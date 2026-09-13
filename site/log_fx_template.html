@@ -734,6 +734,12 @@
         <h2>煙はなぜ動かなかったのか — 温度を入れると立ち上る</h2>
         <p class="path">/obj/smoke &nbsp;·&nbsp; 供給する属性を1つ足すだけで別物になった</p>
 
+        <p class="callout callout--note">
+          <strong>→ ここで「shredding は炎がないと出番がないのだろう」と書いた見立ては、
+          <a href="#exp023">実験023</a>で確かめて当たっていた。</strong>
+          燃焼を入れると、同じ設定で炎の合計が40%減り、形のばらつきが9%増える。
+        </p>
+
         <div class="prose">
           <p>
             実験018で「いまの煙は一様な球で、レンダラーの差を見せる題材として弱い」と書いた。
@@ -936,6 +942,108 @@
           <code>convert</code> で普通の<button class="term" data-term="ポリゴン">ポリゴン</button>に戻す。
           なお面ごとの measuredvolume を足しても体積は出ない（平らな面には体積が無い）。
           三角形ごとに原点との四面体の符号付き体積を足して求めた。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 023 ===================== -->
+    <article class="entry entry--current" id="exp023">
+      <div class="badge">023</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>炎を出す — shredding が効かなかった理由</h2>
+        <p class="path">/obj/burn &nbsp;·&nbsp; 021で残した見立てを確かめる</p>
+
+        <div class="prose">
+          <p>
+            実験021で <code>shredding</code> を 1.0 でも 20.0 でも試したが、
+            数値が小数点以下まで完全に一致した。まったく効いていない。
+          </p>
+          <p>
+            付属ヘルプにはこうある。「温度の勾配にもとづいて速度場を押し引きし、
+            炎に特有の筋・裂け目・舌のような形を作る」。
+            021では<strong>「炎を伴わない煙だけの設定では出番がないのだろう」</strong>と書いて止めた。
+            確かめていない見立てを残したままにしたくないので、今回それを確かめる。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="023_compare.png" alt="上段はなめらかな柱状の炎、下段はちぎれて波打つ炎を3フレームずつ並べた比較"></div>
+            <figcaption>燃焼あり、同じカメラ・同じフレーム。<strong>上段が shredding なし、下段が 5.0。</strong>下段はちぎれて波打っている。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">煙だけのとき（021の再確認）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>F40の合計</th><th>中身のマス</th><th>ばらつき</th><th>格子</th></tr></thead>
+            <tbody>
+              <tr><td>shredding なし</td><td class="num">48,289.94</td><td class="num">30,105</td><td class="num">3.7187</td><td class="num">48×144×48</td></tr>
+              <tr><td>shredding 5.0</td><td class="num">48,289.94</td><td class="num">30,105</td><td class="num">3.7187</td><td class="num">48×144×48</td></tr>
+              <tr><td>差</td><td class="num muted">0</td><td class="num muted">0</td><td class="num muted">0</td><td class="muted">なし</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">燃焼を入れたとき</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>F40の温度の合計</th><th>中身のマス</th><th>ばらつき</th><th>格子</th></tr></thead>
+            <tbody>
+              <tr><td>shredding なし</td><td class="num">4,724.59</td><td class="num">38,637</td><td class="num">1.8278</td><td class="num">48×144×48</td></tr>
+              <tr><td>shredding 5.0</td><td class="num">3,673.59</td><td class="num">41,569</td><td class="num">1.9914</td><td class="num">48×128×48</td></tr>
+              <tr><td>差</td><td class="num hi">−22.2%</td><td class="num hi">+7.6%</td><td class="num hi">+9.0%</td><td class="hi">縦が16マス短い</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">炎そのものの量</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>F25の合計</th><th>F25のマス</th><th>F40の合計</th><th>F40のマス</th></tr></thead>
+            <tbody>
+              <tr><td>shredding なし</td><td class="num">3,001.8</td><td class="num">7,374</td><td class="num">3,727.4</td><td class="num">10,621</td></tr>
+              <tr><td>shredding 5.0</td><td class="num">2,424.4</td><td class="num">7,314</td><td class="num">2,231.5</td><td class="num">7,906</td></tr>
+              <tr><td>差</td><td class="num">−19.2%</td><td class="num muted">−0.8%</td><td class="num hi">−40.1%</td><td class="num hi">−25.6%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">フレームごとの推移（燃焼あり）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>なしの合計</th><th>ありの合計</th><th>なしのばらつき</th><th>ありのばらつき</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">765.31</td><td class="num">760.67</td><td class="num">0.8442</td><td class="num">0.8427</td></tr>
+              <tr><td class="num">15</td><td class="num">2,106.41</td><td class="num">1,994.95</td><td class="num">1.0784</td><td class="num">1.1381</td></tr>
+              <tr><td class="num">25</td><td class="num">3,281.97</td><td class="num">2,853.95</td><td class="num">1.4196</td><td class="num">1.5271</td></tr>
+              <tr><td class="num">40</td><td class="num">4,724.59</td><td class="num">3,673.59</td><td class="num">1.8278</td><td class="num">1.9914</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          F5では合計の差が 0.6% しかないが、F40では 22.2% になる。
+          <strong>短いフレームだけ見て「効かない」と判断すると間違える。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>021の見立ては当たっていた。</strong>shredding は炎（燃焼）があるときだけ効く。煙だけの設定では、0 から 5.0 に変えても数値が1桁も動かない。</li>
+          <li>効き方にも筋が通っている。<strong>炎の合計が40.1%減り、燃えているマスが25.6%減る一方で、広がりは7.6%増え、ばらつきは9.0%増えた。</strong>炎がちぎれて薄く広がり、そのぶん早く燃え尽きる。</li>
+          <li><strong>立ち上る高さも縮む。</strong>計算領域が縦に16マス短くなった。ちぎれた炎は上昇の勢いを失いやすい。</li>
+          <li>違いはフレームが進むほど大きくなる。F5では 0.6%、F40では 22.2%。<span class="hi">短いフレームだけで判断すると見落とす。</span></li>
+          <li><strong>燃焼の組み方。</strong>pyrosource の初期化に <code>sourceburn</code> というプリセットがある。押すと、作られる属性が density と temperature ではなく <strong>burn と temperature</strong> に変わる。burn が燃える元で、<button class="term" data-term="ソルバ">ソルバ</button>がこれを炎に変える。</li>
+          <li>ソルバ側では <code>addflamefield</code> を有効にすると flame の場ができる。煙も出すなら <code>doflamedensity</code> だが、<strong>量の既定が 0.0001 でほとんど出ない</strong>。1.0 にして初めて見えた。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          この実験で<button class="term" data-term="密度">密度</button>の合計が 0 のままだったのは、燃焼のプリセットが density を作らないため。
+          指標を temperature に変えて測り直した。
+          <strong>「測ろうとしたものが存在しない」と気づけたのは、場の一覧を毎回出していたから。</strong>
+          021で「確かめきれていない」と書いて残した見立ても、2実験あとで回収できた。
+          見立てを断定せずに残しておくと、あとで潰せる。
         </p>
       </div>
     </article>

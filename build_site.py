@@ -185,13 +185,18 @@ DONE = [
      "shots": ["022_particles.png", "022_clipped.png"],
      "title": "液体に表面を張る — そして019の係数が間違っていた",
      "note": "水の体積は「器の中の粒の数 × 間隔の3乗」ちょうど。比 1.0006"},
+    {"no": "023", "anchor": "exp023", "tags": ["エフェクト", "炎", "比較"],
+     "log": "log_fx", "hip": "023_fire.hipnc", "thumb": "023_compare.png",
+     "shots": ["023_compare.png", "023_fire.gif"],
+     "title": "炎を出す — shredding が効かなかった理由",
+     "note": "炎があるときだけ効く。炎の合計が40%減り、ばらつきが9%増える"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "023", "title": "炎を出す",
-     "note": "021で shredding が効かなかった。燃焼を伴う設定で確かめ直す"},
+    {"no": "025", "title": "シミュレーションのキャッシュ",
+     "note": "同じ計算を何度も回している。file cache で中間結果を保存する"},
     {"no": "024", "title": "動く煙で Karma を撮り直す",
      "note": "018は動かない煙で比べていた。題材を入れ替えて確かめ直す"},
 ]

@@ -1,0 +1,98 @@
+{
+  "case": "smoke",
+  "params": {
+    "fire": false,
+    "shredding": 0.0
+  },
+  "fields": [
+    "density",
+    "temperature"
+  ],
+  "rows": [
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 18356.352170387865,
+      "filled": 1072,
+      "cv": 1.6672698135830673,
+      "res": [
+        48,
+        32,
+        48
+      ],
+      "flame_total": 0.0,
+      "flame_filled": 0,
+      "frame": 5
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 33901.97662421757,
+      "filled": 5851,
+      "cv": 1.9247157980031573,
+      "res": [
+        48,
+        64,
+        48
+      ],
+      "flame_total": 0.0,
+      "flame_filled": 0,
+      "frame": 15
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 41407.577310196706,
+      "filled": 14006,
+      "cv": 2.7518900169031206,
+      "res": [
+        48,
+        96,
+        48
+      ],
+      "flame_total": 0.0,
+      "flame_filled": 0,
+      "frame": 25
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 48289.94471800199,
+      "filled": 30105,
+      "cv": 3.718740265110918,
+      "res": [
+        48,
+        144,
+        48
+      ],
+      "flame_total": 0.0,
+      "flame_filled": 0,
+      "frame": 40
+    }
+  ],
+  "sec": 0.903258399994229
+}

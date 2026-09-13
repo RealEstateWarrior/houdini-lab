@@ -1,0 +1,106 @@
+{
+  "case": "fire_shred",
+  "params": {
+    "fire": true,
+    "shredding": 5.0
+  },
+  "fields": [
+    "burn",
+    "temperature"
+  ],
+  "rows": [
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 760.6729765557029,
+      "filled": 1481,
+      "cv": 0.8426999635057811,
+      "res": [
+        48,
+        32,
+        48
+      ],
+      "flame_total": 777.5618216767907,
+      "flame_filled": 1050,
+      "density_total": 777.5618216767907,
+      "density_filled": 1050,
+      "frame": 5
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 1994.9494470891877,
+      "filled": 6333,
+      "cv": 1.1380672560772789,
+      "res": [
+        48,
+        64,
+        48
+      ],
+      "flame_total": 1963.6466285381466,
+      "flame_filled": 3774,
+      "density_total": 1963.6466285381466,
+      "density_filled": 3774,
+      "frame": 15
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 2853.9528494905317,
+      "filled": 16654,
+      "cv": 1.5270970124044114,
+      "res": [
+        48,
+        80,
+        48
+      ],
+      "flame_total": 2424.3558367732912,
+      "flame_filled": 7314,
+      "density_total": 2424.3558367732912,
+      "density_filled": 7314,
+      "frame": 25
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 3673.5859162979614,
+      "filled": 41569,
+      "cv": 1.9914206965458667,
+      "res": [
+        48,
+        128,
+        48
+      ],
+      "flame_total": 2231.5275236759335,
+      "flame_filled": 7906,
+      "density_total": 2231.5275236759335,
+      "density_filled": 7906,
+      "frame": 40
+    }
+  ],
+  "sec": 0.97929689999728
+}

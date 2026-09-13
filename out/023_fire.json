@@ -1,0 +1,106 @@
+{
+  "case": "fire",
+  "params": {
+    "fire": true,
+    "shredding": 0.0
+  },
+  "fields": [
+    "burn",
+    "temperature"
+  ],
+  "rows": [
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 765.3062891988957,
+      "filled": 1490,
+      "cv": 0.8442457145359452,
+      "res": [
+        48,
+        32,
+        48
+      ],
+      "flame_total": 781.8012395035475,
+      "flame_filled": 1072,
+      "density_total": 781.8012395035475,
+      "density_filled": 1072,
+      "frame": 5
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 2106.4083885299406,
+      "filled": 6274,
+      "cv": 1.0784332512720818,
+      "res": [
+        48,
+        64,
+        48
+      ],
+      "flame_total": 2075.46769849211,
+      "flame_filled": 3851,
+      "density_total": 2075.46769849211,
+      "density_filled": 3851,
+      "frame": 15
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 3281.9744724292177,
+      "filled": 16032,
+      "cv": 1.4196136983426892,
+      "res": [
+        48,
+        96,
+        48
+      ],
+      "flame_total": 3001.8037762027234,
+      "flame_filled": 7374,
+      "density_total": 3001.8037762027234,
+      "density_filled": 7374,
+      "frame": 25
+    },
+    {
+      "fields": [
+        "density",
+        "flame",
+        "temperature",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "total": 4724.5890430654545,
+      "filled": 38637,
+      "cv": 1.8278037081339877,
+      "res": [
+        48,
+        144,
+        48
+      ],
+      "flame_total": 3727.362263932824,
+      "flame_filled": 10621,
+      "density_total": 3727.362263932824,
+      "density_filled": 10621,
+      "frame": 40
+    }
+  ],
+  "sec": 0.8659836999868276
+}
