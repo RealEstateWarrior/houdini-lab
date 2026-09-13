@@ -1,0 +1,46 @@
+[
+  {
+    "iterations": 0,
+    "points": 8,
+    "prims": 6,
+    "size": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "image": "002_subdiv_0.png"
+  },
+  {
+    "iterations": 1,
+    "points": 26,
+    "prims": 24,
+    "size": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "image": "002_subdiv_1.png"
+  },
+  {
+    "iterations": 2,
+    "points": 98,
+    "prims": 96,
+    "size": [
+      0.8785,
+      0.8785,
+      0.8785
+    ],
+    "image": "002_subdiv_2.png"
+  },
+  {
+    "iterations": 3,
+    "points": 386,
+    "prims": 384,
+    "size": [
+      0.8492,
+      0.8492,
+      0.8492
+    ],
+    "image": "002_subdiv_3.png"
+  }
+]

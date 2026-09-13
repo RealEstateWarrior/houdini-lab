@@ -1,0 +1,80 @@
+[
+  {
+    "key": "base",
+    "label": "分割のみ（ノイズなし）",
+    "points": 98,
+    "prims": 96,
+    "area": 2.43164,
+    "size": [
+      0.8785,
+      0.8785,
+      0.8785
+    ],
+    "image": "003_base.png"
+  },
+  {
+    "key": "A",
+    "label": "mountain → subdivide(2)",
+    "points": 98,
+    "prims": 96,
+    "area": 2.30052,
+    "size": [
+      0.8545,
+      0.8545,
+      0.8545
+    ],
+    "image": "003_A.png"
+  },
+  {
+    "key": "B",
+    "label": "subdivide(2) → mountain",
+    "points": 98,
+    "prims": 96,
+    "area": 2.24947,
+    "size": [
+      0.8535,
+      0.8203,
+      0.8672
+    ],
+    "image": "003_B.png"
+  },
+  {
+    "key": "C",
+    "label": "subdivide(3) → mountain",
+    "points": 386,
+    "prims": 384,
+    "area": 2.16988,
+    "size": [
+      0.8314,
+      0.8203,
+      0.8465
+    ],
+    "image": "003_C.png"
+  },
+  {
+    "key": "D",
+    "label": "subdivide(3) → mountain\n（elementsize 0.25）",
+    "points": 386,
+    "prims": 384,
+    "area": 2.49922,
+    "size": [
+      0.9123,
+      0.8916,
+      0.8776
+    ],
+    "image": "003_D.png"
+  },
+  {
+    "key": "E",
+    "label": "subdivide(4) → mountain\n（elementsize 0.25）",
+    "points": 1538,
+    "prims": 1536,
+    "area": 2.66892,
+    "size": [
+      0.9278,
+      0.9004,
+      0.9523
+    ],
+    "image": "003_E.png"
+  }
+]

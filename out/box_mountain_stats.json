@@ -1,0 +1,21 @@
+{
+  "node": "/obj/box_mountain/OUT",
+  "points": 26,
+  "prims": 24,
+  "bbox_min": [
+    -0.4794,
+    -0.4768,
+    -0.4767
+  ],
+  "bbox_max": [
+    0.4932,
+    0.4959,
+    0.4959
+  ],
+  "point_attribs": [
+    "P",
+    "Cd"
+  ],
+  "prim_attribs": [],
+  "detail_attribs": []
+}

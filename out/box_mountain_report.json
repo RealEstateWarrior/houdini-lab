@@ -1,0 +1,19 @@
+{
+  "title": "Box を山にして細分割し、位置で色を付ける",
+  "summary": "プロシージャルモデリングの最小構成を確認するための実験。box SOP で立方体を作り、mountain SOP でノイズによる凹凸を与え、subdivide SOP で細分割し、color SOP で色を乗せた。最後に null ノードを OUT として置き、そこを出力点にしている。\n\nHoudini の基本的な考え方である「ジオメトリを次のノードに流し込んで加工を積み重ねる」形をそのまま辿っている。各ノードは前のノードの出力だけを入力として受け取るため、途中のどのノードでも結果を確認できる。",
+  "graph": "box_mountain_graph.json",
+  "graph_image": "box_mountain_graph.png",
+  "render": "box_mountain.png",
+  "stats": "box_mountain_stats.json",
+  "notes": [
+    "box は 8 ポイント / 6 プリミティブ。subdivide を 1 回かけると 26 ポイント / 24 プリミティブになる。Catmull-Clark 細分割なので、回数を増やすと立方体はどんどん球に近づく（2 回で既に球状になり、元が箱だと分からなくなった）。",
+    "mountain SOP は既存のポイントを法線方向にノイズで押し出すもので、ポイントを増やさない。つまり box のままかけても 8 点しか動かないため、凹凸のディテールを出すには先に subdivide などで分割数を上げる必要がある。",
+    "color SOP の colortype は数値メニュー（0=Constant, 1=Bounding Box, 2=Random, 3=Ramp from Attribute, 4=Random from Attribute）。文字列で指定すると TypeError になる。今回は 1 を使い、バウンディングボックス内の位置をそのまま RGB に割り当てた。",
+    "color SOP を通すとポイント属性に Cd が追加される（P のみ → P, Cd）。属性が増えたかどうかはジオメトリの統計で確認できる。"
+  ],
+  "next": [
+    "subdivide の回数を変えて、ポイント数と見た目がどう変わるかを並べて比較する",
+    "mountain を subdivide の後ろに移動し、分割後に凹凸をかけた場合との違いを見る",
+    "grid から地形を作る流れに広げ、プロシージャルモデリングの定番パターンに入る"
+  ]
+}

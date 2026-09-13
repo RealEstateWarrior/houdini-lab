@@ -1,0 +1,505 @@
+<title>Houdini 実験室</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+<!--CSS-->
+</style>
+
+<div class="layout">
+<!--NAV-->
+  <div class="shell">
+
+  <header class="masthead">
+    <p class="eyebrow">Procedural Modeling &amp; FX / hython 21.0.700</p>
+    <h1>Houdini 実験室</h1>
+    <p class="lede">
+      <button class="term" data-term="ノード">ノード</button>を実際に組んで、何ができたかを画像と実測値で記録していく場所。
+      ここに書いてある数字はすべて実行して得た値で、推測は含まない。
+      1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
+    </p>
+    <dl class="facts">
+      <div><dt>実験</dt><dd>5 / 16</dd></div>
+      <div><dt>Houdini</dt><dd>21.0.700</dd></div>
+      <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
+      <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
+    </dl>
+    <p class="hint">
+      点線の下線が付いた語はクリックすると意味が出る。
+      全部を一覧で読むなら<a href="<!--GLOSSARY_URL-->">用語辞典</a>へ。
+    </p>
+  </header>
+
+  <div class="spine">
+
+    <div class="stage"><h3>完了した実験</h3></div>
+
+    <!-- ===================== 001 ===================== -->
+    <article class="entry" id="exp001">
+      <div class="badge">001</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>Box を山にして細分割し、位置で色を付ける</h2>
+        <p class="path">/obj/box_mountain &nbsp;·&nbsp; ノード 5 / 接続 4</p>
+
+        <div class="prose">
+          <p>
+            最小構成を確認するための実験。box <button class="term" data-term="SOP">SOP</button> で立方体を作り、
+            <button class="term" data-term="mountain">mountain</button> SOP で<button class="term" data-term="ノイズ">ノイズ</button>による凹凸を与え、
+            <button class="term" data-term="subdivide">subdivide</button> SOP で細分割し、color SOP で色を乗せた。
+            「<button class="term" data-term="ジオメトリ">ジオメトリ</button>を次のノードに流し込んで加工を積み重ねる」という
+            Houdini の基本形をそのまま辿っている。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="box_mountain_graph.png" alt="box1 から mountain1、subdivide1、color1 を経て OUT へ縦一列に接続されたノードネットワークの図"></div>
+            <figcaption>構築したネットワーク。水色の点は<button class="term" data-term="表示フラグ">表示フラグ</button>。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="box_mountain.png" alt="ワイヤーフレームが乗った、位置に応じて虹色に着色された多面体のレンダリング"></div>
+            <figcaption><button class="term" data-term="OpenGL ROP">OpenGL ROP</button> / <button class="term" data-term="Smooth Wire Shaded">Smooth Wire Shaded</button><br>26<button class="term" data-term="ポイント">点</button> / 24<button class="term" data-term="プリミティブ">面</button>、ポイント<button class="term" data-term="アトリビュート">アトリビュート</button>は <code>P</code>, <code>Cd</code></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>mountain SOP は既存の点を<button class="term" data-term="法線">法線</button>方向に押し出すだけで、<strong>点を増やさない</strong>。box のままかけても8点しか動かない。</li>
+          <li>color SOP の <code>colortype</code> は数値メニュー（0=Constant, 1=Bounding Box, 2=Random, 3=Ramp from Attribute, 4=Random from Attribute）。文字列を渡すと <code>TypeError</code> になる。</li>
+          <li>color SOP を通すとポイントアトリビュートに <code>Cd</code> が増える（<code>P</code> のみ → <code>P, Cd</code>）。</li>
+        </ul>
+
+        <p class="callout">
+          最初のレンダが真っ黒だった。<code>hlight</code> の既定はポイントライトで<button class="term" data-term="距離減衰">距離減衰</button>するため、
+          強度1のまま距離7に置くと光が届かない。<button class="term" data-term="dome light">ドームライト</button>＋<button class="term" data-term="distant light">distant</button>のキーライトに変更して解決した。
+        </p>
+      </div>
+    </article>
+
+    <!-- ===================== 002 ===================== -->
+    <article class="entry" id="exp002">
+      <div class="badge">002</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>subdivide の回数で、形と数はどう変わるか</h2>
+        <p class="path">/obj/subdiv_compare &nbsp;·&nbsp; box に4通りの subdivide を並列接続</p>
+
+        <div class="prose">
+          <p>
+            001で「回数を増やすと立方体が球に近づく」と気づいたので、数値で確かめた。
+            重要なのは<strong>4通りすべてを同じカメラで撮っている</strong>こと。各変種を自動でフレームに収めると
+            大きさの違いが消えて比較にならない。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="002_subdiv_0.png" alt="分割なしの立方体のワイヤーフレーム付きレンダリング"></div>
+            <figcaption><strong>0回</strong> 8点 / 6面<br>一辺 1.00000</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="002_subdiv_1.png" alt="1回細分割して角が丸まった立方体"></div>
+            <figcaption><strong>1回</strong> 26点 / 24面<br>一辺 1.00000</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="002_subdiv_2.png" alt="2回細分割してほぼ球状になった形"></div>
+            <figcaption><strong>2回</strong> 98点 / 96面<br>一辺 0.87847</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="002_subdiv_3.png" alt="3回細分割して球になった形。格子状のワイヤーフレームが細かい"></div>
+            <figcaption><strong>3回</strong> 386点 / 384面<br>一辺 0.84918</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">回数と数の関係</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>iterations</th><th>ポイント</th><th>プリミティブ</th><th>面の倍率</th><th>一辺</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">8</td><td class="num">6</td><td class="muted">—</td><td class="num">1.00000</td></tr>
+              <tr><td class="num">1</td><td class="num">26</td><td class="num">24</td><td class="num">4.00</td><td class="num">1.00000</td></tr>
+              <tr><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">4.00</td><td class="num">0.87847</td></tr>
+              <tr><td class="num">3</td><td class="num">386</td><td class="num">384</td><td class="num">4.00</td><td class="num">0.84918</td></tr>
+              <tr><td class="num">4</td><td class="num">1538</td><td class="num">1536</td><td class="num">4.00</td><td class="num">0.84192</td></tr>
+              <tr><td class="num">5</td><td class="num">6146</td><td class="num">6144</td><td class="num">4.00</td><td class="num">0.84011</td></tr>
+              <tr><td class="num">6</td><td class="num">24578</td><td class="num">24576</td><td class="num">4.00</td><td class="num">0.83966</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>プリミティブ数は1回ごとに<strong>正確に4倍</strong>。四角形1枚が4枚に割れるため。3回で64倍、6回で4096倍なので、回数を安易に増やすと破綻する。</li>
+          <li>ポイント数は常に「プリミティブ数 + 2」。オイラーの多面体定理から導ける。閉じた四角形メッシュでは各辺を2面が共有するので E = 2F、これを V − E + F = 2 に代入すると V = F + 2。実測7通りすべて一致した。</li>
+          <li><strong>1回目だけ一辺が縮まない</strong>。+X端を保持している点を調べたら (0.5, 0, 0) の1点だけで、これは元の +X 面の中心そのものだった。<button class="term" data-term="Catmull-Clark">Catmull-Clark</button> は各面の中心に新しい点を作るので、1回目はその新点が元の面上に乗る。2回目でその点も内側に引かれ 0.87847 に縮む。</li>
+          <li>縮みの原因は分割ではなく<strong>平滑化</strong>だと確定した。OpenSubdiv Bilinear（平滑化せず分割するだけ）で3回分割しても一辺は 1.00000 のまま。面数は同じ384なので、分割量は同じで平滑化の有無だけが違う。</li>
+          <li>一辺の縮み方は等比的に収束する。差は 0.02929 → 0.00726 → 0.00181 → 0.00045 で毎回およそ1/4。外挿した極限値は約 <span class="hi">0.83951</span>。</li>
+          <li>Mantra-Compatible Catmull-Clark は回数1〜5のどれでも一辺が 0.83951 で一定だった。上で外挿した極限値と一致する。つまりこのモードは繰り返して近づけるのではなく、<strong>極限曲面上の位置を直接求めている</strong>。</li>
+          <li><button class="term" data-term="ポリゴン">OpenSubdiv Loop</button> だけプリミティブ数が768になる（他は384）。三角形メッシュ向けの方式なので四角形が三角形に割られる。四角形を保ちたい場面では選べない。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 003 ===================== -->
+    <article class="entry" id="exp003">
+      <div class="badge">003</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>mountain と subdivide は、順序を変えると何が変わるか</h2>
+        <p class="path">/obj/order_compare &nbsp;·&nbsp; ノード 14 / 接続 13</p>
+
+        <div class="prose">
+          <p>
+            001で立てた「細かい凹凸を出すには先に分割数を上げる必要がある」という見込みを検証した。
+            <code>height = 0.35</code> は全変種で固定し、D と E だけ <code>elementsize</code>（ノイズの特徴サイズ）を
+            0.8 から 0.25 に下げている。
+          </p>
+          <p>
+            この実験は<strong>測り方を一度間違えている</strong>。最初に表面積を指標に選んだが違いが正しく出ず、
+            途中で別の指標に切り替えた。その経緯も残した。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="003_base.png" alt="ノイズをかけていない、2回細分割しただけの滑らかな球"></div>
+            <figcaption><strong>基準</strong> 分割のみ<br>98点 / 96面</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="003_A.png" alt="ノイズを先にかけてから細分割した、ほとんど凹凸のない球"></div>
+            <figcaption><strong>A</strong> mountain → subdivide(2)<br>98点、最大ずれ 0.03671</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="003_B.png" alt="細分割してからノイズをかけた、緩やかな凹凸のある球"></div>
+            <figcaption><strong>B</strong> subdivide(2) → mountain<br>98点、最大ずれ 0.08062</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="003_C.png" alt="3回細分割してからノイズをかけた球。Bと似た凹凸"></div>
+            <figcaption><strong>C</strong> subdivide(3) → mountain<br>386点、最大ずれ 0.08009</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="003_D.png" alt="ノイズの特徴サイズを小さくした、岩のように凹凸の激しい形"></div>
+            <figcaption><strong>D</strong> C + elementsize 0.25<br>386点、最大ずれ 0.11985</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="003_E.png" alt="Dと同じ凹凸だが面が細かく滑らかに表現された岩状の形"></div>
+            <figcaption><strong>E</strong> D + 点数4倍<br>1538点、最大ずれ 0.13173</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">基準形（ノイズなし）からの点ごとのずれ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>変種</th><th>ポイント</th><th>平均のずれ</th><th>最大のずれ</th></tr></thead>
+            <tbody>
+              <tr><td>A: mountain → subdivide(2)</td><td class="num">98</td><td class="num">0.02069</td><td class="num">0.03671</td></tr>
+              <tr><td>B: subdivide(2) → mountain</td><td class="num">98</td><td class="num">0.02479</td><td class="num hi">0.08062</td></tr>
+              <tr><td>C: subdivide(3) → mountain</td><td class="num">386</td><td class="num">0.02504</td><td class="num">0.08009</td></tr>
+              <tr><td>D: C + elementsize 0.25</td><td class="num">386</td><td class="num hi">0.03236</td><td class="num">0.11985</td></tr>
+              <tr><td>E: D + 点数4倍</td><td class="num">1538</td><td class="num hi">0.03239</td><td class="num">0.13173</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          同じ分割回数なら点の順序も同じなので、ノイズなしの基準形と1点ずつ引き算できる。
+          これが「ノイズがどれだけ形を動かしたか」を直接表す。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>順序を入れ替えても点数・面数は同じ（どちらも98点 / 96面）。<strong>データの重さは変わらず、形だけが変わる</strong>。</li>
+          <li>最大のずれは A が 0.03671、B が 0.08062 で<strong>Bが約2.2倍大きい</strong>。分割したあとにノイズをかけた方が凹凸が残る。001の見込みは正しかった。</li>
+          <li>理由も測れた。box に mountain をかけた直後は8点すべてが平均 0.03607 動いている。ところが subdivide を通すとずれは平均 0.02069・最大 0.03671 まで下がる。Catmull-Clark の平滑化は周囲の点を平均するので、<strong>せっかく作った凹凸をなめしてしまう</strong>。</li>
+          <li>C は B とほぼ同じずれだった（平均 0.02504 対 0.02479）。<strong>点を4倍に増やしても凹凸の大きさは変わらない</strong>。点数は振幅を決めていない。</li>
+          <li>振幅を決めていたのは <code>elementsize</code> だった。C と D は同じ386点だが、0.8 から 0.25 に下げると平均のずれが 0.02504 → 0.03236 に増え、画も明確に岩になった。</li>
+          <li>E は D と同じノイズ設定で点数だけ4倍。平均のずれは 0.03236 → 0.03239 でほぼ不変だが、画は同じ起伏をより滑らかな面で表現できている。つまり<strong>点数は解像度を、elementsize は振幅を決めている</strong>。</li>
+          <li>ただし最大のずれだけは点数とともに少し増える（0.11985 → 0.13173）。点が増えるとノイズのより極端な場所まで拾えるためで、振幅が増えたわけではない。</li>
+          <li><strong>実用的な結論</strong>: 細かいディテールが欲しいなら、分割数を上げるだけでは足りない。elementsize も一緒に小さくし、mountain は分割のあとに置く。この3つが揃って初めて狙った凹凸になる。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          測り方の反省。表面積のように「全体をひとつの数にまとめた量」は、大きさの変化と形の変化が混ざる。
+          実際 mountain を足すと表面積は<em>減った</em>（2.43164 → 2.24947）。ノイズが内側にも押して全体が縮み、
+          面積は大きさの2乗に比例するのでその影響が勝っていた。
+          比較実験では、まず基準形を作り、それと1対1で対応づけられる量を選ぶべきだった。
+        </p>
+      </div>
+    </article>
+
+    <!-- ===================== 004 ===================== -->
+    <article class="entry entry--current" id="exp004">
+      <div class="badge">004</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>mountain のノイズパラメータは、それぞれ何に効くのか</h2>
+        <p class="path">/obj/mountain_params &nbsp;·&nbsp; ノード 15</p>
+
+        <div class="prose">
+          <p>
+            003で「点数は解像度、<code>elementsize</code> は振幅」と分かった。では残りのパラメータは何を変えているのか。
+          </p>
+          <p>
+            最初に分かったのは名前の問題だった。パラメータ名は <code>roughness</code> や <code>octaves</code> ではなく
+            <strong><code>rough</code> / <code>oct</code> / <code>lac</code></strong>。
+            一般的な名前で書くとパラメータが見つからずエラーになる。
+          </p>
+          <p>
+            そして003で使った「基準形からのずれ」だけでは、これらをほとんど区別できなかった。
+            平均のずれはどれも 0.032〜0.034 に収まる。<strong>振幅ではなく形の性質を変えるパラメータ</strong>だったため、
+            性質を測る指標を新しく用意した。隣り合う点どうしで、ずれの向きと量がどれだけ食い違うかを測る。
+            なだらかな起伏なら隣も同じように動くので小さく、細かい凹凸なら大きくなる。
+          </p>
+        </div>
+
+        <p class="label">rough — 振幅は変えず、細かさだけを変える</p>
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="004_base.png" alt="ノイズをかけていない、4回細分割した滑らかな球"></div>
+            <figcaption><strong>基準</strong> ノイズなし<br>1538点 / 1536面</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="004_rough_00.png" alt="なだらかな起伏のある丸い形"></div>
+            <figcaption><strong>rough 0.0</strong><br>平均 0.03377 / 食い違い 0.01350</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="004_rough_05.png" alt="中程度の細かい凹凸がある岩状の形"></div>
+            <figcaption><strong>rough 0.5</strong>（既定）<br>平均 0.03237 / 食い違い 0.01733</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="004_rough_10.png" alt="鋭い棘が全面に突き出した形"></div>
+            <figcaption><strong>rough 1.0</strong><br>平均 0.03235 / 食い違い 0.03233</figcaption>
+          </figure>
+        </div>
+        <p class="hint">
+          固定条件はすべて共通: subdivide 4回（1538点）、<code>height</code> 0.35、<code>elementsize</code> 0.25。
+          <strong>平均のずれはほぼ変わらないのに、なだらかな丘から棘だらけの形まで変わる。</strong>
+        </p>
+
+        <p class="label">予測の検証 — oct が 3 以上で効かないのは点数のせいか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>subdivide</th><th>点数</th><th>oct = 1</th><th>oct = 3</th><th>oct = 8</th><th>8 と 3 の差</th></tr></thead>
+            <tbody>
+              <tr><td>3回</td><td class="num">386</td><td class="num">0.02692</td><td class="num">0.02868</td><td class="num">0.02856</td><td class="num">−0.00012</td></tr>
+              <tr><td>4回</td><td class="num">1538</td><td class="num">0.01519</td><td class="num">0.01732</td><td class="num">0.01733</td><td class="num">+0.00001</td></tr>
+              <tr><td>5回</td><td class="num">6146</td><td class="num">0.00782</td><td class="num">0.00941</td><td class="num hi">0.00963</td><td class="num hi">+0.00022</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          「oct が効かないのは点数が足りないからだ」が正しいなら、点数を増やせば oct=8 が oct=3 を上回るはず。
+          実際にそうなった。なお食い違いの絶対値は点数が増えると小さくなる（隣同士が近づくため）ので、
+          <strong>各行の中だけで比較できる表</strong>で、行をまたいで比べてはいけない。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>既定値は <code>rough</code> 0.5、<code>oct</code> 8、<code>lac</code> 1.841、<code>fractal</code> Hybrid Terrain、<code>basis</code> Simplex。<strong>使う前に実際のパラメータ名を確認する必要がある</strong>（<code>roughness</code> は存在しない）。</li>
+          <li><code>rough</code> が細かさに最も強く効く。0.0 → 1.0 で食い違いが 0.01350 → 0.03233（約2.4倍）になる一方、平均のずれは 0.03377 → 0.03235 でほぼ変わらない。<strong>同じ振幅のまま、形の性質だけを変えるパラメータ</strong>。</li>
+          <li><code>rough</code> = 0.0 の数値は <code>fractal</code> = None と完全に一致した（平均 0.03377、最大 0.14799、食い違い 0.01350）。rough = 0 では追加の層が何も足さないので、層を重ねない単一ノイズに退化している。別経路で同じ結果に着いたので、この解釈は確かだと言える。</li>
+          <li><code>oct</code> は 1 → 3 では効くが、3 → 8 ではほぼ変わらない（差 0.00001）。点数が足りず細かい層を表現できていないため。<strong>oct を上げるなら点数も上げないと無駄</strong>。003の「点数は解像度を決める」が別角度から確認できた。</li>
+          <li><code>lac</code>（層ごとの周波数の開き）も細かさに効く（1.5 → 4.0 で 0.01259 → 0.02218）。ただし lac = 1.5 では平均のずれも 0.02625 に下がるので、rough のようにきれいに性質だけを変えるわけではない。</li>
+          <li><code>fractal</code> の4種類は今回の条件では差が小さかった（食い違い 0.01350〜0.01786）。地形向けの方式が揃っているので、平面の地形ならもっと差が出る可能性がある。</li>
+          <li><code>basis</code>（ノイズの基礎となる種類）は14種類あった。Worley Cellular のようなセル状のものも含まれ、見た目が大きく変わるはず。次の実験にする。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          指標について。003で作った「基準形からのずれ」は振幅を測る道具で、今回のパラメータには盲目だった。
+          測りたいものが変われば、指標も作り直す必要がある。
+          今回足した「隣との食い違い」は、同じ点数の中でだけ有効な指標であることにも注意。
+        </p>
+      </div>
+    </article>
+    <!-- ===================== 005 ===================== -->
+    <article class="entry entry--current" id="exp005">
+      <div class="badge">005</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>basis（ノイズの種類）14通りで、形はどこまで変わるか</h2>
+        <p class="path">/obj/noise_basis &nbsp;·&nbsp; 14種類を同条件で比較</p>
+
+        <div class="prose">
+          <p>
+            004で <code>basis</code> に14種類あることが分かったので、同じ条件で全部描き出した。
+            <code>height</code> 0.35、<code>elementsize</code> 0.25、subdivide 4回（1538点）で固定し、
+            <code>basis</code> だけを変えている。
+          </p>
+          <p>
+            結果は他のパラメータと性質がまったく違った。<code>rough</code> は振幅を変えずに形の性質だけを
+            変えたが、<strong><code>basis</code> は振幅も性質も両方変える</strong>。
+            指標には004の「隣との食い違い」に加えて、<strong>外に出た点の割合</strong>を足した。
+            ノイズが外向きに押すのか内向きに削るのかで、使いどころが変わるため。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="005_base.png" alt="ノイズなしの滑らかな球"></div>
+            <figcaption><strong>基準</strong> ノイズなし</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="005_sine.png" alt="丸い4つの膨らみを持つ滑らかな星型"></div>
+            <figcaption><strong>Sinusoid</strong><br>平均 0.14454 / 細かさ 0.00444<br>外向き 0.0%</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="005_perlin.png" alt="ゆるやかな凹凸のある球"></div>
+            <figcaption><strong>Perlin</strong><br>平均 0.02426 / 細かさ 0.01268<br>外向き 40.9%</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="005_simplex.png" alt="中程度の凹凸がある岩状の形"></div>
+            <figcaption><strong>Simplex</strong>（既定）<br>平均 0.03237 / 細かさ 0.01733<br>外向き 35.8%</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="005_worleyFA.png" alt="細胞状に深く削られた侵食岩のような形"></div>
+            <figcaption><strong>Worley F1</strong><br>平均 0.08017 / 細かさ 0.02065<br>外向き 5.4%</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="005_mworleyFA.png" alt="軸に沿った角ばった塊が外に突き出した形"></div>
+            <figcaption><strong>Manhattan F1</strong><br>平均 0.08103 / 細かさ 0.02996<br>外向き 91.1%</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">14種類すべて（細かさの小さい順）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>basis</th><th>表示名</th><th>平均のずれ</th><th>最大</th><th>細かさ</th><th>外向き率</th></tr></thead>
+            <tbody>
+              <tr><td>sine</td><td>Sinusoid</td><td class="num">0.14454</td><td class="num">0.15748</td><td class="num">0.00444</td><td class="num">0.0%</td></tr>
+              <tr><td>sparse</td><td>Sparse Convolution</td><td class="num">0.01985</td><td class="num">0.08378</td><td class="num">0.00965</td><td class="num">32.9%</td></tr>
+              <tr><td>pflow</td><td>Periodic Perlin Flow</td><td class="num">0.01551</td><td class="num">0.05039</td><td class="num">0.01005</td><td class="num">51.2%</td></tr>
+              <tr><td>pperlin</td><td>Periodic Perlin</td><td class="num">0.01662</td><td class="num">0.05705</td><td class="num">0.01062</td><td class="num">58.8%</td></tr>
+              <tr><td>perlin</td><td>Perlin</td><td class="num">0.02426</td><td class="num">0.09921</td><td class="num">0.01268</td><td class="num">40.9%</td></tr>
+              <tr><td>flow</td><td>Perlin Flow</td><td class="num">0.02639</td><td class="num">0.10496</td><td class="num">0.01441</td><td class="num">49.9%</td></tr>
+              <tr><td>simplex</td><td>Simplex（既定）</td><td class="num">0.03237</td><td class="num">0.13153</td><td class="num">0.01733</td><td class="num">35.8%</td></tr>
+              <tr><td>worleyFB</td><td>Worley F2-F1</td><td class="num">0.14144</td><td class="num">0.17436</td><td class="num">0.01831</td><td class="num">0.0%</td></tr>
+              <tr><td>worleyFA</td><td>Worley F1</td><td class="num">0.08017</td><td class="num">0.17328</td><td class="num">0.02065</td><td class="num">5.4%</td></tr>
+              <tr><td>alligator</td><td>Alligator</td><td class="num">0.12904</td><td class="num">0.17456</td><td class="num">0.02747</td><td class="num">2.3%</td></tr>
+              <tr><td>mworleyFA</td><td>Manhattan F1</td><td class="num">0.08103</td><td class="num">0.16473</td><td class="num">0.02996</td><td class="num hi">91.1%</td></tr>
+              <tr><td>cworleyFB</td><td>Chebyshev F2-F1</td><td class="num">0.11841</td><td class="num">0.17439</td><td class="num">0.03104</td><td class="num">1.4%</td></tr>
+              <tr><td>cworleyFA</td><td>Chebyshev F1</td><td class="num">0.09937</td><td class="num">0.16540</td><td class="num">0.03193</td><td class="num hi">94.4%</td></tr>
+              <tr><td>mworleyFB</td><td>Manhattan F2-F1</td><td class="num">0.11505</td><td class="num">0.17052</td><td class="num">0.03323</td><td class="num">2.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>同じ <code>height</code> 0.35 でも、平均のずれは Periodic Perlin Flow の 0.01551 から Sinusoid の 0.14454 まで<strong>約9.3倍</strong>開く。<strong>basis を変えたら height も再調整が必要</strong>。</li>
+          <li>Sinusoid は例外的。平均のずれは最大級なのに細かさは全種類中最小（0.00444）で、外向きの点は<strong>0.0%</strong>、つまり全点が内側に動く。画は丸い膨らみを持つ滑らかな形で、大きなうねり専用。ディテールには使えない。</li>
+          <li>Perlin 系（perlin / pperlin / flow / pflow）は外向きの点が 40〜59% で、外と内にほぼ均等に動く。平均のずれも 0.0155〜0.0264 と控えめ。自然な揺らぎを足したいときの素直な選択肢。</li>
+          <li>セル系（Worley / Manhattan / Chebyshev / Alligator）は平均のずれが 0.08〜0.14 と大きく、細かさも上位を占める。<strong>岩、割れ、結晶のような硬い見た目はここから作る</strong>。</li>
+          <li>セル系で外向き率が真っ二つに分かれた。Manhattan F1 が 91.1%、Chebyshev F1 が 94.4% でほぼ全点が外に出る。一方 Worley F1 は 5.4%、Alligator は 2.3%、Chebyshev F2-F1 は 1.4% でほぼ全点が内に削られる。</li>
+          <li>画で理由が見えた。Worley F1 は細胞の中心から遠いところが深く削られ、侵食岩のようになる。Manhattan F1 は距離の測り方が軸に沿っているため、<strong>軸に平行な面を持つ角ばった塊が外に突き出す</strong>。同じ「F1」でも距離の定義が違うと、削る向きと形がまったく変わる。</li>
+          <li>F1 と F2-F1 の違いも外向き率に出る。Manhattan は F1 が 91.1%（外向き）なのに F2-F1 は 2.5%（内向き）。Chebyshev も同じ傾向。F2-F1 は細胞の境界線を強調する計算なので、境界以外が下がる＝内向きになる。</li>
+          <li><strong>実用指針</strong>: 突起を作りたいなら Manhattan F1 か Chebyshev F1、窪みや侵食なら Worley F1 か Alligator、自然な揺らぎなら Perlin 系、大きなうねりなら Sinusoid。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          最大のずれはセル系でほぼ頭打ちになっている（0.164〜0.175）。
+          <code>height</code> 0.35 に対して 0.5 倍弱で止まっており、何らかの上限が効いている可能性がある。
+          これは実験006で確かめる。
+        </p>
+      </div>
+    </article>
+
+  </div>
+
+  <footer>
+    <p>
+      接続図は <code>hou_tools.dump_graph()</code> が書き出したJSONから <code>graph_report.py</code> が描画し、
+      レンダは OpenGL ROP、レポートPDFは <code>report_pdf.py</code> が生成している。
+      すべて <code>hython</code> 経由の headless 実行で、Houdini の GUI は使っていない。
+      用語の説明は <code>glossary.json</code> を単一の情報源として、このページのポップアップ・<a href="<!--GLOSSARY_URL-->">用語辞典</a>・Notebook用PDFの3つを生成している。
+    </p>
+  </footer>
+
+  </div>
+</div>
+
+<div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
+
+<!--GLOSSARY_DATA-->
+
+<script>
+  (function () {
+    var dataEl = document.getElementById("glossary-data");
+    var terms = dataEl ? JSON.parse(dataEl.textContent) : {};
+    var pop = document.getElementById("popover");
+    var active = null;
+
+    function close() {
+      pop.hidden = true;
+      if (active) { active.removeAttribute("aria-expanded"); active = null; }
+    }
+
+    function open(button) {
+      var entry = terms[button.dataset.term];
+      if (!entry) { return; }
+
+      var meta = [];
+      if (entry.reading) { meta.push(entry.reading); }
+      if (entry.expand) { meta.push(entry.expand); }
+
+      pop.textContent = "";
+      var head = document.createElement("div");
+      head.className = "pop-term";
+      head.textContent = entry.term;
+      pop.appendChild(head);
+
+      if (meta.length) {
+        var m = document.createElement("div");
+        m.className = "pop-meta";
+        m.textContent = meta.join("  ·  ");
+        pop.appendChild(m);
+      }
+
+      var body = document.createElement("p");
+      body.className = "pop-def";
+      body.textContent = entry.def;
+      pop.appendChild(body);
+
+      if (entry.related) {
+        var rel = document.createElement("span");
+        rel.className = "pop-rel";
+        rel.textContent = "関連: " + entry.related;
+        body.appendChild(rel);
+      }
+
+      pop.hidden = false;
+
+      var rect = button.getBoundingClientRect();
+      var width = pop.offsetWidth;
+      var left = rect.left + window.scrollX;
+      var maxLeft = window.scrollX + document.documentElement.clientWidth - width - 16;
+      if (left > maxLeft) { left = maxLeft; }
+      if (left < window.scrollX + 16) { left = window.scrollX + 16; }
+
+      var top = rect.bottom + window.scrollY + 8;
+      if (rect.bottom + pop.offsetHeight + 24 > document.documentElement.clientHeight) {
+        var above = rect.top + window.scrollY - pop.offsetHeight - 8;
+        if (above > window.scrollY) { top = above; }
+      }
+
+      pop.style.left = left + "px";
+      pop.style.top = top + "px";
+
+      active = button;
+      button.setAttribute("aria-expanded", "true");
+    }
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest(".term");
+      if (button) {
+        event.preventDefault();
+        if (active === button) { close(); } else { open(button); }
+        return;
+      }
+      if (!event.target.closest("#popover")) { close(); }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { close(); }
+    });
+
+    window.addEventListener("resize", close);
+  })();
+</script>

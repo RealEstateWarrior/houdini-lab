@@ -1,0 +1,167 @@
+    <section class="linkset">
+      <h3>さつき先生（高瀬紗月）</h3>
+      <p>
+        SideFX の日本語公式Houdini講師。日本語でHoudiniを学ぶなら最初に挙がる名前。
+        本人のチャンネルと、初心者向けシリーズのプレイリストを確認した。
+      </p>
+      <ul class="links">
+        <li>
+          <div class="link-title">
+            <a href="https://www.youtube.com/playlist?list=PLAsWwUHApt3P92c3R1VjJrPJQNIfEijrT">ゼロから始めるHoudini - Houdini Fundamentals（プレイリスト）</a>
+            <span class="link-flag flag-verified">確認済</span>
+          </div>
+          <p class="link-url">youtube.com/playlist?list=PLAsWwUHApt3P92c3R1VjJrPJQNIfEijrT</p>
+          <p class="link-note">
+            初心者向けのシリーズ。プレイリストの存在とタイトルは確認した。
+            ただしYouTubeのページは中身が動的に読み込まれるため、<strong>各回のタイトルは取得できなかった</strong>。
+            何回まであるかはプレイリストを直接開いて確認してほしい。
+            公開開始は2022年、Houdini 19.5 の頃のシリーズ。
+          </p>
+        </li>
+        <li>
+          <div class="link-title">
+            <a href="https://www.youtube.com/@StudioSatsuki">Studio Satsuki（YouTubeチャンネル）</a>
+            <span class="link-flag flag-verified">確認済</span>
+          </div>
+          <p class="link-url">youtube.com/@StudioSatsuki</p>
+          <p class="link-note">チャンネルの存在を確認した。上のシリーズ以外のセミナーアーカイブなどもここにある。</p>
+        </li>
+        <li>
+          <div class="link-title">
+            <a href="https://www.youtube.com/watch?v=EqOT2WER7Y4">【さつき先生】VEXの基礎 高速な処理を作る方法（2023/05/26 セミナーアーカイブ）</a>
+          </div>
+          <p class="link-url">youtube.com/watch?v=EqOT2WER7Y4</p>
+          <p class="link-note">
+            VEX に入るとき（実験009の予定）に見る。動画の存在は検索結果で確認したが、内容は未視聴。
+          </p>
+        </li>
+        <li>
+          <div class="link-title">SideFX公式 さつき先生と学ぶはじめてのHoudini（書籍）</div>
+          <p class="link-note">
+            2024年9月刊、ボーンデジタル。著者は高瀬紗月・Side Effects Software・山田優花。
+            3DCGの基礎から自動化まで扱うとされる。書籍の存在は複数の出典（IGDA日本、ボーンデジタル、Amazon）で
+            確認したが、中身は未確認。
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="linkset">
+      <h3>SideFX 公式</h3>
+      <p>一次情報。仕様の確認はここを優先する。</p>
+      <ul class="links">
+        <li>
+          <div class="link-title"><a href="https://www.sidefx.com/docs/houdini/">Houdini ドキュメント</a></div>
+          <p class="link-url">sidefx.com/docs/houdini/</p>
+          <p class="link-note">オンライン版のヘルプ。ローカルにも同じものが入っている（下記）。</p>
+        </li>
+        <li>
+          <div class="link-title">
+            <a href="https://www.sidefx.com/products/compare/">ライセンス比較</a>
+            <span class="link-flag flag-verified">確認済</span>
+            <span class="link-flag flag-caution">要注意</span>
+          </div>
+          <p class="link-url">sidefx.com/products/compare/</p>
+          <p class="link-note">
+            Apprenticeの制限（非商用のみ、1920x1080まで、ウォーターマーク、Karma/Mantraトークン各1個）を確認した。
+            ただし<strong>「コマンドラインアクセス」の記載は曖昧</strong>で、これだけでは Apprentice で hython が
+            使えるか判断できない。実測した結果は下の「実測で覆した情報」に書いた。
+          </p>
+        </li>
+        <li>
+          <div class="link-title"><a href="https://www.sidefx.com/docs/houdini/render/batch.html">Rendering as part of a workflow</a></div>
+          <p class="link-url">sidefx.com/docs/houdini/render/batch.html</p>
+          <p class="link-note">hython / hbatch でのバッチレンダリングの位置づけ。</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="linkset">
+      <h3>実測で覆した情報</h3>
+      <p>
+        ネット上で見かけたが、自分で動かしたら違っていたもの。
+        このプロジェクトでは<strong>Houdiniの挙動は実測を正とする</strong>方針にしている。
+      </p>
+      <ul class="links">
+        <li>
+          <div class="link-title">
+            「Apprentice では hython / hbatch が使えない」
+            <span class="link-flag flag-caution">誤り</span>
+          </div>
+          <p class="link-note">
+            フォーラム由来の情報として複数箇所で見かけたが、<strong>実測では普通に動いた</strong>。
+            Houdini 21.0.700 の Apprentice ライセンスで、GUIがライセンスを保持している状態でも
+            hython を同時起動できた。OpenGL ROP / Karma ROP での headless レンダリングも成功している。
+            この誤情報を前提にGUI遠隔操作（hrpyc）方式を作りかけて無駄になった。
+          </p>
+        </li>
+        <li>
+          <div class="link-title">Apprentice ライセンスの入れ直しは hkey では<strong>できない</strong></div>
+          <p class="link-note">
+            License Administrator（hkey.exe）からログインすると
+            「Installing licenses through hkey is reserved for non-apprentice accounts」と弾かれる。
+            正解は Houdini 本体を起動し、出てくる「Unable to Acquire a License」ダイアログから進めること。
+          </p>
+        </li>
+        <li>
+          <div class="link-title">mountain SOP のパラメータ名は <code>roughness</code> / <code>octaves</code> では<strong>ない</strong></div>
+          <p class="link-note">
+            実際の名前は <code>rough</code> / <code>oct</code> / <code>lac</code>。
+            一般的な名前で書くとパラメータが見つからずエラーになる。
+            ノードのパラメータ名は <code>[p.name() for p in node.parms()]</code> で確認してから使う。
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="linkset">
+      <h3>ローカルにあるHoudiniヘルプ</h3>
+      <p>
+        インストール先に公式ヘルプ一式がzipで入っている。オフラインで全文が読めるので、
+        実験で扱うノードの解説はここから抜き出すのが早い。
+      </p>
+      <ul class="links">
+        <li>
+          <div class="link-title">
+            ヘルプ一式の場所
+            <span class="link-flag flag-local">ローカル</span>
+          </div>
+          <p class="link-url">C:\Program Files\Side Effects Software\Houdini 21.0.700\houdini\help\</p>
+          <p class="link-note">
+            特に価値が高いもの: <code>nodes.zip</code>（6.2MB、全ノードのリファレンス）、
+            <code>images.zip</code>（307MB、ノードの図解）、<code>vex.zip</code>（0.7MB、VEXリファレンス）、
+            <code>hom.zip</code>（1.1MB、Python API リファレンス）。
+            全部を Notebook に入れるとソース数の無駄なので、実験に関係する範囲だけ抜粋する方針。
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="linkset">
+      <h3>Gemini Notebook 連携に使っているツール</h3>
+      <p>非公式ツールなので、使う場合は自己責任。</p>
+      <ul class="links">
+        <li>
+          <div class="link-title">
+            <a href="https://github.com/jacob-bd/notebooklm-mcp-cli">jacob-bd / notebooklm-mcp-cli</a>
+            <span class="link-flag flag-verified">採用</span>
+          </div>
+          <p class="link-url">github.com/jacob-bd/notebooklm-mcp-cli</p>
+          <p class="link-note">
+            <code>pip install notebooklm-mcp-cli</code>。CLI（<code>nlm</code>）とMCPサーバーと
+            エージェントスキルの3点セット。このプロジェクトで使っているのはこれ。
+          </p>
+        </li>
+        <li>
+          <div class="link-title">
+            <a href="https://github.com/PleasePrompto/notebooklm-mcp">PleasePrompto / notebooklm-mcp</a>
+            <span class="link-flag flag-caution">開発終了</span>
+          </div>
+          <p class="link-url">github.com/PleasePrompto/notebooklm-mcp</p>
+          <p class="link-note">
+            当初の第一候補だったが <strong>2026-09-10 にアーカイブされた</strong>。
+            star 3.4k あっても保守は別問題。この手のツールは導入前に必ず最終更新を見る。
+          </p>
+        </li>
+      </ul>
+    </section>

@@ -1,0 +1,286 @@
+{
+  "title": "mountain と subdivide の順序比較",
+  "network": "/obj/order_compare",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        -3.248,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "A_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        -3.248,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.8
+      }
+    },
+    {
+      "name": "A_subdiv",
+      "type": "subdivide",
+      "pos": [
+        -3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "B_subdiv",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "B_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.8
+      }
+    },
+    {
+      "name": "C_subdiv",
+      "type": "subdivide",
+      "pos": [
+        3.248,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "C_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.8
+      }
+    },
+    {
+      "name": "D_subdiv",
+      "type": "subdivide",
+      "pos": [
+        6.495,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "D_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25
+      }
+    },
+    {
+      "name": "E_subdiv",
+      "type": "subdivide",
+      "pos": [
+        9.743,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "E_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        9.743,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25
+      }
+    },
+    {
+      "name": "base_subdiv",
+      "type": "subdivide",
+      "pos": [
+        12.99,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "base3_subdiv",
+      "type": "subdivide",
+      "pos": [
+        16.238,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "base4_subdiv",
+      "type": "subdivide",
+      "pos": [
+        19.486,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "A_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "A_mountain",
+      "from_output": 0,
+      "to": "A_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "B_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "B_subdiv",
+      "from_output": 0,
+      "to": "B_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "C_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "C_subdiv",
+      "from_output": 0,
+      "to": "C_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "D_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "D_subdiv",
+      "from_output": 0,
+      "to": "D_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "E_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "E_subdiv",
+      "from_output": 0,
+      "to": "E_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "base_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "base3_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "base4_subdiv",
+      "to_input": 0
+    }
+  ]
+}

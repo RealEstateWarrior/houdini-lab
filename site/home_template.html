@@ -1,0 +1,152 @@
+<title>Houdini 研究ハブ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+<!--CSS-->
+</style>
+
+<div class="layout">
+<!--NAV-->
+  <div class="shell">
+
+    <!-- ========== 概要 ========== -->
+    <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <header class="masthead">
+        <p class="eyebrow">Houdini research hub</p>
+        <h1>Houdini 研究ハブ</h1>
+        <p class="lede">
+          Houdiniを実際に動かして確かめたことを積み上げる場所。
+          左のタブは読み込みなしで切り替わる。実験の中身だけは、サムネイルを押したときに読み込む。
+        </p>
+        <dl class="facts">
+          <div><dt>実験</dt><dd>5 / 16</dd></div>
+          <div><dt>用語</dt><dd>56</dd></div>
+          <div><dt>Houdini</dt><dd>21.0.700 Apprentice</dd></div>
+          <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
+        </dl>
+      </header>
+
+      <div class="stage" style="margin-top: 46px;"><h3>この場所の決めごと</h3></div>
+      <ul class="findings">
+        <li><strong>Houdiniの挙動は実測を正とする。</strong> ネットの情報は出典を確認し、動かせるものは動かして確かめる。実際に「Apprenticeではhythonが使えない」「mountainのパラメータは roughness という名前」はどちらも誤りだった。</li>
+        <li><strong>測り方も記録する。</strong> 実験003では最初に選んだ指標（表面積）が不適切で途中で切り替えた。004でも指標を1つ足している。失敗した測り方も残す。</li>
+        <li><strong>仮説は否定できる条件で試す。</strong> 「縮む原因は平滑化」の検証には、平滑化しない Bilinear を使った。「octが効かないのは点数のせい」は、点数を増やして予測どおりになるかを確かめた。</li>
+        <li><strong>Notebookのソースは増やしすぎない。</strong> 上限300件。実験1件ごとに1ソース足すと無駄に消費するので、テーマ単位で1ソースにまとめ、実験が増えたらそのソースを差し替える。</li>
+        <li><strong>用語は1か所で管理する。</strong> <code>glossary.json</code> を単一の情報源にして、この用語集タブ・実験ログのポップアップ・Notebook用PDFの3つを生成している。説明が食い違わない。</li>
+        <li><strong>話がつながらない実験は分ける。</strong> 現在の001〜004はひとつながりの流れなので同じログにまとめている。エフェクトに入ったら別のログに分ける。</li>
+      </ul>
+
+      <div class="stage" style="margin-top: 46px;"><h3>いま使っているもの</h3></div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>用途</th><th>中身</th></tr></thead>
+          <tbody>
+            <tr><td>ノード構築とレンダ</td><td>hython 21.0.700（GUIは使わない）</td></tr>
+            <tr><td>プレビュー</td><td>OpenGL ROP / Smooth Wire Shaded</td></tr>
+            <tr><td>接続図</td><td>ノード位置のJSONから Pillow で描画</td></tr>
+            <tr><td>レポート</td><td>reportlab で日本語PDF。テキストが残るのでNotebookが引用できる</td></tr>
+            <tr><td>Notebook連携</td><td>notebooklm-mcp-cli（ローカルPDFを直接ソースにできる）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== 実験 ========== -->
+    <section class="panel" id="panel-experiments" role="tabpanel" aria-labelledby="tab-experiments" hidden>
+      <header class="masthead">
+        <p class="eyebrow">Experiments</p>
+        <h1>実験</h1>
+        <p class="lede">
+          サムネイルを押すと、その実験の詳細に移動する（ここで初めて読み込みが入る）。
+          001から004はひとつながりの流れなので、同じログにまとめている。
+        </p>
+        <p class="thread">
+          <strong>001</strong> で最小構成を組んだときに「分割を重ねると立方体が球になる」と気づいた。
+          → <strong>002</strong> でそれを数えて、縮む原因が平滑化だと確定させた。
+          → <strong>003</strong> では「ならノイズは分割の前か後か」を比べ、点数は解像度を決めるだけで
+          凹凸の大きさは elementsize が決めていると分かった。
+          → <strong>004</strong> で残りのノイズパラメータを切り分け、rough が形の性質を、
+          oct は点数が足りている範囲でしか効かないことを確かめた。
+          → <strong>005</strong> ではノイズの種類そのものを14通り並べ、種類によって
+          外向きに押すか内向きに削るかが決まると分かった。
+        </p>
+      </header>
+<!--THUMBS-->
+    </section>
+
+    <!-- ========== 用語集 ========== -->
+    <section class="panel" id="panel-glossary" role="tabpanel" aria-labelledby="tab-glossary" hidden>
+      <header class="masthead">
+        <p class="eyebrow">Terminology</p>
+        <h1>用語集</h1>
+        <p class="lede">
+          Houdiniは略語と英語の専門用語が多く、意味が分からないまま読み進めると手が止まる。
+          前提知識なしで読めるようにまとめた。カタカナ読みを併記しているのは、
+          そもそも何と読むのか分からない語が多いため。
+        </p>
+        <p class="hint">
+          単独ページとしても<a href="<!--GLOSSARY_URL-->">用語辞典</a>にある（見出しへのリンクを共有したいとき用）。
+        </p>
+        <nav class="gloss-nav"><!--GLOSSARY_NAV--></nav>
+      </header>
+<!--GLOSSARY_SECTION-->
+    </section>
+
+    <!-- ========== 参考リンク ========== -->
+    <section class="panel" id="panel-links" role="tabpanel" aria-labelledby="tab-links" hidden>
+      <header class="masthead">
+        <p class="eyebrow">References</p>
+        <h1>参考リンク</h1>
+        <p class="lede">
+          参照した資料と、参照する価値があると判断した資料。
+          実際にアクセスして確認したものに <span class="link-flag flag-verified">確認済</span> を付けている。
+          確認できなかった部分は、確認できなかったと書いてある。
+        </p>
+      </header>
+<!--LINKS_BODY-->
+    </section>
+
+    <footer>
+      <p>
+        すべて <code>hython</code> 経由の headless 実行で、Houdini の GUI は使っていない。
+        ページは <code>build_site.py</code> がテンプレートと <code>glossary.json</code> から生成している。
+        UIは見直し前提の暫定版。
+      </p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(".nav-tab"));
+    var panels = {};
+    tabs.forEach(function (tab) {
+      panels[tab.dataset.panel] = document.getElementById("panel-" + tab.dataset.panel);
+    });
+
+    function show(name, push) {
+      if (!panels[name]) { return; }
+      tabs.forEach(function (tab) {
+        var on = tab.dataset.panel === name;
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        panels[tab.dataset.panel].hidden = !on;
+      });
+      window.scrollTo(0, 0);
+      if (push) {
+        try { history.replaceState(null, "", "#" + name); } catch (e) {}
+      }
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () { show(tab.dataset.panel, true); });
+    });
+
+    var initial = (window.location.hash || "").replace("#", "");
+    show(panels[initial] ? initial : "overview", false);
+
+    window.addEventListener("hashchange", function () {
+      var name = (window.location.hash || "").replace("#", "");
+      if (panels[name]) { show(name, false); }
+    });
+  })();
+</script>

@@ -1,0 +1,324 @@
+{
+  "title": "mountain のノイズパラメータの切り分け",
+  "network": "/obj/mountain_params",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "base_subdiv",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "rough_00",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "rough": 0.0
+      }
+    },
+    {
+      "name": "rough_05",
+      "type": "mountain::2.0",
+      "pos": [
+        3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25
+      }
+    },
+    {
+      "name": "rough_10",
+      "type": "mountain::2.0",
+      "pos": [
+        6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "rough": 1.0
+      }
+    },
+    {
+      "name": "oct_1",
+      "type": "mountain::2.0",
+      "pos": [
+        9.743,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "oct": 1
+      }
+    },
+    {
+      "name": "oct_3",
+      "type": "mountain::2.0",
+      "pos": [
+        12.99,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "oct": 3
+      }
+    },
+    {
+      "name": "oct_8",
+      "type": "mountain::2.0",
+      "pos": [
+        16.238,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25
+      }
+    },
+    {
+      "name": "lac_15",
+      "type": "mountain::2.0",
+      "pos": [
+        19.486,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "lac": 1.5
+      }
+    },
+    {
+      "name": "lac_20",
+      "type": "mountain::2.0",
+      "pos": [
+        22.733,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "lac": 2.0
+      }
+    },
+    {
+      "name": "lac_40",
+      "type": "mountain::2.0",
+      "pos": [
+        25.981,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "lac": 4.0
+      }
+    },
+    {
+      "name": "fractal_hmfT",
+      "type": "mountain::2.0",
+      "pos": [
+        29.228,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25
+      }
+    },
+    {
+      "name": "fractal_fBm",
+      "type": "mountain::2.0",
+      "pos": [
+        32.476,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "fractal": "fBm"
+      }
+    },
+    {
+      "name": "fractal_mfT",
+      "type": "mountain::2.0",
+      "pos": [
+        35.724,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "fractal": "mfT"
+      }
+    },
+    {
+      "name": "fractal_none",
+      "type": "mountain::2.0",
+      "pos": [
+        38.971,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "fractal": "none"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "base_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "rough_00",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "rough_05",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "rough_10",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "oct_1",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "oct_3",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "oct_8",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "lac_15",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "lac_20",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "lac_40",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "fractal_hmfT",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "fractal_fBm",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "fractal_mfT",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "fractal_none",
+      "to_input": 0
+    }
+  ]
+}

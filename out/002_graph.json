@@ -1,0 +1,99 @@
+{
+  "title": "subdivide の回数比較（box を4通りに分岐）",
+  "network": "/obj/subdiv_compare",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        -9.743,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "subdiv_0",
+      "type": "subdivide",
+      "pos": [
+        -9.743,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 0
+      }
+    },
+    {
+      "name": "subdiv_1",
+      "type": "subdivide",
+      "pos": [
+        -6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "subdiv_2",
+      "type": "subdivide",
+      "pos": [
+        -3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "subdiv_3",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "iterations": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "subdiv_0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "subdiv_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "subdiv_2",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "subdiv_3",
+      "to_input": 0
+    }
+  ]
+}

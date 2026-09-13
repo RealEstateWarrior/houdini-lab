@@ -1,0 +1,145 @@
+{
+  "default": "simplex",
+  "results": [
+    {
+      "basis": "sine",
+      "label": "Sinusoid",
+      "mean": 0.14454,
+      "max": 0.15748,
+      "variation": 0.00444,
+      "outward": 0.0,
+      "image": "005_sine.png",
+      "default": false
+    },
+    {
+      "basis": "perlin",
+      "label": "Perlin",
+      "mean": 0.02426,
+      "max": 0.09921,
+      "variation": 0.01268,
+      "outward": 0.409,
+      "image": "005_perlin.png",
+      "default": false
+    },
+    {
+      "basis": "pperlin",
+      "label": "Periodic Perlin",
+      "mean": 0.01662,
+      "max": 0.05705,
+      "variation": 0.01062,
+      "outward": 0.5884,
+      "image": "005_pperlin.png",
+      "default": false
+    },
+    {
+      "basis": "simplex",
+      "label": "Simplex",
+      "mean": 0.03237,
+      "max": 0.13153,
+      "variation": 0.01733,
+      "outward": 0.3576,
+      "image": "005_simplex.png",
+      "default": true
+    },
+    {
+      "basis": "sparse",
+      "label": "Sparse Convolution",
+      "mean": 0.01985,
+      "max": 0.08378,
+      "variation": 0.00965,
+      "outward": 0.329,
+      "image": "005_sparse.png",
+      "default": false
+    },
+    {
+      "basis": "flow",
+      "label": "Perlin Flow",
+      "mean": 0.02639,
+      "max": 0.10496,
+      "variation": 0.01441,
+      "outward": 0.4993,
+      "image": "005_flow.png",
+      "default": false
+    },
+    {
+      "basis": "pflow",
+      "label": "Periodic Perlin Flow",
+      "mean": 0.01551,
+      "max": 0.05039,
+      "variation": 0.01005,
+      "outward": 0.5124,
+      "image": "005_pflow.png",
+      "default": false
+    },
+    {
+      "basis": "worleyFA",
+      "label": "Worley Cellular F1",
+      "mean": 0.08017,
+      "max": 0.17328,
+      "variation": 0.02065,
+      "outward": 0.054,
+      "image": "005_worleyFA.png",
+      "default": false
+    },
+    {
+      "basis": "worleyFB",
+      "label": "Worley Cellular F2-F1",
+      "mean": 0.14144,
+      "max": 0.17436,
+      "variation": 0.01831,
+      "outward": 0.0,
+      "image": "005_worleyFB.png",
+      "default": false
+    },
+    {
+      "basis": "mworleyFA",
+      "label": "Manhattan Cellular F1",
+      "mean": 0.08103,
+      "max": 0.16473,
+      "variation": 0.02996,
+      "outward": 0.9109,
+      "image": "005_mworleyFA.png",
+      "default": false
+    },
+    {
+      "basis": "mworleyFB",
+      "label": "Manhattan Cellular F2-F1",
+      "mean": 0.11505,
+      "max": 0.17052,
+      "variation": 0.03323,
+      "outward": 0.0254,
+      "image": "005_mworleyFB.png",
+      "default": false
+    },
+    {
+      "basis": "cworleyFA",
+      "label": "Chebyshev Cellular F1",
+      "mean": 0.09937,
+      "max": 0.1654,
+      "variation": 0.03193,
+      "outward": 0.9441,
+      "image": "005_cworleyFA.png",
+      "default": false
+    },
+    {
+      "basis": "cworleyFB",
+      "label": "Chebyshev Cellular F2-F1",
+      "mean": 0.11841,
+      "max": 0.17439,
+      "variation": 0.03104,
+      "outward": 0.0137,
+      "image": "005_cworleyFB.png",
+      "default": false
+    },
+    {
+      "basis": "alligator",
+      "label": "Alligator",
+      "mean": 0.12904,
+      "max": 0.17456,
+      "variation": 0.02747,
+      "outward": 0.0228,
+      "image": "005_alligator.png",
+      "default": false
+    }
+  ]
+}

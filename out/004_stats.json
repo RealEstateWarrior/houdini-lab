@@ -1,0 +1,131 @@
+{
+  "defaults": {
+    "height": 1.0,
+    "elementsize": 1.0,
+    "rough": 0.5,
+    "oct": 8,
+    "lac": 1.841,
+    "fractal": "hmfT",
+    "basis": "simplex",
+    "gain": 0.5,
+    "bias": 0.5,
+    "pulselength": 1.0
+  },
+  "groups": [
+    {
+      "id": "rough",
+      "label": "rough（粗さ）",
+      "rows": [
+        {
+          "key": "rough_00",
+          "label": "rough = 0.0",
+          "mean": 0.03377,
+          "max": 0.14799,
+          "variation": 0.0135
+        },
+        {
+          "key": "rough_05",
+          "label": "rough = 0.5",
+          "mean": 0.03237,
+          "max": 0.13153,
+          "variation": 0.01733
+        },
+        {
+          "key": "rough_10",
+          "label": "rough = 1.0",
+          "mean": 0.03235,
+          "max": 0.13588,
+          "variation": 0.03233
+        }
+      ]
+    },
+    {
+      "id": "oct",
+      "label": "oct（オクターブ数）",
+      "rows": [
+        {
+          "key": "oct_1",
+          "label": "oct = 1",
+          "mean": 0.03231,
+          "max": 0.13417,
+          "variation": 0.01519
+        },
+        {
+          "key": "oct_3",
+          "label": "oct = 3",
+          "mean": 0.0325,
+          "max": 0.13274,
+          "variation": 0.01732
+        },
+        {
+          "key": "oct_8",
+          "label": "oct = 8",
+          "mean": 0.03237,
+          "max": 0.13153,
+          "variation": 0.01733
+        }
+      ]
+    },
+    {
+      "id": "lac",
+      "label": "lac（ラキュナリティ）",
+      "rows": [
+        {
+          "key": "lac_15",
+          "label": "lac = 1.5",
+          "mean": 0.02625,
+          "max": 0.13925,
+          "variation": 0.01259
+        },
+        {
+          "key": "lac_20",
+          "label": "lac = 2.0",
+          "mean": 0.0316,
+          "max": 0.13528,
+          "variation": 0.01734
+        },
+        {
+          "key": "lac_40",
+          "label": "lac = 4.0",
+          "mean": 0.03169,
+          "max": 0.13334,
+          "variation": 0.02218
+        }
+      ]
+    },
+    {
+      "id": "fractal",
+      "label": "fractal（フラクタルの種類）",
+      "rows": [
+        {
+          "key": "fractal_hmfT",
+          "label": "Hybrid Terrain",
+          "mean": 0.03237,
+          "max": 0.13153,
+          "variation": 0.01733
+        },
+        {
+          "key": "fractal_fBm",
+          "label": "Standard (fBm)",
+          "mean": 0.03183,
+          "max": 0.13207,
+          "variation": 0.01786
+        },
+        {
+          "key": "fractal_mfT",
+          "label": "Terrain",
+          "mean": 0.03288,
+          "max": 0.13504,
+          "variation": 0.01481
+        },
+        {
+          "key": "fractal_none",
+          "label": "None",
+          "mean": 0.03377,
+          "max": 0.14799,
+          "variation": 0.0135
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "title": "mountain の basis 14種類の比較",
+  "network": "/obj/noise_basis",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        -42.219,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "base_subdiv",
+      "type": "subdivide",
+      "pos": [
+        -42.219,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "basis_sine",
+      "type": "mountain::2.0",
+      "pos": [
+        -42.219,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "sine"
+      }
+    },
+    {
+      "name": "basis_perlin",
+      "type": "mountain::2.0",
+      "pos": [
+        -38.971,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "perlin"
+      }
+    },
+    {
+      "name": "basis_pperlin",
+      "type": "mountain::2.0",
+      "pos": [
+        -35.724,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "pperlin"
+      }
+    },
+    {
+      "name": "basis_simplex",
+      "type": "mountain::2.0",
+      "pos": [
+        -32.476,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25
+      }
+    },
+    {
+      "name": "basis_sparse",
+      "type": "mountain::2.0",
+      "pos": [
+        -29.228,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "sparse"
+      }
+    },
+    {
+      "name": "basis_flow",
+      "type": "mountain::2.0",
+      "pos": [
+        -25.981,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "flow"
+      }
+    },
+    {
+      "name": "basis_pflow",
+      "type": "mountain::2.0",
+      "pos": [
+        -22.733,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "pflow"
+      }
+    },
+    {
+      "name": "basis_worleyFA",
+      "type": "mountain::2.0",
+      "pos": [
+        -19.486,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "worleyFA"
+      }
+    },
+    {
+      "name": "basis_worleyFB",
+      "type": "mountain::2.0",
+      "pos": [
+        -16.238,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "worleyFB"
+      }
+    },
+    {
+      "name": "basis_mworleyFA",
+      "type": "mountain::2.0",
+      "pos": [
+        -12.99,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "mworleyFA"
+      }
+    },
+    {
+      "name": "basis_mworleyFB",
+      "type": "mountain::2.0",
+      "pos": [
+        -9.743,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "mworleyFB"
+      }
+    },
+    {
+      "name": "basis_cworleyFA",
+      "type": "mountain::2.0",
+      "pos": [
+        -6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "cworleyFA"
+      }
+    },
+    {
+      "name": "basis_cworleyFB",
+      "type": "mountain::2.0",
+      "pos": [
+        -3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "cworleyFB"
+      }
+    },
+    {
+      "name": "basis_alligator",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "alligator"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "base_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_sine",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_perlin",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_pperlin",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_simplex",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_sparse",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_flow",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_pflow",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_worleyFA",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_worleyFB",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_mworleyFA",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_mworleyFB",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_cworleyFA",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_cworleyFB",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "basis_alligator",
+      "to_input": 0
+    }
+  ]
+}

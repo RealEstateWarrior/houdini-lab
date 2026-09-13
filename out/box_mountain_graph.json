@@ -1,0 +1,102 @@
+{
+  "title": "Box を山にして細分割し、位置で色付け",
+  "network": "/obj/box_mountain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        0.0,
+        4.518
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "mountain1",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.8
+      }
+    },
+    {
+      "name": "subdivide1",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "color1",
+      "type": "color",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "colortype": 1,
+        "ramp2pos": 1.0,
+        "ramp2cr": 1.0,
+        "ramp2cg": 1.0,
+        "ramp2cb": 1.0
+      }
+    },
+    {
+      "name": "OUT",
+      "type": "null",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "mountain1",
+      "to_input": 0
+    },
+    {
+      "from": "mountain1",
+      "from_output": 0,
+      "to": "subdivide1",
+      "to_input": 0
+    },
+    {
+      "from": "subdivide1",
+      "from_output": 0,
+      "to": "color1",
+      "to_input": 0
+    },
+    {
+      "from": "color1",
+      "from_output": 0,
+      "to": "OUT",
+      "to_input": 0
+    }
+  ]
+}
