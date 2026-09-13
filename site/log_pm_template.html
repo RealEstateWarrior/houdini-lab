@@ -12,7 +12,7 @@
   <header class="masthead">
     <p class="eyebrow">Procedural Modeling / hython 21.0.700</p>
     <h1>実験ログ — モデリング編</h1>
-    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034（HeightField）。数字はすべて実行して得た値で、推測は含まない。</p>
+    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜035（地形）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
       <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
@@ -1211,6 +1211,115 @@
           <li><strong>時間は回数に比例しない。</strong>1回 0.68秒、2回 0.80秒、4回 2.35秒。1回目に下ごしらえの費用がかかる。100×100 という小さな地形でこれなので、実用の解像度では相応に重い。</li>
           <li><strong><code>amp</code> は純粋な倍率だった。</strong>4通りで 幅÷amp が <span class="hi">0.291329</span> と小数点以下6桁まで同じ。<a href="#exp006">実験006</a>で mountain の <code>height</code> について確かめたことが、こちらでも成り立つ。</li>
           <li>ただし<strong>amp の数字がそのまま高さになるわけではない</strong>。amp 30 で実際の幅は 8.74（0.29倍ほど）。狙った高さにしたいなら、この比率を測ってから逆算する。</li>
+        </ul>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 035 ===================== -->
+    <article class="entry entry--current" id="exp035">
+      <div class="badge">035</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>地形の上に生やし分ける — 浸食が残した情報で木の場所を決める</h2>
+        <p class="path">/obj/terrain &nbsp;·&nbsp; 008の散布を、地形の形に従わせる</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp008">実験008</a>では平らな地面に木を200本立てた。
+            どこに立てるかは完全に運任せで、地形の形とは関係がなかった。
+          </p>
+          <p>
+            <a href="#exp034">実験034</a>で、浸食が過程を<button class="term" data-term="レイヤー">レイヤー</button>として残すことが分かった。
+            がれき・堆積・流れ。このうち <code>sediment</code>（堆積）は「土が溜まったところ」を
+            表しているはずなので、これを<button class="term" data-term="scatter">散布</button>の重みに使えば、
+            <strong>崖には生えず平らなところに生える</strong>地形が自動で作れる。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="035_plain.png" alt="崖にも尾根にも一様に木が生えた地形"></div>
+            <figcaption>重み無し。<strong>崖も尾根も関係なく一様にばらまかれる。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="035_masked.png" alt="崖が裸になり、谷筋に木が集まった地形"></div>
+            <figcaption><code>sediment</code> を重みに。同じ600本。<strong>崖が裸になり、谷筋に集まる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">段取り</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>順</th><th>やること</th><th>使うノード</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td>地形を作って浸食する</td><td><code>heightfield</code> → <code>heightfield_noise</code> → <code>heightfield_erode</code></td></tr>
+              <tr><td class="num">2</td><td>メッシュに直す</td><td><code>convertheightfield</code></td></tr>
+              <tr><td class="num">3</td><td>面の向きを作る</td><td><code>normal</code>（これが無いと複製が回らない）</td></tr>
+              <tr><td class="num">4</td><td>レイヤーを点に読み込む</td><td><code>attribwrangle</code> で <code>volumesample</code></td></tr>
+              <tr><td class="num">5</td><td>重みを付けて散布</td><td><code>scatter</code> の密度アトリビュートに指定</td></tr>
+              <tr><td class="num">6</td><td>木を複製する</td><td><code>copy to points</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">1. 浸食が残したレイヤーの中身</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>レイヤー</th><th>最小</th><th>最大</th><th>平均</th><th>値のあるマス</th></tr></thead>
+            <tbody>
+              <tr><td>height（高さ）</td><td class="num">−10.4156</td><td class="num">18.1462</td><td class="num">0.6104</td><td class="num">49.1%</td></tr>
+              <tr><td>mask</td><td class="num muted">0.0000</td><td class="num muted">0.0000</td><td class="num muted">0.0000</td><td class="num muted">0.0%</td></tr>
+              <tr><td>debris（がれき）</td><td class="num">0.0000</td><td class="num">2.5569</td><td class="num">0.0452</td><td class="num">32.5%</td></tr>
+              <tr><td>sediment（堆積）</td><td class="num">0.0000</td><td class="num hi">11.0788</td><td class="num">0.8346</td><td class="num">49.5%</td></tr>
+              <tr><td>flow（流れ）</td><td class="num">0.0000</td><td class="num">4.1504</td><td class="num">0.8009</td><td class="num hi">100.0%</td></tr>
+              <tr><td>flowdir.x</td><td class="num">−4.1177</td><td class="num">2.9576</td><td class="num">−0.1818</td><td class="num">39.4%</td></tr>
+              <tr><td>flowdir.y</td><td class="num">−2.2426</td><td class="num">4.0191</td><td class="num">0.0780</td><td class="num">50.6%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong><code>mask</code> は最初から最後まで全部ゼロだった。</strong>
+          レイヤーがあることと、値が入っていることは別の話。
+          <code>flow</code> だけは 100% のマスに値があり、地形全体をなでる量なので散布の重みには向かない。
+        </p>
+
+        <p class="label">2. sediment は本当に「緩いところ」に溜まっているか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>どちら</th><th>sediment の平均</th></tr></thead>
+            <tbody>
+              <tr><td>急なほう（勾配が中央値より上）</td><td class="num">0.00973</td></tr>
+              <tr><td>緩いほう（勾配が中央値より下）</td><td class="num">1.65957</td></tr>
+              <tr><td>緩いほうは急なほうの</td><td class="num hi">170.64倍</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint"><button class="term" data-term="メッシュ">メッシュ</button>の点 10,000個で測った。<strong>浸食が「どこに土が溜まったか」をそのまま記録している。</strong></p>
+
+        <p class="label">3. 重みを付けると、生える場所はどう変わるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th></th><th>本数</th><th>勾配の平均</th><th>勾配の中央値</th><th>sediment の平均</th></tr></thead>
+            <tbody>
+              <tr><td>重み無し</td><td class="num">600</td><td class="num">0.06474</td><td class="num">0.03674</td><td class="num">0.75115</td></tr>
+              <tr><td>重みあり</td><td class="num">600</td><td class="num">0.00332</td><td class="num">0.00063</td><td class="num">4.23520</td></tr>
+              <tr><td>変化</td><td class="muted">—</td><td class="num hi">−94.9%</td><td class="num hi">−98.3%</td><td class="num hi">5.64倍</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>sediment は緩いところに 170.64倍 溜まっていた。</strong>浸食が「どこに土が溜まったか」をそのまま記録している。</li>
+          <li><strong>重みを付けると、生える場所の勾配が 94.9% 下がった。</strong>中央値では 98.3%。<span class="hi">木は崖を避ける。</span></li>
+          <li><strong>生えた場所の sediment の値は 5.64倍になった。</strong>狙ったレイヤーの値が高いところへ、はっきり寄っている。</li>
+          <li><strong><code>mask</code> は全部ゼロだった。</strong>最小も最大も 0.0000。<code>heightfield</code> が作る2枚のうち1枚は、何か塗らないかぎり空のまま。<strong>「レイヤーがある」と「値が入っている」は別の話。</strong></li>
+          <li><strong><code>flow</code> だけは 100% のマスに値がある。</strong>他は 32〜51%。地形全体をなでる量なので、散布の重みには向かない。<strong>使うレイヤーは、値の散らばり方を見てから選ぶ。</strong></li>
+          <li><strong>レイヤーを点に持ってくるのは <code>volumesample</code> 1行。</strong><code>f@layer = volumesample(1, "sediment", @P);</code> と書き、2本目の入力に浸食後の HeightField をつなぐ。<a href="#exp026">実験026</a>で炎の温度を読んだのと同じやり方が、そのまま地形にも効く。</li>
+          <li><strong><code>normal</code> は <code>scatter</code> の前に置く。</strong><a href="#exp030">実験030</a>で測ったとおり、scatter は N を作らない。上流で作っておかないと木が全部同じ向きに立つ。</li>
+          <li>木の<button class="term" data-term="テンプレート">テンプレート</button>は <code>tube</code> を X に 90度回して Z 軸向きにしている。<strong><button class="term" data-term="copy to points">copy to points</button> はテンプレートの Z 軸を N に合わせる</strong>（<a href="#exp008">実験008</a>）。</li>
         </ul>
       </div>
     </article>

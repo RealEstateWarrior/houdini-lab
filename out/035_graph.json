@@ -1,0 +1,219 @@
+{
+  "title": "実験035 — 地形の上に生やし分ける",
+  "network": "/obj/terrain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "field",
+      "type": "heightfield",
+      "pos": [
+        -1.977,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 200.0,
+        "sizey": 200.0
+      }
+    },
+    {
+      "name": "noise",
+      "type": "heightfield_noise",
+      "pos": [
+        -1.977,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "amp": 120.0,
+        "elementsize": 80.0
+      }
+    },
+    {
+      "name": "erode",
+      "type": "heightfield_erode::3.0",
+      "pos": [
+        -1.977,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 0.2596234083175659,
+        "folder0": 1,
+        "folder1": 1,
+        "iterations": 4
+      }
+    },
+    {
+      "name": "mesh",
+      "type": "convertheightfield",
+      "pos": [
+        -1.977,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        3.106,
+        4.518
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "read_layer",
+      "type": "attribwrangle",
+      "pos": [
+        3.106,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@layer = volumesample(1, \"sediment\", @P);\n// 勾配も点ごとに持たせる。あとで「どこに生えたか」を測るのに使う\nvector up = set(0, 1, 0);\nf@slope = 1.0..."
+      }
+    },
+    {
+      "name": "scatter",
+      "type": "scatter::2.0",
+      "pos": [
+        3.106,
+        1.958
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 600,
+        "usedensityattrib": 1,
+        "densityattrib": "layer"
+      }
+    },
+    {
+      "name": "tree",
+      "type": "tube",
+      "pos": [
+        0.847,
+        2.41
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "rx": 90.0,
+        "rad1": 0.6,
+        "rad2": 0.05,
+        "height": 6.0,
+        "cols": 8
+      }
+    },
+    {
+      "name": "copies",
+      "type": "copytopoints::2.0",
+      "pos": [
+        1.977,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "both",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "field",
+      "from_output": 0,
+      "to": "noise",
+      "to_input": 0
+    },
+    {
+      "from": "noise",
+      "from_output": 0,
+      "to": "erode",
+      "to_input": 0
+    },
+    {
+      "from": "erode",
+      "from_output": 0,
+      "to": "mesh",
+      "to_input": 0
+    },
+    {
+      "from": "mesh",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "read_layer",
+      "to_input": 0
+    },
+    {
+      "from": "erode",
+      "from_output": 0,
+      "to": "read_layer",
+      "to_input": 1
+    },
+    {
+      "from": "read_layer",
+      "from_output": 0,
+      "to": "scatter",
+      "to_input": 0
+    },
+    {
+      "from": "tree",
+      "from_output": 0,
+      "to": "copies",
+      "to_input": 0
+    },
+    {
+      "from": "scatter",
+      "from_output": 0,
+      "to": "copies",
+      "to_input": 1
+    },
+    {
+      "from": "mesh",
+      "from_output": 0,
+      "to": "both",
+      "to_input": 0
+    },
+    {
+      "from": "copies",
+      "from_output": 0,
+      "to": "both",
+      "to_input": 1
+    }
+  ]
+}

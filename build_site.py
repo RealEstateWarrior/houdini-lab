@@ -245,13 +245,18 @@ DONE = [
      "shots": ["034_raw.png", "034_eroded.png"],
      "title": "HeightField で地形を作る — 高さを面ではなく数の並びで持つ",
      "note": "プリミティブは2つだけ。浸食で勾配が32.7%下がる。Grid Samples は効かない"},
+    {"no": "035", "anchor": "exp035", "tags": ["モデリング", "地形", "HeightField", "複製"],
+     "log": "log_pm", "hip": "035_scatter.hipnc", "thumb": "035_masked.png",
+     "shots": ["035_plain.png", "035_masked.png"],
+     "title": "地形の上に生やし分ける — 浸食が残した情報で木の場所を決める",
+     "note": "堆積を重みにすると生える場所の勾配が94.9%下がる。崖が裸になる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "035", "title": "地形の上に物を生やす",
-     "note": "034の浸食レイヤーを使って、斜面と平地で生やし分ける"},
+    {"no": "036", "title": "流れの向きに草を寝かせる",
+     "note": "035で使わなかった flowdir を使う"},
 ]
 
 PAGES = [
