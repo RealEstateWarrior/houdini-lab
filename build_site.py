@@ -145,17 +145,21 @@ DONE = [
      "shots": ["018_noise_strip.png", "018_opengl.png", "018_karma.png"],
      "title": "Karma でのレンダリング — ノイズはサンプル数で本当に減るのか",
      "note": "サンプル数は上限であって指定ではない。頭打ちの犯人は varianceaa_thresh"},
+    {"no": "019", "anchor": "exp019", "thumb": "019_sheet.png",
+     "shots": ["019_pool.gif", "019_sheet.png"],
+     "title": "FLIP 液体 — 配線が解けた。そして粒の数は体積ではなかった",
+     "note": "017の保留を解決。コンテナは3チャンネルの中継点で、VDBの名前が役割を決める"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "019", "title": "FLIP の再挑戦",
-     "note": "付属ヘルプとGUIが作るネットワークから入力の作法を読み取る"},
     {"no": "020", "title": "POP パーティクル",
      "note": "SOPには0種でDOPに67種。DOPネットワークを組む必要がある"},
     {"no": "021", "title": "構造のある煙を作る",
      "note": "018で判明。いまの煙は一様な球で、レンダラーの差を見せる題材として弱い"},
+    {"no": "022", "title": "液体に表面を張る",
+     "note": "019の粒のままでは液体に見えない。particlefluidsurface を使う"},
 ]
 
 PAGES = [

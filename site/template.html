@@ -1207,6 +1207,12 @@
         <h2>FLIP 液体 — 組み方が分からず保留</h2>
         <p class="path">/obj/flip_test &nbsp;·&nbsp; 4通りの配線を試行</p>
 
+        <p class="callout callout--note">
+          <strong>→ この保留は<a href="#exp019">実験019</a>で解決した。</strong>
+          原因はコンテナの役割の誤解で、付属ヘルプを読んだ時点でほぼ解けた。
+          ここは当時の記録としてそのまま残す。
+        </p>
+
         <div class="prose">
           <p>
             液体は押し縮められないので体積が保たれるはず。<button class="term" data-term="FLIP">FLIP</button> は液体を粒で表す方式なので、
@@ -1367,6 +1373,131 @@
           (3) <strong>OpenGL と Karma でカメラの寄り方が違っていた</strong>（margin 1.12 対 0.5）。
           写る画素数が違って当たり前で、最初の比較は無効だった。
           実験003以降ずっと守ってきた「全変種を同じカメラで撮る」を、自分で破っていた。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 019 ===================== -->
+    <article class="entry entry--current" id="exp019">
+      <div class="badge">019</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>FLIP 液体 — 配線が解けた。そして粒の数は体積ではなかった</h2>
+        <p class="path">/obj/flip &nbsp;·&nbsp; 実験017の保留を解く</p>
+
+        <div class="prose">
+          <p>
+            017で4通りの配線を試して全部同じエラーで止まり、保留にしていた。
+            付属ヘルプ（<code>nodes.zip</code>）を読んだら原因がはっきりした。
+          </p>
+          <p>
+            <strong>コンテナは単なる箱ではなく、3つのチャンネルを束ねる中継点だった。</strong>
+            粒を<button class="term" data-term="ソルバ">ソルバ</button>に直接つなぐのではなく、
+            いったんコンテナに入れて、コンテナの3出力をソルバの3入力へ渡す。
+            017で試した4通りは、どれもこの形になっていなかった。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="019_pool.gif" alt="上から落ちてきた水が床に当たって放射状に広がっていくアニメーション"></div>
+            <figcaption>動くようになった状態。床に当たった水が放射状に広がる。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">Sources チャンネルを流れているもの</p>
+        <div class="prose">
+          <p>
+            コンテナの出力1を調べると、点は7つ、<button class="term" data-term="プリミティブ">プリミティブ</button>も7つで、
+            すべて<button class="term" data-term="ボリューム">VDB（ボリューム）</button>だった。
+            ヘルプには「液体の粒を期待する」と書いてあるが、実際に流れているのは粒ではない。
+            <strong>タンクの3,145点をいくら入れても無視されたのは当然だった。</strong>
+          </p>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>VDBの名前</th><th>F1</th><th>F5</th><th>F20</th><th>F40</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td>source</td><td class="num hi">3588</td><td class="num">3667</td><td class="num">5725</td><td class="num">5517</td><td class="hi">液体が湧く</td></tr>
+              <tr><td>surface（flipsource の既定）</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="muted">何も起きない</td></tr>
+              <tr><td>notasource</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="muted">何も起きない</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          同じ箱から作ったVDBを、名前だけ変えて合流させた。<strong>名前が役割を決めている。</strong>
+        </p>
+
+        <p class="label">水の量を5倍にしても、粒の数が変わらない</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>水位</th><th>水の体積</th><th>narrow band あり</th><th>narrow band なし</th></tr></thead>
+            <tbody>
+              <tr><td class="num">−1.00</td><td class="num">4.5000</td><td class="num">19,973</td><td class="num">33,252</td></tr>
+              <tr><td class="num">−0.50</td><td class="num">9.0000</td><td class="num">19,081</td><td class="num">48,926</td></tr>
+              <tr><td class="num">0.00</td><td class="num">13.5000</td><td class="num">19,537</td><td class="num">64,517</td></tr>
+              <tr><td class="num">0.50</td><td class="num">18.0000</td><td class="num">19,885</td><td class="num">79,896</td></tr>
+              <tr><td class="num">1.00</td><td class="num">22.5000</td><td class="num muted">19,484</td><td class="num hi">94,621</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          体積が5倍になっているのに、narrow band ありでは粒の数がほとんど動かない
+          （最多19,973と最少19,081の差は4.7%）。
+        </p>
+
+        <p class="label">narrow band を切ると、体積にきれいに比例する</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>水の体積</th><th>実測</th><th>直線の予測</th><th>ずれ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">4.500</td><td class="num">33,252</td><td class="num">33,500.8</td><td class="num">−0.74%</td></tr>
+              <tr><td class="num">9.000</td><td class="num">48,926</td><td class="num">48,871.6</td><td class="num">+0.11%</td></tr>
+              <tr><td class="num">13.500</td><td class="num">64,517</td><td class="num">64,242.4</td><td class="num">+0.43%</td></tr>
+              <tr><td class="num">18.000</td><td class="num">79,896</td><td class="num">79,613.2</td><td class="num">+0.36%</td></tr>
+              <tr><td class="num">22.500</td><td class="num">94,621</td><td class="num">94,984.0</td><td class="num">−0.38%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          当てはめた式は <strong>粒の数 = 3415.7 × 体積 + 18130</strong>。5点すべてずれが1%未満。
+        </p>
+
+        <p class="label">40フレーム進めたときの粒の数</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>reseeding</th><th>F1</th><th>F10</th><th>F20</th><th>F40</th><th>最大−最小</th></tr></thead>
+            <tbody>
+              <tr><td>あり（既定）</td><td class="num">64,517</td><td class="num">64,439</td><td class="num">64,421</td><td class="num">64,385</td><td class="num hi">132（0.20%）</td></tr>
+              <tr><td>なし</td><td class="num">64,517</td><td class="num">69,929</td><td class="num">75,904</td><td class="num">87,921</td><td class="num">23,404（36.28%）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="019_sheet.png" alt="水が落ちて床に溜まっていく様子を等間隔のフレームで並べたコンタクトシート"></div>
+            <figcaption>同じ計算を等間隔のフレームで。粒の数は湧く量と消える量が釣り合って約4,450で落ち着く。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>017を止めていた原因はコンテナの役割の誤解だった。</strong>flipcontainer は箱を作るだけではなく、液体の粒・容器・衝突の3チャンネルを束ねて流す中継点になっている。</li>
+          <li>チャンネルを流れているのは粒ではなく<strong>名前付きのVDB</strong>。<code>source</code> という名前のものだけが液体を湧かせる。flipsource の既定の名前は <code>surface</code> なので、そのままつないでも動かない。</li>
+          <li><strong>粒の数は体積を表していなかった。</strong>水の体積を5倍にしても粒の数はほぼ一定。原因は <code>donarrowband</code>（既定で有効）で、<strong>粒は水面付近の帯にしか置かれていない</strong>。</li>
+          <li>narrow band を切ると体積に比例した。<strong>粒の数 = 3415.7 × 体積 + 18130</strong>、5点すべてずれ1%未満。</li>
+          <li>切片の 18,130 は、narrow band ありのときの粒の数（平均 19,592）に近い。<strong>体積に比例しない分が、ちょうど帯の分にあたる。</strong>別々の道から測った2つの量が同じところを指している。</li>
+          <li>粒1つが担う体積は 0.000293 で、間隔の3乗（0.000512）の <span class="hi">0.572倍</span>。017で「粒の数 × 間隔の3乗では体積を表せない」と書いた、その係数がこれ。</li>
+          <li><strong>017で立てた予想は逆だった。</strong>「reseeding を切れば粒の数が保たれるはず」と書いていたが、実測では reseeding <strong>あり</strong>のほうが保たれる（0.20%）。切ると36.28%増える。境界では水位を保つため粒が絶えず作られており、reseeding はその「消す」側だった。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          <strong>ヘルプを読むのが一番速かった。</strong>
+          017ではネットを調べ、配線を総当たりして進まなかった。
+          付属の <code>nodes.zip</code> に入力の意味が書いてあり、読んだ時点でほぼ解けた。
+          手元の一次情報を先に当たる。
         </p>
       </div>
     </article>
