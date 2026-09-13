@@ -376,9 +376,9 @@
       html += '<a class="m-more" href="' + esc(item.href) + '">全文のログを読む →</a>';
 
       body.innerHTML = html;
-      body.scrollTop = 0;
       modal.hidden = false;
-      modal.querySelector(".modal-card").scrollTop = 0;
+      /* スクロールするのは .modal-body。カードは動かない（×を右上に留めるため） */
+      body.scrollTop = 0;
       document.body.style.overflow = "hidden";
       opener = button || null;
       document.getElementById("m-close").focus();
@@ -429,7 +429,7 @@
       body.appendChild(section);
       current = section;
       modal.hidden = false;
-      modal.querySelector(".modal-card").scrollTop = 0;
+      body.scrollTop = 0;
       document.body.style.overflow = "hidden";
       opener = button || null;
       document.getElementById("guide-close").focus();
