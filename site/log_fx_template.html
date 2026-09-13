@@ -1450,6 +1450,133 @@ cache, info = hou_tools.cache_sim(solver.path(), CACHE_DIR, "smoke", FRAMES)</co
     </article>
 
 
+
+    <!-- ===================== 028 ===================== -->
+    <article class="entry entry--current" id="exp028">
+      <div class="badge">028</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>布は破れなかった — 効かない条件を14通り潰す</h2>
+        <p class="path">/obj/tear &nbsp;·&nbsp; Vellum の breaking が、どうやっても効かない</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp015">実験015</a>で布を垂らした。今回はそれを<strong>破る</strong>つもりだった。
+            <code>vellumconstraints</code> には <code>dobreaking</code>（既定でオフ）と
+            <code>breakthreshold</code>（既定 0.1）がある。しきい値を下げれば破れやすくなるはずである。
+          </p>
+          <p>
+            結果を先に書く。<strong>1つも破れなかった。</strong>
+            しきい値を 1.0 から 0.000001 まで下げても、破れ方の種類を3つとも試しても、
+            布を100倍重くして応力を 26,552 まで上げても、切れた<button class="term" data-term="コンストレイント">拘束</button>は
+            <span class="hi">ゼロのまま</span>だった。<strong>しきい値の 2.7×10<sup>10</sup> 倍の応力がかかっても</strong>、である。
+          </p>
+          <p>
+            「効かない」と書くには、効くはずの条件を潰しきる必要がある。
+            しきい値・破れ方の種類・力の強さ・拘束の型・<button class="term" data-term="ソルバ">ソルバ</button>の設定の5つを潰した。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="028_off.png" alt="上端で吊るされ、無傷のまま垂れている格子状の布"></div>
+            <figcaption>breaking を切った状態。F48。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="028_t002.png" alt="同じ構図で、まったく同じに見える布"></div>
+            <figcaption>しきい値 0.02。同じカメラ・同じフレーム。<strong>見分けがつかない。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">組んだもの</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>項目</th><th>値</th></tr></thead>
+            <tbody>
+              <tr><td>布</td><td>4×4 / 40×40分割 / 1,600点 / 1,521面</td></tr>
+              <tr><td>留めたところ</td><td>上の辺1列だけ（全重量が上端にかかる）</td></tr>
+              <tr><td>作られた拘束</td><td class="num">9,126本（distance 4,641 + bend 4,485）</td></tr>
+              <tr><td>拘束の型 / 破れ方</td><td>distance / stretchstress</td></tr>
+              <tr><td>ソルバのモード</td><td class="hi">full（Minimal ではない）</td></tr>
+              <tr><td>中の DOP の判定頻度</td><td class="hi">perframe（Never ではない）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">1. しきい値を下げていく</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>しきい値</th><th>切れた拘束</th><th>拘束</th><th>点</th><th>塊</th><th>一番長い辺</th><th>最下点</th></tr></thead>
+            <tbody>
+              <tr><td>なし（基準）</td><td class="num">0</td><td class="num">9,126</td><td class="num">1,600</td><td class="num">1</td><td class="num">0.10506</td><td class="num">0.1594</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0</td><td class="num">9,126</td><td class="num">1,600</td><td class="num">1</td><td class="num">0.10506</td><td class="num">0.1594</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0</td><td class="num">9,126</td><td class="num">1,600</td><td class="num">1</td><td class="num">0.10506</td><td class="num">0.1594</td></tr>
+              <tr><td class="num">0.2</td><td class="num">0</td><td class="num">9,126</td><td class="num">1,600</td><td class="num">1</td><td class="num">0.10506</td><td class="num">0.1594</td></tr>
+              <tr><td class="num">0.1（既定値）</td><td class="num">0</td><td class="num">9,126</td><td class="num">1,600</td><td class="num">1</td><td class="num">0.10506</td><td class="num">0.1594</td></tr>
+              <tr><td class="num">0.05</td><td class="num">0</td><td class="num">9,126</td><td class="num">1,600</td><td class="num">1</td><td class="num">0.10506</td><td class="num">0.1594</td></tr>
+              <tr><td class="num">0.02</td><td class="num">0</td><td class="num">9,126</td><td class="num">1,600</td><td class="num">1</td><td class="num">0.10506</td><td class="num">0.1594</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          数字が1つも動かない。<strong>実験021の shredding と同じ形の「効いていない」</strong>である。
+        </p>
+
+        <p class="label">2. 破れ方の種類を変える（しきい値 0.000001）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>破れ方</th><th>切れた拘束</th><th>応力の最大</th></tr></thead>
+            <tbody>
+              <tr><td>stretchstress（応力）</td><td class="num">0 / 9,126</td><td class="num">22.603</td></tr>
+              <tr><td>stretchdistance（伸びた距離）</td><td class="num">0 / 9,126</td><td class="num">22.603</td></tr>
+              <tr><td>stretchratio（伸び率）</td><td class="num">0 / 9,126</td><td class="num">22.603</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 力を強くする（しきい値 0.000001）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>stretchstiffness</th><th>重さ</th><th>切れた拘束</th><th>応力の最大</th><th>一番長い辺</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num">1</td><td class="num">0</td><td class="num">22.603</td><td class="num">0.10506</td></tr>
+              <tr><td class="num">0.01</td><td class="num">1</td><td class="num">0</td><td class="num">22.605</td><td class="num">0.10506</td></tr>
+              <tr><td class="num">0.001</td><td class="num">1</td><td class="num">0</td><td class="num">22.616</td><td class="num">0.10506</td></tr>
+              <tr><td class="num">0.001</td><td class="num">100</td><td class="num">0</td><td class="num hi">26,551.953</td><td class="num">0.10672</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          応力 26,551.953 に対してしきい値は 0.000001。<strong>「力が足りない」では説明できない。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>14通りすべてで1つも切れなかった。</strong>しきい値7段階・破れ方3種類・力4段階。</li>
+          <li><strong>結果は小数点以下まで完全に同一。</strong>breaking を切った状態としきい値 0.02 の状態で、一番長い辺（0.10506）も最下点（0.1594）も一致する。効いていれば必ずどこかが動く。</li>
+          <li><strong>拘束の型は対象だった。</strong>cloth が作る 4,641本は型が <code>distance</code> で、<code>breaktype</code> に <code>stretchstress</code> が書かれている。付属ヘルプは <code>breaktypestretch</code> を「distance 拘束の破れ方を決める」と説明しており、条件を満たしている。</li>
+          <li><strong>ソルバは判定を切っていなかった。</strong><code>solvermode</code> は <code>full</code>（Minimal モードなら拘束の増減が非対応だが、そうではない）。<button class="term" data-term="SOP">SOP</button> の中に埋まっている <button class="term" data-term="DOP">DOP</button> ソルバの <code>breakfrequency</code> は <code>perframe</code>、つまり<span class="hi">毎フレーム判定する設定</span>だった。</li>
+          <li><strong>破れた拘束は消えるのではなく <code>broken</code> <button class="term" data-term="グループ">グループ</button>に入る。</strong>ソルバの2番目の出力にその名前の<button class="term" data-term="プリミティブ">プリミティブ</button>グループが用意されている。今回はここが最後まで空のままだった。<strong>「拘束の数が減ったか」ではなく「グループに入ったか」で数えるのが正しい。</strong>数え方を間違えると、破れているのに気づけない。</li>
+          <li><strong>付属ヘルプに <code>breakfrequency</code> は載っているが、SOP の<button class="term" data-term="パラメータ">パラメータ</button>には無い。</strong>DOP 版の vellumsolver にはある。SOP の中の DOP <button class="term" data-term="ノード">ノード</button>を <code>allowEditingOfContents()</code> で開いて読むまで、値が分からなかった。</li>
+        </ul>
+
+        <p class="callout">
+          <strong>ここまでが確かめたこと。原因は特定できていない。</strong>
+          残っている可能性は3つ。(1) SOP レベルの vellumsolver では拘束の破れが扱われない、
+          (2) 別の未知の設定が要る、(3) この版に固有の挙動。
+          <strong>断定はしない。</strong>実験021で「shredding は炎がないと効かないのだろう」と書いて残した見立ては、
+          2実験あとの023で確かめて当たっていた。今回も同じように、見立てを断定せずに残しておく。
+        </p>
+
+        <p class="callout callout--note">
+          次に試すこと。<strong>DOP レベルで vellum を組み、<code>breakfrequency</code> を自分で指定して同じ測定をする。</strong>
+          もう1つ、付属ヘルプは <code>breaktypeall</code> を「<strong>weld と hair</strong> の破れ方を決める」と説明している。
+          本来の対象は溶接や接着の拘束で、布の伸びではないのかもしれない。
+        </p>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

@@ -1,0 +1,145 @@
+{
+  "title": "実験028 — 布は破れなかった",
+  "network": "/obj/tear",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cloth",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 4.0,
+        "sizey": 4.0,
+        "ty": 2.2,
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "make_pins",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "if (@P.y > 4.1) { @group_pins = 1; }"
+      }
+    },
+    {
+      "name": "con",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "dobreaking": 1
+      }
+    },
+    {
+      "name": "pin",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        -3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 6,
+        "grouptype": 1,
+        "group": "pins"
+      }
+    },
+    {
+      "name": "solve",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        -4.518
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "conn",
+      "type": "connectivity",
+      "pos": [
+        0.0,
+        -5.647
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "connecttype": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "make_pins",
+      "to_input": 0
+    },
+    {
+      "from": "make_pins",
+      "from_output": 0,
+      "to": "con",
+      "to_input": 0
+    },
+    {
+      "from": "con",
+      "from_output": 0,
+      "to": "pin",
+      "to_input": 0
+    },
+    {
+      "from": "con",
+      "from_output": 1,
+      "to": "pin",
+      "to_input": 1
+    },
+    {
+      "from": "pin",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 0
+    },
+    {
+      "from": "pin",
+      "from_output": 1,
+      "to": "solve",
+      "to_input": 1
+    },
+    {
+      "from": "solve",
+      "from_output": 0,
+      "to": "conn",
+      "to_input": 0
+    }
+  ]
+}
