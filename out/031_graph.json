@@ -1,0 +1,195 @@
+{
+  "title": "実験031 — Vellum の breaking",
+  "network": "/obj/glue",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "top",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "ty": 4.0,
+        "rows": 12,
+        "cols": 12
+      }
+    },
+    {
+      "name": "bottom",
+      "type": "grid",
+      "pos": [
+        2.259,
+        -0.452
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "ty": 2.02,
+        "rows": 12,
+        "cols": 12
+      }
+    },
+    {
+      "name": "merge",
+      "type": "merge",
+      "pos": [
+        1.13,
+        -1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "make_pins",
+      "type": "attribwrangle",
+      "pos": [
+        1.13,
+        -2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "if (@P.y > 4.9) { @group_pins = 1; }"
+      }
+    },
+    {
+      "name": "cloth",
+      "type": "vellumconstraints",
+      "pos": [
+        1.13,
+        -3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "glue",
+      "type": "vellumconstraints",
+      "pos": [
+        1.13,
+        -4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 12,
+        "dobreaking": 1,
+        "breakthreshold": 1e-06
+      }
+    },
+    {
+      "name": "pin",
+      "type": "vellumconstraints",
+      "pos": [
+        1.13,
+        -5.949
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 6,
+        "grouptype": 1,
+        "group": "pins"
+      }
+    },
+    {
+      "name": "solve",
+      "type": "vellumsolver",
+      "pos": [
+        1.13,
+        -7.078
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "merge",
+      "to_input": 0
+    },
+    {
+      "from": "bottom",
+      "from_output": 0,
+      "to": "merge",
+      "to_input": 1
+    },
+    {
+      "from": "merge",
+      "from_output": 0,
+      "to": "make_pins",
+      "to_input": 0
+    },
+    {
+      "from": "make_pins",
+      "from_output": 0,
+      "to": "cloth",
+      "to_input": 0
+    },
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "glue",
+      "to_input": 0
+    },
+    {
+      "from": "cloth",
+      "from_output": 1,
+      "to": "glue",
+      "to_input": 1
+    },
+    {
+      "from": "glue",
+      "from_output": 0,
+      "to": "pin",
+      "to_input": 0
+    },
+    {
+      "from": "glue",
+      "from_output": 1,
+      "to": "pin",
+      "to_input": 1
+    },
+    {
+      "from": "pin",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 0
+    },
+    {
+      "from": "pin",
+      "from_output": 1,
+      "to": "solve",
+      "to_input": 1
+    }
+  ]
+}

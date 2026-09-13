@@ -1,0 +1,206 @@
+{
+  "threshold": 1e-06,
+  "last": 40,
+  "kinds": [
+    {
+      "label": "どちらも breaking なし",
+      "break_cloth": false,
+      "break_glue": false,
+      "before": {
+        "distance": 770,
+        "bend": 682,
+        "stitch": 12
+      },
+      "after": {
+        "bend": 682,
+        "stitch": 12,
+        "distance": 770
+      },
+      "gone": {
+        "distance": 0,
+        "bend": 0,
+        "stitch": 0
+      },
+      "broken_group": null,
+      "lowest": 0.9607558250427246
+    },
+    {
+      "label": "glue だけ breaking",
+      "break_cloth": false,
+      "break_glue": true,
+      "before": {
+        "distance": 770,
+        "bend": 682,
+        "stitch": 12
+      },
+      "after": {
+        "bend": 682,
+        "distance": 770
+      },
+      "gone": {
+        "distance": 0,
+        "bend": 0,
+        "stitch": 12
+      },
+      "broken_group": 0,
+      "lowest": -8.64393138885498
+    },
+    {
+      "label": "cloth だけ breaking",
+      "break_cloth": true,
+      "break_glue": false,
+      "before": {
+        "distance": 770,
+        "bend": 682,
+        "stitch": 12
+      },
+      "after": {
+        "bend": 682,
+        "stitch": 12,
+        "distance": 770
+      },
+      "gone": {
+        "distance": 0,
+        "bend": 0,
+        "stitch": 0
+      },
+      "broken_group": 0,
+      "lowest": 0.9607558250427246
+    },
+    {
+      "label": "両方に breaking",
+      "break_cloth": true,
+      "break_glue": true,
+      "before": {
+        "distance": 770,
+        "bend": 682,
+        "stitch": 12
+      },
+      "after": {
+        "bend": 682,
+        "distance": 770
+      },
+      "gone": {
+        "distance": 0,
+        "bend": 0,
+        "stitch": 12
+      },
+      "broken_group": 0,
+      "lowest": -8.64393138885498
+    }
+  ],
+  "threshold_sweep": [
+    {
+      "threshold": null,
+      "counts": {
+        "3": 1464,
+        "10": 1464,
+        "40": 1464
+      },
+      "lowest": 0.9607558250427246
+    },
+    {
+      "threshold": 1e-06,
+      "counts": {
+        "3": 1452,
+        "10": 1452,
+        "40": 1452
+      },
+      "lowest": -8.64393138885498
+    },
+    {
+      "threshold": 1.0,
+      "counts": {
+        "3": 1452,
+        "10": 1452,
+        "40": 1452
+      },
+      "lowest": -8.64393138885498
+    },
+    {
+      "threshold": 10.0,
+      "counts": {
+        "3": 1464,
+        "10": 1456,
+        "40": 1452
+      },
+      "lowest": -5.654000759124756
+    },
+    {
+      "threshold": 100.0,
+      "counts": {
+        "3": 1464,
+        "10": 1464,
+        "40": 1464
+      },
+      "lowest": 0.9607558250427246
+    },
+    {
+      "threshold": 1000.0,
+      "counts": {
+        "3": 1464,
+        "10": 1464,
+        "40": 1464
+      },
+      "lowest": 0.9607558250427246
+    }
+  ],
+  "curtains": [
+    {
+      "kind": "cloth",
+      "threshold": null,
+      "before": 2166,
+      "after": 2166,
+      "lowest": 0.1928531676530838
+    },
+    {
+      "kind": "cloth",
+      "threshold": 1e-06,
+      "before": 2166,
+      "after": 2166,
+      "lowest": 0.1928531676530838
+    },
+    {
+      "kind": "distance",
+      "threshold": null,
+      "before": 1121,
+      "after": 1121,
+      "lowest": 0.1930813193321228
+    },
+    {
+      "kind": "distance",
+      "threshold": 1e-06,
+      "before": 1121,
+      "after": 1121,
+      "lowest": 0.1930813193321228
+    },
+    {
+      "kind": "distance",
+      "threshold": 10.0,
+      "before": 1121,
+      "after": 1121,
+      "lowest": 0.1930813193321228
+    }
+  ],
+  "dop": [
+    {
+      "breakfrequency": "never",
+      "before": 2166,
+      "after": 2166,
+      "lowest": 0.19281746447086334
+    },
+    {
+      "breakfrequency": "perframe",
+      "before": 2166,
+      "after": 2166,
+      "lowest": 0.19281746447086334
+    },
+    {
+      "breakfrequency": "persubstep",
+      "before": 2166,
+      "after": 2166,
+      "lowest": 0.19281746447086334
+    }
+  ],
+  "anything_broke": true
+}

@@ -225,13 +225,18 @@ DONE = [
      "shots": ["030_audit.png"],
      "title": "過去29回を測り直す — 書いたことは、いまも正しいか",
      "note": "7項目を再測定。5つは確認、2つは訂正。数字は動かず、動いたのは書き方だけ"},
+    {"no": "031", "anchor": "exp031", "tags": ["エフェクト", "布", "Vellum", "検算"],
+     "log": "log_fx", "hip": "031_break.hipnc", "thumb": "031_tear.png",
+     "shots": ["031_hold.png", "031_tear.png"],
+     "title": "Vellum の breaking は動く — ただし布の伸びには効かない",
+     "note": "028の宿題を回収。glue の stitch は破れ、cloth の distance は同じ場面でも破れない"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "031", "title": "Vellum の breaking を DOP で確かめ直す",
-     "note": "028で SOP レベルでは1つも破れなかった。breakfrequency を自分で指定する"},
+    {"no": "032", "title": "狙った線で破れる布を作る",
+     "note": "031で分かった glue の使い方を、切れ目を入れた布に応用する"},
 ]
 
 PAGES = [
