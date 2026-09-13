@@ -1,5 +1,5 @@
 __pycache__/
 *.pyc
 
-# Houdiniのシーンファイル。examples/ のスクリプトを実行すれば再生成できる
-out/*.hipnc
+# 性能計測の一時出力
+out/*_perf_*.csv

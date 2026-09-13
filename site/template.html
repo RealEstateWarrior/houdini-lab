@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>8 / 16</dd></div>
+      <div><dt>実験</dt><dd>9 / 16</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -630,6 +630,80 @@
           円錐の底面リングの点がすべて等距離のため、選ばれる点が複製ごとにばらついて 21.44度 という
           無意味な値が出た。固定の点番号を使う方式に変えたら 0.00度 になった。
           等距離の点が並ぶ形では「最も遠い点」は一意に決まらない。
+        </p>
+      </div>
+    </article>
+
+    <!-- ===================== 009 ===================== -->
+    <article class="entry entry--current" id="exp009">
+      <div class="badge">009</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>attribute wrangle で VEX を書く — 何が何回動くのか</h2>
+        <p class="path">/obj/vex_intro &nbsp;·&nbsp; 20×20 の grid で検証</p>
+
+        <div class="prose">
+          <p>
+            <button class="term" data-term="VEX">VEX</button> は「ノードを並べる代わりに数行書く」ための言語。
+            ただし初心者が最初につまずくのは文法ではなく、<strong>そのコードが何に対して何回走るのか</strong>という点。
+          </p>
+          <p>
+            あわせて「VEXは速い」を数字にしようとしたが、<strong>測り方を二度も間違えた</strong>。
+            その経緯も残す。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="009_wave.png" alt="VEX 1行で作られた規則的な波状の面"></div>
+            <figcaption>VEX 1行で作った波<br><code>@P.y = sin(@P.x * 2.0) * 0.5;</code></figcaption>
+          </figure>
+          <figure>
+            <div class="scroll">
+              <table>
+                <thead><tr><th>実行対象（class）</th><th>作られるアトリビュート</th><th>要素数</th></tr></thead>
+                <tbody>
+                  <tr><td>Detail (only once)</td><td>ディテール</td><td class="num">1</td></tr>
+                  <tr><td>Primitives</td><td>プリミティブ</td><td class="num">361</td></tr>
+                  <tr><td>Points（既定）</td><td>ポイント</td><td class="num">400</td></tr>
+                  <tr><td>Vertices</td><td>バーテックス</td><td class="num">1444</td></tr>
+                  <tr><td>Numbers</td><td class="muted">作られない</td><td class="muted">—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <figcaption>同じ <code>@marker = 1.0;</code> を実行対象だけ変えて走らせた結果。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">処理時間 — 3回目でようやく本物になった</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>計測方法</th><th>軽い処理</th><th>重い処理（計算量100倍）</th><th>比</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td>cook(force=True) を挟む</td><td class="num">0.080ms</td><td class="num">0.070ms</td><td class="num">0.9倍</td><td class="muted">無効</td></tr>
+              <tr><td>hou.perfMon</td><td class="num">0.008秒</td><td class="num">0.008秒</td><td class="num">1.0倍</td><td class="muted">無効</td></tr>
+              <tr><td>毎回新しいノードを作る</td><td class="num">2.48ms</td><td class="num">43.91ms</td><td class="num hi">17.7倍</td><td class="hi">有効</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>実行対象は5種類（Detail / Primitives / Points / Vertices / Numbers）で既定は Points。<strong>同じコードでも、実行対象によって結果の置き場所が変わる</strong>。Points なら点に、Primitives なら面に、Detail ならジオメトリ全体に1つだけ作られる。</li>
+          <li>Numbers だけはアトリビュートが作られない。ジオメトリの要素ではなく指定した個数の番号に対して走るモードなので、書き込む先がないため。</li>
+          <li>予測してから測った。sin の値域は -1〜+1 なので 0.5 倍すれば y は -0.5〜+0.5 に収まるはず。実測は <strong>-0.499983 〜 +0.499983</strong>。</li>
+          <li>この 0.000017 のずれも説明がつく。20分割なので点の間隔は 10/19 = 0.526316。sin(2x) が最大になる x = π/4 ≈ 0.785398 に最も近い格子点は x = 0.789474 で、そこでの値を計算すると 0.4999834。実測と<strong>小数点以下6桁まで一致</strong>する。誤差ではなく格子がピークをまたいでいるだけだった。</li>
+          <li><code>rand(@ptnum)</code> は完全に再現する。別のノードで2回走らせて全400点が小数点以下9桁まで一致した。乱数といっても点番号から決まる固定値なので、実行のたびに変わることはない。</li>
+          <li>処理時間の計測は<strong>二度失敗した</strong>。<code>cook(force=True)</code> を <code>perf_counter</code> で挟む方法では、計算量を100倍にしても時間が 0.9倍 にしかならない。ジオメトリを要求した時点で初めて計算されるため、計測区間の外で処理が走っていた。公式の <code>hou.perfMon</code> でも同じ値が返り、同じノードを焼き直す限りキャッシュが効いてしまうと分かった。</li>
+          <li>三度目に成功した。<strong>毎回新しいノードを作って初回のクックを測る</strong>。キャッシュが存在しないので必ず計算が走る。計算量100倍の処理が 17.7倍 の時間になり、結果の最大yも 0.49999 から 0.32169 に変わった。<strong>時間と結果の両方が動いたので本物</strong>。</li>
+          <li>得られた数字。64万点に sin × cos を1回かけて 2.47ミリ秒、256万点で 4.58ミリ秒。この2点から、<strong>1点あたりの限界コストは約1.1ナノ秒（毎秒約9億点）、固定の費用が約1.8ミリ秒</strong>。</li>
+          <li>つまり「VEXが速い」効果は点数が多いときにしか出ない。4万点では1.49ミリ秒かかり、そのほとんどが固定費。少ない点数ならどう書いても体感は変わらない。</li>
+        </ul>
+
+        <p class="callout">
+          計測の型として、今後は<strong>「結果が変わること」と「時間が変わること」の両方を確認する</strong>。
+          今回は結果の最大yが 0.49999 → 0.32169 と変わったことが、確かに別の計算が走った証拠になった。
+          時間だけを見ていたら二度の失敗に気づけなかった。
         </p>
       </div>
     </article>

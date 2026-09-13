@@ -86,13 +86,16 @@ DONE = [
     {"no": "008", "anchor": "exp008", "thumb": "008_z_axis.png",
      "title": "scatter と copy to points — 地面に物を生やす",
      "note": "N はテンプレートのZ軸に対応する。Y軸のまま複製すると必ず横倒しになる"},
+    {"no": "009", "anchor": "exp009", "thumb": "009_wave.png",
+     "title": "attribute wrangle で VEX を書く",
+     "note": "実行対象でアトリビュートの置き場所が変わる。処理時間の計測は3回目で本物になった"},
 ]
 
 PLANNED = [
-    {"no": "009", "title": "crease で角を保持する",
+    {"no": "010", "title": "for-each ループ",
+     "note": "プリミティブ単位の繰り返し。VEXとの使い分け"},
+    {"no": "011", "title": "crease で角を保持する",
      "note": "分割しても立方体らしさを残せるか"},
-    {"no": "010", "title": "for-each ループ", "note": "プリミティブ単位の繰り返し"},
-    {"no": "011", "title": "attribute wrangle (VEX) 入門", "note": "@P / @N / @ptnum"},
     {"no": "012", "title": "polyextrude と boolean", "note": "押し出しとブーリアン"},
 ]
 

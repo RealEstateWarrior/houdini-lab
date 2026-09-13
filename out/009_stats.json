@@ -1,0 +1,101 @@
+{
+  "classes": [
+    {
+      "class": "detail",
+      "label": "Detail (only once)",
+      "created": [
+        "ディテール"
+      ]
+    },
+    {
+      "class": "primitive",
+      "label": "Primitives",
+      "created": [
+        "プリミティブ"
+      ]
+    },
+    {
+      "class": "point",
+      "label": "Points",
+      "created": [
+        "ポイント"
+      ]
+    },
+    {
+      "class": "vertex",
+      "label": "Vertices",
+      "created": [
+        "バーテックス"
+      ]
+    },
+    {
+      "class": "number",
+      "label": "Numbers",
+      "created": [
+        "（なし）"
+      ]
+    }
+  ],
+  "counts": {
+    "point": 400,
+    "prim": 361,
+    "vertex": 1444,
+    "detail": 1
+  },
+  "wave": {
+    "predicted": [
+      -0.5,
+      0.5
+    ],
+    "measured": [
+      -0.499983,
+      0.499983
+    ]
+  },
+  "rand": {
+    "identical": true,
+    "mean": 1.03046,
+    "min": 0.00103,
+    "max": 1.9905
+  },
+  "timing": [
+    {
+      "divisions": 200,
+      "points": 40000,
+      "ms": 1.487,
+      "points_per_second": 26899798
+    },
+    {
+      "divisions": 400,
+      "points": 160000,
+      "ms": 2.005,
+      "points_per_second": 79788560
+    },
+    {
+      "divisions": 800,
+      "points": 640000,
+      "ms": 2.472,
+      "points_per_second": 258910149
+    },
+    {
+      "divisions": 1600,
+      "points": 2560000,
+      "ms": 4.58,
+      "points_per_second": 558951964
+    }
+  ],
+  "weight": [
+    {
+      "label": "軽い（1回）",
+      "ms": 2.48,
+      "ratio": 1.0,
+      "peak_y": 0.49999
+    },
+    {
+      "label": "重い（100回の繰り返し）",
+      "ms": 43.91,
+      "ratio": 17.7,
+      "peak_y": 0.32169
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "attribute wrangle で VEX を書く",
+  "network": "/obj/vex_intro",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 20,
+        "cols": 20
+      }
+    },
+    {
+      "name": "wave",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "snippet": "@P.y = sin(@P.x * 2.0) * 0.5;"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "wave",
+      "to_input": 0
+    }
+  ]
+}
