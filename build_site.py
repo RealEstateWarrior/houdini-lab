@@ -255,13 +255,18 @@ DONE = [
      "shots": ["036_flat.png", "036_flow.png"],
      "title": "流れの向きに草を寝かせる — flowdir は x と y が入れ替わっている",
      "note": "素直な並びは96.5度でハズレ。8通り総当たりで入れ替えが正解と決めた"},
+    {"no": "037", "anchor": "exp037", "tags": ["モデリング", "地形", "HeightField", "レンダリング"],
+     "log": "log_pm", "hip": "037_color.hipnc", "thumb": "037_color.png",
+     "shots": ["037_plain.png", "037_color.png"],
+     "title": "浸食のレイヤーで地形を塗り分ける — 色は情報を持っているか",
+     "note": "岩肌は土の6.32倍急。しきい値は分布を見てから決める"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "037", "title": "浸食のレイヤーで地形を塗り分ける",
-     "note": "debris と sediment を色にして、岩肌と土を描き分ける"},
+    {"no": "038", "title": "地形を Karma で見せる絵にする",
+     "note": "037の塗り分けを、確認用の速い描画ではなく本番のレンダで出す"},
 ]
 
 PAGES = [

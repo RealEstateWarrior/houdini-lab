@@ -12,7 +12,7 @@
   <header class="masthead">
     <p class="eyebrow">Procedural Modeling / hython 21.0.700</p>
     <h1>実験ログ — モデリング編</h1>
-    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜036（地形）。数字はすべて実行して得た値で、推測は含まない。</p>
+    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜037（地形）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
       <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
@@ -1427,6 +1427,98 @@
           <strong>おかしいと気づけたのは、毎回「でたらめなら何度になるか」を先に決めていたから。</strong>
           90度という基準が無ければ、96.48度を見ても何も思わなかった。
         </p>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 037 ===================== -->
+    <article class="entry entry--current" id="exp037">
+      <div class="badge">037</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>浸食のレイヤーで地形を塗り分ける — 色は情報を持っているか</h2>
+        <p class="path">/obj/terrain &nbsp;·&nbsp; しきい値は分布を見てから決める</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp034">実験034</a>で、浸食が過程を<button class="term" data-term="レイヤー">レイヤー</button>として残すと分かった。
+            <a href="#exp035">035</a>では <code>sediment</code> を散布の重みに、
+            <a href="#exp036">036</a>では <code>flowdir</code> を向きに使った。今回は<strong>色</strong>にする。
+          </p>
+          <p>
+            見た目を作るだけなら、適当に塗っても絵にはなる。そうではなく、
+            <strong>塗り分けが地形の形と対応しているか</strong>を数字で確かめる。
+            3つの勾配の平均がどれも同じなら、塗り分けはただの模様である。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="037_plain.png" alt="灰色一色の地形"></div>
+            <figcaption>塗り分け無し。<strong>形は見えるが、どこが土でどこが岩か分からない。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="037_color.png" alt="尾根が灰色、平地が茶色、谷筋が青色に塗り分けられた地形"></div>
+            <figcaption>浸食のレイヤーで塗り分け。<strong>灰＝岩肌、茶＝土、青＝水筋。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">塗り分けの決め方</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>色</th><th>意味</th><th>条件</th></tr></thead>
+            <tbody>
+              <tr><td>灰 (0.62, 0.60, 0.58)</td><td>岩肌。土が流れ去って何も溜まっていない</td><td>どちらにも当てはまらない</td></tr>
+              <tr><td>茶 (0.45, 0.32, 0.18)</td><td>土。堆積が積もった</td><td class="num">sediment ≧ 0.30</td></tr>
+              <tr><td>青 (0.20, 0.38, 0.55)</td><td>水筋。水が集まって流れた</td><td class="num">flow ≧ 1.60（こちらが優先）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">1. しきい値を決めるために、値の分布を見る</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>レイヤー</th><th>最小</th><th>下から10%</th><th>25%</th><th>50%</th><th>75%</th><th>90%</th><th>最大</th></tr></thead>
+            <tbody>
+              <tr><td>sediment</td><td class="num">0.0000</td><td class="num muted">0.0000</td><td class="num muted">0.0000</td><td class="num muted">0.0000</td><td class="num">0.8157</td><td class="num">2.9817</td><td class="num">11.0788</td></tr>
+              <tr><td>flow</td><td class="num">0.0000</td><td class="num">0.0969</td><td class="num">0.3697</td><td class="num">0.6956</td><td class="num">1.1336</td><td class="num">1.5871</td><td class="num">4.1504</td></tr>
+              <tr><td>debris</td><td class="num">0.0000</td><td class="num muted">0.0000</td><td class="num muted">0.0000</td><td class="num muted">0.0000</td><td class="num muted">0.0014</td><td class="num muted">0.0854</td><td class="num">2.5569</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <code>sediment</code> は<strong>半分以上のマスがゼロ</strong>。この形を見てから 0.30 を境にした。
+          <strong>分布を見ずに「0.5くらい」と決めていたら、土がほとんど出ないところだった。</strong>
+        </p>
+
+        <p class="label">2. 分けた3つは、勾配で見て別のものか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>種類</th><th>点の数</th><th>割合</th><th>勾配の平均</th><th>勾配の中央値</th><th>堆積の平均</th><th>流れの平均</th></tr></thead>
+            <tbody>
+              <tr><td>岩肌</td><td class="num">6,370</td><td class="num">63.7%</td><td class="num hi">0.44733</td><td class="num hi">0.40695</td><td class="num">0.01660</td><td class="num">0.59386</td></tr>
+              <tr><td>土</td><td class="num">2,653</td><td class="num">26.5%</td><td class="num hi">0.07076</td><td class="num hi">0.05448</td><td class="num">2.39543</td><td class="num">0.83297</td></tr>
+              <tr><td>水筋</td><td class="num">977</td><td class="num">9.8%</td><td class="num">0.21210</td><td class="num">0.13315</td><td class="num">1.93003</td><td class="num">2.06320</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>岩肌は土の 6.32倍 急</strong>（中央値で見れば 7.5倍）。
+          水筋はその中間で、<strong>水は斜面を下って谷に集まる</strong>という筋が通る。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>塗り分けは地形の形と対応していた。</strong>岩肌 0.44733 対 土 0.07076 で <span class="hi">6.32倍</span>。<strong>色は模様ではなく、形の情報を持っている。</strong></li>
+          <li><strong>水筋は中間に入った。</strong>勾配 0.21210 で岩肌より緩く土より急。狙って作った並びではないが、筋が通っている。</li>
+          <li><strong>しきい値は勘で決めない。</strong>まず値の分布を出す。<code>sediment</code> は半分以上がゼロで、下から75%でようやく 0.8157。<strong>この形を見てから境を決めた。</strong></li>
+          <li><strong><code>debris</code> は使えなかった。</strong>下から90%でも 0.0854 しかなく、ほとんどのマスが実質ゼロ。<strong>レイヤーがあることと、塗り分けに使えることは別の話。</strong></li>
+          <li><strong><code>flow</code> は逆に、どこにでも値がある。</strong>下から10%でも 0.0969。ゼロとの比較では分けられず、上位（1.60以上、約1割）で切って初めて筋になる。</li>
+          <li><strong>優先順位を決める必要があった。</strong>水筋のところは堆積も多い（平均 1.93）ので条件が重なる。<strong>水筋を先に判定して、残りを土と岩肌に分けた。</strong>順番を逆にすると水筋が土に飲まれて消える。</li>
+          <li>使われた色はちょうど3種で、割合は 63.7% / 26.5% / 9.8%。<strong>塗り残しも、意図しない中間色も無い。</strong></li>
+          <li>勾配は <code>normal</code> <button class="term" data-term="SOP">SOP</button> の N からではなく、高さの<button class="term" data-term="ボリューム">ボリューム</button>から隣との差で作っている（<a href="#exp036">実験036</a>で踏んだ罠）。</li>
+        </ul>
       </div>
     </article>
 
