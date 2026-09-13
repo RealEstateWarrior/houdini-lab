@@ -25,9 +25,14 @@ public class WinCap {
   [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr h, out RECT r);
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr h);
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int n);
+  [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
 }
 '@
 if (-not ("WinCap" -as [type])) { Add-Type -TypeDefinition $signature }
+
+# Without this, GetWindowRect returns physical pixels while CopyFromScreen works
+# in scaled coordinates, so the captured region is offset and the wrong size.
+[WinCap]::SetProcessDPIAware() | Out-Null
 
 $process = Get-Process $ProcessName -ErrorAction SilentlyContinue |
     Where-Object { $_.MainWindowHandle -ne 0 } | Select-Object -First 1
@@ -37,7 +42,9 @@ if (-not $process) {
 }
 
 $handle = $process.MainWindowHandle
-[WinCap]::ShowWindow($handle, 9) | Out-Null       # restore if minimised
+# Maximise before capturing. GetWindowRect on a partially covered window still
+# returns the full rect, so anything overlapping it ends up in the screenshot.
+[WinCap]::ShowWindow($handle, 3) | Out-Null       # SW_MAXIMIZE
 [WinCap]::SetForegroundWindow($handle) | Out-Null
 Start-Sleep -Milliseconds 900                     # let it repaint
 
@@ -55,7 +62,11 @@ $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
 $graphics.CopyFromScreen($rect.Left, $rect.Top, 0, 0, $bitmap.Size)
 $graphics.Dispose()
 
-$full = [System.IO.Path]::GetFullPath((Join-Path (Get-Location) $Out))
+if ([System.IO.Path]::IsPathRooted($Out)) {
+    $full = [System.IO.Path]::GetFullPath($Out)
+} else {
+    $full = [System.IO.Path]::GetFullPath((Join-Path (Get-Location) $Out))
+}
 $dir = [System.IO.Path]::GetDirectoryName($full)
 if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir | Out-Null }
 $bitmap.Save($full, [System.Drawing.Imaging.ImageFormat]::Png)

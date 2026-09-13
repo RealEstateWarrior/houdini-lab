@@ -31,6 +31,15 @@
       ]
     },
     {
+      "label": "実際の Houdini の画面",
+      "note": "自動生成の接続図と違い、これは起動中の Houdini を外から操作して撮った本物の画面。自分の Houdini で同じものを開いたときに何が見えるかがそのまま分かる。パラメータ側に写っている「Transform Using Target Point Orientations」が、この実験で測った「N で回転するかどうか」の正体。",
+      "per_row": 1,
+      "images": [
+        {"path": "008_ui_network.png", "caption": "ネットワークエディタ。scatter_200 から4つの Copy to Points に分岐している"},
+        {"path": "008_ui_parms.png", "caption": "copy_oriented のパラメータと、その結果のビューポート"}
+      ]
+    },
+    {
       "label": "scatter の点数は指定どおりか",
       "columns": ["指定した数", "実際の点数", "一致"],
       "rows": [
