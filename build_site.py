@@ -95,17 +95,22 @@ DONE = [
     {"no": "011", "anchor": "exp011", "thumb": "011_w3_0.png",
      "title": "crease で角を残す — どれだけの重みが要るのか",
      "note": "分割回数と同じ重みで完全に角が残る。一辺だけ見ていると誤判定する"},
+    {"no": "012", "anchor": "exp012", "thumb": "012_bool_subtract.png",
+     "title": "polyextrude と boolean — 硬い形を作る",
+     "note": "押し出しは寸法が指定どおり。boolean は体積の関係式で正しさを検算できる"},
 ]
 
 PLANNED = [
-    {"no": "012", "title": "polyextrude と boolean", "note": "押し出しとブーリアン"},
+    {"no": "013", "title": "時間軸への対応（ツール側）",
+     "note": "複数フレームの書き出しとキャッシュ。エフェクトに入る前に必要"},
 ]
 
 PLANNED_FX = [
-    {"no": "013", "title": "POP パーティクル基本", "note": "source と solver。重力と寿命"},
-    {"no": "014", "title": "RBD 破壊", "note": "voronoi fracture からの剛体シミュレーション"},
-    {"no": "015", "title": "Vellum クロス", "note": "布のシミュレーション"},
-    {"no": "016", "title": "Pyro と FLIP", "note": "ボリュームと液体"},
+    {"no": "014", "title": "POP パーティクル基本", "note": "source と solver。重力と寿命"},
+    {"no": "015", "title": "RBD 破壊",
+     "note": "boolean の Shatter で作った破片から剛体シミュレーション"},
+    {"no": "016", "title": "Vellum クロス", "note": "布のシミュレーション"},
+    {"no": "017", "title": "Pyro と FLIP", "note": "ボリュームと液体"},
 ]
 
 PAGES = [

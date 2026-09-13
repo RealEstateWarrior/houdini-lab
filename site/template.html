@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>11 / 16</dd></div>
+      <div><dt>実験</dt><dd>12 / 17</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -864,6 +864,73 @@
           <li>重み 0.5 のとき一辺は 0.92459 で、これは crease なし（0.84918）と重み1.0（1.00000）の<strong>ちょうど中間</strong>（小数点以下5桁まで一致）。小数の重みは2つの結果を線形に混ぜている。ただし折れ角のほうは線形にならない。</li>
           <li>crease SOP の Operation の既定は「Add To Existing Value」で、既にある値に足し込む。重みを決め打ちしたいなら「Set」にする。既定のまま何度も通すと重みが積み上がる。</li>
           <li>crease SOP が書き込む属性名の既定は <code>creaseweight</code> で、subdivide はこの名前を自動で見る。名前を変えるなら subdivide 側の Creases にも同じ名前を指定する。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 012 ===================== -->
+    <article class="entry entry--current" id="exp012">
+      <div class="badge">012</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>polyextrude と boolean — 硬い形を作る2つの道具</h2>
+        <p class="path">/obj/extrude_boolean &nbsp;·&nbsp; 押し出し4通り、boolean 8演算</p>
+
+        <div class="prose">
+          <p>
+            ここまではノイズで有機的な形を作ってきた。建物や機械のような硬い形は別の道具で作る。
+            面を押し出す <button class="term" data-term="polyextrude">polyextrude</button> と、
+            立体どうしを足し引きする <button class="term" data-term="boolean">boolean</button>。
+          </p>
+          <p>
+            boolean が正しく計算できているかは、<strong>体積の関係式で検算できる</strong>ことが分かった。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="012_ext_1_0.png" alt="平面を押し出して厚みのある板になった形"></div>
+            <figcaption><strong>polyextrude</strong> 距離 1.0<br>高さ 1.00000（差ゼロ）</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="012_bool_union.png" alt="立方体と球が合体した形"></div>
+            <figcaption><strong>Union</strong>（和集合）<br>体積 9.91613</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="012_bool_intersect.png" alt="立方体と球の重なった部分だけが残った形"></div>
+            <figcaption><strong>Intersect</strong>（積集合）<br>体積 7.08567</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="012_bool_subtract.png" alt="立方体から球をくり抜いて角だけが残った形"></div>
+            <figcaption><strong>Subtract</strong>（差集合）<br>体積 0.91433</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">boolean が正しいかを体積で検算する</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>確かめた式</th><th>左辺</th><th>右辺</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td>和集合 + 積集合 = box + 球</td><td class="num">17.00180</td><td class="num">17.00180</td><td class="num hi">0.0000049</td></tr>
+              <tr><td>差集合 = box − 積集合</td><td class="num">0.91433</td><td class="num">0.91433</td><td class="num hi">0.0000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          集合には「和集合 + 積集合 = 元の2つの合計」という関係が必ず成り立つ。
+          複雑な boolean の結果が正しいか不安なときは、目で見る代わりにこれを確かめればよい。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>polyextrude の<strong>距離は指定どおりに出る</strong>（0.5 / 1.0 / 2.0 → 差ゼロ）。ノイズ系のパラメータが種類によって実際のずれが9倍も違ったのとは対照的で、押し出しは寸法をそのまま指定できる。</li>
+          <li>点数・面数は距離によらず一定（41点 / 32面）。<strong>形を変えても重さは変わらない。</strong> 内訳も説明できる。5×5 の grid は境界に16点あり、押し出すとそれが複製されて 25+16 = 41点。面は上面16 + 側面16 = 32面。</li>
+          <li><code>inset</code> は各辺から内側に引っ込む距離。0.3 なら両側から 0.6 縮んで 10.0 → 9.40000、0.8 なら 1.6 縮んで 8.40000。指定した値がそのまま効く。</li>
+          <li>パラメータ名は <code>dist</code> と <code>inset</code>、分割数は <code>divisions</code> ではなく <code>divs</code>。ここでも一般的な名前は通じなかった。</li>
+          <li>boolean には8演算ある。Union / Intersect / Subtract のほかに <strong>Shatter</strong>（Aを砕いて全破片を残す）、Seam（境界線だけ）、Detect（検出のみ）、Resolve（自己交差の解消）。</li>
+          <li>Shatter の体積は 8.00000 で box と完全一致。<strong>砕いても全破片が残るので体積は変わらない。</strong> 破壊エフェクトの下準備がこれ。</li>
+          <li>sphere SOP で rows / cols を 30 にしても面数は 80 のままだった。<strong>ポリゴン球は rows / cols ではなく多面体の細分を使っている。</strong></li>
+          <li>その粗い球（80面）の体積は 9.00180。半径 1.35 の真球なら 10.30575 なので約13%小さい。<strong>ポリゴンで近似した球は必ず内側に寄る。</strong></li>
         </ul>
       </div>
     </article>

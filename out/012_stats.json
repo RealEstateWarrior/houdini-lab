@@ -1,0 +1,126 @@
+{
+  "source": {
+    "points": 25,
+    "prims": 16
+  },
+  "extrude": [
+    {
+      "dist": 0.0,
+      "points": 25,
+      "prims": 16,
+      "height": 0.0,
+      "image": "012_ext_0_0.png"
+    },
+    {
+      "dist": 0.5,
+      "points": 41,
+      "prims": 32,
+      "height": 0.5,
+      "image": "012_ext_0_5.png"
+    },
+    {
+      "dist": 1.0,
+      "points": 41,
+      "prims": 32,
+      "height": 1.0,
+      "image": "012_ext_1_0.png"
+    },
+    {
+      "dist": 2.0,
+      "points": 41,
+      "prims": 32,
+      "height": 2.0,
+      "image": "012_ext_2_0.png"
+    }
+  ],
+  "inset": [
+    {
+      "inset": 0.0,
+      "points": 41,
+      "prims": 32,
+      "top_spread": 10.0
+    },
+    {
+      "inset": 0.3,
+      "points": 41,
+      "prims": 32,
+      "top_spread": 9.4
+    },
+    {
+      "inset": 0.8,
+      "points": 41,
+      "prims": 32,
+      "top_spread": 8.4
+    }
+  ],
+  "boolean": [
+    {
+      "op": "union",
+      "label": "Union",
+      "points": 130,
+      "prims": 120,
+      "volume": 9.91613,
+      "image": "012_bool_union.png"
+    },
+    {
+      "op": "intersect",
+      "label": "Intersect",
+      "points": 96,
+      "prims": 60,
+      "volume": 7.08567,
+      "image": "012_bool_intersect.png"
+    },
+    {
+      "op": "subtract",
+      "label": "Subtract",
+      "points": 104,
+      "prims": 60,
+      "volume": 0.91433,
+      "image": "012_bool_subtract.png"
+    },
+    {
+      "op": "shatter",
+      "label": "Shatter",
+      "points": 200,
+      "prims": 120,
+      "volume": 8.0,
+      "image": "012_bool_shatter.png"
+    },
+    {
+      "op": "custom",
+      "label": "Custom",
+      "points": 200,
+      "prims": 120,
+      "volume": 8.0,
+      "image": "012_bool_custom.png"
+    },
+    {
+      "op": "seam",
+      "label": "Seam",
+      "points": 88,
+      "prims": 6,
+      "volume": 0.0,
+      "image": "012_bool_seam.png"
+    },
+    {
+      "op": "detect",
+      "label": "Detect",
+      "points": 8,
+      "prims": 6,
+      "volume": 8.0,
+      "image": "012_bool_detect.png"
+    },
+    {
+      "op": "resolve",
+      "label": "Resolve",
+      "points": 152,
+      "prims": 496,
+      "volume": 2.91612,
+      "image": "012_bool_resolve.png"
+    }
+  ],
+  "volumes": {
+    "box": 8.0,
+    "sphere": 9.0018
+  }
+}

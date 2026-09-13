@@ -1,0 +1,382 @@
+{
+  "title": "polyextrude と boolean",
+  "network": "/obj/extrude_boolean",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grid",
+      "type": "grid",
+      "pos": [
+        -14.12,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 5,
+        "cols": 5
+      }
+    },
+    {
+      "name": "ext_0_0",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -14.12,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "ext_0_5",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -10.872,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "ext_1_0",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -7.625,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "ext_2_0",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -4.377,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 2.0,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "bool_box",
+      "type": "box",
+      "pos": [
+        -1.13,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "scale": 2.0
+      }
+    },
+    {
+      "name": "bool_sphere",
+      "type": "sphere",
+      "pos": [
+        1.13,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "radx": 1.35,
+        "rady": 1.35,
+        "radz": 1.35,
+        "rows": 30,
+        "cols": 30
+      }
+    },
+    {
+      "name": "bool_union",
+      "type": "boolean::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "bool_intersect",
+      "type": "boolean::2.0",
+      "pos": [
+        4.377,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 1
+      }
+    },
+    {
+      "name": "bool_subtract",
+      "type": "boolean::2.0",
+      "pos": [
+        7.625,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 2
+      }
+    },
+    {
+      "name": "bool_shatter",
+      "type": "boolean::2.0",
+      "pos": [
+        10.872,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 3
+      }
+    },
+    {
+      "name": "bool_custom",
+      "type": "boolean::2.0",
+      "pos": [
+        14.12,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 4
+      }
+    },
+    {
+      "name": "bool_seam",
+      "type": "boolean::2.0",
+      "pos": [
+        17.368,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 6
+      }
+    },
+    {
+      "name": "bool_detect",
+      "type": "boolean::2.0",
+      "pos": [
+        20.615,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 8
+      }
+    },
+    {
+      "name": "bool_resolve",
+      "type": "boolean::2.0",
+      "pos": [
+        23.863,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 9
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "ext_0_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "ext_0_5",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "ext_1_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "ext_2_0",
+      "to_input": 0
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_union",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_union",
+      "to_input": 1
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_intersect",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_intersect",
+      "to_input": 1
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_subtract",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_subtract",
+      "to_input": 1
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_shatter",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_shatter",
+      "to_input": 1
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_custom",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_custom",
+      "to_input": 1
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_seam",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_seam",
+      "to_input": 1
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_detect",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_detect",
+      "to_input": 1
+    },
+    {
+      "from": "bool_box",
+      "from_output": 0,
+      "to": "bool_resolve",
+      "to_input": 0
+    },
+    {
+      "from": "bool_sphere",
+      "from_output": 0,
+      "to": "bool_resolve",
+      "to_input": 1
+    }
+  ]
+}
