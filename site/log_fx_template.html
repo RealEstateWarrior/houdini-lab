@@ -1124,6 +1124,86 @@
       </div>
     </article>
 
+
+    <!-- ===================== 025 ===================== -->
+    <article class="entry entry--current" id="exp025">
+      <div class="badge">025</div>
+      <div class="body">
+        <span class="chip chip--tool">ツール</span>
+        <h2>シミュレーションのキャッシュ — 速くなるが、値は変わっていないか</h2>
+        <p class="path">/obj/smoke &nbsp;·&nbsp; 40フレームを書き出して読み直す</p>
+
+        <div class="prose">
+          <p>
+            ここまでの実験で、同じ計算を何度も回してきた。実験018では同じ煙を何十回も描き直している。
+            <button class="term" data-term="シミュレーション">シミュレーション</button>は前の<button class="term" data-term="フレーム">フレーム</button>の結果から次を作るので、
+            途中から見ることができず、毎回1フレーム目から計算し直している。
+          </p>
+          <p>
+            <code>filecache</code> は結果をファイルに書き出し、次からはそれを読む。当然速くなるはずだが、
+            <strong>速くなっても値が変わっていたら意味がない。</strong>
+            以降の測定がすべて信用できなくなる。両方を測る。
+          </p>
+        </div>
+
+        <p class="label">時間とファイルの量（40フレーム）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>やったこと</th><th>時間</th><th>備考</th></tr></thead>
+            <tbody>
+              <tr><td>計算しながら40フレーム回す</td><td class="num">1.17 秒</td><td>毎回1フレーム目から積み上げる</td></tr>
+              <tr><td>ファイルに書き出す</td><td class="num">0.15 秒</td><td>40ファイル / 63.3 MB</td></tr>
+              <tr><td>ファイルから読んで40フレーム回す</td><td class="num hi">0.26 秒</td><td class="hi">計算より 4.6倍速い</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">値は変わっていないか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>計算した値</th><th>読んだ値</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">4,244.138830</td><td class="num">4,244.138830</td><td class="num hi">0.0000000000</td></tr>
+              <tr><td class="num">10</td><td class="num">29,938.465463</td><td class="num">29,938.465463</td><td class="num hi">0.0000000000</td></tr>
+              <tr><td class="num">20</td><td class="num">38,283.067808</td><td class="num">38,283.067808</td><td class="num hi">0.0000000000</td></tr>
+              <tr><td class="num">30</td><td class="num">44,966.939905</td><td class="num">44,966.939905</td><td class="num hi">0.0000000000</td></tr>
+              <tr><td class="num">40</td><td class="num">48,289.944718</td><td class="num">48,289.944718</td><td class="num hi">0.0000000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          「ほぼ同じ」ではなく「完全に同じ」を求めた。40フレームすべてで差は 0。
+        </p>
+
+        <p class="label">フレーム範囲の指定でつまずいた</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>やり方</th><th>書かれたフレーム</th><th>ファイル数</th><th>容量</th><th>書き出し時間</th></tr></thead>
+            <tbody>
+              <tr><td>数値を set しただけ</td><td class="num">1〜240</td><td class="num">240</td><td class="num muted">3,578.9 MB</td><td class="num muted">28.81 秒</td></tr>
+              <tr><td>式を消してから set</td><td class="num">1〜40</td><td class="num">40</td><td class="num hi">63.3 MB</td><td class="num hi">0.15 秒</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>値は完全に一致した。</strong>40フレームすべてで<button class="term" data-term="密度">密度</button>の合計の差が 0.0000000000。<button class="term" data-term="キャッシュ">キャッシュ</button>を挟んだあとの測定も信用してよい。</li>
+          <li><strong>読み込みは 4.6倍速い。</strong>1.17秒が 0.26秒になる。今回の煙は軽いのでこの程度だが、重いものほど差は開く。</li>
+          <li><strong><code>f1</code> と <code>f2</code> の既定は式だった。</strong><code>$FSTART</code> / <code>$FEND</code> と書かれていて、シーンの範囲（1〜240）を指す。数値を入れるだけでは式が残る。</li>
+          <li>そのせいで40フレームのつもりが240フレーム書かれ、<span class="hi">3,578.9 MB・28.81秒</span>を消費した。式を消してから入れると 63.3 MB・0.15秒。<strong>56倍の無駄</strong>だった。</li>
+          <li>この手のずれは<strong>書き出したファイルの数を数えれば一発で分かる</strong>。40フレームのつもりなら40ファイルのはず。思ったとおりに動いたかを、別の量で確かめる。</li>
+          <li>容量は1フレームあたり約 1.6 MB。フレーム1が 7.7 KB、フレーム40が 3.2 MB で、煙が広がるにつれて増える。長いシミュレーションでは容量が効いてくる。</li>
+          <li><strong>キャッシュが得になるのは2回目から。</strong>書き出し時間の 0.15秒は、直前に全フレームを計算済みだったため。まっさらな状態からなら計算の時間がそのまま乗る。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          キャッシュはリポジトリに入れない。中身は再生成できるうえに大きいので、
+          <code>.gitignore</code> に <code>out/*_cache/</code> を足した。
+        </p>
+      </div>
+    </article>
+
   </div>
 
   <footer>
