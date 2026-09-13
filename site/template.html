@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>14 / 17</dd></div>
+      <div><dt>実験</dt><dd>15 / 17</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -1060,6 +1060,65 @@
           <li>rbdmaterialfracture のコンクリートモードで 25個の破片（282点 / 191面）。破片の区別は <code>name</code> というプリミティブ属性で管理されている。</li>
           <li>計算は速い。最初のフレームが 0.38秒、以降 0.02〜0.05秒。全部で1秒程度で、この規模なら実験を回すのに支障はない。</li>
           <li>ソルバの既定は <code>substeps</code> = 10、<code>cacheenabled</code> = 1。1フレームを10回に分けて計算し、結果は自動でキャッシュされる。地面は <code>useground</code> で用意でき、別途ジオメトリは要らない。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 015 ===================== -->
+    <article class="entry entry--current" id="exp015">
+      <div class="badge">015</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Vellum クロス — 布で保存されるべき量は何か</h2>
+        <p class="path">/obj/vellum_test &nbsp;·&nbsp; 900点の布、4条件 + かたさ掃引</p>
+
+        <div class="prose">
+          <p>
+            剛体では体積が保たれた（実験014）。布は面なので体積では測れない。代わりに
+            <strong>辺の長さの合計</strong>を見る。布は伸びにくい素材なので、たわんでも吊るしても
+            ほぼ変わらないはず。
+          </p>
+          <p>
+            さらに伸びにくさを下げれば保存が崩れるはず——と考えて試したら、
+            <strong>まったく変化しなかった</strong>。原因を追ったら、このパラメータの本当の仕組みが分かった。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="015_cloth.gif" alt="両端を固定された布が自重で垂れ下がっていくアニメーション"></div>
+            <figcaption>両端をピンで留めて吊るす。中央が自重で垂れ下がる。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">かたさを大きく振る（吊るした布、最終フレーム）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>stretchstiffness</th><th>stretchstiffnessexp</th><th>実効的なかたさ</th><th>最後の伸び率</th><th>最下点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num">6</td><td class="num">10⁶</td><td class="num hi">1.00843</td><td class="num">2.6042</td></tr>
+              <tr><td class="num">1000000.0</td><td class="num">0</td><td class="num">10⁶</td><td class="num hi">1.00843</td><td class="num">2.6042</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0</td><td class="num">10⁰</td><td class="num">2.74029</td><td class="num">−3.9926</td></tr>
+              <tr><td class="num">1.0</td><td class="num">−6</td><td class="num">10⁻⁶</td><td class="num hi">3.53114</td><td class="num">−5.7265</td></tr>
+              <tr><td class="num">0.000001</td><td class="num">0</td><td class="num">10⁻⁶</td><td class="num hi">3.53114</td><td class="num">−5.7265</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          値と指数を入れ替えたペアの結果が<strong>完全に一致</strong>している。
+          実効的なかたさは「値 × 10の指数乗」だと実測で確定した。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>点数は全フレームで 900 のまま。</strong> 布は形が変わるだけで点が増減しない。剛体の体積保存にあたるのが、布ではこの「構造が変わらないこと」。</li>
+          <li>たわませただけでは辺の長さはほとんど変わらない（伸び 0.272%）。自重で垂れるだけでは張力がかからないため。</li>
+          <li>両端をピンで留めて吊るすと 0.842% まで増えた。<strong>たわむ場合の3.1倍。</strong> 指標が張力を捉えられていると確認できた。</li>
+          <li><strong>かたさを 1.0 から 0.02 に下げても結果がまったく変わらなかった。</strong> 50分の1にしたのに伸び率は小数点以下5桁まで同じ。</li>
+          <li>原因は <code>stretchstiffnessexp</code> で、<strong>既定値が 10</strong>。実効的なかたさは「値 × 10の指数乗」なので、既定は 1.0 × 10¹⁰ という極端に硬い状態。0.02 にしても 2 × 10⁸ でやはり伸びない。</li>
+          <li><strong>画面に見えている数字だけを触っても実際にはほとんど変わらない。</strong> 効くのは指数のほう。布が硬すぎる・柔らかすぎると感じたら、値ではなく指数を疑う。</li>
+          <li>指数を 0 まで下げると伸び 174%、−6 まで下げると 253% になり、布というよりゴムの挙動になる。</li>
+          <li>ピンの指定でもつまずいた。<code>grouptype</code> の既定はプリミティブなので、点のグループを渡すなら points へ切り替える。さらに <code>group</code> を空のままにすると<strong>「全部が対象」と解釈され、布全体がピン留めされて一切動かなくなる</strong>（最下点が全フレーム 3.0000 のまま、という症状で気づいた）。</li>
         </ul>
       </div>
     </article>

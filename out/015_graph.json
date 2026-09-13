@@ -1,0 +1,329 @@
+{
+  "title": "Vellum クロス",
+  "network": "/obj/vellum_test",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cloth",
+      "type": "grid",
+      "pos": [
+        3.248,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 4.0,
+        "ty": 3.0,
+        "rows": 30,
+        "cols": 30
+      }
+    },
+    {
+      "name": "collider",
+      "type": "sphere",
+      "pos": [
+        5.507,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "radx": 1.2,
+        "rady": 1.2,
+        "radz": 1.2,
+        "ty": 1.0
+      }
+    },
+    {
+      "name": "make_pins",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "if (abs(@P.x) > 1.9) { @group_pins = 1; }"
+      }
+    },
+    {
+      "name": "con_drape_stiff",
+      "type": "vellumconstraints",
+      "pos": [
+        3.248,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "solve_drape_stiff",
+      "type": "vellumsolver",
+      "pos": [
+        4.377,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "useground": 1,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "con_drape_soft",
+      "type": "vellumconstraints",
+      "pos": [
+        8.754,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "stretchstiffness": 0.02
+      }
+    },
+    {
+      "name": "solve_drape_soft",
+      "type": "vellumsolver",
+      "pos": [
+        8.754,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "useground": 1,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "con_hang_stiff",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "pin_hang_stiff",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 6,
+        "grouptype": 1,
+        "group": "pins"
+      }
+    },
+    {
+      "name": "solve_hang_stiff",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "con_hang_soft",
+      "type": "vellumconstraints",
+      "pos": [
+        12.002,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "stretchstiffness": 0.02
+      }
+    },
+    {
+      "name": "pin_hang_soft",
+      "type": "vellumconstraints",
+      "pos": [
+        12.002,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 6,
+        "grouptype": 1,
+        "group": "pins"
+      }
+    },
+    {
+      "name": "solve_hang_soft",
+      "type": "vellumsolver",
+      "pos": [
+        12.002,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "make_pins",
+      "to_input": 0
+    },
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "con_drape_stiff",
+      "to_input": 0
+    },
+    {
+      "from": "con_drape_stiff",
+      "from_output": 0,
+      "to": "solve_drape_stiff",
+      "to_input": 0
+    },
+    {
+      "from": "con_drape_stiff",
+      "from_output": 1,
+      "to": "solve_drape_stiff",
+      "to_input": 1
+    },
+    {
+      "from": "collider",
+      "from_output": 0,
+      "to": "solve_drape_stiff",
+      "to_input": 2
+    },
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "con_drape_soft",
+      "to_input": 0
+    },
+    {
+      "from": "con_drape_soft",
+      "from_output": 0,
+      "to": "solve_drape_soft",
+      "to_input": 0
+    },
+    {
+      "from": "con_drape_soft",
+      "from_output": 1,
+      "to": "solve_drape_soft",
+      "to_input": 1
+    },
+    {
+      "from": "collider",
+      "from_output": 0,
+      "to": "solve_drape_soft",
+      "to_input": 2
+    },
+    {
+      "from": "make_pins",
+      "from_output": 0,
+      "to": "con_hang_stiff",
+      "to_input": 0
+    },
+    {
+      "from": "con_hang_stiff",
+      "from_output": 0,
+      "to": "pin_hang_stiff",
+      "to_input": 0
+    },
+    {
+      "from": "con_hang_stiff",
+      "from_output": 1,
+      "to": "pin_hang_stiff",
+      "to_input": 1
+    },
+    {
+      "from": "pin_hang_stiff",
+      "from_output": 0,
+      "to": "solve_hang_stiff",
+      "to_input": 0
+    },
+    {
+      "from": "pin_hang_stiff",
+      "from_output": 1,
+      "to": "solve_hang_stiff",
+      "to_input": 1
+    },
+    {
+      "from": "make_pins",
+      "from_output": 0,
+      "to": "con_hang_soft",
+      "to_input": 0
+    },
+    {
+      "from": "con_hang_soft",
+      "from_output": 0,
+      "to": "pin_hang_soft",
+      "to_input": 0
+    },
+    {
+      "from": "con_hang_soft",
+      "from_output": 1,
+      "to": "pin_hang_soft",
+      "to_input": 1
+    },
+    {
+      "from": "pin_hang_soft",
+      "from_output": 0,
+      "to": "solve_hang_soft",
+      "to_input": 0
+    },
+    {
+      "from": "pin_hang_soft",
+      "from_output": 1,
+      "to": "solve_hang_soft",
+      "to_input": 1
+    }
+  ]
+}

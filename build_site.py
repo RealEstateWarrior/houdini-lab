@@ -104,12 +104,14 @@ DONE = [
     {"no": "014", "anchor": "exp014", "thumb": "014_sheet.png",
      "title": "RBD 破壊 — 最初の本物のシミュレーション",
      "note": "体積が全フレームで完全に保存。落下中は砕けず、着地して2.8倍に散らばる"},
+    {"no": "015", "anchor": "exp015", "thumb": "015_sheet.png",
+     "title": "Vellum クロス — 布で保存されるべき量は何か",
+     "note": "かたさは「値 × 10の指数乗」。既定の指数10のせいで値を触っても効かない"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "015", "title": "Vellum クロス", "note": "SOPに22種。布のシミュレーション"},
     {"no": "016", "title": "POP パーティクル",
      "note": "SOPには0種でDOPに67種。DOPネットワークを組む必要がある"},
     {"no": "017", "title": "Pyro と FLIP", "note": "煙・炎と液体"},

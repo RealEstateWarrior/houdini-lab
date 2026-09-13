@@ -1,0 +1,283 @@
+{
+  "rest": {
+    "points": 900,
+    "prims": 841,
+    "edges": 464.0,
+    "area": 16.0
+  },
+  "runs": [
+    {
+      "label": "たわむ・かたい",
+      "stiffness": 1.0,
+      "rows": [
+        {
+          "frame": 1,
+          "points": 900,
+          "edges": 464.0,
+          "ratio": 1.0,
+          "area_ratio": 1.0,
+          "lowest": 3.0,
+          "seconds": 0.78
+        },
+        {
+          "frame": 5,
+          "points": 900,
+          "edges": 464.0,
+          "ratio": 1.0,
+          "area_ratio": 1.0,
+          "lowest": 2.8912,
+          "seconds": 0.27
+        },
+        {
+          "frame": 15,
+          "points": 900,
+          "edges": 464.34538,
+          "ratio": 1.00074,
+          "area_ratio": 1.00088,
+          "lowest": 1.923,
+          "seconds": 0.3
+        },
+        {
+          "frame": 30,
+          "points": 900,
+          "edges": 465.2632,
+          "ratio": 1.00272,
+          "area_ratio": 0.98675,
+          "lowest": 0.0767,
+          "seconds": 0.51
+        },
+        {
+          "frame": 45,
+          "points": 900,
+          "edges": 465.11952,
+          "ratio": 1.00241,
+          "area_ratio": 0.99597,
+          "lowest": 0.011,
+          "seconds": 0.58
+        },
+        {
+          "frame": 57,
+          "points": 900,
+          "edges": 465.05328,
+          "ratio": 1.00227,
+          "area_ratio": 0.99443,
+          "lowest": 0.0128,
+          "seconds": 0.44
+        }
+      ]
+    },
+    {
+      "label": "たわむ・やわらかい",
+      "stiffness": 0.02,
+      "rows": [
+        {
+          "frame": 1,
+          "points": 900,
+          "edges": 464.0,
+          "ratio": 1.0,
+          "area_ratio": 1.0,
+          "lowest": 3.0,
+          "seconds": 0.51
+        },
+        {
+          "frame": 5,
+          "points": 900,
+          "edges": 464.0,
+          "ratio": 1.0,
+          "area_ratio": 1.0,
+          "lowest": 2.8912,
+          "seconds": 0.26
+        },
+        {
+          "frame": 15,
+          "points": 900,
+          "edges": 464.34125,
+          "ratio": 1.00074,
+          "area_ratio": 1.00086,
+          "lowest": 1.9227,
+          "seconds": 0.35
+        },
+        {
+          "frame": 30,
+          "points": 900,
+          "edges": 465.19064,
+          "ratio": 1.00257,
+          "area_ratio": 0.98418,
+          "lowest": 0.0731,
+          "seconds": 0.56
+        },
+        {
+          "frame": 45,
+          "points": 900,
+          "edges": 465.05438,
+          "ratio": 1.00227,
+          "area_ratio": 0.9956,
+          "lowest": 0.011,
+          "seconds": 0.56
+        },
+        {
+          "frame": 57,
+          "points": 900,
+          "edges": 465.08565,
+          "ratio": 1.00234,
+          "area_ratio": 0.9944,
+          "lowest": 0.0123,
+          "seconds": 0.46
+        }
+      ]
+    },
+    {
+      "label": "吊るす・かたい",
+      "stiffness": 1.0,
+      "rows": [
+        {
+          "frame": 1,
+          "points": 900,
+          "edges": 464.0,
+          "ratio": 1.0,
+          "area_ratio": 1.0,
+          "lowest": 3.0,
+          "seconds": 0.53
+        },
+        {
+          "frame": 5,
+          "points": 900,
+          "edges": 465.06247,
+          "ratio": 1.00229,
+          "area_ratio": 1.00457,
+          "lowest": 2.8911,
+          "seconds": 0.26
+        },
+        {
+          "frame": 15,
+          "points": 900,
+          "edges": 466.44672,
+          "ratio": 1.00527,
+          "area_ratio": 1.01048,
+          "lowest": 2.7051,
+          "seconds": 0.34
+        },
+        {
+          "frame": 30,
+          "points": 900,
+          "edges": 467.21731,
+          "ratio": 1.00693,
+          "area_ratio": 1.01375,
+          "lowest": 2.62,
+          "seconds": 0.51
+        },
+        {
+          "frame": 45,
+          "points": 900,
+          "edges": 467.49683,
+          "ratio": 1.00754,
+          "area_ratio": 1.01494,
+          "lowest": 2.6006,
+          "seconds": 0.52
+        },
+        {
+          "frame": 57,
+          "points": 900,
+          "edges": 467.90618,
+          "ratio": 1.00842,
+          "area_ratio": 1.01668,
+          "lowest": 2.6041,
+          "seconds": 0.4
+        }
+      ]
+    },
+    {
+      "label": "吊るす・やわらかい",
+      "stiffness": 0.02,
+      "rows": [
+        {
+          "frame": 1,
+          "points": 900,
+          "edges": 464.0,
+          "ratio": 1.0,
+          "area_ratio": 1.0,
+          "lowest": 3.0,
+          "seconds": 0.53
+        },
+        {
+          "frame": 5,
+          "points": 900,
+          "edges": 465.06246,
+          "ratio": 1.00229,
+          "area_ratio": 1.00457,
+          "lowest": 2.8911,
+          "seconds": 0.3
+        },
+        {
+          "frame": 15,
+          "points": 900,
+          "edges": 466.44681,
+          "ratio": 1.00527,
+          "area_ratio": 1.01048,
+          "lowest": 2.7051,
+          "seconds": 0.38
+        },
+        {
+          "frame": 30,
+          "points": 900,
+          "edges": 467.21738,
+          "ratio": 1.00693,
+          "area_ratio": 1.01375,
+          "lowest": 2.62,
+          "seconds": 0.55
+        },
+        {
+          "frame": 45,
+          "points": 900,
+          "edges": 467.49692,
+          "ratio": 1.00754,
+          "area_ratio": 1.01494,
+          "lowest": 2.6006,
+          "seconds": 0.55
+        },
+        {
+          "frame": 57,
+          "points": 900,
+          "edges": 467.90624,
+          "ratio": 1.00842,
+          "area_ratio": 1.01668,
+          "lowest": 2.6041,
+          "seconds": 0.43
+        }
+      ]
+    }
+  ],
+  "sweep": [
+    {
+      "stiffness": 1.0,
+      "exp": 0,
+      "ratio": 2.74029,
+      "lowest": -3.9926
+    },
+    {
+      "stiffness": 1.0,
+      "exp": -6,
+      "ratio": 3.53114,
+      "lowest": -5.7265
+    },
+    {
+      "stiffness": 1.0,
+      "exp": 6,
+      "ratio": 1.00843,
+      "lowest": 2.6042
+    },
+    {
+      "stiffness": 1e-06,
+      "exp": 0,
+      "ratio": 3.53114,
+      "lowest": -5.7265
+    },
+    {
+      "stiffness": 1000000.0,
+      "exp": 0,
+      "ratio": 1.00843,
+      "lowest": 2.6042
+    }
+  ],
+  "render_seconds": 1.2
+}
