@@ -1,0 +1,123 @@
+{
+  "title": "手順 — 布を垂らす",
+  "network": "/obj/cloth",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sheet",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 4.0,
+        "ty": 3.0,
+        "rows": 30,
+        "cols": 30
+      }
+    },
+    {
+      "name": "make_pins",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "if (abs(@P.x) > 1.9) { @group_pins = 1; }"
+      }
+    },
+    {
+      "name": "constraints",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "pinning",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        -3.389
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 6,
+        "grouptype": 1,
+        "group": "pins"
+      }
+    },
+    {
+      "name": "solver",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        -4.518
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sheet",
+      "from_output": 0,
+      "to": "make_pins",
+      "to_input": 0
+    },
+    {
+      "from": "make_pins",
+      "from_output": 0,
+      "to": "constraints",
+      "to_input": 0
+    },
+    {
+      "from": "constraints",
+      "from_output": 0,
+      "to": "pinning",
+      "to_input": 0
+    },
+    {
+      "from": "constraints",
+      "from_output": 1,
+      "to": "pinning",
+      "to_input": 1
+    },
+    {
+      "from": "pinning",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 0
+    },
+    {
+      "from": "pinning",
+      "from_output": 1,
+      "to": "solver",
+      "to_input": 1
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "title": "手順 — 硬い形を作る（穴を開ける）",
+  "network": "/obj/hard_surface",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "base",
+      "type": "box",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizez": 1.4
+      }
+    },
+    {
+      "name": "cutter",
+      "type": "tube",
+      "pos": [
+        2.259,
+        -0.452
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.32,
+        "rad2": 0.32,
+        "height": 3.0,
+        "cols": 24
+      }
+    },
+    {
+      "name": "drill",
+      "type": "boolean::2.0",
+      "pos": [
+        1.13,
+        -1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 2
+      }
+    },
+    {
+      "name": "panel",
+      "type": "polyextrude::2.0",
+      "pos": [
+        1.13,
+        -2.56
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "dist": -0.08,
+        "inset": 0.12,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "base",
+      "from_output": 0,
+      "to": "drill",
+      "to_input": 0
+    },
+    {
+      "from": "cutter",
+      "from_output": 0,
+      "to": "drill",
+      "to_input": 1
+    },
+    {
+      "from": "drill",
+      "from_output": 0,
+      "to": "panel",
+      "to_input": 0
+    }
+  ]
+}

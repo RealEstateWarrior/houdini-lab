@@ -1,0 +1,64 @@
+{
+  "title": "手順 — VEX で点を動かす",
+  "network": "/obj/vex_wave",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sheet",
+      "type": "grid",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 120,
+        "cols": 120
+      }
+    },
+    {
+      "name": "make_wave",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "float d = length(@P);\n@P.y = sin(d * 2.0) * 0.6 / (1.0 + d * 0.25);"
+      }
+    },
+    {
+      "name": "make_color",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "snippet": "@Cd = set(0.25 + @P.y, 0.55, 0.95 - @P.y);"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sheet",
+      "from_output": 0,
+      "to": "make_wave",
+      "to_input": 0
+    },
+    {
+      "from": "make_wave",
+      "from_output": 0,
+      "to": "make_color",
+      "to_input": 0
+    }
+  ]
+}

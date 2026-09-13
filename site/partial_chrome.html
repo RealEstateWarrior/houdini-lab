@@ -321,6 +321,55 @@
     });
   })();
 
+  /* #expNNN で飛んだとき、着地がずれる問題。
+
+     ブラウザは HTML を読んだ時点で目的の記事へ飛ぶが、そのあと画像が
+     次々に読み込まれて上のほうが伸びる。結果、狙った記事はずっと下に
+     押し出されてしまう。画像に寸法を書いていないページではこれが起きる。
+
+     そこで、画像が届くたびに飛び先へ合わせ直す。人が自分でスクロール
+     したらそこで止める（勝手に動かされるのが一番うっとうしいため）。 */
+  (function () {
+    if (!window.location.hash) { return; }
+    var id = window.location.hash.slice(1);
+    var stopped = false;
+    var until = Date.now() + 6000;
+
+    function target() {
+      try { return document.getElementById(decodeURIComponent(id)); }
+      catch (e) { return document.getElementById(id); }
+    }
+    function fix() {
+      if (stopped) { return; }
+      var el = target();
+      if (el) { el.scrollIntoView({ behavior: "auto", block: "start" }); }
+    }
+    function stop() { stopped = true; }
+
+    window.addEventListener("wheel", stop, { passive: true, once: true });
+    window.addEventListener("touchmove", stop, { passive: true, once: true });
+    window.addEventListener("keydown", function (event) {
+      if (event.key && event.key.indexOf("Arrow") === 0) { stop(); }
+      if (event.key === " " || event.key === "PageDown" ||
+          event.key === "PageUp" || event.key === "Home" ||
+          event.key === "End") { stop(); }
+    });
+
+    Array.prototype.forEach.call(document.images, function (img) {
+      if (img.complete) { return; }
+      img.addEventListener("load", fix);
+      img.addEventListener("error", fix);
+    });
+    window.addEventListener("load", function () {
+      fix();
+      var timer = setInterval(function () {
+        if (stopped || Date.now() > until) { clearInterval(timer); return; }
+        fix();
+      }, 250);
+    });
+    fix();
+  })();
+
   /* 実験ログを2編に分けたので、古いリンク（#exp014 など）が
      この編に無いことがある。その場合は、正しい編へ送る。 */
   (function () {

@@ -1,0 +1,10 @@
+grow | guide008.hipnc | guide008_6_right.png | steps=6
+terrain | guide_terrain.hipnc | guide_terrain_4_detail.png | steps=5
+hard | guide_hard.hipnc | guide_hard_3_boolean.png | steps=3
+smooth | guide_smooth.hipnc | guide_smooth_4_crease.png | steps=4
+vex | guide_vex.hipnc | guide_vex_3_color.png | steps=3
+rbd | guide_rbd.hipnc | guide_rbd_4_land.png | steps=4
+cloth | guide_cloth.hipnc | guide_cloth_4_hang.png | steps=5
+smoke | guide_smoke.hipnc | guide_smoke_4_grown.png | steps=5
+liquid | guide_liquid.hipnc | guide_liquid_4_pool.png | steps=5
+pop | guide_pop.hipnc | guide_pop_4_stream.png | steps=5

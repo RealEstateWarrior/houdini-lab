@@ -195,11 +195,12 @@
         <p class="eyebrow">How to</p>
         <h1>手順</h1>
         <p class="lede">
-          作り方だけを順番に並べたページ。1段ごとに図がある。
-          なぜそうなるのかまで知りたくなったら、末尾から実験ログへ進める。
+          作り方だけを順番に並べたもの。カードを押すと手順が開く。
+          1段ごとに図があり、最後に完成図と組み上がったノードグラフが出る。
+          なぜそうなるのかまで知りたくなったら、そこから実験ログへ進める。
         </p>
-        <nav class="gloss-nav"><!--GUIDE_NAV--></nav>
       </header>
+<!--GUIDE_CARDS-->
 <!--GUIDES-->
     </section>
 
@@ -398,5 +399,63 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && !modal.hidden) { close(); }
     });
+  })();
+
+  /* 手順のポップアップ。
+
+     中身はページの中に隠して置いてある（#guide-store）。
+     開くときはその節そのものをポップアップへ移し、閉じるときに戻す。
+     作り直すのではなく動かすので、用語のポップアップなど、
+     すでに付いている仕掛けがそのまま生きる。 */
+  (function () {
+    var store = document.getElementById("guide-store");
+    var modal = document.getElementById("guide-modal");
+    var body = document.getElementById("guide-modal-body");
+    if (!store || !modal || !body) { return; }
+    var current = null;
+    var opener = null;
+
+    function close() {
+      if (current) { store.appendChild(current); current = null; }
+      modal.hidden = true;
+      document.body.style.overflow = "";
+      if (opener) { opener.focus(); opener = null; }
+    }
+
+    function open(id, button) {
+      var section = document.getElementById("guide-" + id);
+      if (!section) { return; }
+      if (current) { store.appendChild(current); }
+      body.appendChild(section);
+      current = section;
+      modal.hidden = false;
+      modal.querySelector(".modal-card").scrollTop = 0;
+      document.body.style.overflow = "hidden";
+      opener = button || null;
+      document.getElementById("guide-close").focus();
+    }
+
+    document.addEventListener("click", function (event) {
+      var card = event.target.closest("[data-guide]");
+      if (card) {
+        event.preventDefault();
+        open(card.dataset.guide, card);
+        return;
+      }
+      if (event.target.closest("#guide-close")) { close(); return; }
+      if (modal.hidden) { return; }
+      if (event.target === modal) { close(); }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !modal.hidden) { close(); }
+    });
+
+    /* タブを移る／別のポップアップが開くときは、こちらを畳む */
+    document.addEventListener("click", function (event) {
+      if (event.target.closest(".nav-tab") || event.target.closest("[data-exp]")) {
+        if (!modal.hidden) { close(); }
+      }
+    }, true);
   })();
 </script>

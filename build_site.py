@@ -421,22 +421,48 @@ def link_terms_in(markup):
     return linked
 
 
-def render_guide_nav(guides):
-    return "\n".join(
-        f'      <a href="#guide-{g["id"]}">{html.escape(g["title"])}</a>'
-        for g in guides["guides"]
-    )
+def render_guide_cards(guides):
+    """手順の一覧。カードを押すとポップアップで開く。
+
+    手順が増えてきたので、全部を縦に並べると目当てのものに辿り着けない。
+    実験タブと同じで、まず一覧、押したら中身。
+    """
+    out = ['      <div class="thumbs" id="guide-cards">']
+    for index, guide in enumerate(guides["guides"], start=1):
+        facts = dict(guide.get("facts") or [])
+        chips = [f'{len(guide["steps"])}ステップ']
+        if facts.get("ノードの数"):
+            chips.append(facts["ノードの数"])
+        if facts.get("かかる時間"):
+            chips.append(facts["かかる時間"])
+        out.append('        <button type="button" class="thumb"'
+                   f' data-guide="{guide["id"]}">')
+        out.append('          <span class="thumb-img">'
+                   f'<img src="{guide["hero"]}" alt="" loading="lazy"></span>')
+        out.append('          <span class="thumb-body">')
+        out.append(f'            <span class="thumb-no">手順 {index:02d}'
+                   f'{" · 実験" + guide["exp"] if guide.get("exp") else ""}'
+                   '</span>')
+        out.append(f'            <h4>{html.escape(guide["title"])}</h4>')
+        out.append(f'            <p>{html.escape(guide["lede"])}</p>')
+        out.append('            <span class="thumb-tags">'
+                   + "".join(f"<span>{html.escape(c)}</span>" for c in chips)
+                   + "</span>")
+        out.append("          </span>")
+        out.append("        </button>")
+    out.append("      </div>")
+    return "\n".join(out)
 
 
 def render_guides(guides, urls):
-    """手順ページ。実験ログとは別に「どう作るか」だけを順番に読ませる。
+    """手順の中身。ふだんは隠しておき、カードを押したらポップアップへ移す。
 
-    1段ごとに図を置く。最後に完成図をもう一度出して、
+    1段ごとに図を置く。最後に完成図と、組み上がったノードグラフを出して、
     詳しく知りたい人だけが実験ログへ行けるようにする。
     """
     anchors = {item["no"]: (item["anchor"], item.get("log", "log_pm"))
                for item in DONE}
-    out = []
+    out = ['      <div id="guide-store" hidden>']
     for guide in guides["guides"]:
         section_start = len(out)
         out.append(f'      <section class="guide" id="guide-{guide["id"]}">')
@@ -492,7 +518,22 @@ def render_guides(guides, urls):
                     out.append("          </figure>")
                 out.append("        </div>")
 
+        graph = f'guide_{guide["id"]}_graph.png'
+        if os.path.exists(os.path.join(OUT, graph)):
+            out.append('        <p class="label">組み上がったノードグラフ</p>')
+            out.append('        <div class="figs figs--wide">')
+            out.append("          <figure>")
+            out.append('            <div class="frame-dark">'
+                       f'<img src="{graph}" loading="lazy"'
+                       f' alt="{html.escape(guide["title"])}の'
+                       'ノードネットワークの図"></div>')
+            out.append("            <figcaption>ここまでを組んだ状態。"
+                       "水色の点は表示フラグ。</figcaption>")
+            out.append("          </figure>")
+            out.append("        </div>")
+
         out.append('        <div class="guide-end">')
+        out.append('          <p class="label">完成図</p>')
         out.append(f'          <img src="{guide["hero"]}"'
                    f' alt="{html.escape(guide["title"])}の完成図">')
         out.append(f'          <p>{html.escape(guide.get("hero_cap", ""))}</p>')
@@ -509,6 +550,15 @@ def render_guides(guides, urls):
         out.append("        </div>")
         out.append("      </section>")
         out[section_start:] = [link_terms_in("\n".join(out[section_start:]))]
+    out.append("      </div>")
+    out.append("")
+    out.append('      <div class="modal modal--wide" id="guide-modal" hidden>')
+    out.append('        <div class="modal-card">')
+    out.append('          <button type="button" class="modal-close"'
+               ' id="guide-close" aria-label="閉じる">&#10005;</button>')
+    out.append('          <div class="modal-body" id="guide-modal-body"></div>')
+    out.append("        </div>")
+    out.append("      </div>")
     return "\n".join(out)
 
 
@@ -750,7 +800,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--EXP_DATA-->", render_exp_data(urls)),
         ("<!--NODES-->", render_nodes(nodes, urls)),
         ("<!--GUIDES-->", render_guides(guides, urls)),
-        ("<!--GUIDE_NAV-->", render_guide_nav(guides)),
+        ("<!--GUIDE_CARDS-->", render_guide_cards(guides)),
         ("<!--NODE_NAV-->", render_node_nav(nodes)),
         ("<!--LINKS_BODY-->", links_body),
         ("<!--GLOSSARY_SECTION-->", render_section(data)),

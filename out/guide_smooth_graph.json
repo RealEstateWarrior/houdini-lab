@@ -1,0 +1,100 @@
+{
+  "title": "手順 — 丸くする、角は残す",
+  "network": "/obj/smooth_shape",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "base",
+      "type": "box",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "divide1",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "divide3",
+      "type": "subdivide",
+      "pos": [
+        3.248,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "keep_edges",
+      "type": "crease",
+      "pos": [
+        6.495,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "0-3",
+        "crease": 3.0
+      }
+    },
+    {
+      "name": "divide3_crease",
+      "type": "subdivide",
+      "pos": [
+        6.495,
+        -1.129
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "iterations": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "base",
+      "from_output": 0,
+      "to": "divide1",
+      "to_input": 0
+    },
+    {
+      "from": "base",
+      "from_output": 0,
+      "to": "divide3",
+      "to_input": 0
+    },
+    {
+      "from": "base",
+      "from_output": 0,
+      "to": "keep_edges",
+      "to_input": 0
+    },
+    {
+      "from": "keep_edges",
+      "from_output": 0,
+      "to": "divide3_crease",
+      "to_input": 0
+    }
+  ]
+}

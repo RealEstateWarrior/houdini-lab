@@ -1,0 +1,102 @@
+{
+  "title": "手順 — 箱を砕いて落とす",
+  "network": "/obj/rbd",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "block",
+      "type": "box",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ty": 2.0,
+        "scale": 2.0
+      }
+    },
+    {
+      "name": "fracture",
+      "type": "rbdmaterialfracture::3.0",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "solver",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "unpack",
+      "type": "unpack",
+      "pos": [
+        0.0,
+        -3.389
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "block",
+      "from_output": 0,
+      "to": "fracture",
+      "to_input": 0
+    },
+    {
+      "from": "fracture",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 0
+    },
+    {
+      "from": "solver",
+      "from_output": 0,
+      "to": "unpack",
+      "to_input": 0
+    }
+  ]
+}

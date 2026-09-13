@@ -1,0 +1,125 @@
+{
+  "title": "手順 — 地形を作る",
+  "network": "/obj/terrain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ground",
+      "type": "grid",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 20,
+        "cols": 20
+      }
+    },
+    {
+      "name": "ground_dense",
+      "type": "grid",
+      "pos": [
+        3.248,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 160,
+        "cols": 160
+      }
+    },
+    {
+      "name": "rough_terrain",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 1.2,
+        "elementsize": 4.0
+      }
+    },
+    {
+      "name": "fine_terrain",
+      "type": "mountain::2.0",
+      "pos": [
+        3.248,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 1.2,
+        "elementsize": 4.0
+      }
+    },
+    {
+      "name": "detail_terrain",
+      "type": "mountain::2.0",
+      "pos": [
+        6.495,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 1.2,
+        "elementsize": 1.2,
+        "rough": 0.75
+      }
+    },
+    {
+      "name": "cell_terrain",
+      "type": "mountain::2.0",
+      "pos": [
+        9.743,
+        -1.129
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "height": 1.2,
+        "elementsize": 2.0,
+        "basis": "worleyFA"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "rough_terrain",
+      "to_input": 0
+    },
+    {
+      "from": "ground_dense",
+      "from_output": 0,
+      "to": "fine_terrain",
+      "to_input": 0
+    },
+    {
+      "from": "ground_dense",
+      "from_output": 0,
+      "to": "detail_terrain",
+      "to_input": 0
+    },
+    {
+      "from": "ground_dense",
+      "from_output": 0,
+      "to": "cell_terrain",
+      "to_input": 0
+    }
+  ]
+}

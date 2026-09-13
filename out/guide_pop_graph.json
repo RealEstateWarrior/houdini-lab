@@ -1,0 +1,52 @@
+{
+  "title": "手順 — 粒を降らせる",
+  "network": "/obj/pop",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "emitter",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "ty": 3.0
+      }
+    },
+    {
+      "name": "popnet",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "import",
+      "type": "dopimport::2.0",
+      "pos": [
+        2.259,
+        0.452
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "doppath": "/obj/pop/popnet"
+      }
+    }
+  ],
+  "edges": []
+}

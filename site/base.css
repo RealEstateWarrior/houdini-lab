@@ -487,23 +487,34 @@ h2 {
   box-shadow: var(--shadow-lift);
   position: relative;
 }
+/* 大きく開くポップアップ。手順のように長いものを入れる */
+.modal--wide .modal-card { width: min(1080px, 100%); max-height: min(92vh, 1100px); }
+
+/* ×は必ず右上。中身をスクロールしても、そこから動かない。
+   （カード自体がスクロール箱なので、position: fixed ではなく
+   sticky で「上端に張り付く高さ0の帯」を作り、その中に置く） */
 .modal-close {
   position: sticky;
   top: 0;
   float: right;
-  margin: 12px 14px 0 0;
-  width: 30px;
-  height: 30px;
-  border: none;
+  margin-right: 14px;
+  transform: translateY(14px);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--wire-dim);
   border-radius: 50%;
-  background: var(--ground-2);
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
   color: var(--ink-mid);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 }
-.modal-close:hover { background: var(--wire); color: var(--ink); }
+.modal-close:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
 .modal-close:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 .modal-body { padding: 26px 30px 30px; }
 .modal-body .m-no {
@@ -698,7 +709,9 @@ h2 {
 
 /* ---------- 実験ログ本体（背骨） ---------- */
 
-.spine { position: relative; margin-top: 44px; }
+/* 縦の線は記事の並びにだけ添える。見出し（.stage）は .spine の外に置く。
+   中に入れると、線が見出しの文字の後ろを突き抜けてしまう。 */
+.spine { position: relative; margin-top: 26px; }
 .spine::before {
   content: "";
   position: absolute;
@@ -1082,6 +1095,14 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 /* ---------- 手順ページ ---------- */
 
 .guide { margin-top: 28px; }
+/* ポップアップの中に入れたときは、上の余白は×ボタンの帯が受け持つ */
+.modal-body > .guide { margin-top: 0; }
+.modal--wide .modal-body { padding: 6px 30px 34px; }
+@media (max-width: 720px) {
+  .modal { padding: 10px; }
+  .modal--wide .modal-body { padding: 6px 18px 28px; }
+  .modal--wide .modal-card { max-height: 94vh; }
+}
 .guide-hero {
   background: var(--ground-2);
   border-radius: var(--radius);
