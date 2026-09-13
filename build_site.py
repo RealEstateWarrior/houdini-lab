@@ -219,7 +219,8 @@ def render_nav(active, tabs, urls):
 
     log_current = ' aria-current="page"' if active == "log" else ""
     out.append(f'        <li><a href="{urls["log"]}"{log_current}>実験ログ</a></li>')
-    out.append(f'        <li><a href="{NOTEBOOK_URL}" class="nav-ext">Notebook</a></li>')
+    out.append(f'        <li><a href="{NOTEBOOK_URL}" class="nav-ext"'
+               ' target="_blank" rel="noopener noreferrer">Notebook</a></li>')
     out.append("      </ul>")
     out.append('      <button type="button" class="nav-icon" id="search-open"'
                ' aria-label="サイト内を検索">' + SEARCH_SVG + "</button>")
