@@ -37,8 +37,10 @@ def report_specs():
 
 def run(command, **kwargs):
     # 既定の文字コードだと、子プロセスの日本語出力を読むところで落ちる。
+    # 子プロセス側の出力も UTF-8 に揃えておかないと、受け取る前に化ける。
+    env = dict(os.environ, PYTHONIOENCODING="utf-8")
     result = subprocess.run(command, cwd=HERE, capture_output=True, text=True,
-                            encoding="utf-8", errors="replace", **kwargs)
+                            encoding="utf-8", errors="replace", env=env, **kwargs)
     if result.returncode != 0:
         raise SystemExit(f"失敗: {' '.join(command)}\n{result.stdout}\n{result.stderr}")
     return result.stdout.strip()
@@ -51,6 +53,8 @@ def main():
     print(f"レポート {len(specs)} 件を束ねる")
     run([sys.executable, "report_pdf.py", "--bundle", BUNDLE, TITLE] + specs)
 
+    # 本文の用語リンクを付け直してから生成する（差し込むのはタグだけ）
+    print(run([sys.executable, "link_terms.py"]))
     print(run([sys.executable, "build_site.py"]))
 
     run(["git", "add", "-A"])

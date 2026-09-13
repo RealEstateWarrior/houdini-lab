@@ -1,5 +1,6 @@
 <title>Houdini 研究ハブ</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 <!--CSS-->
 </style>
@@ -10,41 +11,139 @@
 
     <!-- ========== 概要 ========== -->
     <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
-      <header class="masthead">
+      <header class="hero">
         <p class="eyebrow">Houdini research hub</p>
-        <h1>Houdini 研究ハブ</h1>
+        <h1>動かして、測って、残す。</h1>
         <p class="lede">
-          Houdiniを実際に動かして確かめたことを積み上げる場所。
-          左のタブは読み込みなしで切り替わる。実験の中身だけは、サムネイルを押したときに読み込む。
+          Houdini を実際に動かして確かめたことだけを積み上げる場所。
+          推測は書かない。数字が合わなかった回も、そのまま残す。
         </p>
         <dl class="facts">
-          <div><dt>実験</dt><dd>17 / 20</dd></div>
-          <div><dt>用語</dt><dd>56</dd></div>
-          <div><dt>Houdini</dt><dd>21.0.700 Apprentice</dd></div>
+          <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
+          <div><dt>解説したノード</dt><dd><!--NODE_COUNT--></dd></div>
+          <div><dt>用語</dt><dd><!--TERM_COUNT--></dd></div>
           <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
         </dl>
       </header>
 
-      <div class="stage" style="margin-top: 46px;"><h3>この場所の決めごと</h3></div>
-      <ul class="findings">
-        <li><strong>Houdiniの挙動は実測を正とする。</strong> ネットの情報は出典を確認し、動かせるものは動かして確かめる。実際に「Apprenticeではhythonが使えない」「mountainのパラメータは roughness という名前」はどちらも誤りだった。</li>
-        <li><strong>測り方も記録する。</strong> 実験003では最初に選んだ指標（表面積）が不適切で途中で切り替えた。004でも指標を1つ足している。失敗した測り方も残す。</li>
-        <li><strong>仮説は否定できる条件で試す。</strong> 「縮む原因は平滑化」の検証には、平滑化しない Bilinear を使った。「octが効かないのは点数のせい」は、点数を増やして予測どおりになるかを確かめた。</li>
-        <li><strong>Notebookのソースは増やしすぎない。</strong> 上限300件。実験1件ごとに1ソース足すと無駄に消費するので、テーマ単位で1ソースにまとめ、実験が増えたらそのソースを差し替える。</li>
-        <li><strong>用語は1か所で管理する。</strong> <code>glossary.json</code> を単一の情報源にして、この用語集タブ・実験ログのポップアップ・Notebook用PDFの3つを生成している。説明が食い違わない。</li>
-        <li><strong>話がつながらない実験は分ける。</strong> 現在の001〜004はひとつながりの流れなので同じログにまとめている。エフェクトに入ったら別のログに分ける。</li>
-      </ul>
+      <div class="stage">
+        <h3>これまでに作ったもの</h3>
+        <p>プロシージャルモデリングから始めて、いまはエフェクトに入っている。</p>
+      </div>
+      <div class="tiles">
+        <div class="tile tile--wide">
+          <img src="008_z_axis.png" alt="地面の上に200本の筒が立ち並んでいるレンダリング">
+          <div class="tile-body">
+            <h4>地面に物を生やす</h4>
+            <p>200個すべての向きを測って、複製の向きが
+              <button class="term" data-term="N">N</button>
+              のどの軸に対応するかを確定させた。答えは Z 軸。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="002_subdiv_3.png" alt="細分割を3回かけて球に近づいた立方体">
+          <div class="tile-body">
+            <h4>割ると丸くなる</h4>
+            <p>面の数はちょうど4倍ずつ増える。縮む原因は分割ではなく平滑化だった。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="005_mworleyFA.png" alt="Manhattan Worley ノイズで大きく変形した球">
+          <div class="tile-body">
+            <h4>ノイズの種類で形が変わる</h4>
+            <p>14通り並べると振幅に9.3倍の開きがあった。外へ押すものと内へ削るものがある。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="014_sheet.png" alt="立方体が落下して床で砕けるまでの連続コマ">
+          <div class="tile-body">
+            <h4>落として、砕く</h4>
+            <p>硬い物体なので体積は全フレームで 8.00000。ばらつきは 0.0000000 だった。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="016_sheet.png" alt="散逸の強さを変えた3条件の煙の比較">
+          <div class="tile-body">
+            <h4>煙の減り方を式にする</h4>
+            <p>毎フレーム (1−d) 倍という仮説を立て、実測と4桁一致させた。</p>
+          </div>
+        </div>
+      </div>
 
-      <div class="stage" style="margin-top: 46px;"><h3>いま使っているもの</h3></div>
+      <div class="stage">
+        <h3>やり方</h3>
+        <p>Houdini の画面は使わず、<code>hython</code> という文字だけの実行環境で組み立てている。</p>
+      </div>
+      <div class="pipeline">
+        <div class="pipe">
+          <span class="pipe-no">01</span>
+          <h4>組む</h4>
+          <p>ノードを作って配線する。変えたパラメータだけ記録に残す。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">02</span>
+          <h4>測る</h4>
+          <p>保たれるはずの量を選び、条件ごと・フレームごとに数える。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">03</span>
+          <h4>撮る</h4>
+          <p>全条件を同じカメラから描画する。見た目の差が条件の差になる。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">04</span>
+          <h4>検算する</h4>
+          <p>先に式を立てて、実測と突き合わせる。外れたら指標を疑う。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">05</span>
+          <h4>配る</h4>
+          <p>PDF・このサイト・Gemini Notebook へ同じ内容を流す。</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <h3>この場所の決めごと</h3>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <h4>実測を正とする</h4>
+          <p>ネットの情報は出典を確かめ、動かせるものは動かす。「Apprentice では hython が使えない」も「mountain のパラメータは roughness」も、実際には誤りだった。</p>
+        </div>
+        <div class="pillar">
+          <h4>測り方も残す</h4>
+          <p>実験003では最初に選んだ指標が不適切で途中で捨てた。失敗した測り方も消さずに書く。</p>
+        </div>
+        <div class="pillar">
+          <h4>否定できる形で試す</h4>
+          <p>「縮む原因は平滑化」は、平滑化しない方式に切り替えて確かめた。覆る条件を先に決める。</p>
+        </div>
+        <div class="pillar">
+          <h4>用語は1か所で管理する</h4>
+          <p><code>glossary.json</code> から用語集・本文のポップアップ・Notebook 用 PDF を生成している。説明が食い違わない。</p>
+        </div>
+        <div class="pillar">
+          <h4>ソースは増やしすぎない</h4>
+          <p>Gemini Notebook の上限は300件。実験ごとに増やさず、テーマ単位の1ソースを差し替えて更新する。</p>
+        </div>
+        <div class="pillar">
+          <h4>つながらない話は分ける</h4>
+          <p>プロシージャルモデリングとエフェクトは別の流れとして扱う。読む側が筋を追える単位で切る。</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <h3>使っている道具</h3>
+      </div>
       <div class="scroll">
         <table>
           <thead><tr><th>用途</th><th>中身</th></tr></thead>
           <tbody>
-            <tr><td>ノード構築とレンダ</td><td>hython 21.0.700（GUIは使わない）</td></tr>
+            <tr><td>ノード構築とレンダ</td><td>hython 21.0.700（Apprentice）</td></tr>
             <tr><td>プレビュー</td><td>OpenGL ROP / Smooth Wire Shaded</td></tr>
-            <tr><td>接続図</td><td>ノード位置のJSONから Pillow で描画</td></tr>
-            <tr><td>レポート</td><td>reportlab で日本語PDF。テキストが残るのでNotebookが引用できる</td></tr>
-            <tr><td>Notebook連携</td><td>notebooklm-mcp-cli（ローカルPDFを直接ソースにできる）</td></tr>
+            <tr><td>接続図</td><td>ノード位置の JSON から Pillow で描画</td></tr>
+            <tr><td>レポート</td><td>reportlab で日本語 PDF。文字が残るので Notebook が引用できる</td></tr>
+            <tr><td>Notebook 連携</td><td>notebooklm-mcp-cli（ローカル PDF を直接ソースにできる）</td></tr>
           </tbody>
         </table>
       </div>
@@ -56,28 +155,30 @@
         <p class="eyebrow">Experiments</p>
         <h1>実験</h1>
         <p class="lede">
-          サムネイルを押すと、その実験の詳細に移動する（ここで初めて読み込みが入る）。
-          001から004はひとつながりの流れなので、同じログにまとめている。
+          カードを押すと要点が開く。そこから全文のログへ進める。
         </p>
         <p class="thread">
-          <strong>001</strong> で最小構成を組んだときに「分割を重ねると立方体が球になる」と気づいた。
-          → <strong>002</strong> でそれを数えて、縮む原因が平滑化だと確定させた。
-          → <strong>003</strong> では「ならノイズは分割の前か後か」を比べ、点数は解像度を決めるだけで
-          凹凸の大きさは elementsize が決めていると分かった。
-          → <strong>004</strong> で残りのノイズパラメータを切り分け、rough が形の性質を、
-          oct は点数が足りている範囲でしか効かないことを確かめた。
-          → <strong>005</strong> ではノイズの種類そのものを14通り並べ、種類によって
-          外向きに押すか内向きに削るかが決まると分かった。
-          → <strong>006</strong> でそこで疑った「上限」を検証したところ、上限は存在せず、
-          むしろ自分の指標が壊れていたと判明した。あわせて bias が突起と窪みを
-          連続的に制御できると分かり、mountain のパラメータ地図がほぼ埋まった。
-          → <strong>007</strong> では舞台を平面に移し、球体では使えなかった指標を作り直した。
-          勾配が増えなくなる点が「その形に足りている解像度」を教えてくれると分かった。
-          → <strong>008</strong> でパラメータの調査を離れ、地面に物を生やす定番パターンに進んだ。
-          複製の向きが N のどの軸に対応するかを200個すべて測り、Z軸だと確定させた。
+          <strong>001〜007</strong> は形を作る側の話。分割とノイズがそれぞれ何を決めているかを切り分けた。
+          → <strong>008〜012</strong> で道具が増える。ばらまき・複製・VEX・ブーリアン。
+          → <strong>013</strong> から時間が入り、<strong>014〜017</strong> はシミュレーション。
+          剛体・布・煙・液体を順に当たっている。
         </p>
       </header>
 <!--THUMBS-->
+    </section>
+
+    <!-- ========== ノード解説 ========== -->
+    <section class="panel" id="panel-nodes" role="tabpanel" aria-labelledby="tab-nodes" hidden>
+      <header class="masthead">
+        <p class="eyebrow">Nodes</p>
+        <h1>ノード解説</h1>
+        <p class="lede">
+          実験で実際に使ったノードだけを載せている。「そのノードで何ができるか」を先に1行で書き、
+          実際に踏んだ落とし穴を添えた。
+        </p>
+        <nav class="gloss-nav"><!--NODE_NAV--></nav>
+      </header>
+<!--NODES-->
     </section>
 
     <!-- ========== 用語集 ========== -->
@@ -86,12 +187,8 @@
         <p class="eyebrow">Terminology</p>
         <h1>用語集</h1>
         <p class="lede">
-          Houdiniは略語と英語の専門用語が多く、意味が分からないまま読み進めると手が止まる。
-          前提知識なしで読めるようにまとめた。カタカナ読みを併記しているのは、
-          そもそも何と読むのか分からない語が多いため。
-        </p>
-        <p class="hint">
-          単独ページとしても<a href="<!--GLOSSARY_URL-->">用語辞典</a>にある（見出しへのリンクを共有したいとき用）。
+          Houdini は略語と英語の専門用語が多い。前提知識なしで読めるようにまとめた。
+          本文中の点線が付いた語は、押すとその場で意味が出る。
         </p>
         <nav class="gloss-nav"><!--GLOSSARY_NAV--></nav>
       </header>
@@ -105,8 +202,7 @@
         <h1>参考リンク</h1>
         <p class="lede">
           参照した資料と、参照する価値があると判断した資料。
-          実際にアクセスして確認したものに <span class="link-flag flag-verified">確認済</span> を付けている。
-          確認できなかった部分は、確認できなかったと書いてある。
+          実際にアクセスして確認したものには <span class="link-flag flag-verified">確認済</span> を付けている。
         </p>
       </header>
 <!--LINKS_BODY-->
@@ -114,16 +210,28 @@
 
     <footer>
       <p>
-        すべて <code>hython</code> 経由の headless 実行で、Houdini の GUI は使っていない。
-        ページは <code>build_site.py</code> がテンプレートと <code>glossary.json</code> から生成している。
-        UIは見直し前提の暫定版。
+        すべて <code>hython</code> 経由の headless 実行で、Houdini の GUI はノードの画面写真を撮るときだけ使っている。
+        ページは <code>build_site.py</code> がテンプレートと <code>glossary.json</code> /
+        <code>nodes.json</code> から生成している。
       </p>
     </footer>
 
   </div>
 </div>
 
+<div class="modal" id="expmodal" role="dialog" aria-modal="true" aria-labelledby="m-title" hidden>
+  <div class="modal-card">
+    <button class="modal-close" type="button" id="m-close" aria-label="閉じる">✕</button>
+    <div class="modal-body" id="m-body"></div>
+  </div>
+</div>
+
+<!--EXP_DATA-->
+<!--GLOSSARY_DATA-->
+<!--POPOVER-->
+
 <script>
+  /* タブ切り替え。ページの読み込みは起きない。 */
   (function () {
     var tabs = Array.prototype.slice.call(document.querySelectorAll(".nav-tab"));
     var panels = {};
@@ -133,6 +241,8 @@
 
     function show(name, push) {
       if (!panels[name]) { return; }
+      var modal = document.getElementById("expmodal");
+      if (modal && !modal.hidden) { modal.hidden = true; document.body.style.overflow = ""; }
       tabs.forEach(function (tab) {
         var on = tab.dataset.panel === name;
         tab.setAttribute("aria-selected", on ? "true" : "false");
@@ -154,6 +264,84 @@
     window.addEventListener("hashchange", function () {
       var name = (window.location.hash || "").replace("#", "");
       if (panels[name]) { show(name, false); }
+    });
+  })();
+
+  /* 実験カードのポップアップ。中身は build_site.py が out/*_report.json から埋め込む。 */
+  (function () {
+    var dataEl = document.getElementById("experiment-data");
+    if (!dataEl) { return; }
+    var data = JSON.parse(dataEl.textContent);
+    var modal = document.getElementById("expmodal");
+    var body = document.getElementById("m-body");
+    var opener = null;
+
+    function esc(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function close() {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+      if (opener) { opener.focus(); opener = null; }
+    }
+
+    function open(no, button) {
+      var item = data[no];
+      if (!item) { return; }
+
+      var html = '<span class="m-no">実験 ' + esc(no) + '</span>';
+      html += '<h3 id="m-title">' + esc(item.title) + "</h3>";
+
+      if (item.shots && item.shots.length) {
+        html += '<div class="m-shots">';
+        item.shots.forEach(function (src) {
+          html += '<img src="' + esc(src) + '" alt="実験' + esc(no) + 'の結果">';
+        });
+        html += "</div>";
+      }
+
+      html += '<div class="m-sum">';
+      (item.summary || []).forEach(function (p) { html += "<p>" + p + "</p>"; });
+      html += "</div>";
+
+      if (item.points && item.points.length) {
+        html += '<p class="m-label">分かったこと</p><ul class="m-points">';
+        item.points.forEach(function (p) { html += "<li>" + p + "</li>"; });
+        html += "</ul>";
+      }
+
+      if (item.next && item.next.length) {
+        html += '<p class="m-label">次にやること</p><ul class="m-points">';
+        item.next.forEach(function (p) { html += "<li>" + esc(p) + "</li>"; });
+        html += "</ul>";
+      }
+
+      html += '<a class="m-more" href="' + esc(item.href) + '">全文のログを読む →</a>';
+
+      body.innerHTML = html;
+      body.scrollTop = 0;
+      modal.hidden = false;
+      modal.querySelector(".modal-card").scrollTop = 0;
+      document.body.style.overflow = "hidden";
+      opener = button || null;
+      document.getElementById("m-close").focus();
+    }
+
+    document.addEventListener("click", function (event) {
+      var card = event.target.closest("[data-exp]");
+      if (card) {
+        event.preventDefault();
+        open(card.dataset.exp, card);
+        return;
+      }
+      if (event.target.closest("#m-close")) { close(); return; }
+      if (modal.hidden) { return; }
+      if (event.target === modal) { close(); }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !modal.hidden) { close(); }
     });
   })();
 </script>

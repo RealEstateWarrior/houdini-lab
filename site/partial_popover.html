@@ -1,0 +1,87 @@
+<div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
+<script>
+  /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
+     語の一覧は build_site.py が glossary.json から埋め込む。 */
+  (function () {
+    var dataEl = document.getElementById("glossary-data");
+    var terms = dataEl ? JSON.parse(dataEl.textContent) : {};
+    var pop = document.getElementById("popover");
+    var active = null;
+
+    function close() {
+      pop.hidden = true;
+      if (active) { active.removeAttribute("aria-expanded"); active = null; }
+    }
+
+    function open(button) {
+      var entry = terms[button.dataset.term];
+      if (!entry) { return; }
+
+      var meta = [];
+      if (entry.reading) { meta.push(entry.reading); }
+      if (entry.expand) { meta.push(entry.expand); }
+
+      pop.textContent = "";
+      var head = document.createElement("div");
+      head.className = "pop-term";
+      head.textContent = entry.term;
+      pop.appendChild(head);
+
+      if (meta.length) {
+        var m = document.createElement("div");
+        m.className = "pop-meta";
+        m.textContent = meta.join("  ·  ");
+        pop.appendChild(m);
+      }
+
+      var body = document.createElement("p");
+      body.className = "pop-def";
+      body.textContent = entry.def;
+      pop.appendChild(body);
+
+      if (entry.related) {
+        var rel = document.createElement("span");
+        rel.className = "pop-rel";
+        rel.textContent = "関連: " + entry.related;
+        body.appendChild(rel);
+      }
+
+      pop.hidden = false;
+
+      var rect = button.getBoundingClientRect();
+      var width = pop.offsetWidth;
+      var left = rect.left + window.scrollX;
+      var maxLeft = window.scrollX + document.documentElement.clientWidth - width - 16;
+      if (left > maxLeft) { left = maxLeft; }
+      if (left < window.scrollX + 16) { left = window.scrollX + 16; }
+
+      var top = rect.bottom + window.scrollY + 8;
+      if (rect.bottom + pop.offsetHeight + 24 > document.documentElement.clientHeight) {
+        var above = rect.top + window.scrollY - pop.offsetHeight - 8;
+        if (above > window.scrollY) { top = above; }
+      }
+
+      pop.style.left = left + "px";
+      pop.style.top = top + "px";
+
+      active = button;
+      button.setAttribute("aria-expanded", "true");
+    }
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest(".term");
+      if (button) {
+        event.preventDefault();
+        if (active === button) { close(); } else { open(button); }
+        return;
+      }
+      if (!event.target.closest("#popover")) { close(); }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { close(); }
+    });
+
+    window.addEventListener("resize", close);
+  })();
+</script>

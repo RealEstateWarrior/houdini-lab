@@ -1,26 +1,42 @@
 <title>Houdini 研究ハブ</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root {
-  --ground: #191c21;
-  --panel: #22262c;
-  --panel-hi: #2a2f37;
-  --plate: #eef1f5;
-  --wire: #6d7784;
-  --wire-dim: #454c56;
-  --ink: #e7eaef;
-  --ink-mid: #aab3c0;
-  --ink-dim: #808a97;
-  --flag: #56c4e9;
-  --fx: #f0863c;
-  --alert: #e27064;
+/* Houdini 研究ハブ — 明るい配色。Apple のサイトのような、白地・広い余白・
+   大きな図版を基本にする。色は単一テーマ（ライト）に決め打ちし、
+   背景も文字色もすべて明示的に塗る。 */
 
-  --font-display: "Archivo", "Zen Kaku Gothic New", system-ui, sans-serif;
-  --font-body: "Zen Kaku Gothic New", "Archivo", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", Consolas, monospace;
+:root {
+  --ground: #ffffff;
+  --ground-2: #f5f5f7;
+  --panel: #ffffff;
+  --panel-hi: #f5f5f7;
+  --plate: #f5f5f7;
+
+  --wire: #d2d2d7;
+  --wire-dim: #e8e8ed;
+
+  --ink: #1d1d1f;
+  --ink-mid: #4a4a4f;
+  --ink-dim: #86868b;
+
+  --flag: #0066cc;
+  --fx: #9a4b00;
+  --alert: #b3261e;
+
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  "Noto Sans JP", system-ui, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  --shadow-lift: 0 12px 34px rgba(0, 0, 0, 0.12);
+  --radius: 18px;
 
   --gutter: 58px;
-  color-scheme: dark;
+  --bar: 52px;
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -30,186 +46,374 @@ body {
   background: var(--ground);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 0.94rem;
-  line-height: 1.8;
+  font-size: 0.95rem;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-a { color: var(--flag); }
+a { color: var(--flag); text-underline-offset: 2px; }
 
-.shell { max-width: 1060px; margin: 0 auto; padding: 56px 28px 88px; }
+.shell { max-width: 980px; margin: 0 auto; padding: 40px 22px 96px; }
+.layout { display: block; }
+.layout > .shell { max-width: 980px; margin: 0 auto; padding: 40px 22px 96px; }
 
-/* ---------- side navigation shared by every page ---------- */
-
-.layout {
-  display: grid;
-  grid-template-columns: 216px minmax(0, 1fr);
-  max-width: 1320px;
-  margin: 0 auto;
-  gap: 0 40px;
-  align-items: start;
-}
-.layout > .shell { max-width: none; margin: 0; padding: 56px 28px 88px 0; }
+/* ---------- 上部のバー（全ページ共通） ---------- */
 
 .sidenav {
   position: sticky;
   top: 0;
-  padding: 56px 0 40px 28px;
-  border-right: 1px solid var(--wire-dim);
-  min-height: 100vh;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--wire-dim);
 }
-.sidenav .brand {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.94rem;
-  letter-spacing: 0.01em;
-  margin: 0 0 4px;
+.nav-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+  height: var(--bar);
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }
-.sidenav .brand-note {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  margin: 0 0 26px;
-}
-.sidenav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-.sidenav a {
-  display: block;
-  padding: 7px 11px;
-  border-radius: 4px;
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   text-decoration: none;
-  color: var(--ink-mid);
-  font-size: 0.88rem;
-  border-left: 2px solid transparent;
-}
-.sidenav a:hover { background: var(--panel); color: var(--ink); }
-.sidenav a[aria-current="page"] {
-  background: var(--panel);
   color: var(--ink);
-  border-left-color: var(--flag);
+  flex: none;
 }
-.sidenav .nav-ext::after {
-  content: " ↗";
-  color: var(--ink-dim);
-  font-size: 0.8em;
+.logo svg { display: block; width: 22px; height: 22px; }
+.logo .logo-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
-.sidenav .nav-group {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  margin: 22px 0 6px 11px;
-}
+.logo:hover { opacity: 0.65; }
+.logo:focus-visible { outline: 2px solid var(--flag); outline-offset: 4px; border-radius: 4px; }
 
-@media (max-width: 860px) {
-  .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .layout > .shell { padding: 28px 22px 72px; }
-  .sidenav {
-    position: static;
-    min-height: 0;
-    padding: 22px 22px 18px;
-    border-right: none;
-    border-bottom: 1px solid var(--wire-dim);
-  }
-  .sidenav ul { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; gap: 4px; }
-  .sidenav .nav-group { display: none; }
-  .sidenav a { border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; }
-  .sidenav a[aria-current="page"] { border-left-color: transparent; border-bottom-color: var(--flag); }
+.sidenav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1 1 auto;
 }
+.sidenav ul::-webkit-scrollbar { display: none; }
+.sidenav .nav-group { display: none; }
 
-/* ---------- in-page tabs (no reload) ---------- */
+.sidenav a,
+.sidenav button.nav-tab {
+  display: block;
+  font: inherit;
+  font-size: 0.82rem;
+  line-height: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 980px;
+  background: none;
+  color: var(--ink-mid);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.sidenav a:hover,
+.sidenav button.nav-tab:hover { background: var(--ground-2); color: var(--ink); }
+.sidenav a[aria-current="page"],
+.sidenav button.nav-tab[aria-selected="true"] {
+  background: var(--ink);
+  color: #ffffff;
+}
+.sidenav a:focus-visible,
+.sidenav button.nav-tab:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.sidenav .nav-ext { margin-left: auto; color: var(--ink-dim); }
+.sidenav .nav-ext::after { content: " ↗"; font-size: 0.85em; }
+
+@media (max-width: 720px) {
+  .nav-inner { gap: 12px; padding: 0 16px; }
+  .logo .logo-text { display: none; }
+  .layout > .shell, .shell { padding: 28px 18px 72px; }
+}
 
 .panel[hidden] { display: none !important; }
 
-.sidenav button.nav-tab {
+/* ---------- 見出し ---------- */
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5.2vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.35;
+  letter-spacing: -0.014em;
+  margin: 0 0 6px;
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--flag);
+  margin: 0 0 10px;
+}
+
+.lede {
+  max-width: 34em;
+  color: var(--ink-mid);
+  font-size: 1.04rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.masthead { padding-bottom: 8px; }
+
+/* 中央寄せの大見出し（概要タブの先頭） */
+.hero { text-align: center; padding: 40px 0 8px; }
+.hero .lede { margin: 0 auto; }
+.hero .eyebrow { color: var(--ink-dim); }
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  margin: 40px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--wire-dim);
+}
+.facts div {
+  flex: 1 1 140px;
+  display: block;
+  padding: 20px 10px 4px;
+  text-align: center;
+}
+.facts dt {
+  font-size: 0.76rem;
+  color: var(--ink-dim);
+  order: 2;
+  margin-top: 2px;
+}
+.facts dd {
+  margin: 0;
+  order: 1;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.facts div { display: flex; flex-direction: column; align-items: center; }
+
+.hint { margin: 16px 0 0; font-size: 0.84rem; color: var(--ink-dim); max-width: 42em; }
+.hero .hint { margin-left: auto; margin-right: auto; }
+
+/* ---------- 区切りの見出し ---------- */
+
+.stage {
+  display: block;
+  margin: 72px 0 22px;
+  border-top: 1px solid var(--wire-dim);
+  padding-top: 22px;
+}
+.stage h3 {
+  font-family: var(--font-display);
+  font-size: 1.34rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-transform: none;
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.stage p {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-dim);
+  max-width: 44em;
+}
+
+/* ---------- 大きな図版の帯 ---------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.tile {
+  background: var(--ground-2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.tile img {
   display: block;
   width: 100%;
-  text-align: left;
-  font: inherit;
-  font-size: 0.88rem;
-  padding: 7px 11px;
-  border: none;
-  border-left: 2px solid transparent;
-  border-radius: 4px;
-  background: none;
-  color: var(--ink-mid);
-  cursor: pointer;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--ground-2);
 }
-.sidenav button.nav-tab:hover { background: var(--panel); color: var(--ink); }
-.sidenav button.nav-tab[aria-selected="true"] {
-  background: var(--panel);
+.tile .tile-body { padding: 16px 18px 20px; }
+.tile h4 {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
   color: var(--ink);
-  border-left-color: var(--flag);
 }
-.sidenav button.nav-tab:focus-visible { outline: 2px solid var(--flag); outline-offset: -2px; }
+.tile p { margin: 0; font-size: 0.85rem; line-height: 1.65; color: var(--ink-mid); }
 
-@media (max-width: 860px) {
-  .sidenav button.nav-tab {
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    width: auto;
-  }
-  .sidenav button.nav-tab[aria-selected="true"] {
-    border-left-color: transparent;
-    border-bottom-color: var(--flag);
-  }
+.tile--wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
 }
+.tile--wide img { aspect-ratio: 16 / 9; }
+.tile--wide .tile-body { padding: 24px 30px; }
+.tile--wide h4 { font-size: 1.14rem; }
+.tile--wide p { font-size: 0.9rem; }
+@media (max-width: 700px) { .tile--wide { grid-template-columns: minmax(0, 1fr); } }
 
-/* ---------- experiment thumbnails ---------- */
+/* ---------- 決めごとのカード ---------- */
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.pillar {
+  background: var(--ground-2);
+  border-radius: 14px;
+  padding: 20px 20px 22px;
+}
+.pillar h4 {
+  font-family: var(--font-display);
+  font-size: 0.96rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.pillar p { margin: 0; font-size: 0.86rem; line-height: 1.7; color: var(--ink-mid); }
+
+/* ---------- 流れ図 ---------- */
+
+.pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+.pipe {
+  flex: 1 1 150px;
+  background: var(--ground-2);
+  border-radius: 14px;
+  padding: 16px 16px 18px;
+  position: relative;
+}
+.pipe .pipe-no {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+}
+.pipe h4 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 4px 0 4px;
+  color: var(--ink);
+}
+.pipe p { margin: 0; font-size: 0.8rem; line-height: 1.6; color: var(--ink-mid); }
+.pipe + .pipe::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: var(--wire);
+}
+@media (max-width: 700px) { .pipe + .pipe::before { display: none; } }
+
+/* ---------- 実験カード ---------- */
 
 .thumbs {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
-  gap: 18px;
-  margin-top: 26px;
+  grid-template-columns: repeat(auto-fill, minmax(236px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
 }
 .thumb {
   display: flex;
   flex-direction: column;
+  text-align: left;
+  font: inherit;
   text-decoration: none;
   color: inherit;
   background: var(--panel);
   border: 1px solid var(--wire-dim);
-  border-radius: 6px;
+  border-radius: var(--radius);
   overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
-.thumb:hover { border-color: var(--flag); }
+.thumb:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+.thumb:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 .thumb .thumb-img {
-  background: var(--plate);
+  background: var(--ground-2);
   aspect-ratio: 16 / 10;
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-bottom: 1px solid var(--wire-dim);
 }
-.thumb .thumb-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.thumb .thumb-body { padding: 13px 15px 15px; display: grid; gap: 5px; }
+.thumb .thumb-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb .thumb-body { padding: 14px 17px 18px; display: grid; gap: 5px; }
 .thumb .thumb-no {
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  color: var(--flag);
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
 }
 .thumb h4 {
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   margin: 0;
   line-height: 1.45;
   color: var(--ink);
 }
-.thumb p { margin: 0; font-size: 0.82rem; line-height: 1.65; color: var(--ink-mid); }
-.thumb .thumb-planned {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-}
-.thumb--planned { border-style: dashed; opacity: 0.72; }
+.thumb p { margin: 0; font-size: 0.82rem; line-height: 1.6; color: var(--ink-mid); }
+.thumb--planned { border-style: dashed; cursor: default; box-shadow: none; }
+.thumb--planned:hover { box-shadow: none; transform: none; }
 .thumb--planned .thumb-img {
   background: var(--ground);
   color: var(--ink-dim);
@@ -218,133 +422,200 @@ a { color: var(--flag); }
 }
 
 .thread {
-  border-left: 2px solid var(--wire-dim);
-  padding: 4px 0 4px 16px;
+  border-left: 2px solid var(--wire);
+  padding: 2px 0 2px 18px;
   margin: 22px 0 0;
   max-width: 44em;
-  font-size: 0.88rem;
-  line-height: 1.8;
+  font-size: 0.9rem;
+  line-height: 1.85;
   color: var(--ink-mid);
 }
 .thread strong { color: var(--ink); }
 
-/* ---------- hub cards ---------- */
+/* ---------- 実験のポップアップ ---------- */
 
-.hub {
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  margin-top: 30px;
+  place-items: center;
+  padding: 22px;
+  background: rgba(0, 0, 0, 0.42);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
-.hub-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  background: var(--panel);
-  border: 1px solid var(--wire-dim);
-  border-radius: 6px;
-  padding: 18px 18px 16px;
+.modal[hidden] { display: none !important; }
+.modal-card {
+  background: var(--ground);
+  border-radius: var(--radius);
+  width: min(760px, 100%);
+  max-height: min(86vh, 900px);
+  overflow-y: auto;
+  box-shadow: var(--shadow-lift);
+  position: relative;
 }
-.hub-card:hover { border-color: var(--flag); }
-.hub-card h3 {
-  font-family: var(--font-display);
+.modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: 12px 14px 0 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ground-2);
+  color: var(--ink-mid);
   font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 6px;
-  color: var(--ink);
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
 }
-.hub-card p { margin: 0; font-size: 0.85rem; line-height: 1.7; color: var(--ink-mid); }
-.hub-card .hub-meta {
-  display: block;
-  margin-top: 12px;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
-  color: var(--flag);
-}
-
-/* ---------- link list ---------- */
-
-.linkset { margin-top: 34px; }
-.linkset h3 {
-  font-family: var(--font-display);
-  font-size: 1.06rem;
-  font-weight: 600;
-  color: var(--flag);
-  margin: 0 0 4px;
-}
-.linkset > p { margin: 0 0 16px; font-size: 0.86rem; color: var(--ink-dim); max-width: 44em; }
-
-.links { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--wire-dim); border: 1px solid var(--wire-dim); border-radius: 5px; overflow: hidden; }
-.links li { background: var(--panel); padding: 14px 16px; }
-.links .link-title { font-weight: 600; font-size: 0.92rem; }
-.links .link-title a { text-decoration: none; }
-.links .link-title a:hover { text-decoration: underline; }
-.links .link-url {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--ink-dim);
-  word-break: break-all;
-  margin: 2px 0 6px;
-}
-.links .link-note { font-size: 0.86rem; line-height: 1.7; color: var(--ink-mid); margin: 0; }
-.links .link-flag {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  padding: 1px 7px;
-  border-radius: 3px;
-  border: 1px solid currentColor;
-  margin-left: 8px;
-  vertical-align: 1px;
-}
-.flag-verified { color: var(--flag); }
-.flag-local { color: var(--wire); }
-.flag-caution { color: var(--alert); }
-
-/* ---------- masthead ---------- */
-
-.masthead { border-bottom: 1px solid var(--wire-dim); padding-bottom: 26px; }
-
-.eyebrow {
+.modal-close:hover { background: var(--wire); color: var(--ink); }
+.modal-close:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.modal-body { padding: 26px 30px 30px; }
+.modal-body .m-no {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--ink-dim);
-  margin: 0 0 14px;
 }
-
-h1 {
+.modal-body h3 {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2rem, 5vw, 2.7rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.3;
+  margin: 4px 0 14px;
+  color: var(--ink);
   text-wrap: balance;
-  margin: 0 0 12px;
 }
-
-.lede { max-width: 40em; color: var(--ink-mid); margin: 0; }
-
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 34px;
-  margin: 26px 0 0;
-  padding: 0;
-  font-family: var(--font-mono);
+.modal-body .m-sum { margin: 0 0 18px; color: var(--ink-mid); font-size: 0.92rem; max-width: 40em; }
+.modal-body .m-sum p { margin: 0 0 10px; }
+.m-shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 0 0 20px; }
+.m-shots img { display: block; width: 100%; border-radius: 12px; background: var(--ground-2); }
+.m-label {
+  font-family: var(--font-display);
   font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink-dim);
+  margin: 22px 0 8px;
 }
-.facts div { display: flex; gap: 8px; align-items: baseline; }
-.facts dt { color: var(--ink-dim); letter-spacing: 0.04em; }
-.facts dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+.m-points { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.m-points li {
+  background: var(--ground-2);
+  border-radius: 12px;
+  padding: 12px 15px;
+  font-size: 0.87rem;
+  line-height: 1.7;
+  color: var(--ink-mid);
+}
+.m-points li strong { color: var(--ink); }
+.m-more {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 9px 20px;
+  border-radius: 980px;
+  background: var(--flag);
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.m-more:hover { background: #0055aa; }
 
-.hint { margin: 18px 0 0; font-size: 0.82rem; color: var(--ink-dim); max-width: 42em; }
+/* ---------- ノード解説 ---------- */
 
-/* ---------- clickable term ---------- */
+.nodegrid { display: grid; gap: 16px; margin-top: 20px; }
+.nodecard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 244px;
+  gap: 0;
+  background: var(--panel);
+  border: 1px solid var(--wire-dim);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.nodecard.nodecard--noimg { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 700px) { .nodecard { grid-template-columns: minmax(0, 1fr); } }
+.nodecard .node-main { padding: 22px 24px 24px; min-width: 0; }
+.nodecard .node-shot {
+  background: var(--ground-2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px;
+  gap: 8px;
+}
+.nodecard .node-shot img { width: 100%; border-radius: 10px; display: block; }
+.nodecard .node-shot span { font-size: 0.72rem; line-height: 1.5; color: var(--ink-dim); }
+
+.node-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.node-head h4 {
+  font-family: var(--font-mono);
+  font-size: 1.02rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--ink);
+}
+.node-kind {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 980px;
+  background: var(--ground-2);
+  color: var(--ink-dim);
+}
+.node-one {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.node-what { margin: 0; font-size: 0.88rem; line-height: 1.75; color: var(--ink-mid); max-width: 40em; }
+.node-parms { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.node-parms li { font-size: 0.82rem; line-height: 1.6; color: var(--ink-mid); }
+.node-parms code { margin-right: 8px; }
+.node-extra { margin: 12px 0 0; font-size: 0.84rem; line-height: 1.7; color: var(--ink-mid); }
+
+.gotcha {
+  margin: 14px 0 0;
+  background: #fff8f2;
+  border: 1px solid #f0ddc9;
+  border-radius: 12px;
+  padding: 12px 15px;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: var(--ink-mid);
+}
+.gotcha strong { color: var(--fx); }
+.gotcha .gotcha-tag {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fx);
+  margin-bottom: 3px;
+}
+
+.node-exps { margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.node-exps a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 980px;
+  background: var(--ground-2);
+  color: var(--ink-mid);
+}
+.node-exps a:hover { background: var(--ink); color: #ffffff; }
+
+/* ---------- 用語ポップアップ ---------- */
 
 .term {
   font: inherit;
@@ -353,7 +624,7 @@ h1 {
   border: none;
   padding: 0;
   cursor: help;
-  border-bottom: 1px dotted var(--flag);
+  border-bottom: 1px dashed var(--flag);
   line-height: inherit;
 }
 .term:hover { color: var(--flag); }
@@ -361,49 +632,48 @@ h1 {
 
 #popover {
   position: absolute;
-  z-index: 40;
+  z-index: 70;
   width: min(340px, calc(100vw - 32px));
-  background: var(--panel-hi);
+  background: var(--ground);
   border: 1px solid var(--wire);
-  border-radius: 6px;
-  padding: 13px 15px;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-lift);
   font-size: 0.86rem;
   line-height: 1.7;
 }
 #popover .pop-term {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.96rem;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 #popover .pop-meta {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  color: var(--flag);
-  letter-spacing: 0.04em;
-  margin: 2px 0 7px;
+  color: var(--ink-dim);
+  letter-spacing: 0.02em;
+  margin: 2px 0 8px;
 }
 #popover .pop-def { color: var(--ink-mid); margin: 0; }
 #popover .pop-rel {
   display: block;
-  margin-top: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  margin-top: 9px;
+  font-size: 0.76rem;
   color: var(--ink-dim);
 }
 
-/* ---------- the spine ---------- */
+/* ---------- 実験ログ本体（背骨） ---------- */
 
-.spine { position: relative; margin-top: 52px; }
-
+.spine { position: relative; margin-top: 44px; }
 .spine::before {
   content: "";
   position: absolute;
   left: calc(var(--gutter) / 2);
   top: 18px;
   bottom: 46px;
-  width: 2px;
+  width: 1px;
   background: var(--wire-dim);
 }
 
@@ -412,83 +682,61 @@ h1 {
   display: grid;
   grid-template-columns: var(--gutter) minmax(0, 1fr);
   gap: 0 22px;
-  padding-bottom: 38px;
+  padding-bottom: 46px;
+  scroll-margin-top: 70px;
 }
 
 .badge {
   position: relative;
   z-index: 1;
-  width: 34px;
+  width: 36px;
   height: 26px;
-  margin-left: calc(var(--gutter) / 2 - 17px);
-  border-radius: 5px;
-  background: var(--panel-hi);
-  border: 1.5px solid var(--wire);
+  margin-left: calc(var(--gutter) / 2 - 18px);
+  border-radius: 980px;
+  background: var(--ground);
+  border: 1px solid var(--wire);
   display: grid;
   place-items: center;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--ink);
+  font-size: 0.68rem;
+  color: var(--ink-mid);
   font-variant-numeric: tabular-nums;
 }
-.entry--planned .badge {
-  background: var(--ground);
-  border-style: dashed;
-  border-color: var(--wire-dim);
-  color: var(--ink-dim);
-}
-.badge::after {
-  content: "";
-  position: absolute;
-  right: -3px;
-  bottom: -3px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--flag);
-}
-.entry:not(.entry--current) .badge::after { display: none; }
+.entry--current .badge { background: var(--ink); border-color: var(--ink); color: #ffffff; }
+.entry--planned .badge { border-style: dashed; color: var(--ink-dim); }
 
 .body { padding-top: 1px; }
 
 .chip {
   display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: 3px;
-  border: 1px solid currentColor;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 2px 10px;
+  border-radius: 980px;
+  background: var(--ground-2);
   margin-bottom: 10px;
+  text-transform: none;
 }
 .chip--pm { color: var(--flag); }
 .chip--fx { color: var(--fx); }
-.chip--tool { color: var(--wire); }
+.chip--tool { color: var(--ink-dim); }
 
-h2 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.24rem;
-  line-height: 1.4;
-  margin: 0 0 4px;
-  text-wrap: balance;
-}
-.entry--planned h2 { font-size: 1.05rem; color: var(--ink-mid); font-weight: 500; }
-
-.path { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-dim); margin: 0 0 16px; }
+.entry--planned h2 { font-size: 1.06rem; color: var(--ink-mid); font-weight: 500; }
+.path { font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-dim); margin: 0 0 16px; }
 .entry--planned .path { font-family: var(--font-body); font-size: 0.86rem; }
 
 .prose { max-width: 40em; }
 .prose p { margin: 0 0 12px; }
 .prose p:last-child { margin-bottom: 0; }
 
-/* ---------- figures ---------- */
+/* ---------- 図版 ---------- */
 
 .figs {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
-  gap: 20px;
+  gap: 18px;
   align-items: start;
   margin: 22px 0 4px;
 }
@@ -497,31 +745,38 @@ h2 {
 @media (max-width: 720px) { .figs { grid-template-columns: minmax(0, 1fr); } }
 
 figure { margin: 0; }
-figure img { display: block; width: 100%; height: auto; border-radius: 4px; }
+figure img { display: block; width: 100%; height: auto; border-radius: 10px; }
 
-.frame-dark { background: var(--panel); border: 1px solid var(--wire-dim); border-radius: 5px; overflow: hidden; }
-.frame-light { background: var(--plate); padding: 8px; border: 1px solid var(--wire-dim); border-radius: 5px; }
+.frame-dark,
+.frame-light {
+  background: var(--ground-2);
+  border: none;
+  border-radius: 14px;
+  padding: 8px;
+  overflow: hidden;
+}
 
-figcaption { font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.6; color: var(--ink-dim); margin-top: 8px; }
-figcaption strong { color: var(--ink-mid); font-weight: 500; }
+figcaption { font-size: 0.76rem; line-height: 1.6; color: var(--ink-dim); margin-top: 8px; }
+figcaption strong { color: var(--ink-mid); font-weight: 600; }
 
-/* ---------- data blocks ---------- */
+/* ---------- 表とデータ ---------- */
 
 .label {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--ink-dim);
   margin: 26px 0 10px;
 }
 
-.scroll { overflow-x: auto; }
+.scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--wire-dim); }
 
 table { border-collapse: collapse; width: 100%; font-size: 0.8rem; font-family: var(--font-mono); }
 th, td {
   text-align: left;
-  padding: 7px 12px;
+  padding: 9px 14px;
   border-bottom: 1px solid var(--wire-dim);
   vertical-align: top;
   white-space: nowrap;
@@ -529,16 +784,17 @@ th, td {
 th {
   color: var(--ink-dim);
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   font-size: 0.7rem;
-  text-transform: uppercase;
+  text-transform: none;
+  background: var(--ground-2);
   border-bottom-color: var(--wire);
 }
 td.wrap { white-space: normal; }
 tbody tr:last-child td { border-bottom: none; }
 .muted { color: var(--ink-dim); }
 .num { font-variant-numeric: tabular-nums; }
-.hi { color: var(--flag); }
+.hi { color: var(--flag); font-weight: 500; }
 
 .findings { margin: 0; padding: 0; list-style: none; max-width: 44em; }
 .findings li { position: relative; padding-left: 20px; margin-bottom: 13px; }
@@ -552,13 +808,14 @@ tbody tr:last-child td { border-bottom: none; }
   height: 1.5px;
   background: var(--wire);
 }
+
 code {
   font-family: var(--font-mono);
   font-size: 0.86em;
-  color: var(--flag);
-  background: rgba(86, 196, 233, 0.09);
-  padding: 1px 5px;
-  border-radius: 3px;
+  color: var(--ink);
+  background: var(--ground-2);
+  padding: 1px 6px;
+  border-radius: 5px;
 }
 
 .callout {
@@ -571,52 +828,106 @@ code {
 }
 .callout--note { border-left-color: var(--wire); }
 
-/* ---------- stage divider ---------- */
+/* ---------- ハブのカード ---------- */
 
-.stage {
+.hub {
   display: grid;
-  grid-template-columns: var(--gutter) minmax(0, 1fr);
-  gap: 0 22px;
-  margin: 10px 0 26px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
 }
-.stage h3 {
-  grid-column: 2;
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  margin: 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--wire-dim);
-}
-
-/* ---------- glossary page ---------- */
-
-.gloss-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 30px 0 6px;
-}
-.gloss-nav a {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+.hub-card {
+  display: block;
   text-decoration: none;
-  padding: 4px 11px;
+  color: inherit;
+  background: var(--ground-2);
+  border-radius: 14px;
+  padding: 20px;
+}
+.hub-card:hover { box-shadow: var(--shadow); }
+.hub-card h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.hub-card p { margin: 0; font-size: 0.85rem; line-height: 1.7; color: var(--ink-mid); }
+.hub-card .hub-meta { display: block; margin-top: 12px; font-size: 0.76rem; color: var(--flag); }
+
+/* ---------- リンク集 ---------- */
+
+.linkset { margin-top: 34px; }
+.linkset h3 {
+  font-family: var(--font-display);
+  font-size: 1.14rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.linkset > p { margin: 0 0 16px; font-size: 0.86rem; color: var(--ink-dim); max-width: 44em; }
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--wire-dim);
   border: 1px solid var(--wire-dim);
-  border-radius: 3px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.links li { background: var(--panel); padding: 15px 18px; }
+.links .link-title { font-weight: 600; font-size: 0.93rem; }
+.links .link-title a { text-decoration: none; }
+.links .link-title a:hover { text-decoration: underline; }
+.links .link-url {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  word-break: break-all;
+  margin: 2px 0 6px;
+}
+.links .link-note { font-size: 0.86rem; line-height: 1.7; color: var(--ink-mid); margin: 0; }
+.links .link-flag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  padding: 1px 9px;
+  border-radius: 980px;
+  background: var(--ground-2);
+  margin-left: 8px;
+  vertical-align: 1px;
+}
+.flag-verified { color: var(--flag); }
+.flag-local { color: var(--ink-dim); }
+.flag-caution { color: var(--alert); }
+
+/* ---------- 用語集ページ ---------- */
+
+.gloss-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 6px; }
+.gloss-nav a {
+  font-size: 0.8rem;
+  text-decoration: none;
+  padding: 5px 14px;
+  border-radius: 980px;
+  background: var(--ground-2);
   color: var(--ink-mid);
 }
-.gloss-nav a:hover { border-color: var(--flag); color: var(--flag); }
+.gloss-nav a:hover { background: var(--ink); color: #ffffff; }
 
-.gloss-cat { margin-top: 40px; scroll-margin-top: 20px; }
+.gloss-cat { margin-top: 44px; scroll-margin-top: 70px; }
 .gloss-cat h3 {
   font-family: var(--font-display);
-  font-size: 1.08rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: var(--flag);
+  letter-spacing: -0.014em;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 .gloss-note { margin: 0 0 14px; font-size: 0.86rem; color: var(--ink-dim); max-width: 44em; }
@@ -627,37 +938,38 @@ code {
   gap: 1px;
   background: var(--wire-dim);
   border: 1px solid var(--wire-dim);
-  border-radius: 5px;
+  border-radius: 14px;
   overflow: hidden;
 }
 .gloss-item { display: grid; grid-template-columns: minmax(170px, 250px) minmax(0, 1fr); background: var(--panel); }
 @media (max-width: 660px) { .gloss-item { grid-template-columns: minmax(0, 1fr); } }
 .gloss-item dt {
-  padding: 11px 14px;
-  background: var(--panel-hi);
+  padding: 13px 16px;
+  background: var(--ground-2);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9rem;
   line-height: 1.5;
+  color: var(--ink);
 }
-.gloss-item dd { margin: 0; padding: 11px 16px; font-size: 0.87rem; line-height: 1.75; color: var(--ink-mid); }
+.gloss-item dd { margin: 0; padding: 13px 18px; font-size: 0.87rem; line-height: 1.75; color: var(--ink-mid); }
 .gloss-meta {
   display: block;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   font-weight: 400;
-  letter-spacing: 0.04em;
-  color: var(--flag);
+  letter-spacing: 0.02em;
+  color: var(--ink-dim);
   margin-top: 2px;
 }
-.gloss-rel { display: block; margin-top: 6px; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-dim); }
+.gloss-rel { display: block; margin-top: 6px; font-size: 0.78rem; color: var(--ink-dim); }
 
 footer {
-  margin-top: 20px;
-  padding-top: 24px;
+  margin-top: 60px;
+  padding-top: 26px;
   border-top: 1px solid var(--wire-dim);
   color: var(--ink-dim);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   max-width: 46em;
 }
 footer code { color: var(--ink-mid); background: none; padding: 0; }
@@ -672,58 +984,159 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 
 <div class="layout">
   <nav class="sidenav" aria-label="サイト内の移動">
-    <p class="brand">Houdini 研究ハブ</p>
-    <p class="brand-note">measured, not guessed</p>
-    <ul role="tablist">
-      <li class="nav-group">Houdini</li>
-      <li><button type="button" class="nav-tab" role="tab" id="tab-overview" data-panel="overview" aria-controls="panel-overview" aria-selected="false">概要</button></li>
-      <li><button type="button" class="nav-tab" role="tab" id="tab-experiments" data-panel="experiments" aria-controls="panel-experiments" aria-selected="false">実験</button></li>
-      <li><button type="button" class="nav-tab" role="tab" id="tab-glossary" data-panel="glossary" aria-controls="panel-glossary" aria-selected="false">用語集</button></li>
-      <li><button type="button" class="nav-tab" role="tab" id="tab-links" data-panel="links" aria-controls="panel-links" aria-selected="false">参考リンク</button></li>
-      <li class="nav-group">外部</li>
-      <li><a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129">実験ログ（全文）</a></li>
-      <li><a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" class="nav-ext">Gemini Notebook</a></li>
-    </ul>
+    <div class="nav-inner">
+      <a class="logo" href="#overview" aria-label="Houdini 研究ハブ（ハブに戻る）">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="1.1" y="1.1" width="21.8" height="21.8" rx="6.4" stroke="currentColor" stroke-width="1.5"/><path d="M7.9 10.5V13.6a2.2 2.2 0 0 0 2.2 2.2h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7.9" cy="8.1" r="2.2" fill="currentColor"/><circle cx="15.9" cy="15.8" r="2.2" fill="currentColor"/></svg>
+        <span class="logo-text">Houdini 研究ハブ</span>
+      </a>
+      <ul role="tablist">
+        <li><button type="button" class="nav-tab" role="tab" id="tab-overview" data-panel="overview" aria-controls="panel-overview" aria-selected="false">概要</button></li>
+        <li><button type="button" class="nav-tab" role="tab" id="tab-experiments" data-panel="experiments" aria-controls="panel-experiments" aria-selected="false">実験</button></li>
+        <li><button type="button" class="nav-tab" role="tab" id="tab-nodes" data-panel="nodes" aria-controls="panel-nodes" aria-selected="false">ノード解説</button></li>
+        <li><button type="button" class="nav-tab" role="tab" id="tab-glossary" data-panel="glossary" aria-controls="panel-glossary" aria-selected="false">用語集</button></li>
+        <li><button type="button" class="nav-tab" role="tab" id="tab-links" data-panel="links" aria-controls="panel-links" aria-selected="false">参考リンク</button></li>
+        <li><a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129">実験ログ</a></li>
+        <li><a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" class="nav-ext">Notebook</a></li>
+      </ul>
+    </div>
   </nav>
   <div class="shell">
 
     <!-- ========== 概要 ========== -->
     <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
-      <header class="masthead">
+      <header class="hero">
         <p class="eyebrow">Houdini research hub</p>
-        <h1>Houdini 研究ハブ</h1>
+        <h1>動かして、測って、残す。</h1>
         <p class="lede">
-          Houdiniを実際に動かして確かめたことを積み上げる場所。
-          左のタブは読み込みなしで切り替わる。実験の中身だけは、サムネイルを押したときに読み込む。
+          Houdini を実際に動かして確かめたことだけを積み上げる場所。
+          推測は書かない。数字が合わなかった回も、そのまま残す。
         </p>
         <dl class="facts">
           <div><dt>実験</dt><dd>17 / 20</dd></div>
-          <div><dt>用語</dt><dd>56</dd></div>
-          <div><dt>Houdini</dt><dd>21.0.700 Apprentice</dd></div>
+          <div><dt>解説したノード</dt><dd>23</dd></div>
+          <div><dt>用語</dt><dd>79</dd></div>
           <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
         </dl>
       </header>
 
-      <div class="stage" style="margin-top: 46px;"><h3>この場所の決めごと</h3></div>
-      <ul class="findings">
-        <li><strong>Houdiniの挙動は実測を正とする。</strong> ネットの情報は出典を確認し、動かせるものは動かして確かめる。実際に「Apprenticeではhythonが使えない」「mountainのパラメータは roughness という名前」はどちらも誤りだった。</li>
-        <li><strong>測り方も記録する。</strong> 実験003では最初に選んだ指標（表面積）が不適切で途中で切り替えた。004でも指標を1つ足している。失敗した測り方も残す。</li>
-        <li><strong>仮説は否定できる条件で試す。</strong> 「縮む原因は平滑化」の検証には、平滑化しない Bilinear を使った。「octが効かないのは点数のせい」は、点数を増やして予測どおりになるかを確かめた。</li>
-        <li><strong>Notebookのソースは増やしすぎない。</strong> 上限300件。実験1件ごとに1ソース足すと無駄に消費するので、テーマ単位で1ソースにまとめ、実験が増えたらそのソースを差し替える。</li>
-        <li><strong>用語は1か所で管理する。</strong> <code>glossary.json</code> を単一の情報源にして、この用語集タブ・実験ログのポップアップ・Notebook用PDFの3つを生成している。説明が食い違わない。</li>
-        <li><strong>話がつながらない実験は分ける。</strong> 現在の001〜004はひとつながりの流れなので同じログにまとめている。エフェクトに入ったら別のログに分ける。</li>
-      </ul>
+      <div class="stage">
+        <h3>これまでに作ったもの</h3>
+        <p>プロシージャルモデリングから始めて、いまはエフェクトに入っている。</p>
+      </div>
+      <div class="tiles">
+        <div class="tile tile--wide">
+          <img src="008_z_axis.png" alt="地面の上に200本の筒が立ち並んでいるレンダリング">
+          <div class="tile-body">
+            <h4>地面に物を生やす</h4>
+            <p>200個すべての向きを測って、複製の向きが
+              <button class="term" data-term="N">N</button>
+              のどの軸に対応するかを確定させた。答えは Z 軸。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="002_subdiv_3.png" alt="細分割を3回かけて球に近づいた立方体">
+          <div class="tile-body">
+            <h4>割ると丸くなる</h4>
+            <p>面の数はちょうど4倍ずつ増える。縮む原因は分割ではなく平滑化だった。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="005_mworleyFA.png" alt="Manhattan Worley ノイズで大きく変形した球">
+          <div class="tile-body">
+            <h4>ノイズの種類で形が変わる</h4>
+            <p>14通り並べると振幅に9.3倍の開きがあった。外へ押すものと内へ削るものがある。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="014_sheet.png" alt="立方体が落下して床で砕けるまでの連続コマ">
+          <div class="tile-body">
+            <h4>落として、砕く</h4>
+            <p>硬い物体なので体積は全フレームで 8.00000。ばらつきは 0.0000000 だった。</p>
+          </div>
+        </div>
+        <div class="tile">
+          <img src="016_sheet.png" alt="散逸の強さを変えた3条件の煙の比較">
+          <div class="tile-body">
+            <h4>煙の減り方を式にする</h4>
+            <p>毎フレーム (1−d) 倍という仮説を立て、実測と4桁一致させた。</p>
+          </div>
+        </div>
+      </div>
 
-      <div class="stage" style="margin-top: 46px;"><h3>いま使っているもの</h3></div>
+      <div class="stage">
+        <h3>やり方</h3>
+        <p>Houdini の画面は使わず、<code>hython</code> という文字だけの実行環境で組み立てている。</p>
+      </div>
+      <div class="pipeline">
+        <div class="pipe">
+          <span class="pipe-no">01</span>
+          <h4>組む</h4>
+          <p>ノードを作って配線する。変えたパラメータだけ記録に残す。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">02</span>
+          <h4>測る</h4>
+          <p>保たれるはずの量を選び、条件ごと・フレームごとに数える。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">03</span>
+          <h4>撮る</h4>
+          <p>全条件を同じカメラから描画する。見た目の差が条件の差になる。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">04</span>
+          <h4>検算する</h4>
+          <p>先に式を立てて、実測と突き合わせる。外れたら指標を疑う。</p>
+        </div>
+        <div class="pipe">
+          <span class="pipe-no">05</span>
+          <h4>配る</h4>
+          <p>PDF・このサイト・Gemini Notebook へ同じ内容を流す。</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <h3>この場所の決めごと</h3>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <h4>実測を正とする</h4>
+          <p>ネットの情報は出典を確かめ、動かせるものは動かす。「Apprentice では hython が使えない」も「mountain のパラメータは roughness」も、実際には誤りだった。</p>
+        </div>
+        <div class="pillar">
+          <h4>測り方も残す</h4>
+          <p>実験003では最初に選んだ指標が不適切で途中で捨てた。失敗した測り方も消さずに書く。</p>
+        </div>
+        <div class="pillar">
+          <h4>否定できる形で試す</h4>
+          <p>「縮む原因は平滑化」は、平滑化しない方式に切り替えて確かめた。覆る条件を先に決める。</p>
+        </div>
+        <div class="pillar">
+          <h4>用語は1か所で管理する</h4>
+          <p><code>glossary.json</code> から用語集・本文のポップアップ・Notebook 用 PDF を生成している。説明が食い違わない。</p>
+        </div>
+        <div class="pillar">
+          <h4>ソースは増やしすぎない</h4>
+          <p>Gemini Notebook の上限は300件。実験ごとに増やさず、テーマ単位の1ソースを差し替えて更新する。</p>
+        </div>
+        <div class="pillar">
+          <h4>つながらない話は分ける</h4>
+          <p>プロシージャルモデリングとエフェクトは別の流れとして扱う。読む側が筋を追える単位で切る。</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <h3>使っている道具</h3>
+      </div>
       <div class="scroll">
         <table>
           <thead><tr><th>用途</th><th>中身</th></tr></thead>
           <tbody>
-            <tr><td>ノード構築とレンダ</td><td>hython 21.0.700（GUIは使わない）</td></tr>
+            <tr><td>ノード構築とレンダ</td><td>hython 21.0.700（Apprentice）</td></tr>
             <tr><td>プレビュー</td><td>OpenGL ROP / Smooth Wire Shaded</td></tr>
-            <tr><td>接続図</td><td>ノード位置のJSONから Pillow で描画</td></tr>
-            <tr><td>レポート</td><td>reportlab で日本語PDF。テキストが残るのでNotebookが引用できる</td></tr>
-            <tr><td>Notebook連携</td><td>notebooklm-mcp-cli（ローカルPDFを直接ソースにできる）</td></tr>
+            <tr><td>接続図</td><td>ノード位置の JSON から Pillow で描画</td></tr>
+            <tr><td>レポート</td><td>reportlab で日本語 PDF。文字が残るので Notebook が引用できる</td></tr>
+            <tr><td>Notebook 連携</td><td>notebooklm-mcp-cli（ローカル PDF を直接ソースにできる）</td></tr>
           </tbody>
         </table>
       </div>
@@ -735,170 +1148,155 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
         <p class="eyebrow">Experiments</p>
         <h1>実験</h1>
         <p class="lede">
-          サムネイルを押すと、その実験の詳細に移動する（ここで初めて読み込みが入る）。
-          001から004はひとつながりの流れなので、同じログにまとめている。
+          カードを押すと要点が開く。そこから全文のログへ進める。
         </p>
         <p class="thread">
-          <strong>001</strong> で最小構成を組んだときに「分割を重ねると立方体が球になる」と気づいた。
-          → <strong>002</strong> でそれを数えて、縮む原因が平滑化だと確定させた。
-          → <strong>003</strong> では「ならノイズは分割の前か後か」を比べ、点数は解像度を決めるだけで
-          凹凸の大きさは elementsize が決めていると分かった。
-          → <strong>004</strong> で残りのノイズパラメータを切り分け、rough が形の性質を、
-          oct は点数が足りている範囲でしか効かないことを確かめた。
-          → <strong>005</strong> ではノイズの種類そのものを14通り並べ、種類によって
-          外向きに押すか内向きに削るかが決まると分かった。
-          → <strong>006</strong> でそこで疑った「上限」を検証したところ、上限は存在せず、
-          むしろ自分の指標が壊れていたと判明した。あわせて bias が突起と窪みを
-          連続的に制御できると分かり、mountain のパラメータ地図がほぼ埋まった。
-          → <strong>007</strong> では舞台を平面に移し、球体では使えなかった指標を作り直した。
-          勾配が増えなくなる点が「その形に足りている解像度」を教えてくれると分かった。
-          → <strong>008</strong> でパラメータの調査を離れ、地面に物を生やす定番パターンに進んだ。
-          複製の向きが N のどの軸に対応するかを200個すべて測り、Z軸だと確定させた。
+          <strong>001〜007</strong> は形を作る側の話。分割とノイズがそれぞれ何を決めているかを切り分けた。
+          → <strong>008〜012</strong> で道具が増える。ばらまき・複製・VEX・ブーリアン。
+          → <strong>013</strong> から時間が入り、<strong>014〜017</strong> はシミュレーション。
+          剛体・布・煙・液体を順に当たっている。
         </p>
       </header>
-      <div class="stage" style="margin-top: 40px;"><h3>完了</h3></div>
+      <div class="stage"><h3>完了した実験</h3><p>カードを押すと要点が開く。全文のログへはそこから進める。</p></div>
       <div class="thumbs">
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp001">
+        <button type="button" class="thumb" data-exp="001">
           <span class="thumb-img"><img src="box_mountain.png" alt="実験001の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 001</span>
             <h4>Box を山にして細分割し、位置で色を付ける</h4>
             <p>最小構成。mountain は点を増やさないと分かった</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp002">
+        </button>
+        <button type="button" class="thumb" data-exp="002">
           <span class="thumb-img"><img src="002_subdiv_3.png" alt="実験002の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 002</span>
             <h4>subdivide の回数で、形と数はどう変わるか</h4>
             <p>面数は正確に4倍、点数は常に面数+2。縮む原因は分割ではなく平滑化</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp003">
+        </button>
+        <button type="button" class="thumb" data-exp="003">
           <span class="thumb-img"><img src="003_D.png" alt="実験003の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 003</span>
             <h4>mountain と subdivide は、順序を変えると何が変わるか</h4>
             <p>点数は解像度を決め、凹凸の大きさは elementsize が決める</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp004">
+        </button>
+        <button type="button" class="thumb" data-exp="004">
           <span class="thumb-img"><img src="004_rough_10.png" alt="実験004の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 004</span>
             <h4>mountain のノイズパラメータは、それぞれ何に効くのか</h4>
             <p>rough が形の性質を決める。oct は点数が足りないと効かない</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp005">
+        </button>
+        <button type="button" class="thumb" data-exp="005">
           <span class="thumb-img"><img src="005_mworleyFA.png" alt="実験005の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 005</span>
             <h4>basis 14通りで、形はどこまで変わるか</h4>
             <p>振幅も性質も変わる。外向きに押すか内向きに削るかが種類で決まる</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp006">
+        </button>
+        <button type="button" class="thumb" data-exp="006">
           <span class="thumb-img"><img src="006_bias_075.png" alt="実験006の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 006</span>
             <h4>height は純粋な倍率か。gain と bias は何に効くか</h4>
             <p>005の「上限がある」は誤りだった。bias で突起と窪みを連続的に制御できる</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp007">
+        </button>
+        <button type="button" class="thumb" data-exp="007">
           <span class="thumb-img"><img src="007_frac_fBm.png" alt="実験007の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 007</span>
             <h4>平面で地形を作り、指標を作り直す</h4>
             <p>勾配が止まる点が「足りている解像度」を教えてくれる。fractal は平面で差が出る</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp008">
+        </button>
+        <button type="button" class="thumb" data-exp="008">
           <span class="thumb-img"><img src="008_z_axis.png" alt="実験008の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 008</span>
             <h4>scatter と copy to points — 地面に物を生やす</h4>
             <p>N はテンプレートのZ軸に対応する。Y軸のまま複製すると必ず横倒しになる</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp009">
+        </button>
+        <button type="button" class="thumb" data-exp="009">
           <span class="thumb-img"><img src="009_wave.png" alt="実験009の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 009</span>
             <h4>attribute wrangle で VEX を書く</h4>
             <p>実行対象でアトリビュートの置き場所が変わる。処理時間の計測は3回目で本物になった</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp010">
+        </button>
+        <button type="button" class="thumb" data-exp="010">
           <span class="thumb-img"><img src="010_ui_network.png" alt="実験010の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 010</span>
             <h4>for-each ループと VEX を比べる</h4>
             <p>3,969面で85.9倍の差。ただし置き換え可能とは限らず、点の共有が鍵だった</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp011">
+        </button>
+        <button type="button" class="thumb" data-exp="011">
           <span class="thumb-img"><img src="011_w3_0.png" alt="実験011の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 011</span>
             <h4>crease で角を残す — どれだけの重みが要るのか</h4>
             <p>分割回数と同じ重みで完全に角が残る。一辺だけ見ていると誤判定する</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp012">
+        </button>
+        <button type="button" class="thumb" data-exp="012">
           <span class="thumb-img"><img src="012_bool_subtract.png" alt="実験012の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 012</span>
             <h4>polyextrude と boolean — 硬い形を作る</h4>
             <p>押し出しは寸法が指定どおり。boolean は体積の関係式で正しさを検算できる</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp013">
+        </button>
+        <button type="button" class="thumb" data-exp="013">
           <span class="thumb-img"><img src="013_sheet.png" alt="実験013の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 013</span>
             <h4>時間軸への対応 — フレームを進めて記録する</h4>
             <p>連番・コンタクトシート・GIF。パーティクルはSOPに0種でDOPに67種と判明</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp014">
+        </button>
+        <button type="button" class="thumb" data-exp="014">
           <span class="thumb-img"><img src="014_sheet.png" alt="実験014の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 014</span>
             <h4>RBD 破壊 — 最初の本物のシミュレーション</h4>
             <p>体積が全フレームで完全に保存。落下中は砕けず、着地して2.8倍に散らばる</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp015">
+        </button>
+        <button type="button" class="thumb" data-exp="015">
           <span class="thumb-img"><img src="015_sheet.png" alt="実験015の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 015</span>
             <h4>Vellum クロス — 布で保存されるべき量は何か</h4>
             <p>かたさは「値 × 10の指数乗」。既定の指数10のせいで値を触っても効かない</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp016">
+        </button>
+        <button type="button" class="thumb" data-exp="016">
           <span class="thumb-img"><img src="016_sheet.png" alt="実験016の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 016</span>
             <h4>Pyro 煙 — dissipation の正体を式で突き止める</h4>
             <p>毎フレーム (1−d) 倍に減らす仕組み。立てた式と実測が4桁一致した</p>
           </span>
-        </a>
-        <a class="thumb" href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp017">
+        </button>
+        <button type="button" class="thumb" data-exp="017">
           <span class="thumb-img"><img src="017_graph.png" alt="実験017の結果のレンダリング"></span>
           <span class="thumb-body">
             <span class="thumb-no">実験 017</span>
             <h4>FLIP 液体 — 組み方が分からず保留</h4>
             <p>4通りの配線を試して全部同じエラー。他のソルバと作法が違うと判明</p>
           </span>
-        </a>
+        </button>
       </div>
-      <div class="stage" style="margin-top: 40px;"><h3>予定 — プロシージャルモデリング</h3></div>
-      <div class="thumbs">
-      </div>
-      <div class="stage" style="margin-top: 40px;"><h3>予定 — エフェクト</h3></div>
+      <div class="stage"><h3>予定 — エフェクト</h3></div>
       <div class="thumbs">
         <div class="thumb thumb--planned">
           <span class="thumb-img">未実施</span>
@@ -925,7 +1323,542 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           </span>
         </div>
       </div>
-      <p class="hint" style="margin-top: 30px;">エフェクトに入る前に、ツール側で複数フレームの書き出しとシミュレーションのキャッシュに対応する必要がある。</p>
+    </section>
+
+    <!-- ========== ノード解説 ========== -->
+    <section class="panel" id="panel-nodes" role="tabpanel" aria-labelledby="tab-nodes" hidden>
+      <header class="masthead">
+        <p class="eyebrow">Nodes</p>
+        <h1>ノード解説</h1>
+        <p class="lede">
+          実験で実際に使ったノードだけを載せている。「そのノードで何ができるか」を先に1行で書き、
+          実際に踏んだ落とし穴を添えた。
+        </p>
+        <nav class="gloss-nav">      <a href="#make">形を作る</a>
+      <a href="#shape">形を変える</a>
+      <a href="#scatter">ばらまく・複製する</a>
+      <a href="#program">プログラムで書く</a>
+      <a href="#sim">シミュレーション</a></nav>
+      </header>
+      <div class="stage" id="make">
+        <h3>形を作る</h3>
+        <p>何もないところから最初のジオメトリを出すノード。ここが実験の出発点になる。</p>
+      </div>
+      <div class="nodegrid">
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>box</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">立方体をひとつ出す。</p>
+            <p class="node-what">実験の出発点として一番よく使う。既定で点が8個、面が6枚のいちばん単純な形が出てくる。ここに他のノードをつないで、点の数や形がどう変わるかを見る。</p>
+            <ul class="node-parms">
+              <li><code>size</code>縦横高さ。既定は1辺1.0</li>
+              <li><code>t</code>置く位置</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp001">実験 001</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp002">実験 002</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp012">実験 012</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="002_subdiv_0.png" alt="boxの結果">
+            <span>box の既定（8点・6面）</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>sphere</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">球を出す。</p>
+            <p class="node-what">凹凸を付ける実験の土台に使った。ただし球は「もともと丸い」ので、変化を測る土台としては癖がある。実験007で平面に移したのはそのため。</p>
+            <ul class="node-parms">
+              <li><code>type</code>球の作り方。多面体・NURBSなどで点の並びが変わる</li>
+              <li><code>rows / cols</code>分割数。点の数を決める</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>球の上では「重心から一番遠い点」のような指標が壊れやすい。実験006で自分の指標のほうが壊れていたと判明した。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp004">実験 004</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp005">実験 005</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp006">実験 006</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="005_base.png" alt="sphereの結果">
+            <span>sphere を土台にした状態</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>grid</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">平らな格子を出す。</p>
+            <p class="node-what">地形の土台。rows と cols で点の数を直接決められるので、「点の数を変えると何が変わるか」を調べるのに一番向いている。</p>
+            <ul class="node-parms">
+              <li><code>rows / cols</code>縦横の点の数。面の数は (rows−1)×(cols−1)</li>
+              <li><code>size</code>平面の大きさ</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp007">実験 007</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp008">実験 008</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="007_frac_fBm.png" alt="gridの結果">
+            <span>grid に mountain をかけた地形</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>tube</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">筒や円錐を出す。</p>
+            <p class="node-what">複製の向きを調べる実験でテンプレートとして使った。先端がある形なので「どちらを向いているか」が測れる。</p>
+            <ul class="node-parms">
+              <li><code>type</code>0=Primitive（数式の形）／1=Polygon（実際の面）</li>
+              <li><code>rad1 / rad2</code>上下の半径。片方を0にすると円錐になる</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>type の既定は Primitive で、点が1個・面が1枚しか出てこない。面として扱いたいなら type を Polygon にする。ここで一度つまずいた。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp008">実験 008</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="008_z_axis.png" alt="tubeの結果">
+            <span>tube を複製して向きを測った</span>
+          </div>
+        </article>
+      </div>
+      <div class="stage" id="shape">
+        <h3>形を変える</h3>
+        <p>入ってきた形を作り変えるノード。プロシージャルモデリングの中心。</p>
+      </div>
+      <div class="nodegrid">
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>subdivide</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">面を細かく割って、形を滑らかにする。</p>
+            <p class="node-what">カクカクした形を丸くしたいときに使う。1回かけるごとに面が4倍に増える。増えた点の位置は元の形の内側に寄るので、全体が少し縮む。</p>
+            <ul class="node-parms">
+              <li><code>iterations</code>何回割るか。1増やすと面は4倍</li>
+              <li><code>algorithm</code>割り方。Catmull-Clark が既定</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>縮む原因は「割ること」ではなく「平滑化」。平滑化しない Bilinear で試すと1辺は 1.00000 のまま変わらなかった。面の数は正確に4倍、閉じた形なら点の数は常に「面の数+2」になる。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp002">実験 002</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp003">実験 003</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp011">実験 011</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="002_subdiv_3.png" alt="subdivideの結果">
+            <span>3回かけた状態。立方体が球に近づく</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>mountain</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">ノイズで点をずらして、でこぼこにする。</p>
+            <p class="node-what">地形や岩肌を作る定番。既にある点を動かすだけで、点は1つも増えない。だから細かい凹凸が欲しければ、先に subdivide などで点を増やしておく必要がある。</p>
+            <ul class="node-parms">
+              <li><code>height</code>凹凸の高さ。純粋な倍率で、2倍にすれば凹凸もちょうど2倍</li>
+              <li><code>elementsize</code>凹凸の細かさ。小さいほど細かい模様になる</li>
+              <li><code>basis</code>ノイズの種類。14通りあり、見た目が大きく変わる</li>
+              <li><code>rough / oct / lac</code>重ねるノイズの性質・枚数・細かさの比</li>
+              <li><code>bias</code>外へ出っ張らせるか、内へ食い込ませるか</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>パラメータ名に roughness や octaves は無い。実際の名前は rough / oct / lac。oct（重ねる枚数）は点が足りないと増やしても効かず、点を増やすと初めて効き始める。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp003">実験 003</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp004">実験 004</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp005">実験 005</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp006">実験 006</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp007">実験 007</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="004_rough_10.png" alt="mountainの結果">
+            <span>rough を上げた状態</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>polyextrude</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">面を押し出して厚みを出す。</p>
+            <p class="node-what">板を箱にしたり、壁から柱を生やしたりする。指定した距離がそのまま寸法になるので、機械的な形を作るときに扱いやすい。</p>
+            <ul class="node-parms">
+              <li><code>dist</code>押し出す距離。指定どおりの寸法になる</li>
+              <li><code>inset</code>押し出す前に面を内側へ縮める量</li>
+              <li><code>outputfront / outputback</code>ふたを残すかどうか</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp012">実験 012</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="012_ext_1_0.png" alt="polyextrudeの結果">
+            <span>距離1.0で押し出した結果</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>boolean</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">2つの形を足す・引く・重なりだけ取り出す。</p>
+            <p class="node-what">箱から球をくり抜く、といった形作り。和（union）・差（subtract）・積（intersect）の3種類があり、硬い形を作るときの主力になる。</p>
+            <ul class="node-parms">
+              <li><code>booleanop</code>union（和）／subtract（差）／intersect（積）</li>
+              <li><code>asurface / bsurface</code>入力をそれぞれ立体として扱うか面として扱うか</li>
+            </ul>
+            <p class="node-extra">結果が正しいかは体積の関係式で検算できる。｜A∪B｜+｜A∩B｜=｜A｜+｜B｜ の差は 0.0000049、｜A−B｜=｜A｜−｜A∩B｜ の差はちょうど 0 だった。</p>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp012">実験 012</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="012_bool_subtract.png" alt="booleanの結果">
+            <span>差（subtract）でくり抜いた結果</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>crease</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">辺に「角を残す」重みを付ける。</p>
+            <p class="node-what">subdivide をかけると角が丸まってしまうが、残したい辺に重みを付けておくと、その辺だけ角が保たれる。箱の縁をシャープに残したいときに使う。</p>
+            <ul class="node-parms">
+              <li><code>group</code>重みを付ける辺</li>
+              <li><code>creaseweight</code>重み。整数で指定する</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>重み N は「分割 N 回まで角を保つ」という意味。分割3回に対して重み3なら角度は 90.00° のまま完全に残る。重み1では一辺の長さだけ見ると保たれているように見えるが、折れ角は 28.07° まで崩れている。指標を1つしか見ないと誤判定する。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp011">実験 011</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="011_w3_0.png" alt="creaseの結果">
+            <span>重み3。角が完全に残っている</span>
+          </div>
+        </article>
+        <article class="nodecard nodecard--noimg">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>facet</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">点の共有をまとめ直す。</p>
+            <p class="node-what">同じ位置にある複数の点を1つにまとめる（Unique Points を切る）／逆に面ごとに切り離す。形は変わらないのに点の数だけ違う、という食い違いを直すのに使う。</p>
+            <ul class="node-parms">
+              <li><code>unique</code>面ごとに点を切り離す</li>
+              <li><code>inline</code>同じ位置の点をまとめる</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>for-each と VEX の結果が食い違ったとき、原因は for-each が点の共有を外していたことだった。facet でまとめ直すと両者は完全に一致した。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp010">実験 010</a>
+            </div>
+          </div>
+        </article>
+        <article class="nodecard nodecard--noimg">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>normal</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">面の向き（法線 N）を計算して付ける。</p>
+            <p class="node-what">複製の向きや光の当たり方は N で決まる。N が無い状態では copy to points が向きを揃えられない。</p>
+            <ul class="node-parms">
+              <li><code>type</code>点ごとに付けるか、面ごとに付けるか</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp008">実験 008</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="stage" id="scatter">
+        <h3>ばらまく・複製する</h3>
+        <p>1つの形をたくさん並べる。木を生やす、瓦礫を撒く、といった場面の土台。</p>
+      </div>
+      <div class="nodegrid">
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>scatter</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">面の上に点をばらまく。</p>
+            <p class="node-what">地面の上に木を生やしたいとき、まず「どこに生やすか」を点で決める。面積の広いところほど多く点が置かれる。</p>
+            <ul class="node-parms">
+              <li><code>npts</code>ばらまく点の数</li>
+              <li><code>seed</code>乱数の種。変えると配置が変わる</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp008">実験 008</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="008_plain.png" alt="scatterの結果">
+            <span>ばらまいた点の上に複製した状態</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>copy to points</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">点の場所すべてに、別の形を複製する。</p>
+            <p class="node-what">scatter で作った点に木や岩を置く。点が持っている属性（N、up、pscale など）に応じて、向きや大きさを1つずつ変えられる。</p>
+            <ul class="node-parms">
+              <li><code>targetgroup</code>どの点に置くか</li>
+              <li><code>pack</code>複製をまとめて軽く扱うか</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>N はテンプレートの Z 軸に対応する。Z 軸に伸びたテンプレートなら向きのずれは 0.00°、Y 軸に伸びたテンプレートだと 200個すべてが 90.00° 倒れる。「なぜか全部横倒しになる」のはこれが原因。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp008">実験 008</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="008_z_axis.png" alt="copy to pointsの結果">
+            <span>Z軸テンプレートなら地面に正しく立つ</span>
+          </div>
+        </article>
+      </div>
+      <div class="stage" id="program">
+        <h3>プログラムで書く</h3>
+        <p>パラメータを触るのではなく、処理そのものを書く。</p>
+      </div>
+      <div class="nodegrid">
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>attribwrangle</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">VEX という言語で、点や面を1つずつ加工する。</p>
+            <p class="node-what">「全部の点を、その位置に応じて上下に動かす」といった処理を数行で書ける。既存のノードに無い操作をしたいときの逃げ道であり、同時にいちばん速い手段でもある。</p>
+            <ul class="node-parms">
+              <li><code>class</code>実行対象（run over）。点ごと／面ごと／全体で1回など</li>
+              <li><code>snippet</code>実行する VEX のコード</li>
+            </ul>
+            <p class="node-extra">処理時間を実測すると、点1つあたり約1.1ナノ秒（毎秒9億点相当）で、加えて約1.8ミリ秒の固定費がかかっていた。</p>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>実行対象を変えると、作ったアトリビュートの置き場所も変わる。点ごとで作れば点の属性、面ごとで作れば面の属性になる。また他のノードの値を読むときは detail(&quot;../meta&quot;, ...) ではなく detail(&quot;op:../meta&quot;, ...) と書く必要がある。前者はエラーも警告も出さずに 0 を返す。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp009">実験 009</a>
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp010">実験 010</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="009_wave.png" alt="attribwrangleの結果">
+            <span>VEX で波を作った結果</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>block_begin / block_end</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">for-each ループ。かたまりごとに同じ処理を繰り返す。</p>
+            <p class="node-what">「破片を1つずつ別々に動かす」のように、まとまり単位で処理したいときに使う。block_begin が入口、block_end が出口。</p>
+            <ul class="node-parms">
+              <li><code>method</code>点ごと／プリミティブごと／かたまりごと</li>
+              <li><code>templatepath</code>block_end に、入口のノードを教える</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>VEX で書き直すと 3,969面で 85.9倍速かった。ただし置き換え可能とは限らない。for-each はかたまりを切り離すために点の共有を外すので、点が 64個から196個に増える。この「切り離し」こそが、かたまりごとの移動や回転を可能にしている。速さだけで選ぶと目的を失う。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp010">実験 010</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="010_ui_network.png" alt="block_begin / block_endの結果">
+            <span>for-each の組み方（Houdini の画面）</span>
+          </div>
+        </article>
+      </div>
+      <div class="stage" id="sim">
+        <h3>シミュレーション</h3>
+        <p>時間を進めて物理を解く。ここから先はフレームごとに結果が変わる。</p>
+      </div>
+      <div class="nodegrid">
+        <article class="nodecard nodecard--noimg">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>rbdmaterialfracture</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">形を破片に割る。</p>
+            <p class="node-what">ガラス・コンクリート・木といった素材ごとの割れ方を選んで、1つの形を複数の破片にする。割っただけでは動かない。動かすのはソルバの仕事。</p>
+            <ul class="node-parms">
+              <li><code>materialtype</code>素材。割れ方の性質が変わる</li>
+              <li><code>Scatter Points</code>破片の数のもとになる点の数</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp014">実験 014</a>
+            </div>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>rbdbulletsolver</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">硬い物体を落として、ぶつけて、転がす。</p>
+            <p class="node-what">破片を重力で落として床にぶつける。入力に破片をつなぐだけで動く。SOP の中で完結するので、DOP ネットワークを組まなくてよい。</p>
+            <ul class="node-parms">
+              <li><code>Ground Type</code>床を置くかどうか</li>
+              <li><code>ground_posy</code>床の高さ</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>硬い物体なので体積は変わらないはず——実測でも全フレームで 8.00000、ばらつき 0.0000000 だった。ただし破片は床から約0.022だけ沈んだ位置で止まる。接触の計算上、完全に0にはならない。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp014">実験 014</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="014_sheet.png" alt="rbdbulletsolverの結果">
+            <span>落下から着地まで</span>
+          </div>
+        </article>
+        <article class="nodecard nodecard--noimg">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>vellumconstraints</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">布に「つながり方」の規則を与える。</p>
+            <p class="node-what">布は点の集まりでしかない。どの点とどの点が、どれくらいの強さで結ばれているか（伸びにくさ・曲がりにくさ）をここで決める。ピン留めもここで指定する。</p>
+            <ul class="node-parms">
+              <li><code>stretchstiffness</code>伸びにくさ</li>
+              <li><code>stretchstiffnessexp</code>その指数</li>
+              <li><code>grouptype / group</code>ピン留めする点の指定</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>かたさは「値 × 10の指数乗」で決まる。既定の指数が10なので、見えている値をいくら触ってもほとんど変わらない。(値1.0, 指数6) と (値1000000, 指数0) は伸び 1.00843 で完全に一致した。またピン留めは grouptype を points にしないと効かず、group を空にすると「全部が対象」と解釈されて布全体が固定される。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp015">実験 015</a>
+            </div>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>vellumsolver</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">布や柔らかい物体を解く。</p>
+            <p class="node-what">vellumconstraints で決めた規則に従って、布を重力や風で動かす。</p>
+            <ul class="node-parms">
+              <li><code>substeps</code>1フレームを何回に分けて計算するか</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp015">実験 015</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="015_sheet.png" alt="vellumsolverの結果">
+            <span>ピン留めした布が垂れる</span>
+          </div>
+        </article>
+        <article class="nodecard nodecard--noimg">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>pyrosource</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">煙の発生源になる点に、密度などの値を付ける。</p>
+            <p class="node-what">煙を出したい場所の点に「ここから density（濃さ）が出る」という情報を書き込む。これだけでは煙にならず、次のノードでボリュームに変換する。</p>
+            <ul class="node-parms">
+              <li><code>attributes</code>作る属性の個数（multiparm）</li>
+              <li><code>attribute1</code>1つ目の属性名。density など</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>attributes は「個数」を指定する欄で、名前を書く欄ではない。個数を1にしてから attribute1 に density と書く。次の volumerasterizeattributes にも同じ名前の attributes があるが、そちらは空白区切りの文字列。名前が同じで意味が違う。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp016">実験 016</a>
+            </div>
+          </div>
+        </article>
+        <article class="nodecard nodecard--noimg">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>volumerasterizeattributes</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">点に付いた値を、立体の格子（ボリューム）に焼き込む。</p>
+            <p class="node-what">煙は点ではなく、空間を細かい立方体で区切った格子として扱う。その格子を作るノード。</p>
+            <ul class="node-parms">
+              <li><code>attributes</code>ボリュームにする属性名。空白区切りの文字列</li>
+              <li><code>voxelsize</code>格子の細かさ</li>
+            </ul>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp016">実験 016</a>
+            </div>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>pyrosolver</h4>
+              <span class="node-kind">SOP</span>
+            </div>
+            <p class="node-one">煙や炎を時間方向に進める。</p>
+            <p class="node-what">発生源から出た密度を、上昇・拡散・減衰させていく。</p>
+            <ul class="node-parms">
+              <li><code>dissipation</code>毎フレーム減らす割合</li>
+              <li><code>temp_diffusion</code>温度の広がり方</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>dissipation は「毎フレーム (1−d) 倍にする」という意味だと式を立てて確かめた。発生源が毎フレーム供給し続けるので、密度は減るのではなく増えて、やがて 1/d で釣り合う。立てた式と実測は4桁一致（差 0.0006 以内）した。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp016">実験 016</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="016_sheet.png" alt="pyrosolverの結果">
+            <span>散逸の強さを変えた比較</span>
+          </div>
+        </article>
+        <article class="nodecard">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>flipsolver</h4>
+              <span class="node-kind">DOP</span>
+            </div>
+            <p class="node-one">液体を粒で解く。（未解決）</p>
+            <p class="node-what">水や溶岩などの液体。粒の集まりとして計算し、表面を後から張る方式。</p>
+            <ul class="node-parms">
+              <li><code>sourceband</code>供給源の帯の幅</li>
+            </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>4通りの配線を試したが、すべて「Not enough sources specified.」で止まった。RBD・Vellum・Pyro はどれも入力1につなぐだけで動いたのに、FLIP だけ作法が違う。付属ヘルプを読むところからやり直す予定。</div>
+            <div class="node-exps">
+              <a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp017">実験 017</a>
+            </div>
+          </div>
+          <div class="node-shot">
+            <img src="017_graph.png" alt="flipsolverの結果">
+            <span>動かなかったときの配線</span>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- ========== 用語集 ========== -->
@@ -934,12 +1867,8 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
         <p class="eyebrow">Terminology</p>
         <h1>用語集</h1>
         <p class="lede">
-          Houdiniは略語と英語の専門用語が多く、意味が分からないまま読み進めると手が止まる。
-          前提知識なしで読めるようにまとめた。カタカナ読みを併記しているのは、
-          そもそも何と読むのか分からない語が多いため。
-        </p>
-        <p class="hint">
-          単独ページとしても<a href="https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868">用語辞典</a>にある（見出しへのリンクを共有したいとき用）。
+          Houdini は略語と英語の専門用語が多い。前提知識なしで読めるようにまとめた。
+          本文中の点線が付いた語は、押すとその場で意味が出る。
         </p>
         <nav class="gloss-nav">      <a href="#network">ネットワークと文脈</a>
       <a href="#geometry">ジオメトリの構成要素</a>
@@ -1066,6 +1995,14 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           <dt>ボリューム / Volume<span class="gloss-meta">ボリューム</span></dt>
           <dd>空間を格子状に区切って、各マスに値を持たせたデータ。煙や炎のように「面では表せない、中身のあるもの」を扱うのに使う。VDBはその代表的な形式。<span class="gloss-rel">関連: Pyro</span></dd>
         </div>
+        <div class="gloss-item">
+          <dt>ボクセル / Voxel<span class="gloss-meta">ボクセル</span></dt>
+          <dd>空間を細かい立方体のマス目に区切ったときの、1マスのこと。画像のピクセルを立体にしたもの。ボリュームはボクセルの集まりでできていて、マス目が細かいほど煙の形も細かくなる代わりに計算が重くなる。<span class="gloss-rel">関連: ボリューム</span></dd>
+        </div>
+        <div class="gloss-item">
+          <dt>パックプリミティブ / Packed primitive<span class="gloss-meta">パックプリミティブ</span></dt>
+          <dd>中身のジオメトリを1つのプリミティブとしてまとめて持つ仕組み。破片のように同じ形を大量に扱うときに軽くなる。中身を取り出すには unpack を使う。<span class="gloss-rel">関連: プリミティブ</span></dd>
+        </div>
       </dl>
     </section>
     <section class="gloss-cat" id="operations">
@@ -1170,6 +2107,34 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           <dt>フレーム / Frame<span class="gloss-meta">フレーム</span></dt>
           <dd>アニメーションの1コマ。24フレームで1秒が一般的。シミュレーションはフレームを順に進めながら計算する。</dd>
         </div>
+        <div class="gloss-item">
+          <dt>フラクチャ / Fracture<span class="gloss-meta">フラクチャ</span></dt>
+          <dd>ひとつの形を破片に割ること。割った時点ではまだ動かない。動かすのはソルバの仕事で、割る工程と動かす工程は分かれている。<span class="gloss-rel">関連: RBD / voronoi fracture</span></dd>
+        </div>
+        <div class="gloss-item">
+          <dt>コンストレイント / Constraint<span class="gloss-meta">コンストレイント</span></dt>
+          <dd>点と点のつながり方の規則。布なら「この点とこの点は離れすぎない」という条件にあたる。Vellum では規則を作るノードと、それを解くソルバが別になっている。<span class="gloss-rel">関連: Vellum</span></dd>
+        </div>
+        <div class="gloss-item">
+          <dt>スティフネス / Stiffness<span class="gloss-meta">スティフネス</span></dt>
+          <dd>伸びにくさ・曲がりにくさ。Vellum では「値 × 10の指数乗」で決まるため、見えている値より指数のほうが効く。実験015で、値と指数を入れ替えた組み合わせが同じ結果になることを確かめた。<span class="gloss-rel">関連: コンストレイント</span></dd>
+        </div>
+        <div class="gloss-item">
+          <dt>ピン / Pin<span class="gloss-meta">ピン</span></dt>
+          <dd>シミュレーション中も動かさないよう固定した点。布の上端を留めて垂らす、といった使い方をする。対象の指定を空にすると「全部が対象」と解釈され、何も動かなくなる。<span class="gloss-rel">関連: コンストレイント</span></dd>
+        </div>
+        <div class="gloss-item">
+          <dt>密度 / Density<span class="gloss-meta">みつど</span></dt>
+          <dd>煙の濃さを表す値。ボリュームのマス目ひとつひとつに入っている数値で、全部足したものが煙の総量にあたる。煙のシミュレーションで保存量として測れるのはこれ。<span class="gloss-rel">関連: ボリューム / ボクセル</span></dd>
+        </div>
+        <div class="gloss-item">
+          <dt>散逸 / Dissipation<span class="gloss-meta">さんいつ</span></dt>
+          <dd>煙を毎フレーム減らす設定。値を d とすると、毎フレーム (1−d) 倍になる。発生源が供給し続ける場合は減り続けるのではなく、やがて 1/d のところで釣り合う。<span class="gloss-rel">関連: Pyro / 密度</span></dd>
+        </div>
+        <div class="gloss-item">
+          <dt>発生源 / Source<span class="gloss-meta">はっせいげん</span></dt>
+          <dd>煙や液体が湧き出してくる場所。ソルバは毎フレーム、ここから新しい分の供給を受け取る。供給が続く限り総量は増え続ける。<span class="gloss-rel">関連: Pyro / FLIP</span></dd>
+        </div>
       </dl>
     </section>
     <section class="gloss-cat" id="render">
@@ -1273,8 +2238,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
         <h1>参考リンク</h1>
         <p class="lede">
           参照した資料と、参照する価値があると判断した資料。
-          実際にアクセスして確認したものに <span class="link-flag flag-verified">確認済</span> を付けている。
-          確認できなかった部分は、確認できなかったと書いてある。
+          実際にアクセスして確認したものには <span class="link-flag flag-verified">確認済</span> を付けている。
         </p>
       </header>
     <section class="linkset">
@@ -1449,16 +2413,115 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 
     <footer>
       <p>
-        すべて <code>hython</code> 経由の headless 実行で、Houdini の GUI は使っていない。
-        ページは <code>build_site.py</code> がテンプレートと <code>glossary.json</code> から生成している。
-        UIは見直し前提の暫定版。
+        すべて <code>hython</code> 経由の headless 実行で、Houdini の GUI はノードの画面写真を撮るときだけ使っている。
+        ページは <code>build_site.py</code> がテンプレートと <code>glossary.json</code> /
+        <code>nodes.json</code> から生成している。
       </p>
     </footer>
 
   </div>
 </div>
 
+<div class="modal" id="expmodal" role="dialog" aria-modal="true" aria-labelledby="m-title" hidden>
+  <div class="modal-card">
+    <button class="modal-close" type="button" id="m-close" aria-label="閉じる">✕</button>
+    <div class="modal-body" id="m-body"></div>
+  </div>
+</div>
+
+<script type="application/json" id="experiment-data">{"001":{"title":"Box を山にして細分割し、位置で色を付ける","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp001","shots":["box_mountain.png","box_mountain_graph.png"],"summary":["プロシージャルモデリングの最小構成を確認するための実験。box SOP で立方体を作り、mountain SOP でノイズによる凹凸を与え、subdivide SOP で細分割し、color SOP で色を乗せた。最後に null ノードを OUT として置き、そこを出力点にしている。","Houdini の基本的な考え方である「ジオメトリを次のノードに流し込んで加工を積み重ねる」形をそのまま辿っている。各ノードは前のノードの出力だけを入力として受け取るため、途中のどのノードでも結果を確認できる。"],"points":["box は 8 ポイント / 6 プリミティブ。subdivide を 1 回かけると 26 ポイント / 24 プリミティブになる。Catmull-Clark 細分割なので、回数を増やすと立方体はどんどん球に近づく（2 回で既に球状になり、元が箱だと分からなくなった）。","mountain SOP は既存のポイントを法線方向にノイズで押し出すもので、ポイントを増やさない。つまり box のままかけても 8 点しか動かないため、凹凸のディテールを出すには先に subdivide などで分割数を上げる必要がある。","color SOP の colortype は数値メニュー（0=Constant, 1=Bounding Box, 2=Random, 3=Ramp from Attribute, 4=Random from Attribute）。文字列で指定すると TypeError になる。今回は 1 を使い、バウンディングボックス内の位置をそのまま RGB に割り当てた。","color SOP を通すとポイント属性に Cd が追加される（P のみ → P, Cd）。属性が増えたかどうかはジオメトリの統計で確認できる。"],"next":["subdivide の回数を変えて、ポイント数と見た目がどう変わるかを並べて比較する","mountain を subdivide の後ろに移動し、分割後に凹凸をかけた場合との違いを見る","grid から地形を作る流れに広げ、プロシージャルモデリングの定番パターンに入る"]},"002":{"title":"subdivide の回数で、形と数はどう変わるか","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp002","shots":["002_subdiv_0.png","002_subdiv_3.png"],"summary":["実験001で「subdivideの回数を増やすと立方体が球に近づく」ことに気づいたので、それを数値で確かめる実験。box SOP に subdivide SOP を4通り（0回・1回・2回・3回）ぶら下げ、すべて同じカメラでレンダして並べた。","同じカメラで撮っているのが重要な点で、各変種を自動でフレームに収めてしまうと、大きさの違いが消えて比較にならない。画を見ると球が立方体よりはっきり小さいことが分かるが、これは目の錯覚ではなく実測でも縮んでいる。","さらに「なぜ縮むのか」「どこまで縮むのか」「1回目だけ縮まないのはなぜか」を追加検証で確定させた。"],"points":["iterations = 0 は素通し。8点 / 6面のまま何も起きない。比較の基準として使える。","プリミティブ数は1回ごとに正確に4倍になる（6 → 24 → 96 → 384 → 1536 → 6144 → 24576）。四角形1枚が4枚に割れるため。3回で64倍、6回で4096倍なので、回数を安易に増やすと破綻する。","ポイント数は常に「プリミティブ数 + 2」になっている。これは偶然ではなくオイラーの多面体定理から導ける。閉じた四角形メッシュでは各辺を2つの面が共有するので E = 2F、これを V − E + F = 2 に代入すると V = F + 2。実測した7通りすべてで一致した。","1回目だけ一辺が 1.00000 のまま縮まない。検証したところ、+X方向の端を保持しているポイントは (0.5, 0, 0) の1点だけだった。これは元の +X 面の中心そのもの。Catmull-Clark は各面の中心に新しい点を作るため、1回目はその新点が元の面の上に乗り、バウンディングボックスが変わらない。2回目でその点も内側に引かれ 0.87847 に縮む。","一辺の縮み方は等比的に収束する。差を取ると 0.02929 → 0.00726 → 0.00181 → 0.00045 で、毎回およそ 1/4（実測 0.248 / 0.249 / 0.249）。ここから外挿した極限値は約 0.83951 になる。","縮みの原因は「分割」ではなく「平滑化」だと確定した。OpenSubdiv Bilinear（平滑化せず分割するだけの方式）で3回分割しても一辺は 1.00000 のまま変わらない。面数は同じ384なので、分割量は同じで平滑化の有無だけが違う。","OpenSubdiv Loop だけプリミティブ数が 768 になる（他は384）。Loop は三角形メッシュ向けの方式なので、四角形が三角形に割られて枚数が倍になる。四角形を保ちたい場面では選んではいけない。","Mantra-Compatible Catmull-Clark は回数を 1〜5 のどれにしても一辺が 0.83951 で一定だった。これは分割を繰り返して極限に近づけるのではなく、極限曲面上の位置を直接求めていることを示している。実際この値は、OpenSubdiv CC の収束列から外挿した極限値 0.83951 と一致した。つまり「無限回分割した先の形」を1回で出しているのがこのモード。"],"next":["crease（折り目）を使って角を保持できるか。立方体らしさを残したまま分割する方法があるはず","mountain と subdivide の順序を入れ替えて、凹凸のディテールがどう変わるかを比較する（実験003）","polyextrude など他のSOPでもポイント数・プリミティブ数の増え方を測り、重くなる原因を数で把握する"]},"003":{"title":"mountain と subdivide は、順序を変えると何が変わるか","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp003","shots":["003_C.png","003_D.png"],"summary":["実験001で「mountain はポイントを増やさないので、細かい凹凸を出すには先に分割数を上げる必要がある」と書いた。これは筋は通っているが、実際に確かめてはいなかった。そこで順序違いを並べて比較し、違いを数字で出す。","比較したのは6通り。ノイズなしの基準形、ノイズを先にかけたもの、分割を先にしたもの、分割をさらに細かくしたもの、ノイズの特徴サイズを小さくしたもの、そのうえで点数を増やしたもの。すべて同じカメラでレンダした。","この実験では測り方を一度間違えている。最初に選んだ指標では違いが正しく出ず、途中で別の指標に切り替えた。その経緯も含めて記録した。"],"points":["順序を入れ替えてもポイント数とプリミティブ数は同じ（どちらも98点 / 96面）。つまりデータの重さは変わらない。変わるのは形だけ。","最大のずれは A が 0.03671、B が 0.08062 で、B が約2.2倍大きい。同じ mountain の設定でも、分割したあとにかけた方が凹凸が残る。実験001で立てた見込みは正しかった。","なぜそうなるかも測れた。box に mountain をかけた直後は、8点すべてが平均 0.03607 動いている。ところがそのあと subdivide をかけると、基準形からのずれは平均 0.02069・最大 0.03671 まで下がる。Catmull-Clark の平滑化は周囲の点を平均するので、せっかく動かした凹凸をなめしてしまう。","C は B とほぼ同じずれだった（平均 0.02504 対 0.02479、最大 0.08009 対 0.08062）。点を4倍に増やしても凹凸の大きさは変わらない。点数はノイズの振幅を決めていない。","振幅を決めていたのは elementsize だった。C と D は同じ386点だが、elementsize を 0.8 から 0.25 に下げると平均のずれが 0.02504 から 0.03236 に増え、画も明確に岩のようになった。","E は D と同じノイズ設定で点数だけ4倍にしたもの。平均のずれは 0.03236 から 0.03239 でほぼ変わらない。一方で画は、同じ起伏をより滑らかな面で表現できている。つまり点数は「ノイズをどれだけ忠実に表現できるか（解像度）」を決めていて、「起伏の大きさ（振幅）」は決めていない。","ただし最大のずれだけは点数とともに少し増える（0.11985 → 0.13173）。点が増えるとノイズのより極端な場所まで拾えるようになるためで、振幅そのものが増えたわけではない。","実用的な結論: 細かいディテールが欲しいときは、分割数を上げるだけでは足りない。elementsize も一緒に小さくする。そして mountain は分割のあとに置く。この3つが揃って初めて狙った凹凸になる。","測り方についての反省。表面積のような「全体をひとつの数にまとめた量」は、大きさと形の変化が混ざってしまう。基準形と1点ずつ対応づけて引き算する方が、知りたいことを素直に測れた。比較実験では、まず基準形を作り、それと1対1で比べられる量を選ぶべき。"],"next":["mountain の他のパラメータ（roughness, octaves）が振幅と細かさのどちらに効くのかを、同じやり方で切り分ける","grid から地形を作り、平面の場合も同じ結論になるか確かめる（実験004）","crease を使って、分割しても角を保持できるかを確かめる（実験002からの持ち越し）"]},"004":{"title":"mountain のノイズパラメータは、それぞれ何に効くのか","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp004","shots":["004_rough_00.png","004_rough_10.png"],"summary":["実験003で「点数は解像度を決め、elementsize は振幅を決める」と分かった。では残りのノイズパラメータは何を変えているのか。同じ切り分け方で調べる。","最初に分かったのは名前の問題だった。パラメータ名は roughness や octaves ではなく rough / oct / lac。実際に mountain::2.0 が持っている名前を確認してから使わないと、そもそも動かない。","この実験でも測り方を追加している。003で使った「基準形からのずれ」だけでは、これらのパラメータをほとんど区別できなかった。振幅ではなく形の性質を変えるパラメータだったため、性質を測る指標を新しく用意した。"],"points":["パラメータ名は rough / oct / lac。roughness や octaves という名前は存在せず、そのまま書くと何も設定されない。既定値は rough = 0.5、oct = 8、lac = 1.841、fractal = Hybrid Terrain、basis = Simplex。使う前に実際の名前を確認する必要がある。","003で使った「基準形からのずれ」だけでは、これらのパラメータはほとんど区別できなかった。平均のずれはどれも 0.032〜0.034 の範囲に収まる。振幅を決めているのは height と elementsize であり、今回のパラメータは振幅に効いていない。","そこで「隣り合う点どうしで、ずれの向きと量がどれだけ食い違うか」を測る指標を足した。なだらかな起伏なら隣の点も同じように動くので値は小さく、細かい凹凸なら大きくなる。基準形は原点中心なので、中心からの距離の差を符号付きのずれとして使っている（外に出たら正、へこんだら負）。これで完全に分離できた。","rough が細かさに最も強く効く。0.0 から 1.0 で食い違いが 0.01350 から 0.03233 へ約2.4倍になる一方、平均のずれは 0.03377 から 0.03235 でほぼ変わらない。つまり rough は、同じ振幅のまま、なだらかな丘から棘だらけの形まで性質だけを変えるパラメータ。","rough = 0.0 の数値は fractal = None と完全に一致した（平均 0.03377、最大 0.14799、食い違い 0.01350）。rough = 0 では追加の層が何も足さないので、層を重ねない単一ノイズに退化している。別の経路で同じ結果に到達したので、この解釈は確かだと言える。","oct は 1 から 3 では効くが、3 から 8 ではほぼ変わらない（0.01732 → 0.01733、差は 0.00001）。点数が足りず細かい層を表現できていないため。この説明を予測に変えて検証したところ、点数を増やすと oct = 8 が oct = 3 を上回り始めた（386点では −0.00012、1538点で +0.00001、6146点で +0.00022）。予測どおりだったので、この解釈も確かだと言える。","実用的には、oct を上げるだけでは無駄になる。点数が足りていなければ、上げた層は形に現れない。003の「点数は解像度を決める」という結論と同じことが、別の角度から確認できた。","lac も細かさに効く（1.5 → 4.0 で 0.01259 → 0.02218）。ただし lac = 1.5 では平均のずれも 0.02625 に下がっており、振幅にも影響している。rough のようにきれいに性質だけを変えるパラメータではない。","fractal の4種類は、今回の条件では差が小さかった（食い違い 0.01350〜0.01786）。地形向けの方式が揃っているので、平面の地形（実験005の予定）ではもっと差が出る可能性がある。","指標の注意点。食い違いの絶対値は点数が増えると小さくなる。隣同士の距離が縮まれば、その間のずれの差も縮むため。したがって同じ点数の中でだけ比較できる。点数をまたいだ比較には、辺の長さで割るなどの正規化が必要になる。","basis（ノイズの基礎となる種類）は14種類あった。既定は Simplex。Worley Cellular のようなセル状のものも含まれており、見た目が大きく変わるはずなので、別の実験にする価値がある。"],"next":["basis を14種類すべて描き出して並べる。セル状ノイズは岩や結晶の見た目に直結するので、実用価値が高い","grid から地形を作り、平面では fractal の種類の差が出るかを確かめる（実験005）","食い違いの指標を辺の長さで正規化し、点数をまたいだ比較ができるようにする"]},"005":{"title":"basis（ノイズの種類）14通りで、形はどこまで変わるか","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp005","shots":["005_perlin.png","005_mworleyFA.png"],"summary":["004で basis に14種類あることが分かったので、同じ条件で全部描き出した。height 0.35、elementsize 0.25、subdivide 4回（1538点）で固定し、basis だけを変えている。","結果は他のパラメータと性質がまったく違った。rough は振幅を変えずに形の性質だけを変えたが、basis は振幅も性質も両方変える。同じ height を指定しても、種類によって実際のずれが4.5倍違う。","測る指標には004で作った「隣との食い違い」に加えて、外に出た点の割合を足した。ノイズが外向きに押すのか内向きに削るのかで、使いどころが変わるため。"],"points":["basis は振幅と性質の両方を変える。rough が振幅を保ったまま性質だけを変えたのとは性格が違う。同じ height 0.35 でも、平均のずれは Periodic Perlin Flow の 0.01551 から Sinusoid の 0.14454 まで約9.3倍の開きがある。basis を変えたら height も再調整が必要。","Sinusoid は例外的な挙動をする。平均のずれが 0.14454 と最大級に大きいのに、隣との食い違いは 0.00444 で全種類中もっとも小さい。外向きの点は 0.0%、つまり全部の点が内側に動いている。画を見ると、丸い4つの膨らみを持つ滑らかな形になっていた。規則的な波なので、細かい凹凸ではなく大きなうねりを作る。地形の大きな起伏には使えるが、ディテールには使えない。","Perlin 系（perlin / pperlin / flow / pflow）は外向きの点が 40〜59% で、外と内にほぼ均等に動く。平均のずれも 0.0155〜0.0264 と控えめ。自然な揺らぎを足したいときの素直な選択肢。","既定の Simplex は Perlin 系より振幅も細かさも大きい（平均 0.03237、細かさ 0.01733）が、セル系ほど極端ではない。中間的な位置にある。","セル系（Worley / Manhattan / Chebyshev / Alligator）は平均のずれが 0.08〜0.14 と大きく、隣との食い違いも上位を占める。岩、割れ、結晶のような硬い見た目はここから作る。","セル系の中で、外向きの点の割合が極端に分かれた。Manhattan F1 が 91.1%、Chebyshev F1 が 94.4% で、ほぼ全部の点が外に出る。一方 Worley F1 は 5.4%、Alligator は 2.3%、Chebyshev F2-F1 は 1.4% で、ほぼ全部が内側に削られる。","画で確認すると理由が見えた。Worley F1 は、細胞の中心から遠いところが深く削られた侵食岩のような形になる。Manhattan F1 は距離の測り方が軸に沿っているため、軸に平行な面を持つ角ばった塊が外に突き出す形になった。同じ「F1」でも距離の定義が違うと、削る方向と形がまったく変わる。","F1 と F2-F1 の違いも外向き率に出る。Manhattan は F1 が 91.1%（外向き）なのに F2-F1 は 2.5%（内向き）。Chebyshev も F1 が 94.4%、F2-F1 が 1.4% で同じ傾向。F2-F1 は細胞の境界線を強調する計算なので、境界以外が下がる＝内向きになる。","最大のずれはセル系でほぼ頭打ちになっている（0.164〜0.175）。height 0.35 に対して 0.5 倍弱で止まっており、何らかの上限が効いている可能性がある。この確認は別の実験にする。","外向きの点の割合という指標は安く作れて情報量が多かった。ノイズが押すのか削るのかは、実際に作りたいもの（突起か窪みか）に直結する。"],"next":["セル系で最大のずれが 0.175 付近で止まる理由を確かめる。height を上げても止まるのかを測る","grid の平面で同じ14種類を並べる。地形として見たときの向き不向きは球体とは違うはず","外向き率を、突起を作りたいとき／窪みを作りたいときの選択指針としてまとめる"]},"006":{"title":"height は純粋な倍率か。gain と bias は何に効くか","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp006","shots":["006_bias_025.png","006_bias_075.png"],"summary":["005でセル系の最大のずれが 0.164〜0.175 に揃っていたので、何らかの上限が効いているのではないかと書いた。それを確かめる実験。height を 0.0875 から 1.4 まで16倍の範囲で変え、最大のずれが比例するかを見る。","結論を先に書くと、005の見立ては誤りだった。上限は存在しない。そして高い height で比率が崩れたのは Houdini の制限ではなく、私が使っている指標が壊れていたためだった。","あわせて未調査だった gain / bias / clipmin / clipmax も測った。bias は実用上かなり重要なパラメータだと分かった。"],"points":["height は純粋な倍率だった。「最大 / height」は 0.0875 から 0.7 まで8倍の範囲で小数点以下4桁まで一定（simplex は 0.3759、worleyFA は 0.4951）。height を2倍にすれば、ずれもきっちり2倍になる。","005で疑った上限は存在しなかった。セル系の最大のずれが揃って見えたのは、セル系ノイズのピーク値の分布が互いに似ているため。実際 005 のセル系7種類の「最大 / height」を計算すると 0.47〜0.50 の範囲に収まる。一方 simplex は 0.376 で明確に違う。上限ではなく、ノイズの種類ごとの固有の比率だった。","ただし height = 1.4 では比率が両方とも 0.307 に落ちた。これは Houdini の制限ではなく、私の指標が壊れているため。基準形の半径は約 0.42（subdivide 4回のバウンディングボックスの一辺 0.84192 の半分）で、そのとき測れた最大のずれ 0.4312 / 0.4298 はこれとほぼ一致している。中心を貫通するほど強く押し込まれると、「中心からの距離の差」という測り方では値が頭打ちになる。","つまりこの指標には適用範囲がある。ずれが対象の半径より十分小さいときにしか使えない。今回でいえば height 0.7 まで。005の観察を「上限がある」と解釈しかけたのは、この限界を意識していなかったため。指標を作ったら、それが壊れる条件も押さえておく必要がある。","clipmin / clipmax の既定は 0.0 / 1.0、dogain / dobias は既定で無効。つまり既定状態ではクリップもゲインもバイアスも効いていない。005までの測定に余計な処理は入っていなかったことが確認できた。","gain は振幅の倍率として働く。0.25 / 0.5 / 0.75 で平均のずれが 0.01494 / 0.03237 / 0.05519 と増える。一方で外向きの点の割合は 35.8% のまま完全に動かない。形の偏りには触れず、強さだけを変えるパラメータ。","gain = 0.5 の数値は、dogain を無効にした既定状態と完全に一致した（平均 0.03237、最大 0.13153、細かさ 0.01733）。0.5 が中立値だと確認できた。","bias は外向きと内向きの比率を直接変える。0.25 で外向き 0.9%（ほぼ全部が内側に削られる）、0.5 で 35.8%、0.75 で 98.7%（ほぼ全部が外側に膨らむ）。画で見ると、0.25 は深くえぐられて鋭い稜線が残る侵食的な形、0.75 は膨らんで浅いへこみが残る塊になる。","ただし bias を 0.5 から動かすと平均のずれも増える（0.03237 → 0.09756 / 0.07644）。分布が片側に寄ると、ゼロから離れた点が増えるため。純粋に形の偏りだけを変えるパラメータではなく、振幅も一緒に動く。","ここまでで mountain のパラメータ地図がほぼ埋まった。振幅を決めるのは height（純粋な倍率）と gain（倍率）。細かさを決めるのは rough（最も強い）、lac、oct（点数が足りている範囲で）。外向きか内向きかを決めるのは bias（連続的）と basis（種類で決まる）。そして何を表現できるかの上限は点数が決める。"],"next":["grid の平面で同じ測定をする。球体では中心からの距離で測れたが、平面では別の基準が必要になるので、指標の作り直しも兼ねる","指標を辺の長さで正規化し、点数をまたいだ比較ができるようにする","パラメータ調査はここで区切り、scatter と copy to points に進む"]},"007":{"title":"平面で地形を作り、指標を作り直す","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp007","shots":["007_flat.png","007_frac_fBm.png"],"summary":["これまでの指標は「中心からの距離の差」で、球体でしか使えず、点数をまたいだ比較もできなかった（006でその限界にぶつかった）。平面なら高さの差をそのまま測れる。さらに点の間隔で割れば勾配（傾き）になるので、これなら解像度によらない量になるはずだと考えた。","結果として、その期待は外れた。勾配は解像度を上げるほど増え続ける。ただしこれは失敗ではなく、狙っていたものより役に立つ道具になった。勾配が増えなくなる点が「その形を表現するのに十分な解像度」を教えてくれる。","あわせて、004で「平面ならもっと差が出るかもしれない」と書いた fractal の種類も確かめた。"],"points":["grid SOP の既定は 10×10 のサイズ、分割は 10×10、向きは ZX 平面（水平）、種類はポリゴン。水平に置かれるので、mountain の押し出しは真上（Y方向）になる。だから高さの差をそのまま測れる。","狙いは外れた。勾配は解像度によらない量にはならず、分割数を上げるほど増え続けた（0.13595 → 0.16634 → 0.18745 → 0.20430）。fBm 系のノイズは細かい成分を何段も持っているので、細かく刻むほど急な斜面が新たに見えてくるため。","ただしこの性質のおかげで、別のことが分かるようになった。オクターブ数ごとに勾配の伸びを見ると、oct = 1 は 80分割で収束し（80→160 で +0.5%）、oct = 2 はほぼ収束（+1.2%）、oct = 4 はまだ伸び（+5.4%）、oct = 8 もまだ伸びている（+9.0%）。つまり<strong>勾配が増えなくなったら、その解像度でその形を表現しきれている<\/strong>という判定に使える。","低い解像度では余分なオクターブがまったく見えない。20分割では oct = 2 / 4 / 8 がほぼ同じ値（0.13673 / 0.13593 / 0.13595）になり、oct = 2 がわずかに最大という順序の逆転まで起きている。004で球体を使って得た結論が平面でも再現し、しかも解像度との関係まで数字で見えた。","高さの平均は40分割以降ほぼ一定（0.0819前後）。振幅は低い解像度でもすぐ正しくなるが、細かさはずっと遅れて収束する。<strong>形が正しく見えるのに必要な解像度は、高さが合う解像度よりはるかに高い<\/strong>ということ。点数を決めるときは高さではなく細かさを基準にする必要がある。","最大の高さも解像度とともに増える（0.29407 → 0.33513）。これも同じ理由で、細かく刻むほどノイズの尖った部分を拾えるようになるため。005・006で使った「最大のずれ」も同じ性質を持っていたことになる。","fractal の種類は平面で明確に差が出た。滑らかな順に None（0.12216）、Terrain（0.14766）、Hybrid Terrain（0.18745）、Standard fBm（0.19064）。一方で平均の高さはどれも 0.0818〜0.0839 でほぼ同じ。<strong>fractal は振幅ではなく細かさを変えるパラメータ<\/strong>だと確定した。","None が最も滑らかなのは筋が通っている。層を重ねない単一のノイズなので、細かい成分が入らない。004で「rough = 0 は fractal = None と完全に一致する」と分かったことと整合する。","カメラのフレーミングを直した。以前はバウンディングボックスを立方体とみなして距離を決めていたため、平たい地形が画面の4分の1ほどにしか写らなかった。8つの隅をカメラ空間に投影して必要な距離を解く方式に変更し、対象が画面いっぱいに収まるようになった。地形を扱う以上、これは必須の修正だった。"],"next":["elementsize・オクターブ数・必要な分割数の関係を式にまとめる。「この設定ならこれだけの点数が要る」と事前に見積もれるようにする","地形専用の heightfield ノード群と、この grid + mountain のやり方を比べる","パラメータの調査はここで区切り、scatter と copy to points に進む"]},"008":{"title":"scatter と copy to points — 地面に物を生やす","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp008","shots":["008_plain.png","008_z_axis.png"],"summary":["面の上に点をばらまき、その点ごとにジオメトリを複製する。プロシージャルモデリングの中核パターンで、草や岩や建物を並べるのは全部これで行う。","測ったのは3つ。散布点の数は指定どおりになるか、複製後の点数はどう増えるか、そして複製が地面の傾きに沿って回るかどうか。","3つめで重要な落とし穴が見つかった。複製は確かに回るのだが、回り方が想像と違う。数字で確定させた。"],"points":["scatter の npts は正確に守られる。50 / 200 / 800 を指定して、実際の点数も 50 / 200 / 800 になった。おおよその数ではなく、指定した数ちょうどが出る。","scatter の出力は P だけでなく N も持っている。元の面の法線が引き継がれるため。この N があるかないかで、次の copy to points の挙動が変わる。","copy to points の点数は掛け算そのまま。散布点200個 × テンプレート20点 = 4000点。予想と実測が完全に一致した。テンプレートが重いと一気に破綻するので、散布数とテンプレートの点数は掛け算で効くと覚えておく。","N を持たない点に複製すると、複製は<strong>一切回転しない<\/strong>。向きのばらつきは平均も最大も 0.00度。200個すべてが同じ向きに立つ。","N を持つ点に複製すると、点ごとに回転する。向きのばらつきは平均 10.84度、最大 31.69度で、これは地面の傾きのばらつきそのもの。","ただし<strong>N はテンプレートの Y 軸ではなく Z 軸に対応している<\/strong>。tube の既定（Y軸向き）のまま複製すると、複製の軸と N の角度が全200個すべて正確に 90.00度、つまり完全に横倒しになる。テンプレートを Z軸向きに作り直すと全200個すべて 0.00度 で完全に一致した。ばらつきがゼロなので、これは偶然ではなく仕様。","tube SOP の orient の既定は Y軸。そのため何も考えずに tube を複製すると必ず横倒しになる。地面に立てたいなら、テンプレートを Z軸向きに作るか、あとで回転させる必要がある。","pscale は大きさだけを変える。向きのばらつきは 10.84度 / 31.69度 のまま完全に同じで、大きさが 0.45 固定から 0.16〜0.63 に広がった。向きと大きさは独立して制御できる。","tube SOP の type の既定は Primitive で、1点 / 1面の「本物の円柱プリミティブ」になる。ポリゴンとして扱いたいなら Polygon に変える必要がある。これに気づかず、最初は1点のテンプレートを200個複製していた（200点になるだけで何も見えない）。","測り方の失敗も1つ記録しておく。最初は「重心から最も遠い点」で複製の向きを測ろうとしたが、円錐の底面リングの点がすべて等距離のため、選ばれる点が複製ごとにばらついて 21.44度 という無意味な値が出た。固定の点番号を使う方式に変えたら 0.00度 になった。<strong>等距離の点が並ぶ形では「最も遠い点」は一意に決まらない。<\/strong>","実用の型はこうなる。地面 → normal → scatter → copy to points。テンプレートは Z軸向きに作る。大きさを変えたいなら散布点に pscale を持たせる。この4ノードで「地面に物を生やす」が完成する。"],"next":["複製の向きに、傾きだけでなくランダムな回転を混ぜる（up ベクトルの扱い）","density や面積のアトリビュートで散布密度に偏りをつける","for-each で複製ごとに違う処理をかける（実験010の予定）"]},"009":{"title":"attribute wrangle で VEX を書く — 何が何回動くのか","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp009","shots":["009_wave.png"],"summary":["VEX は「ノードを並べる代わりに数行書く」ための言語。ただし初心者が最初につまずくのは文法ではなく、そのコードが何に対して何回走るのかという点。それを実測で確かめる。","あわせて「VEXは速い」という話を数字にしようとしたが、ここで測り方を二度も間違えた。最初の方法では計算量を100倍にしても時間が変わらず、公式の性能計測機能を使っても同じだった。三度目でようやく実際の計算を捉えられた。その経緯も残す。"],"points":["attribute wrangle の「実行対象（class）」は5種類ある。Detail (only once) / Primitives / Points / Vertices / Numbers で、既定は Points。","実行対象を変えると、作られるアトリビュートの種類がそれに従って変わる。同じ @marker = 1.0; というコードでも、Points なら点に、Primitives なら面に、Vertices なら頂点に、Detail ならジオメトリ全体に1つだけ作られる。<strong>コードは同じでも結果の置き場所が変わる<\/strong>というのが、最初に押さえるべき点。","Numbers だけはアトリビュートが作られなかった。これはジオメトリの要素ではなく、指定した個数の番号に対して走るモードなので、値を書き込む先がないため。","予測を立ててから測る形にした。sin の値域は -1 〜 +1 なので、0.5 倍すれば y は -0.5 〜 +0.5 に収まるはず。実測は -0.499983 〜 +0.499983 だった。","この 0.000017 のずれも説明できる。grid は20分割なので点の間隔は 10/19 = 0.526316。sin(2x) が最大になるのは x = π/4 ≈ 0.785398 のときだが、最も近い格子点は x = 0.789474 で、わずかに外れている。この点での値を計算すると 0.4999834 になり、実測値と小数点以下6桁まで一致する。<strong>誤差ではなく、格子がピークをまたいでいるだけ<\/strong>だった。","rand(@ptnum) は完全に再現する。同じコードを別のノードで2回走らせて、全400点が小数点以下9桁まで一致した。乱数といっても点番号から決まる固定の値なので、実行するたびに変わることはない。","その分布も妥当だった。0〜2 の範囲に散らす設定で平均 1.03046（理論値 1.0）、範囲は 0.00103 〜 1.99050。400点しかないので 3% ほどのずれは想定内。","処理時間の計測は<strong>二度失敗した<\/strong>。一度目は cook(force=True) の前後を time.perf_counter で挟む方法。これだと計算量を100倍にしても時間が 0.9倍 にしかならなかった。ジオメトリを要求した時点で初めて計算されるため、計測区間の外で処理が走っていた。","二度目は Houdini の性能計測機能（hou.perfMon）を使ったが、軽い処理も重い処理も同じ 0.008000 秒を返した。同じノードを焼き直す限り、キャッシュが効いて実際には再計算されないらしい。","三度目にようやく成功した。<strong>毎回新しいノードを作って初回のクックを測る<\/strong>。キャッシュが存在しないので必ず計算が走る。この方法だと計算量100倍の処理が 17.7倍 の時間になり、結果の最大yも 0.49999 から 0.32169 に変わった。時間と結果の両方が動いたので、今度は本物。","得られた数字。64万点に sin × cos を1回かける処理が 2.47ミリ秒、256万点で 4.58ミリ秒。この2点から傾きを出すと、<strong>1点あたりの限界コストは約1.1ナノ秒（毎秒約9億点）、固定の費用が約1.8ミリ秒<\/strong>。","つまり「VEXが速い」効果は点数が多いときにしか出ない。4万点では1.49ミリ秒かかっており、そのほとんどが固定費。少ない点数なら、どんな書き方をしても体感は変わらない。","17.7倍という比率が100倍にならないのは、繰り返しの中身が単純で、ノードを作る固定費も含まれているため。それでも計算量に応じて時間が動くことは確認できたので、計測としては成立している。"],"next":["for-each ループと VEX の使い分け。同じことをどちらでもできる場面で、書きやすさと速さを比べる","VEX からアトリビュートを読み書きする（point() / setpointattrib()）","測り方の失敗が3回続いたので、計測の型を作っておく。「結果が変わること」と「時間が変わること」の両方を確認するのを標準にする"]},"010":{"title":"for-each ループと VEX — 同じことをやって比べる","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp010","shots":["010_ui_network.png"],"summary":["「まとめて処理できないときは for-each」とよく言われるが、VEX でも書ける場面でどれだけ差が出るのかは測らないと分からない。そこで、面ごとに違う高さへ動かすという同じ処理を2通りで作り、結果と速さを比べた。","ところが最初は結果が一致しなかった。その理由を追いかけた結果、この2つは「速い遅い」で選ぶものではなく、そもそも別のことをしているのだと分かった。"],"points":["for-each は Block Begin（method = Extract Piece or Point）と Block End で処理を挟んで作る。Block End の Template Path が空だと「Missing template geometry」で止まる。何を何回繰り返すかはここから決まる。","何回目かを知るには、メタデータ用の Block Begin（method = Fetch Metadata）をもう1つ置き、そのディテールアトリビュート iteration を読む。numiterations で総回数も取れる。","<strong>取り出した中では @primnum が常に 0 になる。<\/strong> 1個だけを切り出した状態で処理しているため。「何番目の面か」を使いたいならメタデータを読むしかない。","<strong>detail() のパスには op: が要る。<\/strong> detail(\"../メタデータノード\", \"iteration\", 0) と書くとファイルパスとして扱われ、エラーも警告も出さずに 0 を返す。ループが動いていないように見えるので原因が分かりにくい。detail(\"op:../メタデータノード\", ...) と書けば動く。実際にこれで1時間相当を溶かした。","for-each は面の数に比例して遅くなる。49面で11.79ミリ秒、3,969面で191.87ミリ秒。1面あたりおよそ0.05ミリ秒で、面の数がそのまま効く。","VEX はほとんど変わらない。49面で1.36ミリ秒、3,969面で2.23ミリ秒。実験009で測った「ノード1つあたり約1.8ミリ秒の固定費」がそのまま出ており、処理そのものの時間はまだ見えていない水準。","その結果、差は面の数とともに広がる。49面で 8.7倍、3,969面で <strong>85.9倍<\/strong>。面が増えるほど for-each を選ぶ代償が大きくなる。","ただし<strong>この2つは単純に置き換えられるものではない<\/strong>。for-each は面を1枚ずつ取り出すので、隣と共有していた点が複製される（64点 → 196点）。これは副作用ではなく、面ごとに独立して動かすために必要なこと。点を共有したままでは、隣り合う面が同じ点を別の場所へ動かそうとして取り合いになる。","その取り合いは競合ではあるが、<strong>結果は毎回同じだった<\/strong>（3回とも一致）。書き込む順序が決まっているため、実行のたびに変わることはない。最初は並列処理による非決定性を疑ったが、それは外れた。","点の共有をほどいてから（facet の Unique Points で 64点 → 196点にしてから）比べると、for-each と VEX の結果は<strong>完全に一致した<\/strong>。つまり食い違いの原因は処理内容ではなく、点が共有されているかどうかだけだった。","実用的な結論。面ごとに独立した変形をしたいなら、<strong>まず点の共有をほどく<\/strong>。ほどいてしまえば VEX で書ける場面が増え、数十倍速い。for-each が必要なのは、1回分の処理が VEX 1つでは書けないほど複雑なとき（中で複数のノードを通したいときなど）。","測り方についても1つ。最初は面の中心を (x, y, z) でソートして比べようとしたが、比べたい量である y をソートの鍵に含めてしまったため、対応がずれて必ず食い違った。<strong>比べたい量は鍵にしない。<\/strong> 水平位置 (x, z) を鍵にして y を値にしたら正しく比較できた。"],"next":["facet の Unique Points を挟むことで、for-each が必要だった処理をどこまで VEX に置き換えられるかを試す","for-each の中で複数ノードを通す場合（VEX 1つでは書けない場合）の実例を作る","polyextrude と boolean に進む"]},"011":{"title":"crease で角を残す — どれだけの重みが要るのか","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp011","shots":["011_w0_0.png","011_w3_0.png"],"summary":["実験002で「subdivide を重ねると立方体が球になる」と測った。3回分割すると一辺が 1.0 から 0.84918 まで縮む。crease（折り目）を付ければ角が保たれるはずだが、どれだけの重みが必要なのかは分からない。","理屈の上では「重み N なら N 回分の分割まで角が保たれる」はず。3回分割するなら重み3で完全に元の立方体のままになる、という予測を立てて確かめた。","結果は予測どおりだった。ただしこの実験では、2つの指標が違う答えを出すという厄介な状況にも当たった。"],"points":["<strong>予測は当たった。<\/strong> 3回分割する場合、重み 3.0 で折れ角が 90.00度 になり、分割前の box とまったく同じ角の鋭さになる。「重み N なら N 回分の分割まで角が保たれる」という理解でよい。","重みを 3 より上げても何も変わらない（4.0 も 10.0 も 90.00度 のまま）。分割回数を超える重みは無駄。逆に言えば、分割回数を後から増やすつもりなら重みも合わせて上げる必要がある。","点数・面数はどの重みでも 386点 / 384面で変わらなかった。<strong>crease は形の計算方法を変えるだけで、ジオメトリを増やさない。<\/strong> 角を残すためにポリゴンを足す必要はない。","<strong>2つの指標が違う答えを出した。<\/strong> 一辺の長さは重み 1.0 で 1.00000 に達し、そこから変わらない。この指標だけを見ていたら「重み1で十分」と判断してしまう。しかし折れ角は 28.07度 で、まだ元の 90度 には程遠い。画を見ると角がはっきり丸い。","つまり一辺の長さは「どこまで縮んだか」しか測っておらず、「角が鋭いかどうか」は測れていない。重み1で外形は元に戻るが、角は丸いまま。<strong>何を知りたいかによって、見るべき指標が変わる。<\/strong>","折れ角の指標は、辺を共有する2つの面の法線のなす角の最大値として作った。角が残っていれば大きく、丸まれば小さくなる。分割前の box で 90.00度 と出るので、基準としても正しく働いている。","重み 0.5 のとき一辺は 0.92459 だった。これは crease なし（0.84918）と重み1.0（1.00000）のちょうど中間で、小数点以下5桁まで一致する。<strong>小数の重みは2つの結果を線形に混ぜている。<\/strong>","ただし折れ角のほうは線形ではない。0.0 / 0.5 / 1.0 で 13.93 / 21.45 / 28.07度 となり、中間値の 21.00度 とはわずかにずれる。位置は線形に混ざるが、角度はそうならない。","crease SOP の Operation の既定は「Add To Existing Value」で、既にある値に足し込む。重みを決め打ちしたいなら「Set」にする。既定のまま何度も通すと重みが積み上がる。","crease SOP が書き込む属性名の既定は creaseweight で、subdivide はこの名前を自動で見る。名前を変えたい場合は subdivide 側の Creases にも同じ名前を指定する必要がある。"],"next":["一部の辺だけに crease を付けて、角を残す場所と丸める場所を作り分ける","polyextrude で作った形に crease を付け、建物のような硬い形を作る","折れ角の指標を、面ごとではなく辺ごとに出して分布を見る（どの辺が丸まっているかを特定する）"]},"012":{"title":"polyextrude と boolean — 硬い形を作る2つの道具","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp012","shots":["012_bool_union.png","012_bool_subtract.png"],"summary":["ここまではノイズで有機的な形を作ってきた。建物や機械のような硬い形は別の道具で作る。面を押し出す polyextrude と、立体どうしを足し引きする boolean。","押し出しは距離が指定どおりになるのか、点数はどう増えるのか。boolean は演算ごとに何が変わるのか。そして boolean が正しく計算できているかを、体積の関係式で検算した。"],"points":["polyextrude の<strong>距離は指定どおりに出る<\/strong>。0.5 / 1.0 / 2.0 を指定して、できた高さは 0.50000 / 1.00000 / 2.00000 で差はゼロ。これは当たり前に見えて重要で、ノイズ系のパラメータ（height など）が種類によって実際のずれが9倍も違ったのとは対照的。押し出しは寸法をそのまま指定できる。","点数・面数は距離によらず一定（41点 / 32面）。距離 0 のときだけ何も起きない（25点 / 16面のまま）。<strong>形を変えても重さは変わらない。<\/strong>","元の 25点 / 16面 が 41点 / 32面 になる内訳も説明できる。5×5 の grid は境界に 16点あり、押し出すとその 16点が複製されて 25 + 16 = 41点。面は上面 16 + 側面 16 = 32面。","inset は<strong>各辺から内側に引っ込む距離<\/strong>。0.3 にすると一辺が両側から 0.3 ずつで 0.6 縮み、10.0 → 9.40000 になった。0.8 なら 1.6 縮んで 8.40000。指定した値がそのまま距離として効く。","パラメータ名は <code>dist<\/code> と <code>inset<\/code>。分割数は <code>divisions<\/code> ではなく <code>divs<\/code>。ここでも一般的な名前ではなく実際の名前を確認する必要があった。","boolean には8つの演算がある。よく使う Union / Intersect / Subtract のほかに、Shatter（Aを砕いて全部の破片を残す）、Seam（境界線だけを出す）、Detect（検出だけして形は変えない）、Resolve（自分自身の重なりを解消する）がある。","Shatter の体積は 8.00000 で box と完全に一致した。<strong>砕いても全部の破片が残るので体積は変わらない。<\/strong> 破壊エフェクトの下準備がこれ。","Seam は面数 6 のまま体積 0 になる。境界線だけを取り出す演算なので立体にならない。","<strong>体積の関係式で検算できた。<\/strong> 集合には「和集合 + 積集合 = 元の2つの合計」という関係が必ず成り立つ。実測すると 17.00180 対 17.00180 で差は 0.0000049。また「差集合 = box − 積集合」も 0.91433 対 0.91433 で差は完全にゼロ。boolean が正しく計算できていることを数値で確認できた。","この検算は、形が正しいかどうかを目で見ずに確かめられる点で価値がある。複雑な boolean の結果が正しいか不安なときは、体積の関係を見れば判断できる。","sphere SOP で rows / cols を 30 に設定したが、面数は 80 のままだった。<strong>ポリゴン球は rows / cols ではなく別の分割方法（多面体の細分）を使っている。<\/strong> 分割数を上げたいなら別のパラメータを探す必要がある。","その粗い球（80面）の体積は 9.00180 だった。半径 1.35 の真球なら 10.30575 なので、約 13% 小さい。<strong>ポリゴンで近似した球は必ず内側に寄る<\/strong>ので、体積を当てにするなら分割数を上げる必要がある。"],"next":["polyextrude を繰り返して階層のある建物を作る。for-each との組み合わせ","sphere の分割数を上げる方法を調べ、体積が真球にどう近づくかを測る","エフェクトに入るための下準備（複数フレームの書き出し、シミュレーションのキャッシュ）"]},"013":{"title":"時間軸への対応 — フレームを進めて記録する","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp013","shots":["013_wave.gif","013_sheet.png"],"summary":["ここまでの12実験はすべて1フレームだけを見ていた。エフェクトは時間変化そのものが結果なので、フレームを進めて連番で書き出し、1枚のコンタクトシートと動くGIFにまとめる仕組みが要る。","仕組みが正しいかは、答えが分かっている動き（自由落下の式）で確かめた。","あわせて、この先のシミュレーションで使うノードがどこにあるのかを数えた。その結果、当初の予定を変えるべきだと分かった。"],"points":["連番の書き出しは正しく動いている。自由落下の式との差は最大でも 0.0000006 で、これは小数の計算精度そのもの。フレームを進めて記録する仕組みに間違いはない。","20枚の書き出しに 1.18 秒（1枚あたり 59 ミリ秒）。60フレーム全部でも3.5秒程度で、実用的な速さ。レンダリングの重さは問題にならない。","<strong>カメラは全フレームを覆う範囲で一度だけ決める。<\/strong> フレームごとに枠を合わせ直すと、対象が動いているのか大きさが変わっているのかを画から判断できなくなる。そのために、全フレームを走査して範囲を求める関数を用意した。","出力は2つの形にした。PDFには動きを載せられないので<strong>コンタクトシート<\/strong>（全コマを1枚に並べてフレーム番号を振る）、HTMLには<strong>GIF<\/strong>。同じ連番から両方を作る。","<strong>パーティクルは SOP に1つもない（0種）。<\/strong> すべて DOP 側にある（67種）。つまりパーティクルを扱うには DOP ネットワークを組む必要があり、他の実験のようにSOPをつなぐだけでは始められない。","一方で剛体（RBD）は SOP に 47種もある。布（Vellum）も 22種。<strong>SOPレベルのラッパーが充実している分野の方が、入口としては易しい。<\/strong> 当初はパーティクルから始める予定だったが、RBD か Vellum から入る方が理にかなっている。","煙・炎（Pyro）は SOP 14種 / DOP 3種、液体（FLIP）は SOP 8種 / DOP 4種。どちらも SOP 側にラッパーはあるが数は少ない。","<code>solver<\/code> SOP を使って自分で重力を書こうとしたが、これは<strong>ロックされたアセット<\/strong>で、中にノードを作るには allowEditingOfContents() が要る。しかも中身は dopnet と4つの null で、想像していた「前フレームの結果を受け取って加工する」という単純な構造ではなかった。プログラムから組むには追加の調査が要る。","そのため今回は、自由落下を数式で書いて仕組みの検証にとどめた。これは<strong>シミュレーションではない<\/strong>（前のフレームの結果を使っていない）。本物のシミュレーションは次の実験から。"],"next":["RBD（剛体）から始める。SOPレベルのノードが47種あり、boolean の Shatter で作った破片をそのまま落とせる","Vellum（布）も SOPレベルのノードが揃っているので入りやすい","シミュレーションの結果をファイルに保存して使い回す（キャッシュ）。毎回計算し直すと実験が遅くなる"]},"014":{"title":"RBD 破壊 — 最初の本物のシミュレーション","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp014","shots":["014_rbd.gif","014_sheet.png"],"summary":["実験013で、剛体（RBD）は SOP レベルのノードが47種あり、パーティクルより入口が易しいと分かった。ここまでの実験はすべて「1フレームの計算」だったが、今回は前のフレームの結果を次に渡していく本物のシミュレーション。","シミュレーションは結果が複雑で、目で見ても正しいかどうか判断しづらい。そこで検証の軸を1つ決めた。剛体は変形しないので、砕けても落ちてもぶつかっても、全部の破片の体積の合計は変わらないはず。これが崩れたら計算のどこかがおかしい。"],"points":["<strong>体積は完全に保たれた。<\/strong> 全6フレームで 8.00000 ちょうど、振れ幅は 0.0000000。元の箱の体積 8.0 とも完全に一致する。砕いても落としてもぶつかっても体積が変わらないので、剛体シミュレーションとして正しく動いている。","これは目で見ても分からない種類の検証。破片が散らばった画を見ても「正しく計算できているか」は判断できないが、体積が保たれていれば少なくとも物質は増減していないと言える。実験012で boolean に使った検算と同じ考え方。","<strong>落下中は砕けない。<\/strong> フレーム1から10まで、横の広がりは 2.0000 のまま完全に変化しない。砕いてはあるが、破片はくっついたまま1つの塊として落ちる。","着地の瞬間に広がり始める。フレーム20で最下点が −0.0492 になり（地面を少し突き抜ける）、同時に広がりが 2.0589 に増える。その後 30で 3.7483、46で 5.6408。<strong>元の 2.8倍まで散らばった。<\/strong>","同時に全体の高さは 2.0000 から 1.9498 に下がる。積み上がっていたものが平たく崩れたということ。","最下点は着地時に −0.0492 まで沈み、その後 −0.0219 で落ち着く。<strong>破片は地面を少し突き抜けたまま止まる。<\/strong> ソルバが衝突判定に持たせている余裕（マージン）によるもので、厳密に地面の上に乗るわけではない。","rbdmaterialfracture のコンクリートモードで、2×2×2 の箱が 25個の破片になった（282点 / 191面）。破片の区別は name というプリミティブ属性で管理されている。","計算は速かった。最初のフレームが 0.38秒、以降は 0.02〜0.05秒。全部で1秒程度。シミュレーションといっても、この規模なら実験を回すのに支障はない。","rbdbulletsolver の既定は substeps = 10、cacheenabled = 1。1フレームを10回に分けて計算しており、結果は自動でキャッシュされる。2回目以降のフレーム送りが速いのはこのため。","地面はソルバの useground で用意できる。別途ジオメトリを作る必要はない。"],"next":["substeps を減らすと結果がどう変わるか。突き抜けや不安定さが出るはず","破片の数を増やしたときの計算時間の伸び方を測る","Vellum（布）でも同じように、保存されるべき量を見つけて検証する"]},"015":{"title":"Vellum クロス — 布で保存されるべき量は何か","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp015","shots":["015_cloth.gif","015_sheet.png"],"summary":["剛体では体積が保たれた（実験014）。布は面なので体積では測れない。代わりに「辺の長さの合計」を見る。布は伸びにくい素材なので、たわんでも吊るしても、辺の長さの合計はほぼ変わらないはず。","さらに、伸びにくさ（stretchstiffness）を下げれば保存が崩れるはず。そう考えて試したところ、まったく変化しなかった。原因を追ったら、このパラメータの本当の仕組みが分かった。"],"points":["<strong>点数は全フレームで 900 のまま変わらない。<\/strong> 布は形が変わるだけで、点が増減することはない。剛体の体積保存にあたるのが、布ではこの「構造が変わらないこと」。","たわませただけでは、辺の長さの合計はほとんど変わらなかった（最大 0.272% の伸び）。布が自分の重さで垂れるだけでは、張力がほとんどかからないため。","両端をピンで留めて吊るすと 0.842% まで増えた。<strong>たわむ場合の3.1倍。<\/strong> 布を引っ張る力がかかっている分だけ伸びている。指標が張力を捉えられていることが確認できた。","<strong>ところが、かたさを 1.0 から 0.02 に下げても結果がまったく変わらなかった。<\/strong> 50分の1にしたのに伸び率は 1.00842 で小数点以下5桁まで同じ。","原因は <code>stretchstiffnessexp<\/code> というパラメータで、<strong>既定値が 10<\/strong> だった。実効的なかたさは「値 × 10の指数乗」なので、既定では 1.0 × 10¹⁰ という極端に硬い状態。ここから 0.02 にしても 2 × 10⁸ で、やはり伸びない。","これを確かめるために値と指数を広く振った。<strong>(値 1.0, 指数 6) と (値 1000000, 指数 0) の結果が完全に一致し、(値 1.0, 指数 −6) と (値 0.000001, 指数 0) も完全に一致した。<\/strong> 掛け算であることが実測で確定した。","指数を 0 まで下げると伸び率 2.74029（174%の伸び）、−6 まで下げると 3.53114（253%の伸び）になり、布というよりゴムのような挙動になる。最下点も 2.60 から −5.73 まで下がる。","実用上の意味は大きい。<strong>画面に見えている数字（1.0）だけを触っても、実際にはほとんど変わらない。<\/strong> 効くのは指数のほう。布が硬すぎる・柔らかすぎると感じたら、値ではなく指数を疑う。","ピンの指定でも1つつまずいた。<code>grouptype<\/code> の既定はプリミティブなので、点のグループを渡すなら先に points へ切り替える必要がある。さらに <code>group<\/code> を空のままにすると<strong>「全部が対象」と解釈され、布全体がピン留めされて一切動かなくなる<\/strong>。最下点が全フレーム 3.0000 のまま動かないという分かりやすい症状が出た。","計算は速く、1フレームあたり 0.3〜0.8秒。900点の布ならシミュレーションでも実験のテンポは保てる。"],"next":["bendstiffness にも同じ指数があるか確かめる。あるなら曲がりにくさも同じ罠がある","布と球の衝突で、厚み（thickness）がどう効くかを測る","Pyro（煙）へ進む。ボリュームなので、保存されるべき量がまた変わる"]},"016":{"title":"Pyro 煙 — dissipation の正体を式で突き止める","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp016","shots":["016_sheet.png"],"summary":["剛体は体積、布は辺の長さが保たれた。煙はボリューム（空間を格子で区切って各マスに値を持たせたもの）なので、測るのは密度の合計になる。","当初は「煙は消えていくので密度は減るはず」と考えたが、実際には増えた。発生源が毎フレーム供給し続けるためで、減衰と供給が釣り合う。そこで「供給と減衰の釣り合い」を式に立てて実測と突き合わせたところ、小数点以下4桁まで一致した。"],"points":["<strong>当初の予想は外れた。<\/strong> 「煙は消えていくので密度は減る」と考えていたが、実際には増えた。発生源が毎フレーム煙を供給し続けるため、減る量より足される量が多い間は増え続ける。","散逸なし（dissipation = 0）のとき、密度の合計は<strong>フレーム番号とぴったり同じ比<\/strong>になった。5フレーム目で5.00000倍、46フレーム目で46.00000倍。差は完全にゼロ。毎フレーム同じ量が足され、一切減らないので当然だが、これがきれいに出ることでシミュレーションが余計なことをしていないと確認できる。","<strong>dissipation は「毎フレーム (1 − d) 倍に減らす」という意味だと確定した。<\/strong> この仮定から立てた式 (1 − (1−d)^t) / d と実測を比べると、全フレームで差が 0.0006 以下（最大でも 0.006%）。","行き着く先も式のとおり。供給と減衰が釣り合う値は 1 / dissipation で、0.3 のとき理論値 3.33333 に対し実測 3.33318。0.1 のときは 10 に対し 9.92084 で、まだ完全には収束していないが確実に近づいている。","この形の検証は応用が効く。<strong>パラメータの意味が分からないときは、仮定を式にして実測と突き合わせればよい。<\/strong> 説明を読むより確実で、桁が合っているかまで分かる。実験015で「かたさ = 値 × 10の指数乗」を突き止めたのと同じやり方。","ボリュームの構成でつまずいた点。pyrosource は既定で P と pscale しか作らず、<strong>density 属性を明示的に追加しないと<\/strong>次のラスタライズが空を返す。そして紛らわしいことに、pyrosource の attributes は「作る属性の個数」（数値）、volumerasterizeattributes の attributes は「属性名を並べた文字列」で、<strong>同じ名前なのに意味が違う<\/strong>。","<strong>ハードウェアレンダラー（OpenGL ROP）はボリュームの描画に向いていない。<\/strong> 煙が塊のようにしか描かれず、濃淡も立ち上りも分からない。これまでの実験ではこのレンダラーで十分だったが、ボリュームを扱うならKarmaのような本式のレンダラーが要る。","計算は速く、1フレームあたり 0.04〜0.2秒。ボリュームでもこの規模なら実験のテンポは保てる。"],"next":["Karma でボリュームをレンダリングし、煙らしい見た目を出す。レンダリング時間も測る","buoyancylift（浮力）を変えて、立ち上る速さがどう変わるかを測る","FLIP（液体）へ。液体なら体積が保存されるはずなので、また別の検証軸になる"]},"017":{"title":"FLIP 液体 — 組み方が分からず保留","href":"https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129#exp017","shots":["017_graph.png"],"summary":["液体は押し縮められないので体積が保たれるはず。FLIP は液体を粒で表す方式なので、粒1つが一定の体積を担うなら「粒の数」がそのまま体積にあたる。さらに FLIP には reseeding という粒を足したり間引いたりする仕組みがあり、これを切れば粒の数が完全に保たれるはず——という筋書きで実験を組んだ。","ところがソルバが動かなかった。4通りの配線を試したがすべて同じエラーで止まり、原因を特定できていない。ここまでの調査内容を残して保留とする。"],"points":["エラーメッセージは一貫して「Not enough sources specified.」。ソルバは入力のどこかに「液体の供給源」を期待しているが、粒を渡しても、コンテナを渡しても、flipsource を渡しても満たされなかった。","他のソルバとの違いが大きい。rbdbulletsolver（実験014）も vellumsolver（実験015）も pyrosolver（実験016）も、<strong>入力1にジオメトリをつなぐだけで動いた<\/strong>。FLIP だけが追加の作法を要求している。","パラメータ側にも手がかりが少ない。source を含む名前は sourceband ひとつしかなく、「どの入力が供給源か」を指定する仕組みは見当たらない。つまり入力の順番や種類が決まっていて、そこに正しいものを渡す必要があるということ。","途中で1つ罠を踏んだので記録しておく。<code>particlefluidtank<\/code> を上に移動させたら<strong>粒が0になった<\/strong>。このノードは「水位」を基準に中身を満たす仕組みで、タンクを水位より上に動かすと空になる。落下させたいときはタンクを動かすのではなく、地面のほうを下げる。","この保留は失敗ではあるが、記録しておく価値がある。<strong>「他と同じやり方が通じないノードがある」と分かったこと自体が情報<\/strong>で、次に取り組むときに同じ4通りを試さずに済む。","なお粒から見積もった体積は 4.92750 で、箱の体積 8.0 の 62% だった。粒は格子状に並ぶので隙間があり、粒の数 × 間隔の3乗では体積を正確には表せない。実際に検証に使うなら、この係数を先に求めておく必要がある。"],"next":["Houdini 付属のヘルプ（nodes.zip）で flipsolver の入力の説明を読む。ネットではなく手元の一次情報から","シェルフツールが作る FLIP のネットワークを GUI で作り、その構造を .hipnc から読み取る","先に Karma でのレンダリングを片付ける。実験016でボリュームが描けないと分かっているため"]}}</script>
+<script type="application/json" id="glossary-data">{"ノード":{"term":"ノード / Node","reading":"ノード","expand":"","def":"ひとつの処理を表す箱。入力を受け取り、加工して出力する。Houdiniではこの箱をつないで結果を作るため、作業そのものが「箱をつなぐこと」になる。","related":""},"ノード / Node":{"term":"ノード / Node","reading":"ノード","expand":"","def":"ひとつの処理を表す箱。入力を受け取り、加工して出力する。Houdiniではこの箱をつないで結果を作るため、作業そのものが「箱をつなぐこと」になる。","related":""},"Node":{"term":"ノード / Node","reading":"ノード","expand":"","def":"ひとつの処理を表す箱。入力を受け取り、加工して出力する。Houdiniではこの箱をつないで結果を作るため、作業そのものが「箱をつなぐこと」になる。","related":""},"ネットワーク":{"term":"ネットワーク / Network","reading":"ネットワーク","expand":"","def":"ノードをつないだ全体のこと。上から下へ流れる図として表示され、これを編集する画面をネットワークエディタと呼ぶ。","related":""},"ネットワーク / Network":{"term":"ネットワーク / Network","reading":"ネットワーク","expand":"","def":"ノードをつないだ全体のこと。上から下へ流れる図として表示され、これを編集する画面をネットワークエディタと呼ぶ。","related":""},"Network":{"term":"ネットワーク / Network","reading":"ネットワーク","expand":"","def":"ノードをつないだ全体のこと。上から下へ流れる図として表示され、これを編集する画面をネットワークエディタと呼ぶ。","related":""},"SOP":{"term":"SOP","reading":"ソップ","expand":"Surface Operator","def":"ジオメトリ（形）を扱うノードの階層。box、mountain、subdivide など、モデリングで使うノードはほぼSOP。Houdiniで最初に慣れるべき場所。","related":"ジオメトリ"},"POP":{"term":"POP","reading":"ポップ","expand":"Particle Operator","def":"パーティクル（粒子）を扱うノードの系統。火花、雨、群衆のように「たくさんの小さなものが動く」表現に使う。シミュレーション用のネットワークの中で組む。","related":"DOP, シミュレーション"},"DOP":{"term":"DOP","reading":"ドップ","expand":"Dynamics Operator","def":"シミュレーション（物理計算）を扱う階層。破壊、布、煙、液体などはここで計算する。時間をフレームごとに進めながら結果を積み上げていくのが特徴。","related":"ソルバ, シミュレーション"},"VOP":{"term":"VOP","reading":"ボップ","expand":"VEX Operator","def":"VEXの処理をノードをつないで組み立てる階層。コードを書く代わりに図で書くVEX、という位置づけ。","related":"VEX"},"ROP":{"term":"ROP","reading":"ロップ","expand":"Render Operator","def":"出力を担当するノードの階層。画像のレンダリング、ファイル書き出しなど「最終的に何かを外に出す」処理はここ。","related":"Karma, OpenGL ROP"},"OBJ":{"term":"OBJ","reading":"オブジェ","expand":"Object","def":"シーンに置く「物体」の階層。カメラ、ライト、ジオメトリの入れ物（geoノード）などが並ぶ。SOPはこのgeoノードの中に入っている。","related":""},"LOP":{"term":"LOP","reading":"ロップ","expand":"Lighting Operator","def":"USDベースでシーンを組む階層。Solarisとも呼ばれる。ライティングやレンダリングの設定を扱う新しい仕組み。","related":""},"ジオメトリ / Geometry":{"term":"ジオメトリ / Geometry","reading":"ジオメトリ","expand":"","def":"形のデータそのもの。ポイントやプリミティブの集まりを指す。ノードからノードへ流れていくのはこのジオメトリ。","related":""},"Geometry":{"term":"ジオメトリ / Geometry","reading":"ジオメトリ","expand":"","def":"形のデータそのもの。ポイントやプリミティブの集まりを指す。ノードからノードへ流れていくのはこのジオメトリ。","related":""},"ジオメトリ":{"term":"ジオメトリ / Geometry","reading":"ジオメトリ","expand":"","def":"形のデータそのもの。ポイントやプリミティブの集まりを指す。ノードからノードへ流れていくのはこのジオメトリ。","related":""},"Point":{"term":"ポイント / Point","reading":"ポイント","expand":"","def":"空間上の位置を持つ点。位置は必ず P という属性として持っている。形の頂点にあたるが、Houdiniでは「位置を持つだけの存在」として独立している。","related":"バーテックス, P"},"ポイント / Point":{"term":"ポイント / Point","reading":"ポイント","expand":"","def":"空間上の位置を持つ点。位置は必ず P という属性として持っている。形の頂点にあたるが、Houdiniでは「位置を持つだけの存在」として独立している。","related":"バーテックス, P"},"ポイント":{"term":"ポイント / Point","reading":"ポイント","expand":"","def":"空間上の位置を持つ点。位置は必ず P という属性として持っている。形の頂点にあたるが、Houdiniでは「位置を持つだけの存在」として独立している。","related":"バーテックス, P"},"バーテックス / Vertex":{"term":"バーテックス / Vertex","reading":"バーテックス","expand":"","def":"プリミティブ（面）の角。どのポイントを使うかを指し示すだけの存在。2つの面が同じ角を共有している場合、ポイントは1つだがバーテックスは2つある。UVや面ごとの法線はこちらに乗る。初心者が最も混乱する区別。","related":"ポイント, プリミティブ"},"Vertex":{"term":"バーテックス / Vertex","reading":"バーテックス","expand":"","def":"プリミティブ（面）の角。どのポイントを使うかを指し示すだけの存在。2つの面が同じ角を共有している場合、ポイントは1つだがバーテックスは2つある。UVや面ごとの法線はこちらに乗る。初心者が最も混乱する区別。","related":"ポイント, プリミティブ"},"バーテックス":{"term":"バーテックス / Vertex","reading":"バーテックス","expand":"","def":"プリミティブ（面）の角。どのポイントを使うかを指し示すだけの存在。2つの面が同じ角を共有している場合、ポイントは1つだがバーテックスは2つある。UVや面ごとの法線はこちらに乗る。初心者が最も混乱する区別。","related":"ポイント, プリミティブ"},"Primitive":{"term":"プリミティブ / Primitive","reading":"プリミティブ","expand":"","def":"面や線、ボリュームなど「形の単位」。ポリゴン1枚がプリミティブ1つ。立方体なら6面あるのでプリミティブは6つ。prim と略される。","related":"ポリゴン, バーテックス"},"プリミティブ / Primitive":{"term":"プリミティブ / Primitive","reading":"プリミティブ","expand":"","def":"面や線、ボリュームなど「形の単位」。ポリゴン1枚がプリミティブ1つ。立方体なら6面あるのでプリミティブは6つ。prim と略される。","related":"ポリゴン, バーテックス"},"プリミティブ":{"term":"プリミティブ / Primitive","reading":"プリミティブ","expand":"","def":"面や線、ボリュームなど「形の単位」。ポリゴン1枚がプリミティブ1つ。立方体なら6面あるのでプリミティブは6つ。prim と略される。","related":"ポリゴン, バーテックス"},"ポリゴン / Polygon":{"term":"ポリゴン / Polygon","reading":"ポリゴン","expand":"","def":"3つ以上のバーテックスで囲まれた面。プリミティブの一種で、モデリングで最もよく使う種類。","related":""},"ポリゴン":{"term":"ポリゴン / Polygon","reading":"ポリゴン","expand":"","def":"3つ以上のバーテックスで囲まれた面。プリミティブの一種で、モデリングで最もよく使う種類。","related":""},"Polygon":{"term":"ポリゴン / Polygon","reading":"ポリゴン","expand":"","def":"3つ以上のバーテックスで囲まれた面。プリミティブの一種で、モデリングで最もよく使う種類。","related":""},"Attribute":{"term":"アトリビュート / Attribute","reading":"アトリビュート","expand":"","def":"ジオメトリに付けられる名前付きのデータ。位置、色、速度、大きさなど何でも持たせられる。Houdiniの柔軟さの正体はこれで、「必要な情報を自分で作って後段のノードに渡す」のが基本的な考え方。属性とも書く。","related":"P, N, Cd, ディテールアトリビュート"},"アトリビュート":{"term":"アトリビュート / Attribute","reading":"アトリビュート","expand":"","def":"ジオメトリに付けられる名前付きのデータ。位置、色、速度、大きさなど何でも持たせられる。Houdiniの柔軟さの正体はこれで、「必要な情報を自分で作って後段のノードに渡す」のが基本的な考え方。属性とも書く。","related":"P, N, Cd, ディテールアトリビュート"},"アトリビュート / Attribute":{"term":"アトリビュート / Attribute","reading":"アトリビュート","expand":"","def":"ジオメトリに付けられる名前付きのデータ。位置、色、速度、大きさなど何でも持たせられる。Houdiniの柔軟さの正体はこれで、「必要な情報を自分で作って後段のノードに渡す」のが基本的な考え方。属性とも書く。","related":"P, N, Cd, ディテールアトリビュート"},"P":{"term":"P","reading":"ピー","expand":"","def":"ポイントの位置を表すアトリビュート。x, y, z の3つの数値。すべてのポイントが必ず持っている。","related":""},"N":{"term":"N","reading":"エヌ","expand":"Normal","def":"法線。面や点が向いている方向を表すベクトル。ライティングの計算や、押し出す方向の基準に使われる。","related":"法線"},"Cd":{"term":"Cd","reading":"シーディー","expand":"Color diffuse","def":"色を表すアトリビュート。RGBの3つの数値。color SOP を通すとこれが追加される。","related":""},"pscale":{"term":"pscale","reading":"ピースケール","expand":"","def":"ポイントごとの大きさ。copy to points で形を複製するときに、このアトリビュートで1つずつサイズを変えられる。","related":"copy to points"},"@ptnum":{"term":"@ptnum","reading":"アットピーティーナム","expand":"point number","def":"ポイントの通し番号（0から始まる）。VEXの中で「何番目の点か」を知るために使う。@ が付く書き方はVEXでのアトリビュート参照。","related":"VEX"},"ディテールアトリビュート":{"term":"ディテールアトリビュート / Detail attribute","reading":"ディテールアトリビュート","expand":"","def":"ジオメトリ全体に1つだけ持たせる値。ポイントごとではなく「この形全体の設定」を渡したいときに使う。グローバルアトリビュートとも呼ばれる。","related":"アトリビュート"},"Detail attribute":{"term":"ディテールアトリビュート / Detail attribute","reading":"ディテールアトリビュート","expand":"","def":"ジオメトリ全体に1つだけ持たせる値。ポイントごとではなく「この形全体の設定」を渡したいときに使う。グローバルアトリビュートとも呼ばれる。","related":"アトリビュート"},"ディテールアトリビュート / Detail attribute":{"term":"ディテールアトリビュート / Detail attribute","reading":"ディテールアトリビュート","expand":"","def":"ジオメトリ全体に1つだけ持たせる値。ポイントごとではなく「この形全体の設定」を渡したいときに使う。グローバルアトリビュートとも呼ばれる。","related":"アトリビュート"},"トポロジ":{"term":"トポロジ / Topology","reading":"トポロジ","expand":"","def":"ポイントがどうつながって面を作っているか、というつながり方の構造。位置を動かしてもトポロジは変わらないが、分割したり穴を開けると変わる。","related":""},"トポロジ / Topology":{"term":"トポロジ / Topology","reading":"トポロジ","expand":"","def":"ポイントがどうつながって面を作っているか、というつながり方の構造。位置を動かしてもトポロジは変わらないが、分割したり穴を開けると変わる。","related":""},"Topology":{"term":"トポロジ / Topology","reading":"トポロジ","expand":"","def":"ポイントがどうつながって面を作っているか、というつながり方の構造。位置を動かしてもトポロジは変わらないが、分割したり穴を開けると変わる。","related":""},"法線 / Normal":{"term":"法線 / Normal","reading":"ほうせん","expand":"","def":"面が向いている向きを示す矢印。裏表の判定やライティングに使われる。これが裏返っていると面が真っ黒に見えたり消えたりする。","related":"N"},"法線":{"term":"法線 / Normal","reading":"ほうせん","expand":"","def":"面が向いている向きを示す矢印。裏表の判定やライティングに使われる。これが裏返っていると面が真っ黒に見えたり消えたりする。","related":"N"},"Normal":{"term":"法線 / Normal","reading":"ほうせん","expand":"","def":"面が向いている向きを示す矢印。裏表の判定やライティングに使われる。これが裏返っていると面が真っ黒に見えたり消えたりする。","related":"N"},"UV":{"term":"UV","reading":"ユーブイ","expand":"","def":"テクスチャ（画像）を形に貼るための座標。3Dの形を平面に展開した位置を、バーテックスごとに持たせる。","related":"バーテックス"},"Bounding box":{"term":"バウンディングボックス / Bounding box","reading":"バウンディングボックス","expand":"","def":"ジオメトリ全体がちょうど収まる直方体。大きさや位置の目安として使われ、これを基準に色を付けたり配置したりできる。bbox と略される。","related":""},"バウンディングボックス":{"term":"バウンディングボックス / Bounding box","reading":"バウンディングボックス","expand":"","def":"ジオメトリ全体がちょうど収まる直方体。大きさや位置の目安として使われ、これを基準に色を付けたり配置したりできる。bbox と略される。","related":""},"バウンディングボックス / Bounding box":{"term":"バウンディングボックス / Bounding box","reading":"バウンディングボックス","expand":"","def":"ジオメトリ全体がちょうど収まる直方体。大きさや位置の目安として使われ、これを基準に色を付けたり配置したりできる。bbox と略される。","related":""},"グループ / Group":{"term":"グループ / Group","reading":"グループ","expand":"","def":"ポイントやプリミティブに名前を付けた選択範囲。「この部分だけに処理をかけたい」というときに作る。","related":""},"Group":{"term":"グループ / Group","reading":"グループ","expand":"","def":"ポイントやプリミティブに名前を付けた選択範囲。「この部分だけに処理をかけたい」というときに作る。","related":""},"グループ":{"term":"グループ / Group","reading":"グループ","expand":"","def":"ポイントやプリミティブに名前を付けた選択範囲。「この部分だけに処理をかけたい」というときに作る。","related":""},"ボリューム / Volume":{"term":"ボリューム / Volume","reading":"ボリューム","expand":"","def":"空間を格子状に区切って、各マスに値を持たせたデータ。煙や炎のように「面では表せない、中身のあるもの」を扱うのに使う。VDBはその代表的な形式。","related":"Pyro"},"ボリューム":{"term":"ボリューム / Volume","reading":"ボリューム","expand":"","def":"空間を格子状に区切って、各マスに値を持たせたデータ。煙や炎のように「面では表せない、中身のあるもの」を扱うのに使う。VDBはその代表的な形式。","related":"Pyro"},"Volume":{"term":"ボリューム / Volume","reading":"ボリューム","expand":"","def":"空間を格子状に区切って、各マスに値を持たせたデータ。煙や炎のように「面では表せない、中身のあるもの」を扱うのに使う。VDBはその代表的な形式。","related":"Pyro"},"ボクセル":{"term":"ボクセル / Voxel","reading":"ボクセル","expand":"","def":"空間を細かい立方体のマス目に区切ったときの、1マスのこと。画像のピクセルを立体にしたもの。ボリュームはボクセルの集まりでできていて、マス目が細かいほど煙の形も細かくなる代わりに計算が重くなる。","related":"ボリューム"},"ボクセル / Voxel":{"term":"ボクセル / Voxel","reading":"ボクセル","expand":"","def":"空間を細かい立方体のマス目に区切ったときの、1マスのこと。画像のピクセルを立体にしたもの。ボリュームはボクセルの集まりでできていて、マス目が細かいほど煙の形も細かくなる代わりに計算が重くなる。","related":"ボリューム"},"Voxel":{"term":"ボクセル / Voxel","reading":"ボクセル","expand":"","def":"空間を細かい立方体のマス目に区切ったときの、1マスのこと。画像のピクセルを立体にしたもの。ボリュームはボクセルの集まりでできていて、マス目が細かいほど煙の形も細かくなる代わりに計算が重くなる。","related":"ボリューム"},"Packed primitive":{"term":"パックプリミティブ / Packed primitive","reading":"パックプリミティブ","expand":"","def":"中身のジオメトリを1つのプリミティブとしてまとめて持つ仕組み。破片のように同じ形を大量に扱うときに軽くなる。中身を取り出すには unpack を使う。","related":"プリミティブ"},"パックプリミティブ / Packed primitive":{"term":"パックプリミティブ / Packed primitive","reading":"パックプリミティブ","expand":"","def":"中身のジオメトリを1つのプリミティブとしてまとめて持つ仕組み。破片のように同じ形を大量に扱うときに軽くなる。中身を取り出すには unpack を使う。","related":"プリミティブ"},"パックプリミティブ":{"term":"パックプリミティブ / Packed primitive","reading":"パックプリミティブ","expand":"","def":"中身のジオメトリを1つのプリミティブとしてまとめて持つ仕組み。破片のように同じ形を大量に扱うときに軽くなる。中身を取り出すには unpack を使う。","related":"プリミティブ"},"subdivide":{"term":"subdivide","reading":"サブディバイド","expand":"","def":"面を細かく分割するノード。分割と同時に形を滑らかにするため、立方体にかけると回数を増やすほど球に近づく。この滑らかにする方式が Catmull-Clark。","related":"Catmull-Clark"},"Catmull-Clark":{"term":"Catmull-Clark","reading":"カトマル・クラーク","expand":"","def":"面を分割しながら滑らかな曲面に近づけていく計算方式。角が丸まるのが特徴で、「分割したのに形が変わった」と感じる原因はこれ。","related":"subdivide"},"mountain":{"term":"mountain","reading":"マウンテン","expand":"","def":"ポイントを法線方向にノイズで押し出して、地形のような凹凸を作るノード。既存のポイントを動かすだけでポイントは増えないため、細かい凹凸を出したいなら先に分割数を上げておく必要がある。","related":"ノイズ, subdivide"},"ノイズ":{"term":"ノイズ / Noise","reading":"ノイズ","expand":"","def":"でたらめに見えて滑らかにつながっている数値のパターン。自然物のばらつきを作るのに使われ、地形、煙、揺れなどほぼすべての「自然に見せたいもの」の元になる。","related":""},"ノイズ / Noise":{"term":"ノイズ / Noise","reading":"ノイズ","expand":"","def":"でたらめに見えて滑らかにつながっている数値のパターン。自然物のばらつきを作るのに使われ、地形、煙、揺れなどほぼすべての「自然に見せたいもの」の元になる。","related":""},"Noise":{"term":"ノイズ / Noise","reading":"ノイズ","expand":"","def":"でたらめに見えて滑らかにつながっている数値のパターン。自然物のばらつきを作るのに使われ、地形、煙、揺れなどほぼすべての「自然に見せたいもの」の元になる。","related":""},"scatter":{"term":"scatter","reading":"スキャッター","expand":"","def":"面の上にポイントをばらまくノード。ばらまいた点にあとから草や岩を複製する、という流れがプロシージャルの定番。","related":"copy to points"},"copy to points":{"term":"copy to points","reading":"コピー・トゥ・ポインツ","expand":"","def":"ポイントの位置1つずつに、別のジオメトリを複製して配置するノード。「100個の岩を並べる」ような作業を1ノードで済ませられる、プロシージャルの中核。","related":"scatter, pscale"},"merge":{"term":"merge","reading":"マージ","expand":"","def":"複数のジオメトリを1つにまとめるノード。別々に作った形を合流させる合流点として使う。","related":""},"for-each / フォーイーチ":{"term":"for-each / フォーイーチ","reading":"フォーイーチ","expand":"","def":"同じ処理をパーツごとに繰り返す仕組み。Block Begin と Block End という2つのノードで範囲を挟んで作る。「破片1つずつに別々の動きを付ける」など、まとめて処理できないときに使う。","related":"イテレーション"},"for-each":{"term":"for-each / フォーイーチ","reading":"フォーイーチ","expand":"","def":"同じ処理をパーツごとに繰り返す仕組み。Block Begin と Block End という2つのノードで範囲を挟んで作る。「破片1つずつに別々の動きを付ける」など、まとめて処理できないときに使う。","related":"イテレーション"},"フォーイーチ":{"term":"for-each / フォーイーチ","reading":"フォーイーチ","expand":"","def":"同じ処理をパーツごとに繰り返す仕組み。Block Begin と Block End という2つのノードで範囲を挟んで作る。「破片1つずつに別々の動きを付ける」など、まとめて処理できないときに使う。","related":"イテレーション"},"イテレーション / Iteration":{"term":"イテレーション / Iteration","reading":"イテレーション","expand":"","def":"繰り返し処理の1回分。10個のパーツを順に処理するなら、イテレーションは10回ある。「今が何回目か」を数値として取り出して、回ごとに違う結果にすることができる。","related":"for-each"},"Iteration":{"term":"イテレーション / Iteration","reading":"イテレーション","expand":"","def":"繰り返し処理の1回分。10個のパーツを順に処理するなら、イテレーションは10回ある。「今が何回目か」を数値として取り出して、回ごとに違う結果にすることができる。","related":"for-each"},"イテレーション":{"term":"イテレーション / Iteration","reading":"イテレーション","expand":"","def":"繰り返し処理の1回分。10個のパーツを順に処理するなら、イテレーションは10回ある。「今が何回目か」を数値として取り出して、回ごとに違う結果にすることができる。","related":"for-each"},"wrangle":{"term":"wrangle","reading":"ラングル","expand":"","def":"VEXのコードを直接書き込めるノード。attribute wrangle が代表。ノードを並べるより、数行書いた方が早くて分かりやすい場面で使う。","related":"VEX"},"VEX":{"term":"VEX","reading":"ベックス","expand":"","def":"Houdini専用のプログラミング言語。ポイント1つ1つに対して同じ計算を一斉に走らせるため非常に速い。`@P.y += 1;` のように短く書ける。","related":"wrangle, VOP"},"polyextrude":{"term":"polyextrude","reading":"ポリエクストルード","expand":"","def":"面を押し出して厚みや突起を作るノード。建物の階や、壁からの出っ張りなどを作るのに使う。","related":""},"boolean":{"term":"boolean","reading":"ブーリアン","expand":"","def":"2つの形を足す・引く・重なりを取る、という演算をするノード。四角から円柱を引いて穴を開ける、といった使い方。","related":""},"voronoi fracture":{"term":"voronoi fracture","reading":"ボロノイ・フラクチャー","expand":"","def":"ジオメトリを細胞のような塊に分割するノード。破壊エフェクトで、壊れる前にあらかじめ破片を作っておくために使う。","related":"RBD"},"Simulation":{"term":"シミュレーション / Simulation","reading":"シミュレーション","expand":"","def":"物理法則にもとづいて動きを計算させること。手で動きを付けるのではなく、条件を与えて結果を計算させる。略してsimとも書く。","related":""},"シミュレーション / Simulation":{"term":"シミュレーション / Simulation","reading":"シミュレーション","expand":"","def":"物理法則にもとづいて動きを計算させること。手で動きを付けるのではなく、条件を与えて結果を計算させる。略してsimとも書く。","related":""},"シミュレーション":{"term":"シミュレーション / Simulation","reading":"シミュレーション","expand":"","def":"物理法則にもとづいて動きを計算させること。手で動きを付けるのではなく、条件を与えて結果を計算させる。略してsimとも書く。","related":""},"Solver":{"term":"ソルバ / Solver","reading":"ソルバ","expand":"","def":"シミュレーションの計算を担当するノード。剛体用、布用、煙用など対象ごとに専用のソルバがある。","related":""},"ソルバ":{"term":"ソルバ / Solver","reading":"ソルバ","expand":"","def":"シミュレーションの計算を担当するノード。剛体用、布用、煙用など対象ごとに専用のソルバがある。","related":""},"ソルバ / Solver":{"term":"ソルバ / Solver","reading":"ソルバ","expand":"","def":"シミュレーションの計算を担当するノード。剛体用、布用、煙用など対象ごとに専用のソルバがある。","related":""},"RBD":{"term":"RBD","reading":"アールビーディー","expand":"Rigid Body Dynamics","def":"変形しない硬い物体の物理計算。積み木が崩れる、壁が砕けて飛び散る、といった動きを担当する。","related":"voronoi fracture"},"Vellum":{"term":"Vellum","reading":"ベラム","expand":"","def":"布、ゴム、髪のような柔らかいものを扱うソルバ。比較的軽く扱いやすいため、柔らかいものを試すならまずここから。","related":""},"Pyro":{"term":"Pyro","reading":"パイロ","expand":"","def":"煙と炎を扱うソルバ。ボリュームとして計算するため、面のモデリングとは考え方がかなり違う。","related":"ボリューム"},"FLIP":{"term":"FLIP","reading":"フリップ","expand":"Fluid-Implicit-Particle","def":"液体を扱うソルバ。液体をパーティクルとして計算し、最後に表面を張って水面にする。","related":""},"Substeps":{"term":"サブステップ / Substeps","reading":"サブステップ","expand":"","def":"1フレームの中を何回に分けて計算するかの設定。動きが速すぎて突き抜けてしまうときに増やす。増やすと正確になるが時間もかかる。","related":""},"サブステップ":{"term":"サブステップ / Substeps","reading":"サブステップ","expand":"","def":"1フレームの中を何回に分けて計算するかの設定。動きが速すぎて突き抜けてしまうときに増やす。増やすと正確になるが時間もかかる。","related":""},"サブステップ / Substeps":{"term":"サブステップ / Substeps","reading":"サブステップ","expand":"","def":"1フレームの中を何回に分けて計算するかの設定。動きが速すぎて突き抜けてしまうときに増やす。増やすと正確になるが時間もかかる。","related":""},"キャッシュ / Cache":{"term":"キャッシュ / Cache","reading":"キャッシュ","expand":"","def":"計算結果をファイルに保存しておくこと。シミュレーションは重いため、一度計算したら保存して使い回すのが前提。file cache ノードで行う。","related":""},"キャッシュ":{"term":"キャッシュ / Cache","reading":"キャッシュ","expand":"","def":"計算結果をファイルに保存しておくこと。シミュレーションは重いため、一度計算したら保存して使い回すのが前提。file cache ノードで行う。","related":""},"Cache":{"term":"キャッシュ / Cache","reading":"キャッシュ","expand":"","def":"計算結果をファイルに保存しておくこと。シミュレーションは重いため、一度計算したら保存して使い回すのが前提。file cache ノードで行う。","related":""},"Frame":{"term":"フレーム / Frame","reading":"フレーム","expand":"","def":"アニメーションの1コマ。24フレームで1秒が一般的。シミュレーションはフレームを順に進めながら計算する。","related":""},"フレーム":{"term":"フレーム / Frame","reading":"フレーム","expand":"","def":"アニメーションの1コマ。24フレームで1秒が一般的。シミュレーションはフレームを順に進めながら計算する。","related":""},"フレーム / Frame":{"term":"フレーム / Frame","reading":"フレーム","expand":"","def":"アニメーションの1コマ。24フレームで1秒が一般的。シミュレーションはフレームを順に進めながら計算する。","related":""},"Fracture":{"term":"フラクチャ / Fracture","reading":"フラクチャ","expand":"","def":"ひとつの形を破片に割ること。割った時点ではまだ動かない。動かすのはソルバの仕事で、割る工程と動かす工程は分かれている。","related":"RBD / voronoi fracture"},"フラクチャ / Fracture":{"term":"フラクチャ / Fracture","reading":"フラクチャ","expand":"","def":"ひとつの形を破片に割ること。割った時点ではまだ動かない。動かすのはソルバの仕事で、割る工程と動かす工程は分かれている。","related":"RBD / voronoi fracture"},"フラクチャ":{"term":"フラクチャ / Fracture","reading":"フラクチャ","expand":"","def":"ひとつの形を破片に割ること。割った時点ではまだ動かない。動かすのはソルバの仕事で、割る工程と動かす工程は分かれている。","related":"RBD / voronoi fracture"},"コンストレイント":{"term":"コンストレイント / Constraint","reading":"コンストレイント","expand":"","def":"点と点のつながり方の規則。布なら「この点とこの点は離れすぎない」という条件にあたる。Vellum では規則を作るノードと、それを解くソルバが別になっている。","related":"Vellum"},"コンストレイント / Constraint":{"term":"コンストレイント / Constraint","reading":"コンストレイント","expand":"","def":"点と点のつながり方の規則。布なら「この点とこの点は離れすぎない」という条件にあたる。Vellum では規則を作るノードと、それを解くソルバが別になっている。","related":"Vellum"},"Constraint":{"term":"コンストレイント / Constraint","reading":"コンストレイント","expand":"","def":"点と点のつながり方の規則。布なら「この点とこの点は離れすぎない」という条件にあたる。Vellum では規則を作るノードと、それを解くソルバが別になっている。","related":"Vellum"},"Stiffness":{"term":"スティフネス / Stiffness","reading":"スティフネス","expand":"","def":"伸びにくさ・曲がりにくさ。Vellum では「値 × 10の指数乗」で決まるため、見えている値より指数のほうが効く。実験015で、値と指数を入れ替えた組み合わせが同じ結果になることを確かめた。","related":"コンストレイント"},"スティフネス":{"term":"スティフネス / Stiffness","reading":"スティフネス","expand":"","def":"伸びにくさ・曲がりにくさ。Vellum では「値 × 10の指数乗」で決まるため、見えている値より指数のほうが効く。実験015で、値と指数を入れ替えた組み合わせが同じ結果になることを確かめた。","related":"コンストレイント"},"スティフネス / Stiffness":{"term":"スティフネス / Stiffness","reading":"スティフネス","expand":"","def":"伸びにくさ・曲がりにくさ。Vellum では「値 × 10の指数乗」で決まるため、見えている値より指数のほうが効く。実験015で、値と指数を入れ替えた組み合わせが同じ結果になることを確かめた。","related":"コンストレイント"},"ピン / Pin":{"term":"ピン / Pin","reading":"ピン","expand":"","def":"シミュレーション中も動かさないよう固定した点。布の上端を留めて垂らす、といった使い方をする。対象の指定を空にすると「全部が対象」と解釈され、何も動かなくなる。","related":"コンストレイント"},"Pin":{"term":"ピン / Pin","reading":"ピン","expand":"","def":"シミュレーション中も動かさないよう固定した点。布の上端を留めて垂らす、といった使い方をする。対象の指定を空にすると「全部が対象」と解釈され、何も動かなくなる。","related":"コンストレイント"},"ピン":{"term":"ピン / Pin","reading":"ピン","expand":"","def":"シミュレーション中も動かさないよう固定した点。布の上端を留めて垂らす、といった使い方をする。対象の指定を空にすると「全部が対象」と解釈され、何も動かなくなる。","related":"コンストレイント"},"密度 / Density":{"term":"密度 / Density","reading":"みつど","expand":"","def":"煙の濃さを表す値。ボリュームのマス目ひとつひとつに入っている数値で、全部足したものが煙の総量にあたる。煙のシミュレーションで保存量として測れるのはこれ。","related":"ボリューム / ボクセル"},"密度":{"term":"密度 / Density","reading":"みつど","expand":"","def":"煙の濃さを表す値。ボリュームのマス目ひとつひとつに入っている数値で、全部足したものが煙の総量にあたる。煙のシミュレーションで保存量として測れるのはこれ。","related":"ボリューム / ボクセル"},"Density":{"term":"密度 / Density","reading":"みつど","expand":"","def":"煙の濃さを表す値。ボリュームのマス目ひとつひとつに入っている数値で、全部足したものが煙の総量にあたる。煙のシミュレーションで保存量として測れるのはこれ。","related":"ボリューム / ボクセル"},"Dissipation":{"term":"散逸 / Dissipation","reading":"さんいつ","expand":"","def":"煙を毎フレーム減らす設定。値を d とすると、毎フレーム (1−d) 倍になる。発生源が供給し続ける場合は減り続けるのではなく、やがて 1/d のところで釣り合う。","related":"Pyro / 密度"},"散逸":{"term":"散逸 / Dissipation","reading":"さんいつ","expand":"","def":"煙を毎フレーム減らす設定。値を d とすると、毎フレーム (1−d) 倍になる。発生源が供給し続ける場合は減り続けるのではなく、やがて 1/d のところで釣り合う。","related":"Pyro / 密度"},"散逸 / Dissipation":{"term":"散逸 / Dissipation","reading":"さんいつ","expand":"","def":"煙を毎フレーム減らす設定。値を d とすると、毎フレーム (1−d) 倍になる。発生源が供給し続ける場合は減り続けるのではなく、やがて 1/d のところで釣り合う。","related":"Pyro / 密度"},"Source":{"term":"発生源 / Source","reading":"はっせいげん","expand":"","def":"煙や液体が湧き出してくる場所。ソルバは毎フレーム、ここから新しい分の供給を受け取る。供給が続く限り総量は増え続ける。","related":"Pyro / FLIP"},"発生源":{"term":"発生源 / Source","reading":"はっせいげん","expand":"","def":"煙や液体が湧き出してくる場所。ソルバは毎フレーム、ここから新しい分の供給を受け取る。供給が続く限り総量は増え続ける。","related":"Pyro / FLIP"},"発生源 / Source":{"term":"発生源 / Source","reading":"はっせいげん","expand":"","def":"煙や液体が湧き出してくる場所。ソルバは毎フレーム、ここから新しい分の供給を受け取る。供給が続く限り総量は増え続ける。","related":"Pyro / FLIP"},"Render":{"term":"レンダリング / Render","reading":"レンダリング","expand":"","def":"3Dのシーンから画像を計算して作ること。光の反射や影を計算するため時間がかかる。","related":""},"レンダリング":{"term":"レンダリング / Render","reading":"レンダリング","expand":"","def":"3Dのシーンから画像を計算して作ること。光の反射や影を計算するため時間がかかる。","related":""},"レンダリング / Render":{"term":"レンダリング / Render","reading":"レンダリング","expand":"","def":"3Dのシーンから画像を計算して作ること。光の反射や影を計算するため時間がかかる。","related":""},"Karma":{"term":"Karma","reading":"カルマ","expand":"","def":"Houdiniに付属する現行のレンダラー。品質が高いが計算に時間がかかる。","related":""},"Mantra":{"term":"Mantra","reading":"マントラ","expand":"","def":"Houdiniの旧世代レンダラー。現在はKarmaに置き換わりつつある。","related":""},"OpenGL ROP":{"term":"OpenGL ROP","reading":"オープンジーエル・ロップ","expand":"","def":"ビューポートの表示をそのまま画像に書き出すノード。光の計算をしないため一瞬で終わる。「何ができたか確認する」用途に向く。","related":"ROP, ビューポート"},"Viewport":{"term":"ビューポート / Viewport","reading":"ビューポート","expand":"","def":"3Dの形を表示している画面。ここで見えているものは簡易表示で、レンダリング結果とは異なる。","related":""},"ビューポート / Viewport":{"term":"ビューポート / Viewport","reading":"ビューポート","expand":"","def":"3Dの形を表示している画面。ここで見えているものは簡易表示で、レンダリング結果とは異なる。","related":""},"ビューポート":{"term":"ビューポート / Viewport","reading":"ビューポート","expand":"","def":"3Dの形を表示している画面。ここで見えているものは簡易表示で、レンダリング結果とは異なる。","related":""},"Smooth Wire Shaded":{"term":"Smooth Wire Shaded","reading":"スムース・ワイヤー・シェーデッド","expand":"","def":"表示モードの一種。面に色を付けたうえで、面の境界線（ワイヤーフレーム）も重ねて描く。分割数やトポロジを確認したいときに有効。","related":"トポロジ"},"ワイヤーフレーム / Wireframe":{"term":"ワイヤーフレーム / Wireframe","reading":"ワイヤーフレーム","expand":"","def":"面を塗らず、辺だけを線で表示すること。形の内部構造や分割数を見るのに使う。","related":""},"Wireframe":{"term":"ワイヤーフレーム / Wireframe","reading":"ワイヤーフレーム","expand":"","def":"面を塗らず、辺だけを線で表示すること。形の内部構造や分割数を見るのに使う。","related":""},"ワイヤーフレーム":{"term":"ワイヤーフレーム / Wireframe","reading":"ワイヤーフレーム","expand":"","def":"面を塗らず、辺だけを線で表示すること。形の内部構造や分割数を見るのに使う。","related":""},"フリップブック / Flipbook":{"term":"フリップブック / Flipbook","reading":"フリップブック","expand":"","def":"ビューポートの表示を連続して画像に書き出し、動きを確認すること。レンダリングせずにアニメーションを見たいときに使う。","related":""},"Flipbook":{"term":"フリップブック / Flipbook","reading":"フリップブック","expand":"","def":"ビューポートの表示を連続して画像に書き出し、動きを確認すること。レンダリングせずにアニメーションを見たいときに使う。","related":""},"フリップブック":{"term":"フリップブック / Flipbook","reading":"フリップブック","expand":"","def":"ビューポートの表示を連続して画像に書き出し、動きを確認すること。レンダリングせずにアニメーションを見たいときに使う。","related":""},"距離減衰 / Falloff":{"term":"距離減衰 / Falloff","reading":"きょりげんすい","expand":"","def":"光が遠くなるほど弱くなる性質。ポイントライトは距離の2乗で暗くなるため、遠くに置くと強度を大きく上げないと真っ暗になる。","related":""},"距離減衰":{"term":"距離減衰 / Falloff","reading":"きょりげんすい","expand":"","def":"光が遠くなるほど弱くなる性質。ポイントライトは距離の2乗で暗くなるため、遠くに置くと強度を大きく上げないと真っ暗になる。","related":""},"Falloff":{"term":"距離減衰 / Falloff","reading":"きょりげんすい","expand":"","def":"光が遠くなるほど弱くなる性質。ポイントライトは距離の2乗で暗くなるため、遠くに置くと強度を大きく上げないと真っ暗になる。","related":""},"distant light":{"term":"distant light","reading":"ディスタント・ライト","expand":"","def":"太陽のように平行な光を当てるライト。距離による減衰がないため、どこに置いても明るさが変わらない。","related":"距離減衰"},"dome light":{"term":"dome light / envlight","reading":"ドーム・ライト","expand":"","def":"シーン全体を包む球から光を当てるライト。全方向から柔らかく照らせるので、形を確認したいときに扱いやすい。","related":""},"envlight":{"term":"dome light / envlight","reading":"ドーム・ライト","expand":"","def":"シーン全体を包む球から光を当てるライト。全方向から柔らかく照らせるので、形を確認したいときに扱いやすい。","related":""},"dome light / envlight":{"term":"dome light / envlight","reading":"ドーム・ライト","expand":"","def":"シーン全体を包む球から光を当てるライト。全方向から柔らかく照らせるので、形を確認したいときに扱いやすい。","related":""},"パラメータ / Parameter":{"term":"パラメータ / Parameter","reading":"パラメータ","expand":"","def":"ノードの設定値。高さ、回数、サイズなど。parm と略される。Houdiniではこの値に数式を入れて他のノードと連動させられる。","related":""},"パラメータ":{"term":"パラメータ / Parameter","reading":"パラメータ","expand":"","def":"ノードの設定値。高さ、回数、サイズなど。parm と略される。Houdiniではこの値に数式を入れて他のノードと連動させられる。","related":""},"Parameter":{"term":"パラメータ / Parameter","reading":"パラメータ","expand":"","def":"ノードの設定値。高さ、回数、サイズなど。parm と略される。Houdiniではこの値に数式を入れて他のノードと連動させられる。","related":""},"Cook":{"term":"クック / Cook","reading":"クック","expand":"","def":"ノードが実際に計算を行うこと。パラメータや入力が変わると、そのノードと下流が再クックされる。重いノードを触ると待たされるのはこれが走っているため。","related":""},"クック / Cook":{"term":"クック / Cook","reading":"クック","expand":"","def":"ノードが実際に計算を行うこと。パラメータや入力が変わると、そのノードと下流が再クックされる。重いノードを触ると待たされるのはこれが走っているため。","related":""},"クック":{"term":"クック / Cook","reading":"クック","expand":"","def":"ノードが実際に計算を行うこと。パラメータや入力が変わると、そのノードと下流が再クックされる。重いノードを触ると待たされるのはこれが走っているため。","related":""},"Display flag":{"term":"表示フラグ / Display flag","reading":"ディスプレイ・フラグ","expand":"","def":"どのノードの結果を画面に表示するかの指定。ノードの端に付く点で示される。「途中のノードを見る」ができるのはこの仕組みのおかげ。","related":""},"表示フラグ":{"term":"表示フラグ / Display flag","reading":"ディスプレイ・フラグ","expand":"","def":"どのノードの結果を画面に表示するかの指定。ノードの端に付く点で示される。「途中のノードを見る」ができるのはこの仕組みのおかげ。","related":""},"表示フラグ / Display flag":{"term":"表示フラグ / Display flag","reading":"ディスプレイ・フラグ","expand":"","def":"どのノードの結果を画面に表示するかの指定。ノードの端に付く点で示される。「途中のノードを見る」ができるのはこの仕組みのおかげ。","related":""},"バイパス / Bypass":{"term":"バイパス / Bypass","reading":"バイパス","expand":"","def":"ノードを一時的に無効にして、入力をそのまま下流に流すこと。そのノードの効果を消して比較したいときに使う。","related":""},"Bypass":{"term":"バイパス / Bypass","reading":"バイパス","expand":"","def":"ノードを一時的に無効にして、入力をそのまま下流に流すこと。そのノードの効果を消して比較したいときに使う。","related":""},"バイパス":{"term":"バイパス / Bypass","reading":"バイパス","expand":"","def":"ノードを一時的に無効にして、入力をそのまま下流に流すこと。そのノードの効果を消して比較したいときに使う。","related":""},"HDA":{"term":"HDA","reading":"エイチディーエー","expand":"Houdini Digital Asset","def":"作ったネットワークを1つのノードとしてまとめ、部品として再利用できるようにしたもの。中身を隠して必要なパラメータだけ外に出せる。","related":""},".hip / .hipnc":{"term":".hip / .hipnc","reading":"ヒップ / ヒップエヌシー","expand":"","def":"Houdiniのシーンファイル。.hip が通常版で、.hipnc は非商用（Apprentice）版が保存する形式。.hipnc は商用版で開けない。","related":""},".hipnc":{"term":".hip / .hipnc","reading":"ヒップ / ヒップエヌシー","expand":"","def":"Houdiniのシーンファイル。.hip が通常版で、.hipnc は非商用（Apprentice）版が保存する形式。.hipnc は商用版で開けない。","related":""},".hip":{"term":".hip / .hipnc","reading":"ヒップ / ヒップエヌシー","expand":"","def":"Houdiniのシーンファイル。.hip が通常版で、.hipnc は非商用（Apprentice）版が保存する形式。.hipnc は商用版で開けない。","related":""},"hython":{"term":"hython","reading":"ハイソン","expand":"","def":"Houdiniの機能を使えるPython。GUIを開かずにノードを組んだりレンダリングしたりできるため、自動化の中心になる。","related":"HOM"},"HOM":{"term":"HOM","reading":"ホム","expand":"Houdini Object Model","def":"PythonからHoudiniを操作するためのAPI。`hou` という名前のモジュールとして提供される。","related":"hython"},"Apprentice":{"term":"Apprentice","reading":"アプレンティス","expand":"","def":"無料で使える非商用ライセンス。出力にウォーターマークが入り、解像度は1920x1080まで、保存は .hipnc のみという制限がある。学習用途としては十分。","related":""}}</script>
+<div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
+  /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
+     語の一覧は build_site.py が glossary.json から埋め込む。 */
+  (function () {
+    var dataEl = document.getElementById("glossary-data");
+    var terms = dataEl ? JSON.parse(dataEl.textContent) : {};
+    var pop = document.getElementById("popover");
+    var active = null;
+
+    function close() {
+      pop.hidden = true;
+      if (active) { active.removeAttribute("aria-expanded"); active = null; }
+    }
+
+    function open(button) {
+      var entry = terms[button.dataset.term];
+      if (!entry) { return; }
+
+      var meta = [];
+      if (entry.reading) { meta.push(entry.reading); }
+      if (entry.expand) { meta.push(entry.expand); }
+
+      pop.textContent = "";
+      var head = document.createElement("div");
+      head.className = "pop-term";
+      head.textContent = entry.term;
+      pop.appendChild(head);
+
+      if (meta.length) {
+        var m = document.createElement("div");
+        m.className = "pop-meta";
+        m.textContent = meta.join("  ·  ");
+        pop.appendChild(m);
+      }
+
+      var body = document.createElement("p");
+      body.className = "pop-def";
+      body.textContent = entry.def;
+      pop.appendChild(body);
+
+      if (entry.related) {
+        var rel = document.createElement("span");
+        rel.className = "pop-rel";
+        rel.textContent = "関連: " + entry.related;
+        body.appendChild(rel);
+      }
+
+      pop.hidden = false;
+
+      var rect = button.getBoundingClientRect();
+      var width = pop.offsetWidth;
+      var left = rect.left + window.scrollX;
+      var maxLeft = window.scrollX + document.documentElement.clientWidth - width - 16;
+      if (left > maxLeft) { left = maxLeft; }
+      if (left < window.scrollX + 16) { left = window.scrollX + 16; }
+
+      var top = rect.bottom + window.scrollY + 8;
+      if (rect.bottom + pop.offsetHeight + 24 > document.documentElement.clientHeight) {
+        var above = rect.top + window.scrollY - pop.offsetHeight - 8;
+        if (above > window.scrollY) { top = above; }
+      }
+
+      pop.style.left = left + "px";
+      pop.style.top = top + "px";
+
+      active = button;
+      button.setAttribute("aria-expanded", "true");
+    }
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest(".term");
+      if (button) {
+        event.preventDefault();
+        if (active === button) { close(); } else { open(button); }
+        return;
+      }
+      if (!event.target.closest("#popover")) { close(); }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") { close(); }
+    });
+
+    window.addEventListener("resize", close);
+  })();
+</script>
+
+
+<script>
+  /* タブ切り替え。ページの読み込みは起きない。 */
   (function () {
     var tabs = Array.prototype.slice.call(document.querySelectorAll(".nav-tab"));
     var panels = {};
@@ -1468,6 +2531,8 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 
     function show(name, push) {
       if (!panels[name]) { return; }
+      var modal = document.getElementById("expmodal");
+      if (modal && !modal.hidden) { modal.hidden = true; document.body.style.overflow = ""; }
       tabs.forEach(function (tab) {
         var on = tab.dataset.panel === name;
         tab.setAttribute("aria-selected", on ? "true" : "false");
@@ -1489,6 +2554,84 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
     window.addEventListener("hashchange", function () {
       var name = (window.location.hash || "").replace("#", "");
       if (panels[name]) { show(name, false); }
+    });
+  })();
+
+  /* 実験カードのポップアップ。中身は build_site.py が out/*_report.json から埋め込む。 */
+  (function () {
+    var dataEl = document.getElementById("experiment-data");
+    if (!dataEl) { return; }
+    var data = JSON.parse(dataEl.textContent);
+    var modal = document.getElementById("expmodal");
+    var body = document.getElementById("m-body");
+    var opener = null;
+
+    function esc(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function close() {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+      if (opener) { opener.focus(); opener = null; }
+    }
+
+    function open(no, button) {
+      var item = data[no];
+      if (!item) { return; }
+
+      var html = '<span class="m-no">実験 ' + esc(no) + '</span>';
+      html += '<h3 id="m-title">' + esc(item.title) + "</h3>";
+
+      if (item.shots && item.shots.length) {
+        html += '<div class="m-shots">';
+        item.shots.forEach(function (src) {
+          html += '<img src="' + esc(src) + '" alt="実験' + esc(no) + 'の結果">';
+        });
+        html += "</div>";
+      }
+
+      html += '<div class="m-sum">';
+      (item.summary || []).forEach(function (p) { html += "<p>" + p + "</p>"; });
+      html += "</div>";
+
+      if (item.points && item.points.length) {
+        html += '<p class="m-label">分かったこと</p><ul class="m-points">';
+        item.points.forEach(function (p) { html += "<li>" + p + "</li>"; });
+        html += "</ul>";
+      }
+
+      if (item.next && item.next.length) {
+        html += '<p class="m-label">次にやること</p><ul class="m-points">';
+        item.next.forEach(function (p) { html += "<li>" + esc(p) + "</li>"; });
+        html += "</ul>";
+      }
+
+      html += '<a class="m-more" href="' + esc(item.href) + '">全文のログを読む →</a>';
+
+      body.innerHTML = html;
+      body.scrollTop = 0;
+      modal.hidden = false;
+      modal.querySelector(".modal-card").scrollTop = 0;
+      document.body.style.overflow = "hidden";
+      opener = button || null;
+      document.getElementById("m-close").focus();
+    }
+
+    document.addEventListener("click", function (event) {
+      var card = event.target.closest("[data-exp]");
+      if (card) {
+        event.preventDefault();
+        open(card.dataset.exp, card);
+        return;
+      }
+      if (event.target.closest("#m-close")) { close(); return; }
+      if (modal.hidden) { return; }
+      if (event.target === modal) { close(); }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !modal.hidden) { close(); }
     });
   })();
 </script>

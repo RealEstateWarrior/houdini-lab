@@ -1,5 +1,6 @@
 <title>Houdini 実験室</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 <!--CSS-->
 </style>
@@ -17,7 +18,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>17 / 20</dd></div>
+      <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -45,7 +46,7 @@
             最小構成を確認するための実験。box <button class="term" data-term="SOP">SOP</button> で立方体を作り、
             <button class="term" data-term="mountain">mountain</button> SOP で<button class="term" data-term="ノイズ">ノイズ</button>による凹凸を与え、
             <button class="term" data-term="subdivide">subdivide</button> SOP で細分割し、color SOP で色を乗せた。
-            「<button class="term" data-term="ジオメトリ">ジオメトリ</button>を次のノードに流し込んで加工を積み重ねる」という
+            「<button class="term" data-term="ジオメトリ">ジオメトリ</button>を次の<button class="term" data-term="ノード">ノード</button>に流し込んで加工を積み重ねる」という
             Houdini の基本形をそのまま辿っている。
           </p>
         </div>
@@ -128,12 +129,12 @@
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li>プリミティブ数は1回ごとに<strong>正確に4倍</strong>。四角形1枚が4枚に割れるため。3回で64倍、6回で4096倍なので、回数を安易に増やすと破綻する。</li>
-          <li>ポイント数は常に「プリミティブ数 + 2」。オイラーの多面体定理から導ける。閉じた四角形メッシュでは各辺を2面が共有するので E = 2F、これを V − E + F = 2 に代入すると V = F + 2。実測7通りすべて一致した。</li>
+          <li><button class="term" data-term="プリミティブ">プリミティブ</button>数は1回ごとに<strong>正確に4倍</strong>。四角形1枚が4枚に割れるため。3回で64倍、6回で4096倍なので、回数を安易に増やすと破綻する。</li>
+          <li><button class="term" data-term="ポイント">ポイント</button>数は常に「プリミティブ数 + 2」。オイラーの多面体定理から導ける。閉じた四角形メッシュでは各辺を2面が共有するので E = 2F、これを V − E + F = 2 に代入すると V = F + 2。実測7通りすべて一致した。</li>
           <li><strong>1回目だけ一辺が縮まない</strong>。+X端を保持している点を調べたら (0.5, 0, 0) の1点だけで、これは元の +X 面の中心そのものだった。<button class="term" data-term="Catmull-Clark">Catmull-Clark</button> は各面の中心に新しい点を作るので、1回目はその新点が元の面上に乗る。2回目でその点も内側に引かれ 0.87847 に縮む。</li>
           <li>縮みの原因は分割ではなく<strong>平滑化</strong>だと確定した。OpenSubdiv Bilinear（平滑化せず分割するだけ）で3回分割しても一辺は 1.00000 のまま。面数は同じ384なので、分割量は同じで平滑化の有無だけが違う。</li>
           <li>一辺の縮み方は等比的に収束する。差は 0.02929 → 0.00726 → 0.00181 → 0.00045 で毎回およそ1/4。外挿した極限値は約 <span class="hi">0.83951</span>。</li>
-          <li>Mantra-Compatible Catmull-Clark は回数1〜5のどれでも一辺が 0.83951 で一定だった。上で外挿した極限値と一致する。つまりこのモードは繰り返して近づけるのではなく、<strong>極限曲面上の位置を直接求めている</strong>。</li>
+          <li><button class="term" data-term="Mantra">Mantra</button>-Compatible Catmull-Clark は回数1〜5のどれでも一辺が 0.83951 で一定だった。上で外挿した極限値と一致する。つまりこのモードは繰り返して近づけるのではなく、<strong>極限曲面上の位置を直接求めている</strong>。</li>
           <li><button class="term" data-term="ポリゴン">OpenSubdiv Loop</button> だけプリミティブ数が768になる（他は384）。三角形メッシュ向けの方式なので四角形が三角形に割られる。四角形を保ちたい場面では選べない。</li>
         </ul>
       </div>
@@ -150,7 +151,7 @@
         <div class="prose">
           <p>
             001で立てた「細かい凹凸を出すには先に分割数を上げる必要がある」という見込みを検証した。
-            <code>height = 0.35</code> は全変種で固定し、D と E だけ <code>elementsize</code>（ノイズの特徴サイズ）を
+            <code>height = 0.35</code> は全変種で固定し、D と E だけ <code>elementsize</code>（<button class="term" data-term="ノイズ">ノイズ</button>の特徴サイズ）を
             0.8 から 0.25 に下げている。
           </p>
           <p>
@@ -208,7 +209,7 @@
         <ul class="findings">
           <li>順序を入れ替えても点数・面数は同じ（どちらも98点 / 96面）。<strong>データの重さは変わらず、形だけが変わる</strong>。</li>
           <li>最大のずれは A が 0.03671、B が 0.08062 で<strong>Bが約2.2倍大きい</strong>。分割したあとにノイズをかけた方が凹凸が残る。001の見込みは正しかった。</li>
-          <li>理由も測れた。box に mountain をかけた直後は8点すべてが平均 0.03607 動いている。ところが subdivide を通すとずれは平均 0.02069・最大 0.03671 まで下がる。Catmull-Clark の平滑化は周囲の点を平均するので、<strong>せっかく作った凹凸をなめしてしまう</strong>。</li>
+          <li>理由も測れた。box に <button class="term" data-term="mountain">mountain</button> をかけた直後は8点すべてが平均 0.03607 動いている。ところが <button class="term" data-term="subdivide">subdivide</button> を通すとずれは平均 0.02069・最大 0.03671 まで下がる。<button class="term" data-term="Catmull-Clark">Catmull-Clark</button> の平滑化は周囲の点を平均するので、<strong>せっかく作った凹凸をなめしてしまう</strong>。</li>
           <li>C は B とほぼ同じずれだった（平均 0.02504 対 0.02479）。<strong>点を4倍に増やしても凹凸の大きさは変わらない</strong>。点数は振幅を決めていない。</li>
           <li>振幅を決めていたのは <code>elementsize</code> だった。C と D は同じ386点だが、0.8 から 0.25 に下げると平均のずれが 0.02504 → 0.03236 に増え、画も明確に岩になった。</li>
           <li>E は D と同じノイズ設定で点数だけ4倍。平均のずれは 0.03236 → 0.03239 でほぼ不変だが、画は同じ起伏をより滑らかな面で表現できている。つまり<strong>点数は解像度を、elementsize は振幅を決めている</strong>。</li>
@@ -235,7 +236,7 @@
 
         <div class="prose">
           <p>
-            003で「点数は解像度、<code>elementsize</code> は振幅」と分かった。では残りのパラメータは何を変えているのか。
+            003で「点数は解像度、<code>elementsize</code> は振幅」と分かった。では残りの<button class="term" data-term="パラメータ">パラメータ</button>は何を変えているのか。
           </p>
           <p>
             最初に分かったのは名前の問題だった。パラメータ名は <code>roughness</code> や <code>octaves</code> ではなく
@@ -270,7 +271,7 @@
           </figure>
         </div>
         <p class="hint">
-          固定条件はすべて共通: subdivide 4回（1538点）、<code>height</code> 0.35、<code>elementsize</code> 0.25。
+          固定条件はすべて共通: <button class="term" data-term="subdivide">subdivide</button> 4回（1538点）、<code>height</code> 0.35、<code>elementsize</code> 0.25。
           <strong>平均のずれはほぼ変わらないのに、なだらかな丘から棘だらけの形まで変わる。</strong>
         </p>
 
@@ -295,7 +296,7 @@
         <ul class="findings">
           <li>既定値は <code>rough</code> 0.5、<code>oct</code> 8、<code>lac</code> 1.841、<code>fractal</code> Hybrid Terrain、<code>basis</code> Simplex。<strong>使う前に実際のパラメータ名を確認する必要がある</strong>（<code>roughness</code> は存在しない）。</li>
           <li><code>rough</code> が細かさに最も強く効く。0.0 → 1.0 で食い違いが 0.01350 → 0.03233（約2.4倍）になる一方、平均のずれは 0.03377 → 0.03235 でほぼ変わらない。<strong>同じ振幅のまま、形の性質だけを変えるパラメータ</strong>。</li>
-          <li><code>rough</code> = 0.0 の数値は <code>fractal</code> = None と完全に一致した（平均 0.03377、最大 0.14799、食い違い 0.01350）。rough = 0 では追加の層が何も足さないので、層を重ねない単一ノイズに退化している。別経路で同じ結果に着いたので、この解釈は確かだと言える。</li>
+          <li><code>rough</code> = 0.0 の数値は <code>fractal</code> = None と完全に一致した（平均 0.03377、最大 0.14799、食い違い 0.01350）。rough = 0 では追加の層が何も足さないので、層を重ねない単一<button class="term" data-term="ノイズ">ノイズ</button>に退化している。別経路で同じ結果に着いたので、この解釈は確かだと言える。</li>
           <li><code>oct</code> は 1 → 3 では効くが、3 → 8 ではほぼ変わらない（差 0.00001）。点数が足りず細かい層を表現できていないため。<strong>oct を上げるなら点数も上げないと無駄</strong>。003の「点数は解像度を決める」が別角度から確認できた。</li>
           <li><code>lac</code>（層ごとの周波数の開き）も細かさに効く（1.5 → 4.0 で 0.01259 → 0.02218）。ただし lac = 1.5 では平均のずれも 0.02625 に下がるので、rough のようにきれいに性質だけを変えるわけではない。</li>
           <li><code>fractal</code> の4種類は今回の条件では差が小さかった（食い違い 0.01350〜0.01786）。地形向けの方式が揃っているので、平面の地形ならもっと差が出る可能性がある。</li>
@@ -320,14 +321,14 @@
         <div class="prose">
           <p>
             004で <code>basis</code> に14種類あることが分かったので、同じ条件で全部描き出した。
-            <code>height</code> 0.35、<code>elementsize</code> 0.25、subdivide 4回（1538点）で固定し、
+            <code>height</code> 0.35、<code>elementsize</code> 0.25、<button class="term" data-term="subdivide">subdivide</button> 4回（1538点）で固定し、
             <code>basis</code> だけを変えている。
           </p>
           <p>
-            結果は他のパラメータと性質がまったく違った。<code>rough</code> は振幅を変えずに形の性質だけを
+            結果は他の<button class="term" data-term="パラメータ">パラメータ</button>と性質がまったく違った。<code>rough</code> は振幅を変えずに形の性質だけを
             変えたが、<strong><code>basis</code> は振幅も性質も両方変える</strong>。
             指標には004の「隣との食い違い」に加えて、<strong>外に出た点の割合</strong>を足した。
-            ノイズが外向きに押すのか内向きに削るのかで、使いどころが変わるため。
+            <button class="term" data-term="ノイズ">ノイズ</button>が外向きに押すのか内向きに削るのかで、使いどころが変わるため。
           </p>
         </div>
 
@@ -459,17 +460,17 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><code>height</code> は純粋な倍率だった。「最大 / height」は 0.0875 から 0.7 まで<strong>8倍の範囲で小数点以下4桁まで一定</strong>（simplex 0.3759、worleyFA 0.4951）。height を2倍にすればずれもきっちり2倍になる。</li>
-          <li><strong>005で疑った上限は存在しなかった。</strong> セル系の最大が揃って見えたのは、セル系ノイズのピーク値の分布が互いに似ているため。005のセル系7種類の「最大 / height」を計算すると 0.47〜0.50 に収まる一方、simplex は 0.376 で明確に違う。上限ではなく種類ごとの固有の比率だった。</li>
-          <li>height = 1.4 で比率が両方とも 0.307 に落ちたのは、<strong>私の指標が壊れているため</strong>。基準形の半径は約 0.42（バウンディングボックスの一辺 0.84192 の半分）で、測れた最大のずれ 0.4312 / 0.4298 はこれとほぼ一致する。中心を貫通するほど押し込まれると「中心からの距離の差」では値が頭打ちになる。</li>
+          <li><strong>005で疑った上限は存在しなかった。</strong> セル系の最大が揃って見えたのは、セル系<button class="term" data-term="ノイズ">ノイズ</button>のピーク値の分布が互いに似ているため。005のセル系7種類の「最大 / height」を計算すると 0.47〜0.50 に収まる一方、simplex は 0.376 で明確に違う。上限ではなく種類ごとの固有の比率だった。</li>
+          <li>height = 1.4 で比率が両方とも 0.307 に落ちたのは、<strong>私の指標が壊れているため</strong>。基準形の半径は約 0.42（<button class="term" data-term="バウンディングボックス">バウンディングボックス</button>の一辺 0.84192 の半分）で、測れた最大のずれ 0.4312 / 0.4298 はこれとほぼ一致する。中心を貫通するほど押し込まれると「中心からの距離の差」では値が頭打ちになる。</li>
           <li>つまりこの指標は<strong>ずれが対象の半径より十分小さいときにしか使えない</strong>。005の観察を「上限がある」と解釈しかけたのは、この限界を意識していなかったため。指標を作ったら、それが壊れる条件も押さえておく必要がある。</li>
           <li><code>clipmin</code> / <code>clipmax</code> の既定は 0.0 / 1.0、<code>dogain</code> / <code>dobias</code> は既定で無効。005までの測定に余計な処理は入っていなかったと確認できた。</li>
           <li><code>gain</code> は振幅の倍率。0.25 / 0.5 / 0.75 で平均のずれが 0.01494 / 0.03237 / 0.05519 と増える一方、<strong>外向きの点の割合は 35.8% のまま完全に動かない</strong>。強さだけを変える。</li>
-          <li><strong><code>bias</code> は外向きと内向きの比率を直接変える。</strong> 0.25 で外向き 0.9%、0.5 で 35.8%、0.75 で 98.7%。005では basis を選ぶことでしか得られなかった「突起か窪みか」の制御が、1つのパラメータで連続的にできる。</li>
+          <li><strong><code>bias</code> は外向きと内向きの比率を直接変える。</strong> 0.25 で外向き 0.9%、0.5 で 35.8%、0.75 で 98.7%。005では basis を選ぶことでしか得られなかった「突起か窪みか」の制御が、1つの<button class="term" data-term="パラメータ">パラメータ</button>で連続的にできる。</li>
           <li>ただし bias を 0.5 から動かすと平均のずれも増える（0.03237 → 0.09756 / 0.07644）。分布が片側に寄るとゼロから離れた点が増えるため。形の偏りだけを変えるわけではない。</li>
         </ul>
 
         <p class="callout">
-          <strong>mountain のパラメータ地図（実験003〜006のまとめ）</strong><br>
+          <strong><button class="term" data-term="mountain">mountain</button> のパラメータ地図（実験003〜006のまとめ）</strong><br>
           振幅を決めるのは <code>height</code>（純粋な倍率）と <code>gain</code>（倍率）。
           細かさを決めるのは <code>rough</code>（最も強い）、<code>lac</code>、<code>oct</code>（点数が足りている範囲で）。
           外向きか内向きかを決めるのは <code>bias</code>（連続的）と <code>basis</code>（種類で決まる）。
@@ -536,17 +537,17 @@
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li>勾配は解像度によらない量には<strong>ならなかった</strong>。分割数を上げるほど増え続ける（0.13595 → 0.16634 → 0.18745 → 0.20430）。fBm 系のノイズは細かい成分を何段も持つので、細かく刻むほど急な斜面が新たに見えてくるため。</li>
+          <li>勾配は解像度によらない量には<strong>ならなかった</strong>。分割数を上げるほど増え続ける（0.13595 → 0.16634 → 0.18745 → 0.20430）。fBm 系の<button class="term" data-term="ノイズ">ノイズ</button>は細かい成分を何段も持つので、細かく刻むほど急な斜面が新たに見えてくるため。</li>
           <li>ただしこの性質のおかげで別のことが分かる。<strong>勾配が増えなくなったら、その解像度でその形を表現しきれている</strong>という判定に使える。oct = 1 なら80分割で十分、oct = 8 なら160分割でもまだ足りない。</li>
           <li>低い解像度では余分なオクターブがまったく見えない。20分割では oct = 2 / 4 / 8 がほぼ同値（0.13673 / 0.13593 / 0.13595）で、順序の逆転まで起きている。004で球体を使って得た結論が平面でも再現し、解像度との関係まで数字で見えた。</li>
           <li>高さの平均は40分割以降ほぼ一定（0.0819前後）なのに、勾配は160分割でも伸び続ける。<strong>形が正しく見えるのに必要な解像度は、高さが合う解像度よりはるかに高い。</strong> 点数を決めるときは高さではなく細かさを基準にする。</li>
           <li>最大の高さも解像度とともに増える（0.29407 → 0.33513）。005・006で使った「最大のずれ」も同じ性質を持っていたことになる。</li>
           <li>fractal は平面で明確に差が出た。滑らかな順に None（0.12216）、Terrain（0.14766）、Hybrid Terrain（0.18745）、Standard fBm（0.19064）で1.6倍の開き。一方で平均の高さはどれも 0.0818〜0.0839 とほぼ同じなので、<strong>fractal は振幅ではなく細かさを変える</strong>と確定した。004で立てた「平面ならもっと差が出るかもしれない」は当たっていた。</li>
-          <li>grid SOP の既定は 10×10 のサイズ、分割 10×10、向きは ZX 平面（水平）。水平なので mountain の押し出しは真上になり、高さの差をそのまま測れる。</li>
+          <li>grid <button class="term" data-term="SOP">SOP</button> の既定は 10×10 のサイズ、分割 10×10、向きは ZX 平面（水平）。水平なので <button class="term" data-term="mountain">mountain</button> の押し出しは真上になり、高さの差をそのまま測れる。</li>
         </ul>
 
         <p class="callout callout--note">
-          カメラのフレーミングを直した。以前はバウンディングボックスを立方体とみなして距離を決めていたため、
+          カメラのフレーミングを直した。以前は<button class="term" data-term="バウンディングボックス">バウンディングボックス</button>を立方体とみなして距離を決めていたため、
           平たい地形が画面の4分の1ほどにしか写らなかった。8つの隅をカメラ空間に投影して必要な距離を解く方式に変更した。
         </p>
       </div>
@@ -562,7 +563,7 @@
 
         <div class="prose">
           <p>
-            面の上に点をばらまき、その点ごとにジオメトリを複製する。
+            面の上に点をばらまき、その点ごとに<button class="term" data-term="ジオメトリ">ジオメトリ</button>を複製する。
             草や岩や建物を並べるのは全部このパターンで行う、プロシージャルモデリングの中核。
           </p>
           <p>
@@ -621,20 +622,20 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><code>scatter</code> の <code>npts</code> は正確に守られる。50 / 200 / 800 を指定して実際も 50 / 200 / 800。おおよその数ではなく指定した数ちょうどが出る。</li>
-          <li>scatter の出力は <code>P</code> だけでなく <code>N</code> も持つ。元の面の法線が引き継がれる。この N があるかないかで次の挙動が変わる。</li>
-          <li>copy to points の点数は<strong>掛け算そのまま</strong>。散布点200個 × テンプレート20点 = 4000点。テンプレートが重いと一気に破綻するので、この掛け算を意識する。</li>
+          <li><button class="term" data-term="scatter">scatter</button> の出力は <code>P</code> だけでなく <code>N</code> も持つ。元の面の<button class="term" data-term="法線">法線</button>が引き継がれる。この N があるかないかで次の挙動が変わる。</li>
+          <li><button class="term" data-term="copy to points">copy to points</button> の点数は<strong>掛け算そのまま</strong>。散布点200個 × テンプレート20点 = 4000点。テンプレートが重いと一気に破綻するので、この掛け算を意識する。</li>
           <li>N を持たない点に複製すると、複製は<strong>一切回転しない</strong>。ばらつきは平均も最大も 0.00度で、200個すべてが同じ向きに立つ。</li>
           <li>N を持つ点に複製すると点ごとに回転する。ばらつきは平均 10.84度、最大 31.69度で、これは地面の傾きのばらつきそのもの。</li>
           <li><strong>ただし N はテンプレートの Y軸ではなく Z軸に対応する。</strong> tube の既定（Y軸向き）のまま複製すると、複製の軸と N の角度が全200個すべて正確に 90.00度 ＝ 完全に横倒しになる。Z軸向きに作り直すと全200個すべて 0.00度 で一致した。</li>
           <li><code>tube</code> の <code>orient</code> の既定は Y軸なので、何も考えずに複製すると必ず横倒しになる。地面に立てたいならテンプレートを Z軸向きに作る。</li>
           <li><code>pscale</code> は大きさだけを変える。向きのばらつきは 10.84度 / 31.69度 のまま同じで、大きさが 0.45固定 から 0.16〜0.63 に広がった。向きと大きさは独立している。</li>
-          <li><code>tube</code> の <code>type</code> の既定は Primitive で、1点 / 1面の「本物の円柱プリミティブ」になる。ポリゴンとして扱うには Polygon に変える。これに気づかず最初は1点のテンプレートを200個複製していた。</li>
+          <li><code>tube</code> の <code>type</code> の既定は Primitive で、1点 / 1面の「本物の円柱<button class="term" data-term="プリミティブ">プリミティブ</button>」になる。<button class="term" data-term="ポリゴン">ポリゴン</button>として扱うには Polygon に変える。これに気づかず最初は1点のテンプレートを200個複製していた。</li>
         </ul>
 
         <p class="callout">
           <strong>実用の型</strong>: 地面 → <code>normal</code> → <code>scatter</code> → <code>copy to points</code>。
           テンプレートは Z軸向きに作る。大きさを変えたいなら散布点に <code>pscale</code> を持たせる。
-          この4ノードで「地面に物を生やす」が完成する。
+          この4<button class="term" data-term="ノード">ノード</button>で「地面に物を生やす」が完成する。
         </p>
 
         <p class="callout callout--note">
@@ -656,7 +657,7 @@
 
         <div class="prose">
           <p>
-            <button class="term" data-term="VEX">VEX</button> は「ノードを並べる代わりに数行書く」ための言語。
+            <button class="term" data-term="VEX">VEX</button> は「<button class="term" data-term="ノード">ノード</button>を並べる代わりに数行書く」ための言語。
             ただし初心者が最初につまずくのは文法ではなく、<strong>そのコードが何に対して何回走るのか</strong>という点。
           </p>
           <p>
@@ -701,13 +702,13 @@
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li>実行対象は5種類（Detail / Primitives / Points / Vertices / Numbers）で既定は Points。<strong>同じコードでも、実行対象によって結果の置き場所が変わる</strong>。Points なら点に、Primitives なら面に、Detail ならジオメトリ全体に1つだけ作られる。</li>
-          <li>Numbers だけはアトリビュートが作られない。ジオメトリの要素ではなく指定した個数の番号に対して走るモードなので、書き込む先がないため。</li>
+          <li>実行対象は5種類（Detail / Primitives / Points / Vertices / Numbers）で既定は Points。<strong>同じコードでも、実行対象によって結果の置き場所が変わる</strong>。Points なら点に、Primitives なら面に、Detail なら<button class="term" data-term="ジオメトリ">ジオメトリ</button>全体に1つだけ作られる。</li>
+          <li>Numbers だけは<button class="term" data-term="アトリビュート">アトリビュート</button>が作られない。ジオメトリの要素ではなく指定した個数の番号に対して走るモードなので、書き込む先がないため。</li>
           <li>予測してから測った。sin の値域は -1〜+1 なので 0.5 倍すれば y は -0.5〜+0.5 に収まるはず。実測は <strong>-0.499983 〜 +0.499983</strong>。</li>
           <li>この 0.000017 のずれも説明がつく。20分割なので点の間隔は 10/19 = 0.526316。sin(2x) が最大になる x = π/4 ≈ 0.785398 に最も近い格子点は x = 0.789474 で、そこでの値を計算すると 0.4999834。実測と<strong>小数点以下6桁まで一致</strong>する。誤差ではなく格子がピークをまたいでいるだけだった。</li>
           <li><code>rand(@ptnum)</code> は完全に再現する。別のノードで2回走らせて全400点が小数点以下9桁まで一致した。乱数といっても点番号から決まる固定値なので、実行のたびに変わることはない。</li>
-          <li>処理時間の計測は<strong>二度失敗した</strong>。<code>cook(force=True)</code> を <code>perf_counter</code> で挟む方法では、計算量を100倍にしても時間が 0.9倍 にしかならない。ジオメトリを要求した時点で初めて計算されるため、計測区間の外で処理が走っていた。公式の <code>hou.perfMon</code> でも同じ値が返り、同じノードを焼き直す限りキャッシュが効いてしまうと分かった。</li>
-          <li>三度目に成功した。<strong>毎回新しいノードを作って初回のクックを測る</strong>。キャッシュが存在しないので必ず計算が走る。計算量100倍の処理が 17.7倍 の時間になり、結果の最大yも 0.49999 から 0.32169 に変わった。<strong>時間と結果の両方が動いたので本物</strong>。</li>
+          <li>処理時間の計測は<strong>二度失敗した</strong>。<code>cook(force=True)</code> を <code>perf_counter</code> で挟む方法では、計算量を100倍にしても時間が 0.9倍 にしかならない。ジオメトリを要求した時点で初めて計算されるため、計測区間の外で処理が走っていた。公式の <code>hou.perfMon</code> でも同じ値が返り、同じノードを焼き直す限り<button class="term" data-term="キャッシュ">キャッシュ</button>が効いてしまうと分かった。</li>
+          <li>三度目に成功した。<strong>毎回新しいノードを作って初回の<button class="term" data-term="クック">クック</button>を測る</strong>。キャッシュが存在しないので必ず計算が走る。計算量100倍の処理が 17.7倍 の時間になり、結果の最大yも 0.49999 から 0.32169 に変わった。<strong>時間と結果の両方が動いたので本物</strong>。</li>
           <li>得られた数字。64万点に sin × cos を1回かけて 2.47ミリ秒、256万点で 4.58ミリ秒。この2点から、<strong>1点あたりの限界コストは約1.1ナノ秒（毎秒約9億点）、固定の費用が約1.8ミリ秒</strong>。</li>
           <li>つまり「VEXが速い」効果は点数が多いときにしか出ない。4万点では1.49ミリ秒かかり、そのほとんどが固定費。少ない点数ならどう書いても体感は変わらない。</li>
         </ul>
@@ -775,7 +776,7 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li>Block End の <code>Template Path</code> が空だと「Missing template geometry」で止まる。何を何回繰り返すかはここから決まる。</li>
-          <li>何回目かを知るには、メタデータ用の Block Begin をもう1つ置き、ディテールアトリビュート <code>iteration</code> を読む。<code>numiterations</code> で総回数も取れる。</li>
+          <li>何回目かを知るには、メタデータ用の Block Begin をもう1つ置き、<button class="term" data-term="ディテールアトリビュート">ディテールアトリビュート</button> <code>iteration</code> を読む。<code>numiterations</code> で総回数も取れる。</li>
           <li><strong>取り出した中では <code>@primnum</code> が常に 0 になる。</strong> 1個だけを切り出した状態で処理しているため。「何番目の面か」を使いたいならメタデータを読むしかない。</li>
           <li><strong><code>detail()</code> のパスには <code>op:</code> が要る。</strong> <code>detail("../メタデータ", "iteration", 0)</code> と書くとファイルパスとして扱われ、<strong>エラーも警告も出さずに 0 を返す</strong>。ループが動いていないように見えるので原因が分かりにくい。</li>
           <li>for-each は面の数に比例して遅くなる（1面あたり約0.05ミリ秒）。VEX はほとんど変わらず、1.3〜2.2ミリ秒は実験009で測った固定費そのもの。差は 49面で 8.7倍、3,969面で <strong>85.9倍</strong>。</li>
@@ -858,11 +859,11 @@
         <ul class="findings">
           <li><strong>予測は当たった。</strong> 3回分割なら重み 3.0 で折れ角が 90.00度 になり、分割前の box とまったく同じ鋭さになる。「重み N なら N 回分の分割まで角が保たれる」でよい。</li>
           <li>重みを3より上げても何も変わらない（4.0 も 10.0 も 90.00度）。分割回数を超える重みは無駄。逆に分割回数を後から増やすなら重みも上げる必要がある。</li>
-          <li>点数・面数はどの重みでも 386点 / 384面で変わらない。<strong>crease は形の計算方法を変えるだけで、ジオメトリを増やさない。</strong> 角を残すためにポリゴンを足す必要はない。</li>
+          <li>点数・面数はどの重みでも 386点 / 384面で変わらない。<strong>crease は形の計算方法を変えるだけで、<button class="term" data-term="ジオメトリ">ジオメトリ</button>を増やさない。</strong> 角を残すために<button class="term" data-term="ポリゴン">ポリゴン</button>を足す必要はない。</li>
           <li><strong>2つの指標が違う答えを出した。</strong> 一辺の長さは重み 1.0 で 1.00000 に達し、そこから変わらない。この指標だけを見ていたら「重み1で十分」と判断してしまう。しかし折れ角は 28.07度 で、画を見れば角がはっきり丸い。</li>
           <li>一辺の長さは「どこまで縮んだか」しか測っておらず、「角が鋭いか」は測れていない。<strong>何を知りたいかによって見るべき指標が変わる。</strong></li>
           <li>重み 0.5 のとき一辺は 0.92459 で、これは crease なし（0.84918）と重み1.0（1.00000）の<strong>ちょうど中間</strong>（小数点以下5桁まで一致）。小数の重みは2つの結果を線形に混ぜている。ただし折れ角のほうは線形にならない。</li>
-          <li>crease SOP の Operation の既定は「Add To Existing Value」で、既にある値に足し込む。重みを決め打ちしたいなら「Set」にする。既定のまま何度も通すと重みが積み上がる。</li>
+          <li>crease <button class="term" data-term="SOP">SOP</button> の Operation の既定は「Add To Existing Value」で、既にある値に足し込む。重みを決め打ちしたいなら「Set」にする。既定のまま何度も通すと重みが積み上がる。</li>
           <li>crease SOP が書き込む属性名の既定は <code>creaseweight</code> で、subdivide はこの名前を自動で見る。名前を変えるなら subdivide 側の Creases にも同じ名前を指定する。</li>
         </ul>
       </div>
@@ -878,7 +879,7 @@
 
         <div class="prose">
           <p>
-            ここまではノイズで有機的な形を作ってきた。建物や機械のような硬い形は別の道具で作る。
+            ここまでは<button class="term" data-term="ノイズ">ノイズ</button>で有機的な形を作ってきた。建物や機械のような硬い形は別の道具で作る。
             面を押し出す <button class="term" data-term="polyextrude">polyextrude</button> と、
             立体どうしを足し引きする <button class="term" data-term="boolean">boolean</button>。
           </p>
@@ -923,13 +924,13 @@
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li>polyextrude の<strong>距離は指定どおりに出る</strong>（0.5 / 1.0 / 2.0 → 差ゼロ）。ノイズ系のパラメータが種類によって実際のずれが9倍も違ったのとは対照的で、押し出しは寸法をそのまま指定できる。</li>
+          <li>polyextrude の<strong>距離は指定どおりに出る</strong>（0.5 / 1.0 / 2.0 → 差ゼロ）。ノイズ系の<button class="term" data-term="パラメータ">パラメータ</button>が種類によって実際のずれが9倍も違ったのとは対照的で、押し出しは寸法をそのまま指定できる。</li>
           <li>点数・面数は距離によらず一定（41点 / 32面）。<strong>形を変えても重さは変わらない。</strong> 内訳も説明できる。5×5 の grid は境界に16点あり、押し出すとそれが複製されて 25+16 = 41点。面は上面16 + 側面16 = 32面。</li>
           <li><code>inset</code> は各辺から内側に引っ込む距離。0.3 なら両側から 0.6 縮んで 10.0 → 9.40000、0.8 なら 1.6 縮んで 8.40000。指定した値がそのまま効く。</li>
           <li>パラメータ名は <code>dist</code> と <code>inset</code>、分割数は <code>divisions</code> ではなく <code>divs</code>。ここでも一般的な名前は通じなかった。</li>
           <li>boolean には8演算ある。Union / Intersect / Subtract のほかに <strong>Shatter</strong>（Aを砕いて全破片を残す）、Seam（境界線だけ）、Detect（検出のみ）、Resolve（自己交差の解消）。</li>
           <li>Shatter の体積は 8.00000 で box と完全一致。<strong>砕いても全破片が残るので体積は変わらない。</strong> 破壊エフェクトの下準備がこれ。</li>
-          <li>sphere SOP で rows / cols を 30 にしても面数は 80 のままだった。<strong>ポリゴン球は rows / cols ではなく多面体の細分を使っている。</strong></li>
+          <li>sphere <button class="term" data-term="SOP">SOP</button> で rows / cols を 30 にしても面数は 80 のままだった。<strong><button class="term" data-term="ポリゴン">ポリゴン</button>球は rows / cols ではなく多面体の細分を使っている。</strong></li>
           <li>その粗い球（80面）の体積は 9.00180。半径 1.35 の真球なら 10.30575 なので約13%小さい。<strong>ポリゴンで近似した球は必ず内側に寄る。</strong></li>
         </ul>
       </div>
@@ -993,13 +994,13 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li>連番の仕組みは正しい。自由落下の式との差は最大 0.0000006 で、これは小数の計算精度そのもの。</li>
-          <li>20枚の書き出しに 1.18秒（1枚59ミリ秒）。60フレーム全部でも3.5秒程度で、<strong>レンダリングの重さは問題にならない</strong>。</li>
+          <li>20枚の書き出しに 1.18秒（1枚59ミリ秒）。60フレーム全部でも3.5秒程度で、<strong><button class="term" data-term="レンダリング">レンダリング</button>の重さは問題にならない</strong>。</li>
           <li><strong>カメラは全フレームを覆う範囲で一度だけ決める。</strong> フレームごとに枠を合わせ直すと、対象が動いているのか大きさが変わっているのかを画から判断できなくなる。</li>
           <li>出力は2形式にした。PDFには動きを載せられないので<strong>コンタクトシート</strong>、HTMLには<strong>GIF</strong>。同じ連番から両方を作る。</li>
-          <li><strong>パーティクルは SOP に1つもない（0種）。</strong> すべて DOP 側（67種）。SOPをつなぐだけでは始められず、DOPネットワークを組む必要がある。</li>
-          <li>一方で剛体は SOP に 47種、布は 22種ある。<strong>SOPレベルのラッパーが充実している分野の方が入口として易しい。</strong> 当初はパーティクルから始める予定だったが、<strong>RBD か Vellum から入る方が理にかなっている</strong>と分かったので順番を変える。</li>
+          <li><strong>パーティクルは <button class="term" data-term="SOP">SOP</button> に1つもない（0種）。</strong> すべて <button class="term" data-term="DOP">DOP</button> 側（67種）。SOPをつなぐだけでは始められず、DOP<button class="term" data-term="ネットワーク">ネットワーク</button>を組む必要がある。</li>
+          <li>一方で剛体は SOP に 47種、布は 22種ある。<strong>SOPレベルのラッパーが充実している分野の方が入口として易しい。</strong> 当初はパーティクルから始める予定だったが、<strong><button class="term" data-term="RBD">RBD</button> か <button class="term" data-term="Vellum">Vellum</button> から入る方が理にかなっている</strong>と分かったので順番を変える。</li>
           <li><code>solver</code> SOP はロックされたアセットで、中を触るには <code>allowEditingOfContents()</code> が要る。しかも中身は dopnet と4つの null で、想像していた単純な構造ではなかった。</li>
-          <li>そのため今回の自由落下は数式で書いており、<strong>これはシミュレーションではない</strong>（前のフレームの結果を使っていない）。本物のシミュレーションは次から。</li>
+          <li>そのため今回の自由落下は数式で書いており、<strong>これは<button class="term" data-term="シミュレーション">シミュレーション</button>ではない</strong>（前のフレームの結果を使っていない）。本物のシミュレーションは次から。</li>
         </ul>
       </div>
     </article>
@@ -1016,7 +1017,7 @@
           <p>
             ここまでの実験はすべて「1フレームの計算」だったが、今回は前のフレームの結果を次に渡していく
             本物の<button class="term" data-term="シミュレーション">シミュレーション</button>。
-            <button class="term" data-term="RBD">RBD</button> は SOP レベルのノードが47種あり、入口として易しい。
+            <button class="term" data-term="RBD">RBD</button> は <button class="term" data-term="SOP">SOP</button> レベルの<button class="term" data-term="ノード">ノード</button>が47種あり、入口として易しい。
           </p>
           <p>
             シミュレーションは結果が複雑で、画を見ても正しいか判断しづらい。そこで検証の軸を決めた。
@@ -1053,13 +1054,13 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><strong>体積は完全に保たれた。</strong> 全6フレームで 8.00000 ちょうど、振れ幅 0.0000000。元の箱の体積とも完全一致。剛体シミュレーションとして正しく動いている。</li>
-          <li>これは画を見ても分からない種類の検証。破片が散らばった絵から正しさは判断できないが、体積が保たれていれば物質は増減していないと言える。実験012で boolean に使った検算と同じ考え方。</li>
+          <li>これは画を見ても分からない種類の検証。破片が散らばった絵から正しさは判断できないが、体積が保たれていれば物質は増減していないと言える。実験012で <button class="term" data-term="boolean">boolean</button> に使った検算と同じ考え方。</li>
           <li><strong>落下中は砕けない。</strong> フレーム1〜10で横の広がりは 2.0000 のまま完全に不変。砕いてはあるが、破片はくっついたまま1つの塊として落ちる。</li>
           <li>着地の瞬間に広がり始める。フレーム20で最下点が −0.0492（地面を少し突き抜ける）、同時に広がりが 2.0589 に。その後 3.7483 → 5.6408 で<strong>元の2.8倍まで散らばった</strong>。同時に全体の高さは 2.0000 → 1.9498 に下がる。</li>
-          <li>最下点は着地時に −0.0492 まで沈み、その後 −0.0219 で落ち着く。<strong>破片は地面を少し突き抜けたまま止まる。</strong> ソルバが衝突判定に持たせている余裕によるもので、厳密に地面の上には乗らない。</li>
-          <li>rbdmaterialfracture のコンクリートモードで 25個の破片（282点 / 191面）。破片の区別は <code>name</code> というプリミティブ属性で管理されている。</li>
+          <li>最下点は着地時に −0.0492 まで沈み、その後 −0.0219 で落ち着く。<strong>破片は地面を少し突き抜けたまま止まる。</strong> <button class="term" data-term="ソルバ">ソルバ</button>が衝突判定に持たせている余裕によるもので、厳密に地面の上には乗らない。</li>
+          <li>rbdmaterialfracture のコンクリートモードで 25個の破片（282点 / 191面）。破片の区別は <code>name</code> という<button class="term" data-term="プリミティブ">プリミティブ</button>属性で管理されている。</li>
           <li>計算は速い。最初のフレームが 0.38秒、以降 0.02〜0.05秒。全部で1秒程度で、この規模なら実験を回すのに支障はない。</li>
-          <li>ソルバの既定は <code>substeps</code> = 10、<code>cacheenabled</code> = 1。1フレームを10回に分けて計算し、結果は自動でキャッシュされる。地面は <code>useground</code> で用意でき、別途ジオメトリは要らない。</li>
+          <li>ソルバの既定は <code>substeps</code> = 10、<code>cacheenabled</code> = 1。1フレームを10回に分けて計算し、結果は自動で<button class="term" data-term="キャッシュ">キャッシュ</button>される。地面は <code>useground</code> で用意でき、別途<button class="term" data-term="ジオメトリ">ジオメトリ</button>は要らない。</li>
         </ul>
       </div>
     </article>
@@ -1080,7 +1081,7 @@
           </p>
           <p>
             さらに伸びにくさを下げれば保存が崩れるはず——と考えて試したら、
-            <strong>まったく変化しなかった</strong>。原因を追ったら、このパラメータの本当の仕組みが分かった。
+            <strong>まったく変化しなかった</strong>。原因を追ったら、この<button class="term" data-term="パラメータ">パラメータ</button>の本当の仕組みが分かった。
           </p>
         </div>
 
@@ -1113,12 +1114,12 @@
         <ul class="findings">
           <li><strong>点数は全フレームで 900 のまま。</strong> 布は形が変わるだけで点が増減しない。剛体の体積保存にあたるのが、布ではこの「構造が変わらないこと」。</li>
           <li>たわませただけでは辺の長さはほとんど変わらない（伸び 0.272%）。自重で垂れるだけでは張力がかからないため。</li>
-          <li>両端をピンで留めて吊るすと 0.842% まで増えた。<strong>たわむ場合の3.1倍。</strong> 指標が張力を捉えられていると確認できた。</li>
+          <li>両端を<button class="term" data-term="ピン">ピン</button>で留めて吊るすと 0.842% まで増えた。<strong>たわむ場合の3.1倍。</strong> 指標が張力を捉えられていると確認できた。</li>
           <li><strong>かたさを 1.0 から 0.02 に下げても結果がまったく変わらなかった。</strong> 50分の1にしたのに伸び率は小数点以下5桁まで同じ。</li>
           <li>原因は <code>stretchstiffnessexp</code> で、<strong>既定値が 10</strong>。実効的なかたさは「値 × 10の指数乗」なので、既定は 1.0 × 10¹⁰ という極端に硬い状態。0.02 にしても 2 × 10⁸ でやはり伸びない。</li>
           <li><strong>画面に見えている数字だけを触っても実際にはほとんど変わらない。</strong> 効くのは指数のほう。布が硬すぎる・柔らかすぎると感じたら、値ではなく指数を疑う。</li>
           <li>指数を 0 まで下げると伸び 174%、−6 まで下げると 253% になり、布というよりゴムの挙動になる。</li>
-          <li>ピンの指定でもつまずいた。<code>grouptype</code> の既定はプリミティブなので、点のグループを渡すなら points へ切り替える。さらに <code>group</code> を空のままにすると<strong>「全部が対象」と解釈され、布全体がピン留めされて一切動かなくなる</strong>（最下点が全フレーム 3.0000 のまま、という症状で気づいた）。</li>
+          <li>ピンの指定でもつまずいた。<code>grouptype</code> の既定は<button class="term" data-term="プリミティブ">プリミティブ</button>なので、点の<button class="term" data-term="グループ">グループ</button>を渡すなら points へ切り替える。さらに <code>group</code> を空のままにすると<strong>「全部が対象」と解釈され、布全体がピン留めされて一切動かなくなる</strong>（最下点が全フレーム 3.0000 のまま、という症状で気づいた）。</li>
         </ul>
       </div>
     </article>
@@ -1134,11 +1135,11 @@
         <div class="prose">
           <p>
             剛体は体積、布は辺の長さが保たれた。煙は<button class="term" data-term="ボリューム">ボリューム</button>なので、
-            測るのは密度の合計になる。
+            測るのは<button class="term" data-term="密度">密度</button>の合計になる。
           </p>
           <p>
             当初は「煙は消えていくので密度は減るはず」と考えたが、<strong>実際には増えた</strong>。
-            発生源が毎フレーム供給し続けるためで、減衰と供給が釣り合う。
+            <button class="term" data-term="発生源">発生源</button>が毎フレーム供給し続けるためで、減衰と供給が釣り合う。
             そこで釣り合いを式に立てて実測と突き合わせた。
           </p>
         </div>
@@ -1177,12 +1178,12 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><strong>当初の予想は外れた。</strong> 煙は消えるので減ると思っていたが、供給が続く限り増える。減る量より足される量が多い間は増え続ける。</li>
-          <li>散逸なしのとき、密度の合計は<strong>フレーム番号とぴったり同じ比</strong>になった（46フレーム目で46.00000倍、差ゼロ）。毎フレーム同じ量が足され一切減らないので当然だが、これがきれいに出ることでシミュレーションが余計なことをしていないと確認できる。</li>
+          <li><button class="term" data-term="散逸">散逸</button>なしのとき、密度の合計は<strong>フレーム番号とぴったり同じ比</strong>になった（46フレーム目で46.00000倍、差ゼロ）。毎フレーム同じ量が足され一切減らないので当然だが、これがきれいに出ることで<button class="term" data-term="シミュレーション">シミュレーション</button>が余計なことをしていないと確認できる。</li>
           <li><strong>dissipation は「毎フレーム (1 − d) 倍に減らす」という意味だと確定した。</strong> この仮定から立てた式と実測の差は全フレームで 0.0006 以下（最大 0.006%）。</li>
           <li>行き着く先も式のとおりで <strong>1 / dissipation</strong>。0.3 のとき理論値 3.33333 に対し実測 3.33318。</li>
-          <li>この形の検証は応用が効く。<strong>パラメータの意味が分からないときは、仮定を式にして実測と突き合わせればよい。</strong> 説明を読むより確実で、桁が合っているかまで分かる。実験015で「かたさ = 値 × 10の指数乗」を突き止めたのと同じやり方。</li>
+          <li>この形の検証は応用が効く。<strong><button class="term" data-term="パラメータ">パラメータ</button>の意味が分からないときは、仮定を式にして実測と突き合わせればよい。</strong> 説明を読むより確実で、桁が合っているかまで分かる。実験015で「かたさ = 値 × 10の指数乗」を突き止めたのと同じやり方。</li>
           <li>構成でつまずいた点。<code>pyrosource</code> は既定で <code>P</code> と <code>pscale</code> しか作らず、<strong>density を明示的に追加しないと</strong>次のラスタライズが空を返す。しかも <code>pyrosource</code> の attributes は「個数」（数値）、<code>volumerasterizeattributes</code> の attributes は「名前の文字列」で<strong>同じ名前なのに意味が違う</strong>。</li>
-          <li><strong>ハードウェアレンダラーはボリュームの描画に向いていない。</strong> 煙が塊にしか描かれず、濃淡も立ち上りも分からない。ここまでの実験では十分だったが、ボリュームを扱うなら Karma のような本式のレンダラーが要る。</li>
+          <li><strong>ハードウェアレンダラーはボリュームの描画に向いていない。</strong> 煙が塊にしか描かれず、濃淡も立ち上りも分からない。ここまでの実験では十分だったが、ボリュームを扱うなら <button class="term" data-term="Karma">Karma</button> のような本式のレンダラーが要る。</li>
         </ul>
       </div>
     </article>
@@ -1201,7 +1202,7 @@
             粒1つが一定の体積を担うなら「粒の数」がそのまま体積にあたる——という筋書きで実験を組んだ。
           </p>
           <p>
-            <strong>ところがソルバが動かなかった。</strong>4通りの配線を試してすべて同じエラーで止まり、
+            <strong>ところが<button class="term" data-term="ソルバ">ソルバ</button>が動かなかった。</strong>4通りの配線を試してすべて同じエラーで止まり、
             原因を特定できていない。調査内容を残して保留とする。
           </p>
         </div>
@@ -1222,9 +1223,9 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li>エラーは一貫して「Not enough sources specified.」。粒を渡しても、コンテナを渡しても、flipsource を渡しても満たされない。</li>
-          <li><strong>他のソルバとの違いが大きい。</strong> rbdbulletsolver（014）も vellumsolver（015）も pyrosolver（016）も、入力1にジオメトリをつなぐだけで動いた。FLIP だけが追加の作法を要求している。</li>
-          <li>パラメータ側の手がかりも少ない。source を含む名前は <code>sourceband</code> ひとつだけで、「どの入力が供給源か」を指定する仕組みは見当たらない。入力の順番と種類が決まっていて、そこに正しいものを渡す必要があるということ。</li>
-          <li>途中で罠を1つ踏んだ。<code>particlefluidtank</code> を上に移動させたら<strong>粒が0になった</strong>。このノードは「水位」を基準に中身を満たすので、タンクを水位より上に動かすと空になる。落下させたいならタンクではなく地面を下げる。</li>
+          <li><strong>他のソルバとの違いが大きい。</strong> rbdbulletsolver（014）も vellumsolver（015）も pyrosolver（016）も、入力1に<button class="term" data-term="ジオメトリ">ジオメトリ</button>をつなぐだけで動いた。FLIP だけが追加の作法を要求している。</li>
+          <li><button class="term" data-term="パラメータ">パラメータ</button>側の手がかりも少ない。source を含む名前は <code>sourceband</code> ひとつだけで、「どの入力が供給源か」を指定する仕組みは見当たらない。入力の順番と種類が決まっていて、そこに正しいものを渡す必要があるということ。</li>
+          <li>途中で罠を1つ踏んだ。<code>particlefluidtank</code> を上に移動させたら<strong>粒が0になった</strong>。この<button class="term" data-term="ノード">ノード</button>は「水位」を基準に中身を満たすので、タンクを水位より上に動かすと空になる。落下させたいならタンクではなく地面を下げる。</li>
           <li>粒から見積もった体積は 4.92750 で、箱の体積 8.0 の 62%。粒は格子状に並ぶので隙間があり、<strong>粒の数 × 間隔の3乗では体積を正確に表せない</strong>。検証に使うならこの係数を先に求める必要がある。</li>
           <li>この保留は失敗だが記録する価値がある。<strong>「他と同じやり方が通じないノードがある」と分かったこと自体が情報</strong>で、次に取り組むときに同じ4通りを試さずに済む。</li>
         </ul>
@@ -1243,7 +1244,7 @@
     <p>
       接続図は <code>hou_tools.dump_graph()</code> が書き出したJSONから <code>graph_report.py</code> が描画し、
       レンダは OpenGL ROP、レポートPDFは <code>report_pdf.py</code> が生成している。
-      すべて <code>hython</code> 経由の headless 実行で、Houdini の GUI は使っていない。
+      ノードの構築とレンダは <code>hython</code> 経由の headless 実行で、Houdini の GUI はノードの画面写真を撮るときだけ使っている。
       用語の説明は <code>glossary.json</code> を単一の情報源として、このページのポップアップ・<a href="<!--GLOSSARY_URL-->">用語辞典</a>・Notebook用PDFの3つを生成している。
     </p>
   </footer>
@@ -1251,91 +1252,5 @@
   </div>
 </div>
 
-<div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
-
 <!--GLOSSARY_DATA-->
-
-<script>
-  (function () {
-    var dataEl = document.getElementById("glossary-data");
-    var terms = dataEl ? JSON.parse(dataEl.textContent) : {};
-    var pop = document.getElementById("popover");
-    var active = null;
-
-    function close() {
-      pop.hidden = true;
-      if (active) { active.removeAttribute("aria-expanded"); active = null; }
-    }
-
-    function open(button) {
-      var entry = terms[button.dataset.term];
-      if (!entry) { return; }
-
-      var meta = [];
-      if (entry.reading) { meta.push(entry.reading); }
-      if (entry.expand) { meta.push(entry.expand); }
-
-      pop.textContent = "";
-      var head = document.createElement("div");
-      head.className = "pop-term";
-      head.textContent = entry.term;
-      pop.appendChild(head);
-
-      if (meta.length) {
-        var m = document.createElement("div");
-        m.className = "pop-meta";
-        m.textContent = meta.join("  ·  ");
-        pop.appendChild(m);
-      }
-
-      var body = document.createElement("p");
-      body.className = "pop-def";
-      body.textContent = entry.def;
-      pop.appendChild(body);
-
-      if (entry.related) {
-        var rel = document.createElement("span");
-        rel.className = "pop-rel";
-        rel.textContent = "関連: " + entry.related;
-        body.appendChild(rel);
-      }
-
-      pop.hidden = false;
-
-      var rect = button.getBoundingClientRect();
-      var width = pop.offsetWidth;
-      var left = rect.left + window.scrollX;
-      var maxLeft = window.scrollX + document.documentElement.clientWidth - width - 16;
-      if (left > maxLeft) { left = maxLeft; }
-      if (left < window.scrollX + 16) { left = window.scrollX + 16; }
-
-      var top = rect.bottom + window.scrollY + 8;
-      if (rect.bottom + pop.offsetHeight + 24 > document.documentElement.clientHeight) {
-        var above = rect.top + window.scrollY - pop.offsetHeight - 8;
-        if (above > window.scrollY) { top = above; }
-      }
-
-      pop.style.left = left + "px";
-      pop.style.top = top + "px";
-
-      active = button;
-      button.setAttribute("aria-expanded", "true");
-    }
-
-    document.addEventListener("click", function (event) {
-      var button = event.target.closest(".term");
-      if (button) {
-        event.preventDefault();
-        if (active === button) { close(); } else { open(button); }
-        return;
-      }
-      if (!event.target.closest("#popover")) { close(); }
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") { close(); }
-    });
-
-    window.addEventListener("resize", close);
-  })();
-</script>
+<!--POPOVER-->
