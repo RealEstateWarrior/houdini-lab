@@ -1,0 +1,214 @@
+{
+  "title": "実験022 — 液体に表面を張る",
+  "network": "/obj/liquid",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "container",
+      "type": "flipcontainer",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.07,
+        "sizex": 3.0,
+        "sizey": 3.0,
+        "sizez": 3.0
+      }
+    },
+    {
+      "name": "blob",
+      "type": "box",
+      "pos": [
+        -2.259,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.9,
+        "sizey": 0.9,
+        "sizez": 0.9,
+        "ty": 1.0
+      }
+    },
+    {
+      "name": "src",
+      "type": "flipsource",
+      "pos": [
+        -2.259,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "volumename": "source",
+        "particlesep": 0.07
+      }
+    },
+    {
+      "name": "merge_sources",
+      "type": "merge",
+      "pos": [
+        -3.389,
+        0.452
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "solver",
+      "type": "flipsolver",
+      "pos": [
+        -1.694,
+        -0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder2": 1,
+        "particlesep": 0.07,
+        "folder3": 1,
+        "waterlinesettings": 1,
+        "folder5": 1,
+        "folder6": 1,
+        "useground": 1,
+        "ground_posy": -1.5,
+        "folder14": 1,
+        "folder15": 1,
+        "donarrowband": 0,
+        "vis_ramp1cb": 1.0,
+        "vis_ramp2pos": 0.4993646740913391,
+        "vis_ramp2cg": 0.5,
+        "vis_ramp2cb": 1.0,
+        "vis_ramp3pos": 1.0,
+        "vis_ramp3cr": 1.0,
+        "vis_ramp3cg": 1.0,
+        "vis_ramp3cb": 1.0
+      }
+    },
+    {
+      "name": "surface",
+      "type": "particlefluidsurface::3.0",
+      "pos": [
+        -1.694,
+        -2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.07,
+        "folder7": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "dobbox": 1,
+        "sizex": 3.0,
+        "sizey": 3.0,
+        "sizez": 3.0,
+        "closedends": 1,
+        "folder5": 1,
+        "velvisramp1cb": 0.8999999761581421,
+        "velvisramp2pos": 0.5057914853096008,
+        "velvisramp2cg": 0.9,
+        "velvisramp2cb": 0.9,
+        "velvisramp3pos": 1.0,
+        "velvisramp3cr": 1.0,
+        "velvisramp3cg": 1.0,
+        "velvisramp3cb": 1.0,
+        "vorticityvisramp1cb": 0.8999999761581421,
+        "vorticityvisramp2pos": 0.5,
+        "vorticityvisramp2cg": 0.8999999761581421,
+        "vorticityvisramp2cb": 0.8999999761581421,
+        "vorticityvisramp3pos": 1.0,
+        "vorticityvisramp3cr": 1.0,
+        "vorticityvisramp3cg": 1.0,
+        "vorticityvisramp3cb": 1.0,
+        "maskvisramp1cr": 0.2,
+        "maskvisramp1cb": 1.0,
+        "maskvisramp2pos": 0.25,
+        "maskvisramp2cg": 0.85,
+        "maskvisramp2cb": 1.0,
+        "maskvisramp3pos": 0.5,
+        "maskvisramp3cg": 1.0,
+        "maskvisramp3cb": 0.10000000149011612,
+        "maskvisramp4pos": 0.75,
+        "maskvisramp4cr": 0.95,
+        "maskvisramp4cg": 1.0,
+        "maskvisramp5pos": 1.0,
+        "maskvisramp5cr": 1.0
+      }
+    },
+    {
+      "name": "to_polygons",
+      "type": "convert",
+      "pos": [
+        -1.694,
+        -3.238
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "blob",
+      "from_output": 0,
+      "to": "src",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "merge_sources",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "merge_sources",
+      "to_input": 1
+    },
+    {
+      "from": "merge_sources",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 1,
+      "to": "solver",
+      "to_input": 1
+    },
+    {
+      "from": "container",
+      "from_output": 2,
+      "to": "solver",
+      "to_input": 2
+    },
+    {
+      "from": "solver",
+      "from_output": 0,
+      "to": "surface",
+      "to_input": 0
+    },
+    {
+      "from": "surface",
+      "from_output": 0,
+      "to": "to_polygons",
+      "to_input": 0
+    }
+  ]
+}

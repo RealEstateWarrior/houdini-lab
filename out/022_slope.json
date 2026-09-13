@@ -1,0 +1,20 @@
+{
+  "sep": 0.07,
+  "rows": [
+    {
+      "waterline": -0.5,
+      "volume": 9.0,
+      "total": 60152,
+      "inside": 27688
+    },
+    {
+      "waterline": 0.5,
+      "volume": 18.0,
+      "total": 101884,
+      "inside": 53912
+    }
+  ],
+  "slope_total": 4636.888888888889,
+  "slope_inside": 2913.777777777778,
+  "slope_outside": 1723.111111111111
+}

@@ -489,6 +489,13 @@
         <h2>FLIP 液体 — 配線が解けた。そして粒の数は体積ではなかった</h2>
         <p class="path">/obj/flip &nbsp;·&nbsp; 実験017の保留を解く</p>
 
+        <p class="callout">
+          <strong>→ ここで出した「粒1つが担う体積 0.000293」は誤りだった。
+          <a href="#exp022">実験022</a>で訂正した。</strong>
+          境界の外側にできる粒も水位と一緒に増えるため、傾きにその分が混ざっていた。
+          器の中の粒だけで数え直すと、粒1つぶんはちょうど<strong>粒の間隔の3乗</strong>になる。
+        </p>
+
         <div class="prose">
           <p>
             017で4通りの配線を試して全部同じエラーで止まり、保留にしていた。
@@ -811,6 +818,124 @@
           ヘルプには「温度の拡散が小さいほど shredding の効果が出やすい」ともあったが、
           <code>tempdiffusion</code> は既定で 0.0、つまりすでに最小だった。この線では説明がつかない。
           炎を出す設定で改めて試す。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 022 ===================== -->
+    <article class="entry entry--current" id="exp022">
+      <div class="badge">022</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>液体に表面を張る — そして019の係数が間違っていた</h2>
+        <p class="path">/obj/liquid &nbsp;·&nbsp; 粒を面にして、体積で検算する</p>
+
+        <div class="prose">
+          <p>
+            実験019では粒のままだったので、液体に見えなかった。
+            <code>particlefluidsurface</code> で表面を張る。
+          </p>
+          <p>
+            張るだけなら簡単だったが、体積を測ったら019から予測した値の
+            <strong>2.75倍</strong>になった。追っていくと、別々の問題が2つ重なっていた。
+            ひとつは境界の外側の粒まで面に含めていたこと。
+            <strong>もうひとつは019の係数そのものが間違っていたこと。</strong>
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="022_particles.png" alt="粒のまま表示した液体"></div>
+            <figcaption><strong>粒のまま</strong>（4,339個）。粒の集まりにしか見えない。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="022_clipped.png" alt="表面を張って液体らしくなった状態"></div>
+            <figcaption><strong>面を張ったあと</strong>。落ちた水が床で広がっているのが分かる。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">体積が分かっている水で確かめる</p>
+        <div class="prose">
+          <p>
+            落ちて広がった水でいきなり測っても、正解が分からないので合っているか判断できない。
+            器を水位まで満たせば体積は計算で出せる。3×3 の器を深さ1.5まで満たすので
+            <strong>13.5</strong>。ここで 13.5 が出れば、面の張り方は正しい。
+          </p>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>切り取り</th><th>影響半径</th><th>体積</th><th>本当の体積との比</th><th>ずれ</th></tr></thead>
+            <tbody>
+              <tr><td>なし</td><td class="num">2.0</td><td class="num">60.0394</td><td class="num">4.4474</td><td class="num muted">+344.7%</td></tr>
+              <tr><td>なし</td><td class="num">3.0</td><td class="num">59.7756</td><td class="num">4.4278</td><td class="num muted">+342.8%</td></tr>
+              <tr><td>あり</td><td class="num">2.0</td><td class="num hi">13.3606</td><td class="num">0.9897</td><td class="num hi">−1.0%</td></tr>
+              <tr><td>あり</td><td class="num">3.0</td><td class="num">13.2493</td><td class="num">0.9814</td><td class="num">−1.9%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          付属ヘルプに理由が書いてある。「境界の外側にも粒が作られる。面を張るときこの粒も
+          数えられるので、<button class="term" data-term="メッシュ">メッシュ</button>が大きくなる。Bounding Box で外側を切り取れる」。
+        </p>
+
+        <p class="label">器の中と外で、粒はどう分かれているか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>場所</th><th>粒の数</th><th>割合</th></tr></thead>
+            <tbody>
+              <tr><td>器の中（水のある範囲）</td><td class="num">40,871</td><td class="num">50.4%</td></tr>
+              <tr><td>器の外</td><td class="num">40,235</td><td class="num hi">49.6%</td></tr>
+              <tr><td>合計</td><td class="num">81,106</td><td class="num">100%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>粒の半分が器の外にある。</strong>面を張るときだけでなく、
+          粒の数を何かの目安に使うときも、この分を除かないと話が合わない。
+        </p>
+
+        <p class="label">水位を変えたときの、粒の増え方</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>水位</th><th>水の体積</th><th>全部の粒</th><th>器の中</th><th>器の外</th></tr></thead>
+            <tbody>
+              <tr><td class="num">−0.50</td><td class="num">9.0000</td><td class="num">60,152</td><td class="num">27,688</td><td class="num">32,464</td></tr>
+              <tr><td class="num">0.50</td><td class="num">18.0000</td><td class="num">101,884</td><td class="num">53,912</td><td class="num">47,972</td></tr>
+              <tr><td>増えた分</td><td class="num">9.0000</td><td class="num">41,732</td><td class="num">26,224</td><td class="num hi">15,508</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">粒1つが担う体積</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>数え方</th><th>体積1あたりの粒</th><th>粒1つぶんの体積</th><th>間隔の3乗との比</th></tr></thead>
+            <tbody>
+              <tr><td>全部の粒</td><td class="num">4,636.9</td><td class="num">0.000216</td><td class="num muted">0.63</td></tr>
+              <tr><td>器の中だけ</td><td class="num">2,913.8</td><td class="num">0.000343</td><td class="num hi">1.0006</td></tr>
+              <tr><td>器の外だけ</td><td class="num">1,723.1</td><td class="muted">—</td><td class="muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>切り取らないと体積が4.4倍になる。</strong>境界の外側に作られる粒まで面に含まれるため。Bounding Box で切り取ると、ずれは <span class="hi">1.0%</span> まで下がる。</li>
+          <li><strong>切り取るときは「切り口を閉じる」も入れる。</strong>入れないと切った面が開いたままで、囲まれた体積という考え方が成り立たない。測ると 0.016 というでたらめな値が出る。</li>
+          <li><strong>粒の半分（49.6%）が器の外にある。</strong>想像よりずっと多い。</li>
+          <li><strong>実験019で出した係数 0.000293 は誤りだった。</strong>境界の粒も水位と一緒に増えるので、傾きにその分が混ざっていた。体積が9.0増えたときに増えた41,732個のうち、<strong>15,508個（37.2%）が器の外</strong>だった。</li>
+          <li>器の中の粒だけで数え直すと、粒1つぶんは 0.000343。<strong>粒の間隔の3乗（0.07³ = 0.000343）との比は 1.0006</strong>。</li>
+          <li>つまり <strong>「水の体積 ＝ 器の中の粒の数 × 粒の間隔の3乗」</strong> がそのまま成り立つ。019で「0.572倍」と書いた半端な係数は、境界の粒が混ざって出ていた見かけの数字だった。</li>
+          <li>面をなめらかにすると体積は減る。0回で 3.4935、8回で 3.1243 と <strong>10.6% 減った</strong>。実験002の「縮ませているのは平滑化」と同じことが起きている。</li>
+          <li>面の太さは <code>influenceradius</code>（既定3.0）で決まる。1.0 まで下げるとエラーで面が作れず、2.5 を超えると体積が変わらなくなる。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          出力は PolySoup（多数の面を1つにまとめた形）なので、そのままでは体積を測る仕組みが使えない。
+          <code>convert</code> で普通の<button class="term" data-term="ポリゴン">ポリゴン</button>に戻す。
+          なお面ごとの measuredvolume を足しても体積は出ない（平らな面には体積が無い）。
+          三角形ごとに原点との四面体の符号付き体積を足して求めた。
         </p>
       </div>
     </article>

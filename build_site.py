@@ -180,13 +180,16 @@ DONE = [
      "shots": ["021_compare.png", "021_rise.gif"],
      "title": "煙はなぜ動かなかったのか — 温度を入れると立ち上る",
      "note": "温度を供給しないと浮力が働かない。016と018の煙も止まっていた"},
+    {"no": "022", "anchor": "exp022", "tags": ["エフェクト", "液体", "検算", "訂正"],
+     "log": "log_fx", "hip": "022_surface.hipnc", "thumb": "022_clipped.png",
+     "shots": ["022_particles.png", "022_clipped.png"],
+     "title": "液体に表面を張る — そして019の係数が間違っていた",
+     "note": "水の体積は「器の中の粒の数 × 間隔の3乗」ちょうど。比 1.0006"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "022", "title": "液体に表面を張る",
-     "note": "019の粒のままでは液体に見えない。particlefluidsurface を使う"},
     {"no": "023", "title": "炎を出す",
      "note": "021で shredding が効かなかった。燃焼を伴う設定で確かめ直す"},
     {"no": "024", "title": "動く煙で Karma を撮り直す",

@@ -1,0 +1,45 @@
+{
+  "sep": 0.07,
+  "frame": 40,
+  "particles": 4339,
+  "per_particle": 0.000293,
+  "predicted_volume": 1.271327,
+  "smooth_parm": "smoothiterations",
+  "rows": [
+    {
+      "smooth": 0,
+      "points": 11365,
+      "prims": 12679,
+      "volume": -3.493471483807349,
+      "sec": 2.8608024999994086
+    },
+    {
+      "smooth": 1,
+      "points": 9858,
+      "prims": 11047,
+      "volume": -3.4448117258540196,
+      "sec": 2.2968121000012616
+    },
+    {
+      "smooth": 2,
+      "points": 8946,
+      "prims": 9952,
+      "volume": -3.397089092901655,
+      "sec": 1.954257699995651
+    },
+    {
+      "smooth": 4,
+      "points": 7840,
+      "prims": 8632,
+      "volume": -3.30198496109445,
+      "sec": 1.572911800001748
+    },
+    {
+      "smooth": 8,
+      "points": 6653,
+      "prims": 7353,
+      "volume": -3.1242979894387273,
+      "sec": 1.3927148999937344
+    }
+  ]
+}

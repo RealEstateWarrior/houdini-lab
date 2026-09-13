@@ -1,0 +1,31 @@
+{
+  "true_volume": 13.5,
+  "particles": 81106,
+  "sep": 0.07,
+  "rows": [
+    {
+      "clip": false,
+      "radius": 2.0,
+      "volume": 60.03938154998608,
+      "gap_pct": 344.7361596295265
+    },
+    {
+      "clip": false,
+      "radius": 3.0,
+      "volume": 59.77556074222744,
+      "gap_pct": 342.781931423907
+    },
+    {
+      "clip": true,
+      "radius": 2.0,
+      "volume": 13.360591142691419,
+      "gap_pct": -1.032658202285785
+    },
+    {
+      "clip": true,
+      "radius": 3.0,
+      "volume": 13.249279430962147,
+      "gap_pct": -1.8571894002803901
+    }
+  ]
+}
