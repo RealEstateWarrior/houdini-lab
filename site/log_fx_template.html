@@ -961,6 +961,11 @@
         <h2>炎を出す — shredding が効かなかった理由</h2>
         <p class="path">/obj/burn &nbsp;·&nbsp; 021で残した見立てを確かめる</p>
 
+        <p class="callout callout--note">
+          <strong>→ ここで出した炎が白黒だった件は、<a href="#exp026">実験026</a>で色を付けた。</strong>
+          温度から色を出す <code>blackbody()</code> を使い、赤と青の比が温度とともに 23.6分の1まで下がることを数字で確かめている。
+        </p>
+
         <div class="prose">
           <p>
             実験021で <code>shredding</code> を 1.0 でも 20.0 でも試したが、
@@ -1203,6 +1208,126 @@
         </p>
       </div>
     </article>
+
+
+    <!-- ===================== 026 ===================== -->
+    <article class="entry entry--current" id="exp026">
+      <div class="badge">026</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>炎に色を付ける — 黒体放射の式を、数字で追う</h2>
+        <p class="path">/obj/bb, /obj/fire &nbsp;·&nbsp; 温度から色を出す式は思ったとおりに効いているか</p>
+
+        <div class="prose">
+          <p>
+            実験023で炎を出したが、白黒でしか描けていなかった。
+            炎は温度で色が変わる。低いと赤、高くなるにつれて橙・黄・白へ。
+            これは<button class="term" data-term="黒体放射">黒体放射</button>という物理の話で、
+            Houdini の <button class="term" data-term="VEX">VEX</button> には <code>blackbody()</code> という関数がそのまま入っている。
+          </p>
+          <p>
+            「色が付いた」で終わらせない。<strong>温度を上げても赤と青の比が変わらなければ、式は効いていない。</strong>
+            そう言える形にしてから測った。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="026_ramp.png" alt="1000Kの橙赤から8000Kの淡い青まで、9段階の色見本を横に並べたもの"></div>
+            <figcaption><code>blackbody()</code> が返す色。左が 1000K、右が 8000K。下の数字は<strong>赤÷青</strong>で、17.39 から 0.7381 まで落ちる。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 温度ごとに返る色を取り出す</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>温度(K)</th><th>赤</th><th>緑</th><th>青</th><th>赤/青</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1000</td><td class="num">1.4015</td><td class="num">1.0000</td><td class="num">0.0806</td><td class="num hi">17.3872</td></tr>
+              <tr><td class="num">1500</td><td class="num">1.4015</td><td class="num">1.0000</td><td class="num">0.0806</td><td class="num hi">17.3872</td></tr>
+              <tr><td class="num">2000</td><td class="num">1.2750</td><td class="num">1.0000</td><td class="num">0.1448</td><td class="num">8.8063</td></tr>
+              <tr><td class="num">2500</td><td class="num">1.1517</td><td class="num">1.0000</td><td class="num">0.2655</td><td class="num">4.3383</td></tr>
+              <tr><td class="num">3000</td><td class="num">1.0802</td><td class="num">1.0000</td><td class="num">0.3940</td><td class="num">2.7415</td></tr>
+              <tr><td class="num">4000</td><td class="num">1.0101</td><td class="num">1.0000</td><td class="num">0.6443</td><td class="num">1.5676</td></tr>
+              <tr><td class="num">5000</td><td class="num">0.9812</td><td class="num">1.0000</td><td class="num">0.8630</td><td class="num">1.1370</td></tr>
+              <tr><td class="num">6500</td><td class="num">0.9686</td><td class="num">1.0000</td><td class="num">1.1211</td><td class="num">0.8640</td></tr>
+              <tr><td class="num">8000</td><td class="num">0.9686</td><td class="num">1.0000</td><td class="num">1.3122</td><td class="num">0.7381</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          9点すべてで赤/青が下がる。向きが一度も崩れない。<strong>式は思ったとおりに効いている。</strong>
+          ただし 1000K と 1500K は小数点以下まで完全に同じで、低いほうで頭打ちになっている。
+        </p>
+
+        <p class="label">2. 炎の温度を色にする</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="026_fire_grey.png" alt="白い霧のような、色のない炎"></div>
+            <figcaption>実験023までの炎。温度は持っているのに、色になっていない。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="026_fire_color.png" alt="根元が橙、上にいくほど黄色に変わる炎"></div>
+            <figcaption>温度を色にしたもの。<strong>根元が橙、上が黄。</strong></figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>ばらまいた点</td><td class="num">4,779 個</td></tr>
+              <tr><td>温度の範囲</td><td class="num">0.3227 〜 0.9929</td></tr>
+              <tr><td>ケルビンに直すと（×3000）</td><td class="num">968K 〜 2,979K</td></tr>
+              <tr><td>その範囲の赤/青</td><td class="num hi">約 17.4 〜 2.8</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">つまずいた2か所</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>書き方</th><th>1000K がどう出るか</th><th>見え方</th></tr></thead>
+            <tbody>
+              <tr><td>割らずにそのまま</td><td class="num">(9110, 6500, 524)</td><td class="muted">全部まっ白</td></tr>
+              <tr><td>1 で切る（clamp）</td><td class="num">(1.000, 1.000, 0.081)</td><td class="muted">赤と緑が同じ＝全部黄色</td></tr>
+              <tr><td>一番大きい成分で割る</td><td class="num">(1.000, 0.713, 0.058)</td><td class="hi">橙赤のまま残る</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>丸めるか割るかで、色が別物になる。</strong>最初の画は一面の黄色だった。
+        </p>
+
+        <p class="label">書いたコード</p>
+        <pre><code>// 2本目の入力（ボリューム）から、この点の位置の温度を読む
+float t = volumesample(1, "temperature", @P);
+// 温度の単位をケルビンに直してから色にする
+vector c = blackbody(t * 3000.0, 6500) / 6500.0;
+// 1で切ると赤が潰れて全部黄色になる。
+// 一番大きい成分で割れば、明るさだけ揃って色味は残る。
+@Cd = c / max(max(c.x, c.y), max(c.z, 1e-6));
+// 温度の低いところは薄くする
+@Alpha = clamp(t, 0.0, 1.0);</code></pre>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>赤と青の比は温度とともに単調に下がった。</strong>1000K で 17.39、8000K で 0.7381。<span class="hi">23.6分の1</span>になる。9点すべてで向きが崩れない。</li>
+          <li><strong>1000K と 1500K が完全に同じ値だった。</strong>どちらも (1.4015, 1.0000, 0.0806)。低いほうで頭打ちになっている。炎の一番冷たいところを描き分けたいなら、この下限より上に収まるよう温度の換算を調整する必要がある。</li>
+          <li><strong>引数は2つ。</strong><code>blackbody(温度)</code> と書くとエラーになる。正しくは <code>blackbody(温度, 白として扱う温度)</code>。2つ目は「何Kを白とみなすか」で、写真の<button class="term" data-term="ホワイトバランス">ホワイトバランス</button>と同じ考え方。</li>
+          <li><strong>返る値は 0〜1 ではない。</strong>6500 を指定すると、緑成分がちょうど 6500 になる大きさで返る。そのまま色に入れると全部まっ白。6500 で割って初めて見える値になった。</li>
+          <li><strong>1 で切ると色味が消える。</strong>(1.4015, 1.0000, 0.0806) を 0〜1 に丸めると (1.0, 1.0, 0.08)＝赤と緑が同値で黄色になる。一番大きい成分で割れば、明るさだけ揃って色味は残る。</li>
+          <li><button class="term" data-term="ボリューム">ボリューム</button>そのものには色を付けず、<code>pointsfromvolume</code> で中に点をばらまいて点に色を付けた。こうすると確認用の速い描画（<button class="term" data-term="OpenGL ROP">OpenGL</button>）でも色が見える。</li>
+          <li>点から温度を読むのは <code>volumesample(1, "temperature", @P)</code>。<strong>2本目の入力につないだボリュームを、その点の位置で読む</strong>という意味。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          この実験の色は、点に付けた色である。見せる絵にするときは
+          <button class="term" data-term="Karma">Karma</button> 側でボリュームそのものに色を付ける必要があり、そこはまだやっていない。
+          <strong>いま出ている画は「温度と色の対応が正しいこと」を示すためのもので、完成した炎のレンダではない。</strong>
+        </p>
+      </div>
+    </article>
+
 
   </div>
 
