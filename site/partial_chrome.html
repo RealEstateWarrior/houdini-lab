@@ -1,0 +1,55 @@
+<button type="button" id="totop" class="totop" aria-label="ページの先頭に戻る" hidden>
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 19V6M12 6l-6 6M12 6l6 6" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+  /* 先頭に戻るボタン。少しスクロールしてから出す。 */
+  (function () {
+    var button = document.getElementById("totop");
+    if (!button) { return; }
+
+    function update() {
+      button.hidden = window.scrollY < 400;
+    }
+
+    button.addEventListener("click", function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    });
+
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  })();
+
+  /* スクロールに合わせて、節が下からすっと出てくる。
+
+     大事なのは「動かない環境でも全部読める」こと。隠す指定はJSで後から付けるので、
+     JSが動かなければ最初から見えている。動きを減らす設定の人には何もしない。 */
+  (function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) { return; }
+
+    var targets = document.querySelectorAll(
+      ".stage, .tile, .pillar, .pipe, .thumb, .nodecard, .gloss-cat, .linkset, .entry");
+    if (!targets.length) { return; }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        entry.target.classList.remove("reveal");
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.02 });
+
+    Array.prototype.forEach.call(targets, function (el, index) {
+      var box = el.getBoundingClientRect();
+      if (box.top < window.innerHeight * 0.92) { return; }  // 最初から見えている分は触らない
+      el.classList.add("reveal");
+      el.style.transitionDelay = (index % 4) * 40 + "ms";
+      observer.observe(el);
+    });
+  })();
+</script>

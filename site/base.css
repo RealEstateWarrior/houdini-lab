@@ -159,7 +159,7 @@ h1 {
 h2 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.52rem;
   line-height: 1.35;
   letter-spacing: -0.014em;
   margin: 0 0 6px;
@@ -236,9 +236,10 @@ h2 {
 }
 .stage h3 {
   font-family: var(--font-display);
-  font-size: 1.34rem;
+  font-size: 1.72rem;
   font-weight: 600;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.018em;
+  line-height: 1.3;
   text-transform: none;
   color: var(--ink);
   margin: 0;
@@ -246,8 +247,8 @@ h2 {
   border: none;
 }
 .stage p {
-  margin: 6px 0 0;
-  font-size: 0.9rem;
+  margin: 8px 0 0;
+  font-size: 0.95rem;
   color: var(--ink-dim);
   max-width: 44em;
 }
@@ -276,7 +277,7 @@ h2 {
 .tile .tile-body { padding: 16px 18px 20px; }
 .tile h4 {
   font-family: var(--font-display);
-  font-size: 0.98rem;
+  font-size: 1.18rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0 0 4px;
@@ -292,7 +293,7 @@ h2 {
 }
 .tile--wide img { aspect-ratio: 16 / 9; }
 .tile--wide .tile-body { padding: 24px 30px; }
-.tile--wide h4 { font-size: 1.14rem; }
+.tile--wide h4 { font-size: 1.34rem; }
 .tile--wide p { font-size: 0.9rem; }
 @media (max-width: 700px) { .tile--wide { grid-template-columns: minmax(0, 1fr); } }
 
@@ -310,7 +311,7 @@ h2 {
 }
 .pillar h4 {
   font-family: var(--font-display);
-  font-size: 0.96rem;
+  font-size: 1.14rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0 0 6px;
@@ -341,7 +342,7 @@ h2 {
 }
 .pipe h4 {
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 1.04rem;
   font-weight: 600;
   margin: 4px 0 4px;
   color: var(--ink);
@@ -400,7 +401,7 @@ h2 {
 }
 .thumb h4 {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0;
@@ -478,7 +479,7 @@ h2 {
 }
 .modal-body h3 {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.68rem;
   font-weight: 600;
   letter-spacing: -0.018em;
   line-height: 1.3;
@@ -492,7 +493,7 @@ h2 {
 .m-shots img { display: block; width: 100%; border-radius: 12px; background: var(--ground-2); }
 .m-label {
   font-family: var(--font-display);
-  font-size: 0.78rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--ink-dim);
@@ -550,7 +551,7 @@ h2 {
 .node-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
 .node-head h4 {
   font-family: var(--font-mono);
-  font-size: 1.02rem;
+  font-size: 1.12rem;
   font-weight: 500;
   margin: 0;
   color: var(--ink);
@@ -566,7 +567,7 @@ h2 {
 }
 .node-one {
   font-family: var(--font-display);
-  font-size: 1.02rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: -0.012em;
   color: var(--ink);
@@ -759,7 +760,7 @@ figcaption strong { color: var(--ink-mid); font-weight: 600; }
 
 .label {
   font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-size: 0.94rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-transform: none;
@@ -843,7 +844,7 @@ code {
 .hub-card:hover { box-shadow: var(--shadow); }
 .hub-card h3 {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.16rem;
   font-weight: 600;
   margin: 0 0 6px;
   color: var(--ink);
@@ -856,7 +857,7 @@ code {
 .linkset { margin-top: 34px; }
 .linkset h3 {
   font-family: var(--font-display);
-  font-size: 1.14rem;
+  font-size: 1.42rem;
   font-weight: 600;
   letter-spacing: -0.012em;
   color: var(--ink);
@@ -920,7 +921,7 @@ code {
 .gloss-cat { margin-top: 44px; scroll-margin-top: 70px; }
 .gloss-cat h3 {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.014em;
   color: var(--ink);
@@ -944,7 +945,7 @@ code {
   background: var(--ground-2);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   line-height: 1.5;
   color: var(--ink);
 }
@@ -970,8 +971,59 @@ footer {
 }
 footer code { color: var(--ink-mid); background: none; padding: 0; }
 
+/* ---------- 先頭に戻るボタン ---------- */
+
+.totop {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--wire-dim);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  color: var(--ink-mid);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  animation: totop-in 0.22s ease both;
+}
+.totop svg { width: 20px; height: 20px; display: block; }
+.totop:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.totop:focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; }
+
+@keyframes totop-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 720px) { .totop { right: 14px; bottom: 14px; } }
+
+/* ---------- スクロールで現れる ----------
+
+   隠す指定（.reveal）はJSが後から付ける。JSが動かない環境では最初から見えている。
+   動きを減らす設定の人には、JS側でそもそも付けない。 */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.stage, .tile, .pillar, .pipe, .thumb, .nodecard, .gloss-cat, .linkset, .entry {
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 0.7, 0.24, 1),
+              box-shadow 0.2s ease;
+}
+/* カードのホバーは素早く戻したいので、こちらだけ短くする */
+.thumb {
+  transition: opacity 0.55s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 [hidden] { display: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
 }

@@ -405,7 +405,7 @@ def count_nodes(nodes):
 
 
 def render(template_name, out_dir, out_name, active, tabs, urls,
-           data, nodes, css, links_body, popover):
+           data, nodes, css, links_body, popover, chrome):
     with open(os.path.join(SITE, template_name), encoding="utf-8") as fp:
         page = fp.read()
 
@@ -421,6 +421,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_NAV-->", render_gloss_nav(data)),
         ("<!--GLOSSARY_DATA-->", render_data(data)),
         ("<!--POPOVER-->", popover),
+        ("<!--CHROME-->", chrome),
         ("<!--EXP_COUNT-->", str(len(DONE))),
         ("<!--EXP_TOTAL-->", str(len(DONE) + len(PLANNED) + len(PLANNED_FX))),
         ("<!--NODE_COUNT-->", str(count_nodes(nodes))),
@@ -515,12 +516,14 @@ def main():
         links_body = fp.read()
     with open(os.path.join(SITE, "partial_popover.html"), encoding="utf-8") as fp:
         popover = fp.read()
+    with open(os.path.join(SITE, "partial_chrome.html"), encoding="utf-8") as fp:
+        chrome = fp.read()
 
     for template_name, site_out, docs_out, active, tabs in PAGES:
         render(template_name, SITE, site_out, active, tabs,
-               ARTIFACT_URLS, data, nodes, css, links_body, popover)
+               ARTIFACT_URLS, data, nodes, css, links_body, popover, chrome)
         render(template_name, DOCS, docs_out, active, tabs,
-               PAGES_URLS, data, nodes, css, links_body, popover)
+               PAGES_URLS, data, nodes, css, links_body, popover, chrome)
 
     # GitHub Pages に Jekyll 処理をさせない
     with open(os.path.join(DOCS, ".nojekyll"), "w", encoding="utf-8") as fp:

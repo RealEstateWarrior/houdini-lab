@@ -186,7 +186,7 @@ def bbox_union(sop_paths):
 
 
 def render_preview(sop_path, out_png, res=(960, 540), direction=(1.0, 0.62, 1.15),
-                   shading="smoothwire", frame_bbox=None):
+                   shading="smoothwire", frame_bbox=None, margin=1.12):
     """Render the SOP's geometry with the hardware renderer, camera auto-framed.
 
     Default shading draws the wireframe over the shaded surface so the topology
@@ -204,7 +204,8 @@ def render_preview(sop_path, out_png, res=(960, 540), direction=(1.0, 0.62, 1.15
     cam = obj.node("report_cam") or obj.createNode("cam", "report_cam")
     cam.parm("resx").set(res[0])
     cam.parm("resy").set(res[1])
-    _frame_camera(cam, frame_bbox or node.geometry().boundingBox(), res, direction)
+    _frame_camera(cam, frame_bbox or node.geometry().boundingBox(), res, direction,
+                  margin=margin)
 
     out = hou.node("/out")
     rop = out.node("report_opengl") or out.createNode("opengl", "report_opengl")
