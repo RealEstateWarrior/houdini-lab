@@ -164,10 +164,17 @@ def _plain_table(columns, rows, styles):
 def _node_table(graph, styles):
     rows = [[Paragraph(h, styles["cellhead"]) for h in
              ("ノード", "タイプ", "デフォルトから変更したパラメータ")]]
+    # 変更パラメータが多いノード（シミュレーションのソルバなど）は数百行になり、
+    # 1ページに収まらず組版が失敗する。上限を決めて残りは件数だけ示す。
+    limit = 12
     for node in graph["nodes"]:
         params = node.get("params") or {}
         if params:
-            text = "<br/>".join(f"{k} = {v}" for k, v in sorted(params.items()))
+            items = sorted(params.items())
+            lines = [f"{k} = {v}" for k, v in items[:limit]]
+            if len(items) > limit:
+                lines.append(f"…ほか {len(items) - limit} 件")
+            text = "<br/>".join(lines)
         else:
             text = "（変更なし）"
         rows.append([

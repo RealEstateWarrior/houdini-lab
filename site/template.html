@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>15 / 17</dd></div>
+      <div><dt>実験</dt><dd>16 / 19</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -1119,6 +1119,70 @@
           <li><strong>画面に見えている数字だけを触っても実際にはほとんど変わらない。</strong> 効くのは指数のほう。布が硬すぎる・柔らかすぎると感じたら、値ではなく指数を疑う。</li>
           <li>指数を 0 まで下げると伸び 174%、−6 まで下げると 253% になり、布というよりゴムの挙動になる。</li>
           <li>ピンの指定でもつまずいた。<code>grouptype</code> の既定はプリミティブなので、点のグループを渡すなら points へ切り替える。さらに <code>group</code> を空のままにすると<strong>「全部が対象」と解釈され、布全体がピン留めされて一切動かなくなる</strong>（最下点が全フレーム 3.0000 のまま、という症状で気づいた）。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 016 ===================== -->
+    <article class="entry entry--current" id="exp016">
+      <div class="badge">016</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Pyro 煙 — dissipation の正体を式で突き止める</h2>
+        <p class="path">/obj/pyro_test &nbsp;·&nbsp; 散逸3条件 × 48フレーム</p>
+
+        <div class="prose">
+          <p>
+            剛体は体積、布は辺の長さが保たれた。煙は<button class="term" data-term="ボリューム">ボリューム</button>なので、
+            測るのは密度の合計になる。
+          </p>
+          <p>
+            当初は「煙は消えていくので密度は減るはず」と考えたが、<strong>実際には増えた</strong>。
+            発生源が毎フレーム供給し続けるためで、減衰と供給が釣り合う。
+            そこで釣り合いを式に立てて実測と突き合わせた。
+          </p>
+        </div>
+
+        <p class="label">密度の合計（最初のフレームを1とした比）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>散逸なし（0.0）</th><th>既定（0.1）</th><th>強め（0.3）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">5.00000</td><td class="num">4.09489</td><td class="num">2.77298</td></tr>
+              <tr><td class="num">10</td><td class="num">10.00000</td><td class="num">6.51284</td><td class="num">3.23902</td></tr>
+              <tr><td class="num">20</td><td class="num">20.00000</td><td class="num">8.78371</td><td class="num">3.33052</td></tr>
+              <tr><td class="num">46</td><td class="num hi">46.00000</td><td class="num">9.92084</td><td class="num hi">3.33318</td></tr>
+              <tr><td class="muted">行き着く先の理論値</td><td class="muted">（増え続ける）</td><td class="num muted">10.00000</td><td class="num muted">3.33333</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">立てた式と実測の突き合わせ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>フレーム</th><th>実測の比</th><th>式の予測</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td>散逸なし</td><td class="num">46</td><td class="num">46.00000</td><td class="num">46.00000</td><td class="num hi">0.000000</td></tr>
+              <tr><td>既定 0.1</td><td class="num">5</td><td class="num">4.09489</td><td class="num">4.09510</td><td class="num">−0.000210</td></tr>
+              <tr><td>既定 0.1</td><td class="num">46</td><td class="num">9.92084</td><td class="num">9.92145</td><td class="num">−0.000608</td></tr>
+              <tr><td>強め 0.3</td><td class="num">46</td><td class="num">3.33318</td><td class="num">3.33333</td><td class="num">−0.000153</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          供給が毎フレーム一定で、毎フレーム (1 − d) 倍に減るとすれば、t フレーム後の合計は
+          <strong>(1 − (1−d)<sup>t</sup>) / d</strong> 倍になるはず。全フレームで差が 0.0006 以下だった。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>当初の予想は外れた。</strong> 煙は消えるので減ると思っていたが、供給が続く限り増える。減る量より足される量が多い間は増え続ける。</li>
+          <li>散逸なしのとき、密度の合計は<strong>フレーム番号とぴったり同じ比</strong>になった（46フレーム目で46.00000倍、差ゼロ）。毎フレーム同じ量が足され一切減らないので当然だが、これがきれいに出ることでシミュレーションが余計なことをしていないと確認できる。</li>
+          <li><strong>dissipation は「毎フレーム (1 − d) 倍に減らす」という意味だと確定した。</strong> この仮定から立てた式と実測の差は全フレームで 0.0006 以下（最大 0.006%）。</li>
+          <li>行き着く先も式のとおりで <strong>1 / dissipation</strong>。0.3 のとき理論値 3.33333 に対し実測 3.33318。</li>
+          <li>この形の検証は応用が効く。<strong>パラメータの意味が分からないときは、仮定を式にして実測と突き合わせればよい。</strong> 説明を読むより確実で、桁が合っているかまで分かる。実験015で「かたさ = 値 × 10の指数乗」を突き止めたのと同じやり方。</li>
+          <li>構成でつまずいた点。<code>pyrosource</code> は既定で <code>P</code> と <code>pscale</code> しか作らず、<strong>density を明示的に追加しないと</strong>次のラスタライズが空を返す。しかも <code>pyrosource</code> の attributes は「個数」（数値）、<code>volumerasterizeattributes</code> の attributes は「名前の文字列」で<strong>同じ名前なのに意味が違う</strong>。</li>
+          <li><strong>ハードウェアレンダラーはボリュームの描画に向いていない。</strong> 煙が塊にしか描かれず、濃淡も立ち上りも分からない。ここまでの実験では十分だったが、ボリュームを扱うなら Karma のような本式のレンダラーが要る。</li>
         </ul>
       </div>
     </article>

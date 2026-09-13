@@ -107,14 +107,20 @@ DONE = [
     {"no": "015", "anchor": "exp015", "thumb": "015_sheet.png",
      "title": "Vellum クロス — 布で保存されるべき量は何か",
      "note": "かたさは「値 × 10の指数乗」。既定の指数10のせいで値を触っても効かない"},
+    {"no": "016", "anchor": "exp016", "thumb": "016_sheet.png",
+     "title": "Pyro 煙 — dissipation の正体を式で突き止める",
+     "note": "毎フレーム (1−d) 倍に減らす仕組み。立てた式と実測が4桁一致した"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "016", "title": "POP パーティクル",
+    {"no": "017", "title": "FLIP 液体",
+     "note": "液体なら体積が保存されるはず。また別の検証軸になる"},
+    {"no": "018", "title": "POP パーティクル",
      "note": "SOPには0種でDOPに67種。DOPネットワークを組む必要がある"},
-    {"no": "017", "title": "Pyro と FLIP", "note": "煙・炎と液体"},
+    {"no": "019", "title": "Karma でのレンダリング",
+     "note": "ハードウェアレンダラーはボリュームを描けないと判明したため"},
 ]
 
 PAGES = [
