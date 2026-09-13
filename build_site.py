@@ -141,17 +141,21 @@ DONE = [
      "shots": ["017_graph.png"],
      "title": "FLIP 液体 — 組み方が分からず保留",
      "note": "4通りの配線を試して全部同じエラー。他のソルバと作法が違うと判明"},
+    {"no": "018", "anchor": "exp018", "thumb": "018_karma.png",
+     "shots": ["018_noise_strip.png", "018_opengl.png", "018_karma.png"],
+     "title": "Karma でのレンダリング — ノイズはサンプル数で本当に減るのか",
+     "note": "サンプル数は上限であって指定ではない。頭打ちの犯人は varianceaa_thresh"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "018", "title": "Karma でのレンダリング",
-     "note": "ハードウェアレンダラーはボリュームを描けないと判明したため"},
     {"no": "019", "title": "FLIP の再挑戦",
      "note": "付属ヘルプとGUIが作るネットワークから入力の作法を読み取る"},
     {"no": "020", "title": "POP パーティクル",
      "note": "SOPには0種でDOPに67種。DOPネットワークを組む必要がある"},
+    {"no": "021", "title": "構造のある煙を作る",
+     "note": "018で判明。いまの煙は一様な球で、レンダラーの差を見せる題材として弱い"},
 ]
 
 PAGES = [

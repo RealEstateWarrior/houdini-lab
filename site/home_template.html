@@ -68,11 +68,19 @@
             <p>毎フレーム (1−d) 倍という仮説を立て、実測と4桁一致させた。</p>
           </div>
         </div>
+        <div class="tile tile--wide">
+          <img src="018_noise_strip.png" alt="サンプル数2・8・32・256で描いた煙を並べ、ザラつきが消えていく様子">
+          <div class="tile-body">
+            <h4>ノイズはどこまで減るのか</h4>
+            <p>サンプル数を4倍にすればノイズは半分——という式を立てて確かめた。
+              当たったのは狭い範囲だけで、指定した数がそのまま使われていないと分かった。</p>
+          </div>
+        </div>
       </div>
 
       <div class="stage">
         <h3>やり方</h3>
-        <p>Houdini の画面は使わず、<code>hython</code> という文字だけの実行環境で組み立てている。</p>
+        <p>ノードの組み立ても描画も、<code>hython</code> という文字だけの実行環境から行っている。</p>
       </div>
       <div class="pipeline">
         <div class="pipe">
@@ -140,7 +148,8 @@
           <thead><tr><th>用途</th><th>中身</th></tr></thead>
           <tbody>
             <tr><td>ノード構築とレンダ</td><td>hython 21.0.700（Apprentice）</td></tr>
-            <tr><td>プレビュー</td><td>OpenGL ROP / Smooth Wire Shaded</td></tr>
+            <tr><td>確認用の描画</td><td>OpenGL ROP / Smooth Wire Shaded（速い。1枚0.7秒）</td></tr>
+            <tr><td>見せる描画</td><td>Karma（光が中を通る。同じ絵で5倍の時間）</td></tr>
             <tr><td>接続図</td><td>ノード位置の JSON から Pillow で描画</td></tr>
             <tr><td>レポート</td><td>reportlab で日本語 PDF。文字が残るので Notebook が引用できる</td></tr>
             <tr><td>Notebook 連携</td><td>notebooklm-mcp-cli（ローカル PDF を直接ソースにできる）</td></tr>

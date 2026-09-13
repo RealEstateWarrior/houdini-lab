@@ -1256,6 +1256,121 @@
       </div>
     </article>
 
+
+    <!-- ===================== 018 ===================== -->
+    <article class="entry entry--current" id="exp018">
+      <div class="badge">018</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Karma でのレンダリング — ノイズはサンプル数で本当に減るのか</h2>
+        <p class="path">/obj/pyro_test &nbsp;·&nbsp; 実験016の煙を、2つのレンダラーで描き比べる</p>
+
+        <div class="prose">
+          <p>
+            実験016で煙を描いたとき、ハードウェアレンダラーでは濃淡が分からないと書いた。
+            そこで本式の<button class="term" data-term="レンダリング">レンダラー</button>である
+            <button class="term" data-term="Karma">Karma</button> を使う。
+            ただ「きれいになった」では終わらせない。
+          </p>
+          <p>
+            Karma は1ピクセルの色を、乱数で飛ばした何本もの光線の平均で決める。
+            平均のばらつきは本数の平方根に反比例するはずなので、
+            <strong>サンプル数を4倍にすれば<button class="term" data-term="ノイズ">ノイズ</button>は半分になる</strong>という式が立つ。
+            外れたら、式か測り方のどちらかが間違っている。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="018_noise_strip.png" alt="サンプル数2・8・32・256で描いた同じ煙の、同じ場所を拡大して並べた比較"></div>
+            <figcaption>同じ場所を2倍に拡大して並べたもの。<strong>2サンプルではザラつきがはっきり見え、256ではほぼ消える。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">サンプル数を4倍にしたときのノイズの比（式なら 0.5000）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>区間</th><th>実測</th><th>式の予測</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2 → 8</td><td class="num">0.3558</td><td class="num">0.5000</td><td>式より速く減る</td></tr>
+              <tr><td class="num">4 → 16</td><td class="num">0.4028</td><td class="num">0.5000</td><td>式より速く減る</td></tr>
+              <tr><td class="num">8 → 32</td><td class="num hi">0.5238</td><td class="num">0.5000</td><td class="hi">ほぼ式どおり</td></tr>
+              <tr><td class="num">16 → 64</td><td class="num">0.5789</td><td class="num">0.5000</td><td>やや遅い</td></tr>
+              <tr><td class="num">32 → 128</td><td class="num">0.6870</td><td class="num">0.5000</td><td>明らかに遅い</td></tr>
+              <tr><td class="num">64 → 256</td><td class="num">0.7909</td><td class="num">0.5000</td><td class="muted">ほとんど減らない</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          ノイズの量は基準画との差では測っていない。基準画にもノイズが残っているので、
+          基準画の出来に結果が左右されてしまう。3枚を連立させて1枚ずつ求めた。
+        </p>
+
+        <p class="label">指定したサンプル数と、実際に使われた数</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>指定</th><th>実測の時間</th><th>直線の予測</th><th>実測/予測</th><th>実効サンプル</th></tr></thead>
+            <tbody>
+              <tr><td class="num">64</td><td class="num">3.00 秒</td><td class="num">2.74 秒</td><td class="num">1.10</td><td class="num">99</td></tr>
+              <tr><td class="num">256</td><td class="num">3.43 秒</td><td class="num">4.16 秒</td><td class="num">0.82</td><td class="num">157</td></tr>
+              <tr><td class="num">1024</td><td class="num">5.52 秒</td><td class="num">9.88 秒</td><td class="num">0.56</td><td class="num">439</td></tr>
+              <tr><td class="num">4096</td><td class="num">6.48 秒</td><td class="num">32.73 秒</td><td class="num muted">0.20</td><td class="num hi">567</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          直線は「固定費 2.26秒 + 1サンプルあたり 7.44ミリ秒」。指定を64倍にしても、
+          実際の仕事は6倍にもなっていない。
+        </p>
+
+        <p class="label">頭打ちの犯人 — varianceaa_thresh</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>しきい値</th><th>時間</th><th>実効サンプル</th><th>既定との比</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.01（既定）</td><td class="num">5.39 秒</td><td class="num">420</td><td class="num">1.00</td></tr>
+              <tr><td class="num">0.005</td><td class="num">6.29 秒</td><td class="num">542</td><td class="num">1.29</td></tr>
+              <tr><td class="num">0.001</td><td class="num">8.01 秒</td><td class="num">773</td><td class="num">1.84</td></tr>
+              <tr><td class="num">0.0002</td><td class="num">70.64 秒</td><td class="num hi">9,191</td><td class="num hi">21.87</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="018_opengl.png" alt="OpenGL ROP で描いた煙。全体が一様に暗い塊に見える"></div>
+            <figcaption><strong>OpenGL ROP</strong> 0.71秒<br>輪郭と厚みによる濃淡は出ているが、光の向きが分からない</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="018_karma.png" alt="Karma で描いた煙。左上が明るく右下が暗い、光の向きの分かる陰影が付いている"></div>
+            <figcaption><strong>Karma 256サンプル</strong> 3.64秒<br>光源側が明るく反対側が暗い。光が中を通っている</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>式が当たったのは 8〜32 の区間だけ。</strong>そこでは4倍で 0.5238（式は 0.5000）とよく一致したが、64→256 では 0.7909 でほとんど減らない。</li>
+          <li>減らなくなる理由が分かった。<code>samplesperpixel</code> は<strong>「ここまで使ってよい」という上限であって、「必ずこれだけ使う」ではない</strong>。64 から 4096 へ64倍にしても、実効サンプル数は 99 から 567 へ5.7倍にしかならなかった。</li>
+          <li>犯人は <code>varianceaa_thresh</code>（既定 0.01）。「このくらい収束したら打ち切る」というしきい値で、0.0002 まで下げると実効サンプル数が <span class="hi">21.9倍</span>になった。頭打ちは機械の限界ではなく設定だった。</li>
+          <li><strong>実用的な結論。</strong>この場面では32サンプルあたりで費用対効果が折り返す。それ以上は数字を上げても絵は良くならない。詰めたいときは <code>varianceaa_thresh</code> も下げるが、時間は13倍になる。</li>
+          <li>時間の内訳は<strong>固定費 2.26秒 + 1サンプルあたり 7.44ミリ秒</strong>（640×360）。軽い絵を何枚も撮るときは、サンプル数より枚数のほうが効く。</li>
+          <li><strong>実験016に書いた「ハードウェアレンダラーは<button class="term" data-term="ボリューム">ボリューム</button>を描けない」は言い過ぎだった。</strong>同じカメラ・同じ露出で撮り直すと、OpenGL も輪郭と厚みによる濃淡を描けている。中心を横切る線は縁の254から中心の42までなだらかに変化していた。</li>
+          <li>本当の違いは<strong>光が中を通るかどうか</strong>。OpenGL は濃さの分だけ暗くするので、どちらから光が当たっているかが絵に出ない。Karma は光源側が明るい。Karma のほうが最も暗い画素が50と薄いのも、光が内部を抜けてくるため。</li>
+          <li>速さの差は<strong>5倍</strong>（0.71秒 対 3.64秒）。確認用の描画は今後も OpenGL でよく、Karma は見せる絵に使う。</li>
+        </ul>
+
+        <p class="callout">
+          <strong>測り方で3回つまずいた。</strong>
+          (1) 出力画像には透明度が付いていて、透明部分の色は黒だった。白い背景に見えるのは表示側が白で合成しているため。
+          これに気づかず「白から離れた画素＝煙」というマスクを作り、画面の88%を拾って、ほとんど何も測っていなかった。
+          (2) 煙の芯が255に張り付いていた。張り付いた画素は元の値が分からないので、明るさを下げて中間調だけを対象にした。
+          (3) <strong>OpenGL と Karma でカメラの寄り方が違っていた</strong>（margin 1.12 対 0.5）。
+          写る画素数が違って当たり前で、最初の比較は無効だった。
+          実験003以降ずっと守ってきた「全変種を同じカメラで撮る」を、自分で破っていた。
+        </p>
+      </div>
+    </article>
+
   </div>
 
   <footer>
