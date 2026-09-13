@@ -697,7 +697,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           左のタブは読み込みなしで切り替わる。実験の中身だけは、サムネイルを押したときに読み込む。
         </p>
         <dl class="facts">
-          <div><dt>実験</dt><dd>6 / 16</dd></div>
+          <div><dt>実験</dt><dd>7 / 16</dd></div>
           <div><dt>用語</dt><dd>56</dd></div>
           <div><dt>Houdini</dt><dd>21.0.700 Apprentice</dd></div>
           <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -750,6 +750,8 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           → <strong>006</strong> でそこで疑った「上限」を検証したところ、上限は存在せず、
           むしろ自分の指標が壊れていたと判明した。あわせて bias が突起と窪みを
           連続的に制御できると分かり、mountain のパラメータ地図がほぼ埋まった。
+          → <strong>007</strong> では舞台を平面に移し、球体では使えなかった指標を作り直した。
+          勾配が増えなくなる点が「その形に足りている解像度」を教えてくれると分かった。
         </p>
       </header>
       <div class="stage" style="margin-top: 40px;"><h3>完了</h3></div>
@@ -802,17 +804,17 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
             <p>005の「上限がある」は誤りだった。bias で突起と窪みを連続的に制御できる</p>
           </span>
         </a>
+        <a class="thumb" href="log.html#exp007">
+          <span class="thumb-img"><img src="007_frac_fBm.png" alt="実験007の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 007</span>
+            <h4>平面で地形を作り、指標を作り直す</h4>
+            <p>勾配が止まる点が「足りている解像度」を教えてくれる。fractal は平面で差が出る</p>
+          </span>
+        </a>
       </div>
       <div class="stage" style="margin-top: 40px;"><h3>予定 — プロシージャルモデリング</h3></div>
       <div class="thumbs">
-        <div class="thumb thumb--planned">
-          <span class="thumb-img">未実施</span>
-          <span class="thumb-body">
-            <span class="thumb-no">実験 007</span>
-            <h4>grid から地形を作る</h4>
-            <p>平面でも同じ結論になるか</p>
-          </span>
-        </div>
         <div class="thumb thumb--planned">
           <span class="thumb-img">未実施</span>
           <span class="thumb-body">

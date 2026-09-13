@@ -1,0 +1,232 @@
+{
+  "title": "grid で地形を作り、勾配で測る",
+  "network": "/obj/grid_terrain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grid_20",
+      "type": "grid",
+      "pos": [
+        -9.743,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 20,
+        "cols": 20
+      }
+    },
+    {
+      "name": "mt_20",
+      "type": "mountain::2.0",
+      "pos": [
+        -9.743,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0
+      }
+    },
+    {
+      "name": "grid_40",
+      "type": "grid",
+      "pos": [
+        -6.495,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "mt_40",
+      "type": "mountain::2.0",
+      "pos": [
+        -6.495,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0
+      }
+    },
+    {
+      "name": "grid_80",
+      "type": "grid",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 80,
+        "cols": 80
+      }
+    },
+    {
+      "name": "mt_80",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0
+      }
+    },
+    {
+      "name": "grid_160",
+      "type": "grid",
+      "pos": [
+        -3.248,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 160,
+        "cols": 160
+      }
+    },
+    {
+      "name": "mt_160",
+      "type": "mountain::2.0",
+      "pos": [
+        -3.248,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0
+      }
+    },
+    {
+      "name": "frac_none",
+      "type": "mountain::2.0",
+      "pos": [
+        3.248,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0,
+        "fractal": "none"
+      }
+    },
+    {
+      "name": "frac_fBm",
+      "type": "mountain::2.0",
+      "pos": [
+        6.495,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0,
+        "fractal": "fBm"
+      }
+    },
+    {
+      "name": "frac_mfT",
+      "type": "mountain::2.0",
+      "pos": [
+        9.743,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0,
+        "fractal": "mfT"
+      }
+    },
+    {
+      "name": "frac_hmfT",
+      "type": "mountain::2.0",
+      "pos": [
+        12.99,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 2.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "grid_20",
+      "from_output": 0,
+      "to": "mt_20",
+      "to_input": 0
+    },
+    {
+      "from": "grid_40",
+      "from_output": 0,
+      "to": "mt_40",
+      "to_input": 0
+    },
+    {
+      "from": "grid_80",
+      "from_output": 0,
+      "to": "mt_80",
+      "to_input": 0
+    },
+    {
+      "from": "grid_160",
+      "from_output": 0,
+      "to": "mt_160",
+      "to_input": 0
+    },
+    {
+      "from": "grid_80",
+      "from_output": 0,
+      "to": "frac_none",
+      "to_input": 0
+    },
+    {
+      "from": "grid_80",
+      "from_output": 0,
+      "to": "frac_fBm",
+      "to_input": 0
+    },
+    {
+      "from": "grid_80",
+      "from_output": 0,
+      "to": "frac_mfT",
+      "to_input": 0
+    },
+    {
+      "from": "grid_80",
+      "from_output": 0,
+      "to": "frac_hmfT",
+      "to_input": 0
+    }
+  ]
+}

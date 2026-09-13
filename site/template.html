@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>6 / 16</dd></div>
+      <div><dt>実験</dt><dd>7 / 16</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -474,6 +474,80 @@
           細かさを決めるのは <code>rough</code>（最も強い）、<code>lac</code>、<code>oct</code>（点数が足りている範囲で）。
           外向きか内向きかを決めるのは <code>bias</code>（連続的）と <code>basis</code>（種類で決まる）。
           特徴の大きさは <code>elementsize</code>。そして<strong>何を表現できるかの上限は点数が決める</strong>。
+        </p>
+      </div>
+    </article>
+
+    <!-- ===================== 007 ===================== -->
+    <article class="entry entry--current" id="exp007">
+      <div class="badge">007</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>平面で地形を作り、指標を作り直す</h2>
+        <p class="path">/obj/grid_terrain &nbsp;·&nbsp; 10×10 の grid、分割数 20〜160</p>
+
+        <div class="prose">
+          <p>
+            これまでの指標は「中心からの距離の差」で、球体でしか使えず、点数をまたいだ比較もできなかった
+            （006でその限界にぶつかった）。平面なら高さの差をそのまま測れる。さらに点の間隔で割れば
+            <strong>勾配</strong>になるので、解像度によらない量になるはずだと考えた。
+          </p>
+          <p>
+            <strong>その期待は外れた。</strong>ただし失敗ではなく、狙っていたものより役に立つ道具になった。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="007_flat.png" alt="ノイズをかけていない平らな格子"></div>
+            <figcaption><strong>基準</strong> ノイズなし<br>6400点 / 6400面</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="007_frac_none.png" alt="なだらかな起伏だけの地形"></div>
+            <figcaption><strong>None</strong><br>勾配 0.12216 — 最も滑らか</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="007_frac_hmfT.png" alt="細かい凹凸のある地形"></div>
+            <figcaption><strong>Hybrid Terrain</strong>（既定）<br>勾配 0.18745</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="007_frac_fBm.png" alt="最も細かく荒れた地形"></div>
+            <figcaption><strong>Standard (fBm)</strong><br>勾配 0.19064 — 最も粗い</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">オクターブ数ごとに、勾配がどこで止まるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分割数</th><th>点数</th><th>oct = 1</th><th>oct = 2</th><th>oct = 4</th><th>oct = 8</th></tr></thead>
+            <tbody>
+              <tr><td class="num">20</td><td class="num">400</td><td class="num">0.12897</td><td class="num">0.13673</td><td class="num">0.13593</td><td class="num">0.13595</td></tr>
+              <tr><td class="num">40</td><td class="num">1600</td><td class="num">0.14205</td><td class="num">0.15845</td><td class="num">0.16659</td><td class="num">0.16634</td></tr>
+              <tr><td class="num">80</td><td class="num">6400</td><td class="num">0.14492</td><td class="num">0.16561</td><td class="num">0.18604</td><td class="num">0.18745</td></tr>
+              <tr><td class="num">160</td><td class="num">25600</td><td class="num">0.14570</td><td class="num">0.16752</td><td class="num">0.19605</td><td class="num">0.20430</td></tr>
+              <tr><td class="muted">80→160 の伸び</td><td class="muted">—</td><td class="num hi">+0.5%</td><td class="num">+1.2%</td><td class="num">+5.4%</td><td class="num">+9.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          数字が横に並んで止まっていれば、その解像度で足りているということ。
+          oct = 1 は80分割で収束しているが、oct = 8 は160分割でもまだ伸びている。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>勾配は解像度によらない量には<strong>ならなかった</strong>。分割数を上げるほど増え続ける（0.13595 → 0.16634 → 0.18745 → 0.20430）。fBm 系のノイズは細かい成分を何段も持つので、細かく刻むほど急な斜面が新たに見えてくるため。</li>
+          <li>ただしこの性質のおかげで別のことが分かる。<strong>勾配が増えなくなったら、その解像度でその形を表現しきれている</strong>という判定に使える。oct = 1 なら80分割で十分、oct = 8 なら160分割でもまだ足りない。</li>
+          <li>低い解像度では余分なオクターブがまったく見えない。20分割では oct = 2 / 4 / 8 がほぼ同値（0.13673 / 0.13593 / 0.13595）で、順序の逆転まで起きている。004で球体を使って得た結論が平面でも再現し、解像度との関係まで数字で見えた。</li>
+          <li>高さの平均は40分割以降ほぼ一定（0.0819前後）なのに、勾配は160分割でも伸び続ける。<strong>形が正しく見えるのに必要な解像度は、高さが合う解像度よりはるかに高い。</strong> 点数を決めるときは高さではなく細かさを基準にする。</li>
+          <li>最大の高さも解像度とともに増える（0.29407 → 0.33513）。005・006で使った「最大のずれ」も同じ性質を持っていたことになる。</li>
+          <li>fractal は平面で明確に差が出た。滑らかな順に None（0.12216）、Terrain（0.14766）、Hybrid Terrain（0.18745）、Standard fBm（0.19064）で1.6倍の開き。一方で平均の高さはどれも 0.0818〜0.0839 とほぼ同じなので、<strong>fractal は振幅ではなく細かさを変える</strong>と確定した。004で立てた「平面ならもっと差が出るかもしれない」は当たっていた。</li>
+          <li>grid SOP の既定は 10×10 のサイズ、分割 10×10、向きは ZX 平面（水平）。水平なので mountain の押し出しは真上になり、高さの差をそのまま測れる。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          カメラのフレーミングを直した。以前はバウンディングボックスを立方体とみなして距離を決めていたため、
+          平たい地形が画面の4分の1ほどにしか写らなかった。8つの隅をカメラ空間に投影して必要な距離を解く方式に変更した。
         </p>
       </div>
     </article>

@@ -80,10 +80,12 @@ DONE = [
     {"no": "006", "anchor": "exp006", "thumb": "006_bias_075.png",
      "title": "height は純粋な倍率か。gain と bias は何に効くか",
      "note": "005の「上限がある」は誤りだった。bias で突起と窪みを連続的に制御できる"},
+    {"no": "007", "anchor": "exp007", "thumb": "007_frac_fBm.png",
+     "title": "平面で地形を作り、指標を作り直す",
+     "note": "勾配が止まる点が「足りている解像度」を教えてくれる。fractal は平面で差が出る"},
 ]
 
 PLANNED = [
-    {"no": "007", "title": "grid から地形を作る", "note": "平面でも同じ結論になるか"},
     {"no": "008", "title": "crease で角を保持する",
      "note": "分割しても立方体らしさを残せるか"},
     {"no": "009", "title": "scatter と copy to points",

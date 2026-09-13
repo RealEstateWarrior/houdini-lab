@@ -1,0 +1,116 @@
+{
+  "resolution": [
+    {
+      "divisions": 20,
+      "mean": 0.07919,
+      "max": 0.29407,
+      "slope": 0.13595,
+      "upward": 0.4075,
+      "spacing": 0.52632,
+      "points": 400
+    },
+    {
+      "divisions": 40,
+      "mean": 0.08187,
+      "max": 0.3268,
+      "slope": 0.16634,
+      "upward": 0.41813,
+      "spacing": 0.25641,
+      "points": 1600
+    },
+    {
+      "divisions": 80,
+      "mean": 0.08183,
+      "max": 0.32995,
+      "slope": 0.18745,
+      "upward": 0.42312,
+      "spacing": 0.12658,
+      "points": 6400
+    },
+    {
+      "divisions": 160,
+      "mean": 0.08196,
+      "max": 0.33513,
+      "slope": 0.2043,
+      "upward": 0.42461,
+      "spacing": 0.06289,
+      "points": 25600
+    }
+  ],
+  "oct": [
+    {
+      "divisions": 20,
+      "slopes": [
+        0.12897,
+        0.13673,
+        0.13593,
+        0.13595
+      ]
+    },
+    {
+      "divisions": 40,
+      "slopes": [
+        0.14205,
+        0.15845,
+        0.16659,
+        0.16634
+      ]
+    },
+    {
+      "divisions": 80,
+      "slopes": [
+        0.14492,
+        0.16561,
+        0.18604,
+        0.18745
+      ]
+    },
+    {
+      "divisions": 160,
+      "slopes": [
+        0.1457,
+        0.16752,
+        0.19605,
+        0.2043
+      ]
+    }
+  ],
+  "fractal": [
+    {
+      "fractal": "none",
+      "label": "None",
+      "mean": 0.08386,
+      "max": 0.39362,
+      "slope": 0.12216,
+      "upward": 0.4436,
+      "image": "007_frac_none.png"
+    },
+    {
+      "fractal": "fBm",
+      "label": "Standard (fBm)",
+      "mean": 0.08269,
+      "max": 0.37818,
+      "slope": 0.19064,
+      "upward": 0.4536,
+      "image": "007_frac_fBm.png"
+    },
+    {
+      "fractal": "mfT",
+      "label": "Terrain",
+      "mean": 0.08257,
+      "max": 0.38162,
+      "slope": 0.14766,
+      "upward": 0.4358,
+      "image": "007_frac_mfT.png"
+    },
+    {
+      "fractal": "hmfT",
+      "label": "Hybrid Terrain",
+      "mean": 0.08183,
+      "max": 0.32995,
+      "slope": 0.18745,
+      "upward": 0.4231,
+      "image": "007_frac_hmfT.png"
+    }
+  ]
+}

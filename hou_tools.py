@@ -121,20 +121,40 @@ def _ensure_lights():
         key.parmTuple("r").set((-38, -32, 0))
 
 
-def _frame_camera(cam, bbox, res, direction=(1.0, 0.62, 1.15), margin=1.18):
-    """Place cam so bbox fills the frame, looking down `direction`."""
+def _frame_camera(cam, bbox, res, direction=(1.0, 0.62, 1.15), margin=1.12):
+    """Place cam so the bbox exactly fills the frame, looking down `direction`.
+
+    Projects the eight bbox corners into camera space and solves for the
+    distance where the widest corner still fits. A bounding-sphere estimate
+    would badly overshoot for flat objects like terrain, rendering them tiny."""
     center = bbox.center()
-    radius = max(bbox.sizevec()) * 0.5 * math.sqrt(3.0) or 1.0
+    low, high = bbox.minvec(), bbox.maxvec()
+    corners = [hou.Vector3(x, y, z) - center
+               for x in (low[0], high[0])
+               for y in (low[1], high[1])
+               for z in (low[2], high[2])]
 
     focal = cam.parm("focal").eval()
     aperture = cam.parm("aperture").eval()
-    fov_h = 2.0 * math.atan((aperture * 0.5) / focal)
-    fov_v = 2.0 * math.atan(math.tan(fov_h * 0.5) * res[1] / res[0])
-    distance = radius / math.tan(min(fov_h, fov_v) * 0.5) * margin
+    tan_h = (aperture * 0.5) / focal
+    tan_v = tan_h * res[1] / res[0]
 
-    d = hou.Vector3(direction).normalized()
-    eye = center + d * distance
+    forward = -hou.Vector3(direction).normalized()
+    world_up = hou.Vector3(0, 1, 0)
+    if abs(forward.dot(world_up)) > 0.999:
+        world_up = hou.Vector3(0, 0, 1)
+    right = forward.cross(world_up).normalized()
+    up = right.cross(forward).normalized()
 
+    distance = 0.0
+    for corner in corners:
+        depth_offset = corner.dot(forward)
+        distance = max(distance,
+                       abs(corner.dot(right)) / tan_h - depth_offset,
+                       abs(corner.dot(up)) / tan_v - depth_offset)
+    distance = max(distance, 1e-3) * margin
+
+    eye = center - forward * distance
     cam.parmTuple("t").set(eye)
     rotate = hou.hmath.buildRotateLookAt(eye, center, hou.Vector3(0, 1, 0))
     cam.parmTuple("r").set(rotate.extractRotates())
