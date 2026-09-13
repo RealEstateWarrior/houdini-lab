@@ -1855,6 +1855,131 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 032 ===================== -->
+    <article class="entry entry--current" id="exp032">
+      <div class="badge">032</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>狙った線で破れる布 — 先に切って、あとから貼る</h2>
+        <p class="path">/obj/tear_line &nbsp;·&nbsp; 031で分かった glue の使い方を応用する</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp031">実験031</a>で分かったのは、<button class="term" data-term="Vellum">Vellum</button> の breaking は <code>glue</code> が作る
+            stitch <button class="term" data-term="コンストレイント">拘束</button>にだけ効き、<code>cloth</code> が作る distance 拘束には効かないということだった。
+            つまり<strong>布の伸びを破ることはできないが、貼り合わせを外すことはできる</strong>。
+          </p>
+          <p>
+            ならば順序を逆にすればよい。<strong>先に切っておいて、あとから貼る。</strong>
+            破れてほしい線で布を2つに切り分け、<code>glue</code> で貼り直し、しきい値を決めて吊るす。
+            重さが貼り目にかかり、しきい値を超えたところから外れる。
+          </p>
+          <p>
+            狙いどおりになった。波打つ線で切った布は、<strong>その線のかたちのまま裂けた</strong>。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="032_intact.png" alt="継ぎ目の見えない1枚の布が吊るされている"></div>
+            <figcaption>しきい値 1000。<strong>1枚の布として垂れる。貼り目は見えない。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="032_torn.png" alt="波打つ線で上下に裂け、下半分が落ちていく布"></div>
+            <figcaption>しきい値 1.0。同じカメラ・同じフレーム。<strong>切った波の線のまま裂けた。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">段取り</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>順</th><th>やること</th><th>使うノード</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td>布を1枚作る</td><td><code>grid</code></td></tr>
+              <tr><td class="num">2</td><td>破れてほしい線で、面を2組に分ける印を付ける</td><td><code>attribwrangle</code>（実行対象は面）</td></tr>
+              <tr><td class="num">3</td><td>2つに切り分けて合流させる</td><td><code>blast</code> ×2 → <code>merge</code></td></tr>
+              <tr><td class="num">4</td><td>布の拘束を付ける（ピースごとに独立して付く）</td><td><code>vellumconstraints</code>（cloth）</td></tr>
+              <tr><td class="num">5</td><td>貼り直す。ここに breaking としきい値を入れる</td><td><code>vellumconstraints</code>（glue）</td></tr>
+              <tr><td class="num">6</td><td>上端をピンで留めて解く</td><td><code>vellumconstraints</code>（pin）→ <code>vellumsolver</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">1. 貼り目は、狙った線の上にあるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>元の布</td><td class="num">1,600点 / 1,521面</td></tr>
+              <tr><td>切ったあと</td><td class="num">1,666点（+66）</td></tr>
+              <tr><td>作られた拘束</td><td class="num">distance 4,706 / bend 4,420 / stitch 66</td></tr>
+              <tr><td>stitch の高さの範囲</td><td class="num">2.1487 〜 3.0718</td></tr>
+              <tr><td>狙った線の範囲</td><td class="num">2.15 〜 3.05</td></tr>
+              <tr><td>線からのずれ</td><td class="num hi">平均 0.04405 / 最大 0.10071</td></tr>
+              <tr><td>マス目の間隔</td><td class="num">0.1026（4 ÷ 39）</td></tr>
+              <tr><td>検算: 増えた点 = stitch の数</td><td class="num hi">66 = 66</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          切った線は <code>y = 2.6 + 0.45·sin(2.2x)</code> の波。
+          ずれの最大 0.10071 は<strong>マス目1つぶん（0.1026）より小さい</strong>。
+          線をどう引いても、その形のまま破れる。
+        </p>
+
+        <p class="label">2. しきい値で、外れる／外れないを決められるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>しきい値</th><th>F5</th><th>F15</th><th>F40</th><th>吊るした側（683点）</th><th>外れた側（983点）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.01</td><td class="num hi">9,126</td><td class="num">9,126</td><td class="num">9,126</td><td class="num">2.140 〜 4.200</td><td class="num hi">−11.335 〜 −8.448</td></tr>
+              <tr><td class="num">1.0</td><td class="num hi">9,126</td><td class="num">9,126</td><td class="num">9,126</td><td class="num">2.140 〜 4.200</td><td class="num hi">−11.055 〜 −8.187</td></tr>
+              <tr><td class="num">10.0</td><td class="num">9,161</td><td class="num hi">9,126</td><td class="num">9,126</td><td class="num">2.141 〜 4.200</td><td class="num hi">−8.953 〜 −5.728</td></tr>
+              <tr><td class="num">100.0</td><td class="num">9,192</td><td class="num">9,192</td><td class="num">9,192</td><td class="num">2.116 〜 4.200</td><td class="num muted">0.155 〜 3.053</td></tr>
+              <tr><td class="num">1000.0</td><td class="num">9,192</td><td class="num">9,192</td><td class="num">9,192</td><td class="num">2.116 〜 4.200</td><td class="num muted">0.155 〜 3.053</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          拘束は <strong>cloth 9,126本 + stitch 66本 = 9,192本</strong>から始まる。
+          外れると stitch が取り除かれて 9,126本になる。
+          しきい値 10 のときは F5 で 9,161本、F15 で 9,126本と<strong>少しずつ</strong>外れていく。
+        </p>
+
+        <p class="label">3. 切らない布は、やはり破れないまま（031の再確認）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>しきい値</th><th>拘束の本数（入力 → F40）</th><th>最下点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.000001</td><td class="num">9,126 → 9,126</td><td class="num">0.1667</td></tr>
+              <tr><td class="num">1.0</td><td class="num">9,126 → 9,126</td><td class="num">0.1667</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>狙った線のまま裂けた。</strong>貼り目は狙った線から平均 0.044・最大 0.101 しか離れていない。<span class="hi">マス目1つぶん（0.1026）より小さい</span>。</li>
+          <li><strong>数が合っている。</strong>切ると切り口の点が二重になる。増えた点は 66個で、glue が作った stitch もちょうど 66本。<strong>重なった1組につき1本</strong>という理屈どおり。ここがずれていたら貼り忘れか貼りすぎがある。</li>
+          <li><strong>しきい値で「どれだけの力で外れるか」を決められる。</strong>10以下なら外れ、100以上なら外れない。境目は 10 と 100 の間で、実験031の glue のときと同じ。</li>
+          <li><strong>外れないときは、貼り目がまったく見えない。</strong>しきい値 1000 の画は1枚の布そのもので、どこで切ったか分からない。<strong>貼っておけば、破れるまでは普通の布として振る舞う。</strong></li>
+          <li><strong>切らない布は、やはり破れない。</strong>しきい値 0.000001 でも 9,126本のまま。031の結論がそのまま再現した。</li>
+          <li><strong><code>blast</code> の <code>grouptype</code> でつまずいた。</strong>選択肢は 0=推測 / 1=ブレーク<button class="term" data-term="ポイント">ポイント</button> / 2=辺 / 3=点 / <strong>4=面</strong>。面のつもりで 1 を入れると「ブレークポイント」になり、<span class="hi">何も消えずに素通りする</span>。エラーは出ない。</li>
+          <li>気づけたのは<strong>点の数を数えていたから</strong>。切ったはずなのに合流後の点数が元のちょうど2倍（3,200）になり、stitch が 1,600本（＝元の点数そのもの）できた。切れていない2枚が丸ごと重なっていたと分かった。<strong>「思ったとおりに動いたか」を別の量で確かめる。</strong></li>
+          <li><strong>面の印は、点ではなく<button class="term" data-term="プリミティブ">プリミティブ</button>に付ける。</strong><code>attribwrangle</code> の実行対象を Primitives にして、面の重心が線より下かどうかで振り分ける。点に付けると1枚の面の4隅で答えが割れて、切り口が崩れる。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          <strong>031で「実用の結論」として書いたやり方を、そのまま試して確かめた形になる。</strong>
+          効かないものを無理に効かせようとせず、効くものの使い方に寄せる。
+          <a href="#exp028">実験028</a>で14通り試して破れなかったところから、
+          031で理由が分かり、032で狙った形に破れるようになった。
+        </p>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

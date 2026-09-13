@@ -1,0 +1,257 @@
+{
+  "title": "実験032 — 狙った線で破れる布",
+  "network": "/obj/tear_line",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cloth",
+      "type": "grid",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 4.0,
+        "sizey": 4.0,
+        "ty": 2.2,
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "mark_cut",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -1.13
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "float line = 2.6 + 0.45 * sin(@P.x * 2.2);\ni@lower = (@P.y < line) ? 1 : 0;"
+      }
+    },
+    {
+      "name": "upper",
+      "type": "blast",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@lower==1",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "lower",
+      "type": "blast",
+      "pos": [
+        2.259,
+        -2.711
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@lower==0",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "two_pieces",
+      "type": "merge",
+      "pos": [
+        1.13,
+        -3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "make_pins",
+      "type": "attribwrangle",
+      "pos": [
+        1.13,
+        -4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "if (@P.y > 4.1) { @group_pins = 1; }"
+      }
+    },
+    {
+      "name": "cloth1",
+      "type": "vellumconstraints",
+      "pos": [
+        1.13,
+        -5.949
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "glue",
+      "type": "vellumconstraints",
+      "pos": [
+        1.13,
+        -7.078
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 12,
+        "dobreaking": 1,
+        "breakthreshold": 1.0
+      }
+    },
+    {
+      "name": "pin",
+      "type": "vellumconstraints",
+      "pos": [
+        1.13,
+        -8.208
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 6,
+        "grouptype": 1,
+        "group": "pins"
+      }
+    },
+    {
+      "name": "solve",
+      "type": "vellumsolver",
+      "pos": [
+        1.13,
+        -9.337
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "conn",
+      "type": "connectivity",
+      "pos": [
+        1.13,
+        -10.467
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "mark_cut",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cut",
+      "from_output": 0,
+      "to": "upper",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cut",
+      "from_output": 0,
+      "to": "lower",
+      "to_input": 0
+    },
+    {
+      "from": "upper",
+      "from_output": 0,
+      "to": "two_pieces",
+      "to_input": 0
+    },
+    {
+      "from": "lower",
+      "from_output": 0,
+      "to": "two_pieces",
+      "to_input": 1
+    },
+    {
+      "from": "two_pieces",
+      "from_output": 0,
+      "to": "make_pins",
+      "to_input": 0
+    },
+    {
+      "from": "make_pins",
+      "from_output": 0,
+      "to": "cloth1",
+      "to_input": 0
+    },
+    {
+      "from": "cloth1",
+      "from_output": 0,
+      "to": "glue",
+      "to_input": 0
+    },
+    {
+      "from": "cloth1",
+      "from_output": 1,
+      "to": "glue",
+      "to_input": 1
+    },
+    {
+      "from": "glue",
+      "from_output": 0,
+      "to": "pin",
+      "to_input": 0
+    },
+    {
+      "from": "glue",
+      "from_output": 1,
+      "to": "pin",
+      "to_input": 1
+    },
+    {
+      "from": "pin",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 0
+    },
+    {
+      "from": "pin",
+      "from_output": 1,
+      "to": "solve",
+      "to_input": 1
+    },
+    {
+      "from": "solve",
+      "from_output": 0,
+      "to": "conn",
+      "to_input": 0
+    }
+  ]
+}

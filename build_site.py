@@ -230,13 +230,18 @@ DONE = [
      "shots": ["031_hold.png", "031_tear.png"],
      "title": "Vellum の breaking は動く — ただし布の伸びには効かない",
      "note": "028の宿題を回収。glue の stitch は破れ、cloth の distance は同じ場面でも破れない"},
+    {"no": "032", "anchor": "exp032", "tags": ["エフェクト", "布", "Vellum"],
+     "log": "log_fx", "hip": "032_tear_line.hipnc", "thumb": "032_torn.png",
+     "shots": ["032_intact.png", "032_torn.png"],
+     "title": "狙った線で破れる布 — 先に切って、あとから貼る",
+     "note": "波の線で切って glue で貼り直す。ずれは最大0.101でマス目1つぶん未満"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "032", "title": "狙った線で破れる布を作る",
-     "note": "031で分かった glue の使い方を、切れ目を入れた布に応用する"},
+    {"no": "033", "title": "布を物にぶつけて破る",
+     "note": "032は重さだけで外した。当たった場所から裂けるようにする"},
 ]
 
 PAGES = [
