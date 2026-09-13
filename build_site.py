@@ -101,13 +101,14 @@ DONE = [
     {"no": "013", "anchor": "exp013", "thumb": "013_sheet.png",
      "title": "時間軸への対応 — フレームを進めて記録する",
      "note": "連番・コンタクトシート・GIF。パーティクルはSOPに0種でDOPに67種と判明"},
+    {"no": "014", "anchor": "exp014", "thumb": "014_sheet.png",
+     "title": "RBD 破壊 — 最初の本物のシミュレーション",
+     "note": "体積が全フレームで完全に保存。落下中は砕けず、着地して2.8倍に散らばる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "014", "title": "RBD 破壊",
-     "note": "SOPに47種あり入口として易しい。boolean の Shatter で作った破片を落とす"},
     {"no": "015", "title": "Vellum クロス", "note": "SOPに22種。布のシミュレーション"},
     {"no": "016", "title": "POP パーティクル",
      "note": "SOPには0種でDOPに67種。DOPネットワークを組む必要がある"},

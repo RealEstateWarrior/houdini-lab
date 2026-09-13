@@ -1,0 +1,61 @@
+{
+  "fracture_points": 282,
+  "fracture_prims": 191,
+  "frames": [
+    {
+      "frame": 1,
+      "points": 282,
+      "volume": 8.0,
+      "lowest": 3.0,
+      "spread": 2.0,
+      "height": 2.0,
+      "seconds": 0.38
+    },
+    {
+      "frame": 4,
+      "points": 282,
+      "volume": 8.0,
+      "lowest": 2.9208,
+      "spread": 2.0,
+      "height": 2.0,
+      "seconds": 0.02
+    },
+    {
+      "frame": 10,
+      "points": 282,
+      "volume": 8.0,
+      "lowest": 2.3028,
+      "spread": 2.0,
+      "height": 2.0,
+      "seconds": 0.03
+    },
+    {
+      "frame": 20,
+      "points": 282,
+      "volume": 8.0,
+      "lowest": -0.0492,
+      "spread": 2.0589,
+      "height": 2.0331,
+      "seconds": 0.05
+    },
+    {
+      "frame": 30,
+      "points": 282,
+      "volume": 8.0,
+      "lowest": -0.0225,
+      "spread": 3.7483,
+      "height": 2.0181,
+      "seconds": 0.03
+    },
+    {
+      "frame": 46,
+      "points": 282,
+      "volume": 8.0,
+      "lowest": -0.0219,
+      "spread": 5.6408,
+      "height": 1.9498,
+      "seconds": 0.05
+    }
+  ],
+  "render_seconds": 1.1
+}
