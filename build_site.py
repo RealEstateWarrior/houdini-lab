@@ -220,13 +220,18 @@ DONE = [
      "shots": ["029_force.png", "029_wind.png", "029_axis.png"],
      "title": "粒に力をかける — 風は「押す」のではなく「追いつかせる」",
      "note": "見立てた式が外れ、風速を変えて測り直したら二乗抵抗だった。15点すべて一致"},
+    {"no": "030", "anchor": "exp030", "tags": ["点検", "検算", "プロシージャルモデリング"],
+     "log": "log_pm", "hip": None, "thumb": "030_audit.png",
+     "shots": ["030_audit.png"],
+     "title": "過去29回を測り直す — 書いたことは、いまも正しいか",
+     "note": "7項目を再測定。5つは確認、2つは訂正。数字は動かず、動いたのは書き方だけ"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "030", "title": "001〜030 の振り返り点検",
-     "note": "過去の実験を1つずつ見直し、補足と訂正を入れる"},
+    {"no": "031", "title": "Vellum の breaking を DOP で確かめ直す",
+     "note": "028で SOP レベルでは1つも破れなかった。breakfrequency を自分で指定する"},
 ]
 
 PAGES = [

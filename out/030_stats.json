@@ -1,0 +1,337 @@
+{
+  "euler": [
+    {
+      "iterations": 0,
+      "points": 8,
+      "prims": 6,
+      "holds": true
+    },
+    {
+      "iterations": 1,
+      "points": 26,
+      "prims": 24,
+      "holds": true
+    },
+    {
+      "iterations": 2,
+      "points": 98,
+      "prims": 96,
+      "holds": true
+    },
+    {
+      "iterations": 3,
+      "points": 386,
+      "prims": 384,
+      "holds": true
+    },
+    {
+      "iterations": 4,
+      "points": 1538,
+      "prims": 1536,
+      "holds": true
+    },
+    {
+      "iterations": 5,
+      "points": 6146,
+      "prims": 6144,
+      "holds": true
+    },
+    {
+      "iterations": 6,
+      "points": 24578,
+      "prims": 24576,
+      "holds": true
+    }
+  ],
+  "mountain_parms": {
+    "rough": true,
+    "oct": true,
+    "lac": true,
+    "height": true,
+    "elementsize": true,
+    "roughness": false,
+    "octaves": false,
+    "lacunarity": false
+  },
+  "rand": {
+    "points": 400,
+    "worst_diff": 0.0,
+    "identical": true
+  },
+  "crease": [
+    {
+      "iterations": 3,
+      "weight": 0.0,
+      "edge": 0.8491753935813904,
+      "angle_edge": 13.93263724615772,
+      "angle_point": 17.85412064707512,
+      "sharp": false
+    },
+    {
+      "iterations": 3,
+      "weight": 1.0,
+      "edge": 1.0,
+      "angle_edge": 28.072472496022645,
+      "angle_point": 28.768946203395643,
+      "sharp": false
+    },
+    {
+      "iterations": 3,
+      "weight": 2.0,
+      "edge": 1.0,
+      "angle_edge": 53.13010428178624,
+      "angle_point": 53.13010428178624,
+      "sharp": false
+    },
+    {
+      "iterations": 3,
+      "weight": 3.0,
+      "edge": 1.0,
+      "angle_edge": 90.0,
+      "angle_point": 90.0,
+      "sharp": true
+    },
+    {
+      "iterations": 3,
+      "weight": 4.0,
+      "edge": 1.0,
+      "angle_edge": 90.0,
+      "angle_point": 90.0,
+      "sharp": true
+    },
+    {
+      "iterations": 3,
+      "weight": 5.0,
+      "edge": 1.0,
+      "angle_edge": 90.0,
+      "angle_point": 90.0,
+      "sharp": true
+    },
+    {
+      "iterations": 4,
+      "weight": 0.0,
+      "edge": 0.8419189453125,
+      "angle_edge": 7.058527462858981,
+      "angle_point": 9.004353091592373,
+      "sharp": false
+    },
+    {
+      "iterations": 4,
+      "weight": 1.0,
+      "edge": 1.0,
+      "angle_edge": 14.250050010685824,
+      "angle_point": 14.713696254283477,
+      "sharp": false
+    },
+    {
+      "iterations": 4,
+      "weight": 2.0,
+      "edge": 1.0,
+      "angle_edge": 28.072472496022645,
+      "angle_point": 28.76903244672348,
+      "sharp": false
+    },
+    {
+      "iterations": 4,
+      "weight": 3.0,
+      "edge": 1.0,
+      "angle_edge": 53.13010428178624,
+      "angle_point": 53.13010428178624,
+      "sharp": false
+    },
+    {
+      "iterations": 4,
+      "weight": 4.0,
+      "edge": 1.0,
+      "angle_edge": 90.0,
+      "angle_point": 90.0,
+      "sharp": true
+    },
+    {
+      "iterations": 4,
+      "weight": 5.0,
+      "edge": 1.0,
+      "angle_edge": 90.0,
+      "angle_point": 90.0,
+      "sharp": true
+    },
+    {
+      "iterations": 5,
+      "weight": 0.0,
+      "edge": 0.8401090502738953,
+      "angle_edge": 3.541092265258598,
+      "angle_point": 4.512125226826209,
+      "sharp": false
+    },
+    {
+      "iterations": 5,
+      "weight": 1.0,
+      "edge": 1.0,
+      "angle_edge": 7.152697622667828,
+      "angle_point": 7.399050044664606,
+      "sharp": false
+    },
+    {
+      "iterations": 5,
+      "weight": 2.0,
+      "edge": 1.0,
+      "angle_edge": 14.250050010685824,
+      "angle_point": 14.713829736825282,
+      "sharp": false
+    },
+    {
+      "iterations": 5,
+      "weight": 3.0,
+      "edge": 1.0,
+      "angle_edge": 28.072472496022645,
+      "angle_point": 28.769093640732194,
+      "sharp": false
+    },
+    {
+      "iterations": 5,
+      "weight": 4.0,
+      "edge": 1.0,
+      "angle_edge": 53.13010428178624,
+      "angle_point": 53.13010428178624,
+      "sharp": false
+    },
+    {
+      "iterations": 5,
+      "weight": 5.0,
+      "edge": 1.0,
+      "angle_edge": 90.0,
+      "angle_point": 90.0,
+      "sharp": true
+    }
+  ],
+  "spheres": [
+    {
+      "index": 0,
+      "name": "prim",
+      "label": "Primitive",
+      "prims_6": 1,
+      "points_6": 1,
+      "prims_30": 1,
+      "points_30": 1,
+      "responds": false
+    },
+    {
+      "index": 1,
+      "name": "poly",
+      "label": "Polygon",
+      "prims_6": 80,
+      "points_6": 42,
+      "prims_30": 80,
+      "points_30": 42,
+      "responds": false
+    },
+    {
+      "index": 2,
+      "name": "polymesh",
+      "label": "Polygon Mesh",
+      "prims_6": 30,
+      "points_6": 26,
+      "prims_30": 870,
+      "points_30": 842,
+      "responds": true
+    },
+    {
+      "index": 3,
+      "name": "mesh",
+      "label": "Mesh",
+      "prims_6": 1,
+      "points_6": 26,
+      "prims_30": 1,
+      "points_30": 842,
+      "responds": false
+    },
+    {
+      "index": 4,
+      "name": "nurbs",
+      "label": "NURBS",
+      "prims_6": 1,
+      "points_6": 36,
+      "prims_30": 1,
+      "points_30": 900,
+      "responds": false
+    },
+    {
+      "index": 5,
+      "name": "bezier",
+      "label": "Bezier",
+      "prims_6": 1,
+      "points_6": 180,
+      "prims_30": 1,
+      "points_30": 7380,
+      "responds": false
+    },
+    {
+      "index": 6,
+      "name": "polysoup",
+      "label": "Polygon Soup",
+      "prims_6": 1,
+      "points_6": 42,
+      "prims_30": 1,
+      "points_30": 42,
+      "responds": false
+    }
+  ],
+  "scatter": [
+    {
+      "normal_sop": false,
+      "upstream_point_N": false,
+      "upstream_vertex_N": false,
+      "scatter_point_N": false,
+      "attribs": [
+        "P"
+      ],
+      "points": 200
+    },
+    {
+      "normal_sop": true,
+      "upstream_point_N": false,
+      "upstream_vertex_N": true,
+      "scatter_point_N": true,
+      "attribs": [
+        "N",
+        "P"
+      ],
+      "points": 200
+    }
+  ],
+  "limit": [
+    {
+      "iterations": 1,
+      "edge": 1.0
+    },
+    {
+      "iterations": 2,
+      "edge": 0.8784722089767456
+    },
+    {
+      "iterations": 3,
+      "edge": 0.8491753935813904
+    },
+    {
+      "iterations": 4,
+      "edge": 0.8419189453125
+    },
+    {
+      "iterations": 5,
+      "edge": 0.8401090502738953
+    },
+    {
+      "iterations": 6,
+      "edge": 0.8396569490432739
+    },
+    {
+      "iterations": 7,
+      "edge": 0.839543879032135
+    },
+    {
+      "iterations": 8,
+      "edge": 0.8395155668258667
+    }
+  ],
+  "limit_gap": 5.566825866720748e-06
+}

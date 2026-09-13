@@ -224,16 +224,19 @@ def _stats_table(stats, styles):
 
 
 def _experiment_flow(spec, styles, base_dir):
-    graph = _load(spec["graph"], base_dir)
+    # 接続図が無い回もある（実験030の振り返り点検のように、
+    # 1つのネットワークを作らずに複数の実験を測り直す回）。
+    graph = _load(spec["graph"], base_dir) if spec.get("graph") else {}
     stats = _load(spec["stats"], base_dir) if spec.get("stats") else {}
 
     flow = [Paragraph(spec.get("title") or graph.get("title", "Houdini 実験ログ"), styles["title"])]
 
     meta = [
         datetime.date.today().isoformat(),
-        f"Houdini {graph.get('houdini_version', '?')}",
+        f"Houdini {graph.get('houdini_version', '?')}" if graph else "",
         graph.get("network", ""),
-        f"ノード {len(graph['nodes'])} / 接続 {len(graph.get('edges', []))}",
+        (f"ノード {len(graph['nodes'])} / 接続 {len(graph.get('edges', []))}"
+         if graph.get("nodes") else ""),
     ]
     flow.append(Paragraph("　|　".join(m for m in meta if m), styles["meta"]))
 
@@ -249,7 +252,8 @@ def _experiment_flow(spec, styles, base_dir):
         flow.append(Paragraph("スクリプトが実際に構築したネットワーク。水色の点は表示フラグ。",
                               styles["caption"]))
 
-    flow.append(_node_table(graph, styles))
+    if graph.get("nodes"):
+        flow.append(_node_table(graph, styles))
 
     for block in spec.get("comparisons", []):
         flow.append(Paragraph(block.get("label", "比較"), styles["h2"]))

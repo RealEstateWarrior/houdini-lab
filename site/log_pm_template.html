@@ -12,7 +12,7 @@
   <header class="masthead">
     <p class="eyebrow">Procedural Modeling / hython 21.0.700</p>
     <h1>実験ログ — モデリング編</h1>
-    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012まで。数字はすべて実行して得た値で、推測は含まない。</p>
+    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、および030（001〜029の振り返り点検）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
       <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
@@ -32,7 +32,7 @@
     <div class="stage"><h3>完了した実験</h3></div>
 
     <!-- ===================== 001 ===================== -->
-    <article class="entry" id="exp001">
+    <article class="entry entry--current" id="exp001">
       <div class="badge">001</div>
       <div class="body">
         <span class="chip chip--pm">プロシージャルモデリング</span>
@@ -75,7 +75,7 @@
     </article>
 
     <!-- ===================== 002 ===================== -->
-    <article class="entry" id="exp002">
+    <article class="entry entry--current" id="exp002">
       <div class="badge">002</div>
       <div class="body">
         <span class="chip chip--pm">プロシージャルモデリング</span>
@@ -132,6 +132,7 @@
           <li><strong>1回目だけ一辺が縮まない</strong>。+X端を保持している点を調べたら (0.5, 0, 0) の1点だけで、これは元の +X 面の中心そのものだった。<button class="term" data-term="Catmull-Clark">Catmull-Clark</button> は各面の中心に新しい点を作るので、1回目はその新点が元の面上に乗る。2回目でその点も内側に引かれ 0.87847 に縮む。</li>
           <li>縮みの原因は分割ではなく<strong>平滑化</strong>だと確定した。OpenSubdiv Bilinear（平滑化せず分割するだけ）で3回分割しても一辺は 1.00000 のまま。面数は同じ384なので、分割量は同じで平滑化の有無だけが違う。</li>
           <li>一辺の縮み方は等比的に収束する。差は 0.02929 → 0.00726 → 0.00181 → 0.00045 で毎回およそ1/4。外挿した極限値は約 <span class="hi">0.83951</span>。</li>
+          <li><strong>この外挿は当たっていた（<a href="#exp030">実験030</a>）。</strong>8回まで回すと一辺は 0.839516 で、0.83951 との差は <span class="hi">0.000006</span>。差が毎回およそ1/4に減るという読みも、0.243 / 0.248 / 0.249 / 0.249 / 0.245 / 0.231 と保たれた。</li>
           <li><button class="term" data-term="Mantra">Mantra</button>-Compatible Catmull-Clark は回数1〜5のどれでも一辺が 0.83951 で一定だった。上で外挿した極限値と一致する。つまりこのモードは繰り返して近づけるのではなく、<strong>極限曲面上の位置を直接求めている</strong>。</li>
           <li><button class="term" data-term="ポリゴン">OpenSubdiv Loop</button> だけプリミティブ数が768になる（他は384）。三角形メッシュ向けの方式なので四角形が三角形に割られる。四角形を保ちたい場面では選べない。</li>
         </ul>
@@ -139,7 +140,7 @@
     </article>
 
     <!-- ===================== 003 ===================== -->
-    <article class="entry" id="exp003">
+    <article class="entry entry--current" id="exp003">
       <div class="badge">003</div>
       <div class="body">
         <span class="chip chip--pm">プロシージャルモデリング</span>
@@ -315,6 +316,12 @@
         <span class="chip chip--pm">プロシージャルモデリング</span>
         <h2>basis（ノイズの種類）14通りで、形はどこまで変わるか</h2>
         <p class="path">/obj/noise_basis &nbsp;·&nbsp; 14種類を同条件で比較</p>
+
+        <p class="callout callout--note">
+          <strong>→ この記事の末尾で「セル系の最大のずれに上限が効いている可能性がある」と書いた見立ては、
+          <a href="#exp006">実験006</a>で否定された。</strong>
+          上限は存在せず、セル系の最大／height が 0.47〜0.50 に揃って見えたのは種類ごとの固有の比率だった。
+        </p>
 
         <div class="prose">
           <p>
@@ -559,6 +566,13 @@
         <h2>scatter と copy to points — 地面に物を生やす</h2>
         <p class="path">/obj/scatter_copy &nbsp;·&nbsp; 散布点200個、テンプレート20点</p>
 
+        <p class="callout">
+          <strong>訂正（<a href="#exp030">実験030</a>）。「scatter の出力は N も持つ」は言い過ぎだった。</strong>
+          scatter は N を作らない。上流に <code>normal</code> <button class="term" data-term="SOP">SOP</button> が無ければ、出力の属性は <code>P</code> だけである。
+          この実験では地面に normal をかけてから scatter していたので N が出ていた。
+          <strong>自分の組み方では正しいが、一般の性質として書くと間違いになる。</strong>
+        </p>
+
         <div class="prose">
           <p>
             面の上に点をばらまき、その点ごとに<button class="term" data-term="ジオメトリ">ジオメトリ</button>を複製する。
@@ -620,7 +634,7 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><code>scatter</code> の <code>npts</code> は正確に守られる。50 / 200 / 800 を指定して実際も 50 / 200 / 800。おおよその数ではなく指定した数ちょうどが出る。</li>
-          <li><button class="term" data-term="scatter">scatter</button> の出力は <code>P</code> だけでなく <code>N</code> も持つ。元の面の<button class="term" data-term="法線">法線</button>が引き継がれる。この N があるかないかで次の挙動が変わる。</li>
+          <li><strong><button class="term" data-term="scatter">scatter</button> は <code>N</code> を作らない。</strong>上流が持っていれば引き継ぐだけで、<code>normal</code> SOP が無ければ出力は <code>P</code> だけになる（<a href="#exp030">実験030</a>で測り直した）。なお <code>normal</code> SOP は既定で<strong><button class="term" data-term="バーテックス">バーテックス</button></strong>に N を書き、scatter を通ると<strong>点</strong>の N になる。この N があるかないかで次の挙動が変わる。</li>
           <li><button class="term" data-term="copy to points">copy to points</button> の点数は<strong>掛け算そのまま</strong>。散布点200個 × <button class="term" data-term="テンプレート">テンプレート</button>20点 = 4000点。テンプレートが重いと一気に破綻するので、この掛け算を意識する。</li>
           <li>N を持たない点に複製すると、複製は<strong>一切回転しない</strong>。ばらつきは平均も最大も 0.00度で、200個すべてが同じ向きに立つ。</li>
           <li>N を持つ点に複製すると点ごとに回転する。ばらつきは平均 10.84度、最大 31.69度で、これは地面の傾きのばらつきそのもの。</li>
@@ -856,6 +870,7 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><strong>予測は当たった。</strong> 3回分割なら重み 3.0 で折れ角が 90.00度 になり、分割前の box とまったく同じ鋭さになる。「重み N なら N 回分の分割まで角が保たれる」でよい。</li>
+          <li><strong>分割4回・5回でも成立した（<a href="#exp030">実験030</a>）。</strong>分割4回では重み3だと 53.13度 どまりで、重み4にして初めて 90.00度。分割5回では重み5が要る。<strong>必要な重みは分割回数と1対1で対応する。</strong></li>
           <li>重みを3より上げても何も変わらない（4.0 も 10.0 も 90.00度）。分割回数を超える重みは無駄。逆に分割回数を後から増やすなら重みも上げる必要がある。</li>
           <li>点数・面数はどの重みでも 386点 / 384面で変わらない。<strong>crease は形の計算方法を変えるだけで、<button class="term" data-term="ジオメトリ">ジオメトリ</button>を増やさない。</strong> 角を残すために<button class="term" data-term="ポリゴン">ポリゴン</button>を足す必要はない。</li>
           <li><strong>2つの指標が違う答えを出した。</strong> 一辺の長さは重み 1.0 で 1.00000 に達し、そこから変わらない。この指標だけを見ていたら「重み1で十分」と判断してしまう。しかし折れ角は 28.07度 で、画を見れば角がはっきり丸い。</li>
@@ -874,6 +889,12 @@
         <span class="chip chip--pm">プロシージャルモデリング</span>
         <h2>polyextrude と boolean — 硬い形を作る2つの道具</h2>
         <p class="path">/obj/extrude_boolean &nbsp;·&nbsp; 押し出し4通り、boolean 8演算</p>
+
+        <p class="callout">
+          <strong>訂正（<a href="#exp030">実験030</a>）。「<button class="term" data-term="ポリゴン">ポリゴン</button>球は rows / cols を使わない」は Polygon のときだけの話だった。</strong>
+          <code>type</code> を <strong>Polygon Mesh</strong> にすると rows / cols は効く（6分割で30面、30分割で870面）。
+          実験026で球の rows / cols を24にして効いていたのは、そちらを使っていたため。
+        </p>
 
         <div class="prose">
           <p>
@@ -928,13 +949,146 @@
           <li>パラメータ名は <code>dist</code> と <code>inset</code>、分割数は <code>divisions</code> ではなく <code>divs</code>。ここでも一般的な名前は通じなかった。</li>
           <li>boolean には8演算ある。Union / Intersect / Subtract のほかに <strong>Shatter</strong>（Aを砕いて全破片を残す）、Seam（境界線だけ）、Detect（検出のみ）、Resolve（自己交差の解消）。</li>
           <li>Shatter の体積は 8.00000 で box と完全一致。<strong>砕いても全破片が残るので体積は変わらない。</strong> 破壊<button class="term" data-term="エフェクト">エフェクト</button>の下準備がこれ。</li>
-          <li>sphere <button class="term" data-term="SOP">SOP</button> で rows / cols を 30 にしても面数は 80 のままだった。<strong><button class="term" data-term="ポリゴン">ポリゴン</button>球は rows / cols ではなく多面体の細分を使っている。</strong></li>
+          <li>sphere <button class="term" data-term="SOP">SOP</button> の <code>type</code> を <strong>Polygon</strong> にすると、rows / cols を 30 にしても面数は 80 のまま。多面体の細分で作られるため。<strong>ただし <code>Polygon Mesh</code> なら rows / cols は効く</strong>（6分割で30面、30分割で870面）。<a href="#exp030">実験030</a>で7種類すべて測り直した。</li>
           <li>その粗い球（80面）の体積は 9.00180。半径 1.35 の真球なら 10.30575 なので約13%小さい。<strong>ポリゴンで近似した球は必ず内側に寄る。</strong></li>
         </ul>
       </div>
     </article>
 
     
+
+
+    <!-- ===================== 030 ===================== -->
+    <article class="entry entry--current" id="exp030">
+      <div class="badge">030</div>
+      <div class="body">
+        <span class="chip chip--tool">点検</span>
+        <h2>過去29回を測り直す — 書いたことは、いまも正しいか</h2>
+        <p class="path">001〜029 の振り返り点検 &nbsp;·&nbsp; 7項目を再測定、2つ訂正</p>
+
+        <div class="prose">
+          <p>
+            実験が30回たまったので、001〜029を1つずつ見直した。
+            読み返すだけでは「そう書いてあった」以上のことは分からないので、
+            <strong>確かめ直せる主張は、もう一度動かして測った</strong>。
+          </p>
+          <p>
+            7つ測り直して、<strong>5つは確認、2つは書き方が不正確だった</strong>。
+            訂正が要ったのは<a href="#exp008">実験008</a>と<a href="#exp012">実験012</a>。
+            どちらも<strong>「自分の組み方では正しいが、一般化すると間違い」</strong>という同じ形の誤りだった。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="030_audit.png" alt="測り直した7項目と結果を並べた表。5つに○、2つに×が付いている"></div>
+            <figcaption>点検の結果。<strong>数字そのものが動いたものは1つも無く、動いたのは書き方だけだった。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">測り直した7項目</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>元の実験</th><th>確かめたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td><a href="#exp002">002</a></td><td>点数はいつも「面数 + 2」か</td><td class="hi">○ 7通りすべて成立</td></tr>
+              <tr><td><a href="#exp002">002</a></td><td>一辺の縮みは外挿値 0.83951 に収束するか</td><td class="hi">○ 8回で差 0.000006</td></tr>
+              <tr><td><a href="#exp004">004</a></td><td>パラメータ名は rough / oct / lac か</td><td class="hi">○ roughness 等は存在しない</td></tr>
+              <tr><td><a href="#exp009">009</a></td><td>rand(@ptnum) は何度走らせても同じか</td><td class="hi">○ 400点で差 0.000000000000</td></tr>
+              <tr><td><a href="#exp011">011</a></td><td>重み N は分割 N 回まで角を保つか</td><td class="hi">○ 分割4回・5回でも成立</td></tr>
+              <tr><td><a href="#exp008">008</a></td><td>scatter の出力はいつも N を持つか</td><td class="num">✗ 訂正</td></tr>
+              <tr><td><a href="#exp012">012</a></td><td>sphere の rows / cols は効かないのか</td><td class="num">✗ 訂正</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">訂正1 — 実験008「scatter の出力は N も持つ」</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>上流に normal SOP</th><th>入力の N の置き場所</th><th>scatter の出力の属性</th></tr></thead>
+            <tbody>
+              <tr><td>なし</td><td class="muted">どこにも無い</td><td class="num">P だけ</td></tr>
+              <tr><td>あり</td><td>バーテックス</td><td class="num hi">P と N</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <button class="term" data-term="scatter">scatter</button> は N を作らない。
+          上流が持っていれば引き継ぐだけである。
+          ついでに分かったこと ——<strong><code>normal</code> <button class="term" data-term="SOP">SOP</button> は既定で<button class="term" data-term="バーテックス">バーテックス</button>に N を書き、
+          scatter を通ると点の N になる。</strong>置き場所が途中で移る。
+        </p>
+
+        <p class="label">訂正2 — 実験012「ポリゴン球は rows / cols を使わない」</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>type</th><th>表示名</th><th>6分割の面数</th><th>30分割の面数</th><th>効くか</th></tr></thead>
+            <tbody>
+              <tr><td>prim</td><td>Primitive</td><td class="num">1</td><td class="num">1</td><td class="muted">効かない</td></tr>
+              <tr><td>poly</td><td>Polygon</td><td class="num">80</td><td class="num">80</td><td class="muted">効かない</td></tr>
+              <tr><td>polymesh</td><td>Polygon Mesh</td><td class="num">30</td><td class="num hi">870</td><td class="hi">効く</td></tr>
+              <tr><td>mesh</td><td>Mesh</td><td class="num">1</td><td class="num">1</td><td class="muted">効かない</td></tr>
+              <tr><td>nurbs</td><td>NURBS</td><td class="num">1</td><td class="num">1</td><td class="muted">効かない</td></tr>
+              <tr><td>bezier</td><td>Bezier</td><td class="num">1</td><td class="num">1</td><td class="muted">効かない</td></tr>
+              <tr><td>polysoup</td><td>Polygon Soup</td><td class="num">1</td><td class="num">1</td><td class="muted">効かない</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          効かないのは <code>Polygon</code> のときだけだった。
+          <button class="term" data-term="エフェクト">エフェクト</button>編の実験026で球の rows / cols を24にして効いていたのは、
+          <code>Polygon Mesh</code> を使っていたため。
+        </p>
+
+        <p class="label">補足 — 実験011 を分割4回・5回まで伸ばす</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分割回数</th><th>重み3</th><th>重み4</th><th>重み5</th><th>元の鋭さになる重み</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3回</td><td class="num hi">90.00度</td><td class="num">90.00度</td><td class="num">90.00度</td><td class="num hi">3</td></tr>
+              <tr><td class="num">4回</td><td class="num muted">53.13度</td><td class="num hi">90.00度</td><td class="num">90.00度</td><td class="num hi">4</td></tr>
+              <tr><td class="num">5回</td><td class="num muted">28.07度</td><td class="num muted">53.13度</td><td class="num hi">90.00度</td><td class="num hi">5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">数え方を変えたら、数字が変わった</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>crease の重み</th><th>辺を共有する面どうし</th><th>点を共有する面どうし</th><th>011 の記載</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">13.93度</td><td class="num muted">17.85度</td><td class="num hi">13.93度</td></tr>
+              <tr><td class="num">1.0</td><td class="num">28.07度</td><td class="num muted">28.77度</td><td class="num hi">28.07度</td></tr>
+              <tr><td class="num">2.0</td><td class="num">53.13度</td><td class="num">53.13度</td><td class="num hi">53.13度</td></tr>
+              <tr><td class="num">3.0</td><td class="num">90.00度</td><td class="num">90.00度</td><td class="num hi">90.00度</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          測り直したとき、最初は 13.93度 が 17.85度 になった。
+          原因は Houdini ではなく、面の隣り合わせを<strong>「辺を共有」ではなく「点を1つでも共有」で数えていた</strong>こと。
+          <strong>角が鋭いケースでは両者が一致するので気づきにくい。</strong>
+          数え方を揃えたら011の数字と4桁まで一致した。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>訂正2つは、どちらも同じ形をしていた。</strong>「自分が組んだ1通りで観察したことを、一般の性質として書いた」。scatter は normal SOP を置いた状態しか見ていなかったし、sphere は type を1つしか試していなかった。</li>
+          <li><strong>防ぎ方も同じ。条件を1つ外した場合も測ってから書く。</strong>scatter なら normal SOP を外す、sphere なら type を変える。それだけで両方とも防げた。</li>
+          <li><strong>指標の数え方は、書いた本人でも取り違える。</strong>011 の折れ角は「辺を共有する面どうし」で測っていたが、今回は「点を共有する面どうし」で数えて違う値を出した。<strong>鋭い角では両者が一致するため、間違いに気づく手がかりが消える。</strong>指標は定義まで書き残す必要がある。</li>
+          <li><strong>外挿は当たっていた。</strong>002で「一辺は 0.83951 に収束する」と外挿していた値は、8回まで回して 0.839516（差 0.000006）。差が毎回およそ1/4という読みも保たれた。</li>
+          <li><button class="term" data-term="パラメータ">パラメータ</button>名（<code>rough</code> / <code>oct</code> / <code>lac</code>）も、<code>rand(@ptnum)</code> の再現性も、そのまま成立した。<strong>29回ぶんのうち、数字そのものが動いたものは1つも無かった。</strong>動いたのは書き方だけである。</li>
+          <li>ついでに見つかった細かいこと。<code>normal</code> SOP は既定で<strong>バーテックス</strong>に N を書き、scatter を通ると<strong>点</strong>の N になる。sphere の type は7種類あり、Primitive / Mesh / NURBS / Bezier / Polygon Soup はいずれも1<button class="term" data-term="プリミティブ">プリミティブ</button>で返る。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          サイト側も直した。実験001〜003 だけ記事の見出し番号の色が他と違っていたので揃え、
+          <a href="#exp005">実験005</a>の冒頭に「末尾の見立ては実験006で否定された」注記を入れた。
+          <strong>訂正が後ろの記事にしか書かれていないと、前から読む人には届かない。</strong>
+        </p>
+      </div>
+    </article>
+
 
   </div>
 
