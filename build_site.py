@@ -400,7 +400,7 @@ def render_guides(guides, urls):
         out.append("        </div>")
         out.append('        <div class="guide-head">')
         out.append(f'          <h3>{html.escape(guide["title"])}</h3>')
-        out.append(f'          <p class="guide-lede">{html.escape(guide["lede"])}</p>')
+        out.append(f'          <p class="guide-lede">{guide["lede"]}</p>')
         if guide.get("facts"):
             out.append('          <dl class="guide-facts">')
             for label, value in guide["facts"]:
@@ -415,7 +415,7 @@ def render_guides(guides, urls):
             out.append('            <div class="step-body">')
             out.append(f'              <h4>{html.escape(step["title"])}'
                        f'<code>{html.escape(step["node"])}</code></h4>')
-            out.append(f'              <p>{html.escape(step["body"])}</p>')
+            out.append(f'              <p>{step["body"]}</p>')
             out.append("            </div>")
             if step.get("img"):
                 out.append('            <figure class="step-figure">')
@@ -434,7 +434,7 @@ def render_guides(guides, urls):
             for trap in guide["traps"]:
                 out.append('        <div class="trap">')
                 out.append(f'          <h4>{html.escape(trap["title"])}</h4>')
-                out.append(f'          <p>{html.escape(trap["body"])}</p>')
+                out.append(f'          <p>{trap["body"]}</p>')
                 if trap.get("img"):
                     out.append('          <figure>')
                     out.append('            <div class="frame-light">'
