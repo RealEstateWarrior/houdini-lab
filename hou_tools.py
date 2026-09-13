@@ -7,9 +7,11 @@ Apprentice works with hython, but saves must use .hipnc and renders carry a
 Houdini watermark.
 """
 
+import hashlib
 import json
 import math
 import os
+import time
 
 import hou
 
@@ -279,3 +281,144 @@ def save_hip(path):
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
     hou.hipFile.save(path)
     return path
+
+
+# ---------- シミュレーションのキャッシュ ----------
+#
+# 実験025で filecache の挙動を測り、実験027でここに組み込んだ。
+# 危ないのは「速くなること」ではなく「上流を変えたのに古いファイルを読むこと」。
+# 測った値が静かに嘘になる。そこで上流の指紋を隣に置き、一致したときだけ読む。
+
+
+def upstream_nodes(node, seen=None):
+    """node から入力をたどって集めた、上流のノード全部（node 自身を含む）。"""
+    if seen is None:
+        seen = []
+    if node is None or node in seen:
+        return seen
+    seen.append(node)
+    for parent in node.inputs():
+        upstream_nodes(parent, seen)
+    return seen
+
+
+def upstream_fingerprint(node, frames=None):
+    """上流のノードの種類と、既定から動かしたパラメータをまとめた文字列。
+
+    これが変わったら、キャッシュの中身は当てにならない。
+    ノードを1つ足しても、パラメータを1つ動かしても変わる。
+    """
+    parts = []
+    for item in sorted(upstream_nodes(node), key=lambda n: n.path()):
+        parts.append({
+            "type": item.type().name(),
+            "parms": _changed_parms(item),
+        })
+    payload = {"nodes": parts, "frames": list(frames) if frames else None}
+    blob = json.dumps(payload, ensure_ascii=False, sort_keys=True)
+    return hashlib.sha1(blob.encode("utf-8")).hexdigest(), blob
+
+
+def cache_sim(sop_path, cache_dir, name, frames, reuse=True, verbose=True):
+    """シミュレーションを一度だけ計算し、以降はファイルから読む。
+
+    返すのは filecache ノード。これを下流につなぐ。
+
+    戻り値の2番目は何が起きたかの記録（dict）で、次のキーを持つ。
+      reused      … 既存のファイルを読んだか
+      wrote       … 書き出したか
+      reason      … 書き出した理由（"no cache" / "fingerprint changed" / "forced"）
+      write_sec   … 書き出しにかかった秒
+      files       … ファイルの数
+      bytes       … 合計のバイト数
+    """
+    node = hou.node(sop_path)
+    if node is None:
+        raise ValueError(f"SOP が見つからない: {sop_path}")
+
+    frames = list(frames)
+    cache_dir = os.path.abspath(cache_dir)
+    os.makedirs(cache_dir, exist_ok=True)
+    stamp_path = os.path.join(cache_dir, name + ".fingerprint.json")
+    pattern = os.path.join(cache_dir, name + ".$F4.bgeo.sc").replace("\\", "/")
+
+    digest, blob = upstream_fingerprint(node, frames)
+
+    cache = node.parent().createNode("filecache::2.0", name + "_cache")
+    cache.setFirstInput(node)
+    cache.parm("filemethod").set(1)              # パスを自分で決める
+    cache.parm("file").set(pattern)
+    cache.parm("trange").set(1)                  # フレーム範囲を書き出す
+    # f1 / f2 の既定は $FSTART / $FEND という式。数値を入れるだけでは式が残り、
+    # シーンの範囲（既定で1〜240）が書き出されてしまう（実験025で3.5GB無駄にした）。
+    for parm_name, value in (("f1", frames[0]), ("f2", frames[-1])):
+        parm = cache.parm(parm_name)
+        parm.deleteAllKeyframes()
+        parm.set(value)
+
+    existing = _cache_files(cache_dir, name)
+    stamp = None
+    if os.path.exists(stamp_path):
+        try:
+            with open(stamp_path, encoding="utf-8") as fp:
+                stamp = json.load(fp)
+        except ValueError:
+            stamp = None
+
+    reason = None
+    if not reuse:
+        reason = "forced"
+    elif len(existing) != len(frames):
+        reason = "no cache" if not existing else "file count differs"
+    elif stamp is None:
+        reason = "no fingerprint"
+    elif stamp.get("digest") != digest:
+        reason = "fingerprint changed"
+
+    info = {"reused": reason is None, "wrote": False, "reason": reason,
+            "write_sec": 0.0, "digest": digest}
+
+    if reason is not None:
+        for path in existing:
+            os.remove(path)
+        cache.parm("loadfromdisk").set(False)
+        start = time.perf_counter()
+        cache.parm("execute").pressButton()
+        info["write_sec"] = time.perf_counter() - start
+        info["wrote"] = True
+        with open(stamp_path, "w", encoding="utf-8") as fp:
+            json.dump({"digest": digest, "frames": frames, "network": blob},
+                      fp, ensure_ascii=False, indent=2)
+
+    cache.parm("loadfromdisk").set(True)
+    cache.parm("reload").pressButton()
+
+    files = _cache_files(cache_dir, name)
+    info["files"] = len(files)
+    info["bytes"] = sum(os.path.getsize(p) for p in files)
+
+    if verbose:
+        if info["wrote"]:
+            print(f"  キャッシュを書いた（{reason}）: {info['files']}ファイル / "
+                  f"{info['bytes'] / 1024 / 1024:.1f} MB / "
+                  f"{info['write_sec']:.2f}秒")
+        else:
+            print(f"  キャッシュを読んだ: {info['files']}ファイル / "
+                  f"{info['bytes'] / 1024 / 1024:.1f} MB")
+
+    # 書いたファイルの数がフレーム数と違えば、範囲の指定が効いていない。
+    if info["files"] != len(frames):
+        raise RuntimeError(
+            f"フレーム {len(frames)} 個のつもりが {info['files']} ファイル。"
+            "範囲の指定が効いていない")
+
+    return cache, info
+
+
+def _cache_files(cache_dir, name):
+    if not os.path.isdir(cache_dir):
+        return []
+    prefix = name + "."
+    return sorted(
+        os.path.join(cache_dir, f) for f in os.listdir(cache_dir)
+        if f.startswith(prefix) and f.endswith(".bgeo.sc"))

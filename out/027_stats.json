@@ -1,0 +1,75 @@
+{
+  "frames": 30,
+  "dissipation_default": 0.1,
+  "dissipation_enabled_default": true,
+  "raw_sec": 0.8256757999915862,
+  "first": {
+    "reused": false,
+    "wrote": true,
+    "reason": "no cache",
+    "write_sec": 0.1202705000032438,
+    "digest": "8f35eab0ca261ef72d6473d65d18c738c6013eaf",
+    "files": 30,
+    "bytes": 37559020
+  },
+  "cached_sec": 0.15123730000050273,
+  "speedup": 5.459471968812202,
+  "identical": true,
+  "worst_diff": 0.0,
+  "check": [
+    {
+      "frame": 1,
+      "raw": 4230.662863325386,
+      "cached": 4230.662863325386
+    },
+    {
+      "frame": 10,
+      "raw": 30202.378274004455,
+      "cached": 30202.378274004455
+    },
+    {
+      "frame": 20,
+      "raw": 37789.693869697294,
+      "cached": 37789.693869697294
+    },
+    {
+      "frame": 30,
+      "raw": 43739.861588727115,
+      "cached": 43739.861588727115
+    }
+  ],
+  "second": {
+    "reused": true,
+    "wrote": false,
+    "reason": null,
+    "write_sec": 0.0,
+    "digest": "8f35eab0ca261ef72d6473d65d18c738c6013eaf",
+    "files": 30,
+    "bytes": 37559020
+  },
+  "second_sec": 0.20320879999781027,
+  "second_identical": true,
+  "third": {
+    "reused": false,
+    "wrote": true,
+    "reason": "fingerprint changed",
+    "write_sec": 1.5737904999987222,
+    "digest": "366303d3368df0fcbdbb3fe02859bf893eaba176",
+    "files": 30,
+    "bytes": 38927958
+  },
+  "digest_changed": true,
+  "moved_frames": 29,
+  "f30_base": 43739.861588727115,
+  "f30_changed": 66890.32161344671,
+  "dissipation_changed": 0.05,
+  "fourth": {
+    "reused": false,
+    "wrote": true,
+    "reason": "no fingerprint",
+    "write_sec": 1.5663017999904696,
+    "digest": "366303d3368df0fcbdbb3fe02859bf893eaba176",
+    "files": 30,
+    "bytes": 38928096
+  }
+}

@@ -1203,6 +1203,11 @@
         </ul>
 
         <p class="callout callout--note">
+          <strong>→ ここで測った仕組みは、<a href="#exp027">実験027</a>で <code>hou_tools.cache_sim()</code> に組み込んだ。</strong>
+          上流の指紋を取り、変わっていれば自動で計算し直す。フレーム範囲のつまずきも道具の側で塞いだ。
+        </p>
+
+        <p class="callout callout--note">
           キャッシュはリポジトリに入れない。中身は再生成できるうえに大きいので、
           <code>.gitignore</code> に <code>out/*_cache/</code> を足した。
         </p>
@@ -1324,6 +1329,122 @@ vector c = blackbody(t * 3000.0, 6500) / 6500.0;
           この実験の色は、点に付けた色である。見せる絵にするときは
           <button class="term" data-term="Karma">Karma</button> 側でボリュームそのものに色を付ける必要があり、そこはまだやっていない。
           <strong>いま出ている画は「温度と色の対応が正しいこと」を示すためのもので、完成した炎のレンダではない。</strong>
+        </p>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 027 ===================== -->
+    <article class="entry entry--current" id="exp027">
+      <div class="badge">027</div>
+      <div class="body">
+        <span class="chip chip--tool">ツール</span>
+        <h2>キャッシュを道具に組み込む — 古いファイルを読む事故を防ぐ</h2>
+        <p class="path">hou_tools.cache_sim() &nbsp;·&nbsp; 上流の指紋を取って、変わったら計算し直す</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp025">実験025</a>で <code>filecache</code> の挙動は測った。読み込みは速く、値は完全に一致する。
+            ただし手で組むと毎回同じ手間がかかるうえ、<strong>もっと危ない落とし穴がある</strong>。
+          </p>
+          <p>
+            <strong>上流を変えたのに、古い<button class="term" data-term="キャッシュ">キャッシュ</button>を読んでしまう。</strong>
+            このとき画も数字も出てくる。エラーも出ない。ただ、それは前の設定の結果である。
+            <strong>測った値が静かに嘘になる。</strong>このプロジェクトで一番避けたい事故がこれ。
+          </p>
+          <p>
+            そこで <code>hou_tools.cache_sim()</code> に指紋を持たせた。
+            上流の<button class="term" data-term="ノード">ノード</button>の種類と「既定から動かした<button class="term" data-term="パラメータ">パラメータ</button>」をまとめて
+            SHA-1 を取り、キャッシュの隣に置く。一致したときだけ読み、変わっていれば黙って計算し直す。
+          </p>
+        </div>
+
+        <p class="label">1. キャッシュを通しても値は変わらないか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>計算した値</th><th>読んだ値</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">4,230.662863</td><td class="num">4,230.662863</td><td class="num hi">0.0000000000</td></tr>
+              <tr><td class="num">10</td><td class="num">30,202.378274</td><td class="num">30,202.378274</td><td class="num hi">0.0000000000</td></tr>
+              <tr><td class="num">20</td><td class="num">37,789.693870</td><td class="num">37,789.693870</td><td class="num hi">0.0000000000</td></tr>
+              <tr><td class="num">30</td><td class="num">43,739.861589</td><td class="num">43,739.861589</td><td class="num hi">0.0000000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">30<button class="term" data-term="フレーム">フレーム</button>すべてで差は 0。「ほぼ同じ」ではなく「完全に同じ」を求めた。</p>
+
+        <p class="label">2. 速さと、2回目の振る舞い</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>やったこと</th><th>書き出し</th><th>読み出し</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>計算しながら30フレーム回す</td><td class="muted">—</td><td class="num">0.83 秒</td><td class="muted">これが基準</td></tr>
+              <tr><td>1回目の cache_sim()</td><td class="num">0.12 秒</td><td class="num">0.15 秒</td><td class="hi">計算より 5.5倍速い</td></tr>
+              <tr><td>2回目の cache_sim()（同じ設定）</td><td class="hi">起きない</td><td class="num">0.20 秒</td><td class="hi">1回目と完全に一致</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 上流を1つ変えたら、気づくか</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="027_default.png" alt="細い柱の上に小さめの煙の頭が乗った状態"></div>
+            <figcaption><code>dissipation</code> 0.1（既定）。F30。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="027_halved.png" alt="同じ構図で、上部の煙の塊が明らかに大きく濃い状態"></div>
+            <figcaption><code>dissipation</code> 0.05。同じカメラ・同じフレーム。<strong>頭が濃く大きい。</strong></figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>指紋</td><td class="num">8f35eab0ca26… → 366303d3368d…</td></tr>
+              <tr><td>cache_sim() の判断</td><td class="hi">fingerprint changed → 計算し直した</td></tr>
+              <tr><td>値が変わったフレーム</td><td class="num hi">29 / 30</td></tr>
+              <tr><td>F30 の<button class="term" data-term="密度">密度</button>の合計</td><td class="num">43,739.86 → 66,890.32（+52.9%）</td></tr>
+              <tr><td>指紋のファイルを壊した場合</td><td class="hi">no fingerprint → 計算し直した</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          この仕組みが無ければ、<strong>30フレーム中29フレームで違う値を、正しい値として読んでいた</strong>ことになる。
+        </p>
+
+        <p class="label">使い方</p>
+        <pre><code># 前（実験025で手で組んでいた形）
+cache = geo.createNode("filecache::2.0", "cache")
+cache.setFirstInput(solver)
+cache.parm("filemethod").set(1)
+cache.parm("file").set(...)
+cache.parm("trange").set(1)
+for name, value in (("f1", 1), ("f2", 40)):
+    parm = cache.parm(name)
+    parm.deleteAllKeyframes()   # 忘れると240フレーム書かれる
+    parm.set(value)
+
+# 後
+cache, info = hou_tools.cache_sim(solver.path(), CACHE_DIR, "smoke", FRAMES)</code></pre>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>キャッシュを通しても値は1ビットも変わらなかった。</strong>30フレームすべてで差が 0.0000000000。025の結論が、道具に組み込んだあとでも保たれている。</li>
+          <li><strong>2回目は書き出しが起きなかった。</strong>指紋が一致したので読むだけになり、値も1回目と完全に一致。使う側は毎回 <code>cache_sim()</code> を呼ぶだけでよい。</li>
+          <li><strong>上流を1つ動かしたら、指紋が変わって計算し直した。</strong>F30 で +52.9% のずれ。これを見逃すと、以降の測定がすべて前の設定の結果になる。</li>
+          <li>指紋は<strong>上流をたどって、種類と「既定から動かしたパラメータ」だけ</strong>を集めて作る。既定値を含めないので、Houdini の版が上がって既定が増えても指紋が暴れない。</li>
+          <li><strong>指紋のファイルが壊れていたら、読まずに計算し直す。</strong>壊れたJSONを置いて確かめた。迷ったら計算し直すほうが、静かに間違えるよりよい。</li>
+          <li><strong>同じ計算を2回書き出すと、ファイルの合計サイズが 138バイト違った</strong>（38,927,958 → 38,928,096）。中身の値は同じでもバイト単位では一致しない。つまり<strong>キャッシュの正しさをファイルの比較で確かめることはできない</strong>。指紋を「ファイル」ではなく「<button class="term" data-term="ネットワーク">ネットワーク</button>」から作っている理由がこれ。</li>
+          <li>書き出したファイルの数がフレーム数と違えば例外を投げて止まる。実験025で 40フレームのつもりが 240フレーム書かれて 3.5GB 無駄にした件を、道具の側で塞いだ。</li>
+          <li><strong>pyrosolver の <code>dissipation</code> は既定で有効・値は 0.1。</strong>何も触らなくても煙は薄くなり続けている。半分にしただけで F30 の密度が +52.9%。<span class="hi">「既定＝何もしていない」ではない。</span></li>
+        </ul>
+
+        <p class="callout callout--note">
+          <strong><button class="term" data-term="hython">hython</button> は、レンダしたあとにシーンを作り直すと固まる。</strong>
+          今回この順に書いてしまい、10分待っても進まなかった。
+          レンダは1プロセスの最後に1枚だけにして、比較の2枚目は別プロセスで撮る。
+          カメラをそろえるため、枠を JSON に残して次のプロセスが読むようにした。
         </p>
       </div>
     </article>
