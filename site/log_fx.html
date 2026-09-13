@@ -1,4 +1,4 @@
-<title>Houdini 参考リンク集</title>
+<title>Houdini 実験室 — エフェクト編</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
@@ -1464,8 +1464,8 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
         <li><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#experiments">実験</a></li>
         <li><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">ノード解説</a></li>
         <li><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#glossary">用語集</a></li>
-        <li><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#links" aria-current="page">参考リンク</a></li>
-        <li><a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129">実験ログ</a></li>
+        <li><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#links">参考リンク</a></li>
+        <li><a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129" aria-current="page">実験ログ</a></li>
         <li><a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" class="nav-ext" target="_blank" rel="noopener noreferrer">Notebook</a></li>
       </ul>
       <button type="button" class="nav-icon" id="search-open" aria-label="サイト内を検索"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
@@ -1474,194 +1474,738 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   </nav>
   <div class="shell">
 
-    <header class="masthead">
-      <p class="eyebrow">References &amp; learning material</p>
-      <h1>参考リンク集</h1>
-      <p class="lede">
-        Houdiniを学ぶうえで参照した資料と、参照する価値があると判断した資料。
-        実際にアクセスして確認したものに <span class="link-flag flag-verified">確認済</span> を付けている。
-        確認できなかった部分は、確認できなかったと書いてある。
-      </p>
-      <p class="hint">
-        このページの内容は<a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa">研究ハブ</a>の「参考リンク」タブでも読める。
-      </p>
-    </header>
-
-    <section class="linkset">
-      <h3>さつき先生（高瀬紗月）</h3>
-      <p>
-        SideFX の日本語公式Houdini講師。日本語でHoudiniを学ぶなら最初に挙がる名前。
-        本人のチャンネルと、初心者向けシリーズのプレイリストを確認した。
-      </p>
-      <ul class="links">
-        <li>
-          <div class="link-title">
-            <a href="https://www.youtube.com/playlist?list=PLAsWwUHApt3P92c3R1VjJrPJQNIfEijrT" target="_blank" rel="noopener noreferrer">ゼロから始めるHoudini - Houdini Fundamentals（プレイリスト）</a>
-            <span class="link-flag flag-verified">確認済</span>
-          </div>
-          <p class="link-url">youtube.com/playlist?list=PLAsWwUHApt3P92c3R1VjJrPJQNIfEijrT</p>
-          <p class="link-note">
-            初心者向けのシリーズ。プレイリストの存在とタイトルは確認した。
-            ただしYouTubeのページは中身が動的に読み込まれるため、<strong>各回のタイトルは取得できなかった</strong>。
-            何回まであるかはプレイリストを直接開いて確認してほしい。
-            公開開始は2022年、Houdini 19.5 の頃のシリーズ。
-          </p>
-        </li>
-        <li>
-          <div class="link-title">
-            <a href="https://www.youtube.com/@StudioSatsuki" target="_blank" rel="noopener noreferrer">Studio Satsuki（YouTubeチャンネル）</a>
-            <span class="link-flag flag-verified">確認済</span>
-          </div>
-          <p class="link-url">youtube.com/@StudioSatsuki</p>
-          <p class="link-note">チャンネルの存在を確認した。上のシリーズ以外のセミナーアーカイブなどもここにある。</p>
-        </li>
-        <li>
-          <div class="link-title">
-            <a href="https://www.youtube.com/watch?v=EqOT2WER7Y4" target="_blank" rel="noopener noreferrer">【さつき先生】VEXの基礎 高速な処理を作る方法（2023/05/26 セミナーアーカイブ）</a>
-          </div>
-          <p class="link-url">youtube.com/watch?v=EqOT2WER7Y4</p>
-          <p class="link-note">
-            VEX に入るとき（実験009の予定）に見る。動画の存在は検索結果で確認したが、内容は未視聴。
-          </p>
-        </li>
-        <li>
-          <div class="link-title">SideFX公式 さつき先生と学ぶはじめてのHoudini（書籍）</div>
-          <p class="link-note">
-            2024年9月刊、ボーンデジタル。著者は高瀬紗月・Side Effects Software・山田優花。
-            3DCGの基礎から自動化まで扱うとされる。書籍の存在は複数の出典（IGDA日本、ボーンデジタル、Amazon）で
-            確認したが、中身は未確認。
-          </p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="linkset">
-      <h3>SideFX 公式</h3>
-      <p>一次情報。仕様の確認はここを優先する。</p>
-      <ul class="links">
-        <li>
-          <div class="link-title"><a href="https://www.sidefx.com/docs/houdini/" target="_blank" rel="noopener noreferrer">Houdini ドキュメント</a></div>
-          <p class="link-url">sidefx.com/docs/houdini/</p>
-          <p class="link-note">オンライン版のヘルプ。ローカルにも同じものが入っている（下記）。</p>
-        </li>
-        <li>
-          <div class="link-title">
-            <a href="https://www.sidefx.com/products/compare/" target="_blank" rel="noopener noreferrer">ライセンス比較</a>
-            <span class="link-flag flag-verified">確認済</span>
-            <span class="link-flag flag-caution">要注意</span>
-          </div>
-          <p class="link-url">sidefx.com/products/compare/</p>
-          <p class="link-note">
-            Apprenticeの制限（非商用のみ、1920x1080まで、ウォーターマーク、Karma/Mantraトークン各1個）を確認した。
-            ただし<strong>「コマンドラインアクセス」の記載は曖昧</strong>で、これだけでは Apprentice で hython が
-            使えるか判断できない。実測した結果は下の「実測で覆した情報」に書いた。
-          </p>
-        </li>
-        <li>
-          <div class="link-title"><a href="https://www.sidefx.com/docs/houdini/render/batch.html" target="_blank" rel="noopener noreferrer">Rendering as part of a workflow</a></div>
-          <p class="link-url">sidefx.com/docs/houdini/render/batch.html</p>
-          <p class="link-note">hython / hbatch でのバッチレンダリングの位置づけ。</p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="linkset">
-      <h3>実測で覆した情報</h3>
-      <p>
-        ネット上で見かけたが、自分で動かしたら違っていたもの。
-        このプロジェクトでは<strong>Houdiniの挙動は実測を正とする</strong>方針にしている。
-      </p>
-      <ul class="links">
-        <li>
-          <div class="link-title">
-            「Apprentice では hython / hbatch が使えない」
-            <span class="link-flag flag-caution">誤り</span>
-          </div>
-          <p class="link-note">
-            フォーラム由来の情報として複数箇所で見かけたが、<strong>実測では普通に動いた</strong>。
-            Houdini 21.0.700 の Apprentice ライセンスで、GUIがライセンスを保持している状態でも
-            hython を同時起動できた。OpenGL ROP / Karma ROP での headless レンダリングも成功している。
-            この誤情報を前提にGUI遠隔操作（hrpyc）方式を作りかけて無駄になった。
-          </p>
-        </li>
-        <li>
-          <div class="link-title">Apprentice ライセンスの入れ直しは hkey では<strong>できない</strong></div>
-          <p class="link-note">
-            License Administrator（hkey.exe）からログインすると
-            「Installing licenses through hkey is reserved for non-apprentice accounts」と弾かれる。
-            正解は Houdini 本体を起動し、出てくる「Unable to Acquire a License」ダイアログから進めること。
-          </p>
-        </li>
-        <li>
-          <div class="link-title">mountain SOP のパラメータ名は <code>roughness</code> / <code>octaves</code> では<strong>ない</strong></div>
-          <p class="link-note">
-            実際の名前は <code>rough</code> / <code>oct</code> / <code>lac</code>。
-            一般的な名前で書くとパラメータが見つからずエラーになる。
-            ノードのパラメータ名は <code>[p.name() for p in node.parms()]</code> で確認してから使う。
-          </p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="linkset">
-      <h3>ローカルにあるHoudiniヘルプ</h3>
-      <p>
-        インストール先に公式ヘルプ一式がzipで入っている。オフラインで全文が読めるので、
-        実験で扱うノードの解説はここから抜き出すのが早い。
-      </p>
-      <ul class="links">
-        <li>
-          <div class="link-title">
-            ヘルプ一式の場所
-            <span class="link-flag flag-local">ローカル</span>
-          </div>
-          <p class="link-url">C:\Program Files\Side Effects Software\Houdini 21.0.700\houdini\help\</p>
-          <p class="link-note">
-            特に価値が高いもの: <code>nodes.zip</code>（6.2MB、全ノードのリファレンス）、
-            <code>images.zip</code>（307MB、ノードの図解）、<code>vex.zip</code>（0.7MB、VEXリファレンス）、
-            <code>hom.zip</code>（1.1MB、Python API リファレンス）。
-            全部を Notebook に入れるとソース数の無駄なので、実験に関係する範囲だけ抜粋する方針。
-          </p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="linkset">
-      <h3>Gemini Notebook 連携に使っているツール</h3>
-      <p>非公式ツールなので、使う場合は自己責任。</p>
-      <ul class="links">
-        <li>
-          <div class="link-title">
-            <a href="https://github.com/jacob-bd/notebooklm-mcp-cli" target="_blank" rel="noopener noreferrer">jacob-bd / notebooklm-mcp-cli</a>
-            <span class="link-flag flag-verified">採用</span>
-          </div>
-          <p class="link-url">github.com/jacob-bd/notebooklm-mcp-cli</p>
-          <p class="link-note">
-            <code>pip install notebooklm-mcp-cli</code>。CLI（<code>nlm</code>）とMCPサーバーと
-            エージェントスキルの3点セット。このプロジェクトで使っているのはこれ。
-          </p>
-        </li>
-        <li>
-          <div class="link-title">
-            <a href="https://github.com/PleasePrompto/notebooklm-mcp" target="_blank" rel="noopener noreferrer">PleasePrompto / notebooklm-mcp</a>
-            <span class="link-flag flag-caution">開発終了</span>
-          </div>
-          <p class="link-url">github.com/PleasePrompto/notebooklm-mcp</p>
-          <p class="link-note">
-            当初の第一候補だったが <strong>2026-09-10 にアーカイブされた</strong>。
-            star 3.4k あっても保守は別問題。この手のツールは導入前に必ず最終更新を見る。
-          </p>
-        </li>
-      </ul>
-    </section>
+  <header class="masthead">
+    <p class="eyebrow">FX &amp; Simulation / hython 21.0.700</p>
+    <h1>実験ログ — エフェクト編</h1>
+    <p class="lede">時間を進めて物理を解く側の記録。剛体・布・煙・液体・パーティクル、そしてレンダリング。実験013から。数字はすべて実行して得た値で、推測は含まない。</p>
+    <dl class="facts">
+      <div><dt>実験</dt><dd>20 / 22</dd></div>
+      <div><dt>Houdini</dt><dd>21.0.700</dd></div>
+      <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
+      <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
+    </dl>
+    <p class="hint">
+      点線の下線が付いた語はクリックすると意味が出る。
+      全部を一覧で読むなら<a href="https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868">用語辞典</a>へ。
+    </p>
+  </header>
 
 
-    <footer>
-      <p>
-        このページの内容は <code>REFERENCES.md</code> と <code>site/partial_links.html</code> に対応している。
-        新しく参照した資料はそちらに追記してから反映する。
-      </p>
-    </footer>
+    <p class="logswitch"><a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129">モデリング編 へ</a></p>
+  <div class="spine">
+
+    <div class="stage"><h3>完了した実験</h3></div>
+
+    <!-- ===================== 001 ===================== -->
+    <!-- ===================== 013 ===================== -->
+    <article class="entry entry--current" id="exp013">
+      <div class="badge">013</div>
+      <div class="body">
+        <span class="chip chip--tool">ツール</span>
+        <h2>時間軸への対応 — フレームを進めて記録する</h2>
+        <p class="path">/obj/time_axis &nbsp;·&nbsp; 20コマ書き出し</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/013_time.hipnc" target="_blank" rel="noopener noreferrer">013_time.hipnc</a></p>
+
+        <div class="prose">
+          <p>
+            ここまでの12実験はすべて1<button class="term" data-term="フレーム">フレーム</button>だけを見ていた。
+            エフェクトは時間変化そのものが結果なので、フレームを進めて連番で書き出す仕組みが要る。
+            仕組みが正しいかは、答えが分かっている動き（自由落下の式）で確かめた。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="013_wave.gif" alt="波打つ面が時間とともに横へ流れていくアニメーション"></div>
+            <figcaption>同じ連番から作ったGIF。HTMLでは動きをそのまま見せられる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="013_sheet.png" alt="20コマの波の形が5列4段に並んだコンタクトシート"></div>
+            <figcaption>コンタクトシート。PDFには動きを載せられないので、全コマを1枚に並べてフレーム番号を振る。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">検証: 自由落下の式と一致するか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>経過秒</th><th>測った高さ</th><th>理論値</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.0000</td><td class="num">20.00000</td><td class="num">20.00000</td><td class="num">0.0000000</td></tr>
+              <tr><td class="num">10</td><td class="num">0.3750</td><td class="num">19.31094</td><td class="num">19.31094</td><td class="num">0.0000004</td></tr>
+              <tr><td class="num">20</td><td class="num">0.7917</td><td class="num">16.92899</td><td class="num">16.92899</td><td class="num">0.0000002</td></tr>
+              <tr><td class="num">30</td><td class="num">1.2083</td><td class="num">12.84566</td><td class="num">12.84566</td><td class="num">−0.0000005</td></tr>
+              <tr><td class="num">40</td><td class="num">1.6250</td><td class="num">7.06094</td><td class="num">7.06094</td><td class="num">−0.0000006</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">シミュレーション関連ノードがどこにあるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>対象</th><th>キーワード</th><th>SOP にある数</th><th>DOP にある数</th></tr></thead>
+            <tbody>
+              <tr><td>パーティクル</td><td>pop</td><td class="num hi">0 種</td><td class="num">67 種</td></tr>
+              <tr><td>剛体（破壊）</td><td>rbd</td><td class="num hi">47 種</td><td class="num">21 種</td></tr>
+              <tr><td>布</td><td>vellum</td><td class="num">22 種</td><td class="num">7 種</td></tr>
+              <tr><td>煙・炎</td><td>pyro</td><td class="num">14 種</td><td class="num">3 種</td></tr>
+              <tr><td>液体</td><td>flip</td><td class="num">8 種</td><td class="num">4 種</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>連番の仕組みは正しい。自由落下の式との差は最大 0.0000006 で、これは小数の計算精度そのもの。</li>
+          <li>20枚の書き出しに 1.18秒（1枚59ミリ秒）。60フレーム全部でも3.5秒程度で、<strong><button class="term" data-term="レンダリング">レンダリング</button>の重さは問題にならない</strong>。</li>
+          <li><strong>カメラは全フレームを覆う範囲で一度だけ決める。</strong> フレームごとに枠を合わせ直すと、対象が動いているのか大きさが変わっているのかを画から判断できなくなる。</li>
+          <li>出力は2形式にした。PDFには動きを載せられないので<strong>コンタクトシート</strong>、HTMLには<strong>GIF</strong>。同じ連番から両方を作る。</li>
+          <li><strong>パーティクルは <button class="term" data-term="SOP">SOP</button> に1つもない（0種）。</strong> すべて <button class="term" data-term="DOP">DOP</button> 側（67種）。SOPをつなぐだけでは始められず、DOP<button class="term" data-term="ネットワーク">ネットワーク</button>を組む必要がある。</li>
+          <li>一方で剛体は SOP に 47種、布は 22種ある。<strong>SOPレベルのラッパーが充実している分野の方が入口として易しい。</strong> 当初はパーティクルから始める予定だったが、<strong><button class="term" data-term="RBD">RBD</button> か <button class="term" data-term="Vellum">Vellum</button> から入る方が理にかなっている</strong>と分かったので順番を変える。</li>
+          <li><code>solver</code> SOP はロックされたアセットで、中を触るには <code>allowEditingOfContents()</code> が要る。しかも中身は dopnet と4つの null で、想像していた単純な構造ではなかった。</li>
+          <li>そのため今回の自由落下は数式で書いており、<strong>これは<button class="term" data-term="シミュレーション">シミュレーション</button>ではない</strong>（前のフレームの結果を使っていない）。本物のシミュレーションは次から。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 014 ===================== -->
+    <article class="entry entry--current" id="exp014">
+      <div class="badge">014</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>RBD 破壊 — 最初の本物のシミュレーション</h2>
+        <p class="path">/obj/rbd_test &nbsp;·&nbsp; 25個の破片、48フレーム</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">rbdmaterialfracture</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">rbdbulletsolver</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/014_rbd.hipnc" target="_blank" rel="noopener noreferrer">014_rbd.hipnc</a></p>
+
+        <div class="prose">
+          <p>
+            ここまでの実験はすべて「1フレームの計算」だったが、今回は前のフレームの結果を次に渡していく
+            本物の<button class="term" data-term="シミュレーション">シミュレーション</button>。
+            <button class="term" data-term="RBD">RBD</button> は <button class="term" data-term="SOP">SOP</button> レベルの<button class="term" data-term="ノード">ノード</button>が47種あり、入口として易しい。
+          </p>
+          <p>
+            シミュレーションは結果が複雑で、画を見ても正しいか判断しづらい。そこで検証の軸を決めた。
+            <strong>剛体は変形しないので、砕けても落ちてもぶつかっても、全破片の体積の合計は変わらないはず。</strong>
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="014_rbd.gif" alt="立方体が落下し、地面に当たって破片に砕けて散らばるアニメーション"></div>
+            <figcaption>高さ4から落として砕く。落下中は塊のまま、着地して初めて砕ける。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="014_sheet.png" alt="16コマの破壊シミュレーションが並んだコンタクトシート"></div>
+            <figcaption>16コマ。左上から右下へ時間が進む。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">フレームごとの状態</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>体積の合計</th><th>最下点</th><th>横の広がり</th><th>高さ</th><th>計算秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num hi">8.00000</td><td class="num">3.0000</td><td class="num">2.0000</td><td class="num">2.0000</td><td class="num">0.38</td></tr>
+              <tr><td class="num">4</td><td class="num hi">8.00000</td><td class="num">2.9208</td><td class="num">2.0000</td><td class="num">2.0000</td><td class="num">0.02</td></tr>
+              <tr><td class="num">10</td><td class="num hi">8.00000</td><td class="num">2.3028</td><td class="num">2.0000</td><td class="num">2.0000</td><td class="num">0.03</td></tr>
+              <tr><td class="num">20</td><td class="num hi">8.00000</td><td class="num">−0.0492</td><td class="num">2.0589</td><td class="num">2.0331</td><td class="num">0.05</td></tr>
+              <tr><td class="num">30</td><td class="num hi">8.00000</td><td class="num">−0.0225</td><td class="num">3.7483</td><td class="num">2.0181</td><td class="num">0.03</td></tr>
+              <tr><td class="num">46</td><td class="num hi">8.00000</td><td class="num">−0.0219</td><td class="num hi">5.6408</td><td class="num">1.9498</td><td class="num">0.05</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>体積は完全に保たれた。</strong> 全6フレームで 8.00000 ちょうど、振れ幅 0.0000000。元の箱の体積とも完全一致。剛体シミュレーションとして正しく動いている。</li>
+          <li>これは画を見ても分からない種類の検証。破片が散らばった絵から正しさは判断できないが、体積が保たれていれば物質は増減していないと言える。実験012で <button class="term" data-term="boolean">boolean</button> に使った検算と同じ考え方。</li>
+          <li><strong>落下中は砕けない。</strong> フレーム1〜10で横の広がりは 2.0000 のまま完全に不変。砕いてはあるが、破片はくっついたまま1つの塊として落ちる。</li>
+          <li>着地の瞬間に広がり始める。フレーム20で最下点が −0.0492（地面を少し突き抜ける）、同時に広がりが 2.0589 に。その後 3.7483 → 5.6408 で<strong>元の2.8倍まで散らばった</strong>。同時に全体の高さは 2.0000 → 1.9498 に下がる。</li>
+          <li>最下点は着地時に −0.0492 まで沈み、その後 −0.0219 で落ち着く。<strong>破片は地面を少し突き抜けたまま止まる。</strong> <button class="term" data-term="ソルバ">ソルバ</button>が衝突判定に持たせている余裕によるもので、厳密に地面の上には乗らない。</li>
+          <li>rbdmaterialfracture のコンクリートモードで 25個の破片（282点 / 191面）。破片の区別は <code>name</code> という<button class="term" data-term="プリミティブ">プリミティブ</button>属性で管理されている。</li>
+          <li>計算は速い。最初のフレームが 0.38秒、以降 0.02〜0.05秒。全部で1秒程度で、この規模なら実験を回すのに支障はない。</li>
+          <li>ソルバの既定は <code>substeps</code> = 10、<code>cacheenabled</code> = 1。1フレームを10回に分けて計算し、結果は自動で<button class="term" data-term="キャッシュ">キャッシュ</button>される。地面は <code>useground</code> で用意でき、別途<button class="term" data-term="ジオメトリ">ジオメトリ</button>は要らない。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 015 ===================== -->
+    <article class="entry entry--current" id="exp015">
+      <div class="badge">015</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Vellum クロス — 布で保存されるべき量は何か</h2>
+        <p class="path">/obj/vellum_test &nbsp;·&nbsp; 900点の布、4条件 + かたさ掃引</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">vellumconstraints</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">vellumsolver</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/015_vellum.hipnc" target="_blank" rel="noopener noreferrer">015_vellum.hipnc</a></p>
+
+        <div class="prose">
+          <p>
+            剛体では体積が保たれた（実験014）。布は面なので体積では測れない。代わりに
+            <strong>辺の長さの合計</strong>を見る。布は伸びにくい素材なので、たわんでも吊るしても
+            ほぼ変わらないはず。
+          </p>
+          <p>
+            さらに伸びにくさを下げれば保存が崩れるはず——と考えて試したら、
+            <strong>まったく変化しなかった</strong>。原因を追ったら、この<button class="term" data-term="パラメータ">パラメータ</button>の本当の仕組みが分かった。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="015_cloth.gif" alt="両端を固定された布が自重で垂れ下がっていくアニメーション"></div>
+            <figcaption>両端をピンで留めて吊るす。中央が自重で垂れ下がる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="015_sheet.png" alt="布が垂れていく様子を等間隔のフレームで並べたコンタクトシート"></div>
+            <figcaption>同じ計算を等間隔のフレームで並べたもの。<strong>垂れ方は途中で止まり、最後は形が変わらなくなる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">かたさを大きく振る（吊るした布、最終フレーム）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>stretchstiffness</th><th>stretchstiffnessexp</th><th>実効的なかたさ</th><th>最後の伸び率</th><th>最下点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num">6</td><td class="num">10⁶</td><td class="num hi">1.00843</td><td class="num">2.6042</td></tr>
+              <tr><td class="num">1000000.0</td><td class="num">0</td><td class="num">10⁶</td><td class="num hi">1.00843</td><td class="num">2.6042</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0</td><td class="num">10⁰</td><td class="num">2.74029</td><td class="num">−3.9926</td></tr>
+              <tr><td class="num">1.0</td><td class="num">−6</td><td class="num">10⁻⁶</td><td class="num hi">3.53114</td><td class="num">−5.7265</td></tr>
+              <tr><td class="num">0.000001</td><td class="num">0</td><td class="num">10⁻⁶</td><td class="num hi">3.53114</td><td class="num">−5.7265</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          値と指数を入れ替えたペアの結果が<strong>完全に一致</strong>している。
+          実効的なかたさは「値 × 10の指数乗」だと実測で確定した。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>点数は全フレームで 900 のまま。</strong> 布は形が変わるだけで点が増減しない。剛体の体積保存にあたるのが、布ではこの「構造が変わらないこと」。</li>
+          <li>たわませただけでは辺の長さはほとんど変わらない（伸び 0.272%）。自重で垂れるだけでは張力がかからないため。</li>
+          <li>両端を<button class="term" data-term="ピン">ピン</button>で留めて吊るすと 0.842% まで増えた。<strong>たわむ場合の3.1倍。</strong> 指標が張力を捉えられていると確認できた。</li>
+          <li><strong>かたさを 1.0 から 0.02 に下げても結果がまったく変わらなかった。</strong> 50分の1にしたのに伸び率は小数点以下5桁まで同じ。</li>
+          <li>原因は <code>stretchstiffnessexp</code> で、<strong>既定値が 10</strong>。実効的なかたさは「値 × 10の指数乗」なので、既定は 1.0 × 10¹⁰ という極端に硬い状態。0.02 にしても 2 × 10⁸ でやはり伸びない。</li>
+          <li><strong>画面に見えている数字だけを触っても実際にはほとんど変わらない。</strong> 効くのは指数のほう。布が硬すぎる・柔らかすぎると感じたら、値ではなく指数を疑う。</li>
+          <li>指数を 0 まで下げると伸び 174%、−6 まで下げると 253% になり、布というよりゴムの挙動になる。</li>
+          <li>ピンの指定でもつまずいた。<code>grouptype</code> の既定は<button class="term" data-term="プリミティブ">プリミティブ</button>なので、点の<button class="term" data-term="グループ">グループ</button>を渡すなら points へ切り替える。さらに <code>group</code> を空のままにすると<strong>「全部が対象」と解釈され、布全体がピン留めされて一切動かなくなる</strong>（最下点が全フレーム 3.0000 のまま、という症状で気づいた）。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 016 ===================== -->
+    <article class="entry entry--current" id="exp016">
+      <div class="badge">016</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Pyro 煙 — dissipation の正体を式で突き止める</h2>
+        <p class="path">/obj/pyro_test &nbsp;·&nbsp; 散逸3条件 × 48フレーム</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">pyrosource</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">volumerasterizeattributes</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">pyrosolver</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/016_pyro.hipnc" target="_blank" rel="noopener noreferrer">016_pyro.hipnc</a></p>
+
+        <p class="callout">
+          <strong>→ この実験の最後に書いた「ハードウェアレンダラーはボリュームを描けない」は、
+          <a href="#exp018">実験018</a>で言い過ぎだったと分かった。</strong>
+          同じカメラ・同じ露出で撮り直すと、<button class="term" data-term="OpenGL ROP">OpenGL ROP</button> も輪郭と厚みによる濃淡は描けている。
+          描けていないのは、光が中を通ることによる陰影のほう。
+        </p>
+
+        <div class="prose">
+          <p>
+            剛体は体積、布は辺の長さが保たれた。煙は<button class="term" data-term="ボリューム">ボリューム</button>なので、
+            測るのは<button class="term" data-term="密度">密度</button>の合計になる。
+          </p>
+          <p>
+            当初は「煙は消えていくので密度は減るはず」と考えたが、<strong>実際には増えた</strong>。
+            <button class="term" data-term="発生源">発生源</button>が毎フレーム供給し続けるためで、減衰と供給が釣り合う。
+            そこで釣り合いを式に立てて実測と突き合わせた。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="016_sheet.png" alt="散逸の強さを変えた3条件の煙を、同じフレームで並べた比較"></div>
+            <figcaption>散逸の強さを変えた3条件。<strong>ハードウェアレンダラーはボリュームを塊としてしか描けず、濃淡が出ない。</strong>数値でしか差を追えないと分かったのがこの実験の副産物。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">密度の合計（最初のフレームを1とした比）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>散逸なし（0.0）</th><th>既定（0.1）</th><th>強め（0.3）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">5.00000</td><td class="num">4.09489</td><td class="num">2.77298</td></tr>
+              <tr><td class="num">10</td><td class="num">10.00000</td><td class="num">6.51284</td><td class="num">3.23902</td></tr>
+              <tr><td class="num">20</td><td class="num">20.00000</td><td class="num">8.78371</td><td class="num">3.33052</td></tr>
+              <tr><td class="num">46</td><td class="num hi">46.00000</td><td class="num">9.92084</td><td class="num hi">3.33318</td></tr>
+              <tr><td class="muted">行き着く先の理論値</td><td class="muted">（増え続ける）</td><td class="num muted">10.00000</td><td class="num muted">3.33333</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">立てた式と実測の突き合わせ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>フレーム</th><th>実測の比</th><th>式の予測</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td>散逸なし</td><td class="num">46</td><td class="num">46.00000</td><td class="num">46.00000</td><td class="num hi">0.000000</td></tr>
+              <tr><td>既定 0.1</td><td class="num">5</td><td class="num">4.09489</td><td class="num">4.09510</td><td class="num">−0.000210</td></tr>
+              <tr><td>既定 0.1</td><td class="num">46</td><td class="num">9.92084</td><td class="num">9.92145</td><td class="num">−0.000608</td></tr>
+              <tr><td>強め 0.3</td><td class="num">46</td><td class="num">3.33318</td><td class="num">3.33333</td><td class="num">−0.000153</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          供給が毎フレーム一定で、毎フレーム (1 − d) 倍に減るとすれば、t フレーム後の合計は
+          <strong>(1 − (1−d)<sup>t</sup>) / d</strong> 倍になるはず。全フレームで差が 0.0006 以下だった。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>当初の予想は外れた。</strong> 煙は消えるので減ると思っていたが、供給が続く限り増える。減る量より足される量が多い間は増え続ける。</li>
+          <li><button class="term" data-term="散逸">散逸</button>なしのとき、密度の合計は<strong>フレーム番号とぴったり同じ比</strong>になった（46フレーム目で46.00000倍、差ゼロ）。毎フレーム同じ量が足され一切減らないので当然だが、これがきれいに出ることで<button class="term" data-term="シミュレーション">シミュレーション</button>が余計なことをしていないと確認できる。</li>
+          <li><strong>dissipation は「毎フレーム (1 − d) 倍に減らす」という意味だと確定した。</strong> この仮定から立てた式と実測の差は全フレームで 0.0006 以下（最大 0.006%）。</li>
+          <li>行き着く先も式のとおりで <strong>1 / dissipation</strong>。0.3 のとき理論値 3.33333 に対し実測 3.33318。</li>
+          <li>この形の検証は応用が効く。<strong><button class="term" data-term="パラメータ">パラメータ</button>の意味が分からないときは、仮定を式にして実測と突き合わせればよい。</strong> 説明を読むより確実で、桁が合っているかまで分かる。実験015で「かたさ = 値 × 10の指数乗」を突き止めたのと同じやり方。</li>
+          <li>構成でつまずいた点。<code>pyrosource</code> は既定で <code>P</code> と <code>pscale</code> しか作らず、<strong>density を明示的に追加しないと</strong>次のラスタライズが空を返す。しかも <code>pyrosource</code> の attributes は「個数」（数値）、<code>volumerasterizeattributes</code> の attributes は「名前の文字列」で<strong>同じ名前なのに意味が違う</strong>。</li>
+          <li><strong>ハードウェアレンダラーはボリュームの描画に向いていない。</strong> 煙が塊にしか描かれず、濃淡も立ち上りも分からない。ここまでの実験では十分だったが、ボリュームを扱うなら <button class="term" data-term="Karma">Karma</button> のような本式のレンダラーが要る。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 017 ===================== -->
+    <article class="entry entry--current" id="exp017">
+      <div class="badge">017</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>FLIP 液体 — 組み方が分からず保留</h2>
+        <p class="path">/obj/flip_test &nbsp;·&nbsp; 4通りの配線を試行</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">flipcontainer</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">flipsolver</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/017_flip.hipnc" target="_blank" rel="noopener noreferrer">017_flip.hipnc</a></p>
+
+        <p class="callout callout--note">
+          <strong>→ この保留は<a href="#exp019">実験019</a>で解決した。</strong>
+          原因はコンテナの役割の誤解で、付属ヘルプを読んだ時点でほぼ解けた。
+          ここは当時の記録としてそのまま残す。
+        </p>
+
+        <div class="prose">
+          <p>
+            液体は押し縮められないので体積が保たれるはず。<button class="term" data-term="FLIP">FLIP</button> は液体を粒で表す方式なので、
+            粒1つが一定の体積を担うなら「粒の数」がそのまま体積にあたる——という筋書きで実験を組んだ。
+          </p>
+          <p>
+            <strong>ところが<button class="term" data-term="ソルバ">ソルバ</button>が動かなかった。</strong>4通りの配線を試してすべて同じエラーで止まり、
+            原因を特定できていない。調査内容を残して保留とする。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="017_graph.png" alt="FLIP のノードをつないだ接続図"></div>
+            <figcaption>試した配線のひとつ。<strong>この図の形ではソルバが動かない。</strong>正しい形が分かったときに見比べられるよう残しておく。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">試した配線と結果</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>配線</th><th>出力1</th><th>出力2</th><th>エラー</th></tr></thead>
+            <tbody>
+              <tr><td>タンクの粒 → 入力1</td><td class="muted">なし</td><td class="num">0点</td><td class="wrap">Not enough sources specified.</td></tr>
+              <tr><td>コンテナ → 入力1</td><td class="muted">なし</td><td class="num">0点</td><td class="wrap">同上</td></tr>
+              <tr><td>コンテナ → 入力1、粒 → 入力2</td><td class="muted">なし</td><td class="num">1460点（素通し）</td><td class="wrap">同上</td></tr>
+              <tr><td>コンテナ → 入力1、flipsource → 入力2</td><td class="muted">なし</td><td class="num">1点（素通し）</td><td class="wrap">同上</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>エラーは一貫して「Not enough sources specified.」。粒を渡しても、コンテナを渡しても、flipsource を渡しても満たされない。</li>
+          <li><strong>他のソルバとの違いが大きい。</strong> rbdbulletsolver（014）も vellumsolver（015）も pyrosolver（016）も、入力1に<button class="term" data-term="ジオメトリ">ジオメトリ</button>をつなぐだけで動いた。FLIP だけが追加の作法を要求している。</li>
+          <li><button class="term" data-term="パラメータ">パラメータ</button>側の手がかりも少ない。source を含む名前は <code>sourceband</code> ひとつだけで、「どの入力が供給源か」を指定する仕組みは見当たらない。入力の順番と種類が決まっていて、そこに正しいものを渡す必要があるということ。</li>
+          <li>途中で罠を1つ踏んだ。<code>particlefluidtank</code> を上に移動させたら<strong>粒が0になった</strong>。この<button class="term" data-term="ノード">ノード</button>は「水位」を基準に中身を満たすので、タンクを水位より上に動かすと空になる。落下させたいならタンクではなく地面を下げる。</li>
+          <li>粒から見積もった体積は 4.92750 で、箱の体積 8.0 の 62%。粒は格子状に並ぶので隙間があり、<strong>粒の数 × 間隔の3乗では体積を正確に表せない</strong>。検証に使うならこの係数を先に求める必要がある。</li>
+          <li>この保留は失敗だが記録する価値がある。<strong>「他と同じやり方が通じないノードがある」と分かったこと自体が情報</strong>で、次に取り組むときに同じ4通りを試さずに済む。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          次の手は決めてある。付属ヘルプ（<code>nodes.zip</code>）で入力の説明を読むか、
+          GUI のシェルフツールに FLIP を作らせて、その <code>.hipnc</code> から構造を読み取る。
+          ネットの情報ではなく手元の一次情報から確かめる。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 018 ===================== -->
+    <article class="entry entry--current" id="exp018">
+      <div class="badge">018</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Karma でのレンダリング — ノイズはサンプル数で本当に減るのか</h2>
+        <p class="path">/obj/pyro_test &nbsp;·&nbsp; 実験016の煙を、2つのレンダラーで描き比べる</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/018_karma.hipnc" target="_blank" rel="noopener noreferrer">018_karma.hipnc</a></p>
+
+        <div class="prose">
+          <p>
+            実験016で煙を描いたとき、ハードウェアレンダラーでは濃淡が分からないと書いた。
+            そこで本式の<button class="term" data-term="レンダリング">レンダラー</button>である
+            <button class="term" data-term="Karma">Karma</button> を使う。
+            ただ「きれいになった」では終わらせない。
+          </p>
+          <p>
+            Karma は1ピクセルの色を、乱数で飛ばした何本もの光線の平均で決める。
+            平均のばらつきは本数の平方根に反比例するはずなので、
+            <strong>サンプル数を4倍にすれば<button class="term" data-term="ノイズ">ノイズ</button>は半分になる</strong>という式が立つ。
+            外れたら、式か測り方のどちらかが間違っている。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="018_noise_strip.png" alt="サンプル数2・8・32・256で描いた同じ煙の、同じ場所を拡大して並べた比較"></div>
+            <figcaption>同じ場所を2倍に拡大して並べたもの。<strong>2サンプルではザラつきがはっきり見え、256ではほぼ消える。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">サンプル数を4倍にしたときのノイズの比（式なら 0.5000）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>区間</th><th>実測</th><th>式の予測</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2 → 8</td><td class="num">0.3558</td><td class="num">0.5000</td><td>式より速く減る</td></tr>
+              <tr><td class="num">4 → 16</td><td class="num">0.4028</td><td class="num">0.5000</td><td>式より速く減る</td></tr>
+              <tr><td class="num">8 → 32</td><td class="num hi">0.5238</td><td class="num">0.5000</td><td class="hi">ほぼ式どおり</td></tr>
+              <tr><td class="num">16 → 64</td><td class="num">0.5789</td><td class="num">0.5000</td><td>やや遅い</td></tr>
+              <tr><td class="num">32 → 128</td><td class="num">0.6870</td><td class="num">0.5000</td><td>明らかに遅い</td></tr>
+              <tr><td class="num">64 → 256</td><td class="num">0.7909</td><td class="num">0.5000</td><td class="muted">ほとんど減らない</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          ノイズの量は基準画との差では測っていない。基準画にもノイズが残っているので、
+          基準画の出来に結果が左右されてしまう。3枚を連立させて1枚ずつ求めた。
+        </p>
+
+        <p class="label">指定したサンプル数と、実際に使われた数</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>指定</th><th>実測の時間</th><th>直線の予測</th><th>実測/予測</th><th>実効サンプル</th></tr></thead>
+            <tbody>
+              <tr><td class="num">64</td><td class="num">3.00 秒</td><td class="num">2.74 秒</td><td class="num">1.10</td><td class="num">99</td></tr>
+              <tr><td class="num">256</td><td class="num">3.43 秒</td><td class="num">4.16 秒</td><td class="num">0.82</td><td class="num">157</td></tr>
+              <tr><td class="num">1024</td><td class="num">5.52 秒</td><td class="num">9.88 秒</td><td class="num">0.56</td><td class="num">439</td></tr>
+              <tr><td class="num">4096</td><td class="num">6.48 秒</td><td class="num">32.73 秒</td><td class="num muted">0.20</td><td class="num hi">567</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          直線は「固定費 2.26秒 + 1サンプルあたり 7.44ミリ秒」。指定を64倍にしても、
+          実際の仕事は6倍にもなっていない。
+        </p>
+
+        <p class="label">頭打ちの犯人 — varianceaa_thresh</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>しきい値</th><th>時間</th><th>実効サンプル</th><th>既定との比</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.01（既定）</td><td class="num">5.39 秒</td><td class="num">420</td><td class="num">1.00</td></tr>
+              <tr><td class="num">0.005</td><td class="num">6.29 秒</td><td class="num">542</td><td class="num">1.29</td></tr>
+              <tr><td class="num">0.001</td><td class="num">8.01 秒</td><td class="num">773</td><td class="num">1.84</td></tr>
+              <tr><td class="num">0.0002</td><td class="num">70.64 秒</td><td class="num hi">9,191</td><td class="num hi">21.87</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="018_opengl.png" alt="OpenGL ROP で描いた煙。全体が一様に暗い塊に見える"></div>
+            <figcaption><strong>OpenGL ROP</strong> 0.71秒<br>輪郭と厚みによる濃淡は出ているが、光の向きが分からない</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="018_karma.png" alt="Karma で描いた煙。左上が明るく右下が暗い、光の向きの分かる陰影が付いている"></div>
+            <figcaption><strong>Karma 256サンプル</strong> 3.64秒<br>光源側が明るく反対側が暗い。光が中を通っている</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>式が当たったのは 8〜32 の区間だけ。</strong>そこでは4倍で 0.5238（式は 0.5000）とよく一致したが、64→256 では 0.7909 でほとんど減らない。</li>
+          <li>減らなくなる理由が分かった。<code>samplesperpixel</code> は<strong>「ここまで使ってよい」という上限であって、「必ずこれだけ使う」ではない</strong>。64 から 4096 へ64倍にしても、実効サンプル数は 99 から 567 へ5.7倍にしかならなかった。</li>
+          <li>犯人は <code>varianceaa_thresh</code>（既定 0.01）。「このくらい収束したら打ち切る」というしきい値で、0.0002 まで下げると実効サンプル数が <span class="hi">21.9倍</span>になった。頭打ちは機械の限界ではなく設定だった。</li>
+          <li><strong>実用的な結論。</strong>この場面では32サンプルあたりで費用対効果が折り返す。それ以上は数字を上げても絵は良くならない。詰めたいときは <code>varianceaa_thresh</code> も下げるが、時間は13倍になる。</li>
+          <li>時間の内訳は<strong>固定費 2.26秒 + 1サンプルあたり 7.44ミリ秒</strong>（640×360）。軽い絵を何枚も撮るときは、サンプル数より枚数のほうが効く。</li>
+          <li><strong>実験016に書いた「ハードウェアレンダラーは<button class="term" data-term="ボリューム">ボリューム</button>を描けない」は言い過ぎだった。</strong>同じカメラ・同じ露出で撮り直すと、OpenGL も輪郭と厚みによる濃淡を描けている。中心を横切る線は縁の254から中心の42までなだらかに変化していた。</li>
+          <li>本当の違いは<strong>光が中を通るかどうか</strong>。OpenGL は濃さの分だけ暗くするので、どちらから光が当たっているかが絵に出ない。Karma は光源側が明るい。Karma のほうが最も暗い画素が50と薄いのも、光が内部を抜けてくるため。</li>
+          <li>速さの差は<strong>5倍</strong>（0.71秒 対 3.64秒）。確認用の描画は今後も OpenGL でよく、Karma は見せる絵に使う。</li>
+        </ul>
+
+        <p class="callout">
+          <strong>測り方で3回つまずいた。</strong>
+          (1) 出力画像には透明度が付いていて、透明部分の色は黒だった。白い背景に見えるのは表示側が白で合成しているため。
+          これに気づかず「白から離れた画素＝煙」というマスクを作り、画面の88%を拾って、ほとんど何も測っていなかった。
+          (2) 煙の芯が255に張り付いていた。張り付いた画素は元の値が分からないので、明るさを下げて中間調だけを対象にした。
+          (3) <strong>OpenGL と Karma でカメラの寄り方が違っていた</strong>（margin 1.12 対 0.5）。
+          写る画素数が違って当たり前で、最初の比較は無効だった。
+          実験003以降ずっと守ってきた「全変種を同じカメラで撮る」を、自分で破っていた。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 019 ===================== -->
+    <article class="entry entry--current" id="exp019">
+      <div class="badge">019</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>FLIP 液体 — 配線が解けた。そして粒の数は体積ではなかった</h2>
+        <p class="path">/obj/flip &nbsp;·&nbsp; 実験017の保留を解く</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">flipcontainer</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">flipsource</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa#nodes">flipsolver</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/019_flip.hipnc" target="_blank" rel="noopener noreferrer">019_flip.hipnc</a></p>
+
+        <div class="prose">
+          <p>
+            017で4通りの配線を試して全部同じエラーで止まり、保留にしていた。
+            付属ヘルプ（<code>nodes.zip</code>）を読んだら原因がはっきりした。
+          </p>
+          <p>
+            <strong>コンテナは単なる箱ではなく、3つのチャンネルを束ねる中継点だった。</strong>
+            粒を<button class="term" data-term="ソルバ">ソルバ</button>に直接つなぐのではなく、
+            いったんコンテナに入れて、コンテナの3出力をソルバの3入力へ渡す。
+            017で試した4通りは、どれもこの形になっていなかった。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="019_pool.gif" alt="上から落ちてきた水が床に当たって放射状に広がっていくアニメーション"></div>
+            <figcaption>動くようになった状態。床に当たった水が放射状に広がる。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">Sources チャンネルを流れているもの</p>
+        <div class="prose">
+          <p>
+            コンテナの出力1を調べると、点は7つ、<button class="term" data-term="プリミティブ">プリミティブ</button>も7つで、
+            すべて<button class="term" data-term="ボリューム">VDB（ボリューム）</button>だった。
+            ヘルプには「液体の粒を期待する」と書いてあるが、実際に流れているのは粒ではない。
+            <strong>タンクの3,145点をいくら入れても無視されたのは当然だった。</strong>
+          </p>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>VDBの名前</th><th>F1</th><th>F5</th><th>F20</th><th>F40</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td>source</td><td class="num hi">3588</td><td class="num">3667</td><td class="num">5725</td><td class="num">5517</td><td class="hi">液体が湧く</td></tr>
+              <tr><td>surface（flipsource の既定）</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="muted">何も起きない</td></tr>
+              <tr><td>notasource</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="muted">何も起きない</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          同じ箱から作ったVDBを、名前だけ変えて合流させた。<strong>名前が役割を決めている。</strong>
+        </p>
+
+        <p class="label">水の量を5倍にしても、粒の数が変わらない</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>水位</th><th>水の体積</th><th>narrow band あり</th><th>narrow band なし</th></tr></thead>
+            <tbody>
+              <tr><td class="num">−1.00</td><td class="num">4.5000</td><td class="num">19,973</td><td class="num">33,252</td></tr>
+              <tr><td class="num">−0.50</td><td class="num">9.0000</td><td class="num">19,081</td><td class="num">48,926</td></tr>
+              <tr><td class="num">0.00</td><td class="num">13.5000</td><td class="num">19,537</td><td class="num">64,517</td></tr>
+              <tr><td class="num">0.50</td><td class="num">18.0000</td><td class="num">19,885</td><td class="num">79,896</td></tr>
+              <tr><td class="num">1.00</td><td class="num">22.5000</td><td class="num muted">19,484</td><td class="num hi">94,621</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          体積が5倍になっているのに、narrow band ありでは粒の数がほとんど動かない
+          （最多19,973と最少19,081の差は4.7%）。
+        </p>
+
+        <p class="label">narrow band を切ると、体積にきれいに比例する</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>水の体積</th><th>実測</th><th>直線の予測</th><th>ずれ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">4.500</td><td class="num">33,252</td><td class="num">33,500.8</td><td class="num">−0.74%</td></tr>
+              <tr><td class="num">9.000</td><td class="num">48,926</td><td class="num">48,871.6</td><td class="num">+0.11%</td></tr>
+              <tr><td class="num">13.500</td><td class="num">64,517</td><td class="num">64,242.4</td><td class="num">+0.43%</td></tr>
+              <tr><td class="num">18.000</td><td class="num">79,896</td><td class="num">79,613.2</td><td class="num">+0.36%</td></tr>
+              <tr><td class="num">22.500</td><td class="num">94,621</td><td class="num">94,984.0</td><td class="num">−0.38%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          当てはめた式は <strong>粒の数 = 3415.7 × 体積 + 18130</strong>。5点すべてずれが1%未満。
+        </p>
+
+        <p class="label">40フレーム進めたときの粒の数</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>reseeding</th><th>F1</th><th>F10</th><th>F20</th><th>F40</th><th>最大−最小</th></tr></thead>
+            <tbody>
+              <tr><td>あり（既定）</td><td class="num">64,517</td><td class="num">64,439</td><td class="num">64,421</td><td class="num">64,385</td><td class="num hi">132（0.20%）</td></tr>
+              <tr><td>なし</td><td class="num">64,517</td><td class="num">69,929</td><td class="num">75,904</td><td class="num">87,921</td><td class="num">23,404（36.28%）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="019_sheet.png" alt="水が落ちて床に溜まっていく様子を等間隔のフレームで並べたコンタクトシート"></div>
+            <figcaption>同じ計算を等間隔のフレームで。粒の数は湧く量と消える量が釣り合って約4,450で落ち着く。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>017を止めていた原因はコンテナの役割の誤解だった。</strong>flipcontainer は箱を作るだけではなく、液体の粒・容器・衝突の3チャンネルを束ねて流す中継点になっている。</li>
+          <li>チャンネルを流れているのは粒ではなく<strong>名前付きのVDB</strong>。<code>source</code> という名前のものだけが液体を湧かせる。flipsource の既定の名前は <code>surface</code> なので、そのままつないでも動かない。</li>
+          <li><strong>粒の数は体積を表していなかった。</strong>水の体積を5倍にしても粒の数はほぼ一定。原因は <code>donarrowband</code>（既定で有効）で、<strong>粒は水面付近の帯にしか置かれていない</strong>。</li>
+          <li>narrow band を切ると体積に比例した。<strong>粒の数 = 3415.7 × 体積 + 18130</strong>、5点すべてずれ1%未満。</li>
+          <li>切片の 18,130 は、narrow band ありのときの粒の数（平均 19,592）に近い。<strong>体積に比例しない分が、ちょうど帯の分にあたる。</strong>別々の道から測った2つの量が同じところを指している。</li>
+          <li>粒1つが担う体積は 0.000293 で、間隔の3乗（0.000512）の <span class="hi">0.572倍</span>。017で「粒の数 × 間隔の3乗では体積を表せない」と書いた、その係数がこれ。</li>
+          <li><strong>017で立てた予想は逆だった。</strong>「reseeding を切れば粒の数が保たれるはず」と書いていたが、実測では reseeding <strong>あり</strong>のほうが保たれる（0.20%）。切ると36.28%増える。境界では水位を保つため粒が絶えず作られており、reseeding はその「消す」側だった。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          <strong>ヘルプを読むのが一番速かった。</strong>
+          017ではネットを調べ、配線を総当たりして進まなかった。
+          付属の <code>nodes.zip</code> に入力の意味が書いてあり、読んだ時点でほぼ解けた。
+          手元の一次情報を先に当たる。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 020 ===================== -->
+    <article class="entry entry--current" id="exp020">
+      <div class="badge">020</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>POP パーティクル — 生まれる数と落ち方を式で確かめる</h2>
+        <p class="path">/obj/pop_test/popnet &nbsp;·&nbsp; 初めての DOP ネットワーク</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/020_pop.hipnc" target="_blank" rel="noopener noreferrer">020_pop.hipnc</a></p>
+
+        <div class="prose">
+          <p>
+            実験013で「<button class="term" data-term="パーティクル">パーティクル</button>は
+            <button class="term" data-term="SOP">SOP</button>に0種、
+            <button class="term" data-term="DOP">DOP</button>に67種」と分かってから保留にしていた題材。
+            SOPだけでは組めず、DOP<button class="term" data-term="ネットワーク">ネットワーク</button>を作る必要がある。
+          </p>
+          <p>
+            測ったのは2つ。<strong>毎秒200個と指定したら本当に毎秒200個生まれるのか。</strong>
+            そして<strong>初速0で落ちる粒は y = y₀ − ½gt² に従うのか。</strong>
+            1つ目はぴたりと合い、2つ目は合わなかった。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="020_pop.gif" alt="上の面から粒が生まれ続け、下へ落ちていくアニメーション"></div>
+            <figcaption>毎秒200個で生まれ続け、重力で落ちる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="020_graph.png" alt="popobject、popsource、popforce が popsolver につながる接続図"></div>
+            <figcaption>組んだネットワーク。入れ物を入力1、部品を入力2以降へ。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">生まれる数 — 毎秒200個と指定したとき</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>経過秒</th><th>粒の数</th><th>式の予測</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">0.1667</td><td class="num">44</td><td class="num">33.33</td><td class="num">+10.67</td></tr>
+              <tr><td class="num">20</td><td class="num">0.7917</td><td class="num">169</td><td class="num">158.33</td><td class="num">+10.67</td></tr>
+              <tr><td class="num">40</td><td class="num">1.6250</td><td class="num">336</td><td class="num">325.00</td><td class="num">+11.00</td></tr>
+              <tr><td class="num">60</td><td class="num">2.4583</td><td class="num">501</td><td class="num">491.67</td><td class="num">+9.33</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          直線に当てはめると <strong>毎秒 199.96 個</strong>。指定の200個に対してずれは 0.02%。
+          切片の +10 はフレーム1で一度に出る初期分。
+        </p>
+
+        <p class="label">落ち方 — 式とずれる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>齢(秒)</th><th>実測の高さ</th><th>式の予測</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">10</td><td class="num">0.4509</td><td class="num">2.23386</td><td class="num">2.00295</td><td class="num">+0.23091</td></tr>
+              <tr><td class="num">20</td><td class="num">0.8676</td><td class="num">−0.23483</td><td class="num">−0.69089</td><td class="num">+0.45606</td></tr>
+              <tr><td class="num">40</td><td class="num">1.7009</td><td class="num">−10.27984</td><td class="num">−11.18619</td><td class="num">+0.90635</td></tr>
+              <tr><td class="num">60</td><td class="num">2.5343</td><td class="num">−27.13502</td><td class="num">−28.49169</td><td class="num">+1.35667</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">「時間の原点がずれている」と置き直すと一定になる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>齢</th><th>実際に落ちた時間</th><th>δ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">10</td><td class="num">0.4509</td><td class="num">0.39528</td><td class="num">0.05565</td></tr>
+              <tr><td class="num">20</td><td class="num">0.8676</td><td class="num">0.81223</td><td class="num">0.05537</td></tr>
+              <tr><td class="num">40</td><td class="num">1.7009</td><td class="num">1.64570</td><td class="num">0.05523</td></tr>
+              <tr><td class="num">60</td><td class="num">2.5343</td><td class="num">2.47908</td><td class="num hi">0.05519</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          6点すべてで 0.0552〜0.0557（幅 0.83%）。ばらばらなら置き方が間違い、一定なら正しい。
+        </p>
+
+        <p class="label">δ の正体 — 計算の刻み</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>substeps</th><th>δ の平均</th><th>1刻みの長さ(秒)</th><th>δ / 1刻み</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.05532</td><td class="num">0.041667</td><td class="num">1.328</td></tr>
+              <tr><td class="num">2</td><td class="num">0.02761</td><td class="num">0.020833</td><td class="num">1.325</td></tr>
+              <tr><td class="num">4</td><td class="num">0.01379</td><td class="num">0.010417</td><td class="num">1.324</td></tr>
+              <tr><td class="num">8</td><td class="num">0.00669</td><td class="num">0.005208</td><td class="num hi">1.284</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>生まれる数は指定どおりだった。</strong>毎秒 199.96 個（指定200、ずれ 0.02%）。</li>
+          <li><strong>落ち方は式と合わなかった。</strong>実測はいつも「まだ落ちていない」側にずれ、差は齢が進むほど大きくなる。</li>
+          <li>ずれ方の形から、速度の違いではなく<strong>時間の原点のずれ</strong>を疑った。δ を逆算すると6点すべてで 0.0552〜0.0557 と一定だった。</li>
+          <li><strong>δ の正体は計算の刻みだった。</strong>substeps を倍にすると δ は半分になり、1刻みの長さで割ると 1.28〜1.33 でほぼ一定。粒は齢より<span class="hi">約1.3刻みぶん遅れて</span>落ち始めている。</li>
+          <li>これは物理が間違っているのではなく、時間を刻んで計算していることから来るずれ。<strong>刻みを細かくすれば小さくなる。</strong>substeps 8 で 0.0067秒（0.16フレーム相当）まで下がる。</li>
+          <li>実用面では、<strong>粒の位置を式で予測したいときは substeps を上げる</strong>。見た目だけなら既定で問題ない。</li>
+          <li>ツマミの確認もした。力を0にすると最も古い粒は60フレーム経っても 3.00000 のまま。重力ありでは −27.13502 まで落ちている。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          <strong>止まったのは結果の取り出し側だった。</strong>
+          <button class="term" data-term="シミュレーション">シミュレーション</button>は最初から動いていたのに、SOP側では0点と出ていた。
+          原因は <code>dopimport</code> の <code>objpattern</code>（読み込む対象の名前）が空だったこと。
+          <code>*</code> を入れたら読めた。エラーも警告も出ないので気づきにくい。
+        </p>
+      </div>
+    </article>
+
+  </div>
+
+  <footer>
+    <p>
+      接続図は <code>hou_tools.dump_graph()</code> が書き出したJSONから <code>graph_report.py</code> が描画し、
+      レンダは OpenGL ROP、レポートPDFは <code>report_pdf.py</code> が生成している。
+      ノードの構築とレンダは <code>hython</code> 経由の headless 実行で、Houdini の GUI はノードの画面写真を撮るときだけ使っている。
+      用語の説明は <code>glossary.json</code> を単一の情報源として、このページのポップアップ・<a href="https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868">用語辞典</a>・Notebook用PDFの3つを生成している。
+    </p>
+  </footer>
 
   </div>
 </div>

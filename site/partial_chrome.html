@@ -318,4 +318,22 @@
       }
     });
   })();
+
+  /* 実験ログを2編に分けたので、古いリンク（#exp014 など）が
+     この編に無いことがある。その場合は、正しい編へ送る。 */
+  (function () {
+    var match = (window.location.hash || "").match(/^#exp(\d+)$/);
+    if (!match) { return; }
+    if (document.getElementById("exp" + match[1])) { return; }
+    if (!document.querySelector(".entry[id^=exp]")) { return; }
+    var dataEl = document.getElementById("search-data");
+    if (!dataEl) { return; }
+    var items = JSON.parse(dataEl.textContent).items;
+    for (var i = 0; i < items.length; i += 1) {
+      if (items[i].exp === match[1]) {
+        window.location.replace(items[i].href);
+        return;
+      }
+    }
+  })();
 </script>

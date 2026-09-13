@@ -1,0 +1,212 @@
+{
+  "title": "手順 — 地面に物を生やす",
+  "network": "/obj/grow_things",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ground",
+      "type": "grid",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "hills",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        -1.13
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.6,
+        "elementsize": 3.0
+      }
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        5.083,
+        0.527
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "scatter",
+      "type": "scatter::2.0",
+      "pos": [
+        5.083,
+        -0.602
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 200
+      }
+    },
+    {
+      "name": "tree",
+      "type": "tube",
+      "pos": [
+        8.331,
+        0.301
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "rx": 90.0,
+        "rad1": 0.02,
+        "rad2": 0.14
+      }
+    },
+    {
+      "name": "tree_y",
+      "type": "tube",
+      "pos": [
+        2.824,
+        -0.151
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "rad1": 0.02,
+        "rad2": 0.14
+      }
+    },
+    {
+      "name": "copy_wrong",
+      "type": "copytopoints::2.0",
+      "pos": [
+        3.954,
+        -1.581
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "copy_right",
+      "type": "copytopoints::2.0",
+      "pos": [
+        8.331,
+        -1.13
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "result_wrong",
+      "type": "merge",
+      "pos": [
+        1.977,
+        -2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "result_right",
+      "type": "merge",
+      "pos": [
+        8.331,
+        -2.56
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "hills",
+      "to_input": 0
+    },
+    {
+      "from": "hills",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "scatter",
+      "to_input": 0
+    },
+    {
+      "from": "tree_y",
+      "from_output": 0,
+      "to": "copy_wrong",
+      "to_input": 0
+    },
+    {
+      "from": "scatter",
+      "from_output": 0,
+      "to": "copy_wrong",
+      "to_input": 1
+    },
+    {
+      "from": "tree",
+      "from_output": 0,
+      "to": "copy_right",
+      "to_input": 0
+    },
+    {
+      "from": "scatter",
+      "from_output": 0,
+      "to": "copy_right",
+      "to_input": 1
+    },
+    {
+      "from": "hills",
+      "from_output": 0,
+      "to": "result_wrong",
+      "to_input": 0
+    },
+    {
+      "from": "copy_wrong",
+      "from_output": 0,
+      "to": "result_wrong",
+      "to_input": 1
+    },
+    {
+      "from": "hills",
+      "from_output": 0,
+      "to": "result_right",
+      "to_input": 0
+    },
+    {
+      "from": "copy_right",
+      "from_output": 0,
+      "to": "result_right",
+      "to_input": 1
+    }
+  ]
+}

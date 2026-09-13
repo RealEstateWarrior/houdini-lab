@@ -30,13 +30,17 @@ DOCS = os.path.join(HERE, "docs")
 OUT = os.path.join(HERE, "out")
 GLOSSARY = os.path.join(HERE, "glossary.json")
 NODES = os.path.join(HERE, "nodes.json")
+GUIDES = os.path.join(HERE, "guides.json")
 
 NOTEBOOK_URL = "https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022"
+GITHUB_RAW = ("https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/")
 
 # 発行済みArtifactのURL。新規発行したらここを更新して再ビルドする。
 ARTIFACT_URLS = {
     "home": "https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa",
     "log": "https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129",
+    "log_pm": "https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129",
+    "log_fx": "https://claude.ai/code/artifact/087548d5-0c09-40b5-8e2e-7bfc084e1f0c",
     "glossary": "https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868",
     "links": "https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f",
 }
@@ -45,6 +49,8 @@ ARTIFACT_URLS = {
 PAGES_URLS = {
     "home": "index.html",
     "log": "log.html",
+    "log_pm": "log.html",
+    "log_fx": "log_fx.html",
     "glossary": "glossary.html",
     "links": "links.html",
 }
@@ -78,6 +84,7 @@ BURGER_SVG = (
 # ハブ内のタブ。読み込みなしで切り替わる。子ページでは同じ並びがリンクになる。
 TABS = [
     ("overview", "概要"),
+    ("guides", "手順"),
     ("experiments", "実験"),
     ("nodes", "ノード解説"),
     ("glossary", "用語集"),
@@ -85,84 +92,84 @@ TABS = [
 ]
 
 DONE = [
-    {"no": "001", "anchor": "exp001", "thumb": "box_mountain.png",
+    {"no": "001", "anchor": "exp001", "log": "log_pm", "hip": "box_mountain.hipnc", "thumb": "box_mountain.png",
      "report": "box_mountain_report.json",
      "shots": ["box_mountain.png", "box_mountain_graph.png"],
      "title": "Box を山にして細分割し、位置で色を付ける",
      "note": "最小構成。mountain は点を増やさないと分かった"},
-    {"no": "002", "anchor": "exp002", "thumb": "002_subdiv_3.png",
+    {"no": "002", "anchor": "exp002", "log": "log_pm", "hip": "002_subdivide.hipnc", "thumb": "002_subdiv_3.png",
      "shots": ["002_subdiv_0.png", "002_subdiv_3.png"],
      "title": "subdivide の回数で、形と数はどう変わるか",
      "note": "面数は正確に4倍、点数は常に面数+2。縮む原因は分割ではなく平滑化"},
-    {"no": "003", "anchor": "exp003", "thumb": "003_D.png",
+    {"no": "003", "anchor": "exp003", "log": "log_pm", "hip": "003_order.hipnc", "thumb": "003_D.png",
      "shots": ["003_C.png", "003_D.png"],
      "title": "mountain と subdivide は、順序を変えると何が変わるか",
      "note": "点数は解像度を決め、凹凸の大きさは elementsize が決める"},
-    {"no": "004", "anchor": "exp004", "thumb": "004_rough_10.png",
+    {"no": "004", "anchor": "exp004", "log": "log_pm", "hip": "004_mountain_params.hipnc", "thumb": "004_rough_10.png",
      "shots": ["004_rough_00.png", "004_rough_10.png"],
      "title": "mountain のノイズパラメータは、それぞれ何に効くのか",
      "note": "rough が形の性質を決める。oct は点数が足りないと効かない"},
-    {"no": "005", "anchor": "exp005", "thumb": "005_mworleyFA.png",
+    {"no": "005", "anchor": "exp005", "log": "log_pm", "hip": "005_noise_basis.hipnc", "thumb": "005_mworleyFA.png",
      "shots": ["005_perlin.png", "005_mworleyFA.png"],
      "title": "basis 14通りで、形はどこまで変わるか",
      "note": "振幅も性質も変わる。外向きに押すか内向きに削るかが種類で決まる"},
-    {"no": "006", "anchor": "exp006", "thumb": "006_bias_075.png",
+    {"no": "006", "anchor": "exp006", "log": "log_pm", "hip": "006_height_shape.hipnc", "thumb": "006_bias_075.png",
      "shots": ["006_bias_025.png", "006_bias_075.png"],
      "title": "height は純粋な倍率か。gain と bias は何に効くか",
      "note": "005の「上限がある」は誤りだった。bias で突起と窪みを連続的に制御できる"},
-    {"no": "007", "anchor": "exp007", "thumb": "007_frac_fBm.png",
+    {"no": "007", "anchor": "exp007", "log": "log_pm", "hip": "007_grid_terrain.hipnc", "thumb": "007_frac_fBm.png",
      "shots": ["007_flat.png", "007_frac_fBm.png"],
      "title": "平面で地形を作り、指標を作り直す",
      "note": "勾配が止まる点が「足りている解像度」を教えてくれる。fractal は平面で差が出る"},
-    {"no": "008", "anchor": "exp008", "thumb": "008_z_axis.png",
+    {"no": "008", "anchor": "exp008", "log": "log_pm", "hip": "008_scatter_copy.hipnc", "thumb": "008_z_axis.png",
      "shots": ["008_plain.png", "008_z_axis.png"],
      "title": "scatter と copy to points — 地面に物を生やす",
      "note": "N はテンプレートのZ軸に対応する。Y軸のまま複製すると必ず横倒しになる"},
-    {"no": "009", "anchor": "exp009", "thumb": "009_wave.png",
+    {"no": "009", "anchor": "exp009", "log": "log_pm", "hip": "009_vex.hipnc", "thumb": "009_wave.png",
      "shots": ["009_wave.png"],
      "title": "attribute wrangle で VEX を書く",
      "note": "実行対象でアトリビュートの置き場所が変わる。処理時間の計測は3回目で本物になった"},
-    {"no": "010", "anchor": "exp010", "thumb": "010_ui_network.png",
+    {"no": "010", "anchor": "exp010", "log": "log_pm", "hip": "010_foreach.hipnc", "thumb": "010_ui_network.png",
      "shots": ["010_ui_network.png"],
      "title": "for-each ループと VEX を比べる",
      "note": "3,969面で85.9倍の差。ただし置き換え可能とは限らず、点の共有が鍵だった"},
-    {"no": "011", "anchor": "exp011", "thumb": "011_w3_0.png",
+    {"no": "011", "anchor": "exp011", "log": "log_pm", "hip": "011_crease.hipnc", "thumb": "011_w3_0.png",
      "shots": ["011_w0_0.png", "011_w3_0.png"],
      "title": "crease で角を残す — どれだけの重みが要るのか",
      "note": "分割回数と同じ重みで完全に角が残る。一辺だけ見ていると誤判定する"},
-    {"no": "012", "anchor": "exp012", "thumb": "012_bool_subtract.png",
+    {"no": "012", "anchor": "exp012", "log": "log_pm", "hip": "012_extrude_boolean.hipnc", "thumb": "012_bool_subtract.png",
      "shots": ["012_bool_union.png", "012_bool_subtract.png"],
      "title": "polyextrude と boolean — 硬い形を作る",
      "note": "押し出しは寸法が指定どおり。boolean は体積の関係式で正しさを検算できる"},
-    {"no": "013", "anchor": "exp013", "thumb": "013_sheet.png",
+    {"no": "013", "anchor": "exp013", "log": "log_fx", "hip": "013_time.hipnc", "thumb": "013_sheet.png",
      "shots": ["013_wave.gif", "013_sheet.png"],
      "title": "時間軸への対応 — フレームを進めて記録する",
      "note": "連番・コンタクトシート・GIF。パーティクルはSOPに0種でDOPに67種と判明"},
-    {"no": "014", "anchor": "exp014", "thumb": "014_sheet.png",
+    {"no": "014", "anchor": "exp014", "log": "log_fx", "hip": "014_rbd.hipnc", "thumb": "014_sheet.png",
      "shots": ["014_rbd.gif", "014_sheet.png"],
      "title": "RBD 破壊 — 最初の本物のシミュレーション",
      "note": "体積が全フレームで完全に保存。落下中は砕けず、着地して2.8倍に散らばる"},
-    {"no": "015", "anchor": "exp015", "thumb": "015_sheet.png",
+    {"no": "015", "anchor": "exp015", "log": "log_fx", "hip": "015_vellum.hipnc", "thumb": "015_sheet.png",
      "shots": ["015_cloth.gif", "015_sheet.png"],
      "title": "Vellum クロス — 布で保存されるべき量は何か",
      "note": "かたさは「値 × 10の指数乗」。既定の指数10のせいで値を触っても効かない"},
-    {"no": "016", "anchor": "exp016", "thumb": "016_sheet.png",
+    {"no": "016", "anchor": "exp016", "log": "log_fx", "hip": "016_pyro.hipnc", "thumb": "016_sheet.png",
      "shots": ["016_sheet.png"],
      "title": "Pyro 煙 — dissipation の正体を式で突き止める",
      "note": "毎フレーム (1−d) 倍に減らす仕組み。立てた式と実測が4桁一致した"},
-    {"no": "017", "anchor": "exp017", "thumb": "017_graph.png",
+    {"no": "017", "anchor": "exp017", "log": "log_fx", "hip": "017_flip.hipnc", "thumb": "017_graph.png",
      "shots": ["017_graph.png"],
      "title": "FLIP 液体 — 組み方が分からず保留",
      "note": "4通りの配線を試して全部同じエラー。他のソルバと作法が違うと判明"},
-    {"no": "018", "anchor": "exp018", "thumb": "018_karma.png",
+    {"no": "018", "anchor": "exp018", "log": "log_fx", "hip": "018_karma.hipnc", "thumb": "018_karma.png",
      "shots": ["018_noise_strip.png", "018_opengl.png", "018_karma.png"],
      "title": "Karma でのレンダリング — ノイズはサンプル数で本当に減るのか",
      "note": "サンプル数は上限であって指定ではない。頭打ちの犯人は varianceaa_thresh"},
-    {"no": "019", "anchor": "exp019", "thumb": "019_sheet.png",
+    {"no": "019", "anchor": "exp019", "log": "log_fx", "hip": "019_flip.hipnc", "thumb": "019_sheet.png",
      "shots": ["019_pool.gif", "019_sheet.png"],
      "title": "FLIP 液体 — 配線が解けた。そして粒の数は体積ではなかった",
      "note": "017の保留を解決。コンテナは3チャンネルの中継点で、VDBの名前が役割を決める"},
-    {"no": "020", "anchor": "exp020", "thumb": "020_sheet.png",
+    {"no": "020", "anchor": "exp020", "log": "log_fx", "hip": "020_pop.hipnc", "thumb": "020_sheet.png",
      "shots": ["020_pop.gif", "020_graph.png"],
      "title": "POP パーティクル — 生まれる数と落ち方を式で確かめる",
      "note": "生まれる数は指定どおり。落ち方のずれは計算の刻み1.3個ぶんの遅れだった"},
@@ -180,7 +187,8 @@ PLANNED_FX = [
 PAGES = [
     # template, site出力, docs出力, ナビの現在位置, タブ形式か
     ("home_template.html", "home.html", "index.html", "home", True),
-    ("template.html", "index.html", "log.html", "log", False),
+    ("log_pm_template.html", "index.html", "log.html", "log", False),
+    ("log_fx_template.html", "log_fx.html", "log_fx.html", "log", False),
     ("glossary_template.html", "glossary.html", "glossary.html", "glossary", False),
     ("links_template.html", "links.html", "links.html", "links", False),
 ]
@@ -268,13 +276,145 @@ def render_thumbs(urls):
     return "\n".join(out)
 
 
+def nodes_by_experiment(nodes):
+    """ノード解説を実験番号で引けるようにひっくり返す。
+
+    nodes.json には「このノードは実験003で使った」と書いてある。
+    実験ログ側から「この実験で使ったノード」を出したいので、向きを変える。
+    """
+    table = {}
+    index = -1
+    for group in nodes["groups"]:
+        for node in group["nodes"]:
+            index += 1
+            for no in node.get("exps", []):
+                table.setdefault(no, []).append((node["name"], index))
+    return table
+
+
+def inject_experiment_links(page, urls, nodes):
+    """実験ログの各記事に「使ったノード」と「シーンファイル」の行を足す。
+
+    記事は手で書いているので、ここで機械的に差し込む。場所は各記事の
+    <p class="path"> の直後。実験が増えても書き忘れが出ない。
+    """
+    table = nodes_by_experiment(nodes)
+    hips = {item["no"]: item.get("hip") for item in DONE}
+    pattern = re.compile(
+        r'(<article class="entry[^"]*" id="exp(\d+)">.*?<p class="path">.*?</p>)',
+        re.S)
+
+    def build(match):
+        whole, no = match.group(1), match.group(2)
+        rows = []
+        chips = [f'<a href="{urls["home"]}#nodes">{html.escape(name)}</a>'
+                 for name, _ in table.get(no, [])]
+        if chips:
+            rows.append('        <p class="usedby">'
+                        '<span class="usedby-tag">使ったノード</span>'
+                        + "".join(chips) + "</p>")
+        if hips.get(no):
+            rows.append('        <p class="usedby">'
+                        '<span class="usedby-tag">シーンファイル</span>'
+                        f'<a href="{GITHUB_RAW}{hips[no]}"'
+                        ' target="_blank" rel="noopener noreferrer">'
+                        f'{hips[no]}</a></p>')
+        if not rows:
+            return whole
+        return whole + "\n" + "\n".join(rows)
+
+    return pattern.sub(build, page)
+
+
+def render_guides(guides, urls):
+    """手順ページ。実験ログとは別に「どう作るか」だけを順番に読ませる。
+
+    1段ごとに図を置く。最後に完成図をもう一度出して、
+    詳しく知りたい人だけが実験ログへ行けるようにする。
+    """
+    anchors = {item["no"]: (item["anchor"], item.get("log", "log_pm"))
+               for item in DONE}
+    out = []
+    for guide in guides["guides"]:
+        out.append(f'      <section class="guide" id="guide-{guide["id"]}">')
+        out.append('        <div class="guide-hero">')
+        out.append(f'          <img src="{guide["hero"]}"'
+                   f' alt="{html.escape(guide["title"])}の完成図">')
+        out.append("        </div>")
+        out.append('        <div class="guide-head">')
+        out.append(f'          <h3>{html.escape(guide["title"])}</h3>')
+        out.append(f'          <p class="guide-lede">{html.escape(guide["lede"])}</p>')
+        if guide.get("facts"):
+            out.append('          <dl class="guide-facts">')
+            for label, value in guide["facts"]:
+                out.append(f"            <div><dt>{html.escape(label)}</dt>"
+                           f"<dd>{html.escape(value)}</dd></div>")
+            out.append("          </dl>")
+        out.append("        </div>")
+
+        out.append('        <ol class="steps">')
+        for step in guide["steps"]:
+            out.append('          <li class="step">')
+            out.append('            <div class="step-body">')
+            out.append(f'              <h4>{html.escape(step["title"])}'
+                       f'<code>{html.escape(step["node"])}</code></h4>')
+            out.append(f'              <p>{html.escape(step["body"])}</p>')
+            out.append("            </div>")
+            if step.get("img"):
+                out.append('            <figure class="step-figure">')
+                out.append('              <div class="frame-light">'
+                           f'<img src="{step["img"]}"'
+                           f' alt="{html.escape(step["title"])}の結果"></div>')
+                if step.get("cap"):
+                    out.append(f"              <figcaption>{html.escape(step['cap'])}"
+                               "</figcaption>")
+                out.append("            </figure>")
+            out.append("          </li>")
+        out.append("        </ol>")
+
+        if guide.get("traps"):
+            out.append('        <p class="label">つまずくところ</p>')
+            for trap in guide["traps"]:
+                out.append('        <div class="trap">')
+                out.append(f'          <h4>{html.escape(trap["title"])}</h4>')
+                out.append(f'          <p>{html.escape(trap["body"])}</p>')
+                if trap.get("img"):
+                    out.append('          <figure>')
+                    out.append('            <div class="frame-light">'
+                               f'<img src="{trap["img"]}"'
+                               f' alt="{html.escape(trap["title"])}"></div>')
+                    if trap.get("cap"):
+                        out.append(f"            <figcaption>"
+                                   f"{html.escape(trap['cap'])}</figcaption>")
+                    out.append("          </figure>")
+                out.append("        </div>")
+
+        out.append('        <div class="guide-end">')
+        out.append(f'          <img src="{guide["hero"]}"'
+                   f' alt="{html.escape(guide["title"])}の完成図">')
+        out.append(f'          <p>{html.escape(guide.get("hero_cap", ""))}</p>')
+        out.append('          <p class="guide-more">')
+        if guide.get("exp") in anchors:
+            anchor, log_key = anchors[guide["exp"]]
+            out.append(f'            <a href="{urls[log_key]}#{anchor}">'
+                       f'実験{guide["exp"]} の全文を読む</a>')
+        if guide.get("hip"):
+            out.append(f'            <a href="{GITHUB_RAW}{guide["hip"]}"'
+                       ' target="_blank" rel="noopener noreferrer">'
+                       f'{guide["hip"]}</a>')
+        out.append("          </p>")
+        out.append("        </div>")
+        out.append("      </section>")
+    return "\n".join(out)
+
+
 def render_exp_data(urls):
     """実験ポップアップの中身。out/*_report.json をそのまま流用する。"""
     payload = {}
     for item in DONE:
         entry = {
             "title": item["title"],
-            "href": f'{urls["log"]}#{item["anchor"]}',
+            "href": f'{urls[item.get("log", "log_pm")]}#{item["anchor"]}',
             "shots": item.get("shots") or [item["thumb"]],
             "summary": [html.escape(item["note"])],
             "points": [],
@@ -372,7 +512,7 @@ def render_search_data(data, nodes, urls, tabs):
             "kind": "実験",
             "label": f'実験{item["no"]} {item["title"]}',
             "note": item["note"],
-            "href": f'{urls["log"]}#{item["anchor"]}',
+            "href": f'{urls[item.get("log", "log_pm")]}#{item["anchor"]}',
             "exp": item["no"],
         })
 
@@ -494,7 +634,7 @@ def count_nodes(nodes):
 
 
 def render(template_name, out_dir, out_name, active, tabs, urls,
-           data, nodes, css, links_body, popover, chrome):
+           data, nodes, guides, css, links_body, popover, chrome):
     with open(os.path.join(SITE, template_name), encoding="utf-8") as fp:
         page = fp.read()
 
@@ -504,6 +644,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--THUMBS-->", render_thumbs(urls)),
         ("<!--EXP_DATA-->", render_exp_data(urls)),
         ("<!--NODES-->", render_nodes(nodes, urls)),
+        ("<!--GUIDES-->", render_guides(guides, urls)),
         ("<!--NODE_NAV-->", render_node_nav(nodes)),
         ("<!--LINKS_BODY-->", links_body),
         ("<!--GLOSSARY_SECTION-->", render_section(data)),
@@ -518,6 +659,8 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--TERM_COUNT-->", str(count_terms(data))),
         ("<!--HOME_URL-->", urls["home"]),
         ("<!--LOG_URL-->", urls["log"]),
+        ("<!--LOGPM_URL-->", urls["log_pm"]),
+        ("<!--LOGFX_URL-->", urls["log_fx"]),
         ("<!--GLOSSARY_URL-->", urls["glossary"]),
         ("<!--LINKS_URL-->", urls["links"]),
         ("<!--NOTEBOOK_URL-->", NOTEBOOK_URL),
@@ -531,6 +674,9 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     unknown = sorted(set(re.findall(r'data-term="([^"]+)"', page)) - all_keys(data))
     if unknown:
         raise SystemExit(f"{template_name}: 用語集に存在しない用語: {unknown}")
+
+    if "entry" in page and 'id="exp' in page:
+        page = inject_experiment_links(page, urls, nodes)
 
     if out_dir == DOCS:
         page = as_document(page)
@@ -600,6 +746,8 @@ def main():
         data = json.load(fp)
     with open(NODES, encoding="utf-8") as fp:
         nodes = json.load(fp)
+    with open(GUIDES, encoding="utf-8") as fp:
+        guides = json.load(fp)
     with open(os.path.join(SITE, "base.css"), encoding="utf-8") as fp:
         css = fp.read()
     with open(os.path.join(SITE, "partial_links.html"), encoding="utf-8") as fp:
@@ -611,9 +759,11 @@ def main():
 
     for template_name, site_out, docs_out, active, tabs in PAGES:
         render(template_name, SITE, site_out, active, tabs,
-               ARTIFACT_URLS, data, nodes, css, links_body, popover, chrome)
+               ARTIFACT_URLS, data, nodes, guides, css, links_body,
+               popover, chrome)
         render(template_name, DOCS, docs_out, active, tabs,
-               PAGES_URLS, data, nodes, css, links_body, popover, chrome)
+               PAGES_URLS, data, nodes, guides, css, links_body,
+               popover, chrome)
 
     # GitHub Pages に Jekyll 処理をさせない
     with open(os.path.join(DOCS, ".nojekyll"), "w", encoding="utf-8") as fp:

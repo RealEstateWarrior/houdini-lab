@@ -21,7 +21,8 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-TARGET = os.path.join(HERE, "site", "template.html")
+TARGETS = [os.path.join(HERE, "site", name)
+           for name in ("log_pm_template.html", "log_fx_template.html")]
 GLOSSARY = os.path.join(HERE, "glossary.json")
 
 # 本文に出てきたときにリンクしたい語。用語集に存在しない語を書くと止まる。
@@ -144,44 +145,50 @@ def main():
 
     # 長い語を先に当てる。「ワイヤーフレーム」を「フレーム」で切らないため。
     ordered = sorted(ALLOW, key=len, reverse=True)
-    pattern = re.compile("|".join(re.escape(t) for t in ordered))
 
-    with io.open(TARGET, encoding="utf-8") as fp:
-        page = fp.read()
-    before_text = strip_tags(page)
+    grand_total = 0
+    all_terms = set()
+    for target in TARGETS:
+        if not os.path.exists(target):
+            continue
+        with io.open(target, encoding="utf-8", newline="") as fp:
+            page = fp.read()
+        before_text = strip_tags(page)
 
-    parts = re.split(r'(<article class="entry[^"]*" id="exp\d+">)', page)
-    result = [parts[0]]
-    total = 0
-    used_globally = set()
+        parts = re.split(r'(<article class="entry[^"]*" id="exp\d+">)', page)
+        result = [parts[0]]
+        total = 0
+        used_globally = set()
 
-    for i in range(1, len(parts), 2):
-        head, body = parts[i], parts[i + 1]
-        end = body.find("</article>")
-        inner, rest = (body[:end], body[end:]) if end != -1 else (body, "")
+        for i in range(1, len(parts), 2):
+            head, body = parts[i], parts[i + 1]
+            end = body.find("</article>")
+            inner, rest = (body[:end], body[end:]) if end != -1 else (body, "")
 
-        # すでに手で付けた語は、その実験では触らない
-        already = set(re.findall(r'data-term="([^"]+)"', inner))
-        linked, added = link_article(
-            inner,
-            re.compile("|".join(re.escape(t) for t in ordered if t not in already)),
-            used_globally,
-        )
-        total += added
-        result.append(head)
-        result.append(linked + rest)
+            # すでに手で付けた語は、その実験では触らない
+            already = set(re.findall(r'data-term="([^"]+)"', inner))
+            linked, added = link_article(
+                inner,
+                re.compile("|".join(re.escape(t) for t in ordered if t not in already)),
+                used_globally,
+            )
+            total += added
+            result.append(head)
+            result.append(linked + rest)
 
-    page_out = "".join(result)
+        page_out = "".join(result)
 
-    after_text = strip_tags(page_out)
-    if after_text != before_text:
-        raise SystemExit("本文が変わってしまった。中止する。")
+        if strip_tags(page_out) != before_text:
+            raise SystemExit(f"{os.path.basename(target)}: 本文が変わってしまった。中止する。")
 
-    print(f"リンクを {total} 件差し込んだ（{len(used_globally)} 語）")
-    if dry:
-        return
-    with io.open(TARGET, "w", encoding="utf-8") as fp:
-        fp.write(page_out)
+        grand_total += total
+        all_terms |= used_globally
+        print(f"  {os.path.basename(target)}: {total} 件")
+        if not dry:
+            with io.open(target, "w", encoding="utf-8", newline="") as fp:
+                fp.write(page_out)
+
+    print(f"リンクを {grand_total} 件差し込んだ（{len(all_terms)} 語）")
 
 
 if __name__ == "__main__":
