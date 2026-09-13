@@ -128,7 +128,7 @@
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><button class="term" data-term="プリミティブ">プリミティブ</button>数は1回ごとに<strong>正確に4倍</strong>。四角形1枚が4枚に割れるため。3回で64倍、6回で4096倍なので、回数を安易に増やすと破綻する。</li>
-          <li><button class="term" data-term="ポイント">ポイント</button>数は常に「プリミティブ数 + 2」。オイラーの多面体定理から導ける。閉じた四角形メッシュでは各辺を2面が共有するので E = 2F、これを V − E + F = 2 に代入すると V = F + 2。実測7通りすべて一致した。</li>
+          <li><button class="term" data-term="ポイント">ポイント</button>数は常に「プリミティブ数 + 2」。オイラーの多面体定理から導ける。閉じた四角形<button class="term" data-term="メッシュ">メッシュ</button>では各辺を2面が共有するので E = 2F、これを V − E + F = 2 に代入すると V = F + 2。実測7通りすべて一致した。</li>
           <li><strong>1回目だけ一辺が縮まない</strong>。+X端を保持している点を調べたら (0.5, 0, 0) の1点だけで、これは元の +X 面の中心そのものだった。<button class="term" data-term="Catmull-Clark">Catmull-Clark</button> は各面の中心に新しい点を作るので、1回目はその新点が元の面上に乗る。2回目でその点も内側に引かれ 0.87847 に縮む。</li>
           <li>縮みの原因は分割ではなく<strong>平滑化</strong>だと確定した。OpenSubdiv Bilinear（平滑化せず分割するだけ）で3回分割しても一辺は 1.00000 のまま。面数は同じ384なので、分割量は同じで平滑化の有無だけが違う。</li>
           <li>一辺の縮み方は等比的に収束する。差は 0.02929 → 0.00726 → 0.00181 → 0.00045 で毎回およそ1/4。外挿した極限値は約 <span class="hi">0.83951</span>。</li>
@@ -562,7 +562,7 @@
         <div class="prose">
           <p>
             面の上に点をばらまき、その点ごとに<button class="term" data-term="ジオメトリ">ジオメトリ</button>を複製する。
-            草や岩や建物を並べるのは全部このパターンで行う、プロシージャルモデリングの中核。
+            草や岩や建物を並べるのは全部このパターンで行う、<button class="term" data-term="プロシージャルモデリング">プロシージャルモデリング</button>の中核。
           </p>
           <p>
             測ったのは3つ。散布点の数は指定どおりになるか、複製後の点数はどう増えるか、
@@ -621,7 +621,7 @@
         <ul class="findings">
           <li><code>scatter</code> の <code>npts</code> は正確に守られる。50 / 200 / 800 を指定して実際も 50 / 200 / 800。おおよその数ではなく指定した数ちょうどが出る。</li>
           <li><button class="term" data-term="scatter">scatter</button> の出力は <code>P</code> だけでなく <code>N</code> も持つ。元の面の<button class="term" data-term="法線">法線</button>が引き継がれる。この N があるかないかで次の挙動が変わる。</li>
-          <li><button class="term" data-term="copy to points">copy to points</button> の点数は<strong>掛け算そのまま</strong>。散布点200個 × テンプレート20点 = 4000点。テンプレートが重いと一気に破綻するので、この掛け算を意識する。</li>
+          <li><button class="term" data-term="copy to points">copy to points</button> の点数は<strong>掛け算そのまま</strong>。散布点200個 × <button class="term" data-term="テンプレート">テンプレート</button>20点 = 4000点。テンプレートが重いと一気に破綻するので、この掛け算を意識する。</li>
           <li>N を持たない点に複製すると、複製は<strong>一切回転しない</strong>。ばらつきは平均も最大も 0.00度で、200個すべてが同じ向きに立つ。</li>
           <li>N を持つ点に複製すると点ごとに回転する。ばらつきは平均 10.84度、最大 31.69度で、これは地面の傾きのばらつきそのもの。</li>
           <li><strong>ただし N はテンプレートの Y軸ではなく Z軸に対応する。</strong> tube の既定（Y軸向き）のまま複製すると、複製の軸と N の角度が全200個すべて正確に 90.00度 ＝ 完全に横倒しになる。Z軸向きに作り直すと全200個すべて 0.00度 で一致した。</li>
@@ -927,7 +927,7 @@
           <li><code>inset</code> は各辺から内側に引っ込む距離。0.3 なら両側から 0.6 縮んで 10.0 → 9.40000、0.8 なら 1.6 縮んで 8.40000。指定した値がそのまま効く。</li>
           <li>パラメータ名は <code>dist</code> と <code>inset</code>、分割数は <code>divisions</code> ではなく <code>divs</code>。ここでも一般的な名前は通じなかった。</li>
           <li>boolean には8演算ある。Union / Intersect / Subtract のほかに <strong>Shatter</strong>（Aを砕いて全破片を残す）、Seam（境界線だけ）、Detect（検出のみ）、Resolve（自己交差の解消）。</li>
-          <li>Shatter の体積は 8.00000 で box と完全一致。<strong>砕いても全破片が残るので体積は変わらない。</strong> 破壊エフェクトの下準備がこれ。</li>
+          <li>Shatter の体積は 8.00000 で box と完全一致。<strong>砕いても全破片が残るので体積は変わらない。</strong> 破壊<button class="term" data-term="エフェクト">エフェクト</button>の下準備がこれ。</li>
           <li>sphere <button class="term" data-term="SOP">SOP</button> で rows / cols を 30 にしても面数は 80 のままだった。<strong><button class="term" data-term="ポリゴン">ポリゴン</button>球は rows / cols ではなく多面体の細分を使っている。</strong></li>
           <li>その粗い球（80面）の体積は 9.00180。半径 1.35 の真球なら 10.30575 なので約13%小さい。<strong>ポリゴンで近似した球は必ず内側に寄る。</strong></li>
         </ul>

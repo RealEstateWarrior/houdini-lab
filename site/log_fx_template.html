@@ -43,7 +43,7 @@
         <div class="prose">
           <p>
             ここまでの12実験はすべて1<button class="term" data-term="フレーム">フレーム</button>だけを見ていた。
-            エフェクトは時間変化そのものが結果なので、フレームを進めて連番で書き出す仕組みが要る。
+            <button class="term" data-term="エフェクト">エフェクト</button>は時間変化そのものが結果なので、フレームを進めて連番で書き出す仕組みが要る。
             仕組みが正しいかは、答えが分かっている動き（自由落下の式）で確かめた。
           </p>
         </div>
@@ -92,7 +92,7 @@
           <li>連番の仕組みは正しい。自由落下の式との差は最大 0.0000006 で、これは小数の計算精度そのもの。</li>
           <li>20枚の書き出しに 1.18秒（1枚59ミリ秒）。60フレーム全部でも3.5秒程度で、<strong><button class="term" data-term="レンダリング">レンダリング</button>の重さは問題にならない</strong>。</li>
           <li><strong>カメラは全フレームを覆う範囲で一度だけ決める。</strong> フレームごとに枠を合わせ直すと、対象が動いているのか大きさが変わっているのかを画から判断できなくなる。</li>
-          <li>出力は2形式にした。PDFには動きを載せられないので<strong>コンタクトシート</strong>、HTMLには<strong>GIF</strong>。同じ連番から両方を作る。</li>
+          <li>出力は2形式にした。PDFには動きを載せられないので<strong><button class="term" data-term="コンタクトシート">コンタクトシート</button></strong>、HTMLには<strong>GIF</strong>。同じ連番から両方を作る。</li>
           <li><strong>パーティクルは <button class="term" data-term="SOP">SOP</button> に1つもない（0種）。</strong> すべて <button class="term" data-term="DOP">DOP</button> 側（67種）。SOPをつなぐだけでは始められず、DOP<button class="term" data-term="ネットワーク">ネットワーク</button>を組む必要がある。</li>
           <li>一方で剛体は SOP に 47種、布は 22種ある。<strong>SOPレベルのラッパーが充実している分野の方が入口として易しい。</strong> 当初はパーティクルから始める予定だったが、<strong><button class="term" data-term="RBD">RBD</button> か <button class="term" data-term="Vellum">Vellum</button> から入る方が理にかなっている</strong>と分かったので順番を変える。</li>
           <li><code>solver</code> SOP はロックされたアセットで、中を触るには <code>allowEditingOfContents()</code> が要る。しかも中身は dopnet と4つの null で、想像していた単純な構造ではなかった。</li>
@@ -233,7 +233,7 @@
         <p class="path">/obj/pyro_test &nbsp;·&nbsp; 散逸3条件 × 48フレーム</p>
 
         <p class="callout">
-          <strong>→ この実験の最後に書いた「ハードウェアレンダラーはボリュームを描けない」は、
+          <strong>→ この実験の最後に書いた「<button class="term" data-term="ハードウェアレンダラー">ハードウェアレンダラー</button>はボリュームを描けない」は、
           <a href="#exp018">実験018</a>で言い過ぎだったと分かった。</strong>
           同じカメラ・同じ露出で撮り直すと、<button class="term" data-term="OpenGL ROP">OpenGL ROP</button> も輪郭と厚みによる濃淡は描けている。
           描けていないのは、光が中を通ることによる陰影のほう。
@@ -376,7 +376,7 @@
 
         <div class="prose">
           <p>
-            実験016で煙を描いたとき、ハードウェアレンダラーでは濃淡が分からないと書いた。
+            実験016で煙を描いたとき、<button class="term" data-term="ハードウェアレンダラー">ハードウェアレンダラー</button>では濃淡が分からないと書いた。
             そこで本式の<button class="term" data-term="レンダリング">レンダラー</button>である
             <button class="term" data-term="Karma">Karma</button> を使う。
             ただ「きれいになった」では終わらせない。
@@ -384,7 +384,7 @@
           <p>
             Karma は1ピクセルの色を、乱数で飛ばした何本もの光線の平均で決める。
             平均のばらつきは本数の平方根に反比例するはずなので、
-            <strong>サンプル数を4倍にすれば<button class="term" data-term="ノイズ">ノイズ</button>は半分になる</strong>という式が立つ。
+            <strong><button class="term" data-term="サンプル">サンプル</button>数を4倍にすれば<button class="term" data-term="ノイズ">ノイズ</button>は半分になる</strong>という式が立つ。
             外れたら、式か測り方のどちらかが間違っている。
           </p>
         </div>
@@ -495,7 +495,7 @@
             付属ヘルプ（<code>nodes.zip</code>）を読んだら原因がはっきりした。
           </p>
           <p>
-            <strong>コンテナは単なる箱ではなく、3つのチャンネルを束ねる中継点だった。</strong>
+            <strong>コンテナは単なる箱ではなく、3つの<button class="term" data-term="チャンネル">チャンネル</button>を束ねる中継点だった。</strong>
             粒を<button class="term" data-term="ソルバ">ソルバ</button>に直接つなぐのではなく、
             いったんコンテナに入れて、コンテナの3出力をソルバの3入力へ渡す。
             017で試した4通りは、どれもこの形になっていなかった。
@@ -546,7 +546,7 @@
           </table>
         </div>
         <p class="hint">
-          体積が5倍になっているのに、narrow band ありでは粒の数がほとんど動かない
+          体積が5倍になっているのに、<button class="term" data-term="narrow band">narrow band</button> ありでは粒の数がほとんど動かない
           （最多19,973と最少19,081の差は4.7%）。
         </p>
 
@@ -593,7 +593,7 @@
           <li>narrow band を切ると体積に比例した。<strong>粒の数 = 3415.7 × 体積 + 18130</strong>、5点すべてずれ1%未満。</li>
           <li>切片の 18,130 は、narrow band ありのときの粒の数（平均 19,592）に近い。<strong>体積に比例しない分が、ちょうど帯の分にあたる。</strong>別々の道から測った2つの量が同じところを指している。</li>
           <li>粒1つが担う体積は 0.000293 で、間隔の3乗（0.000512）の <span class="hi">0.572倍</span>。017で「粒の数 × 間隔の3乗では体積を表せない」と書いた、その係数がこれ。</li>
-          <li><strong>017で立てた予想は逆だった。</strong>「reseeding を切れば粒の数が保たれるはず」と書いていたが、実測では reseeding <strong>あり</strong>のほうが保たれる（0.20%）。切ると36.28%増える。境界では水位を保つため粒が絶えず作られており、reseeding はその「消す」側だった。</li>
+          <li><strong>017で立てた予想は逆だった。</strong>「<button class="term" data-term="reseeding">reseeding</button> を切れば粒の数が保たれるはず」と書いていたが、実測では reseeding <strong>あり</strong>のほうが保たれる（0.20%）。切ると36.28%増える。境界では水位を保つため粒が絶えず作られており、reseeding はその「消す」側だった。</li>
         </ul>
 
         <p class="callout callout--note">
@@ -714,6 +714,103 @@
           <button class="term" data-term="シミュレーション">シミュレーション</button>は最初から動いていたのに、SOP側では0点と出ていた。
           原因は <code>dopimport</code> の <code>objpattern</code>（読み込む対象の名前）が空だったこと。
           <code>*</code> を入れたら読めた。エラーも警告も出ないので気づきにくい。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 021 ===================== -->
+    <article class="entry entry--current" id="exp021">
+      <div class="badge">021</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>煙はなぜ動かなかったのか — 温度を入れると立ち上る</h2>
+        <p class="path">/obj/smoke &nbsp;·&nbsp; 供給する属性を1つ足すだけで別物になった</p>
+
+        <div class="prose">
+          <p>
+            実験018で「いまの煙は一様な球で、レンダラーの差を見せる題材として弱い」と書いた。
+            形のある煙を作ろうとして測ったら、もっと手前に問題があった。
+          </p>
+          <p>
+            <strong>煙がまったく動いていなかった。</strong>
+            中身のある<button class="term" data-term="ボクセル">ボクセル</button>の数が全フレームで 504 のまま、ばらつきも 1.4927 のまま。
+            合計だけが増えていく。これは「同じ形が濃くなっていくだけ」を意味する。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="021_compare.png" alt="上段は動かない煙、下段は立ち上る煙を3フレームずつ並べた比較"></div>
+            <figcaption>同じカメラ・同じフレーム。<strong>上段が density だけ、下段は temperature も供給したもの。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">density だけを供給したとき</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>密度の合計</th><th>中身のあるボクセル</th><th>重心の高さ</th><th>ばらつき</th><th>格子</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">17,379.98</td><td class="num">504</td><td class="num">0.4677</td><td class="num">1.4927</td><td class="num">16×32×16</td></tr>
+              <tr><td class="num">15</td><td class="num">33,702.64</td><td class="num">504</td><td class="num">0.4677</td><td class="num">1.4927</td><td class="num">16×32×16</td></tr>
+              <tr><td class="num">25</td><td class="num">39,394.00</td><td class="num">504</td><td class="num">0.4677</td><td class="num">1.4927</td><td class="num">16×32×16</td></tr>
+              <tr><td class="num">40</td><td class="num">41,813.50</td><td class="num muted">504</td><td class="num muted">0.4677</td><td class="num muted">1.4927</td><td class="num muted">16×32×16</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          「ばらつき」は変動係数（標準偏差 ÷ 平均）。全体を何倍しても変わらない量なので、
+          <strong>濃さだけが変わっているのか、形が変わっているのか</strong>を切り分けられる。
+        </p>
+
+        <p class="label">temperature も供給したとき</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>密度の合計</th><th>中身のあるボクセル</th><th>重心の高さ</th><th>ばらつき</th><th>格子</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">18,356.35</td><td class="num">1,072</td><td class="num">0.5718</td><td class="num">1.6673</td><td class="num">48×32×48</td></tr>
+              <tr><td class="num">15</td><td class="num">33,901.98</td><td class="num">5,851</td><td class="num">0.5109</td><td class="num">1.9247</td><td class="num">48×64×48</td></tr>
+              <tr><td class="num">25</td><td class="num">41,407.58</td><td class="num">14,006</td><td class="num">0.5148</td><td class="num">2.7519</td><td class="num">48×96×48</td></tr>
+              <tr><td class="num">40</td><td class="num">48,289.94</td><td class="num hi">30,105</td><td class="num">0.5217</td><td class="num hi">3.7187</td><td class="num hi">48×144×48</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="021_rise.gif" alt="温度を供給した煙が立ち上っていくアニメーション"></div>
+            <figcaption>温度を足した状態。キノコ型の頭を作りながら立ち上る。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">かき乱す設定は効いたか（40フレーム目）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>密度の合計</th><th>中身</th><th>ばらつき</th><th>基準との差</th></tr></thead>
+            <tbody>
+              <tr><td>温度あり（基準）</td><td class="num">48,289.94</td><td class="num">30,105</td><td class="num">3.7187</td><td class="muted">—</td></tr>
+              <tr><td>disturbance 2.0</td><td class="num hi">52,247.42</td><td class="num">30,350</td><td class="num">3.5663</td><td>合計 +8.2%</td></tr>
+              <tr><td>shredding 1.0</td><td class="num">48,289.94</td><td class="num">30,105</td><td class="num">3.7187</td><td class="muted">完全に同じ</td></tr>
+              <tr><td>shredding 20.0</td><td class="num">48,289.94</td><td class="num">30,105</td><td class="num">3.7187</td><td class="muted">完全に同じ</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>煙は動いていなかった。</strong>中身のあるボクセル・ばらつき・重心の高さが全フレームで同じ値。合計だけが増える。同じ形が濃くなっていくだけだった。</li>
+          <li>格子の大きさも 16×32×16 のまま。煙が広がれば計算領域も広がるはずなので、これも裏付けになる。</li>
+          <li><strong>原因は温度を供給していなかったこと。</strong>浮力は温度差で生まれる。<button class="term" data-term="密度">密度</button>だけ渡しても昇る理由がない。</li>
+          <li>temperature を足すと、格子は縦に4.5倍伸び、中身のあるボクセルは <span class="hi">28倍</span>、ばらつきは 2.2倍になった。</li>
+          <li><strong>実験016と018の煙も同じ状態だった。</strong>016の<button class="term" data-term="散逸">散逸</button>の式も018の<button class="term" data-term="ノイズ">ノイズ</button>の式も、結論自体は変わらない（どちらも動きとは無関係な話）。ただし<strong>絵が地味だった理由はこれ</strong>。</li>
+          <li><code>disturbance</code> は効いた。ただし合計が 8.2% 増えたので、<strong>「動かすだけ」という私の仮説は外れた</strong>。ばらつきは少し下がる（細かくばらけさせる設定なので筋は通る）。</li>
+          <li><strong><code>shredding</code> はまったく効かなかった。</strong>1.0 でも 20.0 でも小数点以下まで完全に一致する。ヘルプには「温度の勾配にもとづいて速度場を押し引きし、炎に特有の筋を作る」とあるので、<strong>炎を伴わない煙だけの設定では出番がない</strong>と見ている。ここは確かめきれていない。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          ヘルプには「温度の拡散が小さいほど shredding の効果が出やすい」ともあったが、
+          <code>tempdiffusion</code> は既定で 0.0、つまりすでに最小だった。この線では説明がつかない。
+          炎を出す設定で改めて試す。
         </p>
       </div>
     </article>

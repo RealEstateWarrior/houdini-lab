@@ -359,6 +359,41 @@ h2 {
 }
 @media (max-width: 700px) { .pipe + .pipe::before { display: none; } }
 
+/* ---------- タグ ---------- */
+
+.tagbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 4px; }
+.tagchip {
+  font: inherit;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 980px;
+  background: var(--ground);
+  color: var(--ink-mid);
+  cursor: pointer;
+}
+.tagchip span { color: var(--ink-dim); font-size: 0.76em; margin-left: 3px; }
+.tagchip:hover { border-color: var(--wire); color: var(--ink); }
+.tagchip.is-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #ffffff;
+}
+.tagchip.is-on span { color: rgba(255, 255, 255, 0.7); }
+.tagchip:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+
+.thumb-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
+.thumb-tags span {
+  font-size: 0.7rem;
+  color: var(--ink-dim);
+  background: var(--ground-2);
+  border-radius: 980px;
+  padding: 2px 9px;
+}
+.thumb[hidden] { display: none !important; }
+
 /* ---------- 実験カード ---------- */
 
 .thumbs {

@@ -24,6 +24,8 @@ import os
 import re
 import shutil
 
+import link_terms
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(HERE, "site")
 DOCS = os.path.join(HERE, "docs")
@@ -92,96 +94,103 @@ TABS = [
 ]
 
 DONE = [
-    {"no": "001", "anchor": "exp001", "log": "log_pm", "hip": "box_mountain.hipnc", "thumb": "box_mountain.png",
+    {"no": "001", "anchor": "exp001", "tags": ["モデリング", "ノイズ", "基礎"], "log": "log_pm", "hip": "box_mountain.hipnc", "thumb": "box_mountain.png",
      "report": "box_mountain_report.json",
      "shots": ["box_mountain.png", "box_mountain_graph.png"],
      "title": "Box を山にして細分割し、位置で色を付ける",
      "note": "最小構成。mountain は点を増やさないと分かった"},
-    {"no": "002", "anchor": "exp002", "log": "log_pm", "hip": "002_subdivide.hipnc", "thumb": "002_subdiv_3.png",
+    {"no": "002", "anchor": "exp002", "tags": ["モデリング", "分割", "検算"], "log": "log_pm", "hip": "002_subdivide.hipnc", "thumb": "002_subdiv_3.png",
      "shots": ["002_subdiv_0.png", "002_subdiv_3.png"],
      "title": "subdivide の回数で、形と数はどう変わるか",
      "note": "面数は正確に4倍、点数は常に面数+2。縮む原因は分割ではなく平滑化"},
-    {"no": "003", "anchor": "exp003", "log": "log_pm", "hip": "003_order.hipnc", "thumb": "003_D.png",
+    {"no": "003", "anchor": "exp003", "tags": ["モデリング", "ノイズ", "分割"], "log": "log_pm", "hip": "003_order.hipnc", "thumb": "003_D.png",
      "shots": ["003_C.png", "003_D.png"],
      "title": "mountain と subdivide は、順序を変えると何が変わるか",
      "note": "点数は解像度を決め、凹凸の大きさは elementsize が決める"},
-    {"no": "004", "anchor": "exp004", "log": "log_pm", "hip": "004_mountain_params.hipnc", "thumb": "004_rough_10.png",
+    {"no": "004", "anchor": "exp004", "tags": ["モデリング", "ノイズ", "パラメータ"], "log": "log_pm", "hip": "004_mountain_params.hipnc", "thumb": "004_rough_10.png",
      "shots": ["004_rough_00.png", "004_rough_10.png"],
      "title": "mountain のノイズパラメータは、それぞれ何に効くのか",
      "note": "rough が形の性質を決める。oct は点数が足りないと効かない"},
-    {"no": "005", "anchor": "exp005", "log": "log_pm", "hip": "005_noise_basis.hipnc", "thumb": "005_mworleyFA.png",
+    {"no": "005", "anchor": "exp005", "tags": ["モデリング", "ノイズ", "比較"], "log": "log_pm", "hip": "005_noise_basis.hipnc", "thumb": "005_mworleyFA.png",
      "shots": ["005_perlin.png", "005_mworleyFA.png"],
      "title": "basis 14通りで、形はどこまで変わるか",
      "note": "振幅も性質も変わる。外向きに押すか内向きに削るかが種類で決まる"},
-    {"no": "006", "anchor": "exp006", "log": "log_pm", "hip": "006_height_shape.hipnc", "thumb": "006_bias_075.png",
+    {"no": "006", "anchor": "exp006", "tags": ["モデリング", "ノイズ", "パラメータ", "訂正"], "log": "log_pm", "hip": "006_height_shape.hipnc", "thumb": "006_bias_075.png",
      "shots": ["006_bias_025.png", "006_bias_075.png"],
      "title": "height は純粋な倍率か。gain と bias は何に効くか",
      "note": "005の「上限がある」は誤りだった。bias で突起と窪みを連続的に制御できる"},
-    {"no": "007", "anchor": "exp007", "log": "log_pm", "hip": "007_grid_terrain.hipnc", "thumb": "007_frac_fBm.png",
+    {"no": "007", "anchor": "exp007", "tags": ["モデリング", "地形", "指標"], "log": "log_pm", "hip": "007_grid_terrain.hipnc", "thumb": "007_frac_fBm.png",
      "shots": ["007_flat.png", "007_frac_fBm.png"],
      "title": "平面で地形を作り、指標を作り直す",
      "note": "勾配が止まる点が「足りている解像度」を教えてくれる。fractal は平面で差が出る"},
-    {"no": "008", "anchor": "exp008", "log": "log_pm", "hip": "008_scatter_copy.hipnc", "thumb": "008_z_axis.png",
+    {"no": "008", "anchor": "exp008", "tags": ["モデリング", "複製", "地形"], "log": "log_pm", "hip": "008_scatter_copy.hipnc", "thumb": "008_z_axis.png",
      "shots": ["008_plain.png", "008_z_axis.png"],
      "title": "scatter と copy to points — 地面に物を生やす",
      "note": "N はテンプレートのZ軸に対応する。Y軸のまま複製すると必ず横倒しになる"},
-    {"no": "009", "anchor": "exp009", "log": "log_pm", "hip": "009_vex.hipnc", "thumb": "009_wave.png",
+    {"no": "009", "anchor": "exp009", "tags": ["VEX", "速度"], "log": "log_pm", "hip": "009_vex.hipnc", "thumb": "009_wave.png",
      "shots": ["009_wave.png"],
      "title": "attribute wrangle で VEX を書く",
      "note": "実行対象でアトリビュートの置き場所が変わる。処理時間の計測は3回目で本物になった"},
-    {"no": "010", "anchor": "exp010", "log": "log_pm", "hip": "010_foreach.hipnc", "thumb": "010_ui_network.png",
+    {"no": "010", "anchor": "exp010", "tags": ["VEX", "速度", "比較"], "log": "log_pm", "hip": "010_foreach.hipnc", "thumb": "010_ui_network.png",
      "shots": ["010_ui_network.png"],
      "title": "for-each ループと VEX を比べる",
      "note": "3,969面で85.9倍の差。ただし置き換え可能とは限らず、点の共有が鍵だった"},
-    {"no": "011", "anchor": "exp011", "log": "log_pm", "hip": "011_crease.hipnc", "thumb": "011_w3_0.png",
+    {"no": "011", "anchor": "exp011", "tags": ["モデリング", "分割", "指標"], "log": "log_pm", "hip": "011_crease.hipnc", "thumb": "011_w3_0.png",
      "shots": ["011_w0_0.png", "011_w3_0.png"],
      "title": "crease で角を残す — どれだけの重みが要るのか",
      "note": "分割回数と同じ重みで完全に角が残る。一辺だけ見ていると誤判定する"},
-    {"no": "012", "anchor": "exp012", "log": "log_pm", "hip": "012_extrude_boolean.hipnc", "thumb": "012_bool_subtract.png",
+    {"no": "012", "anchor": "exp012", "tags": ["モデリング", "ブーリアン", "検算"], "log": "log_pm", "hip": "012_extrude_boolean.hipnc", "thumb": "012_bool_subtract.png",
      "shots": ["012_bool_union.png", "012_bool_subtract.png"],
      "title": "polyextrude と boolean — 硬い形を作る",
      "note": "押し出しは寸法が指定どおり。boolean は体積の関係式で正しさを検算できる"},
-    {"no": "013", "anchor": "exp013", "log": "log_fx", "hip": "013_time.hipnc", "thumb": "013_sheet.png",
+    {"no": "013", "anchor": "exp013", "tags": ["ツール", "時間"], "log": "log_fx", "hip": "013_time.hipnc", "thumb": "013_sheet.png",
      "shots": ["013_wave.gif", "013_sheet.png"],
      "title": "時間軸への対応 — フレームを進めて記録する",
      "note": "連番・コンタクトシート・GIF。パーティクルはSOPに0種でDOPに67種と判明"},
-    {"no": "014", "anchor": "exp014", "log": "log_fx", "hip": "014_rbd.hipnc", "thumb": "014_sheet.png",
+    {"no": "014", "anchor": "exp014", "tags": ["エフェクト", "剛体", "保存量"], "log": "log_fx", "hip": "014_rbd.hipnc", "thumb": "014_sheet.png",
      "shots": ["014_rbd.gif", "014_sheet.png"],
      "title": "RBD 破壊 — 最初の本物のシミュレーション",
      "note": "体積が全フレームで完全に保存。落下中は砕けず、着地して2.8倍に散らばる"},
-    {"no": "015", "anchor": "exp015", "log": "log_fx", "hip": "015_vellum.hipnc", "thumb": "015_sheet.png",
+    {"no": "015", "anchor": "exp015", "tags": ["エフェクト", "布", "保存量"], "log": "log_fx", "hip": "015_vellum.hipnc", "thumb": "015_sheet.png",
      "shots": ["015_cloth.gif", "015_sheet.png"],
      "title": "Vellum クロス — 布で保存されるべき量は何か",
      "note": "かたさは「値 × 10の指数乗」。既定の指数10のせいで値を触っても効かない"},
-    {"no": "016", "anchor": "exp016", "log": "log_fx", "hip": "016_pyro.hipnc", "thumb": "016_sheet.png",
+    {"no": "016", "anchor": "exp016", "tags": ["エフェクト", "煙", "式"], "log": "log_fx", "hip": "016_pyro.hipnc", "thumb": "016_sheet.png",
      "shots": ["016_sheet.png"],
      "title": "Pyro 煙 — dissipation の正体を式で突き止める",
      "note": "毎フレーム (1−d) 倍に減らす仕組み。立てた式と実測が4桁一致した"},
-    {"no": "017", "anchor": "exp017", "log": "log_fx", "hip": "017_flip.hipnc", "thumb": "017_graph.png",
+    {"no": "017", "anchor": "exp017", "tags": ["エフェクト", "液体", "保留"], "log": "log_fx", "hip": "017_flip.hipnc", "thumb": "017_graph.png",
      "shots": ["017_graph.png"],
      "title": "FLIP 液体 — 組み方が分からず保留",
      "note": "4通りの配線を試して全部同じエラー。他のソルバと作法が違うと判明"},
-    {"no": "018", "anchor": "exp018", "log": "log_fx", "hip": "018_karma.hipnc", "thumb": "018_karma.png",
+    {"no": "018", "anchor": "exp018", "tags": ["レンダリング", "式", "比較"], "log": "log_fx", "hip": "018_karma.hipnc", "thumb": "018_karma.png",
      "shots": ["018_noise_strip.png", "018_opengl.png", "018_karma.png"],
      "title": "Karma でのレンダリング — ノイズはサンプル数で本当に減るのか",
      "note": "サンプル数は上限であって指定ではない。頭打ちの犯人は varianceaa_thresh"},
-    {"no": "019", "anchor": "exp019", "log": "log_fx", "hip": "019_flip.hipnc", "thumb": "019_sheet.png",
+    {"no": "019", "anchor": "exp019", "tags": ["エフェクト", "液体", "配線", "訂正"], "log": "log_fx", "hip": "019_flip.hipnc", "thumb": "019_sheet.png",
      "shots": ["019_pool.gif", "019_sheet.png"],
      "title": "FLIP 液体 — 配線が解けた。そして粒の数は体積ではなかった",
      "note": "017の保留を解決。コンテナは3チャンネルの中継点で、VDBの名前が役割を決める"},
-    {"no": "020", "anchor": "exp020", "log": "log_fx", "hip": "020_pop.hipnc", "thumb": "020_sheet.png",
+    {"no": "020", "anchor": "exp020", "tags": ["エフェクト", "パーティクル", "式"], "log": "log_fx", "hip": "020_pop.hipnc", "thumb": "020_sheet.png",
      "shots": ["020_pop.gif", "020_graph.png"],
      "title": "POP パーティクル — 生まれる数と落ち方を式で確かめる",
      "note": "生まれる数は指定どおり。落ち方のずれは計算の刻み1.3個ぶんの遅れだった"},
+    {"no": "021", "anchor": "exp021", "tags": ["エフェクト", "煙", "訂正"],
+     "log": "log_fx", "hip": "021_smoke.hipnc", "thumb": "021_compare.png",
+     "shots": ["021_compare.png", "021_rise.gif"],
+     "title": "煙はなぜ動かなかったのか — 温度を入れると立ち上る",
+     "note": "温度を供給しないと浮力が働かない。016と018の煙も止まっていた"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "021", "title": "構造のある煙を作る",
-     "note": "018で判明。いまの煙は一様な球で、レンダラーの差を見せる題材として弱い"},
     {"no": "022", "title": "液体に表面を張る",
      "note": "019の粒のままでは液体に見えない。particlefluidsurface を使う"},
+    {"no": "023", "title": "炎を出す",
+     "note": "021で shredding が効かなかった。燃焼を伴う設定で確かめ直す"},
+    {"no": "024", "title": "動く煙で Karma を撮り直す",
+     "note": "018は動かない煙で比べていた。題材を入れ替えて確かめ直す"},
 ]
 
 PAGES = [
@@ -240,19 +249,41 @@ def render_nav(active, tabs, urls):
     return "\n".join(out)
 
 
+def all_tags():
+    """使われているタグを、使用数の多い順に並べる。"""
+    counts = {}
+    for item in DONE:
+        for tag in item.get("tags", []):
+            counts[tag] = counts.get(tag, 0) + 1
+    return sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+
+
 def render_thumbs(urls):
     """実験の一覧。カードはリンクではなくボタンで、押すとポップアップが開く。"""
     out = ['      <div class="stage"><h3>完了した実験</h3>'
-           "<p>カードを押すと要点が開く。全文のログへはそこから進める。</p></div>",
-           '      <div class="thumbs">']
+           "<p>カードを押すと要点が開く。タグで絞り込める。</p></div>"]
+    out.append('      <div class="tagbar" id="tagbar">')
+    out.append('        <button type="button" class="tagchip is-on" data-tag="">'
+               f"すべて <span>{len(DONE)}</span></button>")
+    for tag, count in all_tags():
+        out.append(f'        <button type="button" class="tagchip" data-tag="{tag}">'
+                   f"{html.escape(tag)} <span>{count}</span></button>")
+    out.append("      </div>")
+    out.append('      <div class="thumbs" id="thumbs">')
     for item in DONE:
-        out.append(f'        <button type="button" class="thumb" data-exp="{item["no"]}">')
+        tags = " ".join(item.get("tags", []))
+        out.append(f'        <button type="button" class="thumb"'
+                   f' data-exp="{item["no"]}" data-tags="{tags}">')
         out.append(f'          <span class="thumb-img"><img src="{item["thumb"]}"'
                    f' alt="実験{item["no"]}の結果のレンダリング"></span>')
         out.append('          <span class="thumb-body">')
         out.append(f'            <span class="thumb-no">実験 {item["no"]}</span>')
         out.append(f'            <h4>{html.escape(item["title"])}</h4>')
         out.append(f'            <p>{html.escape(item["note"])}</p>')
+        if item.get("tags"):
+            chips = "".join(f"<span>{html.escape(t)}</span>"
+                            for t in item["tags"])
+            out.append(f'            <span class="thumb-tags">{chips}</span>')
         out.append("          </span>")
         out.append("        </button>")
     out.append("      </div>")
@@ -326,6 +357,24 @@ def inject_experiment_links(page, urls, nodes):
     return pattern.sub(build, page)
 
 
+def link_terms_in(markup):
+    """生成したHTMLに用語リンクを差し込む。実験ログと同じ仕組みを使う。
+
+    手順ページは初心者が最初に読むところなので、用語の取りこぼしが一番痛い。
+    差し込むのはタグだけで、本文の文字は変えない（ここでも検算する）。
+    """
+    ordered = sorted(link_terms.ALLOW, key=len, reverse=True)
+    already = set(re.findall(r'data-term="([^"]+)"', markup))
+    remaining = [t for t in ordered if t not in already]
+    if not remaining:
+        return markup
+    pattern = re.compile("|".join(re.escape(t) for t in remaining))
+    linked, _ = link_terms.link_article(markup, pattern, set())
+    if link_terms.strip_tags(linked) != link_terms.strip_tags(markup):
+        raise SystemExit("用語リンクの差し込みで本文が変わった")
+    return linked
+
+
 def render_guides(guides, urls):
     """手順ページ。実験ログとは別に「どう作るか」だけを順番に読ませる。
 
@@ -336,6 +385,7 @@ def render_guides(guides, urls):
                for item in DONE}
     out = []
     for guide in guides["guides"]:
+        section_start = len(out)
         out.append(f'      <section class="guide" id="guide-{guide["id"]}">')
         out.append('        <div class="guide-hero">')
         out.append(f'          <img src="{guide["hero"]}"'
@@ -405,6 +455,7 @@ def render_guides(guides, urls):
         out.append("          </p>")
         out.append("        </div>")
         out.append("      </section>")
+        out[section_start:] = [link_terms_in("\n".join(out[section_start:]))]
     return "\n".join(out)
 
 
@@ -514,6 +565,7 @@ def render_search_data(data, nodes, urls, tabs):
             "note": item["note"],
             "href": f'{urls[item.get("log", "log_pm")]}#{item["anchor"]}',
             "exp": item["no"],
+            "tags": item.get("tags", []),
         })
 
     index = -1

@@ -177,9 +177,11 @@
       var label = item.label.toLowerCase();
       var note = (item.note || "").toLowerCase();
       var reading = (item.reading || "").toLowerCase();
+      var tags = (item.tags || []).join(" ").toLowerCase();
       if (label.indexOf(query) === 0) { return 0; }
       if (label.indexOf(query) !== -1) { return 1; }
       if (reading.indexOf(query) !== -1) { return 2; }
+      if (tags.indexOf(query) !== -1) { return 2; }
       if (note.indexOf(query) !== -1) { return 3; }
       return -1;
     }
@@ -335,5 +337,33 @@
         return;
       }
     }
+  })();
+
+  /* タグで実験カードを絞り込む。押すたびに切り替わる。 */
+  (function () {
+    var bar = document.getElementById("tagbar");
+    var grid = document.getElementById("thumbs");
+    if (!bar || !grid) { return; }
+    var chips = Array.prototype.slice.call(bar.querySelectorAll(".tagchip"));
+    var cards = Array.prototype.slice.call(grid.querySelectorAll(".thumb"));
+
+    function apply(tag) {
+      chips.forEach(function (chip) {
+        chip.classList.toggle("is-on", chip.dataset.tag === tag);
+      });
+      cards.forEach(function (card) {
+        var tags = (card.dataset.tags || "").split(" ");
+        card.hidden = tag !== "" && tags.indexOf(tag) === -1;
+      });
+      try {
+        if (tag) { history.replaceState(null, "", "#experiments"); }
+      } catch (e) {}
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        apply(chip.classList.contains("is-on") ? "" : chip.dataset.tag);
+      });
+    });
   })();
 </script>
