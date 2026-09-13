@@ -1,0 +1,108 @@
+{
+  "title": "FLIP 液体（保留）",
+  "network": "/obj/flip_test",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "liquid",
+      "type": "particlefluidtank",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "particlesep": 0.15,
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "sizez": 2.0
+      }
+    },
+    {
+      "name": "container",
+      "type": "flipcontainer",
+      "pos": [
+        0.0,
+        -1.13
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.15
+      }
+    },
+    {
+      "name": "source",
+      "type": "flipsource",
+      "pos": [
+        2.259,
+        -1.581
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.15
+      }
+    },
+    {
+      "name": "solver",
+      "type": "flipsolver",
+      "pos": [
+        1.13,
+        -2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder2": 1,
+        "particlesep": 0.15,
+        "folder3": 1,
+        "waterlinesettings": 1,
+        "folder5": 1,
+        "folder6": 1,
+        "useground": 1,
+        "folder14": 1,
+        "folder15": 1,
+        "vis_ramp1cb": 1.0,
+        "vis_ramp2pos": 0.4993646740913391,
+        "vis_ramp2cg": 0.5,
+        "vis_ramp2cb": 1.0,
+        "vis_ramp3pos": 1.0,
+        "vis_ramp3cr": 1.0,
+        "vis_ramp3cg": 1.0,
+        "vis_ramp3cb": 1.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "liquid",
+      "from_output": 0,
+      "to": "container",
+      "to_input": 0
+    },
+    {
+      "from": "liquid",
+      "from_output": 0,
+      "to": "source",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 0
+    },
+    {
+      "from": "source",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 1
+    }
+  ]
+}

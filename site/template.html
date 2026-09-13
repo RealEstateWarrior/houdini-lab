@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>16 / 19</dd></div>
+      <div><dt>実験</dt><dd>17 / 20</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -1184,6 +1184,56 @@
           <li>構成でつまずいた点。<code>pyrosource</code> は既定で <code>P</code> と <code>pscale</code> しか作らず、<strong>density を明示的に追加しないと</strong>次のラスタライズが空を返す。しかも <code>pyrosource</code> の attributes は「個数」（数値）、<code>volumerasterizeattributes</code> の attributes は「名前の文字列」で<strong>同じ名前なのに意味が違う</strong>。</li>
           <li><strong>ハードウェアレンダラーはボリュームの描画に向いていない。</strong> 煙が塊にしか描かれず、濃淡も立ち上りも分からない。ここまでの実験では十分だったが、ボリュームを扱うなら Karma のような本式のレンダラーが要る。</li>
         </ul>
+      </div>
+    </article>
+
+    <!-- ===================== 017 ===================== -->
+    <article class="entry entry--current" id="exp017">
+      <div class="badge">017</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>FLIP 液体 — 組み方が分からず保留</h2>
+        <p class="path">/obj/flip_test &nbsp;·&nbsp; 4通りの配線を試行</p>
+
+        <div class="prose">
+          <p>
+            液体は押し縮められないので体積が保たれるはず。<button class="term" data-term="FLIP">FLIP</button> は液体を粒で表す方式なので、
+            粒1つが一定の体積を担うなら「粒の数」がそのまま体積にあたる——という筋書きで実験を組んだ。
+          </p>
+          <p>
+            <strong>ところがソルバが動かなかった。</strong>4通りの配線を試してすべて同じエラーで止まり、
+            原因を特定できていない。調査内容を残して保留とする。
+          </p>
+        </div>
+
+        <p class="label">試した配線と結果</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>配線</th><th>出力1</th><th>出力2</th><th>エラー</th></tr></thead>
+            <tbody>
+              <tr><td>タンクの粒 → 入力1</td><td class="muted">なし</td><td class="num">0点</td><td class="wrap">Not enough sources specified.</td></tr>
+              <tr><td>コンテナ → 入力1</td><td class="muted">なし</td><td class="num">0点</td><td class="wrap">同上</td></tr>
+              <tr><td>コンテナ → 入力1、粒 → 入力2</td><td class="muted">なし</td><td class="num">1460点（素通し）</td><td class="wrap">同上</td></tr>
+              <tr><td>コンテナ → 入力1、flipsource → 入力2</td><td class="muted">なし</td><td class="num">1点（素通し）</td><td class="wrap">同上</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>エラーは一貫して「Not enough sources specified.」。粒を渡しても、コンテナを渡しても、flipsource を渡しても満たされない。</li>
+          <li><strong>他のソルバとの違いが大きい。</strong> rbdbulletsolver（014）も vellumsolver（015）も pyrosolver（016）も、入力1にジオメトリをつなぐだけで動いた。FLIP だけが追加の作法を要求している。</li>
+          <li>パラメータ側の手がかりも少ない。source を含む名前は <code>sourceband</code> ひとつだけで、「どの入力が供給源か」を指定する仕組みは見当たらない。入力の順番と種類が決まっていて、そこに正しいものを渡す必要があるということ。</li>
+          <li>途中で罠を1つ踏んだ。<code>particlefluidtank</code> を上に移動させたら<strong>粒が0になった</strong>。このノードは「水位」を基準に中身を満たすので、タンクを水位より上に動かすと空になる。落下させたいならタンクではなく地面を下げる。</li>
+          <li>粒から見積もった体積は 4.92750 で、箱の体積 8.0 の 62%。粒は格子状に並ぶので隙間があり、<strong>粒の数 × 間隔の3乗では体積を正確に表せない</strong>。検証に使うならこの係数を先に求める必要がある。</li>
+          <li>この保留は失敗だが記録する価値がある。<strong>「他と同じやり方が通じないノードがある」と分かったこと自体が情報</strong>で、次に取り組むときに同じ4通りを試さずに済む。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          次の手は決めてある。付属ヘルプ（<code>nodes.zip</code>）で入力の説明を読むか、
+          GUI のシェルフツールに FLIP を作らせて、その <code>.hipnc</code> から構造を読み取る。
+          ネットの情報ではなく手元の一次情報から確かめる。
+        </p>
       </div>
     </article>
 
