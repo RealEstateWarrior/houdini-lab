@@ -83,13 +83,14 @@ DONE = [
     {"no": "007", "anchor": "exp007", "thumb": "007_frac_fBm.png",
      "title": "平面で地形を作り、指標を作り直す",
      "note": "勾配が止まる点が「足りている解像度」を教えてくれる。fractal は平面で差が出る"},
+    {"no": "008", "anchor": "exp008", "thumb": "008_z_axis.png",
+     "title": "scatter と copy to points — 地面に物を生やす",
+     "note": "N はテンプレートのZ軸に対応する。Y軸のまま複製すると必ず横倒しになる"},
 ]
 
 PLANNED = [
-    {"no": "008", "title": "crease で角を保持する",
+    {"no": "009", "title": "crease で角を保持する",
      "note": "分割しても立方体らしさを残せるか"},
-    {"no": "009", "title": "scatter と copy to points",
-     "note": "プロシージャルの中核パターン"},
     {"no": "010", "title": "for-each ループ", "note": "プリミティブ単位の繰り返し"},
     {"no": "011", "title": "attribute wrangle (VEX) 入門", "note": "@P / @N / @ptnum"},
     {"no": "012", "title": "polyextrude と boolean", "note": "押し出しとブーリアン"},

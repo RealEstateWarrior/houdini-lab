@@ -1,0 +1,75 @@
+{
+  "scatter": [
+    {
+      "requested": 50,
+      "actual": 50
+    },
+    {
+      "requested": 200,
+      "actual": 200
+    },
+    {
+      "requested": 800,
+      "actual": 800
+    }
+  ],
+  "template": {
+    "points": 20,
+    "prims": 12
+  },
+  "copies": [
+    {
+      "key": "plain",
+      "label": "法線なし",
+      "points": 4000,
+      "prims": 2400,
+      "copies": 200,
+      "expected_points": 4000,
+      "angle_mean": 7.97878788209906e-07,
+      "angle_max": 2.561320938754782e-06,
+      "size_min": 0.44999997317790985,
+      "size_max": 0.4500000029802324,
+      "image": "008_plain.png"
+    },
+    {
+      "key": "oriented",
+      "label": "法線あり",
+      "points": 4000,
+      "prims": 2400,
+      "copies": 200,
+      "expected_points": 4000,
+      "angle_mean": 10.836233980402794,
+      "angle_max": 31.686692281577923,
+      "size_min": 0.4499998456204316,
+      "size_max": 0.4500001150506206,
+      "image": "008_oriented.png"
+    },
+    {
+      "key": "varied",
+      "label": "法線あり＋pscale",
+      "points": 4000,
+      "prims": 2400,
+      "copies": 200,
+      "expected_points": 4000,
+      "angle_mean": 10.836233892847176,
+      "angle_max": 31.686706873464736,
+      "size_min": 0.15833269900044628,
+      "size_max": 0.6273484167363543,
+      "image": "008_varied.png"
+    }
+  ],
+  "axis": [
+    {
+      "label": "Y軸（tube の既定）",
+      "mean": 90.0,
+      "min": 90.0,
+      "max": 90.0
+    },
+    {
+      "label": "Z軸",
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    }
+  ]
+}

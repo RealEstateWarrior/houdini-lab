@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>7 / 16</dd></div>
+      <div><dt>実験</dt><dd>8 / 16</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -548,6 +548,88 @@
         <p class="callout callout--note">
           カメラのフレーミングを直した。以前はバウンディングボックスを立方体とみなして距離を決めていたため、
           平たい地形が画面の4分の1ほどにしか写らなかった。8つの隅をカメラ空間に投影して必要な距離を解く方式に変更した。
+        </p>
+      </div>
+    </article>
+
+    <!-- ===================== 008 ===================== -->
+    <article class="entry entry--current" id="exp008">
+      <div class="badge">008</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>scatter と copy to points — 地面に物を生やす</h2>
+        <p class="path">/obj/scatter_copy &nbsp;·&nbsp; 散布点200個、テンプレート20点</p>
+
+        <div class="prose">
+          <p>
+            面の上に点をばらまき、その点ごとにジオメトリを複製する。
+            草や岩や建物を並べるのは全部このパターンで行う、プロシージャルモデリングの中核。
+          </p>
+          <p>
+            測ったのは3つ。散布点の数は指定どおりになるか、複製後の点数はどう増えるか、
+            そして<strong>複製が地面の傾きに沿って回るか</strong>。
+            3つめで重要な落とし穴が見つかった。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="008_ground.png" alt="ノイズで起伏をつけた地面"></div>
+            <figcaption><strong>地面</strong><br>grid 60分割 + mountain</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="008_plain.png" alt="すべて真上を向いた同じ大きさの円錐が地面に並んでいる"></div>
+            <figcaption><strong>法線なしの点に複製</strong><br>向きのばらつき 0.00度</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="008_varied.png" alt="円錐が横倒しになり大きさもばらついている"></div>
+            <figcaption><strong>法線あり + pscale</strong><br>回ってはいるが横倒し</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="008_z_axis.png" alt="円錐が地面に対して立ち、傾きに沿って傾いている"></div>
+            <figcaption><strong>テンプレートをZ軸向きに</strong><br>N と完全に一致</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">N はテンプレートのどの軸に対応するのか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>テンプレートの向き</th><th>N との角度（平均）</th><th>最小</th><th>最大</th></tr></thead>
+            <tbody>
+              <tr><td>Y軸（tube の既定）</td><td class="num hi">90.00度</td><td class="num">90.00度</td><td class="num">90.00度</td></tr>
+              <tr><td>Z軸</td><td class="num hi">0.00度</td><td class="num">0.00度</td><td class="num">0.00度</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          各複製の軸と、その複製が乗っている点の N との角度を全200個について測った。
+          ばらつきがゼロなので、これは偶然ではなく仕様。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><code>scatter</code> の <code>npts</code> は正確に守られる。50 / 200 / 800 を指定して実際も 50 / 200 / 800。おおよその数ではなく指定した数ちょうどが出る。</li>
+          <li>scatter の出力は <code>P</code> だけでなく <code>N</code> も持つ。元の面の法線が引き継がれる。この N があるかないかで次の挙動が変わる。</li>
+          <li>copy to points の点数は<strong>掛け算そのまま</strong>。散布点200個 × テンプレート20点 = 4000点。テンプレートが重いと一気に破綻するので、この掛け算を意識する。</li>
+          <li>N を持たない点に複製すると、複製は<strong>一切回転しない</strong>。ばらつきは平均も最大も 0.00度で、200個すべてが同じ向きに立つ。</li>
+          <li>N を持つ点に複製すると点ごとに回転する。ばらつきは平均 10.84度、最大 31.69度で、これは地面の傾きのばらつきそのもの。</li>
+          <li><strong>ただし N はテンプレートの Y軸ではなく Z軸に対応する。</strong> tube の既定（Y軸向き）のまま複製すると、複製の軸と N の角度が全200個すべて正確に 90.00度 ＝ 完全に横倒しになる。Z軸向きに作り直すと全200個すべて 0.00度 で一致した。</li>
+          <li><code>tube</code> の <code>orient</code> の既定は Y軸なので、何も考えずに複製すると必ず横倒しになる。地面に立てたいならテンプレートを Z軸向きに作る。</li>
+          <li><code>pscale</code> は大きさだけを変える。向きのばらつきは 10.84度 / 31.69度 のまま同じで、大きさが 0.45固定 から 0.16〜0.63 に広がった。向きと大きさは独立している。</li>
+          <li><code>tube</code> の <code>type</code> の既定は Primitive で、1点 / 1面の「本物の円柱プリミティブ」になる。ポリゴンとして扱うには Polygon に変える。これに気づかず最初は1点のテンプレートを200個複製していた。</li>
+        </ul>
+
+        <p class="callout">
+          <strong>実用の型</strong>: 地面 → <code>normal</code> → <code>scatter</code> → <code>copy to points</code>。
+          テンプレートは Z軸向きに作る。大きさを変えたいなら散布点に <code>pscale</code> を持たせる。
+          この4ノードで「地面に物を生やす」が完成する。
+        </p>
+
+        <p class="callout callout--note">
+          測り方の失敗も記録しておく。最初は「重心から最も遠い点」で複製の向きを測ろうとしたが、
+          円錐の底面リングの点がすべて等距離のため、選ばれる点が複製ごとにばらついて 21.44度 という
+          無意味な値が出た。固定の点番号を使う方式に変えたら 0.00度 になった。
+          等距離の点が並ぶ形では「最も遠い点」は一意に決まらない。
         </p>
       </div>
     </article>

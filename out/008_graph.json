@@ -1,0 +1,258 @@
+{
+  "title": "scatter と copy to points",
+  "network": "/obj/scatter_copy",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ground",
+      "type": "grid",
+      "pos": [
+        -9.743,
+        5.497
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 60,
+        "cols": 60
+      }
+    },
+    {
+      "name": "terrain",
+      "type": "mountain::2.0",
+      "pos": [
+        -9.743,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 1.2,
+        "elementsize": 3.0
+      }
+    },
+    {
+      "name": "ground_normals",
+      "type": "normal",
+      "pos": [
+        -9.743,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "scatter_200",
+      "type": "scatter::2.0",
+      "pos": [
+        -9.743,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 200
+      }
+    },
+    {
+      "name": "template",
+      "type": "tube",
+      "pos": [
+        -12.002,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.0,
+        "rad2": 0.18,
+        "height": 0.9,
+        "cols": 10
+      }
+    },
+    {
+      "name": "strip_normals",
+      "type": "attribdelete",
+      "pos": [
+        -9.743,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ptdel": "N"
+      }
+    },
+    {
+      "name": "copy_plain",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -10.872,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "copy_oriented",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "vary_scale",
+      "type": "attribwrangle",
+      "pos": [
+        -3.248,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "@pscale = fit01(rand(@ptnum * 7.3), 0.35, 1.4);"
+      }
+    },
+    {
+      "name": "copy_varied",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "template_z",
+      "type": "tube",
+      "pos": [
+        0.0,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "cap": 1,
+        "rad1": 0.0,
+        "rad2": 0.18,
+        "height": 0.9,
+        "cols": 10
+      }
+    },
+    {
+      "name": "copy_z",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "terrain",
+      "to_input": 0
+    },
+    {
+      "from": "terrain",
+      "from_output": 0,
+      "to": "ground_normals",
+      "to_input": 0
+    },
+    {
+      "from": "ground_normals",
+      "from_output": 0,
+      "to": "scatter_200",
+      "to_input": 0
+    },
+    {
+      "from": "scatter_200",
+      "from_output": 0,
+      "to": "strip_normals",
+      "to_input": 0
+    },
+    {
+      "from": "template",
+      "from_output": 0,
+      "to": "copy_plain",
+      "to_input": 0
+    },
+    {
+      "from": "strip_normals",
+      "from_output": 0,
+      "to": "copy_plain",
+      "to_input": 1
+    },
+    {
+      "from": "template",
+      "from_output": 0,
+      "to": "copy_oriented",
+      "to_input": 0
+    },
+    {
+      "from": "scatter_200",
+      "from_output": 0,
+      "to": "copy_oriented",
+      "to_input": 1
+    },
+    {
+      "from": "scatter_200",
+      "from_output": 0,
+      "to": "vary_scale",
+      "to_input": 0
+    },
+    {
+      "from": "template",
+      "from_output": 0,
+      "to": "copy_varied",
+      "to_input": 0
+    },
+    {
+      "from": "vary_scale",
+      "from_output": 0,
+      "to": "copy_varied",
+      "to_input": 1
+    },
+    {
+      "from": "template_z",
+      "from_output": 0,
+      "to": "copy_z",
+      "to_input": 0
+    },
+    {
+      "from": "scatter_200",
+      "from_output": 0,
+      "to": "copy_z",
+      "to_input": 1
+    }
+  ]
+}
