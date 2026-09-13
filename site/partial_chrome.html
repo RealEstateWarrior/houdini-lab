@@ -5,15 +5,53 @@
   </svg>
 </button>
 
+<div class="sheet" id="menu-sheet" role="dialog" aria-modal="true" aria-label="メニュー" hidden>
+  <div class="sheet-head">
+    <button type="button" class="nav-icon sheet-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="sheet-body">
+    <ul class="sheet-list" id="menu-list"></ul>
+  </div>
+</div>
+
+<div class="sheet" id="search-sheet" role="dialog" aria-modal="true" aria-label="サイト内を検索" hidden>
+  <div class="sheet-head">
+    <button type="button" class="nav-icon sheet-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="sheet-body">
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+      <input type="search" id="search-input" placeholder="検索"
+             autocomplete="off" spellcheck="false" aria-label="検索語">
+    </div>
+    <p class="search-hint" id="search-hint">よく見るところ</p>
+    <ul class="search-results" id="search-results"></ul>
+  </div>
+</div>
+
+<!--SEARCH_DATA-->
+
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */
   (function () {
     var button = document.getElementById("totop");
     if (!button) { return; }
 
-    function update() {
-      button.hidden = window.scrollY < 400;
-    }
+    function update() { button.hidden = window.scrollY < 400; }
 
     button.addEventListener("click", function () {
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -46,10 +84,238 @@
 
     Array.prototype.forEach.call(targets, function (el, index) {
       var box = el.getBoundingClientRect();
-      if (box.top < window.innerHeight * 0.92) { return; }  // 最初から見えている分は触らない
+      if (box.top < window.innerHeight * 0.92) { return; }
       el.classList.add("reveal");
       el.style.transitionDelay = (index % 4) * 40 + "ms";
       observer.observe(el);
+    });
+  })();
+
+  /* 全画面メニューと検索。
+
+     スマホではタブがバーに入りきらないので、ハンバーガーから全画面で開く。
+     項目は上から順に1つずつ現れ、背後のページはぼかして沈める。 */
+  (function () {
+    var layout = document.querySelector(".layout");
+    var menuSheet = document.getElementById("menu-sheet");
+    var searchSheet = document.getElementById("search-sheet");
+    var menuList = document.getElementById("menu-list");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var hint = document.getElementById("search-hint");
+    var dataEl = document.getElementById("search-data");
+    if (!menuSheet || !searchSheet || !dataEl) { return; }
+
+    var data = JSON.parse(dataEl.textContent);
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var open = null;
+    var lastFocus = null;
+    var cursor = 0;
+
+    /* ---- 開閉 ---- */
+
+    function stagger(items, step) {
+      items.forEach(function (li, i) {
+        li.classList.remove("in");
+        if (reduce) { li.classList.add("in"); return; }
+        setTimeout(function () { li.classList.add("in"); }, 40 + i * step);
+      });
+    }
+
+    function show(sheet) {
+      if (open) { hide(); }
+      lastFocus = document.activeElement;
+      sheet.hidden = false;
+      if (layout) { layout.classList.add("dimmed"); }
+      document.body.style.overflow = "hidden";
+      open = sheet;
+    }
+
+    function hide() {
+      if (!open) { return; }
+      var items = open.querySelectorAll("li");
+      Array.prototype.forEach.call(items, function (li) { li.classList.remove("in"); });
+      open.hidden = true;
+      if (layout) { layout.classList.remove("dimmed"); }
+      document.body.style.overflow = "";
+      if (lastFocus && lastFocus.focus) { lastFocus.focus(); }
+      open = null;
+    }
+
+    /* ---- メニュー ---- */
+
+    function buildMenu() {
+      menuList.textContent = "";
+      var source = document.querySelector(".sidenav .nav-inner > ul");
+      if (!source) { return; }
+      Array.prototype.forEach.call(source.children, function (li) {
+        var control = li.firstElementChild;
+        if (!control) { return; }
+        var item = document.createElement("li");
+        var clone = control.cloneNode(true);
+        clone.classList.remove("nav-tab");
+        if (clone.classList.contains("nav-ext")) { clone.classList.add("sheet-ext"); }
+        clone.addEventListener("click", function () {
+          if (control.tagName === "BUTTON") { control.click(); }
+          hide();
+        });
+        if (control.tagName === "BUTTON") { clone.setAttribute("type", "button"); }
+        item.appendChild(clone);
+        menuList.appendChild(item);
+      });
+    }
+
+    document.getElementById("menu-open").addEventListener("click", function () {
+      buildMenu();
+      show(menuSheet);
+      stagger(Array.prototype.slice.call(menuList.children), 55);
+    });
+
+    /* ---- 検索 ---- */
+
+    function score(item, query) {
+      var label = item.label.toLowerCase();
+      var note = (item.note || "").toLowerCase();
+      var reading = (item.reading || "").toLowerCase();
+      if (label.indexOf(query) === 0) { return 0; }
+      if (label.indexOf(query) !== -1) { return 1; }
+      if (reading.indexOf(query) !== -1) { return 2; }
+      if (note.indexOf(query) !== -1) { return 3; }
+      return -1;
+    }
+
+    function quickLinks() {
+      return data.items.filter(function (item) {
+        return item.kind === "ページ";
+      }).concat(data.items.filter(function (item) {
+        return item.kind === "実験";
+      }).slice(-3).reverse());
+    }
+
+    function go(item) {
+      hide();
+      if (data.tabs && item.tab) {
+        if (window.location.hash !== "#" + item.tab) {
+          window.location.hash = "#" + item.tab;
+        }
+        if (item.anchor) {
+          setTimeout(function () {
+            var target = document.getElementById(item.anchor);
+            if (target) {
+              target.scrollIntoView({ behavior: reduce ? "auto" : "smooth",
+                                      block: "start" });
+            }
+          }, 60);
+        }
+        return;
+      }
+      window.location.href = item.href;
+    }
+
+    function render(query) {
+      var list;
+      if (!query) {
+        list = quickLinks().slice(0, 8);
+        hint.textContent = "よく見るところ";
+      } else {
+        list = data.items.map(function (item) {
+          return { item: item, rank: score(item, query) };
+        }).filter(function (row) {
+          return row.rank >= 0;
+        }).sort(function (a, b) {
+          return a.rank - b.rank || a.item.label.length - b.item.label.length;
+        }).slice(0, 8).map(function (row) { return row.item; });
+        hint.textContent = list.length ? "候補" : "";
+      }
+
+      results.textContent = "";
+      cursor = 0;
+      if (!list.length) {
+        var empty = document.createElement("li");
+        empty.className = "search-empty";
+        empty.textContent = "見つかりませんでした";
+        empty.classList.add("in");
+        results.appendChild(empty);
+        return;
+      }
+
+      list.forEach(function (item, index) {
+        var li = document.createElement("li");
+        var button = document.createElement("button");
+        button.type = "button";
+        if (index === 0) { button.classList.add("active"); }
+
+        var kind = document.createElement("span");
+        kind.className = "r-kind";
+        kind.textContent = item.kind;
+
+        var text = document.createElement("span");
+        text.className = "r-text";
+        var label = document.createElement("span");
+        label.className = "r-label";
+        label.textContent = item.label;
+        text.appendChild(label);
+        if (item.note) {
+          var note = document.createElement("span");
+          note.className = "r-note";
+          note.textContent = item.note;
+          text.appendChild(note);
+        }
+
+        button.appendChild(kind);
+        button.appendChild(text);
+        button.addEventListener("click", function () { go(item); });
+        li.appendChild(button);
+        results.appendChild(li);
+      });
+      stagger(Array.prototype.slice.call(results.children), 26);
+      results.dataset.list = list.length;
+      results._items = list;
+    }
+
+    function moveCursor(delta) {
+      var buttons = results.querySelectorAll("button");
+      if (!buttons.length) { return; }
+      buttons[cursor].classList.remove("active");
+      cursor = (cursor + delta + buttons.length) % buttons.length;
+      buttons[cursor].classList.add("active");
+      buttons[cursor].scrollIntoView({ block: "nearest" });
+    }
+
+    document.getElementById("search-open").addEventListener("click", function () {
+      show(searchSheet);
+      input.value = "";
+      render("");
+      setTimeout(function () { input.focus(); }, 30);
+    });
+
+    input.addEventListener("input", function () {
+      render(input.value.trim().toLowerCase());
+    });
+
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowDown") { event.preventDefault(); moveCursor(1); }
+      else if (event.key === "ArrowUp") { event.preventDefault(); moveCursor(-1); }
+      else if (event.key === "Enter") {
+        event.preventDefault();
+        if (results._items && results._items[cursor]) { go(results._items[cursor]); }
+      }
+    });
+
+    /* ---- 共通 ---- */
+
+    Array.prototype.forEach.call(document.querySelectorAll(".sheet-close"),
+      function (button) { button.addEventListener("click", hide); });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && open) { hide(); return; }
+      var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(
+        (document.activeElement || {}).tagName || "");
+      if (!open && !typing && (event.key === "/" ||
+          ((event.metaKey || event.ctrlKey) && event.key === "k"))) {
+        event.preventDefault();
+        document.getElementById("search-open").click();
+      }
     });
   })();
 </script>

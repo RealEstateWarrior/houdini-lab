@@ -62,6 +62,19 @@ LOGO_SVG = (
 )
 BRAND = "Houdini 研究ハブ"
 
+SEARCH_SVG = (
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+    '<circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/>'
+    '<path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8"'
+    ' stroke-linecap="round"/></svg>'
+)
+BURGER_SVG = (
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+    '<path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.8"'
+    ' stroke-linecap="round"/></svg>'
+)
+
+
 # ハブ内のタブ。読み込みなしで切り替わる。子ページでは同じ並びがリンクになる。
 TABS = [
     ("overview", "概要"),
@@ -208,6 +221,11 @@ def render_nav(active, tabs, urls):
     out.append(f'        <li><a href="{urls["log"]}"{log_current}>実験ログ</a></li>')
     out.append(f'        <li><a href="{NOTEBOOK_URL}" class="nav-ext">Notebook</a></li>')
     out.append("      </ul>")
+    out.append('      <button type="button" class="nav-icon" id="search-open"'
+               ' aria-label="サイト内を検索">' + SEARCH_SVG + "</button>")
+    out.append('      <button type="button" class="nav-icon nav-burger" id="menu-open"'
+               ' aria-label="メニューを開く" aria-expanded="false">'
+               + BURGER_SVG + "</button>")
     out.append("    </div>")
     out.append("  </nav>")
     return "\n".join(out)
@@ -290,6 +308,7 @@ def render_node_nav(nodes):
 def render_nodes(nodes, urls):
     anchors = {item["no"]: item["anchor"] for item in DONE}
     out = []
+    node_index = -1
     for group in nodes["groups"]:
         out.append(f'      <div class="stage" id="{group["id"]}">')
         out.append(f'        <h3>{html.escape(group["label"])}</h3>')
@@ -298,8 +317,9 @@ def render_nodes(nodes, urls):
         out.append("      </div>")
         out.append('      <div class="nodegrid">')
         for node in group["nodes"]:
+            node_index += 1
             klass = "nodecard" if node.get("img") else "nodecard nodecard--noimg"
-            out.append(f'        <article class="{klass}">')
+            out.append(f'        <article class="{klass}" id="node-{node_index}">')
             out.append('          <div class="node-main">')
             out.append('            <div class="node-head">')
             out.append(f'              <h4>{html.escape(node["name"])}</h4>')
@@ -338,6 +358,62 @@ def render_nodes(nodes, urls):
     return "\n".join(out)
 
 
+def render_search_data(data, nodes, urls, tabs):
+    """検索の索引。実験・ノード・用語をまとめて1つのJSONに入れる。
+
+    ページの中で開ける行き先（タブ + 要素のid）と、別ページへのリンクを
+    どちらも持たせる。ハブではタブを切り替えて飛び、子ページではリンクで飛ぶ。
+    """
+    items = []
+
+    for item in DONE:
+        items.append({
+            "kind": "実験",
+            "label": f'実験{item["no"]} {item["title"]}',
+            "note": item["note"],
+            "href": f'{urls["log"]}#{item["anchor"]}',
+            "exp": item["no"],
+        })
+
+    index = -1
+    for group in nodes["groups"]:
+        for node in group["nodes"]:
+            index += 1
+            items.append({
+                "kind": "ノード",
+                "label": node["name"],
+                "note": node["one"],
+                "href": f'{urls["home"]}#nodes',
+                "tab": "nodes",
+                "anchor": f"node-{index}",
+            })
+
+    index = -1
+    for cat in data["categories"]:
+        for entry in cat["terms"]:
+            index += 1
+            items.append({
+                "kind": "用語",
+                "label": entry["term"],
+                "note": entry["def"][:70],
+                "href": f'{urls["glossary"]}#{cat["id"]}',
+                "tab": "glossary",
+                "anchor": f"gloss-{index}",
+                "reading": entry.get("reading", ""),
+            })
+
+    for panel, label in TABS:
+        items.append({"kind": "ページ", "label": label,
+                      "note": "タブを開く", "href": f'{urls["home"]}#{panel}',
+                      "tab": panel})
+    items.append({"kind": "ページ", "label": "実験ログ（全文）",
+                  "note": "すべての実験の記録", "href": urls["log"]})
+
+    body = json.dumps({"tabs": bool(tabs), "items": items},
+                      ensure_ascii=False, separators=(",", ":"))
+    body = body.replace("</", "<\\/")
+    return f'<script type="application/json" id="search-data">{body}</script>'
+
 # ---------- 用語集 ----------
 
 def aliases(term):
@@ -367,6 +443,7 @@ def render_gloss_nav(data):
 
 def render_section(data):
     out = []
+    term_index = -1
     for cat in data["categories"]:
         out.append(f'    <section class="gloss-cat" id="{cat["id"]}">')
         out.append(f'      <h3>{html.escape(cat["label"])}</h3>')
@@ -374,9 +451,10 @@ def render_section(data):
             out.append(f'      <p class="gloss-note">{html.escape(cat["note"])}</p>')
         out.append('      <dl class="gloss-list">')
         for entry in cat["terms"]:
+            term_index += 1
             meta = [html.escape(v) for v in
                     (entry.get("reading"), entry.get("expand")) if v]
-            out.append('        <div class="gloss-item">')
+            out.append(f'        <div class="gloss-item" id="gloss-{term_index}">')
             out.append(f'          <dt>{html.escape(entry["term"])}'
                        + (f'<span class="gloss-meta">{" · ".join(meta)}</span>' if meta else "")
                        + "</dt>")
@@ -432,6 +510,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_DATA-->", render_data(data)),
         ("<!--POPOVER-->", popover),
         ("<!--CHROME-->", chrome),
+        ("<!--SEARCH_DATA-->", render_search_data(data, nodes, urls, tabs)),
         ("<!--EXP_COUNT-->", str(len(DONE))),
         ("<!--EXP_TOTAL-->", str(len(DONE) + len(PLANNED) + len(PLANNED_FX))),
         ("<!--NODE_COUNT-->", str(count_nodes(nodes))),
