@@ -1,0 +1,140 @@
+{
+  "heights": [
+    {
+      "basis": "simplex",
+      "height": 0.0875,
+      "mean": 0.00809,
+      "max": 0.03289,
+      "ratio": 0.37594,
+      "variation": 0.00433
+    },
+    {
+      "basis": "simplex",
+      "height": 0.175,
+      "mean": 0.01619,
+      "max": 0.06578,
+      "ratio": 0.3759,
+      "variation": 0.00867
+    },
+    {
+      "basis": "simplex",
+      "height": 0.35,
+      "mean": 0.03237,
+      "max": 0.13153,
+      "ratio": 0.37579,
+      "variation": 0.01733
+    },
+    {
+      "basis": "simplex",
+      "height": 0.7,
+      "mean": 0.06473,
+      "max": 0.26273,
+      "ratio": 0.37532,
+      "variation": 0.03466
+    },
+    {
+      "basis": "simplex",
+      "height": 1.4,
+      "mean": 0.12822,
+      "max": 0.43122,
+      "ratio": 0.30801,
+      "variation": 0.06868
+    },
+    {
+      "basis": "worleyFA",
+      "height": 0.0875,
+      "mean": 0.02005,
+      "max": 0.04332,
+      "ratio": 0.49513,
+      "variation": 0.00516
+    },
+    {
+      "basis": "worleyFA",
+      "height": 0.175,
+      "mean": 0.04009,
+      "max": 0.08665,
+      "ratio": 0.49512,
+      "variation": 0.01033
+    },
+    {
+      "basis": "worleyFA",
+      "height": 0.35,
+      "mean": 0.08017,
+      "max": 0.17328,
+      "ratio": 0.49508,
+      "variation": 0.02065
+    },
+    {
+      "basis": "worleyFA",
+      "height": 0.7,
+      "mean": 0.16025,
+      "max": 0.34636,
+      "ratio": 0.4948,
+      "variation": 0.04125
+    },
+    {
+      "basis": "worleyFA",
+      "height": 1.4,
+      "mean": 0.26687,
+      "max": 0.4298,
+      "ratio": 0.307,
+      "variation": 0.07338
+    }
+  ],
+  "shape": [
+    {
+      "kind": "gain",
+      "value": 0.25,
+      "mean": 0.01494,
+      "max": 0.07691,
+      "variation": 0.00816,
+      "outward": 0.3576,
+      "image": "006_gain_025.png"
+    },
+    {
+      "kind": "gain",
+      "value": 0.5,
+      "mean": 0.03237,
+      "max": 0.13153,
+      "variation": 0.01733,
+      "outward": 0.3576,
+      "image": "006_gain_05.png"
+    },
+    {
+      "kind": "gain",
+      "value": 0.75,
+      "mean": 0.05519,
+      "max": 0.16402,
+      "variation": 0.0287,
+      "outward": 0.3576,
+      "image": "006_gain_075.png"
+    },
+    {
+      "kind": "bias",
+      "value": 0.25,
+      "mean": 0.09756,
+      "max": 0.16935,
+      "variation": 0.01614,
+      "outward": 0.0091,
+      "image": "006_bias_025.png"
+    },
+    {
+      "kind": "bias",
+      "value": 0.5,
+      "mean": 0.03237,
+      "max": 0.13153,
+      "variation": 0.01733,
+      "outward": 0.3576,
+      "image": "006_bias_05.png"
+    },
+    {
+      "kind": "bias",
+      "value": 0.75,
+      "mean": 0.07644,
+      "max": 0.14054,
+      "variation": 0.01156,
+      "outward": 0.987,
+      "image": "006_bias_075.png"
+    }
+  ]
+}

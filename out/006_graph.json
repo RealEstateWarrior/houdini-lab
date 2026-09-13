@@ -1,0 +1,220 @@
+{
+  "title": "height の線形性と gain / bias の効果",
+  "network": "/obj/height_shape",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        -22.733,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "base_subdiv",
+      "type": "subdivide",
+      "pos": [
+        -22.733,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "h_simplex_035",
+      "type": "mountain::2.0",
+      "pos": [
+        -22.733,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25
+      }
+    },
+    {
+      "name": "h_worleyFA_035",
+      "type": "mountain::2.0",
+      "pos": [
+        -19.486,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "basis": "worleyFA"
+      }
+    },
+    {
+      "name": "gain_025",
+      "type": "mountain::2.0",
+      "pos": [
+        -16.238,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "dogain": 1,
+        "gain": 0.25
+      }
+    },
+    {
+      "name": "gain_05",
+      "type": "mountain::2.0",
+      "pos": [
+        -12.99,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "dogain": 1
+      }
+    },
+    {
+      "name": "gain_075",
+      "type": "mountain::2.0",
+      "pos": [
+        -9.743,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "dogain": 1,
+        "gain": 0.75
+      }
+    },
+    {
+      "name": "bias_025",
+      "type": "mountain::2.0",
+      "pos": [
+        -6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "dobias": 1,
+        "bias": 0.25
+      }
+    },
+    {
+      "name": "bias_05",
+      "type": "mountain::2.0",
+      "pos": [
+        -3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "dobias": 1
+      }
+    },
+    {
+      "name": "bias_075",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "height": 0.35,
+        "elementsize": 0.25,
+        "dobias": 1,
+        "bias": 0.75
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "base_subdiv",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "h_simplex_035",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "h_worleyFA_035",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "gain_025",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "gain_05",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "gain_075",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "bias_025",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "bias_05",
+      "to_input": 0
+    },
+    {
+      "from": "base_subdiv",
+      "from_output": 0,
+      "to": "bias_075",
+      "to_input": 0
+    }
+  ]
+}

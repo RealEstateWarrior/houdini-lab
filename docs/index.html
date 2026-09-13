@@ -697,7 +697,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           左のタブは読み込みなしで切り替わる。実験の中身だけは、サムネイルを押したときに読み込む。
         </p>
         <dl class="facts">
-          <div><dt>実験</dt><dd>5 / 16</dd></div>
+          <div><dt>実験</dt><dd>6 / 16</dd></div>
           <div><dt>用語</dt><dd>56</dd></div>
           <div><dt>Houdini</dt><dd>21.0.700 Apprentice</dd></div>
           <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -747,6 +747,9 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           oct は点数が足りている範囲でしか効かないことを確かめた。
           → <strong>005</strong> ではノイズの種類そのものを14通り並べ、種類によって
           外向きに押すか内向きに削るかが決まると分かった。
+          → <strong>006</strong> でそこで疑った「上限」を検証したところ、上限は存在せず、
+          むしろ自分の指標が壊れていたと判明した。あわせて bias が突起と窪みを
+          連続的に制御できると分かり、mountain のパラメータ地図がほぼ埋まった。
         </p>
       </header>
       <div class="stage" style="margin-top: 40px;"><h3>完了</h3></div>
@@ -791,17 +794,17 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
             <p>振幅も性質も変わる。外向きに押すか内向きに削るかが種類で決まる</p>
           </span>
         </a>
+        <a class="thumb" href="log.html#exp006">
+          <span class="thumb-img"><img src="006_bias_075.png" alt="実験006の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 006</span>
+            <h4>height は純粋な倍率か。gain と bias は何に効くか</h4>
+            <p>005の「上限がある」は誤りだった。bias で突起と窪みを連続的に制御できる</p>
+          </span>
+        </a>
       </div>
       <div class="stage" style="margin-top: 40px;"><h3>予定 — プロシージャルモデリング</h3></div>
       <div class="thumbs">
-        <div class="thumb thumb--planned">
-          <span class="thumb-img">未実施</span>
-          <span class="thumb-body">
-            <span class="thumb-no">実験 006</span>
-            <h4>セル系の上限を確かめる</h4>
-            <p>最大のずれが 0.175 付近で止まる理由。height を上げても止まるか</p>
-          </span>
-        </div>
         <div class="thumb thumb--planned">
           <span class="thumb-img">未実施</span>
           <span class="thumb-body">

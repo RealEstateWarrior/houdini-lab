@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>5 / 16</dd></div>
+      <div><dt>実験</dt><dd>6 / 16</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -397,6 +397,83 @@
           最大のずれはセル系でほぼ頭打ちになっている（0.164〜0.175）。
           <code>height</code> 0.35 に対して 0.5 倍弱で止まっており、何らかの上限が効いている可能性がある。
           これは実験006で確かめる。
+        </p>
+      </div>
+    </article>
+
+    <!-- ===================== 006 ===================== -->
+    <article class="entry entry--current" id="exp006">
+      <div class="badge">006</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>height は純粋な倍率か。gain と bias は何に効くか</h2>
+        <p class="path">/obj/height_shape &nbsp;·&nbsp; height を16倍の範囲で振る</p>
+
+        <div class="prose">
+          <p>
+            005で「セル系の最大のずれが 0.175 付近で止まっているので、何らかの上限が効いている
+            可能性がある」と書いた。それを確かめた。
+          </p>
+          <p>
+            <strong>結論から言うと、005の見立ては誤りだった。</strong>上限は存在しない。
+            そして高い <code>height</code> で比率が崩れたのは Houdini の制限ではなく、
+            私が使っている指標が壊れていたためだった。
+          </p>
+        </div>
+
+        <p class="label">height を変えたときの最大のずれ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>basis</th><th>height</th><th>平均</th><th>最大</th><th>最大 / height</th></tr></thead>
+            <tbody>
+              <tr><td>simplex</td><td class="num">0.0875</td><td class="num">0.00809</td><td class="num">0.03289</td><td class="num">0.37594</td></tr>
+              <tr><td>simplex</td><td class="num">0.1750</td><td class="num">0.01619</td><td class="num">0.06578</td><td class="num">0.37590</td></tr>
+              <tr><td>simplex</td><td class="num">0.3500</td><td class="num">0.03237</td><td class="num">0.13153</td><td class="num">0.37579</td></tr>
+              <tr><td>simplex</td><td class="num">0.7000</td><td class="num">0.06473</td><td class="num">0.26273</td><td class="num">0.37532</td></tr>
+              <tr><td>simplex</td><td class="num">1.4000</td><td class="num">0.12822</td><td class="num">0.43122</td><td class="num muted">0.30801</td></tr>
+              <tr><td>worleyFA</td><td class="num">0.0875</td><td class="num">0.02005</td><td class="num">0.04332</td><td class="num">0.49513</td></tr>
+              <tr><td>worleyFA</td><td class="num">0.1750</td><td class="num">0.04009</td><td class="num">0.08665</td><td class="num">0.49512</td></tr>
+              <tr><td>worleyFA</td><td class="num">0.3500</td><td class="num">0.08017</td><td class="num">0.17328</td><td class="num">0.49508</td></tr>
+              <tr><td>worleyFA</td><td class="num">0.7000</td><td class="num">0.16025</td><td class="num">0.34636</td><td class="num">0.49480</td></tr>
+              <tr><td>worleyFA</td><td class="num">1.4000</td><td class="num">0.26687</td><td class="num">0.42980</td><td class="num muted">0.30700</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">bias — 突起か窪みかを連続的に決める</p>
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="006_bias_025.png" alt="深くえぐられて鋭い稜線が残る侵食的な形"></div>
+            <figcaption><strong>bias 0.25</strong><br>外向き 0.9% ＝ ほぼ全部が窪み</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="006_bias_05.png" alt="外と内が混ざった凹凸のある岩状の形"></div>
+            <figcaption><strong>bias 0.50</strong>（中立）<br>外向き 35.8%</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="006_bias_075.png" alt="膨らんで浅いへこみが残る丸い塊"></div>
+            <figcaption><strong>bias 0.75</strong><br>外向き 98.7% ＝ ほぼ全部が膨らみ</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><code>height</code> は純粋な倍率だった。「最大 / height」は 0.0875 から 0.7 まで<strong>8倍の範囲で小数点以下4桁まで一定</strong>（simplex 0.3759、worleyFA 0.4951）。height を2倍にすればずれもきっちり2倍になる。</li>
+          <li><strong>005で疑った上限は存在しなかった。</strong> セル系の最大が揃って見えたのは、セル系ノイズのピーク値の分布が互いに似ているため。005のセル系7種類の「最大 / height」を計算すると 0.47〜0.50 に収まる一方、simplex は 0.376 で明確に違う。上限ではなく種類ごとの固有の比率だった。</li>
+          <li>height = 1.4 で比率が両方とも 0.307 に落ちたのは、<strong>私の指標が壊れているため</strong>。基準形の半径は約 0.42（バウンディングボックスの一辺 0.84192 の半分）で、測れた最大のずれ 0.4312 / 0.4298 はこれとほぼ一致する。中心を貫通するほど押し込まれると「中心からの距離の差」では値が頭打ちになる。</li>
+          <li>つまりこの指標は<strong>ずれが対象の半径より十分小さいときにしか使えない</strong>。005の観察を「上限がある」と解釈しかけたのは、この限界を意識していなかったため。指標を作ったら、それが壊れる条件も押さえておく必要がある。</li>
+          <li><code>clipmin</code> / <code>clipmax</code> の既定は 0.0 / 1.0、<code>dogain</code> / <code>dobias</code> は既定で無効。005までの測定に余計な処理は入っていなかったと確認できた。</li>
+          <li><code>gain</code> は振幅の倍率。0.25 / 0.5 / 0.75 で平均のずれが 0.01494 / 0.03237 / 0.05519 と増える一方、<strong>外向きの点の割合は 35.8% のまま完全に動かない</strong>。強さだけを変える。</li>
+          <li><strong><code>bias</code> は外向きと内向きの比率を直接変える。</strong> 0.25 で外向き 0.9%、0.5 で 35.8%、0.75 で 98.7%。005では basis を選ぶことでしか得られなかった「突起か窪みか」の制御が、1つのパラメータで連続的にできる。</li>
+          <li>ただし bias を 0.5 から動かすと平均のずれも増える（0.03237 → 0.09756 / 0.07644）。分布が片側に寄るとゼロから離れた点が増えるため。形の偏りだけを変えるわけではない。</li>
+        </ul>
+
+        <p class="callout">
+          <strong>mountain のパラメータ地図（実験003〜006のまとめ）</strong><br>
+          振幅を決めるのは <code>height</code>（純粋な倍率）と <code>gain</code>（倍率）。
+          細かさを決めるのは <code>rough</code>（最も強い）、<code>lac</code>、<code>oct</code>（点数が足りている範囲で）。
+          外向きか内向きかを決めるのは <code>bias</code>（連続的）と <code>basis</code>（種類で決まる）。
+          特徴の大きさは <code>elementsize</code>。そして<strong>何を表現できるかの上限は点数が決める</strong>。
         </p>
       </div>
     </article>
