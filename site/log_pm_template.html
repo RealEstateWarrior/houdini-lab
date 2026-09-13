@@ -12,7 +12,7 @@
   <header class="masthead">
     <p class="eyebrow">Procedural Modeling / hython 21.0.700</p>
     <h1>実験ログ — モデリング編</h1>
-    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜035（地形）。数字はすべて実行して得た値で、推測は含まない。</p>
+    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜036（地形）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
       <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
@@ -1321,6 +1321,112 @@
           <li><strong><code>normal</code> は <code>scatter</code> の前に置く。</strong><a href="#exp030">実験030</a>で測ったとおり、scatter は N を作らない。上流で作っておかないと木が全部同じ向きに立つ。</li>
           <li>木の<button class="term" data-term="テンプレート">テンプレート</button>は <code>tube</code> を X に 90度回して Z 軸向きにしている。<strong><button class="term" data-term="copy to points">copy to points</button> はテンプレートの Z 軸を N に合わせる</strong>（<a href="#exp008">実験008</a>）。</li>
         </ul>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 036 ===================== -->
+    <article class="entry entry--current" id="exp036">
+      <div class="badge">036</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>流れの向きに草を寝かせる — flowdir は x と y が入れ替わっている</h2>
+        <p class="path">/obj/terrain &nbsp;·&nbsp; 素直に書いたら外れ、8通り総当たりで決めた</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp035">実験035</a>では浸食の<button class="term" data-term="レイヤー">レイヤー</button>のうち
+            <code>sediment</code>（堆積）だけを使った。残っているのが
+            <code>flowdir.x</code> と <code>flowdir.y</code>、水が流れた向きである。
+            名前からすると下り坂の向きのはずだが、確かめていない。
+          </p>
+          <p>
+            <strong>素直に書いたら外れた。</strong><code>flowdir.x</code> を3Dの x、
+            <code>flowdir.y</code> を3Dの z に入れると、高さから作った下り坂の向きとの角度が
+            <strong>平均96.48度</strong>。でたらめ（90度）とほとんど変わらない。
+          </p>
+          <p>
+            そこで割り当てを<strong>8通り総当たり</strong>で測った。
+            1つだけ明らかに違う値が出た。<strong>入れ替えた <code>set(fy, 0, fx)</code> が平均39.95度。</strong>
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="036_flat.png" alt="地形の上に草がまっすぐ立ち並んでいる"></div>
+            <figcaption>N は真上。<strong>草はまっすぐ立ち、向きの情報が無い。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="036_flow.png" alt="草が寝て、水の通り道が筋になって見える地形"></div>
+            <figcaption>N に流れの向き。同じ900本。<strong>草が寝て、水の通り道が筋になる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. x / y の割り当てを8通り総当たり</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>割り当て</th><th>平均</th><th>中央値</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td>( fx, 0,&nbsp; fy)　素直な並び</td><td class="num">96.48度</td><td class="num">99.55度</td><td class="muted">でたらめと同じ</td></tr>
+              <tr><td>(−fx, 0, −fy)</td><td class="num">83.52度</td><td class="num">80.45度</td><td class="muted">でたらめと同じ</td></tr>
+              <tr><td><strong>( fy, 0,&nbsp; fx)　入れ替え</strong></td><td class="num hi">39.95度</td><td class="num hi">29.94度</td><td class="hi">これが正しい</td></tr>
+              <tr><td>(−fy, 0, −fx)</td><td class="num">140.05度</td><td class="num">150.06度</td><td class="muted">逆向き</td></tr>
+              <tr><td>( fx, 0, −fy)</td><td class="num">93.42度</td><td class="num">94.01度</td><td class="muted">でたらめと同じ</td></tr>
+              <tr><td>(−fx, 0,&nbsp; fy)</td><td class="num">86.58度</td><td class="num">85.99度</td><td class="muted">でたらめと同じ</td></tr>
+              <tr><td>( fy, 0, −fx)</td><td class="num">90.56度</td><td class="num">88.58度</td><td class="muted">でたらめと同じ</td></tr>
+              <tr><td>(−fy, 0,&nbsp; fx)</td><td class="num">89.44度</td><td class="num">91.42度</td><td class="muted">でたらめと同じ</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          高さから作った下り坂の向きと比べている。<strong>でたらめなら、どれも平均90度になる。</strong>
+          1つだけ明らかに外れた値が出るので、迷わず決められる。
+        </p>
+
+        <p class="label">2. 正しい割り当てでの、下り坂との一致具合</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>角度</th><th>その範囲に入る割合</th></tr></thead>
+            <tbody>
+              <tr><td>30度未満</td><td class="num hi">50.1%</td></tr>
+              <tr><td>60度未満</td><td class="num">78.5%</td></tr>
+              <tr><td>90度未満</td><td class="num">90.5%</td></tr>
+              <tr><td>120度未満</td><td class="num">95.3%</td></tr>
+              <tr><td>平均 / 中央値</td><td class="num hi">39.95度 / 29.94度</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 複製は、入れた向きを向くか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>N に入れたもの</th><th>狙いとのずれ（平均）</th><th>最大</th><th>真上からの傾き</th><th>ばらつき</th></tr></thead>
+            <tbody>
+              <tr><td>真上 (0,1,0)</td><td class="num hi">0.000度</td><td class="num hi">0.000度</td><td class="num">0.00度</td><td class="num">0.00</td></tr>
+              <tr><td>流れの向き</td><td class="num hi">0.000度</td><td class="num hi">0.000度</td><td class="num hi">90.00度</td><td class="num">0.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">900本すべて。<strong>真上を入れれば立ち、流れの向きを入れれば寝る。</strong></p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>x と y は入れ替えて使う。</strong>8通り試して <code>set(fy, 0, fx)</code> だけが平均39.95度まで下がる。他の7通りはすべて 83〜140度で、でたらめか逆向きだった。</li>
+          <li><strong>総当たりが効いた。</strong>「合わないから諦める」でも「たぶんこうだろうと決め打つ」でもなく、<strong>ありうる並びを全部試して数字で選んだ</strong>。8通りしかないので、総当たりが一番速い。</li>
+          <li><strong>正しい割り当てなら、半分が30度未満に入る。</strong>完全に一致はしない。浸食の流れが局所の傾きだけで決まらない（上流から来た勢いが残る）ためと考えられるが、<strong>確かめていないので断定しない</strong>。</li>
+          <li><strong>複製は入れた向きをぴたりと向いた。</strong>900本すべてで狙いとのずれが 0.000度、ばらつきも 0.00。</li>
+          <li><strong>草の軸の測り方でつまずいた。</strong>最初は複製の最初の点と最後の点を結んで軸にしたが、<span class="hi">ぴったり180.000度</span>ずれた。tube は2つの輪でできていて、輪の並びが想定と逆だった。<strong>ずれが「ちょうど180度」なので、誤差ではなく向きの取り違えだと分かる。</strong></li>
+          <li><strong>下り坂の向きは、<button class="term" data-term="法線">法線</button>からは作れなかった。</strong><code>normal</code> <button class="term" data-term="SOP">SOP</button> は N を点ではなく<strong><button class="term" data-term="バーテックス">バーテックス</button></strong>に書く（<a href="#exp030">実験030</a>で確認済み）。点のラングルから <code>@N</code> を読むと空になる。高さの<button class="term" data-term="ボリューム">ボリューム</button>から、隣との差で作り直した。</li>
+          <li><strong><code>convertheightfield</code> はレイヤーを点<button class="term" data-term="アトリビュート">アトリビュート</button>として持ち込む。</strong><button class="term" data-term="メッシュ">メッシュ</button>の時点で <code>flow</code> や <code>sediment</code> が点に付いている。最初 <code>v@flow</code> と書いて、既にある float の <code>flow</code> とぶつかり、<strong>ベクトルのつもりが数値1つになっていた</strong>。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          この回は<strong>つまずきが3つ重なった</strong>。名前の衝突・法線の置き場所・軸の取り違え。
+          どれも「エラーは出ないが、数字がおかしい」形をしている。
+          <strong>おかしいと気づけたのは、毎回「でたらめなら何度になるか」を先に決めていたから。</strong>
+          90度という基準が無ければ、96.48度を見ても何も思わなかった。
+        </p>
       </div>
     </article>
 

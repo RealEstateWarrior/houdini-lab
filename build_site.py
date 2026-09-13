@@ -250,13 +250,18 @@ DONE = [
      "shots": ["035_plain.png", "035_masked.png"],
      "title": "地形の上に生やし分ける — 浸食が残した情報で木の場所を決める",
      "note": "堆積を重みにすると生える場所の勾配が94.9%下がる。崖が裸になる"},
+    {"no": "036", "anchor": "exp036", "tags": ["モデリング", "地形", "HeightField", "複製"],
+     "log": "log_pm", "hip": "036_flow.hipnc", "thumb": "036_flow.png",
+     "shots": ["036_flat.png", "036_flow.png"],
+     "title": "流れの向きに草を寝かせる — flowdir は x と y が入れ替わっている",
+     "note": "素直な並びは96.5度でハズレ。8通り総当たりで入れ替えが正解と決めた"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "036", "title": "流れの向きに草を寝かせる",
-     "note": "035で使わなかった flowdir を使う"},
+    {"no": "037", "title": "浸食のレイヤーで地形を塗り分ける",
+     "note": "debris と sediment を色にして、岩肌と土を描き分ける"},
 ]
 
 PAGES = [
