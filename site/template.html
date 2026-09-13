@@ -1136,6 +1136,13 @@
         <h2>Pyro 煙 — dissipation の正体を式で突き止める</h2>
         <p class="path">/obj/pyro_test &nbsp;·&nbsp; 散逸3条件 × 48フレーム</p>
 
+        <p class="callout">
+          <strong>→ この実験の最後に書いた「ハードウェアレンダラーはボリュームを描けない」は、
+          <a href="#exp018">実験018</a>で言い過ぎだったと分かった。</strong>
+          同じカメラ・同じ露出で撮り直すと、<button class="term" data-term="OpenGL ROP">OpenGL ROP</button> も輪郭と厚みによる濃淡は描けている。
+          描けていないのは、光が中を通ることによる陰影のほう。
+        </p>
+
         <div class="prose">
           <p>
             剛体は体積、布は辺の長さが保たれた。煙は<button class="term" data-term="ボリューム">ボリューム</button>なので、
