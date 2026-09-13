@@ -1085,10 +1085,14 @@
           </p>
         </div>
 
-        <div class="figs figs--wide">
+        <div class="figs">
           <figure>
             <div class="frame-dark"><img src="015_cloth.gif" alt="両端を固定された布が自重で垂れ下がっていくアニメーション"></div>
             <figcaption>両端をピンで留めて吊るす。中央が自重で垂れ下がる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="015_sheet.png" alt="布が垂れていく様子を等間隔のフレームで並べたコンタクトシート"></div>
+            <figcaption>同じ計算を等間隔のフレームで並べたもの。<strong>垂れ方は途中で止まり、最後は形が変わらなくなる。</strong></figcaption>
           </figure>
         </div>
 
@@ -1142,6 +1146,13 @@
             <button class="term" data-term="発生源">発生源</button>が毎フレーム供給し続けるためで、減衰と供給が釣り合う。
             そこで釣り合いを式に立てて実測と突き合わせた。
           </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="016_sheet.png" alt="散逸の強さを変えた3条件の煙を、同じフレームで並べた比較"></div>
+            <figcaption>散逸の強さを変えた3条件。<strong>ハードウェアレンダラーはボリュームを塊としてしか描けず、濃淡が出ない。</strong>数値でしか差を追えないと分かったのがこの実験の副産物。</figcaption>
+          </figure>
         </div>
 
         <p class="label">密度の合計（最初のフレームを1とした比）</p>
@@ -1205,6 +1216,13 @@
             <strong>ところが<button class="term" data-term="ソルバ">ソルバ</button>が動かなかった。</strong>4通りの配線を試してすべて同じエラーで止まり、
             原因を特定できていない。調査内容を残して保留とする。
           </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="017_graph.png" alt="FLIP のノードをつないだ接続図"></div>
+            <figcaption>試した配線のひとつ。<strong>この図の形ではソルバが動かない。</strong>正しい形が分かったときに見比べられるよう残しておく。</figcaption>
+          </figure>
         </div>
 
         <p class="label">試した配線と結果</p>
