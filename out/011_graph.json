@@ -1,0 +1,307 @@
+{
+  "title": "crease の重みと角の残り方",
+  "network": "/obj/crease_test",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "crease_0_0",
+      "type": "crease",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 0.0
+      }
+    },
+    {
+      "name": "sub_0_0",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "crease_0_5",
+      "type": "crease",
+      "pos": [
+        3.248,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 0.5
+      }
+    },
+    {
+      "name": "sub_0_5",
+      "type": "subdivide",
+      "pos": [
+        3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "crease_1_0",
+      "type": "crease",
+      "pos": [
+        6.495,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1
+      }
+    },
+    {
+      "name": "sub_1_0",
+      "type": "subdivide",
+      "pos": [
+        6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "crease_2_0",
+      "type": "crease",
+      "pos": [
+        9.743,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 2.0
+      }
+    },
+    {
+      "name": "sub_2_0",
+      "type": "subdivide",
+      "pos": [
+        9.743,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "crease_3_0",
+      "type": "crease",
+      "pos": [
+        12.99,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 3.0
+      }
+    },
+    {
+      "name": "sub_3_0",
+      "type": "subdivide",
+      "pos": [
+        12.99,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "crease_4_0",
+      "type": "crease",
+      "pos": [
+        16.238,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 4.0
+      }
+    },
+    {
+      "name": "sub_4_0",
+      "type": "subdivide",
+      "pos": [
+        16.238,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "crease_10_0",
+      "type": "crease",
+      "pos": [
+        19.486,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 10.0
+      }
+    },
+    {
+      "name": "sub_10_0",
+      "type": "subdivide",
+      "pos": [
+        19.486,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "crease_0_0",
+      "to_input": 0
+    },
+    {
+      "from": "crease_0_0",
+      "from_output": 0,
+      "to": "sub_0_0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "crease_0_5",
+      "to_input": 0
+    },
+    {
+      "from": "crease_0_5",
+      "from_output": 0,
+      "to": "sub_0_5",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "crease_1_0",
+      "to_input": 0
+    },
+    {
+      "from": "crease_1_0",
+      "from_output": 0,
+      "to": "sub_1_0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "crease_2_0",
+      "to_input": 0
+    },
+    {
+      "from": "crease_2_0",
+      "from_output": 0,
+      "to": "sub_2_0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "crease_3_0",
+      "to_input": 0
+    },
+    {
+      "from": "crease_3_0",
+      "from_output": 0,
+      "to": "sub_3_0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "crease_4_0",
+      "to_input": 0
+    },
+    {
+      "from": "crease_4_0",
+      "from_output": 0,
+      "to": "sub_4_0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "crease_10_0",
+      "to_input": 0
+    },
+    {
+      "from": "crease_10_0",
+      "from_output": 0,
+      "to": "sub_10_0",
+      "to_input": 0
+    }
+  ]
+}

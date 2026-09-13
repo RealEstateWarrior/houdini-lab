@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>10 / 16</dd></div>
+      <div><dt>実験</dt><dd>11 / 16</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -795,6 +795,76 @@
           <strong>比べたい量である y をソートの鍵に含めてしまった</strong>ため、対応がずれて必ず食い違った。
           水平位置 (x, z) を鍵にして y を値にしたら正しく比較できた。比べたい量は鍵にしない。
         </p>
+      </div>
+    </article>
+
+    <!-- ===================== 011 ===================== -->
+    <article class="entry entry--current" id="exp011">
+      <div class="badge">011</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>crease で角を残す — どれだけの重みが要るのか</h2>
+        <p class="path">/obj/crease_test &nbsp;·&nbsp; 重み7通り × 3回分割</p>
+
+        <div class="prose">
+          <p>
+            実験002で「<button class="term" data-term="subdivide">subdivide</button> を重ねると立方体が球になる」と測った。
+            3回分割すると一辺が 1.0 から 0.84918 まで縮む。crease（折り目）を付ければ角が保たれるはずだが、
+            どれだけの重みが必要なのかは分からない。
+          </p>
+          <p>
+            <strong>予測</strong>: 「重み N なら N 回分の分割まで角が保たれる」はず。
+            3回分割なら重み3で完全に元の立方体のままになるはず。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="011_raw.png" alt="分割していない立方体"></div>
+            <figcaption><strong>分割前の box</strong><br>一辺 1.00000 / 折れ角 90.00度</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="011_w0_0.png" alt="crease なしで3回分割し、球に近くなった形"></div>
+            <figcaption><strong>重み 0.0</strong>（crease なし）<br>一辺 0.84918 / 折れ角 13.93度</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="011_w1_0.png" alt="角が丸い立方体。外形は元に戻っているが辺が丸い"></div>
+            <figcaption><strong>重み 1.0</strong><br>一辺 1.00000 / 折れ角 28.07度</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="011_w3_0.png" alt="細かく分割されているが角が完全に鋭い立方体"></div>
+            <figcaption><strong>重み 3.0</strong><br>一辺 1.00000 / 折れ角 90.00度</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">重みと結果</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>crease の重み</th><th>点数</th><th>面数</th><th>一辺の長さ</th><th>最大の折れ角</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0（なし）</td><td class="num">386</td><td class="num">384</td><td class="num">0.84918</td><td class="num">13.93度</td></tr>
+              <tr><td class="num">0.5</td><td class="num">386</td><td class="num">384</td><td class="num">0.92459</td><td class="num">21.45度</td></tr>
+              <tr><td class="num">1.0</td><td class="num">386</td><td class="num">384</td><td class="num hi">1.00000</td><td class="num">28.07度</td></tr>
+              <tr><td class="num">2.0</td><td class="num">386</td><td class="num">384</td><td class="num">1.00000</td><td class="num">53.13度</td></tr>
+              <tr><td class="num">3.0</td><td class="num">386</td><td class="num">384</td><td class="num">1.00000</td><td class="num hi">90.00度</td></tr>
+              <tr><td class="num">4.0</td><td class="num">386</td><td class="num">384</td><td class="num">1.00000</td><td class="num">90.00度</td></tr>
+              <tr><td class="num">10.0</td><td class="num">386</td><td class="num">384</td><td class="num">1.00000</td><td class="num">90.00度</td></tr>
+              <tr><td class="muted">分割前の box</td><td class="num muted">8</td><td class="num muted">6</td><td class="num muted">1.00000</td><td class="num muted">90.00度</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>予測は当たった。</strong> 3回分割なら重み 3.0 で折れ角が 90.00度 になり、分割前の box とまったく同じ鋭さになる。「重み N なら N 回分の分割まで角が保たれる」でよい。</li>
+          <li>重みを3より上げても何も変わらない（4.0 も 10.0 も 90.00度）。分割回数を超える重みは無駄。逆に分割回数を後から増やすなら重みも上げる必要がある。</li>
+          <li>点数・面数はどの重みでも 386点 / 384面で変わらない。<strong>crease は形の計算方法を変えるだけで、ジオメトリを増やさない。</strong> 角を残すためにポリゴンを足す必要はない。</li>
+          <li><strong>2つの指標が違う答えを出した。</strong> 一辺の長さは重み 1.0 で 1.00000 に達し、そこから変わらない。この指標だけを見ていたら「重み1で十分」と判断してしまう。しかし折れ角は 28.07度 で、画を見れば角がはっきり丸い。</li>
+          <li>一辺の長さは「どこまで縮んだか」しか測っておらず、「角が鋭いか」は測れていない。<strong>何を知りたいかによって見るべき指標が変わる。</strong></li>
+          <li>重み 0.5 のとき一辺は 0.92459 で、これは crease なし（0.84918）と重み1.0（1.00000）の<strong>ちょうど中間</strong>（小数点以下5桁まで一致）。小数の重みは2つの結果を線形に混ぜている。ただし折れ角のほうは線形にならない。</li>
+          <li>crease SOP の Operation の既定は「Add To Existing Value」で、既にある値に足し込む。重みを決め打ちしたいなら「Set」にする。既定のまま何度も通すと重みが積み上がる。</li>
+          <li>crease SOP が書き込む属性名の既定は <code>creaseweight</code> で、subdivide はこの名前を自動で見る。名前を変えるなら subdivide 側の Creases にも同じ名前を指定する。</li>
+        </ul>
       </div>
     </article>
 

@@ -92,11 +92,12 @@ DONE = [
     {"no": "010", "anchor": "exp010", "thumb": "010_ui_network.png",
      "title": "for-each ループと VEX を比べる",
      "note": "3,969面で85.9倍の差。ただし置き換え可能とは限らず、点の共有が鍵だった"},
+    {"no": "011", "anchor": "exp011", "thumb": "011_w3_0.png",
+     "title": "crease で角を残す — どれだけの重みが要るのか",
+     "note": "分割回数と同じ重みで完全に角が残る。一辺だけ見ていると誤判定する"},
 ]
 
 PLANNED = [
-    {"no": "011", "title": "crease で角を保持する",
-     "note": "分割しても立方体らしさを残せるか"},
     {"no": "012", "title": "polyextrude と boolean", "note": "押し出しとブーリアン"},
 ]
 

@@ -1,0 +1,63 @@
+{
+  "iterations": 3,
+  "raw_side": 1.0,
+  "raw_angle": 90.0,
+  "rows": [
+    {
+      "weight": 0.0,
+      "points": 386,
+      "prims": 384,
+      "side": 0.84918,
+      "angle": 13.93,
+      "image": "011_w0_0.png"
+    },
+    {
+      "weight": 0.5,
+      "points": 386,
+      "prims": 384,
+      "side": 0.92459,
+      "angle": 21.45,
+      "image": "011_w0_5.png"
+    },
+    {
+      "weight": 1.0,
+      "points": 386,
+      "prims": 384,
+      "side": 1.0,
+      "angle": 28.07,
+      "image": "011_w1_0.png"
+    },
+    {
+      "weight": 2.0,
+      "points": 386,
+      "prims": 384,
+      "side": 1.0,
+      "angle": 53.13,
+      "image": "011_w2_0.png"
+    },
+    {
+      "weight": 3.0,
+      "points": 386,
+      "prims": 384,
+      "side": 1.0,
+      "angle": 90.0,
+      "image": "011_w3_0.png"
+    },
+    {
+      "weight": 4.0,
+      "points": 386,
+      "prims": 384,
+      "side": 1.0,
+      "angle": 90.0,
+      "image": "011_w4_0.png"
+    },
+    {
+      "weight": 10.0,
+      "points": 386,
+      "prims": 384,
+      "side": 1.0,
+      "angle": 90.0,
+      "image": "011_w10_0.png"
+    }
+  ]
+}
