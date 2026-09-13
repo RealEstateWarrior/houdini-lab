@@ -1,0 +1,93 @@
+{
+  "title": "実験020 — POP パーティクル（DOPネットワークの中身）",
+  "network": "/obj/pop_test/popnet",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "output",
+      "type": "output",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "particles",
+      "type": "popobject",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "solver",
+      "type": "popsolver::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "source",
+      "type": "popsource::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "soppath": "/obj/pop_test/emitter",
+        "impulseactiveate": 0.0,
+        "constantrate": 200.0
+      }
+    },
+    {
+      "name": "gravity",
+      "type": "popforce",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "forcey": -9.80665
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "particles",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 0
+    },
+    {
+      "from": "source",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 1
+    },
+    {
+      "from": "gravity",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 2
+    }
+  ]
+}

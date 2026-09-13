@@ -1502,6 +1502,119 @@
       </div>
     </article>
 
+
+    <!-- ===================== 020 ===================== -->
+    <article class="entry entry--current" id="exp020">
+      <div class="badge">020</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>POP パーティクル — 生まれる数と落ち方を式で確かめる</h2>
+        <p class="path">/obj/pop_test/popnet &nbsp;·&nbsp; 初めての DOP ネットワーク</p>
+
+        <div class="prose">
+          <p>
+            実験013で「<button class="term" data-term="パーティクル">パーティクル</button>は
+            <button class="term" data-term="SOP">SOP</button>に0種、
+            <button class="term" data-term="DOP">DOP</button>に67種」と分かってから保留にしていた題材。
+            SOPだけでは組めず、DOP<button class="term" data-term="ネットワーク">ネットワーク</button>を作る必要がある。
+          </p>
+          <p>
+            測ったのは2つ。<strong>毎秒200個と指定したら本当に毎秒200個生まれるのか。</strong>
+            そして<strong>初速0で落ちる粒は y = y₀ − ½gt² に従うのか。</strong>
+            1つ目はぴたりと合い、2つ目は合わなかった。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="020_pop.gif" alt="上の面から粒が生まれ続け、下へ落ちていくアニメーション"></div>
+            <figcaption>毎秒200個で生まれ続け、重力で落ちる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="020_graph.png" alt="popobject、popsource、popforce が popsolver につながる接続図"></div>
+            <figcaption>組んだネットワーク。入れ物を入力1、部品を入力2以降へ。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">生まれる数 — 毎秒200個と指定したとき</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>経過秒</th><th>粒の数</th><th>式の予測</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">0.1667</td><td class="num">44</td><td class="num">33.33</td><td class="num">+10.67</td></tr>
+              <tr><td class="num">20</td><td class="num">0.7917</td><td class="num">169</td><td class="num">158.33</td><td class="num">+10.67</td></tr>
+              <tr><td class="num">40</td><td class="num">1.6250</td><td class="num">336</td><td class="num">325.00</td><td class="num">+11.00</td></tr>
+              <tr><td class="num">60</td><td class="num">2.4583</td><td class="num">501</td><td class="num">491.67</td><td class="num">+9.33</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          直線に当てはめると <strong>毎秒 199.96 個</strong>。指定の200個に対してずれは 0.02%。
+          切片の +10 はフレーム1で一度に出る初期分。
+        </p>
+
+        <p class="label">落ち方 — 式とずれる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>齢(秒)</th><th>実測の高さ</th><th>式の予測</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">10</td><td class="num">0.4509</td><td class="num">2.23386</td><td class="num">2.00295</td><td class="num">+0.23091</td></tr>
+              <tr><td class="num">20</td><td class="num">0.8676</td><td class="num">−0.23483</td><td class="num">−0.69089</td><td class="num">+0.45606</td></tr>
+              <tr><td class="num">40</td><td class="num">1.7009</td><td class="num">−10.27984</td><td class="num">−11.18619</td><td class="num">+0.90635</td></tr>
+              <tr><td class="num">60</td><td class="num">2.5343</td><td class="num">−27.13502</td><td class="num">−28.49169</td><td class="num">+1.35667</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">「時間の原点がずれている」と置き直すと一定になる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>齢</th><th>実際に落ちた時間</th><th>δ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">10</td><td class="num">0.4509</td><td class="num">0.39528</td><td class="num">0.05565</td></tr>
+              <tr><td class="num">20</td><td class="num">0.8676</td><td class="num">0.81223</td><td class="num">0.05537</td></tr>
+              <tr><td class="num">40</td><td class="num">1.7009</td><td class="num">1.64570</td><td class="num">0.05523</td></tr>
+              <tr><td class="num">60</td><td class="num">2.5343</td><td class="num">2.47908</td><td class="num hi">0.05519</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          6点すべてで 0.0552〜0.0557（幅 0.83%）。ばらばらなら置き方が間違い、一定なら正しい。
+        </p>
+
+        <p class="label">δ の正体 — 計算の刻み</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>substeps</th><th>δ の平均</th><th>1刻みの長さ(秒)</th><th>δ / 1刻み</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.05532</td><td class="num">0.041667</td><td class="num">1.328</td></tr>
+              <tr><td class="num">2</td><td class="num">0.02761</td><td class="num">0.020833</td><td class="num">1.325</td></tr>
+              <tr><td class="num">4</td><td class="num">0.01379</td><td class="num">0.010417</td><td class="num">1.324</td></tr>
+              <tr><td class="num">8</td><td class="num">0.00669</td><td class="num">0.005208</td><td class="num hi">1.284</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>生まれる数は指定どおりだった。</strong>毎秒 199.96 個（指定200、ずれ 0.02%）。</li>
+          <li><strong>落ち方は式と合わなかった。</strong>実測はいつも「まだ落ちていない」側にずれ、差は齢が進むほど大きくなる。</li>
+          <li>ずれ方の形から、速度の違いではなく<strong>時間の原点のずれ</strong>を疑った。δ を逆算すると6点すべてで 0.0552〜0.0557 と一定だった。</li>
+          <li><strong>δ の正体は計算の刻みだった。</strong>substeps を倍にすると δ は半分になり、1刻みの長さで割ると 1.28〜1.33 でほぼ一定。粒は齢より<span class="hi">約1.3刻みぶん遅れて</span>落ち始めている。</li>
+          <li>これは物理が間違っているのではなく、時間を刻んで計算していることから来るずれ。<strong>刻みを細かくすれば小さくなる。</strong>substeps 8 で 0.0067秒（0.16フレーム相当）まで下がる。</li>
+          <li>実用面では、<strong>粒の位置を式で予測したいときは substeps を上げる</strong>。見た目だけなら既定で問題ない。</li>
+          <li>ツマミの確認もした。力を0にすると最も古い粒は60フレーム経っても 3.00000 のまま。重力ありでは −27.13502 まで落ちている。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          <strong>止まったのは結果の取り出し側だった。</strong>
+          <button class="term" data-term="シミュレーション">シミュレーション</button>は最初から動いていたのに、SOP側では0点と出ていた。
+          原因は <code>dopimport</code> の <code>objpattern</code>（読み込む対象の名前）が空だったこと。
+          <code>*</code> を入れたら読めた。エラーも警告も出ないので気づきにくい。
+        </p>
+      </div>
+    </article>
+
   </div>
 
   <footer>
