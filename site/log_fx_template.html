@@ -374,6 +374,12 @@
         <h2>Karma でのレンダリング — ノイズはサンプル数で本当に減るのか</h2>
         <p class="path">/obj/pyro_test &nbsp;·&nbsp; 実験016の煙を、2つのレンダラーで描き比べる</p>
 
+        <p class="callout callout--note">
+          <strong>→ ここで使った煙は、実は動いていなかった（<a href="#exp021">実験021</a>で判明）。</strong>
+          そこで <a href="#exp024">実験024</a>で、立ち上る煙に入れ替えて測り直した。
+          結果はほとんど同じで、ここの結論はそのまま成り立つ。
+        </p>
+
         <div class="prose">
           <p>
             実験016で煙を描いたとき、<button class="term" data-term="ハードウェアレンダラー">ハードウェアレンダラー</button>では濃淡が分からないと書いた。
@@ -1044,6 +1050,76 @@
           <strong>「測ろうとしたものが存在しない」と気づけたのは、場の一覧を毎回出していたから。</strong>
           021で「確かめきれていない」と書いて残した見立ても、2実験あとで回収できた。
           見立てを断定せずに残しておくと、あとで潰せる。
+        </p>
+      </div>
+    </article>
+
+
+    <!-- ===================== 024 ===================== -->
+    <article class="entry entry--current" id="exp024">
+      <div class="badge">024</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>動く煙で撮り直す — 018の結論は変わらなかった</h2>
+        <p class="path">/obj/smoke &nbsp;·&nbsp; 題材を入れ替えて、同じ指標で測り直す</p>
+
+        <div class="prose">
+          <p>
+            実験018で2つのレンダラーを比べたとき、題材にしていた煙は動いていなかった。
+            それが分かったのは実験021。<strong>一様な球が濃くなるだけの絵で比べていた</strong>ことになる。
+          </p>
+          <p>
+            題材が悪いと結論も疑わしい。021で立ち上るようにした煙に入れ替えて、
+            同じ指標で測り直す。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="024_compare.png" alt="左がOpenGLで一様に暗い煙、右がKarmaで頭の内側に陰影のある煙"></div>
+            <figcaption>同じカメラ・同じ露出。<strong>左は一様に暗く、右は頭の内側に陰影が出ている。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">動く煙を2つのレンダラーで</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>レンダラー</th><th>時間</th><th>煙の画素</th><th>階調</th><th>平均の明るさ</th><th>ばらつき</th><th>最も暗い</th></tr></thead>
+            <tbody>
+              <tr><td>OpenGL ROP</td><td class="num">0.73 秒</td><td class="num">33,003</td><td class="num">233 段</td><td class="num">129.9</td><td class="num">72.99</td><td class="num">17</td></tr>
+              <tr><td>Karma 256サンプル</td><td class="num">4.30 秒</td><td class="num">25,726</td><td class="num">200 段</td><td class="num">141.5</td><td class="num">49.63</td><td class="num hi">49</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">実験018（動かない煙）との比較</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>指標</th><th>018 OpenGL</th><th>018 Karma</th><th>024 OpenGL</th><th>024 Karma</th></tr></thead>
+            <tbody>
+              <tr><td>階調</td><td class="num">235</td><td class="num">200</td><td class="num">233</td><td class="num">200</td></tr>
+              <tr><td>ばらつき</td><td class="num">86.16</td><td class="num">52.83</td><td class="num">72.99</td><td class="num">49.63</td></tr>
+              <tr><td>最も暗い画素</td><td class="num">15</td><td class="num">50</td><td class="num">17</td><td class="num">49</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          題材を入れ替えても、どの指標もほとんど動かない。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>018の結論は変わらなかった。</strong>題材を「動かない球」から「立ち上る煙」に入れ替えても、階調は 235→233 と 200→200、最も暗い画素は 15→17 と 50→49。どれも誤差の範囲。</li>
+          <li>これは<strong>2つのレンダラーの違いが、題材の複雑さに左右されない</strong>ことを意味する。光が中を通るかどうかという違いは、形が単純でも複雑でも同じように出る。</li>
+          <li><strong>疑って測り直したこと自体には意味がある。</strong>018の結論は「悪い題材で出した結論かもしれない」という弱点を抱えていた。測り直したことでその弱点が消えた。<span class="hi">結果が変わらなくても、確かめる価値はある。</span></li>
+          <li>見た目の差ははっきりしている。OpenGL は煙の頭も柱も一様に暗い。<button class="term" data-term="Karma">Karma</button> は頭の内側に陰影が出て、丸みが分かる。<strong>数字ではこれを「最も暗い画素」が捉えている</strong>（17 対 49）。OpenGL は濃いところをほぼ黒まで落とすが、Karma は光が抜けてくるぶん薄く留まる。</li>
+          <li>速さの差も018と同じ傾向。<strong>約5.9倍</strong>（018では5.1倍）。確認用は OpenGL、見せる絵は Karma、という使い分けはそのままでよい。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          今回の煙は実験021の組み方をそのまま使った。
+          <code>temperature</code> を供給しないと煙は動かない。
+          この1行がないと、また「動かない球」を撮ることになる。
         </p>
       </div>
     </article>

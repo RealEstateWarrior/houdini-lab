@@ -190,15 +190,20 @@ DONE = [
      "shots": ["023_compare.png", "023_fire.gif"],
      "title": "炎を出す — shredding が効かなかった理由",
      "note": "炎があるときだけ効く。炎の合計が40%減り、ばらつきが9%増える"},
+    {"no": "024", "anchor": "exp024", "tags": ["レンダリング", "煙", "比較"],
+     "log": "log_fx", "hip": "024_karma.hipnc", "thumb": "024_compare.png",
+     "shots": ["024_compare.png"],
+     "title": "動く煙で撮り直す — 018の結論は変わらなかった",
+     "note": "題材を入れ替えても指標はほぼ同じ。確かめた価値はあった"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
+    {"no": "026", "title": "炎に色を付ける",
+     "note": "023の炎は白黒でしか描けていない"},
     {"no": "025", "title": "シミュレーションのキャッシュ",
      "note": "同じ計算を何度も回している。file cache で中間結果を保存する"},
-    {"no": "024", "title": "動く煙で Karma を撮り直す",
-     "note": "018は動かない煙で比べていた。題材を入れ替えて確かめ直す"},
 ]
 
 PAGES = [
