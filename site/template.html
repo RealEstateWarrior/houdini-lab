@@ -17,7 +17,7 @@
       1テーマごとにPDFをまとめ、Gemini Notebook「Houdini 操作ガイド」のソースとして差し替えている。
     </p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>9 / 16</dd></div>
+      <div><dt>実験</dt><dd>10 / 16</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -716,6 +716,84 @@
           計測の型として、今後は<strong>「結果が変わること」と「時間が変わること」の両方を確認する</strong>。
           今回は結果の最大yが 0.49999 → 0.32169 と変わったことが、確かに別の計算が走った証拠になった。
           時間だけを見ていたら二度の失敗に気づけなかった。
+        </p>
+      </div>
+    </article>
+
+    <!-- ===================== 010 ===================== -->
+    <article class="entry entry--current" id="exp010">
+      <div class="badge">010</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>for-each ループと VEX — 同じことをやって比べる</h2>
+        <p class="path">/obj/foreach_vs_vex &nbsp;·&nbsp; 49〜3,969面で比較</p>
+
+        <div class="prose">
+          <p>
+            「まとめて処理できないときは <button class="term" data-term="for-each">for-each</button>」とよく言われるが、
+            <button class="term" data-term="VEX">VEX</button> でも書ける場面でどれだけ差が出るのかは測らないと分からない。
+            面ごとに違う高さへ動かすという同じ処理を2通りで作って比べた。
+          </p>
+          <p>
+            ところが<strong>最初は結果が一致しなかった</strong>。その理由を追いかけた結果、
+            この2つは「速い遅い」で選ぶものではなく、そもそも別のことをしているのだと分かった。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="010_ui_network.png" alt="HoudiniのネットワークエディタにBlock BeginとBlock Endで挟まれたfor-eachの構造が表示されている"></div>
+            <figcaption>for-each の組み方。Block Begin（1個ずつ取り出す）と メタデータ用をもう1つ置き、<br>処理を挟んで Block End で合流させる。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">同じ処理にかかる時間（3回の中央値）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分割数</th><th>プリミティブ</th><th>for-each</th><th>VEX</th><th>何倍</th></tr></thead>
+            <tbody>
+              <tr><td class="num">8</td><td class="num">49</td><td class="num">11.79 ms</td><td class="num">1.360 ms</td><td class="num">8.7倍</td></tr>
+              <tr><td class="num">16</td><td class="num">225</td><td class="num">21.08 ms</td><td class="num">1.342 ms</td><td class="num">15.7倍</td></tr>
+              <tr><td class="num">32</td><td class="num">961</td><td class="num">53.55 ms</td><td class="num">1.414 ms</td><td class="num">37.9倍</td></tr>
+              <tr><td class="num">64</td><td class="num">3,969</td><td class="num">191.87 ms</td><td class="num">2.233 ms</td><td class="num hi">85.9倍</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">結果が一致しなかった理由を3段階で絞り込む</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th><th>分かったこと</th></tr></thead>
+            <tbody>
+              <tr><td>出力の点数を比べる</td><td>元 64点 → for-each 196点 / VEX 64点</td><td class="wrap">for-each は面を1枚ずつ取り出すので、隣と共有していた点が複製される</td></tr>
+              <tr><td>VEX を3回走らせる</td><td>3回とも完全に同じ</td><td class="wrap">同じ点への書き込みは競合するが、順序は決まっていて再現する</td></tr>
+              <tr><td>点の共有をほどいて比べる</td><td class="hi">完全に一致</td><td class="wrap">食い違いの原因は点の共有だけだった</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li>Block End の <code>Template Path</code> が空だと「Missing template geometry」で止まる。何を何回繰り返すかはここから決まる。</li>
+          <li>何回目かを知るには、メタデータ用の Block Begin をもう1つ置き、ディテールアトリビュート <code>iteration</code> を読む。<code>numiterations</code> で総回数も取れる。</li>
+          <li><strong>取り出した中では <code>@primnum</code> が常に 0 になる。</strong> 1個だけを切り出した状態で処理しているため。「何番目の面か」を使いたいならメタデータを読むしかない。</li>
+          <li><strong><code>detail()</code> のパスには <code>op:</code> が要る。</strong> <code>detail("../メタデータ", "iteration", 0)</code> と書くとファイルパスとして扱われ、<strong>エラーも警告も出さずに 0 を返す</strong>。ループが動いていないように見えるので原因が分かりにくい。</li>
+          <li>for-each は面の数に比例して遅くなる（1面あたり約0.05ミリ秒）。VEX はほとんど変わらず、1.3〜2.2ミリ秒は実験009で測った固定費そのもの。差は 49面で 8.7倍、3,969面で <strong>85.9倍</strong>。</li>
+          <li><strong>ただし単純に置き換えられるものではない。</strong> for-each が点の共有をほどくのは副作用ではなく、面ごとに独立して動かすために必要なこと。共有したままでは隣り合う面が同じ点を取り合う。</li>
+          <li>その取り合いは<strong>毎回同じ結果になった</strong>（3回とも一致）。最初は並列処理による非決定性を疑ったが、それは外れた。</li>
+          <li>点の共有をほどいてから（<code>facet</code> の Unique Points で 64点 → 196点）比べると、2つの結果は<strong>完全に一致した</strong>。</li>
+        </ul>
+
+        <p class="callout">
+          <strong>実用的な結論</strong>: 面ごとに独立した変形をしたいなら、まず点の共有をほどく。
+          ほどいてしまえば VEX で書ける場面が増え、数十倍速い。
+          for-each が要るのは、1回分の処理が VEX 1つでは書けないほど複雑なとき。
+        </p>
+
+        <p class="callout callout--note">
+          測り方の反省。最初は面の中心を (x, y, z) でソートして比べようとしたが、
+          <strong>比べたい量である y をソートの鍵に含めてしまった</strong>ため、対応がずれて必ず食い違った。
+          水平位置 (x, z) を鍵にして y を値にしたら正しく比較できた。比べたい量は鍵にしない。
         </p>
       </div>
     </article>

@@ -1,0 +1,246 @@
+{
+  "title": "for-each と VEX の比較",
+  "network": "/obj/foreach_vs_vex",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "check_grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 8,
+        "cols": 8
+      }
+    },
+    {
+      "name": "check_fe_begin",
+      "type": "block_begin",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 1,
+        "blockpath": "../check_fe_end"
+      }
+    },
+    {
+      "name": "check_fe_meta",
+      "type": "block_begin",
+      "pos": [
+        13.696,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 2,
+        "blockpath": "../check_fe_end"
+      }
+    },
+    {
+      "name": "check_fe_inner",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "@P.y += detail(\"op:../check_fe_meta\", \"iteration\", 0) * 0.001;"
+      }
+    },
+    {
+      "name": "check_fe_end",
+      "type": "block_end",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "itermethod": 1,
+        "method": 1,
+        "class": 0,
+        "blockpath": "../check_fe_begin",
+        "templatepath": "../check_fe_begin"
+      }
+    },
+    {
+      "name": "check_vex",
+      "type": "attribwrangle",
+      "pos": [
+        3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "int pts[] = primpoints(0, @primnum);\nforeach (int pt; pts) {\n    vector p = point(0, \"P\", pt);\n    p.y += @primnum * ..."
+      }
+    },
+    {
+      "name": "make_unique",
+      "type": "facet",
+      "pos": [
+        6.495,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "unique": 1
+      }
+    },
+    {
+      "name": "u_fe_begin",
+      "type": "block_begin",
+      "pos": [
+        6.495,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 1,
+        "blockpath": "../u_fe_end"
+      }
+    },
+    {
+      "name": "u_fe_meta",
+      "type": "block_begin",
+      "pos": [
+        13.696,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 2,
+        "blockpath": "../u_fe_end"
+      }
+    },
+    {
+      "name": "u_fe_inner",
+      "type": "attribwrangle",
+      "pos": [
+        6.495,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "@P.y += detail(\"op:../u_fe_meta\", \"iteration\", 0) * 0.001;"
+      }
+    },
+    {
+      "name": "u_fe_end",
+      "type": "block_end",
+      "pos": [
+        6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "itermethod": 1,
+        "method": 1,
+        "class": 0,
+        "blockpath": "../u_fe_begin",
+        "templatepath": "../u_fe_begin"
+      }
+    },
+    {
+      "name": "u_vex",
+      "type": "attribwrangle",
+      "pos": [
+        9.743,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "int pts[] = primpoints(0, @primnum);\nforeach (int pt; pts) {\n    vector p = point(0, \"P\", pt);\n    p.y += @primnum * ..."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "check_grid",
+      "from_output": 0,
+      "to": "check_fe_begin",
+      "to_input": 0
+    },
+    {
+      "from": "check_fe_begin",
+      "from_output": 0,
+      "to": "check_fe_inner",
+      "to_input": 0
+    },
+    {
+      "from": "check_fe_inner",
+      "from_output": 0,
+      "to": "check_fe_end",
+      "to_input": 0
+    },
+    {
+      "from": "check_grid",
+      "from_output": 0,
+      "to": "check_vex",
+      "to_input": 0
+    },
+    {
+      "from": "check_grid",
+      "from_output": 0,
+      "to": "make_unique",
+      "to_input": 0
+    },
+    {
+      "from": "make_unique",
+      "from_output": 0,
+      "to": "u_fe_begin",
+      "to_input": 0
+    },
+    {
+      "from": "u_fe_begin",
+      "from_output": 0,
+      "to": "u_fe_inner",
+      "to_input": 0
+    },
+    {
+      "from": "u_fe_inner",
+      "from_output": 0,
+      "to": "u_fe_end",
+      "to_input": 0
+    },
+    {
+      "from": "make_unique",
+      "from_output": 0,
+      "to": "u_vex",
+      "to_input": 0
+    }
+  ]
+}

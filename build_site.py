@@ -89,11 +89,12 @@ DONE = [
     {"no": "009", "anchor": "exp009", "thumb": "009_wave.png",
      "title": "attribute wrangle で VEX を書く",
      "note": "実行対象でアトリビュートの置き場所が変わる。処理時間の計測は3回目で本物になった"},
+    {"no": "010", "anchor": "exp010", "thumb": "010_ui_network.png",
+     "title": "for-each ループと VEX を比べる",
+     "note": "3,969面で85.9倍の差。ただし置き換え可能とは限らず、点の共有が鍵だった"},
 ]
 
 PLANNED = [
-    {"no": "010", "title": "for-each ループ",
-     "note": "プリミティブ単位の繰り返し。VEXとの使い分け"},
     {"no": "011", "title": "crease で角を保持する",
      "note": "分割しても立方体らしさを残せるか"},
     {"no": "012", "title": "polyextrude と boolean", "note": "押し出しとブーリアン"},
