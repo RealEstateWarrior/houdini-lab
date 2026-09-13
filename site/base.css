@@ -469,6 +469,11 @@ h2 {
 .modal {
   position: fixed;
   inset: 0;
+  /* iOS Safari の 100vh はアドレスバーを含まない「大きいほうの高さ」なので、
+     これだけだと画面より縦に大きくなり、上下がはみ出して切れる。
+     dvh（いま実際に見えている高さ）を後から上書きして使う。 */
+  height: 100%;
+  height: 100dvh;
   z-index: 60;
   display: grid;
   place-items: center;
@@ -485,7 +490,8 @@ h2 {
   background: var(--ground);
   border-radius: var(--radius);
   width: min(760px, 100%);
-  max-height: min(86vh, 900px);
+  max-height: min(84vh, 900px);
+  max-height: min(84dvh, 900px);
   box-shadow: var(--shadow-lift);
   position: relative;
   display: flex;
@@ -493,7 +499,11 @@ h2 {
   overflow: hidden;
 }
 /* 大きく開くポップアップ。手順のように長いものを入れる */
-.modal--wide .modal-card { width: min(1080px, 100%); max-height: min(92vh, 1100px); }
+.modal--wide .modal-card {
+  width: min(1080px, 100%);
+  max-height: min(88vh, 1100px);
+  max-height: min(88dvh, 1100px);
+}
 
 /* ×はカードの右上に置きっぱなしにする。
    スクロールするのは中身（.modal-body）なので、ボタンは動かない。 */
@@ -1107,10 +1117,15 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .modal-body > .guide { margin-top: 0; }
 .modal--wide .modal-body { padding: 14px 30px 34px; }
 @media (max-width: 720px) {
-  .modal { padding: 8px; }
-  .modal-body { padding: 22px 18px 26px; }
-  .modal--wide .modal-body { padding: 14px 16px 28px; }
-  .modal-card, .modal--wide .modal-card { max-height: calc(100vh - 16px); }
+  /* 上下に背景を残して「これはポップアップだ」と分かるようにする。
+     こうしておけば、×が画面の外へ出ることも起きない。 */
+  .modal { padding: 14px; }
+  .modal-body { padding: 22px 16px 24px; }
+  .modal--wide .modal-body { padding: 14px 15px 26px; }
+  .modal-card, .modal--wide .modal-card {
+    max-height: 80vh;
+    max-height: 80dvh;
+  }
   /* ×に重なる位置の図版だけ、上に少し隙間を作る */
   .modal--wide .guide-hero { margin-top: 34px; }
 }
