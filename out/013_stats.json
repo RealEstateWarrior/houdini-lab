@@ -1,0 +1,139 @@
+{
+  "wave": [
+    {
+      "frame": 1,
+      "max_y": 1.49837
+    },
+    {
+      "frame": 10,
+      "max_y": 1.49865
+    },
+    {
+      "frame": 20,
+      "max_y": 1.4989
+    },
+    {
+      "frame": 30,
+      "max_y": 1.49736
+    }
+  ],
+  "fall": [
+    {
+      "frame": 1,
+      "seconds": 0.0,
+      "measured": 20.0,
+      "ideal": 20.0,
+      "diff": 0.0
+    },
+    {
+      "frame": 10,
+      "seconds": 0.375,
+      "measured": 19.31094,
+      "ideal": 19.31094,
+      "diff": 4e-07
+    },
+    {
+      "frame": 20,
+      "seconds": 0.7917,
+      "measured": 16.92899,
+      "ideal": 16.92899,
+      "diff": 2e-07
+    },
+    {
+      "frame": 30,
+      "seconds": 1.2083,
+      "measured": 12.84566,
+      "ideal": 12.84566,
+      "diff": -5e-07
+    },
+    {
+      "frame": 40,
+      "seconds": 1.625,
+      "measured": 7.06094,
+      "ideal": 7.06094,
+      "diff": -6e-07
+    }
+  ],
+  "frames": 20,
+  "render_seconds": 1.18,
+  "bbox_all": 2.99783,
+  "bbox_one": 2.99624,
+  "landscape": [
+    {
+      "label": "パーティクル",
+      "keyword": "pop",
+      "sop": 0,
+      "dop": 67,
+      "sop_examples": [],
+      "dop_examples": [
+        "popadvectbyfilaments",
+        "popadvectbyvolumes",
+        "popattract"
+      ]
+    },
+    {
+      "label": "剛体",
+      "keyword": "rbd",
+      "sop": 47,
+      "dop": 21,
+      "sop_examples": [
+        "Sop/rbdmaterialfracture::2.0::rbdconcretefracture::2.0",
+        "Sop/rbdmaterialfracture::2.0::rbdglassfracture::2.0",
+        "Sop/rbdmaterialfracture::rbdconcretefracture"
+      ],
+      "dop_examples": [
+        "bulletrbdsolver",
+        "rbdangularconstraint",
+        "rbdangularspringconstraint"
+      ]
+    },
+    {
+      "label": "布",
+      "keyword": "vellum",
+      "sop": 22,
+      "dop": 7,
+      "sop_examples": [
+        "agentvellumunpack",
+        "muscleconstraintpropertiesvellum",
+        "musclesolvervellum"
+      ],
+      "dop_examples": [
+        "muscleupdatevellum",
+        "vellumconstraintproperty",
+        "vellumconstraints"
+      ]
+    },
+    {
+      "label": "煙・炎",
+      "keyword": "pyro",
+      "sop": 14,
+      "dop": 3,
+      "sop_examples": [
+        "pyrobakevolume",
+        "pyroburstsource",
+        "pyropostprocess"
+      ],
+      "dop_examples": [
+        "pyrosolver",
+        "pyrosolver::2.0",
+        "pyrosolver_sparse"
+      ]
+    },
+    {
+      "label": "液体",
+      "keyword": "flip",
+      "sop": 8,
+      "dop": 4,
+      "sop_examples": [
+        "edgeflip",
+        "flipboundary",
+        "flipcollide"
+      ],
+      "dop_examples": [
+        "flipconfigureobject",
+        "flipobject",
+        "flipsolver"
+      ]
+    }
+  ]
+}

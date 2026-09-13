@@ -1,0 +1,78 @@
+{
+  "title": "時間軸への対応",
+  "network": "/obj/time_axis",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "wave_grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "wave",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "snippet": "@P.y = sin(@P.x * 0.8 + @Frame * 0.2) * cos(@P.z * 0.8) * 1.5;"
+      }
+    },
+    {
+      "name": "falling_point",
+      "type": "add",
+      "pos": [
+        3.248,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "free_fall",
+      "type": "attribwrangle",
+      "pos": [
+        3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "float t = (@Frame - 1) / 24.0;\n@P.y = 20.0 - 0.5 * 9.8 * t * t;"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "wave_grid",
+      "from_output": 0,
+      "to": "wave",
+      "to_input": 0
+    },
+    {
+      "from": "falling_point",
+      "from_output": 0,
+      "to": "free_fall",
+      "to_input": 0
+    }
+  ]
+}

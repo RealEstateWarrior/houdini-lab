@@ -219,6 +219,60 @@ def render_preview(sop_path, out_png, res=(960, 540), direction=(1.0, 0.62, 1.15
     return out_png
 
 
+def bbox_over_frames(sop_path, frames):
+    """フレーム範囲全体を覆うバウンディングボックス。
+
+    シミュレーションは時間とともに広がるので、1フレーム目だけで枠を決めると
+    途中で画面からはみ出す。全フレームを通した範囲で一度だけ枠を決める。"""
+    node = hou.node(sop_path)
+    if node is None:
+        raise ValueError(f"no such node: {sop_path}")
+
+    original = hou.frame()
+    box = None
+    try:
+        for frame in frames:
+            hou.setFrame(frame)
+            current = node.geometry().boundingBox()
+            if current.isValid():
+                if box is None:
+                    box = current
+                else:
+                    box.enlargeToContain(current)
+    finally:
+        hou.setFrame(original)
+    return box
+
+
+def render_sequence(sop_path, out_dir, prefix, frames, res=(480, 360),
+                    direction=(1.0, 0.62, 1.15), shading="smoothwire",
+                    frame_bbox=None):
+    """フレームごとに1枚ずつ書き出し、ファイルパスの一覧を返す。
+
+    カメラは全フレームで固定する。フレームごとに枠を合わせ直すと、
+    動いているのか大きさが変わっているのか画から判断できなくなる。"""
+    node = hou.node(sop_path)
+    if node is None:
+        raise ValueError(f"no such node: {sop_path}")
+    os.makedirs(out_dir, exist_ok=True)
+
+    if frame_bbox is None:
+        frame_bbox = bbox_over_frames(sop_path, frames)
+
+    original = hou.frame()
+    paths = []
+    try:
+        for frame in frames:
+            hou.setFrame(frame)
+            path = os.path.join(out_dir, f"{prefix}_{int(frame):04d}.png")
+            render_preview(sop_path, path, res=res, direction=direction,
+                           shading=shading, frame_bbox=frame_bbox)
+            paths.append(path)
+    finally:
+        hou.setFrame(original)
+    return paths
+
+
 def save_hip(path):
     """Apprentice can only write .hipnc."""
     os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)

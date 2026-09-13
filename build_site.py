@@ -98,19 +98,20 @@ DONE = [
     {"no": "012", "anchor": "exp012", "thumb": "012_bool_subtract.png",
      "title": "polyextrude と boolean — 硬い形を作る",
      "note": "押し出しは寸法が指定どおり。boolean は体積の関係式で正しさを検算できる"},
+    {"no": "013", "anchor": "exp013", "thumb": "013_sheet.png",
+     "title": "時間軸への対応 — フレームを進めて記録する",
+     "note": "連番・コンタクトシート・GIF。パーティクルはSOPに0種でDOPに67種と判明"},
 ]
 
-PLANNED = [
-    {"no": "013", "title": "時間軸への対応（ツール側）",
-     "note": "複数フレームの書き出しとキャッシュ。エフェクトに入る前に必要"},
-]
+PLANNED = []
 
 PLANNED_FX = [
-    {"no": "014", "title": "POP パーティクル基本", "note": "source と solver。重力と寿命"},
-    {"no": "015", "title": "RBD 破壊",
-     "note": "boolean の Shatter で作った破片から剛体シミュレーション"},
-    {"no": "016", "title": "Vellum クロス", "note": "布のシミュレーション"},
-    {"no": "017", "title": "Pyro と FLIP", "note": "ボリュームと液体"},
+    {"no": "014", "title": "RBD 破壊",
+     "note": "SOPに47種あり入口として易しい。boolean の Shatter で作った破片を落とす"},
+    {"no": "015", "title": "Vellum クロス", "note": "SOPに22種。布のシミュレーション"},
+    {"no": "016", "title": "POP パーティクル",
+     "note": "SOPには0種でDOPに67種。DOPネットワークを組む必要がある"},
+    {"no": "017", "title": "Pyro と FLIP", "note": "煙・炎と液体"},
 ]
 
 PAGES = [
@@ -300,7 +301,7 @@ def copy_images():
         if not page_html.endswith(".html"):
             continue
         with open(os.path.join(SITE, page_html), encoding="utf-8") as fp:
-            names |= set(re.findall(r'<img src="([^"/]+\.png)"', fp.read()))
+            names |= set(re.findall(r'<img src="([^"/]+\.(?:png|gif))"', fp.read()))
 
     os.makedirs(DOCS, exist_ok=True)
     copied = 0
