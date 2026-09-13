@@ -1,0 +1,54 @@
+{
+  "title": "実験029 — 粒に力をかける",
+  "network": "/obj/forces",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "emitter",
+      "type": "grid",
+      "pos": [
+        -2.259,
+        -0.452
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "ty": 3.0,
+        "rows": 12,
+        "cols": 12
+      }
+    },
+    {
+      "name": "popnet",
+      "type": "dopnet",
+      "pos": [
+        -2.259,
+        0.678
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "import",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "doppath": "/obj/forces/popnet"
+      }
+    }
+  ],
+  "edges": []
+}

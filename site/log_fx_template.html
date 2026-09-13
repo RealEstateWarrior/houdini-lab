@@ -1577,6 +1577,146 @@ cache, info = hou_tools.cache_sim(solver.path(), CACHE_DIR, "smoke", FRAMES)</co
     </article>
 
 
+
+    <!-- ===================== 029 ===================== -->
+    <article class="entry entry--current" id="exp029">
+      <div class="badge">029</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>粒に力をかける — 風は「押す」のではなく「追いつかせる」</h2>
+        <p class="path">/obj/forces &nbsp;·&nbsp; 見立てが外れ、測り直して式を決めた</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp020">実験020</a>では<button class="term" data-term="パーティクル">粒</button>を落としただけだった。今回は横から力をかける。
+            <button class="term" data-term="POP">POP</button> の力の<button class="term" data-term="ノード">ノード</button>は67種あるが、入口になるのは2つ。
+          </p>
+          <p>
+            <code>popforce</code> は決まった向きに<strong>押し続ける</strong>。重力と同じ考え方。
+            <code>popwind</code> は指定した速さに<strong>近づけていく</strong>。空気抵抗の考え方。
+            名前は似ているが中身は違うはずである。
+          </p>
+          <p>
+            <strong>最初の見立ては外れた。</strong>空気抵抗といえば速さに比例する抵抗だと思い、
+            <code>v(t) = 風速 × (1 − e^(−a t))</code> を予測した。
+            この式なら <code>t = 1/a</code> のとき必ず 63.2% になる。
+            測ったら <span class="hi">75.00%</span>。しかも <code>airresist</code> を 0.5・1・2・4 と変えても
+            <strong>75.00% のまま動かない</strong>。式が違う。
+          </p>
+        </div>
+
+        <p class="label">1. popforce と popwind。同じ「3」を与えても別物</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="029_force.png" alt="粒の集まりが画面の右端まで流された状態"></div>
+            <figcaption><code>popforce</code>。x = <strong>13.30</strong> まで進んだ。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="029_wind.png" alt="同じ構図で、粒の集まりが画面の中ほどで止まっている"></div>
+            <figcaption><code>popwind</code>。同じカメラで x = <strong>6.62</strong>。半分しか進まない。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>経過秒</th><th>popforce の速さ</th><th>速さ÷時間</th><th>popwind の速さ</th><th>風速に対する割合</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0417</td><td class="num">0.1250</td><td class="num hi">3.0000</td><td class="num">0.3333</td><td class="num">11.11%</td></tr>
+              <tr><td class="num">0.1667</td><td class="num">0.5000</td><td class="num hi">3.0000</td><td class="num">1.0000</td><td class="num">33.33%</td></tr>
+              <tr><td class="num">0.3750</td><td class="num">1.1250</td><td class="num hi">3.0000</td><td class="num">1.5882</td><td class="num">52.94%</td></tr>
+              <tr><td class="num">0.6667</td><td class="num">2.0000</td><td class="num hi">3.0000</td><td class="num">2.0000</td><td class="num">66.67%</td></tr>
+              <tr><td class="num">1.0000</td><td class="num">3.0000</td><td class="num hi">3.0000</td><td class="num">2.2500</td><td class="num">75.00%</td></tr>
+              <tr><td class="num">2.0000</td><td class="num">6.0000</td><td class="num hi">3.0000</td><td class="num">2.5714</td><td class="num">85.71%</td></tr>
+              <tr><td class="num">2.9583</td><td class="num">8.8750</td><td class="num hi">3.0000</td><td class="num">2.6962</td><td class="num hi">89.87%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          popforce は<strong>速さ÷時間が9点すべてで 3.0000</strong>。入れた数字がそのまま加速度になる。
+          popwind は風速 3 を決して超えない。
+        </p>
+
+        <p class="label">2. 風速を変えて、式を決める</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>風速</th><th>経過秒</th><th>実測</th><th>線形抵抗</th><th>その差</th><th>二乗抵抗</th><th>その差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num">0.3750</td><td class="num">0.2727</td><td class="num">0.3127</td><td class="num muted">−0.0400</td><td class="num">0.2727</td><td class="num hi">0.0000</td></tr>
+              <tr><td class="num">1.0</td><td class="num">1.0000</td><td class="num">0.5000</td><td class="num">0.6321</td><td class="num muted">−0.1321</td><td class="num">0.5000</td><td class="num hi">0.0000</td></tr>
+              <tr><td class="num">1.0</td><td class="num">2.0000</td><td class="num">0.6667</td><td class="num">0.8647</td><td class="num muted">−0.1980</td><td class="num">0.6667</td><td class="num hi">0.0000</td></tr>
+              <tr><td class="num">3.0</td><td class="num">0.1667</td><td class="num">1.0000</td><td class="num">0.4606</td><td class="num muted">+0.5394</td><td class="num">1.0000</td><td class="num hi">0.0000</td></tr>
+              <tr><td class="num">3.0</td><td class="num">1.0000</td><td class="num">2.2500</td><td class="num">1.8964</td><td class="num muted">+0.3536</td><td class="num">2.2500</td><td class="num hi">0.0000</td></tr>
+              <tr><td class="num">6.0</td><td class="num">0.3750</td><td class="num">4.1538</td><td class="num">1.8763</td><td class="num muted">+2.2776</td><td class="num">4.1538</td><td class="num hi">0.0000</td></tr>
+              <tr><td class="num">6.0</td><td class="num">2.0000</td><td class="num">5.5385</td><td class="num">5.1880</td><td class="num muted">+0.3505</td><td class="num">5.5385</td><td class="num hi">0.0000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <pre><code>// 外れた見立て（線形抵抗）
+dv/dt = airresist × (風速 − v)
+v(t)  = 風速 × (1 − e^(−airresist·t))     最大のずれ 2.28
+
+// 合った式（二乗抵抗）
+dv/dt = airresist × (風速 − v)²
+v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003</code></pre>
+
+        <p class="label">3. 式の検算。t = 1/(airresist × 風速) でちょうど 50%</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>airresist</th><th>風速</th><th>測ったフレーム</th><th>実測</th><th>式の予測</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num">1.0</td><td class="num">F25</td><td class="num hi">50.00%</td><td class="num">50.00%</td></tr>
+              <tr><td class="num">1.0</td><td class="num">6.0</td><td class="num">F5</td><td class="num hi">50.00%</td><td class="num">50.00%</td></tr>
+              <tr><td class="num">2.0</td><td class="num">3.0</td><td class="num">F5</td><td class="num hi">50.00%</td><td class="num">50.00%</td></tr>
+              <tr><td class="num">4.0</td><td class="num">3.0</td><td class="num">F3</td><td class="num hi">50.00%</td><td class="num">50.00%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">4. popaxisforce（渦）は、既定では1つも動かない</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="029_axis.png" alt="中心から外へ広がった粒の集まり"></div>
+            <figcaption>中心と大きさを粒に合わせたあと。<strong>回りながら外へ広がる。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="scroll">
+              <table>
+                <thead><tr><th>経過秒</th><th>接線速度</th><th>中心からの距離</th></tr></thead>
+                <tbody>
+                  <tr><td class="num">0.0417</td><td class="num">0.0248</td><td class="num">0.3669</td></tr>
+                  <tr><td class="num">0.3750</td><td class="num">0.1729</td><td class="num">0.3684</td></tr>
+                  <tr><td class="num">1.0000</td><td class="num">0.3206</td><td class="num">0.4033</td></tr>
+                  <tr><td class="num">2.0000</td><td class="num">0.5296</td><td class="num">0.6149</td></tr>
+                  <tr><td class="num">2.9583</td><td class="num hi">1.0126</td><td class="num hi">1.0140</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <figcaption>効く範囲に入れる前は、接線速度 0.0000・距離 0.3669 のまま<strong>1ミリも動かなかった</strong>。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>popforce の加速度は、入れた数字そのもの。</strong>速さ÷時間が9点すべてで 3.0000。速さは伸び続け、2.96秒で 8.875 になる。頭打ちにならない。</li>
+          <li><strong>popwind は風速で頭打ちになる。</strong>同じ「3」でも 2.96秒で 2.6962（風速の 89.87%）。決して 3 を超えない。進んだ距離は <span class="hi">13.30 と 6.62</span> で、ちょうど半分ほど。</li>
+          <li><strong>最初の見立ては外れた。</strong>t = 1/airresist で 63.2% になるはずが 75.00%。しかも airresist を4通り変えても 75.00% のまま。<strong>1条件で外れただけなら誤差を疑うが、4条件すべてで同じ値が出るのは式が違う証拠である。</strong></li>
+          <li><strong>正しい式は二乗抵抗だった。</strong><code>dv/dt = airresist × (風速 − v)²</code>。風速3種類×時刻5点の15点すべてで、ずれは <span class="hi">0.0000003 未満</span>。線形抵抗との最大のずれが 2.28 だったのと桁が違う。</li>
+          <li><strong>式を決められたのは、風速を変えたから。</strong>風速3だけで測っていたら、係数が「3」という定数なのか「風速そのもの」なのか区別がつかなかった。<strong>1つの設定で合う式は、いくらでも作れてしまう。</strong></li>
+          <li><strong>popaxisforce は既定では何も起きない。</strong>効く範囲が「原点を中心とした半径1の球」に決まっている（<code>type</code> / <code>t</code> / <code>r</code> / <code>height</code>）。粒が y=3 にいると範囲の外で、接線速度は 0.0000 のまま位置も動かない。<strong>エラーは出ない。</strong></li>
+          <li>中心と大きさを合わせると回り始めた。接線速度 0.0248 → 1.0126、中心からの距離 0.3669 → 1.0140。回りながら外へ広がる。向きは軸を +Y にしたとき<strong>上から見て反時計回り</strong>。</li>
+          <li>粒は点のままではレンダに写らないほど小さい。小さな球を <code>copytopoints</code> で被せて撮った。比較の2枚は出発点を含めた同じ枠で撮っている。<strong>枠を別々に取ると「どれだけ進んだか」が画から消える。</strong></li>
+        </ul>
+
+        <p class="callout callout--note">
+          実験023で「見立てを断定せずに残しておくと、あとで潰せる」と書いた。
+          今回は<strong>その場で潰せた</strong>。外れた見立てを消さずに残したのは、
+          <strong>外れ方そのものが手がかりだったから</strong>である。
+          「airresist を変えても 75.00% から動かない」という事実が無ければ、
+          誤差を疑って終わっていた。
+        </p>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
