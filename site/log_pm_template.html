@@ -12,7 +12,7 @@
   <header class="masthead">
     <p class="eyebrow">Procedural Modeling / hython 21.0.700</p>
     <h1>実験ログ — モデリング編</h1>
-    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜037（地形）。数字はすべて実行して得た値で、推測は含まない。</p>
+    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜038（地形とレンダ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
       <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
@@ -1518,6 +1518,97 @@
           <li><strong>優先順位を決める必要があった。</strong>水筋のところは堆積も多い（平均 1.93）ので条件が重なる。<strong>水筋を先に判定して、残りを土と岩肌に分けた。</strong>順番を逆にすると水筋が土に飲まれて消える。</li>
           <li>使われた色はちょうど3種で、割合は 63.7% / 26.5% / 9.8%。<strong>塗り残しも、意図しない中間色も無い。</strong></li>
           <li>勾配は <code>normal</code> <button class="term" data-term="SOP">SOP</button> の N からではなく、高さの<button class="term" data-term="ボリューム">ボリューム</button>から隣との差で作っている（<a href="#exp036">実験036</a>で踏んだ罠）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 038 ===================== -->
+    <article class="entry entry--current" id="exp038">
+      <div class="badge">038</div>
+      <div class="body">
+        <span class="chip chip--tool">レンダリング</span>
+        <h2>塗り分けた地形を Karma で出す — 見立ては外れ、白飛びが本命だった</h2>
+        <p class="path">/obj/terrain &nbsp;·&nbsp; 037の色を、確認用ではなく本番のレンダで</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp037">実験037</a>で地形を3色に塗り分けたが、あれは確認用の速い描画
+            （<button class="term" data-term="OpenGL ROP">OpenGL</button>）で、点に付けた
+            <code>@Cd</code> がそのまま画になっていた。
+            見せる絵にするときは <button class="term" data-term="Karma">Karma</button> を使う。
+          </p>
+          <p>
+            見立ては「材質を割り当てないと点の色は出ない」だった。<strong>外れた。</strong>
+            材質なしでも色は出る。<strong>代わりに別の問題が出た。白飛びである。</strong>
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="038_karma_nomat.png" alt="岩肌が真っ白に飛んで形が読めない地形"></div>
+            <figcaption>材質なし。色は出るが、<strong>岩肌が真っ白に飛ぶ（43.4%）。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="038_karma_mat.png" alt="陰影が出て形の読める、塗り分けられた地形"></div>
+            <figcaption>材質あり。同じライト。<strong>白飛びは 3.1% まで落ちる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">材質のあるなし（ライトは同じ）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th></th><th>時間</th><th>白飛び</th><th>茶</th><th>青</th><th>灰</th></tr></thead>
+            <tbody>
+              <tr><td>材質なし</td><td class="num">4.13秒</td><td class="num hi">43.4%</td><td class="num">27.4%</td><td class="num">7.2%</td><td class="num">65.5%</td></tr>
+              <tr><td>材質あり</td><td class="num">3.55秒</td><td class="num hi">3.1%</td><td class="num">24.7%</td><td class="num">6.4%</td><td class="num">68.9%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>色はどちらでも出ている</strong>（茶 27.4% 対 24.7%）。
+          違うのは明るさのほうで、<strong>14倍の差</strong>がある。
+        </p>
+
+        <p class="label">1. ライトを弱くすると、白飛びは減るか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>キーライト</th><th>時間</th><th>白飛び</th><th>明るさ</th><th>ばらつき</th><th>茶</th><th>青</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2.4</td><td class="num">3.40秒</td><td class="num">3.0%</td><td class="num">167.66</td><td class="num">26.30</td><td class="num">23.8%</td><td class="num">6.2%</td></tr>
+              <tr><td class="num">1.2</td><td class="num">3.35秒</td><td class="num">3.0%</td><td class="num">138.95</td><td class="num">25.89</td><td class="num">22.9%</td><td class="num">5.5%</td></tr>
+              <tr><td class="num">0.6</td><td class="num">3.28秒</td><td class="num">3.0%</td><td class="num">120.93</td><td class="num">26.91</td><td class="num">21.0%</td><td class="num">5.0%</td></tr>
+              <tr><td class="num">0.3</td><td class="num">3.20秒</td><td class="num">2.9%</td><td class="num">110.22</td><td class="num">28.04</td><td class="num">19.7%</td><td class="num">4.3%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          キーライトを<strong>8分の1</strong>にしても、白飛びは 3.0% から 2.9% にしか変わらない。
+          全体の明るさは 167.66 → 110.22 と下がるのに、<strong>飛んでいるところは飛んだまま。</strong>
+        </p>
+
+        <p class="label">2. OpenGL と Karma</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th></th><th>時間</th><th>白飛び</th><th>明るさ</th><th>ばらつき</th><th>茶</th><th>青</th></tr></thead>
+            <tbody>
+              <tr><td>OpenGL</td><td class="num">1.29秒</td><td class="num">2.9%</td><td class="num">103.50</td><td class="num hi">44.51</td><td class="num">27.4%</td><td class="num">6.8%</td></tr>
+              <tr><td>Karma</td><td class="num">3.20秒</td><td class="num">2.9%</td><td class="num">110.22</td><td class="num">28.04</td><td class="num">19.7%</td><td class="num">4.3%</td></tr>
+              <tr><td>比</td><td class="num hi">2.5倍</td><td class="muted">同じ</td><td class="num">1.06倍</td><td class="num">0.63倍</td><td class="muted">—</td><td class="muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>見立ては外れた。点の色は材質なしでも出る。</strong>既定の材質がちゃんと <code>@Cd</code> を読む。principled shader の「点の色を使う」も<strong>既定でオン</strong>なので、割り当てても色の出方は変わらない。</li>
+          <li><strong>代わりに白飛びが出た。</strong>材質なしで 43.4%、材質ありで 3.1%。<span class="hi">14倍の差</span>で、これは色ではなく明るさの話だった。</li>
+          <li><strong>白飛びの原因はライトではなかった。</strong>キーライトを8分の1にしても 3.0% → 2.9%。<strong>ライトを絞っても直らない飛び方がある。</strong></li>
+          <li><strong>測り方で一度失敗した。</strong>最初は「明るい画素は背景」として分けたが、<span class="hi">白飛びした地形まで背景として捨ててしまい、白飛びが 0.0% と出た</span>。PNG の透明度で分け直したら 43.4% になった。<strong>測りたいものが「真っ白」なのに、真っ白を捨てる仕分けをしていた。</strong></li>
+          <li><strong>Karma は OpenGL の 2.5倍の時間。</strong>実験018・024で煙を撮ったときは5倍前後だったので、<strong>面だけの地形は<button class="term" data-term="ボリューム">ボリューム</button>より差が小さい</strong>。</li>
+          <li><strong>ばらつき（明暗の差）は Karma のほうが小さい。</strong>44.51 対 28.04 で 0.63倍。<button class="term" data-term="dome light">ドームライト</button>が影を埋めるためで、<strong>「本番のレンダのほうがコントラストが強い」とは限らない</strong>。</li>
+          <li><strong>ライトは題材ごとに決め直す。</strong><a href="#exp024">実験024</a>で煙に合わせた設定をそのまま地形に使うと飛ぶ。<strong>同じ設定を使い回せるのは、同じ種類のものを撮るときだけ。</strong></li>
         </ul>
       </div>
     </article>
