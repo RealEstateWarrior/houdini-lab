@@ -1,0 +1,644 @@
+{
+  "title": "実験033 — 布を物にぶつけて破る",
+  "network": "/obj/impact",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cloth",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 3.0,
+        "sizey": 3.0,
+        "ty": 2.2,
+        "rows": 45,
+        "cols": 45
+      }
+    },
+    {
+      "name": "mark_cells",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "int cx = int(floor((@P.x + 1.5) / 3.0 * 4));\nint cy = int(floor((@P.y - 0.7) / 3.0 * 4));\ni@cell = clamp(cx, 0, 3) * ..."
+      }
+    },
+    {
+      "name": "cell_0",
+      "type": "blast",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=0",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_1",
+      "type": "blast",
+      "pos": [
+        2.259,
+        -2.711
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=1",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_2",
+      "type": "blast",
+      "pos": [
+        4.518,
+        -3.163
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=2",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_3",
+      "type": "blast",
+      "pos": [
+        6.778,
+        -3.614
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=3",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_4",
+      "type": "blast",
+      "pos": [
+        9.037,
+        -4.066
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=4",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_5",
+      "type": "blast",
+      "pos": [
+        11.296,
+        -4.518
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=5",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_6",
+      "type": "blast",
+      "pos": [
+        13.555,
+        -4.97
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=6",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_7",
+      "type": "blast",
+      "pos": [
+        15.814,
+        -5.422
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=7",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_8",
+      "type": "blast",
+      "pos": [
+        18.074,
+        -5.873
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=8",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_9",
+      "type": "blast",
+      "pos": [
+        20.333,
+        -6.325
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=9",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_10",
+      "type": "blast",
+      "pos": [
+        22.592,
+        -6.777
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=10",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_11",
+      "type": "blast",
+      "pos": [
+        24.851,
+        -7.229
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=11",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_12",
+      "type": "blast",
+      "pos": [
+        27.11,
+        -7.681
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=12",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_13",
+      "type": "blast",
+      "pos": [
+        29.37,
+        -8.132
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=13",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_14",
+      "type": "blast",
+      "pos": [
+        31.629,
+        -8.584
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=14",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cell_15",
+      "type": "blast",
+      "pos": [
+        33.888,
+        -9.036
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "@cell!=15",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "cells",
+      "type": "merge",
+      "pos": [
+        16.944,
+        -10.015
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "make_pins",
+      "type": "attribwrangle",
+      "pos": [
+        16.944,
+        -11.144
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "if (@P.y > 3.63) { @group_pins = 1; }"
+      }
+    },
+    {
+      "name": "cloth1",
+      "type": "vellumconstraints",
+      "pos": [
+        16.944,
+        -12.274
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "glue",
+      "type": "vellumconstraints",
+      "pos": [
+        16.944,
+        -13.403
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 12,
+        "dobreaking": 1,
+        "breakthreshold": 200.0
+      }
+    },
+    {
+      "name": "pin",
+      "type": "vellumconstraints",
+      "pos": [
+        16.944,
+        -14.533
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 6,
+        "grouptype": 1,
+        "group": "pins"
+      }
+    },
+    {
+      "name": "solve",
+      "type": "vellumsolver",
+      "pos": [
+        26.546,
+        -15.964
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        36.147,
+        -14.985
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.42,
+        "rady": 0.42,
+        "radz": 0.42,
+        "tx": 0.0,
+        "ty": 2.2,
+        "tz": -2.6,
+        "rows": 24
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "mark_cells",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_0",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_1",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_2",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_3",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_4",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_5",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_6",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_7",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_8",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_9",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_10",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_11",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_12",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_13",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_14",
+      "to_input": 0
+    },
+    {
+      "from": "mark_cells",
+      "from_output": 0,
+      "to": "cell_15",
+      "to_input": 0
+    },
+    {
+      "from": "cell_0",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 0
+    },
+    {
+      "from": "cell_1",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 1
+    },
+    {
+      "from": "cell_2",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 2
+    },
+    {
+      "from": "cell_3",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 3
+    },
+    {
+      "from": "cell_4",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 4
+    },
+    {
+      "from": "cell_5",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 5
+    },
+    {
+      "from": "cell_6",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 6
+    },
+    {
+      "from": "cell_7",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 7
+    },
+    {
+      "from": "cell_8",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 8
+    },
+    {
+      "from": "cell_9",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 9
+    },
+    {
+      "from": "cell_10",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 10
+    },
+    {
+      "from": "cell_11",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 11
+    },
+    {
+      "from": "cell_12",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 12
+    },
+    {
+      "from": "cell_13",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 13
+    },
+    {
+      "from": "cell_14",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 14
+    },
+    {
+      "from": "cell_15",
+      "from_output": 0,
+      "to": "cells",
+      "to_input": 15
+    },
+    {
+      "from": "cells",
+      "from_output": 0,
+      "to": "make_pins",
+      "to_input": 0
+    },
+    {
+      "from": "make_pins",
+      "from_output": 0,
+      "to": "cloth1",
+      "to_input": 0
+    },
+    {
+      "from": "cloth1",
+      "from_output": 0,
+      "to": "glue",
+      "to_input": 0
+    },
+    {
+      "from": "cloth1",
+      "from_output": 1,
+      "to": "glue",
+      "to_input": 1
+    },
+    {
+      "from": "glue",
+      "from_output": 0,
+      "to": "pin",
+      "to_input": 0
+    },
+    {
+      "from": "glue",
+      "from_output": 1,
+      "to": "pin",
+      "to_input": 1
+    },
+    {
+      "from": "pin",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 0
+    },
+    {
+      "from": "pin",
+      "from_output": 1,
+      "to": "solve",
+      "to_input": 1
+    },
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 2
+    }
+  ]
+}

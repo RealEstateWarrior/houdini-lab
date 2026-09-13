@@ -1,0 +1,142 @@
+{
+  "cells": 4,
+  "ball_r": 0.42,
+  "last": 36,
+  "setup": {
+    "points": 2025,
+    "cut_points": 2304,
+    "constraints": {
+      "distance": 6160,
+      "bend": 5456,
+      "stitch": 261
+    },
+    "stitches": 261
+  },
+  "ball_vs_none": [
+    {
+      "threshold": 1.0,
+      "alone": 146,
+      "hit": 146,
+      "gap": 0,
+      "lowest": -7.9793291091918945
+    },
+    {
+      "threshold": 100.0,
+      "alone": 0,
+      "hit": 80,
+      "gap": 80,
+      "lowest": 1.043869137763977
+    },
+    {
+      "threshold": 200.0,
+      "alone": 0,
+      "hit": 55,
+      "gap": 55,
+      "lowest": 1.030977725982666
+    },
+    {
+      "threshold": 300.0,
+      "alone": 0,
+      "hit": 55,
+      "gap": 55,
+      "lowest": 1.1270246505737305
+    },
+    {
+      "threshold": 500.0,
+      "alone": 0,
+      "hit": 43,
+      "gap": 43,
+      "lowest": 1.1900848150253296
+    },
+    {
+      "threshold": 800.0,
+      "alone": 0,
+      "hit": 4,
+      "gap": 4,
+      "lowest": 1.2005953788757324
+    },
+    {
+      "threshold": 1600.0,
+      "alone": 0,
+      "hit": 0,
+      "gap": 0,
+      "lowest": 1.2005069255828857
+    }
+  ],
+  "impact_only_window": [
+    100.0,
+    200.0,
+    300.0,
+    500.0,
+    800.0
+  ],
+  "locality": {
+    "radius": 0.9,
+    "near_all": 105,
+    "far_all": 156,
+    "frames": [
+      {
+        "frame": 14,
+        "gone": 0,
+        "near_gone": 0,
+        "far_gone": 0,
+        "rate_near": 0.0,
+        "rate_far": 0.0
+      },
+      {
+        "frame": 18,
+        "gone": 0,
+        "near_gone": 0,
+        "far_gone": 0,
+        "rate_near": 0.0,
+        "rate_far": 0.0
+      },
+      {
+        "frame": 22,
+        "gone": 1,
+        "near_gone": 1,
+        "far_gone": 0,
+        "rate_near": 0.9523809523809524,
+        "rate_far": 0.0
+      },
+      {
+        "frame": 28,
+        "gone": 37,
+        "near_gone": 16,
+        "far_gone": 21,
+        "rate_near": 15.238095238095239,
+        "rate_far": 13.461538461538462
+      },
+      {
+        "frame": 36,
+        "gone": 55,
+        "near_gone": 21,
+        "far_gone": 34,
+        "rate_near": 20.0,
+        "rate_far": 21.794871794871796
+      }
+    ]
+  },
+  "speed_sweep": [
+    {
+      "speed": 0.08,
+      "broken": 0,
+      "lowest": 0.711642324924469
+    },
+    {
+      "speed": 0.16,
+      "broken": 43,
+      "lowest": 1.1900848150253296
+    },
+    {
+      "speed": 0.32,
+      "broken": 56,
+      "lowest": 0.18517091870307922
+    },
+    {
+      "speed": 0.64,
+      "broken": 71,
+      "lowest": 1.4341038465499878
+    }
+  ]
+}

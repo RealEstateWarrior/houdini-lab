@@ -1980,6 +1980,126 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 033 ===================== -->
+    <article class="entry entry--current" id="exp033">
+      <div class="badge">033</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>布を物にぶつけて破る — 破れ始めは当たった場所、そのあとは全体へ</h2>
+        <p class="path">/obj/impact &nbsp;·&nbsp; 見立ては半分だけ当たった</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp032">実験032</a>では布の重さだけで貼り目を外した。
+            破れる線は自分で決めた波で、どこが破れるかは最初から決まっていた。
+            今回は<strong>ぶつける</strong>。格子状に切れ目を入れた布を吊るし、球を投げ込む。
+          </p>
+          <p>
+            <strong>最初の測り方は失敗した。</strong>しきい値を 1.0 にしたところ、
+            球のあり／なしで外れた数が<strong>まったく同じ 146本</strong>になった。
+            重さだけで全部外れてしまい、球の影響が埋もれていた。
+            <strong>差が出ないときは「効かない」ではなく「他の原因で飽和している」ことを先に疑う。</strong>
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-dark"><img src="033_miss.png" alt="穴のない布が吊るされたまま垂れている"></div>
+            <figcaption>球なし。しきい値200では<strong>重さだけでは1本も外れない</strong>。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-dark"><img src="033_hit.png" alt="中央に大きな穴が開き、破片が下へ落ちていく布"></div>
+            <figcaption>球あり。同じカメラ・同じフレーム。<strong>穴が開いて破片が落ちていく。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">組んだもの</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>元の布</td><td class="num">2,025点 / 1,936面</td></tr>
+              <tr><td>4×4のマス目に切ったあと</td><td class="num">2,304点（+279）</td></tr>
+              <tr><td>作られた拘束</td><td class="num">distance 6,160 / bend 5,456 / stitch 261</td></tr>
+              <tr><td>球</td><td class="num">半径 0.42、1フレームあたり z へ 0.16</td></tr>
+              <tr><td>球が布を通るフレーム</td><td class="num">F17 あたり</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">1. 球を通すと、外れる貼り目は増えるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>しきい値</th><th>球なし</th><th>球あり</th><th>差</th><th>最下点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num muted">146</td><td class="num muted">146</td><td class="num muted">0</td><td class="num">−7.979</td></tr>
+              <tr><td class="num">100.0</td><td class="num hi">0</td><td class="num">80</td><td class="num hi">+80</td><td class="num">1.044</td></tr>
+              <tr><td class="num">200.0</td><td class="num hi">0</td><td class="num">55</td><td class="num hi">+55</td><td class="num">1.031</td></tr>
+              <tr><td class="num">300.0</td><td class="num hi">0</td><td class="num">55</td><td class="num hi">+55</td><td class="num">1.127</td></tr>
+              <tr><td class="num">500.0</td><td class="num hi">0</td><td class="num">43</td><td class="num hi">+43</td><td class="num">1.190</td></tr>
+              <tr><td class="num">800.0</td><td class="num hi">0</td><td class="num">4</td><td class="num hi">+4</td><td class="num">1.201</td></tr>
+              <tr><td class="num">1600.0</td><td class="num">0</td><td class="num">0</td><td class="num muted">0</td><td class="num">1.201</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>球なしが 0 なので、外れた分はすべて球のせいである。</strong>
+          しきい値 1.0 の行だけは、重さで飽和していて比較にならない。
+        </p>
+
+        <p class="label">2. 外れた貼り目は、球の通り道の近くに偏っているか（しきい値 200）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>外れた計</th><th>内で外れた</th><th>外で外れた</th><th>内の率</th><th>外の率</th></tr></thead>
+            <tbody>
+              <tr><td class="num">14</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
+              <tr><td class="num">18</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
+              <tr><td class="num">22</td><td class="num">1</td><td class="num hi">1</td><td class="num">0</td><td class="num hi">1.0%</td><td class="num">0.0%</td></tr>
+              <tr><td class="num">28</td><td class="num">37</td><td class="num">16</td><td class="num">21</td><td class="num hi">15.2%</td><td class="num">13.5%</td></tr>
+              <tr><td class="num">36</td><td class="num">55</td><td class="num">21</td><td class="num">34</td><td class="num">20.0%</td><td class="num">21.8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          球の通り道（x=0, y=2.2）から半径 0.9 の内と外に分けた。内側に 105本、外側に 156本ある。
+          <strong>最初に外れる1本は内側。しかし最後にはほぼ同じ割合になる。</strong>
+        </p>
+
+        <p class="label">3. 球の速さを変えると、外れる数は増えるか（しきい値 500）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>1フレームあたりの距離</th><th>外れた貼り目</th><th>最下点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.08</td><td class="num muted">0本</td><td class="num">0.712</td></tr>
+              <tr><td class="num">0.16</td><td class="num">43本</td><td class="num">1.190</td></tr>
+              <tr><td class="num">0.32</td><td class="num">56本</td><td class="num">0.185</td></tr>
+              <tr><td class="num">0.64</td><td class="num hi">71本</td><td class="num">1.434</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>球が原因であることは疑いようがない。</strong>しきい値 100〜800 では重さだけで 0本、球を通すと 80／55／55／43／4本 外れる。</li>
+          <li><strong>速さを上げると外れる数も増える。</strong>0.08で0本、0.16で43本、0.32で56本、0.64で71本と<span class="hi">単調に増える</span>。ぶつける強さで破れ具合を決められる。</li>
+          <li><strong>「当たった場所に集中する」とは言えなかった。</strong>最後の時点で内側 20.0%・外側 21.8%。ほぼ同じ割合で、当初の見立ては外れた。</li>
+          <li><strong>ただし破れ始めは局所だった。</strong>最初に外れた1本（F22）は球の通り道の内側にある。F28 では内 15.2% 対 外 13.5% でわずかに内側が先行し、F36 で追いつかれる。<strong>「当たったところから破れ始め、そのあと全体へ広がる」が正しい言い方になる。</strong></li>
+          <li>広がる理由は測っていない。布がぶつけられて大きく揺れるので、その動き自体が残りの貼り目に力をかけていると考えられるが、<strong>確かめていないので断定しない</strong>。局所に留めたいなら、球を小さく速くするか、揺れが収まる前にフレームを切る。</li>
+          <li><strong>測り方でつまずいた。</strong>最初は貼り目を<strong>位置</strong>で照合したが、布は動くので前と後の位置が一致しない。ほぼ全部が「外れた」と数えられ、<span class="hi">内 100%・外 96.2%</span> という無意味な結果が出た。<strong>つないでいる点の番号で見分ける</strong>ように直した。番号は動かない。</li>
+          <li>球は <code>sphere</code> の <code>type</code> を <strong>Polygon Mesh</strong> にしている。<a href="#exp030">実験030</a>で測ったとおり、<code>Polygon</code> では rows / cols が効かない。</li>
+        </ul>
+
+        <p class="callout callout--note">
+          <strong>見立ては半分だけ当たった。</strong>「ぶつけたところから裂ける」は、
+          破れ<em>始め</em>については正しく、<em>最終的な分布</em>については間違っていた。
+          時間を追って測らなければ、最後の数字だけを見て「当たった場所は関係ない」と
+          結論していたところだった。<strong>いつ測るかで、出る答えが変わる。</strong>
+        </p>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
