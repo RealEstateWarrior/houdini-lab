@@ -12,7 +12,7 @@
   <header class="masthead">
     <p class="eyebrow">Procedural Modeling / hython 21.0.700</p>
     <h1>実験ログ — モデリング編</h1>
-    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、および030（001〜029の振り返り点検）。数字はすべて実行して得た値で、推測は含まない。</p>
+    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034（HeightField）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
       <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
@@ -1086,6 +1086,132 @@
           <a href="#exp005">実験005</a>の冒頭に「末尾の見立ては実験006で否定された」注記を入れた。
           <strong>訂正が後ろの記事にしか書かれていないと、前から読む人には届かない。</strong>
         </p>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 034 ===================== -->
+    <article class="entry entry--current" id="exp034">
+      <div class="badge">034</div>
+      <div class="body">
+        <span class="chip chip--pm">プロシージャルモデリング</span>
+        <h2>HeightField で地形を作る — 高さを面ではなく数の並びで持つ</h2>
+        <p class="path">/obj/terrain &nbsp;·&nbsp; 007のポリゴン地形とは別の仕組み</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp007">実験007</a>では grid に <button class="term" data-term="mountain">mountain</button> をかけて地形を作った。
+            点を並べて高さをずらす、<button class="term" data-term="ポリゴン">ポリゴン</button>のやり方である。
+            Houdini にはもう1つ <strong>HeightField</strong> という仕組みがあり、
+            こちらは専用の<button class="term" data-term="ノード">ノード</button>が45種もある。
+          </p>
+          <p>
+            違いは持ち方にある。HeightField は<strong>高さを2次元の<button class="term" data-term="ボリューム">ボリューム</button>として持つ</strong>。
+            面も点も持たず、<button class="term" data-term="プリミティブ">プリミティブ</button>はたった2つ。
+            そのぶん、ポリゴンでは難しい<strong>浸食</strong>のような計算ができる。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="034_raw.png" alt="丸い起伏が並んだ、削られていない地形"></div>
+            <figcaption>ノイズをかけただけ。<strong>丸い起伏が並ぶ。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="034_eroded.png" alt="尾根と谷ができ、山肌に筋の入った地形"></div>
+            <figcaption>浸食を4回。同じカメラ。<strong>尾根と谷ができ、山肌に筋が出る。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">中身は何か</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>HeightField の中身</td><td class="num">2点 / 2プリミティブ（height と mask）</td></tr>
+              <tr><td>高さの解像度</td><td class="num">100×100×1</td></tr>
+              <tr><td>メッシュに直すと</td><td class="num">10,000点 / 9,801面</td></tr>
+              <tr><td>点の数と解像度</td><td class="num hi">100×100 = 10,000 でぴったり</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">1. 解像度は何が決めるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>size</th><th>gridspacing</th><th>解像度</th><th>size ÷ gridspacing</th></tr></thead>
+            <tbody>
+              <tr><td class="num">200</td><td class="num">2.0</td><td class="num">100×100</td><td class="num hi">100</td></tr>
+              <tr><td class="num">200</td><td class="num">1.0</td><td class="num">200×200</td><td class="num hi">200</td></tr>
+              <tr><td class="num">200</td><td class="num">4.0</td><td class="num">50×50</td><td class="num hi">50</td></tr>
+              <tr><td class="num">400</td><td class="num">2.0</td><td class="num">200×200</td><td class="num hi">200</td></tr>
+              <tr><td class="num">100</td><td class="num">2.0</td><td class="num">50×50</td><td class="num hi">50</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">2. Grid Samples は効くのか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>gridsamples</th><th>解像度</th></tr></thead>
+            <tbody>
+              <tr><td class="num">128</td><td class="num muted">100×100</td></tr>
+              <tr><td class="num">512（既定）</td><td class="num muted">100×100</td></tr>
+              <tr><td class="num">1024</td><td class="num muted">100×100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>1ミリも動かない。</strong>名前からは解像度を決めそうに見えるが、
+          実際に決めているのは <code>size ÷ gridspacing</code> のほう。
+          この2つが並んでいるのが、最初につまずくところになる。
+        </p>
+
+        <p class="label">3. 浸食は何を変えるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>回数</th><th>かかった秒</th><th>レイヤー数</th><th>最低</th><th>最高</th><th>平均</th><th>勾配</th></tr></thead>
+            <tbody>
+              <tr><td>0（かけない）</td><td class="num">0.04</td><td class="num">2</td><td class="num">−3.747</td><td class="num">4.993</td><td class="num">0.330</td><td class="num">0.07893</td></tr>
+              <tr><td class="num">1</td><td class="num">0.68</td><td class="num hi">7</td><td class="num">−2.626</td><td class="num">4.926</td><td class="num">0.288</td><td class="num">0.06710</td></tr>
+              <tr><td class="num">2</td><td class="num">0.80</td><td class="num hi">7</td><td class="num">−2.619</td><td class="num">4.728</td><td class="num">0.255</td><td class="num">0.06124</td></tr>
+              <tr><td class="num">4</td><td class="num">2.35</td><td class="num hi">7</td><td class="num hi">−2.609</td><td class="num hi">4.615</td><td class="num">0.196</td><td class="num hi">0.05315</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          増えるレイヤーは <code>debris</code>（がれき）・<code>sediment</code>（堆積）・
+          <code>flow</code>（流れ）・<code>flowdir.x</code>・<code>flowdir.y</code>（流れの向き）。
+          <strong>削った結果だけでなく、その過程も残る。</strong>
+        </p>
+
+        <p class="label">4. amp は高さの倍率か（実験006と同じ問い）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>amp</th><th>高さの幅</th><th>幅 ÷ amp</th></tr></thead>
+            <tbody>
+              <tr><td class="num">7.5</td><td class="num">2.1850</td><td class="num hi">0.291329</td></tr>
+              <tr><td class="num">15.0</td><td class="num">4.3699</td><td class="num hi">0.291329</td></tr>
+              <tr><td class="num">30.0</td><td class="num">8.7399</td><td class="num hi">0.291329</td></tr>
+              <tr><td class="num">60.0</td><td class="num">17.4797</td><td class="num hi">0.291329</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>HeightField はプリミティブが2つしかない。</strong><code>height</code> と <code>mask</code> の2枚のボリュームで、点は2個。同じ地形を<button class="term" data-term="メッシュ">メッシュ</button>に直すと 10,000点 / 9,801面。<strong>同じ情報を、まったく違う入れ物で持っている。</strong></li>
+          <li><strong>点の数は解像度そのもの。</strong>100×100 の高さボリュームをメッシュにすると、ちょうど 10,000点。<strong>マス目1つが点1つになる。</strong></li>
+          <li><strong>解像度は <code>size ÷ gridspacing</code> で決まる。</strong>5通りすべて一致。細かくしたいなら gridspacing を下げる。</li>
+          <li><strong><code>Grid Samples</code> は効かなかった。</strong>128 でも 1024 でも 100×100 のまま。<span class="hi">名前からは解像度を決めそうに見えるのに、動かない。</span></li>
+          <li><strong>浸食はレイヤーを2枚から7枚に増やす。</strong>増えるのは がれき・堆積・流れ・流れの向き2つ。削った結果だけでなく過程も残るので、あとで色を塗り分けるのに使える。</li>
+          <li><strong>浸食は地形をなだらかにした。</strong>勾配 0.07893 → 0.05315 で <span class="hi">32.7%</span> 下がる。見立てどおり。</li>
+          <li><strong>削って、積もっている。</strong>最高は 4.993 → 4.615 と下がり、最低は −3.747 → −2.609 と上がった。<strong>山が削れて谷が埋まる。</strong></li>
+          <li><strong>時間は回数に比例しない。</strong>1回 0.68秒、2回 0.80秒、4回 2.35秒。1回目に下ごしらえの費用がかかる。100×100 という小さな地形でこれなので、実用の解像度では相応に重い。</li>
+          <li><strong><code>amp</code> は純粋な倍率だった。</strong>4通りで 幅÷amp が <span class="hi">0.291329</span> と小数点以下6桁まで同じ。<a href="#exp006">実験006</a>で mountain の <code>height</code> について確かめたことが、こちらでも成り立つ。</li>
+          <li>ただし<strong>amp の数字がそのまま高さになるわけではない</strong>。amp 30 で実際の幅は 8.74（0.29倍ほど）。狙った高さにしたいなら、この比率を測ってから逆算する。</li>
+        </ul>
       </div>
     </article>
 

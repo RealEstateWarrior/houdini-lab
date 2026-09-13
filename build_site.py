@@ -240,13 +240,18 @@ DONE = [
      "shots": ["033_miss.png", "033_hit.png"],
      "title": "布を物にぶつけて破る — 破れ始めは当たった場所、そのあとは全体へ",
      "note": "球なし0本に対し球ありは最大80本。ただし最後は内外でほぼ同じ割合になる"},
+    {"no": "034", "anchor": "exp034", "tags": ["モデリング", "地形", "HeightField"],
+     "log": "log_pm", "hip": "034_heightfield.hipnc", "thumb": "034_eroded.png",
+     "shots": ["034_raw.png", "034_eroded.png"],
+     "title": "HeightField で地形を作る — 高さを面ではなく数の並びで持つ",
+     "note": "プリミティブは2つだけ。浸食で勾配が32.7%下がる。Grid Samples は効かない"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "034", "title": "まだ触っていない分野に進む",
-     "note": "布は028〜033で一区切り。次の題材を決める"},
+    {"no": "035", "title": "地形の上に物を生やす",
+     "note": "034の浸食レイヤーを使って、斜面と平地で生やし分ける"},
 ]
 
 PAGES = [

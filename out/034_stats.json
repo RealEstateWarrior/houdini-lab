@@ -1,0 +1,194 @@
+{
+  "size": 200.0,
+  "spacing": 2.0,
+  "amp": 30.0,
+  "element": 80.0,
+  "contents": {
+    "hf_points": 2,
+    "hf_prims": 2,
+    "layers": [
+      "height",
+      "mask"
+    ],
+    "resolution": [
+      100,
+      100,
+      1
+    ],
+    "mesh_points": 10000,
+    "mesh_prims": 9801
+  },
+  "resolution_table": [
+    {
+      "size": 200.0,
+      "spacing": 2.0,
+      "resolution": [
+        100,
+        100
+      ],
+      "expected": 100
+    },
+    {
+      "size": 200.0,
+      "spacing": 1.0,
+      "resolution": [
+        200,
+        200
+      ],
+      "expected": 200
+    },
+    {
+      "size": 200.0,
+      "spacing": 4.0,
+      "resolution": [
+        50,
+        50
+      ],
+      "expected": 50
+    },
+    {
+      "size": 400.0,
+      "spacing": 2.0,
+      "resolution": [
+        200,
+        200
+      ],
+      "expected": 200
+    },
+    {
+      "size": 100.0,
+      "spacing": 2.0,
+      "resolution": [
+        50,
+        50
+      ],
+      "expected": 50
+    }
+  ],
+  "resolution_rule_holds": true,
+  "gridsamples": [
+    {
+      "gridsamples": 128,
+      "resolution": [
+        100,
+        100
+      ]
+    },
+    {
+      "gridsamples": 512,
+      "resolution": [
+        100,
+        100
+      ]
+    },
+    {
+      "gridsamples": 1024,
+      "resolution": [
+        100,
+        100
+      ]
+    }
+  ],
+  "erosion": [
+    {
+      "iterations": 0,
+      "seconds": 0.03647680001449771,
+      "layers": [
+        "height",
+        "mask"
+      ],
+      "height": {
+        "min": -3.7465596199035645,
+        "max": 4.993302345275879,
+        "mean": 0.3303938196361065,
+        "std": 1.624827284309063
+      },
+      "slope": 0.07893124987681707
+    },
+    {
+      "iterations": 1,
+      "seconds": 0.6994468000193592,
+      "layers": [
+        "height",
+        "mask",
+        "debris",
+        "sediment",
+        "flow",
+        "flowdir.x",
+        "flowdir.y"
+      ],
+      "height": {
+        "min": -2.6262378692626953,
+        "max": 4.926003932952881,
+        "mean": 0.2884911719282798,
+        "std": 1.5243090753153201
+      },
+      "slope": 0.06710080599522711
+    },
+    {
+      "iterations": 2,
+      "seconds": 0.5824641999788582,
+      "layers": [
+        "height",
+        "mask",
+        "debris",
+        "sediment",
+        "flow",
+        "flowdir.x",
+        "flowdir.y"
+      ],
+      "height": {
+        "min": -2.618618965148926,
+        "max": 4.727678298950195,
+        "mean": 0.254593239747663,
+        "std": 1.4416816964122576
+      },
+      "slope": 0.061235020739050475
+    },
+    {
+      "iterations": 4,
+      "seconds": 2.483070399990538,
+      "layers": [
+        "height",
+        "mask",
+        "debris",
+        "sediment",
+        "flow",
+        "flowdir.x",
+        "flowdir.y"
+      ],
+      "height": {
+        "min": -2.6088552474975586,
+        "max": 4.614734172821045,
+        "mean": 0.19560984734643716,
+        "std": 1.2961641531974626
+      },
+      "slope": 0.053149142936665825
+    }
+  ],
+  "smoother": true,
+  "slope_change_percent": -32.66400440939137,
+  "amp_table": [
+    {
+      "amp": 7.5,
+      "span": 2.184965491294861,
+      "ratio": 0.2913287321726481
+    },
+    {
+      "amp": 15.0,
+      "span": 4.369930982589722,
+      "ratio": 0.2913287321726481
+    },
+    {
+      "amp": 30.0,
+      "span": 8.739861965179443,
+      "ratio": 0.2913287321726481
+    },
+    {
+      "amp": 60.0,
+      "span": 17.479723930358887,
+      "ratio": 0.2913287321726481
+    }
+  ],
+  "amp_is_pure_scale": true
+}

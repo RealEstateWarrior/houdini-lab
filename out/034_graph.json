@@ -1,0 +1,86 @@
+{
+  "title": "実験034 — HeightField で地形を作る",
+  "network": "/obj/terrain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "field",
+      "type": "heightfield",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 200.0,
+        "sizey": 200.0
+      }
+    },
+    {
+      "name": "noise",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "amp": 30.0,
+        "elementsize": 80.0
+      }
+    },
+    {
+      "name": "erode",
+      "type": "heightfield_erode::3.0",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 0.5160613059997559,
+        "folder0": 1,
+        "folder1": 1,
+        "iterations": 2
+      }
+    },
+    {
+      "name": "mesh",
+      "type": "convertheightfield",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "field",
+      "from_output": 0,
+      "to": "noise",
+      "to_input": 0
+    },
+    {
+      "from": "noise",
+      "from_output": 0,
+      "to": "erode",
+      "to_input": 0
+    },
+    {
+      "from": "erode",
+      "from_output": 0,
+      "to": "mesh",
+      "to_input": 0
+    }
+  ]
+}
