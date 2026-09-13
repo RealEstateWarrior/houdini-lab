@@ -71,7 +71,7 @@ def terrain():
     cells.setFirstInput(dense)
     cells.parm("height").set(1.2)
     cells.parm("elementsize").set(2.0)
-    cells.parm("basis").set(8)          # Worley 系。岩っぽくなる
+    cells.parm("basis").set("worleyFA")   # Worley 系。岩っぽくなる
 
     geo.layoutChildren()
     bbox = hou_tools.bbox_union([fine.path(), detail.path(), cells.path()])
@@ -84,40 +84,39 @@ def terrain():
 
 
 def hard():
-    """硬い形を作る。箱 → 押し出し → 穴を開ける。"""
+    """硬い形を作る。箱 → 穴を開ける → 面を一段くぼませる。"""
     print("hard")
     hou.hipFile.clear(suppress_save_prompt=True)
     geo = hou.node("/obj").createNode("geo", "hard_surface")
 
     box = geo.createNode("box", "base")
-    box.parmTuple("size").set((2.0, 0.6, 1.4))
+    box.parmTuple("size").set((2.0, 1.0, 1.4))
 
-    extrude = geo.createNode("polyextrude::2.0", "tower")
-    extrude.setFirstInput(box)
-    extrude.parm("group").set("2")           # 上の面だけ
-    extrude.parm("grouptype").set(4)
-    extrude.parm("dist").set(1.0)
-    extrude.parm("inset").set(0.25)
-
+    # 縦に貫く円柱。tube は既定で Y 軸に立つので、回さなくてよい
     cutter = geo.createNode("tube", "cutter")
     cutter.parm("type").set(1)
-    cutter.parm("rad1").set(0.28)
-    cutter.parm("rad2").set(0.28)
-    cutter.parm("height").set(4.0)
-    cutter.parmTuple("r").set((90.0, 0.0, 0.0))
+    cutter.parm("rad1").set(0.32)
+    cutter.parm("rad2").set(0.32)
+    cutter.parm("height").set(3.0)
     cutter.parm("cap").set(True)
+    cutter.parm("cols").set(24)
 
-    boolean = geo.createNode("boolean::2.0", "drill")
-    boolean.setInput(0, extrude)
-    boolean.setInput(1, cutter)
-    boolean.parm("booleanop").set(2)          # 差（subtract）
+    drill = geo.createNode("boolean::2.0", "drill")
+    drill.setInput(0, box)
+    drill.setInput(1, cutter)
+    drill.parm("booleanop").set(2)          # 差（subtract）
+
+    panel = geo.createNode("polyextrude::2.0", "panel")
+    panel.setFirstInput(drill)
+    panel.parm("dist").set(-0.08)           # 内側へ。面が一段くぼむ
+    panel.parm("inset").set(0.12)
 
     geo.layoutChildren()
-    bbox = hou_tools.bbox_union([extrude.path(), boolean.path()])
+    bbox = hou_tools.bbox_union([box.path(), cutter.path()])
     shoot(box, "guide_hard_1_box", bbox)
-    shoot(extrude, "guide_hard_2_extrude", bbox)
-    shoot(cutter, "guide_hard_3_cutter", bbox)
-    shoot(boolean, "guide_hard_4_boolean", bbox)
+    shoot(cutter, "guide_hard_2_cutter", bbox)
+    shoot(drill, "guide_hard_3_boolean", bbox)
+    shoot(panel, "guide_hard_4_panel", bbox)
     hou_tools.save_hip(os.path.join(OUT, "guide_hard.hipnc"))
 
 
@@ -140,7 +139,7 @@ def smooth():
     crease = geo.createNode("crease", "keep_edges")
     crease.setFirstInput(box)
     crease.parm("group").set("0-3")
-    crease.parm("creaseweight").set(3)
+    crease.parm("crease").set(3)
 
     sub_crease = geo.createNode("subdivide", "divide3_crease")
     sub_crease.setFirstInput(crease)
@@ -188,8 +187,8 @@ def vex():
 
 
 if __name__ == "__main__":
-    terrain()
-    hard()
-    smooth()
-    vex()
-    print("完了")
+    # 1プロセスで複数のシーンを作ると止まることがあるので、1つずつ動かす
+    which = sys.argv[1] if len(sys.argv) > 1 else "terrain"
+    {"terrain": terrain, "hard": hard, "smooth": smooth,
+     "vex": vex}[which]()
+    print("完了:", which)

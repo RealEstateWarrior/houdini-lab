@@ -375,6 +375,13 @@ def link_terms_in(markup):
     return linked
 
 
+def render_guide_nav(guides):
+    return "\n".join(
+        f'      <a href="#guide-{g["id"]}">{html.escape(g["title"])}</a>'
+        for g in guides["guides"]
+    )
+
+
 def render_guides(guides, urls):
     """手順ページ。実験ログとは別に「どう作るか」だけを順番に読ませる。
 
@@ -697,6 +704,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--EXP_DATA-->", render_exp_data(urls)),
         ("<!--NODES-->", render_nodes(nodes, urls)),
         ("<!--GUIDES-->", render_guides(guides, urls)),
+        ("<!--GUIDE_NAV-->", render_guide_nav(guides)),
         ("<!--NODE_NAV-->", render_node_nav(nodes)),
         ("<!--LINKS_BODY-->", links_body),
         ("<!--GLOSSARY_SECTION-->", render_section(data)),
