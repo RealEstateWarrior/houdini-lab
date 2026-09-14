@@ -1,0 +1,198 @@
+{
+  "title": "実験047 — 土台に毛を付いてこさせる",
+  "network": "/obj/groom",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "skin",
+      "type": "sphere",
+      "pos": [
+        -3.859,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        -3.859,
+        4.443
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rest",
+      "type": "rest",
+      "pos": [
+        -3.859,
+        3.313
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "deform",
+      "type": "mountain::2.0",
+      "pos": [
+        1.224,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.5,
+        "elementsize": 0.9
+      }
+    },
+    {
+      "name": "roots",
+      "type": "scatter::2.0",
+      "pos": [
+        -1.035,
+        4.292
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 200
+      }
+    },
+    {
+      "name": "make_guides",
+      "type": "attribwrangle",
+      "pos": [
+        -1.035,
+        2.861
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nint segs = 8;\nfloat len = 0.5;\nint n = npoints(0);\nfor (int i = 0; i < n; i++) {\n    vector p = point(0, \"P\", i);\n  ..."
+      }
+    },
+    {
+      "name": "hairgen",
+      "type": "hairgen::2.0",
+      "pos": [
+        -1.224,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "density": 200.0,
+        "influenceradius": 0.2,
+        "thickness": 0.01,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "rootdist",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 1,
+        "snippet": "\nint pts[] = primpoints(0, @primnum);\nvector root = point(0, \"P\", pts[0]);\nf@rootdist = xyzdist(1, root);\n"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "rest",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "deform",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "roots",
+      "to_input": 0
+    },
+    {
+      "from": "roots",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 1
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 0
+    },
+    {
+      "from": "make_guides",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 1
+    },
+    {
+      "from": "deform",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 2
+    },
+    {
+      "from": "hairgen",
+      "from_output": 0,
+      "to": "rootdist",
+      "to_input": 0
+    },
+    {
+      "from": "deform",
+      "from_output": 0,
+      "to": "rootdist",
+      "to_input": 1
+    }
+  ]
+}

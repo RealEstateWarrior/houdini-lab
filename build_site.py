@@ -305,13 +305,18 @@ DONE = [
      "shots": ["046_ball_plain.png", "046_ball_tip.png", "046_ball_clump.png"],
      "title": "毛に色を付ける — 光を消して測ると、色は位置ぴったりに乗った",
      "note": "毛はPとwidthしか持たない。発光で測るとR²=0.99991。widthは毛先で0に先細り"},
+    {"no": "047", "anchor": "exp047", "tags": ["グルーム", "毛", "アニメーション", "検算"],
+     "log": "log_pm", "hip": "047_hair_follow.hipnc", "thumb": "047_follow.png",
+     "shots": ["047_start.png", "047_follow.png"],
+     "title": "土台が動いたとき、毛は付いてくるのか — 入力をひとつつなぐかどうかだけの差",
+     "note": "入力2をつなぐと根元の離れは全フレーム0.000000。外すと変形の8.5%ずれる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "047", "title": "毛を動かす",
-     "note": "風と重力で毛がどう揺れるか。土台が動いたら毛は付いてくるか"},
+    {"no": "048", "title": "毛を揺らす",
+     "note": "Vellum で毛をシミュレーションする。重力と風でどう動くか"},
 ]
 
 PAGES = [

@@ -2455,6 +2455,89 @@
     </article>
 
 
+
+    <!-- ===================== 047 ===================== -->
+    <article class="entry entry--current" id="exp047">
+      <div class="badge">047</div>
+      <div class="body">
+        <span class="chip chip--pm">グルーム</span>
+        <h2>土台が動いたとき、毛は付いてくるのか — 入力をひとつつなぐかどうかだけの差</h2>
+        <p class="path">/obj/groom &nbsp;·&nbsp; 目では分からない。数字でしか分からない</p>
+
+        <div class="prose">
+          <p>
+            <code>hairgen::2.0</code> の入力は5つある。<a href="#exp044">実験044</a>で読んだラベルは
+            <strong>0: Rest Skin ／ 1: Guides ／ 2: Animated Skin ／ 3: Volumes ／
+            4: Guide Interpolation Mesh</strong>。
+            つまり<strong>「元の形」と「動いている形」を別々に渡す</strong>作りになっている。
+          </p>
+          <p>
+            では、動いている形をつながなかったら毛はどうなるのか。
+            土台の球を <code>mountain</code> で少しずつ変形させ、
+            <strong>毛の根元から土台の表面までの距離</strong>をフレームごとに測った。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="047_start.png" alt="変形前の毛玉"></div>
+            <figcaption>フレーム1。<strong>変形はまだ 0。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="047_follow.png" alt="変形後の毛玉"></div>
+            <figcaption>フレーム25。変形 0.5。<strong>動いている形をつないであるので、根元は表面に乗ったまま。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 動いている形をつないだ場合</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>frame</th><th>変形の大きさ</th><th>根元の離れ 平均</th><th>最大</th><th>表面にいる割合</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.00000</td><td class="num hi">0.000000</td><td class="num">0.000000</td><td class="num">100.0%</td></tr>
+              <tr><td class="num">5</td><td class="num">0.08333</td><td class="num hi">0.000000</td><td class="num">0.000000</td><td class="num">100.0%</td></tr>
+              <tr><td class="num">10</td><td class="num">0.18750</td><td class="num hi">0.000000</td><td class="num">0.000000</td><td class="num">100.0%</td></tr>
+              <tr><td class="num">15</td><td class="num">0.29167</td><td class="num hi">0.000000</td><td class="num">0.000000</td><td class="num">100.0%</td></tr>
+              <tr><td class="num">20</td><td class="num">0.39583</td><td class="num hi">0.000000</td><td class="num">0.000000</td><td class="num">100.0%</td></tr>
+              <tr><td class="num">25</td><td class="num">0.50000</td><td class="num hi">0.000000</td><td class="num">0.000000</td><td class="num">100.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">2,500本すべてが全フレームで <strong>0.000000</strong>。近い、ではなく、ぴったり 0。</p>
+
+        <p class="label">2. つながなかった場合</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>frame</th><th>変形の大きさ</th><th>根元の離れ 平均</th><th>最大</th><th>表面にいる割合</th><th>離れ ÷ 変形</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.00000</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">100.0%</td><td class="num">—</td></tr>
+              <tr><td class="num">5</td><td class="num">0.08333</td><td class="num">0.007300</td><td class="num">0.024673</td><td class="num">73.6%</td><td class="num hi">0.08760</td></tr>
+              <tr><td class="num">10</td><td class="num">0.18750</td><td class="num">0.016337</td><td class="num">0.055543</td><td class="num">35.4%</td><td class="num hi">0.08713</td></tr>
+              <tr><td class="num">15</td><td class="num">0.29167</td><td class="num">0.025169</td><td class="num">0.086424</td><td class="num">22.8%</td><td class="num hi">0.08629</td></tr>
+              <tr><td class="num">20</td><td class="num">0.39583</td><td class="num">0.033692</td><td class="num">0.117286</td><td class="num">16.3%</td><td class="num hi">0.08512</td></tr>
+              <tr><td class="num">25</td><td class="num">0.50000</td><td class="num">0.041807</td><td class="num">0.148076</td><td class="num">12.9%</td><td class="num hi">0.08361</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          同じシーンで、<code>hairgen</code> の入力2 だけを外した。
+          距離は <code>xyzdist</code> で、動いている土台の表面までを測っている。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>入力2（Animated Skin）をつなぐと、根元は完全に表面に乗り続ける。</strong>2,500本すべてが全フレームで <span class="hi">0.000000</span>。<strong>近い、ではなく、ぴったり 0。</strong></li>
+          <li><strong>つながないと、変形につれて離れていく。</strong>変形 0.5 で平均 0.041807、最大 0.148076。表面（0.01未満）にいるのは <span class="hi">12.9%</span> だけ。</li>
+          <li><strong>離れは変形の大きさに比例する。</strong>離れ ÷ 変形が 0.08760 / 0.08713 / 0.08629 / 0.08512 / 0.08361。<strong>5通りで 0.084〜0.088 とほぼ一定。</strong>わずかに減るが単調で、誤差ではない。</li>
+          <li><strong>比が 1 ではなく 0.085 なのは、測っているのが「最寄りの表面までの距離」だから。</strong>土台が変形しても近くの別の場所が寄ってくるので、離れは変形そのものの大きさにはならない。<strong>何を測っているかで数字の意味が変わる。</strong></li>
+          <li><strong>この差は見た目ではほとんど分からない。</strong>0.042 は球の半径の 4%、毛の長さ 0.5 の 8%。<strong>目で見つけられないずれは、数字でしか見つからない。</strong><a href="#exp044">実験044</a>の「ガイドが使われていなかった」も同じ形の問題だった。</li>
+          <li><strong>「元の形」と「動いている形」を分ける作りの意味。</strong>毛の生える位置は元の形の上で決めておき、描くときだけ動いている形に乗せ替える。<strong>こうしないとフレームごとに毛の生える場所が変わり、毛がちらつく。</strong></li>
+          <li><button class="term" data-term="rest">rest</button> は <code>mountain</code> を通しても壊れない。変形<button class="term" data-term="ノード">ノード</button>は <code>P</code> を動かすだけで <code>rest</code> はそのまま流れる。<strong>だから「元の形」と「動いている形」の両方が、同じ rest を持った状態で hairgen に届く。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
