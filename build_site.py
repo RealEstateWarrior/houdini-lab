@@ -425,13 +425,19 @@ DONE = [
      "shots": ["069_collider.png"],
      "title": "MPM のコライダの摩擦 — 式は同じ。ただし地面と重ねると完全に無視される",
      "note": "同じ高さだとコライダの摩擦が効かない。効くのは「先に触った面」だけ"},
+    {"no": "070", "anchor": "exp070",
+     "tags": ["MPM", "シミュレーション", "摩擦", "落とし穴", "検算"],
+     "log": "log_fx", "hip": "", "thumb": "070_carried.png",
+     "shots": ["070_carried.png", "070_still.png"],
+     "title": "動く板は塊をどれだけ運ぶか — 追いつくまでは式どおり。追いついた先で潰れて遅れる",
+     "note": "コライダのTypeは既定がStaticで板が動かない。追いつく前は式と0.4%一致"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "070", "title": "動くコライダが粒に渡す速度",
-     "note": "computevelocity で、板を動かすと粒はどれだけ運ばれるか"},
+    {"no": "071", "title": "板を回して塊を振り回す",
+     "note": "Animated Rigid の回転は、速度としてどう粒に伝わるか"},
 ]
 
 PAGES = [

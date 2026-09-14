@@ -3202,6 +3202,152 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 070 ===================== -->
+    <article class="entry entry--current" id="exp070">
+      <div class="badge">070</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>動く板は塊をどれだけ運ぶか — 追いつくまでは式どおり。追いついた先で潰れて遅れる</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 式が2段階に分かれるなら、先に境目を計算しておく</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp069">実験069</a>でコライダの摩擦が組み込みの地面と同じものだと分かったので、
+            今度は<strong>板のほうを動かす</strong>。ベルトコンベアの上に物を置いたようなもの。
+          </p>
+          <p>
+            ところが組んだ直後は、<strong>板をいくら速くしても塊が1ミリも動かなかった。</strong>
+            5通りの速さで結果が6桁まで完全に同じ。
+          </p>
+        </div>
+
+        <p class="callout">
+          <strong>原因は <code>mpmcollider</code> の Type。既定が Static だった。</strong>
+          Animated (Rigid) に変えて初めて動き出す。<strong>エラーも警告も出ない。</strong>
+          <a href="#exp044">実験044</a>のガイド、<a href="#exp050">050</a>の可変長入力、
+          <a href="#exp062">062</a>の <code>materialpreset</code>、<a href="#exp066">066</a>の風速に続いて、
+          <strong>これで5件目。</strong>
+        </p>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="070_carried.png" alt="動く板に運ばれた跡"></div>
+            <figcaption><strong>板の速さ 4.0。</strong><span class="hi">5.336132</span> 運ばれる。
+              先へ行くほど薄く伸びているのは、横にこすられて潰れているから（高さ 0.501119 → 0.338196）。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="070_still.png" alt="板を止めたときの跡"></div>
+            <figcaption><strong>板の速さ 0。</strong>40フレーム分がすべて同じ場所に重なる。
+              運ばれた距離 0.001643。<strong>2枚とも摩擦 1.0、カメラも枠も同じ。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">C. Type と computevelocity（板の速さ 4.0・摩擦 1.0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Type</th><th>computevelocity</th><th>運ばれた距離</th><th>最後の vx</th><th>高さ</th></tr></thead>
+            <tbody>
+              <tr><td>Static（既定）</td><td>入り</td><td class="num hi">0.001513</td><td class="num">0.001907</td><td class="num">0.501120</td></tr>
+              <tr><td>Animated Rigid</td><td>入り</td><td class="num hi">5.336132</td><td class="num">3.998951</td><td class="num">0.338196</td></tr>
+              <tr><td>Animated Rigid</td><td>切り</td><td class="num hi">5.336132</td><td class="num">3.998951</td><td class="num">0.338196</td></tr>
+              <tr><td>Animated Deforming</td><td>入り</td><td class="num">5.335937</td><td class="num">3.998780</td><td class="num">0.338201</td></tr>
+              <tr><td>Animated Deforming</td><td>切り</td><td class="num hi">0.001513</td><td class="num">0.001907</td><td class="num">0.501120</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>1行目と5行目は、板を止めたときとまったく同じ値。</strong>
+          <code>computevelocity</code> は Rigid では無関係で、<strong>Deforming では必須</strong>だった。
+        </p>
+
+        <p class="label">A・B. 板の速さと、運ばれた距離（摩擦 1.0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>板の速さ</th><th>運ばれた距離</th><th>式の距離</th><th>実測 ÷ 式</th><th>最後の vx</th><th>vx ÷ 板の速さ</th><th>高さ</th><th>追いつく秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">0.001643</td><td class="num">0.000000</td><td class="num muted">—</td><td class="num">0.001990</td><td class="num muted">—</td><td class="num">0.501120</td><td class="num">∞</td></tr>
+              <tr><td class="num">1.0</td><td class="num">1.516453</td><td class="num">1.574032</td><td class="num">0.963420</td><td class="num">1.049126</td><td class="num hi">1.049126</td><td class="num">0.494549</td><td class="num">0.1019</td></tr>
+              <tr><td class="num">2.0</td><td class="num">2.776795</td><td class="num">3.046126</td><td class="num">0.911582</td><td class="num">1.993989</td><td class="num hi">0.996995</td><td class="num">0.400620</td><td class="num">0.2039</td></tr>
+              <tr><td class="num">4.0</td><td class="num">5.336132</td><td class="num">5.684506</td><td class="num">0.938715</td><td class="num">3.998951</td><td class="num hi">0.999738</td><td class="num">0.338196</td><td class="num">0.4077</td></tr>
+              <tr><td class="num">8.0</td><td class="num">9.479770</td><td class="num">9.738022</td><td class="num">0.973480</td><td class="num">8.024615</td><td class="num hi">1.003077</td><td class="num">0.251712</td><td class="num">0.8155</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          経過時間 1.625 秒。<strong>塊はきちんと板の速さに追いついている。</strong>
+        </p>
+
+        <p class="label">使った式（2段階に分かれる）</p>
+        <div class="prose">
+          <p>
+            板の上に置いた物は、まず滑りながら加速する。
+            <strong>そのあいだの加速度は μ g。</strong>
+            板の速さに追いついたら、それ以上は速くならず板と一緒に動く。
+          </p>
+        </div>
+        <pre><code>追いつく時刻     t* = 板の速さ ÷ (μ g)
+
+まだ追いついていない（t &lt; t*）
+  運ばれた距離 = ½ μ g t²
+
+もう追いついた（t ≥ t*）
+  運ばれた距離 = 板の速さ × t − 板の速さ² ÷ (2 μ g)</code></pre>
+
+        <p class="label">D. 摩擦を変える（板の速さ 4.0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>摩擦</th><th>運ばれた距離</th><th>式の距離</th><th>実測 ÷ 式</th><th>最後の vx</th><th>追いつく秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num hi">-0.000000</td><td class="num">0.000000</td><td class="num muted">—</td><td class="num hi">-0.000000</td><td class="num">∞</td></tr>
+              <tr><td class="num">0.1</td><td class="num">1.300902</td><td class="num">1.295227</td><td class="num hi">1.004382</td><td class="num">1.597380</td><td class="num">4.0775</td></tr>
+              <tr><td class="num">0.25</td><td class="num">3.248055</td><td class="num">3.238066</td><td class="num hi">1.003085</td><td class="num">3.991266</td><td class="num">1.6310</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4.745549</td><td class="num">4.869011</td><td class="num">0.974643</td><td class="num">3.972947</td><td class="num">0.8155</td></tr>
+              <tr><td class="num">1.0</td><td class="num">5.336132</td><td class="num">5.684506</td><td class="num">0.938715</td><td class="num">3.998951</td><td class="num">0.4077</td></tr>
+              <tr><td class="num">2.0</td><td class="num">5.360264</td><td class="num">6.092253</td><td class="num">0.879849</td><td class="num">4.002565</td><td class="num">0.2039</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>まだ追いついていない 0.1 と 0.25 は、式に 0.4% で乗る。</strong>
+          追いついたあとの 0.5 以上は足りなくなっていく。
+        </p>
+
+        <p class="label">足りなくなる理由は潰れ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>板の速さ</th><th>高さ</th><th>摩擦0のときからの減り</th><th>実測 ÷ 式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">0.501120</td><td class="num">0.0%</td><td class="num muted">—</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0.494549</td><td class="num">1.3%</td><td class="num">0.963420</td></tr>
+              <tr><td class="num">2.0</td><td class="num">0.400620</td><td class="num">20.1%</td><td class="num">0.911582</td></tr>
+              <tr><td class="num">4.0</td><td class="num">0.338196</td><td class="num">32.5%</td><td class="num">0.938715</td></tr>
+              <tr><td class="num">8.0</td><td class="num">0.251712</td><td class="num hi">49.8%</td><td class="num">0.973480</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>板が速いほど強くこすられ、底は板と一緒に動いても上のほうが遅れる。</strong>
+          平均で測っているので、そのぶん短く出る。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong><code>mpmcollider</code> の Type は既定が Static。板をいくら動かしても、塊は何も感じない。</strong>5通りの速さで結果が6桁まで完全に同じだった。<strong>Animated (Rigid) に変えて初めて動き出す。</strong></li>
+          <li><strong>「黙って無視される<button class="term" data-term="パラメータ">パラメータ</button>」はこれで5件目。</strong><a href="#exp044">044</a>のガイド、<a href="#exp050">050</a>の可変長入力、<a href="#exp062">062</a>の materialpreset、<a href="#exp066">066</a>の風速、そして今回の Type。</li>
+          <li><strong>動かせば、塊はきちんと板の速さに追いつく。</strong>板 1 / 2 / 4 / 8 に対して塊の速さが 1.049126 / 1.993989 / 3.998951 / 8.024615。<strong>板で割ると 1.049 / 0.997 / 1.000 / 1.003。</strong></li>
+          <li><strong>追いついていない間は、式に 0.4% で乗る。</strong>摩擦 0.1 で式 1.295227 に対し実測 1.300902、0.25 で 3.238066 に対し 3.248055。<strong>「½ μ g t²」そのもの。</strong></li>
+          <li><strong>追いついたあとは足りなくなる。</strong>摩擦 0.5 で 0.974643、1.0 で 0.938715、2.0 で 0.879849。<strong>摩擦を強くするほど式から遠ざかる。</strong></li>
+          <li><strong>理由は潰れ。</strong>高さが 0.501119 → 0.251712（49.8% 減）。<strong>底は板と一緒に動いても、上のほうが遅れる。</strong></li>
+          <li><strong>摩擦 0 の板は、本当に何も運ばない。</strong>運ばれた距離 −0.000000、最後の vx も −0.000000。<strong>動いている板の上でも、摩擦が無ければ物は置き去りになる。</strong></li>
+          <li><strong><code>computevelocity</code> は Rigid では無関係だった。</strong>入れても切っても6桁まで同じ値。<strong>ところが Animated (Deforming) では、切ると塊が動かなくなる</strong>（0.001513 で Static と同じ値）。</li>
+          <li><strong>Rigid と Deforming は、剛体の動きに対しては同じ答えを出す。</strong>5.336132 対 5.335937。差は 0.000195。<strong>剛体で済むなら Rigid でよい。</strong></li>
+          <li>測り方について。<strong>式が2段階に分かれることを先に整理してから測った。</strong>「追いつく秒」を計算しておけば、どの行にどちらの式を当てるかで迷わない。<strong>ひとつの式を全部の行に当ててしまうと、合わない行が「外れた」ように見えてしまう。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
