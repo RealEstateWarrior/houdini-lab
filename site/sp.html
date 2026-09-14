@@ -36,7 +36,6 @@
 
   --gutter: 58px;
   --bar: 52px;
-  --bar-top: 38px;
   color-scheme: light;
 }
 
@@ -80,44 +79,25 @@ a { color: var(--flag); text-underline-offset: 2px; }
   gap: 22px;
 }
 
-/* ---------- 上段（どの部にいるか） ----------
+/* ---------- ロゴ ----------
 
-   親子ができたので、「部を移る」と「部の中の節を移る」を段で分ける。
-   1列に混ぜると、どちらの移動なのか読み手に区別がつかない。 */
+   SP のマークだけ。押すと親の Saito Production へ戻る。
+   部の切り替えは親ページでやるので、ここには文字も部名も置かない。 */
 
-.sidenav .nav-top {
-  border-bottom: 1px solid var(--wire-dim);
-  background: rgba(255, 255, 255, 0.72);
-}
-.sidenav .nav-top-inner {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 22px;
-  height: var(--bar-top);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.sidenav .nav-brand {
+.sidenav .logo {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   flex: none;
   text-decoration: none;
   color: var(--ink);
+  padding: 2px;
+  margin-right: 4px;
 }
-.sidenav .nav-brand svg { display: block; width: 19px; height: 19px; }
-.sidenav .nav-brand span {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: -0.006em;
-  white-space: nowrap;
-}
-.sidenav .nav-brand:hover { opacity: 0.62; }
-.sidenav .nav-brand:focus-visible { outline: 2px solid var(--flag); outline-offset: 4px; border-radius: 5px; }
+.sidenav .logo svg { display: block; width: 23px; height: 23px; }
+.sidenav .logo:hover { opacity: 0.6; }
+.sidenav .logo:focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; border-radius: 6px; }
 
+/* 親ページだけ、ロゴの隣に部を並べる */
 .sidenav .nav-depts {
   list-style: none;
   margin: 0;
@@ -130,21 +110,16 @@ a { color: var(--flag); text-underline-offset: 2px; }
   min-width: 0;
 }
 .sidenav .nav-depts::-webkit-scrollbar { display: none; }
-.sidenav .nav-depts a,
 .sidenav .nav-depts .soon {
   display: block;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   line-height: 1;
-  padding: 6px 11px;
+  padding: 8px 12px;
   border-radius: 980px;
-  color: var(--ink-dim);
-  text-decoration: none;
+  color: var(--wire);
   white-space: nowrap;
+  cursor: default;
 }
-.sidenav .nav-depts a:hover { background: var(--ground-2); color: var(--ink); }
-.sidenav .nav-depts a[aria-current="page"] { background: var(--ground-2); color: var(--ink); font-weight: 600; }
-.sidenav .nav-depts a:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
-.sidenav .nav-depts .soon { color: var(--wire); cursor: default; }
 .sidenav .nav-depts .soon small {
   font-size: 0.86em;
   margin-left: 5px;
@@ -152,6 +127,7 @@ a { color: var(--flag); text-underline-offset: 2px; }
   border: 1px solid var(--wire-dim);
   border-radius: 980px;
 }
+
 
 .sidenav ul {
   list-style: none;
@@ -196,7 +172,6 @@ a { color: var(--flag); text-underline-offset: 2px; }
 
 @media (max-width: 720px) {
   .nav-inner { gap: 12px; padding: 0 16px; }
-  .sidenav .nav-top-inner { gap: 10px; padding: 0 16px; }
   .sidenav .nav-depts .soon { display: none; }
   .layout > .shell, .shell { padding: 28px 18px 72px; }
 }
@@ -811,7 +786,7 @@ h2 {
   grid-template-columns: var(--gutter) minmax(0, 1fr);
   gap: 0 22px;
   padding-bottom: 46px;
-  scroll-margin-top: 106px;
+  scroll-margin-top: 70px;
 }
 
 .badge {
@@ -1069,7 +1044,7 @@ pre code {
 }
 .gloss-nav a:hover { background: var(--ink); color: #ffffff; }
 
-.gloss-cat { margin-top: 44px; scroll-margin-top: 106px; }
+.gloss-cat { margin-top: 44px; scroll-margin-top: 70px; }
 .gloss-cat h3 {
   font-family: var(--font-display);
   font-size: 1.5rem;
@@ -1367,10 +1342,11 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 /* スマホではタブを畳んで、ハンバーガーに入れる。
    上段（部の切り替え）は畳まない。どこにいるかが分からなくなるため */
 @media (max-width: 720px) {
-  .sidenav > .nav-inner > ul { display: none; }
+  /* 親ページの部の並びは畳まない。ハンバーガーが無いので、
+     一緒に隠すと行き先がひとつも無くなる */
+  .sidenav > .nav-inner > ul:not(.nav-depts) { display: none; }
   .nav-burger { display: grid; }
-  .nav-inner { justify-content: flex-end; }
-  .sidenav .nav-brand span { display: inline; font-size: 0.78rem; }
+  .nav-inner { justify-content: space-between; }
 }
 
 /* ---------- 全画面メニュー（スマホ） ---------- */
@@ -1690,17 +1666,14 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 
 <div class="layout" id="top">
   <nav class="sidenav" aria-label="サイト内の移動">
-    <div class="nav-top">
-      <div class="nav-top-inner">
-        <a class="nav-brand" href="#top" aria-label="Saito Production">
-          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg>
-          <span>Saito Production</span>
-        </a>
-        <ul class="nav-depts">
-          <li><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa">Houdini 研究部</a></li>
-          <li><span class="soon">映像制作部<small>準備中</small></span></li>
-        </ul>
-      </div>
+    <div class="nav-inner">
+      <a class="logo" href="#top" aria-label="Saito Production">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg>
+      </a>
+      <ul class="nav-depts">
+        <li><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa">Houdini 研究部</a></li>
+        <li><span class="soon">映像制作部<small>準備中</small></span></li>
+      </ul>
     </div>
   </nav>
   <div class="shell">

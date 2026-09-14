@@ -466,42 +466,21 @@ PAGES = [
 
 
 def render_nav(active, tabs, urls):
-    """上部のバー。2段に分ける。
+    """上部のバー。どのページでも同じ並びにする。
 
-    上段は「どの部にいるか」。ロゴを押すと親の Saito Production へ戻る。
-    下段は「その部の中身」。ハブではタブ（読み込みなしで切り替わる）、
+    左端は SP のロゴだけ。押すと親の Saito Production へ戻る。
+    部の切り替えは親ページでやるので、ここには置かない。
+    続くのはその部の中身で、ハブではタブ（読み込みなしで切り替わる）、
     子ページではハブの該当タブへのリンクになる。
-
-    親子ができると、1段のままでは「部を移る」と「節を移る」が同じ列に
-    並んでしまって区別がつかない。段で分ける。
     """
     parent = urls.get("parent") or PARENT_URLS["pages"]
     out = [
         '  <nav class="sidenav" aria-label="サイト内の移動">',
-        '    <div class="nav-top">',
-        '      <div class="nav-top-inner">',
-        f'        <a class="nav-brand" href="{parent}"'
-        f' aria-label="{BRAND}（親のページへ）">',
-        f"          {LOGO_SVG}",
-        f"          <span>{BRAND}</span>",
-        "        </a>",
-        '        <ul class="nav-depts">',
-    ]
-    for dept_id, label, ready in DEPARTMENTS:
-        if not ready:
-            out.append(f'          <li><span class="soon">{html.escape(label)}'
-                       "<small>準備中</small></span></li>")
-        elif dept_id == "houdini":
-            out.append(f'          <li><a href="{urls["home"]}"'
-                       f' aria-current="page">{html.escape(label)}</a></li>')
-        else:
-            out.append(f'          <li><a href="{parent}">'
-                       f"{html.escape(label)}</a></li>")
-    out += [
-        "        </ul>",
-        "      </div>",
-        "    </div>",
         '    <div class="nav-inner">',
+        f'      <a class="logo" href="{parent}"'
+        f' aria-label="{BRAND}（親のページへ）">',
+        f"        {LOGO_SVG}",
+        "      </a>",
         '      <ul role="tablist">' if tabs else "      <ul>",
     ]
 
@@ -535,25 +514,23 @@ def render_nav(active, tabs, urls):
 
 
 def render_parent_nav(urls):
-    """親（Saito Production）のバー。部が横に並ぶだけの1段。"""
+    """親（Saito Production）のバー。ロゴと部だけの1段。"""
     out = [
         '  <nav class="sidenav" aria-label="サイト内の移動">',
-        '    <div class="nav-top">',
-        '      <div class="nav-top-inner">',
-        f'        <a class="nav-brand" href="#top" aria-label="{BRAND}">',
-        f"          {LOGO_SVG}",
-        f"          <span>{BRAND}</span>",
-        "        </a>",
-        '        <ul class="nav-depts">',
+        '    <div class="nav-inner">',
+        f'      <a class="logo" href="#top" aria-label="{BRAND}">',
+        f"        {LOGO_SVG}",
+        "      </a>",
+        '      <ul class="nav-depts">',
     ]
     for dept_id, label, ready in DEPARTMENTS:
         if ready:
-            out.append(f'          <li><a href="{urls["home"]}">'
+            out.append(f'        <li><a href="{urls["home"]}">'
                        f"{html.escape(label)}</a></li>")
         else:
-            out.append(f'          <li><span class="soon">{html.escape(label)}'
+            out.append(f'        <li><span class="soon">{html.escape(label)}'
                        "<small>準備中</small></span></li>")
-    out += ["        </ul>", "      </div>", "    </div>", "  </nav>"]
+    out += ["      </ul>", "    </div>", "  </nav>"]
     return "\n".join(out)
 
 
