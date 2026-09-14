@@ -1,0 +1,104 @@
+{
+  "title": "実験055 — 二骨IK のグラフ",
+  "network": "apex::Graph（rig::TwoBoneIK）",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "v_root",
+      "type": "Value<Matrix4>",
+      "pos": [
+        -2.6,
+        3.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "parm": "(0, 0, 0)"
+      }
+    },
+    {
+      "name": "v_mid",
+      "type": "Value<Matrix4>",
+      "pos": [
+        -0.9,
+        3.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "parm": "(0, 1, 0)"
+      }
+    },
+    {
+      "name": "v_tip",
+      "type": "Value<Matrix4>",
+      "pos": [
+        0.9,
+        3.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "parm": "(0, 2, 0)"
+      }
+    },
+    {
+      "name": "v_goal",
+      "type": "Value<Matrix4>",
+      "pos": [
+        2.6,
+        3.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "parm": "目標の位置"
+      }
+    },
+    {
+      "name": "ik",
+      "type": "rig::TwoBoneIK",
+      "pos": [
+        0.0,
+        1.3
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "blend": 1.0,
+        "stretch": false
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "v_root",
+      "from_output": 0,
+      "to": "ik",
+      "to_input": 0
+    },
+    {
+      "from": "v_mid",
+      "from_output": 0,
+      "to": "ik",
+      "to_input": 1
+    },
+    {
+      "from": "v_tip",
+      "from_output": 0,
+      "to": "ik",
+      "to_input": 2
+    },
+    {
+      "from": "v_goal",
+      "from_output": 0,
+      "to": "ik",
+      "to_input": 3
+    }
+  ]
+}

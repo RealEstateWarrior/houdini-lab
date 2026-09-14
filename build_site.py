@@ -345,13 +345,18 @@ DONE = [
      "shots": ["054_linear.png", "054_dualquat.png"],
      "title": "なぜ Linear が既定なのか — 速さではなかった。差は 4%",
      "note": "41万点で1.04倍。179度ひねると Linear は体積66.8%減。理由は決まらなかった"},
+    {"no": "055", "anchor": "exp055", "tags": ["APEX", "リグ", "IK", "検算"],
+     "log": "log_pm", "hip": "", "thumb": "055_reach.png",
+     "shots": ["055_reach.png", "055_far.png"],
+     "title": "逆運動学（IK）— 届かない場所を指すと、伸びきってそこで止まる",
+     "note": "9通りすべてで式と全桁一致。blend は途中でいったん目標から遠ざかる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "055", "title": "関節の回る範囲を決める",
-     "note": "kinefx::configurejointlimits。限界を超えたときに何が起きるか測る"},
+    {"no": "056", "title": "長い鎖の IK",
+     "note": "関節が3つより多いときの解き方（FABRIK）。何回で収まるか測る"},
 ]
 
 PAGES = [

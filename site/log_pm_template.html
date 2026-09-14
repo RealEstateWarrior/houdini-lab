@@ -3304,6 +3304,123 @@
     </article>
 
 
+
+    <!-- ===================== 055 ===================== -->
+    <article class="entry entry--current" id="exp055">
+      <div class="badge">055</div>
+      <div class="body">
+        <span class="chip chip--tool">APEX / リグ</span>
+        <h2>逆運動学（IK）— 届かない場所を指すと、伸びきってそこで止まる</h2>
+        <p class="path">apex::Graph / rig::TwoBoneIK &nbsp;·&nbsp; 式と全桁一致した</p>
+
+        <div class="prose">
+          <p>
+            ここまでは関節を1つずつ回して形を作ってきた（順運動学）。
+            <strong>IK はその逆で、先端を「ここに来い」と指定すると、
+            途中の関節が勝手に決まる。</strong>
+          </p>
+          <p>
+            使ったのは <button class="term" data-term="APEX">APEX</button> の部品
+            <code>rig::TwoBoneIK</code>。入力は 4×4 の行列で root / mid / tip / goal、
+            出力は解けた3つの行列。<a href="#exp050">実験050</a>で組んだグラフの作り方が
+            そのまま使える。
+          </p>
+          <p>
+            骨は (0,0,0) → (0,1,0) → (0,2,0) の3関節。
+            <strong>長さは 1 と 1 なので、根元から先端までは最大でも 2 までしか届かない。</strong>
+            先に式を立てる。
+          </p>
+          <pre><code>d ≤ 2 なら   誤差 = 0
+d &gt; 2 なら   誤差 = d − 2</code></pre>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="055_reach.png" alt="肘を曲げて目標に届いた骨"></div>
+            <figcaption>目標まで 1.5。<strong>届くので、肘を曲げてぴたりと合わせる。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="055_far.png" alt="伸びきって目標に届かない骨"></div>
+            <figcaption>目標まで 4.0。<strong>届かないので、まっすぐ伸びきってそこで止まる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 目標を近くから遠くまで動かす</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>目標まで</th><th>先端の位置</th><th>誤差 実測</th><th>誤差 予測</th><th>差</th><th>骨1</th><th>骨2</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.50</td><td class="num">(0.35355, 0.35355, 0.00000)</td><td class="num">0.0000000</td><td class="num">0.0000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">1.00</td><td class="num">(0.70711, 0.70711, 0.00000)</td><td class="num">0.0000000</td><td class="num">0.0000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">1.50</td><td class="num">(1.06066, 1.06066, 0.00000)</td><td class="num">0.0000000</td><td class="num">0.0000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">1.90</td><td class="num">(1.34350, 1.34350, 0.00000)</td><td class="num">0.0000000</td><td class="num">0.0000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">2.00</td><td class="num">(1.41421, 1.41421, 0.00000)</td><td class="num">0.0000000</td><td class="num">0.0000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">2.10</td><td class="num">(1.41421, 1.41421, 0.00000)</td><td class="num">0.1000000</td><td class="num">0.1000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">2.50</td><td class="num">(1.41421, 1.41421, 0.00000)</td><td class="num">0.5000000</td><td class="num">0.5000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">3.00</td><td class="num">(1.41421, 1.41421, 0.00000)</td><td class="num">1.0000000</td><td class="num">1.0000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">4.00</td><td class="num">(1.41421, 1.41421, 0.00000)</td><td class="num">2.0000000</td><td class="num">2.0000000</td><td class="num hi">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          届かないとき、先端は <strong>(1.41421, 1.41421, 0)</strong> で止まる。
+          これは原点から距離 2.0 の点。
+          <strong>目標を 2.1 にしても 4.0 にしても、まったく同じ場所。</strong>
+        </p>
+
+        <p class="label">2. stretch を入れる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>目標まで</th><th>誤差</th><th>骨1</th><th>骨2</th><th>合計 ÷ 2</th><th>目標 ÷ 届く距離</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.00</td><td class="num">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">0.50</td></tr>
+              <tr><td class="num">2.00</td><td class="num">0.000000000</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">1.00</td></tr>
+              <tr><td class="num">2.50</td><td class="num">0.000000121</td><td class="num">1.250000</td><td class="num">1.250000</td><td class="num hi">1.250000</td><td class="num hi">1.25</td></tr>
+              <tr><td class="num">3.00</td><td class="num">0.000000000</td><td class="num">1.500000</td><td class="num">1.500000</td><td class="num hi">1.500000</td><td class="num hi">1.50</td></tr>
+              <tr><td class="num">4.00</td><td class="num">0.000000194</td><td class="num">2.000000</td><td class="num">2.000000</td><td class="num hi">2.000000</td><td class="num hi">2.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>伸びる比は「目標までの距離 ÷ 届く距離」そのもの。</strong>
+          2本とも同じだけ伸びる。
+        </p>
+
+        <p class="label">3. blend を 0 から 1 へ動かす（目標まで 1.5）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>blend</th><th>先端の位置</th><th>元からの移動</th><th>目標までの残り</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.00</td><td class="num">(0.00000, 2.00000, 0.00000)</td><td class="num">0.000000</td><td class="num">1.416813</td></tr>
+              <tr><td class="num">0.25</td><td class="num">(0.10741, 1.76356, <span class="hi">0.85836</span>)</td><td class="num">0.896788</td><td class="num hi">1.462715</td></tr>
+              <tr><td class="num">0.50</td><td class="num">(0.72227, 1.30375, 1.11368)</td><td class="num">1.498905</td><td class="num">1.189069</td></tr>
+              <tr><td class="num">0.75</td><td class="num">(1.19560, 1.02337, 0.64122)</td><td class="num">1.671652</td><td class="num">0.656324</td></tr>
+              <tr><td class="num">1.00</td><td class="num">(1.06066, 1.06066, -0.00000)</td><td class="num">1.416813</td><td class="num">0.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>途中でいったん遠ざかる</strong>（1.4168 → 1.4627）。
+          しかも元の骨も目標も z = 0 の面にあるのに、
+          <strong>blend 0.25 では先端が z = 0.858 まで膨らむ。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>式と完全に一致した。</strong>9通りの距離すべてで、実測と予測の差が <span class="hi">0.000000000</span>。<strong>届く範囲では誤差ゼロ、届かなければ d − 2。</strong></li>
+          <li><strong>届かないとき、先端はいつも同じ場所で止まる。</strong>(1.41421, 1.41421, 0) ＝原点から距離 2.0。<strong>目標を 2.1 にしても 4.0 にしても変わらない。</strong></li>
+          <li><strong>骨の長さは 1.000000 のまま。</strong>18個の値の幅が <span class="hi">0.000000000</span>。<strong>IK は関節を回すだけで、骨を伸ばさない。</strong></li>
+          <li><strong><code>stretch</code> を入れると、届かない距離でも届く。</strong>誤差は 2×10⁻⁷ 以下。<strong>そのかわり骨が伸びる。</strong></li>
+          <li><strong>伸びる比にも式があった。</strong>「目標までの距離 ÷ 届く距離」そのもの。<strong>2本とも同じだけ伸びる。</strong></li>
+          <li><strong><code>blend</code> は「目標へ近づく割合」ではなかった。</strong>目標までの残りが 1.4168 → <span class="hi">1.4627</span> → 1.1891 → 0.6563 → 0。<strong>途中でいったん遠ざかる。</strong></li>
+          <li><strong>しかも平面から外れる。</strong>すべて z = 0 にあるのに、blend 0.25 で先端が z = 0.858 まで膨らむ。<strong>行列そのものを混ぜているので、途中の姿勢は「途中の形」であって「途中の位置」ではない。</strong></li>
+          <li><strong>APEX の部品は、こういう確かめ方に向いている。</strong><button class="term" data-term="ジオメトリ">ジオメトリ</button>を介さず、行列を入れて行列を受け取るだけ。<strong>シーンを組まずに、数字だけで挙動を確かめられる。</strong></li>
+          <li>なお <button class="term" data-term="SOP">SOP</button> の <code>kinefx::ikchains::2.0</code> も試したが、<strong>エラーも警告も出ないまま何も起きなかった</strong>。goal の指定を6通り、入力の作り方を4通り試しても骨は動かない。<strong>原因は分かっていないので断定しない。</strong>APEX の部品のほうは素直に動いた。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
