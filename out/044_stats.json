@@ -1,0 +1,99 @@
+{
+  "guides": 300,
+  "density": 1000,
+  "length": 0.5,
+  "default_radius": 0.05,
+  "rest_fix": [
+    {
+      "fix_rest": false,
+      "jitter": 0.0,
+      "hairs": 12516,
+      "len_mean": 0.049904189618704735,
+      "len_max": 0.04999958616466784,
+      "tip_spread": 0.6050435665831041
+    },
+    {
+      "fix_rest": false,
+      "jitter": 1.2,
+      "hairs": 12516,
+      "len_mean": 0.049904189618704735,
+      "len_max": 0.04999958616466784,
+      "tip_spread": 0.6050435665831041
+    },
+    {
+      "fix_rest": true,
+      "jitter": 0.0,
+      "hairs": 12516,
+      "len_mean": 0.1348051774087453,
+      "len_max": 0.4998914789058632,
+      "tip_spread": 0.6618547620575933
+    },
+    {
+      "fix_rest": true,
+      "jitter": 1.2,
+      "hairs": 12516,
+      "len_mean": 0.13498954265320465,
+      "len_max": 0.5000001579090257,
+      "tip_spread": 0.6567805178474001
+    }
+  ],
+  "rest_fix_works": true,
+  "radius": [
+    {
+      "radius": 0.05,
+      "total": 12516,
+      "taken": 2366,
+      "rate": 0.1890380313199105,
+      "len_mean": 0.1348051774087453,
+      "len_max": 0.4998914789058632
+    },
+    {
+      "radius": 0.1,
+      "total": 12516,
+      "taken": 9153,
+      "rate": 0.7313039309683605,
+      "len_mean": 0.37834611852106104,
+      "len_max": 0.4998914789058632
+    },
+    {
+      "radius": 0.2,
+      "total": 12516,
+      "taken": 12514,
+      "rate": 0.9998402045381911,
+      "len_mean": 0.4976490843118743,
+      "len_max": 0.49988654546085187
+    },
+    {
+      "radius": 0.4,
+      "total": 12516,
+      "taken": 12516,
+      "rate": 1.0,
+      "len_mean": 0.49293945141431067,
+      "len_max": 0.49609943433372916
+    },
+    {
+      "radius": 0.8,
+      "total": 12516,
+      "taken": 12516,
+      "rate": 1.0,
+      "len_mean": 0.48541273179895233,
+      "len_max": 0.48960486511027546
+    }
+  ],
+  "clumpid": {
+    "hairs": 12516,
+    "clumps": 144,
+    "id_min": 204,
+    "id_max": 12492,
+    "sequential": false,
+    "id_in_hairids": 144,
+    "leader_in_own_clump": 144,
+    "purity": {
+      "checked": 1391,
+      "same": 1072,
+      "rate": 0.7706685837526959,
+      "clumps_in_sample": 144,
+      "if_random": 0.006944444444444444
+    }
+  }
+}

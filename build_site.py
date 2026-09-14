@@ -290,13 +290,18 @@ DONE = [
      "shots": ["043_loose.png", "043_clumped.png"],
      "title": "毛を束ねる — つなぐ順番が、思っていたのと逆だった",
      "note": "hairgenは土台→ガイド、hairclumpは毛→土台。2つで逆。clumpsize 0.8は逆に広がる"},
+    {"no": "044", "anchor": "exp044", "tags": ["グルーム", "毛", "属性", "訂正", "落とし穴"],
+     "log": "log_pm", "hip": "044_influence.hipnc", "thumb": "044_guided.png",
+     "shots": ["044_ignored.png", "044_guided.png"],
+     "title": "つないだのに、ガイドが1本も使われていなかった — rest が (0,0,0) だった",
+     "note": "addpointで作った点のrestは既定値のまま。hairgenはrest空間で距離を測る。警告も出ない"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "044", "title": "束ごとに色を変える（clumpid）",
-     "note": "043で増えた clumpid を使い、束の境目を目で確かめる"},
+    {"no": "045", "title": "毛をレンダリングに乗せる",
+     "note": "Karma で毛をどう扱うか。太さ・本数と時間の関係を測る"},
 ]
 
 PAGES = [

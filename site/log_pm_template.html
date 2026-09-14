@@ -1955,6 +1955,18 @@
         <h2>毛を束ねる — つなぐ順番が、思っていたのと逆だった</h2>
         <p class="path">/obj/groom &nbsp;·&nbsp; hairgen は「土台 → ガイド」、hairclump は「毛 → 土台」</p>
 
+        <p class="callout">
+          <strong>訂正（<a href="#exp044">実験044</a>）。</strong>
+          この実験では<strong>ガイドが1本も使われていなかった</strong>。
+          ガイドの点の <code>rest</code> が (0,0,0) のままだったため、
+          <code>hairgen</code> からはガイドが全部が原点にあるように見えていた。
+          ここに出ている 12,516本は、すべて「ガイドに拾われなかった毛」に与えられる
+          既定の長さ 0.05 の短い毛である。
+          <strong>つなぐ順番の結論（土台→ガイド／毛→土台）は正しい</strong>
+          （044でノードの入力ラベルからも確認した）が、
+          <strong>「ガイドは形を決める」という書き方はこの実験では確かめられていない。</strong>
+        </p>
+
         <div class="prose">
           <p>
             <a href="#exp042">実験042</a>では <code>fur</code> で手早く毛を生やした。
@@ -2066,7 +2078,123 @@
           <li><strong>毛先は確かに寄った。ただし一本調子ではない。</strong>0.2 で 52.7% 縮む一方、0.8 では 31.8% しか縮まない。<strong>clumpsize を上げ続ければ密になる、ではなかった。</strong></li>
           <li><strong>その理由は「束が太くなるから」だった。</strong>束の毛先の広がりは 0.00386 → 0.16565 と増え、根元に対する比も <span class="hi">0.279 → 0.632</span> と増える。<strong>大きい束ほど毛先が寄りきらない</strong>ので、束の中は密でも毛先どうしの距離の平均は 0.2 を底に反転する。</li>
           <li><strong><a href="#exp042">実験042</a>の density が、別の組み方で裏づけられた。</strong>density 1000・面積 12.53039 なら計算上 12,530本。実際は 12,516本で <span class="hi">差 0.1%</span>。<strong>ガイドを自作した今回の組み方でも、「density は面積あたりの本数」がそのまま成り立つ。</strong></li>
-          <li>ガイド300本から 12,516本、<strong>41.7倍</strong>。<strong>ガイドは形を決め、density が数を決める。</strong>ガイドの本数は毛の本数に直接は効かない。</li>
+          <li>ガイド300本から 12,516本、<strong>41.7倍</strong>。ガイドの本数は毛の本数に直接は効かない。</li>
+          <li><strong>【補足・実験044】「ガイドは形を決める」はこの実験では確かめられていなかった。</strong>ガイドの点の <code>rest</code> が (0,0,0) のままで、<code>hairgen</code> はガイドを1本も使っていなかった。ここの毛はすべて長さ 0.05 の「拾われなかった毛」。<a href="#exp044">実験044</a>で原因と直し方を測っている。</li>
+        </ul>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 044 ===================== -->
+    <article class="entry entry--current" id="exp044">
+      <div class="badge">044</div>
+      <div class="body">
+        <span class="chip chip--pm">グルーム</span>
+        <h2>つないだのに、ガイドが1本も使われていなかった — rest が (0,0,0) だった</h2>
+        <p class="path">/obj/groom &nbsp;·&nbsp; エラーも警告も出ないまま、入力が無視されていた</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp043">実験043</a>で自作のガイドを <code>hairgen::2.0</code> につなぎ、
+            12,516本の毛を出した。今回はその続きで
+            「ガイドの向きをばらしたら毛はどう変わるか」を測ろうとした。
+          </p>
+          <p>
+            <strong>毛先の平均が、小数点以下5桁まで1ミリも動かなかった。</strong>
+            ガイドを100本にしても900本にしても、毛の本数も束の数もまったく同じ。
+            つまり<strong>ガイドは1本も使われていなかった</strong>。
+            エラーも警告も出ない。
+          </p>
+          <p>
+            原因は <code>rest</code> という<button class="term" data-term="アトリビュート">アトリビュート</button>だった。
+            ガイドを作る <button class="term" data-term="VEX">VEX</button> では <code>addpoint</code> で新しい点を作っている。
+            土台から流れてきた<button class="term" data-term="ジオメトリ">ジオメトリ</button>には <code>rest</code> が付いているので、
+            新しい点にも欄はできるが、<strong>中身は (0,0,0) のまま</strong>。
+            <code>hairgen</code> は rest の空間で毛とガイドの距離を測るので、
+            <strong>ガイドは全部が原点にあることになり、どの毛にも届かなかった。</strong>
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="044_ignored.png" alt="短いうぶ毛だけが生えた球"></div>
+            <figcaption><code>rest</code> が (0,0,0) のまま。<strong>ガイドは使われず、長さ 0.05 の毛だけが生える。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="044_guided.png" alt="長い毛が四方に伸びた球"></div>
+            <figcaption><code>rest</code> を直した。<strong>つなぎ方もパラメータも同じで、ガイドどおりの長さと向きになる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. rest を直す前と後</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>rest</th><th>ガイドのばらつき</th><th>毛</th><th>長さの平均</th><th>長さの最大</th><th>毛先の広がり</th></tr></thead>
+            <tbody>
+              <tr><td>(0,0,0)</td><td class="num">0.0</td><td class="num">12,516</td><td class="num">0.04990</td><td class="num hi">0.05000</td><td class="num">0.60504</td></tr>
+              <tr><td>(0,0,0)</td><td class="num">1.2</td><td class="num">12,516</td><td class="num">0.04990</td><td class="num hi">0.05000</td><td class="num">0.60504</td></tr>
+              <tr><td>直した</td><td class="num">0.0</td><td class="num">12,516</td><td class="num">0.13481</td><td class="num hi">0.49989</td><td class="num">0.66185</td></tr>
+              <tr><td>直した</td><td class="num">1.2</td><td class="num">12,516</td><td class="num">0.13499</td><td class="num hi">0.50000</td><td class="num">0.65678</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          ガイドの長さは 0.5。直す前は<strong>最大でも 0.05000 ちょうど</strong>で、桁がひとつ違う。
+          これは <code>unguidedlength</code>（ガイドに拾われなかった毛の長さ）の既定値。
+          <strong>気づけたのは、この数字が既定値とぴったり一致していたから。</strong>
+        </p>
+        <p class="hint">
+          ばらつきを 0.0 → 1.2 にしたときの毛先の差は、直す前が <strong>0.000000</strong>、
+          直した後が <strong>0.005074</strong>。
+          <strong>ガイドが効いているかは、入力を大きく変えて出力が動くかで判定できる。</strong>
+        </p>
+
+        <p class="label">2. influenceradius を上げると、拾われる毛はどう増えるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>influenceradius</th><th>全部の毛</th><th>拾われた毛</th><th>割合</th><th>長さの平均</th><th>長さの最大</th></tr></thead>
+            <tbody>
+              <tr><td>0.05（既定）</td><td class="num">12,516</td><td class="num">2,366</td><td class="num hi">18.9%</td><td class="num">0.13481</td><td class="num">0.49989</td></tr>
+              <tr><td>0.10</td><td class="num">12,516</td><td class="num">9,153</td><td class="num">73.1%</td><td class="num">0.37835</td><td class="num">0.49989</td></tr>
+              <tr><td>0.20</td><td class="num">12,516</td><td class="num">12,514</td><td class="num hi">100.0%</td><td class="num">0.49765</td><td class="num">0.49989</td></tr>
+              <tr><td>0.40</td><td class="num">12,516</td><td class="num">12,516</td><td class="num">100.0%</td><td class="num">0.49294</td><td class="num">0.49610</td></tr>
+              <tr><td>0.80</td><td class="num">12,516</td><td class="num">12,516</td><td class="num">100.0%</td><td class="num">0.48541</td><td class="num">0.48960</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <code>growunguided</code> を切ると、拾われなかった毛は生えない。
+          残った本数が「拾われた毛」になる。
+          <strong>ガイド300本を半径1の球に撒くと間隔は約0.2。既定の 0.05 では届かない。</strong>
+        </p>
+
+        <p class="label">3. clumpid は何を指す番号か</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>番号の範囲</td><td class="num">204 〜 12492</td></tr>
+              <tr><td>0 からの連番か</td><td>いいえ（144個が飛び飛び）</td></tr>
+              <tr><td>番号が毛の <code>id</code> の中にあるか</td><td class="num hi">144 / 144</td></tr>
+              <tr><td>その id の毛自身が同じ束にいるか</td><td class="num hi">144 / 144</td></tr>
+              <tr><td>隣の毛が同じ束になる率（実測）</td><td class="num hi">77.07%</td></tr>
+              <tr><td>ばらばらだった場合の予想</td><td class="num">1 ÷ 144 = 0.69%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ガイドは1本も使われていなかった。しかもエラーも警告も出ない。</strong>100本を900本にしても、向きをばらばらに傾けても、毛先の平均が小数点以下5桁まで同じ。<strong>「つないだから効いているはず」は、確かめないと言えない。</strong></li>
+          <li><strong>原因は <code>rest</code> が (0,0,0) だったこと。</strong><code>addpoint</code> で作った点には、既にある属性の欄はできるが中身は既定値のまま。土台から <code>rest</code> が流れてきていたので、ガイドの全点の rest が原点になっていた。<strong><code>hairgen</code> は rest の空間で距離を測る。</strong></li>
+          <li><strong>気づけたのは、長さが既定値と一致していたから。</strong>長さの最大が <span class="hi">0.05000</span> ちょうど。ガイドの長さ 0.5 とは桁がひとつ違う。<strong>0.05 は <code>unguidedlength</code>（拾われなかった毛の長さ）の既定値だった。</strong></li>
+          <li><strong>直したら 0.05000 → 0.49989 に変わった。</strong>同時に、ガイドをばらしたときの毛先の差が 0.000000 → 0.005074 になった。<strong>この2つが、ガイドが効いているかの判定になる。</strong></li>
+          <li><strong><code>influenceradius</code> の既定 0.05 では、2割弱しか拾えない。</strong>ガイド300本の間隔は約0.2なので、既定の半径ではほとんどの毛がどのガイドからも遠い。<strong>0.20 でようやく 100%（12,514 / 12,516）。</strong></li>
+          <li><strong>半径を上げすぎると毛が短くなる。</strong>長さの平均が 0.49765 → 0.49294 → 0.48541。遠くのガイドまで混ぜると、向きの違うガイドが平均されて縮む。<strong>2.5% の差だが、単調に減っているので誤差ではない。</strong></li>
+          <li><strong><code>clumpid</code> は「束の代表になった毛の番号」だった。</strong>0からの連番ではなく 204〜12492 の飛び飛びの値。144個すべてが実在する毛の <code>id</code> と一致し、しかもその毛自身が同じ束にいた（どちらも 144/144）。</li>
+          <li><strong>束はちゃんと空間的にまとまっている。</strong>隣の毛が同じ束になる率は <span class="hi">77.07%</span>。ばらばらに振られていたなら 0.69% のはずで、<strong>112倍</strong>。残り 23% は束の境目にいる毛。</li>
+          <li><strong>測り方そのものが道具になる。</strong>効いているはずのものが効いていないことを見つけるには、<strong>入力を大きく変えて出力が動くかを見ればよい</strong>。動かなければ、その入力は使われていない。</li>
         </ul>
       </div>
     </article>

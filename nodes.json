@@ -983,11 +983,24 @@
             [
               "入力1",
               "ガイド"
+            ],
+            [
+              "influenceradius",
+              "ガイドが毛に効く半径。既定 0.05"
+            ],
+            [
+              "growunguided",
+              "拾われなかった毛を生やすか。既定オン"
+            ],
+            [
+              "unguidedlength",
+              "拾われなかった毛の長さ。既定 0.05"
             ]
           ],
-          "gotcha": "入力は「土台 → ガイド」。逆にすると Invalid source で何も出ない。しかも hairclump は逆順なので、片方を覚えてもう片方に当てはめると必ず失敗する（実験043で4通り総当たり）。土台には rest も要る。",
+          "gotcha": "入力は「土台 → ガイド」。逆にすると Invalid source で何も出ない（hairclump は逆順）。さらに、ガイドの点の rest が (0,0,0) だとガイドは1本も使われず、エラーも警告も出ない。rest 空間で距離を測るため。見分け方は毛の長さで、unguidedlength の既定 0.05 ちょうどなら1本も拾われていない（実験044）。既定の influenceradius 0.05 では 18.9% しか拾えない。",
           "exps": [
-            "043"
+            "043",
+            "044"
           ],
           "img": "043_loose.png",
           "cap": "ガイド300本から12,516本"
@@ -1029,7 +1042,7 @@
               "通すだけで rest が付く"
             ]
           ],
-          "gotcha": "グルームの土台には必須。normal を付けただけの球を hairgen に渡すと「Skin input has no rest attribute.」で止まる。rest を1つ挟めば通る（実験043）。",
+          "gotcha": "グルームの土台には必須。normal を付けただけの球を hairgen に渡すと「Skin input has no rest attribute.」で止まる（実験043）。もっと怖いのは、wrangle の addpoint で作った点の rest が (0,0,0) のまま入ること。エラーは出ないのに、そのジオメトリは原点にあるものとして扱われる（実験044）。",
           "exps": [
             "043"
           ],
