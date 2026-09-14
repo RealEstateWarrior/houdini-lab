@@ -325,13 +325,18 @@ DONE = [
      "shots": ["050_parts.png", "050_graph.png"],
      "title": "APEX に入る — 2,220個の部品と、いちばん小さいグラフ",
      "note": "部品2,220種。Add の2つ目の入力は可変長で、値を入れても無視される（警告なし）"},
+    {"no": "051", "anchor": "exp051", "tags": ["APEX", "リグ", "KineFX", "検算"],
+     "log": "log_pm", "hip": "051_skeleton.hipnc", "thumb": "051_bent.png",
+     "shots": ["051_rest.png", "051_bent.png"],
+     "title": "骨を作って動かす — rotate と prerotate を取り違えると、関節ごと飛んでいく",
+     "note": "式とのずれ 6e-8。rotate だと 90度で 1.41 ずれ、回した関節まで動く"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "051", "title": "骨を作って動かす",
-     "note": "KineFX で骨組みを作り、APEX のグラフから動かす"},
+    {"no": "052", "title": "骨に肉を付ける",
+     "note": "kinefx::jointdeform で、骨を動かしたときに皮が付いてくるか測る"},
 ]
 
 PAGES = [

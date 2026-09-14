@@ -2857,6 +2857,112 @@
     </article>
 
 
+
+    <!-- ===================== 051 ===================== -->
+    <article class="entry entry--current" id="exp051">
+      <div class="badge">051</div>
+      <div class="body">
+        <span class="chip chip--tool">APEX / リグ</span>
+        <h2>骨を作って動かす — rotate と prerotate を取り違えると、関節ごと飛んでいく</h2>
+        <p class="path">/obj/rig &nbsp;·&nbsp; 絵で見ても気づけない。大きく振ると差が開く</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp050">実験050</a>で APEX の入口を測った。
+            今回はその手前にある骨組み（<button class="term" data-term="KineFX">KineFX</button>）を触る。
+          </p>
+          <p>
+            KineFX の骨は<strong>ただの点と線</strong>で持たれている。
+            点1つが関節1つ、線が親子のつながり。
+            名前（<code>name</code>）を付けて <code>kinefx::rigdoctor</code> を通すと、
+            足りない属性が埋まる。
+          </p>
+          <p>
+            先に式を立てる。根元を原点、関節が (0,1,0) と (0,2,0) にあるなら、
+            真ん中を Z 軸まわりに θ 回したとき先端は
+          </p>
+          <pre><code>(−sin θ,  1 + cos θ,  0)</code></pre>
+          <p>に来るはずだ。<strong>実測と突き合わせる。</strong></p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="051_rest.png" alt="一直線に並んだ3つの関節"></div>
+            <figcaption>回す前。<strong>関節は (0,0,0) (0,1,0) (0,2,0) に一直線。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="051_bent.png" alt="真ん中で折れ曲がった骨"></div>
+            <figcaption>真ん中を60度。<strong>根元と真ん中は動かず、先だけが折れている。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. rigdoctor が足すもの</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>関節</th><th>位置</th><th>parent_idx</th><th>意味</th></tr></thead>
+            <tbody>
+              <tr><td><code>joint0</code></td><td class="num">(0, 0, 0)</td><td class="num hi">-1</td><td>親がいない＝根元</td></tr>
+              <tr><td><code>joint1</code></td><td class="num">(0, 1, 0)</td><td class="num">0</td><td>親は joint0</td></tr>
+              <tr><td><code>joint2</code></td><td class="num">(0, 2, 0)</td><td class="num">1</td><td>親は joint1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          手で組んだ時点では <code>P</code> と <code>name</code> の2つだけ。
+          rigdoctor が <code>localtransform</code>（4×4）・<code>transform</code>（3×3）・
+          <code>parent_idx</code> の3つを足す。
+          <strong>親子関係は線のつながりから読み取られる。</strong>
+        </p>
+
+        <p class="label">2. 真ん中を回すと、先端はどこへ行くか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>角度</th><th>先端 実測 x</th><th>先端 実測 y</th><th>式 x</th><th>式 y</th><th>ずれ</th><th>真ん中の関節の移動</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0°</td><td class="num">0.000000</td><td class="num">2.000000</td><td class="num">-0.000000</td><td class="num">2.000000</td><td class="num hi">0.000000000</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">15°</td><td class="num">-0.258819</td><td class="num">1.965926</td><td class="num">-0.258819</td><td class="num">1.965926</td><td class="num hi">0.000000014</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">30°</td><td class="num">-0.500000</td><td class="num">1.866025</td><td class="num">-0.500000</td><td class="num">1.866025</td><td class="num hi">0.000000044</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">45°</td><td class="num">-0.707107</td><td class="num">1.707107</td><td class="num">-0.707107</td><td class="num">1.707107</td><td class="num hi">0.000000049</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">60°</td><td class="num">-0.866025</td><td class="num">1.500000</td><td class="num">-0.866025</td><td class="num">1.500000</td><td class="num hi">0.000000044</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">90°</td><td class="num">-1.000000</td><td class="num">1.000000</td><td class="num">-1.000000</td><td class="num">1.000000</td><td class="num hi">0.000000060</td><td class="num hi">0.000000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. rotate と prerotate を取り違えるとどうなるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>角度</th><th>書き方</th><th>真ん中 x</th><th>真ん中 y</th><th>先端 x</th><th>先端 y</th></tr></thead>
+            <tbody>
+              <tr><td class="num">30°</td><td>prerotate（正）</td><td class="num hi">0.000000</td><td class="num hi">1.000000</td><td class="num">-0.500000</td><td class="num">1.866025</td></tr>
+              <tr><td class="num">30°</td><td>rotate（誤）</td><td class="num">-0.500000</td><td class="num">0.866025</td><td class="num">-1.000000</td><td class="num">1.732051</td></tr>
+              <tr><td class="num">60°</td><td>prerotate（正）</td><td class="num hi">0.000000</td><td class="num hi">1.000000</td><td class="num">-0.866025</td><td class="num">1.500000</td></tr>
+              <tr><td class="num">60°</td><td>rotate（誤）</td><td class="num">-0.866025</td><td class="num">0.500000</td><td class="num">-1.732051</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">90°</td><td>prerotate（正）</td><td class="num hi">0.000000</td><td class="num hi">1.000000</td><td class="num">-1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">90°</td><td>rotate（誤）</td><td class="num">-1.000000</td><td class="num">-0.000000</td><td class="num">-2.000000</td><td class="num">-0.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          同じ角度・同じ骨で、<button class="term" data-term="VEX">VEX</button> の1語だけを変えた。
+          <strong>誤のほうは、回した関節そのものが原点のまわりを回ってしまう。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>KineFX の骨は、ただの点と線だった。</strong>点1つが関節1つ、線が親子のつながり。<strong>普通の <button class="term" data-term="wrangle">wrangle</button> でそのまま組める。</strong></li>
+          <li><strong>手で組んだ時点では <code>P</code> と <code>name</code> しか無い。</strong><code>kinefx::rigdoctor</code> が <code>localtransform</code>・<code>transform</code>・<code>parent_idx</code> の3つを足す。<strong>親子関係は線のつながりから読み取られる</strong>（根元の parent_idx は -1）。</li>
+          <li><strong>ただし rigdoctor は既定では何も足さない。</strong>3つのトグルが<strong>すべて既定オフ</strong>。オンにして初めて属性が出てくる。</li>
+          <li><strong>式とのずれは最大 <span class="hi">0.000000060</span>。</strong>6通りすべてで先端は (−sin θ, 1 + cos θ, 0) にぴたりと来る。<strong>回した関節そのものの移動は 0.000000000</strong>で、桁の限界まで動いていない。</li>
+          <li><strong>最初は合わなかった。原因は掛ける順番。</strong>VEX の <code>rotate()</code> だと、90度で先端が (−2, 0, 0) へ飛ぶ。式の値 (−1, 1, 0) とのずれは <span class="hi">1.41</span>。<strong>回した関節そのものまで動いていた。</strong></li>
+          <li><strong><code>prerotate()</code> に変えると一致した。</strong>違いは「回してから動かす」か「動かしてから回す」か。<strong>関節の位置は移動の分で決まるので、先に回さないと関節ごと原点のまわりを回る。</strong></li>
+          <li><strong>この間違いは絵で見ても気づきにくい。</strong>30度なら「少し曲がった骨」に見えてしまう。<strong>気づけたのは先に式を立てて数字で突き合わせたから。</strong>90度まで振ると差が 1.41 まで開くので、<strong>大きく振ってみるのが見つけるこつ</strong>。</li>
+          <li><strong>回転は子にだけ伝わる。</strong>真ん中を回しても根元は動かない。親から子へ行列を掛け合わせる作りなので、<strong>自分より上には影響しない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

@@ -1,0 +1,67 @@
+{
+  "title": "実験051 — 骨を作って動かす",
+  "network": "/obj/rig",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "make_joints",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nint prim = addprim(0, \"polyline\");\nfor (int i = 0; i < 3; i++) {\n    int pt = addpoint(0, set(0.0, float(i), 0.0));\n..."
+      }
+    },
+    {
+      "name": "doctor",
+      "type": "kinefx::rigdoctor",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputparentidx": 1,
+        "transformations": 1,
+        "inittransforms": 1
+      }
+    },
+    {
+      "name": "pose",
+      "type": "kinefx::rigattribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "snippet": "\nif (s@name == \"joint1\") {\n    matrix m = 4@localtransform;\n    // prerotate は「先に回してから動かす」。rotate だと順番が逆になり、\n    // 関...",
+        "angle": 45.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "make_joints",
+      "from_output": 0,
+      "to": "doctor",
+      "to_input": 0
+    },
+    {
+      "from": "doctor",
+      "from_output": 0,
+      "to": "pose",
+      "to_input": 0
+    }
+  ]
+}
