@@ -1162,6 +1162,196 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "mpm",
+      "label": "MPM（砂・雪・泥）",
+      "note": "Houdini 21 から入ったソルバ。物を粒の集まりとして持ち、計算のときだけ格子に移して解く。mpm で始まる SOP が8種、DOP が2種ある。組むのは4ノードだけだが、黙って無視されるパラメータが多い。",
+      "nodes": [
+        {
+          "name": "mpmcontainer",
+          "kind": "SOP",
+          "one": "計算が届く範囲と、粒の細かさを決める。",
+          "what": "MPM は粒を格子に移して解くので、その格子の範囲を先に決める。Size と Center で箱を置くだけ。出力は点1つのジオメトリで、境界の位置や粒の間隔がディテールアトリビュートに入っている。この出力を mpmsource / mpmcollider / mpmsolver につなぐ。",
+          "params": [
+            [
+              "particlesep",
+              "粒の間隔。細かさを決める一番大事な数字"
+            ],
+            [
+              "sizex / sizey / sizez",
+              "範囲の大きさ。既定は 10 × 10 × 10"
+            ],
+            [
+              "centerx / centery / centerz",
+              "範囲の中心"
+            ],
+            [
+              "gridscale",
+              "格子の目の粗さ。既定 2.0（粒の間隔の何倍か）"
+            ],
+            [
+              "allbounds",
+              "6面の扱い。Opened（既定）/ Closed / Delete"
+            ],
+            [
+              "friction / sticky",
+              "境界の面の摩擦と粘着。地面のものとは別"
+            ]
+          ],
+          "gotcha": "ここで決めた範囲とは別に、mpmsolver が y = 0 に地面を持っている（実験066）。範囲を広く取っても、粒は y = 0 で止まる。6面の扱いの既定は Opened で、閉じたいなら Closed を選ぶ。",
+          "exps": [
+            "061",
+            "063",
+            "065"
+          ],
+          "img": "guide_mpm_2_particles.png",
+          "cap": "間隔 0.12 で 1辺 1.0 の箱が 577粒"
+        },
+        {
+          "name": "mpmsource",
+          "kind": "SOP",
+          "one": "形を粒に変える。材質もここで決める。",
+          "what": "入力は 0 = 形、1 = mpmcontainer。箱や球の中身を粒で埋める。粒には Je・Jp（体積がどれだけ変わったか）、v（速度）、pscale、id が付く。初速を与えたいときもここ。",
+          "params": [
+            [
+              "materialtype",
+              "Elastic / Chunky / Liquid / Viscous / Sandy。既定は 1（Chunky）"
+            ],
+            [
+              "density",
+              "密度。既定 400.0"
+            ],
+            [
+              "initialvelocityx / y / z",
+              "粒に最初から持たせる速度"
+            ],
+            [
+              "particlesepoverride",
+              "container と別の間隔を使いたいとき"
+            ],
+            [
+              "sandfrictionangle",
+              "Sandy のときの安息角。既定 30.0 度"
+            ]
+          ],
+          "gotcha": "materialpreset はスクリプトから変えても何も起きない。10通り試して9桁まで同じだった（実験062）。recipeutils.setPresetMenu というコールバックで作られていて、UI で触ったときにしか走らないため。実際に効くのは materialtype。",
+          "exps": [
+            "061",
+            "062",
+            "067"
+          ],
+          "img": "guide_mpm_4_sandy.png",
+          "cap": "materialtype = Sandy。3.44 × 0.23 × 3.51 まで広がる"
+        },
+        {
+          "name": "mpmsolver",
+          "kind": "SOP",
+          "one": "時間を進めて粒を動かす。地面も重力も風もここ。",
+          "what": "入力は 0 = 源 / 1 = ぶつかるもの / 2 = 範囲。コライダが要らないなら 1 は空でよい。重力・空気抵抗・風・地面・substep が全部この1ノードにある。",
+          "params": [
+            [
+              "gravityy",
+              "重力。既定 −9.81"
+            ],
+            [
+              "airdrag",
+              "空気抵抗。既定 0。速さの2乗に比例する"
+            ],
+            [
+              "windvelocityx / y / z",
+              "風速。airdrag が 0 だと何も起きない"
+            ],
+            [
+              "groundactive",
+              "y = 0 の地面。既定 1（入っている）"
+            ],
+            [
+              "groundfriction",
+              "地面の摩擦。クーロン摩擦の μ そのもの。既定 1.0"
+            ],
+            [
+              "groundsticky",
+              "地面の粘着。既定 0。横滑りではなく離れるときに効く"
+            ],
+            [
+              "globalsubsteps",
+              "1フレームを何回に分けるか。既定 1"
+            ],
+            [
+              "exportv / exportje / exportjp",
+              "速度や体積比を粒に書き出すか。既定オン"
+            ]
+          ],
+          "gotcha": "Wind Velocity だけ上げても、位置も速度も9桁まで変わらない。風は空気抵抗を通してしか効かないため（実験066）。また substep を 16 にすると時間が 25.5倍かかるのに高さは動かない。細かくしたいなら粒の間隔のほうを詰めるほうが安い（実験064・065）。",
+          "exps": [
+            "061",
+            "064",
+            "066",
+            "067"
+          ],
+          "img": "guide_mpm_3_hit.png",
+          "cap": "30フレーム目。1.0902 × 0.6070 × 1.0817 に潰れている"
+        },
+        {
+          "name": "mpmcollider",
+          "kind": "SOP",
+          "one": "粒がぶつかる物を作る。",
+          "what": "入力は 0 = 形、1 = mpmcontainer。渡した形を VDB に変えて、mpmsolver の入力1につなぐ。動かしたいときはアニメーションした形をそのまま渡す。",
+          "params": [
+            [
+              "friction",
+              "摩擦。既定 1.0"
+            ],
+            [
+              "sticky",
+              "粘着。既定 0.0"
+            ],
+            [
+              "computevelocity",
+              "動く物の速度を粒に伝えるか。既定オン"
+            ],
+            [
+              "voxelsizeoverride / voxelsize",
+              "VDB の目の細かさ"
+            ]
+          ],
+          "gotcha": "mpmsolver が最初から y = 0 に地面を持っているので、床を置いたつもりが二重になっていることがある。実験062〜065で置いた床の箱は上面がちょうど y = 0 で、組み込みの地面と重なっていた（実験066）。",
+          "exps": [
+            "062",
+            "063",
+            "064"
+          ],
+          "img": "",
+          "cap": ""
+        },
+        {
+          "name": "mpmsurface",
+          "kind": "SOP",
+          "one": "粒を面に戻す。レンダに回すための最後の一段。",
+          "what": "粒の集まりから表面を作る。粒のままではレンダできないので、見せる絵を作るならこれを通す。",
+          "params": [
+            [
+              "outputtype",
+              "既定は Surface VDB。面が欲しいなら Polygon Mesh"
+            ],
+            [
+              "voxelscale",
+              "目の細かさ。体積はほとんど変えないのに点数は大きく変わる"
+            ],
+            [
+              "surfacingmethod",
+              "表面の作り方。機械学習を使う方法もある"
+            ]
+          ],
+          "gotcha": "既定のままつなぐと点が2個しか出てこない（出力が VDB だから）。Polygon Mesh に変えても出てくるのはプリミティブ1個の polysoup で、体積を測ると出鱈目な値になる。convert で Polygon に直して初めて正しく測れる。面にすると体積が 27% 太り、膨らむ厚みは粒の間隔の 0.4倍だった（実験063）。",
+          "exps": [
+            "063"
+          ],
+          "img": "guide_mpm_5_surface.png",
+          "cap": "Polygon Mesh + convert。1,398点 / 1,398面"
+        }
+      ]
     }
   ]
 }
