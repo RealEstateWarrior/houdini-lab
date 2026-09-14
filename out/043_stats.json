@@ -1,0 +1,153 @@
+{
+  "guides": 300,
+  "density": 1000,
+  "length": 0.5,
+  "orders": [
+    {
+      "node": "hairgen",
+      "order": "土台 → ガイド",
+      "hairs": 12516,
+      "error": ""
+    },
+    {
+      "node": "hairgen",
+      "order": "ガイド → 土台",
+      "hairs": null,
+      "error": "Invalid source /obj/order/hg_b/hairgencore."
+    },
+    {
+      "node": "hairclump",
+      "order": "毛 → 土台",
+      "hairs": 12516,
+      "error": ""
+    },
+    {
+      "node": "hairclump",
+      "order": "土台 → 毛",
+      "hairs": null,
+      "error": "Invalid source /obj/order/cl_b/hairclumpcore1."
+    }
+  ],
+  "loose_attribs": [
+    "id",
+    "skinprim",
+    "skinprimuv"
+  ],
+  "added_attribs": [
+    "clumpid"
+  ],
+  "hairs": 12516,
+  "guides_made": 300,
+  "guide_to_hair": 41.72,
+  "clumpsize": [
+    {
+      "clumps": 9823,
+      "per_clump_mean": 1.2741524992364859,
+      "per_clump_max": 7,
+      "per_clump_min": 1,
+      "clumpsize": 0.05
+    },
+    {
+      "clumps": 2607,
+      "per_clump_mean": 4.800920598388953,
+      "per_clump_max": 22,
+      "per_clump_min": 1,
+      "clumpsize": 0.1
+    },
+    {
+      "clumps": 648,
+      "per_clump_mean": 19.314814814814813,
+      "per_clump_max": 60,
+      "per_clump_min": 2,
+      "clumpsize": 0.2
+    },
+    {
+      "clumps": 144,
+      "per_clump_mean": 86.91666666666667,
+      "per_clump_max": 218,
+      "per_clump_min": 14,
+      "clumpsize": 0.4
+    },
+    {
+      "clumps": 27,
+      "per_clump_mean": 463.55555555555554,
+      "per_clump_max": 966,
+      "per_clump_min": 106,
+      "clumpsize": 0.8
+    }
+  ],
+  "fewer_clumps": true,
+  "spacing": [
+    {
+      "label": "束ねない",
+      "clumpsize": null,
+      "count": 1391,
+      "mean": 0.0588456072555134,
+      "median": 0.05838948562610234,
+      "sd": 0.021454234619079724
+    },
+    {
+      "count": 1391,
+      "mean": 0.05820511531846909,
+      "median": 0.05819594232168541,
+      "sd": 0.021889327966081975,
+      "label": "clumpsize 0.05",
+      "clumpsize": 0.05
+    },
+    {
+      "count": 1391,
+      "mean": 0.027805299280589165,
+      "median": 0.020928136129174133,
+      "sd": 0.02288293464919989,
+      "label": "clumpsize 0.2",
+      "clumpsize": 0.2
+    },
+    {
+      "count": 1391,
+      "mean": 0.04015312819782635,
+      "median": 0.03692024213162393,
+      "sd": 0.01889103768026525,
+      "label": "clumpsize 0.8",
+      "clumpsize": 0.8
+    }
+  ],
+  "spacing_drop_percent": 31.765292142406615,
+  "tips_gather": true,
+  "clump_spread": [
+    {
+      "clumpsize": 0.05,
+      "clumps": 9823,
+      "root_spread": 0.013805098953331426,
+      "tip_spread": 0.003856181156938892,
+      "ratio": 0.2793302076265324
+    },
+    {
+      "clumpsize": 0.1,
+      "clumps": 2607,
+      "root_spread": 0.025883431146822986,
+      "tip_spread": 0.006267793656577703,
+      "ratio": 0.24215466724731474
+    },
+    {
+      "clumpsize": 0.2,
+      "clumps": 648,
+      "root_spread": 0.05408060041243963,
+      "tip_spread": 0.016027077992618467,
+      "ratio": 0.2963554004650421
+    },
+    {
+      "clumpsize": 0.4,
+      "clumps": 144,
+      "root_spread": 0.11562374695959142,
+      "tip_spread": 0.051437007229510466,
+      "ratio": 0.44486542411989854
+    },
+    {
+      "clumpsize": 0.8,
+      "clumps": 27,
+      "root_spread": 0.26198893420955177,
+      "tip_spread": 0.1656470111741076,
+      "ratio": 0.6322672050019291
+    }
+  ]
+}

@@ -285,13 +285,18 @@ DONE = [
      "shots": ["042_thin.png", "042_thick.png"],
      "title": "毛を生やす — density は本数ではなく「面積あたりの本数」だった",
      "note": "100を入れて1,249本。面積12.53で割ると99.678。length は純粋な倍率"},
+    {"no": "043", "anchor": "exp043", "tags": ["グルーム", "毛", "属性", "総当たり"],
+     "log": "log_pm", "hip": "043_clump.hipnc", "thumb": "043_clumped.png",
+     "shots": ["043_loose.png", "043_clumped.png"],
+     "title": "毛を束ねる — つなぐ順番が、思っていたのと逆だった",
+     "note": "hairgenは土台→ガイド、hairclumpは毛→土台。2つで逆。clumpsize 0.8は逆に広がる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "043", "title": "毛を束ねる（hairclump）",
-     "note": "042の毛はばらばら。束にすると見え方がどう変わるか測る"},
+    {"no": "044", "title": "束ごとに色を変える（clumpid）",
+     "note": "043で増えた clumpid を使い、束の境目を目で確かめる"},
 ]
 
 PAGES = [

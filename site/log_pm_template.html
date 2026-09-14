@@ -1946,6 +1946,132 @@
     </article>
 
 
+
+    <!-- ===================== 043 ===================== -->
+    <article class="entry entry--current" id="exp043">
+      <div class="badge">043</div>
+      <div class="body">
+        <span class="chip chip--pm">グルーム</span>
+        <h2>毛を束ねる — つなぐ順番が、思っていたのと逆だった</h2>
+        <p class="path">/obj/groom &nbsp;·&nbsp; hairgen は「土台 → ガイド」、hairclump は「毛 → 土台」</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp042">実験042</a>では <code>fur</code> で手早く毛を生やした。
+            今回はその毛を <code>hairclump</code> で束ねる。
+            細かい毛が一様に生えた状態から、房にまとまった状態へ変える。
+          </p>
+          <p>
+            <strong>ところが <code>fur</code> の出力は <code>hairclump</code> につながらない。</strong>
+            「Couldn't find skinprim attribute.」で止まる。
+            グルームの道具は「この毛は土台のどの面から生えたか」を番号で知りたがるが、
+            <code>fur</code> が出すのは <button class="term" data-term="N">N</button> と P だけだった。
+          </p>
+          <p>
+            そこでガイドを自分で組んだ。散らした点から線を伸ばし、
+            <code>xyzdist</code> で一番近い面の番号を調べて <code>skinprim</code> に入れる。
+            <strong>それでも動かなかった。原因はつなぐ順番だった。</strong>
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="043_loose.png" alt="毛が一様に生えた球"></div>
+            <figcaption>束ねない。<strong>12,516本の毛が一様に散り、うぶ毛のように見える。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="043_clumped.png" alt="毛が房にまとまった球"></div>
+            <figcaption><code>clumpsize</code> 0.4。同じ毛・同じカメラ。<strong>144個の房になり、1房あたり約87本。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. つなぐ順番を総当たりで決める</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>ノード</th><th>つないだ順番</th><th>出てきた本数</th><th>エラー</th></tr></thead>
+            <tbody>
+              <tr><td><code>hairgen::2.0</code></td><td class="hi">土台 → ガイド</td><td class="num">12,516</td><td>—</td></tr>
+              <tr><td><code>hairgen::2.0</code></td><td>ガイド → 土台</td><td class="num">出ない</td><td>Invalid source …/hairgencore.</td></tr>
+              <tr><td><code>hairclump::2.0</code></td><td class="hi">毛 → 土台</td><td class="num">12,516</td><td>—</td></tr>
+              <tr><td><code>hairclump::2.0</code></td><td>土台 → 毛</td><td class="num">出ない</td><td>Invalid source …/hairclumpcore1.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          4通りすべてを試した。正しい2通りだけが 12,516本を出し、残りは何も出さない。
+          <strong>2つの<button class="term" data-term="ノード">ノード</button>で順番が逆で、片方を覚えてもう片方に当てはめると必ず失敗する。</strong>
+        </p>
+
+        <p class="label">2. clumpsize を変えると束の数はどう変わるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>clumpsize</th><th>束の数</th><th>1束あたりの本数</th><th>いちばん大きい束</th><th>いちばん小さい束</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td class="num">9,823</td><td class="num hi">1.27</td><td class="num">7</td><td class="num">1</td></tr>
+              <tr><td class="num">0.10</td><td class="num">2,607</td><td class="num">4.80</td><td class="num">22</td><td class="num">1</td></tr>
+              <tr><td class="num">0.20</td><td class="num">648</td><td class="num">19.31</td><td class="num">60</td><td class="num">2</td></tr>
+              <tr><td class="num">0.40</td><td class="num">144</td><td class="num">86.92</td><td class="num">218</td><td class="num">14</td></tr>
+              <tr><td class="num">0.80</td><td class="num">27</td><td class="num">463.56</td><td class="num">966</td><td class="num">106</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          毛は 12,516本で固定。束ねると増える <code>clumpid</code> の種類を数えている。
+          <strong>0.05 では1束あたり 1.27本、つまりほとんど束になっていない。</strong>
+        </p>
+
+        <p class="label">3. 毛先は本当に寄るのか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>測った毛先</th><th>いちばん近い毛先まで</th><th>中央値</th><th>束ねない場合との差</th></tr></thead>
+            <tbody>
+              <tr><td>束ねない</td><td class="num">1,391</td><td class="num">0.05885</td><td class="num">0.05839</td><td class="num">—</td></tr>
+              <tr><td>clumpsize 0.05</td><td class="num">1,391</td><td class="num">0.05821</td><td class="num">0.05820</td><td class="num">-1.1%</td></tr>
+              <tr><td>clumpsize 0.20</td><td class="num">1,391</td><td class="num hi">0.02781</td><td class="num">0.02093</td><td class="num hi">-52.7%</td></tr>
+              <tr><td>clumpsize 0.80</td><td class="num">1,391</td><td class="num">0.04015</td><td class="num">0.03692</td><td class="num">-31.8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          毛先の点だけを取り出し、いちばん近い毛先までの距離を測った。
+          どの条件も同じ 1,391本で比べている。
+          <strong>0.2 がいちばん密で、0.8 では逆に広がった。</strong>
+        </p>
+
+        <p class="label">4. なぜ 0.8 では逆に広がったのか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>clumpsize</th><th>束の数</th><th>根元の広がり</th><th>毛先の広がり</th><th>毛先 ÷ 根元</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td class="num">9,823</td><td class="num">0.01381</td><td class="num">0.00386</td><td class="num">0.279</td></tr>
+              <tr><td class="num">0.10</td><td class="num">2,607</td><td class="num">0.02588</td><td class="num">0.00627</td><td class="num">0.242</td></tr>
+              <tr><td class="num">0.20</td><td class="num">648</td><td class="num">0.05408</td><td class="num">0.01603</td><td class="num">0.296</td></tr>
+              <tr><td class="num">0.40</td><td class="num">144</td><td class="num">0.11562</td><td class="num">0.05144</td><td class="num">0.445</td></tr>
+              <tr><td class="num">0.80</td><td class="num">27</td><td class="num">0.26199</td><td class="num hi">0.16565</td><td class="num hi">0.632</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          束ごとに「束の中心からの平均距離」を、根元と毛先それぞれで測った。これが束の太さにあたる。
+          <strong>束を大きくするほど、毛先は根元に対して寄りきらなくなる（0.279 → 0.632）。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>つなぐ順番が、2つのノードで逆だった。</strong><code>hairgen::2.0</code> は「土台 → ガイド」、<code>hairclump::2.0</code> は「毛 → 土台」。4通り総当たりで、正しい2通りだけが 12,516本を出した。<strong>片方を覚えて、もう片方に当てはめると必ず失敗する。</strong></li>
+          <li><strong><code>fur</code> の出力は、束ねるノードにつながらない。</strong><code>fur</code> が出すのは N と P だけで <code>skinprim</code> が無い。<a href="#exp042">実験042</a>で使った手軽な道具は、次の工程には渡せなかった。</li>
+          <li><strong>土台には <code>rest</code> が要る。</strong>球に <code>normal</code> を付けただけでは「Skin input has no rest attribute.」で止まる。<code>rest</code> <button class="term" data-term="SOP">SOP</button> を1つ挟めば通る。</li>
+          <li><strong>ガイドは自分で作れた。</strong>散らした点から <code>polyline</code> を伸ばし、<code>xyzdist</code> で一番近い面を調べて <code>skinprim</code> と <code>skinprimuv</code> を<button class="term" data-term="プリミティブ">プリミティブ</button>に付ける。<strong>専用ノードを使わなくても、必要だったのは属性2つだけ。</strong></li>
+          <li><strong>束ねて増えるのは <code>clumpid</code> ひとつだけ。</strong>前が <code>id</code>/<code>skinprim</code>/<code>skinprimuv</code>、後がそれに <code>clumpid</code> が足されただけ。<strong>どの毛がどの束かを示す番号で、束ごとに色を変えるといった加工に使える。</strong></li>
+          <li><strong>毛先は確かに寄った。ただし一本調子ではない。</strong>0.2 で 52.7% 縮む一方、0.8 では 31.8% しか縮まない。<strong>clumpsize を上げ続ければ密になる、ではなかった。</strong></li>
+          <li><strong>その理由は「束が太くなるから」だった。</strong>束の毛先の広がりは 0.00386 → 0.16565 と増え、根元に対する比も <span class="hi">0.279 → 0.632</span> と増える。<strong>大きい束ほど毛先が寄りきらない</strong>ので、束の中は密でも毛先どうしの距離の平均は 0.2 を底に反転する。</li>
+          <li><strong><a href="#exp042">実験042</a>の density が、別の組み方で裏づけられた。</strong>density 1000・面積 12.53039 なら計算上 12,530本。実際は 12,516本で <span class="hi">差 0.1%</span>。<strong>ガイドを自作した今回の組み方でも、「density は面積あたりの本数」がそのまま成り立つ。</strong></li>
+          <li>ガイド300本から 12,516本、<strong>41.7倍</strong>。<strong>ガイドは形を決め、density が数を決める。</strong>ガイドの本数は毛の本数に直接は効かない。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
