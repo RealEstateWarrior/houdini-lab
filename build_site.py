@@ -412,13 +412,20 @@ DONE = [
      "shots": ["067_slip.png", "067_grip.png"],
      "title": "MPM の地面の摩擦 — 教科書の式に 0.04% で乗る。ただし塊が潰れるまで",
      "note": "Ground Friction はクーロン摩擦のμそのもの。摩擦が強いと塊が潰れて式から外れる"},
+    {"no": "068", "anchor": "exp068",
+     "tags": ["MPM", "シミュレーション", "摩擦", "材質", "検算"],
+     "log": "log_fx", "hip": "", "thumb": "068_sandy.png",
+     "shots": ["068_chunky.png", "068_viscous.png", "068_sandy.png",
+               "068_liquid.png"],
+     "title": "MPM の材質5つで滑らせる — 摩擦の式に乗るのは、形が崩れない材質だけ",
+     "note": "崩れる順と式から外れる順が完全一致。Liquidの摩擦1.0は発散していた"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "068", "title": "MPM の材質ごとの潰れ方",
-     "note": "materialtype を変えると、摩擦がどこから式を外れるかが動くか"},
+    {"no": "069", "title": "MPM のコライダの摩擦",
+     "note": "mpmcollider 側の friction も組み込みの地面と同じ式に乗るか"},
 ]
 
 PAGES = [

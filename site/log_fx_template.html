@@ -2929,6 +2929,167 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 068 ===================== -->
+    <article class="entry entry--current" id="exp068">
+      <div class="badge">068</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM の材質5つで滑らせる — 摩擦の式に乗るのは、形が崩れない材質だけ</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 平均と最大を両方測れば、発散しているかが分かる</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp067">実験067</a>で、Ground Friction はクーロン摩擦の μ そのものだと分かった。
+            ただし<strong>摩擦が強いと塊が潰れて、式から外れていった。</strong>
+          </p>
+          <p>
+            「潰れる」の中身は材質で決まっているはずだ。
+            だから <code>materialtype</code> を5つとも試す。
+            <strong>仕掛けは実験067とまったく同じで、軸だけ「摩擦」から「材質」に変えてある。</strong>
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="068_chunky.png" alt="Chunkyの跡。まっすぐ細い帯"></div>
+            <figcaption><strong>Chunky（既定）。</strong>奥行き <span class="hi">1.000466</span>。
+              距離 3.260808 は式の <strong>0.999642倍</strong>。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="068_viscous.png" alt="Viscousの跡。少し広がる"></div>
+            <figcaption><strong>Viscous。</strong>奥行き 2.227771。
+              距離 3.380790 は式の 1.036423倍。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="068_sandy.png" alt="Sandyの跡。大きく扇状に広がる"></div>
+            <figcaption><strong>Sandy。</strong>奥行き 5.863259。
+              距離 3.658329 は式の 1.121506倍。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="068_liquid.png" alt="Liquidの跡。もっとも広く散る"></div>
+            <figcaption><strong>Liquid。</strong>奥行き <span class="hi">11.324130</span>。
+              距離 4.109069 は式の <strong>1.259686倍</strong>。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">
+          真上から見た跡。1辺 1.0 の塊を横向きに初速 4.0 で投げ、40フレーム分を2フレームおきに重ねた。
+          古いほど青く、新しいほど明るい。<strong>4枚ともカメラも枠も同じ。</strong>
+        </p>
+
+        <p class="label">A. 摩擦 0.25 — 式が言う距離は 3.261978</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>材質</th><th>滑った距離</th><th>実測 ÷ 式</th><th>いちばん上</th><th>奥行き</th><th>潰れ具合</th></tr></thead>
+            <tbody>
+              <tr><td>Elastic</td><td class="num">3.246170</td><td class="num hi">0.995154</td><td class="num">1.010986</td><td class="num hi">1.000850</td><td class="num">0.9900</td></tr>
+              <tr><td>Chunky（既定）</td><td class="num">3.260808</td><td class="num hi">0.999642</td><td class="num">0.983122</td><td class="num hi">1.000466</td><td class="num">1.0176</td></tr>
+              <tr><td>Viscous</td><td class="num">3.380790</td><td class="num">1.036423</td><td class="num">0.290802</td><td class="num">2.227771</td><td class="num">7.6608</td></tr>
+              <tr><td>Sandy</td><td class="num">3.658329</td><td class="num">1.121506</td><td class="num">0.063920</td><td class="num">5.863259</td><td class="num">91.7282</td></tr>
+              <tr><td>Liquid</td><td class="num">4.109069</td><td class="num hi">1.259686</td><td class="num">0.046547</td><td class="num hi">11.324130</td><td class="num">243.2832</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          「奥行き」は元が 1.0。「潰れ具合」は 奥行き ÷ いちばん高い粒 で、
+          <strong>横に広がって縦に潰れるほど大きくなる。</strong>
+        </p>
+
+        <p class="label">C. 崩れる順に並べると、外れる順も同じになる（摩擦 0.25）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>材質</th><th>潰れ具合</th><th>実測 ÷ 式</th><th>奥行き</th></tr></thead>
+            <tbody>
+              <tr><td>Elastic</td><td class="num">0.9900</td><td class="num">0.995154</td><td class="num">1.000850</td></tr>
+              <tr><td>Chunky（既定）</td><td class="num">1.0176</td><td class="num">0.999642</td><td class="num">1.000466</td></tr>
+              <tr><td>Viscous</td><td class="num">7.6608</td><td class="num">1.036423</td><td class="num">2.227771</td></tr>
+              <tr><td>Sandy</td><td class="num">91.7282</td><td class="num">1.121506</td><td class="num">5.863259</td></tr>
+              <tr><td>Liquid</td><td class="num hi">243.2832</td><td class="num hi">1.259686</td><td class="num">11.324130</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>例外は1つもない。</strong>しかも外れ方は必ず「式より遠くまで行く」側で、
+          近くで止まるほうへは外れない。
+        </p>
+
+        <p class="label">B. 摩擦 1.0 — 式が言う距離は 0.815494</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>材質</th><th>滑った距離</th><th>実測 ÷ 式</th><th>最後の vx</th><th>いちばん上</th><th>奥行き</th></tr></thead>
+            <tbody>
+              <tr><td>Elastic</td><td class="num">2.264021</td><td class="num">2.776256</td><td class="num hi">1.666963</td><td class="num">1.270895</td><td class="num">1.038518</td></tr>
+              <tr><td>Chunky（既定）</td><td class="num">1.194665</td><td class="num">1.464958</td><td class="num">0.000409</td><td class="num">0.647331</td><td class="num">1.015006</td></tr>
+              <tr><td>Viscous</td><td class="num">1.477935</td><td class="num">1.812318</td><td class="num">-0.003296</td><td class="num">0.423962</td><td class="num">1.727110</td></tr>
+              <tr><td>Sandy</td><td class="num">1.676135</td><td class="num">2.055360</td><td class="num">-0.002204</td><td class="num">0.275265</td><td class="num">2.283884</td></tr>
+              <tr><td class="muted">Liquid</td><td class="num muted">2.276151</td><td class="num muted">2.791130</td><td class="num muted">0.031310</td><td class="num muted">3.795241</td><td class="num muted">4.086964</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>Liquid のこの行は計算が暴れている</strong>ので、灰色にしてある。理由は下の表。
+        </p>
+
+        <p class="label">Elastic が外れる理由は「跳ねている」（摩擦 1.0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>frame</th><th>x の平均</th><th>高さの平均</th><th>いちばん上</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.0075</td><td class="num">0.5376</td><td class="num">1.0156</td></tr>
+              <tr><td class="num">7</td><td class="num">0.6842</td><td class="num">0.5971</td><td class="num">1.1782</td></tr>
+              <tr><td class="num">13</td><td class="num">0.9213</td><td class="num hi">0.8331</td><td class="num">1.3811</td></tr>
+              <tr><td class="num">19</td><td class="num">1.1792</td><td class="num">0.5952</td><td class="num">1.2340</td></tr>
+              <tr><td class="num">25</td><td class="num">1.4839</td><td class="num hi">0.8243</td><td class="num">1.4976</td></tr>
+              <tr><td class="num">31</td><td class="num">1.7628</td><td class="num">0.7363</td><td class="num">1.3905</td></tr>
+              <tr><td class="num">37</td><td class="num">2.0616</td><td class="num">0.6437</td><td class="num">1.1369</td></tr>
+              <tr><td class="num">40</td><td class="num">2.2715</td><td class="num">0.7196</td><td class="num">1.2709</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          高さの平均が<strong>3回上下している</strong>。
+          <strong>地面に触れていない間は摩擦が効かない</strong>ので、同じ摩擦でも遠くまで行く。
+        </p>
+
+        <p class="label">Liquid の摩擦 1.0 は暴れている</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>frame</th><th>x の平均</th><th>高さの平均</th><th>いちばん上</th><th>奥行き</th></tr></thead>
+            <tbody>
+              <tr><td class="num">19</td><td class="num">1.9928</td><td class="num">0.0566</td><td class="num">0.1523</td><td class="num">2.7405</td></tr>
+              <tr><td class="num">22</td><td class="num">2.1322</td><td class="num">0.0464</td><td class="num">0.1418</td><td class="num">2.8488</td></tr>
+              <tr><td class="num">25</td><td class="num">2.2173</td><td class="num">0.0447</td><td class="num">0.5760</td><td class="num">2.8848</td></tr>
+              <tr><td class="num">28</td><td class="num">2.2568</td><td class="num">0.0462</td><td class="num">1.1335</td><td class="num">2.8940</td></tr>
+              <tr><td class="num">31</td><td class="num">2.2704</td><td class="num">0.0495</td><td class="num">1.6652</td><td class="num">2.8980</td></tr>
+              <tr><td class="num">34</td><td class="num">2.2758</td><td class="num">0.0520</td><td class="num">2.0569</td><td class="num">3.1284</td></tr>
+              <tr><td class="num">37</td><td class="num">2.2798</td><td class="num">0.0537</td><td class="num">2.9850</td><td class="num">3.5679</td></tr>
+              <tr><td class="num">40</td><td class="num hi">2.2837</td><td class="num hi">0.0563</td><td class="num hi">3.7952</td><td class="num">4.0870</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>高さの平均は 0.0447 から 0.0563 までしか動かないのに、いちばん高い粒だけが 0.5760 → 3.7952 と上がり続ける。</strong>
+          横の位置も 2.2173 から 2.2837 で止まっている。
+          <strong>少数の粒が上へ飛んでいるだけで、物理ではなく数値の暴れと考えるのが自然。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>摩擦の式に乗るのは、形が崩れない材質だけだった。</strong>摩擦 0.25 で Elastic 0.995154倍、Chunky 0.999642倍。<strong>どちらも奥行きが 1.0008 / 1.0005 で、元の箱の幅のまま滑っている。</strong></li>
+          <li><strong>崩れる順と、外れる順が完全に一致する。</strong>潰れ具合 0.99 / 1.02 / 7.66 / 91.7 / 243.3 に対して、実測÷式が 0.9952 / 0.9996 / 1.0364 / 1.1215 / 1.2597。<strong>例外は1つもない。</strong></li>
+          <li><strong>崩れる材質は、必ず式より「遠くまで」行く。</strong>近くで止まるほうへは外れない。<strong>横に広がるということは前側が後ろから押され続けるということで、先頭はいつまでも前へ出る。</strong></li>
+          <li><strong>Sandy は奥行きが 5.9倍、Liquid は 11.3倍になる。</strong>元は 1辺 1.0 の箱。<strong>真上から見た跡を並べると、同じ初速でもまったく違う絵になる。</strong></li>
+          <li><strong>摩擦 1.0 では、5つとも式から大きく外れる（1.46倍〜2.79倍）。</strong><a href="#exp067">実験067</a>と同じで、摩擦を強くするほど式は使えなくなる。</li>
+          <li><strong>Elastic の外れ方だけは理由が別。跳ねている。</strong>高さの平均が 0.5376 → 0.8331 → 0.5952 → 0.8523 → 0.5874 と3回上下する。<strong>地面に触れていない間は摩擦が効かないので、40フレーム目でもまだ 1.666963 の速さで動いていた。</strong></li>
+          <li><strong>Liquid の摩擦 1.0 では計算が暴れた。</strong>平均が動かないのに最大だけが伸び続ける。<strong>この行は結果として扱わない。</strong></li>
+          <li><strong>「発散していないか」は、平均と最大を両方測れば分かる。</strong>平均が動かないのに最大だけが伸び続けたら、それは物理ではない。<strong>片方しか測っていないと、暴れを結果として書いてしまう。</strong></li>
+          <li>測り方について。<strong>Chunky（既定の材質）の距離は、摩擦 0.25 で 3.260808、摩擦 1.0 で 1.194665。<a href="#exp067">実験067</a>で測った値と6桁まで完全に同じだった。</strong>別の実験として組み直しても同じ数字が返ったので、両方の仕掛けが正しいことも確かめられた。</li>
+          <li><strong>ついでに、計算する範囲の大きさは結果を変えないと分かった。</strong>実験067では奥行き 8.0 の範囲、今回は 16.0 の範囲で組んだのに距離が6桁まで一致した。<strong>中身が全部入っているかぎり、範囲を広く取っても結果は動かない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
