@@ -1730,6 +1730,80 @@
     </article>
 
 
+
+    <!-- ===================== 040 ===================== -->
+    <article class="entry entry--current" id="exp040">
+      <div class="badge">040</div>
+      <div class="body">
+        <span class="chip chip--pm">テクスチャ</span>
+        <h2>作ったテクスチャを地形に貼る — 貼れたかどうかを画の数字で判定する</h2>
+        <p class="path">/obj/terrain &nbsp;·&nbsp; 039の画と038のレンダをつなぐ</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp039">実験039</a>で Copernicus の<button class="term" data-term="ノイズ">ノイズ</button>を画像として書き出した。
+            <a href="#exp038">実験038</a>で地形を <button class="term" data-term="Karma">Karma</button> で出した。
+            今回はその2つをつなぐ。
+          </p>
+          <p>
+            <strong>「貼ったつもりで貼れていない」はよくある。</strong>
+            そこで、貼れたかどうかを画の数字で判定する。
+            テクスチャを貼れば面の中に細かい濃淡が出るはずなので、
+            <strong>貼る前と貼ったあとで画の「細かさ」が増える</strong>はずである。
+            増えなければ貼れていない。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="040_compare.png" alt="テクスチャなし・256・1024の3つの地形レンダを横に並べた比較"></div>
+            <figcaption>左から、テクスチャなし / 256×256 / 1024×1024。<strong>同じ地形・同じライト・同じカメラ。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">貼る前と貼ったあと</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>テクスチャ</th><th>時間</th><th>明るさ</th><th>ばらつき</th><th>細かさ</th></tr></thead>
+            <tbody>
+              <tr><td>なし（一色）</td><td class="num">5.35秒</td><td class="num">191.73</td><td class="num">14.83</td><td class="num">2.2143</td></tr>
+              <tr><td class="num">256×256</td><td class="num">3.44秒</td><td class="num">110.31</td><td class="num hi">27.56</td><td class="num hi">2.9028</td></tr>
+              <tr><td class="num">1024×1024</td><td class="num">3.47秒</td><td class="num">110.26</td><td class="num hi">27.54</td><td class="num hi">3.0095</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          細かさ <strong>1.36倍</strong>、ばらつき <strong>1.86倍</strong>。貼れている。
+          ただし<strong>解像度を4倍にしても 1.04倍にしかならない</strong>。
+        </p>
+
+        <p class="label">地形は UV を持っているか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>点アトリビュート</td><td class="num">P, debris, flow, flowdir_x, flowdir_y, height, mask, sediment, uv</td></tr>
+              <tr><td>uv はあるか</td><td class="hi">ある（自分で作らなくてよい）</td></tr>
+              <tr><td>テクスチャを作ったノード</td><td><code>copnet → fractalnoise → rop_image</code></td></tr>
+              <tr><td>貼り付け先</td><td><code>basecolor_useTexture</code> / <code>basecolor_texture</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>貼れたことを、見た目ではなく数字で確かめた。</strong>細かさ 2.2143 → 3.0095（1.36倍）、ばらつき 14.83 → 27.54（1.86倍）。<strong>「貼ったつもり」で終わらせないために、増えるはずの量を先に決めておく。</strong></li>
+          <li><strong>テクスチャの解像度を4倍にしても、画はほとんど変わらなかった。</strong>256 で 2.9028、1024 で 3.0095 で <span class="hi">1.04倍</span>。この見え方の大きさなら 256 でほぼ足りている。</li>
+          <li><strong><a href="#exp039">実験039</a>の結論が、貼る側でも成り立つ。</strong>039では「細かさ×解像度が頭打ちになったところが足りている解像度」と測った。今回は<strong>画面に出る大きさが上限を決めている</strong>。地形が画面の一部しか占めていないので、それ以上細かいテクスチャは画に出ない。</li>
+          <li><strong>UV は自分で作らなくてよい。</strong><code>convertheightfield</code> の出力に <code>uv</code> が最初から付いている。</li>
+          <li><strong><button class="term" data-term="Apprentice">Apprentice</button> では、COP から書き出した画像にウォーターマークが入る。</strong>それを貼ると<span class="hi">地形の表面に文字が写る</span>。レンダの隅に出るウォーターマークと違い、テクスチャに焼き込まれているので<strong>地形のどこにでも現れる</strong>。学習用の画としては問題ないが、本番で使う画をこの経路で作ることはできない。</li>
+          <li><strong>一色のときのほうが遅かった。</strong>5.35秒 対 3.44秒。一色のほうが明るく（191.73 対 110.26）、明るい面ほど光が跳ね返る回数が増えるためと考えられるが、<strong>確かめていないので断定しない</strong>。</li>
+          <li><strong>貼ると暗くなる。</strong>明るさ 191.73 → 110.26。<strong>テクスチャに差し替えると明るさが変わるので、ライトは貼ったあとに決める。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

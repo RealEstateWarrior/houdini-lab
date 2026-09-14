@@ -1,0 +1,55 @@
+{
+  "res": [
+    720,
+    460
+  ],
+  "samples": 24,
+  "mesh_attribs": [
+    "P",
+    "debris",
+    "flow",
+    "flowdir_x",
+    "flowdir_y",
+    "height",
+    "mask",
+    "sediment",
+    "uv"
+  ],
+  "has_uv": true,
+  "textures": {
+    "256": "040_tex_256.png",
+    "1024": "040_tex_1024.png"
+  },
+  "renders": [
+    {
+      "pixels": 88528,
+      "mean": 191.72671546478705,
+      "sd": 14.82695183083968,
+      "detail": 2.2143474559643264,
+      "label": "なし",
+      "seconds": 5.350878600002034,
+      "file": "040_plain.png"
+    },
+    {
+      "pixels": 88562,
+      "mean": 110.30539433767682,
+      "sd": 27.557728297764946,
+      "detail": 2.9027544673676253,
+      "label": "256",
+      "seconds": 3.4401370999985375,
+      "file": "040_tex256.png"
+    },
+    {
+      "pixels": 88593,
+      "mean": 110.26145782774411,
+      "sd": 27.540542844176905,
+      "detail": 3.009468375038987,
+      "label": "1024",
+      "seconds": 3.4676825999922585,
+      "file": "040_tex1024.png"
+    }
+  ],
+  "detail_lift": 1.359076854417318,
+  "applied": true,
+  "res_ratio": 1.036762981117082
+}

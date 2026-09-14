@@ -270,13 +270,18 @@ DONE = [
      "shots": ["039_elements.png", "039_roughs.png"],
      "title": "Copernicus でテクスチャを作る — 細かさは解像度をどう食うのか",
      "note": "解像度を掛けて直すと007の勾配と同じ形。頭打ちが「足りている解像度」"},
+    {"no": "040", "anchor": "exp040", "tags": ["テクスチャ", "COP", "Karma", "地形"],
+     "log": "log_pm", "hip": "040_texture.hipnc", "thumb": "040_compare.png",
+     "shots": ["040_compare.png"],
+     "title": "作ったテクスチャを地形に貼る — 貼れたかどうかを画の数字で判定する",
+     "note": "細かさ1.36倍で貼れたと判定。解像度4倍でも画は1.04倍しか変わらない"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "040", "title": "作ったテクスチャを地形に貼る",
-     "note": "039のノイズを材質に流し込み、038のレンダに乗せる"},
+    {"no": "041", "title": "ノイズで面そのものを凸凹させる",
+     "note": "色ではなく高さとして使う（displacement）"},
 ]
 
 PAGES = [
