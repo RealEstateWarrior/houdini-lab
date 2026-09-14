@@ -1,0 +1,101 @@
+{
+  "title": "実験063 — MPM の粒を面に戻す",
+  "network": "/obj/mpm",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        -1.13,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "container",
+      "type": "mpmcontainer",
+      "pos": [
+        1.13,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.1,
+        "sizex": 4.0,
+        "sizey": 4.0,
+        "sizez": 4.0
+      }
+    },
+    {
+      "name": "source",
+      "type": "mpmsource",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "surface",
+      "type": "mpmsurface",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputtype": 2,
+        "voxelscale": 0.75
+      }
+    },
+    {
+      "name": "to_polygons",
+      "type": "convert",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "source",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "source",
+      "to_input": 1
+    },
+    {
+      "from": "source",
+      "from_output": 0,
+      "to": "surface",
+      "to_input": 0
+    },
+    {
+      "from": "surface",
+      "from_output": 0,
+      "to": "to_polygons",
+      "to_input": 0
+    }
+  ]
+}

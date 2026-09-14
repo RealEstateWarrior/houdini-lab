@@ -385,13 +385,18 @@ DONE = [
      "shots": ["062_elastic.png", "062_liquid.png", "062_sandy.png"],
      "title": "MPM でぶつける — 砂は 16% 膨らみ、既定の塊は 31% 縮む",
      "note": "数は保たれるが体積は保たれない。materialpreset はスクリプトから効かない"},
+    {"no": "063", "anchor": "exp063", "tags": ["MPM", "体積", "検算", "機械学習"],
+     "log": "log_fx", "hip": "063_mpm_surface.hipnc", "thumb": "063_fine.png",
+     "shots": ["063_coarse.png", "063_fine.png"],
+     "title": "MPM の粒を面に戻す — 27% 太る。膨らむ厚みは粒の間隔の 0.4倍",
+     "note": "voxelscale は体積を0.6%しか変えないのに点は4.3倍。機械学習の方法は点が2.5分の1"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "063", "title": "MPM の粒を面にする",
-     "note": "mpmsurface で粒からメッシュを作る。粒の間隔と面の細かさの関係"},
+    {"no": "064", "title": "MPM の刻みと結果",
+     "note": "substep を変えると結果がどれだけ変わるか。時間との引き換えを測る"},
 ]
 
 PAGES = [

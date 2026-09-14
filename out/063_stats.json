@@ -1,0 +1,112 @@
+{
+  "box": 1.0,
+  "sep": 0.1,
+  "box_volume": 1.0,
+  "particles": 1001,
+  "scales": [
+    {
+      "scale": 2.0,
+      "points": 0,
+      "prims": 0,
+      "volume": 0.0,
+      "ratio": 0.0,
+      "seconds": 0.21520490001421422
+    },
+    {
+      "scale": 1.5,
+      "points": 0,
+      "prims": 0,
+      "volume": 0.0,
+      "ratio": 0.0,
+      "seconds": 0.20016999999643303
+    },
+    {
+      "scale": 1.0,
+      "points": 5495,
+      "prims": 5488,
+      "volume": 1.2663039116117465,
+      "ratio": 1.2663039116117465,
+      "seconds": 0.20794950000708923
+    },
+    {
+      "scale": 0.75,
+      "points": 10180,
+      "prims": 10176,
+      "volume": 1.2704612713162386,
+      "ratio": 1.2704612713162386,
+      "seconds": 0.4679803999897558
+    },
+    {
+      "scale": 0.5,
+      "points": 23485,
+      "prims": 23493,
+      "volume": 1.2735984672474627,
+      "ratio": 1.2735984672474627,
+      "seconds": 0.5194016000023112
+    }
+  ],
+  "seps": [
+    {
+      "sep": 0.16,
+      "particles": 231,
+      "points": 2278,
+      "prims": 2272,
+      "volume": 1.3879637583336664,
+      "ratio": 1.3879637583336664,
+      "thickness": 0.05773690164822831,
+      "thickness_ratio": 0.36085563530142695
+    },
+    {
+      "sep": 0.12,
+      "particles": 584,
+      "points": 3957,
+      "prims": 3950,
+      "volume": 1.3392167228951934,
+      "ratio": 1.3392167228951934,
+      "thickness": 0.051129459011500566,
+      "thickness_ratio": 0.42607882509583805
+    },
+    {
+      "sep": 0.1,
+      "particles": 1001,
+      "points": 5495,
+      "prims": 5488,
+      "volume": 1.2663039116117465,
+      "ratio": 1.2663039116117465,
+      "thickness": 0.04094027873696626,
+      "thickness_ratio": 0.4094027873696626
+    },
+    {
+      "sep": 0.08,
+      "particles": 1956,
+      "points": 8589,
+      "prims": 8574,
+      "volume": 1.2276675175697065,
+      "ratio": 1.2276675175697065,
+      "thickness": 0.03538178669930325,
+      "thickness_ratio": 0.44227233374129066
+    }
+  ],
+  "thickness_ratio": [
+    0.36085563530142695,
+    0.44227233374129066
+  ],
+  "methods": [
+    {
+      "method": "vdbfromparticles",
+      "points": 5495,
+      "prims": 5488,
+      "volume": 1.2663039116117465,
+      "ratio": 1.2663039116117465,
+      "seconds": 0.47122430001036264
+    },
+    {
+      "method": "neuralpointsurfacing",
+      "points": 2168,
+      "prims": 2356,
+      "volume": 1.1882117665436498,
+      "ratio": 1.1882117665436498,
+      "seconds": 1.35457039999892
+    }
+  ]
+}

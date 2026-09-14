@@ -2321,6 +2321,105 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 063 ===================== -->
+    <article class="entry entry--current" id="exp063">
+      <div class="badge">063</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM の粒を面に戻す — 27% 太る。膨らむ厚みは粒の間隔の 0.4倍</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 「0個」も結果として記録する</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp061">実験061</a>・<a href="#exp062">062</a>で、
+            MPM は物を<strong>粒の集まり</strong>として持つと分かった。
+            ただし粒のままではレンダできない。<code>mpmsurface</code> で面に戻す。
+          </p>
+          <p>
+            ここで確かめられることがある。
+            <strong>体積 1.0 の箱を粒にして、面に戻したら、また 1.0 になるか。</strong>
+            実験059で obj の往復を測ったのと同じ考え方で、
+            今度は形式ではなく<strong>「粒を経由すること」</strong>で何が変わるかを見る。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="063_coarse.png" alt="何も写っていない白い画"></div>
+            <figcaption><code>voxelscale</code> 2.0。<strong>粗すぎて何も出てこない（点 0 / 面 0）。エラーも出ない。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="063_fine.png" alt="粒の丸みがそのまま出た塊"></div>
+            <figcaption><code>voxelscale</code> 0.5。23,485点。<strong>粒ひとつずつの丸みがそのまま面になる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 面の細かさ（voxelscale）を変える</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>voxelscale</th><th>点</th><th>面</th><th>体積</th><th>元との比</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2.0</td><td class="num hi">0</td><td class="num hi">0</td><td class="num">0.000000</td><td class="num">—</td><td class="num">0.21</td></tr>
+              <tr><td class="num">1.5</td><td class="num hi">0</td><td class="num hi">0</td><td class="num">0.000000</td><td class="num">—</td><td class="num">0.21</td></tr>
+              <tr><td class="num">1.0</td><td class="num">5,495</td><td class="num">5,488</td><td class="num">1.266304</td><td class="num hi">1.2663</td><td class="num">0.22</td></tr>
+              <tr><td class="num">0.75</td><td class="num">10,180</td><td class="num">10,176</td><td class="num">1.270461</td><td class="num hi">1.2705</td><td class="num">0.46</td></tr>
+              <tr><td class="num">0.5</td><td class="num">23,485</td><td class="num">23,493</td><td class="num">1.273598</td><td class="num hi">1.2736</td><td class="num">0.45</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>体積は 0.6% しか変わらないのに、点の数は 4.3倍になる。</strong>
+          重くなるだけで、形はほとんど変わらない。
+        </p>
+
+        <p class="label">2. 粒の間隔を変えると、太り方はどう変わるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>粒の間隔</th><th>粒</th><th>点</th><th>面</th><th>体積</th><th>元との比</th><th>1 + 2d</th><th>d</th><th>d ÷ 間隔</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.16</td><td class="num">231</td><td class="num">2,278</td><td class="num">2,272</td><td class="num">1.387964</td><td class="num">1.3880</td><td class="num">1.11547</td><td class="num">0.05774</td><td class="num hi">0.3609</td></tr>
+              <tr><td class="num">0.12</td><td class="num">584</td><td class="num">3,957</td><td class="num">3,950</td><td class="num">1.339217</td><td class="num">1.3392</td><td class="num">1.10226</td><td class="num">0.05113</td><td class="num hi">0.4261</td></tr>
+              <tr><td class="num">0.10</td><td class="num">1,001</td><td class="num">5,495</td><td class="num">5,488</td><td class="num">1.266304</td><td class="num">1.2663</td><td class="num">1.08188</td><td class="num">0.04094</td><td class="num hi">0.4094</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1,956</td><td class="num">8,589</td><td class="num">8,574</td><td class="num">1.227668</td><td class="num">1.2277</td><td class="num">1.07076</td><td class="num">0.03538</td><td class="num hi">0.4423</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          1辺が <strong>1 + 2d</strong> に太ったと考えて d を逆算した。
+          <strong>d ÷ 間隔 は4通りで 0.36〜0.44 に収まる。</strong>
+        </p>
+
+        <p class="label">3. 面の作り方を変える</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>やり方</th><th>点</th><th>面</th><th>体積</th><th>元との比</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>VDB from Particles</td><td class="num">5,495</td><td class="num">5,488</td><td class="num">1.266304</td><td class="num">1.2663</td><td class="num hi">0.47</td></tr>
+              <tr><td>Neural Point Surface</td><td class="num hi">2,168</td><td class="num">2,356</td><td class="num">1.188212</td><td class="num hi">1.1882</td><td class="num">1.35</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>機械学習の方法のほうが、点が 2.5分の1 で体積も元に近い。ただし3倍近く遅い。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>粒を経由すると 27% 太る。</strong>体積 1.0 の箱が 1.266304 になる。<strong>面は粒の一つひとつを外側から包むので、元より一回り大きくなる。</strong></li>
+          <li><strong>膨らむ厚みは、粒の間隔の 0.4倍くらい。</strong>d ÷ 間隔 が 0.3609 / 0.4261 / 0.4094 / 0.4423。<strong>4通りで 0.36〜0.44。</strong></li>
+          <li><strong>だから細かくすれば太り方は減る。</strong>間隔 0.16 で 1.3880、0.08 で 1.2277。<strong>間隔を半分にすると、太る割合もおよそ半分。</strong></li>
+          <li><strong>面の細かさ（voxelscale）はほとんど効かない。</strong>体積は <span class="hi">0.6%</span> しか変わらないのに、点の数は 4.3倍。<strong>太り方を減らしたいなら、voxelscale ではなく粒の間隔を触る。</strong></li>
+          <li><strong>粗すぎると何も出てこない。</strong>voxelscale 1.5 と 2.0 で点も面も 0。<strong>エラーは出ない。</strong>「0個」も結果として記録しておく。</li>
+          <li><strong><code>mpmsurface</code> が出すのは polysoup。</strong>1<button class="term" data-term="プリミティブ">プリミティブ</button>の中に全部の面が入っている。<code>convert</code> で<button class="term" data-term="ポリゴン">ポリゴン</button>に割ってから測った。<strong>最初これに気づかず、体積が 0.06 という妙な値になった。</strong></li>
+          <li><strong>機械学習の方法もある。</strong>「Neural Point Surface」。点が <span class="hi">2.5分の1</span> なのに体積は 1.1882 で<strong>元に近い</strong>。軽くて正確。</li>
+          <li><strong>ただし3倍近く遅い。</strong>0.47秒 対 1.35秒。<strong>1フレームならどうでもいい差だが、200フレームなら 3分 対 4.5分。</strong></li>
+          <li><strong>出力の既定は面ではない。</strong><code>outputtype</code> の既定は「Surface VDB」。面が欲しいなら <code>polygonmesh</code> に変える。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
