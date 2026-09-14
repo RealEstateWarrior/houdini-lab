@@ -295,13 +295,18 @@ DONE = [
      "shots": ["044_ignored.png", "044_guided.png"],
      "title": "つないだのに、ガイドが1本も使われていなかった — rest が (0,0,0) だった",
      "note": "addpointで作った点のrestは既定値のまま。hairgenはrest空間で距離を測る。警告も出ない"},
+    {"no": "045", "anchor": "exp045", "tags": ["グルーム", "毛", "レンダリング", "Karma", "検算"],
+     "log": "log_pm", "hip": "045_hair_render.hipnc", "thumb": "045_thick_0.008.png",
+     "shots": ["045_thick_0.001.png", "045_thick_0.008.png"],
+     "title": "毛を Karma で出す — 既定の太さは、画の上で 0.1ピクセルしかなかった",
+     "note": "width は直径（比1.007）。既定0.001は0.103px。本数16倍でも時間は4.2倍"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "045", "title": "毛をレンダリングに乗せる",
-     "note": "Karma で毛をどう扱うか。太さ・本数と時間の関係を測る"},
+    {"no": "046", "title": "毛に色を付ける",
+     "note": "根元と毛先で色を変える。clumpid ごとに変える。Karma に出るか"},
 ]
 
 PAGES = [

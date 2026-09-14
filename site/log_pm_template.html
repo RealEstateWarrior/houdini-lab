@@ -2200,6 +2200,118 @@
     </article>
 
 
+
+    <!-- ===================== 045 ===================== -->
+    <article class="entry entry--current" id="exp045">
+      <div class="badge">045</div>
+      <div class="body">
+        <span class="chip chip--pm">グルーム</span>
+        <h2>毛を Karma で出す — 既定の太さは、画の上で 0.1ピクセルしかなかった</h2>
+        <p class="path">/obj/groom &nbsp;·&nbsp; 先に式を立てて、実測と突き合わせる</p>
+
+        <div class="prose">
+          <p>
+            <code>hairgen</code> は毛1本ごとに <code>width</code> という太さの数値を書き出す
+            （<code>thickness</code>、既定 0.001）。
+            では、その 0.001 は画の上で何ピクセルになるのか。
+          </p>
+          <p>
+            素直に考えれば <strong>見かけの太さ(px) = thickness × (1世界単位あたりのピクセル数)</strong>。
+            <strong>ただし <code>width</code> が「直径」なのか「半径」なのかで、答えは2倍違う。</strong>
+            どちらとも書いていないので、測るしかない。
+          </p>
+          <p>
+            測り方は<strong>毛を1本だけ置いて真横から撮る</strong>。
+            毛玉のままでは毛が重なって、覆った面積から1本の太さを割り出せない。
+            1本なら、縦に並ぶピクセルの濃さを足すだけで太さになる。
+            <button class="term" data-term="アルファ">透明度</button>をそのまま足すので、輪郭のぼけも 0.01px まで拾える。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="045_thick_0.001.png" alt="ザラついた点の集まりに見える毛玉"></div>
+            <figcaption><code>thickness</code> 0.001（既定）。画の上で <strong>0.103px</strong>。<strong>1ピクセルより細く、点の集まりにしか見えない。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="045_thick_0.008.png" alt="毛の流れが読める毛玉"></div>
+            <figcaption><code>thickness</code> 0.008。画の上で <strong>0.822px</strong>。同じ毛・同じカメラ。<strong>太さだけが違う。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 太さは指定どおりに出るか（毛を1本だけ、真横から）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>thickness</th><th>予測(px)</th><th>実測(px)</th><th>実測 ÷ 予測</th><th>画に出た長さ（世界）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.005</td><td class="num">2.565</td><td class="num">2.667</td><td class="num hi">1.0397</td><td class="num">1.02349</td></tr>
+              <tr><td class="num">0.010</td><td class="num">5.129</td><td class="num">5.224</td><td class="num hi">1.0183</td><td class="num">1.02739</td></tr>
+              <tr><td class="num">0.020</td><td class="num">10.259</td><td class="num">10.337</td><td class="num hi">1.0076</td><td class="num">1.03324</td></tr>
+              <tr><td class="num">0.040</td><td class="num">20.518</td><td class="num">20.667</td><td class="num hi">1.0072</td><td class="num">1.04494</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          「1世界単位が何ピクセルか」はカメラの焦点距離と絞りから出した（512.95px）。
+          画の中の長さから逆算すると端の丸みの分だけずれるので使わない。
+          <strong>半径なら比は 2.0 になるはず。ならなかったので、<code>width</code> は直径。</strong>
+        </p>
+
+        <p class="label">2. 毛玉のまま太さを変える（毛 12,516本）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>thickness</th><th>画の上の太さ</th><th>触れたピクセル</th><th>平均の濃さ</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td>0.001（既定）</td><td class="num hi">0.103 px</td><td class="num">78,654</td><td class="num">0.723</td><td class="num">5.0秒</td></tr>
+              <tr><td class="num">0.002</td><td class="num">0.205 px</td><td class="num">80,786</td><td class="num">0.808</td><td class="num">7.0秒</td></tr>
+              <tr><td class="num">0.004</td><td class="num">0.411 px</td><td class="num">81,957</td><td class="num">0.874</td><td class="num">10.3秒</td></tr>
+              <tr><td class="num">0.008</td><td class="num hi">0.822 px</td><td class="num">82,820</td><td class="num">0.909</td><td class="num">10.7秒</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 本数とレンダ時間</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>density</th><th>毛</th><th>時間</th><th>毛1本あたり</th><th>覆った面積</th></tr></thead>
+            <tbody>
+              <tr><td class="num">250</td><td class="num">3,104</td><td class="num">3.1秒</td><td class="num hi">0.9841 ms</td><td class="num">44,299</td></tr>
+              <tr><td class="num">500</td><td class="num">6,233</td><td class="num">3.5秒</td><td class="num">0.5629 ms</td><td class="num">49,526</td></tr>
+              <tr><td class="num">1000</td><td class="num">12,516</td><td class="num">4.7秒</td><td class="num">0.3792 ms</td><td class="num">56,899</td></tr>
+              <tr><td class="num">2000</td><td class="num">24,916</td><td class="num">8.6秒</td><td class="num">0.3470 ms</td><td class="num">64,976</td></tr>
+              <tr><td class="num">4000</td><td class="num">49,977</td><td class="num">13.1秒</td><td class="num hi">0.2630 ms</td><td class="num">71,439</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">4. OpenGL と Karma</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>density</th><th>毛</th><th><button class="term" data-term="OpenGL ROP">OpenGL</button></th><th><button class="term" data-term="Karma">Karma</button></th><th>倍率</th></tr></thead>
+            <tbody>
+              <tr><td class="num">250</td><td class="num">3,104</td><td class="num">0.74秒</td><td class="num">3.1秒</td><td class="num">4.1倍</td></tr>
+              <tr><td class="num">1000</td><td class="num">12,516</td><td class="num">0.76秒</td><td class="num">4.7秒</td><td class="num">6.3倍</td></tr>
+              <tr><td class="num">4000</td><td class="num">49,977</td><td class="num">0.75秒</td><td class="num">13.1秒</td><td class="num hi">17.4倍</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong><code>width</code> は直径だった。</strong>4通りで実測÷予測が 1.0397 / 1.0183 / 1.0076 / 1.0072。<strong>半径なら 2.0 になるはずで、そうはならない。</strong>細いほど比が大きいのは輪郭のぼけが相対的に効くためで、太い側の <span class="hi">1.007</span> が真の値に近い。</li>
+          <li><strong>既定の <code>thickness</code> 0.001 は、この構図で 0.103ピクセル。</strong>1ピクセルの1割しかない。毛1本がピクセルの一部しか覆えないので、<strong>点が散らばったようにしか見えない</strong>。平均の濃さも 0.723 と薄い。</li>
+          <li><strong>太さは「世界の大きさに対する値」である。</strong>0.001 が細すぎるのは、土台の球が半径1しかないから。<strong>数字そのものではなく「土台の何分の1か」で考える。</strong></li>
+          <li><strong>太くすると絵は落ち着くが、時間は倍になる。</strong>0.008 で平均の濃さ 0.909。ただし 5.0秒 → 10.7秒。<strong>覆うピクセルが増えるぶん計算も増える。</strong></li>
+          <li><strong>レンダ時間は本数に比例しない。</strong>毛を16倍にしても時間は 4.2倍。毛1本あたりは 0.9841ms → 0.2630ms と <span class="hi">3.7分の1</span>。<strong>毛が増えるほど1本あたりは安くなる。</strong></li>
+          <li><strong>覆う面積も比例しない。</strong>毛を16倍にしても、画の上で覆う面積は <span class="hi">1.6倍</span>。<strong>手前の毛が奥の毛を隠すので、増やしても画は濃くなるだけで広がらない。</strong></li>
+          <li><strong>OpenGL は本数によらず 0.74〜0.76秒で一定だった。</strong>3,104本でも 49,977本でも変わらない。<strong>確認用に何度も撮るなら OpenGL、見せる絵は Karma。</strong></li>
+          <li><strong>Karma との差は本数とともに開く。</strong>4.1倍 → 6.3倍 → 17.4倍。<strong>毛のように数が増えるものでは、この差が効いてくる。</strong></li>
+          <li><strong>測りたいものだけを残す形に作り替える。</strong>毛玉のままでは毛が重なり、覆った面積から1本の太さを割り出せない。<strong>毛を1本だけ置いて真横から撮る、という形にしたことが鍵だった。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

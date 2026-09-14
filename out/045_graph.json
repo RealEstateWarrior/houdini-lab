@@ -1,0 +1,167 @@
+{
+  "title": "実験045 — 毛を Karma で出す",
+  "network": "/obj/groom",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "skin",
+      "type": "sphere",
+      "pos": [
+        -1.836,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        0.424,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rest",
+      "type": "rest",
+      "pos": [
+        0.424,
+        2.41
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "roots",
+      "type": "scatter::2.0",
+      "pos": [
+        3.248,
+        3.389
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 300
+      }
+    },
+    {
+      "name": "make_guides",
+      "type": "attribwrangle",
+      "pos": [
+        3.248,
+        1.958
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nint segs = 8;\nfloat len = 0.5;\nint n = npoints(0);\nfor (int i = 0; i < n; i++) {\n    vector p = point(0, \"P\", i);\n  ..."
+      }
+    },
+    {
+      "name": "hairgen",
+      "type": "hairgen::2.0",
+      "pos": [
+        1.836,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "influenceradius": 0.2,
+        "thickness": 0.008,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "out",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "rest",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "roots",
+      "to_input": 0
+    },
+    {
+      "from": "roots",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 1
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 0
+    },
+    {
+      "from": "make_guides",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 1
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "out",
+      "to_input": 0
+    },
+    {
+      "from": "hairgen",
+      "from_output": 0,
+      "to": "out",
+      "to_input": 1
+    }
+  ]
+}

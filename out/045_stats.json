@@ -1,0 +1,173 @@
+{
+  "res": [
+    600,
+    600
+  ],
+  "samples": 9,
+  "hair_length": 1.0,
+  "one": [
+    {
+      "thickness": 0.005,
+      "seconds": 2.2040905999892857,
+      "scale_px": 512.9495481290644,
+      "distance": 1.4119581665515895,
+      "focal": 50.0,
+      "aperture": 41.4214,
+      "predicted_px": 2.564747740645322,
+      "ratio": 1.0397383822222224,
+      "length_world": 1.02349247,
+      "width_px": 2.666666666666667,
+      "width_px_mean": 9.450631808278866,
+      "length_px": 525.0,
+      "coverage": 5485.827450980392
+    },
+    {
+      "thickness": 0.01,
+      "seconds": 2.251145099988207,
+      "scale_px": 512.9495481290644,
+      "distance": 1.4119581665515895,
+      "focal": 50.0,
+      "aperture": 41.4214,
+      "predicted_px": 5.129495481290644,
+      "ratio": 1.018332003764706,
+      "length_world": 1.0273914889333333,
+      "width_px": 5.223529411764706,
+      "width_px_mean": 11.979377744788765,
+      "length_px": 527.0,
+      "coverage": 6819.341176470588
+    },
+    {
+      "thickness": 0.02,
+      "seconds": 2.2218183999939356,
+      "scale_px": 512.9495481290644,
+      "distance": 1.4119581665515895,
+      "focal": 50.0,
+      "aperture": 41.4214,
+      "predicted_px": 10.258990962581288,
+      "ratio": 1.0076288145359475,
+      "length_world": 1.0332400173333334,
+      "width_px": 10.337254901960783,
+      "width_px_mean": 17.01341719077568,
+      "length_px": 530.0,
+      "coverage": 9505.549019607843
+    },
+    {
+      "thickness": 0.04,
+      "seconds": 2.3794281000155024,
+      "scale_px": 512.9495481290644,
+      "distance": 1.4119581665515895,
+      "focal": 50.0,
+      "aperture": 41.4214,
+      "predicted_px": 20.517981925162577,
+      "ratio": 1.0072465577777776,
+      "length_world": 1.0449370741333333,
+      "width_px": 20.666666666666664,
+      "width_px_mean": 27.2266958957496,
+      "length_px": 536.0,
+      "coverage": 15046.094117647059
+    }
+  ],
+  "ball": [
+    {
+      "density": 250,
+      "hairs": 3104,
+      "seconds": 3.054602599993814,
+      "coverage": 44299.11372549018,
+      "file": "045_ball_250.png"
+    },
+    {
+      "density": 500,
+      "hairs": 6233,
+      "seconds": 3.5084199999982957,
+      "coverage": 49526.2588235294,
+      "file": "045_ball_500.png"
+    },
+    {
+      "density": 1000,
+      "hairs": 12516,
+      "seconds": 4.746059500001138,
+      "coverage": 56899.34117647059,
+      "file": "045_ball_1000.png"
+    },
+    {
+      "density": 2000,
+      "hairs": 24916,
+      "seconds": 8.645098799985135,
+      "coverage": 64976.458823529414,
+      "file": "045_ball_2000.png"
+    },
+    {
+      "density": 4000,
+      "hairs": 49977,
+      "seconds": 13.14486410000245,
+      "coverage": 71439.15686274512,
+      "file": "045_ball_4000.png"
+    }
+  ],
+  "opengl": [
+    {
+      "density": 250,
+      "hairs": 3104,
+      "seconds": 0.7387756999814883,
+      "file": "045_gl_250.png"
+    },
+    {
+      "density": 1000,
+      "hairs": 12516,
+      "seconds": 0.7551089999906253,
+      "file": "045_gl_1000.png"
+    },
+    {
+      "density": 4000,
+      "hairs": 49977,
+      "seconds": 0.7534779000270646,
+      "file": "045_gl_4000.png"
+    }
+  ],
+  "thick": [
+    {
+      "thickness": 0.001,
+      "hairs": 12516,
+      "seconds": 5.023439099983079,
+      "scale_px": 102.72896135744091,
+      "width_px": 0.10272896135744092,
+      "coverage": 56899.34117647059,
+      "touched": 78654,
+      "mean_alpha": 0.72338915986971,
+      "file": "045_thick_0.001.png"
+    },
+    {
+      "thickness": 0.002,
+      "hairs": 12516,
+      "seconds": 6.999926399992546,
+      "scale_px": 102.72896135744091,
+      "width_px": 0.20545792271488184,
+      "coverage": 65240.43529411764,
+      "touched": 80786,
+      "mean_alpha": 0.8075476579857799,
+      "file": "045_thick_0.002.png"
+    },
+    {
+      "thickness": 0.004,
+      "hairs": 12516,
+      "seconds": 10.251477999991039,
+      "scale_px": 102.72896135744091,
+      "width_px": 0.41091584542976367,
+      "coverage": 71672.93333333335,
+      "touched": 81957,
+      "mean_alpha": 0.874495688437289,
+      "file": "045_thick_0.004.png"
+    },
+    {
+      "thickness": 0.008,
+      "hairs": 12516,
+      "seconds": 10.706484800000908,
+      "scale_px": 102.72896135744091,
+      "width_px": 0.8218316908595273,
+      "coverage": 75311.19999999998,
+      "touched": 82820,
+      "mean_alpha": 0.9093130862584108,
+      "file": "045_thick_0.008.png"
+    }
+  ]
+}
