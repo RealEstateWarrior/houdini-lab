@@ -335,13 +335,18 @@ DONE = [
      "shots": ["052_rest.png", "052_bent.png", "052_sharp.png"],
      "title": "骨に肉を付ける — 曲げると痩せる。減り方は (1 − cos θ) にぴたり乗った",
      "note": "90度で体積27.13%減。減り = 27.1284% × (1 − cos θ)。骨1本なら0.85%"},
+    {"no": "053", "anchor": "exp053", "tags": ["APEX", "リグ", "KineFX", "検算", "体積"],
+     "log": "log_pm", "hip": "053_dualquat.hipnc", "thumb": "053_dualquat.png",
+     "shots": ["053_linear.png", "053_dualquat.png"],
+     "title": "痩せない曲げ方はあった — Dual Quaternion で体積の減りが 154分の1 になる",
+     "note": "90度で 27.1284% 対 0.1764%。式に乗るのは Linear だけ（幅0.0001 対 0.0490）"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "053", "title": "痩せない曲げ方を探す",
-     "note": "dual quaternion など別のやり方で、体積の減りがどう変わるか測る"},
+    {"no": "054", "title": "なぜ Linear が既定なのか",
+     "note": "Dual Quaternion との速さの差と、ねじれたときの違いを測る"},
 ]
 
 PAGES = [

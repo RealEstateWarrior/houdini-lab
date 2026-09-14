@@ -3080,6 +3080,114 @@
     </article>
 
 
+
+    <!-- ===================== 053 ===================== -->
+    <article class="entry entry--current" id="exp053">
+      <div class="badge">053</div>
+      <div class="body">
+        <span class="chip chip--tool">APEX / リグ</span>
+        <h2>痩せない曲げ方はあった — Dual Quaternion で体積の減りが 154分の1 になる</h2>
+        <p class="path">/obj/rigskin &nbsp;·&nbsp; 式に乗るのは Linear だけだった</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp052">実験052</a>で、骨を曲げると皮が痩せることを測った。
+            90度で 27.13%、減り方は <strong>27.1284% × (1 − cos θ)</strong> という
+            きれいな式に乗っていた。
+          </p>
+          <p>
+            <code>kinefx::jointdeform</code> には混ぜ方が3つある。
+            <strong>Linear（既定）／ Dual Quaternion ／ その2つの中間</strong>。
+            同じ骨・同じ皮・同じ角度で比べる。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="053_linear.png" alt="内側が食い込んだ曲がり"></div>
+            <figcaption>Linear（既定）。<strong>内側が食い込み、体積は 27.13% 減る。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="053_dualquat.png" alt="太さが保たれた曲がり"></div>
+            <figcaption>Dual Quaternion。同じ骨・同じ角度。<strong>太さが保たれ、減りは 0.18%。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. やり方ごとの体積の減り方</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>角度</th><th>Linear（既定）</th><th>Dual Quaternion</th><th>2つの中間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0°</td><td class="num">0.0000%</td><td class="num">0.0000%</td><td class="num">0.0000%</td></tr>
+              <tr><td class="num">15°</td><td class="num">0.9244%</td><td class="num hi">0.0052%</td><td class="num">0.4657%</td></tr>
+              <tr><td class="num">30°</td><td class="num">3.6345%</td><td class="num hi">0.0205%</td><td class="num">1.8417%</td></tr>
+              <tr><td class="num">45°</td><td class="num">7.9457%</td><td class="num hi">0.0459%</td><td class="num">4.0666%</td></tr>
+              <tr><td class="num">60°</td><td class="num">13.5642%</td><td class="num hi">0.0808%</td><td class="num">7.0413%</td></tr>
+              <tr><td class="num">90°</td><td class="num">27.1284%</td><td class="num hi">0.1764%</td><td class="num">14.6904%</td></tr>
+              <tr><td class="num">120°</td><td class="num">40.6926%</td><td class="num hi">0.3005%</td><td class="num">23.4860%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          90度で <strong>27.1284 ÷ 0.1764 = 153.8倍</strong>の差。
+          ただし Dual Quaternion もゼロではなく、120度で 0.3005% 痩せる。
+        </p>
+
+        <p class="label">2. それぞれ式に乗るか（減った分 ÷ (1 − cos θ)）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>角度</th><th>Linear（既定）</th><th>Dual Quaternion</th><th>2つの中間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">15°</td><td class="num hi">27.1286</td><td class="num">0.1513</td><td class="num">13.6663</td></tr>
+              <tr><td class="num">30°</td><td class="num hi">27.1284</td><td class="num">0.1532</td><td class="num">13.7469</td></tr>
+              <tr><td class="num">45°</td><td class="num hi">27.1284</td><td class="num">0.1568</td><td class="num">13.8844</td></tr>
+              <tr><td class="num">60°</td><td class="num hi">27.1284</td><td class="num">0.1616</td><td class="num">14.0827</td></tr>
+              <tr><td class="num">90°</td><td class="num hi">27.1284</td><td class="num">0.1764</td><td class="num">14.6904</td></tr>
+              <tr><td class="num">120°</td><td class="num hi">27.1284</td><td class="num">0.2003</td><td class="num">15.6573</td></tr>
+              <tr><td>ばらつきの幅</td><td class="num hi">0.0001</td><td class="num">0.0490</td><td class="num">1.9911</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>式で言い切れるのは Linear だけ。</strong>
+          Dual Quaternion は (1 − cos θ) では表せない。
+        </p>
+
+        <p class="label">3. 中心からの太さ（90度のとき、高さの帯ごと）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>元の高さ</th><th>Linear（既定）</th><th>Dual Quaternion</th><th>2つの中間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.00〜0.50</td><td class="num">0.305559</td><td class="num">0.353538</td><td class="num">0.329018</td></tr>
+              <tr><td class="num">0.50〜0.75</td><td class="num">0.281015</td><td class="num">0.329243</td><td class="num">0.304530</td></tr>
+              <tr><td class="num">0.75〜1.00</td><td class="num hi">0.279344</td><td class="num hi">0.327047</td><td class="num">0.302601</td></tr>
+              <tr><td class="num">1.00〜1.25</td><td class="num">0.279592</td><td class="num">0.327048</td><td class="num">0.302731</td></tr>
+              <tr><td class="num">1.25〜1.50</td><td class="num">0.328019</td><td class="num">0.341245</td><td class="num">0.333388</td></tr>
+              <tr><td class="num">1.50〜2.01</td><td class="num hi">0.350916</td><td class="num hi">0.350916</td><td class="num hi">0.350916</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          曲げる前の筒の半径は 0.32。
+          <strong>関節の近くで Linear は 13% 細り、Dual Quaternion はほぼそのまま。</strong>
+          いちばん上の帯は3つとも 0.350916 で完全に一致する（骨1本にしか従っていないため）。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Dual Quaternion は 154分の1 しか痩せない。</strong>90度で Linear が 27.1284% 減るのに対し <span class="hi">0.1764%</span>。<strong>153.8倍の差。</strong></li>
+          <li><strong>式に乗るのは Linear だけだった。</strong>(1 − cos θ) で割った値の幅は Linear 0.0001、Dual Quaternion 0.0490、中間 1.9911。<strong>Linear は式で言い切れるが、Dual Quaternion はこの形では表せない。</strong></li>
+          <li><strong>Dual Quaternion もゼロではない。</strong>0.0052%（15度）→ 0.3005%（120度）と少しずつ増える。<strong>ただし 120度でも 0.3% なので、実用上は無視できる。</strong></li>
+          <li><strong>「2つの中間」は、そのままでは動かない。</strong>「Missing dual quaternion blend attribute」で止まる。<strong>点ごとの混ぜ具合を表す属性を、自分で作って名前を指定する。</strong></li>
+          <li><strong>半々に混ぜると、減りもほぼ半分。</strong>14.6904% は Linear の <span class="hi">0.5415倍</span>。<strong>混ぜた割合がそのまま結果に出る。</strong>部位ごとに混ぜ方を変えられるのが、この方式の使いどころ。</li>
+          <li><strong>太さで見ても差は出る。</strong>関節の近くで Linear 0.279344、Dual Quaternion 0.327047。元の半径 0.32 に対して <strong>Linear は 13% 細い</strong>。</li>
+          <li><strong>関節から離れた場所では3つとも同じ。</strong>いちばん上の帯は 0.350916 で完全一致。<strong>骨1本にしか従っていない場所では、混ぜ方は関係ない。</strong>この一致は測り方が正しいことの確認にもなる。</li>
+          <li><strong>ではなぜ Linear が既定なのか。</strong>この実験からは分からない。速さか、ねじれの扱いか、互換性か。<strong>確かめていないので断定しない。</strong>次に測るとすれば、そこになる。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
