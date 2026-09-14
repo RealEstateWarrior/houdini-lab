@@ -1198,6 +1198,122 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "rig",
+      "title": "骨を入れて動かす",
+      "lede": "点と線で骨を組み、筒の皮を結び付けて、関節を曲げる。KineFX の骨はただのジオメトリなので、専用のノードを覚えなくても普通の wrangle で作れる。ただし落とし穴が多く、そのほとんどが「エラーが出ないまま間違う」種類のもの。数字はすべて実験051〜054で実測したもの。",
+      "hero": "guide_rig_5_dualquat.png",
+      "hero_cap": "完成したところ。90度曲げても太さが保たれている（体積の減り 0.18%）。",
+      "facts": [
+        [
+          "ノードの数",
+          "6個"
+        ],
+        [
+          "かかる時間",
+          "15分ほど"
+        ],
+        [
+          "曲げても減らない体積",
+          "0.18%"
+        ],
+        [
+          "元になった実験",
+          "実験051〜054"
+        ]
+      ],
+      "exp": "051",
+      "hip": "guide_rig.hipnc",
+      "steps": [
+        {
+          "title": "骨を組む",
+          "node": "attribwrangle",
+          "body": "点を3つ置いて、polyline で1本につなぐ。それぞれに <code>name</code>（joint0 / joint1 / joint2）を付ける。<strong>これだけで骨になる。</strong>KineFX の骨は専用の形式ではなく、点1つが関節1つ、線が親子のつながりを表すだけのジオメトリ。クラスは「ディテール」にして1回だけ走らせる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "足りない属性を埋める",
+          "node": "kinefx::rigdoctor",
+          "body": "この時点では <code>P</code> と <code>name</code> しか無い。rigdoctor を通すと <code>localtransform</code>（4×4の行列）・<code>transform</code>（3×3）・<code>parent_idx</code>（親が誰か）の3つが付く。<strong>親子関係は線のつながりから読み取られる</strong>ので、自分で書く必要はない。根元の parent_idx は -1 になる。",
+          "img": "guide_rig_1_bones.png",
+          "cap": "関節3つ。(0,0,0) (0,1,0) (0,2,0) に一直線。見えるように polywire で筒にしてある。"
+        },
+        {
+          "title": "関節を回す",
+          "node": "kinefx::rigattribwrangle",
+          "body": "普通の attribwrangle と同じ書き方で、関節の行列を書き換える。クラスは「点ごと」。真ん中の関節（joint1）の <code>4@localtransform</code> に <strong><code>prerotate</code></strong> をかける。回転は子にだけ伝わるので、根元は動かない。",
+          "img": "guide_rig_2_posed.png",
+          "cap": "真ん中を90度。根元と真ん中は動かず、先だけが折れている。"
+        },
+        {
+          "title": "皮を用意する",
+          "node": "tube",
+          "body": "骨を包む筒を作る。半径 0.32、高さ 2.0、分割は 60×24。ここでは単純な筒だが、キャラクターのメッシュでも手順は同じ。",
+          "img": "guide_rig_3_skin.png",
+          "cap": "1,440点 / 1,418面。体積 0.636074。"
+        },
+        {
+          "title": "皮を骨に結び付ける",
+          "node": "kinefx::jointcaptureproximity",
+          "body": "入力は「皮 → 骨」。近さをもとに、点それぞれが「どの骨にどれだけ従うか」を決める。<strong>皮に付くのは <code>boneCapture</code> というアトリビュート1つだけ</strong>で、骨と皮は別々のジオメトリのまま残る。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "皮を動かす",
+          "node": "kinefx::jointdeform",
+          "body": "入力は3つ。「結び付けた皮 → 元の骨 → 動かした骨」。元の骨と動かした骨を両方渡すのは、その差だけを皮に伝えるため。<strong>既定の Linear だと、90度で体積が 27.13% 減る。</strong>",
+          "img": "guide_rig_4_linear.png",
+          "cap": "既定の Linear。内側が食い込み、体積は 27.13% 減る。"
+        },
+        {
+          "title": "痩せないようにする",
+          "node": "method",
+          "body": "混ぜ方を <strong>Dual Quaternion</strong> に変えるだけ。同じ骨・同じ角度で、体積の減りが 27.1284% から <strong>0.1764%</strong> になる（154分の1）。速さの差は 41万点で 1.04倍しかないので、ほとんどの場合こちらでよい。",
+          "img": "guide_rig_5_dualquat.png",
+          "cap": "Dual Quaternion。太さが保たれている。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "rigdoctor の3つのトグルは、すべて既定オフ",
+          "body": "そのまま通しても何も足されない。<code>transformations</code> / <code>inittransforms</code> / <code>outputparentidx</code> を入れて初めて属性が出てくる。エラーは出ないので、属性が付いているかを自分で確かめる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "rotate と prerotate を取り違えると、関節ごと飛んでいく",
+          "body": "<code>rotate()</code> だと「動かしてから回す」になり、<strong>回した関節そのものが原点のまわりを回ってしまう</strong>。90度で先端が (−2, 0, 0) に飛び、正しい値 (−1, 1, 0) とのずれは 1.41。<strong>30度だと「少し曲がった骨」に見えてしまい、絵では気づけない。</strong>大きく振ると差が開くので、確かめるときは90度まで回す。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "曲げると痩せる。減り方には式がある",
+          "body": "既定の Linear では、体積の減りが <strong>27.1284% × (1 − cos θ)</strong> にぴたり乗る。6通りの角度すべてで、(1 − cos θ) で割った値が 27.1284〜27.1286 にそろった。90度で 27.13%、120度で 40.69%。<strong>ねじり（骨の軸まわり）だともっとひどく、179度で 66.81% 減る。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "痩せる原因は maxinfluences の既定 2",
+          "body": "1つの点が2本の骨に従うので、関節の近くで2つの行列が混ざる。混ざった結果は、どちらの行列でもない縮んだ位置になる。<strong>1 にすると減りは 0.85% まで落ち、根元の点はぴくりとも動かなくなる</strong>が、関節が鋭く折れる。3 にするともっと減る（36.84%）。<strong>「なめらかにしたいから骨を増やす」は逆効果。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "「2つの中間」は、属性が無いと動かない",
+          "body": "jointdeform の method を「Blend Dual Quaternion and Linear」にすると「Missing dual quaternion blend attribute」で止まる。<strong>点ごとの混ぜ具合を表す float のアトリビュートを自分で作り、名前を dqblendattrib に入れる。</strong>全点に 0.5 を入れると、減りは 14.69% で Linear のほぼ半分になった。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Dual Quaternion にも癖がある",
+          "body": "ねじれが根元まで広がる。170度ひねったとき、根元の帯は Linear で 14.1度しかねじれないのに、Dual Quaternion では 58.9度ねじれる。さらに、99.2度で止まっている帯のすぐ上が 170度になり、<strong>途中に段差ができる</strong>。体積は保たれるが、形が素直とは限らない。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

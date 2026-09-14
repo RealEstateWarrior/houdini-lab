@@ -1,0 +1,213 @@
+{
+  "title": "手順 — 骨を入れて動かす",
+  "network": "/obj/rig",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "make_joints",
+      "type": "attribwrangle",
+      "pos": [
+        -7.766,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nint prim = addprim(0, \"polyline\");\nfor (int i = 0; i < 3; i++) {\n    int pt = addpoint(0, set(0.0, float(i), 0.0));\n..."
+      }
+    },
+    {
+      "name": "doctor",
+      "type": "kinefx::rigdoctor",
+      "pos": [
+        -5.507,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputparentidx": 1,
+        "transformations": 1,
+        "inittransforms": 1
+      }
+    },
+    {
+      "name": "pose",
+      "type": "kinefx::rigattribwrangle",
+      "pos": [
+        -3.248,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nif (s@name == \"joint1\") {\n    matrix m = 4@localtransform;\n    // prerotate は「先に回してから動かす」。\n    // rotate だと関節そのものが原点..."
+      }
+    },
+    {
+      "name": "skin",
+      "type": "tube",
+      "pos": [
+        -10.025,
+        3.313
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "ty": 1.0,
+        "rad1": 0.32,
+        "rad2": 0.32,
+        "height": 2.0,
+        "rows": 60,
+        "cols": 24
+      }
+    },
+    {
+      "name": "capture",
+      "type": "kinefx::jointcaptureproximity",
+      "pos": [
+        -8.896,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "deform_linear",
+      "type": "kinefx::jointdeform",
+      "pos": [
+        -5.883,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "deform_dq",
+      "type": "kinefx::jointdeform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "method": 1
+      }
+    },
+    {
+      "name": "bones",
+      "type": "polywire",
+      "pos": [
+        3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "radius": 0.05
+      }
+    },
+    {
+      "name": "bones_rest",
+      "type": "polywire",
+      "pos": [
+        6.495,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "radius": 0.05
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "make_joints",
+      "from_output": 0,
+      "to": "doctor",
+      "to_input": 0
+    },
+    {
+      "from": "doctor",
+      "from_output": 0,
+      "to": "pose",
+      "to_input": 0
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "capture",
+      "to_input": 0
+    },
+    {
+      "from": "doctor",
+      "from_output": 0,
+      "to": "capture",
+      "to_input": 1
+    },
+    {
+      "from": "capture",
+      "from_output": 0,
+      "to": "deform_linear",
+      "to_input": 0
+    },
+    {
+      "from": "doctor",
+      "from_output": 0,
+      "to": "deform_linear",
+      "to_input": 1
+    },
+    {
+      "from": "pose",
+      "from_output": 0,
+      "to": "deform_linear",
+      "to_input": 2
+    },
+    {
+      "from": "capture",
+      "from_output": 0,
+      "to": "deform_dq",
+      "to_input": 0
+    },
+    {
+      "from": "doctor",
+      "from_output": 0,
+      "to": "deform_dq",
+      "to_input": 1
+    },
+    {
+      "from": "pose",
+      "from_output": 0,
+      "to": "deform_dq",
+      "to_input": 2
+    },
+    {
+      "from": "pose",
+      "from_output": 0,
+      "to": "bones",
+      "to_input": 0
+    },
+    {
+      "from": "doctor",
+      "from_output": 0,
+      "to": "bones_rest",
+      "to_input": 0
+    }
+  ]
+}
