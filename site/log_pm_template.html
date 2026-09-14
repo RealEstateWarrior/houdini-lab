@@ -3530,6 +3530,119 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
     </article>
 
 
+
+    <!-- ===================== 057 ===================== -->
+    <article class="entry entry--current" id="exp057">
+      <div class="badge">057</div>
+      <div class="body">
+        <span class="chip chip--tool">APEX / リグ</span>
+        <h2>APEX のグラフを持ち歩く — ネットワークが、そのままジオメトリになる</h2>
+        <p class="path">apex::Graph.saveToGeometry &nbsp;·&nbsp; ファイル1つで別のプロセスへ渡る</p>
+
+        <div class="prose">
+          <p>
+            APEX のいちばんの特徴は<strong>「<button class="term" data-term="ノード">ノード</button>の<button class="term" data-term="ネットワーク">ネットワーク</button>そのものを
+            データとして持ち歩けること」</strong>だと<a href="#exp050">実験050</a>で書いた。
+            今回それを確かめる。
+          </p>
+          <p>
+            グラフを <code>saveToGeometry</code> で<button class="term" data-term="ジオメトリ">ジオメトリ</button>に落とすと、
+            <strong>ノード1つが点1つ、配線1本が<button class="term" data-term="プリミティブ">プリミティブ</button>1つ</strong>になる。
+            そのままファイルに保存でき、別のプロセスで読み直して実行できる。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="057_graphgeo.png" alt="球と線で描かれたAPEXグラフ"></div>
+            <figcaption>
+              1 + 2 + … + 10 を足すグラフを、<strong>ファイルから読んでそのまま描いたもの</strong>。
+              球が点＝ノード、線がプリミティブ＝配線。
+              上の10個が <code>Value</code>、下の1個が <code>Add</code>。
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. ノードの数・配線の数と、ジオメトリの大きさ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>足す数</th><th>ノード</th><th>配線</th><th>点</th><th>プリミティブ</th><th>答え</th><th>合っているか</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td class="num">3</td><td class="num">2</td><td class="num hi">3</td><td class="num hi">2</td><td class="num">3.0</td><td>はい</td></tr>
+              <tr><td class="num">4</td><td class="num">5</td><td class="num">4</td><td class="num hi">5</td><td class="num hi">4</td><td class="num">10.0</td><td>はい</td></tr>
+              <tr><td class="num">8</td><td class="num">9</td><td class="num">8</td><td class="num hi">9</td><td class="num hi">8</td><td class="num">36.0</td><td>はい</td></tr>
+              <tr><td class="num">16</td><td class="num">17</td><td class="num">16</td><td class="num hi">17</td><td class="num hi">16</td><td class="num">136.0</td><td>はい</td></tr>
+              <tr><td class="num">32</td><td class="num">33</td><td class="num">32</td><td class="num hi">33</td><td class="num hi">32</td><td class="num">528.0</td><td>はい</td></tr>
+              <tr><td class="num">64</td><td class="num">65</td><td class="num">64</td><td class="num hi">65</td><td class="num hi">64</td><td class="num">2080.0</td><td>はい</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>例外なし。</strong>答えも 1 + 2 + … + n ＝ n(n+1)/2 とすべて一致している。
+        </p>
+
+        <p class="label">2. 点には何が入っているか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>点</th><th>name</th><th>callback</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td><code>add</code></td><td class="hi"><code>Add&lt;Float&gt;</code></td></tr>
+              <tr><td class="num">1</td><td><code>v0</code></td><td class="hi"><code>Value&lt;Float&gt;</code></td></tr>
+              <tr><td class="num">2</td><td><code>v1</code></td><td class="hi"><code>Value&lt;Float&gt;</code></td></tr>
+              <tr><td class="num">3</td><td><code>v2</code></td><td class="hi"><code>Value&lt;Float&gt;</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          ほかに <code>parms</code>（<button class="term" data-term="パラメータ">パラメータ</button>）・<code>tags</code>・<code>properties</code>・
+          <code>comment</code>・<code>Cd</code> もある。
+          <strong>ノードの置き場所が、そのまま点の位置になる。</strong>
+        </p>
+
+        <p class="label">3. 別のプロセスで読んで実行する</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>読んだジオメトリ</td><td class="num">11点 / 10プリミティブ</td></tr>
+              <tr><td>グラフとして読めたか</td><td class="hi">はい</td></tr>
+              <tr><td>ノード / ポート</td><td class="num">11個 / 32個</td></tr>
+              <tr><td>実行した答え</td><td class="num hi">55.0</td></tr>
+              <tr><td>期待</td><td class="num">55（1 + 2 + … + 10）</td></tr>
+              <tr><td>一致するか</td><td class="hi">はい</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">4. グラフの大きさとファイルの重さ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>ノード</th><th>点</th><th>バイト</th><th>1ノードあたり</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">3</td><td class="num">2,273</td><td class="num hi">757.7 B</td></tr>
+              <tr><td class="num">5</td><td class="num">5</td><td class="num">2,425</td><td class="num">485.0 B</td></tr>
+              <tr><td class="num">9</td><td class="num">9</td><td class="num">2,587</td><td class="num">287.4 B</td></tr>
+              <tr><td class="num">17</td><td class="num">17</td><td class="num">2,756</td><td class="num">162.1 B</td></tr>
+              <tr><td class="num">33</td><td class="num">33</td><td class="num">3,137</td><td class="num">95.1 B</td></tr>
+              <tr><td class="num">65</td><td class="num">65</td><td class="num">3,888</td><td class="num hi">59.8 B</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ノード1つが点1つ、配線1本がプリミティブ1つだった。</strong>6通りの大きさすべてで一致。<strong>例外なし。</strong></li>
+          <li><strong>点には <code>name</code> と <code>callback</code> が入っている。</strong><code>Add&lt;Float&gt;</code> という<strong>部品の名前が、そのまま文字列として点に乗る</strong>。</li>
+          <li><strong>ノードの置き場所が、そのまま点の位置になる。</strong>だからグラフを描くのに専用の道具は要らない。<strong>点に球を複製して、線を筒にすれば、それがネットワーク図になる。</strong>上の図はそうやって作った。</li>
+          <li><strong>別のプロセスで読んでも、同じ答えが出た。</strong>ファイル1つ（2,617バイト）を渡しただけで、シーンもノードも持ち込んでいない。<span class="hi">55.0</span>。<strong>これが「持ち歩ける」ということ。</strong></li>
+          <li><strong>ファイルは思ったより軽い。</strong>ノード65個で 3,888バイト。1ノードあたりは <span class="hi">757.7B → 59.8B</span> と下がり続ける。</li>
+          <li><strong>その下がり方から、内訳が読める。</strong>3個 2,273B と 65個 3,888B の差が 1,615B、その間にノードが62個。<strong>ノード1つの実費は約26バイト</strong>で、残りの約2,195バイトは大きさによらない土台。</li>
+          <li><strong><button class="term" data-term="SOP">SOP</button> のネットワークとの違いが、ここではっきりする。</strong>SOP はシーンの中に置かれ、ジオメトリがその中を流れる。<strong>APEX は逆で、ネットワークのほうがジオメトリの中を流れる。</strong>だからキャラクターのリグを、モデルと一緒に1つのファイルで渡せる。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

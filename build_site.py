@@ -355,13 +355,18 @@ DONE = [
      "shots": ["056_short.png", "056_long.png"],
      "title": "長い鎖の IK — 式は同じ。ただし解き方は2種類あり、得意な範囲が逆",
      "note": "届く距離＝骨の本数。solver=1 は8割まで5〜100倍正確、9割超で逆転"},
+    {"no": "057", "anchor": "exp057", "tags": ["APEX", "リグ", "ジオメトリ"],
+     "log": "log_pm", "hip": "", "thumb": "057_graphgeo.png",
+     "shots": ["057_graphgeo.png"],
+     "title": "APEX のグラフを持ち歩く — ネットワークが、そのままジオメトリになる",
+     "note": "ノード＝点、配線＝プリミティブ。2,617バイトのファイル1つで別プロセスへ渡る"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "057", "title": "APEX のグラフを持ち歩く",
-     "note": "組んだグラフをジオメトリに埋め込み、SOP から呼び出す"},
+    {"no": "058", "title": "SOP からグラフを呼ぶ",
+     "note": "apex::invokegraph で、SOP のネットワークから APEX のグラフを実行する"},
 ]
 
 PAGES = [

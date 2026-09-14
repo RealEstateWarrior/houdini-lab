@@ -1,0 +1,158 @@
+{
+  "sizes": [
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "sizes_table": [
+    {
+      "count": 2,
+      "nodes": 3,
+      "wires": 2,
+      "points": 3,
+      "prims": 2,
+      "value": 3.0,
+      "expected": 3,
+      "ok": true
+    },
+    {
+      "count": 4,
+      "nodes": 5,
+      "wires": 4,
+      "points": 5,
+      "prims": 4,
+      "value": 10.0,
+      "expected": 10,
+      "ok": true
+    },
+    {
+      "count": 8,
+      "nodes": 9,
+      "wires": 8,
+      "points": 9,
+      "prims": 8,
+      "value": 36.0,
+      "expected": 36,
+      "ok": true
+    },
+    {
+      "count": 16,
+      "nodes": 17,
+      "wires": 16,
+      "points": 17,
+      "prims": 16,
+      "value": 136.0,
+      "expected": 136,
+      "ok": true
+    },
+    {
+      "count": 32,
+      "nodes": 33,
+      "wires": 32,
+      "points": 33,
+      "prims": 32,
+      "value": 528.0,
+      "expected": 528,
+      "ok": true
+    },
+    {
+      "count": 64,
+      "nodes": 65,
+      "wires": 64,
+      "points": 65,
+      "prims": 64,
+      "value": 2080.0,
+      "expected": 2080,
+      "ok": true
+    }
+  ],
+  "points_equal_nodes": true,
+  "prims_equal_wires": true,
+  "point_attribs": [
+    "Cd",
+    "P",
+    "callback",
+    "comment",
+    "name",
+    "parms",
+    "properties",
+    "tags"
+  ],
+  "detail_attribs": [
+    "parms",
+    "properties"
+  ],
+  "nodes_seen": [
+    {
+      "name": "add",
+      "callback": "Add<Float>"
+    },
+    {
+      "name": "v0",
+      "callback": "Value<Float>"
+    },
+    {
+      "name": "v1",
+      "callback": "Value<Float>"
+    },
+    {
+      "name": "v2",
+      "callback": "Value<Float>"
+    }
+  ],
+  "file": {
+    "path": "057_graph.bgeo.sc",
+    "bytes": 2617,
+    "expected": 55,
+    "count": 10
+  },
+  "file_sizes": [
+    {
+      "count": 2,
+      "nodes": 3,
+      "bytes": 2273,
+      "per_node": 757.6666666666666
+    },
+    {
+      "count": 4,
+      "nodes": 5,
+      "bytes": 2425,
+      "per_node": 485.0
+    },
+    {
+      "count": 8,
+      "nodes": 9,
+      "bytes": 2587,
+      "per_node": 287.44444444444446
+    },
+    {
+      "count": 16,
+      "nodes": 17,
+      "bytes": 2756,
+      "per_node": 162.11764705882354
+    },
+    {
+      "count": 32,
+      "nodes": 33,
+      "bytes": 3137,
+      "per_node": 95.06060606060606
+    },
+    {
+      "count": 64,
+      "nodes": 65,
+      "bytes": 3888,
+      "per_node": 59.815384615384616
+    }
+  ],
+  "reload": {
+    "points": 11,
+    "prims": 10,
+    "nodes": 11,
+    "value": 55.0,
+    "expected": 55,
+    "ok": true
+  }
+}
