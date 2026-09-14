@@ -1,0 +1,125 @@
+{
+  "source": {
+    "points": 371,
+    "prims": 381
+  },
+  "formats": [
+    {
+      "ext": "bgeo.sc",
+      "how": "直接",
+      "ok": true,
+      "bytes": 6231,
+      "reason": ""
+    },
+    {
+      "ext": "geo",
+      "how": "直接",
+      "ok": true,
+      "bytes": 46506,
+      "reason": ""
+    },
+    {
+      "ext": "obj",
+      "how": "直接",
+      "ok": true,
+      "bytes": 20568,
+      "reason": ""
+    },
+    {
+      "ext": "ply",
+      "how": "直接",
+      "ok": true,
+      "bytes": 50448,
+      "reason": ""
+    },
+    {
+      "ext": "stl",
+      "how": "直接",
+      "ok": true,
+      "bytes": 207899,
+      "reason": ""
+    },
+    {
+      "ext": "fbx",
+      "how": "rop",
+      "ok": false,
+      "bytes": 0,
+      "reason": ""
+    },
+    {
+      "ext": "gltf",
+      "how": "rop",
+      "ok": false,
+      "bytes": 0,
+      "reason": ""
+    },
+    {
+      "ext": "abc",
+      "how": "rop",
+      "ok": false,
+      "bytes": 0,
+      "reason": ""
+    },
+    {
+      "ext": "usd",
+      "how": "rop",
+      "ok": false,
+      "bytes": 0,
+      "reason": ""
+    }
+  ],
+  "usd": {
+    "asked": "payload_lop.usd",
+    "made": [
+      "payload_lop.usdnc"
+    ],
+    "bytes": [
+      815
+    ],
+    "message": [
+      "Layer saved to a location generated from a node path: D:/Claude/houdini/out/058_export/obj/payload/both.usdnc"
+    ]
+  },
+  "roundtrip": [
+    {
+      "ext": "bgeo.sc",
+      "readable": true,
+      "points_before": 371,
+      "points_after": 371,
+      "worst": 0.0,
+      "has_name": true
+    },
+    {
+      "ext": "geo",
+      "readable": true,
+      "points_before": 371,
+      "points_after": 371,
+      "worst": 0.0,
+      "has_name": true
+    },
+    {
+      "ext": "obj",
+      "readable": true,
+      "points_before": 371,
+      "points_after": 371,
+      "worst": 0.0,
+      "has_name": false
+    },
+    {
+      "ext": "ply",
+      "readable": true,
+      "points_before": 371,
+      "points_after": 371,
+      "worst": 0.0,
+      "has_name": false
+    },
+    {
+      "ext": "stl",
+      "readable": true,
+      "points_before": 371,
+      "points_after": 365,
+      "worst": null,
+      "has_name": false
+    }
+  ]
+}

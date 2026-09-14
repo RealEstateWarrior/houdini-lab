@@ -3643,6 +3643,96 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
     </article>
 
 
+
+    <!-- ===================== 058 ===================== -->
+    <article class="entry entry--current" id="exp058">
+      <div class="badge">058</div>
+      <div class="body">
+        <span class="chip chip--tool">書き出し</span>
+        <h2>Apprentice で外へ出せる形式 — FBX も glTF も Alembic も止まる</h2>
+        <p class="path">9通り全部試す &nbsp;·&nbsp; 噂ではなく、実際に走らせて確かめる</p>
+
+        <div class="prose">
+          <p>
+            Houdini で組んだものは、最後は別のソフト（Unreal Engine など）へ渡すことになる。
+            その橋渡しに使われるのが <strong>FBX や glTF、USD、Alembic</strong>。
+          </p>
+          <p>
+            ところが <button class="term" data-term="Apprentice">Apprentice</button> には書き出しの制限がある。
+            <strong>どれが通ってどれが止まるのか、9通り全部試した。</strong>
+          </p>
+          <p>
+            書き出したのは、骨（9関節の点と線）と皮（球362点）を合わせた
+            <strong>371点 / 381<button class="term" data-term="プリミティブ">プリミティブ</button></strong>。
+          </p>
+        </div>
+
+        <p class="label">1. 9通り全部試す</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形式</th><th>やり方</th><th>結果</th><th>バイト</th><th>止まった理由</th></tr></thead>
+            <tbody>
+              <tr><td><code>bgeo.sc</code></td><td>直接保存</td><td class="hi">通った</td><td class="num">6,231</td><td>—</td></tr>
+              <tr><td><code>geo</code></td><td>直接保存</td><td class="hi">通った</td><td class="num">46,506</td><td>—</td></tr>
+              <tr><td><code>obj</code></td><td>直接保存</td><td class="hi">通った</td><td class="num">20,568</td><td>—</td></tr>
+              <tr><td><code>ply</code></td><td>直接保存</td><td class="hi">通った</td><td class="num">50,448</td><td>—</td></tr>
+              <tr><td><code>stl</code></td><td>直接保存</td><td class="hi">通った</td><td class="num">207,899</td><td>—</td></tr>
+              <tr><td><code>fbx</code></td><td>ROP</td><td>止まった</td><td class="num">0</td><td class="wrap">FBX export is not supported in Houdini Apprentice.</td></tr>
+              <tr><td><code>gltf</code></td><td>ROP</td><td>止まった</td><td class="num">0</td><td class="wrap">glTF export is only supported in Houdini Core and Houdini FX versions.</td></tr>
+              <tr><td><code>abc</code></td><td>ROP</td><td>止まった</td><td class="num">0</td><td class="wrap">Alembic export is only supported in Houdini Core and Houdini FX versions.</td></tr>
+              <tr><td><code>usd</code>（SOP内）</td><td>ROP</td><td>止まった</td><td class="num">0</td><td class="wrap">Failed to save output to file</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">2. USD は LOP を経由すると通る。ただし拡張子が変わる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>指定したパス</td><td><code>payload_lop.usd</code></td></tr>
+              <tr><td>実際にできたもの</td><td class="hi"><code>payload_lop.usdnc</code>（815 バイト）</td></tr>
+              <tr><td>中身の実体</td><td><code>obj/payload/both.usdnc</code>（80,845 バイト）</td></tr>
+              <tr><td>出たメッセージ</td><td class="wrap">Layer saved to a location generated from a node path</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong><code>nc</code> は non-commercial（非商用）。</strong>
+          形式としては書けるが、そのままでは他のソフトが読めない。
+        </p>
+
+        <p class="label">3. 通ったものを読み直す</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形式</th><th>点 元</th><th>点 後</th><th>位置のずれ 最大</th><th>name が残ったか</th></tr></thead>
+            <tbody>
+              <tr><td><code>bgeo.sc</code></td><td class="num">371</td><td class="num">371</td><td class="num hi">0.000000000</td><td class="hi">はい</td></tr>
+              <tr><td><code>geo</code></td><td class="num">371</td><td class="num">371</td><td class="num hi">0.000000000</td><td class="hi">はい</td></tr>
+              <tr><td><code>obj</code></td><td class="num">371</td><td class="num">371</td><td class="num hi">0.000000000</td><td>いいえ</td></tr>
+              <tr><td><code>ply</code></td><td class="num">371</td><td class="num">371</td><td class="num hi">0.000000000</td><td>いいえ</td></tr>
+              <tr><td><code>stl</code></td><td class="num">371</td><td class="num hi">365</td><td class="num">— （数が合わない）</td><td>いいえ</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>FBX は書き出せない。</strong>「FBX export is not supported in Houdini Apprentice.」とはっきり出る。<strong>Unreal Engine へ渡す標準の道が、そのままでは使えない。</strong></li>
+          <li><strong>glTF も Alembic も止まる。</strong>どちらも「only supported in Houdini Core and Houdini FX versions.」。<strong>FBX の代わりになりそうな2つも、同じく塞がっている。</strong></li>
+          <li><strong>USD は通る。ただし <code>.usdnc</code> になる。</strong>指定した <code>.usd</code> ではなく、拡張子を <code>nc</code>（非商用）へ変えられる。<strong>書けるが、そのままでは他のソフトが読めない。</strong></li>
+          <li><strong>USD は置き場所で結果が変わった。</strong><button class="term" data-term="SOP">SOP</button> の中の <button class="term" data-term="ROP">ROP</button> では止まり、LOP（/stage）に置くと通る。<strong>同じ名前の<button class="term" data-term="ノード">ノード</button>でも、どこに置くかで動きが違う。</strong></li>
+          <li><strong>通ったのは5つ。</strong>いずれも <code>hou.Geometry.saveToFile</code> での直接保存で、ROP を通していない。<strong>ライセンスの制限は ROP 側に掛かっているように見える</strong>（確かめていないので断定しない）。</li>
+          <li><strong>Houdini 自身の形式は完全に往復する。</strong>bgeo.sc と geo は 371点がそのまま戻り、ずれ <span class="hi">0.000000000</span>、<code>name</code> も残る。</li>
+          <li><strong>obj と ply は位置だけ戻る。</strong>ずれは 0.000000000 だが <strong><code>name</code> は消える</strong>。骨の名前が失われるので、リグとしては渡せない。</li>
+          <li><strong>stl は点が減る。</strong>371点が <span class="hi">365点</span>。stl は三角形の集まりしか持てないので、骨の線が落ちる。<strong>形だけを渡す形式。</strong></li>
+          <li><strong>ファイルの大きさは形式で33倍ちがう。</strong>bgeo.sc 6,231バイト、stl 207,899バイト。<strong>同じ形なのに33倍。</strong></li>
+          <li><strong>結論。Apprentice のままでは外へ渡せない。</strong>形を見せるだけなら obj、Houdini 同士なら bgeo.sc。<strong>リグやアニメーションを他のソフトへ渡すには、ライセンスを上げるしかない。工夫では回避できない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

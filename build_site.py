@@ -360,13 +360,18 @@ DONE = [
      "shots": ["057_graphgeo.png"],
      "title": "APEX のグラフを持ち歩く — ネットワークが、そのままジオメトリになる",
      "note": "ノード＝点、配線＝プリミティブ。2,617バイトのファイル1つで別プロセスへ渡る"},
+    {"no": "058", "anchor": "exp058", "tags": ["書き出し", "Apprentice", "検証"],
+     "log": "log_pm", "hip": "", "thumb": "",
+     "shots": [],
+     "title": "Apprentice で外へ出せる形式 — FBX も glTF も Alembic も止まる",
+     "note": "9通り試して5通り。FBX/glTF/Alembic は不可。USD は .usdnc に変えられる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "058", "title": "SOP からグラフを呼ぶ",
-     "note": "apex::invokegraph で、SOP のネットワークから APEX のグラフを実行する"},
+    {"no": "059", "title": "obj で渡せる範囲を確かめる",
+     "note": "Apprentice で唯一外へ出せる形式。何が残り、何が落ちるか"},
 ]
 
 PAGES = [
