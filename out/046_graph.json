@@ -1,0 +1,248 @@
+{
+  "title": "実験046 — 毛に色を付ける",
+  "network": "/obj/groom",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "skin",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rest",
+      "type": "rest",
+      "pos": [
+        5.083,
+        -4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "roots",
+      "type": "scatter::2.0",
+      "pos": [
+        2.824,
+        -1.28
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 300
+      }
+    },
+    {
+      "name": "make_guides",
+      "type": "attribwrangle",
+      "pos": [
+        2.824,
+        -2.711
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nint segs = 8;\nfloat len = 0.5;\nint n = npoints(0);\nfor (int i = 0; i < n; i++) {\n    vector p = point(0, \"P\", i);\n  ..."
+      }
+    },
+    {
+      "name": "hairgen",
+      "type": "hairgen::2.0",
+      "pos": [
+        1.412,
+        -3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "influenceradius": 0.2,
+        "thickness": 0.008,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "clump",
+      "type": "hairclump::2.0",
+      "pos": [
+        3.248,
+        -5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clumpsize": 0.4,
+        "blendremapramp2pos": 1.0,
+        "blendremapramp2value": 1.0,
+        "clumpsizeremapramp2pos": 1.0,
+        "clumpsizeremapramp2value": 1.0,
+        "tightnessremapramp2pos": 1.0,
+        "tightnessremapramp2value": 1.0,
+        "strayamountremapramp2pos": 1.0,
+        "strayamountremapramp2value": 1.0,
+        "strayrateremapramp2pos": 1.0,
+        "strayrateremapramp2value": 1.0,
+        "strayfalloffremapramp2pos": 1.0,
+        "strayfalloffremapramp2value": 1.0,
+        "clumpprofile1value": 1.0,
+        "clumpprofile1interp": 5,
+        "clumpprofile2pos": 0.14254385232925415,
+        "clumpprofile2value": 0.48605579137802124,
+        "clumpprofile2interp": 5,
+        "clumpprofile3pos": 0.5679824352264404,
+        "clumpprofile3value": 0.11952191591262817,
+        "clumpprofile3interp": 5,
+        "clumpprofile4pos": 1.0,
+        "clumpprofile4interp": 5,
+        "iterationsremapramp2pos": 1.0,
+        "iterationsremapramp2value": 1.0,
+        "sizereductionremapramp2pos": 1.0,
+        "sizereductionremapramp2value": 1.0,
+        "goalfeedbackremapramp2pos": 1.0,
+        "goalfeedbackremapramp2value": 1.0,
+        "tightnessreductionremapramp2pos": 1.0,
+        "tightnessreductionremapramp2value": 1.0,
+        "curlampremapramp2pos": 1.0,
+        "curlampremapramp2value": 1.0,
+        "curlampramp2pos": 1.0,
+        "curlampramp2value": 1.0,
+        "curlfreqremapramp2pos": 1.0,
+        "curlfreqremapramp2value": 1.0,
+        "curlfreqramp2pos": 1.0,
+        "curlfreqramp2value": 1.0
+      }
+    },
+    {
+      "name": "tint",
+      "type": "attribwrangle",
+      "pos": [
+        3.248,
+        -6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "\nint pts[] = primpoints(0, @primnum);\nint n = len(pts);\nfor (int i = 0; i < n; i++) {\n    float u = (n > 1) ? float(i..."
+      }
+    },
+    {
+      "name": "assign",
+      "type": "material",
+      "pos": [
+        3.248,
+        -7.379
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/hair_shader"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "rest",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "roots",
+      "to_input": 0
+    },
+    {
+      "from": "roots",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 1
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 0
+    },
+    {
+      "from": "make_guides",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 1
+    },
+    {
+      "from": "hairgen",
+      "from_output": 0,
+      "to": "clump",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "clump",
+      "to_input": 1
+    },
+    {
+      "from": "clump",
+      "from_output": 0,
+      "to": "tint",
+      "to_input": 0
+    },
+    {
+      "from": "tint",
+      "from_output": 0,
+      "to": "assign",
+      "to_input": 0
+    }
+  ]
+}

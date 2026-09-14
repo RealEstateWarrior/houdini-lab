@@ -2209,6 +2209,17 @@
         <h2>毛を Karma で出す — 既定の太さは、画の上で 0.1ピクセルしかなかった</h2>
         <p class="path">/obj/groom &nbsp;·&nbsp; 先に式を立てて、実測と突き合わせる</p>
 
+        <p class="callout">
+          <strong>訂正（同日・測り方の誤り）。</strong>
+          最初に出した比は 1.0072〜1.0397 で、「細いほど比が大きいのは輪郭のぼけのため」と書いた。
+          <strong>これは誤りだった。</strong>
+          <button class="term" data-term="Apprentice">Apprentice</button> のレンダには右下に Houdini のロゴが焼き込まれ、そこにも透明度がある。
+          列ごとに透明度を足す測り方だったので、<strong>ロゴのかかる列だけ値が水増しされていた</strong>。
+          ロゴの箱（行521〜566・列343〜566、透明度の合計 4163.3）を外して測り直すと、
+          比は <strong>0.9969 / 0.9969 / 0.9969 / 1.0019</strong> と 0.3% 以内にそろう。
+          以下の数字はすべて測り直したものに差し替えてある。
+        </p>
+
         <div class="prose">
           <p>
             <code>hairgen</code> は毛1本ごとに <code>width</code> という太さの数値を書き出す
@@ -2244,10 +2255,10 @@
           <table>
             <thead><tr><th>thickness</th><th>予測(px)</th><th>実測(px)</th><th>実測 ÷ 予測</th><th>画に出た長さ（世界）</th></tr></thead>
             <tbody>
-              <tr><td class="num">0.005</td><td class="num">2.565</td><td class="num">2.667</td><td class="num hi">1.0397</td><td class="num">1.02349</td></tr>
-              <tr><td class="num">0.010</td><td class="num">5.129</td><td class="num">5.224</td><td class="num hi">1.0183</td><td class="num">1.02739</td></tr>
-              <tr><td class="num">0.020</td><td class="num">10.259</td><td class="num">10.337</td><td class="num hi">1.0076</td><td class="num">1.03324</td></tr>
-              <tr><td class="num">0.040</td><td class="num">20.518</td><td class="num">20.667</td><td class="num hi">1.0072</td><td class="num">1.04494</td></tr>
+              <tr><td class="num">0.005</td><td class="num">2.565</td><td class="num">2.557</td><td class="num hi">0.9969</td><td class="num">1.00790</td></tr>
+              <tr><td class="num">0.010</td><td class="num">5.129</td><td class="num">5.114</td><td class="num hi">0.9969</td><td class="num">1.01374</td></tr>
+              <tr><td class="num">0.020</td><td class="num">10.259</td><td class="num">10.227</td><td class="num hi">0.9969</td><td class="num">1.02544</td></tr>
+              <tr><td class="num">0.040</td><td class="num">20.518</td><td class="num">20.557</td><td class="num hi">1.0019</td><td class="num">1.04494</td></tr>
             </tbody>
           </table>
         </div>
@@ -2255,6 +2266,7 @@
           「1世界単位が何ピクセルか」はカメラの焦点距離と絞りから出した（512.95px）。
           画の中の長さから逆算すると端の丸みの分だけずれるので使わない。
           <strong>半径なら比は 2.0 になるはず。ならなかったので、<code>width</code> は直径。</strong>
+          3通りが 0.9969 でぴたりとそろう。
         </p>
 
         <p class="label">2. 毛玉のまま太さを変える（毛 12,516本）</p>
@@ -2262,10 +2274,10 @@
           <table>
             <thead><tr><th>thickness</th><th>画の上の太さ</th><th>触れたピクセル</th><th>平均の濃さ</th><th>時間</th></tr></thead>
             <tbody>
-              <tr><td>0.001（既定）</td><td class="num hi">0.103 px</td><td class="num">78,654</td><td class="num">0.723</td><td class="num">5.0秒</td></tr>
-              <tr><td class="num">0.002</td><td class="num">0.205 px</td><td class="num">80,786</td><td class="num">0.808</td><td class="num">7.0秒</td></tr>
-              <tr><td class="num">0.004</td><td class="num">0.411 px</td><td class="num">81,957</td><td class="num">0.874</td><td class="num">10.3秒</td></tr>
-              <tr><td class="num">0.008</td><td class="num hi">0.822 px</td><td class="num">82,820</td><td class="num">0.909</td><td class="num">10.7秒</td></tr>
+              <tr><td>0.001（既定）</td><td class="num hi">0.103 px</td><td class="num">70,696</td><td class="num">0.746</td><td class="num">5.0秒</td></tr>
+              <tr><td class="num">0.002</td><td class="num">0.205 px</td><td class="num">72,828</td><td class="num">0.839</td><td class="num">7.0秒</td></tr>
+              <tr><td class="num">0.004</td><td class="num">0.411 px</td><td class="num">73,999</td><td class="num">0.912</td><td class="num">10.3秒</td></tr>
+              <tr><td class="num">0.008</td><td class="num hi">0.822 px</td><td class="num">74,862</td><td class="num">0.950</td><td class="num">10.7秒</td></tr>
             </tbody>
           </table>
         </div>
@@ -2275,11 +2287,11 @@
           <table>
             <thead><tr><th>density</th><th>毛</th><th>時間</th><th>毛1本あたり</th><th>覆った面積</th></tr></thead>
             <tbody>
-              <tr><td class="num">250</td><td class="num">3,104</td><td class="num">3.1秒</td><td class="num hi">0.9841 ms</td><td class="num">44,299</td></tr>
-              <tr><td class="num">500</td><td class="num">6,233</td><td class="num">3.5秒</td><td class="num">0.5629 ms</td><td class="num">49,526</td></tr>
-              <tr><td class="num">1000</td><td class="num">12,516</td><td class="num">4.7秒</td><td class="num">0.3792 ms</td><td class="num">56,899</td></tr>
-              <tr><td class="num">2000</td><td class="num">24,916</td><td class="num">8.6秒</td><td class="num">0.3470 ms</td><td class="num">64,976</td></tr>
-              <tr><td class="num">4000</td><td class="num">49,977</td><td class="num">13.1秒</td><td class="num hi">0.2630 ms</td><td class="num">71,439</td></tr>
+              <tr><td class="num">250</td><td class="num">3,104</td><td class="num">3.1秒</td><td class="num hi">0.9841 ms</td><td class="num">40,136</td></tr>
+              <tr><td class="num">500</td><td class="num">6,233</td><td class="num">3.5秒</td><td class="num">0.5629 ms</td><td class="num">45,363</td></tr>
+              <tr><td class="num">1000</td><td class="num">12,516</td><td class="num">4.7秒</td><td class="num">0.3792 ms</td><td class="num">52,736</td></tr>
+              <tr><td class="num">2000</td><td class="num">24,916</td><td class="num">8.6秒</td><td class="num">0.3470 ms</td><td class="num">60,813</td></tr>
+              <tr><td class="num">4000</td><td class="num">49,977</td><td class="num">13.1秒</td><td class="num hi">0.2630 ms</td><td class="num">67,276</td></tr>
             </tbody>
           </table>
         </div>
@@ -2298,15 +2310,146 @@
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li><strong><code>width</code> は直径だった。</strong>4通りで実測÷予測が 1.0397 / 1.0183 / 1.0076 / 1.0072。<strong>半径なら 2.0 になるはずで、そうはならない。</strong>細いほど比が大きいのは輪郭のぼけが相対的に効くためで、太い側の <span class="hi">1.007</span> が真の値に近い。</li>
-          <li><strong>既定の <code>thickness</code> 0.001 は、この構図で 0.103ピクセル。</strong>1ピクセルの1割しかない。毛1本がピクセルの一部しか覆えないので、<strong>点が散らばったようにしか見えない</strong>。平均の濃さも 0.723 と薄い。</li>
+          <li><strong><code>width</code> は直径だった。</strong>4通りで実測÷予測が <span class="hi">0.9969 / 0.9969 / 0.9969 / 1.0019</span>。<strong>半径なら 2.0 になるはずで、そうはならない。</strong>3通りが小数点以下4桁までそろっている。</li>
+          <li><strong>最初の測定は 3〜4% ずれていた。原因はライセンスのロゴだった。</strong>Apprentice のレンダには右下に Houdini のロゴが焼き込まれ、<strong>そこにも透明度がある</strong>。列ごとに透明度を足す測り方だったので、ロゴのかかる列だけ水増しされていた。<strong>画を測るときは、画に写り込んでいるものを全部数え上げる。</strong></li>
+          <li><strong>画に出る長さは、指定より少し長い。</strong>1.00790 / 1.01374 / 1.02544 / 1.04494。<strong>増えた分は太さとほぼ同じ</strong>で、端が丸いぶん両側に半径ずつ出ていることになる。太さを引いた残りは 0.0029〜0.0054＝<strong>1.5〜2.8ピクセル</strong>で、これが輪郭のぼけにあたる。</li>
+          <li><strong>既定の <code>thickness</code> 0.001 は、この構図で 0.103ピクセル。</strong>1ピクセルの1割しかない。毛1本がピクセルの一部しか覆えないので、<strong>点が散らばったようにしか見えない</strong>。平均の濃さも 0.746 と薄い。</li>
           <li><strong>太さは「世界の大きさに対する値」である。</strong>0.001 が細すぎるのは、土台の球が半径1しかないから。<strong>数字そのものではなく「土台の何分の1か」で考える。</strong></li>
-          <li><strong>太くすると絵は落ち着くが、時間は倍になる。</strong>0.008 で平均の濃さ 0.909。ただし 5.0秒 → 10.7秒。<strong>覆うピクセルが増えるぶん計算も増える。</strong></li>
+          <li><strong>太くすると絵は落ち着くが、時間は倍になる。</strong>0.008 で平均の濃さ 0.950。ただし 5.0秒 → 10.7秒。<strong>覆うピクセルが増えるぶん計算も増える。</strong></li>
           <li><strong>レンダ時間は本数に比例しない。</strong>毛を16倍にしても時間は 4.2倍。毛1本あたりは 0.9841ms → 0.2630ms と <span class="hi">3.7分の1</span>。<strong>毛が増えるほど1本あたりは安くなる。</strong></li>
-          <li><strong>覆う面積も比例しない。</strong>毛を16倍にしても、画の上で覆う面積は <span class="hi">1.6倍</span>。<strong>手前の毛が奥の毛を隠すので、増やしても画は濃くなるだけで広がらない。</strong></li>
+          <li><strong>覆う面積も比例しない。</strong>毛を16倍にしても、画の上で覆う面積は <span class="hi">1.68倍</span>。<strong>手前の毛が奥の毛を隠すので、増やしても画は濃くなるだけで広がらない。</strong></li>
           <li><strong>OpenGL は本数によらず 0.74〜0.76秒で一定だった。</strong>3,104本でも 49,977本でも変わらない。<strong>確認用に何度も撮るなら OpenGL、見せる絵は Karma。</strong></li>
           <li><strong>Karma との差は本数とともに開く。</strong>4.1倍 → 6.3倍 → 17.4倍。<strong>毛のように数が増えるものでは、この差が効いてくる。</strong></li>
           <li><strong>測りたいものだけを残す形に作り替える。</strong>毛玉のままでは毛が重なり、覆った面積から1本の太さを割り出せない。<strong>毛を1本だけ置いて真横から撮る、という形にしたことが鍵だった。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 046 ===================== -->
+    <article class="entry entry--current" id="exp046">
+      <div class="badge">046</div>
+      <div class="body">
+        <span class="chip chip--pm">グルーム</span>
+        <h2>毛に色を付ける — 光を消して測ると、色は位置ぴったりに乗った</h2>
+        <p class="path">/obj/groom &nbsp;·&nbsp; 色を測るときは、光を当てない</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp045">実験045</a>で毛を <button class="term" data-term="Karma">Karma</button> に出せた。次は色を付ける。
+            ところが<strong>毛が持っている<button class="term" data-term="アトリビュート">アトリビュート</button>は
+            <code>P</code> と <code>width</code> だけ</strong>だった。
+            「この点は根元から何割の位置か」を示す数値は付いてこない。
+            <button class="term" data-term="プリミティブ">プリミティブ</button>ごとに頂点の並び順から 0〜1 を自分で振る。
+          </p>
+          <p>
+            色が位置どおりに乗っているかを確かめるため、
+            毛を1本だけ置いて根元を赤・毛先を青にし、真横から撮った。
+            <strong>光を当てた状態では 0.6877 × 位置 + 0.1748。</strong>
+            比例はしているが 1:1 ではない。
+            周囲の光が赤にも青にも同じだけ乗るためで、
+            この見立てが正しければ <strong>「傾き + 2×切片 = 1」</strong>になるはず。
+          </p>
+        </div>
+
+        <div class="figs figs--grid">
+          <figure>
+            <div class="frame-light"><img src="046_ball_plain.png" alt="色を付けていない毛玉"></div>
+            <figcaption><strong>色なし。</strong>彩度のあるピクセルは 0.0%。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="046_ball_tip.png" alt="根元が赤く毛先が青い毛玉"></div>
+            <figcaption><strong>根元を赤、毛先を青。</strong>彩度のあるピクセルは 90.1%。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="046_ball_clump.png" alt="束ごとに色が違う毛玉"></div>
+            <figcaption><strong>束ごとに色を変えた。</strong><a href="#exp043">実験043</a>で数えた144個の束が、そのまま房に見える。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 色は位置どおりに乗るか（毛を1本だけ、真横から）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>光</th><th>位置</th><th>赤(sRGB)</th><th>青(sRGB)</th><th>青の割合</th><th>直線との差</th></tr></thead>
+            <tbody>
+              <tr><td>当てる</td><td class="num">0.10</td><td class="num">217.8</td><td class="num">139.7</td><td class="num">0.2718</td><td class="num">+0.0282</td></tr>
+              <tr><td>当てる</td><td class="num">0.30</td><td class="num">203.1</td><td class="num">160.5</td><td class="num">0.3718</td><td class="num">-0.0093</td></tr>
+              <tr><td>当てる</td><td class="num">0.50</td><td class="num">178.7</td><td class="num">179.0</td><td class="num">0.5009</td><td class="num">-0.0177</td></tr>
+              <tr><td>当てる</td><td class="num">0.70</td><td class="num">149.7</td><td class="num">199.0</td><td class="num">0.6530</td><td class="num">-0.0032</td></tr>
+              <tr><td>当てる</td><td class="num">0.90</td><td class="num">108.3</td><td class="num">214.5</td><td class="num">0.8176</td><td class="num">+0.0239</td></tr>
+              <tr><td>発光</td><td class="num">0.10</td><td class="num">246.1</td><td class="num">86.5</td><td class="num hi">0.0926</td><td class="num">-0.0023</td></tr>
+              <tr><td>発光</td><td class="num">0.30</td><td class="num">220.9</td><td class="num">150.3</td><td class="num hi">0.2976</td><td class="num">+0.0003</td></tr>
+              <tr><td>発光</td><td class="num">0.50</td><td class="num">189.4</td><td class="num">190.3</td><td class="num hi">0.5028</td><td class="num">+0.0031</td></tr>
+              <tr><td>発光</td><td class="num">0.70</td><td class="num">151.3</td><td class="num">220.6</td><td class="num hi">0.6987</td><td class="num">-0.0035</td></tr>
+              <tr><td>発光</td><td class="num">0.90</td><td class="num">85.7</td><td class="num">245.3</td><td class="num hi">0.9084</td><td class="num">+0.0037</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          17か所を測って直線をあてはめた（表は4か所おき）。
+          透明度で重みを付けて赤と青の平均を出し、<strong>sRGB を線形に戻してから</strong>割合を求めている。
+          戻さないとガンマの分だけ曲がる。
+        </p>
+
+        <p class="label">2. あてはめた直線</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>光</th><th>傾き</th><th>切片</th><th>R²</th><th>直線からの最大のずれ</th><th>傾き + 2×切片</th></tr></thead>
+            <tbody>
+              <tr><td>当てる</td><td class="num">0.6877</td><td class="num">0.1748</td><td class="num">0.99142</td><td class="num">0.0282</td><td class="num">1.0373</td></tr>
+              <tr><td>発光</td><td class="num hi">1.0123</td><td class="num hi">-0.0064</td><td class="num hi">0.99991</td><td class="num hi">0.0037</td><td class="num hi">0.9996</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          周囲の光を a、色そのものの強さを k とすると、青の割合は
+          <strong>(位置×k + a) ÷ (k + 2a)</strong> という位置の1次式になる。
+          この形なら <strong>傾き + 2×切片 = 1</strong>。
+          光を当てた実測は 1.0373、発光は 0.9996。
+        </p>
+
+        <p class="label">3. width は根元から先まで一定か</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>位置</th><th>width の平均</th><th>根元との比</th><th>ばらつき</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.000</td><td class="num">0.008000</td><td class="num">1.0000</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">0.125</td><td class="num">0.008000</td><td class="num">1.0000</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">0.250</td><td class="num">0.008000</td><td class="num">1.0000</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">0.375</td><td class="num">0.007987</td><td class="num">0.9984</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">0.500</td><td class="num">0.007865</td><td class="num">0.9831</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">0.625</td><td class="num">0.007536</td><td class="num">0.9419</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">0.750</td><td class="num">0.006802</td><td class="num">0.8502</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">0.875</td><td class="num">0.004981</td><td class="num">0.6227</td><td class="num">0.00000000</td></tr>
+              <tr><td class="num">1.000</td><td class="num hi">0.000000</td><td class="num">0.0000</td><td class="num">0.00000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">4. 色を付けるとレンダ時間は変わるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>毛</th><th>時間</th><th>色のあるピクセル</th><th>彩度の平均</th></tr></thead>
+            <tbody>
+              <tr><td>色なし</td><td class="num">12,516</td><td class="num">8.0秒</td><td class="num">0.0%</td><td class="num">0.0000</td></tr>
+              <tr><td>根元→毛先</td><td class="num">12,516</td><td class="num">8.0秒</td><td class="num">90.1%</td><td class="num">0.5745</td></tr>
+              <tr><td>束ごと</td><td class="num">12,516</td><td class="num">8.1秒</td><td class="num">56.4%</td><td class="num">0.1808</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>毛が持っているのは <code>P</code> と <code>width</code> だけだった。</strong>「根元から何割の位置か」を示す数値は付いてこない。<button class="term" data-term="バーテックス">バーテックス</button>にも<button class="term" data-term="ディテールアトリビュート">ディテール</button>にも何も入っていない。<strong><code>primpoints</code> で点を並べ、順番から 0〜1 を自分で振る。</strong></li>
+          <li><strong>光を当てたまま測ると、比例はするが 1:1 にはならない。</strong>青の割合 = 0.6877 × 位置 + 0.1748。<strong>周囲の光が赤にも青にも同じだけ乗るので、割合が 0.5 側へ寄る。</strong></li>
+          <li><strong>その見立ては検算できる。</strong>周囲の光を a、色の強さを k とすると青の割合は (位置×k + a) ÷ (k + 2a)。この形なら <strong>傾き + 2×切片 = 1</strong>。実測は <span class="hi">1.0373</span>（3.7% のずれ）。</li>
+          <li><strong>発光にして光を外すと、位置そのものになった。</strong>1.0123 × 位置 − 0.0064、<span class="hi">R² = 0.99991</span>、直線からの最大のずれ 0.0037、傾き + 2×切片 = 0.9996。<strong>色を測りたいときは、光を当てずに測る。</strong></li>
+          <li><strong><code>width</code> は一定ではなく、先細りしていた。</strong>根元から 1/4 までは 0.008 のままで、そこから落ちて<strong>毛先でちょうど 0</strong>。<code>hairgen</code> の <code>hairprofile</code> というカーブのとおりに変えられている。</li>
+          <li><strong>先細りは 12,516本すべてで同じ。</strong>どの位置でもばらつきが <span class="hi">0.00000000</span>。<strong>毛ごとの個性ではなく、全部に同じカーブが掛かっている。</strong></li>
+          <li><strong>色を付けてもレンダ時間はほとんど変わらない。</strong>8.0 / 8.0 / 8.1秒。<strong>色は形の複雑さを増やさない。</strong></li>
+          <li><strong>数字で出した結果を、見た目で確かめられる形にしておく。</strong>束ごとに色を変えると、<a href="#exp043">実験043</a>で数えた144個の束がそのまま房として見える。</li>
+          <li><a href="#exp045">実験045</a>で見つけた「<button class="term" data-term="Apprentice">Apprentice</button> のロゴが測定に混ざる」問題は、この実験でも最初に出た。<strong>毛の右半分だけ値が乱れ、R² が 0.94 にしかならなかった。</strong>ロゴの箱を外したら 0.99142 になった。<strong>画を測るかぎり、同じ罠は毎回出る。</strong></li>
         </ul>
       </div>
     </article>

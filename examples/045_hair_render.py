@@ -59,6 +59,18 @@ def save(stats):
         json.dump(stats, fp, ensure_ascii=False, indent=2)
 
 
+# Apprentice のレンダには右下に Houdini のロゴが焼き込まれる。
+# 透明度を持っているので、何も考えずに足すと測定値に混ざる（合計 4163.3）。
+# 600×600 のときの箱。ここを 0 にしてから測る。
+LOGO_BOX = (521, 567, 343, 567)
+
+
+def drop_logo(alpha):
+    alpha = alpha.copy()
+    alpha[LOGO_BOX[0]:LOGO_BOX[1], LOGO_BOX[2]:LOGO_BOX[3]] = 0.0
+    return alpha
+
+
 def measure_width(path):
     """PNG から、毛の太さ（px）と長さ（px）を測る。
 
@@ -69,7 +81,8 @@ def measure_width(path):
     import numpy
 
     image = Image.open(path).convert("RGBA")
-    alpha = numpy.asarray(image, dtype=numpy.float64)[:, :, 3] / 255.0
+    alpha = drop_logo(numpy.asarray(image, dtype=numpy.float64)[:, :, 3]
+                      / 255.0)
     cols = alpha.sum(axis=0)                  # 列ごとの「濃さの合計」＝太さ
     used = numpy.nonzero(cols > 0.01)[0]
     if len(used) == 0:
@@ -261,8 +274,8 @@ def ball(density):
                            (0.6, 0.35, 1.0), margin=1.06)
     from PIL import Image
     import numpy
-    alpha = numpy.asarray(Image.open(path).convert("RGBA"),
-                          dtype=numpy.float64)[:, :, 3] / 255.0
+    alpha = drop_logo(numpy.asarray(Image.open(path).convert("RGBA"),
+                                    dtype=numpy.float64)[:, :, 3] / 255.0)
     row = {"density": density, "hairs": hairs, "seconds": seconds,
            "coverage": float(alpha.sum()),
            "file": os.path.basename(path)}
@@ -286,8 +299,8 @@ def thick(thickness):
                                      (0.6, 0.35, 1.0), margin=1.06,
                                      want_scale=True)
     scale = cam_info[0]
-    alpha = numpy.asarray(Image.open(path).convert("RGBA"),
-                          dtype=numpy.float64)[:, :, 3] / 255.0
+    alpha = drop_logo(numpy.asarray(Image.open(path).convert("RGBA"),
+                                    dtype=numpy.float64)[:, :, 3] / 255.0)
     inside = alpha[alpha > 0.004]
     row = {"thickness": thickness, "hairs": hairs, "seconds": seconds,
            "scale_px": scale, "width_px": thickness * scale,

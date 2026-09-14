@@ -299,14 +299,19 @@ DONE = [
      "log": "log_pm", "hip": "045_hair_render.hipnc", "thumb": "045_thick_0.008.png",
      "shots": ["045_thick_0.001.png", "045_thick_0.008.png"],
      "title": "毛を Karma で出す — 既定の太さは、画の上で 0.1ピクセルしかなかった",
-     "note": "width は直径（比1.007）。既定0.001は0.103px。本数16倍でも時間は4.2倍"},
+     "note": "width は直径（比0.997）。既定0.001は0.103px。Apprenticeのロゴが測定に混ざっていた"},
+    {"no": "046", "anchor": "exp046", "tags": ["グルーム", "毛", "色", "レンダリング", "検算"],
+     "log": "log_pm", "hip": "046_hair_color.hipnc", "thumb": "046_ball_clump.png",
+     "shots": ["046_ball_plain.png", "046_ball_tip.png", "046_ball_clump.png"],
+     "title": "毛に色を付ける — 光を消して測ると、色は位置ぴったりに乗った",
+     "note": "毛はPとwidthしか持たない。発光で測るとR²=0.99991。widthは毛先で0に先細り"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "046", "title": "毛に色を付ける",
-     "note": "根元と毛先で色を変える。clumpid ごとに変える。Karma に出るか"},
+    {"no": "047", "title": "毛を動かす",
+     "note": "風と重力で毛がどう揺れるか。土台が動いたら毛は付いてくるか"},
 ]
 
 PAGES = [
