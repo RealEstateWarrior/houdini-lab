@@ -3733,6 +3733,95 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
     </article>
 
 
+
+    <!-- ===================== 059 ===================== -->
+    <article class="entry entry--current" id="exp059">
+      <div class="badge">059</div>
+      <div class="body">
+        <span class="chip chip--tool">書き出し</span>
+        <h2>obj で渡せる範囲 — 色と UV は残る。自作のアトリビュートは全部落ちる</h2>
+        <p class="path">1種類ずつ持たせて往復させる &nbsp;·&nbsp; 混ぜて測ると原因が分からなくなる</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp058">実験058</a>で、<button class="term" data-term="Apprentice">Apprentice</button> から外へ出せるのは
+            <code>bgeo.sc</code> / <code>geo</code> / <code>obj</code> /
+            <code>ply</code> / <code>stl</code> の5つだけだと分かった。
+            このうち他のソフトが読めるのは <strong>obj</strong> と <strong>stl</strong>。
+          </p>
+          <p>
+            では obj で何が渡せて、何が落ちるのか。
+            <strong>1つずつ持たせて往復させる。</strong>
+          </p>
+        </div>
+
+        <p class="label">1. 形の種類は残るか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>種類</th><th>点 元</th><th>点 後</th><th>面 元</th><th>面 後</th><th>位置のずれ</th><th>中身の変化</th></tr></thead>
+            <tbody>
+              <tr><td>面（ポリゴン）</td><td class="num">122</td><td class="num">122</td><td class="num">132</td><td class="num">132</td><td class="num hi">0.000000000</td><td>Polygon 132 → Polygon 132</td></tr>
+              <tr><td>線（1本）</td><td class="num">9</td><td class="num">9</td><td class="num">1</td><td class="num">1</td><td class="num hi">0.000000000</td><td>Polygon 1 → Polygon 1</td></tr>
+              <tr><td>点だけ</td><td class="num">50</td><td class="num">50</td><td class="num">0</td><td class="num">0</td><td class="num hi">0.000000000</td><td>（面なし）→（面なし）</td></tr>
+              <tr><td>NURBS の球</td><td class="num">312</td><td class="num hi">2,232</td><td class="num">1</td><td class="num hi">2,160</td><td class="num">—</td><td class="wrap">NURBSSurface 1 → Polygon 2,160</td></tr>
+              <tr><td>開いたカーブ</td><td class="num">11</td><td class="num">11</td><td class="num">1</td><td class="num">1</td><td class="num hi">0.000000000</td><td>Polygon 1 → Polygon 1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>NURBS だけは刻まれる。</strong>点が 7.2倍。
+          obj は曲面を持てないので、書き出すときに<button class="term" data-term="ポリゴン">ポリゴン</button>へ変換される。
+        </p>
+
+        <p class="label">2. アトリビュートは残るか（面のポリゴンで見る）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>置き場所</th><th>書き出す前</th><th>読み直した後</th></tr></thead>
+            <tbody>
+              <tr><td>点</td><td class="wrap"><code>Cd, P, myfloat, myint, mystring, myvec, pscale</code></td><td class="wrap hi"><code>Cd, N, P</code></td></tr>
+              <tr><td>バーテックス</td><td class="wrap"><code>N, uv</code></td><td class="wrap hi"><code>uv</code></td></tr>
+              <tr><td>プリミティブ</td><td>（なし）</td><td>（なし）</td></tr>
+              <tr><td>点のグループ</td><td><code>firstten</code></td><td class="hi">（なし）</td></tr>
+              <tr><td>面のグループ</td><td>（なし）</td><td>（なし）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>残るのは <code>Cd</code> と <code>uv</code> だけ。</strong>
+          自作の <code>myvec</code> / <code>myfloat</code> / <code>myint</code> /
+          <code>mystring</code> と <code>pscale</code> は全部消える。
+        </p>
+
+        <p class="label">3. ファイルの大きさ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>種類</th><th>バイト</th><th>点あたり</th></tr></thead>
+            <tbody>
+              <tr><td>面（ポリゴン）</td><td class="num">40,409</td><td class="num">331.2 B</td></tr>
+              <tr><td>線（1本）</td><td class="num">791</td><td class="num">87.9 B</td></tr>
+              <tr><td>点だけ</td><td class="num">3,974</td><td class="num">79.5 B</td></tr>
+              <tr><td>NURBS の球</td><td class="num hi">705,418</td><td class="num hi">2,261.0 B</td></tr>
+              <tr><td>開いたカーブ</td><td class="num">1,058</td><td class="num">96.2 B</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ポリゴン・線・点・開いたカーブは、そのまま戻る。</strong>位置のずれは4通りすべてで <span class="hi">0.000000000</span>。<strong>形を渡すだけなら obj で足りる。</strong></li>
+          <li><strong>NURBS だけは刻まれる。</strong>312点 / NURBS面1枚が <span class="hi">2,232点 / ポリゴン2,160枚</span>に変わる。点が 7.2倍。<strong>obj は曲面を持てない。</strong></li>
+          <li><strong>その代償はファイルの重さに出る。</strong>NURBS の球が 705,418バイト。ポリゴンの球 40,409バイトの <span class="hi">17倍</span>。<strong>NURBS のまま渡そうとしない。</strong></li>
+          <li><strong>残る<button class="term" data-term="アトリビュート">アトリビュート</button>は色と UV だけ。</strong>自分で付けた値は全部消える。<code>pscale</code> も消える。</li>
+          <li><strong><button class="term" data-term="グループ">グループ</button>も消える。</strong>点のグループは跡形もない。<strong>obj にはグループの仕組みがあるが、Houdini からは書かれていない。</strong></li>
+          <li><strong><button class="term" data-term="法線">法線</button>は置き場所が変わる。</strong>書き出す前は<button class="term" data-term="バーテックス">バーテックス</button>にあった <code>N</code> が、読み直すと<strong>点に乗っている</strong>。値は失われないが場所が変わる。<a href="#exp036">実験036</a>で掛かった「normal <button class="term" data-term="SOP">SOP</button> はバーテックスに書く」の裏返し。</li>
+          <li><strong>つまり obj で渡せるのは「形・色・UV」まで。</strong>骨の名前も、重みも、自作の値も渡らない。<strong><a href="#exp058">実験058</a>の「リグは渡せない」が、別の角度からも確かめられた。</strong></li>
+          <li><strong>点だけの<button class="term" data-term="ジオメトリ">ジオメトリ</button>も渡せる。</strong>50点が 50点で戻る。<strong>ばらまいた位置を他のソフトへ渡す、という使い方はできる。</strong></li>
+          <li>測り方について。<strong>1種類だけを持つジオメトリを5通り作って、1つずつ往復させた。</strong>全部を1つに混ぜると、何が原因で何が落ちたのか分からなくなる。<strong>分けて測る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

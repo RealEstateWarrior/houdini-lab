@@ -365,13 +365,18 @@ DONE = [
      "shots": [],
      "title": "Apprentice で外へ出せる形式 — FBX も glTF も Alembic も止まる",
      "note": "9通り試して5通り。FBX/glTF/Alembic は不可。USD は .usdnc に変えられる"},
+    {"no": "059", "anchor": "exp059", "tags": ["書き出し", "検証", "アトリビュート"],
+     "log": "log_pm", "hip": "", "thumb": "",
+     "shots": [],
+     "title": "obj で渡せる範囲 — 色と UV は残る。自作のアトリビュートは全部落ちる",
+     "note": "位置のずれ0。NURBSは2,160面に刻まれ点が7.2倍。グループもpscaleも消える"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "059", "title": "obj で渡せる範囲を確かめる",
-     "note": "Apprentice で唯一外へ出せる形式。何が残り、何が落ちるか"},
+    {"no": "060", "title": "031〜060 の振り返り点検",
+     "note": "30件ごとの点検。過去の数字を測り直し、食い違いがあれば元の記事にも注記する"},
 ]
 
 PAGES = [

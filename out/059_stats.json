@@ -1,0 +1,260 @@
+{
+  "kinds": [
+    {
+      "kind": "polygon",
+      "label": "面（ポリゴン）",
+      "before": {
+        "points": 122,
+        "prims": 132,
+        "prim_types": {
+          "Polygon": 132
+        },
+        "point_attribs": [
+          "Cd",
+          "P",
+          "myfloat",
+          "myint",
+          "mystring",
+          "myvec",
+          "pscale"
+        ],
+        "vertex_attribs": [
+          "N",
+          "uv"
+        ],
+        "prim_attribs": [],
+        "point_groups": [
+          "firstten"
+        ],
+        "prim_groups": []
+      },
+      "after": {
+        "points": 122,
+        "prims": 132,
+        "prim_types": {
+          "Polygon": 132
+        },
+        "point_attribs": [
+          "Cd",
+          "N",
+          "P"
+        ],
+        "vertex_attribs": [
+          "uv"
+        ],
+        "prim_attribs": [],
+        "point_groups": [],
+        "prim_groups": []
+      },
+      "worst": 0.0,
+      "bytes": 40409
+    },
+    {
+      "kind": "line",
+      "label": "線（1本）",
+      "before": {
+        "points": 9,
+        "prims": 1,
+        "prim_types": {
+          "Polygon": 1
+        },
+        "point_attribs": [
+          "Cd",
+          "P",
+          "myfloat",
+          "myint",
+          "mystring",
+          "myvec",
+          "pscale"
+        ],
+        "vertex_attribs": [
+          "N",
+          "uv"
+        ],
+        "prim_attribs": [],
+        "point_groups": [
+          "firstten"
+        ],
+        "prim_groups": []
+      },
+      "after": {
+        "points": 9,
+        "prims": 1,
+        "prim_types": {
+          "Polygon": 1
+        },
+        "point_attribs": [
+          "Cd",
+          "N",
+          "P",
+          "uv"
+        ],
+        "vertex_attribs": [],
+        "prim_attribs": [],
+        "point_groups": [],
+        "prim_groups": []
+      },
+      "worst": 0.0,
+      "bytes": 791
+    },
+    {
+      "kind": "points",
+      "label": "点だけ",
+      "before": {
+        "points": 50,
+        "prims": 0,
+        "prim_types": {},
+        "point_attribs": [
+          "Cd",
+          "P",
+          "myfloat",
+          "myint",
+          "mystring",
+          "myvec",
+          "pscale"
+        ],
+        "vertex_attribs": [
+          "N",
+          "uv"
+        ],
+        "prim_attribs": [],
+        "point_groups": [
+          "firstten"
+        ],
+        "prim_groups": []
+      },
+      "after": {
+        "points": 50,
+        "prims": 0,
+        "prim_types": {},
+        "point_attribs": [
+          "Cd",
+          "P"
+        ],
+        "vertex_attribs": [],
+        "prim_attribs": [],
+        "point_groups": [],
+        "prim_groups": []
+      },
+      "worst": 0.0,
+      "bytes": 3974
+    },
+    {
+      "kind": "nurbs",
+      "label": "NURBS の球",
+      "before": {
+        "points": 312,
+        "prims": 1,
+        "prim_types": {
+          "NURBSSurface": 1
+        },
+        "point_attribs": [
+          "Cd",
+          "P",
+          "myfloat",
+          "myint",
+          "mystring",
+          "myvec",
+          "pscale"
+        ],
+        "vertex_attribs": [
+          "N",
+          "uv"
+        ],
+        "prim_attribs": [],
+        "point_groups": [
+          "firstten"
+        ],
+        "prim_groups": []
+      },
+      "after": {
+        "points": 2232,
+        "prims": 2160,
+        "prim_types": {
+          "Polygon": 2160
+        },
+        "point_attribs": [
+          "Cd",
+          "N",
+          "P",
+          "uv"
+        ],
+        "vertex_attribs": [],
+        "prim_attribs": [],
+        "point_groups": [],
+        "prim_groups": []
+      },
+      "worst": null,
+      "bytes": 705418
+    },
+    {
+      "kind": "opencurve",
+      "label": "開いたカーブ",
+      "before": {
+        "points": 11,
+        "prims": 1,
+        "prim_types": {
+          "Polygon": 1
+        },
+        "point_attribs": [
+          "Cd",
+          "P",
+          "myfloat",
+          "myint",
+          "mystring",
+          "myvec",
+          "pscale"
+        ],
+        "vertex_attribs": [
+          "N",
+          "uv"
+        ],
+        "prim_attribs": [],
+        "point_groups": [
+          "firstten"
+        ],
+        "prim_groups": []
+      },
+      "after": {
+        "points": 11,
+        "prims": 1,
+        "prim_types": {
+          "Polygon": 1
+        },
+        "point_attribs": [
+          "Cd",
+          "N",
+          "P",
+          "uv"
+        ],
+        "vertex_attribs": [],
+        "prim_attribs": [],
+        "point_groups": [],
+        "prim_groups": []
+      },
+      "worst": 0.0,
+      "bytes": 1058
+    }
+  ],
+  "attribs": {
+    "kept": [
+      "Cd",
+      "P"
+    ],
+    "lost": [
+      "myfloat",
+      "myint",
+      "mystring",
+      "myvec",
+      "pscale"
+    ]
+  },
+  "groups": {
+    "point_before": [
+      "firstten"
+    ],
+    "point_after": [],
+    "prim_before": [],
+    "prim_after": []
+  }
+}
