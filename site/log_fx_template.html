@@ -2420,6 +2420,103 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 064 ===================== -->
+    <article class="entry entry--current" id="exp064">
+      <div class="badge">064</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM の刻みを細かくする — 量によって、落ち着く速さが違った</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 25.5倍の時間をかけて変わるのは、目より先に数字のほう</p>
+
+        <div class="prose">
+          <p>
+            <button class="term" data-term="シミュレーション">シミュレーション</button>は1フレームを何回かに分けて解く。その回数が
+            <button class="term" data-term="サブステップ">substep</button>。
+            細かくするほど正しくなるはずだが、そのぶん時間がかかる。
+            <strong>では、どこまで細かくすれば「落ち着いた」と言えるのか。</strong>
+          </p>
+          <p>
+            <a href="#exp018">実験018</a>で、煙の<button class="term" data-term="サンプル">サンプル</button>数と<button class="term" data-term="ノイズ">ノイズ</button>の関係を測ったときと同じ問いになる。
+            あのときは「4倍にすればノイズは半分」という式を立てて、
+            <strong>当たったのは狭い範囲だけ</strong>だった。今回はどうか。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="064_sub1.png" alt="substep 1 の結果"></div>
+            <figcaption><strong>substep 1。0.62秒。</strong>広がり 1.09055。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="064_sub16.png" alt="substep 16 の結果"></div>
+            <figcaption><strong>substep 16。15.85秒。</strong>広がり 1.04412。<strong>25.5倍の時間。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 刻みを変えて、結果と時間を測る</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>substep</th><th>粒</th><th>高さの平均</th><th>いちばん上</th><th>広がり</th><th>Je × Jp</th><th>かかった時間</th><th>1刻みあたり</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">577</td><td class="num hi">0.303183</td><td class="num">0.663563</td><td class="num hi">1.09055</td><td class="num">0.689148</td><td class="num">0.62 秒</td><td class="num hi">0.621 秒</td></tr>
+              <tr><td class="num">2</td><td class="num">577</td><td class="num hi">0.304263</td><td class="num">0.664534</td><td class="num">1.09238</td><td class="num">0.689409</td><td class="num">1.85 秒</td><td class="num">0.927 秒</td></tr>
+              <tr><td class="num">4</td><td class="num">577</td><td class="num hi">0.303593</td><td class="num">0.665196</td><td class="num">1.07192</td><td class="num">0.673849</td><td class="num">3.61 秒</td><td class="num">0.901 秒</td></tr>
+              <tr><td class="num">8</td><td class="num">577</td><td class="num hi">0.299784</td><td class="num">0.662280</td><td class="num">1.04211</td><td class="num">0.649739</td><td class="num">8.42 秒</td><td class="num">1.052 秒</td></tr>
+              <tr><td class="num">16</td><td class="num">577</td><td class="num hi">0.304767</td><td class="num">0.669925</td><td class="num hi">1.04412</td><td class="num">0.653366</td><td class="num">15.85 秒</td><td class="num">0.990 秒</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>高さは5通りすべてで 0.2998〜0.3048。</strong>
+          一方、<strong>広がりは 1.09055 から 1.04412 へ 4.4% 動く。</strong>
+        </p>
+
+        <p class="label">2. いちばん細かい 16 を正として、どれだけずれるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>substep</th><th>高さのずれ</th><th>広がりのずれ</th><th>Je × Jp のずれ</th><th>時間 ÷ 16の時間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num hi">0.001584</td><td class="num">0.046433</td><td class="num">0.035782</td><td class="num">0.039</td></tr>
+              <tr><td class="num">2</td><td class="num hi">0.000504</td><td class="num">0.048263</td><td class="num">0.036043</td><td class="num">0.117</td></tr>
+              <tr><td class="num">4</td><td class="num hi">0.001174</td><td class="num">0.027802</td><td class="num">0.020483</td><td class="num">0.228</td></tr>
+              <tr><td class="num">8</td><td class="num">0.004984</td><td class="num hi">0.002012</td><td class="num hi">0.003627</td><td class="num hi">0.531</td></tr>
+              <tr><td class="num">16</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">1.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 「2倍にすればずれは半分」に乗るか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>比べる組</th><th>高さのずれの比</th><th>広がりのずれの比</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1 → 2</td><td class="num">3.141</td><td class="num">0.962</td></tr>
+              <tr><td class="num">2 → 4</td><td class="num">0.430</td><td class="num">1.736</td></tr>
+              <tr><td class="num">4 → 8</td><td class="num">0.236</td><td class="num">13.817</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          2 なら「2倍にすれば半分」。
+          <strong>実測はばらばらで、式にならない。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>量によって、落ち着く速さがまったく違う。</strong>高さは substep 1 でもう落ち着いている。<strong>広がりと体積比は 8 まで上げないと落ち着かない。</strong></li>
+          <li><strong>高さは substep では変わらない。</strong>5通りすべてで 0.2998〜0.3048。<strong>重力で落ちる距離は、刻みを細かくしても変わらない。</strong></li>
+          <li><strong>広がりは 4.4% 違う。</strong>substep 1 で 1.09055、16 で 1.04412。<strong>粗いほど広がる。</strong>ぶつかった瞬間の扱いが粗いぶん、余計に跳ねている。</li>
+          <li><strong>「2倍にすればずれは半分」には乗らない。</strong>比が 3.141 / 0.430 / 0.236、0.962 / 1.736 / 13.817。<strong>ばらばらで式にならない。</strong><a href="#exp018">実験018</a>の煙のときと同じで、<strong>単純な法則を期待すると外れる。</strong></li>
+          <li><strong>時間は 16倍ではなく 25.5倍。</strong>0.62秒 → 15.85秒。<strong>substep 1 だけが特別に安い</strong>ため。<strong>2 以上なら時間はほぼ刻みの数に比例する。</strong></li>
+          <li><strong>絵ではほとんど区別がつかない。</strong>25.5倍の時間をかけて変わるのは、<strong>目より先に数字のほう</strong>。<strong>見せる絵を作るだけなら、刻みを上げる前に別のところを疑ったほうがいい。</strong></li>
+          <li><strong>実用の落としどころは 8。</strong>16 との差が 高さ 0.004984 / 広がり 0.002012 / 体積比 0.003627 まで縮んで、時間は 16 の <span class="hi">53%</span>。<strong>半分の時間で、ほぼ同じ結果。</strong></li>
+          <li>測り方について。<strong>いちばん細かいものを「正」と決めて、そこからのずれを見ている。</strong>本当の正解は分からないので、これは<strong>「落ち着いたかどうか」を見る方法であって「正しいかどうか」ではない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
