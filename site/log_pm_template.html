@@ -51,11 +51,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-dark"><img src="box_mountain_graph.png" alt="box1 から mountain1、subdivide1、color1 を経て OUT へ縦一列に接続されたノードネットワークの図"></div>
+            <div class="frame-dark"><img src="box_mountain_graph.png" alt="box1 から mountain1、subdivide1、color1 を経て OUT へ縦一列に接続されたノードネットワークの図" loading="lazy" decoding="async"></div>
             <figcaption>構築したネットワーク。水色の点は<button class="term" data-term="表示フラグ">表示フラグ</button>。</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="box_mountain.png" alt="ワイヤーフレームが乗った、位置に応じて虹色に着色された多面体のレンダリング"></div>
+            <div class="frame-light"><img src="box_mountain.png" alt="ワイヤーフレームが乗った、位置に応じて虹色に着色された多面体のレンダリング" loading="lazy" decoding="async"></div>
             <figcaption><button class="term" data-term="OpenGL ROP">OpenGL ROP</button> / <button class="term" data-term="Smooth Wire Shaded">Smooth Wire Shaded</button><br>26<button class="term" data-term="ポイント">点</button> / 24<button class="term" data-term="プリミティブ">面</button>、ポイント<button class="term" data-term="アトリビュート">アトリビュート</button>は <code>P</code>, <code>Cd</code></figcaption>
           </figure>
         </div>
@@ -92,19 +92,19 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="002_subdiv_0.png" alt="分割なしの立方体のワイヤーフレーム付きレンダリング"></div>
+            <div class="frame-light"><img src="002_subdiv_0.png" alt="分割なしの立方体のワイヤーフレーム付きレンダリング" loading="lazy" decoding="async"></div>
             <figcaption><strong>0回</strong> 8点 / 6面<br>一辺 1.00000</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="002_subdiv_1.png" alt="1回細分割して角が丸まった立方体"></div>
+            <div class="frame-light"><img src="002_subdiv_1.png" alt="1回細分割して角が丸まった立方体" loading="lazy" decoding="async"></div>
             <figcaption><strong>1回</strong> 26点 / 24面<br>一辺 1.00000</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="002_subdiv_2.png" alt="2回細分割してほぼ球状になった形"></div>
+            <div class="frame-light"><img src="002_subdiv_2.png" alt="2回細分割してほぼ球状になった形" loading="lazy" decoding="async"></div>
             <figcaption><strong>2回</strong> 98点 / 96面<br>一辺 0.87847</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="002_subdiv_3.png" alt="3回細分割して球になった形。格子状のワイヤーフレームが細かい"></div>
+            <div class="frame-light"><img src="002_subdiv_3.png" alt="3回細分割して球になった形。格子状のワイヤーフレームが細かい" loading="lazy" decoding="async"></div>
             <figcaption><strong>3回</strong> 386点 / 384面<br>一辺 0.84918</figcaption>
           </figure>
         </div>
@@ -161,27 +161,27 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="003_base.png" alt="ノイズをかけていない、2回細分割しただけの滑らかな球"></div>
+            <div class="frame-light"><img src="003_base.png" alt="ノイズをかけていない、2回細分割しただけの滑らかな球" loading="lazy" decoding="async"></div>
             <figcaption><strong>基準</strong> 分割のみ<br>98点 / 96面</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="003_A.png" alt="ノイズを先にかけてから細分割した、ほとんど凹凸のない球"></div>
+            <div class="frame-light"><img src="003_A.png" alt="ノイズを先にかけてから細分割した、ほとんど凹凸のない球" loading="lazy" decoding="async"></div>
             <figcaption><strong>A</strong> mountain → subdivide(2)<br>98点、最大ずれ 0.03671</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="003_B.png" alt="細分割してからノイズをかけた、緩やかな凹凸のある球"></div>
+            <div class="frame-light"><img src="003_B.png" alt="細分割してからノイズをかけた、緩やかな凹凸のある球" loading="lazy" decoding="async"></div>
             <figcaption><strong>B</strong> subdivide(2) → mountain<br>98点、最大ずれ 0.08062</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="003_C.png" alt="3回細分割してからノイズをかけた球。Bと似た凹凸"></div>
+            <div class="frame-light"><img src="003_C.png" alt="3回細分割してからノイズをかけた球。Bと似た凹凸" loading="lazy" decoding="async"></div>
             <figcaption><strong>C</strong> subdivide(3) → mountain<br>386点、最大ずれ 0.08009</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="003_D.png" alt="ノイズの特徴サイズを小さくした、岩のように凹凸の激しい形"></div>
+            <div class="frame-light"><img src="003_D.png" alt="ノイズの特徴サイズを小さくした、岩のように凹凸の激しい形" loading="lazy" decoding="async"></div>
             <figcaption><strong>D</strong> C + elementsize 0.25<br>386点、最大ずれ 0.11985</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="003_E.png" alt="Dと同じ凹凸だが面が細かく滑らかに表現された岩状の形"></div>
+            <div class="frame-light"><img src="003_E.png" alt="Dと同じ凹凸だが面が細かく滑らかに表現された岩状の形" loading="lazy" decoding="async"></div>
             <figcaption><strong>E</strong> D + 点数4倍<br>1538点、最大ずれ 0.13173</figcaption>
           </figure>
         </div>
@@ -253,19 +253,19 @@
         <p class="label">rough — 振幅は変えず、細かさだけを変える</p>
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="004_base.png" alt="ノイズをかけていない、4回細分割した滑らかな球"></div>
+            <div class="frame-light"><img src="004_base.png" alt="ノイズをかけていない、4回細分割した滑らかな球" loading="lazy" decoding="async"></div>
             <figcaption><strong>基準</strong> ノイズなし<br>1538点 / 1536面</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="004_rough_00.png" alt="なだらかな起伏のある丸い形"></div>
+            <div class="frame-light"><img src="004_rough_00.png" alt="なだらかな起伏のある丸い形" loading="lazy" decoding="async"></div>
             <figcaption><strong>rough 0.0</strong><br>平均 0.03377 / 食い違い 0.01350</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="004_rough_05.png" alt="中程度の細かい凹凸がある岩状の形"></div>
+            <div class="frame-light"><img src="004_rough_05.png" alt="中程度の細かい凹凸がある岩状の形" loading="lazy" decoding="async"></div>
             <figcaption><strong>rough 0.5</strong>（既定）<br>平均 0.03237 / 食い違い 0.01733</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="004_rough_10.png" alt="鋭い棘が全面に突き出した形"></div>
+            <div class="frame-light"><img src="004_rough_10.png" alt="鋭い棘が全面に突き出した形" loading="lazy" decoding="async"></div>
             <figcaption><strong>rough 1.0</strong><br>平均 0.03235 / 食い違い 0.03233</figcaption>
           </figure>
         </div>
@@ -339,27 +339,27 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="005_base.png" alt="ノイズなしの滑らかな球"></div>
+            <div class="frame-light"><img src="005_base.png" alt="ノイズなしの滑らかな球" loading="lazy" decoding="async"></div>
             <figcaption><strong>基準</strong> ノイズなし</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="005_sine.png" alt="丸い4つの膨らみを持つ滑らかな星型"></div>
+            <div class="frame-light"><img src="005_sine.png" alt="丸い4つの膨らみを持つ滑らかな星型" loading="lazy" decoding="async"></div>
             <figcaption><strong>Sinusoid</strong><br>平均 0.14454 / 細かさ 0.00444<br>外向き 0.0%</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="005_perlin.png" alt="ゆるやかな凹凸のある球"></div>
+            <div class="frame-light"><img src="005_perlin.png" alt="ゆるやかな凹凸のある球" loading="lazy" decoding="async"></div>
             <figcaption><strong>Perlin</strong><br>平均 0.02426 / 細かさ 0.01268<br>外向き 40.9%</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="005_simplex.png" alt="中程度の凹凸がある岩状の形"></div>
+            <div class="frame-light"><img src="005_simplex.png" alt="中程度の凹凸がある岩状の形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Simplex</strong>（既定）<br>平均 0.03237 / 細かさ 0.01733<br>外向き 35.8%</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="005_worleyFA.png" alt="細胞状に深く削られた侵食岩のような形"></div>
+            <div class="frame-light"><img src="005_worleyFA.png" alt="細胞状に深く削られた侵食岩のような形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Worley F1</strong><br>平均 0.08017 / 細かさ 0.02065<br>外向き 5.4%</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="005_mworleyFA.png" alt="軸に沿った角ばった塊が外に突き出した形"></div>
+            <div class="frame-light"><img src="005_mworleyFA.png" alt="軸に沿った角ばった塊が外に突き出した形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Manhattan F1</strong><br>平均 0.08103 / 細かさ 0.02996<br>外向き 91.1%</figcaption>
           </figure>
         </div>
@@ -449,15 +449,15 @@
         <p class="label">bias — 突起か窪みかを連続的に決める</p>
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="006_bias_025.png" alt="深くえぐられて鋭い稜線が残る侵食的な形"></div>
+            <div class="frame-light"><img src="006_bias_025.png" alt="深くえぐられて鋭い稜線が残る侵食的な形" loading="lazy" decoding="async"></div>
             <figcaption><strong>bias 0.25</strong><br>外向き 0.9% ＝ ほぼ全部が窪み</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="006_bias_05.png" alt="外と内が混ざった凹凸のある岩状の形"></div>
+            <div class="frame-light"><img src="006_bias_05.png" alt="外と内が混ざった凹凸のある岩状の形" loading="lazy" decoding="async"></div>
             <figcaption><strong>bias 0.50</strong>（中立）<br>外向き 35.8%</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="006_bias_075.png" alt="膨らんで浅いへこみが残る丸い塊"></div>
+            <div class="frame-light"><img src="006_bias_075.png" alt="膨らんで浅いへこみが残る丸い塊" loading="lazy" decoding="async"></div>
             <figcaption><strong>bias 0.75</strong><br>外向き 98.7% ＝ ほぼ全部が膨らみ</figcaption>
           </figure>
         </div>
@@ -505,19 +505,19 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="007_flat.png" alt="ノイズをかけていない平らな格子"></div>
+            <div class="frame-light"><img src="007_flat.png" alt="ノイズをかけていない平らな格子" loading="lazy" decoding="async"></div>
             <figcaption><strong>基準</strong> ノイズなし<br>6400点 / 6400面</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="007_frac_none.png" alt="なだらかな起伏だけの地形"></div>
+            <div class="frame-light"><img src="007_frac_none.png" alt="なだらかな起伏だけの地形" loading="lazy" decoding="async"></div>
             <figcaption><strong>None</strong><br>勾配 0.12216 — 最も滑らか</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="007_frac_hmfT.png" alt="細かい凹凸のある地形"></div>
+            <div class="frame-light"><img src="007_frac_hmfT.png" alt="細かい凹凸のある地形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Hybrid Terrain</strong>（既定）<br>勾配 0.18745</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="007_frac_fBm.png" alt="最も細かく荒れた地形"></div>
+            <div class="frame-light"><img src="007_frac_fBm.png" alt="最も細かく荒れた地形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Standard (fBm)</strong><br>勾配 0.19064 — 最も粗い</figcaption>
           </figure>
         </div>
@@ -587,19 +587,19 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="008_ground.png" alt="ノイズで起伏をつけた地面"></div>
+            <div class="frame-light"><img src="008_ground.png" alt="ノイズで起伏をつけた地面" loading="lazy" decoding="async"></div>
             <figcaption><strong>地面</strong><br>grid 60分割 + mountain</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="008_plain.png" alt="すべて真上を向いた同じ大きさの円錐が地面に並んでいる"></div>
+            <div class="frame-light"><img src="008_plain.png" alt="すべて真上を向いた同じ大きさの円錐が地面に並んでいる" loading="lazy" decoding="async"></div>
             <figcaption><strong>法線なしの点に複製</strong><br>向きのばらつき 0.00度</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="008_varied.png" alt="円錐が横倒しになり大きさもばらついている"></div>
+            <div class="frame-light"><img src="008_varied.png" alt="円錐が横倒しになり大きさもばらついている" loading="lazy" decoding="async"></div>
             <figcaption><strong>法線あり + pscale</strong><br>回ってはいるが横倒し</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="008_z_axis.png" alt="円錐が地面に対して立ち、傾きに沿って傾いている"></div>
+            <div class="frame-light"><img src="008_z_axis.png" alt="円錐が地面に対して立ち、傾きに沿って傾いている" loading="lazy" decoding="async"></div>
             <figcaption><strong>テンプレートをZ軸向きに</strong><br>N と完全に一致</figcaption>
           </figure>
         </div>
@@ -607,11 +607,11 @@
         <p class="label">実際の Houdini の画面</p>
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-dark"><img src="008_ui_network.png" alt="Houdiniのネットワークエディタ。ground から terrain、ground_normals、scatter_200 を経て4つの Copy to Points に分岐している"></div>
+            <div class="frame-dark"><img src="008_ui_network.png" alt="Houdiniのネットワークエディタ。ground から terrain、ground_normals、scatter_200 を経て4つの Copy to Points に分岐している" loading="lazy" decoding="async"></div>
             <figcaption>起動中の Houdini を外から操作して撮った本物の画面。自動生成の接続図と違い、<br>自分の Houdini で同じものを開いたときに何が見えるかがそのまま分かる。</figcaption>
           </figure>
           <figure>
-            <div class="frame-dark"><img src="008_ui_parms.png" alt="Copy to Points のパラメータペインと、円錐が並んだビューポート"></div>
+            <div class="frame-dark"><img src="008_ui_parms.png" alt="Copy to Points のパラメータペインと、円錐が並んだビューポート" loading="lazy" decoding="async"></div>
             <figcaption>パラメータに写っている <strong>Transform Using Target Point Orientations</strong> が、<br>この実験で測った「N で回転するかどうか」の正体。</figcaption>
           </figure>
         </div>
@@ -680,7 +680,7 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="009_wave.png" alt="VEX 1行で作られた規則的な波状の面"></div>
+            <div class="frame-light"><img src="009_wave.png" alt="VEX 1行で作られた規則的な波状の面" loading="lazy" decoding="async"></div>
             <figcaption>VEX 1行で作った波<br><code>@P.y = sin(@P.x * 2.0) * 0.5;</code></figcaption>
           </figure>
           <figure>
@@ -755,7 +755,7 @@
 
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-dark"><img src="010_ui_network.png" alt="HoudiniのネットワークエディタにBlock BeginとBlock Endで挟まれたfor-eachの構造が表示されている"></div>
+            <div class="frame-dark"><img src="010_ui_network.png" alt="HoudiniのネットワークエディタにBlock BeginとBlock Endで挟まれたfor-eachの構造が表示されている" loading="lazy" decoding="async"></div>
             <figcaption>for-each の組み方。Block Begin（1個ずつ取り出す）と メタデータ用をもう1つ置き、<br>処理を挟んで Block End で合流させる。</figcaption>
           </figure>
         </div>
@@ -833,19 +833,19 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="011_raw.png" alt="分割していない立方体"></div>
+            <div class="frame-light"><img src="011_raw.png" alt="分割していない立方体" loading="lazy" decoding="async"></div>
             <figcaption><strong>分割前の box</strong><br>一辺 1.00000 / 折れ角 90.00度</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="011_w0_0.png" alt="crease なしで3回分割し、球に近くなった形"></div>
+            <div class="frame-light"><img src="011_w0_0.png" alt="crease なしで3回分割し、球に近くなった形" loading="lazy" decoding="async"></div>
             <figcaption><strong>重み 0.0</strong>（crease なし）<br>一辺 0.84918 / 折れ角 13.93度</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="011_w1_0.png" alt="角が丸い立方体。外形は元に戻っているが辺が丸い"></div>
+            <div class="frame-light"><img src="011_w1_0.png" alt="角が丸い立方体。外形は元に戻っているが辺が丸い" loading="lazy" decoding="async"></div>
             <figcaption><strong>重み 1.0</strong><br>一辺 1.00000 / 折れ角 28.07度</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="011_w3_0.png" alt="細かく分割されているが角が完全に鋭い立方体"></div>
+            <div class="frame-light"><img src="011_w3_0.png" alt="細かく分割されているが角が完全に鋭い立方体" loading="lazy" decoding="async"></div>
             <figcaption><strong>重み 3.0</strong><br>一辺 1.00000 / 折れ角 90.00度</figcaption>
           </figure>
         </div>
@@ -909,19 +909,19 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="012_ext_1_0.png" alt="平面を押し出して厚みのある板になった形"></div>
+            <div class="frame-light"><img src="012_ext_1_0.png" alt="平面を押し出して厚みのある板になった形" loading="lazy" decoding="async"></div>
             <figcaption><strong>polyextrude</strong> 距離 1.0<br>高さ 1.00000（差ゼロ）</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="012_bool_union.png" alt="立方体と球が合体した形"></div>
+            <div class="frame-light"><img src="012_bool_union.png" alt="立方体と球が合体した形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Union</strong>（和集合）<br>体積 9.91613</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="012_bool_intersect.png" alt="立方体と球の重なった部分だけが残った形"></div>
+            <div class="frame-light"><img src="012_bool_intersect.png" alt="立方体と球の重なった部分だけが残った形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Intersect</strong>（積集合）<br>体積 7.08567</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="012_bool_subtract.png" alt="立方体から球をくり抜いて角だけが残った形"></div>
+            <div class="frame-light"><img src="012_bool_subtract.png" alt="立方体から球をくり抜いて角だけが残った形" loading="lazy" decoding="async"></div>
             <figcaption><strong>Subtract</strong>（差集合）<br>体積 0.91433</figcaption>
           </figure>
         </div>
@@ -981,7 +981,7 @@
 
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="030_audit.png" alt="測り直した7項目と結果を並べた表。5つに○、2つに×が付いている"></div>
+            <div class="frame-light"><img src="030_audit.png" alt="測り直した7項目と結果を並べた表。5つに○、2つに×が付いている" loading="lazy" decoding="async"></div>
             <figcaption>点検の結果。<strong>数字そのものが動いたものは1つも無く、動いたのは書き方だけだった。</strong></figcaption>
           </figure>
         </div>
@@ -1115,11 +1115,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="034_raw.png" alt="丸い起伏が並んだ、削られていない地形"></div>
+            <div class="frame-light"><img src="034_raw.png" alt="丸い起伏が並んだ、削られていない地形" loading="lazy" decoding="async"></div>
             <figcaption>ノイズをかけただけ。<strong>丸い起伏が並ぶ。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="034_eroded.png" alt="尾根と谷ができ、山肌に筋の入った地形"></div>
+            <div class="frame-light"><img src="034_eroded.png" alt="尾根と谷ができ、山肌に筋の入った地形" loading="lazy" decoding="async"></div>
             <figcaption>浸食を4回。同じカメラ。<strong>尾根と谷ができ、山肌に筋が出る。</strong></figcaption>
           </figure>
         </div>
@@ -1240,11 +1240,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="035_plain.png" alt="崖にも尾根にも一様に木が生えた地形"></div>
+            <div class="frame-light"><img src="035_plain.png" alt="崖にも尾根にも一様に木が生えた地形" loading="lazy" decoding="async"></div>
             <figcaption>重み無し。<strong>崖も尾根も関係なく一様にばらまかれる。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="035_masked.png" alt="崖が裸になり、谷筋に木が集まった地形"></div>
+            <div class="frame-light"><img src="035_masked.png" alt="崖が裸になり、谷筋に木が集まった地形" loading="lazy" decoding="async"></div>
             <figcaption><code>sediment</code> を重みに。同じ600本。<strong>崖が裸になり、谷筋に集まる。</strong></figcaption>
           </figure>
         </div>
@@ -1354,11 +1354,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="036_flat.png" alt="地形の上に草がまっすぐ立ち並んでいる"></div>
+            <div class="frame-light"><img src="036_flat.png" alt="地形の上に草がまっすぐ立ち並んでいる" loading="lazy" decoding="async"></div>
             <figcaption>N は真上。<strong>草はまっすぐ立ち、向きの情報が無い。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="036_flow.png" alt="草が寝て、水の通り道が筋になって見える地形"></div>
+            <div class="frame-light"><img src="036_flow.png" alt="草が寝て、水の通り道が筋になって見える地形" loading="lazy" decoding="async"></div>
             <figcaption>N に流れの向き。同じ900本。<strong>草が寝て、水の通り道が筋になる。</strong></figcaption>
           </figure>
         </div>
@@ -1455,11 +1455,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="037_plain.png" alt="灰色一色の地形"></div>
+            <div class="frame-light"><img src="037_plain.png" alt="灰色一色の地形" loading="lazy" decoding="async"></div>
             <figcaption>塗り分け無し。<strong>形は見えるが、どこが土でどこが岩か分からない。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="037_color.png" alt="尾根が灰色、平地が茶色、谷筋が青色に塗り分けられた地形"></div>
+            <div class="frame-light"><img src="037_color.png" alt="尾根が灰色、平地が茶色、谷筋が青色に塗り分けられた地形" loading="lazy" decoding="async"></div>
             <figcaption>浸食のレイヤーで塗り分け。<strong>灰＝岩肌、茶＝土、青＝水筋。</strong></figcaption>
           </figure>
         </div>
@@ -1547,11 +1547,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="038_karma_nomat.png" alt="岩肌が真っ白に飛んで形が読めない地形"></div>
+            <div class="frame-light"><img src="038_karma_nomat.png" alt="岩肌が真っ白に飛んで形が読めない地形" loading="lazy" decoding="async"></div>
             <figcaption>材質なし。色は出るが、<strong>岩肌が真っ白に飛ぶ（43.4%）。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="038_karma_mat.png" alt="陰影が出て形の読める、塗り分けられた地形"></div>
+            <div class="frame-light"><img src="038_karma_mat.png" alt="陰影が出て形の読める、塗り分けられた地形" loading="lazy" decoding="async"></div>
             <figcaption>材質あり。同じライト。<strong>白飛びは 3.1% まで落ちる。</strong></figcaption>
           </figure>
         </div>
@@ -1640,11 +1640,11 @@
 
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="039_elements.png" alt="うねりの大きさを4段階変えたノイズ画像を横に並べたもの"></div>
+            <div class="frame-light"><img src="039_elements.png" alt="うねりの大きさを4段階変えたノイズ画像を横に並べたもの" loading="lazy" decoding="async"></div>
             <figcaption><code>elementsize</code> 0.05 / 0.10 / 0.20 / 0.40。<strong>数字が大きいほど、うねりが大きくなる。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="039_roughs.png" alt="細かさを4段階変えたノイズ画像を横に並べたもの"></div>
+            <div class="frame-light"><img src="039_roughs.png" alt="細かさを4段階変えたノイズ画像を横に並べたもの" loading="lazy" decoding="async"></div>
             <figcaption><code>rough</code> 0.0 / 0.5 / 0.75 / 1.0。<strong>1.0 では砂嵐に近くなる。</strong></figcaption>
           </figure>
         </div>
@@ -1756,7 +1756,7 @@
 
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="040_compare.png" alt="テクスチャなし・256・1024の3つの地形レンダを横に並べた比較"></div>
+            <div class="frame-light"><img src="040_compare.png" alt="テクスチャなし・256・1024の3つの地形レンダを横に並べた比較" loading="lazy" decoding="async"></div>
             <figcaption>左から、テクスチャなし / 256×256 / 1024×1024。<strong>同じ地形・同じライト・同じカメラ。</strong></figcaption>
           </figure>
         </div>
@@ -1830,7 +1830,7 @@
 
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="041_compare.png" alt="何もしない・ジオメトリ・displacement・bumpの4通りの地形レンダを横に並べた比較"></div>
+            <div class="frame-light"><img src="041_compare.png" alt="何もしない・ジオメトリ・displacement・bumpの4通りの地形レンダを横に並べた比較" loading="lazy" decoding="async"></div>
             <figcaption>左から、何もしない / ジオメトリを動かす / displacement / bump。<strong>displacement と bump にはまったく同じ画を渡している。</strong></figcaption>
           </figure>
         </div>
@@ -1892,11 +1892,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="042_thin.png" alt="まばらに毛が生えた球"></div>
+            <div class="frame-light"><img src="042_thin.png" alt="まばらに毛が生えた球" loading="lazy" decoding="async"></div>
             <figcaption><code>density</code> 60。<strong>毛がまばらで、土台の球が見える。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="042_thick.png" alt="びっしりと毛が生えた球"></div>
+            <div class="frame-light"><img src="042_thick.png" alt="びっしりと毛が生えた球" loading="lazy" decoding="async"></div>
             <figcaption><code>density</code> 600。同じ球・同じカメラ。<strong>密度だけが違う。</strong></figcaption>
           </figure>
         </div>
@@ -1988,11 +1988,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="043_loose.png" alt="毛が一様に生えた球"></div>
+            <div class="frame-light"><img src="043_loose.png" alt="毛が一様に生えた球" loading="lazy" decoding="async"></div>
             <figcaption>束ねない。<strong>12,516本の毛が一様に散り、うぶ毛のように見える。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="043_clumped.png" alt="毛が房にまとまった球"></div>
+            <div class="frame-light"><img src="043_clumped.png" alt="毛が房にまとまった球" loading="lazy" decoding="async"></div>
             <figcaption><code>clumpsize</code> 0.4。同じ毛・同じカメラ。<strong>144個の房になり、1房あたり約87本。</strong></figcaption>
           </figure>
         </div>
@@ -2118,11 +2118,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="044_ignored.png" alt="短いうぶ毛だけが生えた球"></div>
+            <div class="frame-light"><img src="044_ignored.png" alt="短いうぶ毛だけが生えた球" loading="lazy" decoding="async"></div>
             <figcaption><code>rest</code> が (0,0,0) のまま。<strong>ガイドは使われず、長さ 0.05 の毛だけが生える。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="044_guided.png" alt="長い毛が四方に伸びた球"></div>
+            <div class="frame-light"><img src="044_guided.png" alt="長い毛が四方に伸びた球" loading="lazy" decoding="async"></div>
             <figcaption><code>rest</code> を直した。<strong>つなぎ方もパラメータも同じで、ガイドどおりの長さと向きになる。</strong></figcaption>
           </figure>
         </div>
@@ -2241,11 +2241,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="045_thick_0.001.png" alt="ザラついた点の集まりに見える毛玉"></div>
+            <div class="frame-light"><img src="045_thick_0.001.png" alt="ザラついた点の集まりに見える毛玉" loading="lazy" decoding="async"></div>
             <figcaption><code>thickness</code> 0.001（既定）。画の上で <strong>0.103px</strong>。<strong>1ピクセルより細く、点の集まりにしか見えない。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="045_thick_0.008.png" alt="毛の流れが読める毛玉"></div>
+            <div class="frame-light"><img src="045_thick_0.008.png" alt="毛の流れが読める毛玉" loading="lazy" decoding="async"></div>
             <figcaption><code>thickness</code> 0.008。画の上で <strong>0.822px</strong>。同じ毛・同じカメラ。<strong>太さだけが違う。</strong></figcaption>
           </figure>
         </div>
@@ -2355,15 +2355,15 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="046_ball_plain.png" alt="色を付けていない毛玉"></div>
+            <div class="frame-light"><img src="046_ball_plain.png" alt="色を付けていない毛玉" loading="lazy" decoding="async"></div>
             <figcaption><strong>色なし。</strong>彩度のあるピクセルは 0.0%。</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="046_ball_tip.png" alt="根元が赤く毛先が青い毛玉"></div>
+            <div class="frame-light"><img src="046_ball_tip.png" alt="根元が赤く毛先が青い毛玉" loading="lazy" decoding="async"></div>
             <figcaption><strong>根元を赤、毛先を青。</strong>彩度のあるピクセルは 90.1%。</figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="046_ball_clump.png" alt="束ごとに色が違う毛玉"></div>
+            <div class="frame-light"><img src="046_ball_clump.png" alt="束ごとに色が違う毛玉" loading="lazy" decoding="async"></div>
             <figcaption><strong>束ごとに色を変えた。</strong><a href="#exp043">実験043</a>で数えた144個の束が、そのまま房に見える。</figcaption>
           </figure>
         </div>
@@ -2480,11 +2480,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="047_start.png" alt="変形前の毛玉"></div>
+            <div class="frame-light"><img src="047_start.png" alt="変形前の毛玉" loading="lazy" decoding="async"></div>
             <figcaption>フレーム1。<strong>変形はまだ 0。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="047_follow.png" alt="変形後の毛玉"></div>
+            <div class="frame-light"><img src="047_follow.png" alt="変形後の毛玉" loading="lazy" decoding="async"></div>
             <figcaption>フレーム25。変形 0.5。<strong>動いている形をつないであるので、根元は表面に乗ったまま。</strong></figcaption>
           </figure>
         </div>
@@ -2566,11 +2566,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="048_start.png" alt="まっすぐ外へ伸びた毛"></div>
+            <div class="frame-light"><img src="048_start.png" alt="まっすぐ外へ伸びた毛" loading="lazy" decoding="async"></div>
             <figcaption>フレーム1。<strong>毛は土台から真っすぐ外へ伸びている。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="048_fall.png" alt="下へ垂れた毛"></div>
+            <div class="frame-light"><img src="048_fall.png" alt="下へ垂れた毛" loading="lazy" decoding="async"></div>
             <figcaption>フレーム48。<strong>根元は留まったまま、毛先が下へ垂れる。</strong></figcaption>
           </figure>
         </div>
@@ -2662,11 +2662,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="049_calm.png" alt="重力で下に垂れた毛"></div>
+            <div class="frame-light"><img src="049_calm.png" alt="重力で下に垂れた毛" loading="lazy" decoding="async"></div>
             <figcaption>風速 0。<strong>重力だけで下に垂れている。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="049_windy.png" alt="風下へ寝た毛"></div>
+            <div class="frame-light"><img src="049_windy.png" alt="風下へ寝た毛" loading="lazy" decoding="async"></div>
             <figcaption>風速 40。<strong>毛が風下へ寝て、流され具合は 0.950279。</strong></figcaption>
           </figure>
         </div>
@@ -2753,7 +2753,7 @@
 
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="050_parts.png" alt="APEXの部品を名前空間ごとに数えた棒グラフ"></div>
+            <div class="frame-light"><img src="050_parts.png" alt="APEXの部品を名前空間ごとに数えた棒グラフ" loading="lazy" decoding="async"></div>
             <figcaption><strong>2,220種。</strong>geo と sop の2つだけで 715種を占める。<strong>APEX の中から SOP の処理をそのまま呼べる。</strong></figcaption>
           </figure>
         </div>
@@ -2783,7 +2783,7 @@
         <p class="label">2. いちばん小さいグラフ</p>
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-dark"><img src="050_graph.png" alt="Value2つをAddにつないだAPEXグラフの図"></div>
+            <div class="frame-dark"><img src="050_graph.png" alt="Value2つをAddにつないだAPEXグラフの図" loading="lazy" decoding="async"></div>
             <figcaption><code>Value&lt;Float&gt;</code> を2つ置いて <code>Add&lt;Float&gt;</code> につなぐ。<strong>ノード3個・ポート9個。</strong></figcaption>
           </figure>
         </div>
@@ -2887,11 +2887,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="051_rest.png" alt="一直線に並んだ3つの関節"></div>
+            <div class="frame-light"><img src="051_rest.png" alt="一直線に並んだ3つの関節" loading="lazy" decoding="async"></div>
             <figcaption>回す前。<strong>関節は (0,0,0) (0,1,0) (0,2,0) に一直線。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="051_bent.png" alt="真ん中で折れ曲がった骨"></div>
+            <div class="frame-light"><img src="051_bent.png" alt="真ん中で折れ曲がった骨" loading="lazy" decoding="async"></div>
             <figcaption>真ん中を60度。<strong>根元と真ん中は動かず、先だけが折れている。</strong></figcaption>
           </figure>
         </div>
@@ -2985,15 +2985,15 @@
 
         <div class="figs figs--grid">
           <figure>
-            <div class="frame-light"><img src="052_rest.png" alt="まっすぐな筒"></div>
+            <div class="frame-light"><img src="052_rest.png" alt="まっすぐな筒" loading="lazy" decoding="async"></div>
             <figcaption>曲げる前。<strong>体積 0.636074。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="052_bent.png" alt="なめらかに曲がった筒"></div>
+            <div class="frame-light"><img src="052_bent.png" alt="なめらかに曲がった筒" loading="lazy" decoding="async"></div>
             <figcaption>90度（既定）。<strong>なめらかだが体積は 27.13% 減る。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="052_sharp.png" alt="鋭く折れた筒"></div>
+            <div class="frame-light"><img src="052_sharp.png" alt="鋭く折れた筒" loading="lazy" decoding="async"></div>
             <figcaption>90度（骨1本）。<strong>体積の減りは 0.85%。ただし鋭く折れる。</strong></figcaption>
           </figure>
         </div>
@@ -3105,11 +3105,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="053_linear.png" alt="内側が食い込んだ曲がり"></div>
+            <div class="frame-light"><img src="053_linear.png" alt="内側が食い込んだ曲がり" loading="lazy" decoding="async"></div>
             <figcaption>Linear（既定）。<strong>内側が食い込み、体積は 27.13% 減る。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="053_dualquat.png" alt="太さが保たれた曲がり"></div>
+            <div class="frame-light"><img src="053_dualquat.png" alt="太さが保たれた曲がり" loading="lazy" decoding="async"></div>
             <figcaption>Dual Quaternion。同じ骨・同じ角度。<strong>太さが保たれ、減りは 0.18%。</strong></figcaption>
           </figure>
         </div>
@@ -3213,11 +3213,11 @@
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="054_linear.png" alt="真ん中がほぼ潰れた筒"></div>
+            <div class="frame-light"><img src="054_linear.png" alt="真ん中がほぼ潰れた筒" loading="lazy" decoding="async"></div>
             <figcaption>Linear で170度ひねったところ。<strong>真ん中がほぼ潰れる。179度で体積は 66.81% 減る。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="054_dualquat.png" alt="太さは保たれるが段差のある筒"></div>
+            <div class="frame-light"><img src="054_dualquat.png" alt="太さは保たれるが段差のある筒" loading="lazy" decoding="async"></div>
             <figcaption>Dual Quaternion。同じ170度。<strong>太さは保たれるが、途中に段差ができる。</strong></figcaption>
           </figure>
         </div>
@@ -3337,11 +3337,11 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="055_reach.png" alt="肘を曲げて目標に届いた骨"></div>
+            <div class="frame-light"><img src="055_reach.png" alt="肘を曲げて目標に届いた骨" loading="lazy" decoding="async"></div>
             <figcaption>目標まで 1.5。<strong>届くので、肘を曲げてぴたりと合わせる。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="055_far.png" alt="伸びきって目標に届かない骨"></div>
+            <div class="frame-light"><img src="055_far.png" alt="伸びきって目標に届かない骨" loading="lazy" decoding="async"></div>
             <figcaption>目標まで 4.0。<strong>届かないので、まっすぐ伸びきってそこで止まる。</strong></figcaption>
           </figure>
         </div>
@@ -3445,11 +3445,11 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
         <div class="figs">
           <figure>
-            <div class="frame-light"><img src="056_short.png" alt="関節5個の鎖"></div>
+            <div class="frame-light"><img src="056_short.png" alt="関節5個の鎖" loading="lazy" decoding="async"></div>
             <figcaption>関節5個（骨4本）。<strong>目標は届く距離の6割。</strong></figcaption>
           </figure>
           <figure>
-            <div class="frame-light"><img src="056_long.png" alt="関節17個の鎖"></div>
+            <div class="frame-light"><img src="056_long.png" alt="関節17個の鎖" loading="lazy" decoding="async"></div>
             <figcaption>関節17個（骨16本）。同じ割合でも<strong>長い鎖はゆるく巻く。</strong></figcaption>
           </figure>
         </div>
@@ -3556,7 +3556,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="057_graphgeo.png" alt="球と線で描かれたAPEXグラフ"></div>
+            <div class="frame-light"><img src="057_graphgeo.png" alt="球と線で描かれたAPEXグラフ" loading="lazy" decoding="async"></div>
             <figcaption>
               1 + 2 + … + 10 を足すグラフを、<strong>ファイルから読んでそのまま描いたもの</strong>。
               球が点＝ノード、線がプリミティブ＝配線。

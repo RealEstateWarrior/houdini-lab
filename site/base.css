@@ -421,12 +421,17 @@ h2 {
 .thumb:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 .thumb .thumb-img {
   background: var(--ground-2);
-  aspect-ratio: 16 / 10;
+  /* 4:3。16:10 だと正方形の被写体が幅の 46% しか埋められず、
+     一覧が寂しくなる。4:3 なら 75% まで埋まる */
+  aspect-ratio: 4 / 3;
   display: grid;
   place-items: center;
   overflow: hidden;
 }
-.thumb .thumb-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* cover（切り抜き）にすると、正方形の画は上下 37.5% が消える。
+   実験055・056 が「何をしているか分からない」のはこれだった。
+   contain にして、足りない分は板の色で埋める */
+.thumb .thumb-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .thumb .thumb-body { padding: 14px 17px 18px; display: grid; gap: 5px; }
 .thumb .thumb-no {
   font-family: var(--font-mono);

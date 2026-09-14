@@ -178,11 +178,13 @@
       var note = (item.note || "").toLowerCase();
       var reading = (item.reading || "").toLowerCase();
       var tags = (item.tags || []).join(" ").toLowerCase();
+      var body = (item.body || "").toLowerCase();
       if (label.indexOf(query) === 0) { return 0; }
       if (label.indexOf(query) !== -1) { return 1; }
       if (reading.indexOf(query) !== -1) { return 2; }
       if (tags.indexOf(query) !== -1) { return 2; }
       if (note.indexOf(query) !== -1) { return 3; }
+      if (body.indexOf(query) !== -1) { return 4; }
       return -1;
     }
 
@@ -208,6 +210,14 @@
                                       block: "start" });
             }
           }, 60);
+        }
+        /* 手順は、タブを開くだけでなくその手順そのものを開く。
+           一覧から探し直させない */
+        if (item.guide) {
+          setTimeout(function () {
+            var card = document.querySelector('[data-guide="' + item.guide + '"]');
+            if (card) { card.click(); }
+          }, 80);
         }
         return;
       }

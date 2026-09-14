@@ -361,18 +361,18 @@ DONE = [
      "title": "APEX のグラフを持ち歩く — ネットワークが、そのままジオメトリになる",
      "note": "ノード＝点、配線＝プリミティブ。2,617バイトのファイル1つで別プロセスへ渡る"},
     {"no": "058", "anchor": "exp058", "tags": ["書き出し", "Apprentice", "検証"],
-     "log": "log_pm", "hip": "", "thumb": "",
-     "shots": [],
+     "log": "log_pm", "hip": "", "thumb": "058_formats.png",
+     "shots": ["058_formats.png"],
      "title": "Apprentice で外へ出せる形式 — FBX も glTF も Alembic も止まる",
      "note": "9通り試して5通り。FBX/glTF/Alembic は不可。USD は .usdnc に変えられる"},
     {"no": "059", "anchor": "exp059", "tags": ["書き出し", "検証", "アトリビュート"],
-     "log": "log_pm", "hip": "", "thumb": "",
-     "shots": [],
+     "log": "log_pm", "hip": "", "thumb": "059_obj.png",
+     "shots": ["059_obj.png"],
      "title": "obj で渡せる範囲 — 色と UV は残る。自作のアトリビュートは全部落ちる",
      "note": "位置のずれ0。NURBSは2,160面に刻まれ点が7.2倍。グループもpscaleも消える"},
     {"no": "060", "anchor": "exp060", "tags": ["点検", "検算", "訂正"],
-     "log": "log_pm", "hip": "", "thumb": "",
-     "shots": [],
+     "log": "log_pm", "hip": "", "thumb": "060_audit.png",
+     "shots": ["060_audit.png"],
      "title": "031〜059 の振り返り点検 — 6件すべて一致。1件は「もっと強い結論」に変わった",
      "note": "条件を変えて測り直す。052の係数27.1284は形の大きさによらない定数だった"},
     {"no": "061", "anchor": "exp061", "tags": ["MPM", "新分野", "検算", "シミュレーション"],
@@ -521,7 +521,14 @@ def render_thumbs(urls):
         tags = " ".join(item.get("tags", []))
         out.append(f'        <button type="button" class="thumb"'
                    f' data-exp="{item["no"]}" data-tags="{tags}">')
-        out.append(f'          <span class="thumb-img"><img src="{item["thumb"]}"'
+        # make_thumbs.py が作った 4:3 の板があればそちらを使う。
+        # 元の画をそのまま入れると、正方形のものは上下が切られて
+        # 何をしているか分からなくなる（70件中52件がそうだった）
+        card = f'thumb_{item["no"]}.png'
+        if not os.path.exists(os.path.join(OUT, card)):
+            card = item["thumb"]
+        out.append(f'          <span class="thumb-img"><img src="{card}"'
+                   f' loading="lazy" decoding="async"'
                    f' alt="実験{item["no"]}の結果のレンダリング"></span>')
         out.append('          <span class="thumb-body">')
         out.append(f'            <span class="thumb-no">実験 {item["no"]}</span>')
@@ -668,7 +675,8 @@ def render_guides(guides, urls):
         section_start = len(out)
         out.append(f'      <section class="guide" id="guide-{guide["id"]}">')
         out.append('        <div class="guide-hero">')
-        out.append(f'          <img src="{guide["hero"]}"'
+        out.append(f'          <img src="{guide["hero"]}" loading="lazy"'
+                   f' decoding="async"'
                    f' alt="{html.escape(guide["title"])}の完成図">')
         out.append("        </div>")
         out.append('        <div class="guide-head">')
@@ -693,7 +701,8 @@ def render_guides(guides, urls):
             if step.get("img"):
                 out.append('            <figure class="step-figure">')
                 out.append('              <div class="frame-light">'
-                           f'<img src="{step["img"]}"'
+                           f'<img src="{step["img"]}" loading="lazy"'
+                           f' decoding="async"'
                            f' alt="{html.escape(step["title"])}の結果"></div>')
                 if step.get("cap"):
                     out.append(f"              <figcaption>{html.escape(step['cap'])}"
@@ -711,7 +720,8 @@ def render_guides(guides, urls):
                 if trap.get("img"):
                     out.append('          <figure>')
                     out.append('            <div class="frame-light">'
-                               f'<img src="{trap["img"]}"'
+                               f'<img src="{trap["img"]}" loading="lazy"'
+                               f' decoding="async"'
                                f' alt="{html.escape(trap["title"])}"></div>')
                     if trap.get("cap"):
                         out.append(f"            <figcaption>"
@@ -735,7 +745,8 @@ def render_guides(guides, urls):
 
         out.append('        <div class="guide-end">')
         out.append('          <p class="label">完成図</p>')
-        out.append(f'          <img src="{guide["hero"]}"'
+        out.append(f'          <img src="{guide["hero"]}" loading="lazy"'
+                   f' decoding="async"'
                    f' alt="{html.escape(guide["title"])}の完成図">')
         out.append(f'          <p>{html.escape(guide.get("hero_cap", ""))}</p>')
         out.append('          <p class="guide-more">')
@@ -844,7 +855,8 @@ def render_nodes(nodes, urls):
             out.append("          </div>")
             if node.get("img"):
                 out.append('          <div class="node-shot">')
-                out.append(f'            <img src="{node["img"]}"'
+                out.append(f'            <img src="{node["img"]}" loading="lazy"'
+                           f' decoding="async"'
                            f' alt="{html.escape(node["name"])}の結果">')
                 if node.get("cap"):
                     out.append(f'            <span>{html.escape(node["cap"])}</span>')
@@ -854,7 +866,7 @@ def render_nodes(nodes, urls):
     return "\n".join(out)
 
 
-def render_search_data(data, nodes, urls, tabs):
+def render_search_data(data, nodes, guides, urls, tabs):
     """検索の索引。実験・ノード・用語をまとめて1つのJSONに入れる。
 
     ページの中で開ける行き先（タブ + 要素のid）と、別ページへのリンクを
@@ -870,6 +882,21 @@ def render_search_data(data, nodes, urls, tabs):
             "href": f'{urls[item.get("log", "log_pm")]}#{item["anchor"]}',
             "exp": item["no"],
             "tags": item.get("tags", []),
+        })
+
+    # 手順ページが索引に入っていなかった。「作り方」を探している人が
+    # いちばん先に当てたいものなので、実験の次に置く
+    for guide in guides["guides"]:
+        steps = " ".join(s["title"] for s in guide.get("steps", []))
+        traps = " ".join(t["title"] for t in guide.get("traps", []))
+        items.append({
+            "kind": "手順",
+            "label": guide["title"],
+            "note": guide["lede"][:70],
+            "href": f'{urls["home"]}#guides',
+            "tab": "guides",
+            "guide": guide["id"],
+            "body": f"{steps} {traps}",
         })
 
     index = -1
@@ -1009,7 +1036,8 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_DATA-->", render_data(data)),
         ("<!--POPOVER-->", popover),
         ("<!--CHROME-->", chrome),
-        ("<!--SEARCH_DATA-->", render_search_data(data, nodes, urls, tabs)),
+        ("<!--SEARCH_DATA-->",
+         render_search_data(data, nodes, guides, urls, tabs)),
         ("<!--EXP_COUNT-->", str(len(DONE))),
         ("<!--EXP_TOTAL-->", str(len(DONE) + len(PLANNED) + len(PLANNED_FX))),
         ("<!--NODE_COUNT-->", str(count_nodes(nodes))),
