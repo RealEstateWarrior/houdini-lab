@@ -2100,6 +2100,113 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 061 ===================== -->
+    <article class="entry entry--current" id="exp061">
+      <div class="badge">061</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM に入る — 落ち方は式に乗る。ただし時刻が 0.0742フレーム先に進んでいる</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 「ほぼ合っている」で済ませずに、ずれの形を見る</p>
+
+        <div class="prose">
+          <p>
+            MPM（Material Point Method）は Houdini 21 で入った新しい<button class="term" data-term="ソルバ">ソルバ</button>。
+            <strong>砂・雪・泥・パンのような「固体と流体の中間」</strong>を扱える。
+          </p>
+          <p>
+            新しい分野なので、<a href="#exp042">実験042</a>（グルーム）や
+            <a href="#exp050">実験050</a>（APEX）と同じ順番で入る。
+            <strong>部品の数を数える・いちばん小さいものを動かす・保たれるはずの量を測る。</strong>
+          </p>
+          <p>
+            いちばん小さい落下を作る。箱を粒に変えて、重力だけで落とす。
+            <strong>何かにぶつかるまでは、自由落下の式に乗るはずだ。</strong>
+          </p>
+          <pre><code>y = y0 − ½ g t²</code></pre>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="061_start.png" alt="箱の形に並んだ粒"></div>
+            <figcaption>フレーム1。高さ 5.998873。<strong>1,973個の粒がまだ箱の形をしている。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="061_fall.png" alt="落ちてきた粒の塊"></div>
+            <figcaption>フレーム13。高さ 4.757841。<strong>形はほぼそのまま落ちている。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 落ち方は自由落下の式に乗るか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>frame</th><th>秒</th><th>粒の数</th><th>高さの平均</th><th>式の高さ</th><th>ずれ</th><th>横の広がり</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.0000</td><td class="num hi">1,973</td><td class="num">5.998873</td><td class="num">5.998873</td><td class="num">0.000000</td><td class="num">0.999492</td></tr>
+              <tr><td class="num">3</td><td class="num">0.0833</td><td class="num hi">1,973</td><td class="num">5.961985</td><td class="num">5.964822</td><td class="num">-0.002838</td><td class="num">0.999492</td></tr>
+              <tr><td class="num">5</td><td class="num">0.1667</td><td class="num hi">1,973</td><td class="num">5.857198</td><td class="num">5.862670</td><td class="num">-0.005472</td><td class="num">0.999493</td></tr>
+              <tr><td class="num">7</td><td class="num">0.2500</td><td class="num hi">1,973</td><td class="num">5.684511</td><td class="num">5.692415</td><td class="num">-0.007905</td><td class="num">0.999493</td></tr>
+              <tr><td class="num">9</td><td class="num">0.3333</td><td class="num hi">1,973</td><td class="num">5.443722</td><td class="num">5.454059</td><td class="num">-0.010337</td><td class="num">0.999494</td></tr>
+              <tr><td class="num">11</td><td class="num">0.4167</td><td class="num hi">1,973</td><td class="num">5.134832</td><td class="num">5.147602</td><td class="num">-0.012769</td><td class="num">0.999495</td></tr>
+              <tr><td class="num">13</td><td class="num">0.5000</td><td class="num hi">1,973</td><td class="num">4.757841</td><td class="num">4.773042</td><td class="num hi">-0.015201</td><td class="num">0.999496</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>粒の数は7フレームすべてで 1,973。幅 0。</strong>
+          ずれは単調に増えていて、<strong>しかも時間に比例している。</strong>
+        </p>
+
+        <p class="label">2. ずれを「時刻の先走り」で説明できるか</p>
+        <pre><code>y = y0 − ½ g (t + δ)²</code></pre>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>frame</th><th>式（δなし）</th><th>式（δ入り）</th><th>ずれ（δなし）</th><th>ずれ（δ入り）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">5.998873</td><td class="num">5.998826</td><td class="num">0.000000</td><td class="num hi">+0.000047</td></tr>
+              <tr><td class="num">3</td><td class="num">5.964822</td><td class="num">5.962250</td><td class="num">-0.002838</td><td class="num hi">-0.000265</td></tr>
+              <tr><td class="num">5</td><td class="num">5.862670</td><td class="num">5.857571</td><td class="num">-0.005472</td><td class="num hi">-0.000374</td></tr>
+              <tr><td class="num">7</td><td class="num">5.692415</td><td class="num">5.684791</td><td class="num">-0.007905</td><td class="num hi">-0.000280</td></tr>
+              <tr><td class="num">9</td><td class="num">5.454059</td><td class="num">5.443910</td><td class="num">-0.010337</td><td class="num hi">-0.000188</td></tr>
+              <tr><td class="num">11</td><td class="num">5.147602</td><td class="num">5.134926</td><td class="num">-0.012769</td><td class="num hi">-0.000094</td></tr>
+              <tr><td class="num">13</td><td class="num">4.773042</td><td class="num">4.757841</td><td class="num">-0.015201</td><td class="num hi">0.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          δ = <strong>0.003091秒（0.0742フレーム）</strong>。
+          いちばん遠い点から出して全部に当てた。
+          <strong>ずれの最大は 0.015201 → 0.000374 で、41分の1。</strong>
+        </p>
+
+        <p class="label">3. 粒の数と、かかる時間</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>粒の間隔</th><th>粒の数</th><th>1フレーム進める時間</th><th>粒1つあたり</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.16</td><td class="num">238</td><td class="num">0.068 秒</td><td class="num hi">284.32 µs</td></tr>
+              <tr><td class="num">0.12</td><td class="num">583</td><td class="num">0.059 秒</td><td class="num">101.62 µs</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1,973</td><td class="num">0.064 秒</td><td class="num">32.21 µs</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4,602</td><td class="num">0.093 秒</td><td class="num hi">20.11 µs</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>MPM の部品は <button class="term" data-term="SOP">SOP</button> が8種、<button class="term" data-term="DOP">DOP</button> が2種。</strong>グルームの26種や APEX の2,220種と比べるとずいぶん小さい。<strong>新しく入ったばかりで、まだ道具が少ない。</strong></li>
+          <li><strong>いちばん小さい構成は4<button class="term" data-term="ノード">ノード</button>。</strong>box → <code>mpmsource</code> → <code>mpmsolver</code> に、範囲を決める <code>mpmcontainer</code>。<strong><code>mpmsolver</code> の入力は 0=源 / 1=ぶつかるもの / 2=範囲。</strong></li>
+          <li><strong>粒の数は完全に保たれた。</strong>7フレームすべてで 1,973個、幅 <span class="hi">0</span>。</li>
+          <li><strong>落ち方は式に近いが、ぴったりではない。</strong>ずれが 0 から -0.015201 へ単調に増える。<strong>「ほぼ合っている」で済ませずに、ずれの形を見る。</strong></li>
+          <li><strong>ずれは時間に比例していた。</strong>だから「大きさが違う」のではなく<strong>「時刻がずれている」</strong>と考えられる。δ を出すと <span class="hi">0.003091秒（0.0742フレーム）</span>。</li>
+          <li><strong>δ を入れるとずれは 41分の1。</strong>0.015201 → <span class="hi">0.000374</span>。<strong>ソルバはフレーム1の時点ですでに少し時間を進めている</strong>ことになる。ただし 0.0742 という数字が何から来るのかは<strong>確かめていないので断定しない</strong>。</li>
+          <li><strong>粒1つあたりの時間は、増やすほど安くなる。</strong>238個で 284.32µs、4,602個で <span class="hi">20.11µs</span>。14分の1。<strong>1フレームの時間はどれも 0.06〜0.09秒で、ほとんどが固定費。</strong></li>
+          <li><strong>この入り方は3回目。</strong><a href="#exp042">グルーム</a>、<a href="#exp050">APEX</a>、そして MPM。<strong>部品の数を数える・いちばん小さいものを動かす・保たれる量を測る。</strong>新しい分野でも順番は変えなくてよい。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
