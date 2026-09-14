@@ -1,0 +1,255 @@
+{
+  "title": "手順 — 地形を削って草を生やす",
+  "network": "/obj/terrain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "field",
+      "type": "heightfield",
+      "pos": [
+        6.919,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 200.0,
+        "sizey": 200.0
+      }
+    },
+    {
+      "name": "noise",
+      "type": "heightfield_noise",
+      "pos": [
+        6.919,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "amp": 120.0,
+        "elementsize": 80.0
+      }
+    },
+    {
+      "name": "erode",
+      "type": "heightfield_erode::3.0",
+      "pos": [
+        -1.412,
+        2.41
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 0.2140711545944214,
+        "folder0": 1,
+        "folder1": 1,
+        "iterations": 4
+      }
+    },
+    {
+      "name": "mesh_raw",
+      "type": "convertheightfield",
+      "pos": [
+        6.919,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "mesh",
+      "type": "convertheightfield",
+      "pos": [
+        -3.671,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        -3.671,
+        2.861
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "read_layers",
+      "type": "attribwrangle",
+      "pos": [
+        -2.542,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\n// 浸食が残したレイヤーを、点に読み込む。\nf@sediment = volumesample(1, \"sediment\", @P);\n\n// 下り坂の向きは、高さそのものから作る。\n// normal SOP は N をバーテッ..."
+      }
+    },
+    {
+      "name": "scatter",
+      "type": "scatter::2.0",
+      "pos": [
+        3.671,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 900
+      }
+    },
+    {
+      "name": "aim",
+      "type": "attribwrangle",
+      "pos": [
+        3.671,
+        1.958
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\n// 草は上に立てる。斜面の向きに倒したいときは downhill を混ぜる。\n@N = set(0, 1, 0);\n@pscale = 0.6 + 0.8 * rand(@ptnum);\n"
+      }
+    },
+    {
+      "name": "blade",
+      "type": "tube",
+      "pos": [
+        1.412,
+        2.41
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "rx": 90.0,
+        "rad1": 0.35,
+        "rad2": 0.02,
+        "height": 7.0,
+        "cols": 6
+      }
+    },
+    {
+      "name": "copies",
+      "type": "copytopoints::2.0",
+      "pos": [
+        2.542,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "result",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "field",
+      "from_output": 0,
+      "to": "noise",
+      "to_input": 0
+    },
+    {
+      "from": "noise",
+      "from_output": 0,
+      "to": "erode",
+      "to_input": 0
+    },
+    {
+      "from": "noise",
+      "from_output": 0,
+      "to": "mesh_raw",
+      "to_input": 0
+    },
+    {
+      "from": "erode",
+      "from_output": 0,
+      "to": "mesh",
+      "to_input": 0
+    },
+    {
+      "from": "mesh",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "read_layers",
+      "to_input": 0
+    },
+    {
+      "from": "erode",
+      "from_output": 0,
+      "to": "read_layers",
+      "to_input": 1
+    },
+    {
+      "from": "read_layers",
+      "from_output": 0,
+      "to": "scatter",
+      "to_input": 0
+    },
+    {
+      "from": "scatter",
+      "from_output": 0,
+      "to": "aim",
+      "to_input": 0
+    },
+    {
+      "from": "blade",
+      "from_output": 0,
+      "to": "copies",
+      "to_input": 0
+    },
+    {
+      "from": "aim",
+      "from_output": 0,
+      "to": "copies",
+      "to_input": 1
+    },
+    {
+      "from": "read_layers",
+      "from_output": 0,
+      "to": "result",
+      "to_input": 0
+    },
+    {
+      "from": "copies",
+      "from_output": 0,
+      "to": "result",
+      "to_input": 1
+    }
+  ]
+}

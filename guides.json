@@ -795,6 +795,357 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "groom",
+      "title": "毛を生やして束ねる",
+      "lede": "球に毛を12,516本生やし、房にまとめて、束ごとに色を変える。毛は Houdini の中でも道具の数が多く（guide で始まるノードだけで24種）、つなぎ方の決まりごとも多い。ここではいちばん短い道を通る。数字はすべて実験042〜046で実測したもの。",
+      "hero": "guide_groom_6_color.png",
+      "hero_cap": "完成したところ。144個の房に分かれ、束ごとに色が変わっている。",
+      "facts": [
+        [
+          "ノードの数",
+          "8個"
+        ],
+        [
+          "かかる時間",
+          "10分ほど"
+        ],
+        [
+          "出てくる毛",
+          "12,516本"
+        ],
+        [
+          "元になった実験",
+          "実験042〜046"
+        ]
+      ],
+      "exp": "043",
+      "hip": "guide_groom.hipnc",
+      "steps": [
+        {
+          "title": "土台を作る",
+          "node": "sphere",
+          "body": "毛を生やす面を1枚出す。type を Polygon Mesh にして、rows / cols を 40×40 にした。既定の Primitive のままだと点も面も無い「式としての球」が出てくるだけで、毛は生えない。この球は 1,522点 / 1,560面 になる。",
+          "img": "guide_groom_1_skin.png",
+          "cap": "1,522点 / 1,560面。表面積は 12.53039。あとで出てくる density の計算に効く。"
+        },
+        {
+          "title": "面の向きを作る",
+          "node": "normal",
+          "body": "面がどちらを向いているかを表す N を作る。毛は N の向きに伸びるので、これが無いと向きが決まらない。なお normal SOP が書くのは<strong>バーテックスの N</strong> で、点の wrangle からは読めない。ここでは次のノードに渡すだけなので問題にならない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "元の位置を覚えさせる",
+          "node": "rest",
+          "body": "通すだけで、いまの位置が rest というアトリビュートに焼かれる。グルームの道具は「元の形」を基準に動くので、これが無いと hairgen が「Skin input has no rest attribute.」で止まる。土台をあとで動かすなら、この rest を持ったまま変形させる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "根元をばらまく",
+          "node": "scatter",
+          "body": "球の表面に300個の点を散らす。この点がガイド（毛の案内役）の根元になる。面積の広いところほど多く置かれるので、どこかに偏ることはない。",
+          "img": "guide_groom_2_roots.png",
+          "cap": "300点。面はもう無く、位置と N だけを持つ点の集まり。"
+        },
+        {
+          "title": "ガイドを組む",
+          "node": "attribwrangle",
+          "body": "散らした点1つにつき、外向きに線を1本伸ばす。長さ 0.5 を8等分して9点。ここで<strong>2つのアトリビュートを必ず付ける</strong>。ひとつは skinprim（どの面から生えたか。xyzdist で調べる）、もうひとつは各点の rest（自分の位置をそのまま入れる）。クラスは「ディテール」にして、1回だけ走らせる。",
+          "img": "guide_groom_3_guides.png",
+          "cap": "2,700点 / 300本。まだ毛ではなく、毛の形を決めるための案内役。"
+        },
+        {
+          "title": "毛を増やす",
+          "node": "hairgen::2.0",
+          "body": "入力0に<strong>土台</strong>、入力1に<strong>ガイド</strong>をつなぐ。density を 1000、influenceradius を 0.20 にした。density は本数ではなく「面積1あたりの本数」で、面積 12.53039 の球なら 12,516本になる（計算上は 12,530本で、差は 0.1%）。thickness は 0.008 にした。",
+          "img": "guide_groom_4_hairgen.png",
+          "cap": "12,516本。ガイド300本の41.7倍。1本は9点。"
+        },
+        {
+          "title": "束ねる",
+          "node": "hairclump::2.0",
+          "body": "入力0に<strong>毛</strong>、入力1に<strong>土台</strong>をつなぐ。<strong>hairgen とは順番が逆</strong>なので注意。clumpsize を 0.4 にすると144個の房になり、1房あたり約87本。毛には clumpid という「どの束に属するか」の番号が増える。",
+          "img": "guide_groom_5_clump.png",
+          "cap": "本数は変わらず 12,516本。並びだけが房にまとまる。"
+        },
+        {
+          "title": "束ごとに色を変える",
+          "node": "attribwrangle",
+          "body": "プリミティブごとに走らせ、clumpid から乱数で色を作って、その毛の全部の点に Cd を書く。同じ番号なら必ず同じ色になるので、房がそのまま色分けされる。レンダで色を出すときは principledshader の「点の色を使う」を入れておく（既定でオン）。",
+          "img": "guide_groom_6_color.png",
+          "cap": "144色。目で房を数えられる。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "つなぐ順番が、2つのノードで逆",
+          "body": "hairgen::2.0 は「土台 → ガイド」、hairclump::2.0 は「毛 → 土台」。片方を覚えてもう片方に当てはめると必ず失敗する。逆につなぐと「Invalid source …」で何も出てこない。実験043で4通りすべてを試して確かめた。node.inputLabels() で読めば、hairgen の入力は Rest Skin / Guides / Animated Skin / Volumes / Guide Interpolation Mesh、hairclump は Guides / Skin / Skin VDB / Custom Clump Curves と出る。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "wrangle で作った点の rest は (0,0,0) のまま",
+          "body": "addpoint で作った点には、既にあるアトリビュートの欄はできるが中身は既定値のまま入る。土台から rest が流れてきていると、ガイドの全点の rest が原点になる。hairgen は rest の空間で距離を測るので、<strong>ガイドは全部が原点にあることになり、1本も使われない</strong>。しかもエラーも警告も出ない。見分け方は毛の長さで、unguidedlength の既定 0.05 ちょうどなら1本も拾われていない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "influenceradius の既定 0.05 は小さすぎる",
+          "body": "ガイドはこの半径の中にいる毛にしか効かない。半径1の球にガイド300本だと間隔は約0.2なので、既定のままでは 18.9% しか拾われない。0.10 で 73.1%、0.20 で 100%（12,514 / 12,516）。ただし上げすぎると、向きの違うガイドまで平均されて毛が縮む（0.20 で長さ 0.49765、0.80 で 0.48541）。",
+          "img": "guide_groom_7_default.png",
+          "cap": "influenceradius を既定の 0.05 に戻した場合。毛が短いままで、土台の球が見えている。"
+        },
+        {
+          "title": "既定の太さ 0.001 は、画の上で 0.1ピクセル",
+          "body": "thickness は毛の直径で、世界の大きさに対する値。半径1の球を画面いっぱいに撮ると 0.103ピクセルにしかならず、ザラついた点の集まりにしか見えない。0.008 まで上げると 0.822ピクセルになり、毛の流れが読める。ただしレンダ時間は 5.0秒 → 10.7秒と倍になる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "fur ノードの出力は次の工程に渡せない",
+          "body": "手軽に毛を出すなら fur ひとつで足りる。ただし fur が出すのは N と P だけで skinprim が無く、hairclump につなぐと「Couldn't find skinprim attribute.」で止まる。束ねたり整えたりするなら、最初からガイドを組む道を通る。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "heightfield",
+      "title": "地形を削って草を生やす",
+      "lede": "HeightField は高さを「数の並び（ボリューム）」として持つ仕組みで、ポリゴンの地形では難しい「水で削る」がそのまま計算できる。削った跡は debris や sediment といったレイヤーとして残るので、そこに草を生やしたり色を塗り分けたりできる。数字はすべて実験034〜037で実測したもの。",
+      "hero": "guide_hf_5_grass.png",
+      "hero_cap": "完成したところ。削られた尾根と谷の上に、900本の草が立っている。",
+      "facts": [
+        [
+          "ノードの数",
+          "8個"
+        ],
+        [
+          "かかる時間",
+          "10分ほど"
+        ],
+        [
+          "地形の解像度",
+          "100×100"
+        ],
+        [
+          "元になった実験",
+          "実験034〜037"
+        ]
+      ],
+      "exp": "034",
+      "hip": "guide_hf.hipnc",
+      "steps": [
+        {
+          "title": "地形の土台を出す",
+          "node": "heightfield",
+          "body": "高さを2次元のボリュームとして持つ入れ物を作る。sizex / sizey を 200、gridspacing を 2.0 にした。<strong>解像度は size ÷ gridspacing で決まる</strong>ので、これで 100×100 になる。この段階では面も点も無く、height と mask という2枚のボリュームだけが出てくる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "起伏を足す",
+          "node": "heightfield_noise",
+          "body": "mountain と同じ考え方で、高さのボリュームにノイズを足す。amp を 120、elementsize を 80 にした。amp の数字がそのまま高さになるわけではなく、実測では amp 30 で高さの幅が 8.74（約0.29倍）。ただし倍率としては正確で、amp を4通り変えても「幅 ÷ amp」は 0.291329 と小数点以下6桁まで同じだった。",
+          "img": "guide_hf_1_noise.png",
+          "cap": "ノイズをかけただけの状態。なめらかな丘が並んでいる。"
+        },
+        {
+          "title": "水で削る",
+          "node": "heightfield_erode",
+          "body": "山を削って谷に積もらせる。iterations を 4 にした。ここが HeightField を使う一番の理由で、<strong>レイヤーが2枚から7枚に増える</strong>（debris / sediment / flow / flowdir.x / flowdir.y が追加）。削れた場所・積もった場所・水の流れた向きが、あとから使える形で残る。",
+          "img": "guide_hf_2_erode.png",
+          "cap": "浸食を4回。尾根が立ち、谷に筋ができている。100×100 で1回 0.68秒、4回 2.35秒。"
+        },
+        {
+          "title": "メッシュに直す",
+          "node": "convertheightfield",
+          "body": "HeightField のままではレンダできないので、最後にこれを通す。マス目1つが点1つになるので、100×100 なら 10,000点 / 9,801面。<strong>解像度がそのまま点数になる</strong>ので、メッシュ化は必要になったところで行う。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "面の向きを作る",
+          "node": "normal",
+          "body": "あとで草を立てるために N を作る。scatter を通すと面が無くなるので、<strong>ばらまく前</strong>にやる。",
+          "img": "guide_hf_3_mesh.png",
+          "cap": "10,000点 / 9,801面。ここからは普通のポリゴンとして扱える。"
+        },
+        {
+          "title": "浸食のレイヤーを点に読む",
+          "node": "attribwrangle",
+          "body": "volumesample で、点の位置における sediment（積もった量）を読む。ついでに下り坂の向きも作る。<strong>高さを2か所サンプリングして差を取る</strong>やり方にしているのは、normal SOP が N をバーテックスに書くため、点のラングルから @N を読んでも空になるから。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "草を散らす",
+          "node": "scatter",
+          "body": "地形の上に900個の点を散らす。ここで読んだレイヤーの値を density に使えば、「削れた場所には生えない」「積もった場所だけ濃くする」といった配り方ができる。",
+          "img": "guide_hf_4_scatter.png",
+          "cap": "900点。面はもう無く、位置と読み込んだレイヤーの値を持つ点の集まり。"
+        },
+        {
+          "title": "草を複製する",
+          "node": "copy to points",
+          "body": "細い円錐を1本作り、点の上に複製する。<strong>テンプレートは Z 軸に伸ばしておく</strong>（rx に 90 度）。copy to points はテンプレートの Z 軸を点の N に合わせるので、Y 軸のままだと900本すべてが横倒しになる。",
+          "img": "guide_hf_5_grass.png",
+          "cap": "20,800点 / 15,201面。地形の上に草が立った。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "gridsamples では解像度が変わらない",
+          "body": "名前は「Grid Samples」だが、これを 128 にしても 1024 にしても 100×100 のまま動かない。解像度を決めるのは <strong>size ÷ gridspacing</strong>。細かくしたいときは gridspacing を下げる。実験034で確かめた。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "flowdir.x と flowdir.y は入れ替えて使う",
+          "body": "浸食が残す「水の流れた向き」は flowdir.x と flowdir.y の2枚に分かれている。地形は水平なので、素直に set(fx, 0, fy) と書きたくなるが、これだと下り坂を向かない（実験036で測った平均は 96.5度＝でたらめ）。8通り総当たりで試したところ、<strong>入れ替えた set(fy, 0, fx) だけ</strong>が平均 39.9度まで下がった。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "normal SOP が書くのはバーテックスの N",
+          "body": "点のラングルから @N を読んでも空のまま。実験036では、これに気づかず草の向きがでたらめになった。点の N が要るなら、attribpromote でバーテックスから点へ移すか、この手順のように高さから自分で計算する。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "v@flow という名前は使えない",
+          "body": "convertheightfield はレイヤーを点アトリビュートとして持ってくるので、<strong>float の flow がすでに点に乗っている</strong>。そこへ v@flow とベクトルで書こうとすると型がぶつかる。実験036でこれに掛かった。名前を変える。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "浸食の時間は回数に比例しない",
+          "body": "100×100 で1回 0.68秒、4回 2.35秒。回数を4倍にしても時間は 3.5倍で、準備の分が乗っている。ただし実用の解像度（gridspacing を下げる）ではそのまま重くなるので、形が決まるまでは粗い解像度で試す。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "texture",
+      "title": "模様を作って貼る",
+      "lede": "Houdini の中だけで模様の画を作り（Copernicus）、材質に貼る。貼り方は3通りある。色として使う・凸凹に見せる・本当に形を変える。見た目は似ているが、輪郭を見れば区別がつく。数字はすべて実験039〜041で実測したもの。",
+      "hero": "guide_tex_disp.png",
+      "hero_cap": "displacement で貼ったところ。輪郭そのものがでこぼこになっている。",
+      "facts": [
+        [
+          "ノードの数",
+          "6個"
+        ],
+        [
+          "かかる時間",
+          "10分ほど"
+        ],
+        [
+          "模様の解像度",
+          "1024×1024"
+        ],
+        [
+          "元になった実験",
+          "実験039〜041"
+        ]
+      ],
+      "exp": "041",
+      "hip": "",
+      "steps": [
+        {
+          "title": "COP のネットワークを作る",
+          "node": "copnet",
+          "body": "画を作るための入れ物。Houdini 21 では Copernicus と呼ばれ、この中で使えるノードは 262種ある。解像度は copnet 側で決める。setres を入れて res1 / res2 に 1024 を入れた。<strong>setres を入れ忘れても res1 / res2 の値は使われる</strong>ので、意図した解像度になっているかは出てきた画で確かめる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ノイズの画を作る",
+          "node": "fractalnoise",
+          "body": "COP ネットワークの中に置く。elementsize が模様の細かさ、rough が「細かい成分をどれだけ残すか」。ここでは elementsize 0.06、rough 0.6 にした。地形の mountain と同じ考え方の数字で、小さくすると細かい岩肌、大きくするとゆるいうねりになる。",
+          "img": "guide_tex_noise.png",
+          "cap": "1024×1024。これが模様のもと。"
+        },
+        {
+          "title": "画として書き出す",
+          "node": "rop_image",
+          "body": "作った画をファイルに落とす。trange を「今のフレームだけ」にして、copoutput に書き出し先を入れ、execute を押す。<strong>パスは / 区切りで書く</strong>（Windows の \\\\ をそのまま入れると通らないことがある）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "土台に UV を付ける",
+          "node": "uvunwrap",
+          "body": "画を貼るには「面のどこが画のどこにあたるか」の対応（UV）が要る。球をそのまま渡しても UV は付いていないので、uvunwrap を1つ挟む。地形なら convertheightfield が UV を付けて出してくれるので、この段は要らない。",
+          "img": "guide_tex_plain.png",
+          "cap": "何も貼っていない状態。輪郭はなめらかな円。"
+        },
+        {
+          "title": "材質を作る",
+          "node": "principledshader::2.0",
+          "body": "/mat の中に作る。geo の中には作れないので注意。rough を 0.6 にした。この材質を material SOP で土台に割り当てる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "色として貼る",
+          "node": "basecolor_useTexture",
+          "body": "いちばん素直な貼り方。模様がそのまま色になる。<strong>形はまったく変わらない</strong>。輪郭の長さを測ると、何も貼らない場合との比が 0.99999 で、小数点以下4桁まで同じだった。",
+          "img": "guide_tex_color.png",
+          "cap": "色として貼った状態。模様は見えるが、輪郭は円のまま。"
+        },
+        {
+          "title": "凸凹に見せる",
+          "node": "baseBumpAndNormal",
+          "body": "光の当たり方だけを変えて、凸凹があるように見せる。enable を入れるだけでは効かず、<strong>baseBump_bumpTexture に画を指定する必要がある</strong>。実験041では指定を忘れ、何も貼らない場合と数字が完全に一致して気づいた。",
+          "img": "guide_tex_bump.png",
+          "cap": "bump で貼った状態。表面は荒れて見えるが、輪郭の比は 0.99852 でほぼ変わらない。"
+        },
+        {
+          "title": "本当に形を変える",
+          "node": "dispTex",
+          "body": "レンダのときに面そのものを動かす。dispTex_enable を入れ、dispTex_texture に画を、dispTex_scale に動かす量（ここでは 0.12）を入れる。<strong>点の数は増えないのに輪郭が変わる</strong>のが特徴で、輪郭の比は 1.02873、面積も 1.4% 増えた。",
+          "img": "guide_tex_disp.png",
+          "cap": "displacement で貼った状態。輪郭そのものがでこぼこになっている。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "bump は輪郭を変えない",
+          "body": "これが bump と displacement の違いそのもの。輪郭の長さ ÷ 面積の平方根で測ると、何も貼らない場合を 1.00000 として、色 0.99999 / bump 0.99852 / displacement 1.02873。<strong>横から見たときのシルエットに出したいなら displacement しかない。</strong>逆に、シルエットが変わると困る場面では bump を選ぶ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "トグルを入れただけでは効かない",
+          "body": "bump も displacement も、enable のトグルとテクスチャの指定が別になっている。片方だけだと何も起きず、エラーも出ない。実験041では bump のトグルだけ入れて、何も貼らない場合と数字（点 3,056 / 高さ 2.2916）が完全に一致したことで気づいた。<strong>数字が「まったく同じ」なら、それは効いていない印。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "UV が無いと貼れない",
+          "body": "球や箱をそのまま渡しても UV は付いていない。貼ったつもりで何も変わらないときは、まず UV があるかを見る。convertheightfield のように、UV を付けて出してくれるノードもある。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "材質は /mat に作る",
+          "body": "principledshader::2.0 を geo の中に作ろうとすると「Invalid node type name」で止まる。/mat（マテリアルのネットワーク）の中に作って、material SOP からパスで参照する。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "解像度を上げても画はあまり変わらない",
+          "body": "実験040で、模様の解像度を 256 から 1024 へ4倍にしても、貼った結果の画の変化は 1.04倍にしかならなかった。細かさは elementsize のほうが効く。<strong>まず elementsize で見た目を決めて、解像度は最後に上げる。</strong>",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

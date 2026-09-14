@@ -1,0 +1,215 @@
+{
+  "title": "実験048 — 毛を揺らす",
+  "network": "/obj/hairsim",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "skin",
+      "type": "sphere",
+      "pos": [
+        -1.412,
+        7.078
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 30,
+        "cols": 30
+      }
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        -1.412,
+        5.949
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rest",
+      "type": "rest",
+      "pos": [
+        -1.412,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "roots",
+      "type": "scatter::2.0",
+      "pos": [
+        1.412,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 120
+      }
+    },
+    {
+      "name": "make_guides",
+      "type": "attribwrangle",
+      "pos": [
+        1.412,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nint segs = 10;\nfloat len = 0.6;\nint n = npoints(0);\nfor (int i = 0; i < n; i++) {\n    vector p = point(0, \"P\", i);\n ..."
+      }
+    },
+    {
+      "name": "hairgen",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "density": 50.0,
+        "influenceradius": 0.25,
+        "thickness": 0.012,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "mark_roots",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "\nint pts[] = primpoints(0, @primnum);\nsetpointgroup(0, \"roots\", pts[0], 1);\nsetpointattrib(0, \"stopped\", pts[0], 1);\n"
+      }
+    },
+    {
+      "name": "hair",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 4,
+        "domass": 1,
+        "bendstiffness": 0.05
+      }
+    },
+    {
+      "name": "solve",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "rest",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "roots",
+      "to_input": 0
+    },
+    {
+      "from": "roots",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 1
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 0
+    },
+    {
+      "from": "make_guides",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 1
+    },
+    {
+      "from": "hairgen",
+      "from_output": 0,
+      "to": "mark_roots",
+      "to_input": 0
+    },
+    {
+      "from": "mark_roots",
+      "from_output": 0,
+      "to": "hair",
+      "to_input": 0
+    },
+    {
+      "from": "hair",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 0
+    },
+    {
+      "from": "hair",
+      "from_output": 1,
+      "to": "solve",
+      "to_input": 1
+    }
+  ]
+}

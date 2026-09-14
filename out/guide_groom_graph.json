@@ -1,0 +1,358 @@
+{
+  "title": "手順 — 毛を生やして束ねる",
+  "network": "/obj/groom",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "skin",
+      "type": "sphere",
+      "pos": [
+        -10.59,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "normals",
+      "type": "normal",
+      "pos": [
+        -8.331,
+        4.97
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rest",
+      "type": "rest",
+      "pos": [
+        -3.248,
+        1.958
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "roots",
+      "type": "scatter::2.0",
+      "pos": [
+        -5.507,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 300
+      }
+    },
+    {
+      "name": "make_guides",
+      "type": "attribwrangle",
+      "pos": [
+        -5.507,
+        3.389
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nint segs = 8;\nfloat len = 0.5;\nint n = npoints(0);\nfor (int i = 0; i < n; i++) {\n    vector p = point(0, \"P\", i);\n  ..."
+      }
+    },
+    {
+      "name": "hairgen",
+      "type": "hairgen::2.0",
+      "pos": [
+        -6.919,
+        2.41
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "influenceradius": 0.2,
+        "thickness": 0.008,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "hairgen_default",
+      "type": "hairgen::2.0",
+      "pos": [
+        6.495,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "thickness": 0.008,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "clump",
+      "type": "hairclump::2.0",
+      "pos": [
+        -5.083,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clumpsize": 0.4,
+        "blendremapramp2pos": 1.0,
+        "blendremapramp2value": 1.0,
+        "clumpsizeremapramp2pos": 1.0,
+        "clumpsizeremapramp2value": 1.0,
+        "tightnessremapramp2pos": 1.0,
+        "tightnessremapramp2value": 1.0,
+        "strayamountremapramp2pos": 1.0,
+        "strayamountremapramp2value": 1.0,
+        "strayrateremapramp2pos": 1.0,
+        "strayrateremapramp2value": 1.0,
+        "strayfalloffremapramp2pos": 1.0,
+        "strayfalloffremapramp2value": 1.0,
+        "clumpprofile1value": 1.0,
+        "clumpprofile1interp": 5,
+        "clumpprofile2pos": 0.14254385232925415,
+        "clumpprofile2value": 0.48605579137802124,
+        "clumpprofile2interp": 5,
+        "clumpprofile3pos": 0.5679824352264404,
+        "clumpprofile3value": 0.11952191591262817,
+        "clumpprofile3interp": 5,
+        "clumpprofile4pos": 1.0,
+        "clumpprofile4interp": 5,
+        "iterationsremapramp2pos": 1.0,
+        "iterationsremapramp2value": 1.0,
+        "sizereductionremapramp2pos": 1.0,
+        "sizereductionremapramp2value": 1.0,
+        "goalfeedbackremapramp2pos": 1.0,
+        "goalfeedbackremapramp2value": 1.0,
+        "tightnessreductionremapramp2pos": 1.0,
+        "tightnessreductionremapramp2value": 1.0,
+        "curlampremapramp2pos": 1.0,
+        "curlampremapramp2value": 1.0,
+        "curlampramp2pos": 1.0,
+        "curlampramp2value": 1.0,
+        "curlfreqremapramp2pos": 1.0,
+        "curlfreqremapramp2value": 1.0,
+        "curlfreqramp2pos": 1.0,
+        "curlfreqramp2value": 1.0
+      }
+    },
+    {
+      "name": "tint",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "\nint cid = @clumpid;\nvector c = set(rand(cid * 3 + 0.1), rand(cid * 3 + 1.7), rand(cid * 3 + 2.3));\nint pts[] = primp..."
+      }
+    },
+    {
+      "name": "result",
+      "type": "merge",
+      "pos": [
+        -7.837,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "result_color",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "result_loose",
+      "type": "merge",
+      "pos": [
+        3.248,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "result_default",
+      "type": "merge",
+      "pos": [
+        6.495,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "normals",
+      "to_input": 0
+    },
+    {
+      "from": "normals",
+      "from_output": 0,
+      "to": "rest",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "roots",
+      "to_input": 0
+    },
+    {
+      "from": "roots",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "make_guides",
+      "to_input": 1
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 0
+    },
+    {
+      "from": "make_guides",
+      "from_output": 0,
+      "to": "hairgen",
+      "to_input": 1
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "hairgen_default",
+      "to_input": 0
+    },
+    {
+      "from": "make_guides",
+      "from_output": 0,
+      "to": "hairgen_default",
+      "to_input": 1
+    },
+    {
+      "from": "hairgen",
+      "from_output": 0,
+      "to": "clump",
+      "to_input": 0
+    },
+    {
+      "from": "rest",
+      "from_output": 0,
+      "to": "clump",
+      "to_input": 1
+    },
+    {
+      "from": "clump",
+      "from_output": 0,
+      "to": "tint",
+      "to_input": 0
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "result",
+      "to_input": 0
+    },
+    {
+      "from": "clump",
+      "from_output": 0,
+      "to": "result",
+      "to_input": 1
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "result_color",
+      "to_input": 0
+    },
+    {
+      "from": "tint",
+      "from_output": 0,
+      "to": "result_color",
+      "to_input": 1
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "result_loose",
+      "to_input": 0
+    },
+    {
+      "from": "hairgen",
+      "from_output": 0,
+      "to": "result_loose",
+      "to_input": 1
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "result_default",
+      "to_input": 0
+    },
+    {
+      "from": "hairgen_default",
+      "from_output": 0,
+      "to": "result_default",
+      "to_input": 1
+    }
+  ]
+}
