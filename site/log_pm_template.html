@@ -2632,6 +2632,103 @@
     </article>
 
 
+
+    <!-- ===================== 049 ===================== -->
+    <article class="entry entry--current" id="exp049">
+      <div class="badge">049</div>
+      <div class="body">
+        <span class="chip chip--pm">グルーム</span>
+        <h2>毛に風を当てる — 実験029と同じ「二次の抵抗」だった</h2>
+        <p class="path">/obj/hairwind &nbsp;·&nbsp; 上限のある量は、上限で割ってから比べる</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp029">実験029</a>で、粒に当てる <code>popwind</code> は
+            <strong>二次の抵抗</strong>（dv/dt = a(W−v)²）だと突き止めた。毛の場合はどうか。
+          </p>
+          <p>
+            毛は伸びないので、流される量には上限がある。
+            根元から毛先までの距離は、どんなに強い風でも毛の長さを超えられない。
+            つまり<strong>比例するはずがなく、どこかで頭打ちになる</strong>。
+            問題はその近づき方で、候補を2つ先に立てた。
+          </p>
+          <pre><code>一次の抵抗なら   s = W / (W + k)
+二次の抵抗なら   s = W&sup2; / (W&sup2; + k&sup2;)</code></pre>
+          <p>
+            s は「流され具合」＝（毛先の x − 根元の x）÷ 毛の長さ。
+            風速を5通り変えて測り、k を総当たりで合わせて、どちらによく乗るかを見る。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="049_calm.png" alt="重力で下に垂れた毛"></div>
+            <figcaption>風速 0。<strong>重力だけで下に垂れている。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="049_windy.png" alt="風下へ寝た毛"></div>
+            <figcaption>風速 40。<strong>毛が風下へ寝て、流され具合は 0.950279。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 風速を変えて、流され具合を測る</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>風速</th><th>流され具合</th><th>ばらつき</th><th>毛先の x</th><th>毛先の高さ</th><th>長さの平均</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">-0.004210</td><td class="num hi">0.117582</td><td class="num">0.014733</td><td class="num">-0.579763</td><td class="num">0.599089</td></tr>
+              <tr><td class="num">2</td><td class="num">0.318497</td><td class="num">0.062716</td><td class="num">0.207969</td><td class="num">-0.552739</td><td class="num">0.598813</td></tr>
+              <tr><td class="num">5</td><td class="num">0.736690</td><td class="num">0.081876</td><td class="num">0.457701</td><td class="num">-0.314031</td><td class="num">0.597901</td></tr>
+              <tr><td class="num">10</td><td class="num">0.868605</td><td class="num">0.073819</td><td class="num">0.537896</td><td class="num">-0.139250</td><td class="num">0.599409</td></tr>
+              <tr><td class="num">20</td><td class="num">0.923036</td><td class="num">0.045864</td><td class="num">0.578377</td><td class="num">-0.042630</td><td class="num">0.607896</td></tr>
+              <tr><td class="num">40</td><td class="num hi">0.950279</td><td class="num hi">0.028984</td><td class="num">0.617211</td><td class="num">-0.023428</td><td class="num hi">0.631461</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">2. 2つの式にあてはめる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>風速</th><th>実測</th><th>一次 W/(W+k)</th><th>二次 W²/(W²+k²)</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td class="num hi">0.321354</td><td class="num">0.445434</td><td class="num hi">0.303469</td></tr>
+              <tr><td class="num">5</td><td class="num">0.737794</td><td class="num">0.667557</td><td class="num">0.731403</td></tr>
+              <tr><td class="num">10</td><td class="num">0.869156</td><td class="num">0.800641</td><td class="num">0.915911</td></tr>
+              <tr><td class="num">20</td><td class="num">0.923358</td><td class="num">0.889284</td><td class="num">0.977563</td></tr>
+              <tr><td class="num">40</td><td class="num">0.950487</td><td class="num">0.941398</td><td class="num">0.994295</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. どちらの式が合うか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>式</th><th>k</th><th>残差の二乗和</th><th>1点あたりの平均のずれ</th><th>最大のずれ</th></tr></thead>
+            <tbody>
+              <tr><td>一次 W/(W+k)</td><td class="num">2.49</td><td class="num">0.026267</td><td class="num">0.0725</td><td class="num">0.1241</td></tr>
+              <tr><td>二次 W²/(W²+k²)</td><td class="num">3.03</td><td class="num hi">0.007404</td><td class="num hi">0.0385</td><td class="num hi">0.0542</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          k は 0.01 刻みで総当たりして、残差の二乗和がいちばん小さい値を選んだ。
+          <strong>二次のほうが 3.5倍よく乗る。</strong>
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>二次の抵抗のほうがよく乗る。</strong>残差の二乗和が一次 0.026267 に対して二次 0.007404 で、<span class="hi">3.5倍</span>の差。<a href="#exp029">実験029</a>で粒について突き止めたのと同じ形だった。<strong>粒でも毛でも、Houdini の風は速度の差の二乗で効く。</strong></li>
+          <li><strong>低い風速でいちばんはっきり分かれる。</strong>風速2 の実測 0.321354 に対し、一次は 0.445434 と大きく外し、二次は 0.303469 と近い。<strong>頭打ちに入ったあと（10以上）はどちらも似た値になるので、区別は弱い風のところでつく。</strong></li>
+          <li><strong>それでもぴったりではない。</strong>二次でも最大 0.054 ずれる。<strong>この式で完全に説明できるとは言えない。</strong>毛は粒と違って根元が固定されており、隣の毛ともぶつかる。</li>
+          <li><strong>強い風では毛が伸びる。</strong>長さは風速 0 で 0.599089、40 では 0.631461 と <span class="hi">5.9%</span>。重力だけの<a href="#exp048">実験048</a>では 0.63% だったので、これは風の分。<strong>「拘束は硬いばねであって鎖ではない」が、強い力で目に見える形で出てくる。</strong></li>
+          <li><strong>風は毛をそろえる。</strong>流され具合のばらつきは 0.117582 → 0.028984 と <strong>4分の1</strong>。<strong>強い風の下では、どの毛もほぼ同じ向きになる。</strong></li>
+          <li><strong>毛先は上がってくる。</strong>高さの平均が -0.579763 → -0.023428。横向きの風なのに縦が変わるのは<strong>毛が水平に近づくから</strong>で、重力に逆らって持ち上がっているわけではない。</li>
+          <li><strong>上限のある量は、上限で割ってから比べる。</strong>流される距離そのものではなく「毛の長さで割った値」を見ている。こうすると 0〜1 に収まり、<strong>上限が 1 だとはっきりする。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
