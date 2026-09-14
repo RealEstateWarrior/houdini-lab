@@ -2775,6 +2775,159 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 067 ===================== -->
+    <article class="entry entry--current" id="exp067">
+      <div class="badge">067</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM の地面の摩擦 — 教科書の式に 0.04% で乗る。ただし塊が潰れるまで</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 式が外れたら、外れた理由を測れる量に翻訳する</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp066">実験066</a>で、<code>mpmsolver</code> が既定で y = 0 に地面を持っていると分かった。
+            その地面には <strong>Friction</strong>（既定 1.0）と <strong>Sticky</strong>（既定 0.0）が付いている。
+          </p>
+          <p>
+            1辺 1.0 の塊を横向きに初速 4.0 で投げて、摩擦を 0.0 から 2.0 まで変えた。
+            <strong>高校物理の式は「止まるまでの距離 = 初速² ÷ (2 × 摩擦係数 × 重力)」と言う。</strong>
+            Houdini の Friction は、この式の μ なのだろうか。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="067_slip.png" alt="摩擦0.1で遠くまで滑った跡"></div>
+            <figcaption><strong>摩擦 0.1。</strong><span class="hi">5.204091</span> 進んでも、まだ 2.407933 の速さで動いている。
+              形はほぼ保たれている（横の広がり 1.011225）。<br>
+              40フレーム分を2フレームおきに重ねた。古いほど青く、新しいほど明るい。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="067_grip.png" alt="摩擦2.0で短く止まり潰れた跡"></div>
+            <figcaption><strong>摩擦 2.0。</strong><span class="hi">1.148402</span> で止まる。
+              ただし止まったというより<strong>潰れている</strong>（横の広がり 2.374637、高さ 0.325032）。<br>
+              2枚ともカメラも枠も同じ。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">A. 摩擦を変えて、横に投げた塊がどこまで滑るか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>摩擦</th><th>滑った距離</th><th>最後の vx</th><th>高さ</th><th>横の広がり</th><th>止まった秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num hi">6.499988</td><td class="num">3.999986</td><td class="num">0.502654</td><td class="num hi">0.995852</td><td class="num">止まらず</td></tr>
+              <tr><td class="num">0.1</td><td class="num">5.204091</td><td class="num">2.407933</td><td class="num">0.501820</td><td class="num">1.011225</td><td class="num">止まらず</td></tr>
+              <tr><td class="num">0.25</td><td class="num hi">3.260808</td><td class="num">0.025688</td><td class="num">0.504465</td><td class="num">1.049312</td><td class="num">40フレームでほぼ 0</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1.751774</td><td class="num">-0.008058</td><td class="num">0.355074</td><td class="num">1.929583</td><td class="num">1.0000</td></tr>
+              <tr><td class="num">1.0</td><td class="num">1.194665</td><td class="num">0.000409</td><td class="num">0.340183</td><td class="num">2.138179</td><td class="num">0.8750</td></tr>
+              <tr><td class="num">2.0</td><td class="num hi">1.148402</td><td class="num">-0.006202</td><td class="num">0.325032</td><td class="num hi">2.374637</td><td class="num">0.8333</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          経過時間 1.625 秒。<strong>摩擦 0.0 の距離 6.499988 は、初速 4.0 × 1.625 秒 = 6.5 とのずれが 0.000012。</strong>
+        </p>
+
+        <p class="label">B. 教科書の式「止まるまでの距離 = 初速² ÷ (2 μ g)」に乗るか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>摩擦 μ</th><th>実測の距離</th><th>式の距離</th><th>実測 ÷ 式</th><th>式が言う止まる時間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">6.499988</td><td class="num">∞</td><td class="num muted">—</td><td class="num">∞</td></tr>
+              <tr><td class="num">0.1</td><td class="num">5.204091</td><td class="num">8.154944</td><td class="num muted">まだ止まっていない</td><td class="num">4.077472</td></tr>
+              <tr><td class="num">0.25</td><td class="num">3.260808</td><td class="num">3.261978</td><td class="num hi">0.999642</td><td class="num">1.630989</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1.751774</td><td class="num">1.630989</td><td class="num">1.074056</td><td class="num">0.815494</td></tr>
+              <tr><td class="num">1.0</td><td class="num">1.194665</td><td class="num">0.815494</td><td class="num">1.464958</td><td class="num">0.407747</td></tr>
+              <tr><td class="num">2.0</td><td class="num">1.148402</td><td class="num">0.407747</td><td class="num hi">2.816457</td><td class="num">0.203874</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          摩擦 0.1 は<strong>まだ止まっていない</strong>ので比べられない。
+          式が言う止まるまでの時間は 4.077 秒で、測った 1.625 秒より長い。
+        </p>
+
+        <p class="label">B2. 減速そのものを測る。μ × g と合うか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>摩擦 μ</th><th>vx の減り</th><th>÷ 経過秒 1.625</th><th>μ × g</th><th>実測 ÷ μg</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">0.000014</td><td class="num">0.000009</td><td class="num">0.000000</td><td class="num muted">—</td></tr>
+              <tr><td class="num">0.1</td><td class="num">1.592067</td><td class="num hi">0.979733</td><td class="num">0.981000</td><td class="num hi">0.998709</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          まだ止まっていないものだけを対象にした。<strong>止まったあとの時間が混ざると、平均が薄まって意味を失う。</strong>
+        </p>
+
+        <p class="label">C. 粘着を変える（摩擦は 0.25 に固定）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>粘着</th><th>滑った距離</th><th>最後の vx</th><th>高さ</th><th>横の広がり</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">3.260808</td><td class="num">0.025688</td><td class="num">0.504465</td><td class="num">1.049312</td></tr>
+              <tr><td class="num">0.25</td><td class="num">3.240815</td><td class="num">0.010982</td><td class="num">0.503325</td><td class="num">1.045604</td></tr>
+              <tr><td class="num">0.5</td><td class="num hi">3.240539</td><td class="num hi">0.010746</td><td class="num hi">0.503321</td><td class="num hi">1.045606</td></tr>
+              <tr><td class="num">1.0</td><td class="num hi">3.240539</td><td class="num hi">0.010746</td><td class="num hi">0.503321</td><td class="num hi">1.045606</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>0.5 と 1.0 は6桁まで完全に同じ値。</strong>横に滑るぶんには、粘着はほとんど何もしていない。
+        </p>
+
+        <p class="label">D. 初速を変える（摩擦 0.25・粘着 0）。距離は初速の2乗に比例するか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>初速</th><th>滑った距離</th><th>距離 ÷ 初速²</th><th>式の距離</th><th>実測 ÷ 式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2.0</td><td class="num">0.810910</td><td class="num hi">0.202727</td><td class="num">0.815494</td><td class="num">0.994378</td></tr>
+              <tr><td class="num">3.0</td><td class="num">1.833778</td><td class="num hi">0.203753</td><td class="num">1.834862</td><td class="num">0.999409</td></tr>
+              <tr><td class="num">4.0</td><td class="num">3.260808</td><td class="num hi">0.203801</td><td class="num">3.261978</td><td class="num hi">0.999642</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          比例していれば「距離 ÷ 初速²」が一定になる。<strong>実測は 0.2027 / 0.2038 / 0.2038。</strong>
+        </p>
+
+        <p class="label">E. 落として跳ねさせる。粘着は跳ね返りを止めるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>粘着</th><th>いちばん低い高さ</th><th>戻った高さ</th><th>粘着 0 との比</th><th>40フレームの高さ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">0.310169</td><td class="num hi">0.026922</td><td class="num">1.000000</td><td class="num">0.336345</td></tr>
+              <tr><td class="num">0.25</td><td class="num">0.310169</td><td class="num">0.024870</td><td class="num">0.923792</td><td class="num">0.334213</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.310169</td><td class="num">0.015851</td><td class="num">0.588767</td><td class="num">0.324922</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0.310169</td><td class="num hi">0.013617</td><td class="num hi">0.505791</td><td class="num">0.321006</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          初速 0 で y = 2.5 から落とした。
+          <strong>いちばん低くなるのは4通りとも18フレーム目で、高さも6桁まで同じ 0.310169。</strong>
+          違いは、そこから戻る量にだけ出る。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Ground Friction は、そのままクーロン摩擦の係数だった。</strong>摩擦 0.25 で、式が言う距離 3.261978 に対し実測 3.260808。<strong>ずれは 0.04%。</strong></li>
+          <li><strong>減速も μ × g に合う。</strong>摩擦 0.1 のとき 1.625秒で速さが 1.592067 減り、1秒あたり 0.979733。<strong>μ × g = 0.981 との差は 0.13%。</strong></li>
+          <li><strong>距離は初速の2乗に比例する。</strong>「距離 ÷ 初速²」が 0.202727 / 0.203753 / 0.203801。<strong>ほぼ一定。</strong></li>
+          <li><strong>摩擦 0 なら、まったく減速しない。</strong>1.625秒で速さが減ったのは 0.000014 だけ。</li>
+          <li><strong>ただし摩擦を上げると式から外れる。</strong>0.5 で 7.4%、1.0 で 46.5%、2.0 では <span class="hi">2.8倍</span>。<strong>塊が潰れて広がるからで、もう「滑る箱」ではなくなっている。</strong></li>
+          <li><strong>潰れは数字に出ている。</strong>横の広がりが 0.995852 → 2.374637、高さが 0.502654 → 0.325032。<strong>止まったのではなく、つぶれて広がった。</strong></li>
+          <li><strong>だから、ある所から先は摩擦を上げても距離が縮まない。</strong>1.0 で 1.194665、2.0 で 1.148402。<strong>倍にして 4% しか変わらない。</strong></li>
+          <li><strong>Sticky は横滑りにはほとんど効かない。</strong>0.5 と 1.0 は6桁まで同じ値。</li>
+          <li><strong>Sticky が効くのは「離れるとき」。</strong>落として跳ねさせると、戻る高さが 0.026922 から 0.013617 へ<strong>ちょうど半分</strong>になる。<strong>押しつけている間は何もせず、離れようとした瞬間に引き止める数字である。</strong></li>
+          <li>測り方について。<strong>「式に合う／合わない」で終わらせず、合わなくなったときに何が起きているかを別の量で見た。</strong>距離だけを見ていたら「摩擦が強いと式から外れる」で終わっていたが、<strong>高さと横の広がりを一緒に測っていたので「潰れている」と分かった。</strong>式が外れたら、外れた理由を測れる量に翻訳する。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

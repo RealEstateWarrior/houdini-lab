@@ -406,13 +406,19 @@ DONE = [
      "shots": ["066_calm.png", "066_wind.png"],
      "title": "MPM の風 — 風速だけ上げても何も起きない。抵抗は速さの2乗だった",
      "note": "風は空気抵抗を通してしか効かない。横方向は式と0.06%一致。地面は既定で y=0 にある"},
+    {"no": "067", "anchor": "exp067",
+     "tags": ["MPM", "シミュレーション", "摩擦", "検算"],
+     "log": "log_fx", "hip": "", "thumb": "067_slip.png",
+     "shots": ["067_slip.png", "067_grip.png"],
+     "title": "MPM の地面の摩擦 — 教科書の式に 0.04% で乗る。ただし塊が潰れるまで",
+     "note": "Ground Friction はクーロン摩擦のμそのもの。摩擦が強いと塊が潰れて式から外れる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "067", "title": "MPM の地面の摩擦と粘着",
-     "note": "groundfriction / groundsticky が滑り方をどう変えるか測る"},
+    {"no": "068", "title": "MPM の材質ごとの潰れ方",
+     "note": "materialtype を変えると、摩擦がどこから式を外れるかが動くか"},
 ]
 
 PAGES = [
