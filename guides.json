@@ -1314,6 +1314,129 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "mpm",
+      "title": "塊をぶつけて潰す（MPM）",
+      "lede": "Houdini 21 から入った MPM は、砂・雪・泥・パンのような「固体と流体の中間」を扱うソルバ。物を粒の集まりとして持ち、計算のときだけ格子に移して解く。組むのは box → mpmcontainer → mpmsource → mpmsolver の4ノードだけで、地面すら置かなくていい。ただし黙って無視されるパラメータが多く、気づかないまま何も起きていないことがある。数字はすべて実験061〜067で実測したもの。",
+      "hero": "guide_mpm_5_surface.png",
+      "hero_cap": "完成したところ。粒を面に戻して 1,398点 / 1,398面。広がりは 1.3026 × 0.8072 × 1.2899。",
+      "facts": [
+        [
+          "ノードの数",
+          "6個"
+        ],
+        [
+          "かかる時間",
+          "10分ほど"
+        ],
+        [
+          "1辺 1.0 の箱の粒",
+          "577個"
+        ],
+        [
+          "元になった実験",
+          "実験061〜067"
+        ]
+      ],
+      "exp": "061",
+      "hip": "guide_mpm.hipnc",
+      "steps": [
+        {
+          "title": "落とすものを置く",
+          "node": "box",
+          "body": "1辺 1.0 の箱を y = 3.0 に置く。<strong>ここはただのジオメトリで、MPM 用の特別な準備は要らない。</strong>あとで mpmsource が この中を粒で埋める。",
+          "img": "guide_mpm_1_box.png",
+          "cap": "8点 / 6面。まだ普通の箱。"
+        },
+        {
+          "title": "計算する範囲を決める",
+          "node": "mpmcontainer",
+          "body": "MPM は粒を格子に移して解くので、<strong>その格子が届く範囲を先に決める必要がある。</strong>Size と Center で箱を置く。いちばん大事なのは <code>particlesep</code>（粒の間隔）で、これが細かさを決める。0.12 なら 1辺 1.0 の箱が 577粒になる。<strong>この範囲は他のノードにも配線でつなぐ。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "形を粒に変える",
+          "node": "mpmsource",
+          "body": "入力は <strong>0 = 形、1 = さっきの範囲</strong>。箱の中が粒で埋まる。粒には <code>Je</code> と <code>Jp</code>（体積がどれだけ変わったか）や <code>v</code>（速度）が付く。横に投げたいときは <code>initialvelocityx</code> に初速を入れる。",
+          "img": "guide_mpm_2_particles.png",
+          "cap": "577粒。広がりは 0.9989 × 0.9998 × 0.9992 で、まだ立方体のまま。"
+        },
+        {
+          "title": "解かせる",
+          "node": "mpmsolver",
+          "body": "入力は <strong>0 = 源 / 1 = ぶつかるもの / 2 = 範囲</strong>。コライダが要らないなら 1 は空のままでよい。<strong>地面は最初から y = 0 にある</strong>ので、何も置かなくても粒は床で止まる（実験066）。あとはフレームを進めるだけ。",
+          "img": "guide_mpm_3_hit.png",
+          "cap": "30フレーム目。広がりは 1.0902 × 0.6070 × 1.0817。縦に潰れて横に広がっている。"
+        },
+        {
+          "title": "材質を選ぶ",
+          "node": "materialtype",
+          "body": "mpmsource の <code>materialtype</code> が本体で、Elastic / Chunky / Liquid / Viscous / Sandy の5つ。<strong>既定は Chunky。</strong>同じ落とし方でも結果はまるで違い、30フレーム目の高さは Elastic が 1.0462（跳ね返って形が戻っている）、Chunky が 0.6070（潰れたまま）。",
+          "img": "guide_mpm_8_elastic.png",
+          "cap": "Elastic。同じ30フレーム目でも跳ね返って空中にいる。下の Chunky と枠は同じ。"
+        },
+        {
+          "title": "地面の摩擦を決める",
+          "node": "groundfriction",
+          "body": "mpmsolver の Ground Plane にある <code>groundfriction</code>（既定 1.0）は、<strong>高校物理のクーロン摩擦の μ そのもの</strong>。横に初速 4.0 で投げたとき、止まるまでの距離は 初速² ÷ (2 μ g) の式に <strong>0.04% で乗る</strong>（実験067）。隣の <code>groundsticky</code> は横滑りにはほとんど効かず、跳ね返るときにだけ働く。",
+          "img": "guide_mpm_9_chunky.png",
+          "cap": "既定の Chunky。上の Elastic と同じ枠・同じ30フレーム目。"
+        },
+        {
+          "title": "粒の間隔を詰める",
+          "node": "particlesep",
+          "body": "結果を細かくしたいときは、substep より先にここを疑う。<strong>粒を 24.7倍（118個 → 2,916個）に増やしても、時間は 3.73倍にしかならない</strong>（実験065）。substep のほうは 16倍にすると時間が 25.5倍かかるうえ、高さはほとんど動かない（実験064）。",
+          "img": "guide_mpm_7_fine.png",
+          "cap": "間隔 0.07 で 2,916粒。広がり 1.0735 × 0.5957 × 1.0723。"
+        },
+        {
+          "title": "粒を面に戻す",
+          "node": "mpmsurface",
+          "body": "レンダに回すには面が要る。mpmsurface の <strong><code>outputtype</code> を Polygon Mesh に変える</strong>（既定は Surface VDB）。出てくるのは polysoup なので、<code>convert</code> で Polygon に直す。<strong>面にすると体積が 27% 太る。</strong>膨らむ厚みは粒の間隔の 0.4倍（実験063）。",
+          "img": "guide_mpm_5_surface.png",
+          "cap": "1,398点 / 1,398面。広がり 1.3026 × 0.8072 × 1.2899。粒のときより一回り大きい。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "materialpreset は、スクリプトから変えても何も起きない",
+          "body": "Material Preset のメニューを10通り全部試して、結果は<strong>9桁まで完全に同じだった</strong>。エラーも警告も出ない。実際に効くのは <code>materialtype</code>のほうで、こちらを変えると結果がはっきり変わる（実験062）。理由も確かめた。この項目には <code>recipeutils.setPresetMenu</code> という<strong>コールバックが付いていて、UI で触ったときにしか走らない</strong>。スクリプトから <code>parm().set()</code> しても、値が入るだけでコールバックは走らない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "地面は最初から置いてある",
+          "body": "mpmsolver の Ground Plane は <code>groundactive</code> が<strong>既定で 1</strong>。コライダを一つも置いていないのに、粒が y ≈ 0.3 で止まって混乱した。<strong>自由落下を測りたいときは、これを切る</strong>（実験066）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "mpmsurface の既定は面ではない",
+          "body": "そのままつなぐと点が2個しか出てこない。<code>outputtype</code> の既定が <strong>Surface VDB</strong> だから。Polygon Mesh に変えても、出てくるのは <strong>プリミティブ1個の polysoup</strong> で、体積を測ると 0.06 のような出鱈目な値になる。<code>convert</code> で Polygon に直して初めて正しく測れる（実験063）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "風速だけ上げても、粒は流れない",
+          "body": "mpmsolver の Wind Velocity を 0 / 2 / 5 / 10 と上げても、<strong>位置も速度も9桁まで完全に同じ</strong>だった。風は空気抵抗を通してしか効かないので、<code>airdrag</code> が既定の 0 のままだと風速はただの飾り。その airdrag は<strong>速さの2乗</strong>に比例する抵抗で、しかも3次元の相対速度で決まるため、<strong>横風が落ちる速さまで変える</strong>（実験066）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "substep を上げるのは、たいてい損",
+          "body": "substep を 1 から 16 にすると時間が <strong>25.5倍</strong>かかるのに、高さは 0.2998〜0.3048 とほとんど動かない。動くのは横の広がりだけで、それも 8 で落ち着く（実験064）。一方で粒を 24.7倍にすると、時間は 3.73倍で済んで高さが 23% 動く（実験065）。<strong>迷ったら粒のほうを細かくする。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "粒の数は保たれるが、体積は保たれない",
+          "body": "粒の数は全フレームで幅 0（実験061）。ところが体積は材質しだいで大きく動き、<strong>砂は 16% 膨らみ、既定の塊は 31% 縮む</strong>（実験062）。砂は見た目にも極端で、同じ箱が <strong>3.4366 × 0.2348 × 3.5088</strong> まで広がる。「体積が保たれているか」を検算に使うと、ここで足をすくわれる。",
+          "img": "guide_mpm_4_sandy.png",
+          "cap": "Sandy。他の材質より大きく広がるので、この1枚だけ枠を合わせ直している。"
+        }
+      ]
     }
   ]
 }

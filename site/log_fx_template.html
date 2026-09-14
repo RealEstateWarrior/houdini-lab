@@ -2315,6 +2315,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
           <li><strong>広がり方は 4.4倍の開きがある。</strong>Elastic 1.045、Liquid 4.604。<strong>同じ形を同じ高さから落としているのに、着いたあとがまったく違う。</strong></li>
           <li><strong>Elastic だけは落ちきらない。</strong>高さの平均 2.459551。<strong>跳ね返って空中にいる。</strong>ほかの4種は 0.03〜0.30 まで落ちている。</li>
           <li><strong>そして落とし穴。<code>materialpreset</code> はスクリプトから入れても効かない。</strong>10種すべてで小数点以下9桁までまったく同じ。<strong>エラーも警告も出ない。</strong>実際に効くのは <code>materialtype</code>。</li>
+          <li><strong>【追記・実験067のとき】理由が分かった。</strong><code>materialpreset</code> には <code>recipeutils.setPresetMenu</code> というコールバックが付いていて、<strong>UI で触ったときにしか走らない</strong>。スクリプトから <code>parm().set()</code> しても値が入るだけで、コールバックは走らない。<strong>「スクリプトから効かない<button class="term" data-term="パラメータ">パラメータ</button>」を見分けるには、<code>parmTemplate().scriptCallback()</code> が空かどうかを見ればよい。</strong></li>
           <li><strong>この形の罠は4度目。</strong><a href="#exp044">実験044</a>のガイド、<a href="#exp041">実験041</a>の bump、<a href="#exp050">実験050</a>の可変長の入力、そして今回。<strong>見分け方はいつも同じで、値を大きく変えて出力が動くかを見る。</strong></li>
         </ul>
       </div>
