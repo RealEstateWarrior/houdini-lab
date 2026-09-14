@@ -280,13 +280,18 @@ DONE = [
      "shots": ["041_compare.png"],
      "title": "凸凹の付け方3通り — 輪郭を見れば、どれが本当に形を変えたか分かる",
      "note": "bumpは細かさ1.77倍でも輪郭0.999倍。displacementは点を動かさず輪郭を変える"},
+    {"no": "042", "anchor": "exp042", "tags": ["グルーム", "毛", "複製"],
+     "log": "log_pm", "hip": "042_groom.hipnc", "thumb": "042_thick.png",
+     "shots": ["042_thin.png", "042_thick.png"],
+     "title": "毛を生やす — density は本数ではなく「面積あたりの本数」だった",
+     "note": "100を入れて1,249本。面積12.53で割ると99.678。length は純粋な倍率"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "042", "title": "まだ触っていない分野に進む",
-     "note": "地形・テクスチャは034〜041で一区切り"},
+    {"no": "043", "title": "毛を束ねる（hairclump）",
+     "note": "042の毛はばらばら。束にすると見え方がどう変わるか測る"},
 ]
 
 PAGES = [

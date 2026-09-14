@@ -1867,6 +1867,85 @@
     </article>
 
 
+
+    <!-- ===================== 042 ===================== -->
+    <article class="entry entry--current" id="exp042">
+      <div class="badge">042</div>
+      <div class="body">
+        <span class="chip chip--pm">グルーム</span>
+        <h2>毛を生やす — density は本数ではなく「面積あたりの本数」だった</h2>
+        <p class="path">/obj/groom &nbsp;·&nbsp; 新しい分野。guide 系のノードだけで26種</p>
+
+        <div class="prose">
+          <p>
+            新しい分野に入る。Houdini には毛（グルーム）の仕組みがあり、
+            <code>guide</code> で始まる<button class="term" data-term="ノード">ノード</button>だけで26種ある。
+            ただし最初の1本は <code>fur</code> で足りる。面を渡すと毛が生えてくる。
+          </p>
+          <p>
+            <strong>最初につまずいたのは、どのノードが毛を作るのかだった。</strong>
+            名前からすると <code>guideinit</code> が作りそうに見えるが、
+            これは<strong>既にあるガイドに風や持ち上がりを付ける整え役</strong>で、
+            面だけ渡すと「Not enough sources specified.」で止まる。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="042_thin.png" alt="まばらに毛が生えた球"></div>
+            <figcaption><code>density</code> 60。<strong>毛がまばらで、土台の球が見える。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="042_thick.png" alt="びっしりと毛が生えた球"></div>
+            <figcaption><code>density</code> 600。同じ球・同じカメラ。<strong>密度だけが違う。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. density は本数をどう決めるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>density</th><th>生えた本数</th><th>本数 ÷ density</th><th>面積あたりの本数</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">50</td><td class="num">612</td><td class="num">12.240</td><td class="num hi">48.841</td><td class="num">0.01秒</td></tr>
+              <tr><td class="num">100</td><td class="num">1,249</td><td class="num">12.490</td><td class="num hi">99.678</td><td class="num">0.01秒</td></tr>
+              <tr><td class="num">200</td><td class="num">2,498</td><td class="num">12.490</td><td class="num hi">199.355</td><td class="num">0.01秒</td></tr>
+              <tr><td class="num">400</td><td class="num">5,050</td><td class="num">12.625</td><td class="num hi">403.020</td><td class="num">0.01秒</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          土台の球の面積は <strong>12.53039</strong>。
+          本数をこれで割ると density とほぼ一致する。
+          <strong>density は「面積1あたりに何本生やすか」で、土台を大きくすれば本数も増える。</strong>
+        </p>
+
+        <p class="label">2. length は純粋な倍率か（実験006・034と同じ問い）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>length</th><th>本数</th><th>長さの平均</th><th>平均 ÷ length</th><th>長さのばらつき</th><th>毛1本の点数</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.125</td><td class="num">1,249</td><td class="num">0.12476</td><td class="num hi">0.99808</td><td class="num">0.00012</td><td class="num">5.00</td></tr>
+              <tr><td class="num">0.25</td><td class="num">1,249</td><td class="num">0.24952</td><td class="num hi">0.99808</td><td class="num">0.00023</td><td class="num">5.00</td></tr>
+              <tr><td class="num">0.50</td><td class="num">1,249</td><td class="num">0.49904</td><td class="num hi">0.99808</td><td class="num">0.00047</td><td class="num">5.00</td></tr>
+              <tr><td class="num">1.00</td><td class="num">1,249</td><td class="num">0.99808</td><td class="num hi">0.99808</td><td class="num">0.00094</td><td class="num">5.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>density は本数ではなく「面積あたりの本数」だった。</strong>100 を入れて 1,249本。面積 12.53039 で割ると <span class="hi">99.678</span>。<strong>土台を大きくすれば、同じ density でも本数は増える。</strong></li>
+          <li><strong>比は4通りでほぼ一定。</strong>12.240 / 12.490 / 12.490 / 12.625。ばらつきが残るのは、ばらまきに乱数が入るため。<strong>density を2倍にすれば本数も2倍。</strong></li>
+          <li><strong><code>length</code> は純粋な倍率だった。</strong>4通りで「平均÷length」が <span class="hi">0.99808</span> と小数点以下5桁まで同じ。<a href="#exp006">実験006</a>の <code>height</code>、<a href="#exp034">実験034</a>の <code>amp</code> と同じ性質。</li>
+          <li><strong>ただし 1.0 ではなく 0.99808。</strong>指定より 0.19% 短い。4通りすべて同じ値なので誤差ではない。理由は<strong>確かめていないので断定しない</strong>。</li>
+          <li><strong>毛1本は5点。</strong>どの length でも 5点＝4区間で、<strong>長くしても分割は増えない</strong>。長い毛をなめらかに曲げたいなら点数を別に増やす。</li>
+          <li><strong>毛は2段構えで作る。</strong>ガイド（案内役、数百本）で形を決め、そこから毛（数万本）に増やす。<code>fur</code> はこの2段を1つにまとめたノードで、最初の1本にはこれでよい。<strong>26種のノードは、その2段それぞれを細かく調整するためにある。</strong></li>
+          <li>面の向き（<button class="term" data-term="N">N</button>）は必要だった。<code>normal</code> を挟んでいる。<a href="#exp030">実験030</a>で確かめたとおり、N が無いと向きが決まらない。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
