@@ -2517,6 +2517,105 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 065 ===================== -->
+    <article class="entry entry--current" id="exp065">
+      <div class="badge">065</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM の粒を細かくする — 刻みより粒のほうが効くし、しかも安い</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 比べたいなら、測り方をそろえてから測る</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp064">実験064</a>では「1フレームを何回に分けるか」（substep）を変えた。
+            今回は<strong>「物を何粒で表すか」（粒の間隔）</strong>を変える。
+          </p>
+          <p>
+            <strong>どちらも「細かくすれば正しくなる」はずの数字だが、効き方は同じだろうか。</strong>
+            実験064とまったく同じ形の実験を、軸だけ変えて走らせる。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="065_coarse.png" alt="118粒の結果"></div>
+            <figcaption>間隔 0.20。<strong>118粒、0.64秒。</strong>高さの平均 0.357377。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="065_fine.png" alt="2916粒の結果"></div>
+            <figcaption>間隔 0.07。<strong>2,916粒、2.38秒。</strong>高さの平均 0.275207。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 粒の間隔を変える</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔</th><th>粒</th><th>高さの平均</th><th>いちばん上</th><th>広がり</th><th>Je × Jp</th><th>かかった時間</th><th>粒1つあたり</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.20</td><td class="num">118</td><td class="num hi">0.357377</td><td class="num">0.679947</td><td class="num">1.08755</td><td class="num hi">0.733703</td><td class="num">0.64 秒</td><td class="num hi">5.411 ms</td></tr>
+              <tr><td class="num">0.16</td><td class="num">250</td><td class="num hi">0.332527</td><td class="num">0.699142</td><td class="num">1.07179</td><td class="num">0.712208</td><td class="num">0.96 秒</td><td class="num">3.858 ms</td></tr>
+              <tr><td class="num">0.12</td><td class="num">577</td><td class="num hi">0.303183</td><td class="num">0.663563</td><td class="num">1.09055</td><td class="num">0.689148</td><td class="num">1.09 秒</td><td class="num">1.896 ms</td></tr>
+              <tr><td class="num">0.10</td><td class="num">985</td><td class="num hi">0.290995</td><td class="num">0.648743</td><td class="num">1.09659</td><td class="num">0.681013</td><td class="num">1.17 秒</td><td class="num">1.192 ms</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1,919</td><td class="num hi">0.279317</td><td class="num">0.636713</td><td class="num">1.09498</td><td class="num">0.658524</td><td class="num">1.64 秒</td><td class="num">0.854 ms</td></tr>
+              <tr><td class="num">0.07</td><td class="num">2,916</td><td class="num hi">0.275207</td><td class="num">0.629527</td><td class="num">1.07350</td><td class="num hi">0.649174</td><td class="num">2.38 秒</td><td class="num hi">0.817 ms</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>高さが 0.357377 から 0.275207 へ、23% 一本調子に下がる。</strong>
+          substep のときは 5通りで 0.2998〜0.3048 とほとんど動かなかった。
+        </p>
+
+        <p class="label">2. いちばん細かい 0.07 を正として、どれだけずれるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔</th><th>高さのずれ</th><th>広がりのずれ</th><th>Je × Jp のずれ</th><th>時間 ÷ 0.07の時間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.20</td><td class="num hi">0.082171</td><td class="num">0.014051</td><td class="num hi">0.084529</td><td class="num">0.268</td></tr>
+              <tr><td class="num">0.16</td><td class="num">0.057320</td><td class="num">0.001716</td><td class="num">0.063033</td><td class="num">0.405</td></tr>
+              <tr><td class="num">0.12</td><td class="num">0.027977</td><td class="num">0.017053</td><td class="num">0.039974</td><td class="num">0.459</td></tr>
+              <tr><td class="num">0.10</td><td class="num">0.015788</td><td class="num">0.023091</td><td class="num">0.031839</td><td class="num">0.493</td></tr>
+              <tr><td class="num">0.08</td><td class="num hi">0.004110</td><td class="num">0.021480</td><td class="num hi">0.009350</td><td class="num">0.687</td></tr>
+              <tr><td class="num">0.07</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">1.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 粒の数と時間の関係</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔</th><th>粒</th><th>粒の比</th><th>時間の比</th><th>時間の比 ÷ 粒の比</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.20</td><td class="num">118</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.000</td></tr>
+              <tr><td class="num">0.16</td><td class="num">250</td><td class="num">2.12</td><td class="num">1.51</td><td class="num">0.713</td></tr>
+              <tr><td class="num">0.12</td><td class="num">577</td><td class="num">4.89</td><td class="num">1.71</td><td class="num">0.350</td></tr>
+              <tr><td class="num">0.10</td><td class="num">985</td><td class="num">8.35</td><td class="num">1.84</td><td class="num">0.220</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1,919</td><td class="num">16.26</td><td class="num">2.57</td><td class="num">0.158</td></tr>
+              <tr><td class="num">0.07</td><td class="num">2,916</td><td class="num hi">24.71</td><td class="num hi">3.73</td><td class="num hi">0.151</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>粒を 24.7倍に増やしても、時間は 3.73倍にしかならない。</strong>
+          substep は 16倍で 25.5倍だった。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>高さは、粒を細かくすると 23% 動く。</strong>0.357377 → 0.275207。しかも一本調子。<strong>substep ではほとんど動かなかったので、まったく逆の結果。</strong></li>
+          <li><strong>体積比も 12% 動く。</strong>0.733703 → 0.649174。<strong>粗い粒ほど「縮んでいない」ように見える。</strong></li>
+          <li><strong>時間の効率がまるで違う。</strong>粒を <span class="hi">24.7倍</span>に増やしても時間は <span class="hi">3.73倍</span>。substep は 16倍で 25.5倍だった。</li>
+          <li><strong>粒1つあたりの時間は 6.6分の1 に下がる。</strong>5.411ms → 0.817ms。<strong>粗いほど、1粒に払う固定費の割合が大きい。</strong></li>
+          <li><strong>だから、迷ったら粒を細かくするほうが得。</strong><strong>substep 16 は 25.5倍の時間で高さが動かないが、粒 24.7倍は 3.73倍の時間で高さが 23% 動く。</strong></li>
+          <li><strong>ただし広がりだけは素直でない。</strong>上下して、どこへ落ち着くのか見えない。<strong>substep のときは 8 以上できれいに落ち着いたので、こちらも逆。</strong></li>
+          <li><strong>つまり「細かくすれば正しくなる」は、量ごとに別々に確かめるしかない。</strong>高さは粒で決まり、広がりは刻みで決まる。<strong>ひとつの数字を見て「収束した」と言うと、別の数字で外れる。</strong></li>
+          <li>測り方について。<strong>実験064と同じ形の実験を、軸だけ変えて走らせた。</strong>同じ物差しで測ってあるから直接比べられる。<strong>比べたいなら、測り方をそろえてから測る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
