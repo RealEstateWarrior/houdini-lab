@@ -12,7 +12,7 @@
   <header class="masthead">
     <p class="eyebrow">Procedural Modeling / hython 21.0.700</p>
     <h1>実験ログ — モデリング編</h1>
-    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜038（地形とレンダ）。数字はすべて実行して得た値で、推測は含まない。</p>
+    <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
       <div><dt>実験</dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
@@ -1609,6 +1609,122 @@
           <li><strong>Karma は OpenGL の 2.5倍の時間。</strong>実験018・024で煙を撮ったときは5倍前後だったので、<strong>面だけの地形は<button class="term" data-term="ボリューム">ボリューム</button>より差が小さい</strong>。</li>
           <li><strong>ばらつき（明暗の差）は Karma のほうが小さい。</strong>44.51 対 28.04 で 0.63倍。<button class="term" data-term="dome light">ドームライト</button>が影を埋めるためで、<strong>「本番のレンダのほうがコントラストが強い」とは限らない</strong>。</li>
           <li><strong>ライトは題材ごとに決め直す。</strong><a href="#exp024">実験024</a>で煙に合わせた設定をそのまま地形に使うと飛ぶ。<strong>同じ設定を使い回せるのは、同じ種類のものを撮るときだけ。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 039 ===================== -->
+    <article class="entry entry--current" id="exp039">
+      <div class="badge">039</div>
+      <div class="body">
+        <span class="chip chip--pm">テクスチャ</span>
+        <h2>Copernicus でテクスチャを作る — 細かさは解像度をどう食うのか</h2>
+        <p class="path">/obj/cops &nbsp;·&nbsp; 形ではなく画を作る。専用ノードが262種</p>
+
+        <div class="prose">
+          <p>
+            ここまではすべて形（<button class="term" data-term="ジオメトリ">ジオメトリ</button>）の話だった。
+            Houdini には画そのものを作る仕組みもある。<strong>Copernicus</strong>（COP）で、
+            専用の<button class="term" data-term="ノード">ノード</button>が262種ある。
+            地形に貼る模様や汚し、マスクを、外で作って読み込むのではなく
+            Houdini の中で手続きとして作れる。
+          </p>
+          <p>
+            細かさの指標については、<a href="#exp007">実験007</a>と同じ問いを投げた。
+            あのときは地形の勾配が解像度とともに増え続け、
+            「解像度によらない量」にはならなかった。<strong>画でも同じことが起きるのか。</strong>
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="039_elements.png" alt="うねりの大きさを4段階変えたノイズ画像を横に並べたもの"></div>
+            <figcaption><code>elementsize</code> 0.05 / 0.10 / 0.20 / 0.40。<strong>数字が大きいほど、うねりが大きくなる。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="039_roughs.png" alt="細かさを4段階変えたノイズ画像を横に並べたもの"></div>
+            <figcaption><code>rough</code> 0.0 / 0.5 / 0.75 / 1.0。<strong>1.0 では砂嵐に近くなる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 解像度はどこで決まるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>設定</th><th>書き出した大きさ</th><th>階調の数</th></tr></thead>
+            <tbody>
+              <tr><td>setres オフ（既定）</td><td class="num hi">1024×1024</td><td class="num">210</td></tr>
+              <tr><td>setres オン / 256</td><td class="num">256×256</td><td class="num">206</td></tr>
+              <tr><td>setres オン / 512</td><td class="num">512×512</td><td class="num">215</td></tr>
+              <tr><td>setres オン / 1024</td><td class="num">1024×1024</td><td class="num">210</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <code>fractalnoise</code> に解像度の欄は<strong>無い</strong>。決めているのは
+          <code>copnet</code> の <code>res1</code> / <code>res2</code>。
+          しかも<strong>「解像度を指定する」は既定でオフなのに、値は効いている。</strong>
+        </p>
+
+        <p class="label">2. うねりの大きさ（elementsize）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>elementsize</th><th>明るさ</th><th>ばらつき</th><th>細かさ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td class="num">128.00</td><td class="num">20.69</td><td class="num hi">1.7913</td></tr>
+              <tr><td class="num">0.10</td><td class="num">129.22</td><td class="num">19.79</td><td class="num">1.0266</td></tr>
+              <tr><td class="num">0.20</td><td class="num">128.43</td><td class="num">16.94</td><td class="num">0.5752</td></tr>
+              <tr><td class="num">0.40</td><td class="num">127.50</td><td class="num">24.88</td><td class="num">0.3657</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 細かさ（rough）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>rough</th><th>明るさ</th><th>ばらつき</th><th>細かさ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">129.28</td><td class="num">16.92</td><td class="num">0.4020</td></tr>
+              <tr><td class="num">0.25</td><td class="num">129.23</td><td class="num">17.58</td><td class="num">0.4841</td></tr>
+              <tr><td class="num">0.50</td><td class="num">129.22</td><td class="num">19.79</td><td class="num">1.0266</td></tr>
+              <tr><td class="num">0.75</td><td class="num">129.25</td><td class="num">25.72</td><td class="num">5.6503</td></tr>
+              <tr><td class="num">1.0</td><td class="num">129.29</td><td class="num hi">49.17</td><td class="num hi">32.9725</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          0.0 から 1.0 で細かさが <strong>82倍</strong>。0.5 までは穏やかで、0.75 から一気に立ち上がる。
+          <strong>ただし、ばらつき（濃淡の強さ）も 16.92 → 49.17 と約2.9倍になる。</strong>
+        </p>
+
+        <p class="label">4. 細かさは解像度によらない量になるか（実験007と同じ問い）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>解像度</th><th>細かさ</th><th>前の行との比</th><th>細かさ×解像度</th><th>前の行との比</th><th>ばらつき</th></tr></thead>
+            <tbody>
+              <tr><td class="num">128</td><td class="num">6.4940</td><td class="muted">—</td><td class="num">831.2</td><td class="muted">—</td><td class="num">22.77</td></tr>
+              <tr><td class="num">256</td><td class="num">3.6914</td><td class="num">0.568</td><td class="num">945.0</td><td class="num">1.137</td><td class="num">22.76</td></tr>
+              <tr><td class="num">512</td><td class="num">2.0280</td><td class="num">0.549</td><td class="num">1038.4</td><td class="num">1.099</td><td class="num">22.76</td></tr>
+              <tr><td class="num">1024</td><td class="num">1.0266</td><td class="num">0.506</td><td class="num">1051.3</td><td class="num hi">1.012</td><td class="num">19.79</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          画素どうしの差をそのまま見ると、解像度を2倍にするたび約半分になる。
+          <strong>模様が変わったのではなく、画素が細かくなって隣が近づいただけ。</strong>
+          解像度を掛けて「画全体を1とした長さあたりの差」に直すと、
+          <strong>増えて頭打ちになる</strong>——実験007の勾配とまったく同じ形になる。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>解像度は<button class="term" data-term="ノイズ">ノイズ</button>ではなく<button class="term" data-term="ネットワーク">ネットワーク</button>の側で決まる。</strong><code>fractalnoise</code> に欄は無い。<strong>形（<button class="term" data-term="SOP">SOP</button>）の感覚で「そのノードに設定がある」と探すと見つからない。</strong></li>
+          <li><strong>「解像度を指定する」は既定でオフなのに、値は効いている。</strong>オフのままでも 1024×1024 で出てくる。<span class="hi">オフ＝無効ではない。</span></li>
+          <li><strong>細かさは解像度を掛けて初めて比べられる。</strong>831.2 → 945.0 → 1038.4 → 1051.3 で、比が 1.137 → 1.099 → <span class="hi">1.012</span> と頭打ちになる。<strong>頭打ちになったところが、その模様に足りている解像度。</strong>elementsize 0.10 なら 1024 で足りている。</li>
+          <li><strong>ばらつきは解像度によらずほぼ一定。</strong>22.77 / 22.76 / 22.76 / 19.79。<strong>「どれだけ濃淡があるか」は変わらないが、「どれだけ細かいか」は変わる。</strong><a href="#exp007">実験007</a>で「高さの平均は早く収束するのに勾配は伸び続ける」と測ったのと同じ関係。</li>
+          <li><strong><code>rough</code> は明るさのばらつきも変えてしまう。</strong><a href="#exp004">実験004</a>で <button class="term" data-term="mountain">mountain</button> の <code>rough</code> を測ったときは「振幅を変えずに形の性質だけを変える」だったが、<strong>COP のノイズでは同じ名前でも振る舞いが違う</strong>。名前が同じでも、別のノードなら測り直す。</li>
+          <li><strong>書き出した階調は 206〜215。</strong>8ビットPNG の上限 256 をほぼ使い切っている。ただし値は 0〜255 に丸められるので、<strong>マスクとして精度が要るなら EXR など小数のまま持てる形式にする。</strong></li>
         </ul>
       </div>
     </article>

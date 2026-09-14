@@ -1,0 +1,44 @@
+{
+  "title": "実験039 — Copernicus でテクスチャを作る",
+  "network": "/obj/cops",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "noise",
+      "type": "fractalnoise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "folder1": 1,
+        "folder2": 1,
+        "folder0": 1
+      }
+    },
+    {
+      "name": "out",
+      "type": "rop_image",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {},
+      "params": {
+        "outputaovs": 1,
+        "aov1": "C"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "noise",
+      "from_output": 0,
+      "to": "out",
+      "to_input": 0
+    }
+  ]
+}
