@@ -330,13 +330,18 @@ DONE = [
      "shots": ["051_rest.png", "051_bent.png"],
      "title": "骨を作って動かす — rotate と prerotate を取り違えると、関節ごと飛んでいく",
      "note": "式とのずれ 6e-8。rotate だと 90度で 1.41 ずれ、回した関節まで動く"},
+    {"no": "052", "anchor": "exp052", "tags": ["APEX", "リグ", "KineFX", "検算", "体積"],
+     "log": "log_pm", "hip": "052_skin.hipnc", "thumb": "052_bent.png",
+     "shots": ["052_rest.png", "052_bent.png", "052_sharp.png"],
+     "title": "骨に肉を付ける — 曲げると痩せる。減り方は (1 − cos θ) にぴたり乗った",
+     "note": "90度で体積27.13%減。減り = 27.1284% × (1 − cos θ)。骨1本なら0.85%"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "052", "title": "骨に肉を付ける",
-     "note": "kinefx::jointdeform で、骨を動かしたときに皮が付いてくるか測る"},
+    {"no": "053", "title": "痩せない曲げ方を探す",
+     "note": "dual quaternion など別のやり方で、体積の減りがどう変わるか測る"},
 ]
 
 PAGES = [
