@@ -1,0 +1,86 @@
+[
+  {
+    "frac": 0.1,
+    "distance": 0.8,
+    "default": 3.4358512985374824e-06,
+    "solver1": 6.520658519222706e-07,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.2,
+    "distance": 1.6,
+    "default": 6.125740661486544e-05,
+    "solver1": 7.847940922050487e-07,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.3,
+    "distance": 2.4,
+    "default": 0.0001518352822004188,
+    "solver1": 4.945232823553819e-06,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.4,
+    "distance": 3.2,
+    "default": 5.17131324505936e-05,
+    "solver1": 2.7079020647568263e-06,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.5,
+    "distance": 4.0,
+    "default": 2.4089761006626397e-05,
+    "solver1": 4.583990750700182e-06,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.6,
+    "distance": 4.8,
+    "default": 0.00013585228877894596,
+    "solver1": 8.03433541583799e-06,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.7,
+    "distance": 5.6,
+    "default": 0.00028693727751737043,
+    "solver1": 1.4048418295476808e-05,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.8,
+    "distance": 6.4,
+    "default": 0.00036978481289507385,
+    "solver1": 0.00014000425680813872,
+    "better": "solver=1"
+  },
+  {
+    "frac": 0.9,
+    "distance": 7.2,
+    "default": 0.00026169898374195605,
+    "solver1": 0.0014052456944440301,
+    "better": "既定"
+  },
+  {
+    "frac": 0.95,
+    "distance": 7.6,
+    "default": 0.0004065295358084603,
+    "solver1": 0.004909842169860047,
+    "better": "既定"
+  },
+  {
+    "frac": 0.99,
+    "distance": 7.92,
+    "default": 0.0005525896004873022,
+    "solver1": 0.044165595601828346,
+    "better": "既定"
+  },
+  {
+    "frac": 1.0,
+    "distance": 8.0,
+    "default": 0.0014441183015795013,
+    "solver1": 0.08348317084304611,
+    "better": "既定"
+  }
+]

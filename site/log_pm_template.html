@@ -3421,6 +3421,115 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
     </article>
 
 
+
+    <!-- ===================== 056 ===================== -->
+    <article class="entry entry--current" id="exp056">
+      <div class="badge">056</div>
+      <div class="body">
+        <span class="chip chip--tool">APEX / リグ</span>
+        <h2>長い鎖の IK — 式は同じ。ただし解き方は2種類あり、得意な範囲が逆</h2>
+        <p class="path">apex::Graph / rig::MultiBoneIKFromArray &nbsp;·&nbsp; 境目は「届く距離の8割」</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp055">実験055</a>では関節3つ（骨2本）の IK を測り、
+            <strong>届く距離までは誤差ゼロ、越えたら d − 2</strong> という式にぴたり乗った。
+            関節が増えたらどうなるか。
+          </p>
+          <pre><code>誤差 = max(0, 目標までの距離 − 骨の本数)</code></pre>
+          <p>
+            関節を 3 / 5 / 9 / 17 と変え、届く距離の 0.3倍から 1.5倍まで目標を置いて測る。
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="056_short.png" alt="関節5個の鎖"></div>
+            <figcaption>関節5個（骨4本）。<strong>目標は届く距離の6割。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="056_long.png" alt="関節17個の鎖"></div>
+            <figcaption>関節17個（骨16本）。同じ割合でも<strong>長い鎖はゆるく巻く。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 関節の数を変える</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>関節</th><th>骨</th><th>届く距離</th><th>目標まで</th><th>誤差 実測</th><th>誤差 予測</th><th>差</th><th>骨の長さの幅</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">2</td><td class="num">2.0</td><td class="num">2.000</td><td class="num">0.0000762</td><td class="num">0.0000000</td><td class="num">0.000076154</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">3</td><td class="num">2</td><td class="num">2.0</td><td class="num">2.100</td><td class="num">0.1000000</td><td class="num">0.1000000</td><td class="num hi">0.000000000</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">4.0</td><td class="num">4.000</td><td class="num">0.0007615</td><td class="num">0.0000000</td><td class="num">0.000761504</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">4.0</td><td class="num">6.000</td><td class="num">2.0000000</td><td class="num">2.0000000</td><td class="num hi">0.000000000</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">9</td><td class="num">8</td><td class="num">8.0</td><td class="num">8.000</td><td class="num">0.0014441</td><td class="num">0.0000000</td><td class="num">0.001444118</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">9</td><td class="num">8</td><td class="num">8.0</td><td class="num">12.000</td><td class="num">4.0000000</td><td class="num">4.0000000</td><td class="num hi">0.000000000</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">17</td><td class="num">16</td><td class="num">16.0</td><td class="num">16.000</td><td class="num">0.0027750</td><td class="num">0.0000000</td><td class="num">0.002775032</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">17</td><td class="num">16</td><td class="num">16.0</td><td class="num">24.000</td><td class="num">8.0000000</td><td class="num">8.0000000</td><td class="num hi">0.000000000</td><td class="num hi">0.000000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>届かない側は式と完全一致。</strong>骨の長さは全24通りで幅 0.000000000。
+          <strong>関節が16本つながっていても、1本も伸び縮みしない。</strong>
+        </p>
+
+        <p class="label">2. 鎖が長いほど、残る誤差は大きい（目標＝届く距離ちょうど）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>関節</th><th>骨</th><th>既定(0)の誤差</th><th>solver=1 の誤差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">2</td><td class="num hi">0.000076154</td><td class="num">0.019919474</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num hi">0.000761504</td><td class="num">0.044688692</td></tr>
+              <tr><td class="num">9</td><td class="num">8</td><td class="num hi">0.001444118</td><td class="num">0.083483171</td></tr>
+              <tr><td class="num">17</td><td class="num">16</td><td class="num hi">0.002775032</td><td class="num">0.145489437</td></tr>
+              <tr><td class="num">33</td><td class="num">32</td><td class="num hi">0.006900571</td><td class="num">0.252714115</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>骨の本数を2倍にすると、誤差もおよそ2倍。</strong>
+          伸びきる直前がいちばん解きにくい。
+        </p>
+
+        <p class="label">3. 2つの解き方は、得意な範囲が逆（関節9個・骨8本）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>遠さの割合</th><th>目標まで</th><th>既定(0)の誤差</th><th>solver=1 の誤差</th><th>良いほう</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.10</td><td class="num">0.800</td><td class="num">0.000003436</td><td class="num hi">0.000000652</td><td class="hi">solver=1</td></tr>
+              <tr><td class="num">0.30</td><td class="num">2.400</td><td class="num">0.000151835</td><td class="num hi">0.000004945</td><td class="hi">solver=1</td></tr>
+              <tr><td class="num">0.50</td><td class="num">4.000</td><td class="num">0.000024090</td><td class="num hi">0.000004584</td><td class="hi">solver=1</td></tr>
+              <tr><td class="num">0.70</td><td class="num">5.600</td><td class="num">0.000286937</td><td class="num hi">0.000014048</td><td class="hi">solver=1</td></tr>
+              <tr><td class="num">0.80</td><td class="num">6.400</td><td class="num">0.000369785</td><td class="num hi">0.000140004</td><td class="hi">solver=1</td></tr>
+              <tr><td class="num">0.90</td><td class="num">7.200</td><td class="num hi">0.000261699</td><td class="num">0.001405246</td><td class="hi">既定</td></tr>
+              <tr><td class="num">0.95</td><td class="num">7.600</td><td class="num hi">0.000406530</td><td class="num">0.004909842</td><td class="hi">既定</td></tr>
+              <tr><td class="num">0.99</td><td class="num">7.920</td><td class="num hi">0.000552590</td><td class="num">0.044165596</td><td class="hi">既定</td></tr>
+              <tr><td class="num">1.00</td><td class="num">8.000</td><td class="num hi">0.001444118</td><td class="num">0.083483171</td><td class="hi">既定</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>境目は 0.8 と 0.9 の間。</strong>
+          8割までは solver=1 が 5〜100倍正確、9割を越えると既定が 5〜58倍正確。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>式は関節が増えても同じだった。</strong>届かない側では実測と予測の差が <span class="hi">0.000000000</span>。<strong>届く距離＝骨の本数×長さ。</strong></li>
+          <li><strong>骨の長さは全24通りで幅 0.000000000。</strong>関節が16本つながっていても1本も伸び縮みしない。<strong><a href="#exp055">実験055</a>の結論が長い鎖でもそのまま成り立つ。</strong></li>
+          <li><strong>ただし届く側の誤差はゼロではない。</strong>IK は繰り返して近づける解き方なので、わずかに残る。<strong>二骨IK（実験055）が全桁一致だったのとは違う。</strong>あちらは一発で解けるが、こちらは近づけていく。</li>
+          <li><strong>残る誤差は鎖が長いほど大きい。</strong>骨2本で 0.000076、16本で 0.002775、32本で <span class="hi">0.006901</span>。<strong>本数を2倍にすると誤差もおよそ2倍。</strong></li>
+          <li><strong>いちばん誤差が出るのは「伸びきる直前」。</strong>遠さ 0.5 で 0.000024、1.0 で 0.001444。<strong>60倍。</strong></li>
+          <li><strong><code>solver</code> は4つの値のうち、実質2種類だった。</strong>0 / 2 / 3 は小数点以下9桁までまったく同じ。<strong>違うのは 1 だけ。</strong></li>
+          <li><strong>どちらが正確かは、条件でひっくり返る。</strong>8割までは solver=1 が 5〜100倍、9割を越えると既定が 5〜58倍。<strong>境目は 0.8 と 0.9 の間。</strong></li>
+          <li><strong>だから「どちらが良い」とは言えない。</strong>伸ばしきる動きが多いなら既定、曲げた姿勢で細かく合わせたいなら 1。<strong>使い方で選ぶ。</strong></li>
+          <li>測り方について。<strong><button class="term" data-term="ジオメトリ">ジオメトリ</button>を作らずに APEX の部品だけで測っている。</strong>シーンを組まないので、33関節でも一瞬で終わる。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

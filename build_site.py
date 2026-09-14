@@ -350,13 +350,18 @@ DONE = [
      "shots": ["055_reach.png", "055_far.png"],
      "title": "逆運動学（IK）— 届かない場所を指すと、伸びきってそこで止まる",
      "note": "9通りすべてで式と全桁一致。blend は途中でいったん目標から遠ざかる"},
+    {"no": "056", "anchor": "exp056", "tags": ["APEX", "リグ", "IK", "検算"],
+     "log": "log_pm", "hip": "", "thumb": "056_long.png",
+     "shots": ["056_short.png", "056_long.png"],
+     "title": "長い鎖の IK — 式は同じ。ただし解き方は2種類あり、得意な範囲が逆",
+     "note": "届く距離＝骨の本数。solver=1 は8割まで5〜100倍正確、9割超で逆転"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "056", "title": "長い鎖の IK",
-     "note": "関節が3つより多いときの解き方（FABRIK）。何回で収まるか測る"},
+    {"no": "057", "title": "APEX のグラフを持ち歩く",
+     "note": "組んだグラフをジオメトリに埋め込み、SOP から呼び出す"},
 ]
 
 PAGES = [
