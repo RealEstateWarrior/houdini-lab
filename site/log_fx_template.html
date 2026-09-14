@@ -3090,6 +3090,118 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 069 ===================== -->
+    <article class="entry entry--current" id="exp069">
+      <div class="badge">069</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM のコライダの摩擦 — 式は同じ。ただし地面と重ねると完全に無視される</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 筋が通っている推論でも、測れるなら測る</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp067">実験067</a>で測ったのは <code>mpmsolver</code> が最初から持っている地面だった。
+            <code>mpmcollider</code> にも <code>friction</code> と <code>sticky</code> があり、
+            <strong>こちらは自分で置く物</strong>。同じものなのか、別物なのか。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="069_collider.png" alt="コライダの上を滑った跡"></div>
+            <figcaption>コライダの摩擦 0.25。滑った距離 <span class="hi">3.250318</span>。
+              組み込みの地面での 3.260808 と <strong>0.3% しか違わない</strong>。<br>
+              組み込みの地面は切ってある。40フレーム分を2フレームおきに重ねた。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">A・B. コライダと組み込みの地面を、同じ摩擦どうしで並べる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>摩擦 μ</th><th>コライダ</th><th>組み込みの地面</th><th>差</th><th>コライダ ÷ 地面</th><th>式の距離</th><th>コライダ ÷ 式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">6.499993</td><td class="num">6.499988</td><td class="num hi">0.000005</td><td class="num hi">1.000001</td><td class="num">∞</td><td class="num muted">—</td></tr>
+              <tr><td class="num">0.1</td><td class="num">5.199496</td><td class="num">5.204091</td><td class="num">-0.004595</td><td class="num">0.999117</td><td class="num">8.154944</td><td class="num muted">まだ止まっていない</td></tr>
+              <tr><td class="num">0.25</td><td class="num">3.250318</td><td class="num">3.260808</td><td class="num">-0.010490</td><td class="num hi">0.996783</td><td class="num">3.261978</td><td class="num hi">0.996426</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1.748732</td><td class="num">1.751774</td><td class="num">-0.003042</td><td class="num">0.998264</td><td class="num">1.630989</td><td class="num">1.072191</td></tr>
+              <tr><td class="num">1.0</td><td class="num">1.187338</td><td class="num">1.194665</td><td class="num">-0.007327</td><td class="num">0.993867</td><td class="num">0.815494</td><td class="num">1.455974</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          「組み込みの地面」の列は<a href="#exp067">実験067</a>で測った値。条件はまったく同じ。
+          <strong>いちばん離れたところでも 0.6% しか違わない。</strong>
+        </p>
+
+        <p class="label">C. 両方を同じ高さ（y = 0）に置く</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>地面の摩擦</th><th>コライダの摩擦</th><th>滑った距離</th><th>最後の vx</th><th>何と同じ値か</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.25</td><td class="num">0.25</td><td class="num">3.260318</td><td class="num">0.025391</td><td class="wrap">地面だけ 0.25（3.260808）とほぼ同じ</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0.0</td><td class="num">1.193125</td><td class="num">0.000432</td><td class="wrap">地面だけ 1.0（1.194665）とほぼ同じ</td></tr>
+              <tr><td class="num">0.0</td><td class="num hi">1.0</td><td class="num hi">6.499988</td><td class="num">3.999986</td><td class="wrap"><strong>摩擦なし（6.499988）と6桁まで同じ</strong></td></tr>
+              <tr><td class="num">0.25</td><td class="num muted">なし</td><td class="num">3.260808</td><td class="num">0.025688</td><td class="wrap">実験067の値そのもの</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          3行目に注目。<strong>コライダの摩擦を 1.0 にしても、摩擦が無いときとまったく同じ値になる。</strong>
+          エラーも警告も出ない。
+        </p>
+
+        <p class="label">D. 地面だけ y = −0.5 に下げて、先に触るのをコライダにする</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>地面の高さ</th><th>地面の摩擦</th><th>コライダの摩擦</th><th>滑った距離</th><th>何と同じ値か</th></tr></thead>
+            <tbody>
+              <tr><td class="num">-0.5</td><td class="num">1.0</td><td class="num">0.0</td><td class="num hi">6.499993</td><td class="wrap"><strong>コライダだけ 0.0（6.499993）と完全に同じ</strong></td></tr>
+              <tr><td class="num">-0.5</td><td class="num">0.0</td><td class="num">1.0</td><td class="num hi">1.187338</td><td class="wrap"><strong>コライダだけ 1.0（1.187338）と6桁まで同じ</strong></td></tr>
+              <tr><td class="num">-0.5</td><td class="num">1.0</td><td class="num muted">なし</td><td class="num">1.871450</td><td class="wrap">0.5 落ちてから滑るので、その分だけ遠い</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <code>groundposy</code> を −0.5 にしただけ。コライダの板は同じ位置のまま。
+          <strong>今度はコライダが勝つ。つまり「地面がいつも勝つ」のではなく「先に触った面が勝つ」。</strong>
+        </p>
+
+        <p class="label">E. では、実験062〜065で置いていた床の箱は無駄だったのか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>床の箱</th><th>粒</th><th>高さの平均</th><th>いちばん上</th><th>広がり</th><th>Je × Jp</th></tr></thead>
+            <tbody>
+              <tr><td>あり</td><td class="num">577</td><td class="num hi">0.303183</td><td class="num">0.663563</td><td class="num">1.090555</td><td class="num">0.689148</td></tr>
+              <tr><td>なし</td><td class="num">577</td><td class="num hi">0.304588</td><td class="num">0.665211</td><td class="num">1.090218</td><td class="num">0.689286</td></tr>
+              <tr><td>差</td><td class="num">0</td><td class="num hi">0.001404</td><td class="num">0.001648</td><td class="num">0.000336</td><td class="num">0.000138</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>無駄ではなかった。0.46% だけ違う。</strong>
+          摩擦は効かないが、当たる面としては働いている。<br>
+          床ありの 0.303183 は、<a href="#exp064">実験064</a>（substep 1）・<a href="#exp065">実験065</a>（間隔 0.12）の値と
+          <strong>6桁まで完全に同じ</strong>。広がり 1.090555 も実験064の 1.09055 と一致する。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>コライダの摩擦は、組み込みの地面と同じものだった。</strong>5通りの摩擦で、いちばん離れたところでも <span class="hi">0.6%</span> しか違わない。摩擦 0.0 では差が 0.000005。</li>
+          <li><strong>クーロン摩擦の式との合い方も同じ水準。</strong>摩擦 0.25 で 0.996426（<a href="#exp067">実験067</a>の組み込み地面は 0.999642）。<strong>強い摩擦で式から外れていく癖も同じ</strong>で、0.5 で 1.072191、1.0 で 1.455974。</li>
+          <li><strong>ただし両方を同じ高さに置くと、コライダの摩擦は完全に無視される。</strong>地面の摩擦 0.0・コライダの摩擦 1.0 で、距離は 6.499988。<strong>摩擦がまったく無いときの値と6桁まで同じ。</strong></li>
+          <li><strong>エラーも警告も出ない。</strong>コライダはちゃんとつながっていて、粒もその上に乗っている。それでも摩擦だけが効かない。</li>
+          <li><strong>「地面がいつも勝つ」のではなく「先に触った面が勝つ」だった。</strong>地面を y = −0.5 に下げると、どちらもコライダだけを置いたときの値と一致する。<strong>下にある面は無いのと同じ。</strong></li>
+          <li><strong>だから、床を自分で置くなら組み込みの地面を切る。</strong><code>groundactive</code> を 0 にするだけ。<strong>切り忘れると、コライダの摩擦をいくら設定しても効かない。</strong></li>
+          <li><strong>ただし「コライダが無いのと同じ」ではない。</strong>落とすだけの組み方で測り直すと、床の箱ありと無しで高さが <strong>0.46%</strong> 違う。<strong>摩擦は効かないが、当たる面としては働いている。</strong></li>
+          <li><strong>実験062〜065の数字はそのまま有効。</strong>床ありで測り直した 0.303183 は、<a href="#exp064">実験064</a>・<a href="#exp065">実験065</a>の値と6桁まで完全に同じだった。<strong>別の目的で組み直した実験が同じ数字を返したので、あちらの測定も再現できている。</strong></li>
+          <li>測り方について。<strong>まず片方だけで測り、次にもう片方だけで測り、最後に両方を置いた。</strong>両方を置いた場合だけを見ていたら「コライダの摩擦は効かない」で終わっていた。<strong>高さをずらす一手間で、「効かない」ではなく「先に触った面だけが効く」という一段深い答えになった。</strong></li>
+          <li>推測を書かないことについて。<strong>「摩擦が効かないのだから、あの床の箱は無くても同じ結果だったはずだ」と書きかけて、実際に測った。</strong>違った。<strong>筋が通っている推論でも、測れるなら測る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

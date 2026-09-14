@@ -419,13 +419,19 @@ DONE = [
                "068_liquid.png"],
      "title": "MPM の材質5つで滑らせる — 摩擦の式に乗るのは、形が崩れない材質だけ",
      "note": "崩れる順と式から外れる順が完全一致。Liquidの摩擦1.0は発散していた"},
+    {"no": "069", "anchor": "exp069",
+     "tags": ["MPM", "シミュレーション", "摩擦", "落とし穴", "検算"],
+     "log": "log_fx", "hip": "", "thumb": "069_collider.png",
+     "shots": ["069_collider.png"],
+     "title": "MPM のコライダの摩擦 — 式は同じ。ただし地面と重ねると完全に無視される",
+     "note": "同じ高さだとコライダの摩擦が効かない。効くのは「先に触った面」だけ"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "069", "title": "MPM のコライダの摩擦",
-     "note": "mpmcollider 側の friction も組み込みの地面と同じ式に乗るか"},
+    {"no": "070", "title": "動くコライダが粒に渡す速度",
+     "note": "computevelocity で、板を動かすと粒はどれだけ運ばれるか"},
 ]
 
 PAGES = [
