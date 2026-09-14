@@ -1,0 +1,132 @@
+{
+  "title": "実験041 — 凸凹の付け方3通り",
+  "network": "/obj/terrain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "field",
+      "type": "heightfield",
+      "pos": [
+        -1.13,
+        5.949
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 200.0,
+        "sizey": 200.0
+      }
+    },
+    {
+      "name": "noise",
+      "type": "heightfield_noise",
+      "pos": [
+        -1.13,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "amp": 120.0,
+        "elementsize": 80.0
+      }
+    },
+    {
+      "name": "erode",
+      "type": "heightfield_erode::3.0",
+      "pos": [
+        1.13,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 0.8801623582839966,
+        "folder0": 1,
+        "folder1": 1,
+        "iterations": 4
+      }
+    },
+    {
+      "name": "mesh",
+      "type": "convertheightfield",
+      "pos": [
+        -1.13,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "displace",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "float e = 2.0;\nfloat h0 = volumesample(1, \"height\", @P);\nfloat hx = volumesample(1, \"height\", @P + set(e, 0, 0));\nflo..."
+      }
+    },
+    {
+      "name": "assign",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/terrain_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "field",
+      "from_output": 0,
+      "to": "noise",
+      "to_input": 0
+    },
+    {
+      "from": "noise",
+      "from_output": 0,
+      "to": "erode",
+      "to_input": 0
+    },
+    {
+      "from": "erode",
+      "from_output": 0,
+      "to": "mesh",
+      "to_input": 0
+    },
+    {
+      "from": "mesh",
+      "from_output": 0,
+      "to": "displace",
+      "to_input": 0
+    },
+    {
+      "from": "erode",
+      "from_output": 0,
+      "to": "displace",
+      "to_input": 1
+    },
+    {
+      "from": "displace",
+      "from_output": 0,
+      "to": "assign",
+      "to_input": 0
+    }
+  ]
+}

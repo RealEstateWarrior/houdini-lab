@@ -275,13 +275,18 @@ DONE = [
      "shots": ["040_compare.png"],
      "title": "作ったテクスチャを地形に貼る — 貼れたかどうかを画の数字で判定する",
      "note": "細かさ1.36倍で貼れたと判定。解像度4倍でも画は1.04倍しか変わらない"},
+    {"no": "041", "anchor": "exp041", "tags": ["レンダリング", "Karma", "テクスチャ", "検算"],
+     "log": "log_pm", "hip": "041_disp.hipnc", "thumb": "041_compare.png",
+     "shots": ["041_compare.png"],
+     "title": "凸凹の付け方3通り — 輪郭を見れば、どれが本当に形を変えたか分かる",
+     "note": "bumpは細かさ1.77倍でも輪郭0.999倍。displacementは点を動かさず輪郭を変える"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "041", "title": "ノイズで面そのものを凸凹させる",
-     "note": "色ではなく高さとして使う（displacement）"},
+    {"no": "042", "title": "まだ触っていない分野に進む",
+     "note": "地形・テクスチャは034〜041で一区切り"},
 ]
 
 PAGES = [

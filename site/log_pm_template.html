@@ -1804,6 +1804,69 @@
     </article>
 
 
+
+    <!-- ===================== 041 ===================== -->
+    <article class="entry entry--current" id="exp041">
+      <div class="badge">041</div>
+      <div class="body">
+        <span class="chip chip--tool">レンダリング</span>
+        <h2>凸凹の付け方3通り — 輪郭を見れば、どれが本当に形を変えたか分かる</h2>
+        <p class="path">/obj/terrain &nbsp;·&nbsp; bump と displacement の決定的な違いを測る</p>
+
+        <div class="prose">
+          <p>
+            面を凸凹させる方法は3つある。
+            <strong><button class="term" data-term="ジオメトリ">ジオメトリ</button>を動かす</strong>（点そのものを動かす）、
+            <strong>displacement</strong>（レンダのときだけ面を動かす）、
+            <strong>bump</strong>（面は動かさず光の当たり方だけ凸凹に見せる）。
+          </p>
+          <p>
+            見た目はどれも似る。<strong>決定的な違いは輪郭（シルエット）に出る</strong>はずである。
+            本当に面が動いていればフチがぎざぎざになり、光のごまかしならフチは滑らかなままになる。
+            そこで<strong>輪郭の長さ</strong>を測った。書き出した画の透明度から、
+            地形と背景の境目になっている画素を数える。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="041_compare.png" alt="何もしない・ジオメトリ・displacement・bumpの4通りの地形レンダを横に並べた比較"></div>
+            <figcaption>左から、何もしない / ジオメトリを動かす / displacement / bump。<strong>displacement と bump にはまったく同じ画を渡している。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">4通りの数字</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>やり方</th><th>点が動いた量</th><th>輪郭の長さ</th><th>何もしないとの比</th><th>画の細かさ</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td>何もしない</td><td class="num muted">0.000000</td><td class="num">3,064</td><td class="num">1.000倍</td><td class="num">2.2945</td><td class="num">4.32秒</td></tr>
+              <tr><td>ジオメトリを動かす</td><td class="num hi">2.219831</td><td class="num">3,118</td><td class="num hi">1.018倍</td><td class="num">2.7508</td><td class="num">5.02秒</td></tr>
+              <tr><td>displacement</td><td class="num muted">0.000000</td><td class="num">3,126</td><td class="num hi">1.020倍</td><td class="num">3.5173</td><td class="num">6.32秒</td></tr>
+              <tr><td>bump</td><td class="num muted">0.000000</td><td class="num">3,062</td><td class="num">0.999倍</td><td class="num hi">4.0524</td><td class="num">8.32秒</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>bump は画の細かさが一番大きい（1.77倍）のに、輪郭は変わらない。</strong>
+          displacement は点を1ミリも動かさないのに、輪郭を変える。
+        </p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>bump は輪郭をまったく変えなかった。</strong>3,062 対 3,064 で <span class="hi">0.999倍</span>。それでいて画の細かさは一番大きい。<strong>凸凹して見えるのに、形は1ミリも変わっていない。</strong></li>
+          <li><strong>displacement は点を動かさないのに輪郭を変えた。</strong>点の移動量は 0.000000 なのに輪郭は 1.020倍。<strong>レンダのときだけ面が動くので、データを見ても分からない。</strong></li>
+          <li><strong>ジオメトリを動かした場合だけ、データが変わる。</strong>点が最大 2.22 動き、高さの幅も 28.519 → 29.562 に広がった。<strong>あとの工程（散布や当たり判定）に効くのはこれだけ。</strong></li>
+          <li><strong>使い分けの目安。</strong>フチに出したい凸凹はジオメトリか displacement、面の中だけでよい細かさは bump。<strong>遠景の岩肌なら bump で足り、シルエットに出したい割れ目なら displacement が要る。</strong></li>
+          <li><strong>bump が一番遅かった。</strong>8.32秒で、何もしない場合の 1.9倍。displacement（6.32秒）より遅い。<strong>「面を動かさないから軽い」とは限らない。</strong>理由は測っていないので断定しない。</li>
+          <li><strong>最初、bump がまったく効かなかった。</strong>有効化のスイッチだけ入れて<strong>テクスチャのパスを指定していなかった</strong>ため、輪郭も細かさも「何もしない」と完全に同じ数字（3056 と 2.2916）になった。<span class="hi">完全に同じ数字が出たら、効いていないことを疑う。</span></li>
+          <li><strong>輪郭の測り方。</strong>透明度で地形と背景を分け、<strong>隣り合う画素で「地形かどうか」が食い違う場所の数</strong>を数えた。<a href="#exp038">実験038</a>で「明るさで分けると白飛びを取りこぼす」と学んだので、透明度で分けている。</li>
+          <li>差は2%前後と小さい。<strong>目で見比べても分からない大きさだが、数えれば順番がはっきり出る。</strong>bump だけが 1.000倍から動かず、他の2つは 1.018 / 1.020 と揃って上がる。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
