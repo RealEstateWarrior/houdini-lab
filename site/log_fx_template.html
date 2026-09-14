@@ -2616,6 +2616,165 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 066 ===================== -->
+    <article class="entry entry--current" id="exp066">
+      <div class="badge">066</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>MPM の風 — 風速だけ上げても何も起きない。抵抗は速さの2乗だった</h2>
+        <p class="path">/obj/mpm &nbsp;·&nbsp; 入力を複数振って、比が保たれるかを見る</p>
+
+        <div class="prose">
+          <p>
+            <code>mpmsolver</code> の Forces には、Gravity のとなりに
+            <strong>Wind Velocity</strong> と <strong>Air Drag</strong> が並んでいる。
+            どちらも既定は 0。<strong>では風速だけ上げたら、粒は流れるのか。</strong>
+          </p>
+          <p>
+            <strong>何も起きなかった。</strong>
+            風速 0 / 2 / 5 / 10 の4通りで、位置も速度も<strong>9桁まで完全に同じ</strong>。
+            <a href="#exp044">実験044</a>のガイド、
+            <a href="#exp050">実験050</a>の可変長入力、
+            <a href="#exp062">実験062</a>の <code>materialpreset</code> に続いて、
+            これで<strong>「黙って無視される<button class="term" data-term="パラメータ">パラメータ</button>」は4件目</strong>になった。
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="066_calm.png" alt="風なしの落下の跡"></div>
+            <figcaption><strong>風速 0。</strong>まっすぐ落ちる。24フレーム目の x の平均は 0.007215。<br>
+              24フレーム分の粒をぜんぶ重ねた。古いほど青く、新しいほど明るい。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="066_wind.png" alt="風ありの落下の跡"></div>
+            <figcaption><strong>風速 10。</strong>横へ <span class="hi">7.548967</span> まで流される。
+              落ちる速さも -3.157398 から -3.099901 へ変わる。<br>
+              2枚とも空気抵抗 1.0、カメラも枠も同じ。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">A. 空気抵抗 0 のまま、風速だけ上げる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>風速</th><th>x の平均</th><th>vx の平均</th><th>y の平均</th><th>vy の平均</th><th>風速 0 との差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.007215</td><td class="num">0.000000</td><td class="num">-1.542875</td><td class="num">-9.401245</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">2</td><td class="num">0.007215</td><td class="num">0.000000</td><td class="num">-1.542875</td><td class="num">-9.401245</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">5</td><td class="num">0.007215</td><td class="num">0.000000</td><td class="num">-1.542875</td><td class="num">-9.401245</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">10</td><td class="num">0.007215</td><td class="num">0.000000</td><td class="num">-1.542875</td><td class="num">-9.401245</td><td class="num hi">0.000000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>風は空気抵抗を通してしか効かない。</strong>
+          Air Drag が既定の 0 のままなら、Wind Velocity はただの飾りである。
+        </p>
+
+        <p class="callout callout--note">
+          <strong>組み込みの地面がある。</strong>
+          この実験を最初に組んだとき、コライダを一つも置いていないのに
+          <strong>粒が y ≈ 0.3 で止まった。</strong>
+          <code>mpmsolver</code> には Ground Plane があり、
+          <strong><code>groundactive</code> が既定で 1</strong>。
+          つまり <strong>y = 0 に地面が最初から置いてある。</strong>
+          自由落下を測りたかったので、今回はこれを切った。<br>
+          <a href="#exp062">実験062</a>〜<a href="#exp065">実験065</a> の結果には影響しない。
+          あちらで置いた地面の箱は size (6, 0.4, 6) を t (0, -0.2, 0) に置いたもので、
+          <strong>上面がちょうど y = 0</strong>。組み込みの地面と同じ高さに重なっていた。
+        </p>
+
+        <p class="label">B. 風なしで空気抵抗を変える。どの式に乗るか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>空気抵抗 d</th><th>vy 実測</th><th>速さに比例する式</th><th>2乗に比例する式</th><th>終端速度 √(g/d)</th><th>実測 − 2乗の式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.25</td><td class="num hi">-5.704545</td><td class="num">-8.359859</td><td class="num">-5.670913</td><td class="num">-6.264184</td><td class="num">-0.033632</td></tr>
+              <tr><td class="num">0.5</td><td class="num hi">-4.343024</td><td class="num">-7.469349</td><td class="num">-4.304229</td><td class="num">-4.429447</td><td class="num">-0.038795</td></tr>
+              <tr><td class="num">1.0</td><td class="num hi">-3.157398</td><td class="num">-6.047555</td><td class="num">-3.116652</td><td class="num">-3.132092</td><td class="num">-0.040746</td></tr>
+              <tr><td class="num">2.0</td><td class="num hi">-2.255033</td><td class="num">-4.183492</td><td class="num">-2.213813</td><td class="num">-2.214723</td><td class="num">-0.041220</td></tr>
+              <tr><td class="num">4.0</td><td class="num hi">-1.607434</td><td class="num">-2.399434</td><td class="num">-1.566027</td><td class="num">-1.566046</td><td class="num hi">-0.041407</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          経過時間 t = 23 / 24 = 0.958333 秒。抵抗なしなら g t = 9.401250 のはずで、
+          実測は 9.401245 だった（<strong>ずれ 0.000005</strong>）。<br>
+          <strong>「速さに比例」は d = 1.0 で 1.92倍も外れる。</strong>
+          当たったのは「2乗に比例」のほう。
+        </p>
+
+        <p class="label">C. 空気抵抗 1.0 で風速を変える。横速度は風速に比例するか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>風速 w</th><th>vx 実測</th><th>vx ÷ w</th><th>2乗の式</th><th>実測 − 式</th><th>vy 実測</th><th>vy の式</th><th>x の平均</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td class="num">1.840484</td><td class="num hi">0.920242</td><td class="num">1.841579</td><td class="num hi">-0.001095</td><td class="num">-3.146102</td><td class="num">-3.105449</td><td class="num">1.147626</td></tr>
+              <tr><td class="num">5</td><td class="num">4.728911</td><td class="num hi">0.945782</td><td class="num">4.729887</td><td class="num hi">-0.000976</td><td class="num">-3.125549</td><td class="num">-3.084892</td><td class="num">3.359090</td></tr>
+              <tr><td class="num">10</td><td class="num">9.656235</td><td class="num hi">0.965623</td><td class="num">9.656630</td><td class="num hi">-0.000395</td><td class="num">-3.099901</td><td class="num">-3.065852</td><td class="num">7.548967</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>「速さに比例」なら vx ÷ w はどの風速でも 0.616468 で一定になるはずだった。</strong>
+          実際は 0.920242 / 0.945782 / 0.965623 と動く。<strong>これで比例の式は消える。</strong>
+        </p>
+
+        <p class="label">D. 終端速度は √(g/d)。d を半分にすると √2 = 1.41421 倍になるはず</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>比べる組</th><th>実測の比</th><th>√2 との差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">4.0 → 2.0</td><td class="num hi">1.40287</td><td class="num">0.01134</td></tr>
+              <tr><td class="num">2.0 → 1.0</td><td class="num hi">1.40016</td><td class="num">0.01405</td></tr>
+              <tr><td class="num">1.0 → 0.5</td><td class="num">1.37549</td><td class="num">0.03872</td></tr>
+              <tr><td class="num">0.5 → 0.25</td><td class="num">1.31349</td><td class="num">0.10072</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          抵抗が弱いと 0.958秒ではまだ終端に届かないので、下の2行は離れていく。
+        </p>
+
+        <p class="label">使った式</p>
+        <div class="prose">
+          <p>
+            <strong>加速度 = 重力 + d × |相対速度| × 相対速度</strong>。
+            相対速度は「風の速度 − 粒の速度」で、<strong>3次元のベクトルとしての大きさ</strong>を使う。
+            これを4次のルンゲクッタで 20万刻みに解いて、上の表の「式」の列にした。
+          </p>
+          <p>
+            <a href="#exp029">実験029</a>で、<button class="term" data-term="POP">POP</button> の
+            <code>popwind</code> の <code>airresist</code> も
+            <strong>二乗抵抗だった</strong>ことを測っている。
+            <strong>Houdini の「空気抵抗」は、<button class="term" data-term="ソルバ">ソルバ</button>が違っても同じ形をしているらしい。</strong>
+            ただしあちらは1次元の式でずれ 0.0000003 まで合ったのに対し、
+            今回は縦方向に 0.0414 の食い違いが残る。
+          </p>
+        </div>
+        <pre><code>def accel(v):
+    u = w - v                      # 相対速度（3次元）
+    s = sqrt(u.x*u.x + u.y*u.y + u.z*u.z)
+    return g + drag * s * u        # 速さの2乗に比例する</code></pre>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Wind Velocity だけを上げても、何も起きない。</strong>4通りで位置も速度も9桁まで同じ。<strong>風は空気抵抗を通してしか効かない。</strong></li>
+          <li><strong>「黙って無視されるパラメータ」は4件目。</strong><a href="#exp044">044</a>のガイド、<a href="#exp050">050</a>の可変長入力、<a href="#exp062">062</a>の materialpreset、そして今回の風速。<strong>見つけ方はいつも同じで、入力を極端に振って出力が動くかを見る。</strong></li>
+          <li><strong>Houdini の空気抵抗は「速さの2乗」に比例する。</strong>「速さに比例」の式は d = 1.0 で -6.047555 と言うが、実測は -3.157398。<strong>1.92倍も外れる。</strong>2乗の式なら -3.116652 で、ずれは 0.040746 に縮む。</li>
+          <li><strong><a href="#exp029">実験029</a>で測った POP の <code>popwind</code> も二乗抵抗だった。</strong>Houdini の「空気抵抗」は、ソルバが違っても同じ形をしているらしい。<strong>ただしあちらは1次元の式でずれ 0.0000003 まで合ったのに対し、今回は縦方向に 0.0414 の食い違いが残る。</strong></li>
+          <li><strong>終端速度は √(g/d)。</strong>d = 4.0 で式 1.566046、実測 1.607434。d を半分にしたときの比は 1.40287 / 1.40016（√2 = 1.41421）。</li>
+          <li><strong>抵抗は3次元の相対速度の大きさで決まる。</strong>だから<strong>横風は落ち方まで変える。</strong>風速 0 / 2 / 5 / 10 に対して vy は -3.157398 / -3.146102 / -3.125549 / -3.099901。<strong>横に強く吹くほど、下向きの抵抗は弱くなる。</strong></li>
+          <li><strong>横方向は式と 0.06% しか違わない。</strong>ずれ 0.001095 / 0.000976 / 0.000395。<strong>抵抗の式が当たっている証拠として、これがいちばん強い。</strong></li>
+          <li><strong>縦方向だけ、いつも 0.0414 ほど速い。</strong>d を 0.25 から 4.0 まで変えてもずれは -0.0336 〜 -0.0414 でほぼ同じ値に落ち着く。重力で割ると 0.004221秒（0.1013フレーム）。<strong>抵抗を切ると速度のずれは 0.000005 まで消えるので、これは重力の刻み方ではなく抵抗の当て方から出ている。</strong></li>
+          <li><strong>mpmsolver は既定で y = 0 に地面を持っている（groundactive = 1）。</strong>コライダを置かなくても粒は y = 0 で止まる。<a href="#exp062">062</a>〜<a href="#exp065">065</a>で置いた地面の箱は上面がちょうど y = 0 なので、<strong>結果には影響しない。</strong></li>
+          <li>測り方について。<strong>「速さに比例」と「2乗に比例」は、1本の曲線を見ているだけでは見分けがつきにくい。</strong>どちらもそれらしい形をしている。<strong>見分けられたのは、風速を3通りに振って vx ÷ 風速 が一定かどうかを見たから。</strong>比例なら一定になるはずが、動いた。<strong>入力を複数振って、比が保たれるかを見る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

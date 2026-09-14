@@ -400,13 +400,19 @@ DONE = [
      "shots": ["065_coarse.png", "065_fine.png"],
      "title": "MPM の粒を細かくする — 刻みより粒のほうが効くし、しかも安い",
      "note": "粒24.7倍で時間は3.73倍。高さが23%動く。substepは16倍で25.5倍かかって動かない"},
+    {"no": "066", "anchor": "exp066",
+     "tags": ["MPM", "シミュレーション", "検算", "落とし穴", "空気抵抗"],
+     "log": "log_fx", "hip": "", "thumb": "066_wind.png",
+     "shots": ["066_calm.png", "066_wind.png"],
+     "title": "MPM の風 — 風速だけ上げても何も起きない。抵抗は速さの2乗だった",
+     "note": "風は空気抵抗を通してしか効かない。横方向は式と0.06%一致。地面は既定で y=0 にある"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "066", "title": "MPM に風や外力を当てる",
-     "note": "粒に外から力を加える方法と、効き方を測る"},
+    {"no": "067", "title": "MPM の地面の摩擦と粘着",
+     "note": "groundfriction / groundsticky が滑り方をどう変えるか測る"},
 ]
 
 PAGES = [
