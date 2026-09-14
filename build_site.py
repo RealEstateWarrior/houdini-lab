@@ -45,6 +45,7 @@ ARTIFACT_URLS = {
     "log_fx": "https://claude.ai/code/artifact/087548d5-0c09-40b5-8e2e-7bfc084e1f0c",
     "glossary": "https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868",
     "links": "https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f",
+    "parent": "",   # 親の Artifact を発行したらここに入れる
 }
 
 # GitHub Pages 版。ルートがハブになるよう index.html をハブに割り当てる。
@@ -55,20 +56,33 @@ PAGES_URLS = {
     "log_fx": "log_fx.html",
     "glossary": "glossary.html",
     "links": "links.html",
+    "parent": "sp.html",
 }
 
-# ロゴ。ノード2つをワイヤーでつないだ形。押すとハブに戻る。
+# ロゴ。S を書き終えた線から縦棒が下りて、S の下半分が P の腹になる。
+# 押すと親（Saito Production）へ戻る。
 LOGO_SVG = (
-    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
-    '<rect x="1.1" y="1.1" width="21.8" height="21.8" rx="6.4"'
-    ' stroke="currentColor" stroke-width="1.5"/>'
-    '<path d="M7.9 10.5V13.6a2.2 2.2 0 0 0 2.2 2.2h3"'
-    ' stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
-    '<circle cx="7.9" cy="8.1" r="2.2" fill="currentColor"/>'
-    '<circle cx="15.9" cy="15.8" r="2.2" fill="currentColor"/>'
-    "</svg>"
+    '<svg viewBox="0 0 48 48" fill="none" aria-hidden="true">'
+    '<g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)"'
+    ' stroke="currentColor" stroke-width="2.3" stroke-linecap="round">'
+    '<path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1'
+    ' 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4'
+    '-2.3 0-4.3-.7-5.7-2"/>'
+    '<path d="M22.6 22.3v16.6"/>'
+    "</g></svg>"
 )
-BRAND = "Houdini 研究ハブ"
+BRAND = "Saito Production"
+DEPT = "Houdini 研究部"
+
+# 親サイトと、その下の部。映像制作部はまだ無いので押せない印にしておく。
+PARENT_URLS = {
+    "pages": "sp.html",
+    "artifact": "",   # 親の Artifact を発行したらここに入れる
+}
+DEPARTMENTS = [
+    ("houdini", "Houdini 研究部", True),
+    ("film", "映像制作部", False),
+]
 
 SEARCH_SVG = (
     '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
@@ -442,6 +456,7 @@ PLANNED_FX = [
 
 PAGES = [
     # template, site出力, docs出力, ナビの現在位置, タブ形式か
+    ("sp_template.html", "sp.html", "sp.html", "sp", False),
     ("home_template.html", "home.html", "index.html", "home", True),
     ("log_pm_template.html", "index.html", "log.html", "log", False),
     ("log_fx_template.html", "log_fx.html", "log_fx.html", "log", False),
@@ -451,19 +466,42 @@ PAGES = [
 
 
 def render_nav(active, tabs, urls):
-    """上部のバー。どのページでも同じ並びにする。
+    """上部のバー。2段に分ける。
 
-    ハブではタブがボタン（読み込みなしで切り替わる）、子ページでは
-    ハブの該当タブへのリンクになる。ロゴは常にハブへ戻る。
+    上段は「どの部にいるか」。ロゴを押すと親の Saito Production へ戻る。
+    下段は「その部の中身」。ハブではタブ（読み込みなしで切り替わる）、
+    子ページではハブの該当タブへのリンクになる。
+
+    親子ができると、1段のままでは「部を移る」と「節を移る」が同じ列に
+    並んでしまって区別がつかない。段で分ける。
     """
-    logo_href = "#overview" if tabs else urls["home"]
+    parent = urls.get("parent") or PARENT_URLS["pages"]
     out = [
         '  <nav class="sidenav" aria-label="サイト内の移動">',
+        '    <div class="nav-top">',
+        '      <div class="nav-top-inner">',
+        f'        <a class="nav-brand" href="{parent}"'
+        f' aria-label="{BRAND}（親のページへ）">',
+        f"          {LOGO_SVG}",
+        f"          <span>{BRAND}</span>",
+        "        </a>",
+        '        <ul class="nav-depts">',
+    ]
+    for dept_id, label, ready in DEPARTMENTS:
+        if not ready:
+            out.append(f'          <li><span class="soon">{html.escape(label)}'
+                       "<small>準備中</small></span></li>")
+        elif dept_id == "houdini":
+            out.append(f'          <li><a href="{urls["home"]}"'
+                       f' aria-current="page">{html.escape(label)}</a></li>')
+        else:
+            out.append(f'          <li><a href="{parent}">'
+                       f"{html.escape(label)}</a></li>")
+    out += [
+        "        </ul>",
+        "      </div>",
+        "    </div>",
         '    <div class="nav-inner">',
-        f'      <a class="logo" href="{logo_href}" aria-label="{BRAND}（ハブに戻る）">',
-        f"        {LOGO_SVG}",
-        f'        <span class="logo-text">{BRAND}</span>',
-        "      </a>",
         '      <ul role="tablist">' if tabs else "      <ul>",
     ]
 
@@ -487,12 +525,101 @@ def render_nav(active, tabs, urls):
                ' target="_blank" rel="noopener noreferrer">Notebook</a></li>')
     out.append("      </ul>")
     out.append('      <button type="button" class="nav-icon" id="search-open"'
-               ' aria-label="サイト内を検索">' + SEARCH_SVG + "</button>")
+               ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + "</button>")
     out.append('      <button type="button" class="nav-icon nav-burger" id="menu-open"'
                ' aria-label="メニューを開く" aria-expanded="false">'
                + BURGER_SVG + "</button>")
     out.append("    </div>")
     out.append("  </nav>")
+    return "\n".join(out)
+
+
+def render_parent_nav(urls):
+    """親（Saito Production）のバー。部が横に並ぶだけの1段。"""
+    out = [
+        '  <nav class="sidenav" aria-label="サイト内の移動">',
+        '    <div class="nav-top">',
+        '      <div class="nav-top-inner">',
+        f'        <a class="nav-brand" href="#top" aria-label="{BRAND}">',
+        f"          {LOGO_SVG}",
+        f"          <span>{BRAND}</span>",
+        "        </a>",
+        '        <ul class="nav-depts">',
+    ]
+    for dept_id, label, ready in DEPARTMENTS:
+        if ready:
+            out.append(f'          <li><a href="{urls["home"]}">'
+                       f"{html.escape(label)}</a></li>")
+        else:
+            out.append(f'          <li><span class="soon">{html.escape(label)}'
+                       "<small>準備中</small></span></li>")
+    out += ["        </ul>", "      </div>", "    </div>", "  </nav>"]
+    return "\n".join(out)
+
+
+def render_sp_depts(urls, guides, data):
+    """部のカード。中身のある部だけ数字を出す。"""
+    out = ['      <div class="depts">']
+    for dept_id, label, ready in DEPARTMENTS:
+        if ready:
+            out.append(f'        <a class="dept" href="{urls["home"]}">')
+            out.append(f"          <h3>{html.escape(label)}</h3>")
+            out.append('          <p>Houdini を実際に動かして、測って、残す。'
+                       "推測は書かない。数字が合わなかった回も、そのまま残す。</p>")
+            out.append('          <dl class="dept-facts">')
+            for term, value in (("実験", f"{len(DONE)} 件"),
+                                ("手順", f"{len(guides['guides'])} 本"),
+                                ("用語", f"{count_terms(data)} 語")):
+                out.append(f"            <div><dt>{term}</dt>"
+                           f"<dd>{value}</dd></div>")
+            out.append("          </dl>")
+            out.append('          <span class="dept-go">開く</span>')
+            out.append("        </a>")
+        else:
+            out.append('        <div class="dept dept--soon">')
+            out.append(f"          <h3>{html.escape(label)}</h3>")
+            out.append("          <p>これから作ります。</p>")
+            out.append('          <span class="dept-go">準備中</span>')
+            out.append("        </div>")
+    out.append("      </div>")
+    return "\n".join(out)
+
+
+def render_sp_recent(urls, count=6):
+    """直近の実験。親から1手で中身へ入れるようにする。"""
+    out = ['      <div class="thumbs">']
+    for item in list(reversed(DONE))[:count]:
+        log_url = urls[item.get("log", "log_pm")]
+        card = f'thumb_{item["no"]}.png'
+        if not os.path.exists(os.path.join(OUT, card)):
+            card = item["thumb"]
+        out.append(f'        <a class="thumb" href="{log_url}#{item["anchor"]}">')
+        out.append(f'          <span class="thumb-img"><img src="{card}"'
+                   f' loading="lazy" decoding="async"'
+                   f' alt="実験{item["no"]}の結果"></span>')
+        out.append('          <span class="thumb-body">')
+        out.append(f'            <span class="thumb-no">実験 {item["no"]}</span>')
+        out.append(f'            <h4>{html.escape(item["title"])}</h4>')
+        out.append(f'            <p>{html.escape(item["note"])}</p>')
+        out.append("          </span>")
+        out.append("        </a>")
+    out.append("      </div>")
+    return "\n".join(out)
+
+
+def render_sp_guides(guides, urls, count=3):
+    """新しい手順。親から「作り方」へ直行させる。"""
+    out = ['      <div class="tiles">']
+    for guide in list(reversed(guides["guides"]))[:count]:
+        out.append(f'        <a class="tile" href="{urls["home"]}#guides">')
+        out.append(f'          <img src="{guide["hero"]}" loading="lazy"'
+                   f' decoding="async" alt="{html.escape(guide["title"])}の完成図">')
+        out.append('          <span class="tile-body">')
+        out.append(f"            <h4>{html.escape(guide['title'])}</h4>")
+        out.append(f"            <p>{html.escape(guide['lede'][:88])}…</p>")
+        out.append("          </span>")
+        out.append("        </a>")
+    out.append("      </div>")
     return "\n".join(out)
 
 
@@ -1049,6 +1176,11 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_URL-->", urls["glossary"]),
         ("<!--LINKS_URL-->", urls["links"]),
         ("<!--NOTEBOOK_URL-->", NOTEBOOK_URL),
+        ("<!--PARENT_NAV-->", render_parent_nav(urls)),
+        ("<!--SP_DEPTS-->", render_sp_depts(urls, guides, data)),
+        ("<!--SP_RECENT-->", render_sp_recent(urls)),
+        ("<!--SP_GUIDES-->", render_sp_guides(guides, urls)),
+        ("<!--GUIDE_COUNT-->", str(len(guides["guides"]))),
     ):
         page = page.replace(needle, value)
 
@@ -1080,7 +1212,8 @@ def as_document(page):
     ファイルをそのまま配る。charset が無いと日本語が化け、doctype が無いと
     ブラウザが互換モードになってレイアウトが崩れる。
     """
-    split = page.find('<div class="layout">')
+    # 属性が付くこともあるので、開きタグの途中までで探す
+    split = page.find('<div class="layout"')
     if split == -1:
         raise SystemExit("レイアウトの開始位置が見つからない")
     head, body = page[:split].strip(), page[split:]

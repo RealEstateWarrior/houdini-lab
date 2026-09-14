@@ -1,0 +1,129 @@
+<title>Saito Production</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+<!--CSS-->
+
+/* ---------- 親ページ（部の入口） ---------- */
+
+.sp-hero { text-align: center; padding: 64px 0 10px; }
+.sp-hero .sp-mark { display: grid; place-items: center; margin: 0 0 22px; }
+.sp-hero .sp-mark svg { width: 66px; height: 66px; color: var(--ink); display: block; }
+.sp-hero h1 {
+  font-size: clamp(2.3rem, 5.6vw, 3.4rem);
+  letter-spacing: -0.024em;
+  margin: 0 0 12px;
+}
+.sp-hero .lede { margin: 0 auto; }
+
+.depts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 26px;
+}
+.dept {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: var(--ground-2);
+  border-radius: var(--radius);
+  padding: 26px 26px 22px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.dept:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+.dept:focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; }
+.dept h3 {
+  font-family: var(--font-display);
+  font-size: 1.34rem;
+  font-weight: 600;
+  letter-spacing: -0.014em;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.dept p { margin: 0; font-size: .88rem; line-height: 1.75; color: var(--ink-mid); }
+.dept-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 26px;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.dept-facts div { display: flex; gap: 6px; align-items: baseline; }
+.dept-facts dt { font-size: .76rem; color: var(--ink-dim); }
+.dept-facts dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .92rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.dept-go {
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--flag);
+}
+.dept-go::after { content: " →"; }
+.dept--soon { border: 1px dashed var(--wire); background: var(--ground); }
+.dept--soon h3, .dept--soon p { color: var(--ink-dim); }
+.dept--soon .dept-go { color: var(--ink-dim); }
+.dept--soon .dept-go::after { content: ""; }
+
+.sp-more { margin-top: 26px; font-size: .86rem; }
+.sp-more a { font-weight: 600; text-decoration: none; }
+.sp-more a:hover { text-decoration: underline; }
+</style>
+
+<div class="layout" id="top">
+<!--PARENT_NAV-->
+  <div class="shell">
+
+    <header class="sp-hero">
+      <div class="sp-mark">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)"
+             stroke="currentColor" stroke-width="2.1" stroke-linecap="round">
+            <path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/>
+            <path d="M22.6 22.3v16.6"/>
+          </g>
+        </svg>
+      </div>
+      <h1>Saito Production</h1>
+      <p class="lede">
+        作ったものと、作り方と、確かめた数字を置いておく場所。
+        部ごとに分けています。
+      </p>
+    </header>
+
+    <div class="stage">
+      <h3>部</h3>
+      <p>いまは Houdini 研究部だけが動いています。</p>
+    </div>
+<!--SP_DEPTS-->
+
+    <div class="stage">
+      <h3>最近やったこと</h3>
+      <p>直近の実験6件。押すとその記録へ飛びます。</p>
+    </div>
+<!--SP_RECENT-->
+    <p class="sp-more"><a href="<!--HOME_URL-->#experiments">実験を全部見る（<!--EXP_COUNT--> 件）</a></p>
+
+    <div class="stage">
+      <h3>新しい手順</h3>
+      <p>同じものを自分で組むための手順書。1段ごとに図が付いています。</p>
+    </div>
+<!--SP_GUIDES-->
+    <p class="sp-more"><a href="<!--HOME_URL-->#guides">手順を全部見る（<!--GUIDE_COUNT--> 本）</a></p>
+
+    <footer>
+      <p>
+        このページは <code>build_site.py</code> が生成しています。
+        中身は実験の記録から自動で流れてくるので、手で書き足すところはありません。
+      </p>
+    </footer>
+  </div>
+</div>

@@ -32,6 +32,7 @@
 
   --gutter: 58px;
   --bar: 52px;
+  --bar-top: 38px;
   color-scheme: light;
 }
 
@@ -75,24 +76,78 @@ a { color: var(--flag); text-underline-offset: 2px; }
   gap: 22px;
 }
 
-.logo {
+/* ---------- 上段（どの部にいるか） ----------
+
+   親子ができたので、「部を移る」と「部の中の節を移る」を段で分ける。
+   1列に混ぜると、どちらの移動なのか読み手に区別がつかない。 */
+
+.sidenav .nav-top {
+  border-bottom: 1px solid var(--wire-dim);
+  background: rgba(255, 255, 255, 0.72);
+}
+.sidenav .nav-top-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+  height: var(--bar-top);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sidenav .nav-brand {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
+  flex: none;
   text-decoration: none;
   color: var(--ink);
-  flex: none;
 }
-.logo svg { display: block; width: 22px; height: 22px; }
-.logo .logo-text {
+.sidenav .nav-brand svg { display: block; width: 19px; height: 19px; }
+.sidenav .nav-brand span {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.88rem;
-  letter-spacing: -0.01em;
+  font-size: 0.8rem;
+  letter-spacing: -0.006em;
   white-space: nowrap;
 }
-.logo:hover { opacity: 0.65; }
-.logo:focus-visible { outline: 2px solid var(--flag); outline-offset: 4px; border-radius: 4px; }
+.sidenav .nav-brand:hover { opacity: 0.62; }
+.sidenav .nav-brand:focus-visible { outline: 2px solid var(--flag); outline-offset: 4px; border-radius: 5px; }
+
+.sidenav .nav-depts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  min-width: 0;
+}
+.sidenav .nav-depts::-webkit-scrollbar { display: none; }
+.sidenav .nav-depts a,
+.sidenav .nav-depts .soon {
+  display: block;
+  font-size: 0.76rem;
+  line-height: 1;
+  padding: 6px 11px;
+  border-radius: 980px;
+  color: var(--ink-dim);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.sidenav .nav-depts a:hover { background: var(--ground-2); color: var(--ink); }
+.sidenav .nav-depts a[aria-current="page"] { background: var(--ground-2); color: var(--ink); font-weight: 600; }
+.sidenav .nav-depts a:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.sidenav .nav-depts .soon { color: var(--wire); cursor: default; }
+.sidenav .nav-depts .soon small {
+  font-size: 0.86em;
+  margin-left: 5px;
+  padding: 1px 6px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 980px;
+}
 
 .sidenav ul {
   list-style: none;
@@ -137,7 +192,8 @@ a { color: var(--flag); text-underline-offset: 2px; }
 
 @media (max-width: 720px) {
   .nav-inner { gap: 12px; padding: 0 16px; }
-  .logo .logo-text { display: none; }
+  .sidenav .nav-top-inner { gap: 10px; padding: 0 16px; }
+  .sidenav .nav-depts .soon { display: none; }
   .layout > .shell, .shell { padding: 28px 18px 72px; }
 }
 
@@ -751,7 +807,7 @@ h2 {
   grid-template-columns: var(--gutter) minmax(0, 1fr);
   gap: 0 22px;
   padding-bottom: 46px;
-  scroll-margin-top: 70px;
+  scroll-margin-top: 106px;
 }
 
 .badge {
@@ -1009,7 +1065,7 @@ pre code {
 }
 .gloss-nav a:hover { background: var(--ink); color: #ffffff; }
 
-.gloss-cat { margin-top: 44px; scroll-margin-top: 70px; }
+.gloss-cat { margin-top: 44px; scroll-margin-top: 106px; }
 .gloss-cat h3 {
   font-family: var(--font-display);
   font-size: 1.5rem;
@@ -1304,12 +1360,13 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .nav-icon:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 .nav-burger { display: none; }
 
-/* スマホではタブを畳んで、ハンバーガーに入れる */
+/* スマホではタブを畳んで、ハンバーガーに入れる。
+   上段（部の切り替え）は畳まない。どこにいるかが分からなくなるため */
 @media (max-width: 720px) {
   .sidenav > .nav-inner > ul { display: none; }
   .nav-burger { display: grid; }
-  .nav-inner { justify-content: space-between; }
-  .logo .logo-text { display: inline; font-size: 0.82rem; }
+  .nav-inner { justify-content: flex-end; }
+  .sidenav .nav-brand span { display: inline; font-size: 0.78rem; }
 }
 
 /* ---------- 全画面メニュー（スマホ） ---------- */
