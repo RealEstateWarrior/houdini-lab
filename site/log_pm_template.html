@@ -3068,6 +3068,7 @@
           <li><strong>結び付けても、皮に増える属性は1つだけだった。</strong><code>boneCapture</code>。これが「この点はどの骨にどれだけ従うか」を持つ。<strong>骨と皮は別々の<button class="term" data-term="ジオメトリ">ジオメトリ</button>のまま、この属性1つでつながっている。</strong></li>
           <li><strong>曲げると体積は減る。</strong>90度で <span class="hi">27.13%</span>、120度で 40.69%。<strong>「腕を曲げると肘が痩せる」は、この数字のこと。</strong></li>
           <li><strong>減り方には、きれいな式があった。</strong>減った分を (1 − cos θ) で割ると6通りすべてで <span class="hi">27.1284</span>。<strong>体積の減り = 27.1284% × (1 − cos θ)</strong>。</li>
+          <li><strong>【補足・実験060】この係数は、形の大きさによらない定数だった。</strong><a href="#exp060">実験060</a>の点検で、骨の長さを 1.0 → 1.5、皮の半径を 0.32 → 0.5、高さを 2.0 → 3.0 に変えて測り直したところ、係数は<strong>小数点以下4桁までまったく同じ 27.1284</strong>で、角度6通りのばらつきも 0.0000 だった。<strong>「この筒ではこうなる」ではなく「Linear で混ぜるとこうなる」という、やり方そのものの性質。</strong></li>
           <li><strong>式が立つと、測っていない角度も言える。</strong>1 − cos 90° = 1 なので、90度でちょうど係数そのものになる。180度なら 54.26% になるはず。</li>
           <li><strong>原因は <code>maxinfluences</code> が既定で 2 だったこと。</strong>1つの点が2本の骨に従うので、関節の近くで2つの行列が混ざる。<strong>混ざった結果は、どちらの行列でもない縮んだ位置になる。</strong></li>
           <li><strong>1本にすると、体積の減りは 27.13% → <span class="hi">0.85%</span>。</strong>根元の点の移動も 0.443 → <span class="hi">0.000000000</span>。<strong>根元がぴくりとも動かなくなる。</strong></li>
@@ -3517,6 +3518,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><strong>式は関節が増えても同じだった。</strong>届かない側では実測と予測の差が <span class="hi">0.000000000</span>。<strong>届く距離＝骨の本数×長さ。</strong></li>
+          <li><strong>【補足・実験060】正しい言い方は「長さの合計」。</strong>この実験は骨1本の長さが 1.0 だったので「本数」とも読めたが、<a href="#exp060">実験060</a>で長さを 0.7 にして測り直したところ、届く距離は合計長ちょうど（差 0.000000000）だった。</li>
           <li><strong>骨の長さは全24通りで幅 0.000000000。</strong>関節が16本つながっていても1本も伸び縮みしない。<strong><a href="#exp055">実験055</a>の結論が長い鎖でもそのまま成り立つ。</strong></li>
           <li><strong>ただし届く側の誤差はゼロではない。</strong>IK は繰り返して近づける解き方なので、わずかに残る。<strong>二骨IK（実験055）が全桁一致だったのとは違う。</strong>あちらは一発で解けるが、こちらは近づけていく。</li>
           <li><strong>残る誤差は鎖が長いほど大きい。</strong>骨2本で 0.000076、16本で 0.002775、32本で <span class="hi">0.006901</span>。<strong>本数を2倍にすると誤差もおよそ2倍。</strong></li>
@@ -3817,6 +3819,106 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <li><strong>つまり obj で渡せるのは「形・色・UV」まで。</strong>骨の名前も、重みも、自作の値も渡らない。<strong><a href="#exp058">実験058</a>の「リグは渡せない」が、別の角度からも確かめられた。</strong></li>
           <li><strong>点だけの<button class="term" data-term="ジオメトリ">ジオメトリ</button>も渡せる。</strong>50点が 50点で戻る。<strong>ばらまいた位置を他のソフトへ渡す、という使い方はできる。</strong></li>
           <li>測り方について。<strong>1種類だけを持つジオメトリを5通り作って、1つずつ往復させた。</strong>全部を1つに混ぜると、何が原因で何が落ちたのか分からなくなる。<strong>分けて測る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
+
+    <!-- ===================== 060 ===================== -->
+    <article class="entry entry--current" id="exp060">
+      <div class="badge">060</div>
+      <div class="body">
+        <span class="chip chip--tool">点検</span>
+        <h2>031〜059 の振り返り点検 — 6件すべて一致。1件は「もっと強い結論」に変わった</h2>
+        <p class="path">条件を変えて測り直す &nbsp;·&nbsp; 同じ条件で走らせ直しても意味がない</p>
+
+        <div class="prose">
+          <p>
+            30件ごとの点検。<a href="#exp030">実験030</a>では 001〜029 を点検した。
+            今回は 031〜059。
+          </p>
+          <p>
+            <strong>同じ条件で走らせ直しても意味がない。</strong>
+            同じ結果が出るだけで、それは「再現した」だけであって「正しい」とは言えない。
+            だから<strong>条件を変えて測る</strong>。
+            式として書いたものは、数字を変えても同じ式に乗るはずだ。
+            <strong>乗らなければ、それは式ではなく偶然だった。</strong>
+          </p>
+        </div>
+
+        <p class="label">点検のまとめ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>実験</th><th>確かめたこと</th><th>もとの記録</th><th>測り直し</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td><a href="#exp042">042</a></td><td>球（40×40）の表面積</td><td class="num">12.53039</td><td class="num">12.530387</td><td class="hi">一致</td></tr>
+              <tr><td><a href="#exp042">042</a></td><td>density は面積1あたりの本数</td><td class="num">99.678（半径1）</td><td class="num">100.556 / 99.678 / 100.755</td><td class="hi">一致</td></tr>
+              <tr><td><a href="#exp045">045</a></td><td>width は直径（比 ≒ 1.0）</td><td class="num">0.9969〜1.0019</td><td class="num">0.9999</td><td class="hi">一致</td></tr>
+              <tr><td><a href="#exp052">052</a></td><td>体積の減り = 係数 × (1 − cos θ)</td><td class="num">係数 27.1284、幅 0.0002</td><td class="num">係数 27.1284、幅 0.0000</td><td class="hi">一致</td></tr>
+              <tr><td><a href="#exp056">056</a></td><td>届く距離 = 骨の長さの合計</td><td class="num">骨の本数（長さ1）</td><td class="num">差の最大 0.000000000</td><td class="hi">一致</td></tr>
+              <tr><td><a href="#exp057">057</a></td><td>ノード数＝点数、配線数＝プリミティブ数</td><td>一直線の足し算で確認</td><td class="num">枝分かれでも 5点 / 6プリミティブ</td><td class="hi">一致</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">1. density は土台の大きさによらないか（実験042）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>半径</th><th>面積</th><th>density</th><th>出た本数</th><th>本数 ÷ 面積</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">3.13260</td><td class="num">100</td><td class="num">315</td><td class="num hi">100.556</td></tr>
+              <tr><td class="num">1.0</td><td class="num">12.53039</td><td class="num">100</td><td class="num">1,249</td><td class="num hi">99.678</td></tr>
+              <tr><td class="num">2.0</td><td class="num">50.12155</td><td class="num">100</td><td class="num">5,050</td><td class="num hi">100.755</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>面積が16倍になっても比は変わらない。</strong>
+          幅 1.077 はばらまきの乱数によるもの。
+        </p>
+
+        <p class="label">2. 体積の減りの係数は、形を変えても同じか（実験052）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>角度</th><th>体積</th><th>減った分</th><th>÷ (1 − cos θ)</th></tr></thead>
+            <tbody>
+              <tr><td class="num">15°</td><td class="num">2.307839</td><td class="num">0.9244%</td><td class="num hi">27.1284</td></tr>
+              <tr><td class="num">30°</td><td class="num">2.244710</td><td class="num">3.6345%</td><td class="num hi">27.1284</td></tr>
+              <tr><td class="num">45°</td><td class="num">2.144285</td><td class="num">7.9457%</td><td class="num hi">27.1284</td></tr>
+              <tr><td class="num">60°</td><td class="num">2.013410</td><td class="num">13.5642%</td><td class="num hi">27.1284</td></tr>
+              <tr><td class="num">90°</td><td class="num">1.697449</td><td class="num">27.1284%</td><td class="num hi">27.1284</td></tr>
+              <tr><td class="num">120°</td><td class="num">1.381488</td><td class="num">40.6926%</td><td class="num hi">27.1284</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          骨の長さを 1.0 → 1.5、皮の半径を 0.32 → 0.5、高さを 2.0 → 3.0 に変えた。
+          <strong>係数のばらつきは 0.0000</strong>（もとの実験では 0.0002）。
+        </p>
+
+        <p class="label">3. IK の届く距離は、骨の長さを変えても合計になるか（実験056）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>関節</th><th>骨</th><th>合計長</th><th>目標まで</th><th>先端までの距離</th><th>合計長との差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">2</td><td class="num">1.40</td><td class="num">4.20</td><td class="num">1.400000000</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">2.80</td><td class="num">8.40</td><td class="num">2.800000000</td><td class="num hi">0.000000000</td></tr>
+              <tr><td class="num">9</td><td class="num">8</td><td class="num">5.60</td><td class="num">16.80</td><td class="num">5.600000000</td><td class="num hi">0.000000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>6件すべて一致した。訂正が必要な箇所は見つからなかった。</strong><a href="#exp030">実験030</a>（001〜029 の点検）では角度の測り方の食い違いが1件見つかったが、今回は無い。</li>
+          <li><strong>そして1件は、もとの結論より強いことが言えるようになった。</strong>実験052の係数 27.1284 は、骨の長さを 1.5倍、皮の半径を 1.56倍、高さを 1.5倍にしても<strong>小数点以下4桁までまったく同じ</strong>。ばらつきも <span class="hi">0.0000</span>。</li>
+          <li><strong>つまり 27.1284% は形の大きさによらない定数だった。</strong>「この筒ではこうなる」ではなく<strong>「Linear で混ぜるとこうなる」という、やり方そのものの性質</strong>。もとの記事では「この条件で」としか言えなかった。</li>
+          <li><strong>density は土台を変えても「面積あたりの本数」だった。</strong>面積が16倍になっても比は変わらない。</li>
+          <li><strong>球の面積は、別のやり方でも 12.530387。</strong>もとの記録と小数点以下5桁まで一致。真球 12.566371 の <span class="hi">99.71%</span>で、<button class="term" data-term="ポリゴン">ポリゴン</button>近似のぶん内側に寄る（<a href="#exp012">実験012</a>の結論とも合う）。</li>
+          <li><strong>IK の届く距離は、骨の長さを 0.7 にしても合計長ちょうど。</strong>3通りすべてで差が <span class="hi">0.000000000</span>。<strong>「骨の本数」ではなく「長さの合計」が正しい言い方</strong>だと、ここではっきりした。</li>
+          <li><strong>APEX の<button class="term" data-term="ノード">ノード</button>数＝点数は、枝分かれでも成り立つ。</strong>もとの実験は一直線だった。分岐と合流のある形でも 5点 / 6<button class="term" data-term="プリミティブ">プリミティブ</button>。</li>
+          <li><strong>点検の意味について。</strong>同じ条件で走らせ直しても「再現した」ことしか分からない。<strong>条件を変えて同じ式に乗るかを見ると、それが式なのか偶然なのかが分かる。</strong>今回 052 の係数が「形によらない定数」だと分かったのは、条件を変えたから。</li>
         </ul>
       </div>
     </article>
