@@ -340,13 +340,18 @@ DONE = [
      "shots": ["053_linear.png", "053_dualquat.png"],
      "title": "痩せない曲げ方はあった — Dual Quaternion で体積の減りが 154分の1 になる",
      "note": "90度で 27.1284% 対 0.1764%。式に乗るのは Linear だけ（幅0.0001 対 0.0490）"},
+    {"no": "054", "anchor": "exp054", "tags": ["APEX", "リグ", "KineFX", "速さ", "体積"],
+     "log": "log_pm", "hip": "054_skin_cost.hipnc", "thumb": "054_linear.png",
+     "shots": ["054_linear.png", "054_dualquat.png"],
+     "title": "なぜ Linear が既定なのか — 速さではなかった。差は 4%",
+     "note": "41万点で1.04倍。179度ひねると Linear は体積66.8%減。理由は決まらなかった"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "054", "title": "なぜ Linear が既定なのか",
-     "note": "Dual Quaternion との速さの差と、ねじれたときの違いを測る"},
+    {"no": "055", "title": "関節の回る範囲を決める",
+     "note": "kinefx::configurejointlimits。限界を超えたときに何が起きるか測る"},
 ]
 
 PAGES = [

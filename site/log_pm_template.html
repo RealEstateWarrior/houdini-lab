@@ -3188,6 +3188,122 @@
     </article>
 
 
+
+    <!-- ===================== 054 ===================== -->
+    <article class="entry entry--current" id="exp054">
+      <div class="badge">054</div>
+      <div class="body">
+        <span class="chip chip--tool">APEX / リグ</span>
+        <h2>なぜ Linear が既定なのか — 速さではなかった。差は 4%</h2>
+        <p class="path">/obj/rigskin &nbsp;·&nbsp; 分からなかったことを、分からないまま残す</p>
+
+        <div class="prose">
+          <p>
+            <a href="#exp053">実験053</a>で、Dual Quaternion のほうが 154倍も痩せないと分かった。
+            <strong>ではなぜ Linear が既定のままなのか。</strong>
+            考えられるのは2つ。<strong>遅いのか、ねじれで挙動が違うのか。</strong>
+          </p>
+          <p>
+            速さの測り方には<a href="#exp009">実験009</a>の教訓を使う。
+            同じ<button class="term" data-term="ノード">ノード</button>を焼き直すと<button class="term" data-term="キャッシュ">キャッシュ</button>が効いて時間が出ないので、
+            <strong>毎回新しいノードを作って初回の<button class="term" data-term="クック">クック</button>を測る。</strong>
+          </p>
+        </div>
+
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="054_linear.png" alt="真ん中がほぼ潰れた筒"></div>
+            <figcaption>Linear で170度ひねったところ。<strong>真ん中がほぼ潰れる。179度で体積は 66.81% 減る。</strong></figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="054_dualquat.png" alt="太さは保たれるが段差のある筒"></div>
+            <figcaption>Dual Quaternion。同じ170度。<strong>太さは保たれるが、途中に段差ができる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. 速さ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>点の数</th><th>面の数</th><th>Linear</th><th>Dual Quaternion</th><th>倍率</th><th>1点あたりの差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2,880</td><td class="num">2,858</td><td class="num">4.47 ms</td><td class="num">4.36 ms</td><td class="num">0.98</td><td class="num">-36.15 ns</td></tr>
+              <tr><td class="num">11,520</td><td class="num">11,474</td><td class="num">4.81 ms</td><td class="num">5.41 ms</td><td class="num">1.12</td><td class="num">51.68 ns</td></tr>
+              <tr><td class="num">46,080</td><td class="num">45,986</td><td class="num">5.75 ms</td><td class="num">5.76 ms</td><td class="num">1.00</td><td class="num">0.20 ns</td></tr>
+              <tr><td class="num">184,320</td><td class="num">184,130</td><td class="num">9.06 ms</td><td class="num">9.78 ms</td><td class="num">1.08</td><td class="num">3.88 ns</td></tr>
+              <tr><td class="num">414,720</td><td class="num">414,434</td><td class="num">14.66 ms</td><td class="num hi">15.21 ms</td><td class="num hi">1.04</td><td class="num">1.32 ns</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          結び付け（capture）までは先に計算を済ませてあるので、測っているのは<strong>皮を動かす処理だけ</strong>。
+          <strong>倍率は 0.98〜1.12。速さは理由にならない。</strong>
+        </p>
+
+        <p class="label">2. 骨の軸まわりにひねる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>ひねり</th><th>Linear</th><th>減った分</th><th>Dual Quaternion</th><th>減った分</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0°</td><td class="num">0.636074</td><td class="num">0.0000%</td><td class="num">0.636074</td><td class="num">0.0000%</td></tr>
+              <tr><td class="num">45°</td><td class="num">0.574068</td><td class="num">9.7482%</td><td class="num">0.636140</td><td class="num">-0.0105%</td></tr>
+              <tr><td class="num">90°</td><td class="num">0.423900</td><td class="num">33.3568%</td><td class="num">0.635838</td><td class="num">0.0371%</td></tr>
+              <tr><td class="num">135°</td><td class="num">0.273535</td><td class="num">56.9964%</td><td class="num">0.635251</td><td class="num">0.1294%</td></tr>
+              <tr><td class="num">170°</td><td class="num">0.214342</td><td class="num">66.3024%</td><td class="num">0.634689</td><td class="num">0.2177%</td></tr>
+              <tr><td class="num">179°</td><td class="num">0.211093</td><td class="num hi">66.8131%</td><td class="num">0.634541</td><td class="num hi">0.2409%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3. 高さごとに、実際は何度ねじれたか（170度を指定）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>元の高さ</th><th>Linear</th><th>Dual Quaternion</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.00〜0.50</td><td class="num hi">14.1°</td><td class="num hi">58.9°</td></tr>
+              <tr><td class="num">0.50〜0.90</td><td class="num">59.7°</td><td class="num">80.6°</td></tr>
+              <tr><td class="num">0.90〜1.10</td><td class="num">102.6°</td><td class="num">87.9°</td></tr>
+              <tr><td class="num">1.10〜1.50</td><td class="num">142.2°</td><td class="num hi">99.2°</td></tr>
+              <tr><td class="num">1.50〜2.01</td><td class="num">170.0°</td><td class="num hi">170.0°</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>Linear は 14 → 60 → 103 → 142 → 170 と、なめらかにつながっている。</strong>
+          Dual Quaternion は根元がすでに 58.9度ねじれ、
+          <strong>99.2度から 170度へ飛ぶ</strong>。この段差が絵にも出ている。
+        </p>
+
+        <p class="label">4. 180度を越えるとどうなるか</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>ひねり</th><th>Linear 減った分</th><th>Dual Quaternion 減った分</th></tr></thead>
+            <tbody>
+              <tr><td class="num">170°</td><td class="num">66.3024%</td><td class="num">0.2177%</td></tr>
+              <tr><td class="num">179°</td><td class="num hi">66.8131%</td><td class="num">0.2409%</td></tr>
+              <tr><td class="num">181°</td><td class="num">66.8149%</td><td class="num">0.5458%</td></tr>
+              <tr><td class="num">200°</td><td class="num">64.8223%</td><td class="num">0.4665%</td></tr>
+              <tr><td class="num">270°</td><td class="num">33.4623%</td><td class="num">0.1981%</td></tr>
+              <tr><td class="num">350°</td><td class="num hi">0.5167%</td><td class="num">0.0107%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>速さは理由ではなかった。</strong>414,720点で Linear 14.66ms、Dual Quaternion 15.21ms。<span class="hi">倍率 1.04</span>。点1つあたりの差は約 <strong>1.8ナノ秒</strong>。</li>
+          <li><strong>ねじれでも Linear は不利だった。</strong>179度で体積が <span class="hi">66.81%</span> 減る。有名な「飴の包み紙」の形になる。Dual Quaternion は 0.24%。</li>
+          <li><strong>ただし Dual Quaternion にも癖がある。ねじれが根元まで広がる。</strong>根元の帯は Linear で 14.1度、Dual Quaternion で <span class="hi">58.9度</span>。<strong>動かしていない側まで巻き込む。</strong></li>
+          <li><strong>そのうえ途中に段差ができる。</strong>99.2度で止まっている帯のすぐ上が 170度。<strong>その境目が絵でも見える。</strong>Linear はなめらかにつながっている。</li>
+          <li><strong>180度を越えても、体積では破綻しなかった。</strong>181度で 0.55%、270度で 0.20%、350度で 0.01%。<strong>向きまでは調べていないので断定はしない。</strong></li>
+          <li><strong>Linear は 350度で元に戻る。</strong>減りが 0.52% まで下がる。<strong>一周に近づけばねじれていないのと同じだから。</strong>いちばん潰れるのは 179度＝半回転のところ。</li>
+          <li><strong>結局「なぜ Linear が既定なのか」は決まらなかった。</strong>速さでもなく、ねじれの体積でもない。<strong>分かったのは、Dual Quaternion が別の癖を持つことだけ。</strong></li>
+          <li><strong>分からなかったことを、分からないまま残す。</strong>ここで「互換性のためだろう」と書くのは簡単だが、測っていない。<strong>言えるのは、2つの筋が消えたということ。</strong></li>
+          <li>測り方について。<strong>結び付けまでは先に済ませてから測っている。</strong>そうしないと両方に共通の重い処理が混ざる。<strong>比べたいものだけを測る形に作り替える。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>
