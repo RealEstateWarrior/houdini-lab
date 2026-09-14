@@ -2729,6 +2729,134 @@
     </article>
 
 
+
+    <!-- ===================== 050 ===================== -->
+    <article class="entry entry--current" id="exp050">
+      <div class="badge">050</div>
+      <div class="body">
+        <span class="chip chip--tool">APEX / リグ</span>
+        <h2>APEX に入る — 2,220個の部品と、いちばん小さいグラフ</h2>
+        <p class="path">apex.Graph &nbsp;·&nbsp; 新しい分野に入るときの、いつもの順番</p>
+
+        <div class="prose">
+          <p>
+            APEX は Houdini 20 から入ったリグ（骨組み）の仕組み。
+            特徴は<strong><button class="term" data-term="ノード">ノード</button>の<button class="term" data-term="ネットワーク">ネットワーク</button>そのものをデータとして持ち歩ける</strong>こと。
+            <button class="term" data-term="SOP">SOP</button> のようにシーンの中に置かれるのではなく、
+            <button class="term" data-term="ジオメトリ">ジオメトリ</button>の中に入って流れていく。
+          </p>
+          <p>
+            新しい分野なので、<a href="#exp042">実験042</a>でグルームに入ったときと同じ順番で進める。
+            <strong>部品の数を数える・いちばん小さいものを動かす・速さを測る。</strong>
+          </p>
+        </div>
+
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="050_parts.png" alt="APEXの部品を名前空間ごとに数えた棒グラフ"></div>
+            <figcaption><strong>2,220種。</strong>geo と sop の2つだけで 715種を占める。<strong>APEX の中から SOP の処理をそのまま呼べる。</strong></figcaption>
+          </figure>
+        </div>
+
+        <p class="label">1. APEX の部品を数える</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>名前空間</th><th>数</th><th>何のための部品か</th></tr></thead>
+            <tbody>
+              <tr><td>（名前空間なし）</td><td class="num hi">475</td><td>算数・比較・変換など</td></tr>
+              <tr><td>geo</td><td class="num hi">362</td><td>ジオメトリを触る</td></tr>
+              <tr><td>sop</td><td class="num hi">353</td><td>SOP の処理をそのまま呼ぶ</td></tr>
+              <tr><td>array</td><td class="num">264</td><td>配列を扱う</td></tr>
+              <tr><td>dict</td><td class="num">155</td><td>辞書を扱う</td></tr>
+              <tr><td>cop</td><td class="num">131</td><td>画（Copernicus）を扱う</td></tr>
+              <tr><td>graph</td><td class="num">112</td><td>グラフ自身を書き換える</td></tr>
+              <tr><td>rig</td><td class="num">42</td><td>リグの部品</td></tr>
+              <tr><td>component</td><td class="num">41</td><td>リグの構成要素</td></tr>
+              <tr><td>transform</td><td class="num">41</td><td>位置・回転・拡大</td></tr>
+              <tr><td>ch</td><td class="num">39</td><td>チャンネル（アニメーション）</td></tr>
+              <tr><td>skel</td><td class="num">33</td><td>骨組み</td></tr>
+              <tr><td>string</td><td class="num">29</td><td>文字列</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">2. いちばん小さいグラフ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-dark"><img src="050_graph.png" alt="Value2つをAddにつないだAPEXグラフの図"></div>
+            <figcaption><code>Value&lt;Float&gt;</code> を2つ置いて <code>Add&lt;Float&gt;</code> につなぐ。<strong>ノード3個・ポート9個。</strong></figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>1つ目の入力の型</td><td><code>Float</code></td></tr>
+              <tr><td>2つ目の入力の型</td><td class="hi"><code>VariadicArg&lt;Float&gt;</code></td></tr>
+              <tr><td>3 + 4 の答え</td><td class="num hi">7.0</td></tr>
+              <tr><td>枝を生やさず parm だけ入れた場合</td><td class="num">3.0（b が無視される）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <strong>2つ目の入力に値を入れても効かない。</strong>
+          a=3 / b=4 を<button class="term" data-term="パラメータ">パラメータ</button>に入れて実行すると答えは 3.0 になる。
+          パラメータの中身を見ると a も b も入っているのに、b だけ無視される。
+          <strong>エラーも警告も出ない。</strong>
+        </p>
+
+        <p class="label">3. 2つ目の入力は可変長だった</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>足す数</th><th>式</th><th>答え</th><th>合っているか</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td>1 + 2</td><td class="num">3.0</td><td>はい</td></tr>
+              <tr><td class="num">3</td><td>1 + 2 + 3</td><td class="num">6.0</td><td>はい</td></tr>
+              <tr><td class="num">5</td><td>1 + 2 + 3 + 4 + 5</td><td class="num">15.0</td><td>はい</td></tr>
+              <tr><td class="num">10</td><td>1 + … + 10</td><td class="num hi">55.0</td><td>はい</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          <code>addSubPort</code> で枝を生やしてからつなぐ。
+          型の合わないつなぎ方をすると
+          <code>Mismatched type: /b:value:Float → /add:b:VariadicArg&lt;Float&gt;</code>
+          と出るので、そこで気づける。
+        </p>
+
+        <p class="label">4. 速さと、SOP 側の入口</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>測ったこと</th><th>値</th></tr></thead>
+            <tbody>
+              <tr><td>組み立て（compile）</td><td class="num">0.0202 ミリ秒</td></tr>
+              <tr><td>10,000回の実行</td><td class="num">0.0050 秒</td></tr>
+              <tr><td>1回あたりの実行</td><td class="num hi">0.499 マイクロ秒</td></tr>
+              <tr><td>組み立ては実行何回分か</td><td class="num">41回分</td></tr>
+              <tr><td><code>apex::</code> で始まる SOP</td><td class="num">38種</td></tr>
+              <tr><td><code>kinefx::</code> で始まる SOP</td><td class="num">133種</td></tr>
+              <tr><td>SOP 全体</td><td class="num">1,273種</td></tr>
+              <tr><td>2つで SOP 全体の</td><td class="num hi">13.4%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>APEX の部品は 2,220種あった。</strong>名前空間で分けると <span class="hi">geo が 362、sop が 353</span> で、この2つだけで 715種。<strong>APEX の中から SOP の処理をそのまま呼べる</strong>ということで、リグ専用の小さな言語ではない。</li>
+          <li><strong>名前空間の付いていない部品が 475種。</strong>Add / Abs / Clamp / Convert といった算数と変換で、<code>Add&lt;Float&gt;</code> のように<strong>型ごとに別の部品</strong>になっている（Add だけで16種）。</li>
+          <li><strong>いちばん小さいグラフは動いた。</strong>Value を2つ置いて Add につなぎ、3 + 4 = <span class="hi">7.0</span>。ノード3個・ポート9個。</li>
+          <li><strong>2つ目の入力に値を入れても効かない。</strong>答えは 3.0 になる。<strong>エラーも警告も出ない。</strong><a href="#exp044">実験044</a>の「ガイドが1本も使われていなかった」と同じ形の罠。</li>
+          <li><strong>理由は入力の型だった。</strong>a が <code>Float</code>、b が <code>VariadicArg&lt;Float&gt;</code>。b は「いくつでもつなげる可変長の口」で、値を直接入れる場所ではない。<strong><code>addSubPort</code> で枝を生やしてからつなぐ。</strong></li>
+          <li><strong>可変長なので、いくつでも足せる。</strong>枝を10本生やせば 1+2+…+10 = 55.0 がノード1個で出る。<strong>SOP の merge のような考え方が、算数の部品にも入っている。</strong></li>
+          <li><strong>実行は 0.499マイクロ秒。</strong>組み立ては 0.0202ミリ秒＝<strong>実行41回分</strong>。<strong>組み立ては1回きり、実行は毎フレーム、という作りに合っている。</strong></li>
+          <li><strong>SOP 側の入口は 171種。</strong><code>apex::</code> が 38種、<code>kinefx::</code> が 133種で、SOP 全体 1,273種の <span class="hi">13.4%</span>。<strong>骨組みまわりだけで SOP の1割を超えている。</strong></li>
+          <li>この実験は「新しい分野に入るとき、まず何を測るか」の型でもある。<strong>部品の数を数える・いちばん小さいものを動かす・速さを測る。</strong><a href="#exp042">実験042</a>でグルームに入ったときも同じ順番だった。</li>
+        </ul>
+      </div>
+    </article>
+
+
   </div>
 
   <footer>

@@ -1,0 +1,131 @@
+{
+  "total_parts": 2220,
+  "plain_parts": 475,
+  "groups": [
+    {
+      "group": "geo",
+      "count": 362
+    },
+    {
+      "group": "sop",
+      "count": 353
+    },
+    {
+      "group": "array",
+      "count": 264
+    },
+    {
+      "group": "dict",
+      "count": 155
+    },
+    {
+      "group": "cop",
+      "count": 131
+    },
+    {
+      "group": "graph",
+      "count": 112
+    },
+    {
+      "group": "rig",
+      "count": 42
+    },
+    {
+      "group": "component",
+      "count": 41
+    },
+    {
+      "group": "transform",
+      "count": 41
+    },
+    {
+      "group": "ch",
+      "count": 39
+    },
+    {
+      "group": "skel",
+      "count": 33
+    },
+    {
+      "group": "string",
+      "count": 29
+    }
+  ],
+  "tiny": {
+    "nodes": 3,
+    "ports": 9,
+    "type_a": "Float",
+    "type_b": "VariadicArg<Float>",
+    "value": 7.0,
+    "ok": true
+  },
+  "variadic": [
+    {
+      "count": 2,
+      "sum": 3.0,
+      "expected": 3.0,
+      "ok": true
+    },
+    {
+      "count": 3,
+      "sum": 6.0,
+      "expected": 6.0,
+      "ok": true
+    },
+    {
+      "count": 5,
+      "sum": 15.0,
+      "expected": 15.0,
+      "ok": true
+    },
+    {
+      "count": 10,
+      "sum": 55.0,
+      "expected": 55.0,
+      "ok": true
+    }
+  ],
+  "parm_only": {
+    "value": 3.0,
+    "parms": {
+      "a": 3.0,
+      "b": 4.0
+    }
+  },
+  "speed": {
+    "runs": 10000,
+    "compile_ms": 0.018399994587525725,
+    "total_s": 0.005264600011287257,
+    "per_run_us": 0.5264600011287257,
+    "compile_in_runs": 34.95041322812045
+  },
+  "sops": {
+    "apex": 38,
+    "kinefx": 133,
+    "all": 1273,
+    "apex_names": [
+      "apex.dev::autorigcomponent::2.0",
+      "apex::addcharacterpicker",
+      "apex::addgroom",
+      "apex::addmldeformer",
+      "apex::addwrinkles",
+      "apex::animationfromskeleton",
+      "apex::autorigbuilder",
+      "apex::autorigcomponent",
+      "apex::autorigcomponent::2.0",
+      "apex::autorigcomponent::3.0"
+    ],
+    "kinefx_names": [
+      "kinefx::adapttoterrain",
+      "kinefx::adapttoterrain::2.0",
+      "kinefx::agentanimationunpack",
+      "kinefx::agentcharacterunpack",
+      "kinefx::agentfromrig",
+      "kinefx::agentfromrigcore",
+      "kinefx::agentposefromrig",
+      "kinefx::attachcontrolgeo",
+      "kinefx::attachjointgeo",
+      "kinefx::attribtransformcompute"
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "title": "実験050 — APEX のいちばん小さいグラフ",
+  "network": "apex::Graph（シーンの中ではなくデータの中にある）",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "v0",
+      "type": "Value<Float>",
+      "pos": [
+        -1.2,
+        3.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "parm": 3.0
+      }
+    },
+    {
+      "name": "v1",
+      "type": "Value<Float>",
+      "pos": [
+        1.2,
+        3.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "parm": 4.0
+      }
+    },
+    {
+      "name": "add",
+      "type": "Add<Float>",
+      "pos": [
+        0.0,
+        1.4
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "a": "Float",
+        "b": "VariadicArg<Float>"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "v0",
+      "from_output": 0,
+      "to": "add",
+      "to_input": 0
+    },
+    {
+      "from": "v1",
+      "from_output": 0,
+      "to": "add",
+      "to_input": 1
+    }
+  ]
+}
