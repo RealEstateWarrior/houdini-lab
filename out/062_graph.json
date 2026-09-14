@@ -1,0 +1,152 @@
+{
+  "title": "実験062 — MPM でぶつける",
+  "network": "/obj/mpm",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        -4.518,
+        3.313
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ty": 3.0
+      }
+    },
+    {
+      "name": "container",
+      "type": "mpmcontainer",
+      "pos": [
+        2.824,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.12,
+        "sizex": 8.0,
+        "sizey": 6.0,
+        "sizez": 8.0,
+        "centery": 2.0
+      }
+    },
+    {
+      "name": "source",
+      "type": "mpmsource",
+      "pos": [
+        -3.389,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "materialpreset": 10
+      }
+    },
+    {
+      "name": "ground",
+      "type": "box",
+      "pos": [
+        0.565,
+        2.861
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 6.0,
+        "sizey": 0.4,
+        "sizez": 6.0,
+        "ty": -0.2
+      }
+    },
+    {
+      "name": "collider",
+      "type": "mpmcollider",
+      "pos": [
+        0.565,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "solve",
+      "type": "mpmsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "remaptocolor1cr": 0.20000000298023224,
+        "remaptocolor1cb": 1.0,
+        "remaptocolor2pos": 0.25,
+        "remaptocolor2cg": 0.8500000238418579,
+        "remaptocolor2cb": 1.0,
+        "remaptocolor3pos": 0.5,
+        "remaptocolor3cg": 1.0,
+        "remaptocolor3cb": 0.10000000149011612,
+        "remaptocolor4pos": 0.75,
+        "remaptocolor4cr": 0.949999988079071,
+        "remaptocolor4cg": 1.0,
+        "remaptocolor5pos": 1.0,
+        "remaptocolor5cr": 1.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "source",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "source",
+      "to_input": 1
+    },
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "collider",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "collider",
+      "to_input": 1
+    },
+    {
+      "from": "source",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 0
+    },
+    {
+      "from": "collider",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 1
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "solve",
+      "to_input": 2
+    }
+  ]
+}

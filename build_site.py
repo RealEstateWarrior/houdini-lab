@@ -380,13 +380,18 @@ DONE = [
      "shots": ["061_start.png", "061_fall.png"],
      "title": "MPM に入る — 落ち方は式に乗る。ただし時刻が 0.0742フレーム先に進んでいる",
      "note": "粒の数は幅0で完全保存。時刻のずれδ=0.003091秒を入れると誤差が41分の1"},
+    {"no": "062", "anchor": "exp062", "tags": ["MPM", "シミュレーション", "体積", "落とし穴"],
+     "log": "log_fx", "hip": "062_mpm.hipnc", "thumb": "062_sandy.png",
+     "shots": ["062_elastic.png", "062_liquid.png", "062_sandy.png"],
+     "title": "MPM でぶつける — 砂は 16% 膨らみ、既定の塊は 31% 縮む",
+     "note": "数は保たれるが体積は保たれない。materialpreset はスクリプトから効かない"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "062", "title": "MPM でぶつける",
-     "note": "mpmcollider を入れて、跳ね方と体積の保たれ方を測る"},
+    {"no": "063", "title": "MPM の粒を面にする",
+     "note": "mpmsurface で粒からメッシュを作る。粒の間隔と面の細かさの関係"},
 ]
 
 PAGES = [
