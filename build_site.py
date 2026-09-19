@@ -460,13 +460,19 @@ DONE = [
      "shots": ["072_heights.png"],
      "title": "たわむ板は塊を放り上げられるか — Deforming は板の速さを渡す。Rigid はたわみを平均の動きにしてしまう",
      "note": "Deformingは板の速さを渡すが高さは式の30〜76%。Rigidは平均の動き。cv切りはすり抜け"},
+    {"no": "073", "anchor": "exp073",
+     "tags": ["MPM", "シミュレーション", "液体", "落とし穴", "効率化"],
+     "log": "log_fx", "hip": "073_liquid.hipnc", "thumb": "073_top.png",
+     "shots": ["073_top.png", "073_wild.png"],
+     "title": "液体はいつ暴れ出すか — 摩擦の境目ではなく「時間」だった。substep 8 で消えるが 5倍かかる",
+     "note": "摩擦0.25〜1.0は全部暴れる（F28〜46から）。0と1.5以上は静か。substep 8で消えるが4.7〜6.3倍"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "073", "title": "液体が暴れ始める摩擦",
-     "note": "Liquid の摩擦をどこまで上げると暴れ出すかを挟み撃ちで探す"},
+    {"no": "074", "title": "コライダの sticky",
+     "note": "コライダの sticky は、組み込みの地面の sticky と同じ効き方か"},
 ]
 
 PAGES = [
