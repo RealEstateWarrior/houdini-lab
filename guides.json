@@ -1438,6 +1438,961 @@
           "cap": "Sandy。他の材質より大きく広がるので、この1枚だけ枠を合わせ直している。"
         }
       ]
+    },
+    {
+      "id": "cache",
+      "title": "シミュレーションをキャッシュする",
+      "lede": "一度計算したシミュレーションをファイルに書き、次からはそれを読む。同じ煙 40フレームが、計算だと約1秒、読むだけなら 0.06秒。",
+      "hero": "guide_cache_2_loaded.png",
+      "hero_cap": "ファイルから読んだ煙の F40。計算した結果と値まで一致する。",
+      "facts": [
+        [
+          "ノードの数",
+          "5個"
+        ],
+        [
+          "読む速さ",
+          "計算の約17倍"
+        ],
+        [
+          "元になった実験",
+          "実験025・027"
+        ]
+      ],
+      "exp": "025",
+      "hip": "guide_cache.hipnc",
+      "tags": [
+        "エフェクト",
+        "キャッシュ",
+        "効率化"
+      ],
+      "steps": [
+        {
+          "title": "キャッシュしたいシミュレーションを組む",
+          "node": "pyrosolver",
+          "body": "ここでは手順「煙を出す」と同じ4つ（sphere → pyrosource → volumerasterizeattributes → pyrosolver）を使う。<strong>このままだと、フレームを動かすたびに最初から計算し直す。</strong>40フレーム回すと 0.99〜1.01秒かかった。",
+          "img": "guide_cache_1_sim.png",
+          "cap": "計算して出した F40。"
+        },
+        {
+          "title": "下に File Cache をつなぐ",
+          "node": "filecache",
+          "body": "solver の下に <code>filecache</code> をつなぎ、表示フラグをこちらに移す。File Path を Explicit にして、Geometry File に <code>$HIP/guide_cache_cache/smoke.$F4.bgeo.sc</code> と書く。<strong><code>$F4</code> はフレーム番号（0001, 0002 …）に置き換わるので、1フレームが1ファイルになる。</strong><code>$HIP</code> はシーンファイルのあるフォルダ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "書き出す範囲を数値で決める",
+          "node": "f1",
+          "ui_node": "cache",
+          "body": "Evaluate As を Frame Range にすると、Start/End/Inc の範囲が書き出される。<strong>ここの既定は <code>$FSTART</code> / <code>$FEND</code> という式で、シーン全体（新しいシーンなら 1〜240）を指している。</strong>40フレームだけ欲しいなら、式を消してから 1 と 40 を入れる（パラメータを右クリック → Delete Channels で式が消える）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Save to Disk で書き出す",
+          "node": "filecache",
+          "body": "Save to Disk を押すと、範囲の全フレームを計算しながらファイルに書く。<strong>書き終わったら、フォルダのファイル数を数える。</strong>40フレームのつもりなら40個のはず。この手順では 0.15秒で 40個・63.3 MB になった。",
+          "img": "guide_cache_card.png",
+          "cap": "手順のシーンで測った時間とファイル。いちばん下の行は範囲の式を消し忘れたとき。"
+        },
+        {
+          "title": "Load from Disk で読むほうに切り替える",
+          "node": "loadfromdisk",
+          "ui_node": "cache",
+          "body": "Load from Disk をオンにすると、上流を計算せずにファイルを読む。<strong>40フレーム回すのが 0.99秒から 0.06秒になった。</strong>実験025で、読んだ値は計算した値と40フレームすべてで一致する（密度の合計の差 0.0000000000）ことを確かめている。",
+          "img": "guide_cache_2_loaded.png",
+          "cap": "ファイルから読んだ F40。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "範囲に数値を入れたつもりでも、式が残っていた",
+          "body": "実験025では Python から数値を入れたのに式が残り、40フレームのつもりが 240フレーム書かれた。<strong>3,578.9 MB を書いて 28.81秒。</strong>式を消してから入れ直すと 63.3 MB・0.15秒で、56倍の無駄だった。書き出したファイルの数を数えれば一発で気づける。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "上流を変えても、古いファイルを読み続ける",
+          "body": "Load from Disk がオンのままだと、上流のパラメータを変えても画面は変わらない。実験027で pyrosolver の dissipation を半分にしたところ、<strong>30フレーム中29フレームで違う値になり、F30 の密度は +52.9%。</strong>古いキャッシュを読んでいたら、これを正しい値として使っていたことになる。上流を触ったら書き直す。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ファイルを見比べても、正しさは確かめられない",
+          "body": "同じ計算を2回書き出すと、ファイルの合計サイズが 138バイト違った（38,927,958 → 38,928,096、実験027）。中身の値は同じでも、ファイルはバイト単位では一致しない。確かめるなら、読んだ値そのものを比べる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "得をするのは2回目から",
+          "body": "書き出しが 0.15秒で済んだのは、直前に全フレームを計算していたから。まっさらな状態から書き出せば、計算の時間がそのまま乗る（実験025では 1.17秒）。何度も見返すときや、下流をいじるときに効く。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "wind",
+      "title": "粒に風を当てる",
+      "lede": "降ってくる粒を横風で流す。popwind は粒を押し続けるのではなく、風の速さまで追いつかせる。だから流れは途中から一定の速さになる。",
+      "hero": "guide_wind_3_blown.png",
+      "hero_cap": "3秒たったところ。横にも下にも一定の速さになり、流れがまっすぐな斜めの線になった。",
+      "facts": [
+        [
+          "ノードの数",
+          "10個（うち DOP の中に5個）"
+        ],
+        [
+          "計算の時間",
+          "72フレームで 0.51〜0.65秒"
+        ],
+        [
+          "元になった実験",
+          "実験020・029"
+        ]
+      ],
+      "exp": "029",
+      "hip": "guide_wind.hipnc",
+      "tags": [
+        "エフェクト",
+        "パーティクル",
+        "風"
+      ],
+      "steps": [
+        {
+          "title": "粒の出どころを作る",
+          "node": "grid",
+          "body": "1 × 1 の板を y = 3 に置く。この面から粒が生まれる。",
+          "img": "guide_wind_1_emitter.png",
+          "cap": "144点。"
+        },
+        {
+          "title": "DOP ネットワークに粒の部品を置く",
+          "node": "popsolver",
+          "body": "手順「粒を降らせる」と同じく <code>dopnet</code> の中に組む。popsolver の入力には名前があり、<strong>1番目が Object、2番目が Pre-Solve、3番目が Sources (post-solve)。</strong>popobject を1番目に、popsource を3番目につなぐ。popsource には板のパスを入れ、1秒に200個生ませる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "重力を足す",
+          "node": "popforce",
+          "body": "<code>popforce</code> の force に (0, −9.80665, 0) を入れる。popforce は入れた数字をそのまま加速度として足し続ける（実験029）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "風を足す",
+          "node": "popwind",
+          "body": "<code>popwind</code> を popforce の下につなぎ、それを popsolver の2番目（Pre-Solve）へ。力のノードは数珠つなぎにできる。wind を (3, 0, 0)、airresist を 1 にする。<strong>いちばん古い粒の横の速さは、1秒で 2.7978、2秒で 2.9911、3秒で 2.9996。風速の 3 に近づくだけで、超えない。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "SOP 側に取り出して、球を被せる",
+          "node": "copytopoints",
+          "body": "<code>dopimport</code> で取り出す（読み込む対象に * を入れる）。<strong>粒は点なので、そのままではレンダに写らないほど小さい。</strong>半径 0.06 の小さな球を作り、<code>copytopoints</code> で粒の位置に配る。",
+          "img": "guide_wind_2_start.png",
+          "cap": "1秒たったところ。202粒。"
+        },
+        {
+          "title": "時間を進める",
+          "node": "dopimport",
+          "body": "3秒で 602粒。生まれた粒はすぐ風に追いつき、横も下も一定の速さで流れる。そのため流れは曲がらず、まっすぐな斜めの線になる。",
+          "img": "guide_wind_3_blown.png",
+          "cap": "3秒たったところ。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "popforce と popwind は、同じ「3」でも別物",
+          "body": "実験029で、重力なし・最初の1フレームだけ生んだ粒で比べた。popforce に 3 を入れると速さは伸び続け、2.96秒で 8.875。popwind に風速 3 を入れると 2.96秒で 2.6962（風速の 89.87%）で、3 を超えない。<strong>「押す」なら popforce、「その速さで流す」なら popwind。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "風の抵抗は、下向きの動きにもかかる",
+          "body": "この手順では、いちばん古い粒の下向きの速さが 2秒で −2.9338、3秒で −2.9339 と止まった。重力だけなら 3秒で秒速 29 ほどまで加速する計算になる。<strong>popwind の空気抵抗は風の向きだけでなく、粒の動き全体にかかる。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "airresist で追いつく速さが決まる",
+          "body": "実験029で測ると、popwind の抵抗は速さの差の2乗に比例していた。<strong>風速の半分に届くのは 1 ÷（airresist × 風速）秒後。</strong>airresist と風速の4通りの組み合わせすべてで 50.00% になった（重力なしの条件）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "渦（popaxisforce）は既定のままでは何も起きない",
+          "body": "効く範囲が、原点を中心とした半径1の球に決まっている。粒が y = 3 にいると範囲の外で、エラーも出ずに1ミリも動かない。中心と大きさを粒に合わせると回り始めた（実験029）。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "tear",
+      "title": "狙った線で布を破る",
+      "lede": "Vellum の布は、布そのものの拘束では破れない。破りたい線で先に切っておき、glue で貼り直す。重さが貼り目にかかると、しきい値を超えたところで外れる。",
+      "hero": "032_torn.png",
+      "hero_cap": "波打つ線のまま、上下2枚に分かれて下が落ちた（F30）。",
+      "facts": [
+        [
+          "ノードの数",
+          "11個"
+        ],
+        [
+          "計算の時間",
+          "40フレームで 3.59秒"
+        ],
+        [
+          "元になった実験",
+          "実験031・032"
+        ]
+      ],
+      "exp": "032",
+      "hip": "guide_tear.hipnc",
+      "tags": [
+        "エフェクト",
+        "布",
+        "Vellum",
+        "破る"
+      ],
+      "steps": [
+        {
+          "title": "布を1枚立てる",
+          "node": "grid",
+          "body": "Orientation を XY Plane にして縦に立て、4 × 4、40行 × 40列にする。中心は y = 2.2。1,600点の布になる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "破りたい線で、面に印を付ける",
+          "node": "attribwrangle",
+          "ui_node": "mark_cut",
+          "body": "Run Over を Primitives にして、面の重心 <code>@P</code> が線より下かどうかを書く。<code>float line = 2.6 + 0.45 * sin(@P.x * 2.2); i@lower = (@P.y &lt; line) ? 1 : 0;</code> <strong>点ではなく面に付けるのが肝心。</strong>点に付けると1枚の面の4隅で答えが割れ、切り口がぎざぎざに崩れる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "2枚に切り分ける",
+          "node": "blast",
+          "ui_node": "upper",
+          "body": "<code>blast</code> を2つ置き、片方は <code>@lower==1</code>、もう片方は <code>@lower==0</code> を消す。<strong>Group Type は Primitives にする。</strong>2つを <code>merge</code> で合流させると、切り口の点が二重になる。1,600点が 1,666点（+66）になった。",
+          "img": "guide_tear_1_cut.png",
+          "cap": "上下の2枚。色は説明用に付けたもの。"
+        },
+        {
+          "title": "吊るす場所に印を付ける",
+          "node": "attribwrangle",
+          "ui_node": "make_pins",
+          "body": "上端の点をグループにする。<code>if (@P.y &gt; 4.1) { @group_pins = 1; }</code>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "布の拘束を作る",
+          "node": "vellumconstraints",
+          "ui_node": "cloth",
+          "body": "Constraint Type を Cloth にする。伸びの distance 4,706本と、曲げの bend 4,420本ができる。<strong>ここに breaking を入れても布は破れない</strong>（下の「つまずくところ」）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "glue で貼り直す",
+          "node": "vellumconstraints",
+          "ui_node": "glue",
+          "body": "もう1つ <code>vellumconstraints</code> を置き、左右の出力をそのまま左右の入力につなぐ。Constraint Type を Glue にして、Enable Breaking をオンにして Threshold を 1 にする。<strong>重なった点1組につき1本の stitch ができる。今回は 66本で、切って増えた点の数と一致した。</strong>ここがずれていたら、貼り忘れか貼りすぎがある。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "上端を留める",
+          "node": "vellumconstraints",
+          "ui_node": "pin",
+          "body": "3つ目の <code>vellumconstraints</code> で Constraint Type を Pin to Target にし、Group Type を Points、グループを <code>pins</code> にする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "解く",
+          "node": "vellumsolver",
+          "body": "左右の出力を <code>vellumsolver</code> の左右へ。40フレームの計算は 3.59秒。しきい値 1 だと、<strong>66本の stitch は F5 までにすべて外れた。</strong>F40 では 683点と 983点の2つの塊に分かれている。",
+          "img": "032_torn.png",
+          "cap": "F30。切った線の形のまま破れている。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "布の拘束に breaking を入れても、破れない",
+          "body": "実験031・032で、cloth が作る distance 拘束に breaking を入れ、しきい値を 0.000001 まで下げても1本も減らなかった。<strong>breaking が効いたのは glue が作る stitch だけ。</strong>だから「先に切って、あとから貼る」順にする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "しきい値で、外れるかどうかが決まる",
+          "body": "実験032では、しきい値 10 以下なら外れ、100 以上なら外れなかった。10 のときは少しずつ外れる。<strong>外れないときは、貼り目がまったく見えない。</strong>破れるまでは1枚の布として振る舞う。",
+          "img": "032_intact.png",
+          "cap": "しきい値 1000。どこで切ったか分からない（F30）。"
+        },
+        {
+          "title": "blast の Group Type を間違えると、何も消えない",
+          "body": "選択肢は上から Guess from Group / Breakpoints / Edges / Points / Primitives。Python で番号の 1 を入れると Breakpoints になり、何も消えずに素通りした。エラーは出ない。実験032では、合流後の点数がちょうど2倍（3,200）になり、stitch が 1,600本できたことで気づいた。切れていない2枚が丸ごと重なっていた。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "fire",
+      "title": "炎を出して色を付ける",
+      "lede": "煙の組み方を「燃える元」に変えると炎が出る。温度を blackbody() で色に直せば、低いところは橙、高いところは黄色になる。",
+      "hero": "026_fire_color.png",
+      "hero_cap": "温度から色を付けた炎（F30）。確認用の描画でも色が見えるよう、中に点をばらまいて点に色を付けている。",
+      "facts": [
+        [
+          "ノードの数",
+          "7個"
+        ],
+        [
+          "計算の時間",
+          "30フレームで 0.75秒"
+        ],
+        [
+          "元になった実験",
+          "実験023・026"
+        ]
+      ],
+      "exp": "026",
+      "hip": "guide_fire.hipnc",
+      "tags": [
+        "エフェクト",
+        "炎",
+        "色",
+        "VEX"
+      ],
+      "steps": [
+        {
+          "title": "炎の出どころを置く",
+          "node": "sphere",
+          "body": "手順「煙を出す」と同じ小さな球（半径 0.22、y = −0.9、24行 × 24列）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "燃える元を持たせる",
+          "node": "pyrosource",
+          "body": "Initialize のメニューから <strong>Source Burn</strong> を選ぶ。作られる値が <code>burn</code> と <code>temperature</code> になる。<strong>burn が「燃える元」で、ソルバがこれを炎に変える。</strong>density は作られないことに注意（煙の量を測りたいときは temperature を見る）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ボリュームに焼き込む",
+          "node": "volumerasterizeattributes",
+          "body": "attributes に <code>burn temperature</code> と空白区切りで書く。Voxel Size は 0.05。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "炎を出す設定で解く",
+          "node": "pyrosolver",
+          "body": "<strong>Create Flame Field</strong> をオンにすると、燃えている部分の場 <code>flame</code> ができる。煙も出したいなら Set Flame Density をオンにし、Flame Density を 1.0 に上げる（実験023では既定の 0.0001 だとほとんど出なかった）。30フレームの計算は 0.75秒。",
+          "img": "026_fire_grey.png",
+          "cap": "F30。確認用の描画では、炎も白い塊にしか見えない。"
+        },
+        {
+          "title": "中に点をばらまく",
+          "node": "pointsfromvolume",
+          "body": "ボリュームそのものには色を付けず、中に点を置いて点に色を付ける。<strong>点なら確認用の描画でも色が見える。</strong>Point Separation を 0.08 にすると 4,779点になった。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "温度を色にする",
+          "node": "attribwrangle",
+          "body": "Run Over は Points。2本目の入力にソルバをつなぎ、<code>float t = volumesample(1, \"temperature\", @P);</code> でその点の温度を読む。<code>vector c = blackbody(t * 3000.0, 6500) / 6500.0;</code> で色にして、<code>@Cd = c / max(max(c.x, c.y), max(c.z, 1e-6));</code> と<strong>一番大きい成分で割る。</strong>点の温度は 0.32〜0.99 で、3000倍して 968〜2,979K として色にした。",
+          "img": "026_fire_color.png",
+          "cap": "F30。4,779点。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "blackbody() の答えは 0〜1 ではない",
+          "body": "引数は2つで、<code>blackbody(温度, 白として扱う温度)</code>。1つだけだとエラーになる。返る値は、2つ目に 6500 を入れると緑がちょうど 6500 になる大きさで、そのまま色に入れると真っ白になる。6500 で割って初めて見える値になった（実験026）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "1 で切ると、全部黄色になる",
+          "body": "1000K は (1.4015, 1.0000, 0.0806)。0〜1 に丸めると (1.0, 1.0, 0.08) で、赤と緑が同じ＝黄色になる。<strong>一番大きい成分で割れば (1.0, 0.713, 0.058) で、橙赤のまま明るさだけが揃う。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "1500K より下は、同じ色になる",
+          "body": "1000K と 1500K はまったく同じ値だった。赤と青の比は 1000K で 17.39、8000K で 0.7381 と下がっていくが、低いほうは頭打ちになる。炎の一番冷たいところを描き分けたいなら、換算の倍率を上げてこの下限より上に収める。",
+          "img": "026_ramp.png",
+          "cap": "blackbody() の色を温度ごとに並べたもの（実験026）。"
+        },
+        {
+          "title": "shredding は炎があるときだけ効く",
+          "body": "煙だけの設定では、shredding を 0 から 5.0 にしても数字が1桁も動かなかった。燃焼を入れると炎がちぎれて薄く広がり、F40 で炎の合計が 40.1% 減った。<strong>ただし F5 では温度の合計の差が 0.6% しかない。</strong>短いフレームだけ見て「効かない」と決めない（実験023）。",
+          "img": "guide_fire_shred.png",
+          "cap": "F40。枠はそれぞれの広がりに合わせてあり、同じカメラではない。"
+        },
+        {
+          "title": "冷たい点を消す blast は、ここでは空振りした",
+          "body": "温度 0.02 未満の点を消す <code>blast</code> も付けたが、ばらまいた点の温度は最低でも 0.32 で、1点も消えなかった（4,779点のまま）。付ける前に、温度の範囲を一度数えておくと無駄な枝を増やさずに済む。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "hair",
+      "title": "毛を風で揺らす",
+      "lede": "生やした毛を Vellum で動かし、ソルバの風で横へなびかせる。根元の留め方と、曲がりにくさが何に効くかがつまずきどころ。",
+      "hero": "049_windy.png",
+      "hero_cap": "風速 40 で 2秒（F48）。毛がそろって風下へ流れている。",
+      "facts": [
+        [
+          "ノードの数",
+          "9個"
+        ],
+        [
+          "計算の時間",
+          "48フレームで 2.36秒（620本）"
+        ],
+        [
+          "元になった実験",
+          "実験048・049"
+        ]
+      ],
+      "exp": "049",
+      "hip": "guide_hair.hipnc",
+      "tags": [
+        "エフェクト",
+        "毛",
+        "Vellum",
+        "風"
+      ],
+      "steps": [
+        {
+          "title": "毛を生やす面を用意する",
+          "node": "sphere",
+          "body": "30行 × 30列の球を作り、<code>normal</code> で向きを付け、<code>rest</code> で元の位置を覚えさせる。毛はこの向きに生える。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ガイドの毛を立てる",
+          "node": "attribwrangle",
+          "ui_node": "make_guides",
+          "body": "<code>scatter</code> で根元を 120点ばらまき、wrangle で各点から法線の向きに長さ 0.6・10区切りの線を立てる。線には、どの面のどこから生えたか（<code>skinprim</code> / <code>skinprimuv</code>）を持たせておく。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "毛を増やす",
+          "node": "hairgen",
+          "body": "<code>hairgen</code> の1番目に面、2番目にガイドをつなぐ。Density 50、Influence Radius 0.25、Thickness 0.012 で <strong>620本・6,820点</strong>になった。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "根元を留める",
+          "node": "attribwrangle",
+          "ui_node": "mark_roots",
+          "body": "Run Over を Primitives にして、各毛の最初の点に <code>stopped</code> を立てる。<code>int pts[] = primpoints(0, @primnum); setpointattrib(0, \"stopped\", pts[0], 1);</code> <strong>Vellum はこの値が 1 の点を動かさない。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "毛の拘束を作る",
+          "node": "vellumconstraints",
+          "body": "Constraint Type を Hair にする。曲げの Stiffness は 0.05。<strong>質量を計算する設定（<code>domass</code>）をオンにする。</strong>既定はオフで、オフのままだと mass が −1 のまま入る（実験048）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "風を当てて解く",
+          "node": "vellumsolver",
+          "body": "左右の出力を <code>vellumsolver</code> の左右へ。Built-in Wind を有効にして、向きを (1, 0, 0)、Built-in Wind Speed を 40 にする。48フレームの計算は 2.36秒。",
+          "img": "049_windy.png",
+          "cap": "風速 40、F48。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "Pin to Target では根元が留まらなかった",
+          "body": "実験048の組み方では、Pin to Target の拘束を足しても1本も作られず、毛が根元ごと落ちた。group・pingroup、pintype の Permanent / Stopped / Soft をすべて試しても同じ。<strong>根元の点に <code>stopped</code> を直接立てると効いた。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "曲がりにくさは、垂れる距離ではなく形に効く",
+          "body": "曲げの Stiffness を 0 から 1,000,000 まで変えても、毛先の高さは −0.5784 → −0.5852 と 1.2% しか動かなかった。変わったのはまっすぐさで、いちばん曲がった毛で 0.835 → 0.990。<strong>固い毛は「同じところまで垂れるが、まっすぐなまま垂れる」。</strong>100 あたりで頭打ちになる（実験048）。",
+          "img": "049_calm.png",
+          "cap": "風速 0、F48。重力だけで垂れている。"
+        },
+        {
+          "title": "強い風では毛が伸びる",
+          "body": "毛の長さは風速 0 で 0.599089、40 で 0.631461 と 5.9% 伸びた（実験049）。重力だけなら 0.63%。Vellum の拘束は硬いばねで、鎖ではない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "風の効き方は、粒と同じ二次の抵抗に近い",
+          "body": "流され具合は、速度の差の2乗で効く式によく乗った（残差の二乗和が一次の式の 3.5分の1）。実験029の粒と同じ形。ただし最大 0.054 ずれ、完全には説明できない。式の違いがはっきり出るのは弱い風のほうで、風速 2 では一次の式が 0.445、二次の式が 0.303、実測は 0.321 だった。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "grass",
+      "title": "流れの向きに草を寝かせる",
+      "lede": "浸食した地形には、水が流れた向き（flowdir）が残る。それを草の向きに入れると、草が流れに沿って倒れる。ただし flowdir の x と y は入れ替えて使う。",
+      "hero": "036_flow.png",
+      "hero_cap": "900本の草が、浸食の流れの向きに寝ている。",
+      "facts": [
+        [
+          "ノードの数",
+          "11個"
+        ],
+        [
+          "計算の時間",
+          "組んで草まで出して 1.72秒"
+        ],
+        [
+          "元になった実験",
+          "実験034〜036"
+        ]
+      ],
+      "exp": "036",
+      "hip": "guide_grass.hipnc",
+      "tags": [
+        "モデリング",
+        "地形",
+        "ハイトフィールド",
+        "VEX",
+        "複製"
+      ],
+      "steps": [
+        {
+          "title": "地形を作って浸食する",
+          "node": "heightfield_erode",
+          "body": "<code>heightfield</code>（200 × 200、Grid Spacing 2）→ <code>heightfield_noise</code>（Amplitude 120、Element Size 80）→ <code>heightfield_erode</code> とつなぐ。Iterations per Frame は 4。<strong>浸食すると、水が流れた向き <code>flowdir</code> がレイヤーとして残る。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "メッシュにする",
+          "node": "convertheightfield",
+          "body": "<code>convertheightfield</code> で 10,000点のメッシュにする。このとき flow や sediment などのレイヤーは、点のアトリビュートとして一緒に持ち込まれる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "流れの向きを点に読む",
+          "node": "attribwrangle",
+          "ui_node": "read_layers",
+          "body": "Run Over は Points、2番目の入力に浸食後のハイトフィールドをつなぐ。<code>float fx = volumesample(1, \"flowdir.x\", @P); float fy = volumesample(1, \"flowdir.y\", @P); v@flowvec = set(fy, 0.0, fx);</code> <strong>x と y を入れ替えるのが肝心</strong>（下の「つまずくところ」）。名前は flow ではなく flowvec にする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "草の生える場所をばらまく",
+          "node": "scatter",
+          "body": "<code>scatter</code> で 900点。ばらまいた点は、元の点のアトリビュート（flowvec）を引き継ぐ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "向きを N に入れる",
+          "node": "attribwrangle",
+          "ui_node": "aim",
+          "body": "<code>if (length(v@flowvec) &gt; 1e-6) @N = normalize(v@flowvec); else @N = set(0, 1, 0);</code> <strong>copytopoints は形の Z 軸を N に合わせる。</strong>だから N に流れの向きを入れると、草はその向きへ倒れる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "草の形を作って配る",
+          "node": "copytopoints",
+          "body": "<code>tube</code> で根元の半径 0.35・先 0.02・高さ 7 の細い円すいを作り、x に 90度回して Z 軸向きにする（実験008と同じ考え方）。<code>copytopoints</code> で 900点に配り、<code>merge</code> で地形と合わせる。",
+          "img": "036_flow.png",
+          "cap": "900本。すべて流れの向きに寝ている。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "flowdir の x と y は入れ替わっている",
+          "body": "flowdir.x を x、flowdir.y を z に入れると、下り坂との角度は平均 96.48度で、でたらめ（90度）とほぼ同じだった。8通りの並べ方を総当たりして、<strong>set(fy, 0, fx) だけが平均 39.95度・中央 29.94度</strong>まで下がった。他の7通りは 83〜140度（実験036）。",
+          "img": "036_flat.png",
+          "cap": "N を真上にしたとき。全部の草がまっすぐ立つ。"
+        },
+        {
+          "title": "同じ名前のアトリビュートとぶつかる",
+          "body": "convertheightfield はレイヤーを点アトリビュートとして持ち込むので、メッシュの時点で flow という数値1つのアトリビュートがある。<code>v@flow</code> と書くとこれとぶつかり、ベクトルのつもりが数値1つになっていた。新しい名前（flowvec）を使う。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "向きは入れたとおりに正確に向く",
+          "body": "900本すべてで、N に入れた向きとのずれは 0.000度だった。向きがおかしいときは、複製ではなく N に入れた値のほうを疑う。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "carry",
+      "title": "動く板で塊を運ぶ（MPM）",
+      "lede": "MPM の塊を、横に動く板に乗せて運ぶ。コライダは既定では動かない扱いなので、種類を変えないと板をいくら動かしても塊は何も感じない。",
+      "hero": "070_carried.png",
+      "hero_cap": "板の速さ 4、摩擦 1。1フレームおきの位置を重ねたもの（濃い青が最初、薄い紫が最後）。",
+      "facts": [
+        [
+          "ノードの数",
+          "8個"
+        ],
+        [
+          "計算の時間",
+          "40フレームで 2.26秒"
+        ],
+        [
+          "元になった実験",
+          "実験069・070"
+        ]
+      ],
+      "exp": "070",
+      "hip": "guide_carry.hipnc",
+      "tags": [
+        "エフェクト",
+        "MPM",
+        "摩擦",
+        "コライダ"
+      ],
+      "steps": [
+        {
+          "title": "塊と計算範囲を用意する",
+          "node": "mpmsource",
+          "body": "手順「塊をぶつけて潰す（MPM）」と同じく、1辺 1.0 の <code>box</code> を <code>mpmsource</code> で粒にする。<code>mpmcontainer</code> は運ぶ先まで入るよう、Size を (40, 8, 8)、Center を (14, 2, 0) と横長にする。particlesep は 0.12。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "板を作って動かす",
+          "node": "box",
+          "ui_node": "floor",
+          "body": "もう1つ <code>box</code> を (60, 0.4, 6) の板にして、y = −0.2 に置く。Translate の x に式 <code>10.0 + ($FF - 1) / $FPS * 4.0</code> を入れると、1秒に 4 ずつ横へ動く。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "板をコライダにする",
+          "node": "mpmcollider",
+          "body": "入力は 0 = 板、1 = 計算範囲。<strong>Collider Type を Animated (Rigid) にする。</strong>既定の Static のままだと、板を動かしても塊は何も感じない（下の「つまずくところ」）。Friction は 1。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "組み込みの地面を切って解く",
+          "node": "mpmsolver",
+          "body": "入力は 0 = 粒、1 = コライダ、2 = 計算範囲。<strong>ソルバの組み込みの地面（<code>groundactive</code>）はオフにする。</strong>自分で置いた床と重なると、先に触った面の摩擦しか効かない（実験069）。40フレームの計算は 2.26秒で、塊の平均位置は x = 5.34 まで運ばれた。",
+          "img": "070_carried.png",
+          "cap": "板の速さ 4、摩擦 1。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "Collider Type が Static のままだと、何も運ばない",
+          "body": "実験070で板の速さを5通りに変えても、Static のままでは結果が6桁まで同じだった。エラーも警告も出ない。Animated (Rigid) に変えて初めて塊が動き出す。",
+          "img": "070_still.png",
+          "cap": "板の速さ 0 のとき。Static のままだと、板を動かしてもこれと同じ値になる（運ばれた距離 0.001513）。"
+        },
+        {
+          "title": "摩擦 0 の板は、動いていても置き去りにする",
+          "body": "摩擦 0 では、運ばれた距離も最後の横の速さも −0.000000 だった。<strong>板が物を運ぶのは摩擦があるから。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "追いつくまでは式どおり、追いついた先で遅れる",
+          "body": "板の速さに追いつくまでは「½ μ g t²」に 0.4% で乗った。追いついたあとは、摩擦が強いほど式より短くなる（摩擦 2.0 で式の 0.88倍）。板が速いほど強くこすられて塊が潰れ（板の速さ 1 → 8 で、高さ 0.49 → 0.25）、上のほうが遅れるため。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Compute Velocity は、形が変わる板のときだけ要る",
+          "body": "Animated (Rigid) では、Compute Velocity を切っても値は6桁まで同じだった。Animated (Deforming) で切ると、塊は動かなくなった。剛体の動きなら Rigid と Deforming の答えはほぼ同じ（5.336132 対 5.335937）なので、Rigid でよい。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "karma",
+      "title": "Karma で見せる絵を撮る",
+      "lede": "確認は速い OpenGL で、人に見せる1枚は Karma で撮る。材質・ライト・カメラ・Karma の出力ノードの4つを足すだけで撮れるが、白飛びとサンプル数に気をつける。",
+      "hero": "guide_karma_render.png",
+      "hero_cap": "色を塗り分けた地形を Karma で撮ったもの（720 × 460、サンプル 24）。",
+      "facts": [
+        [
+          "足すノード",
+          "6個"
+        ],
+        [
+          "撮る時間",
+          "1枚 3.49秒（起動直後の1枚目は 19.49秒）"
+        ],
+        [
+          "元になった実験",
+          "実験018・024・038"
+        ]
+      ],
+      "exp": "038",
+      "hip": "guide_karma.hipnc",
+      "tags": [
+        "レンダリング",
+        "Karma",
+        "材質",
+        "ライト",
+        "効率化"
+      ],
+      "steps": [
+        {
+          "title": "撮るものに色を付けておく",
+          "node": "attribwrangle",
+          "ui_node": "paint",
+          "body": "ここでは浸食した地形の点に、岩・土・水の3色を <code>@Cd</code> で塗った（堆積 <code>sediment</code> と流れ <code>flow</code> の量で分ける）。<strong>点の色は、材質を割り当てなくても Karma に出る。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "材質を割り当てる",
+          "node": "material",
+          "body": "<code>/mat</code> に <code>principledshader</code> を作り、Use Point Color をオン（既定でオン）、Roughness を 0.75 にする。地形の下に <code>material</code> ノードを足し、Material 欄にその材質のパスを入れる。<strong>色のためではなく、白飛びを抑えるために割り当てる</strong>（下の「つまずくところ」）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ライトを置く",
+          "node": "envlight",
+          "body": "空全体から照らす <code>envlight</code>（強さ 1.0）と、向きのある <code>hlight</code> を Distant にしたキーライト（強さ 2.4、回転 (−38, −32, 0)）の2つ。点光源は距離で弱まるので、既定の hlight のままだと被写体が暗く写る。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "カメラを置く",
+          "node": "cam",
+          "body": "<code>cam</code> を置き、解像度を 720 × 460 にして地形が収まる向きに向ける。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Karma の出力ノードで撮る",
+          "node": "karma",
+          "body": "<code>/out</code> に <code>karma</code> を作り、Camera にさっきのカメラを入れる。Primary Samples と Max Secondary Samples を 24、Denoiser は off、Output Picture に書き出し先を入れてレンダする。<strong>1枚 3.49秒。ただし起動直後の1枚目は 19.49秒かかった。</strong>同じ地形を OpenGL で撮ると 1.29秒（実験038）。",
+          "img": "guide_karma_render.png",
+          "cap": "材質あり・キーライト 2.4。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "材質が無いと、地形の4割が白く飛ぶ",
+          "body": "材質を割り当てないと、地形の画素の 43.4% が真っ白に飛んだ。割り当てると 3.1%（実験038）。<strong>しかもライトを絞っても直らない。</strong>材質ありでキーライトを 2.4 から 0.3 に下げても、白飛びは 3.0% → 2.9% にしか変わらなかった。",
+          "img": "038_karma_nomat.png",
+          "cap": "材質なし。色は出ているが、明るい面が白く飛んでいる。"
+        },
+        {
+          "title": "サンプル数は「上限」で、上げても効かなくなる",
+          "body": "samplesperpixel は「ここまで使ってよい」という上限。64 から 4096 へ64倍にしても、実際に使われたサンプル数は 99 から 567 へ5.7倍にしかならなかった。打ち切りを決めているのは varianceaa_thresh（既定 0.01）。0.0002 まで下げると絵は詰まるが、時間は 5.39秒 → 70.64秒 と13倍になった（実験018）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "1枚の時間の多くは、固定費",
+          "body": "実験018の煙（640 × 360）では、1枚に固定費 2.26秒、1サンプルあたり 7.44ミリ秒。256サンプルでも半分強が固定費だった。<strong>軽い絵を何枚も撮るときは、サンプル数より枚数のほうが時間に効く。</strong>確認の描画は OpenGL で済ませる。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "title": "形を外へ書き出す",
+      "lede": "作った形をファイルにして、他のソフトへ渡す。Apprentice では FBX・glTF・Alembic が使えないので、形を渡すなら obj になる。画面からは File SOP か ROP Geometry Output で書ける。",
+      "hero": "058_formats.png",
+      "hero_cap": "Apprentice で外へ出せる形式（実験058）。9通り試して通ったのは5通り。",
+      "facts": [
+        [
+          "ノードの数",
+          "5個"
+        ],
+        [
+          "書く時間",
+          "338点の球で 0.003〜0.004秒"
+        ],
+        [
+          "元になった実験",
+          "実験058・059"
+        ]
+      ],
+      "exp": "058",
+      "hip": "guide_export.hipnc",
+      "tags": [
+        "書き出し",
+        "obj",
+        "Apprentice",
+        "受け渡し"
+      ],
+      "steps": [
+        {
+          "title": "渡したい形を用意する",
+          "node": "color",
+          "body": "ここでは 16行 × 24列の球に <code>uvunwrap</code> で UV を付け、<code>color</code> で色を塗った。338点・360面で、点に <code>Cd</code>、バーテックスに <code>uv</code> が乗っている。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "File SOP で書く",
+          "node": "file",
+          "body": "<code>file</code> を下につなぎ、File Mode を <strong>Write Files</strong> にする。Geometry File に <code>$HIP/guide_export/shape_file.obj</code> と書く。<strong>形式は拡張子で決まる。</strong>このノードが計算されるたびに、そのときの形がファイルに書かれる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ROP Geometry Output で書く",
+          "node": "rop_geometry",
+          "body": "決まったときに1回だけ書きたいなら、<code>rop_geometry</code> を使う。Output File に <code>$HIP/guide_export/shape_rop.obj</code>、Valid Frame Range を Render Current Frame にして、Save to Disk を押す。<strong>Apprentice でも obj は書けた。</strong>どちらのやり方でも 48,150バイトで、0.003〜0.004秒。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "読み直して確かめる",
+          "node": "file",
+          "body": "書いたファイルを File SOP（Read Files）で読み直すと、338点・360面のまま、<code>Cd</code> と <code>uv</code> も残っていた。<strong>渡す前に一度読み直して、数と中身を数える。</strong>",
+          "img": "059_obj.png",
+          "cap": "obj で往復させたとき、残るものと消えるもの（実験059）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "FBX・glTF・Alembic は Apprentice では書けない",
+          "body": "FBX は「FBX export is not supported in Houdini Apprentice.」と断られる。glTF と Alembic も同じく止まる。USD は書けるが、拡張子が .usdnc に変えられ、そのままでは他のソフトが読めない。<strong>リグやアニメーションを他のソフトへ渡すには、ライセンスを上げるしかない</strong>（実験058）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "obj では、自分で付けたアトリビュートとグループが消える",
+          "body": "残るのは位置・色（Cd）・UV（uv）まで。自作の値（myvec・myfloat など）、pscale、点のグループはすべて消えた。バーテックスにあった法線 N は、読み直すと点に移っていた（実験059）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "NURBS はポリゴンに刻まれて重くなる",
+          "body": "NURBS の球（312点・1面）は、obj にすると 2,232点・2,160面になった。点が 7.2倍、ファイルは同じ球をポリゴンで作ったときの 17倍（705,418バイト 対 40,409バイト）。<strong>NURBS のまま渡そうとしない。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "stl は線を持てない",
+          "body": "骨の線（polyline）を含む形を stl にすると、371点が 365点に減った。stl は三角形の集まりしか持てない。Houdini 同士なら bgeo.sc が位置も名前もそのまま往復し、ファイルも最小（6,231バイト）だった（実験058）。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "foreach",
+      "title": "面ごとの繰り返しを VEX に置き換える",
+      "lede": "「面を1枚ずつ取り出して処理する」は for-each で組めるが、面が多いと重い。点の共有をほどいてから VEX で書けば、同じ結果が数十〜数百倍速く出る。",
+      "hero": "guide_foreach_tiles.png",
+      "hero_cap": "441枚のタイルを、1枚ごとにばらばらの高さへ持ち上げたもの。for-each でも VEX でも、まったく同じ形になる。",
+      "facts": [
+        [
+          "ノードの数",
+          "8個（両方のやり方を並べた数）"
+        ],
+        [
+          "差",
+          "3,969面で約200倍"
+        ],
+        [
+          "元になった実験",
+          "実験009・010"
+        ]
+      ],
+      "exp": "010",
+      "hip": "guide_foreach.hipnc",
+      "tags": [
+        "VEX",
+        "for-each",
+        "効率化",
+        "ループ"
+      ],
+      "steps": [
+        {
+          "title": "板を用意して、点の共有をほどく",
+          "node": "facet",
+          "body": "10 × 10 の <code>grid</code> の下に <code>facet</code> を置き、<strong>Unique Points をオンにする。</strong>隣り合う面が共有していた点が面ごとに分かれ、22行 × 22列の板なら 441面・1,764点になる。これをしないと、隣の面が同じ点を別々の高さへ動かそうとして、面ごとに独立して動かせない（実験010）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "for-each で組む場合",
+          "node": "block_begin",
+          "ui_node": "each_begin",
+          "body": "<code>block_begin</code>（Method は Extract Piece or Point）と <code>block_end</code> で処理を挟む。block_end は Iteration Method を By Pieces or Points、Piece Elements を Primitives、Gather Method を Merge Each Iteration にし、Piece Block Path に block_begin を入れる。何回目かを知るには、Method を Fetch Metadata にした block_begin をもう1つ置く。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "中で1枚ぶんを持ち上げる",
+          "node": "attribwrangle",
+          "ui_node": "lift_one",
+          "body": "ループの中の wrangle で <code>int i = detail(\"op:../each_meta\", \"iteration\", 0); @P.y += rand(i) * 0.5;</code> と書く。<strong>取り出した中では @primnum が常に 0 になる</strong>ので、何枚目かはメタデータから読む。パスの頭の <code>op:</code> を忘れると、エラーも出ずに 0 が返る（実験010）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "同じことを VEX 1つで書く",
+          "node": "attribwrangle",
+          "ui_node": "lift_all",
+          "body": "facet の下に wrangle を1つ置き、Run Over を Primitives にする。<code>float h = rand(@primnum) * 0.5; foreach (int pt; primpoints(0, @primnum)) { vector p = point(0, \"P\", pt); setpointattrib(0, \"P\", pt, p + set(0, h, 0)); }</code> 各面が自分の点を持ち上げる。<strong>for-each と比べると、49面・441面・3,969面のすべてで結果が完全に一致した。</strong>",
+          "img": "guide_foreach_tiles.png",
+          "cap": "441面。VEX で持ち上げたもの。"
+        },
+        {
+          "title": "時間を比べる",
+          "node": "attribwrangle",
+          "ui_node": "lift_all",
+          "body": "上流を少し動かして計算し直させると、3,969面で for-each は 167ミリ秒、VEX は 0.8ミリ秒だった。<strong>for-each は面の数にほぼ比例して遅くなるが、VEX はほとんど変わらない。</strong>形を調整するたびにこの差がかかる。",
+          "img": "guide_foreach_card.png",
+          "cap": "この手順のシーンで2回測った範囲。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "測り方で差の大きさが変わる",
+          "body": "実験010ではノードを毎回作り直して測り、3,969面で 191.87ミリ秒 対 2.23ミリ秒（85.9倍）だった。作り直しには VEX の固定費（約1.8ミリ秒、実験009）が乗る。この手順は作ったあとで計算し直させて測ったので、差が約200倍と大きく出た。<strong>どちらでも、面が多いほど差が開く向きは同じ。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "計算し直しを強制しても、されないことがある",
+          "body": "最初は <code>cook(force=True)</code> で計算し直させて測ったが、VEX 側が 0.02ミリ秒と出た。本当に計算していなかった疑いがあるので、上流の grid をごくわずかに動かして両方を確実に計算し直させ、上流だけの時間を引いて測り直した。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "for-each が必要なのは、1回分が VEX で書けないとき",
+          "body": "1回分の処理の中で複数のノードを通したいときなどは、for-each でしか組めない。VEX 1つで書ける処理なら、置き換える価値がある（実験010）。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }
