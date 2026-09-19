@@ -41,8 +41,12 @@ def article(no, chip, path, lesson, report):
            f'        <span class="chip chip--fx">{html.escape(chip)}</span>',
            f"        <h2>{html.escape(report['title'])}</h2>",
            f'        <p class="path">{html.escape(path)} &nbsp;·&nbsp; {html.escape(lesson)}</p>',
-           "",
-           '        <div class="prose">']
+           ""]
+    if report.get("callout"):
+        # あとの実験で結論に条件が付いたり、訂正したりしたときの注記
+        out += ['        <p class="callout">', f"          {link_exps(report['callout'])}",
+                "        </p>", ""]
+    out += ['        <div class="prose">']
     for para in report["summary"].split("\n\n"):
         out.append(f"          <p>{link_exps(html.escape(para))}</p>")
     out.append("        </div>")
