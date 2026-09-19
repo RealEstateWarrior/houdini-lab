@@ -1,0 +1,420 @@
+{
+  "rig": {
+    "1": {
+      "node": "/obj/rig/make_joints",
+      "wanted": "attribwrangle",
+      "png": "guide_rig_p1.png"
+    },
+    "2": {
+      "node": "/obj/rig/doctor",
+      "wanted": "kinefx::rigdoctor",
+      "png": "guide_rig_p2.png"
+    },
+    "3": {
+      "node": "/obj/rig/pose",
+      "wanted": "kinefx::rigattribwrangle",
+      "png": "guide_rig_p3.png"
+    },
+    "4": {
+      "node": "/obj/rig/skin",
+      "wanted": "tube",
+      "png": "guide_rig_p4.png"
+    },
+    "5": {
+      "node": "/obj/rig/capture",
+      "wanted": "kinefx::jointcaptureproximity",
+      "png": "guide_rig_p5.png"
+    },
+    "6": {
+      "node": "/obj/rig/deform_linear",
+      "wanted": "kinefx::jointdeform",
+      "png": "guide_rig_p6.png"
+    },
+    "7": {
+      "node": "/obj/rig/deform_dq",
+      "wanted": "method",
+      "png": "guide_rig_p7.png"
+    }
+  },
+  "grow": {
+    "1": {
+      "node": "/obj/grow_things/ground",
+      "wanted": "grid",
+      "png": "guide_grow_p1.png"
+    },
+    "2": {
+      "node": "/obj/grow_things/hills",
+      "wanted": "mountain",
+      "png": "guide_grow_p2.png"
+    },
+    "3": {
+      "node": "/obj/grow_things/normals",
+      "wanted": "normal",
+      "png": "guide_grow_p3.png"
+    },
+    "4": {
+      "node": "/obj/grow_things/scatter",
+      "wanted": "scatter",
+      "png": "guide_grow_p4.png"
+    },
+    "5": {
+      "node": "/obj/grow_things/tree",
+      "wanted": "tube",
+      "png": "guide_grow_p5.png"
+    },
+    "6": {
+      "node": "/obj/grow_things/copy_right",
+      "wanted": "copy to points",
+      "png": "guide_grow_p6.png"
+    }
+  },
+  "terrain": {
+    "1": {
+      "node": "/obj/terrain/ground",
+      "wanted": "grid",
+      "png": "guide_terrain_p1.png"
+    },
+    "2": {
+      "node": "/obj/terrain/rough_terrain",
+      "wanted": "mountain",
+      "png": "guide_terrain_p2.png"
+    },
+    "3": {
+      "node": "/obj/terrain/ground_dense",
+      "wanted": "grid",
+      "png": "guide_terrain_p3.png"
+    },
+    "4": {
+      "node": "/obj/terrain/fine_terrain",
+      "wanted": "mountain",
+      "png": "guide_terrain_p4.png"
+    },
+    "5": {
+      "node": "/obj/terrain/detail_terrain",
+      "wanted": "mountain",
+      "png": "guide_terrain_p5.png"
+    }
+  },
+  "hard": {
+    "1": {
+      "node": "/obj/hard_surface/base",
+      "wanted": "box",
+      "png": "guide_hard_p1.png"
+    },
+    "2": {
+      "node": "/obj/hard_surface/cutter",
+      "wanted": "tube",
+      "png": "guide_hard_p2.png"
+    },
+    "3": {
+      "node": "/obj/hard_surface/drill",
+      "wanted": "boolean",
+      "png": "guide_hard_p3.png"
+    },
+    "4": {
+      "node": "/obj/hard_surface/panel",
+      "wanted": "polyextrude",
+      "png": "guide_hard_p4.png"
+    }
+  },
+  "smooth": {
+    "1": {
+      "node": "/obj/smooth_shape/base",
+      "wanted": "box",
+      "png": "guide_smooth_p1.png"
+    },
+    "2": {
+      "node": "/obj/smooth_shape/divide1",
+      "wanted": "subdivide",
+      "png": "guide_smooth_p2.png"
+    },
+    "3": {
+      "node": "/obj/smooth_shape/divide3",
+      "wanted": "subdivide",
+      "png": "guide_smooth_p3.png"
+    },
+    "4": {
+      "node": "/obj/smooth_shape/keep_edges",
+      "wanted": "crease",
+      "png": "guide_smooth_p4.png"
+    }
+  },
+  "vex": {
+    "1": {
+      "node": "/obj/vex_wave/sheet",
+      "wanted": "grid",
+      "png": "guide_vex_p1.png"
+    },
+    "2": {
+      "node": "/obj/vex_wave/make_wave",
+      "wanted": "attribwrangle",
+      "png": "guide_vex_p2.png"
+    },
+    "3": {
+      "node": "/obj/vex_wave/make_color",
+      "wanted": "attribwrangle",
+      "png": "guide_vex_p3.png"
+    },
+    "4": {
+      "node": "/obj/vex_wave/make_wave",
+      "wanted": "attribwrangle",
+      "png": "guide_vex_p4.png"
+    }
+  },
+  "rbd": {
+    "1": {
+      "node": "/obj/rbd/block",
+      "wanted": "box",
+      "png": "guide_rbd_p1.png"
+    },
+    "2": {
+      "node": "/obj/rbd/fracture",
+      "wanted": "rbdmaterialfracture",
+      "png": "guide_rbd_p2.png"
+    },
+    "3": {
+      "node": "/obj/rbd/solver",
+      "wanted": "rbdbulletsolver",
+      "png": "guide_rbd_p3.png"
+    },
+    "4": {
+      "node": "/obj/rbd/solver",
+      "wanted": "rbdbulletsolver",
+      "png": "guide_rbd_p4.png"
+    }
+  },
+  "cloth": {
+    "1": {
+      "node": "/obj/cloth/sheet",
+      "wanted": "grid",
+      "png": "guide_cloth_p1.png"
+    },
+    "2": {
+      "node": "/obj/cloth/make_pins",
+      "wanted": "attribwrangle",
+      "png": "guide_cloth_p2.png"
+    },
+    "3": {
+      "node": "/obj/cloth/constraints",
+      "wanted": "vellumconstraints",
+      "png": "guide_cloth_p3.png"
+    },
+    "4": {
+      "node": "/obj/cloth/solver",
+      "wanted": "vellumsolver",
+      "png": "guide_cloth_p4.png"
+    },
+    "5": {
+      "node": "/obj/cloth/solver",
+      "wanted": "vellumsolver",
+      "png": "guide_cloth_p5.png"
+    }
+  },
+  "smoke": {
+    "1": {
+      "node": "/obj/smoke/emitter",
+      "wanted": "sphere",
+      "png": "guide_smoke_p1.png"
+    },
+    "2": {
+      "node": "/obj/smoke/src",
+      "wanted": "pyrosource",
+      "png": "guide_smoke_p2.png"
+    },
+    "3": {
+      "node": "/obj/smoke/rasterize",
+      "wanted": "volumerasterizeattributes",
+      "png": "guide_smoke_p3.png"
+    },
+    "4": {
+      "node": "/obj/smoke/solver",
+      "wanted": "pyrosolver",
+      "png": "guide_smoke_p4.png"
+    },
+    "5": {
+      "node": "/obj/smoke/solver",
+      "wanted": "pyrosolver",
+      "png": "guide_smoke_p5.png"
+    }
+  },
+  "liquid": {
+    "1": {
+      "node": "/obj/liquid/blob",
+      "wanted": "box",
+      "png": "guide_liquid_p1.png"
+    },
+    "2": {
+      "node": "/obj/liquid/src",
+      "wanted": "flipsource",
+      "png": "guide_liquid_p2.png"
+    },
+    "3": {
+      "node": "/obj/liquid/container",
+      "wanted": "flipcontainer",
+      "png": "guide_liquid_p3.png"
+    },
+    "4": {
+      "node": "/obj/liquid/merge_sources",
+      "wanted": "merge",
+      "png": "guide_liquid_p4.png"
+    },
+    "5": {
+      "node": "/obj/liquid/solver",
+      "wanted": "flipsolver",
+      "png": "guide_liquid_p5.png"
+    }
+  },
+  "pop": {
+    "1": {
+      "node": "/obj/pop/emitter",
+      "wanted": "grid",
+      "png": "guide_pop_p1.png"
+    },
+    "2": {
+      "node": "/obj/pop/popnet",
+      "wanted": "dopnet",
+      "png": "guide_pop_p2.png"
+    },
+    "4": {
+      "node": "/obj/pop/import",
+      "wanted": "dopimport",
+      "png": "guide_pop_p4.png"
+    },
+    "5": {
+      "node": "/obj/pop/import",
+      "wanted": "dopimport",
+      "png": "guide_pop_p5.png"
+    },
+    "3": {
+      "node": "/obj/pop/popnet/solver",
+      "wanted": "popsolver",
+      "png": "guide_pop_p3.png"
+    }
+  },
+  "groom": {
+    "1": {
+      "node": "/obj/groom/skin",
+      "wanted": "sphere",
+      "png": "guide_groom_p1.png"
+    },
+    "2": {
+      "node": "/obj/groom/normals",
+      "wanted": "normal",
+      "png": "guide_groom_p2.png"
+    },
+    "3": {
+      "node": "/obj/groom/rest",
+      "wanted": "rest",
+      "png": "guide_groom_p3.png"
+    },
+    "4": {
+      "node": "/obj/groom/roots",
+      "wanted": "scatter",
+      "png": "guide_groom_p4.png"
+    },
+    "5": {
+      "node": "/obj/groom/make_guides",
+      "wanted": "attribwrangle",
+      "png": "guide_groom_p5.png"
+    },
+    "6": {
+      "node": "/obj/groom/hairgen",
+      "wanted": "hairgen::2.0",
+      "png": "guide_groom_p6.png"
+    },
+    "7": {
+      "node": "/obj/groom/clump",
+      "wanted": "hairclump::2.0",
+      "png": "guide_groom_p7.png"
+    },
+    "8": {
+      "node": "/obj/groom/tint",
+      "wanted": "attribwrangle",
+      "png": "guide_groom_p8.png"
+    }
+  },
+  "heightfield": {
+    "1": {
+      "node": "/obj/terrain/field",
+      "wanted": "heightfield",
+      "png": "guide_heightfield_p1.png"
+    },
+    "2": {
+      "node": "/obj/terrain/noise",
+      "wanted": "heightfield_noise",
+      "png": "guide_heightfield_p2.png"
+    },
+    "3": {
+      "node": "/obj/terrain/erode",
+      "wanted": "heightfield_erode",
+      "png": "guide_heightfield_p3.png"
+    },
+    "4": {
+      "node": "/obj/terrain/mesh",
+      "wanted": "convertheightfield",
+      "png": "guide_heightfield_p4.png"
+    },
+    "5": {
+      "node": "/obj/terrain/normals",
+      "wanted": "normal",
+      "png": "guide_heightfield_p5.png"
+    },
+    "6": {
+      "node": "/obj/terrain/aim",
+      "wanted": "attribwrangle",
+      "png": "guide_heightfield_p6.png"
+    },
+    "7": {
+      "node": "/obj/terrain/scatter",
+      "wanted": "scatter",
+      "png": "guide_heightfield_p7.png"
+    },
+    "8": {
+      "node": "/obj/terrain/copies",
+      "wanted": "copy to points",
+      "png": "guide_heightfield_p8.png"
+    }
+  },
+  "mpm": {
+    "1": {
+      "node": "/obj/mpm/box",
+      "wanted": "box",
+      "png": "guide_mpm_p1.png"
+    },
+    "2": {
+      "node": "/obj/mpm/container",
+      "wanted": "mpmcontainer",
+      "png": "guide_mpm_p2.png"
+    },
+    "3": {
+      "node": "/obj/mpm/source",
+      "wanted": "mpmsource",
+      "png": "guide_mpm_p3.png"
+    },
+    "4": {
+      "node": "/obj/mpm/solve",
+      "wanted": "mpmsolver",
+      "png": "guide_mpm_p4.png"
+    },
+    "5": {
+      "node": "/obj/mpm/source",
+      "wanted": "materialtype",
+      "png": "guide_mpm_p5.png"
+    },
+    "6": {
+      "node": "/obj/mpm/solve",
+      "wanted": "groundfriction",
+      "png": "guide_mpm_p6.png"
+    },
+    "7": {
+      "node": "/obj/mpm/container",
+      "wanted": "particlesep",
+      "png": "guide_mpm_p7.png"
+    },
+    "8": {
+      "node": "/obj/mpm/surface",
+      "wanted": "mpmsurface",
+      "png": "guide_mpm_p8.png"
+    }
+  }
+}

@@ -26,6 +26,34 @@ public class WinCap {
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr h);
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int n);
   [DllImport("user32.dll")] public static extern bool SetProcessDPIAware();
+  [DllImport("user32.dll")] static extern bool EnumWindows(EnumProc cb, IntPtr lp);
+  [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr h, out uint pid);
+  [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr h);
+  [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr h, System.Text.StringBuilder s, int n);
+  delegate bool EnumProc(IntPtr h, IntPtr lp);
+
+  // The process can own several top-level windows (the main window, the
+  // "Houdini Console", floating panes). MainWindowHandle picks whichever was
+  // active last, which was the console. Pick the largest visible window whose
+  // title is not the console instead.
+  public static IntPtr FindMain(uint[] pids) {
+    IntPtr best = IntPtr.Zero; long bestArea = 0;
+    EnumWindows(delegate (IntPtr h, IntPtr lp) {
+      uint pid; GetWindowThreadProcessId(h, out pid);
+      if (Array.IndexOf(pids, pid) < 0 || !IsWindowVisible(h)) return true;
+      var sb = new System.Text.StringBuilder(512); GetWindowText(h, sb, 512);
+      string t = sb.ToString();
+      if (t.Length == 0 || t.IndexOf("Console", StringComparison.OrdinalIgnoreCase) >= 0) return true;
+      RECT r; GetWindowRect(h, out r);
+      long a = (long)(r.Right - r.Left) * (r.Bottom - r.Top);
+      if (a > bestArea) { bestArea = a; best = h; }
+      return true;
+    }, IntPtr.Zero);
+    return best;
+  }
+  public static string Title(IntPtr h) {
+    var sb = new System.Text.StringBuilder(512); GetWindowText(h, sb, 512); return sb.ToString();
+  }
 }
 '@
 if (-not ("WinCap" -as [type])) { Add-Type -TypeDefinition $signature }
@@ -34,14 +62,17 @@ if (-not ("WinCap" -as [type])) { Add-Type -TypeDefinition $signature }
 # in scaled coordinates, so the captured region is offset and the wrong size.
 [WinCap]::SetProcessDPIAware() | Out-Null
 
-$process = Get-Process $ProcessName -ErrorAction SilentlyContinue |
-    Where-Object { $_.MainWindowHandle -ne 0 } | Select-Object -First 1
-if (-not $process) {
-    Write-Output "no visible window found for process: $ProcessName"
+$procs = @(Get-Process $ProcessName -ErrorAction SilentlyContinue)
+if ($procs.Count -eq 0) {
+    Write-Output "no process found: $ProcessName"
     exit 1
 }
-
-$handle = $process.MainWindowHandle
+$pids = [uint32[]]($procs | ForEach-Object { [uint32]$_.Id })
+$handle = [WinCap]::FindMain($pids)
+if ($handle -eq [IntPtr]::Zero) {
+    Write-Output "no visible main window found for process: $ProcessName"
+    exit 1
+}
 # Maximise before capturing. GetWindowRect on a partially covered window still
 # returns the full rect, so anything overlapping it ends up in the screenshot.
 [WinCap]::ShowWindow($handle, 3) | Out-Null       # SW_MAXIMIZE
@@ -74,4 +105,4 @@ $bitmap.Dispose()
 
 Write-Output ("saved: {0}" -f $full)
 Write-Output ("size: {0} by {1}" -f $width, $height)
-Write-Output ("title: {0}" -f $process.MainWindowTitle)
+Write-Output ("title: {0}" -f [WinCap]::Title($handle))

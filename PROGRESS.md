@@ -44,7 +44,7 @@
 | R0 | サムネ70件作り直し（`make_thumbs.py`）・058〜060に図・遅延読み込み・検索に手順 | 完了 |
 | R1 | SPロゴ・親ページ `sp.html`・ナビ1段化 | 完了 |
 | R2 | ★ユーザー: 新リポジトリ `RealEstateWarrior.github.io` を作る（gh が無いので手作業） | 待ち |
-| R3 | ★ユーザー: Houdini GUI で `bridge_server.start()` → 手順15本のノード画面を撮る | 待ち |
+| R3 | ノード画面の撮影。**撮影は完了**（全体 14枚 `out/guide_<id>_ui.png`・各段 78枚 `out/guide_<id>_p<段>.png`、対応表 `out/guide_parm_map.json`）。「模様」だけシーンが無く未撮影。**次: 切り出して手順ページに組み込む** | 撮影済み・組み込みはこれから |
 | R4 | あいまい検索（`search_synonyms.json` 33グループ・表記ゆれ・本文・文の近さ）。親も含めて全体を検索 | 完了 |
 | R5 | Artifacts 版に AI チャット（`sample`。検索画面の「AI に聞く」。根拠は検索上位10件） | 完了（実機での動作確認はユーザー待ち） |
 | R6 | 概要ページ「これまでに作ったもの」をリンク化（実験＋作り方へ直行） | これから |
@@ -154,7 +154,14 @@
   既定のエンコーディングが UTF-8 ではないので文字化けする（2026-09-14 に
   PROGRESS.md を壊した）。書き換えは Edit ツールか Python で行う
 
-## 手順ページのノードグラフ（未完）
+## 手順ページのノードグラフ
+
+- 撮り方: Houdini で `bridge_server.start()` → Houdini 同梱の python で `guide_ui_capture.py all`（全体）と `guide_parm_capture.py all`（各段）
+- **撮影窓は「Console を含まない一番大きい窓」を選ぶ**（`capture_window.ps1`）。MainWindowHandle だと Houdini Console の小窓を撮ってしまった
+- 段とノードの対応は `step.node`（型名かパラメータ名）。同名パラメータが複数あるときは `step.ui_node` で指定
+- パラメータ名の段は、そのパラメータのあるタブを開いてから撮る
+
+### 以前のメモ
 
 - 実物の Houdini 画面で撮りたい（`guide_ui_capture.py all`）。道具はできている
 - ただし **PC の画面に Houdini が映っていないと、古い画のまま撮れてしまう**。
