@@ -201,6 +201,14 @@
           "exps": [
             "054"
           ]
+        },
+        {
+          "rule": "粒の値は1粒ずつ読まず、まとめて受け取る",
+          "evidence": "15,591粒の位置を1粒ずつ position() で読むと1フレーム 81.67ms で、MPM の計算そのもの（約 86ms）と同じだけかかった。速さも読むと 226.34ms。pointFloatAttribValues なら 0.57ms、numpy.frombuffer(pointFloatAttribValuesAsString) なら 0.11ms（740倍速い）。読んだ値は6桁まで同じ。",
+          "exps": [
+            "076",
+            "077"
+          ]
         }
       ]
     }

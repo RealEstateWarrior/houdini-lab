@@ -3862,6 +3862,71 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 077 ===================== -->
+    <article class="entry entry--current" id="exp077">
+      <div class="badge">077</div>
+      <div class="body">
+        <span class="chip chip--fx">ツール</span>
+        <h2>測る処理が、計算より重くなっていた — 1粒ずつ読むのをやめると 740倍速い</h2>
+        <p class="path">hou.Geometry &nbsp;·&nbsp; 測る道具が、測られる対象より重くなっていないか確かめる</p>
+
+        <div class="prose">
+          <p><a href="#exp076">実験076</a>で、同じ 15,591粒の MPM が、片方では 4.05秒、もう片方では 20秒かかった。違いは「毎フレーム、全部の粒を Python で読んでいたかどうか」だけだった。測るための処理が、測りたい計算より重くなっていた。</p>
+          <p>読み方を5通り用意して、<a href="#exp070">実験070</a>の動く板（40フレーム）で比べた。読み方ごとに毎回組み直し、計算と読む時間を別々に測った。</p>
+          <p>15,591粒で1フレームあたり、読まなければ 0.01ms。これまでの実験のやり方（1粒ずつ position() を読む）は 81.67ms で、計算そのもの（1フレーム約 86ms）とほぼ同じだけかかる。速さ v も1粒ずつ読むと 226.34ms で、計算の2.6倍。</p>
+          <p>全部を1回で受け取ると一気に軽くなる。pointFloatAttribValues は 0.57ms、文字列で受け取って numpy に渡すと 0.11ms。1粒ずつ読むのと比べて 740倍速い。読んだ値（高さの平均）は、どの読み方でも6桁まで同じだった。</p>
+          <p>粒が少なければ差は小さい。547粒では 1粒ずつでも1フレーム 2.94ms で、計算の数%にとどまる。粒を増やすほど、1粒ずつ読むやり方だけが重くなっていく。</p>
+        </div>
+
+        <p class="label">15,591粒を1フレーム読む時間</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="077_read.png" alt="1粒ずつ読むと、計算と同じか、それ以上の時間がかかる。まとめて受け取れば 1% " loading="lazy" decoding="async"></div>
+            <figcaption>1粒ずつ読むと、計算と同じか、それ以上の時間がかかる。まとめて受け取れば 1% 未満。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">「計算と比べて」は、40フレーム読む時間 ÷ 読まないときの計算の時間（3.457秒）。</p>
+
+        <p class="label">粒の数と読み方（実験070の動く板・40フレーム）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔</th><th>粒</th><th>読み方</th><th>計算の秒</th><th>読む秒</th><th>1フレームで読む ms</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.12</td><td class="num">547</td><td>読まない</td><td class="num">2.226</td><td class="num">0.194</td><td class="num">4.86</td></tr>
+              <tr><td class="num">0.12</td><td class="num">547</td><td>1粒ずつ位置</td><td class="num">1.571</td><td class="num">0.118</td><td class="num">2.94</td></tr>
+              <tr><td class="num">0.12</td><td class="num">547</td><td>1粒ずつ位置と v</td><td class="num">1.575</td><td class="num">0.326</td><td class="num">8.15</td></tr>
+              <tr><td class="num">0.12</td><td class="num">547</td><td>まとめて</td><td class="num">1.641</td><td class="num">0.002</td><td class="num">0.06</td></tr>
+              <tr><td class="num">0.12</td><td class="num">547</td><td>numpy</td><td class="num">1.814</td><td class="num">0.003</td><td class="num">0.07</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td>読まない</td><td class="num">2.813</td><td class="num">0.000</td><td class="num">0.01</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td>1粒ずつ位置</td><td class="num">2.929</td><td class="num">0.971</td><td class="num">24.27</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td>1粒ずつ位置と v</td><td class="num">3.316</td><td class="num">2.726</td><td class="num">68.15</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td>まとめて</td><td class="num">2.835</td><td class="num">0.007</td><td class="num">0.19</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td>numpy</td><td class="num">2.662</td><td class="num">0.003</td><td class="num">0.08</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td>読まない</td><td class="num">3.457</td><td class="num">0.000</td><td class="num">0.01</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td>1粒ずつ位置</td><td class="num">3.975</td><td class="num">3.267</td><td class="num">81.67</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td>1粒ずつ位置と v</td><td class="num">4.872</td><td class="num">9.054</td><td class="num">226.34</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td>まとめて</td><td class="num">3.575</td><td class="num">0.023</td><td class="num">0.57</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td>numpy</td><td class="num">3.237</td><td class="num">0.004</td><td class="num">0.11</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「計算」は geometry() を呼んで計算させた時間、「読む」はそのあと値を取り出した時間。読み方ごとに組み直している。間隔 0.12 の「読まない」の読む時間 0.194秒は、最初の1回だけ numpy を読み込んだ時間（読み方の関数の中で import している）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>1粒ずつ読むと、計算と同じだけの時間がかかる。</strong>15,591粒で1フレーム 81.67ms。計算そのもの（約 86ms）とほぼ同じ。速さ v も1粒ずつ読むと 226.34ms で、計算の2.6倍。</li>
+          <li><strong>まとめて受け取れば、ほぼ0になる。</strong>pointFloatAttribValues で 0.57ms、pointFloatAttribValuesAsString を numpy.frombuffer に渡すと 0.11ms。1粒ずつより 740倍速い。</li>
+          <li><strong>読んだ値は変わらない。</strong>位置だけを読んだ3通り（1粒ずつ・まとめて・numpy）で、最後の高さの平均は 0.338196 / 0.231387 / 0.205530（間隔 0.12 / 0.06 / 0.04）と、6桁まで同じだった。</li>
+          <li><strong>粒が少なければ気にしなくてよい。</strong>547粒では1粒ずつでも1フレーム 2.94ms。粒が 8.4倍（4,580）で 24.27ms、28.5倍（15,591）で 81.67ms と、粒の数にほぼ比例して重くなる。</li>
+          <li><strong>読む処理が重いと、計算の時間も少し伸びた。</strong>15,591粒で、読まないとき 3.457秒、1粒ずつ位置と v を読んだとき 4.872秒。なぜかは確かめていない（メモリの出し入れなどが考えられるが、推測）。</li>
+          <li><strong>実験076の「滑る塊は20秒かかった」の大半は、この読む時間だった。</strong>同じ粒の数の動く板は、最初と最後しか読まないので 4.05秒だった。計算の重さを比べるときは、読むのは必要なフレームだけにする。</li>
+          <li><strong>計算の時間には、1回ごとに ±0.3〜0.6秒ほどの揺れがある。</strong>間隔 0.12 で 1.57〜2.23秒。0.1秒を争う比べ方をするなら、何度か測って中央値を取る。</li>
+          <li>実用の結論。<strong>粒や<button class="term" data-term="ポイント">ポイント</button>の値を Python で集計するときは、pointFloatAttribValues（できれば numpy.frombuffer）でまとめて受け取る。</strong>これまでの実験の測り方も、粒が多い場面ではこちらに切り替える。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
