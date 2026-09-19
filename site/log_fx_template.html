@@ -3348,6 +3348,102 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
     </article>
 
 
+
+    <!-- ===================== 071 ===================== -->
+    <article class="entry entry--current" id="exp071">
+      <div class="badge">071</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>回る台は塊をどこまで乗せておけるか — 境目は式の形どおり。ただし摩擦は 0.3〜0.4 ぶんしか効かない</h2>
+        <p class="path">C:/Program Files/Git/obj/spin &nbsp;·&nbsp; 式の形が合っても、定数まで合うとは限らない</p>
+
+        <div class="prose">
+          <p><a href="#exp070">実験070</a>では板をまっすぐ動かした。今度は台を回す。レコード盤の上に物を置いたようなもの。</p>
+          <p>回る台の上の物が一緒に回るには、中心へ向かう力 m ω² r が要る。それを出せるのは摩擦だけで、上限は μ m g。だから ω² r が μ g を超えたところで外へ滑り出すはず。半径 2・摩擦 1.0 なら、境目は ω = √(9.81 ÷ 2) = 2.215 rad/秒。</p>
+          <p>まず回転そのものは正確に伝わった。台に乗っている間の塊の回る速さは、台の 0.98〜1.00 倍。Animated (Rigid) のコライダは、回転もきちんと速度として粒に渡している。</p>
+          <p>ところが境目は外れた。半径 2 では ω 1.25 で乗ったまま、1.30 で滑り出した。式の 2.215 の 0.58 倍しかない。</p>
+          <p>式の形は合っていた。半径を 1 / 2 / 3 / 4 と変えて境目を挟み撃ちで探すと、ω² r が 3.71 / 3.25 / 3.47 / 3.06 とほぼ一定になった。半径が倍なら境目の ω は √2 分の1、という形はそのまま出ている。違うのは定数だけで、μ g = 9.81 のところが 3.06〜3.71。摩擦に直すと 0.31〜0.38 ぶんしか効いていない。</p>
+          <p>摩擦を変えると、弱い摩擦ではほぼ式どおりだった。摩擦 0.25 で境目 ω は式の 0.95倍、0.5 で 0.90倍。ところが 1.0 で 0.58倍、2.0 で 0.47倍。0.5 より上は、摩擦を上げても実効の値が 0.33〜0.44 から上がらない。<a href="#exp067">実験067</a>・069で「強い摩擦ほど式から外れる」と見ていたものが、ここではっきり上限として出た。</p>
+          <p>境目より下でも、塊はゆっくり外へずれる。ω 1.0 で 3秒に 0.039、1.25 で 0.149。止まっているのではなく、少しずつ滑っている。</p>
+        </div>
+
+        <p class="label">境目の下と上</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="071_stay.png" alt="ω 1.0。台と一緒に回る（塊の回る速さは台の 0.9993倍）。3秒で外へ 0" loading="lazy" decoding="async"></div>
+            <figcaption>ω 1.0。台と一緒に回る（塊の回る速さは台の 0.9993倍）。3秒で外へ 0.039 だけずれた。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="071_fling.png" alt="ω 1.5。回りきれずに外へ滑り出し、3秒で半径 5.94 まで出た。式の境目 " loading="lazy" decoding="async"></div>
+            <figcaption>ω 1.5。回りきれずに外へ滑り出し、3秒で半径 5.94 まで出た。式の境目 2.215 より、ずっと遅い回転で滑った。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">1辺 0.6 の塊を半径 2 に置き、台を回した（摩擦 1.0）。3秒ぶんを3フレームおきに重ね、真上から撮った。古いほど青く、新しいほど明るい。内側の円が半径 2、外側の円が台の縁（半径 6）。2枚とも同じカメラ。</p>
+
+        <p class="label">A. 半径 2 で、回す速さを変える（摩擦 1.0。式の境目は ω 2.215）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>台の ω</th><th>外へずれた距離</th><th>塊の ω ÷ 台の ω</th><th>塊が回った角度</th><th>台が回った角度</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.0</td><td class="num">0.0027</td><td class="num muted">—</td><td class="num">0.0000</td><td class="num">0.0000</td><td class="num">3.61</td></tr>
+              <tr><td class="num">0.25</td><td class="num">0.0039</td><td class="num">0.9851</td><td class="num">0.7252</td><td class="num">0.7396</td><td class="num">2.06</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.0072</td><td class="num">0.9827</td><td class="num">1.4244</td><td class="num">1.4792</td><td class="num">2.37</td></tr>
+              <tr><td class="num">0.75</td><td class="num">0.0144</td><td class="num">1.0013</td><td class="num">2.1518</td><td class="num">2.2188</td><td class="num">2.70</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0.0394</td><td class="num">0.9993</td><td class="num">2.8288</td><td class="num">2.9583</td><td class="num">2.91</td></tr>
+              <tr><td class="num">1.25</td><td class="num">0.1488</td><td class="num">1.0000</td><td class="num">3.5217</td><td class="num">3.6979</td><td class="num">2.98</td></tr>
+              <tr><td class="num">1.5</td><td class="num">3.9350</td><td class="num">0.5760</td><td class="num">3.3684</td><td class="num">4.4375</td><td class="num">2.90</td></tr>
+              <tr><td class="num">2.0</td><td class="num">6.7892</td><td class="num">0.2279</td><td class="num">3.4729</td><td class="num">5.9167</td><td class="num">2.98</td></tr>
+              <tr><td class="num">2.4</td><td class="num">11.0868</td><td class="num">0.0911</td><td class="num">3.3178</td><td class="num">7.1000</td><td class="num">2.91</td></tr>
+              <tr><td class="num">3.0</td><td class="num">15.5046</td><td class="num">0.0437</td><td class="num">2.9058</td><td class="num">8.8750</td><td class="num">2.89</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">3秒（72フレーム）回したあとの値。「塊の ω ÷ 台の ω」は、台に乗っていれば 1 になる。</p>
+
+        <p class="label">B. 置く半径を変えて、境目を挟み撃ちで探す（摩擦 1.0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>半径</th><th>境目の ω</th><th>式の境目</th><th>実測 ÷ 式</th><th>ω² r</th><th>実効の摩擦</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num">1.90〜1.95</td><td class="num">3.1321</td><td class="num">0.6146</td><td class="num">3.7056</td><td class="num">0.3777</td></tr>
+              <tr><td class="num">2.0</td><td class="num">1.25〜1.30</td><td class="num">2.2147</td><td class="num">0.5757</td><td class="num">3.2512</td><td class="num">0.3314</td></tr>
+              <tr><td class="num">3.0</td><td class="num">1.05〜1.10</td><td class="num">1.8083</td><td class="num">0.5945</td><td class="num">3.4669</td><td class="num">0.3534</td></tr>
+              <tr><td class="num">4.0</td><td class="num">0.85〜0.90</td><td class="num">1.5660</td><td class="num">0.5587</td><td class="num">3.0625</td><td class="num">0.3122</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">3秒で半径が 1.0 以上外へ動いたら「滑り出した」とした。6回の挟み撃ちで幅 0.05 まで詰めた。式どおりなら ω² r は 9.81 で一定。</p>
+
+        <p class="label">C. 摩擦を変えて、境目を探す（半径 2）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>入れた摩擦</th><th>境目の ω</th><th>式の境目</th><th>実測 ÷ 式</th><th>実効の摩擦</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.25</td><td class="num">1.025〜1.077</td><td class="num">1.1074</td><td class="num">0.9489</td><td class="num">0.2251</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1.386〜1.438</td><td class="num">1.5660</td><td class="num">0.9015</td><td class="num">0.4063</td></tr>
+              <tr><td class="num">1.0</td><td class="num">1.25〜1.30</td><td class="num">2.2147</td><td class="num">0.5757</td><td class="num">0.3314</td></tr>
+              <tr><td class="num">2.0</td><td class="num">1.438〜1.489</td><td class="num">3.1321</td><td class="num">0.4672</td><td class="num">0.4365</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">摩擦 1.0 の行は B と同じもの。式どおりなら「実効の摩擦」は入れた摩擦と同じ値になる。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>回転はきちんと伝わる。</strong>台に乗っている間、塊の回る速さは台の 0.98〜1.00 倍（ω 0.25〜1.25）。Animated (Rigid) のコライダは、平行移動（<a href="#exp070">実験070</a>）だけでなく回転も速度として粒に渡している。</li>
+          <li><strong>境目は式よりずっと早く来た。</strong>半径 2・摩擦 1.0 で、式の境目 ω 2.215 に対して、実際は 1.25〜1.30。0.58倍。</li>
+          <li><strong>式の形は合っている。</strong>半径 1 / 2 / 3 / 4 で ω² r が 3.71 / 3.25 / 3.47 / 3.06 とほぼ一定（平均 3.37、ばらつき ±10%）。「半径が大きいほど、ゆっくり回しても滑る」という向きと比率はそのまま出ている。違うのは定数で、μ g = 9.81 のところが 3.1〜3.7。</li>
+          <li><strong>摩擦は、0.3〜0.4 ぶんしか効いていない。</strong>摩擦 0.25 で実効 0.225、0.5 で 0.406 と、弱いうちはほぼ入れたとおり。ところが 1.0 で 0.331、2.0 で 0.437。0.5 より上は、摩擦を上げても実効の値が上がらない。</li>
+          <li><strong>実験067・069の「強い摩擦ほど式から外れる」と同じ話だった。</strong>滑り落ちる塊（067）や動く板（070）では「強い摩擦で少しずれる」程度に見えていたが、止まっていられるかどうかを問うと、はっきり上限として出る。</li>
+          <li><strong>境目の下でも、塊はゆっくり外へずれる。</strong>ω 1.0 で3秒に 0.039、1.25 で 0.149。回っていない台（ω 0）では 0.0027。完全に止まっているのではなく、少しずつ滑っている。</li>
+          <li><strong>滑り出すと、塊はもう台に追いつかない。</strong>ω 3.0 では塊の回る速さが台の 0.044倍。外へ飛ばされながら、ほとんど回らなくなる。</li>
+          <li>実用の結論。<strong>MPM で「回る台に物を乗せておく」なら、摩擦の値ではなく回す速さで調整する。</strong>摩擦 1.0 を超えて上げても、乗せておける限界はほとんど延びない。目安は ω² r ＜ 3（この場面の粒の細かさ 0.12 で）。</li>
+          <li>測り方について。「滑り出した」を <strong>3秒で半径が 1.0 以上外へ動いたか</strong> で決めた。境目の下でもゆっくりずれるので、この決め方しだいで境目は少し動く。ただ、境目の上ではずれが 1.6〜13.6 と桁違いに大きく、決め方に迷う例はなかった。</li>
+          <li>計算の時間は、108粒・72フレーム（3秒）で 1回 2.1〜4.5秒。計算範囲は 16 × 4 × 16。挟み撃ちの1点ごとに作り直している。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

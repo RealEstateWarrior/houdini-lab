@@ -448,13 +448,19 @@ DONE = [
      "shots": ["070_carried.png", "070_still.png"],
      "title": "動く板は塊をどれだけ運ぶか — 追いつくまでは式どおり。追いついた先で潰れて遅れる",
      "note": "コライダのTypeは既定がStaticで板が動かない。追いつく前は式と0.4%一致"},
+    {"no": "071", "anchor": "exp071",
+     "tags": ["MPM", "シミュレーション", "摩擦", "回転", "検算"],
+     "log": "log_fx", "hip": "071_spin.hipnc", "thumb": "071_fling.png",
+     "shots": ["071_stay.png", "071_fling.png"],
+     "title": "回る台は塊をどこまで乗せておけるか — 境目は式の形どおり。ただし摩擦は 0.3〜0.4 ぶんしか効かない",
+     "note": "回転は台の0.98〜1.00倍で伝わる。滑り出す境目は式の0.58倍。ω²rはほぼ一定"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "071", "title": "板を回して塊を振り回す",
-     "note": "Animated Rigid の回転は、速度としてどう粒に伝わるか"},
+    {"no": "072", "title": "たわむ板の上の塊",
+     "note": "Animated (Deforming) のコライダを実際に曲げたとき、粒にどう伝わるか"},
 ]
 
 PAGES = [
