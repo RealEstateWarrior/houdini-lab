@@ -798,13 +798,34 @@ def render_guides(guides, urls):
             out.append("          </dl>")
         out.append("        </div>")
 
+        # 本物の Houdini で撮ったネットワーク全体（guide_ui_capture.py）
+        net = f'guide_{guide["id"]}_net.png'
+        if os.path.exists(os.path.join(OUT, net)):
+            out.append('        <figure class="guide-net">')
+            out.append('          <img src="' + net + '" loading="lazy" decoding="async"'
+                       f' alt="{html.escape(guide["title"])}のネットワーク'
+                       '（Houdini の画面）">')
+            out.append("          <figcaption>組み上がったネットワーク。"
+                       "Houdini の画面をそのまま撮ったもの。</figcaption>")
+            out.append("        </figure>")
+
         out.append('        <ol class="steps">')
-        for step in guide["steps"]:
+        for index, step in enumerate(guide["steps"], start=1):
             out.append('          <li class="step">')
             out.append('            <div class="step-body">')
             out.append(f'              <h4>{html.escape(step["title"])}'
                        f'<code>{html.escape(step["node"])}</code></h4>')
             out.append(f'              <p>{step["body"]}</p>')
+            # その段のノードを選んだときのパラメータ欄（guide_parm_capture.py）。
+            # 開いたときだけ読み込むよう details に入れる。ポップアップが重くならない
+            parm = f'guide_{guide["id"]}_p{index}_parm.png'
+            if os.path.exists(os.path.join(OUT, parm)):
+                out.append('              <details class="step-ui">')
+                out.append("                <summary>Houdini のパラメータ画面</summary>")
+                out.append('                <img src="' + parm + '" loading="lazy"'
+                           ' decoding="async"'
+                           f' alt="{html.escape(step["title"])}のパラメータ">')
+                out.append("              </details>")
             out.append("            </div>")
             if step.get("img"):
                 out.append('            <figure class="step-figure">')
@@ -837,8 +858,9 @@ def render_guides(guides, urls):
                     out.append("          </figure>")
                 out.append("        </div>")
 
+        # 本物の画面（_net.png）があるときは、自動で描いた図は重複なので出さない
         graph = f'guide_{guide["id"]}_graph.png'
-        if os.path.exists(os.path.join(OUT, graph)):
+        if os.path.exists(os.path.join(OUT, graph)) and                 not os.path.exists(os.path.join(OUT, f'guide_{guide["id"]}_net.png')):
             out.append('        <p class="label">組み上がったノードグラフ</p>')
             out.append('        <div class="figs figs--wide">')
             out.append("          <figure>")

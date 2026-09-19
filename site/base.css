@@ -1677,3 +1677,46 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   .ask-msg.is-thinking .ask-body { animation: none; }
 }
+
+/* ---------- 手順の中の、本物の Houdini 画面 ---------- */
+
+.guide-net { margin: 28px 0 0; }
+.guide-net img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  background: #303030;
+}
+.guide-net figcaption { margin-top: 8px; }
+
+/* 段ごとのパラメータ画面。閉じておき、見たい人だけ開く */
+.step-ui { margin-top: 12px; }
+.step-ui summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--flag);
+  padding: 5px 12px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 980px;
+  background: var(--ground);
+}
+.step-ui summary::-webkit-details-marker { display: none; }
+.step-ui summary::before { content: "+"; font-family: var(--font-mono); }
+.step-ui[open] summary::before { content: "−"; }
+.step-ui summary:hover { background: var(--ground-2); }
+.step-ui summary:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.step-ui img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  background: #3a3a3a;
+}
