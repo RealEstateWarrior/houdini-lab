@@ -422,3 +422,22 @@ def _cache_files(cache_dir, name):
     return sorted(
         os.path.join(cache_dir, f) for f in os.listdir(cache_dir)
         if f.startswith(prefix) and f.endswith(".bgeo.sc"))
+
+
+# ---------- 値をまとめて読む ----------
+#
+# 実験077。15,591粒の位置を1粒ずつ position() で読むと1フレーム 81.67ms かかり、
+# MPM の計算そのもの（約 86ms）と同じだけ時間を食った。まとめて受け取れば 0.11ms。
+
+def point_array(geometry, name="P"):
+    """点のアトリビュートを numpy の配列で返す（成分が2つ以上なら (点の数, 成分) の形）。"""
+    import numpy
+    attrib = geometry.findPointAttrib(name)
+    if attrib is None:
+        raise ValueError(f"点のアトリビュートが無い: {name}")
+    size = attrib.size()
+    if attrib.dataType() == hou.attribData.Int:
+        data = numpy.frombuffer(geometry.pointIntAttribValuesAsString(name), dtype=numpy.int32)
+    else:
+        data = numpy.frombuffer(geometry.pointFloatAttribValuesAsString(name), dtype=numpy.float32)
+    return data.reshape(-1, size) if size > 1 else data
