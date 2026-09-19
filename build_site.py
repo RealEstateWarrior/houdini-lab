@@ -945,6 +945,17 @@ def render_guide_cards(guides):
     return "\n".join(out)
 
 
+_FIRST_BY_CONTENT = {}
+
+
+def same_image(name):
+    """中身（バイト列）が同じ画像なら、最初に出てきた名前を返す。"""
+    import hashlib
+    with open(os.path.join(OUT, name), "rb") as fp:
+        digest = hashlib.sha1(fp.read()).hexdigest()
+    return _FIRST_BY_CONTENT.setdefault(digest, name)
+
+
 def render_guides(guides, urls):
     """手順の中身。ふだんは隠しておき、カードを押したらポップアップへ移す。
 
@@ -995,6 +1006,10 @@ def render_guides(guides, urls):
             # 開いたときだけ読み込むよう details に入れる。ポップアップが重くならない
             parm = f'guide_{guide["id"]}_p{index}_parm.png'
             if os.path.exists(os.path.join(OUT, parm)):
+                # 同じノードを別の段でも撮ると、中身がまったく同じ画像になる。
+                # 最初の1枚だけを使えば、ページに載せるファイルが減る
+                # （Claude 版は1つの版に置けるファイルが 512 まで）
+                parm = same_image(parm)
                 out.append('              <details class="step-ui">')
                 out.append("                <summary>Houdini のパラメータ画面</summary>")
                 out.append('                <img src="' + parm + '" loading="lazy"'
