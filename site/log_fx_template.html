@@ -3782,6 +3782,86 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 076 ===================== -->
+    <article class="entry entry--current" id="exp076">
+      <div class="badge">076</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>粒を細かくしても、摩擦の式には戻らない — 細かいほど塊が潰れ、かえって式から離れる</h2>
+        <p class="path">C:/Program Files/Git/obj/mpm &nbsp;·&nbsp; 同じ「式に合わない」でも、原因は1つとは限らない</p>
+
+        <div class="prose">
+          <p><a href="#exp067">実験067</a>で、塊を地面に滑らせると、摩擦 0.25 までは式「止まるまでの距離 = v² ÷ (2 μ g)」に乗ったが、摩擦を上げるほど式より遠くまで滑った。<a href="#exp070">実験070</a>の動く板でも、強い摩擦ほど式より短くしか運ばれなかった。どちらも粒の間隔は 0.12。</p>
+          <p><a href="#exp075">実験075</a>で、回る台の摩擦の上限は、粒を細かくすると上がると分かった。では067・070の外れも、細かくすれば縮むか。粒の間隔を 0.12 / 0.08 / 0.06 / 0.04 と変えて、同じ場面を測り直した。</p>
+          <p>縮まなかった。逆に広がった。滑る塊（初速 4）の「実測 ÷ 式」は、摩擦 1.0 で 1.46 → 1.58 → 1.64 → 1.73、摩擦 2.0 で 2.82 → 3.14 → 3.31 → 3.36。動く板も 0.939 → 0.918 → 0.908 → 0.896 と、細かいほど式から遠ざかる。摩擦 0.25 だけは、どの細かさでも 1.000 前後（0.9996〜1.0009）のまま。</p>
+          <p>同時に、止まったあとの塊の高さの平均が下がっていく。摩擦 1.0 の滑る塊で 0.340 → 0.263 → 0.233 → 0.205。元は 0.5 なので、細かいほど大きく潰れている。<a href="#exp068">実験068</a>で「潰れるほど式から外れる」と分かったのと同じ筋で、細かくすると塊が柔らかく振る舞い、そのぶん外れが大きくなった。</p>
+          <p>075と逆の結果になったのは、見ているものが違うからと考えられる。075は「止まっていられるか」（滑り出す境目）で、細かいほど摩擦がよく効いた。067・070は「滑りながらどう止まるか」で、ここでは塊の潰れが効く。同じ「摩擦の外れ」でも、原因は1つではなかった。</p>
+        </div>
+
+        <p class="label">粒の間隔と「実測 ÷ 式」</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="076_ratio.png" alt="摩擦 0.25 だけは、どの細かさでもほぼ 1。摩擦 0.5 以上は、細かくする" loading="lazy" decoding="async"></div>
+            <figcaption>摩擦 0.25 だけは、どの細かさでもほぼ 1。摩擦 0.5 以上は、細かくするほど外れが大きくなる。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">1 なら式どおり。滑る塊は 1 より上（式より遠くまで滑る）、動く板は 1 より下（式より短く運ばれる）に外れる。どちらも、細かいほど 1 から離れる。</p>
+
+        <p class="label">A. 滑る塊（1辺 1.0・初速 4・40フレーム。実験067と同じ組み方）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔</th><th>粒</th><th>摩擦</th><th>滑った距離</th><th>式</th><th>実測 ÷ 式</th><th>止まった秒</th><th>高さ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.12</td><td class="num">547</td><td class="num">0.25</td><td class="num">3.260808</td><td class="num">3.261978</td><td class="num">0.999642</td><td>止まらず</td><td class="num">0.5045</td></tr>
+              <tr><td class="num">0.12</td><td class="num">547</td><td class="num">0.5</td><td class="num">1.751774</td><td class="num">1.630989</td><td class="num">1.074056</td><td class="num">1.000</td><td class="num">0.3551</td></tr>
+              <tr><td class="num">0.12</td><td class="num">547</td><td class="num">1.0</td><td class="num">1.194665</td><td class="num">0.815494</td><td class="num">1.464958</td><td class="num">0.875</td><td class="num">0.3402</td></tr>
+              <tr><td class="num">0.12</td><td class="num">547</td><td class="num">2.0</td><td class="num">1.148402</td><td class="num">0.407747</td><td class="num">2.816457</td><td class="num">0.833</td><td class="num">0.3250</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1914</td><td class="num">0.25</td><td class="num">3.262817</td><td class="num">3.261978</td><td class="num">1.000257</td><td>止まらず</td><td class="num">0.5003</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1914</td><td class="num">0.5</td><td class="num">1.792811</td><td class="num">1.630989</td><td class="num">1.099217</td><td class="num">0.958</td><td class="num">0.2926</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1914</td><td class="num">1.0</td><td class="num">1.284540</td><td class="num">0.815494</td><td class="num">1.575167</td><td class="num">0.917</td><td class="num">0.2626</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1914</td><td class="num">2.0</td><td class="num">1.282087</td><td class="num">0.407747</td><td class="num">3.144319</td><td class="num">0.917</td><td class="num">0.2503</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td class="num">0.25</td><td class="num">3.264006</td><td class="num">3.261978</td><td class="num">1.000622</td><td>止まらず</td><td class="num">0.4992</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td class="num">0.5</td><td class="num">1.819939</td><td class="num">1.630989</td><td class="num">1.115850</td><td class="num">1.042</td><td class="num">0.2629</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td class="num">1.0</td><td class="num">1.336022</td><td class="num">0.815494</td><td class="num">1.638297</td><td class="num">1.000</td><td class="num">0.2325</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td class="num">2.0</td><td class="num">1.348446</td><td class="num">0.407747</td><td class="num">3.307065</td><td class="num">0.917</td><td class="num">0.2254</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td class="num">0.25</td><td class="num">3.264953</td><td class="num">3.261978</td><td class="num">1.000912</td><td>止まらず</td><td class="num">0.4954</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td class="num">0.5</td><td class="num">1.881290</td><td class="num">1.630989</td><td class="num">1.153466</td><td class="num">1.125</td><td class="num">0.2216</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td class="num">1.0</td><td class="num">1.409456</td><td class="num">0.815494</td><td class="num">1.728345</td><td class="num">1.042</td><td class="num">0.2045</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td class="num">2.0</td><td class="num">1.370689</td><td class="num">0.407747</td><td class="num">3.361615</td><td class="num">1.042</td><td class="num">0.2102</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">間隔 0.12 の行は、<a href="#exp067">実験067</a>の値と6桁まで同じ。「高さ」は40フレーム目の高さの平均で、元は 0.5。</p>
+
+        <p class="label">B. 動く板（板の速さ 4・摩擦 1.0・40フレーム。実験070と同じ組み方）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔</th><th>粒</th><th>運ばれた距離</th><th>実測 ÷ 式</th><th>最後の vx</th><th>高さ</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.12</td><td class="num">547</td><td class="num">5.336132</td><td class="num">0.938715</td><td class="num">3.998951</td><td class="num">0.3382</td><td class="num">2.03</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1914</td><td class="num">5.219249</td><td class="num">0.918154</td><td class="num">4.000077</td><td class="num">0.2633</td><td class="num">2.04</td></tr>
+              <tr><td class="num">0.06</td><td class="num">4580</td><td class="num">5.164202</td><td class="num">0.908470</td><td class="num">3.999630</td><td class="num">0.2314</td><td class="num">2.70</td></tr>
+              <tr><td class="num">0.04</td><td class="num">15591</td><td class="num">5.091048</td><td class="num">0.895601</td><td class="num">4.000787</td><td class="num">0.2055</td><td class="num">4.05</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">式の距離は 5.684506。間隔 0.12 の行は<a href="#exp070">実験070</a>の値と6桁まで同じ。計算の秒は、最初と最後のフレームだけ測った場合の値。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>粒を細かくしても、摩擦の式には戻らない。むしろ離れる。</strong>滑る塊の摩擦 1.0 で「実測 ÷ 式」が 1.46（間隔 0.12）→ 1.73（0.04）、摩擦 2.0 で 2.82 → 3.36。動く板は 0.939 → 0.896。</li>
+          <li><strong>摩擦 0.25 だけは、どの細かさでも式どおり。</strong>0.999642 / 1.000257 / 1.000622 / 1.000912。弱い摩擦で塊が形を保ったまま滑る場面では、細かさは関係ない。</li>
+          <li><strong>細かいほど、塊が潰れる。</strong>摩擦 1.0 の滑る塊で、止まったあとの高さの平均が 0.340 → 0.263 → 0.233 → 0.205（元は 0.5）。動く板でも 0.338 → 0.206。<a href="#exp068">実験068</a>の「潰れるほど式から外れる」と同じ筋で、潰れが大きくなるぶん外れも大きくなった。</li>
+          <li><strong>強い摩擦でも、止まる時間はほとんど縮まない。</strong>式では摩擦 1.0 で 0.41秒、2.0 で 0.20秒で止まるはずが、実測は 0.83〜1.04秒。摩擦 1.0 と 2.0 で滑った距離もほぼ同じ（間隔 0.04 で 1.409 と 1.371）。</li>
+          <li><strong>実験075と逆の向きになった。</strong>075（回る台で止まっていられるか）では、細かいほど摩擦がよく効いた。こちら（滑りながらどう止まるか）では、細かいほど式から離れた。<strong>同じ「摩擦が式に合わない」でも、原因は1つではない。</strong>一方は粗さ、一方は潰れと考えると両方に合うが、潰れの中身は確かめていない。</li>
+          <li><strong>粒の間隔 0.12 の値は、<a href="#exp067">実験067</a>・070と6桁まで同じだった。</strong>同じ組み方を別のスクリプトから呼んでも、結果は変わらない。</li>
+          <li>計算の時間について。<strong>動く板（B）では、粒が 547 → 15,591 と28倍になっても、時間は 2.03秒 → 4.05秒の2倍だった。</strong>滑る塊（A）は 2.2秒 → 20秒と9倍になったが、A は測るために毎フレーム全部の粒を読んでいて、その時間が大きく乗っている。<strong>計算の重さを比べるときは、測る処理を最後のフレームだけにする。</strong></li>
+          <li>実用の結論。<strong>MPM の塊を「式どおりに滑って止まる」ようにしたいなら、摩擦は 0.25 程度にとどめる。</strong>摩擦を上げても止まる時間はほとんど縮まず、細かくするとかえって外れる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
