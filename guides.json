@@ -2400,6 +2400,118 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "sparks",
+      "title": "火花を散らす",
+      "lede": "1点から一度に粒を飛ばし、重力で落としながら、ばらばらの時刻に消していく。粒を短い線にすると、速さが筋になって火花らしく見える。",
+      "hero": "079_sparks_18.png",
+      "hero_cap": "3,000粒・18フレーム目。寿命の短いものから消え、残りは赤くなりながら落ちている。",
+      "facts": [
+        [
+          "ノードの数",
+          "9個（うち DOP の中に6個）"
+        ],
+        [
+          "計算の時間",
+          "18フレームで 0.48秒"
+        ],
+        [
+          "元になった実験",
+          "実験029・079"
+        ]
+      ],
+      "exp": "079",
+      "hip": "079_sparks.hipnc",
+      "tags": [
+        "エフェクト",
+        "パーティクル",
+        "火花"
+      ],
+      "steps": [
+        {
+          "title": "火花の出どころを1点置く",
+          "node": "add",
+          "ui_node": "origin",
+          "body": "<code>add</code> で原点に点を1つだけ作る。ここから全部の火花が出る。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "一度にまとめて生む",
+          "node": "popsource",
+          "ui_node": "popnet/source",
+          "body": "<code>dopnet</code> の中に popobject・popsource・popsolver を置く（手順「粒を降らせる」と同じ）。popsource の Emission Type を <strong>Points</strong> にし、Const. Activation を切って Impulse Activation を入れる。Impulse Count に <code>if($FF == 1, 3000, 0)</code> と書くと、最初のフレームに 3,000粒をまとめて生む。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "寿命をばらつかせる",
+          "node": "life",
+          "ui_node": "popnet/source",
+          "body": "Life Expectancy 1.2、Life Variance 0.6。<strong>寿命は 0.6〜1.8 の間に一様に散る</strong>（実験079で、4,000粒の寿命を10区間に分けるとどこもほぼ同じ数だった）。生きている数は一定の速さで減っていく。",
+          "img": "079_alive.png",
+          "cap": "Life 1.0 のとき、生きている粒の数。Life Variance を入れると、消える時刻が幅に広がる。"
+        },
+        {
+          "title": "四方へ飛ばす",
+          "node": "velx",
+          "ui_node": "popnet/source",
+          "body": "Initial Velocity を Set initial velocity にして、Velocity (0, 3, 0)、Variance (7, 7, 7)。<strong>Variance は「その半径の球の中に散らす」数字</strong>（実験079）。上向きの速さ 3 より大きい 7 にすると、全方向へ飛び散る。小さくすると上向きの噴水になる。",
+          "img": "079_sparks_6.png",
+          "cap": "6フレーム目。"
+        },
+        {
+          "title": "重力と空気抵抗を足す",
+          "node": "popdrag",
+          "ui_node": "popnet/drag",
+          "body": "<code>popforce</code> に (0, −9.81, 0)、その下に <code>popdrag</code>（Air Resistance 0.15）をつなぎ、popsolver の Pre-Solve へ。<strong>popdrag は速さの2乗で効く</strong>ので、速い粒ほど強く止められる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ソルバに表示フラグを立てる",
+          "node": "popsolver",
+          "ui_node": "popnet/solver",
+          "body": "DOP の中で <strong>popsolver に表示フラグを立てる。</strong>立てないと、エラーも出ずに粒が1つも生まれない。そのあと SOP 側で <code>dopimport</code>（読み込む対象に *）で取り出す。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "粒を短い線にして色を付ける",
+          "node": "attribwrangle",
+          "ui_node": "streaks",
+          "body": "Run Over を Detail (only once) にした wrangle で、粒ごとに「今の位置 P から P − v × 0.04 まで」の線を作り、元の点は消す。速い粒ほど長い筋になる。色は <code>age ÷ life</code> で黄色から赤へ。計算と線の作成を合わせて、18フレームで 0.48秒。",
+          "img": "079_sparks_18.png",
+          "cap": "18フレーム目。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "ソルバの表示フラグを忘れると、何も起きない",
+          "body": "dopnet は、中で表示フラグの立ったノードまでしか計算しない。立て忘れると粒は1つも生まれず、dopimport に「No DOP object names specified.」という警告が出るだけ（実験079）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "All Points では、まとめて生めない",
+          "body": "Emission Type を All Points にすると、Impulse Count に 4,000 を入れても、点1つにつき毎フレーム1粒しか生まれなかった。1点から一度に出すなら Points にする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Variance は箱ではなく球",
+          "body": "Velocity (0, 6, 0)・Variance (3, 3, 3) で、(0, 6, 0) からのずれは最大 2.9999。3 を超える粒は1つもなかった。各成分が ±3 に独立に散る（箱）なら、角の粒は 5.2 まで離れる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "空気抵抗は、思ったより強く効く",
+          "body": "速さの2乗で効くので、速い粒ほど止められる。横に 8 で飛ばすと、airresist 0.5 でも0.5秒後に 2.53 まで落ちた（1秒後 1.55）。この手順では 0.15 にした。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

@@ -3987,6 +3987,96 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 079 ===================== -->
+    <article class="entry entry--current" id="exp079">
+      <div class="badge">079</div>
+      <div class="body">
+        <span class="chip chip--fx">POP</span>
+        <h2>火花を散らす — Life Variance は幅、Variance は球の半径。空気抵抗は速さの2乗で効く</h2>
+        <p class="path">C:/Program Files/Git/obj/sparks &nbsp;·&nbsp; 名前だけでは分からない数字は、分布を数えて決める</p>
+
+        <div class="prose">
+          <p>火花は、1点から一斉に飛び出し、重力で落ちながら少しずつ消えていく粒。<button class="term" data-term="POP">POP</button> の popsource には、そのための「ばらつき」が2つある。寿命の Life Variance と、初速の Variance。名前だけではどうばらつくのか分からないので、手順ページに書く前に測った。</p>
+          <p>寿命は、Life Expectancy ± Life Variance の幅に一様に散った。Life 1.0・Life Variance 0.5 で 4,000粒を一度に生むと、寿命は 0.5001〜1.4999、10区間に分けるとどこも 373〜439粒。標準偏差 0.2891 は、幅 1 の一様分布の値 0.2887 と合う。生きている粒の数は 0.5秒から一定の速さで減り、1.5秒でちょうど0になった。</p>
+          <p>初速の Variance は、各成分が ±3 の箱に散るのではなかった。Velocity (0, 6, 0)・Variance (3, 3, 3) で、(0, 6, 0) からのずれの長さは最大 2.9999、3 を超えた粒は 0%。半径 3 の球の中に一様に散っている。各成分の標準偏差 1.34〜1.37 も、球の中の一様分布の値 3 ÷ √5 = 1.342 と合う。</p>
+          <p>空気抵抗の popdrag は、速さの2乗に比例して効いた。横に 8 で飛ばすと、速さは 8 ÷ (1 + airresist × 8 × 時間) の式に、airresist 0.5 / 1.0 / 2.0 のどれでもずれ 0.0000 で乗った。<a href="#exp029">実験029</a>の popwind と同じ形。</p>
+          <p>組む途中で2回つまずいた。<button class="term" data-term="DOP">DOP</button> の中で<button class="term" data-term="ソルバ">ソルバ</button>に<button class="term" data-term="表示フラグ">表示フラグ</button>を立て忘れると、エラーも出ずに粒が1つも生まれない。Emission Type を All Points にすると、Impulse Count に 4,000 を入れても「点1つにつき1粒」しか生まれない。</p>
+        </div>
+
+        <p class="label">完成した火花</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="079_sparks_6.png" alt="6フレーム目。上向きの速さ 3 より、ばらつきの半径 7 のほうが大きいので、全" loading="lazy" decoding="async"></div>
+            <figcaption>6フレーム目。上向きの速さ 3 より、ばらつきの半径 7 のほうが大きいので、全方向へ飛び散る。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="079_sparks_18.png" alt="18フレーム目。寿命の短い粒から消え、残りは赤くなりながら落ちている。" loading="lazy" decoding="async"></div>
+            <figcaption>18フレーム目。寿命の短い粒から消え、残りは赤くなりながら落ちている。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">寿命 1.2 ± 0.6、初速 (0, 3, 0) に半径 7 の球のばらつき、重力 9.81、空気抵抗 0.15。1粒を「今の位置から、速さ × 0.04 だけ前の位置まで」の線にして、生まれてからの割合で黄色から赤へ色を変えた。3,000粒、18フレームの計算と線の作成で 0.48秒。</p>
+
+        <p class="label">A. 寿命のばらつき（4,000粒を一度に生む）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="079_alive.png" alt="Life Variance 0 はちょうど 1.0秒で全部消える。0.5 は 0" loading="lazy" decoding="async"></div>
+            <figcaption>Life Variance 0 はちょうど 1.0秒で全部消える。0.5 は 0.5〜1.5秒、1.0 は 0〜2秒の間で、一定の速さで減る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Life</th><th>Life Variance</th><th>寿命の最小</th><th>最大</th><th>平均</th><th>標準偏差</th><th>10区間の数</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.0</td><td class="num">0</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="num">0.0000</td><td>全部が1区間</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0.5</td><td class="num">0.5001</td><td class="num">1.4999</td><td class="num">0.9998</td><td class="num">0.2891</td><td class="num">373〜439</td></tr>
+              <tr><td class="num">1.0</td><td class="num">1.0</td><td class="num">0.0436</td><td class="num">1.9997</td><td class="num">1.0340</td><td class="num">0.5584</td><td class="num">352〜423</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Life Variance 1.0 の最小が 0 でなく 0.0436 なのは、寿命が 1フレーム（0.0417秒）より短い粒は、数えた2フレーム目にもう消えていたため。そのぶん平均も 1.034 と少し上に出ている。</p>
+
+        <p class="label">B. 初速のばらつき（Velocity (0, 6, 0)・Variance (3, 3, 3)・4,000粒）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>成分</th><th>最小</th><th>最大</th><th>平均</th><th>標準偏差</th></tr></thead>
+            <tbody>
+              <tr><td>vx</td><td class="num">−2.9430</td><td class="num">2.9759</td><td class="num">−0.0016</td><td class="num">1.3651</td></tr>
+              <tr><td>vy</td><td class="num">3.0269</td><td class="num">8.9114</td><td class="num">5.9938</td><td class="num">1.3426</td></tr>
+              <tr><td>vz</td><td class="num">−2.9493</td><td class="num">2.9514</td><td class="num">−0.0159</td><td class="num">1.3379</td></tr>
+              <tr><td>ずれの長さ</td><td class="num muted">—</td><td class="num">2.9999</td><td class="num">2.2646</td><td>3 を超えた粒 0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">箱（各成分 ±3）なら、角のほうの粒は中心から 3 より遠くなる（最大 5.2）。球なら 3 を超えない。平均の長さも、球の中の一様分布なら 3 × 3/4 = 2.25。</p>
+
+        <p class="label">C. 空気抵抗（重力なし・横に 8 で飛ばす）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>airresist</th><th>1フレーム後</th><th>0.5秒後</th><th>1秒後</th><th>1.5秒後</th><th>式とのずれの最大</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">6.8571</td><td class="num">2.5263</td><td class="num">1.5484</td><td class="num">1.1163</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1.0</td><td class="num">6.0000</td><td class="num">1.5000</td><td class="num">0.8571</td><td class="num">0.6000</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2.0</td><td class="num">4.8000</td><td class="num">0.8276</td><td class="num">0.4528</td><td class="num">0.3117</td><td class="num">0.0000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「式」は 8 ÷ (1 + airresist × 8 × 経過秒)。どの時刻でも実測と4桁まで同じ。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Life Variance は「± その幅に一様に散らす」数字。</strong>Life 1.0・Life Variance 0.5 で寿命は 0.5001〜1.4999、10区間どこも 373〜439粒。生きている数は 0.5秒から1.5秒まで一定の速さで減る。</li>
+          <li><strong>Variance（初速）は「その半径の球の中に一様に散らす」数字。</strong>各成分 ±3 の箱ではない。中心からのずれは最大 2.9999 で、3 を超える粒は 0%。成分の標準偏差 1.34 は球の理論値 1.342、平均の長さ 2.26 は 2.25 と合う。</li>
+          <li><strong>だから、Variance を Velocity より大きくすると、全方向へ飛び散る。</strong>火花の完成形では上向き 3 に対して半径 7 にした。逆に小さくすると、上向きの細い噴水になる。</li>
+          <li><strong>popdrag の空気抵抗は、速さの2乗に比例する。</strong>v = v₀ ÷ (1 + airresist × v₀ × t) に、3通りすべてでずれ 0.0000。<a href="#exp029">実験029</a>の popwind と同じ形で、速い粒ほど強く減速される。</li>
+          <li><strong>DOP の中でソルバに表示フラグを立て忘れると、粒が1つも生まれない。</strong>エラーは出ず、dopimport に「No DOP object names specified.」という警告が出るだけ。</li>
+          <li><strong>Emission Type が All Points だと、Impulse Count は効かない。</strong>点1つにつき毎フレーム1粒ずつ生まれた。1点から一度にまとめて出すなら Points にする。</li>
+          <li><strong>寿命の短すぎる粒は、数える前に消えている。</strong>Life Variance 1.0 では寿命 0〜2 のはずが、2フレーム目に数えると最小 0.0436。1フレーム（0.0417秒）より短い粒は、もういない。</li>
+          <li>計算の時間は軽い。3,000粒の火花を18フレーム計算し、線にするまで 0.48秒。4,000粒を60フレーム回しても 0.29〜0.60秒。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

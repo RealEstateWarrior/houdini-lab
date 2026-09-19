@@ -496,6 +496,12 @@ DONE = [
      "shots": ["078_top.png"],
      "title": "液体の暴れは、粒を細かくしても消えない — 飛ぶ高さは下がるが、始まる時刻は変わらない",
      "note": "間隔0.16〜0.06の全部で暴れる（F22〜40）。飛ぶ高さは46→4.4に下がる。止めるのはsubstep"},
+    {"no": "079", "anchor": "exp079",
+     "tags": ["POP", "パーティクル", "火花", "手順"],
+     "log": "log_fx", "hip": "079_sparks.hipnc", "thumb": "079_sparks_18.png",
+     "shots": ["079_sparks_6.png", "079_sparks_18.png", "079_alive.png"],
+     "title": "火花を散らす — Life Variance は幅、Variance は球の半径。空気抵抗は速さの2乗で効く",
+     "note": "寿命は±幅に一様、初速は半径の球に一様、popdragは速さの2乗（ずれ0.0000）"},
 ]
 
 PLANNED = []
