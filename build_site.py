@@ -454,13 +454,19 @@ DONE = [
      "shots": ["071_stay.png", "071_fling.png"],
      "title": "回る台は塊をどこまで乗せておけるか — 境目は式の形どおり。ただし摩擦は 0.3〜0.4 ぶんしか効かない",
      "note": "回転は台の0.98〜1.00倍で伝わる。滑り出す境目は式の0.58倍。ω²rはほぼ一定"},
+    {"no": "072", "anchor": "exp072",
+     "tags": ["MPM", "シミュレーション", "コライダ", "落とし穴", "効率化"],
+     "log": "log_fx", "hip": "072_deform.hipnc", "thumb": "072_heights.png",
+     "shots": ["072_heights.png"],
+     "title": "たわむ板は塊を放り上げられるか — Deforming は板の速さを渡す。Rigid はたわみを平均の動きにしてしまう",
+     "note": "Deformingは板の速さを渡すが高さは式の30〜76%。Rigidは平均の動き。cv切りはすり抜け"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "072", "title": "たわむ板の上の塊",
-     "note": "Animated (Deforming) のコライダを実際に曲げたとき、粒にどう伝わるか"},
+    {"no": "073", "title": "液体が暴れ始める摩擦",
+     "note": "Liquid の摩擦をどこまで上げると暴れ出すかを挟み撃ちで探す"},
 ]
 
 PAGES = [

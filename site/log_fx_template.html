@@ -3444,6 +3444,77 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 072 ===================== -->
+    <article class="entry entry--current" id="exp072">
+      <div class="badge">072</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>たわむ板は塊を放り上げられるか — Deforming は板の速さを渡す。Rigid はたわみを平均の動きにしてしまう</h2>
+        <p class="path">C:/Program Files/Git/obj/deform &nbsp;·&nbsp; 板の種類を間違えると、形の変化が黙って消える</p>
+
+        <div class="prose">
+          <p><a href="#exp070">実験070</a>では「形の変わらない板」を動かした。今度は板そのものを曲げる。細かく割った板の真ん中を、決まった速さ v で高さ 1.0 まで持ち上げて止める。上に乗った塊は、板が止まった瞬間に放り出されるはず。</p>
+          <p>投げ上げの式どおりなら、放り出されたあと、さらに v² ÷ (2 g) だけ上がる。v = 2 / 4 / 8 なら 0.204 / 0.816 / 3.262。</p>
+          <p>Animated (Deforming)・computevelocity 入りでは、塊はきちんと放り上げられた。持ち上げている間の塊の上向きの速さは、最大で 1.17 / 2.19 / 4.28 / 8.00（v = 1 / 2 / 4 / 8）と、板の速さにそろう。ただし上がった高さは式に届かず、0.061 / 0.506 / 2.473 で、式の 30% / 62% / 76%。速く持ち上げるほど式に近づき、v = 1 では板から離れなかった。</p>
+          <p>Type を変えると、まったく別の振る舞いになった。Static は070と同じく何も伝えない。Animated (Rigid) は、たわみを「板全体の平均の持ち上がり」として扱った。塊の上向きの速さは 2.50 で、真ん中の速さ 4 ではなく、板の平均の速さ 4 × 2/π = 2.55 にほぼ一致する。最後に塊が落ち着いた高さも 0.647 で、平均の持ち上がり 0.637 に近い。</p>
+          <p>Deforming で computevelocity を切ると、板が動き出した瞬間に塊が板をすり抜けて落ちた。1.54秒で y = −3.69、下向きの速さ 8.5 で、そのまま自由落下している。<a href="#exp070">実験070</a>では「切ると塊が動かない」だったが、板が塊に向かって動く場合は、すり抜けになる。</p>
+          <p>計算の時間も違う。同じ場面（v = 4）で Static 3.05秒、Rigid 3.83秒、Deforming 8.98秒。形の変わるコライダは、Rigid の2.3倍かかる。</p>
+        </div>
+
+        <p class="label">塊の高さの動き（Deforming・computevelocity 入り）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="072_heights.png" alt="v = 8 は板が止まった 0.625秒から 0.71秒上がり続け、3.53 ま" loading="lazy" decoding="async"></div>
+            <figcaption>v = 8 は板が止まった 0.625秒から 0.71秒上がり続け、3.53 まで届いた。v = 1 は板から離れずに一緒に上がっただけ。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">1辺 0.6 の塊を板の真ん中に置き、0.5秒から板の真ん中を持ち上げた。実線が塊の一番下の高さ、同じ色の点線が板の真ん中の高さ。塊は板の上面より 0.057 上に浮いて乗っている（コライダの厚み）。</p>
+
+        <p class="label">A. 持ち上げる速さを変える（Deforming・computevelocity 入り・摩擦 1.0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>v</th><th>板が止まる秒</th><th>塊の最大の上向きの速さ</th><th>止まる直前の上向きの速さ</th><th>板より上に上がった高さ</th><th>式 v²÷2g</th><th>実測 ÷ 式</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">1.500</td><td class="num">1.1689</td><td class="num">0.7151</td><td class="num">−0.0417</td><td class="num">0.0510</td><td class="num muted">—</td><td class="num">7.27</td></tr>
+              <tr><td class="num">2</td><td class="num">1.000</td><td class="num">2.1866</td><td class="num">1.5678</td><td class="num">0.0613</td><td class="num">0.2039</td><td class="num">0.301</td><td class="num">7.74</td></tr>
+              <tr><td class="num">4</td><td class="num">0.750</td><td class="num">4.2798</td><td class="num">3.4746</td><td class="num">0.5059</td><td class="num">0.8155</td><td class="num">0.620</td><td class="num">9.14</td></tr>
+              <tr><td class="num">8</td><td class="num">0.625</td><td class="num">7.9968</td><td class="num">7.3339</td><td class="num">2.4728</td><td class="num">3.2620</td><td class="num">0.758</td><td class="num">7.97</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「板より上」は、塊の一番下の最高点から、止まった板の上面（1.0 ＋ 浮き 0.057）を引いたもの。1/24秒ごとに見ているので、最高点は最大 1フレームぶんずれうる。</p>
+
+        <p class="label">B. v = 4 で、Type と computevelocity を変える</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Type</th><th>computevelocity</th><th>止まる直前の上向きの速さ</th><th>塊の一番下の最高点</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td>Static（既定）</td><td>入り</td><td class="num">−0.0041</td><td class="num">0.0566</td><td class="num">3.05</td></tr>
+              <tr><td>Animated (Rigid)</td><td>入り</td><td class="num">2.5004</td><td class="num">0.9379</td><td class="num">3.83</td></tr>
+              <tr><td>Animated (Rigid)</td><td>切り</td><td class="num">2.5004</td><td class="num">0.9379</td><td class="num">3.88</td></tr>
+              <tr><td>Animated (Deforming)</td><td>入り</td><td class="num">3.4746</td><td class="num">1.5630</td><td class="num">8.98</td></tr>
+              <tr><td>Animated (Deforming)</td><td>切り</td><td class="num">−0.7375</td><td class="num">−0.0054</td><td class="num">8.84</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Rigid の2行は6桁まで同じ値。Deforming で切った行は、板をすり抜けて落ちている（最高点が止まる前の 0.75秒にあり、そのあと下がり続ける）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Deforming・computevelocity 入りなら、板のたわみは速さとして塊に渡る。</strong>持ち上げている間の塊の上向きの速さは、最大で 1.17 / 2.19 / 4.28 / 8.00。板の真ん中の速さ 1 / 2 / 4 / 8 にそろう。</li>
+          <li><strong>ただし放り上げの高さは式に届かない。</strong>板より上に 0.061 / 0.506 / 2.473（v = 2 / 4 / 8）で、式 v²÷2g の 30% / 62% / 76%。<strong>速く持ち上げるほど式に近い。</strong>v = 1 では板から離れなかった（式でも 0.051 しか上がらない）。</li>
+          <li><strong>放り出されたときの速さが、もう板の速さより小さい。</strong>v = 8 で、板が止まってから最高点までの時間 0.71秒に g をかけると 6.95（v の 0.87倍）。この速さで上がる高さ 2.46 は実測 2.473 と合う。つまり足りない分は、飛んでいる間ではなく、放り出される前に失われている。なぜかは確かめていない。</li>
+          <li><strong>Animated (Rigid) は、たわみを「板全体の平均の動き」として扱う。</strong>塊の上向きの速さは 2.50。真ん中の速さ 4 ではなく、cos の山の平均 4 × 2/π = 2.55 に近い。落ち着いた高さ 0.647 も、平均の持ち上がり 2/π = 0.637 に近い。<strong>曲がる板を Rigid にすると、形の変化が消えて平均の上下動だけが残る。</strong></li>
+          <li><strong>Rigid では computevelocity は無関係。</strong>入り・切りで6桁まで同じ値だった（<a href="#exp070">実験070</a>と同じ）。</li>
+          <li><strong>Deforming で computevelocity を切ると、塊は板をすり抜けて落ちる。</strong>板が動き出した 0.6秒ごろから下がり始め、1.54秒で y = −3.69・下向きの速さ 8.5。自由落下そのもの。<strong>エラーも警告も出ない。</strong>実験070（板が横に動く）では「切ると動かない」だったが、板が塊に向かって動くと、すり抜けになる。</li>
+          <li><strong>Static は何も伝えない。</strong>板をいくら曲げても、塊は最初の高さ 0.057 のまま（<a href="#exp070">実験070</a>と同じ）。</li>
+          <li><strong>形の変わるコライダは重い。</strong>同じ場面で Static 3.05秒、Rigid 3.83秒、Deforming 8.98秒。Deforming は Rigid の2.3倍。板が曲がらないなら Rigid で足りる（<a href="#exp070">実験070</a>でも、剛体の動きなら2つの答えは6桁近くまで同じだった）。</li>
+          <li>測り方について。高さは「塊の一番下の点」で測った。平均の高さでは、塊が潰れたり伸びたりした分が混ざってしまう。また塊は板の上面より 0.057 上に浮いて乗っていたので、「板より上」はその分を引いてある。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
