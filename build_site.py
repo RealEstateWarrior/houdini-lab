@@ -34,6 +34,7 @@ GLOSSARY = os.path.join(HERE, "glossary.json")
 NODES = os.path.join(HERE, "nodes.json")
 GUIDES = os.path.join(HERE, "guides.json")
 SYNONYMS = os.path.join(HERE, "search_synonyms.json")
+SPEED = os.path.join(HERE, "speed_tips.json")
 
 NOTEBOOK_URL = "https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022"
 GITHUB_RAW = ("https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/")
@@ -103,6 +104,7 @@ TABS = [
     ("overview", "概要"),
     ("guides", "手順"),
     ("experiments", "実験"),
+    ("speed", "効率化"),
     ("nodes", "ノード解説"),
     ("glossary", "用語集"),
     ("links", "参考リンク"),
@@ -668,6 +670,46 @@ def render_showcase(guides):
     return "\n".join(out)
 
 
+def load_speed():
+    with open(SPEED, encoding="utf-8") as fp:
+        return json.load(fp)
+
+
+def render_speed():
+    """効率化タブ。重くなりがちなところと、実測した対処を並べる。
+
+    結論（太字の一文）→ 実測の数字 → 元の実験へのボタン、の順。
+    数字は speed_tips.json に書いたものをそのまま出す。"""
+    data = load_speed()
+    titles = {item["no"]: item["title"] for item in DONE}
+    out = ['      <p class="lede speed-lede">' + html.escape(data["lede"]) + "</p>"]
+    out.append('      <nav class="gloss-nav" aria-label="効率化の分類">')
+    for group in data["groups"]:
+        out.append(f'        <a href="#speed-{group["id"]}">{html.escape(group["title"])}</a>')
+    out.append("      </nav>")
+    for group in data["groups"]:
+        out.append(f'      <section class="speed-group" id="speed-{group["id"]}">')
+        out.append(f'        <h3>{html.escape(group["title"])}</h3>')
+        out.append('        <ol class="speed-list">')
+        for index, tip in enumerate(group["tips"]):
+            out.append(f'          <li class="speed-tip" id="speed-{group["id"]}-{index}">')
+            out.append(f'            <h4>{html.escape(tip["rule"])}</h4>')
+            out.append(f'            <p>{html.escape(tip["evidence"])}</p>')
+            out.append('            <p class="speed-exps">')
+            for no in tip["exps"]:
+                if no in titles:
+                    out.append(f'              <button type="button" class="speed-exp"'
+                               f' data-exp="{no}" title="{html.escape(titles[no])}">'
+                               f'実験{no}</button>')
+            out.append("            </p>")
+            out.append("          </li>")
+        out.append("        </ol>")
+        out.append("      </section>")
+    out.append('      <p class="hint">これからの実験では、結果と一緒にかかった時間も必ず記録する。'
+               "分かったことはこのタブに足していく。</p>")
+    return "\n".join(out)
+
+
 def all_tags():
     """使われているタグを、使用数の多い順に並べる。"""
     counts = {}
@@ -1105,6 +1147,20 @@ def render_search_data(data, nodes, guides, urls, tabs):
             "facts": report_facts(item["no"]),
         })
 
+    # 効率化の項目。「重い」「遅い」で探したときの行き先
+    for group in load_speed()["groups"]:
+        for index, tip in enumerate(group["tips"]):
+            items.append({
+                "kind": "効率化",
+                "label": tip["rule"],
+                "note": tip["evidence"][:70],
+                "href": f'{urls["home"]}#speed',
+                "tab": "speed",
+                "anchor": f'speed-{group["id"]}-{index}',
+                "tags": ["速さ", "効率", "時間", group["title"]],
+                "body": tip["evidence"],
+            })
+
     # 手順ページが索引に入っていなかった。「作り方」を探している人が
     # いちばん先に当てたいものなので、実験の次に置く
     for guide in guides["guides"]:
@@ -1284,6 +1340,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--NOTEBOOK_URL-->", NOTEBOOK_URL),
         ("<!--PARENT_NAV-->", render_parent_nav(urls)),
         ("<!--SHOWCASE-->", render_showcase(guides)),
+        ("<!--SPEED-->", render_speed()),
         ("<!--SP_DEPTS-->", render_sp_depts(urls, guides, data)),
         ("<!--SP_RECENT-->", render_sp_recent(urls)),
         ("<!--SP_GUIDES-->", render_sp_guides(guides, urls)),
