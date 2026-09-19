@@ -604,6 +604,70 @@ def render_sp_guides(guides, urls, count=3):
     return "\n".join(out)
 
 
+# 概要タブの「これまでに作ったもの」。
+# 実験番号・手順の id・見出し・一文・横長か。文面の数字は各実験の記録から引く。
+# 押すと実験のポップアップ、または手順のポップアップがそのまま開く。
+SHOWCASE = [
+    ("008", "grow", "地面に物を生やす",
+     "200個すべての向きを測って、複製の向きが N のどの軸に対応するかを確定させた。答えは Z 軸。", True),
+    ("002", "smooth", "割ると丸くなる",
+     "面の数はちょうど4倍ずつ増える。縮む原因は分割ではなく平滑化だった。", False),
+    ("005", "terrain", "ノイズの種類で形が変わる",
+     "14通り並べると振幅に9.3倍の開きがあった。外へ押すものと内へ削るものがある。", False),
+    ("014", "rbd", "落として、砕く",
+     "硬い物体なので体積は全フレームで 8.00000。ばらつきは 0.0000000 だった。", False),
+    ("016", "smoke", "煙の減り方を式にする",
+     "毎フレーム (1−d) 倍という仮説を立て、実測と4桁一致させた。", False),
+    ("042", "groom", "毛を生やす",
+     "density は本数ではなく面積あたりの本数。100 を入れて 1,249本、面積 12.53 で割ると 99.678。", False),
+    ("053", "rig", "曲げても痩せない骨",
+     "90度曲げたときの体積の減りが Linear で 27.1284%、Dual Quaternion で 0.1764%。", False),
+    ("067", "mpm", "塊を滑らせて、摩擦を式で確かめる",
+     "MPM の Ground Friction は教科書のクーロン摩擦の μ そのもの。止まる距離が式と 0.04% で合った。"
+     "ただし塊が潰れ始めると式から外れる。", True),
+    ("018", None, "ノイズはどこまで減るのか",
+     "サンプル数を4倍にすればノイズは半分、という式は狭い範囲でしか当たらなかった。"
+     "指定した数がそのまま使われていない。", False),
+    ("055", None, "届かない場所を指す",
+     "逆運動学で届かない目標を指すと、腕は伸びきってそこで止まる。9通りすべてで式と全桁一致。", False),
+    ("066", "mpm", "風を当てる",
+     "風速だけ上げても何も起きない。風は空気抵抗を通してしか効かず、その抵抗は速さの2乗だった。", False),
+]
+
+
+def render_showcase(guides):
+    """概要タブの「これまでに作ったもの」。カードから実験と作り方へ直行できる。"""
+    known = {g["id"]: g["title"] for g in guides["guides"]}
+    by_no = {item["no"]: item for item in DONE}
+    out = ['      <div class="tiles">']
+    for no, guide_id, head, text, wide in SHOWCASE:
+        item = by_no.get(no)
+        if item is None:
+            continue
+        img = f"thumb_{no}.png"
+        if not os.path.exists(os.path.join(OUT, img)):
+            img = item["thumb"]
+        cls = "tile tile--wide" if wide else "tile"
+        out.append(f'        <div class="{cls}">')
+        out.append(f'          <button type="button" class="tile-img" data-exp="{no}"'
+                   f' aria-label="実験{no}を開く"><img src="{img}" loading="lazy"'
+                   f' decoding="async" alt="{html.escape(item["title"])}"></button>')
+        out.append('          <div class="tile-body">')
+        out.append(f"            <h4>{html.escape(head)}</h4>")
+        out.append(f"            <p>{html.escape(text)}</p>")
+        out.append('            <p class="tile-actions">')
+        out.append(f'              <button type="button" class="tile-go" data-exp="{no}">'
+                   f"実験{no} を読む</button>")
+        if guide_id and guide_id in known:
+            out.append(f'              <button type="button" class="tile-go tile-go--guide"'
+                       f' data-guide="{guide_id}">作り方を見る</button>')
+        out.append("            </p>")
+        out.append("          </div>")
+        out.append("        </div>")
+    out.append("      </div>")
+    return "\n".join(out)
+
+
 def all_tags():
     """使われているタグを、使用数の多い順に並べる。"""
     counts = {}
@@ -1219,6 +1283,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--LINKS_URL-->", urls["links"]),
         ("<!--NOTEBOOK_URL-->", NOTEBOOK_URL),
         ("<!--PARENT_NAV-->", render_parent_nav(urls)),
+        ("<!--SHOWCASE-->", render_showcase(guides)),
         ("<!--SP_DEPTS-->", render_sp_depts(urls, guides, data)),
         ("<!--SP_RECENT-->", render_sp_recent(urls)),
         ("<!--SP_GUIDES-->", render_sp_guides(guides, urls)),

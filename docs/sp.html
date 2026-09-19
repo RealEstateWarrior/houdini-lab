@@ -1730,6 +1730,38 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   background: #3a3a3a;
 }
 
+/* ---------- 概要の「これまでに作ったもの」から、記録と作り方へ ---------- */
+
+.tile .tile-img {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: var(--ground-2);
+  cursor: pointer;
+}
+.tile .tile-img:focus-visible { outline: 2px solid var(--flag); outline-offset: -2px; }
+.tile .tile-img img { transition: transform 0.3s ease; }
+.tile .tile-img:hover img { transform: scale(1.02); }
+.tile-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0 !important; }
+.tile-go {
+  font: inherit;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border: 1px solid var(--wire);
+  border-radius: 980px;
+  background: var(--ground);
+  color: var(--ink);
+  cursor: pointer;
+}
+.tile-go:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.tile-go--guide { background: var(--flag); border-color: var(--flag); color: #ffffff; }
+.tile-go--guide:hover { background: #0055aa; border-color: #0055aa; }
+.tile-go:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .tile .tile-img img { transition: none; } }
+
 
 /* ---------- 親ページ（部の入口） ---------- */
 
