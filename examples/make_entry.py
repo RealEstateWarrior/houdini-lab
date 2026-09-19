@@ -33,12 +33,13 @@ def cell(value):
     return f'<td class="num">{text}</td>' if numeric else f"<td>{text}</td>"
 
 
-def article(no, chip, path, lesson, report):
+def article(no, chip, path, lesson, report, log="log_fx"):
+    tone = "chip--pm" if log == "log_pm" else "chip--fx"     # モデリング編とエフェクト編で色が違う
     out = [f"    <!-- ===================== {no} ===================== -->",
            f'    <article class="entry entry--current" id="exp{no}">',
            f'      <div class="badge">{no}</div>',
            '      <div class="body">',
-           f'        <span class="chip chip--fx">{html.escape(chip)}</span>',
+           f'        <span class="chip {tone}">{html.escape(chip)}</span>',
            f"        <h2>{html.escape(report['title'])}</h2>",
            f'        <p class="path">{html.escape(path)} &nbsp;·&nbsp; {html.escape(lesson)}</p>',
            ""]
@@ -96,7 +97,7 @@ def main():
     template = os.path.join(SITE, f"{log}_template.html")
     with open(template, encoding="utf-8") as fp:
         page = fp.read()
-    block = article(no, chip, path, lesson, report)
+    block = article(no, chip, path, lesson, report, log)
     pattern = re.compile(
         rf"    <!-- =+ {no} =+ -->\n    <article .*?</article>\n", re.S)
     if pattern.search(page):

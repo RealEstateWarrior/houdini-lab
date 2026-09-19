@@ -2705,7 +2705,106 @@
         },
         {
           "title": "強い風ほど、暴れる",
-          "body": "風速 16 では角度が −6〜22度の間で揺れ続けた。旗らしくはためかせたいなら、風速を上げるより Normal Drag を上げるほうが揺れは小さい（風速 4・抵抗 100 で揺れ ±3.1度）。",
+          "body": "風速 16 では角度が −6〜22度の間で揺れ続けた。同じくらい持ち上げるなら、風速を上げるより Normal Drag を上げるほうが揺れは小さかった（風速 8・抵抗 10 で 20度 ±5.6度、風速 4・抵抗 100 で 17度 ±3.1度）。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "path",
+      "title": "道に沿って物を並べる",
+      "lede": "曲線を等間隔に切り、その向きに物をそろえて並べる。坂のある道では、向き（N）だけでなく上（up）も入れないと、物が横に倒れる。",
+      "hero": "082_posts.png",
+      "hero_cap": "S字の道の両側に、54本の杭が道の向きにそろって立っている。",
+      "facts": [
+        [
+          "ノードの数",
+          "8個"
+        ],
+        [
+          "計算の時間",
+          "0.1秒"
+        ],
+        [
+          "元になった実験",
+          "実験008・082"
+        ]
+      ],
+      "exp": "082",
+      "hip": "082_path.hipnc",
+      "tags": [
+        "モデリング",
+        "曲線",
+        "複製",
+        "効率化"
+      ],
+      "steps": [
+        {
+          "title": "道の線を作る",
+          "node": "line",
+          "ui_node": "road_line",
+          "body": "<code>line</code> で長さ 20・400点の直線を x 方向に作り、wrangle で <code>@P.z = 3.0 * sin(@P.x * 0.35);</code> と曲げる。手で描いた <code>curve</code> でもよい。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "等間隔に切って、向きを付ける",
+          "node": "resample",
+          "ui_node": "spacing",
+          "body": "<code>resample</code> の Maximum Segment Length を 1.0 にし、<strong>Create Tangent Point Attribute をオン</strong>にする。各点に道の向き <code>tangentu</code> が付く。Length は上限で、全体を等分する。長さ 25.02 の道なら26等分で、間隔は約 0.96 になる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "向きと上を入れて、両側に振り分ける",
+          "node": "attribwrangle",
+          "ui_node": "aim",
+          "body": "<code>@N = normalize(v@tangentu); v@up = {0, 1, 0};</code> <strong>up も必ず入れる。</strong>道の横向きは <code>normalize(cross(@N, v@up))</code> で作れるので、同じ点を左右に 1.2 ずつずらして2本にする（<code>addpoint</code> で片側を足す）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "並べる物を作る",
+          "node": "box",
+          "ui_node": "post",
+          "body": "杭は 0.15 × 1.0 × 0.5 の <code>box</code>。<strong>前後を +Z に向けて作る</strong>（copytopoints は形の +Z を N に合わせる）。底が地面に来るよう y に 0.5 上げておく。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "点に配る",
+          "node": "copytopoints",
+          "ui_node": "posts",
+          "body": "<code>copytopoints</code> の左に杭、右に点。<strong>Pack and Instance をオンにする。</strong>細かい形を1万個配ると、オフでは 714ms・1,878MB、オンでは 2.9ms・4MB だった（実験082）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "道の面を張る",
+          "node": "sweep",
+          "ui_node": "road",
+          "body": "<code>sweep</code> に resample の出力をつなぎ、Surface Shape を Ribbon、Width 2、Target Up Vector を Y Axis にする。",
+          "img": "082_posts.png",
+          "cap": "道と杭を merge したところ。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "坂のある道で、N だけだと倒れる",
+          "body": "平らな道なら N だけでも杭はまっすぐ立つ。起伏（高さ ±1.2）を付けると、N だけでは横に最大 49度・平均 19度傾いた。up に (0, 1, 0) を入れると 0.0000度。平らな道で確かめただけでは気づけない（実験082）。",
+          "img": "082_roll_n.png",
+          "cap": "N だけ。谷のあたりの杭が倒れている。"
+        },
+        {
+          "title": "間隔がちょうど 1.0 にならない",
+          "body": "resample の Length は「これより長くしない」という上限。道全体を等分するので、1.0 を入れても 0.96 になる。ちょうどの間隔が要るなら、道の長さのほうをその倍数にする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Pack しないと重い",
+          "body": "2,210点の球を1万個配ると、Pack and Instance オフで点が 2,210万、メモリ 1,878MB、計算 714ms。オンなら 1万点・4MB・2.9ms。形を1つずつ編集しないなら、オンのままでよい。",
           "img": "",
           "cap": ""
         }
