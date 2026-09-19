@@ -121,9 +121,11 @@ def shoot_guide(conn, guide, record):
         if not wanted:
             continue
         # 同じ名前のパラメータを持つノードが複数あるときは、guides.json の
-        # ui_node（ネットワーク内のノード名）で写すノードを指定する
+        # ui_node（ネットワーク内のノード名）で写すノードを指定する。
+        # /obj のライトや /out の出力ノードのように外にあるものは、/ から書く
         if step.get("ui_node"):
-            node = f"{network}/{step['ui_node']}"
+            ui = step["ui_node"]
+            node = ui if ui.startswith("/") else f"{network}/{ui}"
         else:
             node = pick_node(conn, network, wanted, used)
         if not node:
@@ -132,17 +134,41 @@ def shoot_guide(conn, guide, record):
         used.add(node)
         # 段がパラメータ名（groundfriction など）なら、それが入っているタブを開く。
         # 開かないと最初のタブが写り、肝心のパラメータが画面に無い
+        focus = step.get("ui_parm") or wanted   # 開いて見せたいパラメータ
         gui_capture.run_in_houdini(conn, f"""
             import hou
             node = hou.node({node!r})
-            parm = node.parm({wanted!r}) or (node.parmTuple({wanted!r}) or [None])[0]
+            parm = node.parm({focus!r}) or (node.parmTuple({focus!r}) or [None])[0]
+            if parm is not None and {bool(step.get("ui_parm"))!r}:
+                # 見せたい項目が下のほうにあるときは、関係のない折りたたみ欄を閉じて上へ寄せる
+                mine = set(t.name() for t in parm.containingFolderSetParmTuples())
+                for tup in node.parmTuples():
+                    tmpl = tup.parmTemplate()
+                    if (tmpl.type() == hou.parmTemplateType.FolderSet
+                            and tup.name() not in mine
+                            and tmpl.folderType() == hou.folderType.Collapsible):
+                        tup[0].set(0)
             if parm is not None:
                 sets = parm.containingFolderSetParmTuples()
                 for tup, index in zip(sets, parm.containingFolderIndices()):
-                    tup[0].set(index)
+                    # タブは「何番目を開くか」、折りたたみ欄は「開く＝1」。
+                    # 折りたたみ欄に番号の 0 を入れると閉じてしまう（Sequence が閉じて写った）
+                    kind = tup.parmTemplate().folderType()
+                    if kind in (hou.folderType.Collapsible, hou.folderType.Simple):
+                        tup[0].set(1)
+                    else:
+                        tup[0].set(index)
         """)
         gui_capture.show_parameters(conn, node)
         refresh(conn)
+        if step.get("ui_parm"):
+            # 下のほうにある項目は、パラメータ欄をそこまでスクロールしてから撮る
+            gui_capture.run_in_houdini(conn, f"""
+                import hou
+                pane = hou.ui.paneTabOfType(hou.paneTabType.Parm)
+                pane.scrollTo({focus!r})
+            """)
+            refresh(conn)
         time.sleep(2.0)                     # ビューポートとパラメータの描き直し待ち
         png = os.path.join(OUT, f"guide_{guide['id']}_p{index}.png")
         if first:

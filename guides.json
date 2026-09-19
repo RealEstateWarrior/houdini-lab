@@ -1664,7 +1664,8 @@
           "node": "grid",
           "body": "Orientation を XY Plane にして縦に立て、4 × 4、40行 × 40列にする。中心は y = 2.2。1,600点の布になる。",
           "img": "",
-          "cap": ""
+          "cap": "",
+          "ui_node": "cloth"
         },
         {
           "title": "破りたい線で、面に印を付ける",
@@ -1693,7 +1694,7 @@
         {
           "title": "布の拘束を作る",
           "node": "vellumconstraints",
-          "ui_node": "cloth",
+          "ui_node": "cloth1",
           "body": "Constraint Type を Cloth にする。伸びの distance 4,706本と、曲げの bend 4,420本ができる。<strong>ここに breaking を入れても布は破れない</strong>（下の「つまずくところ」）。",
           "img": "",
           "cap": ""
@@ -1704,7 +1705,8 @@
           "ui_node": "glue",
           "body": "もう1つ <code>vellumconstraints</code> を置き、左右の出力をそのまま左右の入力につなぐ。Constraint Type を Glue にして、Enable Breaking をオンにして Threshold を 1 にする。<strong>重なった点1組につき1本の stitch ができる。今回は 66本で、切って増えた点の数と一致した。</strong>ここがずれていたら、貼り忘れか貼りすぎがある。",
           "img": "",
-          "cap": ""
+          "cap": "",
+          "ui_parm": "dobreaking"
         },
         {
           "title": "上端を留める",
@@ -1919,7 +1921,9 @@
           "node": "vellumsolver",
           "body": "左右の出力を <code>vellumsolver</code> の左右へ。Built-in Wind を有効にして、向きを (1, 0, 0)、Built-in Wind Speed を 40 にする。48フレームの計算は 2.36秒。",
           "img": "049_windy.png",
-          "cap": "風速 40、F48。"
+          "cap": "風速 40、F48。",
+          "ui_node": "solve",
+          "ui_parm": "dowind"
         }
       ],
       "traps": [
@@ -2181,21 +2185,24 @@
           "node": "envlight",
           "body": "空全体から照らす <code>envlight</code>（強さ 1.0）と、向きのある <code>hlight</code> を Distant にしたキーライト（強さ 2.4、回転 (−38, −32, 0)）の2つ。点光源は距離で弱まるので、既定の hlight のままだと被写体が暗く写る。",
           "img": "",
-          "cap": ""
+          "cap": "",
+          "ui_node": "/obj/report_dome"
         },
         {
           "title": "カメラを置く",
           "node": "cam",
           "body": "<code>cam</code> を置き、解像度を 720 × 460 にして地形が収まる向きに向ける。",
           "img": "",
-          "cap": ""
+          "cap": "",
+          "ui_node": "/obj/report_cam"
         },
         {
           "title": "Karma の出力ノードで撮る",
           "node": "karma",
           "body": "<code>/out</code> に <code>karma</code> を作り、Camera にさっきのカメラを入れる。Primary Samples と Max Secondary Samples を 24、Denoiser は off、Output Picture に書き出し先を入れてレンダする。<strong>1枚 3.49秒。ただし起動直後の1枚目は 19.49秒かかった。</strong>同じ地形を OpenGL で撮ると 1.29秒（実験038）。",
           "img": "guide_karma_render.png",
-          "cap": "材質あり・キーライト 2.4。"
+          "cap": "材質あり・キーライト 2.4。",
+          "ui_node": "/out/exp038_guide"
         }
       ],
       "traps": [

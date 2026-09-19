@@ -416,5 +416,300 @@
       "wanted": "mpmsurface",
       "png": "guide_mpm_p8.png"
     }
+  },
+  "cache": {
+    "1": {
+      "node": "/obj/smoke/solver",
+      "wanted": "pyrosolver",
+      "png": "guide_cache_p1.png"
+    },
+    "2": {
+      "node": "/obj/smoke/cache",
+      "wanted": "filecache",
+      "png": "guide_cache_p2.png"
+    },
+    "3": {
+      "node": "/obj/smoke/cache",
+      "wanted": "f1",
+      "png": "guide_cache_p3.png"
+    },
+    "4": {
+      "node": "/obj/smoke/cache",
+      "wanted": "filecache",
+      "png": "guide_cache_p4.png"
+    },
+    "5": {
+      "node": "/obj/smoke/cache",
+      "wanted": "loadfromdisk",
+      "png": "guide_cache_p5.png"
+    }
+  },
+  "wind": {
+    "1": {
+      "node": "/obj/wind/emitter",
+      "wanted": "grid",
+      "png": "guide_wind_p1.png"
+    },
+    "2": {
+      "node": "/obj/wind/popnet/solver",
+      "wanted": "popsolver",
+      "png": "guide_wind_p2.png"
+    },
+    "3": {
+      "node": "/obj/wind/popnet/gravity",
+      "wanted": "popforce",
+      "png": "guide_wind_p3.png"
+    },
+    "4": {
+      "node": "/obj/wind/popnet/wind",
+      "wanted": "popwind",
+      "png": "guide_wind_p4.png"
+    },
+    "5": {
+      "node": "/obj/wind/dots",
+      "wanted": "copytopoints",
+      "png": "guide_wind_p5.png"
+    },
+    "6": {
+      "node": "/obj/wind/import",
+      "wanted": "dopimport",
+      "png": "guide_wind_p6.png"
+    }
+  },
+  "tear": {
+    "1": {
+      "node": "/obj/tear_line/cloth",
+      "wanted": "grid",
+      "png": "guide_tear_p1.png"
+    },
+    "2": {
+      "node": "/obj/tear_line/mark_cut",
+      "wanted": "attribwrangle",
+      "png": "guide_tear_p2.png"
+    },
+    "3": {
+      "node": "/obj/tear_line/upper",
+      "wanted": "blast",
+      "png": "guide_tear_p3.png"
+    },
+    "4": {
+      "node": "/obj/tear_line/make_pins",
+      "wanted": "attribwrangle",
+      "png": "guide_tear_p4.png"
+    },
+    "5": {
+      "node": "/obj/tear_line/cloth1",
+      "wanted": "vellumconstraints",
+      "png": "guide_tear_p5.png"
+    },
+    "6": {
+      "node": "/obj/tear_line/glue",
+      "wanted": "vellumconstraints",
+      "png": "guide_tear_p6.png"
+    },
+    "7": {
+      "node": "/obj/tear_line/pin",
+      "wanted": "vellumconstraints",
+      "png": "guide_tear_p7.png"
+    },
+    "8": {
+      "node": "/obj/tear_line/solve",
+      "wanted": "vellumsolver",
+      "png": "guide_tear_p8.png"
+    }
+  },
+  "fire": {
+    "1": {
+      "node": "/obj/fire/emitter",
+      "wanted": "sphere",
+      "png": "guide_fire_p1.png"
+    },
+    "2": {
+      "node": "/obj/fire/src",
+      "wanted": "pyrosource",
+      "png": "guide_fire_p2.png"
+    },
+    "3": {
+      "node": "/obj/fire/rasterize",
+      "wanted": "volumerasterizeattributes",
+      "png": "guide_fire_p3.png"
+    },
+    "4": {
+      "node": "/obj/fire/solve",
+      "wanted": "pyrosolver",
+      "png": "guide_fire_p4.png"
+    },
+    "5": {
+      "node": "/obj/fire/points",
+      "wanted": "pointsfromvolume",
+      "png": "guide_fire_p5.png"
+    },
+    "6": {
+      "node": "/obj/fire/color",
+      "wanted": "attribwrangle",
+      "png": "guide_fire_p6.png"
+    }
+  },
+  "hair": {
+    "1": {
+      "node": "/obj/hairwind/skin",
+      "wanted": "sphere",
+      "png": "guide_hair_p1.png"
+    },
+    "2": {
+      "node": "/obj/hairwind/make_guides",
+      "wanted": "attribwrangle",
+      "png": "guide_hair_p2.png"
+    },
+    "3": {
+      "node": "/obj/hairwind/hairgen",
+      "wanted": "hairgen",
+      "png": "guide_hair_p3.png"
+    },
+    "4": {
+      "node": "/obj/hairwind/mark_roots",
+      "wanted": "attribwrangle",
+      "png": "guide_hair_p4.png"
+    },
+    "5": {
+      "node": "/obj/hairwind/hair",
+      "wanted": "vellumconstraints",
+      "png": "guide_hair_p5.png"
+    },
+    "6": {
+      "node": "/obj/hairwind/solve",
+      "wanted": "vellumsolver",
+      "png": "guide_hair_p6.png"
+    }
+  },
+  "grass": {
+    "1": {
+      "node": "/obj/terrain/erode",
+      "wanted": "heightfield_erode",
+      "png": "guide_grass_p1.png"
+    },
+    "2": {
+      "node": "/obj/terrain/mesh",
+      "wanted": "convertheightfield",
+      "png": "guide_grass_p2.png"
+    },
+    "3": {
+      "node": "/obj/terrain/read_layers",
+      "wanted": "attribwrangle",
+      "png": "guide_grass_p3.png"
+    },
+    "4": {
+      "node": "/obj/terrain/scatter",
+      "wanted": "scatter",
+      "png": "guide_grass_p4.png"
+    },
+    "5": {
+      "node": "/obj/terrain/aim",
+      "wanted": "attribwrangle",
+      "png": "guide_grass_p5.png"
+    },
+    "6": {
+      "node": "/obj/terrain/copies",
+      "wanted": "copytopoints",
+      "png": "guide_grass_p6.png"
+    }
+  },
+  "carry": {
+    "1": {
+      "node": "/obj/mpm/source",
+      "wanted": "mpmsource",
+      "png": "guide_carry_p1.png"
+    },
+    "2": {
+      "node": "/obj/mpm/floor",
+      "wanted": "box",
+      "png": "guide_carry_p2.png"
+    },
+    "3": {
+      "node": "/obj/mpm/collider",
+      "wanted": "mpmcollider",
+      "png": "guide_carry_p3.png"
+    },
+    "4": {
+      "node": "/obj/mpm/solve",
+      "wanted": "mpmsolver",
+      "png": "guide_carry_p4.png"
+    }
+  },
+  "karma": {
+    "1": {
+      "node": "/obj/terrain/paint",
+      "wanted": "attribwrangle",
+      "png": "guide_karma_p1.png"
+    },
+    "2": {
+      "node": "/obj/terrain/assign",
+      "wanted": "material",
+      "png": "guide_karma_p2.png"
+    },
+    "3": {
+      "node": "/obj/report_dome",
+      "wanted": "envlight",
+      "png": "guide_karma_p3.png"
+    },
+    "4": {
+      "node": "/obj/report_cam",
+      "wanted": "cam",
+      "png": "guide_karma_p4.png"
+    },
+    "5": {
+      "node": "/out/exp038_guide",
+      "wanted": "karma",
+      "png": "guide_karma_p5.png"
+    }
+  },
+  "export": {
+    "1": {
+      "node": "/obj/export/color",
+      "wanted": "color",
+      "png": "guide_export_p1.png"
+    },
+    "2": {
+      "node": "/obj/export/write_obj",
+      "wanted": "file",
+      "png": "guide_export_p2.png"
+    },
+    "3": {
+      "node": "/obj/export/rop_obj",
+      "wanted": "rop_geometry",
+      "png": "guide_export_p3.png"
+    },
+    "4": {
+      "node": "/obj/export/write_obj",
+      "wanted": "file",
+      "png": "guide_export_p4.png"
+    }
+  },
+  "foreach": {
+    "1": {
+      "node": "/obj/tiles/unique",
+      "wanted": "facet",
+      "png": "guide_foreach_p1.png"
+    },
+    "2": {
+      "node": "/obj/tiles/each_begin",
+      "wanted": "block_begin",
+      "png": "guide_foreach_p2.png"
+    },
+    "3": {
+      "node": "/obj/tiles/lift_one",
+      "wanted": "attribwrangle",
+      "png": "guide_foreach_p3.png"
+    },
+    "4": {
+      "node": "/obj/tiles/lift_all",
+      "wanted": "attribwrangle",
+      "png": "guide_foreach_p4.png"
+    },
+    "5": {
+      "node": "/obj/tiles/lift_all",
+      "wanted": "attribwrangle",
+      "png": "guide_foreach_p5.png"
+    }
   }
 }
