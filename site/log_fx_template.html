@@ -3613,6 +3613,96 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 074 ===================== -->
+    <article class="entry entry--current" id="exp074">
+      <div class="badge">074</div>
+      <div class="body">
+        <span class="chip chip--fx">MPM</span>
+        <h2>sticky は天井にぶら下げられるか — 地面とコライダで効き方は同じ。ただし重さに逆らう力は無い</h2>
+        <p class="path">C:/Program Files/Git/obj/sticky &nbsp;·&nbsp; 名前から想像する働きと、実際の働きは違うことがある</p>
+
+        <div class="prose">
+          <p><a href="#exp067">実験067</a>で、組み込みの地面の sticky（粘着）は「離れるとき」にだけ効くと分かった。落として跳ねさせると、戻る高さが sticky 1.0 で半分になった。<a href="#exp069">実験069</a>で、コライダの摩擦は組み込みの地面と同じものだった。では sticky も同じか。</p>
+          <p>同じ落とし方（y = 2.5 から、摩擦 0.25）で、地面とコライダの板に同じ sticky を入れて並べた。どちらも sticky を上げると戻る高さが減り、1〜2 で頭打ちになる。地面は 0.026922 → 0.013596、コライダは 0.020205 → 0.013596。sticky 5 と 20 では、地面とコライダの値が6桁まで完全に一致した。途中の値は少し違うが、行き着く先は同じ。</p>
+          <p>「離れるときに引き止める」なら、天井にもぶら下げられるはず。天井の板の真下に塊を接して置き、sticky を 0 から 1000 まで上げた。塊はすべて落ちた。40フレーム目で下がった量は、sticky 0 で 13.01、1000 で 12.87。自由落下の 12.95 とほとんど変わらない。塊を天井に食い込ませて置いても同じだった。</p>
+          <p>sticky は「離れる速さ」を少し削るだけで、重さに逆らって物を支える力ではない。跳ね返りが半分になったのも、離れる瞬間の速さが削られた結果と考えると、両方の結果が合う。</p>
+        </div>
+
+        <p class="label">天井に接して置いた塊（0.46秒後）</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="074_ceiling_0.png" alt="sticky 0。12フレーム目までに 1.05 下がった。" loading="lazy" decoding="async"></div>
+            <figcaption>sticky 0。12フレーム目までに 1.05 下がった。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="074_ceiling_1000.png" alt="sticky 1000。1.01 下がった。ほとんど変わらない。" loading="lazy" decoding="async"></div>
+            <figcaption>sticky 1000。1.01 下がった。ほとんど変わらない。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">天井の板の下面は y = 3.0。塊の一番上の粒は、最初のフレームで天井の 0.0615 下にある（粒の間隔 0.12 の半分）。2枚とも同じカメラ。</p>
+
+        <p class="label">A. 落として跳ねさせる（y = 2.5 から・摩擦 0.25）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>sticky</th><th>地面：いちばん低い</th><th>地面：戻った高さ</th><th>コライダ：いちばん低い</th><th>コライダ：戻った高さ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.310169</td><td class="num">0.026922</td><td class="num">0.310112</td><td class="num">0.020205</td></tr>
+              <tr><td class="num">0.25</td><td class="num">0.310169</td><td class="num">0.024870</td><td class="num">0.310112</td><td class="num">0.017774</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.310169</td><td class="num">0.015851</td><td class="num">0.310112</td><td class="num">0.012788</td></tr>
+              <tr><td class="num">1.0</td><td class="num">0.310169</td><td class="num">0.013617</td><td class="num">0.310112</td><td class="num">0.011758</td></tr>
+              <tr><td class="num">2.0</td><td class="num">0.310169</td><td class="num">0.013596</td><td class="num">0.310112</td><td class="num">0.011881</td></tr>
+              <tr><td class="num">5.0</td><td class="num">0.310169</td><td class="num">0.013596</td><td class="num">0.310169</td><td class="num">0.013596</td></tr>
+              <tr><td class="num">20.0</td><td class="num">0.310169</td><td class="num">0.013596</td><td class="num">0.310169</td><td class="num">0.013596</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「戻った高さ」は、いちばん低くなったあと、どこまで戻ったか（高さの平均で測る）。地面の値は<a href="#exp067">実験067</a>と6桁まで同じ。</p>
+
+        <p class="label">B. 天井にぶら下げる（摩擦 0.25）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>sticky</th><th>F6</th><th>F12</th><th>F24</th><th>F40</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.2227</td><td class="num">1.0504</td><td class="num">4.5435</td><td class="num">13.0121</td><td class="num">1.28</td></tr>
+              <tr><td class="num">1</td><td class="num">0.2106</td><td class="num">1.0184</td><td class="num">4.4716</td><td class="num">12.8869</td><td class="num">0.96</td></tr>
+              <tr><td class="num">5</td><td class="num">0.2099</td><td class="num">1.0154</td><td class="num">4.4640</td><td class="num">12.8733</td><td class="num">0.99</td></tr>
+              <tr><td class="num">20</td><td class="num">0.2099</td><td class="num">1.0154</td><td class="num">4.4640</td><td class="num">12.8733</td><td class="num">1.07</td></tr>
+              <tr><td class="num">100</td><td class="num">0.2099</td><td class="num">1.0154</td><td class="num">4.4640</td><td class="num">12.8733</td><td class="num">1.05</td></tr>
+              <tr><td class="num">1000</td><td class="num">0.2099</td><td class="num">1.0154</td><td class="num">4.4640</td><td class="num">12.8733</td><td class="num">0.99</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">下がった量は、最初のフレームからの高さの平均の差。40フレーム（1.625秒）の自由落下は ½ g t² = 12.9523。</p>
+
+        <p class="label">C. 天井に食い込ませて置く（sticky 1000）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>箱の上面を天井より上に</th><th>F6</th><th>F12</th><th>F40</th><th>sticky 0 の F40</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.2075</td><td class="num">1.0085</td><td class="num">12.8454</td><td class="num">13.0121</td></tr>
+              <tr><td class="num">0.05</td><td class="num">0.2060</td><td class="num">1.0043</td><td class="num">12.8285</td><td class="num">13.0121</td></tr>
+              <tr><td class="num">0.1</td><td class="num">0.2049</td><td class="num">1.0012</td><td class="num">12.8162</td><td class="num">13.0121</td></tr>
+              <tr><td class="num">0.2</td><td class="num">0.2026</td><td class="num">0.9946</td><td class="num">12.7896</td><td class="num">13.0121</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">箱の上面を天井より上に出して置いた。どの置き方でも、最初のフレームで一番上の粒は天井の 0.0615 下にそろった。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>コライダの sticky も、地面の sticky と同じ向きに効く。</strong>上げるほど跳ね返りが減り、地面は 0.026922 → 0.013596、コライダは 0.020205 → 0.013596。</li>
+          <li><strong>どちらも 1〜2 で頭打ちになる。</strong>地面は sticky 2 以上で 0.013596 のまま。コライダも 5 以上で変わらない。<strong>sticky 5 と 20 では、地面とコライダの値が6桁まで完全に一致した</strong>（いちばん低い高さ 0.310169 も同じ）。</li>
+          <li><strong>途中の値は少し違う。</strong>sticky 0 で戻った高さは地面 0.026922、コライダ 0.020205。コライダの板のほうが少し跳ねにくい。いちばん低い高さも 0.310169 対 0.310112 と、0.00006 だけ違う。</li>
+          <li><strong>sticky では天井にぶら下がれない。</strong>sticky を 1000 にしても、40フレームで 12.87 下がった。sticky 0 の 13.01、自由落下の 12.95 とほとんど変わらない。<strong>エラーも警告も出ない。</strong></li>
+          <li><strong>天井に食い込ませても同じ。</strong>箱の上面を天井より 0.2 上に出して置いても 12.79 下がった。置き方によらず、最初のフレームで一番上の粒は天井の 0.0615 下にそろう。</li>
+          <li><strong>sticky が効くのは、離れる最初の一瞬だけ。</strong>F6 の下がり方は sticky 0 の 0.2227 に対して 0.2099（5.7% 少ない）。その差はあとで広がらない。重さに逆らって支え続ける力ではなく、離れる瞬間の速さを削る数字と見るのが、跳ね返り（<a href="#exp067">実験067</a>）とぶら下がりの両方に合う。</li>
+          <li>実用の結論。<strong>MPM で物を天井や壁に貼り付けたいなら、sticky ではできない。</strong>跳ね返りを抑える目的なら、コライダでも地面でも 1〜2 で足りる（それ以上は変わらない）。</li>
+          <li>計算の時間は、555粒・40フレームで 1回 0.7〜2.7秒。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

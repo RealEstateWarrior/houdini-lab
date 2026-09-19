@@ -466,13 +466,19 @@ DONE = [
      "shots": ["073_top.png", "073_wild.png"],
      "title": "液体はいつ暴れ出すか — 摩擦の境目ではなく「時間」だった。substep 8 で消えるが 5倍かかる",
      "note": "摩擦0.25〜1.0は全部暴れる（F28〜46から）。0と1.5以上は静か。substep 8で消えるが4.7〜6.3倍"},
+    {"no": "074", "anchor": "exp074",
+     "tags": ["MPM", "シミュレーション", "粘着", "落とし穴"],
+     "log": "log_fx", "hip": "074_sticky.hipnc", "thumb": "074_ceiling_1000.png",
+     "shots": ["074_ceiling_0.png", "074_ceiling_1000.png"],
+     "title": "sticky は天井にぶら下げられるか — 地面とコライダで効き方は同じ。ただし重さに逆らう力は無い",
+     "note": "stickyは1〜2で頭打ち、5以上で地面とコライダが6桁一致。1000でも天井から落ちる"},
 ]
 
 PLANNED = []
 
 PLANNED_FX = [
-    {"no": "074", "title": "コライダの sticky",
-     "note": "コライダの sticky は、組み込みの地面の sticky と同じ効き方か"},
+    {"no": "075", "title": "粒の細かさと摩擦の上限",
+     "note": "particlesep を変えると、実験071の「実効の摩擦」の上限は動くか"},
 ]
 
 PAGES = [
