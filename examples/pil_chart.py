@@ -87,8 +87,16 @@ def line_chart(path, series, title="", x_label="", y_label="", size=(1000, 560),
         color = s.get("color") or PALETTE[index % len(PALETTE)]
         pts = [(px(x), py(y)) for x, y in s["points"]]
         if s.get("dash"):
-            for a, b in zip(pts[::2], pts[1::2]):
-                draw.line([a, b], fill=color, width=2)
+            # 線分ごとに 6px 描いて 5px 空ける。点の数に関係なく同じ見た目になる
+            for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+                length = max(((bx - ax) ** 2 + (by - ay) ** 2) ** 0.5, 1e-6)
+                pos = 0.0
+                while pos < length:
+                    end = min(pos + 6.0, length)
+                    draw.line([(ax + (bx - ax) * pos / length, ay + (by - ay) * pos / length),
+                               (ax + (bx - ax) * end / length, ay + (by - ay) * end / length)],
+                              fill=color, width=2)
+                    pos += 11.0
         else:
             draw.line(pts, fill=color, width=3, joint="curve")
     for x, y, text in markers:

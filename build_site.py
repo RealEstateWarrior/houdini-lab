@@ -508,6 +508,12 @@ DONE = [
      "shots": ["080_rain.png"],
      "title": "雨を地面で跳ねさせる — Bounce は速さの比で、地面と粒の値は掛け算になる",
      "note": "跳ね上がる高さはBounce²に近い。地面0.5×粒0.5＝地面0.25×粒1（4桁一致）。DieでResponse"},
+    {"no": "081", "anchor": "exp081",
+     "tags": ["Vellum", "布", "風", "手順"],
+     "log": "log_fx", "hip": "081_flag.hipnc", "thumb": "081_flag_16.png",
+     "shots": ["081_flag_4.png", "081_flag_16.png", "081_angle.png"],
+     "title": "旗を風になびかせる — 風速 2 まではほぼ垂れたまま。持ち上がり方は「抵抗 × 風速²」でそろう",
+     "note": "風速0〜2で85〜78度、4で41度、16で9度。抵抗×風速²が同じ組は0.6度差でそろう"},
 ]
 
 PLANNED = []

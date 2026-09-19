@@ -4146,6 +4146,88 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 081 ===================== -->
+    <article class="entry entry--current" id="exp081">
+      <div class="badge">081</div>
+      <div class="body">
+        <span class="chip chip--fx">Vellum</span>
+        <h2>旗を風になびかせる — 風速 2 まではほぼ垂れたまま。持ち上がり方は「抵抗 × 風速²」でそろう</h2>
+        <p class="path">C:/Program Files/Git/obj/flag &nbsp;·&nbsp; 揺れるものは、一定時間の平均で測る</p>
+
+        <div class="prose">
+          <p>左端を竿に留めた布（<button class="term" data-term="Vellum">Vellum</button> の cloth）に、<button class="term" data-term="ソルバ">ソルバ</button>の Built-in Wind で横から風を当てた。旗の角度は、竿の真ん中から見た「旗の先の辺」の向きで測る。0度が水平、90度が真下に垂れた状態。</p>
+          <p>最初は3秒回して最後のフレームで角度を取ったが、旗はまだ大きく揺れていて、1フレームの値は ±8〜16度もぶれた。風速 2 で抵抗を 20 から 40 に上げると角度が増える、という逆向きの結果まで出た。そこで6秒回し、最後の2秒（48フレーム）の平均で測り直した。</p>
+          <p>風速 0 / 1 / 2 では、旗はほとんど持ち上がらない（85 / 85 / 78度）。4 で 41度、8 で 20度、16 で 9度と、そこから急に水平へ近づく。強い風ほど、はためきも大きい。風速 16 では角度が −6〜22度の間で揺れ続けた。</p>
+          <p>布の Normal Drag（面に垂直な向きの抵抗、既定 10）も同じ向きに効く。風速 4 のまま 1 / 10 / 100 にすると、89 / 41 / 17度。</p>
+          <p>では、効いているのは「抵抗 × 風速」か「抵抗 × 風速²」か。積をそろえた組を並べた。抵抗 × 風速² が 160 の組は、(風速 4・抵抗 10) 41.1度、(風速 2・抵抗 40) 40.5度とほぼ一致した。抵抗 × 風速 が 40 の組は、41.1 / 78.5 / 30.6度とばらばら。風の効きは速さの2乗に近い。<a href="#exp029">実験029</a>（<button class="term" data-term="POP">POP</button> の風）・079（popdrag）と同じ形だった。ただし (風速 8・抵抗 2.5) だけは 50.5度で、9度ずれた。</p>
+        </div>
+
+        <p class="label">完成した旗（6秒後）</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="081_flag_4.png" alt="風速 4。斜め下へ垂れながら、先がはためく（平均 41度）。" loading="lazy" decoding="async"></div>
+            <figcaption>風速 4。斜め下へ垂れながら、先がはためく（平均 41度）。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="081_flag_16.png" alt="風速 16。ほぼ水平に広がり、面が大きく波打つ（平均 9度、−6〜22度で揺れる" loading="lazy" decoding="async"></div>
+            <figcaption>風速 16。ほぼ水平に広がり、面が大きく波打つ（平均 9度、−6〜22度で揺れる）。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">3 × 2 の布（31 × 21 点）を、左端の点だけ竿に留めた。Normal Drag 10。2枚とも同じカメラ。</p>
+
+        <p class="label">A. 風速を変える（Normal Drag 10・最後の2秒の平均）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="081_angle.png" alt="風速 2 までは垂れたまま。4 から急に持ち上がり、そのあとはゆっくり水平へ近づ" loading="lazy" decoding="async"></div>
+            <figcaption>風速 2 までは垂れたまま。4 から急に持ち上がり、そのあとはゆっくり水平へ近づく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>風速</th><th>角度の平均</th><th>揺れ（標準偏差）</th><th>最小〜最大</th><th>計算の秒（6秒ぶん）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">84.69</td><td class="num">4.83</td><td class="num">77.0〜91.1</td><td class="num">4.56</td></tr>
+              <tr><td class="num">1</td><td class="num">84.77</td><td class="num">4.45</td><td class="num">76.6〜90.4</td><td class="num">4.52</td></tr>
+              <tr><td class="num">2</td><td class="num">77.72</td><td class="num">4.67</td><td class="num">72.1〜85.3</td><td class="num">4.48</td></tr>
+              <tr><td class="num">4</td><td class="num">41.08</td><td class="num">1.82</td><td class="num">38.0〜43.5</td><td class="num">4.21</td></tr>
+              <tr><td class="num">8</td><td class="num">19.72</td><td class="num">5.59</td><td class="num">11.5〜30.1</td><td class="num">3.55</td></tr>
+              <tr><td class="num">16</td><td class="num">9.31</td><td class="num">8.72</td><td class="num">−5.8〜21.6</td><td class="num">3.64</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">点線は、最後の2秒の間の角度の最小と最大。</p>
+
+        <p class="label">B・C. 抵抗と風速の組み合わせ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>風速</th><th>Normal Drag</th><th>抵抗 × 風速</th><th>抵抗 × 風速²</th><th>角度の平均</th><th>揺れ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">4</td><td class="num">1</td><td class="num">4</td><td class="num">16</td><td class="num">88.81</td><td class="num">4.88</td></tr>
+              <tr><td class="num">4</td><td class="num">10</td><td class="num">40</td><td class="num">160</td><td class="num">41.08</td><td class="num">1.82</td></tr>
+              <tr><td class="num">4</td><td class="num">100</td><td class="num">400</td><td class="num">1600</td><td class="num">16.62</td><td class="num">3.11</td></tr>
+              <tr><td class="num">2</td><td class="num">40</td><td class="num">80</td><td class="num">160</td><td class="num">40.51</td><td class="num">3.07</td></tr>
+              <tr><td class="num">8</td><td class="num">2.5</td><td class="num">20</td><td class="num">160</td><td class="num">50.45</td><td class="num">2.75</td></tr>
+              <tr><td class="num">2</td><td class="num">20</td><td class="num">40</td><td class="num">80</td><td class="num">78.51</td><td class="num">7.92</td></tr>
+              <tr><td class="num">8</td><td class="num">5</td><td class="num">40</td><td class="num">320</td><td class="num">30.59</td><td class="num">7.87</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「抵抗 × 風速²」が同じ 160 の3組のうち、2組は 0.6度差でそろった。「抵抗 × 風速」が同じ 40 の3組は、31〜79度とばらばら。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>風速 2 までは、旗はほとんど持ち上がらない。</strong>0 / 1 / 2 で 85 / 85 / 78度。4 で 41度、8 で 20度、16 で 9度。「なびかせる」なら 4 以上から。</li>
+          <li><strong>風が強いほど、はためきも大きい。</strong>最後の2秒の角度の揺れは、風速 4 で ±1.8度、16 で ±8.7度（−6〜22度）。面も大きく波打つ。</li>
+          <li><strong>布の Normal Drag も同じ向きに効く。</strong>風速 4 で 1 / 10 / 100 にすると 89 / 41 / 17度。抵抗を上げても風を強くしても、旗は持ち上がる。</li>
+          <li><strong>持ち上がり方は「抵抗 × 風速²」でほぼそろう。</strong>積が 160 の (4, 10) と (2, 40) は 41.1度と 40.5度。「抵抗 × 風速」がそろった組は 31〜79度とばらばら。風の効きは速さの2乗に近く、POP の風（<a href="#exp029">実験029</a>）・空気抵抗（<a href="#exp079">実験079</a>）・毛（<a href="#exp049">実験049</a>）と同じ形だった。</li>
+          <li><strong>ただし完全にはそろわない。</strong>(風速 8・抵抗 2.5) は同じ積 160 でも 50.5度で、9度ずれた。抵抗がとても小さいときに外れるのかは、確かめていない。</li>
+          <li><strong>旗は3秒ではまだ落ち着かない。</strong>3秒後の1フレームで測ると ±8〜16度ぶれ、抵抗を上げたのに角度が増えるという逆向きの値まで出た。6秒回して最後の2秒を平均すると、筋の通った値になった。<strong>揺れるものは、1フレームではなく一定時間の平均で測る。</strong></li>
+          <li>計算の時間は、651点の布で6秒（144フレーム）が 3.6〜4.6秒。風が強いほど少し速かった。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
