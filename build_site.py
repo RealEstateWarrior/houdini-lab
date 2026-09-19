@@ -500,10 +500,7 @@ DONE = [
 
 PLANNED = []
 
-PLANNED_FX = [
-    {"no": "079", "title": "次の題材は相談して決める",
-     "note": "MPM の続き・手順ページ向きの題材・効率化のどれに進むか"},
-]
+PLANNED_FX = []
 
 PAGES = [
     # template, site出力, docs出力, ナビの現在位置, タブ形式か
