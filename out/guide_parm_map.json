@@ -711,5 +711,138 @@
       "wanted": "attribwrangle",
       "png": "guide_foreach_p5.png"
     }
+  },
+  "sparks": {
+    "1": {
+      "node": "/obj/sparks/origin",
+      "wanted": "add",
+      "png": "guide_sparks_p1.png"
+    },
+    "2": {
+      "node": "/obj/sparks/popnet/source",
+      "wanted": "popsource",
+      "png": "guide_sparks_p2.png"
+    },
+    "3": {
+      "node": "/obj/sparks/popnet/source",
+      "wanted": "life",
+      "png": "guide_sparks_p3.png"
+    },
+    "4": {
+      "node": "/obj/sparks/popnet/source",
+      "wanted": "velx",
+      "png": "guide_sparks_p4.png"
+    },
+    "5": {
+      "node": "/obj/sparks/popnet/drag",
+      "wanted": "popdrag",
+      "png": "guide_sparks_p5.png"
+    },
+    "6": {
+      "node": "/obj/sparks/popnet/solver",
+      "wanted": "popsolver",
+      "png": "guide_sparks_p6.png"
+    },
+    "7": {
+      "node": "/obj/sparks/streaks",
+      "wanted": "attribwrangle",
+      "png": "guide_sparks_p7.png"
+    }
+  },
+  "rain": {
+    "1": {
+      "node": "/obj/rain/cloud",
+      "wanted": "grid",
+      "png": "guide_rain_p1.png"
+    },
+    "2": {
+      "node": "/obj/rain/popnet/source",
+      "wanted": "popsource",
+      "png": "guide_rain_p2.png"
+    },
+    "3": {
+      "node": "/obj/rain/popnet/gravity",
+      "wanted": "popforce",
+      "png": "guide_rain_p3.png"
+    },
+    "4": {
+      "node": "/obj/rain/popnet/ground",
+      "wanted": "groundplane",
+      "png": "guide_rain_p4.png"
+    },
+    "5": {
+      "node": "/obj/rain/popnet/ground",
+      "wanted": "bounce",
+      "png": "guide_rain_p5.png"
+    },
+    "6": {
+      "node": "/obj/rain/streaks",
+      "wanted": "attribwrangle",
+      "png": "guide_rain_p6.png"
+    }
+  },
+  "flag": {
+    "1": {
+      "node": "/obj/flag/cloth",
+      "wanted": "grid",
+      "png": "guide_flag_p1.png"
+    },
+    "2": {
+      "node": "/obj/flag/pole_side",
+      "wanted": "attribwrangle",
+      "png": "guide_flag_p2.png"
+    },
+    "3": {
+      "node": "/obj/flag/cloth_con",
+      "wanted": "vellumconstraints",
+      "png": "guide_flag_p3.png"
+    },
+    "4": {
+      "node": "/obj/flag/pin",
+      "wanted": "vellumconstraints",
+      "png": "guide_flag_p4.png"
+    },
+    "5": {
+      "node": "/obj/flag/solve",
+      "wanted": "vellumsolver",
+      "png": "guide_flag_p5.png"
+    },
+    "6": {
+      "node": "/obj/flag/show",
+      "wanted": "merge",
+      "png": "guide_flag_p6.png"
+    }
+  },
+  "path": {
+    "1": {
+      "node": "/obj/road/road_line",
+      "wanted": "line",
+      "png": "guide_path_p1.png"
+    },
+    "2": {
+      "node": "/obj/road/spacing",
+      "wanted": "resample",
+      "png": "guide_path_p2.png"
+    },
+    "3": {
+      "node": "/obj/road/aim",
+      "wanted": "attribwrangle",
+      "png": "guide_path_p3.png"
+    },
+    "4": {
+      "node": "/obj/road/post",
+      "wanted": "box",
+      "png": "guide_path_p4.png"
+    },
+    "5": {
+      "node": "/obj/road/posts",
+      "wanted": "copytopoints",
+      "png": "guide_path_p5.png"
+    },
+    "6": {
+      "node": "/obj/road/road",
+      "wanted": "sweep",
+      "png": "guide_path_p6.png"
+    }
   }
 }

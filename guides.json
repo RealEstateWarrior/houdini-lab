@@ -2679,7 +2679,8 @@
           "ui_node": "solve",
           "body": "<code>vellumsolver</code> の Forces タブで Built-in Wind を有効にし、向きを (1, 0, 0)、Built-in Wind Speed を 4 にする。<strong>風速 2 までは旗はほとんど持ち上がらない</strong>（85〜78度）。4 で 41度、16 で 9度（0度が水平）。",
           "img": "081_angle.png",
-          "cap": "風速ごとの旗の角度（最後の2秒の平均）。点線は揺れの幅。"
+          "cap": "風速ごとの旗の角度（最後の2秒の平均）。点線は揺れの幅。",
+          "ui_parm": "dowind"
         },
         {
           "title": "竿を足して見せる",
