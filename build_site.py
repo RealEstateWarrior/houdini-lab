@@ -33,6 +33,7 @@ OUT = os.path.join(HERE, "out")
 GLOSSARY = os.path.join(HERE, "glossary.json")
 NODES = os.path.join(HERE, "nodes.json")
 GUIDES = os.path.join(HERE, "guides.json")
+SYNONYMS = os.path.join(HERE, "search_synonyms.json")
 
 NOTEBOOK_URL = "https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022"
 GITHUB_RAW = ("https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/")
@@ -530,7 +531,10 @@ def render_parent_nav(urls):
         else:
             out.append(f'        <li><span class="soon">{html.escape(label)}'
                        "<small>準備中</small></span></li>")
-    out += ["      </ul>", "    </div>", "  </nav>"]
+    out.append("      </ul>")
+    out.append('      <button type="button" class="nav-icon" id="search-open"'
+               ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + "</button>")
+    out += ["    </div>", "  </nav>"]
     return "\n".join(out)
 
 
@@ -970,6 +974,16 @@ def render_nodes(nodes, urls):
     return "\n".join(out)
 
 
+def report_summary(no, limit=240):
+    """実験のレポートの要約の頭。検索で本文にも当てるため。"""
+    path = os.path.join(OUT, f"{no}_report.json")
+    if not os.path.exists(path):
+        return ""
+    with open(path, encoding="utf-8") as fp:
+        text = json.load(fp).get("summary", "")
+    return re.sub(r"\s+", " ", text)[:limit]
+
+
 def render_search_data(data, nodes, guides, urls, tabs):
     """検索の索引。実験・ノード・用語をまとめて1つのJSONに入れる。
 
@@ -986,6 +1000,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
             "href": f'{urls[item.get("log", "log_pm")]}#{item["anchor"]}',
             "exp": item["no"],
             "tags": item.get("tags", []),
+            "body": report_summary(item["no"]),
         })
 
     # 手順ページが索引に入っていなかった。「作り方」を探している人が
@@ -997,7 +1012,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
             "kind": "手順",
             "label": guide["title"],
             "note": guide["lede"][:70],
-            "href": f'{urls["home"]}#guides',
+            "href": f'{urls["home"]}#guide-{guide["id"]}',
             "tab": "guides",
             "guide": guide["id"],
             "body": f"{steps} {traps}",
@@ -1014,6 +1029,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
                 "href": f'{urls["home"]}#nodes',
                 "tab": "nodes",
                 "anchor": f"node-{index}",
+                "body": f'{node.get("what", "")} {node.get("gotcha", "")}',
             })
 
     index = -1
@@ -1028,6 +1044,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
                 "tab": "glossary",
                 "anchor": f"gloss-{index}",
                 "reading": entry.get("reading", ""),
+                "body": entry["def"],
             })
 
     for panel, label in TABS:
@@ -1036,8 +1053,18 @@ def render_search_data(data, nodes, guides, urls, tabs):
                       "tab": panel})
     items.append({"kind": "ページ", "label": "実験ログ（全文）",
                   "note": "すべての実験の記録", "href": urls["log"]})
+    items.append({"kind": "ページ", "label": BRAND,
+                  "note": "親のページ。部の入口",
+                  "href": urls.get("parent") or PARENT_URLS["pages"],
+                  "body": "サイトウプロダクション SP 部 映像制作部"})
 
-    body = json.dumps({"tabs": bool(tabs), "items": items},
+    with open(SYNONYMS, encoding="utf-8") as fp:
+        synonyms = json.load(fp)
+    syn = {"groups": [{"label": g["label"], "words": g["words"],
+                       "expand": g["expand"]} for g in synonyms["groups"]],
+           "fillers": synonyms["fillers"]}
+
+    body = json.dumps({"tabs": bool(tabs), "items": items, "syn": syn},
                       ensure_ascii=False, separators=(",", ":"))
     body = body.replace("</", "<\\/")
     return f'<script type="application/json" id="search-data">{body}</script>'

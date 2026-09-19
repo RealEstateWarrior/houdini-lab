@@ -35,7 +35,7 @@
         <path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8"
               stroke-linecap="round"/>
       </svg>
-      <input type="search" id="search-input" placeholder="検索"
+      <input type="search" id="search-input" placeholder="やりたいことでも探せます（例: 形を変えたい）"
              autocomplete="off" spellcheck="false" aria-label="検索語">
     </div>
     <p class="search-hint" id="search-hint">よく見るところ</p>
@@ -165,27 +165,141 @@
       });
     }
 
-    document.getElementById("menu-open").addEventListener("click", function () {
-      buildMenu();
-      show(menuSheet);
-      stagger(Array.prototype.slice.call(menuList.children), 55);
-    });
+    /* 親ページにはハンバーガーが無い。無いページで落ちないようにする */
+    var menuOpen = document.getElementById("menu-open");
+    if (menuOpen) {
+      menuOpen.addEventListener("click", function () {
+        buildMenu();
+        show(menuSheet);
+        stagger(Array.prototype.slice.call(menuList.children), 55);
+      });
+    }
 
     /* ---- 検索 ---- */
 
-    function score(item, query) {
-      var label = item.label.toLowerCase();
-      var note = (item.note || "").toLowerCase();
-      var reading = (item.reading || "").toLowerCase();
-      var tags = (item.tags || []).join(" ").toLowerCase();
-      var body = (item.body || "").toLowerCase();
-      if (label.indexOf(query) === 0) { return 0; }
-      if (label.indexOf(query) !== -1) { return 1; }
-      if (reading.indexOf(query) !== -1) { return 2; }
-      if (tags.indexOf(query) !== -1) { return 2; }
-      if (note.indexOf(query) !== -1) { return 3; }
-      if (body.indexOf(query) !== -1) { return 4; }
-      return -1;
+    /* 表記ゆれを吸収する。全角→半角、大文字→小文字、カタカナ→ひらがな。
+       「リグ」と「りぐ」、「ＦＢＸ」と「fbx」を同じものとして扱う。 */
+    function norm(s) {
+      s = String(s || "");
+      if (s.normalize) { s = s.normalize("NFKC"); }
+      s = s.toLowerCase();
+      return s.replace(/[ァ-ヶ]/g, function (c) {
+        return String.fromCharCode(c.charCodeAt(0) - 0x60);
+      });
+    }
+
+    var SYN = (data.syn && data.syn.groups || []).map(function (g) {
+      return { label: g.label, words: g.words.map(norm),
+               expand: g.expand.map(norm) };
+    });
+    var FILLERS = (data.syn && data.syn.fillers || []).map(norm)
+      .sort(function (a, b) { return b.length - a.length; });
+
+    /* 検索語の「言い回し」を落とす。「形を変えたい」→「形を変え」。
+       言い換え辞書は落とす前の全文に当てるので、「やり方」も拾える。 */
+    function stripFillers(q) {
+      FILLERS.forEach(function (f) {
+        if (f && q.length > f.length) { q = q.split(f).join(" "); }
+      });
+      return q.replace(/\s+/g, " ").trim();
+    }
+
+    /* 検索語から、探す語の一覧を作る。
+       直接の語（重み 1.5）と、言い換え辞書で広げた語（重み 1）に分ける。 */
+    function expandQuery(query) {
+      var q = norm(query);
+      var direct = stripFillers(q).split(" ").filter(function (t) {
+        return t.length > 0;
+      });
+      var hits = [];
+      var extra = [];
+      SYN.forEach(function (g) {
+        /* 検索語が辞書の語を含む（「形を変えたい」⊃「形を変」）なら当たり。
+           逆向き（辞書の語が検索語で始まる）は、ほぼ全部を打ったときだけ。
+           そうしないと「ノイズ」が「ノイズが出」に当たってレンダリングまで広がる */
+        var matched = g.words.some(function (w) {
+          return w && (q.indexOf(w) !== -1 ||
+                       (w.indexOf(q) === 0 && q.length >= w.length * 0.75));
+        });
+        if (matched) {
+          hits.push(g.label);
+          g.expand.forEach(function (e) {
+            if (extra.indexOf(e) === -1 && direct.indexOf(e) === -1) {
+              extra.push(e);
+            }
+          });
+        }
+      });
+      /* 英字だけの検索語に2文字の近さを使うと、"on" "io" のような
+         どこにでもある並びで関係ないものが上がる。日本語のときだけ使う */
+      return { direct: direct, extra: extra, groups: hits,
+               grams: bigrams(stripFillers(q)),
+               japanese: /[぀-ヿ一-鿿]/.test(q) };
+    }
+
+    /* 項目の中身を、ラベル・タグ・本文に分けて正規化しておく。1回だけ作る */
+    data.items.forEach(function (item) {
+      item._label = norm(item.label);
+      item._tags = norm((item.tags || []).join(" ") + " " + item.kind);
+      item._text = norm((item.note || "") + " " + (item.reading || "") +
+                        " " + (item.body || ""));
+    });
+
+    function termScore(item, term, weight) {
+      if (!term) { return 0; }
+      var s = 0;
+      if (item._label.indexOf(term) === 0) { s += 14; }
+      else if (item._label.indexOf(term) !== -1) { s += 10; }
+      if (item._tags.indexOf(term) !== -1) { s += 6; }
+      if (item._text.indexOf(term) !== -1) { s += 3; }
+      return s * weight;
+    }
+
+    function score(item, plan) {
+      var total = 0;
+      var directHit = 0;
+      plan.direct.forEach(function (t) {
+        var s = termScore(item, t, 1.5);
+        if (s > 0) { directHit += 1; }
+        total += s;
+      });
+      plan.extra.forEach(function (t) { total += termScore(item, t, 1); });
+      /* 複数語で打ったとき、全部当たったものを上に */
+      if (plan.direct.length > 1 && directHit === plan.direct.length) {
+        total *= 1.6;
+      }
+      /* 「骨を曲げると痩せる」のように文で打ったとき、文そのものに近い
+         題を上げる。言い換えだけだと、関係する実験がみな同じ点になって
+         いちばん近い1件が埋もれる */
+      if (plan.grams.length >= 3 && plan.japanese) {
+        var nearLabel = gramRatio(item._label, plan.grams);
+        var nearText = gramRatio(item._text, plan.grams);
+        if (nearLabel >= 0.3) { total += nearLabel * 30; }
+        if (nearText >= 0.3) { total += nearText * 8; }
+      }
+      return total;
+    }
+
+    /* 何も当たらなかったときの最後の手。2文字ずつに切って、
+       ラベルと説明にどれだけ含まれるかで近いものを出す。打ち間違い用 */
+    function bigrams(s) {
+      var out = [];
+      s = s.replace(/\s+/g, "");
+      for (var i = 0; i < s.length - 1; i++) { out.push(s.substr(i, 2)); }
+      return out;
+    }
+    function gramRatio(hay, grams) {
+      if (!grams.length) { return 0; }
+      var hit = 0;
+      grams.forEach(function (g) { if (hay.indexOf(g) !== -1) { hit += 1; } });
+      return hit / grams.length;
+    }
+    function nearScore(item, grams) {
+      if (!grams.length) { return 0; }
+      var hay = item._label + " " + item._text;
+      var hit = 0;
+      grams.forEach(function (g) { if (hay.indexOf(g) !== -1) { hit += 1; } });
+      return hit / grams.length;
     }
 
     function quickLinks() {
@@ -230,14 +344,35 @@
         list = quickLinks().slice(0, 8);
         hint.textContent = "よく見るところ";
       } else {
+        var plan = expandQuery(query);
+        var limit = plan.extra.length ? 12 : 8;
         list = data.items.map(function (item) {
-          return { item: item, rank: score(item, query) };
+          return { item: item, rank: score(item, plan) };
         }).filter(function (row) {
-          return row.rank >= 0;
+          return row.rank > 0;
         }).sort(function (a, b) {
-          return a.rank - b.rank || a.item.label.length - b.item.label.length;
-        }).slice(0, 8).map(function (row) { return row.item; });
-        hint.textContent = list.length ? "候補" : "";
+          return b.rank - a.rank || a.item.label.length - b.item.label.length;
+        }).slice(0, limit).map(function (row) { return row.item; });
+
+        if (plan.groups.length) {
+          /* 言い換えで広げたときは、何として探したかを見せる */
+          hint.textContent = "「" + plan.groups.slice(0, 3).join("」「") +
+            "」として探しています";
+        } else {
+          hint.textContent = list.length ? "候補" : "";
+        }
+
+        if (!list.length) {
+          var grams = bigrams(norm(stripFillers(norm(query))));
+          list = data.items.map(function (item) {
+            return { item: item, rank: nearScore(item, grams) };
+          }).filter(function (row) {
+            return row.rank >= 0.5;
+          }).sort(function (a, b) {
+            return b.rank - a.rank;
+          }).slice(0, 6).map(function (row) { return row.item; });
+          if (list.length) { hint.textContent = "近いもの"; }
+        }
       }
 
       results.textContent = "";
@@ -302,7 +437,7 @@
     });
 
     input.addEventListener("input", function () {
-      render(input.value.trim().toLowerCase());
+      render(input.value.trim());
     });
 
     input.addEventListener("keydown", function (event) {

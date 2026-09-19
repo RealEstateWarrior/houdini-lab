@@ -1,4 +1,4 @@
-<title>Houdini 研究ハブ</title>
+<title>Houdini 研究部</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
@@ -12,7 +12,7 @@
     <!-- ========== 概要 ========== -->
     <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
       <header class="hero">
-        <p class="eyebrow">Houdini research hub</p>
+        <p class="eyebrow">Saito Production — Houdini 研究部</p>
         <h1>動かして、測って、残す。</h1>
         <p class="lede">
           Houdini を実際に動かして確かめたことだけを積み上げる場所。
@@ -314,12 +314,27 @@
       tab.addEventListener("click", function () { show(tab.dataset.panel, true); });
     });
 
-    var initial = (window.location.hash || "").replace("#", "");
-    show(panels[initial] ? initial : "overview", false);
+    /* #guide-<id> で来たら、手順タブを開いてその手順のポップアップも開く。
+       別のページの検索から手順を選んだときの行き先 */
+    function openFromHash(hash, push) {
+      var name = (hash || "").replace("#", "");
+      if (name.indexOf("guide-") === 0) {
+        show("guides", false);
+        var id = name.slice(6);
+        setTimeout(function () {
+          var card = document.querySelector('[data-guide="' + id + '"]');
+          if (card) { card.click(); }
+        }, 60);
+        return true;
+      }
+      if (panels[name]) { show(name, push); return true; }
+      return false;
+    }
+
+    if (!openFromHash(window.location.hash, false)) { show("overview", false); }
 
     window.addEventListener("hashchange", function () {
-      var name = (window.location.hash || "").replace("#", "");
-      if (panels[name]) { show(name, false); }
+      openFromHash(window.location.hash, false);
     });
   })();
 
