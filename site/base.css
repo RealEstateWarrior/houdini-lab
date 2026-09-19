@@ -1584,3 +1584,96 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   * { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- AI に聞く（検索画面の中） ----------
+
+   Claude 版のページだけに出る。検索の候補より上に置く。
+   答えは吹き出しではなく、左に細い線を引いた段落にする。
+   サイトの本文と同じ読み物として読めるように。 */
+
+.ask { margin: 18px 0 4px; }
+.ask-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ask-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: inherit;
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 9px 16px 9px 13px;
+  border: none;
+  border-radius: 980px;
+  background: var(--ink);
+  color: #ffffff;
+  cursor: pointer;
+}
+.ask-go svg { width: 17px; height: 17px; display: block; }
+.ask-go:hover { background: #3a3a3f; }
+.ask-go:disabled { background: var(--ground-2); color: var(--ink-dim); cursor: default; }
+.ask-go:focus-visible, .ask-sub:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.ask-sub {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 8px 13px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 980px;
+  background: var(--ground);
+  color: var(--ink-mid);
+  cursor: pointer;
+}
+.ask-sub:hover { border-color: var(--wire); color: var(--ink); }
+
+.ask-log { display: grid; gap: 14px; margin-top: 14px; }
+.ask-log:empty { display: none; }
+.ask-msg--q .ask-body {
+  justify-self: end;
+  font-size: 0.86rem;
+  color: var(--ink-mid);
+  background: var(--ground-2);
+  border-radius: 14px;
+  padding: 8px 13px;
+  width: fit-content;
+  max-width: 88%;
+  margin-left: auto;
+}
+.ask-msg--a {
+  border-left: 2px solid var(--ink);
+  padding: 2px 0 2px 15px;
+}
+.ask-msg--a .ask-body {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--ink);
+  white-space: pre-wrap;
+  max-width: 40em;
+}
+.ask-msg--a .ask-body a { color: var(--flag); font-weight: 600; text-decoration: none; }
+.ask-msg--a .ask-body a:hover { text-decoration: underline; }
+.ask-msg.is-thinking { border-left-color: var(--wire); }
+.ask-msg.is-thinking .ask-body { color: var(--ink-dim); animation: ask-pulse 1.4s ease-in-out infinite; }
+@keyframes ask-pulse { 50% { opacity: 0.45; } }
+
+.ask-refs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; }
+.ask-refs-head { font-size: 0.72rem; font-weight: 600; color: var(--ink-dim); margin-right: 2px; }
+.ask-refs button {
+  font: inherit;
+  font-size: 0.74rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 980px;
+  background: var(--ground);
+  color: var(--ink-mid);
+  cursor: pointer;
+}
+.ask-refs button:hover { background: var(--ground-2); color: var(--ink); }
+.ask-warn { margin: 8px 0 0; font-size: 0.8rem; color: var(--alert); }
+.ask-fine { margin: 10px 0 0; font-size: 0.72rem; line-height: 1.6; color: var(--ink-dim); max-width: 44em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ask-msg.is-thinking .ask-body { animation: none; }
+}

@@ -45,12 +45,12 @@
 | R1 | SPロゴ・親ページ `sp.html`・ナビ1段化 | 完了 |
 | R2 | ★ユーザー: 新リポジトリ `RealEstateWarrior.github.io` を作る（gh が無いので手作業） | 待ち |
 | R3 | ★ユーザー: Houdini GUI で `bridge_server.start()` → 手順15本のノード画面を撮る | 待ち |
-| R4 | あいまい検索（同義語辞書・表記ゆれ・タグ展開）。親も含めて全体を検索 | 進行中 |
-| R5 | Artifacts 版に AI チャット（artifact-capabilities で可否を先に確認） | これから |
+| R4 | あいまい検索（`search_synonyms.json` 33グループ・表記ゆれ・本文・文の近さ）。親も含めて全体を検索 | 完了 |
+| R5 | Artifacts 版に AI チャット（`sample`。検索画面の「AI に聞く」。根拠は検索上位10件） | 完了（実機での動作確認はユーザー待ち） |
 | R6 | 概要ページ「これまでに作ったもの」をリンク化（実験＋作り方へ直行） | これから |
 | R7 | 効率化ページ（測った速度の結論を集約）・以後の実験は時間を必ず記録 | これから |
 | R8 | 手順ページを 15 → 25 本前後へ | これから |
-| R9 | Artifacts 4ページに今回の修正を反映（ロゴ確定済みなのでいつでも可） | これから |
+| R9 | Artifacts 全ページに反映。親の Artifact は https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo | 完了 |
 
 ## 済んだことの詳細
 

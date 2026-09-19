@@ -38,6 +38,26 @@
       <input type="search" id="search-input" placeholder="やりたいことでも探せます（例: 形を変えたい）"
              autocomplete="off" spellcheck="false" aria-label="検索語">
     </div>
+    <div class="ask" id="ask" hidden>
+      <div class="ask-bar">
+        <button type="button" class="ask-go" id="ask-go" disabled>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z"
+                  stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"
+                  fill="currentColor"/>
+          </svg>
+          <span>AI に聞く</span>
+        </button>
+        <button type="button" class="ask-sub" id="ask-stop" hidden>止める</button>
+        <button type="button" class="ask-sub" id="ask-clear" hidden>会話を消す</button>
+      </div>
+      <div class="ask-log" id="ask-log" aria-live="polite"></div>
+      <p class="ask-fine">
+        答えの根拠はこのサイトの記録だけです。書いていないことは「まだ確かめていない」と答えます。
+        あなたの Claude の利用枠を使います。
+      </p>
+    </div>
     <p class="search-hint" id="search-hint">よく見るところ</p>
     <ul class="search-results" id="search-results"></ul>
   </div>
@@ -338,21 +358,28 @@
       window.location.href = item.href;
     }
 
+    /* 検索語に近い順に並べた全候補。検索の一覧と、AI に渡す根拠の両方で使う */
+    function rankItems(query) {
+      var plan = expandQuery(query);
+      var list = data.items.map(function (item) {
+        return { item: item, rank: score(item, plan) };
+      }).filter(function (row) {
+        return row.rank > 0;
+      }).sort(function (a, b) {
+        return b.rank - a.rank || a.item.label.length - b.item.label.length;
+      }).map(function (row) { return row.item; });
+      return { plan: plan, list: list };
+    }
+
     function render(query) {
       var list;
       if (!query) {
         list = quickLinks().slice(0, 8);
         hint.textContent = "よく見るところ";
       } else {
-        var plan = expandQuery(query);
-        var limit = plan.extra.length ? 12 : 8;
-        list = data.items.map(function (item) {
-          return { item: item, rank: score(item, plan) };
-        }).filter(function (row) {
-          return row.rank > 0;
-        }).sort(function (a, b) {
-          return b.rank - a.rank || a.item.label.length - b.item.label.length;
-        }).slice(0, limit).map(function (row) { return row.item; });
+        var ranked = rankItems(query);
+        var plan = ranked.plan;
+        list = ranked.list.slice(0, plan.extra.length ? 12 : 8);
 
         if (plan.groups.length) {
           /* 言い換えで広げたときは、何として探したかを見せる */
@@ -440,9 +467,207 @@
       render(input.value.trim());
     });
 
+    /* ---- AI に聞く ----
+
+       Claude 版のページ（Artifact）だけで動く。GitHub Pages 版には
+       window.claude が無いので、ボタンごと出てこない。
+
+       正確さのために、質問のたびにサイト内をあいまい検索して上位10件の
+       中身を添え、「それ以外を根拠にしない」と頼む。答えの下には、
+       添えた記録をリンクで並べる。根拠を自分でたどれるようにするため。 */
+    var ask = document.getElementById("ask");
+    var askGo = document.getElementById("ask-go");
+    var askStop = document.getElementById("ask-stop");
+    var askClear = document.getElementById("ask-clear");
+    var askLog = document.getElementById("ask-log");
+    var sampleFn = null;
+    var turns = [];
+    var askCtl = null;
+
+    var RULES = [
+      "あなたは Saito Production の「Houdini 研究部」というサイトの案内係です。",
+      "読み手は Houdini を学んでいる人です。日本語の、やわらかい丁寧語で答えてください。",
+      "答えの根拠は、質問に添えた「このサイトの資料」だけにしてください。",
+      "資料に書かれていないことは推測で埋めず、「このサイトではまだ確かめていません」とはっきり言ってください。",
+      "数値は資料に書かれた値をそのまま使い、丸めたり新しく作ったりしないでください。",
+      "実験に触れるときは「実験052」のように3桁の番号で書いてください。",
+      "作り方を聞かれて、資料に「手順」があれば、その手順の名前を挙げてください。",
+      "最初の1〜2文で結論を言い、そのあと必要なら要点を3つまで。見出しや表は使わず、箇条書きは「・」で書いてください。"
+    ].join("\n");
+
+    function askContext(query) {
+      var list = rankItems(query).list.slice(0, 10);
+      var text = list.map(function (item, i) {
+        var parts = ["[" + (i + 1) + "] " + item.kind + "：" + item.label];
+        if (item.note) { parts.push("要点: " + item.note); }
+        if (item.body) { parts.push("内容: " + String(item.body).slice(0, 360)); }
+        if (item.facts) { parts.push("わかったこと: " + item.facts); }
+        return parts.join("\n");
+      }).join("\n\n");
+      return { list: list, text: text };
+    }
+
+    var expByNo = {};
+    data.items.forEach(function (item) { if (item.exp) { expByNo[item.exp] = item; } });
+
+    /* 答えの中の「実験052」を、その実験へのリンクにする */
+    function fillAnswer(el, text) {
+      el.textContent = "";
+      String(text).split(/(実験\d{3})/).forEach(function (part) {
+        var m = /^実験(\d{3})$/.exec(part);
+        if (m && expByNo[m[1]]) {
+          var target = expByNo[m[1]];
+          var a = document.createElement("a");
+          a.href = target.href;
+          a.textContent = part;
+          a.addEventListener("click", function (event) {
+            event.preventDefault();
+            go(target);
+          });
+          el.appendChild(a);
+        } else {
+          el.appendChild(document.createTextNode(part));
+        }
+      });
+    }
+
+    function bubble(kind, text) {
+      var div = document.createElement("div");
+      div.className = "ask-msg ask-msg--" + kind;
+      var body = document.createElement("div");
+      body.className = "ask-body";
+      body.textContent = text;
+      div.appendChild(body);
+      askLog.appendChild(div);
+      if (div.scrollIntoView) { div.scrollIntoView({ block: "nearest" }); }
+      return div;
+    }
+
+    function addRefs(msg, list) {
+      if (!list.length) { return; }
+      var box = document.createElement("div");
+      box.className = "ask-refs";
+      var head = document.createElement("span");
+      head.className = "ask-refs-head";
+      head.textContent = "根拠にした記録";
+      box.appendChild(head);
+      list.slice(0, 5).forEach(function (item) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = item.kind + "｜" + item.label;
+        b.addEventListener("click", function () { go(item); });
+        box.appendChild(b);
+      });
+      msg.appendChild(box);
+    }
+
+    function askNote(msg, text) {
+      var p = document.createElement("p");
+      p.className = "ask-warn";
+      p.textContent = text;
+      msg.appendChild(p);
+    }
+
+    function updateAsk() {
+      if (!sampleFn) { return; }
+      askGo.disabled = !input.value.trim() || !!askCtl;
+    }
+
+    function askBusy(on) {
+      askStop.hidden = !on;
+      askClear.hidden = on || !turns.length;
+      updateAsk();
+    }
+
+    /* これが返ってきたら、この閲覧では AI を使えない。二度と頼まない */
+    var HIDE = ["not_granted", "sampling_disabled", "not_declared",
+                "capability_disabled", "capability_removed", "tools_unavailable"];
+
+    function send() {
+      var q = input.value.trim();
+      if (!sampleFn || !q || askCtl) { return; }
+      var ctx = askContext(q);
+      var msgs = [{ role: "user", content: RULES }]
+        .concat(turns.slice(-8))
+        .concat([{ role: "user", content:
+          "質問: " + q + "\n\nこのサイトの資料:\n" +
+          (ctx.text || "（この質問に当たる資料は見つかりませんでした）") }]);
+
+      bubble("q", q);
+      var msg = bubble("a", "考えています…");
+      var body = msg.querySelector(".ask-body");
+      msg.classList.add("is-thinking");
+
+      askCtl = new AbortController();
+      askBusy(true);
+      sampleFn(msgs, {
+        cache: false,
+        signal: askCtl.signal,
+        onText: function (u) {
+          msg.classList.remove("is-thinking");
+          fillAnswer(body, u.text);
+        }
+      }).then(function (res) {
+        msg.classList.remove("is-thinking");
+        fillAnswer(body, res.text);
+        addRefs(msg, ctx.list);
+        turns.push({ role: "user", content: "質問: " + q });
+        turns.push({ role: "assistant", content: res.text });
+        if (res.truncated) { askNote(msg, "答えが途中で切れました。質問を短くしてみてください。"); }
+      }).catch(function (e) {
+        msg.classList.remove("is-thinking");
+        var code = (e && e.code) || "upstream_error";
+        if (e && e.text && code !== "refused") { fillAnswer(body, e.text); }
+        else { body.textContent = ""; }
+        if (code === "cancelled") {
+          if (!(e && e.text)) { msg.remove(); }
+          return;
+        }
+        if (HIDE.indexOf(code) !== -1) {
+          askNote(msg, "この閲覧環境では AI を使えません。検索はそのまま使えます。");
+          sampleFn = null;
+          askGo.disabled = true;
+          return;
+        }
+        askNote(msg, {
+          rate_limited: "いま混み合っています。少し待ってから、もう一度押してください。",
+          session_expired: "サインインが切れました。もう一度サインインしてください。",
+          refused: "この質問には答えられませんでした。言い方を変えてみてください。",
+          empty_completion: "答えが空でした。質問を短くしてみてください。",
+          prompt_too_large: "質問が長すぎました。短くしてみてください。"
+        }[code] || "途中で接続が切れました。もう一度押してください。");
+      }).then(function () {
+        askCtl = null;
+        askBusy(false);
+      });
+    }
+
+    askGo.addEventListener("click", send);
+    askStop.addEventListener("click", function () { if (askCtl) { askCtl.abort(); } });
+    askClear.addEventListener("click", function () {
+      turns = [];
+      askLog.textContent = "";
+      askClear.hidden = true;
+      input.focus();
+    });
+    input.addEventListener("input", updateAsk);
+
+    if (window.claude && typeof window.claude.use === "function") {
+      window.claude.use("sample").then(function (s) {
+        if (!s) { return; }
+        sampleFn = s;
+        ask.hidden = false;
+        updateAsk();
+      }, function () {});
+    }
+
     input.addEventListener("keydown", function (event) {
       if (event.key === "ArrowDown") { event.preventDefault(); moveCursor(1); }
       else if (event.key === "ArrowUp") { event.preventDefault(); moveCursor(-1); }
+      else if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault();
+        send();
+      }
       else if (event.key === "Enter") {
         event.preventDefault();
         if (results._items && results._items[cursor]) { go(results._items[cursor]); }

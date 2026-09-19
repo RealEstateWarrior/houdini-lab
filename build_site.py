@@ -46,7 +46,7 @@ ARTIFACT_URLS = {
     "log_fx": "https://claude.ai/code/artifact/087548d5-0c09-40b5-8e2e-7bfc084e1f0c",
     "glossary": "https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868",
     "links": "https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f",
-    "parent": "",   # 親の Artifact を発行したらここに入れる
+    "parent": "https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo",
 }
 
 # GitHub Pages 版。ルートがハブになるよう index.html をハブに割り当てる。
@@ -78,7 +78,7 @@ DEPT = "Houdini 研究部"
 # 親サイトと、その下の部。映像制作部はまだ無いので押せない印にしておく。
 PARENT_URLS = {
     "pages": "sp.html",
-    "artifact": "",   # 親の Artifact を発行したらここに入れる
+    "artifact": "https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo",
 }
 DEPARTMENTS = [
     ("houdini", "Houdini 研究部", True),
@@ -984,6 +984,21 @@ def report_summary(no, limit=240):
     return re.sub(r"\s+", " ", text)[:limit]
 
 
+def report_facts(no, count=3, limit=420):
+    """実験の「わかったこと」の頭。AI に答えさせるときの根拠にする。
+
+    検索の点数には使わない（語が多すぎて何にでも当たるため）。
+    数字はここからそのまま引かせるので、タグを外すだけで書き換えない。
+    """
+    path = os.path.join(OUT, f"{no}_report.json")
+    if not os.path.exists(path):
+        return ""
+    with open(path, encoding="utf-8") as fp:
+        notes = json.load(fp).get("notes", [])[:count]
+    text = " / ".join(re.sub(r"<[^>]+>", "", n) for n in notes)
+    return re.sub(r"\s+", " ", text)[:limit]
+
+
 def render_search_data(data, nodes, guides, urls, tabs):
     """検索の索引。実験・ノード・用語をまとめて1つのJSONに入れる。
 
@@ -1001,6 +1016,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
             "exp": item["no"],
             "tags": item.get("tags", []),
             "body": report_summary(item["no"]),
+            "facts": report_facts(item["no"]),
         })
 
     # 手順ページが索引に入っていなかった。「作り方」を探している人が
