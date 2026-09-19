@@ -502,6 +502,12 @@ DONE = [
      "shots": ["079_sparks_6.png", "079_sparks_18.png", "079_alive.png"],
      "title": "火花を散らす — Life Variance は幅、Variance は球の半径。空気抵抗は速さの2乗で効く",
      "note": "寿命は±幅に一様、初速は半径の球に一様、popdragは速さの2乗（ずれ0.0000）"},
+    {"no": "080", "anchor": "exp080",
+     "tags": ["POP", "パーティクル", "雨", "衝突", "手順"],
+     "log": "log_fx", "hip": "080_rain.hipnc", "thumb": "080_rain.png",
+     "shots": ["080_rain.png"],
+     "title": "雨を地面で跳ねさせる — Bounce は速さの比で、地面と粒の値は掛け算になる",
+     "note": "跳ね上がる高さはBounce²に近い。地面0.5×粒0.5＝地面0.25×粒1（4桁一致）。DieでResponse"},
 ]
 
 PLANNED = []

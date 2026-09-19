@@ -2512,6 +2512,105 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "rain",
+      "title": "雨を降らせて地面で跳ねさせる",
+      "lede": "上の板から粒を降らせ続け、地面（groundplane）に当てて小さく跳ねさせる。跳ね方は Bounce で決まり、当たったあとどうするかは Response で決まる。",
+      "hero": "080_rain.png",
+      "hero_cap": "48フレーム目。3,008粒の雨が斜めに降り、地面で小さく跳ねている。",
+      "facts": [
+        [
+          "ノードの数",
+          "10個（うち DOP の中に7個）"
+        ],
+        [
+          "計算の時間",
+          "48フレームで 0.51秒"
+        ],
+        [
+          "元になった実験",
+          "実験079・080"
+        ]
+      ],
+      "exp": "080",
+      "hip": "080_rain.hipnc",
+      "tags": [
+        "エフェクト",
+        "パーティクル",
+        "雨",
+        "衝突"
+      ],
+      "steps": [
+        {
+          "title": "雨雲の板を置く",
+          "node": "grid",
+          "ui_node": "cloud",
+          "body": "8 × 8 の <code>grid</code> を高さ 6 に置く。この面から雨粒が生まれる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "降らせ続ける",
+          "node": "popsource",
+          "ui_node": "popnet/source",
+          "body": "<code>dopnet</code> の中に popobject（名前を drops にする）・popsource・popsolver を置く。popsource は Emission Type を Scatter onto Surfaces、Const. Birth Rate 1,500、Initial Velocity を Set initial velocity にして Velocity (1, −6, 0)、Variance は 0。Life Expectancy 3。少し横向きの速さを入れると、斜めに降る。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "重力を足す",
+          "node": "popforce",
+          "ui_node": "popnet/gravity",
+          "body": "<code>popforce</code> に (0, −9.81, 0) を入れ、popsolver の Pre-Solve へ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "地面を置いて merge でつなぐ",
+          "node": "groundplane",
+          "ui_node": "popnet/ground",
+          "body": "<code>groundplane</code> を置き、Bounce を 0.2 にする。<code>merge</code> の1番目に groundplane、2番目に popsolver をつなぎ、<strong>merge に表示フラグを立てる。</strong>popsolver に置いたままだと、粒は地面をすり抜けて落ちていく（実験080）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "跳ね方を決める",
+          "node": "bounce",
+          "ui_node": "popnet/ground",
+          "body": "<strong>Bounce は「跳ね返る速さ ÷ 当たる速さ」</strong>なので、跳ね上がる高さは落ちた高さの約 Bounce² 倍（0.5 なら約 0.27倍）。地面と粒（popobject）の Bounce は掛け算になる。粒のほうは既定で 1 なので、地面の値だけ決めればよい。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "粒だけを取り出して、線にする",
+          "node": "attribwrangle",
+          "ui_node": "streaks",
+          "body": "<code>dopimport</code> の読み込む対象に <code>drops</code>（粒の名前）を入れる。* だと地面の形まで入ってくる。取り出した粒を、手順「火花を散らす」と同じ wrangle で P から P − v × 0.035 までの短い線にすると、雨の筋に見える。",
+          "img": "080_rain.png",
+          "cap": "48フレーム目。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "高さを半分にしたいのに、Bounce を 0.5 にしてしまう",
+          "body": "高さ 3 から落とすと、Bounce 0.5 で跳ね上がったのは 0.81（0.27倍）。高さの比は Bounce² に近い（0.25 → 0.071、0.75 → 0.596、1.0 → 1.049）。高さを半分にしたいなら約 0.7。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "当たったら消したいなら Response",
+          "body": "popsolver の Response を Die にすると、地面に当たった粒は消える（100粒が24フレーム目に0）。Stick は貼り付き、Slide は地面で止まる。既定の Unchanged は跳ね続ける。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "地面に着いた雨粒は、寿命まで残る",
+          "body": "この手順では 48フレーム目に、3,008粒のうち 2,081粒が高さ 0.5 未満にいた。跳ねたあと地面に溜まっている。気になるなら寿命（Life Expectancy）を短くするか、Response を Die にする。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }
