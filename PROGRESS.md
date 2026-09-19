@@ -49,7 +49,7 @@
 | R5 | Artifacts 版に AI チャット（`sample`。検索画面の「AI に聞く」。根拠は検索上位10件） | 完了（実機での動作確認はユーザー待ち） |
 | R6 | 概要ページ「これまでに作ったもの」をリンク化。`build_site.py` の `SHOWCASE` で11枚（実験を読む／作り方を見る） | 完了 |
 | R7 | 効率化タブ（`speed_tips.json`。5分類20項目、元の実験へボタン、検索にも入る）・以後の実験は時間を必ず記録 | 完了 |
-| R8 | 手順ページを 15 → 25 本へ（キャッシュ・粒に風・布を破る・炎と色・毛を風で・草を流れに・動く板で運ぶ・Karma・書き出し・for-each→VEX）。作り方は `examples/guide_cache.py` / `guide_more.py`、数字は各手順のシーンでその場で測定 | 完了（新10本のパラメータ画面の撮影は Houdini を開いたときに） |
+| R8 | 手順ページを 15 → 25 本へ（キャッシュ・粒に風・布を破る・炎と色・毛を風で・草を流れに・動く板で運ぶ・Karma・書き出し・for-each→VEX）。作り方は `examples/guide_cache.py` / `guide_more.py`、数字は各手順のシーンでその場で測定 | 完了（新10本の Houdini 画面も 2026-09-19 に撮影済み） |
 | R9 | Artifacts 全ページに反映。親の Artifact は https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo | 完了 |
 
 ## 済んだことの詳細
@@ -157,6 +157,7 @@
 ## 手順ページのノードグラフ
 
 - 撮り方: Houdini で `bridge_server.start()` → Houdini 同梱の python で `guide_ui_capture.py all`（全体）と `guide_parm_capture.py all`（各段）
+- 段ごとの `ui_parm` で見せたい項目を指定できる（そのタブ・折りたたみ欄を開き、パラメータ欄をそこまでスクロールして撮る）。`ui_node` は / から書けば /obj や /out のノードも撮れる
 - **撮影窓は「Console を含まない一番大きい窓」を選ぶ**（`capture_window.ps1`）。MainWindowHandle だと Houdini Console の小窓を撮ってしまった
 - 段とノードの対応は `step.node`（型名かパラメータ名）。同名パラメータが複数あるときは `step.ui_node` で指定
 - パラメータ名の段は、そのパラメータのあるタブを開いてから撮る
