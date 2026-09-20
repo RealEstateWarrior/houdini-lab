@@ -5113,6 +5113,77 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 104 ===================== -->
+    <article class="entry entry--current" id="exp104">
+      <div class="badge">104</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>resample の点の数は切り上げ — 「最大の長さ」は本当に最大だった</h2>
+        <p class="path">examples/104_resample.py &nbsp;·&nbsp; 点の数は切り上げ。carve の First U は入切で、値は別のつまみ</p>
+
+        <div class="prose">
+          <p>resample の Maximum Segment Length に s を入れると、長さ 7.0 の線は何点になるのか。切り上げなら ceil(L/s)+1、四捨五入なら round(L/s)+1。割り切れない値を混ぜて9通り測った。</p>
+          <p>結果は **9通りすべて切り上げ**。2つの式が分かれるのは 2 か所（刻み 0.3 と 3）で、そこでも切り上げのほうが合った。</p>
+          <p>できた刻みは、指定した値より必ず短いか等しい。たとえば刻み 3.0 を指定すると4点になり、実際の刻みは 2.333333。刻み 1.5 では 1.4。**「最大の長さ」という名前のとおりで、指定を超える区間はできない。** 線の全長はどの刻みでも 7.0 のまま変わらなかった。</p>
+          <p>carve も測った。0〜1 の範囲で線の一部を取り出す箱で、長さは「元の長さ × (終わり - 始まり)」になるはず。5通りすべてで差は 0.000000。0.5〜0.5（幅ゼロ）を指定すると、長さ 0・点 0 で何も出てこない。</p>
+          <p>つまずいた点: carve の First U / Second U というつまみは**「使うかどうか」の入切**で、値は domainu1 / domainu2 という別のつまみに入っている。既定では First U だけが入で domainu1 が 0.25 なので、何も触らないと 0.25〜1.0 が取り出される（長さ 5.25）。画面のラベルが同じ名前で2つ並ぶので、スクリプトから触るときに間違えやすい。</p>
+        </div>
+
+        <p class="label">resample の刻みと点の数（長さ 7.0 の線）</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="104_resample.png" alt="実測は切り上げの線に重なる。四捨五入の線とは2か所で分かれる。" loading="lazy" decoding="async"></div>
+            <figcaption>実測は切り上げの線に重なる。四捨五入の線とは2か所で分かれる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="104_seg.png" alt="実際の刻みは、指定した値を超えない。" loading="lazy" decoding="async"></div>
+            <figcaption>実際の刻みは、指定した値を超えない。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>刻み</th><th>L/s</th><th>点</th><th>切り上げ</th><th>四捨五入</th><th>実際の刻み</th><th>長さ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.2</td><td class="num">35.0000</td><td class="num">36</td><td class="num">36</td><td class="num">36</td><td class="num">0.200000</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">0.25</td><td class="num">28.0000</td><td class="num">29</td><td class="num">29</td><td class="num">29</td><td class="num">0.250000</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">0.3</td><td class="num">23.3333</td><td class="num">25</td><td class="num">25</td><td class="num">24</td><td class="num">0.291667</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">0.5</td><td class="num">14.0000</td><td class="num">15</td><td class="num">15</td><td class="num">15</td><td class="num">0.500000</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">0.7</td><td class="num">10.0000</td><td class="num">11</td><td class="num">11</td><td class="num">11</td><td class="num">0.700000</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">1</td><td class="num">7.0000</td><td class="num">8</td><td class="num">8</td><td class="num">8</td><td class="num">1.000000</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">1.5</td><td class="num">4.6667</td><td class="num">6</td><td class="num">6</td><td class="num">6</td><td class="num">1.400000</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">2</td><td class="num">3.5000</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">1.750000</td><td class="num">7.000000</td></tr>
+              <tr><td class="num">3</td><td class="num">2.3333</td><td class="num">4</td><td class="num">4</td><td class="num">3</td><td class="num">2.333333</td><td class="num">7.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">元は line（2点）。長さは measure の Perimeter を面ごとに足した値。「実際の刻み」は 長さ ÷ (点の数 - 1)。</p>
+
+        <p class="label">carve で取り出す範囲と長さ（元は 7.0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>始まり</th><th>終わり</th><th>点</th><th>長さ</th><th>式</th><th>差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">1</td><td class="num">2</td><td class="num">7.000000</td><td class="num">7.000000</td><td class="num">+0.000000</td></tr>
+              <tr><td class="num">0</td><td class="num">0.5</td><td class="num">2</td><td class="num">3.500000</td><td class="num">3.500000</td><td class="num">+0.000000</td></tr>
+              <tr><td class="num">0.25</td><td class="num">0.75</td><td class="num">2</td><td class="num">3.500000</td><td class="num">3.500000</td><td class="num">+0.000000</td></tr>
+              <tr><td class="num">0.1</td><td class="num">0.9</td><td class="num">2</td><td class="num">5.600000</td><td class="num">5.600000</td><td class="num">-0.000000</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.5</td><td class="num">0</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">+0.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">値は domainu1 / domainu2 に入れる（First U / Second U は入切）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>点の数は切り上げ。</strong>9通りすべて ceil(L/s)+1 と一致した（例外なし）。四捨五入と分かれる所でも切り上げだった。</li>
+          <li><strong>「最大の長さ」は本当に最大。</strong>刻み 3.0 を指定すると実際は 2.333333、1.5 なら 1.4。指定を超える区間はできない。細かく刻みたいなら、その数字より短くなることを前提にする。</li>
+          <li><strong>carve は式どおり。</strong>5通りすべてで差は 0.000000。幅ゼロを指定すると点も出てこない（長さ 0・点 0）。</li>
+          <li><strong>つまずいた点。</strong>carve の First U / Second U は「使うかどうか」の入切で、値は domainu1 / domainu2 にある。既定は First U だけ入・domainu1 が 0.25 なので、何も触らないと 0.25〜1.0（長さ 5.25）になる。画面に同じラベルが2つ並ぶ型のつまみは、スクリプトから触るとき要注意。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

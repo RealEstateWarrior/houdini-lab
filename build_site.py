@@ -709,6 +709,12 @@ DONE = [
      "shots": ["103_order.png"],
      "title": "Rotate Order の xyz は「x から順に掛ける」 — 6通りで最大 0.725534（約42.5°）ずれる",
      "note": "6通りすべて Rz·Ry·Rx の式と差0.000000。1軸だけなら順番は関係ない（差 1e-9未満）"},
+    {"no": "104", "anchor": "exp104",
+     "tags": ["モデリング", "resample", "carve", "検算"],
+     "log": "log_pm", "thumb": "104_resample.png",
+     "shots": ["104_resample.png", "104_seg.png"],
+     "title": "resample の点の数は切り上げ — 「最大の長さ」は本当に最大だった",
+     "note": "9通りすべて ceil(L/s)+1。carve の First U は入切で、値は domainu1 にある"},
 ]
 
 PLANNED = []
