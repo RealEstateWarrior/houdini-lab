@@ -1,20 +1,42 @@
 # STATE — 新しいセッションはまずこれだけ読む
 
-最終更新: 2026-09-20（実験090・手順36本）
+最終更新: 2026-09-20（実験098・実践36本・ノード186件・用語255語）
 
 ## いまの状態
 
-- 実験 001〜090 完了。振り返り点検は 090 まで済み、次は 120（対象 091〜120）
-- 手順ページ 36本、効率化のまとめ 28項目
-- 091以降の方向は未決定。候補: 手順向きの題材を続ける（水しぶき・群れ・破片）／MPM の宿題／サイト側の宿題
-- ユーザー待ち: 新リポジトリ `RealEstateWarrior.github.io` の作成、Claude 版「AI に聞く」の実機確認
-- 残りの宿題: 手順「テクスチャを貼る」だけ元の .hipnc と画面が無い。Claude 版のファイル数が上限512に対し501
+- 実験 001〜098 完了。振り返り点検は 090 まで済み、次は 120（対象 091〜120）
+- **名前が変わった**: 「手順」→「実践」（画面の言葉だけ。ファイル名は guides.json のまま）
+- 新設: 「制作」（works.json、まだ0本）と「要望」（requests.json、4件）
+- 実践 36本、効率化のまとめ 34項目、ノード解説 186件、用語 255語
+- ナビは4つに畳んだ（ホーム／実践／実験／解説）。乗せるとパネルが降りる
+- 親ページは別リポジトリ https://realestatewarrior.github.io/ （クローンは D:\Claude\sp）
+- ユーザー待ち: Claude 版を組織内限定にしてよいか（512の壁）、Cloudflare+Gemini の鍵、UE の導入
+- 残りの宿題: 実践「テクスチャを貼る」「ターンテーブル」「文字を光らせる」の Houdini 画面（GUI が要るので自動では撮れない）
+
+## ノードと用語を増やすときの型（091〜098 で確立）
+
+1. `"…/hython.exe" node_dump.py out/_nodes_dump.json --file 一覧.txt`
+   でノードの**実物を作って**つまみ名・ラベル・既定値・メニューを取る（型に聞くと漏れる）
+2. `nodes_add_1〜3.py` に日本語の説明を書く（つまみ名は1つだけ書く）
+3. `python nodes_merge.py` で混ぜる。**つまみ名が実物に無ければ止まる**
+   （`cp out/_nodes_backup.json nodes.json` してから実行する）
+4. 用語は `gloss_add_1〜3.py` → `python gloss_merge.py`
+
+版番号に注意: `createNode("remesh")` は remesh::2.0 になり、つまみ名が 1.0 と違う
+（target_edge→targetsize、smooth の iterations→strength、measure の type→measure など）。
+
+## SOP を測る型（091〜098 で確立）
+
+`examples/sop_bench.py` を使う。`fresh()` でシーンを捨てて組み直し、
+`spread(a, b)` で「a の各点から b の面までの最短距離」の平均と最大を取る。
+体積は measure（Measure=Volume）を面ごとに足す。**答えが計算で出る形を使うと、
+アルゴリズムのずれと近似のずれを分けられる**（実験098）。
 
 ## 1実験の流れ
 
 1. hython で測る（1プロセス1レンダ。時間も記録）
 2. `out/NNN_report.json` を作る
-3. 手順ページ向きの題材なら `guides.json` に手順を1本足す（画像と .hipnc は `examples/guide_cache.py` / `guide_more.py` 系で作る）
+3. 実践向きの題材なら `guides.json` に1本足す（画像と .hipnc は `examples/guide_cache.py` / `guide_more.py` 系で作る）
 4. 速さの結論は `speed_tips.json`、新しい用語は `glossary.json`
 5. `python publish.py "実験NNNを追加"` で生成・コミット・push
 6. Artifact を再発行する（公開先の URL は auto-memory の houdini-sites）
@@ -27,6 +49,7 @@
 | ファイル | 大きさ | 使い方 |
 |---|---|---|
 | guides.json | 約186KB | Grep でキーや題名を探す |
+| out/_nodes_dump.json | 約1.5MB | **開かない**。Python で名前を絞って読む |
 | build_site.py | 約94KB | Grep で関数名を探す |
 | glossary.json / nodes.json | 約45KB / 約62KB | Grep で用語・ノード名を探す |
 | PROGRESS.md | 約20KB | **古い**（手順15本の時点）。読まない。履歴として残すだけ |
