@@ -198,7 +198,7 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <header>
 <h1>Houdini 研究部 やることメモ</h1>
 <p class="sub">2026-09-20 現在。中身は <code>memo.json</code> を直して組み直す。</p>
-<div class="tally"><span><b class="n-wait">6</b>あなたにお願いすること</span><span><b class="n-todo">6</b>私の宿題</span><span><b class="n-open">5</b>気になっていること（未解決）</span><span><b class="n-rule">4</b>決めごと（毎回通す）</span></div>
+<div class="tally"><span><b class="n-wait">6</b>あなたにお願いすること</span><span><b class="n-todo">6</b>私の宿題</span><span><b class="n-open">5</b>気になっていること（未解決）</span><span><b class="n-rule">6</b>決めごと（毎回通す）</span></div>
 </header>
 <div class="links">
 <div class="band"><h3>公開ページ（GitHub）</h3><div class="row"><a href="https://realestatewarrior.github.io/" target="_blank" rel="noopener">親 Saito Production</a><a href="https://realestatewarrior.github.io/houdini-lab/" target="_blank" rel="noopener">Houdini 研究部</a><a href="https://realestatewarrior.github.io/houdini-lab/index.html#requests" target="_blank" rel="noopener">要望</a><a href="https://realestatewarrior.github.io/houdini-lab/log.html" target="_blank" rel="noopener">実験ログ 前半</a><a href="https://realestatewarrior.github.io/houdini-lab/log_fx.html" target="_blank" rel="noopener">実験ログ 後半</a><a href="https://realestatewarrior.github.io/houdini-lab/glossary.html" target="_blank" rel="noopener">用語集</a><a href="https://realestatewarrior.github.io/houdini-lab/links.html" target="_blank" rel="noopener">参考リンク</a></div></div>
@@ -308,12 +308,20 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <div class="t"><strong>ログインは私がやらない</strong></div>
 <p class="d">GitHub・SideFX・Google の認証はユーザーが行う。</p>
 </li>
+<li>
+<div class="t"><strong>答えが計算で出る形で試す</strong></div>
+<p class="d">面積・体積・長さが式で出る形（箱・球・線）で測ると、道具のずれと近似のずれを分けられる。実験098ではこれで「boolean が黙って何もしない」を見つけた。</p>
+</li>
+<li>
+<div class="t"><strong>つまみ名は node_dump.py で実物から取る</strong></div>
+<p class="d">型（nodeType）に聞くとフォルダの中や親から受け継いだ分が漏れる。実物を1つ作って node.parms() を読む。nodes_merge.py が実物に無い名前を弾く。</p>
+</li>
 </ul>
 </section>
 <section class="log">
 <div class="head"><h2>直近やったこと</h2></div>
 <ol>
-<li><time>2026-09-20</time><p>実験091〜102（面を減らす・張り直す・ならす・VDB・fuse・scatter・pack・boolean・細分化・peak・面積・押し出し）。ノード解説48→186件、用語119→255語、効率化28→38項目</p></li>
+<li><time>2026-09-20</time><p>実験091〜104。ノード解説48→186件、用語119→256語、効率化28→38項目。091以降は「答えが計算で出る形と突き合わせる」型で回した</p></li>
 <li><time>2026-09-20</time><p>要望ページに書いて送れるフォームを追加（GitHub の投稿画面を中身入りで開く形）</p></li>
 <li><time>2026-09-20</time><p>実践の要望ページを新設（状態ごとの順番待ち。断った理由も残す形）</p></li>
 <li><time>2026-09-20</time><p>上のバーを ホーム／実践／実験／解説 の4つに畳み、乗せると降りるパネルにした。ホームに横へ流れる帯を追加</p></li>
