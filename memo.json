@@ -10,12 +10,20 @@
           "url": "https://realestatewarrior.github.io/"
         },
         {
-          "label": "Houdini 研究部",
+          "label": "概要と実験",
           "url": "https://realestatewarrior.github.io/houdini-lab/"
         },
         {
+          "label": "実践と制作",
+          "url": "https://realestatewarrior.github.io/houdini-lab/practice.html"
+        },
+        {
+          "label": "ノードと用語",
+          "url": "https://realestatewarrior.github.io/houdini-lab/reference.html"
+        },
+        {
           "label": "要望",
-          "url": "https://realestatewarrior.github.io/houdini-lab/index.html#requests"
+          "url": "https://realestatewarrior.github.io/houdini-lab/practice.html#requests"
         },
         {
           "label": "実験ログ 前半",
@@ -24,14 +32,6 @@
         {
           "label": "実験ログ 後半",
           "url": "https://realestatewarrior.github.io/houdini-lab/log_fx.html"
-        },
-        {
-          "label": "用語集",
-          "url": "https://realestatewarrior.github.io/houdini-lab/glossary.html"
-        },
-        {
-          "label": "参考リンク",
-          "url": "https://realestatewarrior.github.io/houdini-lab/links.html"
         }
       ]
     },
@@ -43,8 +43,16 @@
           "url": "https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo"
         },
         {
-          "label": "Houdini 研究部",
+          "label": "概要と実験",
           "url": "https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu"
+        },
+        {
+          "label": "実践と制作",
+          "url": "https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs"
+        },
+        {
+          "label": "ノードと用語",
+          "url": "https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7"
         },
         {
           "label": "実験ログ 前半",
@@ -97,11 +105,6 @@
       "label": "あなたにお願いすること",
       "tone": "wait",
       "items": [
-        {
-          "title": "Claude 版を組織内限定にしてよいか",
-          "detail": "512の壁を外すには画像をアセット置き場へ移すしかなく、それを宣言したページは公開リンクで配れなくなる（組織内限定）。公開は GitHub 版が担うので実害は無いはずですが、共有の仕方が変わるので勝手には切り替えません。",
-          "state": "返事待ち"
-        },
         {
           "title": "Unreal Engine を入れる",
           "detail": "Epic のランチャーはありますが、エンジン本体が入っていません。要望ページの「Unreal Engine へ持っていく」もこれ待ちです。",
@@ -172,8 +175,8 @@
       "tone": "open",
       "items": [
         {
-          "title": "Claude 版はもう上限を超えている（529 / 512）",
-          "detail": "概要ページが必要とするファイルは529、置けるのは512。内訳は 実践のパラメータ画面163・実験の図145・サムネイル104・実践の図82・ネットワーク33。外部の画像を読む案は使えないと分かった（Artifact の方針が自分のファイル・Google Fonts・一部のCDNしか許さない）。残るのは アセット置き場／画像を減らす／ページを分ける の3つ。"
+          "title": "Claude 版のファイル数（解決）",
+          "detail": "ハブを3ページに分けて解決した。概要と実験216・実践と制作319・ノードと用語39（上限は512）。外部から画像を読む案は使えないと分かった（Artifact は自分のファイル・Google Fonts・一部CDNしか通さない）。実践が250本になっても、実践のページをもう1つ分ければ足りる。"
         },
         {
           "title": "液体は、なぜ摩擦 1.5 以上だと暴れないのか",
@@ -226,6 +229,10 @@
     }
   ],
   "recent": [
+    {
+      "when": "2026-09-20",
+      "what": "Claude 版のハブを3つに分割（概要と実験／実践と制作／ノードと用語）。529必要だったのが216・319・39になり、512の壁を解決"
+    },
     {
       "when": "2026-09-20",
       "what": "実験091〜104。ノード解説48→186件、用語119→256語、効率化28→38項目。091以降は「答えが計算で出る形と突き合わせる」型で回した"

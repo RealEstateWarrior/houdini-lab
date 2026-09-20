@@ -14,7 +14,10 @@
 - 実践 36本、効率化のまとめ 34項目、ノード解説 186件、用語 255語
 - ナビは4つに畳んだ（ホーム／実践／実験／解説）。乗せるとパネルが降りる
 - 親ページは別リポジトリ https://realestatewarrior.github.io/ （クローンは D:\Claude\sp）
-- ユーザー待ち: Claude 版を組織内限定にしてよいか（512の壁）、Cloudflare+Gemini の鍵、UE の導入、Houdini 22 のライセンス
+- ユーザー待ち: Cloudflare+Gemini の鍵、UE の導入、Houdini 22 のライセンス
+- **Claude 版のハブは3ページに分かれた**（概要と実験216 / 実践と制作319 / ノードと用語39。上限512）
+  URL は build_site.py の ARTIFACT_URLS。新しい2つは guides / ref の鍵
+  外部から画像を読む案は使えない（Artifact は自分のファイル・Google Fonts・一部CDNのみ）
 - **Houdini 22.0.368 はライセンスが無く hython が起動しない**（21 のライセンスでは動かない）
 - 残りの宿題: 実践「テクスチャを貼る」「ターンテーブル」「文字を光らせる」の Houdini 画面（GUI が要るので自動では撮れない）。要望ページ（#requests）で追う
 

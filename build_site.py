@@ -50,17 +50,16 @@ ISSUE_NEW = "https://github.com/RealEstateWarrior/houdini-lab/issues/new"
 
 # 発行済みArtifactのURL。新規発行したらここを更新して再ビルドする。
 ARTIFACT_URLS = {
-    "home": "https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa",
-    "log": "https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129",
-    "log_pm": "https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129",
-    "log_fx": "https://claude.ai/code/artifact/087548d5-0c09-40b5-8e2e-7bfc084e1f0c",
-    "glossary": "https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868",
-    "links": "https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f",
+    "home": "https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu",
+    "log": "https://claude.ai/artifact/XqNSd943n6cguxcULeHxBz",
+    "log_pm": "https://claude.ai/artifact/XqNSd943n6cguxcULeHxBz",
+    "log_fx": "https://claude.ai/artifact/23aXF1hG3G5oCZaaeZ5BAT",
+    "glossary": "https://claude.ai/artifact/B9pzUkXod3G6acw2ZF9aLP",
+    "links": "https://claude.ai/artifact/14k3waBngc76XEj2JhUusL",
     "parent": "https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo",
-    # ハブを3つに分けたので、実践と解説は別のArtifactになる。
-    # 発行したらこの2つを本物のURLに差し替えて、もう一度ビルドする。
-    "guides": "PENDING_GUIDES_URL",
-    "ref": "PENDING_REF_URL",
+    # ハブを3つに分けたので、実践と解説は別のArtifactになる（2026-09-20 発行）
+    "guides": "https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs",
+    "ref": "https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7",
 }
 
 # GitHub Pages 版。ルートがハブになるよう index.html をハブに割り当てる。
@@ -194,6 +193,14 @@ PAGE_PANELS = {
 PANEL_PAGE = {panel: page
               for page, panels in PAGE_PANELS.items()
               for panel in panels}
+
+# ページの名前。Artifact の一覧では <title> がそのまま名前になるので、
+# 3つのハブが同じ名前で並ばないように分ける。
+PAGE_TITLE = {
+    "home": "Houdini 研究部",
+    "guides": "Houdini 研究部 — 実践と制作",
+    "ref": "Houdini 研究部 — ノードと用語",
+}
 
 
 def panel_url(urls, panel):
@@ -1853,6 +1860,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--EXP_TOTAL-->", str(len(DONE) + len(PLANNED) + len(PLANNED_FX))),
         ("<!--NODE_COUNT-->", str(count_nodes(nodes))),
         ("<!--TERM_COUNT-->", str(count_terms(data))),
+        ("<!--PAGE_TITLE-->", PAGE_TITLE.get(bundle, "Houdini 研究部")),
         ("<!--URL_GUIDES-->", panel_url(urls, "guides")),
         ("<!--URL_EXPERIMENTS-->", panel_url(urls, "experiments")),
         ("<!--URL_GLOSSARY-->", panel_url(urls, "glossary")),
