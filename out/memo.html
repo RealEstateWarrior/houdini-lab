@@ -198,7 +198,7 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <header>
 <h1>Houdini 研究部 やることメモ</h1>
 <p class="sub">2026-09-20 現在。中身は <code>memo.json</code> を直して組み直す。</p>
-<div class="tally"><span><b class="n-wait">5</b>あなたにお願いすること</span><span><b class="n-todo">6</b>私の宿題</span><span><b class="n-open">4</b>気になっていること（未解決）</span><span><b class="n-rule">4</b>決めごと（毎回通す）</span></div>
+<div class="tally"><span><b class="n-wait">5</b>あなたにお願いすること</span><span><b class="n-todo">7</b>私の宿題</span><span><b class="n-open">4</b>気になっていること（未解決）</span><span><b class="n-rule">4</b>決めごと（毎回通す）</span></div>
 </header>
 <div class="links">
 <div class="band"><h3>公開ページ（GitHub）</h3><div class="row"><a href="https://realestatewarrior.github.io/" target="_blank" rel="noopener">親 Saito Production</a><a href="https://realestatewarrior.github.io/houdini-lab/" target="_blank" rel="noopener">Houdini 研究部</a><a href="https://realestatewarrior.github.io/houdini-lab/log.html" target="_blank" rel="noopener">実験ログ 前半</a><a href="https://realestatewarrior.github.io/houdini-lab/log_fx.html" target="_blank" rel="noopener">実験ログ 後半</a><a href="https://realestatewarrior.github.io/houdini-lab/glossary.html" target="_blank" rel="noopener">用語集</a><a href="https://realestatewarrior.github.io/houdini-lab/links.html" target="_blank" rel="noopener">参考リンク</a></div></div>
@@ -210,24 +210,24 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <div class="head"><h2>あなたにお願いすること</h2><span class="tag">あなた待ち</span></div>
 <ul>
 <li>
+<div class="t"><strong>Claude 版を組織内限定にしてよいか</strong><span class="state">返事待ち</span></div>
+<p class="d">512の壁を外すには画像をアセット置き場へ移すしかなく、それを宣言したページは公開リンクで配れなくなる（組織内限定）。公開は GitHub 版が担うので実害は無いはずですが、共有の仕方が変わるので勝手には切り替えません。</p>
+</li>
+<li>
+<div class="t"><strong>Unreal Engine を入れる</strong><span class="state">未インストール</span></div>
+<p class="d">調べたところ Epic のランチャーはありますが、エンジン本体は入っていません。入れば実験501番以降の題材に。</p>
+</li>
+<li>
 <div class="t"><strong>Claude 版で「AI に聞く」が動くか確かめる</strong><span class="state">未確認</span></div>
 <p class="d">検索窓を開いて質問し、答えと「根拠にした記録」が出れば成功。出ない場合は表示されたメッセージを教えてください。</p>
 </li>
 <li>
-<div class="t"><strong>「10月まで」は9月末か10月末か</strong><span class="state">返事待ち</span></div>
-<p class="d">9月末（あと10日）なら実験は1日41本必要で届かない。10月末（あと41日）なら1日10本で、いまの実測11.3本/日で足りる。</p>
-</li>
-<li>
-<div class="t"><strong>新設の名前を「制作」でよいか</strong><span class="state">返事待ち</span></div>
-<p class="d">実践＝誰でも同じ結果になるレシピ、制作＝頼まれた一点物の記録。他の候補は 依頼・作例・受注。</p>
-</li>
-<li>
-<div class="t"><strong>チャットAIの形を選ぶ</strong><span class="state">返事待ち</span></div>
-<p class="d">案A Claude版だけ（いまの形・費用ゼロ）／案B 中継を立ててGeminiの鍵を置く（無料枠・アカウント作成はあなた）／案C 閲覧者が自分の鍵を入れる。</p>
-</li>
-<li>
 <div class="t"><strong>Unreal Engine は入っている？</strong><span class="state">未確認</span></div>
 <p class="d">実験501番以降の題材にしたい。入っていれば書き出し時間・ファイルの大きさ・アトリビュートの生き残りを測る。</p>
+</li>
+<li>
+<div class="t"><strong>Cloudflare のアカウントと Gemini の鍵</strong><span class="state">案B着手前</span></div>
+<p class="d">案Bを選んだので、中継を1つ立てます。Workers の無料枠と Gemini の API キー取得はあなたの作業（鍵は私に見せず、Workers の Secret に入れてください）。私は中継のコードとサイト側を書きます。</p>
 </li>
 </ul>
 </section>
@@ -257,6 +257,10 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <li>
 <div class="t"><strong>実践ページも JSON から組み立てる</strong><span class="state">未着手</span></div>
 <p class="d">実験記事の make_entry.py と同じ形にして、HTML を手で書かない。掃き出し（sweep）ハーネスも作る。</p>
+</li>
+<li>
+<div class="t"><strong>Gemini 中継（案B）を書く</strong><span class="state">鍵待ち</span></div>
+<p class="d">Cloudflare Workers のコードと、GitHub版から呼ぶ側。質問ごとに添える記録を10件→4件に減らしてトークンを削る。</p>
 </li>
 </ul>
 </section>
@@ -305,6 +309,7 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <section class="log">
 <div class="head"><h2>直近やったこと</h2></div>
 <ol>
+<li><time>2026-09-20</time><p>「手順」を「実践」に改名。「制作」の枠を新設（中身は0本、依頼の言葉と過程の2枠が増える形）</p></li>
 <li><time>2026-09-20</time><p>10月までの計画を ROADMAP.md に。スマホの検索を右へ、AI にベータの印。Houdini 22.0.368 も入っていると分かった</p></li>
 <li><time>2026-09-20</time><p>親ページを新リポジトリ RealEstateWarrior.github.io へ移して公開。やることメモのページを作った</p></li>
 <li><time>2026-09-20</time><p>実験083〜090 と手順7本を追加。061〜090 の振り返り点検（7件を測り直して全部一致）</p></li>
