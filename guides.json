@@ -2974,6 +2974,97 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "wall",
+      "title": "壁を崩す",
+      "lede": "壁を破片に割り、球をぶつけて崩す。割るのは1つのノードでできるが、破片をつなぐ「強さ」の決め方でほとんど決まる。強すぎれば壊れず、弱すぎれば当てる前に崩れる。",
+      "hero": "085_wall_500_58.png",
+      "hero_cap": "破片50個・強さ 500・球の速さ 12。当たった側の下半分が崩れた。",
+      "facts": [
+        [
+          "ノードの数",
+          "6個"
+        ],
+        [
+          "計算の時間",
+          "割る 1.1秒＋解く 0.3〜1.2秒"
+        ],
+        [
+          "元になった実験",
+          "実験014・085"
+        ]
+      ],
+      "exp": "085",
+      "hip": "085_wall.hipnc",
+      "tags": [
+        "エフェクト",
+        "剛体",
+        "RBD",
+        "破壊"
+      ],
+      "steps": [
+        {
+          "title": "壁を作る",
+          "node": "box",
+          "ui_node": "wall_box",
+          "body": "<code>box</code> を 3 × 2 × 0.25 にして、下端が地面に来るよう y = 1 に上げる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "破片に割る",
+          "node": "rbdmaterialfracture",
+          "ui_node": "fracture",
+          "body": "<code>rbdmaterialfracture</code> の Material Type を Concrete にし、Fracture Level 1、Scatter Points に破片の数を入れる。<strong>指定した数がそのまま破片の数になる</strong>（25 → 25個・216面）。割る時間は 10個でも 200個でも 1.1〜1.3秒とほぼ同じ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "壊れる強さを決める",
+          "node": "concrete_primarystrength",
+          "ui_node": "fracture",
+          "body": "Primary Strength が、破片どうしをつなぐ力。<strong>既定のままでは、球をぶつけても壊れない。</strong>この壁では 500 前後が使える値で、700 だと1個しか外れず、100 まで下げると球を当てなくても自分の重さで崩れた。",
+          "img": "085_wall_700_58.png",
+          "cap": "強さ 700。当たったところが1つ外れるだけ。"
+        },
+        {
+          "title": "ぶつける球を作る",
+          "node": "attribwrangle",
+          "ui_node": "name_ball",
+          "body": "球に <code>s@name = \"ball\";</code> で名前を付け、別の wrangle（Run Over は Points）で <code>v@v = set(12, 0, 0);</code> と初速を入れる。<strong>packed にして混ぜると、球だけが動いて壁は反応しない。</strong>破片と同じ「name で区切られたポリゴン」の形にそろえる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "解く",
+          "node": "rbdbulletsolver",
+          "ui_node": "solve",
+          "body": "壁の破片と球を <code>merge</code> して <code>rbdbulletsolver</code> の1番目へ。<strong>2番目には rbdmaterialfracture の2番目の出力（拘束）をつなぐ。</strong>Ground Plane を有効にする。60フレームで 0.3秒（破片25個）〜1.2秒（200個）。",
+          "img": "085_wall_100_58.png",
+          "cap": "強さ 100。球が届く前に、自重で崩れてしまう。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "崩れたのは球のせいとは限らない",
+          "body": "強さ 100 では、球を当てなくても（速さ 0）15個の破片が動いた。壁が自分の重さを支えられていない。<strong>崩れ方を見るときは、まず球を当てない場合を1回流す。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "強さ 10 より下は、つないでいないのと同じ",
+          "body": "10 / 1 / 0 の結果が、動いた破片15個・いちばん動いた距離 2.439 まで完全に一致した。下げれば下げるほど崩れるわけではない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "破片を増やすと、崩れる範囲も広がる",
+          "body": "同じ強さ・同じ球で、動いた破片の割合は 3/10 → 16/25 → 42/50 → 85/100 → 179/200。<strong>細かくすると崩れやすくなる</strong>ので、破片の数を変えたら強さも決め直す。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

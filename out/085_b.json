@@ -1,0 +1,80 @@
+[
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 10000.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.2782169000056456,
+    "sim_sec": 0.23261679999995977,
+    "moved_over_01": 0,
+    "moved_max": 0.005711271179288779,
+    "moved_mean": 0.005705960502432179,
+    "ball_moved": 1.3490917539396277
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 1000.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1228734000033,
+    "sim_sec": 0.2389398000013898,
+    "moved_over_01": 0,
+    "moved_max": 0.005966346916414695,
+    "moved_mean": 0.005688877660003588,
+    "ball_moved": 1.3490917539396277
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 100.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1001030999977957,
+    "sim_sec": 0.26225899999553803,
+    "moved_over_01": 16,
+    "moved_max": 1.1568447164242106,
+    "moved_mean": 0.2739421719042846,
+    "ball_moved": 0.7536303351337807
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 10.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1041748000061489,
+    "sim_sec": 0.25662870000087423,
+    "moved_over_01": 15,
+    "moved_max": 2.439387910593822,
+    "moved_mean": 0.495759293717213,
+    "ball_moved": 0.7718681849982824
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 1.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1202866000021459,
+    "sim_sec": 0.2614822999967146,
+    "moved_over_01": 15,
+    "moved_max": 2.439387910593822,
+    "moved_mean": 0.495759293717213,
+    "ball_moved": 0.7718681849982824
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 0.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1111020000025746,
+    "sim_sec": 0.2589951999980258,
+    "moved_over_01": 15,
+    "moved_max": 2.439387910593822,
+    "moved_mean": 0.495759293717213,
+    "ball_moved": 0.7718681849982824
+  }
+]

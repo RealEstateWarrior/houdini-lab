@@ -1,0 +1,54 @@
+[
+  {
+    "pieces_asked": 25,
+    "speed": 2.0,
+    "strength": 100.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.2933545999985654,
+    "sim_sec": 0.31384320000506705,
+    "moved_over_01": 15,
+    "moved_max": 2.038009660386004,
+    "moved_mean": 0.3935394388090983,
+    "ball_moved": 0.764322804042046
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 5.0,
+    "strength": 100.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1198186000037822,
+    "sim_sec": 0.2801125999976648,
+    "moved_over_01": 15,
+    "moved_max": 2.4593384563177607,
+    "moved_mean": 0.47737751219798674,
+    "ball_moved": 0.756240815225336
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 100.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.0991900999943027,
+    "sim_sec": 0.30668010000226786,
+    "moved_over_01": 16,
+    "moved_max": 1.1568447164242106,
+    "moved_mean": 0.2739421719042846,
+    "ball_moved": 0.7536303351337807
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 12.0,
+    "strength": 100.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1078536999993958,
+    "sim_sec": 0.27585719999478897,
+    "moved_over_01": 18,
+    "moved_max": 2.148827765382729,
+    "moved_mean": 0.5204772715003303,
+    "ball_moved": 0.8307711586339084
+  }
+]

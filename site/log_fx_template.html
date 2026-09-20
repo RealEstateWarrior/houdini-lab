@@ -4307,6 +4307,100 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 085 ===================== -->
+    <article class="entry entry--current" id="exp085">
+      <div class="badge">085</div>
+      <div class="body">
+        <span class="chip chip--fx">RBD</span>
+        <h2>壁を崩す — 拘束の強さの窓は狭い。弱いと自重で崩れ、強いとぶつけても壊れない</h2>
+        <p class="path">C:/Program Files/Git/obj/wall &nbsp;·&nbsp; 崩れたときは、まず力を加えない場合を試す</p>
+
+        <div class="prose">
+          <p>3 × 2 × 0.25 の壁を rbdmaterialfracture（Concrete）で割り、半径 0.25 の球を横からぶつけた。破片どうしは、割るときに一緒に作られる拘束でつながっている。</p>
+          <p>最初は壁がまったく崩れなかった。球は壁に当たって止まり（2.5秒で 1.35 しか進まない）、破片はいちばん動いたものでも 0.006。拘束の強さ（Primary Strength）が既定のままだと、この壁はぶつけても壊れない。</p>
+          <p>強さを下げていくと崩れ始めた。10000 と 1000 では破片が1つも動かず、100 で16個が動いた。10 / 1 / 0 は結果がまったく同じで、10 より下は「つながっていない」のと変わらない。</p>
+          <p>ところが 100 では、球を当てなくても崩れた。速さ 0（球は落ちるだけ）でも15個が動く。壁が自分の重さを支えられていない。そこで強さを上げ直すと、500 で「自立はするが、速い球で崩れる」状態になった。速さ 0 で動いた破片は1個（0.155）、速さ 8 で6個、速さ 12 で19個。700 まで上げると、速さ 12 でぶつけても動くのは1個だけだった。</p>
+          <p>破片の数は、割る時間にはほとんど効かないが、解く時間には効く。10 / 25 / 50 / 100 / 200個で、割るのは 1.10〜1.28秒とほぼ一定、解くのは 0.26 / 0.29 / 0.40 / 0.56 / 1.15秒。破片が20倍で、解く時間は4.4倍。</p>
+        </div>
+
+        <p class="label">拘束の強さを変えて、同じ球をぶつける</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="085_wall_700_58.png" alt="強さ 700。当たったところが1つ外れるだけで、壁は立っている。" loading="lazy" decoding="async"></div>
+            <figcaption>強さ 700。当たったところが1つ外れるだけで、壁は立っている。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="085_wall_500_58.png" alt="強さ 500。当たった側の下半分が崩れる。" loading="lazy" decoding="async"></div>
+            <figcaption>強さ 500。当たった側の下半分が崩れる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="085_wall_100_58.png" alt="強さ 100。球が届く前から、自分の重さで崩れている。" loading="lazy" decoding="async"></div>
+            <figcaption>強さ 100。球が届く前から、自分の重さで崩れている。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">破片 50個、球の速さ 12、58フレーム目。3枚とも同じカメラ。</p>
+
+        <p class="label">B. 拘束の強さ（破片 25・球の速さ 8）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Primary Strength</th><th>動いた破片</th><th>いちばん動いた距離</th><th>球が進んだ距離</th></tr></thead>
+            <tbody>
+              <tr><td class="num">10000</td><td>0 / 25</td><td class="num">0.006</td><td class="num">1.349</td></tr>
+              <tr><td class="num">1000</td><td>0 / 25</td><td class="num">0.006</td><td class="num">1.349</td></tr>
+              <tr><td class="num">100</td><td>16 / 25</td><td class="num">1.157</td><td class="num">0.754</td></tr>
+              <tr><td class="num">10</td><td>15 / 25</td><td class="num">2.439</td><td class="num">0.772</td></tr>
+              <tr><td class="num">1</td><td>15 / 25</td><td class="num">2.439</td><td class="num">0.772</td></tr>
+              <tr><td class="num">0</td><td>15 / 25</td><td class="num">2.439</td><td class="num">0.772</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「動いた破片」は、60フレームの間に 0.1 以上動いた数。</p>
+
+        <p class="label">自立するか、壊れるか（破片 25）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>強さ</th><th>速さ 0（当てない）</th><th>速さ 8</th><th>速さ 12</th></tr></thead>
+            <tbody>
+              <tr><td class="num">100</td><td>15個 動く（自重で崩れる）</td><td>16個</td><td class="num muted">—</td></tr>
+              <tr><td class="num">300</td><td>15個 動く（自重で崩れる）</td><td>20個</td><td class="num muted">—</td></tr>
+              <tr><td class="num">500</td><td>1個（0.155）</td><td>6個（0.204）</td><td>19個（1.801）</td></tr>
+              <tr><td class="num">700</td><td>0個</td><td>1個（0.151）</td><td>1個（0.158）</td></tr>
+              <tr><td class="num">1000</td><td>0個</td><td>0個</td><td class="num muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">速さ 0 は「球を当てない」場合。球は落ちるだけで壁には届かない。</p>
+
+        <p class="label">A. 破片の数（球の速さ 8・強さ 100）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>指定した数</th><th>できた破片</th><th>面の数</th><th>割る時間</th><th>解く時間</th><th>動いた破片</th></tr></thead>
+            <tbody>
+              <tr><td class="num">10</td><td class="num">10</td><td class="num">71</td><td>1.28秒</td><td>0.26秒</td><td class="num">3</td></tr>
+              <tr><td class="num">25</td><td class="num">25</td><td class="num">216</td><td>1.12秒</td><td>0.29秒</td><td class="num">16</td></tr>
+              <tr><td class="num">50</td><td class="num">50</td><td class="num">475</td><td>1.10秒</td><td>0.40秒</td><td class="num">42</td></tr>
+              <tr><td class="num">100</td><td class="num">100</td><td class="num">1,015</td><td>1.12秒</td><td>0.56秒</td><td class="num">85</td></tr>
+              <tr><td class="num">200</td><td class="num">200</td><td class="num">2,246</td><td>1.15秒</td><td>1.15秒</td><td class="num">179</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「割る」は rbdmaterialfracture の計算、「解く」は60フレームの<button class="term" data-term="シミュレーション">シミュレーション</button>。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>既定の強さでは、ぶつけても壊れない。</strong>Primary Strength 1000 以上では、速さ 8 の球を当てても破片は1つも動かなかった（いちばん動いて 0.006）。</li>
+          <li><strong>強さを下げすぎると、当てる前に自分の重さで崩れる。</strong>100 では、球を当てなくても15個が動いた。<strong>「崩れた」を見たら、まず球を当てない場合を試す。</strong></li>
+          <li><strong>使える窓は狭い。</strong>この壁（3 × 2 × 0.25・破片25）では 500 前後。速さ 0 で1個（0.155）、速さ 8 で6個、速さ 12 で19個。700 にすると速さ 12 でも1個しか動かない。</li>
+          <li><strong>10 より下は、つながっていないのと同じ。</strong>強さ 10 / 1 / 0 の結果が、動いた破片15個・いちばん動いた 2.439 まで完全に一致した。</li>
+          <li><strong>破片の数は、割る時間にはほぼ効かない。</strong>10個でも 200個でも 1.10〜1.28秒。<strong>効くのは解く時間で</strong>、0.26秒（10個）→ 1.15秒（200個）。破片が20倍でも4.4倍で済む。</li>
+          <li><strong>破片を細かくすると、崩れる範囲も広がる。</strong>動いた破片の割合は 3/10 → 16/25 → 42/50 → 85/100 → 179/200 と、3割から9割へ増えた。同じ強さなら、細かいほど崩れやすい。</li>
+          <li><strong>球は破片と同じ形で混ぜる。</strong>球を packed にして混ぜたときは、球だけが動いて壁は無反応だった。破片は「name で区切られた<button class="term" data-term="ポリゴン">ポリゴン</button>」なので、球にも name を付けて同じ形でつないだら動いた。</li>
+          <li>計算の時間は、破片25個で割る 1.1秒・解く 0.3秒。破片200個でも解くのは 1.15秒。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

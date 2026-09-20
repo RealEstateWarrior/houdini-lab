@@ -1,0 +1,80 @@
+[
+  {
+    "pieces_asked": 25,
+    "speed": 0.0,
+    "strength": 300.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.2667250000013155,
+    "sim_sec": 0.2811119000034523,
+    "moved_over_01": 15,
+    "moved_max": 0.9551132185736165,
+    "moved_mean": 0.23987247043080612,
+    "ball_moved": 0.7579978604366671
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 0.0,
+    "strength": 500.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1357342999981483,
+    "sim_sec": 0.27570399999967776,
+    "moved_over_01": 1,
+    "moved_max": 0.15524334765574566,
+    "moved_mean": 0.01378676875081964,
+    "ball_moved": 0.7580386399679515
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 0.0,
+    "strength": 700.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1089586000016425,
+    "sim_sec": 0.27140289999806555,
+    "moved_over_01": 0,
+    "moved_max": 0.032648299835080136,
+    "moved_mean": 0.0021150051610567206,
+    "ball_moved": 0.7580386399679515
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 8.0,
+    "strength": 700.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1097449000008055,
+    "sim_sec": 0.27459440000529867,
+    "moved_over_01": 1,
+    "moved_max": 0.15086044940912874,
+    "moved_mean": 0.018187381158340513,
+    "ball_moved": 0.7769690386802585
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 12.0,
+    "strength": 700.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1088644999981625,
+    "sim_sec": 0.2635089000032167,
+    "moved_over_01": 1,
+    "moved_max": 0.15829109284055873,
+    "moved_mean": 0.0186583250724981,
+    "ball_moved": 1.1848930087894076
+  },
+  {
+    "pieces_asked": 25,
+    "speed": 12.0,
+    "strength": 500.0,
+    "pieces": 25,
+    "fracture_prims": 216,
+    "fracture_sec": 1.1223199000014574,
+    "sim_sec": 0.26917640000465326,
+    "moved_over_01": 19,
+    "moved_max": 1.8009829009855236,
+    "moved_mean": 0.5254475286635157,
+    "ball_moved": 1.1843210822365748
+  }
+]
