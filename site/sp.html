@@ -1346,7 +1346,10 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
      一緒に隠すと行き先がひとつも無くなる */
   .sidenav > .nav-inner > ul:not(.nav-depts) { display: none; }
   .nav-burger { display: grid; }
-  .nav-inner { justify-content: space-between; }
+  /* タブを畳むと伸びる要素が無くなる。space-between だと検索が真ん中に来るので、
+     検索から先を右へ寄せて、ハンバーガーと並べる */
+  .nav-inner > #search-open { margin-left: auto; }
+  .nav-inner > #search-open + .nav-burger { margin-left: -6px; }
 }
 
 /* ---------- 全画面メニュー（スマホ） ---------- */
@@ -1627,6 +1630,14 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   cursor: pointer;
 }
 .ask-sub:hover { border-color: var(--wire); color: var(--ink); }
+.ask-beta {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 4px;
+  color: var(--ink-dim);
+}
 
 .ask-log { display: grid; gap: 14px; margin-top: 14px; }
 .ask-log:empty { display: none; }
@@ -2080,13 +2091,14 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           </svg>
           <span>AI に聞く</span>
         </button>
+        <span class="ask-beta">ベータ</span>
         <button type="button" class="ask-sub" id="ask-stop" hidden>止める</button>
         <button type="button" class="ask-sub" id="ask-clear" hidden>会話を消す</button>
       </div>
       <div class="ask-log" id="ask-log" aria-live="polite"></div>
       <p class="ask-fine">
-        答えの根拠はこのサイトの記録だけです。書いていないことは「まだ確かめていない」と答えます。
-        あなたの Claude の利用枠を使います。
+        まだベータです。答えの根拠はこのサイトの記録だけで、書いていないことは「まだ確かめていない」と答えます。
+        続けて聞けば、直近8往復ぶんは話の流れを覚えています。あなたの Claude の利用枠を使います。
       </p>
     </div>
     <p class="search-hint" id="search-hint">よく見るところ</p>
