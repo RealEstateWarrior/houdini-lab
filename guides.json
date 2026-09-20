@@ -2810,6 +2810,80 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "sign",
+      "title": "看板の文字を立体にする",
+      "lede": "文字の形を作り、厚みを付け、角を丸める。3つのノードでできるが、細かさ・厚み・丸めのつまみは効き方がそれぞれ違う。",
+      "hero": "083_round.png",
+      "hero_cap": "厚み 0.15、角の丸め 0.02。角に光の筋が出る。",
+      "facts": [
+        [
+          "ノードの数",
+          "3個"
+        ],
+        [
+          "計算の時間",
+          "合わせて 25ms ほど"
+        ],
+        [
+          "元になった実験",
+          "実験083"
+        ]
+      ],
+      "exp": "083",
+      "hip": "083_sign.hipnc",
+      "tags": [
+        "モデリング",
+        "文字",
+        "看板"
+      ],
+      "steps": [
+        {
+          "title": "文字の形を作る",
+          "node": "font",
+          "ui_node": "letters",
+          "body": "<code>font</code> の Text に出したい文字を入れる。Font Size が文字の大きさ、<strong>Level of Detail は曲線の刻みの細かさ</strong>で、大きさは変わらない。1（既定）で「SP」が 962点、4 にすると 3,626点。曲がった文字を大きく写すときだけ上げる。",
+          "img": "083_flat.png",
+          "cap": "font だけ。面は文字の数ぶん（2枚）しかなく、厚みが無い。"
+        },
+        {
+          "title": "厚みを付ける",
+          "node": "polyextrude",
+          "ui_node": "thickness",
+          "body": "<code>polyextrude</code> の Distance に厚みを入れる。<strong>入れた値がそのまま奥行きになる</strong>（0.15 → 0.150000）。<strong>Output Back は入れたままにする。</strong>切ると裏のふたが消えて、裏から見ると穴が開く。",
+          "img": "083_thick.png",
+          "cap": "Distance 0.15。"
+        },
+        {
+          "title": "角を丸める",
+          "node": "polybevel",
+          "ui_node": "round",
+          "body": "<code>polybevel</code> の Distance で角を丸める。文字の太さに対して 0.01〜0.04 くらいが使いやすい。<strong>上げすぎても、ある値から先は形が変わらない</strong>（この文字では 0.08 以上で同じ）。Divisions を上げると丸みが滑らかになる。",
+          "img": "083_round.png",
+          "cap": "Distance 0.02。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "丸めを強くしても、途中から効かない",
+          "body": "polybevel の Distance を 0.08 / 0.15 / 0.3 にしても、面積は 1.616047 で6桁まで同じだった。ぶつかったら止める設定（Detect Collisions・Stop Loops）が既定で入っていて、細い部分の幅より大きくは丸められない。エラーは出ないので、効いていないことに気づきにくい（実験083）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "丸めは、点や面の数では確かめられない",
+          "body": "Distance を 0 から 0.3 まで変えても 5,776点・5,778面のまま。効いているかどうかは、見た目か面積（measure SOP）で確かめる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Level of Detail を上げても、文字は大きくならない",
+          "body": "0.2 でも 4 でも、幅 1.1220・高さ 0.7390 で同じ。変わるのは点の数だけ（222 → 3,626）。大きさを変えるのは Font Size。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

@@ -4015,6 +4015,103 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 083 ===================== -->
+    <article class="entry entry--current" id="exp083">
+      <div class="badge">083</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>看板の文字を立体にする — Distance はそのまま奥行き。角の丸めは 0.08 で止まる</h2>
+        <p class="path">C:/Program Files/Git/obj/sign &nbsp;·&nbsp; 数が変わらないつまみは、別の量で追う</p>
+
+        <div class="prose">
+          <p>font で文字の形を作り、<button class="term" data-term="polyextrude">polyextrude</button> で厚みを付け、polybevel で角を丸める。手順ページに書く前に、3つのつまみの意味を数字で確かめた。</p>
+          <p>細かさ。font の Level of Detail は、点の数にほぼ比例する。文字「SP」・Font Size 1 で、LOD 0.2 / 0.5 / 1 / 2 / 4 のとき 222 / 518 / 962 / 1,850 / 3,626点。倍にすると点も倍になる。幅 1.1220・高さ 0.7390 は、どの LOD でもまったく同じで、形の大きさは変わらない。面は2枚（文字1つが1面）のまま。</p>
+          <p>厚み。polyextrude の Distance は、そのまま奥行きになった。0.05 / 0.15 / 0.4 を入れると、奥行きは 0.050000 / 0.150000 / 0.400000。Output Back を切ると、面が 966 から 964 に減る。減るのはちょうど2枚で、これが裏側のふただった。点の数は変わらない。</p>
+          <p>角の丸め。polybevel の Distance（Offset）を上げても、点 5,776・面 5,778 は動かない。丸めは形だけを変えるので、数では追えない。面積で測ると 1.689066（0）→ 1.656768（0.005）→ 1.643416（0.01）→ 1.629985（0.02）→ 1.617612（0.04）と減っていき、0.08 以上は 1.616047 のまま6桁まで同じ。上げても形がそれ以上変わらない。</p>
+          <p>丸めを入れると面が 966 から 5,778 に増える。Offset 0 でも同じ数になるので、増えるのは丸めの量ではなく、丸め<button class="term" data-term="ノード">ノード</button>を通したこと自体による。</p>
+        </div>
+
+        <p class="label">平ら・厚み・角の丸め</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="083_flat.png" alt="font だけ。面は2枚で、厚みが無い。" loading="lazy" decoding="async"></div>
+            <figcaption>font だけ。面は2枚で、厚みが無い。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="083_thick.png" alt="polyextrude の Distance 0.15。奥行きがちょうど 0.1" loading="lazy" decoding="async"></div>
+            <figcaption>polyextrude の Distance 0.15。奥行きがちょうど 0.15 になる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="083_round.png" alt="polybevel の Distance 0.02。角に光の筋が出る。" loading="lazy" decoding="async"></div>
+            <figcaption>polybevel の Distance 0.02。角に光の筋が出る。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">文字「SP」、Font Size 1、LOD 1。3枚とも同じカメラ。</p>
+
+        <p class="label">A. font の Level of Detail</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Level of Detail</th><th>点</th><th>面</th><th>幅</th><th>高さ</th><th>計算の時間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.2</td><td class="num">222</td><td class="num">2</td><td class="num">1.1220</td><td class="num">0.7390</td><td>12.4 ms</td></tr>
+              <tr><td class="num">0.5</td><td class="num">518</td><td class="num">2</td><td class="num">1.1220</td><td class="num">0.7390</td><td>0.7 ms</td></tr>
+              <tr><td>1（既定）</td><td class="num">962</td><td class="num">2</td><td class="num">1.1220</td><td class="num">0.7390</td><td>0.7 ms</td></tr>
+              <tr><td class="num">2</td><td class="num">1,850</td><td class="num">2</td><td class="num">1.1220</td><td class="num">0.7390</td><td>1.3 ms</td></tr>
+              <tr><td class="num">4</td><td class="num">3,626</td><td class="num">2</td><td class="num">1.1220</td><td class="num">0.7390</td><td>3.4 ms</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">点の数だけが変わり、文字の大きさ（幅・高さ）は変わらない。</p>
+
+        <p class="label">B. polyextrude の Distance と Output Back（LOD 1）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Distance</th><th>Output Back</th><th>点</th><th>面</th><th>奥行き</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td>入り</td><td class="num">1,924</td><td class="num">966</td><td class="num">0.050000</td></tr>
+              <tr><td class="num">0.05</td><td>切り</td><td class="num">1,924</td><td class="num">964</td><td class="num">0.050000</td></tr>
+              <tr><td class="num">0.15</td><td>入り</td><td class="num">1,924</td><td class="num">966</td><td class="num">0.150000</td></tr>
+              <tr><td class="num">0.15</td><td>切り</td><td class="num">1,924</td><td class="num">964</td><td class="num">0.150000</td></tr>
+              <tr><td class="num">0.4</td><td>入り</td><td class="num">1,924</td><td class="num">966</td><td class="num">0.400000</td></tr>
+              <tr><td class="num">0.4</td><td>切り</td><td class="num">1,924</td><td class="num">964</td><td class="num">0.400000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Output Back を切ると面が2枚減る。文字が2つなので、裏のふたが1文字につき1枚。</p>
+
+        <p class="label">C. polybevel の Distance（厚み 0.15）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Distance</th><th>点</th><th>面</th><th>面積の合計</th><th>計算の時間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.689066</td><td>19.8 ms</td></tr>
+              <tr><td class="num">0.005</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.656768</td><td>21.3 ms</td></tr>
+              <tr><td class="num">0.01</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.643416</td><td>22.4 ms</td></tr>
+              <tr><td class="num">0.02</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.629985</td><td>20.1 ms</td></tr>
+              <tr><td class="num">0.04</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.617612</td><td>20.4 ms</td></tr>
+              <tr><td class="num">0.08</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.616047</td><td>20.3 ms</td></tr>
+              <tr><td class="num">0.15</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.616047</td><td>20.0 ms</td></tr>
+              <tr><td class="num">0.3</td><td class="num">5,776</td><td class="num">5,778</td><td class="num">1.616047</td><td>20.7 ms</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">点と面の数は変わらないので、面ごとの面積を measure <button class="term" data-term="SOP">SOP</button> で出して合計した。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>font の Level of Detail は、点の数にほぼ比例する。</strong>0.2 / 0.5 / 1 / 2 / 4 で 222 / 518 / 962 / 1,850 / 3,626点。<strong>文字の大きさは変わらない</strong>（幅 1.1220・高さ 0.7390 が全部同じ）。曲線の刻みだけが変わる。</li>
+          <li><strong>polyextrude の Distance は、そのまま奥行きになる。</strong>0.05 / 0.15 / 0.4 で、奥行きが 0.050000 / 0.150000 / 0.400000。</li>
+          <li><strong>Output Back を切ると、裏のふたが消える。</strong>面が 966 → 964 と、ちょうど文字の数だけ減る。見た目は正面から変わらないが、裏から見ると穴が開いている。</li>
+          <li><strong>角の丸めは、点と面の数では追えない。</strong>polybevel の Distance を 0 から 0.3 まで変えても 5,776点・5,778面のまま。形だけが変わる。面積で測れば追える（1.689066 → 1.616047）。</li>
+          <li><strong>丸めは 0.08 で止まる。</strong>0.08 / 0.15 / 0.3 の面積が 1.616047 で6桁まで同じ。polybevel には「ぶつかったら止める」設定（Stop Loops / Detect Collisions）が既定で入っていて、文字の細い部分の幅までしか丸められない。<strong>エラーは出ない。</strong></li>
+          <li><strong>丸めノードを通すだけで、面が 966 → 5,778 に増える。</strong>Distance 0 でも同じ数。丸めの量ではなく、通したこと自体で増える。</li>
+          <li>計算はどれも軽い。font は LOD 4 でも 3.4ms、polyextrude は 3.4〜4.2ms、polybevel は約 20ms。</li>
+          <li><strong>1つのプロセスで OpenGL の描画を3回続けたら、2枚目で「OpenGL Fatal Error」が出て止まった。</strong>1プロセスにつき1枚だけ撮るようにしたら通った。レンダを続けて撮るときは、プロセスを分ける。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

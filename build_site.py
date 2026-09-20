@@ -520,6 +520,12 @@ DONE = [
      "shots": ["082_posts.png", "082_roll_n.png", "082_roll_n_up.png"],
      "title": "道に沿って物を並べる — N だけでは坂で杭が倒れる。up を足せば 0度。Pack で 250倍速い",
      "note": "坂でNだけだと横に最大49度倒れ、upを足すと0度。Packで1万個714ms→2.9ms・1878MB→4MB"},
+    {"no": "083", "anchor": "exp083",
+     "tags": ["モデリング", "文字", "厚み", "手順"],
+     "log": "log_pm", "hip": "083_sign.hipnc", "thumb": "083_round.png",
+     "shots": ["083_flat.png", "083_thick.png", "083_round.png"],
+     "title": "看板の文字を立体にする — Distance はそのまま奥行き。角の丸めは 0.08 で止まる",
+     "note": "LODは点の数に比例（大きさは不変）。Output Backを切ると面が2枚減る。丸めは面積でしか追えない"},
 ]
 
 PLANNED = []
