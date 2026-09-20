@@ -1315,6 +1315,72 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .usedby a:hover { background: var(--ink); color: #ffffff; }
 .usedby + .path { margin-top: 4px; }
 
+/* ---------- 要望の順番待ち ---------- */
+
+.queue { margin: 0 0 34px; }
+.queue-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--wire-dim);
+}
+.queue-tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 4px 11px;
+  border-radius: 980px;
+  background: var(--ground-2);
+  color: var(--ink-mid);
+}
+.queue-tag b { font-size: 0.78rem; font-variant-numeric: tabular-nums; opacity: 0.7; }
+.queue--go .queue-tag { background: var(--ink); color: #ffffff; }
+.queue--wait .queue-tag { background: #f3e4d6; color: var(--fx); }
+.queue--open .queue-tag { background: #e3edf7; color: var(--flag); }
+.queue--done .queue-tag { background: #e2efe4; color: #2f6b3c; }
+.queue--drop .queue-tag { background: var(--ground-2); color: var(--ink-dim); }
+.queue-head p { margin: 0; font-size: 0.82rem; color: var(--ink-dim); }
+
+.queue ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.queue li {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--wire-dim);
+  display: grid;
+  gap: 5px;
+}
+.queue li:last-child { border-bottom: none; }
+.queue h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  font-weight: 600;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+}
+.queue li > p { margin: 0; font-size: 0.9rem; line-height: 1.75; color: var(--ink-mid); max-width: 46em; }
+.queue-meta { font-size: 0.76rem !important; color: var(--ink-dim) !important; }
+.queue--drop h4 { color: var(--ink-dim); }
+.queue-go {
+  justify-self: start;
+  margin-top: 4px;
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 6px 13px;
+  border: 1px solid var(--wire);
+  border-radius: 980px;
+  background: var(--ground);
+  color: var(--ink);
+  cursor: pointer;
+}
+.queue-go:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.queue-go:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+
 /* ---------- 横へ流れる帯（ホーム） ----------
 
    小さな札が途切れずに流れる。乗せると止まるので、そのまま押せる。

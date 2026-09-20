@@ -37,6 +37,7 @@ GLOSSARY = os.path.join(HERE, "glossary.json")
 NODES = os.path.join(HERE, "nodes.json")
 GUIDES = os.path.join(HERE, "guides.json")
 WORKS = os.path.join(HERE, "works.json")
+REQUESTS = os.path.join(HERE, "requests.json")
 SYNONYMS = os.path.join(HERE, "search_synonyms.json")
 SPEED = os.path.join(HERE, "speed_tips.json")
 
@@ -121,6 +122,7 @@ TABS = [
     ("overview", "ホーム"),
     ("guides", "実践"),
     ("works", "制作"),
+    ("requests", "要望"),
     ("experiments", "実験"),
     ("speed", "効率化"),
     ("nodes", "ノード解説"),
@@ -137,6 +139,7 @@ MENU = [
     ("実践", "guides", [
         ("guides", "実践", "作り方を順に並べたもの"),
         ("works", "制作", "頼まれて作った一点物の記録"),
+        ("requests", "要望", "作ってほしいものと、その順番待ち"),
     ]),
     ("実験", "experiments", [
         ("experiments", "実験集", "測った回の一覧。押すと中身が開く"),
@@ -1065,6 +1068,53 @@ def same_image(name):
     return _FIRST_BY_CONTENT.setdefault(digest, name)
 
 
+def render_requests(requests):
+    """実践の要望。状態ごとにまとめて、上から手を付けている順に並べる。
+
+    済んだものも消さずに残す。何を断ったかも理由ごと残す。
+    そうしないと、同じ要望が何度も出てくる。
+    """
+    by_state = {}
+    for item in requests["requests"]:
+        by_state.setdefault(item["state"], []).append(item)
+
+    out = []
+    for state in requests["states"]:
+        items = by_state.get(state["id"])
+        if not items:
+            continue
+        out.append(f'      <div class="queue queue--{state["tone"]}">')
+        out.append('        <div class="queue-head">')
+        out.append(f'          <span class="queue-tag">{html.escape(state["label"])}'
+                   f'<b>{len(items)}</b></span>')
+        out.append(f'          <p>{html.escape(state["note"])}</p>')
+        out.append("        </div>")
+        out.append("        <ul>")
+        for item in items:
+            out.append("          <li>")
+            out.append(f'            <h4>{html.escape(item["title"])}</h4>')
+            out.append(f'            <p>{html.escape(item["why"])}</p>')
+            meta = [f'出した人: {html.escape(item["from"])}',
+                    html.escape(item["when"])]
+            if item.get("block"):
+                meta.append("止まっている理由: " + html.escape(item["block"]))
+            if item.get("reason"):
+                meta.append("見送った理由: " + html.escape(item["reason"]))
+            out.append('            <p class="queue-meta">'
+                       + " · ".join(meta) + "</p>")
+            if item.get("guide"):
+                out.append('            <button type="button" class="queue-go"'
+                           f' data-guide="{item["guide"]}">'
+                           "できた実践を見る</button>")
+            out.append("          </li>")
+        out.append("        </ul>")
+        out.append("      </div>")
+    if not out:
+        return ('      <p class="empty">いまのところ順番待ちはありません。'
+                "作ってほしいものを言ってもらえれば、ここに並びます。</p>")
+    return "\n".join(out)
+
+
 def render_strip(guides):
     """ホームの帯。小さな札が横へ流れる。
 
@@ -1577,7 +1627,8 @@ def count_nodes(nodes):
 
 
 def render(template_name, out_dir, out_name, active, tabs, urls,
-           data, nodes, guides, works, css, links_body, popover, chrome):
+           data, nodes, guides, works, requests, css, links_body,
+           popover, chrome):
     with open(os.path.join(SITE, template_name), encoding="utf-8") as fp:
         page = fp.read()
 
@@ -1591,6 +1642,8 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GUIDE_CARDS-->", render_guide_cards(guides)),
         ("<!--WORK_CARDS-->", render_work_cards(works)),
         ("<!--STRIP-->", render_strip(guides)),
+        ("<!--REQUESTS-->", render_requests(requests)),
+        ("<!--REQUEST_COUNT-->", str(len(requests["requests"]))),
         ("<!--WORK_COUNT-->", str(len(works["works"]))),
         ("<!--NODE_NAV-->", render_node_nav(nodes)),
         ("<!--LINKS_BODY-->", links_body),
@@ -1710,6 +1763,8 @@ def main():
         guides = json.load(fp)
     with open(WORKS, encoding="utf-8") as fp:
         works = json.load(fp)
+    with open(REQUESTS, encoding="utf-8") as fp:
+        requests = json.load(fp)
     with open(os.path.join(SITE, "base.css"), encoding="utf-8") as fp:
         css = fp.read()
     with open(os.path.join(SITE, "partial_links.html"), encoding="utf-8") as fp:
@@ -1721,18 +1776,18 @@ def main():
 
     for template_name, site_out, docs_out, active, tabs in PAGES:
         render(template_name, SITE, site_out, active, tabs,
-               ARTIFACT_URLS, data, nodes, guides, works, css, links_body,
+               ARTIFACT_URLS, data, nodes, guides, works, requests, css, links_body,
                popover, chrome)
         if docs_out:
             render(template_name, DOCS, docs_out, active, tabs,
-                   PAGES_URLS, data, nodes, guides, works, css, links_body,
+                   PAGES_URLS, data, nodes, guides, works, requests, css, links_body,
                    popover, chrome)
 
     # 親ページ。クローンが置いてあるときだけ書き出す。
     root_note = "置き場が無いので飛ばした"
     if os.path.isdir(ROOT):
         render("sp_template.html", ROOT, "index.html", "sp", False,
-               ROOT_URLS, data, nodes, guides, works, css, links_body,
+               ROOT_URLS, data, nodes, guides, works, requests, css, links_body,
                popover, chrome)
         root_note = os.path.join(ROOT, "index.html")
 
