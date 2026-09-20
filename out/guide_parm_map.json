@@ -844,5 +844,130 @@
       "wanted": "sweep",
       "png": "guide_path_p6.png"
     }
+  },
+  "sign": {
+    "1": {
+      "node": "/obj/sign/letters",
+      "wanted": "font",
+      "png": "guide_sign_p1.png"
+    },
+    "2": {
+      "node": "/obj/sign/thickness",
+      "wanted": "polyextrude",
+      "png": "guide_sign_p2.png"
+    },
+    "3": {
+      "node": "/obj/sign/round",
+      "wanted": "polybevel",
+      "png": "guide_sign_p3.png"
+    }
+  },
+  "domino": {
+    "1": {
+      "node": "/obj/dominoes/spots",
+      "wanted": "line",
+      "png": "guide_domino_p1.png"
+    },
+    "2": {
+      "node": "/obj/dominoes/tile",
+      "wanted": "box",
+      "png": "guide_domino_p2.png"
+    },
+    "3": {
+      "node": "/obj/dominoes/tiles",
+      "wanted": "copytopoints",
+      "png": "guide_domino_p3.png"
+    },
+    "4": {
+      "node": "/obj/dominoes/push_first",
+      "wanted": "attribwrangle",
+      "png": "guide_domino_p4.png"
+    },
+    "5": {
+      "node": "/obj/dominoes/solve",
+      "wanted": "rbdbulletsolver",
+      "png": "guide_domino_p5.png"
+    }
+  },
+  "wall": {
+    "1": {
+      "node": "/obj/wall/wall_box",
+      "wanted": "box",
+      "png": "guide_wall_p1.png"
+    },
+    "2": {
+      "node": "/obj/wall/fracture",
+      "wanted": "rbdmaterialfracture",
+      "png": "guide_wall_p2.png"
+    },
+    "3": {
+      "node": "/obj/wall/fracture",
+      "wanted": "concrete_primarystrength",
+      "png": "guide_wall_p3.png"
+    },
+    "4": {
+      "node": "/obj/wall/name_ball",
+      "wanted": "attribwrangle",
+      "png": "guide_wall_p4.png"
+    },
+    "5": {
+      "node": "/obj/wall/solve",
+      "wanted": "rbdbulletsolver",
+      "png": "guide_wall_p5.png"
+    }
+  },
+  "leaves": {
+    "1": {
+      "node": "/obj/leaves/source_area",
+      "wanted": "grid",
+      "png": "guide_leaves_p1.png"
+    },
+    "2": {
+      "node": "/obj/leaves/popnet/source",
+      "wanted": "popsource",
+      "png": "guide_leaves_p2.png"
+    },
+    "3": {
+      "node": "/obj/leaves/popnet/gravity",
+      "wanted": "popforce",
+      "png": "guide_leaves_p3.png"
+    },
+    "4": {
+      "node": "/obj/leaves/popnet/wind",
+      "wanted": "popwind",
+      "png": "guide_leaves_p4.png"
+    },
+    "5": {
+      "node": "/obj/leaves/leaf_copies",
+      "wanted": "copytopoints",
+      "png": "guide_leaves_p5.png"
+    }
+  },
+  "fallen": {
+    "1": {
+      "node": "/obj/fallen/popnet/wind",
+      "wanted": "popwind",
+      "png": "guide_fallen_p1.png"
+    },
+    "2": {
+      "node": "/obj/fallen/popnet/source",
+      "wanted": "popsource",
+      "png": "guide_fallen_p2.png"
+    },
+    "3": {
+      "node": "/obj/fallen/popnet/ground",
+      "wanted": "groundplane",
+      "png": "guide_fallen_p3.png"
+    },
+    "4": {
+      "node": "/obj/fallen/popnet/solver",
+      "wanted": "popsolver",
+      "png": "guide_fallen_p4.png"
+    },
+    "5": {
+      "node": "/obj/fallen/leaf_copies",
+      "wanted": "copytopoints",
+      "png": "guide_fallen_p5.png"
+    }
   }
 }

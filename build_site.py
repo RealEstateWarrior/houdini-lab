@@ -1143,13 +1143,19 @@ def render_guides(guides, urls):
 
 
 def render_exp_data(urls):
-    """実験ポップアップの中身。out/*_report.json をそのまま流用する。"""
+    """実験ポップアップの中身。out/*_report.json をそのまま流用する。
+
+    Claude 版（Artifacts）は1つの版に置けるファイルが 512 までなので、
+    ポップアップの図は1枚だけにする。GitHub Pages 版は全部載せる。
+    """
+    slim = str(urls.get("home", "")).startswith("http")
     payload = {}
     for item in DONE:
+        shots = item.get("shots") or [item["thumb"]]
         entry = {
             "title": item["title"],
             "href": f'{urls[item.get("log", "log_pm")]}#{item["anchor"]}',
-            "shots": item.get("shots") or [item["thumb"]],
+            "shots": shots[:1] if slim else shots,
             "summary": [html.escape(item["note"])],
             "points": [],
             "next": [],
