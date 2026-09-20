@@ -1458,7 +1458,14 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
    降りる途中で閉じてしまう。見出しの li をバーの高さいっぱいに伸ばして、
    パネルがその真下から始まるようにしてある。 */
 
-.sidenav .nav-menu { overflow: visible; gap: 4px; align-items: stretch; }
+.sidenav .nav-menu {
+  overflow: visible;
+  gap: 4px;
+  /* バーの高さいっぱいまで伸ばす。伸ばさないと見出しの下に隙間ができ、
+     そこでマウスの当たりが切れてパネルが閉じる */
+  align-self: stretch;
+  align-items: stretch;
+}
 .sidenav .nav-menu > li { display: flex; align-items: center; }
 .nav-drop { position: static; }
 
