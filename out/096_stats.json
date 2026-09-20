@@ -1,0 +1,101 @@
+{
+  "rows": [
+    {
+      "shape": "平らな板（1面）",
+      "asked": 100,
+      "got": 100,
+      "diff": 0,
+      "seconds": 0.0011,
+      "us_per_point": 10.873
+    },
+    {
+      "shape": "平らな板（1面）",
+      "asked": 1000,
+      "got": 1000,
+      "diff": 0,
+      "seconds": 0.0084,
+      "us_per_point": 8.425
+    },
+    {
+      "shape": "平らな板（1面）",
+      "asked": 10000,
+      "got": 10000,
+      "diff": 0,
+      "seconds": 0.0254,
+      "us_per_point": 2.537
+    },
+    {
+      "shape": "平らな板（1面）",
+      "asked": 100000,
+      "got": 100000,
+      "diff": 0,
+      "seconds": 0.0898,
+      "us_per_point": 0.898
+    },
+    {
+      "shape": "平らな板（1面）",
+      "asked": 1000000,
+      "got": 1000000,
+      "diff": 0,
+      "seconds": 1.0384,
+      "us_per_point": 1.038
+    },
+    {
+      "shape": "凹凸のある球（3,540面）",
+      "asked": 100,
+      "got": 100,
+      "diff": 0,
+      "seconds": 0.3371,
+      "us_per_point": 3371.241
+    },
+    {
+      "shape": "凹凸のある球（3,540面）",
+      "asked": 1000,
+      "got": 1000,
+      "diff": 0,
+      "seconds": 0.0137,
+      "us_per_point": 13.664
+    },
+    {
+      "shape": "凹凸のある球（3,540面）",
+      "asked": 10000,
+      "got": 10000,
+      "diff": 0,
+      "seconds": 0.03,
+      "us_per_point": 3.004
+    },
+    {
+      "shape": "凹凸のある球（3,540面）",
+      "asked": 100000,
+      "got": 100000,
+      "diff": 0,
+      "seconds": 0.111,
+      "us_per_point": 1.11
+    },
+    {
+      "shape": "凹凸のある球（3,540面）",
+      "asked": 1000000,
+      "got": 1000000,
+      "diff": 0,
+      "seconds": 1.1656,
+      "us_per_point": 1.166
+    }
+  ],
+  "seeds": [
+    {
+      "seed": 1,
+      "got": 10000,
+      "seconds": 0.0293
+    },
+    {
+      "seed": 2,
+      "got": 10000,
+      "seconds": 0.0293
+    },
+    {
+      "seed": 3,
+      "got": 10000,
+      "seconds": 0.0303
+    }
+  ]
+}

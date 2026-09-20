@@ -4493,6 +4493,142 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 095 ===================== -->
+    <article class="entry entry--current" id="exp095">
+      <div class="badge">095</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>隙間 0.01 の継ぎ目は、Snap Distance が 0.01 になって初めて閉じる — 0.0095 では閉じない</h2>
+        <p class="path">examples/095_fuse.py &nbsp;·&nbsp; 隙間と同じ値でちょうど閉じる。0.0095では閉じない</p>
+
+        <div class="prose">
+          <p>fuse は Snap Distance より近い点をひとつにまとめる。では「より近い」の境目はどこなのか。そして距離を上げていくと、狙った継ぎ目だけが閉じるのか、細かい所まで潰れてしまうのか。2つの場面で測った。</p>
+          <p>ひとつ目は、板を2枚ちょうど 0.01 だけ離して並べた形（242点）。Snap Distance を 0 から上げていくと、0.0095 までは1点も合わさらず、0.01 でいきなり 11点（継ぎ目の1列ぶん）が合わさった。**距離が隙間と同じ値になったところで閉じる。** それより手前では、どれだけ近くても閉じない。</p>
+          <p>ふたつ目は、球（50×50、2402点）にそのまま fuse をかけた場合。距離 0.01 で 50点、0.02 で 118点が減るが、**形は動かない**（ずれ 0.0）。極のあたりに同じ位置の点が重なっていて、それが掃除されている。</p>
+          <p>形が動き出すのは 0.04 を超えてから。0.08 では点が元の 41.299% まで減り、ずれは 0.000028。0.16 では 15.279% まで減り、ずれは 0.002116 で、形そのものが崩れる。</p>
+        </div>
+
+        <p class="label">板2枚（隙間 0.01）の継ぎ目が閉じる境目</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Snap Distance</th><th>残った点</th><th>合わさった点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">242</td><td class="num">0</td></tr>
+              <tr><td class="num">0.001</td><td class="num">242</td><td class="num">0</td></tr>
+              <tr><td class="num">0.005</td><td class="num">242</td><td class="num">0</td></tr>
+              <tr><td class="num">0.009</td><td class="num">242</td><td class="num">0</td></tr>
+              <tr><td class="num">0.0095</td><td class="num">242</td><td class="num">0</td></tr>
+              <tr><td class="num">0.01</td><td class="num">231</td><td class="num">11</td></tr>
+              <tr><td class="num">0.011</td><td class="num">231</td><td class="num">11</td></tr>
+              <tr><td class="num">0.02</td><td class="num">231</td><td class="num">11</td></tr>
+              <tr><td class="num">0.05</td><td class="num">231</td><td class="num">11</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">1辺1.0の板を11×11で2枚、x方向に 0.01 離して並べた。継ぎ目に向き合う点は左右で11個ずつ。</p>
+
+        <p class="label">球にそのままかけたとき</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="095_fuse.png" alt="点は早い段階から減るが、形が動き出すのは 0.04 を超えてから。" loading="lazy" decoding="async"></div>
+            <figcaption>点は早い段階から減るが、形が動き出すのは 0.04 を超えてから。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Snap Distance</th><th>点</th><th>元の%</th><th>面</th><th>ずれ 平均</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">2402</td><td>100.0%</td><td class="num">2450</td><td class="num">0.000000</td></tr>
+              <tr><td class="num">0.005</td><td class="num">2402</td><td>100.0%</td><td class="num">2450</td><td class="num">0.000000</td></tr>
+              <tr><td class="num">0.01</td><td class="num">2352</td><td>97.918%</td><td class="num">2400</td><td class="num">0.000000</td></tr>
+              <tr><td class="num">0.02</td><td class="num">2284</td><td>95.087%</td><td class="num">2348</td><td class="num">0.000000</td></tr>
+              <tr><td class="num">0.04</td><td class="num">2100</td><td>87.427%</td><td class="num">2164</td><td class="num">0.000002</td></tr>
+              <tr><td class="num">0.08</td><td class="num">992</td><td>41.299%</td><td class="num">1942</td><td class="num">0.000028</td></tr>
+              <tr><td class="num">0.16</td><td class="num">367</td><td>15.279%</td><td class="num">657</td><td class="num">0.002116</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">球（50×50）の 2,402点。ずれは各点から元の面までの最短距離の平均。距離 0.01・0.02 では点が減ってもずれが 0 のままで、重なっていた点だけが掃除されたことが分かる。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>境目は隙間と同じ値。</strong>隙間 0.01 の継ぎ目は、Snap Distance 0.0095 では閉じず、0.01 で閉じた。「より近い」は、距離がちょうど同じときも含む。</li>
+          <li><strong>点が減っても形が変わらないことがある。</strong>球では距離 0.01 で 50点、0.02 で 118点が減るが、ずれは 0.0 のまま。同じ位置に重なっていた点が掃除されただけ。</li>
+          <li><strong>形が崩れ始めるのは 0.04 より上。</strong>0.04 でずれ 0.000002、0.08 で 0.000028、0.16 で 0.002116。掃除のつもりで大きな値を入れると、形まで持っていかれる。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 096 ===================== -->
+    <article class="entry entry--current" id="exp096">
+      <div class="badge">096</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Force Total Count はぴったり合う — 10通り試して差は1つも出なかった</h2>
+        <p class="path">examples/096_scatter.py &nbsp;·&nbsp; Force Total Count は10通りすべてでぴったり合った</p>
+
+        <div class="prose">
+          <p><button class="term" data-term="scatter">scatter</button> の「Force Total Count」は、指定した数をそのまま出すという意味のつまみ。面の大きさが場所によって違う形でも、本当にぴったりになるのか。100点から100万点まで、2つの形で測った。</p>
+          <p>結果は、**10通りすべてで差が +0**。平らな板（1面）でも、凹凸のある球（3,540面）でも、指定した数がそのまま出た。種を変えても数は変わらない（1万点で3回、いずれも 10,000点）。</p>
+          <p>時間は点の数にほぼ比例する。板では 1万点で 0.0254秒、100万点で 1.0384秒。100倍の点で 40.9倍。</p>
+          <p>1点あたりで見ると、数が少ないうちは割高になる。板では100点で 10.873マイクロ秒、100万点で 1.038マイクロ秒。準備にかかる固定の分が、点の数で薄まっていく。</p>
+          <p>面の数が多いほうがわずかに遅い。1万点で板が 0.0254秒、球が 0.03秒。ただし差は小さく、点の数のほうがずっと効く。</p>
+        </div>
+
+        <p class="label">指定した数と、実際に出た数・時間</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="096_scatter.png" alt="時間は点の数にほぼ比例する。100万点で約1秒。" loading="lazy" decoding="async"></div>
+            <figcaption>時間は点の数にほぼ比例する。100万点で約1秒。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="096_per.png" alt="1点あたりの時間は、数が増えるほど下がっていく。" loading="lazy" decoding="async"></div>
+            <figcaption>1点あたりの時間は、数が増えるほど下がっていく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形</th><th>指定</th><th>出た数</th><th>差</th><th>秒</th><th>1点あたりμ秒</th></tr></thead>
+            <tbody>
+              <tr><td>平らな板（1面）</td><td class="num">100</td><td class="num">100</td><td class="num">+0</td><td class="num">0.001</td><td class="num">10.873</td></tr>
+              <tr><td>平らな板（1面）</td><td class="num">1,000</td><td class="num">1,000</td><td class="num">+0</td><td class="num">0.008</td><td class="num">8.425</td></tr>
+              <tr><td>平らな板（1面）</td><td class="num">10,000</td><td class="num">10,000</td><td class="num">+0</td><td class="num">0.025</td><td class="num">2.537</td></tr>
+              <tr><td>平らな板（1面）</td><td class="num">100,000</td><td class="num">100,000</td><td class="num">+0</td><td class="num">0.090</td><td class="num">0.898</td></tr>
+              <tr><td>平らな板（1面）</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="num">+0</td><td class="num">1.038</td><td class="num">1.038</td></tr>
+              <tr><td>凹凸のある球（3,540面）</td><td class="num">100</td><td class="num">100</td><td class="num">+0</td><td class="num">0.337</td><td class="num">3371.241</td></tr>
+              <tr><td>凹凸のある球（3,540面）</td><td class="num">1,000</td><td class="num">1,000</td><td class="num">+0</td><td class="num">0.014</td><td class="num">13.664</td></tr>
+              <tr><td>凹凸のある球（3,540面）</td><td class="num">10,000</td><td class="num">10,000</td><td class="num">+0</td><td class="num">0.030</td><td class="num">3.004</td></tr>
+              <tr><td>凹凸のある球（3,540面）</td><td class="num">100,000</td><td class="num">100,000</td><td class="num">+0</td><td class="num">0.111</td><td class="num">1.11</td></tr>
+              <tr><td>凹凸のある球（3,540面）</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="num">+0</td><td class="num">1.166</td><td class="num">1.166</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Force Total Count を入れ、Total Count に左の数を指定した。球の100点だけ 0.3371秒と外れて見えるが、これは上流の <button class="term" data-term="mountain">mountain</button> を初めて計算した分が乗っているため。この行だけは時間の比べ物にならない。</p>
+
+        <p class="label">種を変えても数は変わらない（1万点）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Seed</th><th>出た数</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">10,000</td><td class="num">0.029</td></tr>
+              <tr><td class="num">2</td><td class="num">10,000</td><td class="num">0.029</td></tr>
+              <tr><td class="num">3</td><td class="num">10,000</td><td class="num">0.030</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Seed だけを変えて3回。位置は変わるが数は同じ。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>数はぴったり合う。</strong>10通り試して、差はすべて +0。面の大きさがばらついた形でも、指定した数がそのまま出た。</li>
+          <li><strong>時間は点の数に比例する。</strong>板では1万点 0.0254秒 → 100万点 1.0384秒。100倍の点で 40.9倍。</li>
+          <li><strong>少ない点ほど割高。</strong>1点あたりは板の100点で 10.873マイクロ秒、100万点で 1.038マイクロ秒。準備の固定分が薄まっていく。少しだけ散らすのを何度も繰り返すより、一度にまとめて散らすほうが得。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

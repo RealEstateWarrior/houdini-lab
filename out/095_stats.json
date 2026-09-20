@@ -1,0 +1,119 @@
+{
+  "rows": [
+    {
+      "dist": 0.0,
+      "points": 242,
+      "merged": 0,
+      "seconds": 0.0002
+    },
+    {
+      "dist": 0.001,
+      "points": 242,
+      "merged": 0,
+      "seconds": 0.0001
+    },
+    {
+      "dist": 0.005,
+      "points": 242,
+      "merged": 0,
+      "seconds": 0.0001
+    },
+    {
+      "dist": 0.009,
+      "points": 242,
+      "merged": 0,
+      "seconds": 0.0001
+    },
+    {
+      "dist": 0.0095,
+      "points": 242,
+      "merged": 0,
+      "seconds": 0.0001
+    },
+    {
+      "dist": 0.01,
+      "points": 231,
+      "merged": 11,
+      "seconds": 0.0001
+    },
+    {
+      "dist": 0.011,
+      "points": 231,
+      "merged": 11,
+      "seconds": 0.0002
+    },
+    {
+      "dist": 0.02,
+      "points": 231,
+      "merged": 11,
+      "seconds": 0.0001
+    },
+    {
+      "dist": 0.05,
+      "points": 231,
+      "merged": 11,
+      "seconds": 0.0001
+    }
+  ],
+  "gap": 0.01,
+  "base_points": 242,
+  "mesh_base_points": 2402,
+  "mesh_rows": [
+    {
+      "dist": 0.0,
+      "points": 2402,
+      "kept_pct": 100.0,
+      "prims": 2450,
+      "seconds": 0.0007,
+      "gap_mean": 0.0
+    },
+    {
+      "dist": 0.005,
+      "points": 2402,
+      "kept_pct": 100.0,
+      "prims": 2450,
+      "seconds": 0.0007,
+      "gap_mean": 0.0
+    },
+    {
+      "dist": 0.01,
+      "points": 2352,
+      "kept_pct": 97.918,
+      "prims": 2400,
+      "seconds": 0.0008,
+      "gap_mean": 0.0
+    },
+    {
+      "dist": 0.02,
+      "points": 2284,
+      "kept_pct": 95.087,
+      "prims": 2348,
+      "seconds": 0.0008,
+      "gap_mean": 0.0
+    },
+    {
+      "dist": 0.04,
+      "points": 2100,
+      "kept_pct": 87.427,
+      "prims": 2164,
+      "seconds": 0.0012,
+      "gap_mean": 2e-06
+    },
+    {
+      "dist": 0.08,
+      "points": 992,
+      "kept_pct": 41.299,
+      "prims": 1942,
+      "seconds": 0.0016,
+      "gap_mean": 2.8e-05
+    },
+    {
+      "dist": 0.16,
+      "points": 367,
+      "kept_pct": 15.279,
+      "prims": 657,
+      "seconds": 0.0016,
+      "gap_mean": 0.002116
+    }
+  ]
+}
