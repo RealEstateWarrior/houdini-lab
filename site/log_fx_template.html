@@ -4471,6 +4471,78 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 088 ===================== -->
+    <article class="entry entry--current" id="exp088">
+      <div class="badge">088</div>
+      <div class="body">
+        <span class="chip chip--fx">Karma</span>
+        <h2>文字を光らせる — 明るさは頭打ち、こぼれる光と時間だけが増える</h2>
+        <p class="path">C:/Program Files/Git/obj/glow &nbsp;·&nbsp; 上げ続けても増えないものと、増え続けるものを分けて見る</p>
+
+        <div class="prose">
+          <p>立体文字を床の上に置き、文字の材質に発光（Emission）を入れて <button class="term" data-term="Karma">Karma</button> で撮った。ライトはドーム 0.12・キー 0.05 だけにして、発光の効き方だけを見る。</p>
+          <p>Emission Intensity を 0 / 1 / 4 / 16 / 64 と上げると、文字のあたりの明るさは 43.54 → 72.00 → 85.42 → 98.64 → 100.39。16 から 64 へ4倍にしても 1.75 しか上がらない。画素は 255 で頭打ちになるので、強くするほど「白い面積」が増えるだけになる（白飛びは 0.85% → 4.74%）。</p>
+          <p>増え続けるのは、まわりへこぼれる光と時間だった。床のあたりの明るさは 96.89 → 143.07。撮る時間は 3.79秒 → 12.35秒で、3.3倍になる。</p>
+          <p>Emission Illuminates Objects を切ると、床は光らなくなった。Emission 16 で、床の明るさが 126.95 から 96.89 へ下がる。この 96.89 は、発光を 0 にしたときの床の明るさと6桁まで同じ。&lt;strong&gt;切ると「光って見えるが、まわりは照らさない」状態になる。&lt;/strong&gt;そのぶん速く、10.27秒が 3.40秒（3.0倍）になった。</p>
+        </div>
+
+        <p class="label">発光の強さ</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="088_emit0.png" alt="Emission 0。ドームの弱い光だけで、文字は暗い。" loading="lazy" decoding="async"></div>
+            <figcaption>Emission 0。ドームの弱い光だけで、文字は暗い。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="088_emit4.png" alt="Emission 4。文字が光り、床にも色が乗る。" loading="lazy" decoding="async"></div>
+            <figcaption>Emission 4。文字が光り、床にも色が乗る。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="088_emit64.png" alt="Emission 64。文字は白く飛び、床のこぼれ光が広がる。" loading="lazy" decoding="async"></div>
+            <figcaption>Emission 64。文字は白く飛び、床のこぼれ光が広がる。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">Karma 640 × 400・<button class="term" data-term="サンプル">サンプル</button>24。3枚とも同じカメラ・同じライト。</p>
+
+        <p class="label">A. Emission Intensity</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Emission</th><th>文字の明るさ</th><th>床の明るさ</th><th>白飛び</th><th>撮る時間</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">43.54</td><td class="num">96.89</td><td>0.85%</td><td>3.79秒</td></tr>
+              <tr><td class="num">1</td><td class="num">72.00</td><td class="num">99.44</td><td>0.89%</td><td>5.48秒</td></tr>
+              <tr><td class="num">4</td><td class="num">85.42</td><td class="num">106.27</td><td>0.96%</td><td>9.35秒</td></tr>
+              <tr><td class="num">16</td><td class="num">98.64</td><td class="num">126.95</td><td>4.42%</td><td>11.83秒</td></tr>
+              <tr><td class="num">64</td><td class="num">100.39</td><td class="num">143.07</td><td>4.74%</td><td>12.35秒</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「文字」は画面の真ん中あたり、「床」は下の帯の平均（0〜255）。白飛びは 250 を超えた画素の割合。</p>
+
+        <p class="label">B. Emission Illuminates Objects（Emission 16）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>emitillum</th><th>文字の明るさ</th><th>床の明るさ</th><th>白飛び</th><th>撮る時間</th></tr></thead>
+            <tbody>
+              <tr><td>入り（既定）</td><td class="num">98.64</td><td class="num">126.95</td><td>4.42%</td><td>10.27秒</td></tr>
+              <tr><td>切り</td><td class="num">83.55</td><td class="num">96.89</td><td>4.27%</td><td>3.40秒</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">切ったときの床の明るさ 96.89 は、発光 0 のときと同じ値。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>文字の明るさは頭打ちになる。</strong>Emission 16 → 64 で 98.64 → 100.39（+1.8%）。画素が 255 で止まるので、それ以上は白い面積が増えるだけ（白飛び 4.42% → 4.74%）。</li>
+          <li><strong>増え続けるのは、こぼれる光。</strong>床の明るさは 96.89（0）→ 126.95（16）→ 143.07（64）。<strong>「もっと光らせたい」ときに効くのは、文字ではなく周りの明るさ。</strong></li>
+          <li><strong>発光は重い。</strong>同じ絵で 3.79秒（0）→ 12.35秒（64）と 3.3倍。ライトを足したのと同じように、光源が1つ増えた扱いになる。</li>
+          <li><strong>Emission Illuminates Objects を切ると、まわりを照らさなくなる。</strong>床の明るさは 126.95 → 96.89 で、発光 0 のときと同じ値に戻った。文字自体は光ったまま（83.55）。<strong>時間は 10.27秒 → 3.40秒と3.0倍速い。</strong></li>
+          <li>実用の結論。<strong>看板の文字のように「光って見えればよい」なら、emitillum を切って Emission を 4〜16 に。</strong>まわりを照らしたいときだけ入れる。そのときは時間が3倍になることを見込む。</li>
+          <li>測り方について。文字と床を別々の帯として測った。1枚の平均だけでは、文字が明るいのか床が明るいのか分からない。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

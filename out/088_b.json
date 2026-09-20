@@ -1,0 +1,22 @@
+[
+  {
+    "letters_mean": 98.63709309895833,
+    "letters_max": 255.0,
+    "floor_mean": 126.95450032552084,
+    "clipped_pct": 4.425,
+    "image_mean": 75.00718880208333,
+    "emitillum": 1,
+    "seconds": 10.26863470000535,
+    "file": "088_illum1.png"
+  },
+  {
+    "letters_mean": 83.54762369791666,
+    "letters_max": 255.0,
+    "floor_mean": 96.8890380859375,
+    "clipped_pct": 4.274609375,
+    "image_mean": 55.42798697916667,
+    "emitillum": 0,
+    "seconds": 3.40159849999327,
+    "file": "088_illum0.png"
+  }
+]
