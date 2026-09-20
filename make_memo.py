@@ -195,6 +195,16 @@ code{
 }
 .row a:hover{border-color:var(--accent);color:var(--accent)}
 .row a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.probe{border-top:1px solid var(--rule);padding-top:16px}
+.probe-box{
+  border:1px dashed var(--rule);
+  border-radius:3px;
+  padding:10px;
+  min-height:120px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--rule-soft);
+}
+.probe-box img{max-width:100%;max-height:220px;display:block}
 .log{border-top:1px solid var(--rule);padding-top:16px}
 .log h2{font-size:15px}
 .log ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -278,6 +288,19 @@ def build(data):
     for entry in data.get("recent", []):
         rows.append('<li><time>%s</time><p>%s</p></li>\n' % (esc(entry["when"]), esc(entry["what"])))
     rows.append('</ol>\n</section>\n')
+
+    # 外部の画像が映るかの試験。確かめたら memo.json の probe を消す
+    probe = data.get("probe")
+    if probe:
+        rows.append('<section class="probe">\n')
+        rows.append('  <div class="head"><h2>%s</h2>'
+                    '<span class="tag">確かめ中</span></div>\n'
+                    % esc(probe["title"]))
+        rows.append('  <p class="d">%s</p>\n' % esc(probe["body"]))
+        rows.append('  <div class="probe-box"><img src="%s"'
+                    ' alt="外部から読んだ図"></div>\n'
+                    % html.escape(probe["url"], quote=True))
+        rows.append("</section>\n")
 
     rows.append('<footer>%s</footer>\n' % esc(data.get("note", "")))
     rows.append(FOOT)

@@ -176,6 +176,16 @@ code{
 }
 .row a:hover{border-color:var(--accent);color:var(--accent)}
 .row a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.probe{border-top:1px solid var(--rule);padding-top:16px}
+.probe-box{
+  border:1px dashed var(--rule);
+  border-radius:3px;
+  padding:10px;
+  min-height:120px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--rule-soft);
+}
+.probe-box img{max-width:100%;max-height:220px;display:block}
 .log{border-top:1px solid var(--rule);padding-top:16px}
 .log h2{font-size:15px}
 .log ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -268,6 +278,10 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <div class="head"><h2>気になっていること（未解決）</h2><span class="tag">未解決</span></div>
 <ul>
 <li>
+<div class="t"><strong>Claude 版はもう上限を超えている（529 / 512）</strong></div>
+<p class="d">概要ページが必要とするファイルは529、置けるのは512。内訳は 実践のパラメータ画面163・実験の図145・サムネイル104・実践の図82・ネットワーク33。外部の画像を読む案は使えないと分かった（Artifact の方針が自分のファイル・Google Fonts・一部のCDNしか許さない）。残るのは アセット置き場／画像を減らす／ページを分ける の3つ。</p>
+</li>
+<li>
 <div class="t"><strong>液体は、なぜ摩擦 1.5 以上だと暴れないのか</strong></div>
 <p class="d">実験073。摩擦 0〜1.5 の間だけ数粒が飛ぶ。止まるまでの時間と関係がありそうだが、確かめていない。</p>
 </li>
@@ -278,10 +292,6 @@ footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);pa
 <li>
 <div class="t"><strong>旗の「抵抗 × 風速²」が1組だけ合わない</strong></div>
 <p class="d">実験081。(風速8・抵抗2.5) だけ 9度ずれた。抵抗が小さいときに外れるのかは未確認。</p>
-</li>
-<li>
-<div class="t"><strong>Claude 版のファイル数が上限に近い</strong></div>
-<p class="d">1つの版に置けるのは 512 まで。いまは 501。手順が増えたら、画像の置き方（アセット置き場など）を見直す。</p>
 </li>
 <li>
 <div class="t"><strong>Catmull-Clark の極限体積は計算で出せるか</strong></div>
