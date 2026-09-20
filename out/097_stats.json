@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "count": 100,
+      "packed": false,
+      "points": 36200,
+      "prims": 38000,
+      "seconds": 0.0018,
+      "write_seconds": 0.0073,
+      "bytes": 237295,
+      "mb": 0.226
+    },
+    {
+      "count": 100,
+      "packed": true,
+      "points": 100,
+      "prims": 100,
+      "seconds": 0.0001,
+      "write_seconds": 0.0009,
+      "bytes": 8095,
+      "mb": 0.008
+    },
+    {
+      "count": 1000,
+      "packed": false,
+      "points": 362000,
+      "prims": 380000,
+      "seconds": 0.0123,
+      "write_seconds": 0.0553,
+      "bytes": 2362852,
+      "mb": 2.253
+    },
+    {
+      "count": 1000,
+      "packed": true,
+      "points": 1000,
+      "prims": 1000,
+      "seconds": 0.0002,
+      "write_seconds": 0.0023,
+      "bytes": 19691,
+      "mb": 0.019
+    },
+    {
+      "count": 10000,
+      "packed": false,
+      "points": 3620000,
+      "prims": 3800000,
+      "seconds": 0.1289,
+      "write_seconds": 0.5272,
+      "bytes": 23631562,
+      "mb": 22.537
+    },
+    {
+      "count": 10000,
+      "packed": true,
+      "points": 10000,
+      "prims": 10000,
+      "seconds": 0.0017,
+      "write_seconds": 0.0156,
+      "bytes": 119599,
+      "mb": 0.114
+    }
+  ],
+  "unit_points": 362,
+  "unit_prims": 380
+}

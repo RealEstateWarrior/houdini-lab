@@ -667,6 +667,18 @@ DONE = [
      "shots": ["096_scatter.png", "096_per.png"],
      "title": "Force Total Count はぴったり合う — 10通り試して差は1つも出なかった",
      "note": "100万点で約1秒。1点あたりは100点で10.873μ秒、100万点で1.038μ秒"},
+    {"no": "097", "anchor": "exp097",
+     "tags": ["モデリング", "pack", "軽くする", "効率化"],
+     "log": "log_pm", "thumb": "097_pack.png",
+     "shots": ["097_pack.png", "097_time.png"],
+     "title": "pack を入れると、点は362分の1・ファイルは198分の1になる — 1万個で 22.5MB が 0.114MB",
+     "note": "計算は0.129秒→0.002秒。代わりに中身を触るには unpack が必要になる"},
+    {"no": "098", "anchor": "exp098",
+     "tags": ["モデリング", "boolean", "VDB", "落とし穴"],
+     "log": "log_pm", "thumb": "098_ngon.png",
+     "shots": ["098_ngon.png", "098_hole.png"],
+     "title": "boolean は答えと6桁まで一致する — 差の正体は円ではなく多角形だった",
+     "note": "Primitive Type が poly でないと boolean も cookie も黙って何もしない"},
 ]
 
 PLANNED = []
