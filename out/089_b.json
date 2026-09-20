@@ -1,0 +1,44 @@
+[
+  {
+    "response": "none",
+    "friction": 0.0,
+    "count": 402,
+    "near_ground": 130,
+    "still": 0,
+    "settled": 0,
+    "y_mean": 1.0271402597427368,
+    "y_min": 1.4516132978315e-05,
+    "spread_x": 1.9471397399902344,
+    "spread_z": 1.659293532371521,
+    "speed_mean": 1.6353306770324707,
+    "seconds": 0.6337635000018054
+  },
+  {
+    "response": "none",
+    "friction": 0.5,
+    "count": 402,
+    "near_ground": 133,
+    "still": 4,
+    "settled": 4,
+    "y_mean": 1.0344548225402832,
+    "y_min": 2.119848613801878e-05,
+    "spread_x": 1.9041316509246826,
+    "spread_z": 1.6158872842788696,
+    "speed_mean": 1.5288550853729248,
+    "seconds": 0.5129402000020491
+  },
+  {
+    "response": "none",
+    "friction": 1.0,
+    "count": 402,
+    "near_ground": 146,
+    "still": 20,
+    "settled": 20,
+    "y_mean": 1.0122833251953125,
+    "y_min": 2.0220473743393086e-05,
+    "spread_x": 1.9400066137313843,
+    "spread_z": 1.5787532329559326,
+    "speed_mean": 1.4122743606567383,
+    "seconds": 0.515645699997549
+  }
+]

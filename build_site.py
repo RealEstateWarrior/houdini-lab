@@ -556,6 +556,12 @@ DONE = [
      "shots": ["088_emit0.png", "088_emit4.png", "088_emit64.png"],
      "title": "文字を光らせる — 明るさは頭打ち、こぼれる光と時間だけが増える",
      "note": "Emission16→64で明るさ+1.8%、床は127→143、時間は3.8→12.4秒。emitillum切りで3倍速い"},
+    {"no": "089", "anchor": "exp089",
+     "tags": ["POP", "パーティクル", "衝突", "手順"],
+     "log": "log_fx", "hip": "089_leaves.hipnc", "thumb": "089_fallen_stuck.png",
+     "shots": ["089_fallen_stuck.png", "089_fallen_none.png"],
+     "title": "落ち葉を積もらせる — 積もるかどうかは Response で決まる。摩擦では止まらない",
+     "note": "Stickで400枚中180枚が停止、既定は20枚、Slideは0枚。摩擦1でも20枚どまり"},
 ]
 
 PLANNED = []

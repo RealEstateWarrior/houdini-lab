@@ -3321,6 +3321,97 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "fallen",
+      "title": "落ち葉を地面に積もらせる",
+      "lede": "舞わせた葉を地面に当てて、その場で止める。止まるかどうかは摩擦ではなく、当たったあとの振る舞い（Response）で決まる。",
+      "hero": "089_fallen_stuck.png",
+      "hero_cap": "400枚・6秒後。Stick にすると 180枚がその場で止まり、寝たまま広がる。",
+      "facts": [
+        [
+          "ノードの数",
+          "13個（うち DOP の中に6個）"
+        ],
+        [
+          "計算の時間",
+          "400枚・144フレームで 0.7秒"
+        ],
+        [
+          "元になった実験",
+          "実験080・086・089"
+        ]
+      ],
+      "exp": "089",
+      "hip": "089_leaves.hipnc",
+      "tags": [
+        "エフェクト",
+        "パーティクル",
+        "衝突",
+        "風"
+      ],
+      "steps": [
+        {
+          "title": "舞う葉を作る",
+          "node": "popwind",
+          "ui_node": "popnet/wind",
+          "body": "手順「葉を風で舞わせる」と同じ組み方（弱い重力・風・乱れ）。ここでは風 (1, 0, 0)、Amplitude 2。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "降らせるのを途中で止める",
+          "node": "popsource",
+          "ui_node": "popnet/source",
+          "body": "Const. Activation に <code>$FF &lt;= 48</code> と書いて、最初の2秒だけ降らせる。<strong>降らせ続けると、いつまでも積もらない</strong>（4秒間降らせ続けたときは、801枚中 69枚しか地面に来なかった）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "地面を足す",
+          "node": "groundplane",
+          "ui_node": "popnet/ground",
+          "body": "<code>groundplane</code> を置き、<code>merge</code> の1番目につないで<strong>merge に表示フラグ</strong>を立てる（手順「雨を降らせて地面で跳ねさせる」と同じ）。Bounce は 0.1 くらい。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "当たったら止める",
+          "node": "popsolver",
+          "ui_node": "popnet/solver",
+          "body": "popsolver の Response を <strong>Stick</strong> にする。400枚のうち 180枚が地面で止まった。既定（Unchanged）では 20枚、Slide では 0枚（実験089）。",
+          "img": "089_fallen_none.png",
+          "cap": "既定のまま。当たっても跳ねて動き続ける。"
+        },
+        {
+          "title": "葉を配って見せる",
+          "node": "copytopoints",
+          "ui_node": "leaf_copies",
+          "body": "取り出した粒に 0.16 × 0.10 の板を配る（向きは v から）。<strong>風下まで床を広げておく</strong>。風で流された葉が、床の外に出てしまう。",
+          "img": "089_fallen_stuck.png",
+          "cap": "Stick。寝たまま積もる。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "摩擦を上げても止まらない",
+          "body": "地面の Friction を 0 / 0.5 / 1 と上げても、止まった葉は 0 / 4 / 20枚。摩擦は横滑りを遅くするだけで、跳ねと風で動き続ける。止めたいなら Response を Stick にする（実験089）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Slide は止まらないうえに重い",
+          "body": "Slide では止まった葉が 0枚。計算も 1.63秒で、Unchanged（0.63秒）の 2.6倍かかった。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "降らせ続けると積もらない",
+          "body": "ずっと降らせていると、地面にあるぶんより空中のぶんが多くなる。積もった絵が欲しいなら、降らせる時間を区切って、そのあとも数秒回す。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

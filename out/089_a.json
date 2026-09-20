@@ -1,0 +1,44 @@
+[
+  {
+    "response": "none",
+    "friction": 1.0,
+    "count": 402,
+    "near_ground": 146,
+    "still": 20,
+    "settled": 20,
+    "y_mean": 1.0122833251953125,
+    "y_min": 2.0220473743393086e-05,
+    "spread_x": 1.9400066137313843,
+    "spread_z": 1.5787532329559326,
+    "speed_mean": 1.4122743606567383,
+    "seconds": 0.6322264000045834
+  },
+  {
+    "response": "stuck",
+    "friction": 1.0,
+    "count": 402,
+    "near_ground": 185,
+    "still": 180,
+    "settled": 180,
+    "y_mean": 0.95408695936203,
+    "y_min": 0.0,
+    "spread_x": 2.106138229370117,
+    "spread_z": 1.526273488998413,
+    "speed_mean": 0.968859076499939,
+    "seconds": 0.7210344999984954
+  },
+  {
+    "response": "slide",
+    "friction": 1.0,
+    "count": 402,
+    "near_ground": 130,
+    "still": 0,
+    "settled": 0,
+    "y_mean": 1.0263583660125732,
+    "y_min": 0.0,
+    "spread_x": 1.9661802053451538,
+    "spread_z": 1.6650840044021606,
+    "speed_mean": 1.6477402448654175,
+    "seconds": 1.6327104000010877
+  }
+]

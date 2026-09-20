@@ -4543,6 +4543,74 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 089 ===================== -->
+    <article class="entry entry--current" id="exp089">
+      <div class="badge">089</div>
+      <div class="body">
+        <span class="chip chip--fx">POP</span>
+        <h2>落ち葉を積もらせる — 積もるかどうかは Response で決まる。摩擦では止まらない</h2>
+        <p class="path">C:/Program Files/Git/obj/fallen &nbsp;·&nbsp; 積もる様子を見たいなら、降らせるのを止める</p>
+
+        <div class="prose">
+          <p><a href="#exp086">実験086</a>の舞う葉に地面（groundplane）を足し、当たったあとの振る舞い（popsolver の Response）を変えて比べた。2秒だけ 400枚を降らせ、6秒まで回す。「積もった」は、地面から 0.12 より低いところに居て、速さが 0.05 より遅い葉の数とした。</p>
+          <p>差ははっきり出た。既定（Unchanged）では、地面の近くに 146枚いるのに、止まっているのは 20枚だけ。Stick にすると、地面の近く 185枚のうち 180枚が止まる。Slide は 130枚が地面の近くにいて、止まっているのは 0枚だった。</p>
+          <p>地面の摩擦では、ほとんど止まらない。Response を既定にしたまま Friction を 0 / 0.5 / 1 と上げても、積もったのは 0 / 4 / 20枚。&lt;strong&gt;摩擦は滑りを遅くするだけで、跳ねと風で動き続ける。&lt;/strong&gt;</p>
+          <p>時間は Slide だけ重い。Unchanged 0.63秒、Stick 0.72秒に対して、Slide は 1.63秒（2.6倍）。</p>
+          <p>最初は4秒で止めていたが、そのときは 801枚中 69枚しか地面の近くに来ていなかった（高さの平均 1.73）。降らせる時間を2秒に区切り、6秒まで回して、ようやく積もり方を比べられるようになった。</p>
+        </div>
+
+        <p class="label">6秒後の地面（400枚）</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="089_fallen_stuck.png" alt="Stick。当たった葉がその場で止まり、寝たまま広がる（180枚が停止）。" loading="lazy" decoding="async"></div>
+            <figcaption>Stick。当たった葉がその場で止まり、寝たまま広がる（180枚が停止）。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="089_fallen_none.png" alt="既定（Unchanged）。当たっても跳ねて動き続ける（停止は20枚）。" loading="lazy" decoding="async"></div>
+            <figcaption>既定（Unchanged）。当たっても跳ねて動き続ける（停止は20枚）。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">2枚とも同じカメラ。風は +x 向きなので、床は風下に広げてある。</p>
+
+        <p class="label">A. 当たったあとの振る舞い（摩擦 1・跳ね 0.1）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Response</th><th>地面の近く</th><th>止まっている</th><th>積もった</th><th>高さの平均</th><th>速さの平均</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td>Unchanged（既定）</td><td class="num">146</td><td class="num">20</td><td class="num">20</td><td class="num">1.0123</td><td class="num">1.4123</td><td class="num">0.63</td></tr>
+              <tr><td>Stick</td><td class="num">185</td><td class="num">180</td><td class="num">180</td><td class="num">0.9541</td><td class="num">0.9689</td><td class="num">0.72</td></tr>
+              <tr><td>Slide</td><td class="num">130</td><td class="num">0</td><td class="num">0</td><td class="num">1.0264</td><td class="num">1.6477</td><td class="num">1.63</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「地面の近く」は高さ 0.12 未満、「止まっている」は速さ 0.05 未満。</p>
+
+        <p class="label">B. 地面の摩擦（Response は Unchanged）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Friction</th><th>地面の近く</th><th>止まっている</th><th>積もった</th><th>速さの平均</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">130</td><td class="num">0</td><td class="num">0</td><td class="num">1.6353</td></tr>
+              <tr><td class="num">0.5</td><td class="num">133</td><td class="num">4</td><td class="num">4</td><td class="num">1.5289</td></tr>
+              <tr><td class="num">1</td><td class="num">146</td><td class="num">20</td><td class="num">20</td><td class="num">1.4123</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">摩擦を上げても、止まる葉はほとんど増えない。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>積もらせたいなら Response を Stick にする。</strong>400枚のうち 180枚がその場で止まった。既定では 20枚しか止まらない。</li>
+          <li><strong>摩擦では止まらない。</strong>Friction 0 / 0.5 / 1 で、止まった葉は 0 / 4 / 20枚。摩擦は横滑りを遅くするだけで、跳ねと風で動き続ける。</li>
+          <li><strong>Slide は止まらないうえに重い。</strong>止まった葉は 0枚で、計算は 1.63秒（Unchanged の 2.6倍）。地面に沿って滑り続ける。</li>
+          <li><strong>降らせ続けると、いつまでも積もらない。</strong>4秒まで降らせ続けたときは、801枚中 69枚しか地面の近くに来ていなかった（高さの平均 1.73）。<strong>積もる様子を見たいなら、降らせるのを途中で止める。</strong>ここでは最初の2秒だけ降らせた。</li>
+          <li><strong>風が強いと、床の外へ出ていく。</strong>風は +x 向きなので、床を風下に広げないと、落ちた葉が枠の外に出てしまう。図では床を 14 × 8 にして、中心を x = 4 に寄せた。</li>
+          <li>計算の時間は、400枚・144フレームで 0.5〜0.7秒（Slide だけ 1.6秒）。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
