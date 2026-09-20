@@ -4228,6 +4228,85 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 084 ===================== -->
+    <article class="entry entry--current" id="exp084">
+      <div class="badge">084</div>
+      <div class="body">
+        <span class="chip chip--fx">RBD</span>
+        <h2>ドミノを倒す — 間隔は高さの 0.25〜1.03倍。初速は点に付けないと効かない</h2>
+        <p class="path">C:/Program Files/Git/obj/dominoes &nbsp;·&nbsp; 効かないときは、付ける場所を疑う</p>
+
+        <div class="prose">
+          <p>高さ 0.6・厚み 0.08・幅 0.3 の板を等間隔に並べ、最初の1枚に横向きの初速 1.6 を与えて倒した。板は copytopoints で配って Pack and Instance にし、rbdbulletsolver で解く。</p>
+          <p>最初はまったく動かなかった。初速 v を<button class="term" data-term="プリミティブ">プリミティブ</button>（1枚＝1つの塊）に付けていたのが原因で、点に付け直すと動いた。名前（name）の有無は関係なく、name を付けても付けなくても 40フレーム目の位置は3桁まで同じだった。</p>
+          <p>間隔には上下の境目があった。狭すぎても倒れない。間隔 0.15（高さの 0.25倍）では 12枚中3枚で止まる。挟み撃ちで詰めると、境目は 0.15〜0.1531（高さの 0.25〜0.26倍）。広いほうは、0.62（高さの 1.03倍）までは最後まで倒れ、0.66（1.10倍）で 2枚で止まった。</p>
+          <p>倒れていく速さは、間隔が広いほど遅い。12枚が倒れきるまでの時間は、間隔 0.25 で 1.042秒（1秒に 10.56枚）、0.35 で 1.875秒（5.87枚）、0.45 で 2.833秒（3.88枚）、0.55 で 3.875秒（2.84枚）、0.62 で 5.375秒（2.05枚）。</p>
+          <p>枚数を変えても、1秒あたりの枚数はだいたい同じだった。間隔 0.3 で 6枚 10.00枚/秒、12枚 7.33枚/秒、24枚 6.57枚/秒。枚数が多いほど少し遅くなる。</p>
+          <p>最初は96フレームで打ち切っていたので、24枚と広い間隔が「途中で止まった」ように見えた。160フレームまで伸ばすと最後まで倒れた。</p>
+        </div>
+
+        <p class="label">倒れていくところ（12枚・間隔 0.3）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="084_dominoes_30.png" alt="30フレーム目。倒れた列と立っている列の境目が進んでいく。" loading="lazy" decoding="async"></div>
+            <figcaption>30フレーム目。倒れた列と立っている列の境目が進んでいく。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="084_dominoes_60.png" alt="60フレーム目。12枚すべてが倒れている（最後の1枚は53フレーム目）。" loading="lazy" decoding="async"></div>
+            <figcaption>60フレーム目。12枚すべてが倒れている（最後の1枚は53フレーム目）。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">2枚とも同じカメラ。左端の1枚に初速 1.6 を与えただけで、あとは当たって倒れていく。</p>
+
+        <p class="label">A. 間隔を変える（12枚・160フレームまで）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔</th><th>高さとの比</th><th>倒れた枚数</th><th>かかった時間</th><th>1秒あたり</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.15</td><td>0.25倍</td><td>3 / 12</td><td>0.125秒</td><td class="num muted">—</td><td class="num">0.81</td></tr>
+              <tr><td class="num">0.25</td><td>0.42倍</td><td>12 / 12</td><td>1.042秒</td><td>10.56枚</td><td class="num">0.53</td></tr>
+              <tr><td class="num">0.35</td><td>0.58倍</td><td>12 / 12</td><td>1.875秒</td><td>5.87枚</td><td class="num">0.53</td></tr>
+              <tr><td class="num">0.45</td><td>0.75倍</td><td>12 / 12</td><td>2.833秒</td><td>3.88枚</td><td class="num">0.55</td></tr>
+              <tr><td class="num">0.55</td><td>0.92倍</td><td>12 / 12</td><td>3.875秒</td><td>2.84枚</td><td class="num">0.55</td></tr>
+              <tr><td class="num">0.58</td><td>0.97倍</td><td>12 / 12</td><td>4.333秒</td><td>2.54枚</td><td class="num">0.78</td></tr>
+              <tr><td class="num">0.62</td><td>1.03倍</td><td>12 / 12</td><td>5.375秒</td><td>2.05枚</td><td class="num">0.50</td></tr>
+              <tr><td class="num">0.66</td><td>1.10倍</td><td>2 / 12</td><td>0.458秒</td><td class="num muted">—</td><td class="num">0.47</td></tr>
+              <tr><td class="num">0.70</td><td>1.17倍</td><td>2 / 12</td><td>0.750秒</td><td class="num muted">—</td><td class="num">0.47</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「倒れた」は、板の上向きがまっすぐ上から60度以上傾いたとき。時間は最初の1枚が倒れてから最後の1枚が倒れるまで。</p>
+
+        <p class="label">B・C. 境目と枚数</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>狭いほうの境目</td><td>間隔 0.15〜0.1531（高さの 0.25〜0.26倍）</td></tr>
+              <tr><td>広いほうの境目</td><td>間隔 0.62〜0.66（高さの 1.03〜1.10倍）</td></tr>
+              <tr><td>6枚</td><td>0.500秒で全部・1秒に 10.00枚</td></tr>
+              <tr><td>12枚</td><td>1.500秒で全部・1秒に 7.33枚</td></tr>
+              <tr><td>24枚</td><td>3.500秒で全部・1秒に 6.57枚</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">境目は挟み撃ちで5回詰めた。枚数を変えた行は間隔 0.3。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>初速は点に付ける。プリミティブに付けても効かない。</strong>packed の塊に <code>v@v</code> を書いても、rbdbulletsolver は動かさなかった。<code>setpointattrib(0, "v", pts[0], ...)</code> と点に書くと動く。<strong>エラーも警告も出ない。</strong>「黙って無視される<button class="term" data-term="パラメータ">パラメータ</button>」の仲間。</li>
+          <li><strong>name の有無は関係なかった。</strong>name を付けた場合と付けない場合で、40フレーム目の位置が 0.372 / 0.628 / 0.927 / 1.237 …と3桁まで同じ。</li>
+          <li><strong>間隔には狭いほうにも境目がある。</strong>高さの 0.25倍（0.15）では 12枚中3枚で止まった。詰めすぎると、倒れた板が次の板を押し切る前に寝てしまう。</li>
+          <li><strong>広いほうの境目は、高さの 1.03〜1.10倍。</strong>板は根元を軸に倒れるので、高さぴったりより少し遠くまで届く（厚み 0.08 のぶん）。</li>
+          <li><strong>間隔が広いほど、倒れる列が進む速さは遅い。</strong>1秒あたり 10.56枚（間隔 0.25）→ 2.05枚（0.62）。倒れるまでの回転に時間がかかるため。</li>
+          <li><strong>枚数を増やしても、速さはほぼ同じ。</strong>6枚 10.00枚/秒、12枚 7.33枚/秒、24枚 6.57枚/秒。並べる長さを倍にすれば、かかる時間もほぼ倍になる。</li>
+          <li><strong>フレーム数が足りないと「途中で止まった」に見える。</strong>96フレームで打ち切ったときは、24枚と間隔 0.55 が途中で止まったと出た。160フレームまで伸ばすと最後まで倒れた。<strong>止まったのか、まだ続いているのかは、最後のフレームの傾きで見分ける</strong>（止まったものは 0〜12度、倒れたものは 74度以上）。</li>
+          <li>計算は軽い。12枚・160フレームで 0.5〜0.8秒。24枚でも 0.63秒。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

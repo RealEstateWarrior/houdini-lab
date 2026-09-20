@@ -1,0 +1,41 @@
+[
+  {
+    "gap": 0.3,
+    "count": 6,
+    "fell": 6,
+    "all": true,
+    "first_frame": 17,
+    "last_frame": 29,
+    "span_sec": 0.5,
+    "per_sec": 10.0,
+    "tilt_min": 74.87672186468343,
+    "tilt_mean": 77.59360647280582,
+    "seconds": 0.7683802999963518
+  },
+  {
+    "gap": 0.3,
+    "count": 12,
+    "fell": 12,
+    "all": true,
+    "first_frame": 17,
+    "last_frame": 53,
+    "span_sec": 1.5,
+    "per_sec": 7.333333333333333,
+    "tilt_min": 74.41492118024358,
+    "tilt_mean": 75.94856123937457,
+    "seconds": 0.5286285000038333
+  },
+  {
+    "gap": 0.3,
+    "count": 24,
+    "fell": 24,
+    "all": true,
+    "first_frame": 17,
+    "last_frame": 101,
+    "span_sec": 3.5,
+    "per_sec": 6.571428571428571,
+    "tilt_min": 74.44607202813927,
+    "tilt_mean": 75.26226821093537,
+    "seconds": 0.6293737000014517
+  }
+]

@@ -2884,6 +2884,96 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "domino",
+      "title": "ドミノを倒す",
+      "lede": "板を等間隔に並べ、最初の1枚だけを押す。あとは当たって倒れていく。間隔は板の高さの 0.25〜1.03倍に収める。",
+      "hero": "084_dominoes_30.png",
+      "hero_cap": "12枚・間隔 0.3（高さの半分）。倒れた列と立っている列の境目が進んでいく。",
+      "facts": [
+        [
+          "ノードの数",
+          "5個"
+        ],
+        [
+          "計算の時間",
+          "12枚・160フレームで 0.5秒"
+        ],
+        [
+          "元になった実験",
+          "実験014・084"
+        ]
+      ],
+      "exp": "084",
+      "hip": "084_dominoes.hipnc",
+      "tags": [
+        "エフェクト",
+        "剛体",
+        "RBD"
+      ],
+      "steps": [
+        {
+          "title": "並べる場所を作る",
+          "node": "line",
+          "ui_node": "spots",
+          "body": "<code>line</code> で、並べたい間隔 × (枚数 − 1) の長さの線を作り、点を枚数ぶん置く。高さの半分（ここでは y = 0.3）に上げておくと、板の中心がそろう。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "板を1枚作る",
+          "node": "box",
+          "ui_node": "tile",
+          "body": "<code>box</code> を 厚み 0.08 × 高さ 0.6 × 幅 0.3 にする。<strong>間隔は、この高さを基準に決める</strong>（下の「つまずくところ」）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "点に配る",
+          "node": "copytopoints",
+          "ui_node": "tiles",
+          "body": "<code>copytopoints</code> で板を点に配り、<strong>Pack and Instance をオンにする。</strong>1枚が1つの塊になり、剛体として扱える。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "最初の1枚を押す",
+          "node": "attribwrangle",
+          "ui_node": "push_first",
+          "body": "Run Over を Primitives にして、最初の塊の<strong>点</strong>に初速を書く。<code>int pts[] = primpoints(0, @primnum); setpointattrib(0, \"v\", pts[0], (@primnum == 0) ? set(1.6, 0, 0) : set(0, 0, 0));</code> <strong>プリミティブに <code>v@v</code> と書いても効かない。</strong>",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "解く",
+          "node": "rbdbulletsolver",
+          "ui_node": "solve",
+          "body": "<code>rbdbulletsolver</code> につなぎ、Ground Plane を有効にする。12枚なら 160フレームで 0.5秒ほど。<strong>フレーム数は多めに取る。</strong>間隔が広いと倒れきるまでに5秒以上かかる。",
+          "img": "084_dominoes_60.png",
+          "cap": "60フレーム目。12枚すべてが倒れた。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "初速をプリミティブに付けても倒れない",
+          "body": "packed の塊に <code>v@v</code> を書いても、rbdbulletsolver は動かさなかった。エラーも警告も出ない。点に <code>setpointattrib</code> で書くと動く（実験084）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "間隔は、板の高さの 0.25〜1.03倍",
+          "body": "高さ 0.6 の板で、間隔 0.15（0.25倍）だと12枚中3枚で止まり、0.66（1.10倍）だと2枚で止まった。<strong>詰めすぎても、空けすぎても倒れない。</strong>倒れる列の進む速さも変わり、間隔 0.25 で1秒に 10.56枚、0.62 で 2.05枚（実験084）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "フレームが足りないと「止まった」に見える",
+          "body": "96フレームで打ち切ると、24枚や広い間隔が途中で止まったように見えた。160フレームまで伸ばすと最後まで倒れた。止まったのか続いているのかは、最後のフレームの傾きで分かる（止まったものは 0〜12度、倒れたものは 74度以上）。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

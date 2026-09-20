@@ -526,6 +526,12 @@ DONE = [
      "shots": ["083_flat.png", "083_thick.png", "083_round.png"],
      "title": "看板の文字を立体にする — Distance はそのまま奥行き。角の丸めは 0.08 で止まる",
      "note": "LODは点の数に比例（大きさは不変）。Output Backを切ると面が2枚減る。丸めは面積でしか追えない"},
+    {"no": "084", "anchor": "exp084",
+     "tags": ["RBD", "剛体", "落とし穴", "手順"],
+     "log": "log_fx", "hip": "084_dominoes.hipnc", "thumb": "084_dominoes_30.png",
+     "shots": ["084_dominoes_30.png", "084_dominoes_60.png"],
+     "title": "ドミノを倒す — 間隔は高さの 0.25〜1.03倍。初速は点に付けないと効かない",
+     "note": "初速はプリミティブでは効かず点に付ける。間隔は高さの0.25〜1.03倍。速さは1秒に2〜10枚"},
 ]
 
 PLANNED = []

@@ -1,0 +1,144 @@
+{
+  "narrow": {
+    "lo": 0.15,
+    "hi": 0.1531,
+    "tried": [
+      {
+        "gap": 0.2,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 30,
+        "last_frame": 42,
+        "span_sec": 0.5,
+        "per_sec": 22.0,
+        "tilt_min": 66.92009352214829,
+        "tilt_mean": 69.11699777600298,
+        "seconds": 0.8099545000004582
+      },
+      {
+        "gap": 0.175,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 37,
+        "last_frame": 40,
+        "span_sec": 0.125,
+        "per_sec": 88.0,
+        "tilt_min": 63.66296645360107,
+        "tilt_mean": 66.40815521091677,
+        "seconds": 0.5318444000004092
+      },
+      {
+        "gap": 0.1625,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 38,
+        "last_frame": 38,
+        "span_sec": 0.0,
+        "per_sec": null,
+        "tilt_min": 61.74854024427897,
+        "tilt_mean": 64.74531900595713,
+        "seconds": 0.5269317999991472
+      },
+      {
+        "gap": 0.1562,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 38,
+        "last_frame": 51,
+        "span_sec": 0.5416666666666666,
+        "per_sec": 20.30769230769231,
+        "tilt_min": 60.65457745373226,
+        "tilt_mean": 63.65411996960791,
+        "seconds": 0.5346650999999838
+      },
+      {
+        "gap": 0.1531,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 40,
+        "last_frame": 81,
+        "span_sec": 1.7083333333333333,
+        "per_sec": 6.439024390243903,
+        "tilt_min": 60.174825321657046,
+        "tilt_mean": 63.43568550066564,
+        "seconds": 0.5396919999984675
+      }
+    ]
+  },
+  "wide": {
+    "lo": 0.5469,
+    "hi": 0.55,
+    "tried": [
+      {
+        "gap": 0.5,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 11,
+        "last_frame": 90,
+        "span_sec": 3.2916666666666665,
+        "per_sec": 3.3417721518987342,
+        "tilt_min": 80.10829643339919,
+        "tilt_mean": 81.51794937221237,
+        "seconds": 0.5318158000009134
+      },
+      {
+        "gap": 0.525,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 11,
+        "last_frame": 99,
+        "span_sec": 3.6666666666666665,
+        "per_sec": 3.0,
+        "tilt_min": 80.74408209084113,
+        "tilt_mean": 81.92807171716852,
+        "seconds": 0.5227499000029638
+      },
+      {
+        "gap": 0.5375,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 10,
+        "last_frame": 100,
+        "span_sec": 3.75,
+        "per_sec": 2.933333333333333,
+        "tilt_min": 80.87331267605124,
+        "tilt_mean": 82.09858698892464,
+        "seconds": 0.5330218000017339
+      },
+      {
+        "gap": 0.5437,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 10,
+        "last_frame": 102,
+        "span_sec": 3.8333333333333335,
+        "per_sec": 2.869565217391304,
+        "tilt_min": 81.00200580567525,
+        "tilt_mean": 82.20240490704727,
+        "seconds": 0.5449826999974903
+      },
+      {
+        "gap": 0.5469,
+        "count": 12,
+        "fell": 12,
+        "all": true,
+        "first_frame": 10,
+        "last_frame": 104,
+        "span_sec": 3.9166666666666665,
+        "per_sec": 2.8085106382978724,
+        "tilt_min": 81.15070252546971,
+        "tilt_mean": 82.25838727591959,
+        "seconds": 0.5663188999969861
+      }
+    ]
+  }
+}
