@@ -1315,6 +1315,152 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .usedby a:hover { background: var(--ink); color: #ffffff; }
 .usedby + .path { margin-top: 4px; }
 
+/* ---------- 横へ流れる帯（ホーム） ----------
+
+   小さな札が途切れずに流れる。乗せると止まるので、そのまま押せる。
+   動きを減らす設定の人には流さず、指でなぞる帯にする。 */
+
+.strip {
+  margin: 40px 0 0;
+  position: relative;
+  overflow: hidden;
+  /* 端を薄くして、画面の外へ続いているように見せる */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+.strip-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  animation: strip-flow 78s linear infinite;
+}
+.strip:hover .strip-track,
+.strip:focus-within .strip-track { animation-play-state: paused; }
+@keyframes strip-flow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.chip-card {
+  flex: none;
+  width: 184px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ink);
+}
+.chip-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--ground-2);
+}
+.chip-card span {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink-mid);
+  padding: 0 2px;
+}
+.chip-card:hover span { color: var(--ink); }
+.chip-card:hover img { outline: 2px solid var(--ink); outline-offset: 2px; }
+.chip-card:focus-visible img { outline: 2px solid var(--flag); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .strip { overflow-x: auto; scrollbar-width: none; }
+  .strip::-webkit-scrollbar { display: none; }
+  .strip-track { animation: none; }
+}
+
+/* ---------- 降りてくるパネル（上のバー） ----------
+
+   見出しは4つだけ。乗せると、バーの下いっぱいに1枚降りてきて、
+   その中に行き先が並ぶ。押したときは先頭の行き先へ飛ぶ。 */
+
+.sidenav .nav-menu { overflow: visible; gap: 4px; }
+.nav-drop { position: static; }
+
+.mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--ground);
+  border-bottom: 1px solid var(--wire-dim);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+.nav-drop:hover .mega,
+.nav-drop:focus-within .mega {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s;
+}
+.mega-inner { max-width: 980px; margin: 0 auto; padding: 26px 22px 32px; }
+.mega-head {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+}
+.mega ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px 34px;
+  overflow: visible;
+  flex: none;
+}
+.mega li { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+
+/* パネルの中だけは、バーの小さな丸ボタンではなく大きな見出しとして出す */
+.sidenav .mega a,
+.sidenav .mega button.nav-tab {
+  font-family: var(--font-display);
+  font-size: 1.16rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.35;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  white-space: normal;
+  text-align: left;
+}
+.sidenav .mega a:hover,
+.sidenav .mega button.nav-tab:hover { background: none; color: var(--flag); }
+.sidenav .mega button.nav-tab[aria-selected="true"] { background: none; color: var(--ink); }
+.mega-note { font-size: 0.78rem; line-height: 1.6; color: var(--ink-dim); }
+
+/* 見出しに乗っているあいだは、見出し自身も押せる状態だと分かるようにする */
+.nav-drop > button.nav-tab,
+.nav-drop > a { position: relative; }
+.nav-drop:hover > button.nav-tab,
+.nav-drop:hover > a { background: var(--ground-2); color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mega { transition: none; }
+  .nav-drop:hover .mega, .nav-drop:focus-within .mega { transition: none; }
+}
+
 /* ---------- 制作だけの2枠 ---------- */
 
 /* どう頼まれたか。言葉をそのまま置くので、引用の形にする */
@@ -1397,6 +1543,16 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
      検索から先を右へ寄せて、ハンバーガーと並べる */
   .nav-inner > #search-open { margin-left: auto; }
   .nav-inner > #search-open + .nav-burger { margin-left: -6px; }
+}
+
+/* スマホのメニューで、4つの束の見出しになる行 */
+.sheet-group {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  padding: 14px 0 2px;
 }
 
 /* ---------- 全画面メニュー（スマホ） ---------- */

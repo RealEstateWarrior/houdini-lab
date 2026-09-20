@@ -165,24 +165,39 @@
 
     /* ---- メニュー ---- */
 
+    function menuItem(control) {
+      var item = document.createElement("li");
+      var clone = control.cloneNode(true);
+      clone.classList.remove("nav-tab");
+      clone.removeAttribute("id");
+      if (clone.classList.contains("nav-ext")) { clone.classList.add("sheet-ext"); }
+      clone.addEventListener("click", function () {
+        if (control.tagName === "BUTTON") { control.click(); }
+        hide();
+      });
+      if (control.tagName === "BUTTON") { clone.setAttribute("type", "button"); }
+      item.appendChild(clone);
+      return item;
+    }
+
+    /* 上のバーは4つに畳んであるが、スマホでは畳まずに全部並べる。
+       束の見出しを挟んでから、その中の行き先を並べる */
     function buildMenu() {
       menuList.textContent = "";
-      var source = document.querySelector(".sidenav .nav-inner > ul");
+      var source = document.querySelector(".sidenav .nav-menu");
       if (!source) { return; }
       Array.prototype.forEach.call(source.children, function (li) {
         var control = li.firstElementChild;
         if (!control) { return; }
-        var item = document.createElement("li");
-        var clone = control.cloneNode(true);
-        clone.classList.remove("nav-tab");
-        if (clone.classList.contains("nav-ext")) { clone.classList.add("sheet-ext"); }
-        clone.addEventListener("click", function () {
-          if (control.tagName === "BUTTON") { control.click(); }
-          hide();
+        var kids = li.querySelectorAll(".mega li > :first-child");
+        if (!kids.length) { menuList.appendChild(menuItem(control)); return; }
+        var head = document.createElement("li");
+        head.className = "sheet-group";
+        head.textContent = control.textContent.trim();
+        menuList.appendChild(head);
+        Array.prototype.forEach.call(kids, function (kid) {
+          menuList.appendChild(menuItem(kid));
         });
-        if (control.tagName === "BUTTON") { clone.setAttribute("type", "button"); }
-        item.appendChild(clone);
-        menuList.appendChild(item);
       });
     }
 

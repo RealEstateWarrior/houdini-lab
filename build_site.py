@@ -118,7 +118,7 @@ BURGER_SVG = (
 
 # ハブ内のタブ。読み込みなしで切り替わる。子ページでは同じ並びがリンクになる。
 TABS = [
-    ("overview", "概要"),
+    ("overview", "ホーム"),
     ("guides", "実践"),
     ("works", "制作"),
     ("experiments", "実験"),
@@ -127,6 +127,32 @@ TABS = [
     ("glossary", "用語集"),
     ("links", "参考リンク"),
 ]
+
+# 上のバーは4つに畳む。乗せると下に大きなパネルが降りて、その中の行き先が並ぶ。
+# 押したときは先頭の行き先へ飛ぶ。ページ自体はどれも今のまま。
+#   (見出し, 押したときの行き先, [(行き先, 名前, 一言), ...])
+# 行き先が "@" で始まるものは別ページ（urls の鍵）、それ以外はハブのタブ。
+MENU = [
+    ("ホーム", "overview", []),
+    ("実践", "guides", [
+        ("guides", "実践", "作り方を順に並べたもの"),
+        ("works", "制作", "頼まれて作った一点物の記録"),
+    ]),
+    ("実験", "experiments", [
+        ("experiments", "実験集", "測った回の一覧。押すと中身が開く"),
+        ("@log", "実験ログ モデリング編", "形を作る側の全文"),
+        ("@log_fx", "実験ログ エフェクト編", "動かす側の全文"),
+        ("speed", "効率化", "速さについて分かったこと"),
+        ("links", "参考リンク", "外の資料"),
+    ]),
+    ("解説", "nodes", [
+        ("nodes", "ノード解説", "箱ひとつずつの説明"),
+        ("glossary", "用語集", "言葉の意味"),
+    ]),
+]
+
+# その行き先にいるときに印を付けるための対応表
+ACTIVE_OF = {"glossary": "解説", "links": "実験", "log": "実験"}
 
 DONE = [
     {"no": "001", "anchor": "exp001", "tags": ["モデリング", "ノイズ", "基礎"], "log": "log_pm", "hip": "box_mountain.hipnc", "thumb": "box_mountain.png",
@@ -608,9 +634,8 @@ def render_nav(active, tabs, urls):
     """上部のバー。どのページでも同じ並びにする。
 
     左端は SP のロゴだけ。押すと親の Saito Production へ戻る。
-    部の切り替えは親ページでやるので、ここには置かない。
-    続くのはその部の中身で、ハブではタブ（読み込みなしで切り替わる）、
-    子ページではハブの該当タブへのリンクになる。
+    続くのは4つの見出しで、乗せると下にパネルが降りて中の行き先が並ぶ。
+    ハブでは読み込みなしでタブが切り替わり、子ページではハブへのリンクになる。
     """
     parent = urls.get("parent") or PARENT_URLS["pages"]
     out = [
@@ -620,25 +645,42 @@ def render_nav(active, tabs, urls):
         f' aria-label="{BRAND}（親のページへ）">',
         f"        {LOGO_SVG}",
         "      </a>",
-        '      <ul role="tablist">' if tabs else "      <ul>",
+        '      <ul class="nav-menu">',
     ]
 
-    for panel, label in TABS:
+    def control(target, label, extra=""):
+        """行き先ひとつ。ハブではタブの切り替え、それ以外はリンクになる。"""
+        if target.startswith("@"):
+            href = urls[target[1:]]
+            return f'<a href="{href}"{extra}>{html.escape(label)}</a>'
         if tabs:
-            out.append(f'        <li><button type="button" class="nav-tab" role="tab"'
-                       f' id="tab-{panel}" data-panel="{panel}"'
-                       f' aria-controls="panel-{panel}" aria-selected="false">'
-                       f"{html.escape(label)}</button></li>")
-        else:
-            current = ""
-            if (active == "glossary" and panel == "glossary") or \
-               (active == "links" and panel == "links"):
-                current = ' aria-current="page"'
-            out.append(f'        <li><a href="{urls["home"]}#{panel}"{current}>'
-                       f"{html.escape(label)}</a></li>")
+            return (f'<button type="button" class="nav-tab" role="tab"'
+                    f' id="tab-{target}" data-panel="{target}"'
+                    f' aria-controls="panel-{target}"'
+                    f' aria-selected="false"{extra}>{html.escape(label)}</button>')
+        return (f'<a href="{urls["home"]}#{target}"{extra}>'
+                f"{html.escape(label)}</a>")
 
-    log_current = ' aria-current="page"' if active == "log" else ""
-    out.append(f'        <li><a href="{urls["log"]}"{log_current}>実験ログ</a></li>')
+    for index, (head, target, children) in enumerate(MENU):
+        current = ' aria-current="page"' if ACTIVE_OF.get(active) == head else ""
+        out.append('        <li class="nav-drop">' if children
+                   else "        <li>")
+        out.append("          " + control(target, head, current))
+        if children:
+            out.append(f'          <div class="mega" id="mega-{index}">')
+            out.append('            <div class="mega-inner">')
+            out.append(f'              <p class="mega-head">{html.escape(head)}</p>')
+            out.append('              <ul>')
+            for child_target, child_label, note in children:
+                out.append("                <li>"
+                           + control(child_target, child_label)
+                           + f'<span class="mega-note">{html.escape(note)}</span>'
+                           + "</li>")
+            out.append("              </ul>")
+            out.append("            </div>")
+            out.append("          </div>")
+        out.append("        </li>")
+
     out.append(f'        <li><a href="{NOTEBOOK_URL}" class="nav-ext"'
                ' target="_blank" rel="noopener noreferrer">Notebook</a></li>')
     out.append("      </ul>")
@@ -1021,6 +1063,32 @@ def same_image(name):
     with open(os.path.join(OUT, name), "rb") as fp:
         digest = hashlib.sha1(fp.read()).hexdigest()
     return _FIRST_BY_CONTENT.setdefault(digest, name)
+
+
+def render_strip(guides):
+    """ホームの帯。小さな札が横へ流れる。
+
+    乗せると止まり、押すとその実践がそのまま開く。
+    継ぎ目なく回すために、同じ並びを2回置いて半分ぶん動かす。
+    2周目は読み上げに要らないので隠す。
+    """
+    items = guides["guides"][-14:]
+    if not items:
+        return ""
+    out = ['      <div class="strip" aria-label="最近の実践">',
+           '        <div class="strip-track">']
+    for pass_no in (1, 2):
+        hidden = ' aria-hidden="true" tabindex="-1"' if pass_no == 2 else ""
+        for guide in items:
+            out.append('          <button type="button" class="chip-card"'
+                       f' data-guide="{guide["id"]}"{hidden}>')
+            out.append(f'            <img src="{guide["hero"]}" alt=""'
+                       ' loading="lazy" decoding="async">')
+            out.append(f'            <span>{html.escape(guide["title"])}</span>')
+            out.append("          </button>")
+    out.append("        </div>")
+    out.append("      </div>")
+    return "\n".join(out)
 
 
 def render_work_cards(works):
@@ -1522,6 +1590,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GUIDES-->", render_guides(guides, works, urls)),
         ("<!--GUIDE_CARDS-->", render_guide_cards(guides)),
         ("<!--WORK_CARDS-->", render_work_cards(works)),
+        ("<!--STRIP-->", render_strip(guides)),
         ("<!--WORK_COUNT-->", str(len(works["works"]))),
         ("<!--NODE_NAV-->", render_node_nav(nodes)),
         ("<!--LINKS_BODY-->", links_body),
