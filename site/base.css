@@ -1315,6 +1315,57 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .usedby a:hover { background: var(--ink); color: #ffffff; }
 .usedby + .path { margin-top: 4px; }
 
+/* ---------- 制作だけの2枠 ---------- */
+
+/* どう頼まれたか。言葉をそのまま置くので、引用の形にする */
+.work-order {
+  margin: 14px 0 0;
+  padding: 12px 0 12px 16px;
+  border-left: 2px solid var(--fx);
+}
+.work-order p { margin: 0; font-size: 1.0rem; line-height: 1.7; color: var(--ink); }
+.work-order cite {
+  display: block;
+  margin-top: 6px;
+  font-style: normal;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+}
+
+/* 作っている間に何が起きたか。時系列なので番号は振らず、印だけを並べる */
+.work-log { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; }
+.work-log li {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--wire-dim);
+}
+.work-log li:last-child { border-bottom: none; }
+.work-when {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+}
+.work-log p { margin: 0; font-size: 0.9rem; line-height: 1.75; color: var(--ink-mid); }
+@media (max-width: 660px) {
+  .work-log li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+
+/* まだ中身が無い欄 */
+.empty {
+  margin: 0;
+  padding: 28px 22px;
+  border: 1px dashed var(--wire);
+  border-radius: var(--radius);
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 /* ---------- ナビのアイコンボタン ---------- */
 
 .nav-icon {

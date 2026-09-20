@@ -36,6 +36,7 @@ OUT = os.path.join(HERE, "out")
 GLOSSARY = os.path.join(HERE, "glossary.json")
 NODES = os.path.join(HERE, "nodes.json")
 GUIDES = os.path.join(HERE, "guides.json")
+WORKS = os.path.join(HERE, "works.json")
 SYNONYMS = os.path.join(HERE, "search_synonyms.json")
 SPEED = os.path.join(HERE, "speed_tips.json")
 
@@ -118,7 +119,8 @@ BURGER_SVG = (
 # ハブ内のタブ。読み込みなしで切り替わる。子ページでは同じ並びがリンクになる。
 TABS = [
     ("overview", "概要"),
-    ("guides", "手順"),
+    ("guides", "実践"),
+    ("works", "制作"),
     ("experiments", "実験"),
     ("speed", "効率化"),
     ("nodes", "ノード解説"),
@@ -513,67 +515,67 @@ DONE = [
      "title": "液体の暴れは、粒を細かくしても消えない — 飛ぶ高さは下がるが、始まる時刻は変わらない",
      "note": "間隔0.16〜0.06の全部で暴れる（F22〜40）。飛ぶ高さは46→4.4に下がる。止めるのはsubstep"},
     {"no": "079", "anchor": "exp079",
-     "tags": ["POP", "パーティクル", "火花", "手順"],
+     "tags": ["POP", "パーティクル", "火花", "実践"],
      "log": "log_fx", "hip": "079_sparks.hipnc", "thumb": "079_sparks_18.png",
      "shots": ["079_sparks_6.png", "079_sparks_18.png", "079_alive.png"],
      "title": "火花を散らす — Life Variance は幅、Variance は球の半径。空気抵抗は速さの2乗で効く",
      "note": "寿命は±幅に一様、初速は半径の球に一様、popdragは速さの2乗（ずれ0.0000）"},
     {"no": "080", "anchor": "exp080",
-     "tags": ["POP", "パーティクル", "雨", "衝突", "手順"],
+     "tags": ["POP", "パーティクル", "雨", "衝突", "実践"],
      "log": "log_fx", "hip": "080_rain.hipnc", "thumb": "080_rain.png",
      "shots": ["080_rain.png"],
      "title": "雨を地面で跳ねさせる — Bounce は速さの比で、地面と粒の値は掛け算になる",
      "note": "跳ね上がる高さはBounce²に近い。地面0.5×粒0.5＝地面0.25×粒1（4桁一致）。DieでResponse"},
     {"no": "081", "anchor": "exp081",
-     "tags": ["Vellum", "布", "風", "手順"],
+     "tags": ["Vellum", "布", "風", "実践"],
      "log": "log_fx", "hip": "081_flag.hipnc", "thumb": "081_flag_16.png",
      "shots": ["081_flag_4.png", "081_flag_16.png", "081_angle.png"],
      "title": "旗を風になびかせる — 風速 2 まではほぼ垂れたまま。持ち上がり方は「抵抗 × 風速²」でそろう",
      "note": "風速0〜2で85〜78度、4で41度、16で9度。抵抗×風速²が同じ組は0.6度差でそろう"},
     {"no": "082", "anchor": "exp082",
-     "tags": ["モデリング", "曲線", "複製", "効率化", "手順"],
+     "tags": ["モデリング", "曲線", "複製", "効率化", "実践"],
      "log": "log_pm", "hip": "082_path.hipnc", "thumb": "082_posts.png",
      "shots": ["082_posts.png", "082_roll_n.png", "082_roll_n_up.png"],
      "title": "道に沿って物を並べる — N だけでは坂で杭が倒れる。up を足せば 0度。Pack で 250倍速い",
      "note": "坂でNだけだと横に最大49度倒れ、upを足すと0度。Packで1万個714ms→2.9ms・1878MB→4MB"},
     {"no": "083", "anchor": "exp083",
-     "tags": ["モデリング", "文字", "厚み", "手順"],
+     "tags": ["モデリング", "文字", "厚み", "実践"],
      "log": "log_pm", "hip": "083_sign.hipnc", "thumb": "083_round.png",
      "shots": ["083_flat.png", "083_thick.png", "083_round.png"],
      "title": "看板の文字を立体にする — Distance はそのまま奥行き。角の丸めは 0.08 で止まる",
      "note": "LODは点の数に比例（大きさは不変）。Output Backを切ると面が2枚減る。丸めは面積でしか追えない"},
     {"no": "084", "anchor": "exp084",
-     "tags": ["RBD", "剛体", "落とし穴", "手順"],
+     "tags": ["RBD", "剛体", "落とし穴", "実践"],
      "log": "log_fx", "hip": "084_dominoes.hipnc", "thumb": "084_dominoes_30.png",
      "shots": ["084_dominoes_30.png", "084_dominoes_60.png"],
      "title": "ドミノを倒す — 間隔は高さの 0.25〜1.03倍。初速は点に付けないと効かない",
      "note": "初速はプリミティブでは効かず点に付ける。間隔は高さの0.25〜1.03倍。速さは1秒に2〜10枚"},
     {"no": "085", "anchor": "exp085",
-     "tags": ["RBD", "破壊", "落とし穴", "効率化", "手順"],
+     "tags": ["RBD", "破壊", "落とし穴", "効率化", "実践"],
      "log": "log_fx", "hip": "085_wall.hipnc", "thumb": "085_wall_500_58.png",
      "shots": ["085_wall_700_58.png", "085_wall_500_58.png", "085_wall_100_58.png"],
      "title": "壁を崩す — 拘束の強さの窓は狭い。弱いと自重で崩れ、強いとぶつけても壊れない",
      "note": "既定1000では無傷、100では自重で崩れる。窓は500前後。破片20倍でも解く時間は4.4倍"},
     {"no": "086", "anchor": "exp086",
-     "tags": ["POP", "パーティクル", "風", "手順"],
+     "tags": ["POP", "パーティクル", "風", "実践"],
      "log": "log_fx", "hip": "086_leaves.hipnc", "thumb": "086_leaves_2.png",
      "shots": ["086_leaves_0.png", "086_leaves_2.png"],
      "title": "葉を風で舞わせる — 乱れは Amplitude で広がり、Swirl Size で渦の大きさが変わる",
      "note": "Amplitude 0→4で散らばり0.76→1.47・速さ1.88→3.59。小さい乱れ（0.5〜1）は差が出ない"},
     {"no": "087", "anchor": "exp087",
-     "tags": ["レンダリング", "カメラ", "ツール", "手順"],
+     "tags": ["レンダリング", "カメラ", "ツール", "実践"],
      "log": "log_pm", "hip": "", "thumb": "087_sheet.png",
      "shots": ["087_sheet.png"],
      "title": "ターンテーブルで見せる — 形は物を回してもカメラを回しても同じ。変わるのは光だけ",
      "note": "シルエットは0.01ポイントまで一致。明るさは物を回すと一定、カメラを回すと186→51"},
     {"no": "088", "anchor": "exp088",
-     "tags": ["レンダリング", "Karma", "材質", "効率化", "手順"],
+     "tags": ["レンダリング", "Karma", "材質", "効率化", "実践"],
      "log": "log_fx", "hip": "", "thumb": "088_emit4.png",
      "shots": ["088_emit0.png", "088_emit4.png", "088_emit64.png"],
      "title": "文字を光らせる — 明るさは頭打ち、こぼれる光と時間だけが増える",
      "note": "Emission16→64で明るさ+1.8%、床は127→143、時間は3.8→12.4秒。emitillum切りで3倍速い"},
     {"no": "089", "anchor": "exp089",
-     "tags": ["POP", "パーティクル", "衝突", "手順"],
+     "tags": ["POP", "パーティクル", "衝突", "実践"],
      "log": "log_fx", "hip": "089_leaves.hipnc", "thumb": "089_fallen_stuck.png",
      "shots": ["089_fallen_stuck.png", "089_fallen_none.png"],
      "title": "落ち葉を積もらせる — 積もるかどうかは Response で決まる。摩擦では止まらない",
@@ -685,7 +687,7 @@ def render_sp_depts(urls, guides, data):
                        "推測は書かない。数字が合わなかった回も、そのまま残す。</p>")
             out.append('          <dl class="dept-facts">')
             for term, value in (("実験", f"{len(DONE)} 件"),
-                                ("手順", f"{len(guides['guides'])} 本"),
+                                ("実践", f"{len(guides['guides'])} 本"),
                                 ("用語", f"{count_terms(data)} 語")):
                 out.append(f"            <div><dt>{term}</dt>"
                            f"<dd>{value}</dd></div>")
@@ -996,7 +998,7 @@ def render_guide_cards(guides):
         out.append('          <span class="thumb-img">'
                    f'<img src="{guide["hero"]}" alt="" loading="lazy"></span>')
         out.append('          <span class="thumb-body">')
-        out.append(f'            <span class="thumb-no">手順 {index:02d}'
+        out.append(f'            <span class="thumb-no">実践 {index:02d}'
                    f'{" · 実験" + guide["exp"] if guide.get("exp") else ""}'
                    '</span>')
         out.append(f'            <h4>{html.escape(guide["title"])}</h4>')
@@ -1021,8 +1023,34 @@ def same_image(name):
     return _FIRST_BY_CONTENT.setdefault(digest, name)
 
 
-def render_guides(guides, urls):
-    """手順の中身。ふだんは隠しておき、カードを押したらポップアップへ移す。
+def render_work_cards(works):
+    """制作の一覧。まだ1本も無いときは、そう書いておく。"""
+    if not works["works"]:
+        return ('      <p class="empty">まだ1本もありません。'
+                "作ってほしいものを言ってもらえれば、ここに記録が並びます。</p>")
+    out = ['      <div class="thumbs" id="work-cards">']
+    for index, work in enumerate(works["works"], start=1):
+        out.append('        <button type="button" class="thumb"'
+                   f' data-guide="{work["id"]}">')
+        out.append('          <span class="thumb-img">'
+                   f'<img src="{work["hero"]}" alt="" loading="lazy"></span>')
+        out.append('          <span class="thumb-body">')
+        out.append(f'            <span class="thumb-no">制作 {index:02d}</span>')
+        out.append(f'            <h4>{html.escape(work["title"])}</h4>')
+        out.append(f'            <p>{html.escape(work["lede"])}</p>')
+        if work.get("facts"):
+            out.append('            <span class="thumb-tags">'
+                       + "".join(f"<span>{html.escape(v)}</span>"
+                                 for _, v in work["facts"])
+                       + "</span>")
+        out.append("          </span>")
+        out.append("        </button>")
+    out.append("      </div>")
+    return "\n".join(out)
+
+
+def render_guides(guides, works, urls):
+    """実践と制作の中身。ふだんは隠しておき、カードを押したらポップアップへ移す。
 
     1段ごとに図を置く。最後に完成図と、組み上がったノードグラフを出して、
     詳しく知りたい人だけが実験ログへ行けるようにする。
@@ -1030,7 +1058,11 @@ def render_guides(guides, urls):
     anchors = {item["no"]: (item["anchor"], item.get("log", "log_pm"))
                for item in DONE}
     out = ['      <div id="guide-store" hidden>']
-    for guide in guides["guides"]:
+    # 実践（guides.json）と制作（works.json）は同じ形で出す。
+    # 画像の名前だけが guide_… / work_… で分かれるので、頭を付け替えて回す。
+    items = ([(item, "guide") for item in guides["guides"]]
+             + [(item, "work") for item in works["works"]])
+    for guide, prefix in items:
         section_start = len(out)
         out.append(f'      <section class="guide" id="guide-{guide["id"]}">')
         out.append('        <div class="guide-hero">')
@@ -1047,10 +1079,16 @@ def render_guides(guides, urls):
                 out.append(f"            <div><dt>{html.escape(label)}</dt>"
                            f"<dd>{html.escape(value)}</dd></div>")
             out.append("          </dl>")
+        # 制作だけ。どう頼まれたかを、言葉そのままで残す
+        if guide.get("order"):
+            out.append('          <blockquote class="work-order">')
+            out.append(f'            <p>{html.escape(guide["order"])}</p>')
+            out.append("            <cite>依頼</cite>")
+            out.append("          </blockquote>")
         out.append("        </div>")
 
         # 本物の Houdini で撮ったネットワーク全体（guide_ui_capture.py）
-        net = f'guide_{guide["id"]}_net.png'
+        net = f'{prefix}_{guide["id"]}_net.png'
         if os.path.exists(os.path.join(OUT, net)):
             out.append('        <figure class="guide-net">')
             out.append('          <img src="' + net + '" loading="lazy" decoding="async"'
@@ -1069,7 +1107,7 @@ def render_guides(guides, urls):
             out.append(f'              <p>{step["body"]}</p>')
             # その段のノードを選んだときのパラメータ欄（guide_parm_capture.py）。
             # 開いたときだけ読み込むよう details に入れる。ポップアップが重くならない
-            parm = f'guide_{guide["id"]}_p{index}_parm.png'
+            parm = f'{prefix}_{guide["id"]}_p{index}_parm.png'
             if os.path.exists(os.path.join(OUT, parm)):
                 # 同じノードを別の段でも撮ると、中身がまったく同じ画像になる。
                 # 最初の1枚だけを使えば、ページに載せるファイルが減る
@@ -1095,6 +1133,16 @@ def render_guides(guides, urls):
             out.append("          </li>")
         out.append("        </ol>")
 
+        # 制作だけ。作っている間に何が起きたかを、順に残す
+        if guide.get("process"):
+            out.append('        <p class="label">過程</p>')
+            out.append('        <ol class="work-log">')
+            for entry in guide["process"]:
+                out.append('          <li><span class="work-when">'
+                           f'{html.escape(entry["when"])}</span>'
+                           f'<p>{entry["what"]}</p></li>')
+            out.append("        </ol>")
+
         if guide.get("traps"):
             out.append('        <p class="label">つまずくところ</p>')
             for trap in guide["traps"]:
@@ -1114,8 +1162,8 @@ def render_guides(guides, urls):
                 out.append("        </div>")
 
         # 本物の画面（_net.png）があるときは、自動で描いた図は重複なので出さない
-        graph = f'guide_{guide["id"]}_graph.png'
-        if os.path.exists(os.path.join(OUT, graph)) and                 not os.path.exists(os.path.join(OUT, f'guide_{guide["id"]}_net.png')):
+        graph = f'{prefix}_{guide["id"]}_graph.png'
+        if os.path.exists(os.path.join(OUT, graph)) and                 not os.path.exists(os.path.join(OUT, f'{prefix}_{guide["id"]}_net.png')):
             out.append('        <p class="label">組み上がったノードグラフ</p>')
             out.append('        <div class="figs figs--wide">')
             out.append("          <figure>")
@@ -1322,7 +1370,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
         steps = " ".join(s["title"] for s in guide.get("steps", []))
         traps = " ".join(t["title"] for t in guide.get("traps", []))
         items.append({
-            "kind": "手順",
+            "kind": "実践",
             "label": guide["title"],
             "note": guide["lede"][:70],
             "href": f'{urls["home"]}#guide-{guide["id"]}',
@@ -1461,7 +1509,7 @@ def count_nodes(nodes):
 
 
 def render(template_name, out_dir, out_name, active, tabs, urls,
-           data, nodes, guides, css, links_body, popover, chrome):
+           data, nodes, guides, works, css, links_body, popover, chrome):
     with open(os.path.join(SITE, template_name), encoding="utf-8") as fp:
         page = fp.read()
 
@@ -1471,8 +1519,10 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--THUMBS-->", render_thumbs(urls)),
         ("<!--EXP_DATA-->", render_exp_data(urls)),
         ("<!--NODES-->", render_nodes(nodes, urls)),
-        ("<!--GUIDES-->", render_guides(guides, urls)),
+        ("<!--GUIDES-->", render_guides(guides, works, urls)),
         ("<!--GUIDE_CARDS-->", render_guide_cards(guides)),
+        ("<!--WORK_CARDS-->", render_work_cards(works)),
+        ("<!--WORK_COUNT-->", str(len(works["works"]))),
         ("<!--NODE_NAV-->", render_node_nav(nodes)),
         ("<!--LINKS_BODY-->", links_body),
         ("<!--GLOSSARY_SECTION-->", render_section(data)),
@@ -1589,6 +1639,8 @@ def main():
         nodes = json.load(fp)
     with open(GUIDES, encoding="utf-8") as fp:
         guides = json.load(fp)
+    with open(WORKS, encoding="utf-8") as fp:
+        works = json.load(fp)
     with open(os.path.join(SITE, "base.css"), encoding="utf-8") as fp:
         css = fp.read()
     with open(os.path.join(SITE, "partial_links.html"), encoding="utf-8") as fp:
@@ -1600,18 +1652,18 @@ def main():
 
     for template_name, site_out, docs_out, active, tabs in PAGES:
         render(template_name, SITE, site_out, active, tabs,
-               ARTIFACT_URLS, data, nodes, guides, css, links_body,
+               ARTIFACT_URLS, data, nodes, guides, works, css, links_body,
                popover, chrome)
         if docs_out:
             render(template_name, DOCS, docs_out, active, tabs,
-                   PAGES_URLS, data, nodes, guides, css, links_body,
+                   PAGES_URLS, data, nodes, guides, works, css, links_body,
                    popover, chrome)
 
     # 親ページ。クローンが置いてあるときだけ書き出す。
     root_note = "置き場が無いので飛ばした"
     if os.path.isdir(ROOT):
         render("sp_template.html", ROOT, "index.html", "sp", False,
-               ROOT_URLS, data, nodes, guides, css, links_body,
+               ROOT_URLS, data, nodes, guides, works, css, links_body,
                popover, chrome)
         root_note = os.path.join(ROOT, "index.html")
 
