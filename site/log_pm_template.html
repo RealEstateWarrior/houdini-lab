@@ -4112,6 +4112,88 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 087 ===================== -->
+    <article class="entry entry--current" id="exp087">
+      <div class="badge">087</div>
+      <div class="body">
+        <span class="chip chip--pm">ツール</span>
+        <h2>ターンテーブルで見せる — 形は物を回してもカメラを回しても同じ。変わるのは光だけ</h2>
+        <p class="path">C:/Program Files/Git/obj/turntable &nbsp;·&nbsp; 形と明るさを分けて測ると、食い違いの理由が分かる</p>
+
+        <div class="prose">
+          <p>作ったものを1周見せるターンテーブルには、物を回すやり方と、カメラを回すやり方がある。同じ絵になるのか、どちらが速いのかを測った。見せる物は、<a href="#exp083">実験083</a>で作った立体文字「SP」。</p>
+          <p>まず条件をそろえるのに2回つまずいた。1回目は、カメラの高さの比を物を回すときと変えてしまい、比べられなかった。2回目は、文字を原点のまわりに置くずらし量を当て推量で入れていて、回すと画の中で位置がずれた。外接箱の真ん中を測ってずらし直すと、ようやく比べられる形になった。</p>
+          <p>そろえて撮ると、形はぴったり同じだった。シルエット（画面に占める割合）は、4コマとも 7.61% / 7.61%、9.28% / 9.29%、9.83% / 9.83%、9.04% / 9.05%。</p>
+          <p>違うのは明るさだった。物を回すと、写っている部分の明るさの平均は 182.6 / 176.2 / 186.4 / 178.2 とほぼ一定。カメラを回すと 186.5 / 132.8 / 51.1 / 60.2 と、裏へ回り込むほど暗くなる。ライトは世界に固定されているので、物を回せば当たり方は変わらず、カメラを回せば影の側へ入っていく。</p>
+          <p>時間は軽い。320 × 320 で1コマ 13ms、480 で 18ms、720 で 29〜30ms。24コマの1周でも 0.3〜0.7秒。GIF にすると、320 × 320・24コマで 128,996バイト（元の PNG 合計 272,287バイトの半分弱）。</p>
+        </div>
+
+        <p class="label">1周を12コマで（物を回した場合）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="087_sheet.png" alt="12コマ。1周のどこで何が見えるかが、これで分かる。" loading="lazy" decoding="async"></div>
+            <figcaption>12コマ。1周のどこで何が見えるかが、これで分かる。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">320 × 320。0コマ目から30度ずつ回している。3コマ目と9コマ目が真横で、文字が線になる。</p>
+
+        <p class="label">A. 物を回す / カメラを回す</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>コマ</th><th>画素の平均の差</th><th>シルエット（物を回す）</th><th>シルエット（カメラを回す）</th><th>明るさ（物を回す）</th><th>明るさ（カメラを回す）</th></tr></thead>
+            <tbody>
+              <tr><td>1（0度）</td><td class="num">0.296</td><td>7.61%</td><td>7.61%</td><td class="num">182.6</td><td class="num">186.5</td></tr>
+              <tr><td>7（90度）</td><td class="num">8.290</td><td>9.28%</td><td>9.29%</td><td class="num">176.2</td><td class="num">132.8</td></tr>
+              <tr><td>13（180度）</td><td class="num">13.495</td><td>9.83%</td><td>9.83%</td><td class="num">186.4</td><td class="num">51.1</td></tr>
+              <tr><td>19（270度）</td><td class="num">12.109</td><td>9.04%</td><td>9.05%</td><td class="num">178.2</td><td class="num">60.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">同じ角度になるよう、カメラは物と逆向きに同じ角度だけ回した。高さの比もそろえてある。「明るさ」は、写っている画素（明るさ5より上）の平均。</p>
+
+        <p class="label">B. 1コマあたりの時間（OpenGL）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>解像度</th><th>コマ数</th><th>合計</th><th>1コマ</th><th>PNG 1枚</th></tr></thead>
+            <tbody>
+              <tr><td>320 × 320</td><td class="num">12</td><td>0.90秒</td><td>75 ms</td><td>12,605 バイト</td></tr>
+              <tr><td>320 × 320</td><td class="num">24</td><td>0.31秒</td><td>13 ms</td><td>11,726 バイト</td></tr>
+              <tr><td>480 × 480</td><td class="num">12</td><td>0.22秒</td><td>18 ms</td><td>23,451 バイト</td></tr>
+              <tr><td>480 × 480</td><td class="num">24</td><td>0.43秒</td><td>18 ms</td><td>21,270 バイト</td></tr>
+              <tr><td>720 × 720</td><td class="num">12</td><td>0.36秒</td><td>30 ms</td><td>39,476 バイト</td></tr>
+              <tr><td>720 × 720</td><td class="num">24</td><td>0.70秒</td><td>29 ms</td><td>34,822 バイト</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">320 × 320 の12コマだけ 75ms と大きいのは、1回目に下ごしらえの時間が乗るため（<a href="#exp034">実験034</a>・061と同じ）。</p>
+
+        <p class="label">C. GIF にしたときの大きさ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>解像度</th><th>コマ数</th><th>GIF</th><th>元の PNG 合計</th><th>GIF ÷ PNG</th></tr></thead>
+            <tbody>
+              <tr><td>320 × 320</td><td class="num">12</td><td>64,048 バイト</td><td>133,978 バイト</td><td class="num">0.48</td></tr>
+              <tr><td>320 × 320</td><td class="num">24</td><td>128,996 バイト</td><td>272,287 バイト</td><td class="num">0.47</td></tr>
+              <tr><td>480 × 480</td><td class="num">24</td><td>242,054 バイト</td><td>506,408 バイト</td><td class="num">0.48</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">PNG の連番をそのまま GIF にまとめた（1コマ 90ms）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>形はどちらのやり方でも同じ。</strong>シルエットの割合が 7.61% / 7.61%、9.83% / 9.83% と、0.01<button class="term" data-term="ポイント">ポイント</button>まで一致した。</li>
+          <li><strong>違うのは光の当たり方。</strong>物を回すと明るさは 176〜186 でほぼ一定、カメラを回すと 186 → 51 と暗くなる。<strong>ライトは世界に固定されているから</strong>で、カメラだけ回すと影の側へ入る。</li>
+          <li><strong>見せるだけなら、物を回すほうが安定する。</strong>カメラを回したいなら、ライトもカメラと一緒に回す（カメラに付ける）必要がある。</li>
+          <li><strong>時間は気にしなくてよい。</strong>OpenGL で1コマ 13〜30ms、24コマの1周でも 0.3〜0.7秒。解像度を 320 → 720（画素で 5倍）にしても、1コマ 13ms → 29ms（2.2倍）。</li>
+          <li><strong>GIF は PNG 合計の半分弱。</strong>0.47〜0.48倍。320 × 320・24コマで 129KB なので、ページに置ける大きさ。</li>
+          <li><strong>物を回すときは、外接箱の真ん中を測ってから原点に寄せる。</strong>ずらす量を当て推量にしたら、回転のたびに画の中で位置がずれ、シルエットの割合が 14.11% と 5.37% のように食い違った。</li>
+          <li>測り方について。<strong>形と明るさを分けて測ったことで、食い違いの理由が1回で分かった。</strong>「写っている割合」だけを見ていたときは、形が違うのか暗いだけなのか区別できなかった。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

@@ -1,0 +1,20 @@
+[
+  {
+    "res": 320,
+    "count": 12,
+    "gif_bytes": 64048,
+    "png_total": 133978
+  },
+  {
+    "res": 320,
+    "count": 24,
+    "gif_bytes": 128996,
+    "png_total": 272287
+  },
+  {
+    "res": 480,
+    "count": 24,
+    "gif_bytes": 242054,
+    "png_total": 506408
+  }
+]
