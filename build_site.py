@@ -43,6 +43,8 @@ SPEED = os.path.join(HERE, "speed_tips.json")
 
 NOTEBOOK_URL = "https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022"
 GITHUB_RAW = ("https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/")
+# 要望の受け皿。書いた中身を入れた投稿画面をここで開く。
+ISSUE_NEW = "https://github.com/RealEstateWarrior/houdini-lab/issues/new"
 
 # 発行済みArtifactのURL。新規発行したらここを更新して再ビルドする。
 ARTIFACT_URLS = {
@@ -1669,6 +1671,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--STRIP-->", render_strip(guides)),
         ("<!--REQUESTS-->", render_requests(requests)),
         ("<!--REQUEST_COUNT-->", str(len(requests["requests"]))),
+        ("<!--ISSUE_NEW-->", ISSUE_NEW),
         ("<!--WORK_COUNT-->", str(len(works["works"]))),
         ("<!--NODE_NAV-->", render_node_nav(nodes)),
         ("<!--LINKS_BODY-->", links_body),

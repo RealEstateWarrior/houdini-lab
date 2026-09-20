@@ -182,11 +182,37 @@
           作ってほしい実践の順番待ち。済んだものも、見送ったものも消さずに残します。
           同じ話が何度も出てこないように、断った理由もそのまま置いておきます。
         </p>
-        <p class="hint">
-          出し方は、いまのところ言ってもらうだけです。
-          「何を作ってほしいか」と「どこで困ったか」の2つがあると、測る所がすぐ決まります。
-        </p>
       </header>
+
+      <form class="reqform" id="reqform" data-issue="<!--ISSUE_NEW-->">
+        <p class="reqform-lede">
+          「何を作ってほしいか」と「どこで困ったか」の2つがあると、
+          何を測ればよいかがすぐ決まります。
+        </p>
+        <label>
+          <span>何を作ってほしいか<b>必須</b></span>
+          <input type="text" id="req-title" maxlength="80" required
+                 placeholder="例: 水たまりに波紋を立てたい" autocomplete="off">
+        </label>
+        <label>
+          <span>どこで困ったか</span>
+          <textarea id="req-why" rows="4" maxlength="600"
+                    placeholder="例: ripple で試したが、波が四角く広がってしまう。丸くしたい。"></textarea>
+        </label>
+        <label class="reqform-half">
+          <span>出した人</span>
+          <input type="text" id="req-from" maxlength="40"
+                 placeholder="呼び名。空のままでもいい" autocomplete="off">
+        </label>
+        <div class="reqform-go">
+          <a class="reqform-send" id="req-send" aria-disabled="true"
+             target="_blank" rel="noopener noreferrer">要望を送る</a>
+          <p class="reqform-note" id="req-note">
+            押すと GitHub の投稿画面が、書いた中身の入った状態で開きます。
+            最後に緑のボタンを押すと届きます（GitHub のアカウントが要ります）。
+          </p>
+        </div>
+      </form>
 <!--REQUESTS-->
     </section>
 
@@ -331,6 +357,60 @@
       openFromHash(window.location.hash, false);
     });
   })();
+
+  /* 要望フォーム。書いた中身を、そのまま投稿画面の住所に入れる。
+     このサイトは置いたファイルを配るだけなので、受け皿は GitHub に借りる。 */
+  (function () {
+    var form = document.getElementById("reqform");
+    if (!form) { return; }
+    var title = document.getElementById("req-title");
+    var why = document.getElementById("req-why");
+    var from = document.getElementById("req-from");
+    var send = document.getElementById("req-send");
+    var note = document.getElementById("req-note");
+    var base = form.dataset.issue;
+
+    function update() {
+      var head = title.value.trim();
+      if (!head) {
+        send.setAttribute("aria-disabled", "true");
+        send.removeAttribute("href");
+        return;
+      }
+      var lines = [
+        "## 何を作ってほしいか",
+        head,
+        "",
+        "## どこで困ったか",
+        why.value.trim() || "（書かれていません）",
+        "",
+        "## 出した人",
+        from.value.trim() || "名乗りなし",
+        "",
+        "---",
+        "サイトの要望フォームから送られました。"
+      ];
+      send.href = base
+        + "?title=" + encodeURIComponent("要望: " + head)
+        + "&body=" + encodeURIComponent(lines.join("\n"));
+      send.setAttribute("aria-disabled", "false");
+    }
+
+    [title, why, from].forEach(function (field) {
+      field.addEventListener("input", update);
+    });
+    form.addEventListener("submit", function (event) { event.preventDefault(); });
+    send.addEventListener("click", function (event) {
+      if (send.getAttribute("aria-disabled") === "true") {
+        event.preventDefault();
+        title.focus();
+        note.textContent = "「何を作ってほしいか」だけは埋めてください。";
+        return;
+      }
+      note.textContent = "GitHub の画面を開きました。最後に緑のボタンを押すと届きます。";
+    });
+    update();
+  }());
 
   /* 実験カードのポップアップ。中身は build_site.py が out/*_report.json から埋め込む。 */
   (function () {
