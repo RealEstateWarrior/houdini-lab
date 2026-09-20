@@ -40,23 +40,23 @@
         },
         {
           "label": "Houdini 研究部",
-          "url": "https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa"
+          "url": "https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu"
         },
         {
           "label": "実験ログ 前半",
-          "url": "https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129"
+          "url": "https://claude.ai/artifact/XqNSd943n6cguxcULeHxBz"
         },
         {
           "label": "実験ログ 後半",
-          "url": "https://claude.ai/code/artifact/087548d5-0c09-40b5-8e2e-7bfc084e1f0c"
+          "url": "https://claude.ai/artifact/23aXF1hG3G5oCZaaeZ5BAT"
         },
         {
           "label": "用語集",
-          "url": "https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868"
+          "url": "https://claude.ai/artifact/B9pzUkXod3G6acw2ZF9aLP"
         },
         {
           "label": "参考リンク",
-          "url": "https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f"
+          "url": "https://claude.ai/artifact/14k3waBngc76XEj2JhUusL"
         }
       ]
     },
@@ -74,6 +74,15 @@
         {
           "label": "Notebook",
           "url": "https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022"
+        }
+      ]
+    },
+    {
+      "label": "このメモ",
+      "items": [
+        {
+          "label": "やることメモ",
+          "url": "https://claude.ai/artifact/7Yd8cWYRkjTEaB6wRe6kqj"
         }
       ]
     }
