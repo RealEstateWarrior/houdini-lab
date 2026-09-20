@@ -29,6 +29,9 @@ import link_terms
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(HERE, "site")
 DOCS = os.path.join(HERE, "docs")
+# 親ページ（Saito Production）の置き場。リポジトリ RealEstateWarrior.github.io を
+# ここへクローンしてあるときだけ、index.html を書き出す。
+ROOT = os.path.join(os.path.dirname(HERE), "sp")
 OUT = os.path.join(HERE, "out")
 GLOSSARY = os.path.join(HERE, "glossary.json")
 NODES = os.path.join(HERE, "nodes.json")
@@ -58,7 +61,20 @@ PAGES_URLS = {
     "log_fx": "log_fx.html",
     "glossary": "glossary.html",
     "links": "links.html",
-    "parent": "sp.html",
+    # 親は別リポジトリの入口（realestatewarrior.github.io/）。
+    # この部のページは /houdini-lab/ 以下なので、1つ上が親になる。
+    "parent": "../",
+}
+
+# 親ページ用。親は入口（/）に置き、この部は /houdini-lab/ 以下にある。
+ROOT_URLS = {
+    "home": "houdini-lab/index.html",
+    "log": "houdini-lab/log.html",
+    "log_pm": "houdini-lab/log.html",
+    "log_fx": "houdini-lab/log_fx.html",
+    "glossary": "houdini-lab/glossary.html",
+    "links": "houdini-lab/links.html",
+    "parent": "index.html",
 }
 
 # ロゴ。S を書き終えた線から縦棒が下りて、S の下半分が P の腹になる。
@@ -576,7 +592,8 @@ PLANNED_FX = []
 
 PAGES = [
     # template, site出力, docs出力, ナビの現在位置, タブ形式か
-    ("sp_template.html", "sp.html", "sp.html", "sp", False),
+    # 親ページは docs/ には出さない。GitHub 版は別リポジトリの入口に置く。
+    ("sp_template.html", "sp.html", None, "sp", False),
     ("home_template.html", "home.html", "index.html", "home", True),
     ("log_pm_template.html", "index.html", "log.html", "log", False),
     ("log_fx_template.html", "log_fx.html", "log_fx.html", "log", False),
@@ -1497,8 +1514,12 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     if "entry" in page and 'id="exp' in page:
         page = inject_experiment_links(page, urls, nodes)
 
-    if out_dir == DOCS:
+    if out_dir in (DOCS, ROOT):
         page = as_document(page)
+
+    if out_dir == ROOT:
+        # 画像は houdini-lab 側に置いたままなので、入口から見た道に直す。
+        page = re.sub(r'src="(?=[\w.\-]+\.(?:png|gif)")', 'src="houdini-lab/', page)
 
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, out_name)
@@ -1581,16 +1602,26 @@ def main():
         render(template_name, SITE, site_out, active, tabs,
                ARTIFACT_URLS, data, nodes, guides, css, links_body,
                popover, chrome)
-        render(template_name, DOCS, docs_out, active, tabs,
-               PAGES_URLS, data, nodes, guides, css, links_body,
+        if docs_out:
+            render(template_name, DOCS, docs_out, active, tabs,
+                   PAGES_URLS, data, nodes, guides, css, links_body,
+                   popover, chrome)
+
+    # 親ページ。クローンが置いてあるときだけ書き出す。
+    root_note = "置き場が無いので飛ばした"
+    if os.path.isdir(ROOT):
+        render("sp_template.html", ROOT, "index.html", "sp", False,
+               ROOT_URLS, data, nodes, guides, css, links_body,
                popover, chrome)
+        root_note = os.path.join(ROOT, "index.html")
 
     # GitHub Pages に Jekyll 処理をさせない
     with open(os.path.join(DOCS, ".nojekyll"), "w", encoding="utf-8") as fp:
         fp.write("")
 
     total, copied = copy_images()
-    print(f"site/ と docs/ に {len(PAGES)} ページずつ生成")
+    print(f"site/ に {len(PAGES)} ページ、docs/ に {len(PAGES) - 1} ページ生成")
+    print(f"親ページ: {root_note}")
     print(f"ノード {count_nodes(nodes)} 件 / 用語 {count_terms(data)} 件")
     print(f"画像 {total} 件（うち {copied} 件をコピー）")
 

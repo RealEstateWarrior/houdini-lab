@@ -1,0 +1,97 @@
+{
+  "updated": "2026-09-20",
+  "note": "やること・気になっていることの置き場。中身はここ（memo.json）だけを直し、make_memo.py で組み立てる。",
+  "links": [
+    {
+      "label": "公開ページ（GitHub）",
+      "items": [
+        {"label": "親 Saito Production", "url": "https://realestatewarrior.github.io/"},
+        {"label": "Houdini 研究部", "url": "https://realestatewarrior.github.io/houdini-lab/"},
+        {"label": "実験ログ 前半", "url": "https://realestatewarrior.github.io/houdini-lab/log.html"},
+        {"label": "実験ログ 後半", "url": "https://realestatewarrior.github.io/houdini-lab/log_fx.html"},
+        {"label": "用語集", "url": "https://realestatewarrior.github.io/houdini-lab/glossary.html"},
+        {"label": "参考リンク", "url": "https://realestatewarrior.github.io/houdini-lab/links.html"}
+      ]
+    },
+    {
+      "label": "Claude 版",
+      "items": [
+        {"label": "親 Saito Production", "url": "https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo"},
+        {"label": "Houdini 研究部", "url": "https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa"},
+        {"label": "実験ログ 前半", "url": "https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129"},
+        {"label": "実験ログ 後半", "url": "https://claude.ai/code/artifact/087548d5-0c09-40b5-8e2e-7bfc084e1f0c"},
+        {"label": "用語集", "url": "https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868"},
+        {"label": "参考リンク", "url": "https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f"}
+      ]
+    },
+    {
+      "label": "置き場・道具",
+      "items": [
+        {"label": "リポジトリ houdini-lab", "url": "https://github.com/RealEstateWarrior/houdini-lab"},
+        {"label": "リポジトリ 親ページ", "url": "https://github.com/RealEstateWarrior/RealEstateWarrior.github.io"},
+        {"label": "Notebook", "url": "https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022"}
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "you",
+      "label": "あなたにお願いすること",
+      "tone": "wait",
+      "items": [
+        {"title": "GitHub で新リポジトリ `RealEstateWarrior.github.io` を作る",
+         "detail": "親ページ（Saito Production）の置き場。Public、README なしで作る。gh コマンドがこの環境に無いので、作成だけはブラウザから。",
+         "state": "今日やる"},
+        {"title": "Claude 版で「AI に聞く」が動くか確かめる",
+         "detail": "検索窓を開いて質問し、答えと「根拠にした記録」が出れば成功。出ない場合は表示されたメッセージを教えてください。",
+         "state": "未確認"}
+      ]
+    },
+    {
+      "id": "mine",
+      "label": "私の宿題",
+      "tone": "todo",
+      "items": [
+        {"title": "手順「テクスチャを貼る」のシーンを作る",
+         "detail": "36本のうち、この1本だけ .hipnc と Houdini の画面が無い。作れば手順が全部そろう。",
+         "state": "残り1本"},
+        {"title": "手順「ターンテーブル」「文字を光らせる」の Houdini 画面",
+         "detail": "実験のときにシーンを保存していなかったので、作り直してから撮る。",
+         "state": "残り2本"},
+        {"title": "親ページを新リポジトリへ移す",
+         "detail": "build_site.py 側の手当ては済み（D:\\Claude\\sp にクローンがあれば index.html を書き出す）。リポジトリができてクローンしたら、組み直して両方を送る。それまで送らない。",
+         "state": "リポジトリ待ち"}
+      ]
+    },
+    {
+      "id": "open",
+      "label": "気になっていること（未解決）",
+      "tone": "open",
+      "items": [
+        {"title": "液体は、なぜ摩擦 1.5 以上だと暴れないのか",
+         "detail": "実験073。摩擦 0〜1.5 の間だけ数粒が飛ぶ。止まるまでの時間と関係がありそうだが、確かめていない。"},
+        {"title": "MPM の摩擦は、どこまで細かくすれば式に届くのか",
+         "detail": "実験075。粒の間隔 0.04 で実効の摩擦 0.79。1.0 に届くのか、頭打ちなのかは未確認。"},
+        {"title": "旗の「抵抗 × 風速²」が1組だけ合わない",
+         "detail": "実験081。(風速8・抵抗2.5) だけ 9度ずれた。抵抗が小さいときに外れるのかは未確認。"},
+        {"title": "Claude 版のファイル数が上限に近い",
+         "detail": "1つの版に置けるのは 512 まで。いまは 501。手順が増えたら、画像の置き方（アセット置き場など）を見直す。"}
+      ]
+    },
+    {
+      "id": "rules",
+      "label": "決めごと（毎回通す）",
+      "tone": "rule",
+      "items": [
+        {"title": "実測した値だけを書く", "detail": "推測は書かない。書くなら「確かめていない」と添える。"},
+        {"title": "時間も必ず記録する", "detail": "速さの結論が出たら、効率化のページに足す。"},
+        {"title": "30実験ごとに振り返り点検", "detail": "030・060・090 は済み。次は120。"},
+        {"title": "ログインは私がやらない", "detail": "GitHub・SideFX・Google の認証はユーザーが行う。"}
+      ]
+    }
+  ],
+  "recent": [
+    {"when": "2026-09-20", "what": "実験083〜090 と手順7本を追加。061〜090 の振り返り点検（7件を測り直して全部一致）"},
+    {"when": "2026-09-19", "what": "実験071〜082、手順を15本→29本。親ページ（Saito Production）と検索・AI回答を追加"}
+  ]
+}

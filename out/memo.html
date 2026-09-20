@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Houdini 研究部 やることメモ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@600;700&display=swap">
+<style>
+:root{
+  --paper:#f7f6f3;
+  --card:#fffefb;
+  --ink:#23262b;
+  --ink-soft:#5c626c;
+  --ink-faint:#8b919b;
+  --rule:#e2e0da;
+  --rule-soft:#edebe5;
+  --accent:#b4531b;
+  --wait:#b4531b;
+  --todo:#2f6b87;
+  --open:#7a4a8c;
+  --rule-tone:#4a7350;
+  --wait-bg:#f6e7dc;
+  --todo-bg:#e0edf3;
+  --open-bg:#eee4f3;
+  --rule-bg:#e3eee4;
+  --shadow:0 1px 2px rgba(35,38,43,.06);
+  --serif:"Zen Old Mincho",'Hiragino Mincho ProN','Yu Mincho',serif;
+  --sans:"Zen Kaku Gothic New",'Hiragino Sans','Yu Gothic',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#191b1f;
+    --card:#212429;
+    --ink:#e8e6e1;
+    --ink-soft:#a8adb5;
+    --ink-faint:#787e87;
+    --rule:#33373d;
+    --rule-soft:#2a2e33;
+    --accent:#e08a4e;
+    --wait:#e08a4e;
+    --todo:#6fb3d2;
+    --open:#bd94d4;
+    --rule-tone:#85b98e;
+    --wait-bg:#3a2a1c;
+    --todo-bg:#1e3340;
+    --open-bg:#31253a;
+    --rule-bg:#22331f;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#191b1f;
+  --card:#212429;
+  --ink:#e8e6e1;
+  --ink-soft:#a8adb5;
+  --ink-faint:#787e87;
+  --rule:#33373d;
+  --rule-soft:#2a2e33;
+  --accent:#e08a4e;
+  --wait:#e08a4e;
+  --todo:#6fb3d2;
+  --open:#bd94d4;
+  --rule-tone:#85b98e;
+  --wait-bg:#3a2a1c;
+  --todo-bg:#1e3340;
+  --open-bg:#31253a;
+  --rule-bg:#22331f;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:28px 16px 56px;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+header{display:flex;flex-direction:column;gap:10px}
+h1{
+  margin:0;
+  font-family:var(--serif);
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-wrap:balance;
+}
+.sub{margin:0;color:var(--ink-soft);font-size:13px}
+.tally{display:flex;flex-wrap:wrap;gap:8px}
+.tally span{
+  display:inline-flex;align-items:baseline;gap:6px;
+  padding:4px 10px;border-radius:999px;
+  font-size:12px;letter-spacing:.02em;
+  border:1px solid var(--rule);
+  background:var(--card);
+}
+.tally b{font-size:14px;font-variant-numeric:tabular-nums}
+.n-wait{color:var(--wait)}
+.n-todo{color:var(--todo)}
+.n-open{color:var(--open)}
+.n-rule{color:var(--rule-tone)}
+section{display:flex;flex-direction:column;gap:12px}
+.head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2{
+  margin:0;
+  font-family:var(--serif);
+  font-size:17px;font-weight:600;letter-spacing:.03em;
+}
+.tag{
+  font-size:11px;letter-spacing:.08em;
+  padding:2px 8px;border-radius:4px;
+  background:var(--rule-soft);color:var(--ink-soft);
+}
+.g-wait .tag{background:var(--wait-bg);color:var(--wait)}
+.g-todo .tag{background:var(--todo-bg);color:var(--todo)}
+.g-open .tag{background:var(--open-bg);color:var(--open)}
+.g-rule .tag{background:var(--rule-bg);color:var(--rule-tone)}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+li{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--ink-faint);
+  border-radius:3px;
+  padding:12px 14px;
+  box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:5px;
+}
+.g-wait li{border-left-color:var(--wait)}
+.g-todo li{border-left-color:var(--todo)}
+.g-open li{border-left-color:var(--open)}
+.g-rule li{border-left-color:var(--rule-tone);box-shadow:none;background:transparent}
+.t{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.t strong{font-weight:700;font-size:14.5px;line-height:1.6}
+.state{
+  margin-left:auto;
+  font-size:11px;letter-spacing:.04em;white-space:nowrap;
+  padding:2px 8px;border-radius:999px;
+  background:var(--rule-soft);color:var(--ink-soft);
+}
+.g-wait .state{background:var(--wait-bg);color:var(--wait)}
+.g-todo .state{background:var(--todo-bg);color:var(--todo)}
+.d{margin:0;color:var(--ink-soft);font-size:13px;line-height:1.7}
+code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.92em;
+  background:var(--rule-soft);
+  padding:1px 5px;border-radius:3px;
+}
+.links{
+  display:flex;flex-direction:column;gap:11px;
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:13px 15px;
+  box-shadow:var(--shadow);
+}
+.band{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:baseline}
+.band h3{
+  margin:0;font-family:var(--sans);
+  font-size:11px;font-weight:500;letter-spacing:.06em;
+  color:var(--ink-faint);
+}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.row a{
+  display:inline-block;
+  padding:3px 10px;border-radius:999px;
+  border:1px solid var(--rule);
+  color:var(--ink);text-decoration:none;
+  font-size:12.5px;line-height:1.5;
+  transition:border-color .12s,color .12s;
+}
+.row a:hover{border-color:var(--accent);color:var(--accent)}
+.row a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.log{border-top:1px solid var(--rule);padding-top:16px}
+.log h2{font-size:15px}
+.log ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.log li{
+  background:transparent;border:0;box-shadow:none;padding:0;
+  display:grid;grid-template-columns:86px 1fr;gap:12px;align-items:baseline;
+}
+.log time{color:var(--ink-faint);font-size:12px;font-variant-numeric:tabular-nums}
+.log p{margin:0;font-size:13px;color:var(--ink-soft)}
+footer{color:var(--ink-faint);font-size:12px;border-top:1px solid var(--rule);padding-top:14px}
+@media (max-width:520px){
+  .state{margin-left:0}
+  .log li{grid-template-columns:1fr;gap:2px}
+  .band{grid-template-columns:1fr;gap:5px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Houdini 研究部 やることメモ</h1>
+<p class="sub">2026-09-20 現在。中身は <code>memo.json</code> を直して組み直す。</p>
+<div class="tally"><span><b class="n-wait">2</b>あなたにお願いすること</span><span><b class="n-todo">3</b>私の宿題</span><span><b class="n-open">4</b>気になっていること（未解決）</span><span><b class="n-rule">4</b>決めごと（毎回通す）</span></div>
+</header>
+<div class="links">
+<div class="band"><h3>公開ページ（GitHub）</h3><div class="row"><a href="https://realestatewarrior.github.io/" target="_blank" rel="noopener">親 Saito Production</a><a href="https://realestatewarrior.github.io/houdini-lab/" target="_blank" rel="noopener">Houdini 研究部</a><a href="https://realestatewarrior.github.io/houdini-lab/log.html" target="_blank" rel="noopener">実験ログ 前半</a><a href="https://realestatewarrior.github.io/houdini-lab/log_fx.html" target="_blank" rel="noopener">実験ログ 後半</a><a href="https://realestatewarrior.github.io/houdini-lab/glossary.html" target="_blank" rel="noopener">用語集</a><a href="https://realestatewarrior.github.io/houdini-lab/links.html" target="_blank" rel="noopener">参考リンク</a></div></div>
+<div class="band"><h3>Claude 版</h3><div class="row"><a href="https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo" target="_blank" rel="noopener">親 Saito Production</a><a href="https://claude.ai/code/artifact/e6fa0709-06ab-4ab9-9591-ed52742a88fa" target="_blank" rel="noopener">Houdini 研究部</a><a href="https://claude.ai/code/artifact/f9b31321-23e5-4e7c-b6bc-ad2bcf9c1129" target="_blank" rel="noopener">実験ログ 前半</a><a href="https://claude.ai/code/artifact/087548d5-0c09-40b5-8e2e-7bfc084e1f0c" target="_blank" rel="noopener">実験ログ 後半</a><a href="https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868" target="_blank" rel="noopener">用語集</a><a href="https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f" target="_blank" rel="noopener">参考リンク</a></div></div>
+<div class="band"><h3>置き場・道具</h3><div class="row"><a href="https://github.com/RealEstateWarrior/houdini-lab" target="_blank" rel="noopener">リポジトリ houdini-lab</a><a href="https://github.com/RealEstateWarrior/RealEstateWarrior.github.io" target="_blank" rel="noopener">リポジトリ 親ページ</a><a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener">Notebook</a></div></div>
+</div>
+<section class="g-wait">
+<div class="head"><h2>あなたにお願いすること</h2><span class="tag">あなた待ち</span></div>
+<ul>
+<li>
+<div class="t"><strong>GitHub で新リポジトリ <code>RealEstateWarrior.github.io</code> を作る</strong><span class="state">今日やる</span></div>
+<p class="d">親ページ（Saito Production）の置き場。Public、README なしで作る。gh コマンドがこの環境に無いので、作成だけはブラウザから。</p>
+</li>
+<li>
+<div class="t"><strong>Claude 版で「AI に聞く」が動くか確かめる</strong><span class="state">未確認</span></div>
+<p class="d">検索窓を開いて質問し、答えと「根拠にした記録」が出れば成功。出ない場合は表示されたメッセージを教えてください。</p>
+</li>
+</ul>
+</section>
+<section class="g-todo">
+<div class="head"><h2>私の宿題</h2><span class="tag">私がやる</span></div>
+<ul>
+<li>
+<div class="t"><strong>手順「テクスチャを貼る」のシーンを作る</strong><span class="state">残り1本</span></div>
+<p class="d">36本のうち、この1本だけ .hipnc と Houdini の画面が無い。作れば手順が全部そろう。</p>
+</li>
+<li>
+<div class="t"><strong>手順「ターンテーブル」「文字を光らせる」の Houdini 画面</strong><span class="state">残り2本</span></div>
+<p class="d">実験のときにシーンを保存していなかったので、作り直してから撮る。</p>
+</li>
+<li>
+<div class="t"><strong>親ページを新リポジトリへ移す</strong><span class="state">リポジトリ待ち</span></div>
+<p class="d">build_site.py 側の手当ては済み（D:\Claude\sp にクローンがあれば index.html を書き出す）。リポジトリができてクローンしたら、組み直して両方を送る。それまで送らない。</p>
+</li>
+</ul>
+</section>
+<section class="g-open">
+<div class="head"><h2>気になっていること（未解決）</h2><span class="tag">未解決</span></div>
+<ul>
+<li>
+<div class="t"><strong>液体は、なぜ摩擦 1.5 以上だと暴れないのか</strong></div>
+<p class="d">実験073。摩擦 0〜1.5 の間だけ数粒が飛ぶ。止まるまでの時間と関係がありそうだが、確かめていない。</p>
+</li>
+<li>
+<div class="t"><strong>MPM の摩擦は、どこまで細かくすれば式に届くのか</strong></div>
+<p class="d">実験075。粒の間隔 0.04 で実効の摩擦 0.79。1.0 に届くのか、頭打ちなのかは未確認。</p>
+</li>
+<li>
+<div class="t"><strong>旗の「抵抗 × 風速²」が1組だけ合わない</strong></div>
+<p class="d">実験081。(風速8・抵抗2.5) だけ 9度ずれた。抵抗が小さいときに外れるのかは未確認。</p>
+</li>
+<li>
+<div class="t"><strong>Claude 版のファイル数が上限に近い</strong></div>
+<p class="d">1つの版に置けるのは 512 まで。いまは 501。手順が増えたら、画像の置き方（アセット置き場など）を見直す。</p>
+</li>
+</ul>
+</section>
+<section class="g-rule">
+<div class="head"><h2>決めごと（毎回通す）</h2><span class="tag">決めごと</span></div>
+<ul>
+<li>
+<div class="t"><strong>実測した値だけを書く</strong></div>
+<p class="d">推測は書かない。書くなら「確かめていない」と添える。</p>
+</li>
+<li>
+<div class="t"><strong>時間も必ず記録する</strong></div>
+<p class="d">速さの結論が出たら、効率化のページに足す。</p>
+</li>
+<li>
+<div class="t"><strong>30実験ごとに振り返り点検</strong></div>
+<p class="d">030・060・090 は済み。次は120。</p>
+</li>
+<li>
+<div class="t"><strong>ログインは私がやらない</strong></div>
+<p class="d">GitHub・SideFX・Google の認証はユーザーが行う。</p>
+</li>
+</ul>
+</section>
+<section class="log">
+<div class="head"><h2>直近やったこと</h2></div>
+<ol>
+<li><time>2026-09-20</time><p>実験083〜090 と手順7本を追加。061〜090 の振り返り点検（7件を測り直して全部一致）</p></li>
+<li><time>2026-09-19</time><p>実験071〜082、手順を15本→29本。親ページ（Saito Production）と検索・AI回答を追加</p></li>
+</ol>
+</section>
+<footer>やること・気になっていることの置き場。中身はここ（memo.json）だけを直し、make_memo.py で組み立てる。</footer>
+</div>
+</body>
+</html>
