@@ -1315,6 +1315,13 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .usedby a:hover { background: var(--ink); color: #ffffff; }
 .usedby + .path { margin-top: 4px; }
 
+.node-unused {
+  margin: 10px 0 0;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+
 /* ---------- 要望フォーム ---------- */
 
 .reqform {

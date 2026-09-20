@@ -42,6 +42,8 @@ SYNONYMS = os.path.join(HERE, "search_synonyms.json")
 SPEED = os.path.join(HERE, "speed_tips.json")
 
 NOTEBOOK_URL = "https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022"
+# ノードの名前とつまみを確認した Houdini の版
+HOU_VERSION = "Houdini 21.0.700"
 GITHUB_RAW = ("https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/")
 # 要望の受け皿。書いた中身を入れた投稿画面をここで開く。
 ISSUE_NEW = "https://github.com/RealEstateWarrior/houdini-lab/issues/new"
@@ -1436,6 +1438,11 @@ def render_nodes(nodes, urls):
                     anchor = anchors.get(no, "")
                     out.append(f'              <a href="{urls["log"]}#{anchor}">実験 {no}</a>')
                 out.append("            </div>")
+            else:
+                # 実験で動かしていないものは、そうと分かるようにしておく。
+                # 名前・つまみ・既定値は Houdini 本体から取っているので確か。
+                out.append('            <p class="node-unused">まだ実験では動かしていない。'
+                           f'名前とつまみは {HOU_VERSION} で確認した。</p>')
             out.append("          </div>")
             if node.get("img"):
                 out.append('          <div class="node-shot">')

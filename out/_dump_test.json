@@ -1,0 +1,799 @@
+[
+ {
+  "spec": "sop/box",
+  "ok": true,
+  "category": "SOP",
+  "name": "box",
+  "label": "Box",
+  "parms": [
+   {
+    "name": "type",
+    "label": "Primitive Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "poly",
+      "Polygon"
+     ],
+     [
+      "polymesh",
+      "Polygon Mesh"
+     ],
+     [
+      "mesh",
+      "Mesh"
+     ],
+     [
+      "nurbs",
+      "NURBS"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prim",
+      "Primitive"
+     ]
+    ]
+   },
+   {
+    "name": "surftype",
+    "label": "Connectivity",
+    "default": 4,
+    "kind": "Menu",
+    "menu": [
+     [
+      "rows",
+      "Rows"
+     ],
+     [
+      "cols",
+      "Columns"
+     ],
+     [
+      "rowcol",
+      "Rows and Columns"
+     ],
+     [
+      "triangles",
+      "Triangles"
+     ],
+     [
+      "quads",
+      "Quadrilaterals"
+     ],
+     [
+      "alttriangles",
+      "Alternating Triangles"
+     ],
+     [
+      "revtriangles",
+      "Reverse Triangles"
+     ]
+    ]
+   },
+   {
+    "name": "consolidatepts",
+    "label": "Consolidate Corner Points",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "size",
+    "label": "Size",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "t",
+    "label": "Center",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "r",
+    "label": "Rotate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "scale",
+    "label": "Uniform Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "divrate",
+    "label": "Axis Divisions",
+    "default": [
+     4,
+     4,
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "orderrate",
+    "label": "Axis Orders",
+    "default": [
+     4,
+     4,
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "dodivs",
+    "label": "Use Divisions",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "divs",
+    "label": "Divisions",
+    "default": [
+     3,
+     3,
+     3
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "rebar",
+    "label": "Enforcement Bars",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "orientedbbox",
+    "label": "Oriented Bounding Box (points only)",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vertexnormals",
+    "label": "Add Vertex Normals",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/polybevel",
+  "ok": true,
+  "category": "SOP",
+  "name": "polybevel",
+  "label": "PolyBevel",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "beveltype",
+    "label": "Bevel Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "flat",
+      "Flat"
+     ],
+     [
+      "lowround",
+      "Low Density Round"
+     ],
+     [
+      "highround",
+      "High Density Round"
+     ],
+     [
+      "corner",
+      "Corner"
+     ]
+    ]
+   },
+   {
+    "name": "entitytype",
+    "label": "Default Entity",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "points",
+      "All Points"
+     ],
+     [
+      "edges",
+      "All Edges"
+     ]
+    ]
+   },
+   {
+    "name": "relinset",
+    "label": "Relative Inset",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "absinset",
+    "label": "Absolute Inset",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "repetitions",
+    "label": "Repetitions",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "updatenmls",
+    "label": "Recompute Point Normals",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/nonexistentnode",
+  "ok": false,
+  "why": "この版には無い"
+ },
+ {
+  "spec": "dop/popvop",
+  "ok": true,
+  "category": "DOP",
+  "name": "popvop",
+  "label": "POP VOP",
+  "parms": [
+   {
+    "name": "activate",
+    "label": "Activation",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "usegroup",
+    "label": "Group",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "partgroup",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vexsrc",
+    "label": "Vex Source",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "myself",
+      "Myself"
+     ],
+     [
+      "shop",
+      "Shop"
+     ],
+     [
+      "script",
+      "Script"
+     ]
+    ]
+   },
+   {
+    "name": "vexshoppath",
+    "label": "Shop Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vexscript",
+    "label": "Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vexclear",
+    "label": "Re-load VEX Functions",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "vop_compiler",
+    "label": "Compiler",
+    "default": [
+     "vcc -q $VOP_INCLUDEPATH -o $VOP_OBJECTFILE -e $VOP_ERRORFILE $VOP_SOURCEFILE"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vop_forcecompile",
+    "label": "Force Compile",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "vex_cwdpath",
+    "label": "Evaluation Node Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_outputmask",
+    "label": "Export Parameters",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_multithread",
+    "label": "Enable Multithreading",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindgeo",
+    "label": "Geometry",
+    "default": [
+     "Geometry"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "autobind",
+    "label": "Autobind by Name",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "groupautobind",
+    "label": "Autobind Groups by Name",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vex_updatenmls",
+    "label": "Update Normals If Displaced",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vex_precision",
+    "label": "VEX Precision",
+    "default": [
+     "auto"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "auto",
+      "Auto"
+     ],
+     [
+      "32",
+      "32-bit"
+     ],
+     [
+      "64",
+      "64-bit"
+     ]
+    ]
+   },
+   {
+    "name": "bindinputmenu1",
+    "label": "Input 1",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput1",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput1",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself1",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindinputmenu2",
+    "label": "Input 2",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput2",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput2",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself2",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindinputmenu3",
+    "label": "Input 3",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput3",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput3",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself3",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindinputmenu4",
+    "label": "Input 4",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput4",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput4",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself4",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usetimestep",
+    "label": "Use Timestep",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "timescale",
+    "label": "Time Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "addaffectors",
+    "label": "Make Objects Mutual Affectors",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "dataname",
+    "label": "Data Name",
+    "default": [
+     "$OS"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "uniquedataname",
+    "label": "Unique Data Name",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "solverperobject",
+    "label": "Solver Per Object",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 9999
+ }
+]
