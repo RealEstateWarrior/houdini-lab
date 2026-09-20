@@ -4903,6 +4903,142 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 101 ===================== -->
+    <article class="entry entry--current" id="exp101">
+      <div class="badge">101</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>面積の測りは、平らな面ならぴったり合う — 球の足りない分は分割の2乗で減る</h2>
+        <p class="path">examples/101_area.py &nbsp;·&nbsp; 平らな面はぴったり。球の足りない分は分割の2乗で減る</p>
+
+        <div class="prose">
+          <p>面積は「測るための道具」としてよく使う。散らす濃さを決めたり、重さを面積から出したり。その道具そのものの精度を、答えの分かっている形で確かめた。</p>
+          <p>1辺 2.0 の平らな板は、面積 4.0 がぴったり出る。分割を 2 から 201 まで変えても差は最大 0.000000032（小数の丸めの範囲）。**分割の数は面積に影響しない。**</p>
+          <p>球は違う。半径 1.0 の球の答えは 12.566371 だが、多角形なので必ず小さく出る。分割 8 では 11.635271（7.40945% 足りない）、分割 240 で 12.565382（0.00787% 足りない）。</p>
+          <p>足りない分の減り方は 4.075 / 3.558 / 4.032 / 4.017 / 4.009 で、**分割を倍にすると4分の1**になる。誤差が分割の2乗で減るということで、細かくする効きは良い。</p>
+          <p>実用の目安として、分割 60（3,540面）で足りない分は 0.12675%。面積を使って何かを決めるぶんには十分だが、答えとして出すなら、多角形のぶん小さく出ていることを覚えておく。</p>
+        </div>
+
+        <p class="label">平らな板（1辺 2.0、答えは 4.000000）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分割</th><th>面</th><th>面積</th><th>答えとの差</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">4.000000</td><td class="num">+0.000000000</td><td class="num">0.000</td></tr>
+              <tr><td class="num">5</td><td class="num">16</td><td class="num">4.000000</td><td class="num">+0.000000000</td><td class="num">0.000</td></tr>
+              <tr><td class="num">11</td><td class="num">100</td><td class="num">4.000000</td><td class="num">-0.000000015</td><td class="num">0.001</td></tr>
+              <tr><td class="num">51</td><td class="num">2,500</td><td class="num">4.000000</td><td class="num">+0.000000032</td><td class="num">0.026</td></tr>
+              <tr><td class="num">201</td><td class="num">40,000</td><td class="num">4.000000</td><td class="num">-0.000000031</td><td class="num">0.403</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">grid の分割を変えた。差は小数の丸めの範囲に収まる。</p>
+
+        <p class="label">球（半径 1.0、答えは 12.566371）</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="101_area.png" alt="分割を倍にすると、足りない分は4分の1になる。" loading="lazy" decoding="async"></div>
+            <figcaption>分割を倍にすると、足りない分は4分の1になる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="101_ratio.png" alt="減り方は4の前後。誤差は分割の2乗で減っている。" loading="lazy" decoding="async"></div>
+            <figcaption>減り方は4の前後。誤差は分割の2乗で減っている。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分割</th><th>面</th><th>面積</th><th>足りない分</th><th>％</th><th>何分の1</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">8</td><td class="num">56</td><td class="num">11.635271</td><td class="num">0.931099</td><td>7.40945%</td><td class="num muted">—</td><td class="num">0.001</td></tr>
+              <tr><td class="num">16</td><td class="num">240</td><td class="num">12.337864</td><td class="num">0.228507</td><td>1.8184%</td><td class="num">4.075</td><td class="num">0.003</td></tr>
+              <tr><td class="num">30</td><td class="num">870</td><td class="num">12.502151</td><td class="num">0.064219</td><td>0.51104%</td><td class="num">3.558</td><td class="num">0.009</td></tr>
+              <tr><td class="num">60</td><td class="num">3,540</td><td class="num">12.550442</td><td class="num">0.015928</td><td>0.12675%</td><td class="num">4.032</td><td class="num">0.038</td></tr>
+              <tr><td class="num">120</td><td class="num">14,280</td><td class="num">12.562405</td><td class="num">0.003965</td><td>0.03155%</td><td class="num">4.017</td><td class="num">0.145</td></tr>
+              <tr><td class="num">240</td><td class="num">57,360</td><td class="num">12.565382</td><td class="num">0.000989</td><td>0.00787%</td><td class="num">4.009</td><td class="num">0.602</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">polymesh の球。rows と cols を同じ数にした。「何分の1」は、前の段の足りない分をこの段の足りない分で割った値。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>平らな面はぴったり。</strong>1辺2.0の板は、分割 2 から 201 までどれも 4.000000。差は最大 0.000000032 で、小数の丸めの範囲。</li>
+          <li><strong>球は必ず小さく出る。</strong>多角形が球の内側を通るので、分割 8 で 7.40945%、分割 60 で 0.12675%、分割 240 で 0.00787% 足りない。</li>
+          <li><strong>足りない分は分割の2乗で減る。</strong>実測 4.075 / 3.558 / 4.032 / 4.017 / 4.009。分割を倍にすると4分の1になるので、細かくする効きは良い。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 102 ===================== -->
+    <article class="entry entry--current" id="exp102">
+      <div class="badge">102</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>押し出した体積は式どおり — 面積×距離、Inset を入れても四角錐台の式に6桁一致</h2>
+        <p class="path">examples/102_extrude.py &nbsp;·&nbsp; 面積×距離。Inset を入れても四角錐台の式に合う</p>
+
+        <div class="prose">
+          <p><button class="term" data-term="polyextrude">polyextrude</button> で平らな板を厚くすると、できる立体の体積は「元の面積 × 押し出した距離」になるはず。答えの分かっている形で突き合わせた。</p>
+          <p>1辺 2.0 の板（面積 4.0）を 0.1 から 2.0 まで押し出した。5通りすべてで差は 0.000000。**式どおり。**</p>
+          <p>Inset を入れると上の面が小さくなり、立体は四角錐台になる。1辺 L の正方形を i だけ内側に寄せると、上の1辺は L-2i。四角錐台の体積は d/3 × (L² + (L-2i)² + L(L-2i)) になる。</p>
+          <p>Inset を 0 から 0.9 まで（上の1辺 2.0 から 0.2 まで）変えて測ったところ、5通りすべてで差は 0.000000。**こちらも式どおり。**</p>
+          <p>Inset 0.9 では体積が 1.48 で、Inset なしの 4.0 に対して 37.0%。上の面をほとんど潰しても、体積は3分の1までしか減らない（錐に近づくので、底のぶんが残る）。</p>
+        </div>
+
+        <p class="label">押し出す距離を変える（1辺 2.0、面積 4.0）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="102_extrude.png" alt="2本の線が完全に重なっている。" loading="lazy" decoding="async"></div>
+            <figcaption>2本の線が完全に重なっている。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>距離</th><th>面</th><th>体積</th><th>面積×距離</th><th>差</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.1</td><td class="num">6</td><td class="num">0.400000</td><td class="num">0.400000</td><td class="num">+0.000000</td><td class="num">0.001</td></tr>
+              <tr><td class="num">0.25</td><td class="num">6</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">+0.000000</td><td class="num">0.000</td></tr>
+              <tr><td class="num">0.5</td><td class="num">6</td><td class="num">2.000000</td><td class="num">2.000000</td><td class="num">+0.000000</td><td class="num">0.000</td></tr>
+              <tr><td class="num">1</td><td class="num">6</td><td class="num">4.000000</td><td class="num">4.000000</td><td class="num">+0.000000</td><td class="num">0.000</td></tr>
+              <tr><td class="num">2</td><td class="num">6</td><td class="num">8.000000</td><td class="num">8.000000</td><td class="num">+0.000000</td><td class="num">0.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">grid（1面）に polyextrude をかけ、前・後・側面のすべてを出した。体積は measure の Volume を面ごとに足した値の絶対値。</p>
+
+        <p class="label">Inset を変える（距離は 1.0 で揃える）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="102_inset.png" alt="Inset を入れても、四角錐台の式の線に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>Inset を入れても、四角錐台の式の線に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Inset</th><th>上の1辺</th><th>体積</th><th>四角錐台の式</th><th>差</th><th>Insetなしとの差</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">2.00</td><td class="num">4.000000</td><td class="num">4.000000</td><td class="num">+0.000000</td><td class="num">+0.000000</td></tr>
+              <tr><td class="num">0.1</td><td class="num">1.80</td><td class="num">3.613333</td><td class="num">3.613333</td><td class="num">-0.000000</td><td class="num">-0.386667</td></tr>
+              <tr><td class="num">0.25</td><td class="num">1.50</td><td class="num">3.083333</td><td class="num">3.083333</td><td class="num">-0.000000</td><td class="num">-0.916667</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1.00</td><td class="num">2.333333</td><td class="num">2.333333</td><td class="num">+0.000000</td><td class="num">-1.666667</td></tr>
+              <tr><td class="num">0.9</td><td class="num">0.20</td><td class="num">1.480000</td><td class="num">1.480000</td><td class="num">+0.000000</td><td class="num">-2.520000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">上の1辺は 2.0 - 2×Inset。四角錐台の式は d/3 × (L² + 上² + L×上)。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>面積×距離で合う。</strong>5通りすべてで差は 0.000000。押し出した体積を式で見積もれるので、重さや量の計算にそのまま使える。</li>
+          <li><strong>Inset も四角錐台の式で合う。</strong>5通りすべてで差は 0.000000。上の面が小さくなるぶんは、式のとおりに減る。</li>
+          <li><strong>上の面を潰しても、体積は3分の1までしか減らない。</strong>Inset 0.9（上の1辺 0.2）で 1.48、Inset なしの 37.0%。錐に近づくので、底の面のぶんが残る。</li>
+          <li><strong>実験100と合わせて。</strong>peak は<button class="term" data-term="法線">法線</button>の向きに動かすので、角のある形では式が変わる（立方体は 1+2d/√3）。polyextrude は面の向きに押し出すので、面積×距離で素直に効く。厚みを付けたいだけなら polyextrude のほうが読みやすい。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

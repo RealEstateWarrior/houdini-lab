@@ -1,0 +1,98 @@
+{
+  "rows": [
+    {
+      "divs": 8,
+      "prims": 56,
+      "area": 11.635271,
+      "short": 0.931099,
+      "short_pct": 7.40945,
+      "short_ratio": null,
+      "seconds": 0.0009
+    },
+    {
+      "divs": 16,
+      "prims": 240,
+      "area": 12.337864,
+      "short": 0.228507,
+      "short_pct": 1.8184,
+      "short_ratio": 4.075,
+      "seconds": 0.0027
+    },
+    {
+      "divs": 30,
+      "prims": 870,
+      "area": 12.502151,
+      "short": 0.064219,
+      "short_pct": 0.51104,
+      "short_ratio": 3.558,
+      "seconds": 0.0093
+    },
+    {
+      "divs": 60,
+      "prims": 3540,
+      "area": 12.550442,
+      "short": 0.015928,
+      "short_pct": 0.12675,
+      "short_ratio": 4.032,
+      "seconds": 0.0377
+    },
+    {
+      "divs": 120,
+      "prims": 14280,
+      "area": 12.562405,
+      "short": 0.003965,
+      "short_pct": 0.03155,
+      "short_ratio": 4.017,
+      "seconds": 0.1451
+    },
+    {
+      "divs": 240,
+      "prims": 57360,
+      "area": 12.565382,
+      "short": 0.000989,
+      "short_pct": 0.00787,
+      "short_ratio": 4.009,
+      "seconds": 0.6015
+    }
+  ],
+  "exact_sphere": 12.566371,
+  "exact_grid": 4.0,
+  "grid_rows": [
+    {
+      "divs": 2,
+      "prims": 1,
+      "area": 4.0,
+      "diff": 0.0,
+      "seconds": 0.0003
+    },
+    {
+      "divs": 5,
+      "prims": 16,
+      "area": 4.0,
+      "diff": 0.0,
+      "seconds": 0.0003
+    },
+    {
+      "divs": 11,
+      "prims": 100,
+      "area": 4.0,
+      "diff": -1.5e-08,
+      "seconds": 0.0013
+    },
+    {
+      "divs": 51,
+      "prims": 2500,
+      "area": 4.0,
+      "diff": 3.2e-08,
+      "seconds": 0.0257
+    },
+    {
+      "divs": 201,
+      "prims": 40000,
+      "area": 4.0,
+      "diff": -3.1e-08,
+      "seconds": 0.4027
+    }
+  ],
+  "side": 2.0
+}
