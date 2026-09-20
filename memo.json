@@ -14,6 +14,10 @@
           "url": "https://realestatewarrior.github.io/houdini-lab/"
         },
         {
+          "label": "要望",
+          "url": "https://realestatewarrior.github.io/houdini-lab/index.html#requests"
+        },
+        {
           "label": "実験ログ 前半",
           "url": "https://realestatewarrior.github.io/houdini-lab/log.html"
         },
@@ -126,14 +130,9 @@
       "tone": "todo",
       "items": [
         {
-          "title": "手順「テクスチャを貼る」のシーンを作る",
-          "detail": "36本のうち、この1本だけ .hipnc と Houdini の画面が無い。作れば手順が全部そろう。",
-          "state": "残り1本"
-        },
-        {
-          "title": "手順「ターンテーブル」「文字を光らせる」の Houdini 画面",
-          "detail": "実験のときにシーンを保存していなかったので、作り直してから撮る。",
-          "state": "残り2本"
+          "title": "実践の作り残しは要望ページで追う",
+          "detail": "「テクスチャを貼る」「ターンテーブル」「文字を光らせる」の画面は、サイトの要望ページに移した。以後そこで状態を更新する。",
+          "state": "移動済み"
         },
         {
           "title": "画像をアセット置き場へ移す",
@@ -210,6 +209,10 @@
     }
   ],
   "recent": [
+    {
+      "when": "2026-09-20",
+      "what": "実践の要望ページを新設（状態ごとの順番待ち。断った理由も残す形）"
+    },
     {
       "when": "2026-09-20",
       "what": "上のバーを ホーム／実践／実験／解説 の4つに畳み、乗せると降りるパネルにした。ホームに横へ流れる帯を追加"
