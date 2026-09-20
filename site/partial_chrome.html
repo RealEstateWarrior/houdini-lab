@@ -163,6 +163,91 @@
       open = null;
     }
 
+    /* ---- 降りてくるパネル ----
+
+       乗せたら開き、離れたら少し待ってから閉じる。待つのは、見出しから
+       パネルへマウスを動かす途中で閉じないようにするため。
+       高さは中身を測って入れる。中身が変わっても付け直さなくてよい。 */
+
+    (function () {
+      var bar = document.querySelector(".sidenav");
+      var drops = Array.prototype.slice.call(document.querySelectorAll(".nav-drop"));
+      if (!bar || !drops.length) { return; }
+      var openDrop = null;
+      var timer = null;
+
+      function panelOf(drop) { return drop.querySelector(".mega"); }
+
+      function close(drop) {
+        if (!drop) { return; }
+        panelOf(drop).classList.remove("open");
+        drop.firstElementChild.setAttribute("aria-expanded", "false");
+        if (openDrop === drop) { openDrop = null; }
+        if (!openDrop) { bar.classList.remove("nav-lit"); }
+      }
+
+      function open(drop) {
+        if (openDrop === drop) { return; }
+        close(openDrop);
+        var panel = panelOf(drop);
+        var inner = panel.firstElementChild;
+        panel.style.setProperty("--mega-h", inner.offsetHeight + "px");
+        panel.classList.add("open");
+        drop.firstElementChild.setAttribute("aria-expanded", "true");
+        bar.classList.add("nav-lit");
+        openDrop = drop;
+      }
+
+      function later(fn) {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(fn, 180);
+      }
+
+      drops.forEach(function (drop) {
+        drop.addEventListener("mouseenter", function () {
+          window.clearTimeout(timer);
+          open(drop);
+        });
+        drop.addEventListener("mouseleave", function () {
+          later(function () { close(drop); });
+        });
+        /* キーボードで辿ってきたときも開く */
+        drop.addEventListener("focusin", function () {
+          window.clearTimeout(timer);
+          open(drop);
+        });
+        drop.addEventListener("focusout", function (event) {
+          if (drop.contains(event.relatedTarget)) { return; }
+          later(function () { close(drop); });
+        });
+        /* 中の行き先を押したら閉じる */
+        panelOf(drop).addEventListener("click", function () { close(drop); });
+      });
+
+      /* 見出し自身を押したときも、行き先へ飛んだうえで閉じる */
+      drops.forEach(function (drop) {
+        drop.firstElementChild.addEventListener("click", function () {
+          window.setTimeout(function () { close(drop); }, 0);
+        });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && openDrop) {
+          var head = openDrop.firstElementChild;
+          close(openDrop);
+          head.focus();
+        }
+      });
+
+      /* 画面幅が変わると中身の高さも変わる。開いたままなら測り直す */
+      window.addEventListener("resize", function () {
+        if (!openDrop) { return; }
+        var panel = panelOf(openDrop);
+        panel.style.setProperty("--mega-h",
+          panel.firstElementChild.offsetHeight + "px");
+      });
+    }());
+
     /* ---- メニュー ---- */
 
     function menuItem(control) {
@@ -189,7 +274,7 @@
       Array.prototype.forEach.call(source.children, function (li) {
         var control = li.firstElementChild;
         if (!control) { return; }
-        var kids = li.querySelectorAll(".mega li > :first-child");
+        var kids = li.querySelectorAll(".mega-col li > :first-child");
         if (!kids.length) { menuList.appendChild(menuItem(control)); return; }
         var head = document.createElement("li");
         head.className = "sheet-group";

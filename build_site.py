@@ -137,20 +137,32 @@ TABS = [
 MENU = [
     ("ホーム", "overview", []),
     ("実践", "guides", [
-        ("guides", "実践", "作り方を順に並べたもの"),
-        ("works", "制作", "頼まれて作った一点物の記録"),
-        ("requests", "要望", "作ってほしいものと、その順番待ち"),
+        ("作り方", [
+            ("guides", "実践", "作り方を順に並べたもの"),
+            ("works", "制作", "頼まれて作った一点物の記録"),
+        ]),
+        ("順番待ち", [
+            ("requests", "要望", "作ってほしいものと、その順番"),
+        ]),
     ]),
     ("実験", "experiments", [
-        ("experiments", "実験集", "測った回の一覧。押すと中身が開く"),
-        ("@log", "実験ログ モデリング編", "形を作る側の全文"),
-        ("@log_fx", "実験ログ エフェクト編", "動かす側の全文"),
-        ("speed", "効率化", "速さについて分かったこと"),
-        ("links", "参考リンク", "外の資料"),
+        ("測った記録", [
+            ("experiments", "実験集", "1件ずつ。押すと中身が開く"),
+        ]),
+        ("全文を読む", [
+            ("@log", "実験ログ モデリング編", "形を作る側"),
+            ("@log_fx", "実験ログ エフェクト編", "動かす側"),
+        ]),
+        ("そのほか", [
+            ("speed", "効率化", "速さについて分かったこと"),
+            ("links", "参考リンク", "外の資料"),
+        ]),
     ]),
     ("解説", "nodes", [
-        ("nodes", "ノード解説", "箱ひとつずつの説明"),
-        ("glossary", "用語集", "言葉の意味"),
+        ("調べる", [
+            ("nodes", "ノード解説", "箱ひとつずつの説明"),
+            ("glossary", "用語集", "言葉の意味"),
+        ]),
     ]),
 ]
 
@@ -637,8 +649,8 @@ def render_nav(active, tabs, urls):
     """上部のバー。どのページでも同じ並びにする。
 
     左端は SP のロゴだけ。押すと親の Saito Production へ戻る。
-    続くのは4つの見出しで、乗せると下にパネルが降りて中の行き先が並ぶ。
-    ハブでは読み込みなしでタブが切り替わり、子ページではハブへのリンクになる。
+    続くのは4つの見出しで、乗せると下にパネルが降りる。
+    1列目は大きく、2列目から先は小さく出す。
     """
     parent = urls.get("parent") or PARENT_URLS["pages"]
     out = [
@@ -664,24 +676,37 @@ def render_nav(active, tabs, urls):
         return (f'<a href="{urls["home"]}#{target}"{extra}>'
                 f"{html.escape(label)}</a>")
 
-    for index, (head, target, children) in enumerate(MENU):
+    for index, (head, target, columns) in enumerate(MENU):
         current = ' aria-current="page"' if ACTIVE_OF.get(active) == head else ""
-        out.append('        <li class="nav-drop">' if children
-                   else "        <li>")
-        out.append("          " + control(target, head, current))
-        if children:
-            out.append(f'          <div class="mega" id="mega-{index}">')
-            out.append('            <div class="mega-inner">')
-            out.append(f'              <p class="mega-head">{html.escape(head)}</p>')
-            out.append('              <ul>')
-            for child_target, child_label, note in children:
-                out.append("                <li>"
+        if not columns:
+            out.append("        <li>")
+            out.append("          " + control(target, head, current))
+            out.append("        </li>")
+            continue
+
+        out.append('        <li class="nav-drop">')
+        out.append("          " + control(
+            target, head,
+            current + f' aria-expanded="false" aria-controls="mega-{index}"'))
+        out.append(f'          <div class="mega" id="mega-{index}">')
+        out.append('            <div class="mega-inner">')
+        out.append('              <div class="mega-cols">')
+        for col_index, (col_head, links) in enumerate(columns):
+            lead = " col--lead" if col_index == 0 else ""
+            out.append(f'                <div class="mega-col{lead}">')
+            out.append(f'                  <p class="mega-head">'
+                       f"{html.escape(col_head)}</p>")
+            out.append("                  <ul>")
+            for child_target, child_label, note in links:
+                out.append("                    <li>"
                            + control(child_target, child_label)
                            + f'<span class="mega-note">{html.escape(note)}</span>'
                            + "</li>")
-            out.append("              </ul>")
-            out.append("            </div>")
-            out.append("          </div>")
+            out.append("                  </ul>")
+            out.append("                </div>")
+        out.append("              </div>")
+        out.append("            </div>")
+        out.append("          </div>")
         out.append("        </li>")
 
     out.append(f'        <li><a href="{NOTEBOOK_URL}" class="nav-ext"'

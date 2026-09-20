@@ -1451,10 +1451,15 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 
 /* ---------- 降りてくるパネル（上のバー） ----------
 
-   見出しは4つだけ。乗せると、バーの下いっぱいに1枚降りてきて、
-   その中に行き先が並ぶ。押したときは先頭の行き先へ飛ぶ。 */
+   見出しは4つだけ。乗せると、バーの下いっぱいに1枚降りてくる。
+   高さを 0 から本来の高さへ動かすので、ブラインドのように開く。
 
-.sidenav .nav-menu { overflow: visible; gap: 4px; }
+   注意: 見出しとパネルの間に隙間があると、そこでマウスの当たりが切れて
+   降りる途中で閉じてしまう。見出しの li をバーの高さいっぱいに伸ばして、
+   パネルがその真下から始まるようにしてある。 */
+
+.sidenav .nav-menu { overflow: visible; gap: 4px; align-items: stretch; }
+.sidenav .nav-menu > li { display: flex; align-items: center; }
 .nav-drop { position: static; }
 
 .mega {
@@ -1462,52 +1467,57 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   top: 100%;
   left: 0;
   right: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
   background: var(--ground);
   border-bottom: 1px solid var(--wire-dim);
-  box-shadow: var(--shadow);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  pointer-events: none;
-  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+  transition: height 0.3s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s linear 0.3s;
 }
-.nav-drop:hover .mega,
-.nav-drop:focus-within .mega {
-  opacity: 1;
+.mega.open {
+  height: var(--mega-h, auto);
   visibility: visible;
-  transform: none;
-  pointer-events: auto;
-  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s;
+  box-shadow: var(--shadow);
+  transition: height 0.32s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s;
 }
-.mega-inner { max-width: 980px; margin: 0 auto; padding: 26px 22px 32px; }
-.mega-head {
-  margin: 0 0 14px;
-  font-family: var(--font-display);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--ink-dim);
+/* パネルが開いているあいだは、バーを透かさない（後ろの文字が透けて読めるため） */
+.sidenav.nav-lit { background: var(--ground); }
+
+.mega-inner { max-width: 980px; margin: 0 auto; padding: 30px 22px 40px; }
+.mega-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) repeat(auto-fit, minmax(170px, 1fr));
+  gap: 26px 40px;
+  align-items: start;
 }
-.mega ul {
+.mega-col > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 18px 34px;
+  gap: 14px;
   overflow: visible;
   flex: none;
 }
-.mega li { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.mega-col li { display: flex; flex-direction: column; gap: 1px; align-items: flex-start; }
+.mega-head {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-dim);
+}
 
-/* パネルの中だけは、バーの小さな丸ボタンではなく大きな見出しとして出す */
+/* パネルの中は、バーの小さな丸ボタンではなく見出しとして出す。
+   1列目だけ大きく、2列目から先は小さく。 */
 .sidenav .mega a,
 .sidenav .mega button.nav-tab {
   font-family: var(--font-display);
-  font-size: 1.16rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: -0.012em;
-  line-height: 1.35;
+  letter-spacing: -0.006em;
+  line-height: 1.45;
   padding: 0;
   border-radius: 0;
   background: none;
@@ -1515,20 +1525,25 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   white-space: normal;
   text-align: left;
 }
+.sidenav .col--lead a,
+.sidenav .col--lead button.nav-tab {
+  font-size: 1.44rem;
+  letter-spacing: -0.018em;
+  line-height: 1.3;
+}
+.col--lead > ul { gap: 18px; }
 .sidenav .mega a:hover,
 .sidenav .mega button.nav-tab:hover { background: none; color: var(--flag); }
 .sidenav .mega button.nav-tab[aria-selected="true"] { background: none; color: var(--ink); }
-.mega-note { font-size: 0.78rem; line-height: 1.6; color: var(--ink-dim); }
+.mega-note { font-size: 0.76rem; line-height: 1.6; color: var(--ink-dim); }
+.col--lead .mega-note { font-size: 0.8rem; }
 
-/* 見出しに乗っているあいだは、見出し自身も押せる状態だと分かるようにする */
-.nav-drop > button.nav-tab,
-.nav-drop > a { position: relative; }
-.nav-drop:hover > button.nav-tab,
-.nav-drop:hover > a { background: var(--ground-2); color: var(--ink); }
+/* 開いている見出しは、そうと分かるようにしておく */
+.nav-drop > button.nav-tab[aria-expanded="true"],
+.nav-drop > a[aria-expanded="true"] { background: var(--ground-2); color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
-  .mega { transition: none; }
-  .nav-drop:hover .mega, .nav-drop:focus-within .mega { transition: none; }
+  .mega, .mega.open { transition: none; }
 }
 
 /* ---------- 制作だけの2枠 ---------- */
@@ -2478,6 +2493,91 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
       open = null;
     }
 
+    /* ---- 降りてくるパネル ----
+
+       乗せたら開き、離れたら少し待ってから閉じる。待つのは、見出しから
+       パネルへマウスを動かす途中で閉じないようにするため。
+       高さは中身を測って入れる。中身が変わっても付け直さなくてよい。 */
+
+    (function () {
+      var bar = document.querySelector(".sidenav");
+      var drops = Array.prototype.slice.call(document.querySelectorAll(".nav-drop"));
+      if (!bar || !drops.length) { return; }
+      var openDrop = null;
+      var timer = null;
+
+      function panelOf(drop) { return drop.querySelector(".mega"); }
+
+      function close(drop) {
+        if (!drop) { return; }
+        panelOf(drop).classList.remove("open");
+        drop.firstElementChild.setAttribute("aria-expanded", "false");
+        if (openDrop === drop) { openDrop = null; }
+        if (!openDrop) { bar.classList.remove("nav-lit"); }
+      }
+
+      function open(drop) {
+        if (openDrop === drop) { return; }
+        close(openDrop);
+        var panel = panelOf(drop);
+        var inner = panel.firstElementChild;
+        panel.style.setProperty("--mega-h", inner.offsetHeight + "px");
+        panel.classList.add("open");
+        drop.firstElementChild.setAttribute("aria-expanded", "true");
+        bar.classList.add("nav-lit");
+        openDrop = drop;
+      }
+
+      function later(fn) {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(fn, 180);
+      }
+
+      drops.forEach(function (drop) {
+        drop.addEventListener("mouseenter", function () {
+          window.clearTimeout(timer);
+          open(drop);
+        });
+        drop.addEventListener("mouseleave", function () {
+          later(function () { close(drop); });
+        });
+        /* キーボードで辿ってきたときも開く */
+        drop.addEventListener("focusin", function () {
+          window.clearTimeout(timer);
+          open(drop);
+        });
+        drop.addEventListener("focusout", function (event) {
+          if (drop.contains(event.relatedTarget)) { return; }
+          later(function () { close(drop); });
+        });
+        /* 中の行き先を押したら閉じる */
+        panelOf(drop).addEventListener("click", function () { close(drop); });
+      });
+
+      /* 見出し自身を押したときも、行き先へ飛んだうえで閉じる */
+      drops.forEach(function (drop) {
+        drop.firstElementChild.addEventListener("click", function () {
+          window.setTimeout(function () { close(drop); }, 0);
+        });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && openDrop) {
+          var head = openDrop.firstElementChild;
+          close(openDrop);
+          head.focus();
+        }
+      });
+
+      /* 画面幅が変わると中身の高さも変わる。開いたままなら測り直す */
+      window.addEventListener("resize", function () {
+        if (!openDrop) { return; }
+        var panel = panelOf(openDrop);
+        panel.style.setProperty("--mega-h",
+          panel.firstElementChild.offsetHeight + "px");
+      });
+    }());
+
     /* ---- メニュー ---- */
 
     function menuItem(control) {
@@ -2504,7 +2604,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
       Array.prototype.forEach.call(source.children, function (li) {
         var control = li.firstElementChild;
         if (!control) { return; }
-        var kids = li.querySelectorAll(".mega li > :first-child");
+        var kids = li.querySelectorAll(".mega-col li > :first-child");
         if (!kids.length) { menuList.appendChild(menuItem(control)); return; }
         var head = document.createElement("li");
         head.className = "sheet-group";
