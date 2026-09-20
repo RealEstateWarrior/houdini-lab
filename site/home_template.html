@@ -32,7 +32,7 @@
         <p>上から順に読むと、作り方 → 確かめ方 → 言葉の意味、の順で入れます。</p>
       </div>
       <div class="route">
-        <a class="route-step" href="#guides">
+        <a class="route-step" href="<!--URL_GUIDES-->">
           <span class="route-no">1</span>
           <span class="route-text">
             <strong>実践を見る</strong>
@@ -40,7 +40,7 @@
             同じものをそのまま組めます。
           </span>
         </a>
-        <a class="route-step" href="#experiments">
+        <a class="route-step" href="<!--URL_EXPERIMENTS-->">
           <span class="route-no">2</span>
           <span class="route-text">
             <strong>実験を読む</strong>
@@ -48,7 +48,7 @@
             カードを押すと要点が開きます。
           </span>
         </a>
-        <a class="route-step" href="#glossary">
+        <a class="route-step" href="<!--URL_GLOSSARY-->">
           <span class="route-no">3</span>
           <span class="route-text">
             <strong>言葉を引く</strong>
@@ -351,7 +351,10 @@
       return false;
     }
 
-    if (!openFromHash(window.location.hash, false)) { show("overview", false); }
+    /* ハブは3ページに分かれている。既定で開くのは、このページが持つ最初のパネル */
+    if (!openFromHash(window.location.hash, false)) {
+      show(tabs.length ? tabs[0].dataset.panel : "overview", false);
+    }
 
     window.addEventListener("hashchange", function () {
       openFromHash(window.location.hash, false);

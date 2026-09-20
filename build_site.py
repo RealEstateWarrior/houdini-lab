@@ -57,6 +57,10 @@ ARTIFACT_URLS = {
     "glossary": "https://claude.ai/code/artifact/5236e98a-7bc1-4fd0-b523-856c80513868",
     "links": "https://claude.ai/code/artifact/0085c322-cc2d-4d35-ac08-f39eb4e63f4f",
     "parent": "https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo",
+    # ハブを3つに分けたので、実践と解説は別のArtifactになる。
+    # 発行したらこの2つを本物のURLに差し替えて、もう一度ビルドする。
+    "guides": "PENDING_GUIDES_URL",
+    "ref": "PENDING_REF_URL",
 }
 
 # GitHub Pages 版。ルートがハブになるよう index.html をハブに割り当てる。
@@ -67,6 +71,8 @@ PAGES_URLS = {
     "log_fx": "log_fx.html",
     "glossary": "glossary.html",
     "links": "links.html",
+    "guides": "practice.html",
+    "ref": "reference.html",
     # 親は別リポジトリの入口（realestatewarrior.github.io/）。
     # この部のページは /houdini-lab/ 以下なので、1つ上が親になる。
     "parent": "../",
@@ -80,6 +86,8 @@ ROOT_URLS = {
     "log_fx": "houdini-lab/log_fx.html",
     "glossary": "houdini-lab/glossary.html",
     "links": "houdini-lab/links.html",
+    "guides": "houdini-lab/practice.html",
+    "ref": "houdini-lab/reference.html",
     "parent": "index.html",
 }
 
@@ -172,6 +180,32 @@ MENU = [
 
 # その行き先にいるときに印を付けるための対応表
 ACTIVE_OF = {"glossary": "解説", "links": "実験", "log": "実験"}
+
+# Claude 版は1つの版に置けるファイルが512まで。パネルを全部1ページに入れると
+# 529 必要で入らない（実践のパラメータ画面163・実験の図145・サムネイル104…）。
+# そこでハブを3ページに分ける。枠は Artifact ごとに付くので、これで収まる。
+# 外部から画像を読む案は使えない（Artifact は自分のファイルと Google Fonts と
+# 一部のCDNしか通さない。2026-09-20 に発行して確かめた）。
+PAGE_PANELS = {
+    "home": ["overview", "experiments", "speed"],
+    "guides": ["guides", "works", "requests"],
+    "ref": ["nodes", "glossary", "links"],
+}
+PANEL_PAGE = {panel: page
+              for page, panels in PAGE_PANELS.items()
+              for panel in panels}
+
+
+def panel_url(urls, panel):
+    """そのパネルを持っているページの住所に #パネル を付けて返す。"""
+    page = PANEL_PAGE.get(panel, "home")
+    return f'{urls[page]}#{panel}'
+
+
+def guide_url(urls, guide_id):
+    """実践ひとつを開く住所。実践は guides のページが持っている。"""
+    return f'{urls[PANEL_PAGE["guides"]]}#guide-{guide_id}'
+
 
 DONE = [
     {"no": "001", "anchor": "exp001", "tags": ["モデリング", "ノイズ", "基礎"], "log": "log_pm", "hip": "box_mountain.hipnc", "thumb": "box_mountain.png",
@@ -722,18 +756,23 @@ PLANNED = []
 PLANNED_FX = []
 
 PAGES = [
-    # template, site出力, docs出力, ナビの現在位置, タブ形式か
+    # template, site出力, docs出力, ナビの現在位置, タブ形式か, 持つパネルの束
     # 親ページは docs/ には出さない。GitHub 版は別リポジトリの入口に置く。
-    ("sp_template.html", "sp.html", None, "sp", False),
-    ("home_template.html", "home.html", "index.html", "home", True),
-    ("log_pm_template.html", "index.html", "log.html", "log", False),
-    ("log_fx_template.html", "log_fx.html", "log_fx.html", "log", False),
-    ("glossary_template.html", "glossary.html", "glossary.html", "glossary", False),
-    ("links_template.html", "links.html", "links.html", "links", False),
+    ("sp_template.html", "sp.html", None, "sp", False, None),
+    ("home_template.html", "home.html", "index.html", "home", True, "home"),
+    ("home_template.html", "practice.html", "practice.html", "guides", True,
+     "guides"),
+    ("home_template.html", "reference.html", "reference.html", "ref", True,
+     "ref"),
+    ("log_pm_template.html", "index.html", "log.html", "log", False, None),
+    ("log_fx_template.html", "log_fx.html", "log_fx.html", "log", False, None),
+    ("glossary_template.html", "glossary.html", "glossary.html", "glossary",
+     False, None),
+    ("links_template.html", "links.html", "links.html", "links", False, None),
 ]
 
 
-def render_nav(active, tabs, urls):
+def render_nav(active, tabs, urls, panels=None):
     """上部のバー。どのページでも同じ並びにする。
 
     左端は SP のロゴだけ。押すと親の Saito Production へ戻る。
@@ -756,12 +795,14 @@ def render_nav(active, tabs, urls):
         if target.startswith("@"):
             href = urls[target[1:]]
             return f'<a href="{href}"{extra}>{html.escape(label)}</a>'
-        if tabs:
+        # そのパネルを、いま出しているページが持っているならタブ。
+        # 別のページが持っているなら、そのページへのリンクにする。
+        if tabs and target in (panels or ()):
             return (f'<button type="button" class="nav-tab" role="tab"'
                     f' id="tab-{target}" data-panel="{target}"'
                     f' aria-controls="panel-{target}"'
                     f' aria-selected="false"{extra}>{html.escape(label)}</button>')
-        return (f'<a href="{urls["home"]}#{target}"{extra}>'
+        return (f'<a href="{panel_url(urls, target)}"{extra}>'
                 f"{html.escape(label)}</a>")
 
     for index, (head, target, columns) in enumerate(MENU):
@@ -888,7 +929,8 @@ def render_sp_guides(guides, urls, count=3):
     """新しい手順。親から「作り方」へ直行させる。"""
     out = ['      <div class="tiles">']
     for guide in list(reversed(guides["guides"]))[:count]:
-        out.append(f'        <a class="tile" href="{urls["home"]}#guides">')
+        out.append('        <a class="tile" href="'
+                   + panel_url(urls, "guides") + '">')
         out.append(f'          <img src="{guide["hero"]}" loading="lazy"'
                    f' decoding="async" alt="{html.escape(guide["title"])}の完成図">')
         out.append('          <span class="tile-body">')
@@ -1100,7 +1142,7 @@ def inject_experiment_links(page, urls, nodes):
     def build(match):
         whole, no = match.group(1), match.group(2)
         rows = []
-        chips = [f'<a href="{urls["home"]}#nodes">{html.escape(name)}</a>'
+        chips = [f'<a href="{panel_url(urls, "nodes")}">{html.escape(name)}</a>'
                  for name, _ in table.get(no, [])]
         if chips:
             rows.append('        <p class="usedby">'
@@ -1593,7 +1635,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
                 "kind": "効率化",
                 "label": tip["rule"],
                 "note": tip["evidence"][:70],
-                "href": f'{urls["home"]}#speed',
+                "href": panel_url(urls, "speed"),
                 "tab": "speed",
                 "anchor": f'speed-{group["id"]}-{index}',
                 "tags": ["速さ", "効率", "時間", group["title"]],
@@ -1609,7 +1651,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
             "kind": "実践",
             "label": guide["title"],
             "note": guide["lede"][:70],
-            "href": f'{urls["home"]}#guide-{guide["id"]}',
+            "href": guide_url(urls, guide["id"]),
             "tab": "guides",
             "guide": guide["id"],
             "body": f"{steps} {traps}",
@@ -1623,7 +1665,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
                 "kind": "ノード",
                 "label": node["name"],
                 "note": node["one"],
-                "href": f'{urls["home"]}#nodes',
+                "href": panel_url(urls, "nodes"),
                 "tab": "nodes",
                 "anchor": f"node-{index}",
                 "body": f'{node.get("what", "")} {node.get("gotcha", "")}',
@@ -1646,7 +1688,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
 
     for panel, label in TABS:
         items.append({"kind": "ページ", "label": label,
-                      "note": "タブを開く", "href": f'{urls["home"]}#{panel}',
+                      "note": "タブを開く", "href": panel_url(urls, panel),
                       "tab": panel})
     items.append({"kind": "ページ", "label": "実験ログ（全文）",
                   "note": "すべての実験の記録", "href": urls["log"]})
@@ -1744,17 +1786,51 @@ def count_nodes(nodes):
     return sum(len(g["nodes"]) for g in nodes["groups"])
 
 
+def strip_panels(page, keep):
+    """このページが持たないパネルを、ひな形から取り除く。
+
+    パネルは <section class="panel" id="panel-XXX" …> … </section> の1かたまり。
+    ひな形の中では入れ子になっていないので、開きから閉じまでを素直に切れる。
+    取り除くと中の差し込み札も消えるので、その画像はページに入らない
+    （これがファイル数を下げる仕組み）。
+    """
+    while True:
+        target = None
+        for match in re.finditer(
+                r'    <section class="panel" id="panel-(\w+)"', page):
+            if match.group(1) not in keep:
+                target = match
+                break
+        if target is None:
+            return page
+        start = target.start()
+        close = page.index("    </section>", start) + len("    </section>")
+        # 改行の書き方（LF か CRLF）に左右されないよう、その行の終わりまで進める
+        while close < len(page) and page[close] in "\r\n":
+            close += 1
+        # 消すたびに位置がずれるので、毎回もう一度探し直す
+        page = page[:start] + page[close:]
+
+
 def render(template_name, out_dir, out_name, active, tabs, urls,
            data, nodes, guides, works, requests, css, links_body,
-           popover, chrome):
+           popover, chrome, bundle=None):
     with open(os.path.join(SITE, template_name), encoding="utf-8") as fp:
         page = fp.read()
 
+    panels = PAGE_PANELS.get(bundle) if bundle else None
+    if panels:
+        page = strip_panels(page, set(panels))
+
+    # 実験ポップアップの中身はパネルの外にあるので、実験を持つページだけに入れる
+    exp_data = render_exp_data(urls) if (not panels or "experiments" in panels) \
+        else '<script type="application/json" id="experiment-data">{}</script>'
+
     for needle, value in (
         ("<!--CSS-->", css),
-        ("<!--NAV-->", render_nav(active, tabs, urls)),
+        ("<!--NAV-->", render_nav(active, tabs, urls, panels)),
         ("<!--THUMBS-->", render_thumbs(urls)),
-        ("<!--EXP_DATA-->", render_exp_data(urls)),
+        ("<!--EXP_DATA-->", exp_data),
         ("<!--NODES-->", render_nodes(nodes, urls)),
         ("<!--GUIDES-->", render_guides(guides, works, urls)),
         ("<!--GUIDE_CARDS-->", render_guide_cards(guides)),
@@ -1777,6 +1853,9 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--EXP_TOTAL-->", str(len(DONE) + len(PLANNED) + len(PLANNED_FX))),
         ("<!--NODE_COUNT-->", str(count_nodes(nodes))),
         ("<!--TERM_COUNT-->", str(count_terms(data))),
+        ("<!--URL_GUIDES-->", panel_url(urls, "guides")),
+        ("<!--URL_EXPERIMENTS-->", panel_url(urls, "experiments")),
+        ("<!--URL_GLOSSARY-->", panel_url(urls, "glossary")),
         ("<!--HOME_URL-->", urls["home"]),
         ("<!--LOG_URL-->", urls["log"]),
         ("<!--LOGPM_URL-->", urls["log_pm"]),
@@ -1893,21 +1972,21 @@ def main():
     with open(os.path.join(SITE, "partial_chrome.html"), encoding="utf-8") as fp:
         chrome = fp.read()
 
-    for template_name, site_out, docs_out, active, tabs in PAGES:
+    for template_name, site_out, docs_out, active, tabs, bundle in PAGES:
         render(template_name, SITE, site_out, active, tabs,
-               ARTIFACT_URLS, data, nodes, guides, works, requests, css, links_body,
-               popover, chrome)
+               ARTIFACT_URLS, data, nodes, guides, works, requests, css,
+               links_body, popover, chrome, bundle)
         if docs_out:
             render(template_name, DOCS, docs_out, active, tabs,
-                   PAGES_URLS, data, nodes, guides, works, requests, css, links_body,
-                   popover, chrome)
+                   PAGES_URLS, data, nodes, guides, works, requests, css,
+                   links_body, popover, chrome, bundle)
 
     # 親ページ。クローンが置いてあるときだけ書き出す。
     root_note = "置き場が無いので飛ばした"
     if os.path.isdir(ROOT):
         render("sp_template.html", ROOT, "index.html", "sp", False,
-               ROOT_URLS, data, nodes, guides, works, requests, css, links_body,
-               popover, chrome)
+               ROOT_URLS, data, nodes, guides, works, requests, css,
+               links_body, popover, chrome, None)
         root_note = os.path.join(ROOT, "index.html")
 
     # GitHub Pages に Jekyll 処理をさせない
@@ -1915,7 +1994,8 @@ def main():
         fp.write("")
 
     total, copied = copy_images()
-    print(f"site/ に {len(PAGES)} ページ、docs/ に {len(PAGES) - 1} ページ生成")
+    docs_count = sum(1 for spec in PAGES if spec[2])
+    print(f"site/ に {len(PAGES)} ページ、docs/ に {docs_count} ページ生成")
     print(f"親ページ: {root_note}")
     print(f"ノード {count_nodes(nodes)} 件 / 用語 {count_terms(data)} 件")
     print(f"画像 {total} 件（うち {copied} 件をコピー）")
