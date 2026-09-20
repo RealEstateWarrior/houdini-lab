@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "keep": 80,
+      "prims": 2832,
+      "points": 2384,
+      "seconds": 0.0062,
+      "gap_mean": 8.7e-05,
+      "gap_max": 0.001369,
+      "gap_mean_pct": 0.0044,
+      "gap_max_pct": 0.0686
+    },
+    {
+      "keep": 50,
+      "prims": 1769,
+      "points": 1110,
+      "seconds": 0.0103,
+      "gap_mean": 0.000853,
+      "gap_max": 0.00342,
+      "gap_mean_pct": 0.0428,
+      "gap_max_pct": 0.1714
+    },
+    {
+      "keep": 25,
+      "prims": 885,
+      "points": 481,
+      "seconds": 0.0123,
+      "gap_mean": 0.002383,
+      "gap_max": 0.008198,
+      "gap_mean_pct": 0.1194,
+      "gap_max_pct": 0.4108
+    },
+    {
+      "keep": 10,
+      "prims": 353,
+      "points": 182,
+      "seconds": 0.0138,
+      "gap_mean": 0.005794,
+      "gap_max": 0.014111,
+      "gap_mean_pct": 0.2903,
+      "gap_max_pct": 0.7071
+    },
+    {
+      "keep": 5,
+      "prims": 177,
+      "points": 92,
+      "seconds": 0.0135,
+      "gap_mean": 0.011303,
+      "gap_max": 0.023076,
+      "gap_mean_pct": 0.5664,
+      "gap_max_pct": 1.1564
+    },
+    {
+      "keep": 2,
+      "prims": 70,
+      "points": 37,
+      "seconds": 0.0137,
+      "gap_mean": 0.034915,
+      "gap_max": 0.050754,
+      "gap_mean_pct": 1.7497,
+      "gap_max_pct": 2.5434
+    }
+  ],
+  "base_prims": 3540,
+  "base_size": 1.995536
+}

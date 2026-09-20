@@ -4278,6 +4278,221 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 091 ===================== -->
+    <article class="entry entry--current" id="exp091">
+      <div class="badge">091</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>面を半分にすると、形のずれはおよそ2倍になる — 25%まで減らしてもずれは幅の 0.1194%</h2>
+        <p class="path">examples/091_polyreduce.py &nbsp;·&nbsp; 面を25%まで減らしても、ずれは幅の0.12%にとどまる</p>
+
+        <div class="prose">
+          <p>polyreduce は「残す割合」を決めると、そこまで面を間引く。軽くなるのは当たり前だが、形はどれだけ元から離れるのか。3540面の形を 80/50/25/10/5/2% まで減らして測った。</p>
+          <p>ずれの測り方は、減らしたあとの各点から元の面までの最短距離（<button class="term" data-term="VEX">VEX</button> の xyzdist）。その平均と最大を、元の形の幅で割って割合にした。</p>
+          <p>25%まで減らすと、面は 3540 から 885 へ。ずれの平均は幅の 0.1194%、最大でも 0.4108%。見た目にはほとんど分からない大きさに収まっている。</p>
+          <p>減らしすぎると急に崩れる。2%（70面）では平均 1.7497%、最大 2.5434%。50%から2%までの区間では、面の数が半分になるたびにずれがおよそ2倍になっていた。</p>
+          <p>時間は、どの割合でもほとんど変わらない（0.0062〜0.0138秒）。減らす量を増やしても遅くならない。</p>
+        </div>
+
+        <p class="label">残す割合ごとの、面の数と形のずれ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="091_reduce.png" alt="25%まではずれが小さいまま。そこから先は、面を半分にするたびにずれがおよそ2倍" loading="lazy" decoding="async"></div>
+            <figcaption>25%まではずれが小さいまま。そこから先は、面を半分にするたびにずれがおよそ2倍になる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>残す%</th><th>面</th><th>点</th><th>ずれ 平均</th><th>幅の%</th><th>ずれ 最大</th><th>幅の%</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">80</td><td class="num">2832</td><td class="num">2384</td><td class="num">0.000087</td><td>0.0044%</td><td class="num">0.001369</td><td>0.0686%</td><td class="num">0.006</td></tr>
+              <tr><td class="num">50</td><td class="num">1769</td><td class="num">1110</td><td class="num">0.000853</td><td>0.0428%</td><td class="num">0.003420</td><td>0.1714%</td><td class="num">0.010</td></tr>
+              <tr><td class="num">25</td><td class="num">885</td><td class="num">481</td><td class="num">0.002383</td><td>0.1194%</td><td class="num">0.008198</td><td>0.4108%</td><td class="num">0.012</td></tr>
+              <tr><td class="num">10</td><td class="num">353</td><td class="num">182</td><td class="num">0.005794</td><td>0.2903%</td><td class="num">0.014111</td><td>0.7071%</td><td class="num">0.014</td></tr>
+              <tr><td class="num">5</td><td class="num">177</td><td class="num">92</td><td class="num">0.011303</td><td>0.5664%</td><td class="num">0.023076</td><td>1.1564%</td><td class="num">0.013</td></tr>
+              <tr><td class="num">2</td><td class="num">70</td><td class="num">37</td><td class="num">0.034915</td><td>1.7497%</td><td class="num">0.050754</td><td>2.5434%</td><td class="num">0.014</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">元は球（60×60）に <button class="term" data-term="mountain">mountain</button> をかけた 3540面・幅 1.995536。ずれは、減らしたあとの各点から元の面までの最短距離。「幅の%」は、その距離を元の形の幅で割ったもの。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>25%まではほとんど変わらない。</strong>面を 3540 から 885 に減らしても、ずれの平均は幅の 0.1194%。半分（1769面）なら 0.0428%。</li>
+          <li><strong>面を半分にすると、ずれはおよそ2倍。</strong>1769→885面で 2.79倍、885→353面で 2.43倍、353→177面で 1.95倍、177→70面で 3.09倍。</li>
+          <li><strong>減らす量を増やしても遅くならない。</strong>0.0062秒から 0.0138秒の間で、残す割合との関係は見えなかった。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 092 ===================== -->
+    <article class="entry entry--current" id="exp092">
+      <div class="badge">092</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>辺の長さを半分にすると、面は約4倍・ずれは約1/4・時間は約4倍</h2>
+        <p class="path">examples/092_remesh.py &nbsp;·&nbsp; 辺を半分にすると、面は4倍・ずれは1/4・時間は4倍</p>
+
+        <div class="prose">
+          <p>remesh は「目指す辺の長さ」を決めて、そこに近い三角形で張り直す。面積あたりの三角形の数で考えれば、辺を半分にすると面は4倍になるはず。球（40×40、1560面）を、辺 0.2 / 0.1 / 0.05 / 0.025 で張り直して測った。</p>
+          <p>面の数は 678 → 2908 → 11518 → 47238。前の段からの倍率は 4.289 / 3.961 / 4.101 で、いずれも4倍の前後だった。</p>
+          <p>元の形からのずれは 0.003694 から 0.000058 まで小さくなる。1段ごとの縮み方は 4.49倍 / 3.59倍 / 3.95倍。こちらも約4分の1ずつ。</p>
+          <p>時間は 0.0078秒 から 0.3146秒。面の数に比例して増えている。細かくすることの代金は、面の数そのままに乗る。</p>
+        </div>
+
+        <p class="label">目指す辺の長さごとの、面の数・ずれ・時間</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="092_remesh.png" alt="1段ごとの面の増え方は4倍の前後に収まる。空間ではなく面積あたりで増えていること" loading="lazy" decoding="async"></div>
+            <figcaption>1段ごとの面の増え方は4倍の前後に収まる。空間ではなく面積あたりで増えていることになる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="092_gap.png" alt="ずれは約1/4ずつ小さくなり、時間は約4倍ずつ増える。" loading="lazy" decoding="async"></div>
+            <figcaption>ずれは約1/4ずつ小さくなり、時間は約4倍ずつ増える。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>目指す辺</th><th>面</th><th>点</th><th>面の倍率</th><th>ずれ 平均</th><th>ずれ 最大</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.2</td><td class="num">678</td><td class="num">341</td><td class="num muted">—</td><td class="num">0.003694</td><td class="num">0.008615</td><td class="num">0.008</td></tr>
+              <tr><td class="num">0.1</td><td class="num">2908</td><td class="num">1456</td><td class="num">4.289</td><td class="num">0.000823</td><td class="num">0.003000</td><td class="num">0.017</td></tr>
+              <tr><td class="num">0.05</td><td class="num">11518</td><td class="num">5761</td><td class="num">3.961</td><td class="num">0.000229</td><td class="num">0.001321</td><td class="num">0.065</td></tr>
+              <tr><td class="num">0.025</td><td class="num">47238</td><td class="num">23621</td><td class="num">4.101</td><td class="num">0.000058</td><td class="num">0.000660</td><td class="num">0.315</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">元は球（40×40）の 1560面。「面の倍率」は前の段からの比。ずれは各点から元の面までの最短距離。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>面は4倍ずつ増える。</strong>実測 4.289 / 3.961 / 4.101。辺の長さを半分にすると、面積あたりの三角形の数が4倍になるという見方と合う。</li>
+          <li><strong>ずれは約1/4ずつ小さくなる。</strong>4.49倍 / 3.59倍 / 3.95倍。面を4倍にして、ずれが1/4。増やした分がそのまま精度になっている。</li>
+          <li><strong>時間も約4倍ずつ。</strong>0.0078秒 → 0.3146秒。面の数に比例するので、細かさを上げるほど代金は素直に増える。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 093 ===================== -->
+    <article class="entry entry--current" id="exp093">
+      <div class="badge">093</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>ならしても体積はほとんど減らない — 強さ160でも 99.60%、縮みは 0.40%だけ</h2>
+        <p class="path">examples/093_smooth_volume.py &nbsp;·&nbsp; ならしても体積は0.40%しか減らない。縮むという言い方は当たらない</p>
+
+        <div class="prose">
+          <p>smooth は点を近所の平均へ寄せる。凹凸が消えるのは狙い通りだが、同時に形が縮むと言われる。どれだけ縮むのかを測った。</p>
+          <p>球（60×60）に <button class="term" data-term="mountain">mountain</button> をかけた形（体積 4.111425）に、Strength を 0 から 160 までかけた。体積は measure <button class="term" data-term="SOP">SOP</button> の Volume を面ごとに足して出した。</p>
+          <p>既定の Strength 10 で体積は元の 99.9533%。16倍の 160 まで上げても 99.6023% で、減ったのは 0.40%だけだった。「ならすと縮む」という言い方は、少なくともこの形とこの<button class="term" data-term="ノード">ノード</button>では**体積の話としては当てはまらない**。</p>
+          <p>形そのものは動いている。元の面からのずれは強さ10で 0.002454、160で 0.006263。凹凸は確かに消えているが、出た所と入った所が相殺して、体積としては残る。</p>
+          <p>ならし方（Method）を変えても、縮みの差は小さい。強さ160で揃えると uniform が 99.6023%、scaledominant が 99.673%、curvaturedominant が 99.7338%。曲率を見るやり方がいちばん体積を保ち、同時にずれも小さかった。</p>
+        </div>
+
+        <p class="label">Strength ごとの体積とずれ</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="093_smooth.png" alt="強さを16倍にしても、体積は 0.40% しか減らない。" loading="lazy" decoding="async"></div>
+            <figcaption>強さを16倍にしても、体積は 0.40% しか減らない。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="093_gap.png" alt="形は動いている。ずれは強さとともに増える。" loading="lazy" decoding="async"></div>
+            <figcaption>形は動いている。ずれは強さとともに増える。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Strength</th><th>体積</th><th>元の%</th><th>ずれ 平均</th><th>ずれ 最大</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">4.111425</td><td>100.0%</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">0.000</td></tr>
+              <tr><td class="num">2.5</td><td class="num">4.110802</td><td>99.9849%</td><td class="num">0.001414</td><td class="num">0.012110</td><td class="num">0.004</td></tr>
+              <tr><td class="num">5</td><td class="num">4.110319</td><td>99.9731%</td><td class="num">0.001891</td><td class="num">0.015560</td><td class="num">0.003</td></tr>
+              <tr><td class="num">10</td><td class="num">4.109505</td><td>99.9533%</td><td class="num">0.002454</td><td class="num">0.019200</td><td class="num">0.003</td></tr>
+              <tr><td class="num">20</td><td class="num">4.108155</td><td>99.9205%</td><td class="num">0.003153</td><td class="num">0.023063</td><td class="num">0.004</td></tr>
+              <tr><td class="num">40</td><td class="num">4.105900</td><td>99.8656%</td><td class="num">0.004013</td><td class="num">0.027141</td><td class="num">0.004</td></tr>
+              <tr><td class="num">80</td><td class="num">4.102029</td><td>99.7715%</td><td class="num">0.005043</td><td class="num">0.031824</td><td class="num">0.004</td></tr>
+              <tr><td class="num">160</td><td class="num">4.095072</td><td>99.6023%</td><td class="num">0.006263</td><td class="num">0.037208</td><td class="num">0.005</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">元は球（60×60）に mountain（高さ0.2）をかけた 3,540面、体積 4.111425。体積は measure の Volume を面ごとに足した値。ずれは各点から元の面までの最短距離。</p>
+
+        <p class="label">ならし方（Method）を変えたとき（Strength 160 で揃える）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Method</th><th>体積</th><th>元の%</th><th>ずれ 平均</th><th>ずれ 最大</th></tr></thead>
+            <tbody>
+              <tr><td>uniform</td><td class="num">4.095072</td><td>99.6023%</td><td class="num">0.006263</td><td class="num">0.037208</td></tr>
+              <tr><td>scaledominant</td><td class="num">4.097979</td><td>99.673%</td><td class="num">0.005568</td><td class="num">0.035997</td></tr>
+              <tr><td>curvaturedominant</td><td class="num">4.100479</td><td>99.7338%</td><td class="num">0.005101</td><td class="num">0.034963</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">3つのやり方を、同じ強さで比べた。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>縮みは 0.40%だけ。</strong>Strength 160 で体積は元の 99.6023%。既定の 10 では 99.9533%。「ならすと縮む」は、体積の話としてはこの形では出なかった。</li>
+          <li><strong>形は動いている。</strong>ずれの平均は強さ10で 0.002454、160で 0.006263。凹凸は消えるが、出た所と入った所が相殺している。</li>
+          <li><strong>曲率を見るやり方がいちばん保つ。</strong>強さ160で、curvaturedominant が 99.7338%、uniform が 99.6023%。ずれも 0.005101 と 0.006263 で、曲率を見るほうが小さい。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 094 ===================== -->
+    <article class="entry entry--current" id="exp094">
+      <div class="badge">094</div>
+      <div class="body">
+        <span class="chip chip--pm">ボリューム</span>
+        <h2>升目を半分にしても、数は8倍ではなく約4倍 — VDB は表面の近くだけ持っている</h2>
+        <p class="path">examples/094_vdb_voxel.py &nbsp;·&nbsp; VDBは表面の近くだけ持つので、升目を半分にしても4倍で済む</p>
+
+        <div class="prose">
+          <p>VDB は空間を升目に区切って値を入れる。1辺を半分にすれば、空間ぜんぶを持つなら升目の数は8倍になる。ところが VDB は表面の近くだけを持つ作りなので、面積に比例して4倍で済むのではないか。測った。</p>
+          <p>球（50×50）に <button class="term" data-term="mountain">mountain</button> をかけた形を、升目 0.2 から 0.0125 まで半分ずつ細かくして、VDB が実際に持っている升目の数（activevoxelcount）を数えた。</p>
+          <p>升目の数は 2098 → 483315。前の段からの倍率は 3.706 / 3.917 / 3.975 / 3.993 で、細かくするほど4に近づいた。**8倍にはならない。**</p>
+          <p>面に戻したときの面の数も同じように増える。446 面から 120606 面。</p>
+          <p>ずれは頭打ちになる。0.009767 から 0.000447 までは順に小さくなるが、最後の段では 0.000406 で、ほとんど変わらなかった。升目を細かくしても、元の面の細かさより細かい形は出てこない。</p>
+        </div>
+
+        <p class="label">升目の大きさごとの、升目の数・面の数・ずれ</p>
+        <div class="figs">
+          <figure>
+            <div class="frame-light"><img src="094_voxels.png" alt="1段ごとの増え方は4に近づく。空間ぜんぶではなく、表面の近くだけを持っている。" loading="lazy" decoding="async"></div>
+            <figcaption>1段ごとの増え方は4に近づく。空間ぜんぶではなく、表面の近くだけを持っている。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="094_gap.png" alt="細かくしてもずれは止まる。元の面の細かさが上限になる。" loading="lazy" decoding="async"></div>
+            <figcaption>細かくしてもずれは止まる。元の面の細かさが上限になる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>升目</th><th>升目の数</th><th>倍率</th><th>戻した面</th><th>作る秒</th><th>戻す秒</th><th>ずれ 平均</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.2</td><td class="num">2,098</td><td class="num muted">—</td><td class="num">446</td><td class="num">0.021</td><td class="num">0.004</td><td class="num">0.009767</td></tr>
+              <tr><td class="num">0.1</td><td class="num">7,775</td><td class="num">3.706</td><td class="num">1,876</td><td class="num">0.010</td><td class="num">0.001</td><td class="num">0.002521</td></tr>
+              <tr><td class="num">0.05</td><td class="num">30,451</td><td class="num">3.917</td><td class="num">7,534</td><td class="num">0.010</td><td class="num">0.002</td><td class="num">0.000804</td></tr>
+              <tr><td class="num">0.025</td><td class="num">121,050</td><td class="num">3.975</td><td class="num">30,134</td><td class="num">0.013</td><td class="num">0.005</td><td class="num">0.000447</td></tr>
+              <tr><td class="num">0.0125</td><td class="num">483,315</td><td class="num">3.993</td><td class="num">120,606</td><td class="num">0.022</td><td class="num">0.013</td><td class="num">0.000406</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">元は球（50×50）に mountain（高さ0.15）をかけた 2,450面。升目の数は、VDB の prim に activevoxelcount を聞いた値。「作る」は vdbfrompolygons、「戻す」は convertvdb の時間。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>8倍ではなく約4倍。</strong>実測 3.706 / 3.917 / 3.975 / 3.993。VDB は表面の近くだけを持つので、空間の体積ではなく面積に比例して増える。</li>
+          <li><strong>ずれは頭打ちになる。</strong>0.000447 から 0.000406 へ、最後の段では 1.1倍しか縮まなかった。元の面の細かさが上限になっている。</li>
+          <li><strong>時間は升目の数ほど増えない。</strong>作るのは 0.0214秒 から 0.0219秒。升目が230倍になっても、この大きさでは1秒を切ったままだった。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

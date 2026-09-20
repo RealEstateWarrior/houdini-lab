@@ -1,0 +1,98 @@
+{
+  "rows": [
+    {
+      "strength": 0.0,
+      "volume": 4.111425,
+      "volume_pct": 100.0,
+      "seconds": 0.0001,
+      "gap_mean": 0.0,
+      "gap_max": 0.0
+    },
+    {
+      "strength": 2.5,
+      "volume": 4.110802,
+      "volume_pct": 99.9849,
+      "seconds": 0.0038,
+      "gap_mean": 0.001414,
+      "gap_max": 0.01211
+    },
+    {
+      "strength": 5.0,
+      "volume": 4.110319,
+      "volume_pct": 99.9731,
+      "seconds": 0.0027,
+      "gap_mean": 0.001891,
+      "gap_max": 0.01556
+    },
+    {
+      "strength": 10.0,
+      "volume": 4.109505,
+      "volume_pct": 99.9533,
+      "seconds": 0.0028,
+      "gap_mean": 0.002454,
+      "gap_max": 0.0192
+    },
+    {
+      "strength": 20.0,
+      "volume": 4.108155,
+      "volume_pct": 99.9205,
+      "seconds": 0.004,
+      "gap_mean": 0.003153,
+      "gap_max": 0.023063
+    },
+    {
+      "strength": 40.0,
+      "volume": 4.1059,
+      "volume_pct": 99.8656,
+      "seconds": 0.0036,
+      "gap_mean": 0.004013,
+      "gap_max": 0.027141
+    },
+    {
+      "strength": 80.0,
+      "volume": 4.102029,
+      "volume_pct": 99.7715,
+      "seconds": 0.0042,
+      "gap_mean": 0.005043,
+      "gap_max": 0.031824
+    },
+    {
+      "strength": 160.0,
+      "volume": 4.095072,
+      "volume_pct": 99.6023,
+      "seconds": 0.0049,
+      "gap_mean": 0.006263,
+      "gap_max": 0.037208
+    }
+  ],
+  "base_volume": 4.111425,
+  "methods": [
+    {
+      "method": "uniform",
+      "strength": 160.0,
+      "volume": 4.095072,
+      "volume_pct": 99.6023,
+      "seconds": 0.0046,
+      "gap_mean": 0.006263,
+      "gap_max": 0.037208
+    },
+    {
+      "method": "scaledominant",
+      "strength": 160.0,
+      "volume": 4.097979,
+      "volume_pct": 99.673,
+      "seconds": 0.0051,
+      "gap_mean": 0.005568,
+      "gap_max": 0.035997
+    },
+    {
+      "method": "curvaturedominant",
+      "strength": 160.0,
+      "volume": 4.100479,
+      "volume_pct": 99.7338,
+      "seconds": 0.0057,
+      "gap_mean": 0.005101,
+      "gap_max": 0.034963
+    }
+  ]
+}

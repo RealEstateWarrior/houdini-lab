@@ -45,6 +45,9 @@ def load_dump():
             continue
         names = {p["name"] for p in row["parms"]}
         by_name.setdefault(row["name"], set()).update(names)
+        # createNode("remesh") は remesh::2.0 になる。版を外した名前でも引けるように
+        base = row["name"].split("::")[0]
+        by_name.setdefault(base, set()).update(names)
     return by_name
 
 

@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "voxel": 0.2,
+      "voxels": 2098,
+      "voxel_ratio": null,
+      "prims": 446,
+      "make_seconds": 0.0214,
+      "convert_seconds": 0.0037,
+      "gap_mean": 0.009767,
+      "gap_max": 0.033596
+    },
+    {
+      "voxel": 0.1,
+      "voxels": 7775,
+      "voxel_ratio": 3.706,
+      "prims": 1876,
+      "make_seconds": 0.0097,
+      "convert_seconds": 0.0014,
+      "gap_mean": 0.002521,
+      "gap_max": 0.01496
+    },
+    {
+      "voxel": 0.05,
+      "voxels": 30451,
+      "voxel_ratio": 3.917,
+      "prims": 7534,
+      "make_seconds": 0.0099,
+      "convert_seconds": 0.0024,
+      "gap_mean": 0.000804,
+      "gap_max": 0.007732
+    },
+    {
+      "voxel": 0.025,
+      "voxels": 121050,
+      "voxel_ratio": 3.975,
+      "prims": 30134,
+      "make_seconds": 0.0135,
+      "convert_seconds": 0.0047,
+      "gap_mean": 0.000447,
+      "gap_max": 0.005496
+    },
+    {
+      "voxel": 0.0125,
+      "voxels": 483315,
+      "voxel_ratio": 3.993,
+      "prims": 120606,
+      "make_seconds": 0.0219,
+      "convert_seconds": 0.0128,
+      "gap_mean": 0.000406,
+      "gap_max": 0.005995
+    }
+  ]
+}

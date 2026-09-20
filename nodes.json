@@ -150,12 +150,12 @@
      "what": "画面上で点を置いて線を引く。Method で折れ線か滑らかな曲線かを選ぶ。道に沿って何かを並べるときの背骨になる。",
      "params": [
       [
-       "method",
-       "折れ線か曲線か"
+       "outputtype",
+       "線で出すか面で出すか"
       ],
       [
-       "coords",
-       "点の座標。ここに数字が並ぶ"
+       "interpmethod",
+       "点のあいだの補い方"
       ],
       [
        "close",
@@ -257,7 +257,7 @@
        "何を出すか"
       ],
       [
-       "prim",
+       "keepprims",
        "元の面を残すか"
       ]
      ]
@@ -493,19 +493,19 @@
      "name": "polybevel",
      "kind": "SOP",
      "one": "角を削って丸める。",
-     "what": "辺や点を選んで面取りする。Repetitions を増やすほど丸くなる。文字や箱の角を柔らかく見せるのに使う。",
+     "what": "辺や点を選んで面取りする。Divisions を増やすほど丸くなる。文字や箱の角を柔らかく見せるのに使う。",
      "params": [
       [
-       "beveltype",
-       "削り方"
+       "filletshape",
+       "削り口の形"
       ],
       [
-       "absinset",
+       "offset",
        "削る幅"
       ],
       [
-       "repetitions",
-       "刻む回数。多いほど丸い"
+       "divisions",
+       "刻む数。多いほど丸い"
       ]
      ],
      "exps": [
@@ -536,10 +536,10 @@
      "name": "remesh",
      "kind": "SOP",
      "one": "面を整った三角形に張り直す。",
-     "what": "細長い面や大きさのばらついた面を、揃った三角形に置き換える。Target Edge Length で目指す辺の長さを決める。布や柔らかい物の計算の前に通すと安定しやすい。",
+     "what": "細長い面や大きさのばらついた面を、揃った三角形に置き換える。Target Size で目指す辺の長さを決める。布や柔らかい物の計算の前に通すと安定しやすい。",
      "params": [
       [
-       "target_edge",
+       "targetsize",
        "目指す辺の長さ"
       ],
       [
@@ -556,19 +556,19 @@
      "name": "smooth",
      "kind": "SOP",
      "one": "形のでこぼこをならす。",
-     "what": "点を近所の平均へ寄せて滑らかにする。subdivide と違い面は増えない。Smoothing Iterations を増やすほど縮む方向へ寄る。",
+     "what": "点を近所の平均へ寄せて滑らかにする。subdivide と違い面は増えない。Strength を上げるほど縮む方向へ寄る。",
      "params": [
       [
-       "iterations",
-       "ならす回数"
+       "strength",
+       "ならす強さ"
       ],
       [
-       "frequency",
-       "どの細かさまで消すか"
+       "method",
+       "ならし方"
       ],
       [
-       "applyto",
-       "位置か、別のアトリビュートか"
+       "attributes",
+       "位置以外をならすときの名前"
       ]
      ]
     },
@@ -576,15 +576,15 @@
      "name": "fuse",
      "kind": "SOP",
      "one": "近い点をひとつにまとめる。",
-     "what": "同じ場所に重なった点を1つにして、面をつなげる。boolean や copy のあとで継ぎ目が割れているときに通す。Distance より近い点だけが合わさる。",
+     "what": "同じ場所に重なった点を1つにして、面をつなげる。boolean や copy のあとで継ぎ目が割れているときに通す。Snap Distance より近い点だけが合わさる。",
      "params": [
       [
-       "dist",
+       "tol3d",
        "この距離より近い点を合わせる"
       ],
       [
-       "deldegen",
-       "潰れた面を消す"
+       "snaptype",
+       "どこへ寄せるか"
       ]
      ]
     },
@@ -1429,7 +1429,7 @@
        "入れる先の名前"
       ],
       [
-       "amp",
+       "amplitude",
        "振れ幅"
       ],
       [
@@ -1465,7 +1465,7 @@
      "what": "測った値をアトリビュートに入れる。細長い面だけ選ぶ、曲がっている所だけ色を変える、といった処理の前段になる。",
      "params": [
       [
-       "type",
+       "measure",
        "何を測るか"
       ],
       [
@@ -1473,7 +1473,7 @@
        "入れる名前"
       ],
       [
-       "curvetype",
+       "curvaturetype",
        "曲率の種類"
       ]
      ]
@@ -2472,18 +2472,18 @@
      "name": "particlefluidsurface",
      "kind": "SOP",
      "one": "液体の粒から表面を作る。",
-     "what": "ばらばらの粒を、つながった面に変える。Point Radius Scale を上げるほど粒が太って一体になり、下げるほど粒立って見える。",
+     "what": "ばらばらの粒を、つながった面に変える。Influence Scale を上げるほど粒が太って一体になり、下げるほど粒立って見える。",
      "params": [
       [
        "particlesep",
        "粒の間隔"
       ],
       [
-       "radiusscale",
+       "influenceradius",
        "粒の太らせ方"
       ],
       [
-       "surfdistance",
+       "surfacedistance",
        "表面の位置をずらす"
       ]
      ],
@@ -2502,12 +2502,12 @@
        "つなぎ方の種類"
       ],
       [
-       "strength",
+       "glue_strength",
        "外れるまでの強さ"
       ],
       [
-       "angularstrength",
-       "曲げに対する強さ"
+       "glue_strengthvariance",
+       "強さのばらつき"
       ]
      ],
      "gotcha": "強さを上げすぎると、ぶつける前に自分の重さで崩れる形も出る。実験085では、何もぶつけなくても崩れる値があった。",
@@ -2616,11 +2616,11 @@
        "元になる SOP"
       ],
       [
-       "impulseactivation",
+       "impulseactiveate",
        "1フレームに出すかどうか"
       ],
       [
-       "const_activation",
+       "constantrate",
        "毎秒いくつ出すか"
       ]
      ],
@@ -3143,7 +3143,7 @@
      "what": "印の濃さに応じて点を散らす。そこに木や草を複製して並べる。",
      "params": [
       [
-       "npts",
+       "totalpointcount",
        "点の数"
       ],
       [
@@ -3151,7 +3151,7 @@
        "使う印"
       ],
       [
-       "densityscale",
+       "density",
        "濃さ"
       ]
      ]
@@ -4067,16 +4067,16 @@
      "what": "地面のひび割れや、石畳のような模様の元になる。滑らかに変わるのではなく、区画で切り替わる。",
      "params": [
       [
-       "sfreq",
-       "横の細かさ"
+       "freq",
+       "細かさ"
       ],
       [
-       "tfreq",
-       "縦の細かさ"
-      ],
-      [
-       "sjitter",
+       "jitter",
        "区画のずれ"
+      ],
+      [
+       "offset",
+       "位置のずらし"
       ]
      ]
     }

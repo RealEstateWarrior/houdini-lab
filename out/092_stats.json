@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "edge": 0.2,
+      "prims": 678,
+      "points": 341,
+      "seconds": 0.0078,
+      "gap_mean": 0.003694,
+      "gap_max": 0.008615,
+      "prim_ratio": null
+    },
+    {
+      "edge": 0.1,
+      "prims": 2908,
+      "points": 1456,
+      "seconds": 0.0167,
+      "gap_mean": 0.000823,
+      "gap_max": 0.003,
+      "prim_ratio": 4.289
+    },
+    {
+      "edge": 0.05,
+      "prims": 11518,
+      "points": 5761,
+      "seconds": 0.0645,
+      "gap_mean": 0.000229,
+      "gap_max": 0.001321,
+      "prim_ratio": 3.961
+    },
+    {
+      "edge": 0.025,
+      "prims": 47238,
+      "points": 23621,
+      "seconds": 0.3146,
+      "gap_mean": 5.8e-05,
+      "gap_max": 0.00066,
+      "prim_ratio": 4.101
+    }
+  ],
+  "base_prims": 1560
+}
