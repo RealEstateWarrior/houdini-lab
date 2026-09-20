@@ -1,0 +1,110 @@
+{
+  "rows": [
+    {
+      "depth": 0,
+      "prims": 6,
+      "points": 8,
+      "seconds": 0.0002,
+      "volume": 1.0,
+      "volume_pct": 100.0,
+      "step": 0.0
+    },
+    {
+      "depth": 1,
+      "prims": 24,
+      "points": 26,
+      "seconds": 0.0003,
+      "volume": 0.427083,
+      "volume_pct": 42.7083,
+      "step": -0.572917
+    },
+    {
+      "depth": 2,
+      "prims": 96,
+      "points": 98,
+      "seconds": 0.0002,
+      "volume": 0.350192,
+      "volume_pct": 35.0192,
+      "step": -0.076892
+    },
+    {
+      "depth": 3,
+      "prims": 384,
+      "points": 386,
+      "seconds": 0.0003,
+      "volume": 0.333081,
+      "volume_pct": 33.3081,
+      "step": -0.017111
+    },
+    {
+      "depth": 4,
+      "prims": 1536,
+      "points": 1538,
+      "seconds": 0.0008,
+      "volume": 0.328926,
+      "volume_pct": 32.8926,
+      "step": -0.004155
+    },
+    {
+      "depth": 5,
+      "prims": 6144,
+      "points": 6146,
+      "seconds": 0.0021,
+      "volume": 0.327895,
+      "volume_pct": 32.7895,
+      "step": -0.001031
+    },
+    {
+      "depth": 6,
+      "prims": 24576,
+      "points": 24578,
+      "seconds": 0.008,
+      "volume": 0.327638,
+      "volume_pct": 32.7638,
+      "step": -0.000257
+    }
+  ],
+  "base_volume": 1.0,
+  "algorithms": [
+    {
+      "algorithm": "houdini",
+      "prims": 384,
+      "points": 386,
+      "seconds": 0.0005,
+      "volume": 0.333081,
+      "volume_pct": 33.3081
+    },
+    {
+      "algorithm": "mantra",
+      "prims": 384,
+      "points": 386,
+      "seconds": 0.0008,
+      "volume": 0.322114,
+      "volume_pct": 32.2114
+    },
+    {
+      "algorithm": "osdcc",
+      "prims": 384,
+      "points": 386,
+      "seconds": 0.0003,
+      "volume": 0.333081,
+      "volume_pct": 33.3081
+    },
+    {
+      "algorithm": "osdloop",
+      "prims": 768,
+      "points": 386,
+      "seconds": 0.0004,
+      "volume": 0.376523,
+      "volume_pct": 37.6523
+    },
+    {
+      "algorithm": "osdbilinear",
+      "prims": 384,
+      "points": 386,
+      "seconds": 0.0003,
+      "volume": 1.0,
+      "volume_pct": 100.0
+    }
+  ]
+}

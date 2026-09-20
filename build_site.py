@@ -679,6 +679,18 @@ DONE = [
      "shots": ["098_ngon.png", "098_hole.png"],
      "title": "boolean は答えと6桁まで一致する — 差の正体は円ではなく多角形だった",
      "note": "Primitive Type が poly でないと boolean も cookie も黙って何もしない"},
+    {"no": "099", "anchor": "exp099",
+     "tags": ["モデリング", "subdivide", "体積", "落とし穴"],
+     "log": "log_pm", "thumb": "099_subdiv.png",
+     "shots": ["099_subdiv.png", "099_step.png"],
+     "title": "立方体を割り続けると、体積は約32.76%に落ち着く — bilinear だけはちょうど1.000000のまま",
+     "note": "深さ3でほぼ決まる（33.31%）。深さ6で32.76%、面は64倍になるのに差は0.55ポイント"},
+    {"no": "100", "anchor": "exp100",
+     "tags": ["モデリング", "peak", "法線", "検算"],
+     "log": "log_pm", "thumb": "100_box.png",
+     "shots": ["100_box.png", "100_peak.png"],
+     "title": "peak は式どおりに動く — 球は((r+d)/r)³、立方体は(1+2d/√3)³に6桁一致",
+     "note": "球は18通りすべて一致。粗い球でも倍率は同じ。立方体は1+2dだと27倍を期待して16.99外す"},
 ]
 
 PLANNED = []
