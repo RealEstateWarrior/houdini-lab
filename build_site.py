@@ -703,6 +703,12 @@ DONE = [
      "shots": ["102_inset.png", "102_extrude.png"],
      "title": "押し出した体積は式どおり — 面積×距離、Inset を入れても四角錐台の式に6桁一致",
      "note": "10通りすべて差0.000000。上の面をほぼ潰しても体積は37%までしか減らない"},
+    {"no": "103", "anchor": "exp103",
+     "tags": ["モデリング", "transform", "回転", "検算"],
+     "log": "log_pm", "thumb": "103_order.png",
+     "shots": ["103_order.png"],
+     "title": "Rotate Order の xyz は「x から順に掛ける」 — 6通りで最大 0.725534（約42.5°）ずれる",
+     "note": "6通りすべて Rz·Ry·Rx の式と差0.000000。1軸だけなら順番は関係ない（差 1e-9未満）"},
 ]
 
 PLANNED = []

@@ -5039,6 +5039,80 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 103 ===================== -->
+    <article class="entry entry--current" id="exp103">
+      <div class="badge">103</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Rotate Order の xyz は「x から順に掛ける」 — 6通りで最大 0.725534（約42.5°）ずれる</h2>
+        <p class="path">examples/103_rotate_order.py &nbsp;·&nbsp; xyz は x から順に掛ける。順番の違いは約42.5°に達する</p>
+
+        <div class="prose">
+          <p>Transform には Rotate Order（xyz / xzy / yxz / yzx / zxy / zyx）がある。同じ角度を入れても、掛ける順番で行き先が変わる。どれだけ変わるのかと、Houdini の並びが数式でいう何の順番なのかを確かめた。</p>
+          <p>点を1つ (1.0, 0.0, 0.0) に置き、角度 (30.0, 40.0, 50.0)（度）で回した。6通りすべての行き先を測り、自分で行列を掛けて出した答えと突き合わせた。</p>
+          <p>**xyz は「x を先に掛け、次に y、最後に z」だった。**6通りすべてで、この掛け順との差は 0.000000。逆から掛けた式では合わない（差は 0.16〜0.73）。行列で書けば xyz は Rz·Ry·Rx になる。</p>
+          <p>ばらつきは小さくない。もっとも離れた2つは **xyz と zyx** で 0.725534。点は原点から 1.0 の距離にあるので、**約 42.5° ぶん開いている**。もっとも近い2つ（xzy と yzx）でも 0.162832 離れる。</p>
+          <p>1軸だけ回すときは順番に関係ない。y だけ 40° 回すと、6通りの差は最大 0.000000000 だった。「順番を気にしなくてよい」のは、角度が1つだけ入っているときに限る。</p>
+        </div>
+
+        <p class="label">6通りの行き先（点 (1.0, 0.0, 0.0) を (30.0, 40.0, 50.0)° 回す）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="103_order.png" alt="x 座標は3通りの値しか取らないが、y と z は6通りすべてで違う。" loading="lazy" decoding="async"></div>
+            <figcaption>x 座標は3通りの値しか取らないが、y と z は6通りすべてで違う。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rotate Order</th><th>x</th><th>y</th><th>z</th><th>左から掛けた式との差</th><th>右から掛けた式との差</th></tr></thead>
+            <tbody>
+              <tr><td>xyz</td><td class="num">+0.492404</td><td class="num">+0.586824</td><td class="num">-0.642788</td><td class="num">0.000000</td><td class="num">0.725534</td></tr>
+              <tr><td>xzy</td><td class="num">+0.492404</td><td class="num">+0.766044</td><td class="num">-0.413176</td><td class="num">0.000000</td><td class="num">0.162832</td></tr>
+              <tr><td>yxz</td><td class="num">+0.246202</td><td class="num">+0.793412</td><td class="num">-0.556670</td><td class="num">0.000000</td><td class="num">0.671006</td></tr>
+              <tr><td>yzx</td><td class="num">+0.492404</td><td class="num">+0.829598</td><td class="num">-0.263258</td><td class="num">0.000000</td><td class="num">0.162832</td></tr>
+              <tr><td>zxy</td><td class="num">+0.738606</td><td class="num">+0.663414</td><td class="num">-0.119764</td><td class="num">0.000000</td><td class="num">0.671006</td></tr>
+              <tr><td>zyx</td><td class="num">+0.492404</td><td class="num">+0.870002</td><td class="num">+0.025201</td><td class="num">0.000000</td><td class="num">0.725534</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">「左から掛けた式との差」は、並びの順に Rx→Ry→Rz と掛けた（行列では Rz·Ry·Rx）答えとの距離。「右から」は逆順に掛けた答えとの距離。</p>
+
+        <p class="label">6通りのあいだの距離（離れている順）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>組</th><th>距離</th><th>開いた角度</th></tr></thead>
+            <tbody>
+              <tr><td>xyz ↔ zyx</td><td class="num">0.725534</td><td>42.5°</td></tr>
+              <tr><td>yxz ↔ zxy</td><td class="num">0.671006</td><td>39.2°</td></tr>
+              <tr><td>yxz ↔ zyx</td><td class="num">0.636440</td><td>37.1°</td></tr>
+              <tr><td>xyz ↔ zxy</td><td class="num">0.583125</td><td>33.9°</td></tr>
+              <tr><td>xyz ↔ yzx</td><td class="num">0.450535</td><td>26.0°</td></tr>
+              <tr><td>xzy ↔ zyx</td><td class="num">0.450535</td><td>26.0°</td></tr>
+              <tr><td>xzy ↔ zxy</td><td class="num">0.396534</td><td>22.9°</td></tr>
+              <tr><td>yxz ↔ yzx</td><td class="num">0.384728</td><td>22.2°</td></tr>
+              <tr><td>zxy ↔ zyx</td><td class="num">0.352575</td><td>20.3°</td></tr>
+              <tr><td>xyz ↔ yxz</td><td class="num">0.332731</td><td>19.2°</td></tr>
+              <tr><td>yzx ↔ zxy</td><td class="num">0.329884</td><td>19.0°</td></tr>
+              <tr><td>xyz ↔ xzy</td><td class="num">0.291276</td><td>16.7°</td></tr>
+              <tr><td>yzx ↔ zyx</td><td class="num">0.291276</td><td>16.7°</td></tr>
+              <tr><td>xzy ↔ yxz</td><td class="num">0.286278</td><td>16.5°</td></tr>
+              <tr><td>xzy ↔ yzx</td><td class="num">0.162832</td><td>9.3°</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">点は原点から 1.0 の距離にある。距離 1.0 なら 60° ぶん開いていることになる。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>xyz は「x から順に掛ける」。</strong>6通りすべてで、この掛け順との差は 0.000000。行列では Rz·Ry·Rx。逆順の式では合わない。</li>
+          <li><strong>順番の違いは約 42.5° に達する。</strong>xyz と zyx で 0.725534（原点から 1.0 の点で）。同じ数字を入れたのに、これだけ別の場所へ行く。</li>
+          <li><strong>1軸だけなら順番は関係ない。</strong>y だけ 40° 回すと、6通りの差は最大 0.000000000。2軸以上に角度が入っているときだけ、順番が効く。</li>
+          <li><strong>x 座標は3通りしか取らない。</strong>x を最初に掛ける並び（xyz / xzy）と、x を最後に掛ける並び（yzx / zyx）で値が揃う。回す軸と座標の関係で、一部の成分だけが一致することがある。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
