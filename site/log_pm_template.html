@@ -4194,6 +4194,90 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 090 ===================== -->
+    <article class="entry entry--current" id="exp090">
+      <div class="badge">090</div>
+      <div class="body">
+        <span class="chip chip--pm">点検</span>
+        <h2>061〜090 の振り返り点検 — 7件を測り直して全部一致。訂正は2件、黙って無視される設定は8件に</h2>
+        <p class="path">examples/090_audit.py &nbsp;·&nbsp; 条件を1つしか試していない結論には、条件を書き添える</p>
+
+        <div class="prose">
+          <p>30件ごとの点検の3回目（<a href="#exp030">実験030</a>・060に続く）。やることは4つ。書いた数字を測り直す、あとで覆った結論を数える、「黙って無視される設定」の一覧を更新する、直したほうがよい点を洗い出す。</p>
+          <p>測り直しは7件を選んだ。重い測定ではなく、数字がはっきり決まっているものを選んでいる。結果は7件すべて記録と同じ値だった。滑った距離 3.260808、運ばれた距離 5.336132 は小数6桁まで、ドミノが倒れきる 1.500秒、液体が暴れ始める28フレーム目、道を切った点 27個も同じ。回る台の境目（ω 1.25 は乗ったまま、1.30 は滑り出す）も同じ向きに出た。</p>
+          <p>この期間に覆った結論は2件。<a href="#exp068">実験068</a>の「Liquid は摩擦 0.25 では暴れない」は、40フレームで止めていたからで、<a href="#exp073">実験073</a>で60フレームまで回すと46フレーム目から暴れた。<a href="#exp071">実験071</a>の「摩擦は 0.3〜0.4 ぶんしか効かない」は、<a href="#exp075">実験075</a>で「粒の間隔 0.12 のとき」という条件が付いた。どちらも元の記事の冒頭に注記を入れてある。</p>
+          <p>「黙って無視される設定」は8件になった。044のガイド、050の可変長入力、062の materialpreset、066の風速、070のコライダ Type、079の <button class="term" data-term="DOP">DOP</button> の<button class="term" data-term="表示フラグ">表示フラグ</button>と Emission Type、084の packed に付けた初速。どれもエラーも警告も出ない。見つけ方はいつも同じで、入力を極端に振って出力が動くかを見る。</p>
+          <p>測り方そのものも2つ直した。<a href="#exp077">実験077</a>で「1粒ずつ読むと計算より重くなる」と分かり、hou_tools に「まとめて読む」関数を入れた。<a href="#exp082">実験082</a>では、点の数を len(g.points()) で数えると 2,210万点で8.8秒かかることが分かり、intrinsicValue(&quot;pointcount&quot;) に変えた。</p>
+          <p>サイト側は、手順ページが 15本から 36本に増えた。効率化の項目は 28。Claude 版は1つの版に置けるファイルが 512 までなので、中身が同じ画像を1枚にまとめる仕組みを入れた。</p>
+        </div>
+
+        <p class="label">測り直し（7件）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="090_audit.png" alt="7件すべて、記録と同じ値が出た。" loading="lazy" decoding="async"></div>
+            <figcaption>7件すべて、記録と同じ値が出た。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>確かめたこと</th><th>記録</th><th>測り直し</th><th>結果</th></tr></thead>
+            <tbody>
+              <tr><td>067 滑った距離（摩擦 0.25）</td><td class="num">3.260808</td><td class="num">3.260808</td><td>一致</td></tr>
+              <tr><td>070 運ばれた距離（板 4・摩擦 1）</td><td class="num">5.336132</td><td class="num">5.336132</td><td>一致</td></tr>
+              <tr><td>071 境目（ω 1.25 は乗る / 1.30 は滑る）</td><td>乗る / 滑る</td><td>乗る / 滑る</td><td>一致</td></tr>
+              <tr><td>073 液体が暴れ始めるフレーム</td><td class="num">28</td><td class="num">28</td><td>一致</td></tr>
+              <tr><td>079 空気抵抗の式とのずれ（最大）</td><td class="num">0.0000</td><td class="num">0.0000</td><td>一致</td></tr>
+              <tr><td>084 ドミノが倒れきる秒（12枚・間隔 0.3）</td><td class="num">1.500</td><td class="num">1.500</td><td>一致</td></tr>
+              <tr><td>082 道を切った点の数</td><td class="num">27</td><td class="num">27</td><td>一致</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">同じスクリプトを別のプロセスから呼び直して測った。<a href="#exp071">実験071</a>だけは数値ではなく「乗ったまま／滑り出す」の向きで見ている。</p>
+
+        <p class="label">この期間に覆った結論</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>元の実験</th><th>訂正した実験</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td class="num">068</td><td class="num">073</td><td>「Liquid は摩擦 0.25 では暴れない」は、40フレームで止めていたため。60フレームまで回すと F46 から飛び始める</td></tr>
+              <tr><td class="num">071</td><td class="num">075</td><td>「摩擦は 0.3〜0.4 ぶんしか効かない」は、粒の間隔 0.12 のときの話。0.08 で 0.65、0.04 で 0.79 に上がる</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">どちらも元の記事の冒頭に注記を入れ、レポート（ポップアップ）にも同じ訂正を書いた。</p>
+
+        <p class="label">黙って無視される設定（8件）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>実験</th><th>設定</th><th>入れても起きないこと</th></tr></thead>
+            <tbody>
+              <tr><td class="num">044</td><td>ガイドのジオメトリ</td><td>毛がガイドに従わない</td></tr>
+              <tr><td class="num">050</td><td>可変長の入力</td><td>2本目以降が無視される</td></tr>
+              <tr><td class="num">062</td><td>materialpreset</td><td>スクリプトから押しても材質が変わらない</td></tr>
+              <tr><td class="num">066</td><td>風速</td><td>値を変えても結果が同じ</td></tr>
+              <tr><td class="num">070</td><td>mpmcollider の Type</td><td>Static のままだと板を動かしても伝わらない</td></tr>
+              <tr><td class="num">079</td><td>DOP の表示フラグ</td><td>立てないと粒が1つも生まれない</td></tr>
+              <tr><td class="num">079</td><td>Emission Type の All Points</td><td>Impulse Count を入れても1点1粒しか出ない</td></tr>
+              <tr><td class="num">084</td><td>packed に付けた初速（v）</td><td>プリミティブに書いても動かない。点に書く</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">どれもエラーも警告も出ない。入力を極端に振って、出力が動くかどうかで見つけた。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>測り直した7件は、すべて記録と同じ値だった。</strong>小数6桁まで同じもの（3.260808 / 5.336132）を含む。別のプロセスから同じスクリプトを呼び直しても、結果は変わらない。</li>
+          <li><strong>覆った結論は2件で、どちらも「測る範囲が足りなかった」のが原因。</strong>068は40フレームで止めていた、071は粒の細かさを1通りしか試していなかった。<strong>条件を1つしか試していない結論には、条件を書き添える。</strong></li>
+          <li><strong>「黙って無視される設定」は8件になった。</strong>061〜090 だけで4件増えた（070・079が2件・084）。<strong>組んで動かないときは、まずこの型を疑う。</strong></li>
+          <li><strong>測り方の落とし穴も2つ直した。</strong>1粒ずつ読むと計算より重くなる（<a href="#exp077">実験077</a>）、点の数を Python 側で数えると8.8秒かかる（<a href="#exp082">実験082</a>）。どちらも hou_tools の <code>point_array()</code> と <code>intrinsicValue("pointcount")</code> に置き換えた。</li>
+          <li><strong>手順ページは 15本から 36本になった。</strong>実験079以降は「手順ページ向き」の題材を選び、実験ごとに手順を1本足している。</li>
+          <li><strong>残っている宿題。</strong>(1) 手順「テクスチャを貼る」だけ、元になるシーン（.hipnc）と Houdini の画面が無い。(2) <a href="#exp083">実験083</a>〜089 で足した手順7本も、Houdini の画面をまだ撮っていない。(3) Claude 版のファイル数が上限 512 に近い（496）。</li>
+          <li>点検にかかった時間は、測り直し7件で合わせて 12.5秒だった。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
