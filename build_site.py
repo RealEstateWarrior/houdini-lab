@@ -538,6 +538,12 @@ DONE = [
      "shots": ["085_wall_700_58.png", "085_wall_500_58.png", "085_wall_100_58.png"],
      "title": "壁を崩す — 拘束の強さの窓は狭い。弱いと自重で崩れ、強いとぶつけても壊れない",
      "note": "既定1000では無傷、100では自重で崩れる。窓は500前後。破片20倍でも解く時間は4.4倍"},
+    {"no": "086", "anchor": "exp086",
+     "tags": ["POP", "パーティクル", "風", "手順"],
+     "log": "log_fx", "hip": "086_leaves.hipnc", "thumb": "086_leaves_2.png",
+     "shots": ["086_leaves_0.png", "086_leaves_2.png"],
+     "title": "葉を風で舞わせる — 乱れは Amplitude で広がり、Swirl Size で渦の大きさが変わる",
+     "note": "Amplitude 0→4で散らばり0.76→1.47・速さ1.88→3.59。小さい乱れ（0.5〜1）は差が出ない"},
 ]
 
 PLANNED = []

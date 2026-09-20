@@ -3065,6 +3065,97 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "leaves",
+      "title": "葉を風で舞わせる",
+      "lede": "落ちてくる粒を横風で流し、風の乱れでばらけさせる。粒に小さな板を配って進む向きに合わせると、葉が舞っているように見える。",
+      "hero": "086_leaves_2.png",
+      "hero_cap": "602枚・3秒後。乱れ（Amplitude 2）でばらけている。",
+      "facts": [
+        [
+          "ノードの数",
+          "10個（うち DOP の中に5個）"
+        ],
+        [
+          "計算の時間",
+          "602枚・72フレームで 0.43秒"
+        ],
+        [
+          "元になった実験",
+          "実験029・086"
+        ]
+      ],
+      "exp": "086",
+      "hip": "086_leaves.hipnc",
+      "tags": [
+        "エフェクト",
+        "パーティクル",
+        "風",
+        "複製"
+      ],
+      "steps": [
+        {
+          "title": "葉が生まれる場所を置く",
+          "node": "grid",
+          "ui_node": "source_area",
+          "body": "1 × 2 の <code>grid</code> を Orientation ZX Plane にして、高さ 2.5 に置く。この面から葉が降ってくる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "粒を生み続ける",
+          "node": "popsource",
+          "ui_node": "popnet/source",
+          "body": "<code>dopnet</code> の中に popobject・popsource・popsolver。popsource は Emission Type を Scatter onto Surfaces、Const. Birth Rate 200、Life Expectancy 8、Variance は 0.2 ほど。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "弱い重力を足す",
+          "node": "popforce",
+          "ui_node": "popnet/gravity",
+          "body": "葉は軽いので、<code>popforce</code> は (0, −2, 0) くらいにする。9.81 のままだと、舞う前に落ちてしまう。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "風と乱れを入れる",
+          "node": "popwind",
+          "ui_node": "popnet/wind",
+          "body": "<code>popwind</code> の Wind を (2, 0, 0)、Air Resistance 2。<strong>Noise の Amplitude が乱れの強さ、Swirl Size が渦の大きさ。</strong>Amplitude 2 で散らばりが 0.76 → 0.85、4 で 1.47 に広がる（実験086）。",
+          "img": "086_leaves_0.png",
+          "cap": "Amplitude 0。乱れが無いと、1本の帯になる。"
+        },
+        {
+          "title": "葉の板を進む向きに配る",
+          "node": "copytopoints",
+          "ui_node": "leaf_copies",
+          "body": "<code>dopimport</code> で取り出し、wrangle（Run Over は Points）で <code>@N = normalize(v@v); v@up = {0,1,0};</code>。0.12 × 0.07 の <code>grid</code> を <code>copytopoints</code>（Pack and Instance オン）で配る。",
+          "img": "086_leaves_2.png",
+          "cap": "Amplitude 2。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "小さい乱れは、入れても見た目が変わらない",
+          "body": "Amplitude 0.5 / 1 の散らばりは 0.7303 / 0.6574 で、乱れ 0 の 0.7621 と変わらない（むしろ小さい）。落ち方のばらつきに埋もれてしまう。変化が欲しいなら 2 以上から（実験086）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "乱れは、速さも上げる",
+          "body": "Amplitude 0 → 4 で、粒の速さの平均が 1.882 → 3.588 になった。舞わせるつもりで上げると、思ったより遠くまで飛ぶ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "渦の大きさで「細かい揺れ」と「流れ」が変わる",
+          "body": "Swirl Size 0.5 は細かく揺らすだけ（x の平均 2.648）、8 は流れごと運ぶ（3.254）。同じ Amplitude でも見え方が違う。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

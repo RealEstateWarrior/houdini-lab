@@ -4401,6 +4401,76 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 086 ===================== -->
+    <article class="entry entry--current" id="exp086">
+      <div class="badge">086</div>
+      <div class="body">
+        <span class="chip chip--fx">POP</span>
+        <h2>葉を風で舞わせる — 乱れは Amplitude で広がり、Swirl Size で渦の大きさが変わる</h2>
+        <p class="path">C:/Program Files/Git/obj/leaves &nbsp;·&nbsp; 効かない大きさの入力は、入れても意味がない</p>
+
+        <div class="prose">
+          <p>上から落ちてくる粒を横風で流し、popwind の Noise で舞わせた。葉に見せるため、粒に小さな板（0.12 × 0.07）を配り、進む向き（v）に合わせている。重力は −2.0（葉は軽いので弱め）、風は (2, 0, 0)、Air Resistance 2.0。</p>
+          <p>乱れの大きさ（Amplitude）を上げると、散らばりが広がる。3秒後の上下の散らばり（標準偏差）は 0.7621（0）→ 0.8482（2）→ 1.4701（4）。前後も 0.5708 → 1.3855。速さの平均も 1.882 → 3.588 と上がる。乱れは「揺らす」だけでなく「加速する」。</p>
+          <p>ただし小さい乱れでは、かえって散らばりが減った。Amplitude 0.5 で 0.7303、1.0 で 0.6574。0 のときの 0.7621 より小さい。粒の散らばりは風の乱れだけでなく、生まれた場所と落ち方でも決まるので、この範囲では差が読み取れない。</p>
+          <p>渦の大きさ（Swirl Size）を上げると、散らばりも進む距離も増える。Amplitude 2 のまま 0.5 / 2 / 8 で、上下の散らばりが 0.5818 / 0.8482 / 1.2311、x の平均が 2.648 / 2.566 / 3.254。小さい渦は細かく揺らすだけだが、大きい渦は流れごと運ぶ。</p>
+          <p>計算は軽い。602粒・72フレームで 0.43〜0.69秒。乱れを入れても時間はほとんど変わらない。</p>
+        </div>
+
+        <p class="label">乱れのあり・なし（3秒後）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="086_leaves_0.png" alt="Amplitude 0。風に流されるだけで、1本の帯になる。" loading="lazy" decoding="async"></div>
+            <figcaption>Amplitude 0。風に流されるだけで、1本の帯になる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="086_leaves_2.png" alt="Amplitude 2。ばらけて舞い、帯が崩れる。" loading="lazy" decoding="async"></div>
+            <figcaption>Amplitude 2。ばらけて舞い、帯が崩れる。</figcaption>
+          </figure>
+        </div>
+        <p class="hint">2枚とも同じカメラ。粒に 0.12 × 0.07 の板を配り、進む向きに合わせている。</p>
+
+        <p class="label">A. 乱れの大きさ（Amplitude・Swirl Size 2）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Amplitude</th><th>上下の散らばり</th><th>前後の散らばり</th><th>x の平均</th><th>x の最大</th><th>速さの平均</th><th>計算の秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.7621</td><td class="num">0.5708</td><td class="num">2.288</td><td class="num">5.571</td><td class="num">1.882</td><td class="num">0.68</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.7303</td><td class="num">0.5396</td><td class="num">2.299</td><td class="num">6.007</td><td class="num">1.864</td><td class="num">0.43</td></tr>
+              <tr><td class="num">1</td><td class="num">0.6574</td><td class="num">0.5747</td><td class="num">2.347</td><td class="num">6.022</td><td class="num">1.900</td><td class="num">0.43</td></tr>
+              <tr><td class="num">2</td><td class="num">0.8482</td><td class="num">0.8760</td><td class="num">2.566</td><td class="num">8.730</td><td class="num">2.230</td><td class="num">0.43</td></tr>
+              <tr><td class="num">4</td><td class="num">1.4701</td><td class="num">1.3855</td><td class="num">2.651</td><td class="num">9.574</td><td class="num">3.588</td><td class="num">0.44</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">3秒（72フレーム）後の 602粒。散らばりは位置の標準偏差。</p>
+
+        <p class="label">B. 渦の大きさ（Swirl Size・Amplitude 2）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Swirl Size</th><th>上下の散らばり</th><th>前後の散らばり</th><th>x の平均</th><th>速さの平均</th><th>速さのばらつき</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">0.5818</td><td class="num">0.7340</td><td class="num">2.648</td><td class="num">2.081</td><td class="num">0.7270</td></tr>
+              <tr><td class="num">2</td><td class="num">0.8482</td><td class="num">0.8760</td><td class="num">2.566</td><td class="num">2.230</td><td class="num">0.8377</td></tr>
+              <tr><td class="num">8</td><td class="num">1.2311</td><td class="num">1.1684</td><td class="num">3.254</td><td class="num">3.029</td><td class="num">0.9400</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">同じ乱れの強さでも、渦が大きいほど遠くまで運ばれる。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Amplitude を上げると、散らばりも速さも増える。</strong>上下の散らばりは 0.7621（0）→ 1.4701（4）、速さの平均は 1.882 → 3.588。<strong>乱れは揺らすだけでなく、粒を速くもする。</strong></li>
+          <li><strong>小さい乱れ（0.5・1）では、散らばりは増えなかった。</strong>0.7303 / 0.6574 と、乱れ 0 の 0.7621 より小さい。落ち方のばらつきに埋もれる大きさでは、入れても見た目が変わらない。</li>
+          <li><strong>Swirl Size は「渦の大きさ」。</strong>0.5 では細かく揺れるだけで x の平均は 2.648、8 では流れごと運ばれて 3.254。散らばりも 0.5818 → 1.2311。</li>
+          <li><strong>葉の向きは、速さの向き（v）を N に入れて作る。</strong>@N = normalize(v@v)、v@up = {0,1,0} を点に書き、copytopoints で板を配る（<a href="#exp082">実験082</a>と同じ形）。</li>
+          <li><strong>計算はほとんど変わらない。</strong>602粒・72フレームで、乱れ 0 でも 4 でも 0.43〜0.44秒。乱れを入れても重くならない。</li>
+          <li>測り方について。散らばりは「位置の標準偏差」で見た。粒の数（602個）は乱れによらず同じなので、散らばりだけを比べられる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
