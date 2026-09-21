@@ -900,6 +900,18 @@ DONE = [
      "shots": ["128_extract.png"],
      "title": "extracttransform は移動と回転だけを取り出す — 拡大は捨てて distortion に出す",
      "note": "移動と回転はずれ0で取り出せる（(10,20,30)°は1軸35.8171°）。拡大は取り出さず distortion に出る"},
+    {"no": "129", "anchor": "exp129",
+     "tags": ["モデリング", "measure", "曲率", "検算"],
+     "log": "log_pm", "thumb": "129_curvature.png",
+     "shots": ["129_curvature.png"],
+     "title": "measure の曲率は既定のままだと式と合わない — Divide Element Area を入れると球・円柱とも0.03%以内",
+     "note": "既定では式の値が出ない（網と大きさで変わる）。Divide Element Area 入・Scale Normalize 切で球も円柱も0.03%以内"},
+    {"no": "130", "anchor": "exp130",
+     "tags": ["モデリング", "normal", "法線", "検算"],
+     "log": "log_pm", "thumb": "130_cusp.png",
+     "shots": ["130_cusp.png"],
+     "title": "normal の Cusp Angle は「曲がり角がこれより大きければ角を立てる」 — ちょうど等しいと、なめらか",
+     "note": "曲がり角 > Cusp Angle なら角が立つ（35通りすべて）。ちょうど等しい・0.1%ほど下でもなめらか"},
 ]
 
 PLANNED = []
