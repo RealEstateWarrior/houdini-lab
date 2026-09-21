@@ -1,0 +1,8310 @@
+[
+ {
+  "spec": "sop/attribrandomize",
+  "ok": true,
+  "category": "SOP",
+  "name": "attribrandomize",
+  "label": "Attribute Randomize",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "grouptype",
+    "label": "Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "guess",
+      "Guess from Group"
+     ],
+     [
+      "vertices",
+      "Vertices"
+     ],
+     [
+      "edges",
+      "Edges"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ]
+    ]
+   },
+   {
+    "name": "class",
+    "label": "Attribute Class",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "detail",
+      "Detail"
+     ],
+     [
+      "primitive",
+      "Primitives"
+     ],
+     [
+      "point",
+      "Points"
+     ],
+     [
+      "vertex",
+      "Vertices"
+     ]
+    ]
+   },
+   {
+    "name": "name",
+    "label": "Attribute Name",
+    "default": [
+     "Cd"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "operation",
+    "label": "Operation",
+    "default": [
+     "set"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "set",
+      "Set Value"
+     ],
+     [
+      "add",
+      "Add Value"
+     ],
+     [
+      "min",
+      "Minimum"
+     ],
+     [
+      "max",
+      "Maximum"
+     ],
+     [
+      "mult",
+      "Multiply"
+     ]
+    ]
+   },
+   {
+    "name": "scale",
+    "label": "Global Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "folder0",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "distribution",
+    "label": "Distribution",
+    "default": [
+     "uniform"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "constant",
+      "Constant Value (not random)"
+     ],
+     [
+      "bernoulli",
+      "Two Values"
+     ],
+     [
+      "uniform",
+      "Uniform (Continuous)"
+     ],
+     [
+      "uniformdiscrete",
+      "Uniform (Discrete)"
+     ],
+     [
+      "uniformorient",
+      "Direction or Orientation"
+     ],
+     [
+      "uniformball",
+      "Inside Sphere"
+     ],
+     [
+      "normal",
+      "Normal (Gaussian)"
+     ],
+     [
+      "exponential",
+      "Exponential"
+     ],
+     [
+      "lognormal",
+      "Log-Normal"
+     ],
+     [
+      "cauchy",
+      "Cauchy-Lorentz"
+     ],
+     [
+      "ramp",
+      "Custom Ramp"
+     ],
+     [
+      "discrete",
+      "Custom Discrete"
+     ]
+    ]
+   },
+   {
+    "name": "dimensions",
+    "label": "Dimensions",
+    "default": [
+     3
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "allsame",
+    "label": "Use First Dimension's Parameters for All",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "constvalue",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "valuea",
+    "label": "Value A",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "valueb",
+    "label": "Value B",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "probvalueb",
+    "label": "Probability of Value B",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min",
+    "label": "Min Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max",
+    "label": "Max Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "mindiscrete",
+    "label": "Min Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maxdiscrete",
+    "label": "Max Value",
+    "default": [
+     9.0,
+     9.0,
+     9.0,
+     9.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "stepsize",
+    "label": "Step Size",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "median",
+    "label": "Middle Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "onesidedmedian",
+    "label": "Middle Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "medianattrib",
+    "label": "Middle Value Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "stddev",
+    "label": "Scale Around Middle",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "onesidedstddev",
+    "label": "Spread Around Middle",
+    "default": [
+     0.2,
+     0.2,
+     0.2,
+     0.2
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usefit0to",
+    "label": "Use Fit Value 0 To",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "fit0to",
+    "label": "Fit Value 0 To",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usefit1to",
+    "label": "Use Fit Value 1 To",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "fit1to",
+    "label": "Fit Value 1 To",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ramp",
+    "label": "Custom Ramp",
+    "default": 3,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "useminlimit",
+    "label": "Use Min Limit",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "minlimit",
+    "label": "Min Limit",
+    "default": [
+     -100.0,
+     -100.0,
+     -100.0,
+     -100.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "useonesidedmin",
+    "label": "Use Min Limit",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "onesidedmin",
+    "label": "Min Limit",
+    "default": [
+     0.1,
+     0.1,
+     0.1,
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usemaxlimit",
+    "label": "Use Max Limit",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "maxlimit",
+    "label": "Max Limit",
+    "default": [
+     100.0,
+     100.0,
+     100.0,
+     100.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "useconeangle",
+    "label": "Use Cone Angle",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "coneangle",
+    "label": "Cone Angle",
+    "default": [
+     30.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usepowerbias",
+    "label": "Use Bias Toward Direction",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "powerbias",
+    "label": "Bias Toward Direction",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "direction",
+    "label": "Direction",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "directionattrib",
+    "label": "Direction Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "valuetype",
+    "label": "Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "float",
+      "Float"
+     ],
+     [
+      "string",
+      "String"
+     ]
+    ]
+   },
+   {
+    "name": "values",
+    "label": "Number of Values",
+    "default": 4,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "normalize",
+    "label": "Normalize",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "visualize",
+    "label": "Visualize as Points",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "nvisualizepts",
+    "label": "Visualize as Points",
+    "default": [
+     10000
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "usefractionattrib",
+    "label": "Use Fraction Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "fractionattrib",
+    "label": "Fraction Attribute",
+    "default": [
+     "fraction"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "seed",
+    "label": "Global Seed",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "useseedattrib",
+    "label": "Use Seed Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "seedattrib",
+    "label": "Seed Attribute",
+    "default": [
+     "id"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "ramp1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ramp1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ramp1interp",
+    "label": "Interpolation",
+    "default": 3,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "ramp2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ramp2value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ramp2interp",
+    "label": "Interpolation",
+    "default": 3,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "ramp3pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ramp3value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ramp3interp",
+    "label": "Interpolation",
+    "default": 3,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "strvalue0",
+    "label": "Value 0",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "value0",
+    "label": "Value 0",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "weight0",
+    "label": "Weight",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "strvalue1",
+    "label": "Value 1",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "value1",
+    "label": "Value 1",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "weight1",
+    "label": "Weight",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "strvalue2",
+    "label": "Value 2",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "value2",
+    "label": "Value 2",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "weight2",
+    "label": "Weight",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "strvalue3",
+    "label": "Value 3",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "value3",
+    "label": "Value 3",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "weight3",
+    "label": "Weight",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/attribfill",
+  "ok": true,
+  "category": "SOP",
+  "name": "attribfill",
+  "label": "Attribute Fill",
+  "parms": [
+   {
+    "name": "mode",
+    "label": "Mode",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "eikonal",
+      "Arrival Time (Eikonal)"
+     ],
+     [
+      "poisson",
+      "Interpolate (Poisson)"
+     ],
+     [
+      "heat",
+      "Blur (Diffusion)"
+     ],
+     [
+      "transport",
+      "Extrapolate (Transport)"
+     ]
+    ]
+   },
+   {
+    "name": "attrib",
+    "label": "Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "source",
+    "label": "Attribute to Match",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "weights",
+    "label": "Weight Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "speed",
+    "label": "Speed Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "boundary",
+    "label": "Boundary Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "mindist",
+    "label": "Minimum Edge Length",
+    "default": [
+     1e-08
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "minspeed",
+    "label": "Minimum Speed",
+    "default": [
+     1e-08
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "timestep",
+    "label": "Diffusion Time",
+    "default": [
+     0.02
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "unreachableval",
+    "label": "Unreachable Time",
+    "default": [
+     -1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "extrapolationtype",
+    "label": "Extrapolation Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "scalar",
+      "Scalar"
+     ],
+     [
+      "paralleltransport",
+      "Parallel Transport"
+     ],
+     [
+      "radialfield",
+      "Radial Field"
+     ]
+    ]
+   },
+   {
+    "name": "tangentialonly",
+    "label": "Tangential Component Only",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "globalrotation",
+    "label": "Global Rotation",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/edgecollapse",
+  "ok": true,
+  "category": "SOP",
+  "name": "edgecollapse",
+  "label": "Edge Collapse",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "removedegen",
+    "label": "Remove Degenerate",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "updatenmls",
+    "label": "Recompute Point Normals",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "connectivityattrib",
+    "label": "Connectivity Attribute",
+    "default": [
+     "uv"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/edgefracture",
+  "ok": true,
+  "category": "SOP",
+  "name": "edgefracture",
+  "label": "Edge Fracture",
+  "parms": [
+   {
+    "name": "doinitialpieces",
+    "label": "doinitialpieces",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "initialpieces",
+    "label": "Initial Pieces",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "doresample",
+    "label": "Resample Input Curves",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "resampleres",
+    "label": "Resample Accuracy",
+    "default": [
+     0.2
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "enablecost",
+    "label": "Enable Point Cost Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cost",
+    "label": "Point Cost Attribute",
+    "default": [
+     "cost"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "showguide",
+    "label": "Show Guide Geometry",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "output",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "outputpieceattrib",
+    "label": "outputpieceattrib",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pieceattrib",
+    "label": "Primitive Piece",
+    "default": [
+     "piece"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "doorigptsgrp",
+    "label": "Label",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "origptsgrp",
+    "label": "Original Point Group",
+    "default": [
+     "origpts"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "donewptsgrp",
+    "label": "Label",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "newptsgrp",
+    "label": "New Point Group",
+    "default": [
+     "newpts"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/polybridge",
+  "ok": true,
+  "category": "SOP",
+  "name": "polybridge",
+  "label": "PolyBridge",
+  "parms": [
+   {
+    "name": "divisions",
+    "label": "Divisions",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "spinetype",
+    "label": "Spine Shape",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "straight",
+      "Straight"
+     ],
+     [
+      "curved",
+      "Curved"
+     ],
+     [
+      "external",
+      "Curve From Second Input"
+     ]
+    ]
+   },
+   {
+    "name": "pairingshift",
+    "label": "Default Pairing Shift",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "tabs",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "srcsection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "srcgroup",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "srcsplittype",
+    "label": "Divide Into",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "elements",
+      "Individual Elements"
+     ],
+     [
+      "component",
+      "Connected Components"
+     ]
+    ]
+   },
+   {
+    "name": "usesrcsplitgroup",
+    "label": "",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "srcsplitgroup",
+    "label": "Split Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "srcrevwinding",
+    "label": "Reverse Winding",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "srcdirsign",
+    "label": "Depart",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "auto",
+      "Auto Using"
+     ],
+     [
+      "pos",
+      "Along"
+     ],
+     [
+      "neg",
+      "Opposite"
+     ]
+    ]
+   },
+   {
+    "name": "usesrcdir",
+    "label": "Depart",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "normal",
+      "Loop Normal"
+     ],
+     [
+      "explicit",
+      "Explicit Direction"
+     ]
+    ]
+   },
+   {
+    "name": "srcdir",
+    "label": "Direction",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcnscale",
+    "label": "Magnitude",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcstiffness",
+    "label": "Stiffness",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dstsection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "dstgroup",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "dstsplittype",
+    "label": "Divide Into",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "elements",
+      "Individual Elements"
+     ],
+     [
+      "component",
+      "Connected Components"
+     ]
+    ]
+   },
+   {
+    "name": "usedstsplitgroup",
+    "label": "",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dstsplitgroup",
+    "label": "Split Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "dstrevwinding",
+    "label": "Reverse Winding",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dstdirsign",
+    "label": "Arrive",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "auto",
+      "Auto Using"
+     ],
+     [
+      "pos",
+      "Along"
+     ],
+     [
+      "neg",
+      "Opposite"
+     ]
+    ]
+   },
+   {
+    "name": "usedstdir",
+    "label": "Arrive",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "normal",
+      "Loop Normal"
+     ],
+     [
+      "explicit",
+      "Explicit Direction"
+     ]
+    ]
+   },
+   {
+    "name": "dstdir",
+    "label": "Direction",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dstnscale",
+    "label": "Magnitude",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dststiffness",
+    "label": "Stiffness",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "divisionssection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "srcdivs",
+    "label": "Source Divisions",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "dstdivs",
+    "label": "Destination Divisions",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "spacing",
+    "label": "Spacing",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "arclengthuniform",
+      "Uniform"
+     ],
+     [
+      "curvatureadaptive",
+      "Curvature Sensitive"
+     ]
+    ]
+   },
+   {
+    "name": "externalspinesection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "spinerange",
+    "label": "U Range",
+    "default": [
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "spinepos",
+    "label": "Positioning",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "asis",
+      "As Is"
+     ],
+     [
+      "srctodst",
+      "Start at Source, End at Destination"
+     ],
+     [
+      "alongsrcdir",
+      "Start at Source, End Along Source Direction"
+     ],
+     [
+      "alongdstdir",
+      "End at Destination, Start Along Destination Direction"
+     ],
+     [
+      "tangentsrcdir",
+      "Start at Source, Tangent to Source Direction"
+     ],
+     [
+      "tangentdstdir",
+      "End at Destination, Tangent to Destination Direction"
+     ],
+     [
+      "translatesrc",
+      "Translate Start to Source"
+     ],
+     [
+      "translatedst",
+      "Translate End to Destination"
+     ]
+    ]
+   },
+   {
+    "name": "reversespinedirection",
+    "label": "Reverse Direction",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "axialrotation",
+    "label": "Axial Rotation",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcblend",
+    "label": "Source Blend",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dstblend",
+    "label": "Destination Blend",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "spinesection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "generatespinesample",
+    "label": "Generate Spine Sample Points",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "spinegroup",
+    "label": "Group",
+    "default": [
+     "bridgespinepts"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "spintangent",
+    "label": "Tangent Attribute",
+    "default": [
+     "sptan"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "spinenormal",
+    "label": "Normal Attribute",
+    "default": [
+     "spnorm"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "spinebinormal",
+    "label": "Binormal Attribute",
+    "default": [
+     "spbinorm"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "meshsection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "generatemesh",
+    "label": "Generate Bridge Mesh",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usemeshprimgroup",
+    "label": "",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "meshprimgroup",
+    "label": "Mesh Group",
+    "default": [
+     "bridgemeshprims"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "attachtosrc",
+    "label": "Attach to Input Geometry At Source",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "attachtodst",
+    "label": "Attach to Input Geometry At Destination",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cliprange0",
+    "label": "Clip Start",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "cliprange1",
+    "label": "Clip End",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "miterjoints",
+    "label": "Miter Joints",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "normalsection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "addvertexnomrals",
+    "label": "Add Vertex Normals",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cuspangle",
+    "label": "Cusp Angle",
+    "default": [
+     60.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "cuspsrc",
+    "label": "Cusp All Source Boundary Edges",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cuspdst",
+    "label": "Cusp All Destination Boundary Edges",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "uvssection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "genuvs",
+    "label": "Generate Unwrapped Texture Coordinates",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "uvstyle",
+    "label": "Style",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "unitsquare",
+      "Unit Square"
+     ],
+     [
+      "rectangular",
+      "Rectangular"
+     ],
+     [
+      "proprtional",
+      "Proportional"
+     ]
+    ]
+   },
+   {
+    "name": "uvscaling",
+    "label": "Scaling",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "fitunitsquare",
+      "Fit Unit Square"
+     ],
+     [
+      "match3d",
+      "Match 3D Scale"
+     ],
+     [
+      "matchuv",
+      "Match Incident UV Scale"
+     ]
+    ]
+   },
+   {
+    "name": "inputgeosection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "keepinputgeo",
+    "label": "Keep Input Geometry",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "deletesrc",
+    "label": "Delete Source Primitives",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "deletedst",
+    "label": "Delete Destination Primitives",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "thicknesssection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "thicknessscale",
+    "label": "Thickness",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usethicknessattrib",
+    "label": "",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "thicknessattrib",
+    "label": "Thickness Scale",
+    "default": [
+     "thickness"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "usethicknessramp",
+    "label": "",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "thicknessramp",
+    "label": "Thickness Scale Ramp",
+    "default": 2,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "twistsection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "twists",
+    "label": "Full-Turn Twists",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "usetwistattrib",
+    "label": "",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "twistattrib",
+    "label": "Local Twist Attribute",
+    "default": [
+     "twist"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "usetwistramp",
+    "label": "",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "twistramp",
+    "label": "Local Twist Ramp",
+    "default": 2,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "twistscale",
+    "label": "Range Half-Width",
+    "default": [
+     180.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "interpolation",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "rotatingframe",
+      "Rotating Frame"
+     ]
+    ]
+   },
+   {
+    "name": "implcitpairing",
+    "label": "Implicit Pairing",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "length",
+      "Use Relative Edge Lengths"
+     ],
+     [
+      "edgecount",
+      "Use Edge Counts"
+     ]
+    ]
+   },
+   {
+    "name": "linkssection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "usepairloopsgrp",
+    "label": "",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pairloopsgrp",
+    "label": "Group",
+    "default": [
+     "pairlinkedges"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "oneloopperbridge",
+    "label": "Include Only One Loop per Bridge",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pairingsection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "usepairedptattrib",
+    "label": "Read Mappings from Point Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "numpairs",
+    "label": "Number of Pairs",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "srcdirinitialized",
+    "label": "",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dstdirinitialized",
+    "label": "",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "thicknessramp1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "thicknessramp1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "thicknessramp1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "thicknessramp2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "thicknessramp2value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "thicknessramp2interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "twistramp1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "twistramp1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "twistramp1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "twistramp2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "twistramp2value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "twistramp2interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/polysplit",
+  "ok": true,
+  "category": "SOP",
+  "name": "polysplit::2.0",
+  "label": "PolySplit",
+  "parms": [
+   {
+    "name": "splitloc",
+    "label": "Split Locations",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pathtype",
+    "label": "Path Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "shortest",
+      "Shortest Distance"
+     ],
+     [
+      "quadcut",
+      "Edge Loop"
+     ]
+    ]
+   },
+   {
+    "name": "polysplit",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "close",
+    "label": "Close Path",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "allowfaces",
+    "label": "Allow Split Points on Faces",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "quadcomplete",
+    "label": "Quad Autocompletion",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "edgeloop",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "numloops",
+    "label": "Number of Loops",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "parallellooptoggle",
+    "label": "Match Profile",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "parallelfliptoggle",
+    "label": "Switch Profile",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "edgepercenttoggle",
+    "label": "edgepercenttoggle",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "edgepercent",
+    "label": "Edge Percentage",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "updatenorms",
+    "label": "Update Point Normals",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "grouptoggle",
+    "label": "grouptoggle",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "groupname",
+    "label": "Edge Group",
+    "default": [
+     "splitPathGroup"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "groupappend",
+    "label": "Append to Group",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "groupexclude",
+    "label": "Exclude Extra Edges from Group",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "tolerance",
+    "label": "Tolerance",
+    "default": [
+     1e-05
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/polycut",
+  "ok": true,
+  "category": "SOP",
+  "name": "polycut",
+  "label": "PolyCut",
+  "parms": [
+   {
+    "name": "polygons",
+    "label": "Polygon Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "type",
+    "label": "Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "edges",
+      "Edges"
+     ]
+    ]
+   },
+   {
+    "name": "cutpoints",
+    "label": "Cut Points",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "cutedges",
+    "label": "Cut Edges",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "strategy",
+    "label": "Strategy",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "remove",
+      "Remove"
+     ],
+     [
+      "cut",
+      "Cut"
+     ]
+    ]
+   },
+   {
+    "name": "detectedgechanges",
+    "label": "Detect Edge Changes",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "attribcrossing",
+      "Cut At Attribute Crossing"
+     ],
+     [
+      "attribchange",
+      "Cut At Attribute Change"
+     ]
+    ]
+   },
+   {
+    "name": "cutattrib",
+    "label": "Cut Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "cutvalue",
+    "label": "Cut Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "cutstringvalue",
+    "label": "Cut String Value",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "cutthreshold",
+    "label": "Cut Threshold",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "keepclosed",
+    "label": "Keep Polygons Closed",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/polypatch",
+  "ok": true,
+  "category": "SOP",
+  "name": "polypatch",
+  "label": "PolyPatch",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "basis",
+    "label": "Basis",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "cardinal",
+      "Cardinal"
+     ],
+     [
+      "bspline",
+      "BSpline"
+     ]
+    ]
+   },
+   {
+    "name": "connecttype",
+    "label": "Connectivity",
+    "default": 4,
+    "kind": "Menu",
+    "menu": [
+     [
+      "rows",
+      "Rows"
+     ],
+     [
+      "cols",
+      "Columns"
+     ],
+     [
+      "rowcol",
+      "Rows and Columns"
+     ],
+     [
+      "triangles",
+      "Triangles"
+     ],
+     [
+      "quads",
+      "Quadrilaterals"
+     ],
+     [
+      "alttriangles",
+      "Alternating Triangles"
+     ],
+     [
+      "revtriangles",
+      "Reverse Triangles"
+     ],
+     [
+      "inheritconnect",
+      "Inherit from Source"
+     ]
+    ]
+   },
+   {
+    "name": "closeu",
+    "label": "U Wrap",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "nonewu",
+      "Off"
+     ],
+     [
+      "wu",
+      "On"
+     ],
+     [
+      "ifprimwu",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "closev",
+    "label": "V Wrap",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "nonewv",
+      "Off"
+     ],
+     [
+      "wv",
+      "On"
+     ],
+     [
+      "ifprimwv",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "firstuclamp",
+    "label": "U Clamp (First)",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "firstuclampoff",
+      "Off"
+     ],
+     [
+      "firstuclampon",
+      "On"
+     ],
+     [
+      "firstuclampifprim",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "lastuclamp",
+    "label": "U Clamp (Last)",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "lastuclampoff",
+      "Off"
+     ],
+     [
+      "lastuclampon",
+      "On"
+     ],
+     [
+      "lastuclampifprim",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "firstvclamp",
+    "label": "V Clamp (First)",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "firstvclampoff",
+      "Off"
+     ],
+     [
+      "firstvclampon",
+      "On"
+     ],
+     [
+      "firstvclampifprim",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "lastvclamp",
+    "label": "V Clamp (Last)",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "lastvclampoff",
+      "Off"
+     ],
+     [
+      "lastvclampon",
+      "On"
+     ],
+     [
+      "lastvclampifprim",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "divisions",
+    "label": "Output Divisions",
+    "default": [
+     4,
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "polys",
+    "label": "Output Polygons",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/polyloft",
+  "ok": true,
+  "category": "SOP",
+  "name": "polyloft",
+  "label": "PolyLoft",
+  "parms": [
+   {
+    "name": "proximity",
+    "label": "Connect Closest Ends",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "consolidate",
+    "label": "Consolidate Points",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dist",
+    "label": "Distance",
+    "default": [
+     0.0010000000474974513
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "minimize",
+    "label": "Minimize",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "point2",
+      "2-Point Distance"
+     ],
+     [
+      "point3",
+      "3-Point Distance"
+     ]
+    ]
+   },
+   {
+    "name": "closeu",
+    "label": "U Wrap",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "nonewu",
+      "Off"
+     ],
+     [
+      "wu",
+      "On"
+     ],
+     [
+      "ifprimwu",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "closev",
+    "label": "V Wrap",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "nonewv",
+      "Off"
+     ],
+     [
+      "wv",
+      "On"
+     ],
+     [
+      "ifprimwv",
+      "If primitive does"
+     ]
+    ]
+   },
+   {
+    "name": "coltol",
+    "label": "Collinearity Tolerance",
+    "default": [
+     1.049999991664663e-05
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "creategroup",
+    "label": "Create Polygon Group",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "polygroup",
+    "label": "Name",
+    "default": [
+     "loftgroup"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "stdswitcher",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "prim",
+    "label": "Keep Primitives",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pointgroup0",
+    "label": "Group 0",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pointgroup1",
+    "label": "Group 1",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pointgroup2",
+    "label": "Group 2",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pointgroup3",
+    "label": "Group 3",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pointgroup4",
+    "label": "Group 4",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pointgroup5",
+    "label": "Group 5",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/rails",
+  "ok": true,
+  "category": "SOP",
+  "name": "rails",
+  "label": "Rails",
+  "parms": [
+   {
+    "name": "xsectgrp",
+    "label": "X-Section Groups",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "railgrp",
+    "label": "Rail Groups",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "cycle",
+    "label": "Cycle Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "all",
+      "All Primitives at Each Point"
+     ],
+     [
+      "each",
+      "One Primitive at a Time"
+     ],
+     [
+      "cycle",
+      "Cycle Primitives"
+     ]
+    ]
+   },
+   {
+    "name": "pairs",
+    "label": "Sweep Along Pairs of Rails",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "firstl",
+    "label": "Sweep Along First and Last Rail",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "stretch",
+    "label": "Stretch to Rails",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usevtx",
+    "label": "Use Vertex",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "nouse",
+      "None"
+     ],
+     [
+      "usespec",
+      "Specific Range"
+     ],
+     [
+      "useends",
+      "End to End"
+     ]
+    ]
+   },
+   {
+    "name": "vertex",
+    "label": "Connection Vertices",
+    "default": [
+     0,
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "scale",
+    "label": "Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "roll",
+    "label": "Roll",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "noflip",
+    "label": "Fix Flipping",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usedir",
+    "label": "Use Direction",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dir",
+    "label": "Direction",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "newg",
+    "label": "Create Output Groups",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "railname",
+    "label": "Group Name",
+    "default": [
+     "railGroup"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 2,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/ends",
+  "ok": true,
+  "category": "SOP",
+  "name": "ends",
+  "label": "Ends",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Source Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pshapeu",
+    "label": "Preserve Shape U",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pshapev",
+    "label": "Preserve Shape V",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "closeu",
+    "label": "Close U",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "sameclosure",
+      "No change"
+     ],
+     [
+      "open",
+      "Open"
+     ],
+     [
+      "closesharp",
+      "Close Straight"
+     ],
+     [
+      "closeround",
+      "Close Rounded"
+     ],
+     [
+      "unroll",
+      "Unroll with New Points"
+     ],
+     [
+      "unrollshared",
+      "Unroll with Shared Points"
+     ]
+    ]
+   },
+   {
+    "name": "closev",
+    "label": "Close V",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "sameclosure",
+      "No change"
+     ],
+     [
+      "open",
+      "Open"
+     ],
+     [
+      "closesharp",
+      "Close Straight"
+     ],
+     [
+      "closeround",
+      "Close Rounded"
+     ],
+     [
+      "unroll",
+      "Unroll with New Points"
+     ],
+     [
+      "unrollshared",
+      "Unroll with Shared Points"
+     ]
+    ]
+   },
+   {
+    "name": "clampu",
+    "label": "Clamp U",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "sameclamp",
+      "No change"
+     ],
+     [
+      "clamp",
+      "Clamp"
+     ],
+     [
+      "unclamp",
+      "Unclamp"
+     ]
+    ]
+   },
+   {
+    "name": "clampv",
+    "label": "Clamp V",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "sameclamp",
+      "No change"
+     ],
+     [
+      "clamp",
+      "Clamp"
+     ],
+     [
+      "unclamp",
+      "Unclamp"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/reverse",
+  "ok": true,
+  "category": "SOP",
+  "name": "reverse",
+  "label": "Reverse",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Source Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vtxsort",
+    "label": "Vertex",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "samevertex",
+      "No change"
+     ],
+     [
+      "reverse",
+      "Reverse"
+     ],
+     [
+      "reverseu",
+      "Reverse U"
+     ],
+     [
+      "reversev",
+      "Reverse V"
+     ],
+     [
+      "swapuv",
+      "Swap U and V"
+     ],
+     [
+      "shift",
+      "Shift"
+     ]
+    ]
+   },
+   {
+    "name": "vtxuoff",
+    "label": "U Offset",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "vtxvoff",
+    "label": "V Offset",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/groupexpand",
+  "ok": true,
+  "category": "SOP",
+  "name": "groupexpand",
+  "label": "Group Expand",
+  "parms": [
+   {
+    "name": "outputgroup",
+    "label": "Group Name",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "group",
+    "label": "Base Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "grouptype",
+    "label": "Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "auto",
+      "Guess from Group"
+     ],
+     [
+      "vertices",
+      "Vertices"
+     ],
+     [
+      "edges",
+      "Edges"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ]
+    ]
+   },
+   {
+    "name": "primshareedge",
+    "label": "Require Primitives Share Edge",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "floodfill",
+    "label": "Flood Fill to Connected Geometry",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "numsteps",
+    "label": "Steps",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "usestepattrib",
+    "label": "usestepattrib",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "stepattrib",
+    "label": "Step Attribute",
+    "default": [
+     "step"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "constraintfolder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "normalfolder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "bynormal",
+    "label": "bynormal",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "normalangle",
+    "label": "Restrict by Normal Spread Angle",
+    "default": [
+     60.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "overridenormal",
+    "label": "overridenormal",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "normalattrib",
+    "label": "Normal Attribute",
+    "default": [
+     "N"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "connectivityfolder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "useconnectivityattrib",
+    "label": "useconnectivityattrib",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "connectivityattrib",
+    "label": "Connectivity Attribute",
+    "default": [
+     "uv"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "tol",
+    "label": "Connectivity Attribute Tolerance",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usecolgroup",
+    "label": "usecolgroup",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "colgroup",
+    "label": "Collision Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "colgrouptype",
+    "label": "Collision Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "auto",
+      "Guess from Group"
+     ],
+     [
+      "edges",
+      "Edges"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ],
+     [
+      "vertices",
+      "Vertices"
+     ]
+    ]
+   },
+   {
+    "name": "colgroupinvert",
+    "label": "Contain Growth within Collision Group",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "colgroupallowonbound",
+    "label": "Allow Growth to Collision Group Boundary",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/connectivity",
+  "ok": true,
+  "category": "SOP",
+  "name": "connectivity",
+  "label": "Connectivity",
+  "parms": [
+   {
+    "name": "connecttype",
+    "label": "Connectivity Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "point",
+      "Point"
+     ],
+     [
+      "prim",
+      "Primitive"
+     ]
+    ]
+   },
+   {
+    "name": "primincgroup",
+    "label": "Primitive Include Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pointincgroup",
+    "label": "Point Include Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "attribname",
+    "label": "Attribute",
+    "default": [
+     "class"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "attribtype",
+    "label": "Attribute Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "int",
+      "Integer"
+     ],
+     [
+      "string",
+      "String"
+     ]
+    ]
+   },
+   {
+    "name": "prefix",
+    "label": "Prefix",
+    "default": [
+     "piece"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "createvarmap",
+    "label": "Create Variable Mapping",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "varname",
+    "label": "Local Variable",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "seamgroup",
+    "label": "Seam Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "byuv",
+    "label": "Use UV Connectivity",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "uvattrib",
+    "label": "UV Attribute",
+    "default": [
+     "uv"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/name",
+  "ok": true,
+  "category": "SOP",
+  "name": "name",
+  "label": "Name",
+  "parms": [
+   {
+    "name": "attribname",
+    "label": "Attribute",
+    "default": [
+     "name"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "class",
+    "label": "Class",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "primitive",
+      "Primitive"
+     ],
+     [
+      "point",
+      "Point"
+     ],
+     [
+      "vertex",
+      "Vertex"
+     ]
+    ]
+   },
+   {
+    "name": "donamefromgroup",
+    "label": "Name from Group",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "namefromgroupmask",
+    "label": "Group Mask",
+    "default": [
+     "piece*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "numnames",
+    "label": "Number of Namings",
+    "default": 1,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "numrenames",
+    "label": "Number of Renames",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "group1",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "name1",
+    "label": "Name",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/uvflatten",
+  "ok": true,
+  "category": "SOP",
+  "name": "uvflatten::3.0",
+  "label": "UV Flatten",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "uvattrib",
+    "label": "UV Attribute",
+    "default": [
+     "uv"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "method",
+    "label": "Flattening Method",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "scp",
+      "Spectral (SCP)"
+     ],
+     [
+      "abf",
+      "Angle-Based (ABF)"
+     ]
+    ]
+   },
+   {
+    "name": "existinguvs",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "keepexistingseams",
+    "label": "Preserve Seams",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "keepexistinglayout",
+    "label": "Preserve Layout",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pinboundaries",
+    "label": "Preserve Island Boundary Shapes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "flattening",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "seamgroup",
+    "label": "Seams",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "rectifygroup",
+    "label": "Rectify Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vertexpins",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "usepins",
+    "label": "Enable Pins",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pins",
+    "label": "Number of Pins",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "alignedvertices",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "usealignments",
+    "label": "Enable Axis Alignment",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "alignments",
+    "label": "Aligned Groups",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "straighedloops",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "usestraightenings",
+    "label": "Enable Loop Straightening",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "straightenings",
+    "label": "Straightened Groups",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "layout",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "manuallayout",
+    "label": "Enable Manual Layout",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "layoutseamgroup",
+    "label": "Seams",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "layoutrectifygroup",
+    "label": "Rectify Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "lvertexpins",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "lpins",
+    "label": "Number of Pins",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "lalignedvertices",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "lalignments",
+    "label": "Aligned Groups",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "lstraightenedloops",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "lstraightenings",
+    "label": "Straightened Groups",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "outputgroups",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "useoutputseams",
+    "label": "useoutputseams",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "outputseams",
+    "label": "Seams",
+    "default": [
+     "outputseams"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useoutputconstrislands",
+    "label": "useoutputconstrislands",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "outputconstrislands",
+    "label": "Constrained Islands",
+    "default": [
+     "constrainedprims"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "layoutbox",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "bboxcenter",
+    "label": "Center",
+    "default": [
+     0.5,
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bboxsize",
+    "label": "Size",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/uvtransform",
+  "ok": true,
+  "category": "SOP",
+  "name": "uvtransform::2.0",
+  "label": "UV Transform",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "grouptype",
+    "label": "Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "guess",
+      "Guess from Group"
+     ],
+     [
+      "vertices",
+      "Vertices"
+     ],
+     [
+      "edges",
+      "Edges"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ]
+    ]
+   },
+   {
+    "name": "uvattrib",
+    "label": "UV Attribute",
+    "default": [
+     "uv"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "xOrd",
+    "label": "Transform Order",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "srt",
+      "Scale Rot Trans"
+     ],
+     [
+      "str",
+      "Scale Trans Rot"
+     ],
+     [
+      "rst",
+      "Rot Scale Trans"
+     ],
+     [
+      "rts",
+      "Rot Trans Scale"
+     ],
+     [
+      "tsr",
+      "Trans Scale Rot"
+     ],
+     [
+      "trs",
+      "Trans Rot Scale"
+     ]
+    ]
+   },
+   {
+    "name": "rOrd",
+    "label": "Rotate Order",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "xyz",
+      "Rx Ry Rz"
+     ],
+     [
+      "xzy",
+      "Rx Rz Ry"
+     ],
+     [
+      "yxz",
+      "Ry Rx Rz"
+     ],
+     [
+      "yzx",
+      "Ry Rz Rx"
+     ],
+     [
+      "zxy",
+      "Rz Rx Ry"
+     ],
+     [
+      "zyx",
+      "Rz Ry Rx"
+     ]
+    ]
+   },
+   {
+    "name": "t",
+    "label": "Translate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "r",
+    "label": "Rotate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "s",
+    "label": "Scale",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "shear",
+    "label": "Shear",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p",
+    "label": "Pivot",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "softparmsgrouper",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "rad",
+    "label": "Soft Radius",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "type",
+    "label": "Soft Type",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "quadratic",
+      "Quadratic"
+     ],
+     [
+      "cubic",
+      "Cubic"
+     ],
+     [
+      "meta",
+      "Meta-ball"
+     ]
+    ]
+   },
+   {
+    "name": "tandeg",
+    "label": "Tangent Angles",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "kernel",
+    "label": "Kernel Function",
+    "default": [
+     "wyvill"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "metric",
+    "label": "Metric",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "uv",
+      "UV"
+     ],
+     [
+      "uvw",
+      "UVW"
+     ],
+     [
+      "xyz",
+      "XYZ"
+     ]
+    ]
+   },
+   {
+    "name": "global",
+    "label": "Ignore Point Connectivity",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "uvglobal",
+    "label": "Ignore UV Connectivity",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "visualizefalloff",
+    "label": "Visualize Falloff",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "never",
+      "Never"
+     ],
+     [
+      "always",
+      "Always"
+     ],
+     [
+      "state",
+      "When Viewport Tool Is Active"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/triangulate2d",
+  "ok": true,
+  "category": "SOP",
+  "name": "triangulate2d::3.0",
+  "label": "Triangulate2D",
+  "parms": [
+   {
+    "name": "points",
+    "label": "Point Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "planepossrc",
+    "label": "2D Positions",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "fitplane",
+      "Fit Plane"
+     ],
+     [
+      "setprojplane",
+      "Select Projection Plane"
+     ],
+     [
+      "useattrib",
+      "Use Attribute"
+     ]
+    ]
+   },
+   {
+    "name": "origin",
+    "label": "Origin",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dist",
+    "label": "Distance",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dir",
+    "label": "Direction",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos2attrib",
+    "label": "Attribute Name",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "options",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "useconstredges",
+    "label": "useconstredges",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "constredges",
+    "label": "Edges",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useconstrpolys",
+    "label": "useconstrpolys",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "constrpolys",
+    "label": "Polygons",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "ignorepolybridges",
+    "label": "Ignore Polygon Bridge Edges",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usesilhouettepolys",
+    "label": "usesilhouettepolys",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "silhouettepolys",
+    "label": "Silhouette",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "allowconstrsplit",
+    "label": "Allow Splitting of Crossing Constraints",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "useexactconstruction",
+    "label": "Use Exact Construction for Constraint Split Points",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "ignorenonconstrpts",
+    "label": "Ignore Non-Constraint Points",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "outsideremoval",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "removefromconvexhull",
+    "label": "Flood from Convex Hull Boundary",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "removefromconstrpolys",
+    "label": "Remove Outside of Constraint Polygons",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "removeoutsidesilhouette",
+    "label": "Remove Outside of Silhouette",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "refinement",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "refine",
+    "label": "Refine",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "allowrefineonstrsplit",
+    "label": "Allow Splitting of Constraint Edges",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "encroachangle",
+    "label": "Encroach Angle",
+    "default": [
+     180.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "minangle",
+    "label": "Minimum Angle",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "trianglesize",
+    "label": "Triangle Sizes",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "unrestricted",
+      "Unrestricted"
+     ],
+     [
+      "capmaxarea",
+      "Cap Maximum Area"
+     ],
+     [
+      "settargetedgelength",
+      "Set Target Edge Length"
+     ]
+    ]
+   },
+   {
+    "name": "maxarea",
+    "label": "Maximum Area",
+    "default": [
+     10000.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "targetedgelength",
+    "label": "Target Edge Length",
+    "default": [
+     100.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "minedgelength",
+    "label": "Minimum Edge Length",
+    "default": [
+     0.0001
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maxnewpts",
+    "label": "Maximum New Points",
+    "default": [
+     5000
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "lloydsteps",
+    "label": "Regularization Steps",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "allowmovinginteriorpts",
+    "label": "Allow Movement of Interior Input Points",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "outputgeo",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "restorepos",
+    "label": "Restore Original Point Positions",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "keepprims",
+    "label": "Keep Primitives",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "updatenmls",
+    "label": "Recompute Point Normals",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "removeunusedpoints",
+    "label": "Remove Unused Points",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "removeduplicatepoints",
+    "label": "Remove Duplicate Points from Triangulation",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "outputgrps",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "usecontrsplitptgrp",
+    "label": "usecontrsplitptgrp",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "constrsplitptgrp",
+    "label": "Split Points",
+    "default": [
+     "constrsplitpts"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useconstrdedges",
+    "label": "useconstrdedges",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "constrdedges",
+    "label": "Constrained Edges",
+    "default": [
+     "constrdedges"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "randseed",
+    "label": "Random Seed",
+    "default": [
+     5678
+    ],
+    "kind": "Int",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/align",
+  "ok": true,
+  "category": "SOP",
+  "name": "align",
+  "label": "Spline Align",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "groupb",
+    "label": "Align To",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "align",
+    "label": "Align",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "all",
+      "All primitives"
+     ],
+     [
+      "group",
+      "Groups of N primitives"
+     ],
+     [
+      "skip",
+      "Skip every Nth primitive"
+     ]
+    ]
+   },
+   {
+    "name": "inc",
+    "label": "N",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "stdswitcher",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "bias",
+    "label": "Bias",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "leftuv",
+    "label": "Left UV",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rightuv",
+    "label": "Right UV",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rightuvend",
+    "label": "Right UV End",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "individual",
+    "label": "Individual Alignment",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dotrans",
+    "label": "Translate",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dorotate",
+    "label": "Rotate",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "xOrd",
+    "label": "Transform Order",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "srt",
+      "Scale Rot Trans"
+     ],
+     [
+      "str",
+      "Scale Trans Rot"
+     ],
+     [
+      "rst",
+      "Rot Scale Trans"
+     ],
+     [
+      "rts",
+      "Rot Trans Scale"
+     ],
+     [
+      "tsr",
+      "Trans Scale Rot"
+     ],
+     [
+      "trs",
+      "Trans Rot Scale"
+     ]
+    ]
+   },
+   {
+    "name": "rOrd",
+    "label": "Rotate Order",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "xyz",
+      "Rx Ry Rz"
+     ],
+     [
+      "xzy",
+      "Rx Rz Ry"
+     ],
+     [
+      "yxz",
+      "Ry Rx Rz"
+     ],
+     [
+      "yzx",
+      "Ry Rz Rx"
+     ],
+     [
+      "zxy",
+      "Rz Rx Ry"
+     ],
+     [
+      "zyx",
+      "Rz Ry Rx"
+     ]
+    ]
+   },
+   {
+    "name": "t",
+    "label": "Translate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "r",
+    "label": "Rotate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "s",
+    "label": "Scale",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p",
+    "label": "Pivot",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/taper",
+  "ok": false,
+  "why": "この版には無い"
+ },
+ {
+  "spec": "sop/creep",
+  "ok": true,
+  "category": "SOP",
+  "name": "creep",
+  "label": "Creep",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "path",
+    "label": "Path Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "stdswitcher",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "Initialize",
+    "label": "Initialize",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "initfill",
+      "Fill path"
+     ],
+     [
+      "initundistort",
+      "Keep proportions"
+     ]
+    ]
+   },
+   {
+    "name": "t",
+    "label": "Translate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "r",
+    "label": "Rotate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "s",
+    "label": "Scale",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p",
+    "label": "Pivot",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "douv",
+    "label": "Set Creep UV Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "uvname",
+    "label": "UV Name",
+    "default": [
+     "creepuv"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "doattr",
+    "label": "Set Point Attributes From Path",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "_label_",
+    "label": "",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "setpt",
+    "label": "From Point",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "mulpt",
+    "label": "Multiply From Point",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "addpt",
+    "label": "Add From Point",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "subpt",
+    "label": "Subtract From Point",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "setprim",
+    "label": "From Primitive",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "mulprim",
+    "label": "Multiply From Primitive",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "addprim",
+    "label": "Add From Primitive",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "subprim",
+    "label": "Subtract From Primitive",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "setvtx",
+    "label": "From Vertex",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "mulvtx",
+    "label": "Multiply From Vertex",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "addvtx",
+    "label": "Add From Vertex",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "subvtx",
+    "label": "Subtract From Vertex",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 2,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/project",
+  "ok": true,
+  "category": "SOP",
+  "name": "project",
+  "label": "Spline Project",
+  "parms": [
+   {
+    "name": "facegroup",
+    "label": "Face Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "surfgroup",
+    "label": "Surface Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "cycle",
+    "label": "Cycle Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "allseq",
+      "All On Each Surface In Sequence"
+     ],
+     [
+      "allover",
+      "All On Each Surface Overlapping"
+     ],
+     [
+      "oneeach",
+      "One per Surface"
+     ],
+     [
+      "cycled",
+      "Cycled"
+     ]
+    ]
+   },
+   {
+    "name": "switcher",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "axis",
+    "label": "Axis",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "xaxis",
+      "X"
+     ],
+     [
+      "yaxis",
+      "Y"
+     ],
+     [
+      "zaxis",
+      "Z"
+     ],
+     [
+      "fnorm",
+      "Face Normal"
+     ],
+     [
+      "mindist",
+      "Minimum Distance"
+     ],
+     [
+      "other",
+      "User Defined:"
+     ]
+    ]
+   },
+   {
+    "name": "vector",
+    "label": "Vector",
+    "default": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "projside",
+    "label": "Side",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "closest",
+      "Closest"
+     ],
+     [
+      "farthest",
+      "Farthest"
+     ]
+    ]
+   },
+   {
+    "name": "sdivs",
+    "label": "Divisions per Span",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "rtolerance",
+    "label": "Ray Tolerance",
+    "default": [
+     0.01
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "ftolerance",
+    "label": "Fit Tolerance",
+    "default": [
+     0.001
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "uvgap",
+    "label": "Max UV Gap (%)",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "order",
+    "label": "Order",
+    "default": [
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "csharp",
+    "label": "Preserve Sharp Corners",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "accurate",
+    "label": "Super Accurate Projection",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "ufrom",
+    "label": "U From",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "uvx",
+      "X Coordinate"
+     ],
+     [
+      "uvy",
+      "Y Coordinate"
+     ],
+     [
+      "uvz",
+      "Z Coordinate"
+     ]
+    ]
+   },
+   {
+    "name": "vfrom",
+    "label": "V From",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "uvx",
+      "X Coordinate"
+     ],
+     [
+      "uvy",
+      "Y Coordinate"
+     ],
+     [
+      "uvz",
+      "Z Coordinate"
+     ]
+    ]
+   },
+   {
+    "name": "userange",
+    "label": "Map Profile to Range:",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "urange",
+    "label": "U Range",
+    "default": [
+     0.1,
+     0.9
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vrange",
+    "label": "V Range",
+    "default": [
+     0.1,
+     0.9
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maptype",
+    "label": "Mapping Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "unif",
+      "Uniform"
+     ],
+     [
+      "chordlen",
+      "Chord Length"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 2,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/clean",
+  "ok": true,
+  "category": "SOP",
+  "name": "clean",
+  "label": "Clean",
+  "parms": [
+   {
+    "name": "fusepts",
+    "label": "Consolidate Points",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "fusedist",
+    "label": "Consolidate Distance",
+    "default": [
+     0.001
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "deldegengeo",
+    "label": "Remove Degenerate Primitives",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "degentol",
+    "label": "Degenerancy Tolerance",
+    "default": [
+     0.001
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "removeunusedgrp",
+    "label": "Delete Unused Groups",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "orientpoly",
+    "label": "Orient Polygons",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "reversewinding",
+    "label": "Reverse Winding",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "fixoverlap",
+    "label": "Fix Overlaps",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "deleteoverlap",
+    "label": "Delete Overlap Pairs",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "delunusedpts",
+    "label": "Remove Unused Points",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "dodelattribs",
+    "label": "Remove Attributes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "delattribs",
+    "label": "Remove Attribs",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "dodelgroups",
+    "label": "Remove Groups",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "delgroups",
+    "label": "Remove Groups",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "delnans",
+    "label": "Remove NANs",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "make_manifold",
+    "label": "Manifold-Only Topology",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "delete_small",
+    "label": "Delete Small Manifold Patches",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "prim_count",
+    "label": "Primitive Threshold",
+    "default": [
+     3
+    ],
+    "kind": "Int",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/curvature",
+  "ok": false,
+  "why": "この版には無い"
+ },
+ {
+  "spec": "sop/relax",
+  "ok": true,
+  "category": "SOP",
+  "name": "relax",
+  "label": "Point Relax",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Points to Relax",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "influencegroup",
+    "label": "Influencing Points",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "surfacegroup",
+    "label": "Surface Primitives",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "maxiterations",
+    "label": "Max Iterations",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "radius",
+    "label": "Point Radius Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "useradiusattrib",
+    "label": "Use Point Radius Attribute",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "radiusattrib",
+    "label": "Point Radius Attribute",
+    "default": [
+     "pscale"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "relaxin3d",
+    "label": "Relax in 3D Space",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usenormals",
+    "label": "Use Normal Attribute",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usegeometricnormals",
+    "label": "Use Geometric Normals",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "normal",
+    "label": "Normal Direction",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usemaxstepattrib",
+    "label": "Override Max Step Size",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "maxstepattrib",
+    "label": "Max Step Size Attribute",
+    "default": [
+     "maxstep"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useprimnumattrib",
+    "label": "Use Prim Num Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "primnumattrib",
+    "label": "Prim Num Attribute",
+    "default": [
+     "sourceprim"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useprimuvwattrib",
+    "label": "Use Prim UVW Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "primuvwattrib",
+    "label": "Prim UVW Attribute",
+    "default": [
+     "sourceprimuv"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/pointjitter",
+  "ok": true,
+  "category": "SOP",
+  "name": "pointjitter",
+  "label": "Point Jitter",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "mask",
+    "label": "Mask",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "enablemaskattrib",
+    "label": "Enable Mask Attribute",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "noscaling",
+      "No Scaling"
+     ],
+     [
+      "byattrib",
+      "Scale by Attrib"
+     ]
+    ]
+   },
+   {
+    "name": "maskattrib",
+    "label": "Mask Attribute",
+    "default": [
+     "mask"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useidattrib",
+    "label": "Use ID Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "idattrib",
+    "label": "Id Attribute",
+    "default": [
+     "id"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "scale",
+    "label": "Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "axisscale",
+    "label": "Axis Scales",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "seed",
+    "label": "Seed",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usepscale",
+    "label": "Use Point Scale",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "updatenmls",
+    "label": "Update Normals",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/pointrelax",
+  "ok": false,
+  "why": "この版には無い"
+ },
+ {
+  "spec": "sop/pointreplicate",
+  "ok": true,
+  "category": "SOP",
+  "name": "pointreplicate",
+  "label": "Point Replicate",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "keepgeo",
+    "label": "Keep Input Geometry",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "folder1",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "nptsperpt",
+    "label": "Points per Point",
+    "default": [
+     100.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "genfromattrib",
+    "label": "Generate from Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "attrib",
+    "label": "Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "shape",
+    "label": "Shape",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "box",
+      "Box"
+     ],
+     [
+      "sphere",
+      "Sphere"
+     ],
+     [
+      "cylinder",
+      "Cylinder"
+     ],
+     [
+      "cone",
+      "Cone"
+     ],
+     [
+      "grid",
+      "Grid"
+     ],
+     [
+      "circle",
+      "Circle"
+     ],
+     [
+      "line",
+      "Line"
+     ],
+     [
+      "point",
+      "Point"
+     ],
+     [
+      "file",
+      "File"
+     ],
+     [
+      "sop",
+      "SOP"
+     ]
+    ]
+   },
+   {
+    "name": "file",
+    "label": "File",
+    "default": [
+     "defgeo.bgeo"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "sop",
+    "label": "SOP",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "orientation",
+    "label": "Orientation",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "xy",
+      "XY Plane"
+     ],
+     [
+      "yz",
+      "YZ Plane"
+     ],
+     [
+      "zx",
+      "ZX Plane"
+     ]
+    ]
+   },
+   {
+    "name": "t",
+    "label": "Center",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "size",
+    "label": "Size",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "scale",
+    "label": "Uniform Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "velstretch",
+    "label": "Velocity Stretch",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "scaled",
+      "Scaled"
+     ],
+     [
+      "ignore",
+      "Ignore Geometry Scale"
+     ]
+    ]
+   },
+   {
+    "name": "velscale",
+    "label": "Velocity Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "seed",
+    "label": "Seed",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "qstrat",
+    "label": "Quasi-Stratified Sampling",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "donoise",
+    "label": "Add Noise",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "type",
+    "label": "Noise Type",
+    "default": [
+     "xnoise"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "pnoise",
+      "Perlin Noise"
+     ],
+     [
+      "onoise",
+      "Original Perlin Noise"
+     ],
+     [
+      "snoise",
+      "Sparse Convolution Noise"
+     ],
+     [
+      "anoise",
+      "Alligator Noise"
+     ],
+     [
+      "xnoise",
+      "Simplex Noise"
+     ],
+     [
+      "correctnoise",
+      "Zero Centered Perlin Noise"
+     ]
+    ]
+   },
+   {
+    "name": "freq",
+    "label": "Frequency",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset",
+    "label": "Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "amp",
+    "label": "Amplitude",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rough",
+    "label": "Roughness",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "atten",
+    "label": "Attenuation",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "turb",
+    "label": "Turbulence",
+    "default": [
+     3
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "docopyattribs",
+    "label": "Copy Source Attributes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "attribstocopy",
+    "label": "Attributes",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "inheritvel",
+    "label": "Inherit Velocity",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radialvel",
+    "label": "Radial Velocity",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "attribstotransform",
+    "label": "Attributes to Transform",
+    "default": [
+     "P"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "keepinternal",
+    "label": "Keep Source Attributes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "sourceptattrib",
+    "label": "Source Point Attribute",
+    "default": [
+     "sourcept"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "sourceidxattrib",
+    "label": "Source Index Attribute",
+    "default": [
+     "sourceidx"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "newg",
+    "label": "Create Output Group",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "outputgroup",
+    "label": "Output Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/copytopoints",
+  "ok": true,
+  "category": "SOP",
+  "name": "copytopoints::2.0",
+  "label": "Copy to Points",
+  "parms": [
+   {
+    "name": "sourcegroup",
+    "label": "Source Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "sourcegrouptype",
+    "label": "Source Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "guess",
+      "Guess from Group"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ],
+     [
+      "points",
+      "Points"
+     ]
+    ]
+   },
+   {
+    "name": "targetgroup",
+    "label": "Target Points",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useidattrib",
+    "label": "Piece Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "idattrib",
+    "label": "Piece Attribute",
+    "default": [
+     "name"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pack",
+    "label": "Pack and Instance",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pivot",
+    "label": "Pivot Location",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "origin",
+      "Origin"
+     ],
+     [
+      "centroid",
+      "Centroid"
+     ]
+    ]
+   },
+   {
+    "name": "viewportlod",
+    "label": "Display As",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "full",
+      "Full Geometry"
+     ],
+     [
+      "points",
+      "Point Cloud"
+     ],
+     [
+      "box",
+      "Bounding Box"
+     ],
+     [
+      "centroid",
+      "Centroid"
+     ],
+     [
+      "hidden",
+      "Hidden"
+     ]
+    ]
+   },
+   {
+    "name": "transform",
+    "label": "Transform Using Target Point Orientations",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "useimplicitn",
+    "label": "Transform Using Implicit Target Point Normals If No Point N Attribute",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "resettargetattribs",
+    "label": "Reset Attributes from Target",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "targetattribs",
+    "label": "Attributes from Target",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   }
+  ],
+  "min_inputs": 2,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/copyxform",
+  "ok": true,
+  "category": "SOP",
+  "name": "copyxform",
+  "label": "Copy and Transform",
+  "parms": [
+   {
+    "name": "sourcegroup",
+    "label": "Source Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "sourcegrouptype",
+    "label": "Source Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "guess",
+      "Guess from Group"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ],
+     [
+      "points",
+      "Points"
+     ]
+    ]
+   },
+   {
+    "name": "ncy",
+    "label": "Total Number",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pack",
+    "label": "Pack and Instance",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pivot",
+    "label": "Pivot Location",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "origin",
+      "Origin"
+     ],
+     [
+      "centroid",
+      "Centroid"
+     ]
+    ]
+   },
+   {
+    "name": "viewportlod",
+    "label": "Display As",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "full",
+      "Full Geometry"
+     ],
+     [
+      "points",
+      "Point Cloud"
+     ],
+     [
+      "box",
+      "Bounding Box"
+     ],
+     [
+      "centroid",
+      "Centroid"
+     ],
+     [
+      "hidden",
+      "Hidden"
+     ]
+    ]
+   },
+   {
+    "name": "xOrd",
+    "label": "Transform Order",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "srt",
+      "Scale Rot Trans"
+     ],
+     [
+      "str",
+      "Scale Trans Rot"
+     ],
+     [
+      "rst",
+      "Rot Scale Trans"
+     ],
+     [
+      "rts",
+      "Rot Trans Scale"
+     ],
+     [
+      "tsr",
+      "Trans Scale Rot"
+     ],
+     [
+      "trs",
+      "Trans Rot Scale"
+     ]
+    ]
+   },
+   {
+    "name": "rOrd",
+    "label": "Rotate Order",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "xyz",
+      "Rx Ry Rz"
+     ],
+     [
+      "xzy",
+      "Rx Rz Ry"
+     ],
+     [
+      "yxz",
+      "Ry Rx Rz"
+     ],
+     [
+      "yzx",
+      "Ry Rz Rx"
+     ],
+     [
+      "zxy",
+      "Rz Rx Ry"
+     ],
+     [
+      "zyx",
+      "Rz Ry Rx"
+     ]
+    ]
+   },
+   {
+    "name": "t",
+    "label": "Translate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "r",
+    "label": "Rotate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "s",
+    "label": "Scale",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "shear",
+    "label": "Shear",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "scale",
+    "label": "Uniform Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "parmgroup_pivotxform",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "p",
+    "label": "Pivot Translate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pr",
+    "label": "Pivot Rotate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "newgroups",
+    "label": "Create Output Groups",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "newgroupprefix",
+    "label": "Output Group Prefix",
+    "default": [
+     "copyGroup"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "docopyattrib",
+    "label": "Create Output Groups",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "copyattrib",
+    "label": "Copy Number Attribute",
+    "default": [
+     "copynum"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/timeblend",
+  "ok": true,
+  "category": "SOP",
+  "name": "timeblend::2.0",
+  "label": "Time Blend",
+  "parms": [
+   {
+    "name": "holdfirst",
+    "label": "Hold First Frame",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "firstframe",
+    "label": "Hold First Frame",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "holdlast",
+    "label": "Hold Last Frame",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "lastframe",
+    "label": "Hold Last Frame",
+    "default": [
+     240
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "attribs",
+    "label": "Attributes",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "ptidattr",
+    "label": "Point ID Attribute",
+    "default": [
+     "id"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "primidattr",
+    "label": "Primitive ID Attribute",
+    "default": [
+     "name"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "voxelblend",
+    "label": "Voxel Blend",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "bygridindex",
+      "By Grid Index"
+     ]
+    ]
+   },
+   {
+    "name": "doslerp",
+    "label": "Smoothly Interpolate Normals, Quaternions, and Transforms",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usevforpinterp",
+    "label": "Use Velocity When Interpolating Position",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/split",
+  "ok": true,
+  "category": "SOP",
+  "name": "split",
+  "label": "Split",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "grouptype",
+    "label": "Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "guess",
+      "Guess from Group"
+     ],
+     [
+      "breakpoints",
+      "Breakpoints"
+     ],
+     [
+      "edges",
+      "Edges"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ]
+    ]
+   },
+   {
+    "name": "negate",
+    "label": "Invert Selection",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "removegrp",
+    "label": "Delete Unused Groups",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/splitpoints",
+  "ok": true,
+  "category": "SOP",
+  "name": "splitpoints",
+  "label": "Point Split",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "grouptype",
+    "label": "Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "guess",
+      "Guess from Group"
+     ],
+     [
+      "vertices",
+      "Vertices"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ]
+    ]
+   },
+   {
+    "name": "useattrib",
+    "label": "Limit by Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "attribname",
+    "label": "Attributes",
+    "default": [
+     "N"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "tol",
+    "label": "Tolerance",
+    "default": [
+     0.001
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "promote",
+    "label": "Promote to Point Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/extractcentroid",
+  "ok": true,
+  "category": "SOP",
+  "name": "extractcentroid",
+  "label": "Extract Centroid",
+  "parms": [
+   {
+    "name": "partitiontype",
+    "label": "Run Over",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "primitives",
+      "Primitives"
+     ],
+     [
+      "pieces",
+      "Pieces"
+     ],
+     [
+      "detail",
+      "Detail"
+     ]
+    ]
+   },
+   {
+    "name": "pieceattrib",
+    "label": "Piece Attribute",
+    "default": [
+     "name"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "class",
+    "label": "Piece Elements",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "prim",
+      "Primitive"
+     ],
+     [
+      "point",
+      "Point"
+     ]
+    ]
+   },
+   {
+    "name": "method",
+    "label": "Method",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "com",
+      "Center of Mass"
+     ],
+     [
+      "bbox",
+      "Bounding Box Center"
+     ],
+     [
+      "convexhull",
+      "Convex Hull Center"
+     ]
+    ]
+   },
+   {
+    "name": "output",
+    "label": "Output",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "attrib",
+      "Attribute"
+     ]
+    ]
+   },
+   {
+    "name": "centroidattrib",
+    "label": "Centroid Attribute ",
+    "default": [
+     "centroid"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "transferattributes",
+    "label": "Transfer Attributes",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "transfergroups",
+    "label": "Transfer Groups",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/vdbsmoothsdf",
+  "ok": true,
+  "category": "SOP",
+  "name": "vdbsmoothsdf",
+  "label": "VDB Smooth SDF",
+  "parms": [
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "mask",
+    "label": "",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "maskname",
+    "label": "Alpha Mask",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "operation",
+    "label": "Operation",
+    "default": [
+     "meanvalue"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "meanvalue",
+      "Mean Value"
+     ],
+     [
+      "gaussian",
+      "Gaussian"
+     ],
+     [
+      "medianvalue",
+      "Median Value"
+     ],
+     [
+      "meancurvature",
+      "Mean Curvature Flow"
+     ],
+     [
+      "laplacianflow",
+      "Laplacian Flow"
+     ]
+    ]
+   },
+   {
+    "name": "assumeuniformscale",
+    "label": "Assume Uniform Scaling",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "useworldspaceunits",
+    "label": "Use World Space Units",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "radius",
+    "label": "Filter Voxel Radius",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "radiusworld",
+    "label": "Filter Radius",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "iterations",
+    "label": "Iterations",
+    "default": [
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "halfwidth",
+    "label": "Half Width",
+    "default": [
+     3
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "halfwidthworld",
+    "label": "Half Width",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "voxeloffset",
+    "label": "Offset",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "accuracy",
+    "label": "Renorm Accuracy",
+    "default": [
+     "upwind first"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "upwind first",
+      "First-order upwinding"
+     ],
+     [
+      "upwind second",
+      "Second-order upwinding"
+     ],
+     [
+      "hj weno",
+      "Fifth-order HJ-WENO"
+     ]
+    ]
+   },
+   {
+    "name": "invert",
+    "label": "Invert Alpha Mask",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "minmask",
+    "label": "Min Mask Cutoff",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maxmask",
+    "label": "Max Mask Cutoff",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "trim",
+    "label": "Trim",
+    "default": [
+     "all"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "interior",
+      "Interior"
+     ],
+     [
+      "exterior",
+      "Exterior"
+     ],
+     [
+      "all",
+      "All"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/vdbcombine",
+  "ok": true,
+  "category": "SOP",
+  "name": "vdbcombine",
+  "label": "VDB Combine",
+  "parms": [
+   {
+    "name": "agroup",
+    "label": "Group A",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "bgroup",
+    "label": "Group B",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "collation",
+    "label": "Collation",
+    "default": [
+     "pairs"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "pairs",
+      "Combine A/B Pairs"
+     ],
+     [
+      "awithfirstb",
+      "Combine Each A With First B"
+     ],
+     [
+      "flattena",
+      "Flatten All A"
+     ],
+     [
+      "flattenbtoa",
+      "Flatten All B Into First A"
+     ],
+     [
+      "flattenagroups",
+      "Flatten A Groups"
+     ]
+    ]
+   },
+   {
+    "name": "operation",
+    "label": "Operation",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "copya",
+      "Copy A"
+     ],
+     [
+      "copyb",
+      "Copy B"
+     ],
+     [
+      "inverta",
+      "Invert A"
+     ],
+     [
+      "add",
+      "Add"
+     ],
+     [
+      "subtract",
+      "Subtract"
+     ],
+     [
+      "multiply",
+      "Multiply"
+     ],
+     [
+      "divide",
+      "Divide"
+     ],
+     [
+      "maximum",
+      "Maximum"
+     ],
+     [
+      "minimum",
+      "Minimum"
+     ],
+     [
+      "compatimesb",
+      "(1 - A) * B"
+     ],
+     [
+      "apluscompatimesb",
+      "A + (1 - A) * B"
+     ],
+     [
+      "sdfunion",
+      "SDF Union"
+     ]
+    ]
+   },
+   {
+    "name": "amult",
+    "label": "A Multiplier",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bmult",
+    "label": "B Multiplier",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "resample",
+    "label": "Resample",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "off",
+      "Off"
+     ],
+     [
+      "btoa",
+      "B to Match A"
+     ],
+     [
+      "atob",
+      "A to Match B"
+     ],
+     [
+      "hitolo",
+      "Higher-res to Match Lower-res"
+     ],
+     [
+      "lotohi",
+      "Lower-res to Match Higher-res"
+     ]
+    ]
+   },
+   {
+    "name": "resampleinterp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "point",
+      "Nearest"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "quadratic",
+      "Quadratic"
+     ]
+    ]
+   },
+   {
+    "name": "deactivate",
+    "label": "Deactivate Background Voxels",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bgtolerance",
+    "label": "Deactivate Tolerance",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "prunedegenerate",
+    "label": "Prune Degenerate Tiles",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "prune",
+    "label": "Prune",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "tolerance",
+    "label": "Prune Tolerance",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "flood",
+    "label": "Signed-Flood-Fill Output SDFs",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/volumewrangle",
+  "ok": true,
+  "category": "SOP",
+  "name": "volumewrangle",
+  "label": "Volume Wrangle",
+  "parms": [
+   {
+    "name": "folder0",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "group",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "bindeach",
+    "label": "Bind Each Volume to Density",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "snippet",
+    "label": "VEXpression",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "exportlist",
+    "label": "Volumes to Write to",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_strict",
+    "label": "Enforce Prototypes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vex_strictvariables",
+    "label": "Standard Variable Names Only",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "autobind",
+    "label": "Autobind by Name",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindings",
+    "label": "Number of Bindings",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "vex_geometrygenerator",
+    "label": "Only Output Created Geometry",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vdb_signedflood",
+    "label": "Signed-Flood Fill Output SDF VDBs",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vex_cwdpath",
+    "label": "Evaluation Node Path",
+    "default": [
+     "."
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_outputmask",
+    "label": "Export Parameters",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_precision",
+    "label": "VEX Precision",
+    "default": [
+     "auto"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "auto",
+      "Auto"
+     ],
+     [
+      "32",
+      "32"
+     ],
+     [
+      "64",
+      "64"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 4
+ },
+ {
+  "spec": "sop/spiral",
+  "ok": true,
+  "category": "SOP",
+  "name": "spiral",
+  "label": "Spiral",
+  "parms": [
+   {
+    "name": "type",
+    "label": "Primitive Type",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "nurbs",
+      "NURBS"
+     ],
+     [
+      "poly",
+      "Polygon"
+     ]
+    ]
+   },
+   {
+    "name": "order",
+    "label": "Order",
+    "default": [
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "family",
+    "label": "Family",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "archimedean",
+      "Archimedean"
+     ],
+     [
+      "logarithmic",
+      "Logarithmic"
+     ]
+    ]
+   },
+   {
+    "name": "mode",
+    "label": "Mode",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "heightpitch",
+      "Height and Pitch"
+     ],
+     [
+      "turns",
+      "Turns"
+     ]
+    ]
+   },
+   {
+    "name": "height_folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "height",
+    "label": "Height",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "turns",
+    "label": "Turns",
+    "default": [
+     3.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pitch",
+    "label": "Pitch",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "heightramp_folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "enableheightramp",
+    "label": "Enable Ramp",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "heightprofile",
+    "label": "Profile",
+    "default": 2,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "radius_folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "radiusmode",
+    "label": "Radius Mode",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "changeperturn",
+      "Change per Turn"
+     ],
+     [
+      "endradius",
+      "Explicit End Radius"
+     ]
+    ]
+   },
+   {
+    "name": "startradius",
+    "label": "Start Radius",
+    "default": [
+     0.125
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "endradius",
+    "label": "End Radius",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusincreaseperturn",
+    "label": "Increase per Turn",
+    "default": [
+     0.25
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusscaleperturn",
+    "label": "Scale per Turn",
+    "default": [
+     2.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusscale",
+    "label": "Radius Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusramp_folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "enableradiusramp",
+    "label": "Enable Ramp",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "radiusprofile",
+    "label": "Profile",
+    "default": 2,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "construction_folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "direction",
+    "label": "Direction",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "cw",
+      "Clockwise"
+     ],
+     [
+      "ccw",
+      "Counterclockwise"
+     ]
+    ]
+   },
+   {
+    "name": "startangle",
+    "label": "Start Angle",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "divsmode",
+    "label": "Divisions Mode",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "divspercurve",
+      "Divisions per Curve"
+     ],
+     [
+      "divsperturn",
+      "Divisions per Turn"
+     ]
+    ]
+   },
+   {
+    "name": "divspercurve",
+    "label": "Divisions per Curve",
+    "default": [
+     100
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "divsperturn",
+    "label": "Divisions per Turn",
+    "default": [
+     50.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "uniformdivs",
+    "label": "Uniform Division Spacing",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "spiralcount",
+    "label": "Spiral Count",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "transform_folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "t",
+    "label": "Translate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "r",
+    "label": "Rotate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "scale",
+    "label": "Uniform Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "attributes_folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "outputangle",
+    "label": "Output Angle",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "anglename",
+    "label": "Angle",
+    "default": [
+     "angle"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "outputxaxis",
+    "label": "Output X Axis",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "xaxisname",
+    "label": "X Axis",
+    "default": [
+     "out"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "outputyaxis",
+    "label": "Output Y Axis",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "yaxisname",
+    "label": "Y Axis",
+    "default": [
+     "up"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "outputzaxis",
+    "label": "Output Tangent (Z Axis)",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "zaxisname",
+    "label": "Tangent (Z Axis)",
+    "default": [
+     "N"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "outputorient",
+    "label": "Output Orient",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "orientname",
+    "label": "Orient",
+    "default": [
+     "orient"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "outputdistance",
+    "label": "Output Distance",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "distancename",
+    "label": "Distance",
+    "default": [
+     "dist"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "heightprofile1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "heightprofile1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "heightprofile1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "heightprofile2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "heightprofile2value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "heightprofile2interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "radiusprofile1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusprofile1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusprofile1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "radiusprofile2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusprofile2value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radiusprofile2interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 0
+ }
+]

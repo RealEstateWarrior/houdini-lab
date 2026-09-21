@@ -5184,6 +5184,187 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 105 ===================== -->
+    <article class="entry entry--current" id="exp105">
+      <div class="badge">105</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>spiral の長さは折れ線の式に6桁一致 — 1巻き50分割で 0.06% 短い</h2>
+        <p class="path">examples/105_spiral.py &nbsp;·&nbsp; 10通りすべて折れ線の式と差0.000001以下。既定50分割で0.06%短い</p>
+
+        <div class="prose">
+          <p>spiral を多角形で出して、長さを式と突き合わせた。半径を一定にすると、1巻きを N 分割した折れ線の1区間は、横に 2r·sin(π/N)、縦に p/N 進む（p は1巻きで上がる高さ）。これを 巻き数×N 本足せば全長になる。分割を細かくしていくと、なめらかならせんの長さ 巻き数×√((2πr)²+p²) に近づくはず。</p>
+          <p>結果は **10通りすべて折れ線の式と一致**（差は最大 0.000001）。点の数も 巻き数×N+1 ですべて一致。</p>
+          <p>なめらかならせんと比べると、既定の Divisions per Turn = 50 で 0.999358（0.06% 短い）。4分割なら 0.902912、1000分割なら 0.999998。分割を2倍にすると、足りない分はおよそ1/4になる（8分割で 2.487%、16分割で 0.625%）。</p>
+          <p>高さ 0 にすると、同じ円を巻き数の回数だけなぞった線になる（4巻きで長さ 25.116 ≒ 円周の4倍）。平らな渦巻きにはならない。渦巻きにしたいときは、半径を変える（Start と End を変える）。</p>
+        </div>
+
+        <p class="label">らせんの長さ（折れ線の式・なめらかな式と比べる）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="105_spiral.png" alt="分割を増やすと比は1に近づく。実測（実線）と折れ線の式（破線）は重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>分割を増やすと比は1に近づく。実測（実線）と折れ線の式（破線）は重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>半径</th><th>巻き数</th><th>高さ</th><th>1巻きの分割</th><th>点</th><th>長さ</th><th>折れ線の式</th><th>差</th><th>なめらかな式との比</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">3</td><td class="num">3</td><td class="num">4</td><td class="num">13</td><td class="num">17.233688</td><td class="num">17.233688</td><td class="num">+0.000000</td><td class="num">0.902912</td></tr>
+              <tr><td class="num">1</td><td class="num">3</td><td class="num">3</td><td class="num">8</td><td class="num">25</td><td class="num">18.612173</td><td class="num">18.612173</td><td class="num">-0.000000</td><td class="num">0.975133</td></tr>
+              <tr><td class="num">1</td><td class="num">3</td><td class="num">3</td><td class="num">16</td><td class="num">49</td><td class="num">18.967422</td><td class="num">18.967422</td><td class="num">+0.000000</td><td class="num">0.993746</td></tr>
+              <tr><td class="num">1</td><td class="num">3</td><td class="num">3</td><td class="num">50</td><td class="num">151</td><td class="num">19.074549</td><td class="num">19.074550</td><td class="num">-0.000001</td><td class="num">0.999358</td></tr>
+              <tr><td class="num">1</td><td class="num">3</td><td class="num">3</td><td class="num">200</td><td class="num">601</td><td class="num">19.086029</td><td class="num">19.086030</td><td class="num">-0.000001</td><td class="num">0.999960</td></tr>
+              <tr><td class="num">1</td><td class="num">3</td><td class="num">3</td><td class="num">1000</td><td class="num">3001</td><td class="num">19.086765</td><td class="num">19.086765</td><td class="num">+0.000001</td><td class="num">0.999998</td></tr>
+              <tr><td class="num">0.5</td><td class="num">5</td><td class="num">1</td><td class="num">50</td><td class="num">251</td><td class="num">15.729449</td><td class="num">15.729450</td><td class="num">-0.000000</td><td class="num">0.999345</td></tr>
+              <tr><td class="num">2</td><td class="num">2</td><td class="num">8</td><td class="num">50</td><td class="num">101</td><td class="num">26.359512</td><td class="num">26.359512</td><td class="num">-0.000000</td><td class="num">0.999403</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">0</td><td class="num">50</td><td class="num">201</td><td class="num">25.116209</td><td class="num">25.116208</td><td class="num">+0.000001</td><td class="num">0.999342</td></tr>
+              <tr><td class="num">0.25</td><td class="num">10</td><td class="num">5</td><td class="num">50</td><td class="num">501</td><td class="num">16.474695</td><td class="num">16.474695</td><td class="num">-0.000000</td><td class="num">0.999403</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">type=Polygon、mode=Turns、半径は Start = End。長さは measure の Perimeter を面ごとに足した値。折れ線の式は 巻き数×N×√((2r·sin(π/N))²+(p/N)²)。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>折れ線の式に一致。</strong>10通りすべてで差は 0.000001 以下。点の数は 巻き数×分割数+1。</li>
+          <li><strong>既定の50分割で 0.06% 短い。</strong>比は 0.999358。ばねや電線の長さを正確に出したいときは、分割を増やすか、式で補正する。</li>
+          <li><strong>分割2倍で、足りない分は約1/4。</strong>弦と弧の差は分割の2乗に反比例して減る。精度を1桁上げるには、分割を約3.2倍にすればよい。</li>
+          <li><strong>高さ0は渦巻きにならない。</strong>半径が一定のままだと、同じ円を何周もなぞるだけ（点も重なる）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 106 ===================== -->
+    <article class="entry entry--current" id="exp106">
+      <div class="badge">106</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>attribrandomize の分布は式どおり — Scale Around Middle は標準偏差だった</h2>
+        <p class="path">examples/106_randomize.py &nbsp;·&nbsp; 一様・正規5通りとも平均のずれは標準誤差の約1倍。Scale Around Middle は標準偏差、整数の一様は上端を含む</p>
+
+        <div class="prose">
+          <p>attribrandomize で 99,856 点に乱数を1つずつ入れ、平均・分散・割合を数えて、分布の式から出る値と比べた。10万点あると、平均のぶれは標準偏差の約 1/316 に収まるはず（標準誤差 σ/√n）。</p>
+          <p>**一様・正規の5通りすべてで、平均のずれは標準誤差の 1.00 倍以内、分散のずれは 0.42% 以内。** 式どおりの分布が出ている。</p>
+          <p>正規分布の **Scale Around Middle は標準偏差**だった。Scale 2 で標準偏差 2.0042、0.5 で 0.4992。画面の名前からは分散なのか幅なのか分からないが、標準偏差として読めばよい。</p>
+          <p>整数の一様（0〜9・刻み1）では、**上端の 9 も出る**。10通りの値がそれぞれ 9.82〜10.21%。2つの値（B の確率 0.3）では B が 30.05%。</p>
+          <p>3成分の「球の中」は、長さの平均 0.7492（式は 3/4）、最大 0.999998。「向き」は長さが全部 1.000000〜1.000000 で、平均の向きはほぼ0。</p>
+          <p>同じ種なら値は1つ残らず同じ。種を 0→1 に変えると、同じ値になった点は 0.0000%。</p>
+        </div>
+
+        <p class="label">一様・正規の平均と分散（99,856 点）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分布</th><th>平均</th><th>式</th><th>z</th><th>分散</th><th>式</th><th>最小</th><th>最大</th></tr></thead>
+            <tbody>
+              <tr><td>一様 0〜1</td><td class="num">0.500425</td><td class="num">0.5</td><td class="num">+0.47</td><td class="num">0.083001</td><td class="num">0.083333</td><td class="num">0.0000</td><td class="num">1.0000</td></tr>
+              <tr><td>一様 2〜5</td><td class="num">3.500409</td><td class="num">3.5</td><td class="num">+0.15</td><td class="num">0.750799</td><td class="num">0.750000</td><td class="num">2.0000</td><td class="num">5.0000</td></tr>
+              <tr><td>正規 中央0・Scale 1</td><td class="num">0.003162</td><td class="num">0</td><td class="num">+1.00</td><td class="num">0.996149</td><td class="num">1.000000</td><td class="num">-4.4274</td><td class="num">4.1824</td></tr>
+              <tr><td>正規 中央0・Scale 2</td><td class="num">0.005412</td><td class="num">0</td><td class="num">+0.86</td><td class="num">4.016712</td><td class="num">4.000000</td><td class="num">-8.9782</td><td class="num">8.9926</td></tr>
+              <tr><td>正規 中央3・Scale 0.5</td><td class="num">3.000008</td><td class="num">3</td><td class="num">+0.01</td><td class="num">0.249201</td><td class="num">0.250000</td><td class="num">0.9326</td><td class="num">5.1811</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">z は（平均 − 式）÷ 標準誤差。±2 の中なら、偶然のぶれの範囲。</p>
+
+        <p class="label">整数の一様（0〜9・刻み1）の割合</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="106_discrete.png" alt="10通りの値がどれも約10%。上端の9も出る。" loading="lazy" decoding="async"></div>
+            <figcaption>10通りの値がどれも約10%。上端の9も出る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>値</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr></thead>
+            <tbody>
+              <tr><td>割合</td><td>9.91%</td><td>10.00%</td><td>9.97%</td><td>10.12%</td><td>9.89%</td><td>10.21%</td><td>9.82%</td><td>9.85%</td><td>10.18%</td><td>10.05%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Min 0・Max 9・Step Size 1。</p>
+
+        <p class="label">3成分の分布</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分布</th><th>長さの平均</th><th>最小</th><th>最大</th><th>平均の向き</th></tr></thead>
+            <tbody>
+              <tr><td>球の中</td><td class="num">0.749162</td><td class="num">0.014580</td><td class="num">0.999998</td><td>[0.000128, -0.001556, 0.001751]</td></tr>
+              <tr><td>向き</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">1.000000</td><td>[0.000492, 0.002268, 0.000737]</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">長さ = √(x²+y²+z²)。球の中が一様なら、長さの平均は 3/4。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>分布は式どおり。</strong>一様・正規の5通りで、平均は標準誤差の 1.00 倍以内、分散は 0.42% 以内。</li>
+          <li><strong>Scale Around Middle は標準偏差。</strong>Scale 2 で標準偏差 2.0042。分散ではない。</li>
+          <li><strong>整数の一様は上端を含む。</strong>0〜9 なら10通り、どれも約10%。</li>
+          <li><strong>球の中は、中まで均一。</strong>長さの平均 0.7492（式 0.75）。表面だけに散る「向き」とは別物。</li>
+          <li><strong>同じ種なら、同じ値。</strong>種を変えれば全部の点が変わる。</li>
+          <li><strong>速い。</strong>99,856 点で 0.01〜0.13 秒（最初の1回は読み込みを含むので遅い）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 107 ===================== -->
+    <article class="entry entry--current" id="exp107">
+      <div class="badge">107</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>extractcentroid の Center of Mass は、閉じていれば体積・開いていれば面積の中心</h2>
+        <p class="path">examples/107_centroid.py &nbsp;·&nbsp; 閉じた形は体積の中心、開いた形は面積の中心。Convex Hull は凸包の体積の中心（19/21 に一致）</p>
+
+        <div class="prose">
+          <p>「中心」には何通りもある。点の平均、囲む箱の中心、面積の中心、体積の中心。形によっては全部ちがう値になる。答えが計算で出る4つの形を作り、extractcentroid の Method ごとに出てくる値を式と突き合わせた。</p>
+          <p>**Center of Mass は、閉じた形なら体積の中心、開いた形なら面積の中心。** 四角錐（閉じている）では y=0.75（体積の中心 3/4）、底を抜くと y=1（側面の面積の中心）。L字の板では (0.833333, 0.833333)（面積の中心 5/6）。点の平均ではない。</p>
+          <p>**Bounding Box Center は、囲む箱の真ん中。** 四角錐なら y=1.5 で、形の重さのある所からいちばん離れる。</p>
+          <p>**Convex Hull Center は、凸包（へこみを埋めた外形）の体積の中心。** L字の柱では (0.904762, …) で、式 19/21 と一致。底を抜いた四角錐でも、凸包は底をふさいだ形になるので y=0.75。平らな L字の板では凸包に体積が無く、(1, 1) が出た（点の平均とも箱の中心とも同じ値なので、どちらに倒れたのかは確かめていない）。</p>
+          <p>Piece Elements を Primitive にしても Point にしても、結果は同じ。</p>
+        </div>
+
+        <p class="label">形と Method ごとの中心（式と一致したものを右に書く）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="107_centroid.png" alt="L字の柱を上から。Center of Mass（青）は本当の体積の中心、Conv" loading="lazy" decoding="async"></div>
+            <figcaption>L字の柱を上から。Center of Mass（青）は本当の体積の中心、Convex Hull（緑）は灰色まで含めた外形の中心、Bounding Box（橙）は箱の真ん中。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形</th><th>Method</th><th>出た中心</th><th>一致した式</th></tr></thead>
+            <tbody>
+              <tr><td>L字の板（開いた面1枚）</td><td>Center of Mass</td><td>(0.833333, 0, 0.833333)</td><td>面積の中心</td></tr>
+              <tr><td>L字の板（開いた面1枚）</td><td>Bounding Box Center</td><td>(1, 0, 1)</td><td>点の平均・箱の中心</td></tr>
+              <tr><td>L字の板（開いた面1枚）</td><td>Convex Hull Center</td><td>(1, 0, 1)</td><td>点の平均・箱の中心</td></tr>
+              <tr><td>四角錐（閉じている）</td><td>Center of Mass</td><td>(-0, 0.75, 0)</td><td>体積の中心</td></tr>
+              <tr><td>四角錐（閉じている）</td><td>Bounding Box Center</td><td>(0, 1.5, 0)</td><td>箱の中心</td></tr>
+              <tr><td>四角錐（閉じている）</td><td>Convex Hull Center</td><td>(0, 0.75, -0)</td><td>体積の中心</td></tr>
+              <tr><td>底の無い四角錐（開いている）</td><td>Center of Mass</td><td>(0, 1, -0)</td><td>面積の中心</td></tr>
+              <tr><td>底の無い四角錐（開いている）</td><td>Bounding Box Center</td><td>(0, 1.5, 0)</td><td>箱の中心</td></tr>
+              <tr><td>底の無い四角錐（開いている）</td><td>Convex Hull Center</td><td>(0, 0.75, -0)</td><td>凸包の体積の中心</td></tr>
+              <tr><td>L字の柱（閉じている）</td><td>Center of Mass</td><td>(0.833333, 0.5, 0.833333)</td><td>体積の中心</td></tr>
+              <tr><td>L字の柱（閉じている）</td><td>Bounding Box Center</td><td>(1, 0.5, 1)</td><td>点の平均・箱の中心</td></tr>
+              <tr><td>L字の柱（閉じている）</td><td>Convex Hull Center</td><td>(0.904762, 0.5, 0.904762)</td><td>凸包の体積の中心</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Run Over = Detail（形全体で1つ）、Output = Points。四角錐は底 2×2・高さ3、L字は 2×2 から 1×1 の角を欠いたもの、柱は高さ1。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Center of Mass は「形の中身」の中心。</strong>閉じていれば体積、開いていれば面積で重みを付ける。点の平均ではない（点が片寄った形では試していない）。</li>
+          <li><strong>Bounding Box Center は、先が尖った形ほど外れる。</strong>四角錐で y=1.5（体積の中心 0.75 の2倍の高さ）。</li>
+          <li><strong>Convex Hull Center は、へこみを埋めた形の中心。</strong>L字の柱で 19/21≒0.905。開いた形でもふさいだ形として扱う。</li>
+          <li><strong>Primitive / Point の切り替えは、Detail で回すときは結果を変えない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
