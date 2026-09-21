@@ -1,0 +1,77 @@
+{
+ "fps": 24.0,
+ "rows": [
+  {
+   "frame": 1.0,
+   "direct": 1.0,
+   "true": 1.0,
+   "blend": 1.0,
+   "linear": 1.0,
+   "blend_v": 1.0,
+   "blend_wrongv": 1.0
+  },
+  {
+   "frame": 1.25,
+   "direct": 1.5625,
+   "true": 1.5625,
+   "blend": 1.75,
+   "linear": 1.75,
+   "blend_v": 1.5625,
+   "blend_wrongv": 1.472656
+  },
+  {
+   "frame": 1.5,
+   "direct": 2.25,
+   "true": 2.25,
+   "blend": 2.5,
+   "linear": 2.5,
+   "blend_v": 2.25,
+   "blend_wrongv": 2.489583
+  },
+  {
+   "frame": 1.75,
+   "direct": 3.0625,
+   "true": 3.0625,
+   "blend": 3.25,
+   "linear": 3.25,
+   "blend_v": 3.0625,
+   "blend_wrongv": 3.511719
+  },
+  {
+   "frame": 2.0,
+   "direct": 4.0,
+   "true": 4.0,
+   "blend": 4.0,
+   "linear": 4.0,
+   "blend_v": 4.0,
+   "blend_wrongv": 4.0
+  },
+  {
+   "frame": 2.5,
+   "direct": 6.25,
+   "true": 6.25,
+   "blend": 6.5,
+   "linear": 6.5,
+   "blend_v": 6.25,
+   "blend_wrongv": 6.489583
+  },
+  {
+   "frame": 3.3,
+   "direct": 10.889999,
+   "true": 10.89,
+   "blend": 11.099999,
+   "linear": 11.1,
+   "blend_v": 10.889999,
+   "blend_wrongv": 10.527749
+  },
+  {
+   "frame": 3.9,
+   "direct": 15.210001,
+   "true": 15.21,
+   "blend": 15.299999,
+   "linear": 15.3,
+   "blend_v": 15.209999,
+   "blend_wrongv": 15.779249
+  }
+ ]
+}

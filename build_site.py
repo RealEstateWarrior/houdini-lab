@@ -798,6 +798,18 @@ DONE = [
      "shots": ["111_var.png"],
      "title": "pointjitter の Scale は「幅」 — 各軸 −s/2〜+s/2 の一様で、箱の中に散る",
      "note": "Scale は幅: 各軸 −s/2〜+s/2 の一様（分散 s²/12）。球ではなく箱の中に散る"},
+    {"no": "112", "anchor": "exp112",
+     "tags": ["モデリング", "VDB", "vdbcombine", "検算"],
+     "log": "log_pm", "thumb": "112_csg.png",
+     "shots": ["112_csg.png"],
+     "title": "vdbcombine の和・積・差は球2つの式に収束 — ボクセル 0.0125 で 0.08% 以内、どれも少なめ",
+     "note": "和・積・差ともボクセル0.0125で式の0.08%以内、12通りすべて少なめ。Operation の選択肢は18個"},
+    {"no": "113", "anchor": "exp113",
+     "tags": ["エフェクト", "timeblend", "補間", "検算"],
+     "log": "log_pm", "thumb": "113_blend.png",
+     "shots": ["113_blend.png"],
+     "title": "timeblend は速度が無ければ直線、あれば F² を誤差0でつなぐ — v は「1秒あたり」",
+     "note": "速度なしは直線（1.5フレームで2.5）。1秒あたりの v を渡すと F² を誤差0で再現"},
 ]
 
 PLANNED = []

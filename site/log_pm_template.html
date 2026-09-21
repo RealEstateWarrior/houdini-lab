@@ -5590,6 +5590,112 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 112 ===================== -->
+    <article class="entry entry--current" id="exp112">
+      <div class="badge">112</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>vdbcombine の和・積・差は球2つの式に収束 — ボクセル 0.0125 で 0.08% 以内、どれも少なめ</h2>
+        <p class="path">examples/112_vdb_csg.py &nbsp;·&nbsp; 和・積・差ともボクセル0.0125で式の0.08%以内、12通りすべて少なめ。Operation の選択肢は18個</p>
+
+        <div class="prose">
+          <p>半径1の球を2つ、中心の距離 1 で重ね、vdbcombine の SDF Union / Intersect / Difference で合わせてから多角形に戻し、体積を式と比べた。重なり（レンズ）の体積は π(4r+d)(2r−d)²/12 で出せるので、和・積・差の答えはすべて式で分かる。</p>
+          <p>**3つとも、<button class="term" data-term="ボクセル">ボクセル</button>を細かくするほど式に近づいた。** ボクセル 0.0125 で、和 -0.034%・積 -0.076%・差 -0.039%。ボクセル 0.1 では 和 -0.95%・積 -2.14%。</p>
+          <p>**ずれはすべてマイナス（体積が少なめ）。** <a href="#exp094">実験094</a>（VDB は形をやせさせる）と同じ向き。ずれの割合は積（レンズ）が一番大きい。レンズは縁が鋭く尖っていて、その先をボクセルが丸めるからだと考えられる（尖りの影響だけを分けては確かめていない）。</p>
+          <p>ボクセルを半分にしたときの減り方は、最初は約1/4（0.1→0.05 で和が 3.7分の1）、細かくなるほど鈍る。元の球（200×200 の多角形）自体が -0.023% 小さいので、そこが底になる。</p>
+          <p>速さ: ボクセル 0.0125 で和が 1.9 秒（VDB 化・合成・多角形化・体積の合計）。半分にすると約3〜4倍。</p>
+          <p>つまずいた点: 素性の控え（node_dump.py）では Operation の選択肢が12個で切れていて、SDF Intersect / Difference が載っていなかった。本物は18個ある。控えを直した（選択肢は全部残す）。</p>
+        </div>
+
+        <p class="label">ボクセルの大きさと体積（式との比）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="112_csg.png" alt="どの合わせ方も、ボクセルを細かくすると式に近づく。灰色の破線は、元の多角形の球が" loading="lazy" decoding="async"></div>
+            <figcaption>どの合わせ方も、ボクセルを細かくすると式に近づく。灰色の破線は、元の多角形の球が持っているずれ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>ボクセル</th><th>合わせ方</th><th>体積</th><th>式</th><th>ずれ</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.1</td><td>和（SDF Union）</td><td class="num">7.001569</td><td class="num">7.068583</td><td>-0.948%</td><td class="num">0.097</td></tr>
+              <tr><td class="num">0.1</td><td>積（SDF Intersect）</td><td class="num">1.280965</td><td class="num">1.308997</td><td>-2.142%</td><td class="num">0.014</td></tr>
+              <tr><td class="num">0.1</td><td>差（SDF Difference）</td><td class="num">2.832658</td><td class="num">2.879793</td><td>-1.637%</td><td class="num">0.022</td></tr>
+              <tr><td class="num">0.05</td><td>和（SDF Union）</td><td class="num">7.050587</td><td class="num">7.068583</td><td>-0.255%</td><td class="num">0.161</td></tr>
+              <tr><td class="num">0.05</td><td>積（SDF Intersect）</td><td class="num">1.301543</td><td class="num">1.308997</td><td>-0.570%</td><td class="num">0.043</td></tr>
+              <tr><td class="num">0.05</td><td>差（SDF Difference）</td><td class="num">2.867955</td><td class="num">2.879793</td><td>-0.411%</td><td class="num">0.077</td></tr>
+              <tr><td class="num">0.025</td><td>和（SDF Union）</td><td class="num">7.063037</td><td class="num">7.068583</td><td>-0.079%</td><td class="num">0.516</td></tr>
+              <tr><td class="num">0.025</td><td>積（SDF Intersect）</td><td class="num">1.306632</td><td class="num">1.308997</td><td>-0.181%</td><td class="num">0.160</td></tr>
+              <tr><td class="num">0.025</td><td>差（SDF Difference）</td><td class="num">2.876511</td><td class="num">2.879793</td><td>-0.114%</td><td class="num">0.312</td></tr>
+              <tr><td class="num">0.0125</td><td>和（SDF Union）</td><td class="num">7.066169</td><td class="num">7.068583</td><td>-0.034%</td><td class="num">1.903</td></tr>
+              <tr><td class="num">0.0125</td><td>積（SDF Intersect）</td><td class="num">1.308006</td><td class="num">1.308997</td><td>-0.076%</td><td class="num">0.634</td></tr>
+              <tr><td class="num">0.0125</td><td>差（SDF Difference）</td><td class="num">2.878679</td><td class="num">2.879793</td><td>-0.039%</td><td class="num">1.266</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">球は polymesh 200×200。vdbfrompolygons → vdbcombine → convertvdb（Polygons）→ measure の Volume を面ごとに足した値。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>和・積・差は式どおりに収束する。</strong>ボクセル 0.0125 で3つとも 0.08% 以内。</li>
+          <li><strong>体積は少なめに出る。</strong>12通りすべてマイナス。ぴったり合わせたいときは、細かくするか、少し太らせて戻す。</li>
+          <li><strong>尖った所を含む形ほどずれる。</strong>同じボクセルでも、積（レンズ）は和の約2倍ずれた。</li>
+          <li><strong>Operation の選択肢は18個。</strong>SDF Intersect・SDF Difference・Topology 系は後ろのほうにある。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 113 ===================== -->
+    <article class="entry entry--current" id="exp113">
+      <div class="badge">113</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>timeblend は速度が無ければ直線、あれば F² を誤差0でつなぐ — v は「1秒あたり」</h2>
+        <p class="path">examples/113_timeblend.py &nbsp;·&nbsp; 速度なしは直線（1.5フレームで2.5）。1秒あたりの v を渡すと F² を誤差0で再現</p>
+
+        <div class="prose">
+          <p>点を1つ、高さ y = F²（F はフレーム）で動かし、timeblend で整数フレームの間（1.25・1.5・3.3 など）を作らせた。整数フレームの形だけから直線でつなぐなら、1.5 フレームでは (1+4)/2 = 2.5 になる（本当は 2.25）。</p>
+          <p>**速度が無いと、直線でつなぐ。** 8通りすべてで直線の式と一致（差 0.000001）。本当の値からは最大 0.250 ずれた。</p>
+          <p>**速度 v を持たせて Use Velocity When Interpolating Position を入れると、F² をぴったり再現した**（ずれ最大 0.000001）。両端の位置と速度を使う3次のつなぎ方（エルミート補間）なら2次式は誤差0になるので、それと合う。</p>
+          <p>**v は1秒あたりの速さとして読まれる。** 2F×24（fps）を入れたときに合った。fps を掛け忘れて1フレームあたりの値（2F）を入れると、ずれは最大 0.569 で、速度なし（0.250）より悪くなることもある。</p>
+        </div>
+
+        <p class="label">フレームと高さ（y = F²）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="113_blend.png" alt="青（1秒あたりの v）はずれ0。橙（速度なし）は整数フレームの間でふくらむ。" loading="lazy" decoding="async"></div>
+            <figcaption>青（1秒あたりの v）はずれ0。橙（速度なし）は整数フレームの間でふくらむ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>本当の値 F²</th><th>速度なし</th><th>直線の式</th><th>速度あり</th><th>v を1フレームあたり</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">1.000000</td></tr>
+              <tr><td class="num">1.25</td><td class="num">1.562500</td><td class="num">1.750000</td><td class="num">1.750000</td><td class="num">1.562500</td><td class="num">1.472656</td></tr>
+              <tr><td class="num">1.5</td><td class="num">2.250000</td><td class="num">2.500000</td><td class="num">2.500000</td><td class="num">2.250000</td><td class="num">2.489583</td></tr>
+              <tr><td class="num">1.75</td><td class="num">3.062500</td><td class="num">3.250000</td><td class="num">3.250000</td><td class="num">3.062500</td><td class="num">3.511719</td></tr>
+              <tr><td class="num">2</td><td class="num">4.000000</td><td class="num">4.000000</td><td class="num">4.000000</td><td class="num">4.000000</td><td class="num">4.000000</td></tr>
+              <tr><td class="num">2.5</td><td class="num">6.250000</td><td class="num">6.500000</td><td class="num">6.500000</td><td class="num">6.250000</td><td class="num">6.489583</td></tr>
+              <tr><td class="num">3.3</td><td class="num">10.890000</td><td class="num">11.099999</td><td class="num">11.100000</td><td class="num">10.889999</td><td class="num">10.527749</td></tr>
+              <tr><td class="num">3.9</td><td class="num">15.210000</td><td class="num">15.299999</td><td class="num">15.300000</td><td class="num">15.209999</td><td class="num">15.779249</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">fps = 24。v は attribwrangle で毎フレーム入れた。Hold First Frame は切った。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>速度が無ければ直線。</strong>曲がって動くものは、フレームの間で近道する（F² では最大 0.25）。</li>
+          <li><strong>速度を渡せば、2次の動きは誤差0。</strong>Use Velocity When Interpolating Position を入れる。</li>
+          <li><strong>v は1秒あたり。</strong>24 fps なら、1フレームあたりの動き×24。間違えると、速度なしより悪くなる。</li>
+          <li><strong>今回は点に id=0 を入れた。</strong>id が無い場合は試していない。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

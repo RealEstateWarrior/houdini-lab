@@ -69,7 +69,7 @@ def parm_rows(node):
             "label": template.label(),
             "default": default,
             "kind": kind,
-            "menu": menu[:12],
+            "menu": menu,
         })
     return rows
 

@@ -1,0 +1,123 @@
+{
+ "d": 1.0,
+ "menu": [
+  "copya",
+  "copyb",
+  "inverta",
+  "add",
+  "subtract",
+  "multiply",
+  "divide",
+  "maximum",
+  "minimum",
+  "compatimesb",
+  "apluscompatimesb",
+  "sdfunion",
+  "sdfintersect",
+  "sdfdifference",
+  "replacewithactive",
+  "topounion",
+  "topointersect",
+  "topodifference"
+ ],
+ "poly_ball": 4.18784,
+ "ball": 4.18879,
+ "rows": [
+  {
+   "voxel": 0.1,
+   "op": "sdfunion",
+   "volume": 7.001569,
+   "want": 7.068583,
+   "rel": -0.009481,
+   "sec": 0.097
+  },
+  {
+   "voxel": 0.1,
+   "op": "sdfintersect",
+   "volume": 1.280965,
+   "want": 1.308997,
+   "rel": -0.021415,
+   "sec": 0.014
+  },
+  {
+   "voxel": 0.1,
+   "op": "sdfdifference",
+   "volume": 2.832658,
+   "want": 2.879793,
+   "rel": -0.016368,
+   "sec": 0.022
+  },
+  {
+   "voxel": 0.05,
+   "op": "sdfunion",
+   "volume": 7.050587,
+   "want": 7.068583,
+   "rel": -0.002546,
+   "sec": 0.161
+  },
+  {
+   "voxel": 0.05,
+   "op": "sdfintersect",
+   "volume": 1.301543,
+   "want": 1.308997,
+   "rel": -0.005695,
+   "sec": 0.043
+  },
+  {
+   "voxel": 0.05,
+   "op": "sdfdifference",
+   "volume": 2.867955,
+   "want": 2.879793,
+   "rel": -0.004111,
+   "sec": 0.077
+  },
+  {
+   "voxel": 0.025,
+   "op": "sdfunion",
+   "volume": 7.063037,
+   "want": 7.068583,
+   "rel": -0.000785,
+   "sec": 0.516
+  },
+  {
+   "voxel": 0.025,
+   "op": "sdfintersect",
+   "volume": 1.306632,
+   "want": 1.308997,
+   "rel": -0.001807,
+   "sec": 0.16
+  },
+  {
+   "voxel": 0.025,
+   "op": "sdfdifference",
+   "volume": 2.876511,
+   "want": 2.879793,
+   "rel": -0.00114,
+   "sec": 0.312
+  },
+  {
+   "voxel": 0.0125,
+   "op": "sdfunion",
+   "volume": 7.066169,
+   "want": 7.068583,
+   "rel": -0.000342,
+   "sec": 1.903
+  },
+  {
+   "voxel": 0.0125,
+   "op": "sdfintersect",
+   "volume": 1.308006,
+   "want": 1.308997,
+   "rel": -0.000757,
+   "sec": 0.634
+  },
+  {
+   "voxel": 0.0125,
+   "op": "sdfdifference",
+   "volume": 2.878679,
+   "want": 2.879793,
+   "rel": -0.000387,
+   "sec": 1.266
+  }
+ ]
+}
