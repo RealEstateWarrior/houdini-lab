@@ -4709,6 +4709,880 @@
    ]
   },
   {
+   "id": "gas",
+   "label": "煙と炎の部品（Gas）",
+   "note": "Pyro や FLIP の中で1つの仕事だけをする小さな解き手（マイクロソルバ）。組み合わせて独自の煙や炎を作る。",
+   "nodes": [
+    {
+     "name": "gasadvect",
+     "kind": "DOP",
+     "one": "速度の場に乗せて、別の場を運ぶ。",
+     "what": "煙の濃さや温度を、流れ（vel）に沿って動かす。Pyro の中で毎ステップ行われている基本の仕事。",
+     "params": [
+      [
+       "field",
+       "運ばれる場"
+      ],
+      [
+       "velocity",
+       "運ぶ速度の場"
+      ],
+      [
+       "geo",
+       "一緒に運ぶ形"
+      ]
+     ]
+    },
+    {
+     "name": "gasdissipate::2.0",
+     "kind": "DOP",
+     "one": "場の値を、時間とともに減らす。",
+     "what": "煙が薄れて消えていく様子を作る。割合で減らす・一定量を引く・半減期で減らす、を選べる。",
+     "params": [
+      [
+       "dissipationmode",
+       "減らし方"
+      ],
+      [
+       "dissipationrate",
+       "減る割合"
+      ],
+      [
+       "halflife",
+       "半減期"
+      ],
+      [
+       "subtractrate",
+       "引く量"
+      ]
+     ]
+    },
+    {
+     "name": "gasdisturb::2.0",
+     "kind": "DOP",
+     "one": "流れに細かい乱れを足す。",
+     "what": "小さなかたまりごとにランダムな力を加えて、煙の表面に細かい渦を作る。",
+     "params": [
+      [
+       "strength",
+       "強さ"
+      ],
+      [
+       "blocksize",
+       "乱れのかたまりの大きさ"
+      ],
+      [
+       "pulselength",
+       "変わる間隔"
+      ],
+      [
+       "threshrange",
+       "効かせる範囲"
+      ]
+     ]
+    },
+    {
+     "name": "gasturbulence",
+     "kind": "DOP",
+     "one": "流れにノイズの渦を足す。",
+     "what": "大きめのうねりを煙に加える。Swirl Size で渦の大きさ、Scale で強さを決める。",
+     "params": [
+      [
+       "turbulence_scale",
+       "強さ"
+      ],
+      [
+       "swirl_size",
+       "渦の大きさ"
+      ],
+      [
+       "rough",
+       "細かさ"
+      ],
+      [
+       "seed",
+       "乱数の種"
+      ]
+     ]
+    },
+    {
+     "name": "gasvortexconfinement",
+     "kind": "DOP",
+     "one": "消えかけた渦を強めて、細部を保つ。",
+     "what": "計算の途中でなまってしまう小さな渦を、回転を強めて取り戻す。",
+     "params": [
+      [
+       "confinementscale",
+       "強さ"
+      ],
+      [
+       "use_control_field",
+       "場で効き目を変える"
+      ],
+      [
+       "control_field",
+       "効き目を決める場"
+      ]
+     ]
+    },
+    {
+     "name": "gasbuoyancy",
+     "kind": "DOP",
+     "one": "温度の高い所を持ち上げる浮力を足す。",
+     "what": "温度の場から上向きの速度を加え、熱い煙が昇るようにする。",
+     "params": [
+      [
+       "temperature",
+       "温度の場"
+      ],
+      [
+       "dir",
+       "浮く向き"
+      ],
+      [
+       "lift",
+       "浮く強さ"
+      ],
+      [
+       "velocity",
+       "速度の場"
+      ]
+     ]
+    },
+    {
+     "name": "gascombustion",
+     "kind": "DOP",
+     "one": "燃料を燃やして、熱と煙を出す。",
+     "what": "発火温度を超えた所で燃料を減らし、温度を上げ、煙（soot）を出す。炎の芯になる計算。",
+     "params": [
+      [
+       "ignitiontemp",
+       "発火温度"
+      ],
+      [
+       "burnrate",
+       "燃える速さ"
+      ],
+      [
+       "heatoutput",
+       "出る熱"
+      ],
+      [
+       "gasrelease",
+       "出る気体の量"
+      ]
+     ]
+    },
+    {
+     "name": "gasdamp",
+     "kind": "DOP",
+     "one": "速すぎる流れを弱める。",
+     "what": "速度を少しずつ落として、暴れすぎた流れを落ち着かせる。",
+     "params": [
+      [
+       "drag_scale",
+       "弱める強さ"
+      ],
+      [
+       "target_speed",
+       "目標の速さ"
+      ],
+      [
+       "field_influence",
+       "場で効き目を変える"
+      ]
+     ]
+    },
+    {
+     "name": "gasdiffuse",
+     "kind": "DOP",
+     "one": "場の値を、まわりへにじませる。",
+     "what": "拡散。熱が伝わる、色がにじむ、といった広がりを作る。",
+     "params": [
+      [
+       "field",
+       "にじませる場"
+      ],
+      [
+       "diffuse",
+       "にじむ速さ"
+      ]
+     ]
+    },
+    {
+     "name": "gasblur",
+     "kind": "DOP",
+     "one": "場をぼかす。",
+     "what": "場の値をまわりと平均してなめらかにする。マスクで効かせる所を絞れる。",
+     "params": [
+      [
+       "field",
+       "ぼかす場"
+      ],
+      [
+       "radfield",
+       "半径を決める場"
+      ],
+      [
+       "maskfield",
+       "効かせる所"
+      ]
+     ]
+    },
+    {
+     "name": "gasresizefluiddynamic",
+     "kind": "DOP",
+     "one": "煙の入っている範囲に合わせて、計算の箱を広げ縮めする。",
+     "what": "空っぽの所を計算しないように、場の大きさを毎フレーム合わせる。重い Pyro を軽くする定番。",
+     "params": [
+      [
+       "fluidtype",
+       "流体の種類"
+      ],
+      [
+       "bound_padding",
+       "余白"
+      ],
+      [
+       "extrafields",
+       "一緒に大きさを変える場"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lop",
+   "label": "Solaris（LOP）",
+   "note": "USD の舞台（ステージ）を組み立てる箱。形を読み込み、光・カメラ・材質を置いて、Karma でレンダリングする。",
+   "nodes": [
+    {
+     "name": "sceneimport::2.0",
+     "kind": "LOP",
+     "one": "/obj の形・光・カメラを、まとめて USD の舞台に取り込む。",
+     "what": "これまでの OBJ の組み立てをそのまま Solaris へ持ち込む入口。どのオブジェクトを取り込むか、どこに置くかを決める。",
+     "params": [
+      [
+       "objects",
+       "取り込むオブジェクト"
+      ],
+      [
+       "objdestpath",
+       "置き先のパス"
+      ],
+      [
+       "importobjects",
+       "オブジェクトを取り込む"
+      ],
+      [
+       "frange",
+       "フレーム範囲"
+      ]
+     ]
+    },
+    {
+     "name": "reference::2.0",
+     "kind": "LOP",
+     "one": "別の USD ファイルを、舞台に参照として差し込む。",
+     "what": "中身をコピーせず、ファイルを指し示して読み込む。同じ部品を何度も使っても重くならない。Make Instanceable でさらに軽くできる。",
+     "params": [
+      [
+       "primpath",
+       "差し込む先のパス"
+      ],
+      [
+       "reftype",
+       "参照の種類"
+      ],
+      [
+       "instanceable",
+       "インスタンスにする"
+      ],
+      [
+       "refprim",
+       "参照する中のプリム"
+      ]
+     ]
+    },
+    {
+     "name": "cube",
+     "kind": "LOP",
+     "one": "USD の立方体を1つ置く。",
+     "what": "多角形ではなく、USD の「Cube」という形の定義として置く。大きさは Size 1つで決まる。",
+     "params": [
+      [
+       "primpath",
+       "置く場所のパス"
+      ],
+      [
+       "size",
+       "一辺の長さ"
+      ],
+      [
+       "xn__primvarsdisplayColor_p8a",
+       "表示の色"
+      ]
+     ]
+    },
+    {
+     "name": "cylinder::2.0",
+     "kind": "LOP",
+     "one": "USD の円柱を1つ置く。",
+     "what": "高さと、上下の半径を別々に決められる（円錐台にもなる）。",
+     "params": [
+      [
+       "primpath",
+       "置く場所のパス"
+      ],
+      [
+       "height",
+       "高さ"
+      ],
+      [
+       "radiusBottom",
+       "下の半径"
+      ],
+      [
+       "radiusTop",
+       "上の半径"
+      ]
+     ]
+    },
+    {
+     "name": "camera",
+     "kind": "LOP",
+     "one": "USD のカメラを置く。",
+     "what": "焦点距離と、フィルムの大きさ（アパーチャ）で写る範囲が決まる。Karma はこのカメラから描く。",
+     "params": [
+      [
+       "primpath",
+       "置く場所のパス"
+      ],
+      [
+       "focalLength",
+       "焦点距離"
+      ],
+      [
+       "horizontalAperture",
+       "横のアパーチャ"
+      ],
+      [
+       "verticalAperture",
+       "縦のアパーチャ"
+      ]
+     ]
+    },
+    {
+     "name": "light::2.0",
+     "kind": "LOP",
+     "one": "点・面・球などの光を置く。",
+     "what": "Type で光の形を選ぶ。明るさは Intensity と Exposure の両方で決まり、Exposure を1上げると2倍になる。",
+     "params": [
+      [
+       "lighttype",
+       "光の形"
+      ],
+      [
+       "xn__inputsintensity_i0a",
+       "強さ"
+      ],
+      [
+       "xn__inputsexposure_vya",
+       "露出"
+      ],
+      [
+       "xn__inputscolor_zta",
+       "色"
+      ]
+     ]
+    },
+    {
+     "name": "distantlight::2.0",
+     "kind": "LOP",
+     "one": "太陽のように、遠くから平行に差す光を置く。",
+     "what": "どこに置いても同じ向きから照らす。影の向きは回転で決める。",
+     "params": [
+      [
+       "xn__inputsintensity_i0a",
+       "強さ"
+      ],
+      [
+       "xn__inputsexposure_vya",
+       "露出"
+      ],
+      [
+       "xn__inputscolor_zta",
+       "色"
+      ]
+     ]
+    },
+    {
+     "name": "domelight::3.0",
+     "kind": "LOP",
+     "one": "まわり全体から照らす光。HDRI 画像を貼る。",
+     "what": "空全体を光らせる。HDRI を貼れば、その場所の光と映り込みがそのまま付く。",
+     "params": [
+      [
+       "xn__inputsintensity_i0a",
+       "強さ"
+      ],
+      [
+       "xn__inputsexposure_vya",
+       "露出"
+      ],
+      [
+       "xn__inputscolor_zta",
+       "色"
+      ],
+      [
+       "r",
+       "回転（光の向き）"
+      ]
+     ]
+    },
+    {
+     "name": "karmaphysicalsky",
+     "kind": "LOP",
+     "one": "太陽の高さから、空の色と日差しを作る。",
+     "what": "時刻や太陽の角度を決めると、昼の青空から夕焼けまでの空と太陽の光を、物理の計算で作る。",
+     "params": [
+      [
+       "primpath",
+       "置く場所のパス"
+      ],
+      [
+       "intensity",
+       "強さ"
+      ],
+      [
+       "exposure",
+       "露出"
+      ],
+      [
+       "skymode",
+       "空の作り方"
+      ]
+     ]
+    },
+    {
+     "name": "materiallibrary",
+     "kind": "LOP",
+     "one": "材質を作って、USD の舞台に置く。",
+     "what": "中に VOP で材質を組み、USD の Material として出す。Auto-fill Materials で、中の材質を全部並べる。",
+     "params": [
+      [
+       "matpathprefix",
+       "材質を置くパスの頭"
+      ],
+      [
+       "fillmaterials",
+       "中の材質を自動で並べる"
+      ],
+      [
+       "genpreviewshaders",
+       "簡易表示用の材質も作る"
+      ]
+     ]
+    },
+    {
+     "name": "assignmaterial",
+     "kind": "LOP",
+     "one": "形に材質を割り当てる。",
+     "what": "どのプリム（パスのパターン）に、どの材質を付けるかを決める。何組でも並べられる。",
+     "params": [
+      [
+       "nummaterials",
+       "組の数"
+      ],
+      [
+       "primpattern1",
+       "付ける先のプリム"
+      ],
+      [
+       "matspecpath1",
+       "材質のパス"
+      ]
+     ]
+    },
+    {
+     "name": "edit",
+     "kind": "LOP",
+     "one": "舞台の上の物を、手で動かす・回す。",
+     "what": "ビューポートで選んで動かした結果を、USD の変形として書き込む。物理を使って落として置くこともできる。",
+     "params": [
+      [
+       "primpattern",
+       "動かすプリム"
+      ],
+      [
+       "t",
+       "移動"
+      ],
+      [
+       "r",
+       "回転"
+      ],
+      [
+       "xOrd",
+       "変形の順序"
+      ]
+     ]
+    },
+    {
+     "name": "editproperties",
+     "kind": "LOP",
+     "one": "プリムの属性を、名前を指定して書き換える。",
+     "what": "専用の箱が無い USD の属性でも、ここで追加・変更できる。",
+     "params": [
+      [
+       "primpattern",
+       "書き換えるプリム"
+      ],
+      [
+       "editinterface",
+       "書き換える属性の一覧"
+      ]
+     ]
+    },
+    {
+     "name": "configureprimitive",
+     "kind": "LOP",
+     "one": "プリムの用途・表示・有効無効などを設定する。",
+     "what": "Purpose（render / proxy / guide）、見える見えない、インスタンスにするか、などをまとめて決める。",
+     "params": [
+      [
+       "primpattern",
+       "対象のプリム"
+      ],
+      [
+       "purpose",
+       "用途"
+      ],
+      [
+       "instanceable",
+       "インスタンスにする"
+      ],
+      [
+       "activation",
+       "有効にするか"
+      ]
+     ]
+    },
+    {
+     "name": "configurelayer",
+     "kind": "LOP",
+     "one": "USD のレイヤーの保存先や時間の範囲を決める。",
+     "what": "書き出すファイルの場所、既定のプリム、開始・終了の時刻をレイヤーに書き込む。",
+     "params": [
+      [
+       "savepath",
+       "保存先"
+      ],
+      [
+       "defaultprim",
+       "既定のプリム"
+      ],
+      [
+       "starttime",
+       "開始の時刻"
+      ]
+     ]
+    },
+    {
+     "name": "collection::2.0",
+     "kind": "LOP",
+     "one": "プリムの集まりに名前を付ける（コレクション）。",
+     "what": "あとで「このコレクションに光を当てない」などと、まとめて指定するための名簿。",
+     "params": [
+      [
+       "collectionname1",
+       "コレクションの名前"
+      ],
+      [
+       "primpath1",
+       "作る場所"
+      ],
+      [
+       "collectioncount",
+       "作る数"
+      ]
+     ]
+    },
+    {
+     "name": "prune",
+     "kind": "LOP",
+     "one": "プリムを、舞台から取り除く（または隠す）。",
+     "what": "選んだプリムを消したり、見えなくしたりする。選ばなかった方を消すこともできる。",
+     "params": [
+      [
+       "pruneunselected",
+       "選ばなかった方を消す"
+      ],
+      [
+       "num_rules",
+       "選び方の規則の数"
+      ],
+      [
+       "doexclusions",
+       "除外を足す"
+      ]
+     ]
+    },
+    {
+     "name": "instancer",
+     "kind": "LOP",
+     "one": "点の位置に、物をたくさん並べる（USD のインスタンス）。",
+     "what": "SOP の copy to points の USD 版。中身を共有したまま大量に置けるので、森や群衆でも軽い。",
+     "params": [
+      [
+       "primpath",
+       "置く場所のパス"
+      ],
+      [
+       "method",
+       "並べ方"
+      ],
+      [
+       "locationpattern",
+       "位置に使うプリム"
+      ]
+     ]
+    },
+    {
+     "name": "addvariant",
+     "kind": "LOP",
+     "one": "1つの物に、切り替えられる別案（バリアント）を足す。",
+     "what": "色違い・形違いを1つの物の中に持たせ、あとで Set Variant で選ぶ。",
+     "params": [
+      [
+       "primpath",
+       "対象のプリム"
+      ],
+      [
+       "variantset",
+       "バリアントの組の名前"
+      ],
+      [
+       "primkind",
+       "プリムの種類"
+      ]
+     ]
+    },
+    {
+     "name": "setvariant",
+     "kind": "LOP",
+     "one": "バリアントのうち、どれを使うかを選ぶ。",
+     "what": "Add Variant で用意した別案から1つを選ぶ。番号でも名前でも選べる。",
+     "params": [
+      [
+       "primpattern1",
+       "対象のプリム"
+      ],
+      [
+       "variantset1",
+       "バリアントの組"
+      ],
+      [
+       "variantname1",
+       "使う案の名前"
+      ]
+     ]
+    },
+    {
+     "name": "graftstages",
+     "kind": "LOP",
+     "one": "別の流れで作った舞台を、今の舞台の枝につなぐ。",
+     "what": "2つめの入力の中身を、指定したパスの下にまとめて差し込む。",
+     "params": [
+      [
+       "primpath",
+       "つなぐ先のパス"
+      ],
+      [
+       "destpath",
+       "既定の差し込み先"
+      ],
+      [
+       "makeuniquepaths",
+       "パスが重ならないようにする"
+      ]
+     ]
+    },
+    {
+     "name": "layerbreak",
+     "kind": "LOP",
+     "one": "ここより上の編集を、書き出しから外す。",
+     "what": "上流の読み込み分を捨てて、この下での編集だけを新しいレイヤーとして書き出す。差分だけの USD を作るときに使う。",
+     "params": [
+      [
+       "helplabel",
+       "説明の表示"
+      ]
+     ]
+    },
+    {
+     "name": "loadlayer",
+     "kind": "LOP",
+     "one": "USD ファイルをレイヤーとして読み込み、編集できるようにする。",
+     "what": "reference と違い、ファイルの中身そのものを編集の対象として開く。",
+     "params": [
+      [
+       "filepath",
+       "ファイル"
+      ],
+      [
+       "loadpayloads",
+       "ペイロードも読む"
+      ],
+      [
+       "reload",
+       "読み直す"
+      ]
+     ]
+    },
+    {
+     "name": "motionblur",
+     "kind": "LOP",
+     "one": "モーションブラー用に、フレームの間の時刻もまとめて書き込む。",
+     "what": "シャッターが開いている間の何時刻かを USD に書き込み、Karma がぶれを描けるようにする。点の速度を作ることもできる。",
+     "params": [
+      [
+       "sample_shuttermode",
+       "シャッターの決め方"
+      ],
+      [
+       "sample_shutterrange",
+       "シャッターの開閉"
+      ],
+      [
+       "sample_count",
+       "時刻の数"
+      ],
+      [
+       "computevelocity",
+       "点の速度を作る"
+      ]
+     ]
+    },
+    {
+     "name": "rendersettings",
+     "kind": "LOP",
+     "one": "レンダリングの設定（カメラ・解像度など）をまとめるプリムを作る。",
+     "what": "どのカメラで、どの大きさで、何を描くかを USD の RenderSettings として置く。",
+     "params": [
+      [
+       "camera",
+       "カメラ"
+      ],
+      [
+       "resolution",
+       "解像度"
+      ],
+      [
+       "includedPurposes",
+       "描く用途"
+      ],
+      [
+       "renderingColorSpace",
+       "色空間"
+      ]
+     ]
+    },
+    {
+     "name": "renderproduct",
+     "kind": "LOP",
+     "one": "書き出す画像1枚分の設定を作る。",
+     "what": "出力ファイル・カメラ・解像度と、その画像に入れる AOV（Render Var）を束ねる。",
+     "params": [
+      [
+       "camera",
+       "カメラ"
+      ],
+      [
+       "resolution",
+       "解像度"
+      ],
+      [
+       "resolutionMenu",
+       "解像度の選択肢"
+      ]
+     ]
+    },
+    {
+     "name": "rendervar::2.0",
+     "kind": "LOP",
+     "one": "書き出す AOV（色・深さ・法線など）を1つ決める。",
+     "what": "レンダリングで取り出す値の名前（Source Name）と、その型（Data Type）を決める。",
+     "params": [
+      [
+       "sourceName",
+       "取り出す値の名前"
+      ],
+      [
+       "dataType",
+       "値の型"
+      ]
+     ]
+    },
+    {
+     "name": "rendergeometrysettings",
+     "kind": "LOP",
+     "one": "形ごとのレンダリング設定を決める。",
+     "what": "影を落とすか、映り込むか、細分化するかなど、Karma での扱いを形ごとに変える。",
+     "params": [
+      [
+       "primpattern",
+       "対象のプリム"
+      ]
+     ]
+    },
+    {
+     "name": "karmarendersettings",
+     "kind": "LOP",
+     "one": "Karma でレンダリングするための設定を、1つにまとめて作る。",
+     "what": "Render Settings・Render Product・Render Var をまとめて作る便利な箱。出力先・カメラ・解像度・サンプル数を決める。",
+     "params": [
+      [
+       "picture",
+       "出力する画像"
+      ],
+      [
+       "camera",
+       "カメラ"
+      ],
+      [
+       "resolution",
+       "解像度"
+      ],
+      [
+       "res_mode",
+       "解像度の決め方"
+      ]
+     ]
+    },
+    {
+     "name": "karmacryptomatte",
+     "kind": "LOP",
+     "one": "物ごとに色分けした選択用の画像（Cryptomatte）を書き出す。",
+     "what": "合成のときに、物や材質ごとの切り抜きを後から作れるようにする。",
+     "params": [
+      [
+       "doprimcrypto",
+       "プリムごとに作る"
+      ],
+      [
+       "primcryptoname",
+       "名前"
+      ],
+      [
+       "cryptopicture",
+       "出力する画像"
+      ]
+     ]
+    }
+   ]
+  },
+  {
    "id": "pop",
    "label": "粒を動かす",
    "note": "たくさんの小さなものを飛ばす道具。生む口・力・条件で選ぶ箱・消す箱を並べて組む。",
