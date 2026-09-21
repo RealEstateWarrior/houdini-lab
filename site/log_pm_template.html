@@ -6711,6 +6711,109 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 131 ===================== -->
+    <article class="entry entry--current" id="exp131">
+      <div class="badge">131</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>bend は長さを保って円弧に曲げる — 端の位置は式と差0、範囲の外は接線の向きにまっすぐ</h2>
+        <p class="path">examples/131_bend.py &nbsp;·&nbsp; 範囲の終わりの点は円弧の式と差0（45〜360°）。範囲の外は接線の向きにまっすぐ。全長の不足は弦の分だけ</p>
+
+        <div class="prose">
+          <p>z 方向に長さ1の線（100分割）を、bend の捕まえる範囲（origin 0・dir z・length 1）いっぱいに角度 θ だけ曲げた。長さを保って円弧になるなら、半径は R = 1/θ（ラジアン）で、範囲の終わりの点は y = R(1 − cos θ)、z = R sin θ に来るはず。</p>
+          <p>**45°〜360° の5通りで、範囲の終わりの点は式と一致**（ずれ最大 0.000000）。360° では、線がちょうど1周して始まりの点に戻った。</p>
+          <p>**範囲の外（長さ2の線の後ろ半分）は、曲がり終わりの接線の向きにまっすぐ伸びた。** 端の点も式どおり（ずれ 0.000000）。180° なら後ろ半分は真後ろ（−z）へ向かう。</p>
+          <p>全長は少しだけ短くなる（360° で 0.999835）。これは点が円弧の上に乗ったまま、点と点の間がまっすぐな弦になるため。弦の長さの式 sin(h)/h（h は1区間の中心角の半分）と比べると、ずれは最大 0.000001。点そのものは円弧の上にある。</p>
+        </div>
+
+        <p class="label">曲げる角度と、点の位置・全長</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="131_bend.png" alt="曲げる角度ごとの円弧。半径は 1/θ で、長さはどれも1。" loading="lazy" decoding="async"></div>
+            <figcaption>曲げる角度ごとの円弧。半径は 1/θ で、長さはどれも1。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>線の長さ</th><th>角度</th><th>範囲の終わりの点</th><th>式</th><th>端の点</th><th>全長</th><th>弦の式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td>45°</td><td>(0.372923, 0.900316)</td><td>(0.372923, 0.900316)</td><td>(0.372923, 0.900316)</td><td class="num">0.999997</td><td class="num">0.999997</td></tr>
+              <tr><td class="num">1</td><td>90°</td><td>(0.63662, 0.63662)</td><td>(0.63662, 0.63662)</td><td>(0.63662, 0.63662)</td><td class="num">0.999990</td><td class="num">0.999990</td></tr>
+              <tr><td class="num">1</td><td>180°</td><td>(0.63662, -0)</td><td>(0.63662, 0)</td><td>(0.63662, -0)</td><td class="num">0.999959</td><td class="num">0.999959</td></tr>
+              <tr><td class="num">1</td><td>270°</td><td>(0.212207, -0.212207)</td><td>(0.212207, -0.212207)</td><td>(0.212207, -0.212207)</td><td class="num">0.999907</td><td class="num">0.999907</td></tr>
+              <tr><td class="num">1</td><td>360°</td><td>(0, 0)</td><td>(0, -0)</td><td>(0, 0)</td><td class="num">0.999835</td><td class="num">0.999836</td></tr>
+              <tr><td class="num">2</td><td>45°</td><td>(0.372923, 0.900316)</td><td>(0.372923, 0.900316)</td><td>(1.08003, 1.60742)</td><td class="num">1.999997</td><td class="num">1.999997</td></tr>
+              <tr><td class="num">2</td><td>90°</td><td>(0.63662, 0.63662)</td><td>(0.63662, 0.63662)</td><td>(1.63662, 0.63662)</td><td class="num">1.999990</td><td class="num">1.999990</td></tr>
+              <tr><td class="num">2</td><td>180°</td><td>(0.63662, -0)</td><td>(0.63662, 0)</td><td>(0.63662, -1)</td><td class="num">1.999959</td><td class="num">1.999959</td></tr>
+              <tr><td class="num">2</td><td>270°</td><td>(0.212207, -0.212207)</td><td>(0.212207, -0.212207)</td><td>(-0.787793, -0.212207)</td><td class="num">1.999907</td><td class="num">1.999907</td></tr>
+              <tr><td class="num">2</td><td>360°</td><td>(0, 0)</td><td>(0, -0)</td><td>(0, 1)</td><td class="num">1.999835</td><td class="num">1.999836</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Limit Deformation は既定（入）。曲げる向きは y（既定の up）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>bend は長さを保つ円弧。</strong>半径は「範囲の長さ ÷ 角度（ラジアン）」。</li>
+          <li><strong>範囲の外はまっすぐ付いてくる。</strong>曲がり終わりの向きに、そのまま伸びる。</li>
+          <li><strong>全長の不足は弦の分だけ。</strong>100分割で 360° 曲げても 0.02% 以内。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 132 ===================== -->
+    <article class="entry entry--current" id="exp132">
+      <div class="badge">132</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>attribpromote の11通りのまとめ方 — Median は偶数個なら上の方、Mode は同数なら最小の値</h2>
+        <p class="path">examples/132_promote.py &nbsp;·&nbsp; 8通りは式どおり。Median は偶数個なら上の方（4.5 ではなく5）、Mode は同数なら最小の値</p>
+
+        <div class="prose">
+          <p>格子 4×4 の16点に、v = (点番号 × 7) mod 10 という決まった値を入れ、attribpromote で点 → 全体（Detail）に上げた。Python で同じ計算をして、まとめ方ごとに比べた。</p>
+          <p>**最大・最小・平均・合計・2乗の合計・RMS・最初・最後の8通りは、式とすべて一致。**平均 4.375、RMS 5.244044 など。</p>
+          <p>**Median は、値が偶数個のとき真ん中の2つの平均ではなく、大きい方を返した**（小さい順に並べた 8番目 4 と 9番目 5 のうち 5。平均なら 4.5）。</p>
+          <p>**Mode は、いちばん多く出た値が同数で並ぶとき、その中の最小の値を返した。** 元の並べ方（候補 0, 1, 4, 5, 7, 8 → 0）に加え、最初に出る値が最小にならない並べ方2通りでも確かめた（最初に出てきた値ではない）: 候補 0, 1, 3, 4, 7, 8 → 0（最初の値は 3）、候補 1, 2, 4, 5, 8, 9 → 1（最初の値は 9）。</p>
+          <p>点 → 面の Average は、面の4つの角の値の平均と一致した（ずれ 0）。</p>
+        </div>
+
+        <p class="label">点 → 全体へのまとめ方（16点）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="132_promote.png" alt="偶数個の Median は、真ん中の2つの上の方（5）。平均の 4.5 ではない" loading="lazy" decoding="async"></div>
+            <figcaption>偶数個の Median は、真ん中の2つの上の方（5）。平均の 4.5 ではない。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>まとめ方</th><th>出た値</th><th>式</th></tr></thead>
+            <tbody>
+              <tr><td>Maximum</td><td class="num">9</td><td class="num">9</td></tr>
+              <tr><td>Minimum</td><td class="num">0</td><td class="num">0</td></tr>
+              <tr><td>Average</td><td class="num">4.375</td><td class="num">4.375</td></tr>
+              <tr><td>Sum</td><td class="num">70</td><td class="num">70</td></tr>
+              <tr><td>Sum of Squares</td><td class="num">440</td><td class="num">440</td></tr>
+              <tr><td>Root Mean Square</td><td class="num">5.24404</td><td class="num">5.24404</td></tr>
+              <tr><td>First Match</td><td class="num">0</td><td class="num">0</td></tr>
+              <tr><td>Last Match</td><td class="num">5</td><td class="num">5</td></tr>
+              <tr><td>Median</td><td class="num">5</td><td>平均なら 4.5／下 4／上 5</td></tr>
+              <tr><td>Mode</td><td class="num">0</td><td>同数の候補 0, 1, 4, 5, 7, 8</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">値は 0, 7, 4, 1, 8, 5, 2, 9, 6, 3, 0, 7, 4, 1, 8, 5（点番号の順）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Median は偶数個で上の方。</strong>中央値として平均がほしいなら、自分で計算する。</li>
+          <li><strong>Mode の同数は最小の値。</strong>ばらつきが大きいデータの Mode は当てにしにくい。</li>
+          <li><strong>点 → 面の Average は、角の平均そのもの。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

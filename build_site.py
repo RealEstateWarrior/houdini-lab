@@ -912,6 +912,18 @@ DONE = [
      "shots": ["130_cusp.png"],
      "title": "normal の Cusp Angle は「曲がり角がこれより大きければ角を立てる」 — ちょうど等しいと、なめらか",
      "note": "曲がり角 > Cusp Angle なら角が立つ（35通りすべて）。ちょうど等しい・0.1%ほど下でもなめらか"},
+    {"no": "131", "anchor": "exp131",
+     "tags": ["モデリング", "bend", "変形", "検算"],
+     "log": "log_pm", "thumb": "131_bend.png",
+     "shots": ["131_bend.png"],
+     "title": "bend は長さを保って円弧に曲げる — 端の位置は式と差0、範囲の外は接線の向きにまっすぐ",
+     "note": "範囲の終わりの点は円弧の式と差0（45〜360°）。範囲の外は接線の向きにまっすぐ。全長の不足は弦の分だけ"},
+    {"no": "132", "anchor": "exp132",
+     "tags": ["モデリング", "attribpromote", "属性", "検算"],
+     "log": "log_pm", "thumb": "132_promote.png",
+     "shots": ["132_promote.png"],
+     "title": "attribpromote の11通りのまとめ方 — Median は偶数個なら上の方、Mode は同数なら最小の値",
+     "note": "8通りは式どおり。Median は偶数個なら上の方（4.5 ではなく5）、Mode は同数なら最小の値"},
 ]
 
 PLANNED = []

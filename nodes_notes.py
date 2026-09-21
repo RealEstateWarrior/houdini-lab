@@ -27,6 +27,8 @@ NOTES = {
     "cluster": ("重なった塊でも、純度は理論の上限 Φ(s/σ)² どおり（差0.2%以内）。番号は cluster 属性に入る（実験126）。", ["126"]),
     "findshortestpath": ("道の長さ（cost）は distancealonggeometry の Edge と同じ。四角の網では |x|+|z|（実験127）。", ["127"]),
     "extracttransform": ("出すのは P・pivot・orient・distortion だけ。移動と回転はずれ0で取り出せるが、拡大は取り出さず distortion に出る（実験128）。", ["128"]),
+    "measure": ("Curvature は既定のまま（Divide Element Area 切・Scale Normalize 入）だと、網の細かさで変わる値になり、式の曲率にならない。Divide Element Area を入れ Scale Normalize を切ると、球・円柱とも0.03%以内（実験129）。", ["129"]),
+    "normal": ("Cusp Angle は「隣の面との曲がりがこれより大きければ角を立てる」しきい値。ちょうど等しいとなめらか。既定60°では6角柱まで丸い（実験130）。", ["130"]),
 }
 
 

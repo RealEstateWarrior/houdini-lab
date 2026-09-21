@@ -1,0 +1,112 @@
+{
+ "values": [
+  0.0,
+  7.0,
+  4.0,
+  1.0,
+  8.0,
+  5.0,
+  2.0,
+  9.0,
+  6.0,
+  3.0,
+  0.0,
+  7.0,
+  4.0,
+  1.0,
+  8.0,
+  5.0
+ ],
+ "want": {
+  "max": 9.0,
+  "min": 0.0,
+  "mean": 4.375,
+  "sum": 70.0,
+  "sumsquare": 440.0,
+  "rms": 5.244044240850758,
+  "first": 0.0,
+  "last": 5.0,
+  "median_avg": 4.5,
+  "median_low": 4.0,
+  "median_high": 5.0,
+  "mode_candidates": [
+   0.0,
+   1.0,
+   4.0,
+   5.0,
+   7.0,
+   8.0
+  ]
+ },
+ "rows": [
+  {
+   "method": "max",
+   "got": 9.0
+  },
+  {
+   "method": "min",
+   "got": 0.0
+  },
+  {
+   "method": "mean",
+   "got": 4.375
+  },
+  {
+   "method": "mode",
+   "got": 0.0
+  },
+  {
+   "method": "median",
+   "got": 5.0
+  },
+  {
+   "method": "sum",
+   "got": 70.0
+  },
+  {
+   "method": "sumsquare",
+   "got": 440.0
+  },
+  {
+   "method": "rms",
+   "got": 5.244044
+  },
+  {
+   "method": "first",
+   "got": 0.0
+  },
+  {
+   "method": "last",
+   "got": 5.0
+  }
+ ],
+ "prim_mean_err": 0.0,
+ "ties": [
+  {
+   "code": "f@v = (@ptnum * 7 + 3) % 10;",
+   "first": 3.0,
+   "got": 0.0,
+   "candidates": [
+    0.0,
+    1.0,
+    3.0,
+    4.0,
+    7.0,
+    8.0
+   ]
+  },
+  {
+   "code": "f@v = 9 - (@ptnum * 7) % 10;",
+   "first": 9.0,
+   "got": 1.0,
+   "candidates": [
+    1.0,
+    2.0,
+    4.0,
+    5.0,
+    8.0,
+    9.0
+   ]
+  }
+ ]
+}
