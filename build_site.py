@@ -888,6 +888,18 @@ DONE = [
      "shots": ["126_cluster.png"],
      "title": "cluster（k-means）は塊を理論の上限どおりに分ける — 重なる塊でも Φ(s/σ)² と1%以内",
      "note": "離れた塊は純度100%。重なった塊でも理論の上限 Φ(s/σ)² と1%以内"},
+    {"no": "127", "anchor": "exp127",
+     "tags": ["モデリング", "findshortestpath", "距離", "検算"],
+     "log": "log_pm", "thumb": "127_path.png",
+     "shots": ["127_path.png"],
+     "title": "findshortestpath の道のりは Edge の距離と同じ — 四角の網では |x|+|z|",
+     "note": "4本とも cost＝道の長さ＝Edge の距離＝|x|+|z|。(1,1) まで 2.0（まっすぐなら1.414）"},
+    {"no": "128", "anchor": "exp128",
+     "tags": ["モデリング", "extracttransform", "回転", "検算"],
+     "log": "log_pm", "thumb": "128_extract.png",
+     "shots": ["128_extract.png"],
+     "title": "extracttransform は移動と回転だけを取り出す — 拡大は捨てて distortion に出す",
+     "note": "移動と回転はずれ0で取り出せる（(10,20,30)°は1軸35.8171°）。拡大は取り出さず distortion に出る"},
 ]
 
 PLANNED = []

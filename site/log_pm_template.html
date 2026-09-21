@@ -6477,6 +6477,94 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 127 ===================== -->
+    <article class="entry entry--current" id="exp127">
+      <div class="badge">127</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>findshortestpath の道のりは Edge の距離と同じ — 四角の網では |x|+|z|</h2>
+        <p class="path">examples/127_shortest_path.py &nbsp;·&nbsp; 4本とも cost＝道の長さ＝Edge の距離＝|x|+|z|。(1,1) まで 2.0（まっすぐなら1.414）</p>
+
+        <div class="prose">
+          <p><a href="#exp119">実験119</a> で、distancealonggeometry の Edge は「辺をたどった道のり」だと分かった。findshortestpath の道の長さも同じになるかを確かめた。2×2 の四角の網（41×41点）の真ん中から、4つの点へ道を引いた。</p>
+          <p>**4本すべてで、cost・道の線の長さ・Edge の距離・|x|+|z| の4つが完全に一致。**たとえば (1, 1) までは 2.0（まっすぐなら √2 ≒ 1.414）。道は縦横の辺だけを通る。</p>
+          <p>道の長さは点の属性 cost にも入る。4本の道を出すのに 85 ミリ秒。</p>
+        </div>
+
+        <p class="label">行き先ごとの道の長さ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="127_path.png" alt="道の長さは |x|+|z| の線に乗り、まっすぐの距離より長い。" loading="lazy" decoding="async"></div>
+            <figcaption>道の長さは |x|+|z| の線に乗り、まっすぐの距離より長い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>行き先</th><th>道の点</th><th>道の長さ</th><th>cost</th><th>Edge の距離</th><th>|x|+|z|</th><th>まっすぐ</th></tr></thead>
+            <tbody>
+              <tr><td>(0.5, 0.25)</td><td class="num">16</td><td class="num">0.750000</td><td class="num">0.750000</td><td class="num">0.750000</td><td class="num">0.750000</td><td class="num">0.559017</td></tr>
+              <tr><td>(-0.8, 0.6)</td><td class="num">29</td><td class="num">1.400000</td><td class="num">1.400000</td><td class="num">1.400000</td><td class="num">1.400000</td><td class="num">1.000000</td></tr>
+              <tr><td>(1, 1)</td><td class="num">41</td><td class="num">2.000000</td><td class="num">2.000000</td><td class="num">2.000000</td><td class="num">2.000000</td><td class="num">1.414214</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Output Paths = From any start to each end。道の長さは measure の Perimeter。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>findshortestpath・Edge・attribfill の到着時間は、同じ「辺の道のり」。</strong>（<a href="#exp115">実験115</a>・119 とあわせて）</li>
+          <li><strong>四角の網では、斜めの行き先ほど遠回りになる。</strong>45°の向きで約1.41倍。</li>
+          <li><strong>まっすぐに近い道がほしいなら、網を三角形や remesh にする。</strong>（<a href="#exp119">実験119</a> では remesh で Edge のずれが約1/6 になった）</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 128 ===================== -->
+    <article class="entry entry--current" id="exp128">
+      <div class="badge">128</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>extracttransform は移動と回転だけを取り出す — 拡大は捨てて distortion に出す</h2>
+        <p class="path">examples/128_extracttransform.py &nbsp;·&nbsp; 移動と回転はずれ0で取り出せる（(10,20,30)°は1軸35.8171°）。拡大は取り出さず distortion に出る</p>
+
+        <div class="prose">
+          <p>半径1の球に、分かっている移動・回転・拡大をかけ、元の形と変形後の形を extracttransform に渡した。取り出した変形を元の形にかけ直し、変形後の形とのずれを測った。</p>
+          <p>**出てくるのは、点1つと4つの属性だけ:** P（変形後の中心）、pivot（元の中心）、orient（回転の四元数）、distortion。拡大の属性は無い。</p>
+          <p>**移動と回転は、ぴったり取り出せた。** かけ直したずれは、移動だけ・回転だけのどちらも 0.000000。回転 (10°, 20°, 30°) は、1つの軸のまわりの 35.8171° として出た（xyz の順に掛けた回転行列から計算すると 35.8171°）。P は、元の中心を変形した位置と一致（差は最大 0.000000）。</p>
+          <p>**拡大は取り出されない。** 1.5 倍にすると、かけ直しのずれは 0.5（半径 1 → 1.5 の差）で、distortion も 0.5。x だけ2倍に伸ばすと、ずれ 1・distortion 0.5203。distortion は「かたい変形では説明できない分」の大きさの目安になる（伸ばしたときに最大のずれと一致しない理由は確かめていない）。</p>
+        </div>
+
+        <p class="label">かけた変形と、取り出した結果</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="128_extract.png" alt="拡大を含むと、かけ直してもずれが残り、distortion が0でなくなる。" loading="lazy" decoding="async"></div>
+            <figcaption>拡大を含むと、かけ直してもずれが残り、distortion が0でなくなる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>変形</th><th>移動</th><th>回転</th><th>拡大</th><th>取り出した角度</th><th>かけ直しのずれ</th><th>distortion</th></tr></thead>
+            <tbody>
+              <tr><td>move</td><td>(1.0, 2.0, 3.0)</td><td>(0, 0, 0)</td><td>(1, 1, 1)</td><td>0.0000°</td><td class="num">0.000000</td><td class="num">0.000000</td></tr>
+              <tr><td>turn</td><td>(0, 0, 0)</td><td>(10, 20, 30)</td><td>(1, 1, 1)</td><td>35.8171°</td><td class="num">0.000000</td><td class="num">0.000000</td></tr>
+              <tr><td>all</td><td>(1.0, -0.5, 2.0)</td><td>(10, 20, 30)</td><td>(1.5, 1.5, 1.5)</td><td>35.8171°</td><td class="num">0.500000</td><td class="num">0.500000</td></tr>
+              <tr><td>stretch</td><td>(0, 0, 0)</td><td>(0, 30, 0)</td><td>(2.0, 1.0, 1.0)</td><td>30.0000°</td><td class="num">1.000000</td><td class="num">0.520266</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">元の形は半径1の球（中心 (0.3, 0.1, −0.2)）。transform <button class="term" data-term="SOP">SOP</button>（xform）で変形。かけ直し = (元の点 − pivot) × orient の回転 + P。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>移動と回転は正確に取り出せる。</strong>破片の<button class="term" data-term="シミュレーション">シミュレーション</button>結果を、軽い変形として持ち運ぶのに使える。</li>
+          <li><strong>拡大は取り出さない。</strong>大きさが変わる動きは、distortion が0でなくなることで気づける。</li>
+          <li><strong>回転は1本の軸のまわりの角度として出る。</strong>(10°, 20°, 30°) は 35.8° になる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
