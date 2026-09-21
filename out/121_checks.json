@@ -1,0 +1,533 @@
+[
+ {
+  "no": "091",
+  "script": "091_polyreduce.py",
+  "records": [
+   "091_stats.json"
+  ],
+  "returncode": 0,
+  "values": 44,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.2
+ },
+ {
+  "no": "092",
+  "script": "092_remesh.py",
+  "records": [
+   "092_stats.json"
+  ],
+  "returncode": 0,
+  "values": 25,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.4
+ },
+ {
+  "no": "093",
+  "script": "093_smooth_volume.py",
+  "records": [
+   "093_stats.json"
+  ],
+  "returncode": 0,
+  "values": 59,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.7
+ },
+ {
+  "no": "094",
+  "script": "094_vdb_voxel.py",
+  "records": [
+   "094_stats.json"
+  ],
+  "returncode": 0,
+  "values": 40,
+  "diffs": [
+   [
+    "094_stats.json",
+    ".rows[0].convert_seconds",
+    0.0037,
+    0.001
+   ],
+   [
+    "094_stats.json",
+    ".rows[0].make_seconds",
+    0.0214,
+    0.0211
+   ],
+   [
+    "094_stats.json",
+    ".rows[1].convert_seconds",
+    0.0014,
+    0.0013
+   ],
+   [
+    "094_stats.json",
+    ".rows[1].make_seconds",
+    0.0097,
+    0.0108
+   ],
+   [
+    "094_stats.json",
+    ".rows[2].convert_seconds",
+    0.0024,
+    0.0021
+   ],
+   [
+    "094_stats.json",
+    ".rows[2].make_seconds",
+    0.0099,
+    0.0103
+   ],
+   [
+    "094_stats.json",
+    ".rows[3].convert_seconds",
+    0.0047,
+    0.0042
+   ],
+   [
+    "094_stats.json",
+    ".rows[3].make_seconds",
+    0.0135,
+    0.013
+   ],
+   [
+    "094_stats.json",
+    ".rows[4].convert_seconds",
+    0.0128,
+    0.012
+   ],
+   [
+    "094_stats.json",
+    ".rows[4].make_seconds",
+    0.0219,
+    0.021
+   ]
+  ],
+  "n_diffs": 10,
+  "sec": 1.3
+ },
+ {
+  "no": "095",
+  "script": "095_fuse.py",
+  "records": [
+   "095_stats.json"
+  ],
+  "returncode": 0,
+  "values": 65,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "096",
+  "script": "096_scatter.py",
+  "records": [
+   "096_stats.json"
+  ],
+  "returncode": 0,
+  "values": 56,
+  "diffs": [
+   [
+    "096_stats.json",
+    ".rows[0].us_per_point",
+    10.873,
+    10.955
+   ],
+   [
+    "096_stats.json",
+    ".rows[1].us_per_point",
+    8.425,
+    8.319
+   ],
+   [
+    "096_stats.json",
+    ".rows[2].us_per_point",
+    2.537,
+    2.71
+   ],
+   [
+    "096_stats.json",
+    ".rows[3].us_per_point",
+    0.898,
+    0.919
+   ],
+   [
+    "096_stats.json",
+    ".rows[4].us_per_point",
+    1.038,
+    1.081
+   ],
+   [
+    "096_stats.json",
+    ".rows[5].us_per_point",
+    3371.241,
+    1418.031
+   ],
+   [
+    "096_stats.json",
+    ".rows[6].us_per_point",
+    13.664,
+    13.394
+   ],
+   [
+    "096_stats.json",
+    ".rows[7].us_per_point",
+    3.004,
+    3.262
+   ],
+   [
+    "096_stats.json",
+    ".rows[8].us_per_point",
+    1.11,
+    1.115
+   ],
+   [
+    "096_stats.json",
+    ".rows[9].us_per_point",
+    1.166,
+    1.165
+   ]
+  ],
+  "n_diffs": 10,
+  "sec": 3.7
+ },
+ {
+  "no": "097",
+  "script": "097_pack.py",
+  "records": [
+   "097_stats.json"
+  ],
+  "returncode": 0,
+  "values": 44,
+  "diffs": [
+   [
+    "097_stats.json",
+    ".rows[0].write_seconds",
+    0.0073,
+    0.0076
+   ],
+   [
+    "097_stats.json",
+    ".rows[1].write_seconds",
+    0.0009,
+    0.0008
+   ],
+   [
+    "097_stats.json",
+    ".rows[2].write_seconds",
+    0.0553,
+    0.0532
+   ],
+   [
+    "097_stats.json",
+    ".rows[4].write_seconds",
+    0.5272,
+    0.5091
+   ],
+   [
+    "097_stats.json",
+    ".rows[5].bytes",
+    119599,
+    119600
+   ],
+   [
+    "097_stats.json",
+    ".rows[5].write_seconds",
+    0.0156,
+    0.0153
+   ]
+  ],
+  "n_diffs": 6,
+  "sec": 1.7
+ },
+ {
+  "no": "098",
+  "script": "098_hole.py",
+  "records": [
+   "098_stats.json"
+  ],
+  "returncode": 0,
+  "values": 92,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 5.4
+ },
+ {
+  "no": "099",
+  "script": "099_subdivide.py",
+  "records": [
+   "099_stats.json"
+  ],
+  "returncode": 0,
+  "values": 68,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.3
+ },
+ {
+  "no": "100",
+  "script": "100_peak.py",
+  "records": [
+   "100_stats.json"
+  ],
+  "returncode": 0,
+  "values": 176,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 2.3
+ },
+ {
+  "no": "101",
+  "script": "101_area.py",
+  "records": [
+   "101_stats.json"
+  ],
+  "returncode": 0,
+  "values": 59,
+  "diffs": [
+   [
+    "101_stats.json",
+    ".side",
+    2.0,
+    null
+   ]
+  ],
+  "n_diffs": 1,
+  "sec": 2.2
+ },
+ {
+  "no": "102",
+  "script": "102_extrude.py",
+  "records": [
+   "102_stats.json"
+  ],
+  "returncode": 0,
+  "values": 63,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "103",
+  "script": "103_rotate_order.py",
+  "records": [
+   "103_stats.json"
+  ],
+  "returncode": 0,
+  "values": 112,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "104",
+  "script": "104_resample.py",
+  "records": [
+   "104_stats.json"
+  ],
+  "returncode": 0,
+  "values": 118,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "105",
+  "script": "105_spiral.py",
+  "records": [
+   "105_stats.json"
+  ],
+  "returncode": 0,
+  "values": 140,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.2
+ },
+ {
+  "no": "106",
+  "script": "106_randomize.py",
+  "records": [
+   "106_stats.json"
+  ],
+  "returncode": 0,
+  "values": 83,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.6
+ },
+ {
+  "no": "107",
+  "script": "107_centroid.py",
+  "records": [
+   "107_stats.json"
+  ],
+  "returncode": 0,
+  "values": 243,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "108",
+  "script": "108_triangulate.py",
+  "records": [
+   "108_stats.json"
+  ],
+  "returncode": 0,
+  "values": 76,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 6.8
+ },
+ {
+  "no": "109",
+  "script": "109_groupexpand.py",
+  "records": [
+   "109_stats.json"
+  ],
+  "returncode": 0,
+  "values": 117,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "110",
+  "script": "110_copyxform.py",
+  "records": [
+   "110_stats.json"
+  ],
+  "returncode": 0,
+  "values": 113,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "111",
+  "script": "111_jitter.py",
+  "records": [
+   "111_stats.json"
+  ],
+  "returncode": 0,
+  "values": 76,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.5
+ },
+ {
+  "no": "112",
+  "script": "112_vdb_csg.py",
+  "records": [
+   "112_stats.json"
+  ],
+  "returncode": 0,
+  "values": 81,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 6.6
+ },
+ {
+  "no": "113",
+  "script": "113_timeblend.py",
+  "records": [
+   "113_stats.json"
+  ],
+  "returncode": 0,
+  "values": 57,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "114",
+  "script": "114_sweep_volume.py",
+  "records": [
+   "114_stats.json"
+  ],
+  "returncode": 0,
+  "values": 129,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.9
+ },
+ {
+  "no": "115",
+  "script": "115_attribfill.py",
+  "records": [
+   "115_stats.json"
+  ],
+  "returncode": 0,
+  "values": 108,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.2
+ },
+ {
+  "no": "116",
+  "script": "116_uvflatten.py",
+  "records": [
+   "116_stats.json",
+   "116_uv_cylinder_abf.json",
+   "116_uv_cylinder_scp.json",
+   "116_uv_hemisphere_abf.json",
+   "116_uv_hemisphere_scp.json"
+  ],
+  "returncode": 0,
+  "values": 24607,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 2.4
+ },
+ {
+  "no": "117",
+  "script": "117_relax.py",
+  "records": [
+   "117_stats.json"
+  ],
+  "returncode": 0,
+  "values": 144,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.5
+ },
+ {
+  "no": "118",
+  "script": "118_revolve.py",
+  "records": [
+   "118_sign.json",
+   "118_stats.json"
+  ],
+  "returncode": 0,
+  "values": 67,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.2
+ },
+ {
+  "no": "119",
+  "script": "119_surface_distance.py",
+  "records": [
+   "119_stats.json"
+  ],
+  "returncode": 0,
+  "values": 105,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.4
+ },
+ {
+  "no": "120",
+  "script": "120_thickness.py",
+  "records": [
+   "120_stats.json"
+  ],
+  "returncode": 0,
+  "values": 50,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 3.4
+ }
+]

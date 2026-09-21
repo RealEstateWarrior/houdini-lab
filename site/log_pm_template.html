@@ -5764,6 +5764,10 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <h2>attribfill の到着時間は「網の辺をたどる道のり」 — 四角の網ではマンハッタン距離そのもの</h2>
         <p class="path">examples/115_attribfill.py &nbsp;·&nbsp; Interpolate は式どおり。1点からの Arrival Time は四角の網で |x|+|z| に一致し、細かくしても直線距離にならない</p>
 
+        <p class="callout">
+          <a href="#exp119">実験119</a> で、この値が distancealonggeometry の Edge（辺をたどった道のり）と3つの網すべてで同じになると確かめた。面に沿った本当の距離がほしいときは、distancealonggeometry の Surface を使う。
+        </p>
+
         <div class="prose">
           <p>attribfill で値を埋め、式で出る答えと比べた。</p>
           <p>**Interpolate (Poisson) は式どおり。** 4×2 の板の左端を0・右端を1に固定すると、中は x に比例する直線で埋まった（3通りの細かさで、ずれ 0.000000）。</p>
@@ -6092,6 +6096,95 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <li><strong>角のある形では、ぼかしで縁の値がにじむ。</strong>正確な値がほしいなら Use Blur と Median of Neighbors を切る。</li>
           <li><strong>box の Use Divisions（Polygon のとき）は開いた線の籠。</strong>measure の体積が0になる。点を増やすなら Polygon Mesh にする。</li>
           <li><strong>速い。</strong>36,100 点の殻で約0.1秒。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 121 ===================== -->
+    <article class="entry entry--current" id="exp121">
+      <div class="badge">121</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>091〜120 の振り返り点検 — 30本すべて流し直し、結果の数字は1つを除いて全部一致</h2>
+        <p class="path">examples/121_audit.py &nbsp;·&nbsp; 30本すべて流し直し。時間以外で違ったのはファイルの大きさ1バイトと、手で足した項目1つだけ</p>
+
+        <div class="prose">
+          <p>30件ごとの点検（030・060・090 に続いて4回目）。090 までは数件を選んで測り直したが、091 からの台本はどれも数秒で終わるので、**30本すべてを流し直した**。記録（out/NNN_*.json）を控えに退避し、台本を <button class="term" data-term="hython">hython</button> で流し、新しい値と控えを数字1つずつ比べて、最後に控えを戻した（記録は変えていない）。</p>
+          <p>比べた値は 27,217 個（うち 24,607 個は<a href="#exp116">実験116</a> の UV の座標）。かかった時間は全部で 61 秒。</p>
+          <p>**違ったのは時間の項目 25 個と、それ以外の 2 個だけ。**</p>
+          <p>- <a href="#exp097">実験097</a>: パックして書き出したファイルの大きさが 119,599 → 119,600 バイト（1バイト差）。同じものを書いても、ファイルの大きさはぴったり同じにならないことがある（記事の結論「パックすると小さくなる」は変わらない）
+- <a href="#exp101">実験101</a>: 記録に、台本が書かない項目（side = 2.0）が1つ混ざっていた。あとから手で足したもの。値は既定と同じで、記事の数字は変わらない</p>
+          <p>時間の項目（秒・1点あたりのマイクロ秒）は、流すたびに揺れるので比べていない。<a href="#exp096">実験096</a> の最も遅い行は 3371 → 1418 マイクロ秒と大きく動いた。時間の値は1回の測定では目安にとどまる。</p>
+          <p>**あとの実験で結論に条件が付いたもの: 1件。** <a href="#exp115">実験115</a>（到着時間が縦横の道のりになる）の理由を、<a href="#exp119">実験119</a> で確かめた（distancealonggeometry の Edge と同じ値）。記事115 に注記を足した。</p>
+          <p>**解説の訂正: 1件。** copyxform の説明を「同じ変形を重ねる」と書いていたが、<a href="#exp110">実験110</a> で「値を i 倍して1回かける」と分かったので直した。</p>
+          <p>**検算で見つけた落とし穴: 091〜120 で8件**（<button class="term" data-term="boolean">boolean</button> は poly 以外だと何もしない 098、carve の First U は入切 104、copyxform は輪にならない 110、timeblend の v は1秒あたり 113、attribfill の到着時間は辺の道のり 115、revolve は裏返しになる 118、box の Use Divisions は線の籠 120、素性の控えがメニューを12個で切っていた 112）。</p>
+        </div>
+
+        <p class="label">実験ごとの測り直し</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="121_audit.png" alt="30本のうち28本は、時間以外の数字がすべて一致。" loading="lazy" decoding="async"></div>
+            <figcaption>30本のうち28本は、時間以外の数字がすべて一致。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>実験</th><th>台本</th><th>比べた値</th><th>時間以外のずれ</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">091</td><td>091_polyreduce.py</td><td class="num">44</td><td class="num">0</td><td class="num">1.2</td></tr>
+              <tr><td class="num">092</td><td>092_remesh.py</td><td class="num">25</td><td class="num">0</td><td class="num">1.4</td></tr>
+              <tr><td class="num">093</td><td>093_smooth_volume.py</td><td class="num">59</td><td class="num">0</td><td class="num">1.7</td></tr>
+              <tr><td class="num">094</td><td>094_vdb_voxel.py</td><td class="num">40</td><td class="num">0</td><td class="num">1.3</td></tr>
+              <tr><td class="num">095</td><td>095_fuse.py</td><td class="num">65</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">096</td><td>096_scatter.py</td><td class="num">56</td><td class="num">0</td><td class="num">3.7</td></tr>
+              <tr><td class="num">097</td><td>097_pack.py</td><td class="num">44</td><td class="num">1</td><td class="num">1.7</td></tr>
+              <tr><td class="num">098</td><td>098_hole.py</td><td class="num">92</td><td class="num">0</td><td class="num">5.4</td></tr>
+              <tr><td class="num">099</td><td>099_subdivide.py</td><td class="num">68</td><td class="num">0</td><td class="num">1.3</td></tr>
+              <tr><td class="num">100</td><td>100_peak.py</td><td class="num">176</td><td class="num">0</td><td class="num">2.3</td></tr>
+              <tr><td class="num">101</td><td>101_area.py</td><td class="num">59</td><td class="num">1</td><td class="num">2.2</td></tr>
+              <tr><td class="num">102</td><td>102_extrude.py</td><td class="num">63</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">103</td><td>103_rotate_order.py</td><td class="num">112</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">104</td><td>104_resample.py</td><td class="num">118</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">105</td><td>105_spiral.py</td><td class="num">140</td><td class="num">0</td><td class="num">1.2</td></tr>
+              <tr><td class="num">106</td><td>106_randomize.py</td><td class="num">83</td><td class="num">0</td><td class="num">1.6</td></tr>
+              <tr><td class="num">107</td><td>107_centroid.py</td><td class="num">243</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">108</td><td>108_triangulate.py</td><td class="num">76</td><td class="num">0</td><td class="num">6.8</td></tr>
+              <tr><td class="num">109</td><td>109_groupexpand.py</td><td class="num">117</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">110</td><td>110_copyxform.py</td><td class="num">113</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">111</td><td>111_jitter.py</td><td class="num">76</td><td class="num">0</td><td class="num">1.5</td></tr>
+              <tr><td class="num">112</td><td>112_vdb_csg.py</td><td class="num">81</td><td class="num">0</td><td class="num">6.6</td></tr>
+              <tr><td class="num">113</td><td>113_timeblend.py</td><td class="num">57</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">114</td><td>114_sweep_volume.py</td><td class="num">129</td><td class="num">0</td><td class="num">1.9</td></tr>
+              <tr><td class="num">115</td><td>115_attribfill.py</td><td class="num">108</td><td class="num">0</td><td class="num">1.2</td></tr>
+              <tr><td class="num">116</td><td>116_uvflatten.py</td><td class="num">24,607</td><td class="num">0</td><td class="num">2.4</td></tr>
+              <tr><td class="num">117</td><td>117_relax.py</td><td class="num">144</td><td class="num">0</td><td class="num">1.5</td></tr>
+              <tr><td class="num">118</td><td>118_revolve.py</td><td class="num">67</td><td class="num">0</td><td class="num">1.2</td></tr>
+              <tr><td class="num">119</td><td>119_surface_distance.py</td><td class="num">105</td><td class="num">0</td><td class="num">1.4</td></tr>
+              <tr><td class="num">120</td><td>120_thickness.py</td><td class="num">50</td><td class="num">0</td><td class="num">3.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">時間の項目（sec・seconds・us_per_point など）は除いて比べた。許す差は 0.000001（相対）。</p>
+
+        <p class="label">ずれた値（時間以外）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>実験</th><th>ファイル</th><th>項目</th><th>記録</th><th>流し直し</th></tr></thead>
+            <tbody>
+              <tr><td class="num">097</td><td>097_stats.json</td><td>.rows[5].bytes</td><td class="num">119599</td><td class="num">119600</td></tr>
+              <tr><td class="num">101</td><td>101_stats.json</td><td>.side</td><td class="num">2.0</td><td>None</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>30本すべて流し直せた。</strong>全部で約1分。091 以降の台本は、1本数秒で結果を出す作りになっている。</li>
+          <li><strong>結果の数字は、ファイルの大きさ1バイトを除いて全部一致。</strong></li>
+          <li><strong>時間の値は揺れる。</strong>最も遅い行では2倍以上動いた。速さの比べは、同じ回で並べて測る。</li>
+          <li><strong>記録を手で直さない。</strong>台本が書かない項目が1つ混ざっていた。直すなら台本を直して流し直す。</li>
+          <li><strong>次の点検は150。</strong></li>
         </ul>
       </div>
     </article>

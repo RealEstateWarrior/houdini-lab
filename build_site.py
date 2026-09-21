@@ -852,6 +852,12 @@ DONE = [
      "shots": ["120_thickness.png"],
      "title": "measurethickness は殻の厚みを6桁で返す — 板の縁ではぼかしで細く出る。box の Use Divisions は面にならない",
      "note": "殻の厚みはずれ0.000001。板は既定のぼかしで縁が細く出る。box の Use Divisions（Polygon）は開いた線の籠"},
+    {"no": "121", "anchor": "exp121",
+     "tags": ["点検", "検算", "測り方"],
+     "log": "log_pm", "thumb": "121_audit.png",
+     "shots": ["121_audit.png"],
+     "title": "091〜120 の振り返り点検 — 30本すべて流し直し、結果の数字は1つを除いて全部一致",
+     "note": "30本すべて流し直し。時間以外で違ったのはファイルの大きさ1バイトと、手で足した項目1つだけ"},
 ]
 
 PLANNED = []

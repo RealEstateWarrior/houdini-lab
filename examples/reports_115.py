@@ -39,6 +39,9 @@ def main():
     tri = pick("eikonal_point_tris")
     payload = {
         "title": "attribfill の到着時間は「網の辺をたどる道のり」 — 四角の網ではマンハッタン距離そのもの",
+        "callout": "実験119 で、この値が distancealonggeometry の Edge（辺をたどった道のり）と"
+                   "3つの網すべてで同じになると確かめた。面に沿った本当の距離がほしいときは、"
+                   "distancealonggeometry の Surface を使う。",
         "summary":
             "attribfill で値を埋め、式で出る答えと比べた。\n\n"
             "**Interpolate (Poisson) は式どおり。** 4×2 の板の左端を0・右端を1に固定すると、"
