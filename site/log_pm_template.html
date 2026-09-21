@@ -6350,6 +6350,133 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 125 ===================== -->
+    <article class="entry entry--current" id="exp125">
+      <div class="badge">125</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>点と面の数は式で先に分かる — divide は n−2、convertline は V+F−2。edgedivide は既定で点が2倍</h2>
+        <p class="path">examples/125_counts.py &nbsp;·&nbsp; divide は n−2 枚、convertline は 点+面−2 本。edgedivide は既定で面ごとに点を作り 8+24(k−1) 点</p>
+
+        <div class="prose">
+          <p>形を変える箱を通したとき、点と面の数が式どおりになるかを、5つの箱で確かめた。数えるのは intrinsic の pointcount・primitivecount・vertexcount。</p>
+          <p>**divide: n 角形1枚は、三角形 n−2 枚になる**（3〜100角形の6通りですべて一致）。</p>
+          <p>**facet の Unique Points: 点の数は頂点の数になる**（箱 8→24、格子 25→64、球 242→1,008 で一致）。面ごとに自分の点を持つので、角がくっきりする代わりに点が増える。</p>
+          <p>**convertline: 線の本数は辺の数。** 閉じた形ではオイラーの式から 辺 = 点 + 面 − 2 で、箱 12 本・球 504 本と一致。開いた格子 5×5 は 40 本（縦20＋横20）。</p>
+          <p>**polysoup: 面が1つになり、頂点の数が点の数まで減る**（箱 24→8、球 1,008→242）。同じ点を使う頂点をまとめる（Merge Identical Vertices が既定で入っている）。</p>
+          <p>**edgedivide は、既定では点が思ったより多い。** 箱の12本の辺を k 分割すると、点は 8 + 12(k−1) ではなく **8 + 24(k−1)** になった。隣り合う2つの面が、それぞれ自分の新しい点を作るため。Share New Points を入れると 8 + 12(k−1) になる（すべて一致）。</p>
+        </div>
+
+        <p class="label">divide（n 角形1枚 → 三角形）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="125_counts.png" alt="edgedivide の既定（橙）は、辺ごとに点を2倍作る。" loading="lazy" decoding="async"></div>
+            <figcaption>edgedivide の既定（橙）は、辺ごとに点を2倍作る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>n</th><th>三角形</th><th>n−2</th><th>頂点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">1</td><td class="num">1</td><td class="num">3</td></tr>
+              <tr><td class="num">4</td><td class="num">2</td><td class="num">2</td><td class="num">6</td></tr>
+              <tr><td class="num">5</td><td class="num">3</td><td class="num">3</td><td class="num">9</td></tr>
+              <tr><td class="num">8</td><td class="num">6</td><td class="num">6</td><td class="num">18</td></tr>
+              <tr><td class="num">24</td><td class="num">22</td><td class="num">22</td><td class="num">66</td></tr>
+              <tr><td class="num">100</td><td class="num">98</td><td class="num">98</td><td class="num">294</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">circle を Polygon で n 分割したもの。</p>
+
+        <p class="label">facet・convertline・polysoup</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>箱</th><th>形</th><th>前の点・面・頂点</th><th>後の点・面・頂点</th><th>式</th></tr></thead>
+            <tbody>
+              <tr><td>facet_unique</td><td>箱（8点・6面）</td><td>8・6・24</td><td>24・6・24</td><td class="num">24</td></tr>
+              <tr><td>facet_unique</td><td>格子 5×5（25点・16面）</td><td>25・16・64</td><td>64・16・64</td><td class="num">64</td></tr>
+              <tr><td>facet_unique</td><td>球 12×24（242点・264面）</td><td>242・264・1008</td><td>1008・264・1008</td><td class="num">1008</td></tr>
+              <tr><td>convertline</td><td>箱（8点・6面）</td><td>8・6・24</td><td>8・12・24</td><td class="num">12</td></tr>
+              <tr><td>convertline</td><td>格子 5×5（25点・16面）</td><td>25・16・64</td><td>25・40・80</td><td class="num muted">—</td></tr>
+              <tr><td>convertline</td><td>球 12×24（242点・264面）</td><td>242・264・1008</td><td>242・504・1008</td><td class="num">504</td></tr>
+              <tr><td>polysoup</td><td>箱（8点・6面）</td><td>8・6・24</td><td>8・1・8</td><td class="num muted">—</td></tr>
+              <tr><td>polysoup</td><td>格子 5×5（25点・16面）</td><td>25・16・64</td><td>25・1・25</td><td class="num muted">—</td></tr>
+              <tr><td>polysoup</td><td>球 12×24（242点・264面）</td><td>242・264・1008</td><td>242・1・242</td><td class="num muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">前 = 元の形。後 = 箱を通したあと。</p>
+
+        <p class="label">edgedivide（箱の12本の辺を全部 k 分割）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>k</th><th>点（既定）</th><th>8+24(k−1)</th><th>点（Share New Points）</th><th>8+12(k−1)</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td class="num">32</td><td class="num">32</td><td class="num">20</td><td class="num">20</td></tr>
+              <tr><td class="num">3</td><td class="num">56</td><td class="num">56</td><td class="num">32</td><td class="num">32</td></tr>
+              <tr><td class="num">5</td><td class="num">104</td><td class="num">104</td><td class="num">56</td><td class="num">56</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>divide は n−2 枚。</strong>三角形の数は、割る前に分かる。</li>
+          <li><strong>facet の Unique Points は、点を頂点の数まで増やす。</strong>球 12×24 で約4倍。</li>
+          <li><strong>閉じた形の辺の数は、点 + 面 − 2。</strong>convertline の本数で確かめられる。</li>
+          <li><strong>edgedivide は既定で辺ごとに点を2つずつ作る。</strong>形がつながったままでいてほしいなら Share New Points を入れる。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 126 ===================== -->
+    <article class="entry entry--current" id="exp126">
+      <div class="badge">126</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>cluster（k-means）は塊を理論の上限どおりに分ける — 重なる塊でも Φ(s/σ)² と1%以内</h2>
+        <p class="path">examples/126_cluster.py &nbsp;·&nbsp; 離れた塊は純度100%。重なった塊でも理論の上限 Φ(s/σ)² と1%以内</p>
+
+        <div class="prose">
+          <p>中心の分かっている4つの塊（(±s, ±s) に各 2,000 点、正規分布のばらつき σ）を作り、cluster に「4つに分けて」と頼んだ。元の塊の点が、どれだけ同じ番号にまとまるか（純度）を測った。</p>
+          <p>塊が重なっていると、どんな分け方でも100%は取れない。境目は x=0・z=0 なので、点が正しい側にいる確率は1軸あたり Φ(s/σ)（正規分布の累積）、2軸で **Φ(s/σ)²** が上限になる。</p>
+          <p>**4通りすべてで、純度はこの上限と 0.1% 以内。** 十分離れた塊（s/σ = 10）は 100%、s/σ = 1 まで近づけると 70.7%（上限 70.8%）。k-means は、重なった塊でも取れるだけ取っている。</p>
+          <p>番号ごとの点の平均は、元の中心から最大 0.0066（離れた塊）〜0.0793（重なった塊）。結果の番号は点の属性 cluster に入る。</p>
+          <p>速さ: 8,000 点で 0.06〜0.12 秒。</p>
+        </div>
+
+        <p class="label">塊の近さと、分け方の純度</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="126_cluster.png" alt="実測（青）は理論の上限（緑の破線）に沿う。" loading="lazy" decoding="async"></div>
+            <figcaption>実測（青）は理論の上限（緑の破線）に沿う。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>s</th><th>σ</th><th>s/σ</th><th>番号の数</th><th>純度（4つ）</th><th>上限 Φ(s/σ)²</th><th>中心のずれ</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td class="num">0.2</td><td class="num">10.00</td><td class="num">4</td><td>1.000 / 1.000 / 1.000 / 1.000</td><td class="num">1.0000</td><td class="num">0.0066</td><td class="num">0.119</td></tr>
+              <tr><td class="num">1</td><td class="num">0.3</td><td class="num">3.33</td><td class="num">4</td><td>1.000 / 0.999 / 1.000 / 1.000</td><td class="num">0.9991</td><td class="num">0.0094</td><td class="num">0.058</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.3</td><td class="num">1.67</td><td class="num">4</td><td>0.915 / 0.898 / 0.898 / 0.910</td><td class="num">0.9067</td><td class="num">0.0210</td><td class="num">0.060</td></tr>
+              <tr><td class="num">0.3</td><td class="num">0.3</td><td class="num">1.00</td><td class="num">4</td><td>0.712 / 0.702 / 0.688 / 0.728</td><td class="num">0.7079</td><td class="num">0.0793</td><td class="num">0.060</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">純度 = 元の塊ごとに、いちばん多い番号に入った点の割合（4つの平均）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>離れた塊は100%正しく分ける。</strong></li>
+          <li><strong>重なった塊でも、理論の上限まで取る。</strong>s/σ = 1 で約70%。それ以上は、どの方法でも無理。</li>
+          <li><strong>番号は cluster 属性。</strong>色分けや、塊ごとの処理にそのまま使える。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

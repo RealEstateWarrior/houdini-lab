@@ -1,0 +1,65 @@
+{
+ "per": 2000,
+ "rows": [
+  {
+   "spread": 2.0,
+   "sd": 0.2,
+   "gap_over_sd": 20.0,
+   "clusters": 4,
+   "purity": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "center_err_max": 0.00655,
+   "attr": "cluster",
+   "sec": 0.1186
+  },
+  {
+   "spread": 1.0,
+   "sd": 0.3,
+   "gap_over_sd": 6.67,
+   "clusters": 4,
+   "purity": [
+    0.9995,
+    0.999,
+    0.9995,
+    0.9995
+   ],
+   "center_err_max": 0.00944,
+   "attr": "cluster",
+   "sec": 0.0582
+  },
+  {
+   "spread": 0.5,
+   "sd": 0.3,
+   "gap_over_sd": 3.33,
+   "clusters": 4,
+   "purity": [
+    0.9155,
+    0.8985,
+    0.898,
+    0.91
+   ],
+   "center_err_max": 0.02099,
+   "attr": "cluster",
+   "sec": 0.06
+  },
+  {
+   "spread": 0.3,
+   "sd": 0.3,
+   "gap_over_sd": 2.0,
+   "clusters": 4,
+   "purity": [
+    0.712,
+    0.7015,
+    0.6875,
+    0.728
+   ],
+   "center_err_max": 0.0793,
+   "attr": "cluster",
+   "sec": 0.06
+  }
+ ]
+}

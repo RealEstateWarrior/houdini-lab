@@ -876,6 +876,18 @@ DONE = [
      "shots": ["124_koch.png"],
      "title": "L-System のコッホ曲線は式どおり — 全長4^n・端の間隔3^n。小数の世代は途中の形になる",
      "note": "0〜6世代すべて 全長4^n・端の間隔3^n。Generations 2.5 は3世代と同じ点の数で、全長40"},
+    {"no": "125", "anchor": "exp125",
+     "tags": ["モデリング", "divide", "edgedivide", "検算"],
+     "log": "log_pm", "thumb": "125_counts.png",
+     "shots": ["125_counts.png"],
+     "title": "点と面の数は式で先に分かる — divide は n−2、convertline は V+F−2。edgedivide は既定で点が2倍",
+     "note": "divide は n−2 枚、convertline は 点+面−2 本。edgedivide は既定で面ごとに点を作り 8+24(k−1) 点"},
+    {"no": "126", "anchor": "exp126",
+     "tags": ["モデリング", "cluster", "k-means", "検算"],
+     "log": "log_pm", "thumb": "126_cluster.png",
+     "shots": ["126_cluster.png"],
+     "title": "cluster（k-means）は塊を理論の上限どおりに分ける — 重なる塊でも Φ(s/σ)² と1%以内",
+     "note": "離れた塊は純度100%。重なった塊でも理論の上限 Φ(s/σ)² と1%以内"},
 ]
 
 PLANNED = []
