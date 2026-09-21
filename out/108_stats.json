@@ -1,0 +1,107 @@
+{
+ "rows": [
+  {
+   "case": "scatter_10",
+   "n": 10,
+   "h": 7,
+   "tris": 11,
+   "want": 11,
+   "not_tri": 0,
+   "area": 6.813466,
+   "hull_area": 6.813466,
+   "sec": 0.0009
+  },
+  {
+   "case": "scatter_100",
+   "n": 100,
+   "h": 21,
+   "tris": 177,
+   "want": 177,
+   "not_tri": 0,
+   "area": 11.764791,
+   "hull_area": 11.764791,
+   "sec": 0.0012
+  },
+  {
+   "case": "scatter_1000",
+   "n": 1000,
+   "h": 61,
+   "tris": 1937,
+   "want": 1937,
+   "not_tri": 0,
+   "area": 11.858296,
+   "hull_area": 11.858296,
+   "sec": 0.0122
+  },
+  {
+   "case": "scatter_10000",
+   "n": 10000,
+   "h": 98,
+   "tris": 19900,
+   "want": 19900,
+   "not_tri": 0,
+   "area": 11.995832,
+   "hull_area": 11.995833,
+   "sec": 0.0586
+  },
+  {
+   "case": "scatter_100000",
+   "n": 100000,
+   "h": 207,
+   "tris": 199791,
+   "want": 199791,
+   "not_tri": 0,
+   "area": 11.999218,
+   "hull_area": 11.999218,
+   "sec": 0.6184
+  },
+  {
+   "case": "grid_3x3",
+   "n": 9,
+   "h": 8,
+   "tris": 8,
+   "want": 8,
+   "not_tri": 0,
+   "area": 100.0,
+   "hull_area": 100.0,
+   "sec": 0.0002,
+   "grid_want": 8
+  },
+  {
+   "case": "grid_5x5",
+   "n": 25,
+   "h": 16,
+   "tris": 32,
+   "want": 32,
+   "not_tri": 0,
+   "area": 100.0,
+   "hull_area": 100.0,
+   "sec": 0.0002,
+   "grid_want": 32
+  },
+  {
+   "case": "grid_11x11",
+   "n": 121,
+   "h": 40,
+   "tris": 200,
+   "want": 200,
+   "not_tri": 0,
+   "area": 100.0,
+   "hull_area": 100.0,
+   "sec": 0.0004,
+   "grid_want": 200
+  },
+  {
+   "case": "grid_51x51",
+   "n": 2601,
+   "h": 200,
+   "tris": 5000,
+   "want": 5000,
+   "not_tri": 0,
+   "area": 100.000001,
+   "hull_area": 100.0,
+   "sec": 0.0091,
+   "grid_want": 5000
+  }
+ ]
+}

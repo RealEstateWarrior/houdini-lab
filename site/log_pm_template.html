@@ -5365,6 +5365,231 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 108 ===================== -->
+    <article class="entry entry--current" id="exp108">
+      <div class="badge">108</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>triangulate2d の三角形は 2n−2−h 枚 — 9通りすべて式どおり、面積は凸包と一致</h2>
+        <p class="path">examples/108_triangulate.py &nbsp;·&nbsp; 9通りすべて 2n−2−h 枚。面積は凸包と一致。10万点で0.62秒</p>
+
+        <div class="prose">
+          <p>平面の点 n 個を三角形で埋めると、外周（凸包）に乗る点が h 個なら、三角形は **2n − 2 − h 枚**になる。オイラーの多面体定理から出る式で、並べ方によらない。面を張った範囲は凸包になるので、面積の合計も凸包の面積と同じはず。</p>
+          <p>ばらまいた点（<button class="term" data-term="scatter">scatter</button>、10〜100,000点）と、格子に並んだ点（3×3〜51×51）で確かめた。凸包と面積は Python 側で別に計算した。</p>
+          <p>**9通りすべてで三角形の数が式と一致**（例外なし）。面積の差は最大 0.000001。三角形以外の面は1枚も出なかった。</p>
+          <p>格子の点は、4点が同じ円に乗るのでどちらの対角線で割っても成り立つが、それでも枚数は 2(k−1)² で、1マスを2枚に割っている。</p>
+          <p>速さは、100,000 点で 0.62 秒（10,000 点で 0.059 秒）。1万点から10万点に増やすと、時間は約10倍。</p>
+        </div>
+
+        <p class="label">点の数と三角形の数</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="108_tris.png" alt="外周の点の割合が減るので、三角形 ÷ 点 は2に近づく。" loading="lazy" decoding="async"></div>
+            <figcaption>外周の点の割合が減るので、三角形 ÷ 点 は2に近づく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>点の置き方</th><th>n</th><th>h</th><th>三角形</th><th>2n−2−h</th><th>面積</th><th>凸包の面積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>scatter 10</td><td class="num">10</td><td class="num">7</td><td class="num">11</td><td class="num">11</td><td class="num">6.813466</td><td class="num">6.813466</td><td class="num">0.0009</td></tr>
+              <tr><td>scatter 100</td><td class="num">100</td><td class="num">21</td><td class="num">177</td><td class="num">177</td><td class="num">11.764791</td><td class="num">11.764791</td><td class="num">0.0012</td></tr>
+              <tr><td>scatter 1000</td><td class="num">1,000</td><td class="num">61</td><td class="num">1,937</td><td class="num">1,937</td><td class="num">11.858296</td><td class="num">11.858296</td><td class="num">0.0122</td></tr>
+              <tr><td>scatter 10000</td><td class="num">10,000</td><td class="num">98</td><td class="num">19,900</td><td class="num">19,900</td><td class="num">11.995832</td><td class="num">11.995833</td><td class="num">0.0586</td></tr>
+              <tr><td>scatter 100000</td><td class="num">100,000</td><td class="num">207</td><td class="num">199,791</td><td class="num">199,791</td><td class="num">11.999218</td><td class="num">11.999218</td><td class="num">0.6184</td></tr>
+              <tr><td>格子 3x3</td><td class="num">9</td><td class="num">8</td><td class="num">8</td><td class="num">8</td><td class="num">100.000000</td><td class="num">100.000000</td><td class="num">0.0002</td></tr>
+              <tr><td>格子 5x5</td><td class="num">25</td><td class="num">16</td><td class="num">32</td><td class="num">32</td><td class="num">100.000000</td><td class="num">100.000000</td><td class="num">0.0002</td></tr>
+              <tr><td>格子 11x11</td><td class="num">121</td><td class="num">40</td><td class="num">200</td><td class="num">200</td><td class="num">100.000000</td><td class="num">100.000000</td><td class="num">0.0004</td></tr>
+              <tr><td>格子 51x51</td><td class="num">2,601</td><td class="num">200</td><td class="num">5,000</td><td class="num">5,000</td><td class="num">100.000001</td><td class="num">100.000000</td><td class="num">0.0091</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">scatter は 4×3 の板の上。格子は grid の面を消して点だけにしたもの。h は凸包に乗る点の数（一直線上の点も数える）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>三角形は 2n−2−h 枚。</strong>9通りすべて一致。点の数と外周の点の数だけで、分ける前に枚数が分かる。</li>
+          <li><strong>面を張る範囲は凸包。</strong>面積の差は最大 0.000001。へこんだ形の中だけを埋めたいときは、拘束の辺か Silhouette を渡す必要がある（今回は試していない）。</li>
+          <li><strong>格子でも崩れない。</strong>同じ円に4点が乗る並びでも、1マス2枚ずつになる。</li>
+          <li><strong>10万点で約0.6秒。</strong>1万点→10万点で約10倍。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 109 ===================== -->
+    <article class="entry entry--current" id="exp109">
+      <div class="badge">109</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>groupexpand の1段は「隣」の決め方しだい — 点と辺共有は菱形、面の既定は正方形</h2>
+        <p class="path">examples/109_groupexpand.py &nbsp;·&nbsp; 点と辺共有は菱形 2k²+2k+1、面の既定は正方形 (2k+1)²。負の段数は外周を1列ずつ削る</p>
+
+        <div class="prose">
+          <p>格子の真ん中の1つから groupexpand で広げ、段ごとの数を数えた。辺でつながった隣へ広がるなら k 段で菱形 **2k²+2k+1 個**、角を共有する隣まで広がるなら正方形 **(2k+1)² 個**になる。</p>
+          <p>結果は、点の<button class="term" data-term="グループ">グループ</button>が **菱形**、面で Require Primitives Share Edge を入れると **菱形**、切ったまま（既定）だと **正方形**。7 通りの段数（0〜8）で、すべて式の数ちょうどだった。</p>
+          <p>つまり、面のグループを既定のまま広げると、斜めの隣にも一度に広がる。8段で 289 枚と、辺だけのとき（145 枚）の約2倍になる。</p>
+          <p>負の段数は縮める。9×9 の点の塊から −1 段で 7×7、−2 段で 5×5、−4 段で 1 点（すべて式どおり）。1段ごとに外周が1列ずつ削られる。</p>
+        </div>
+
+        <p class="label">広げた段数と数</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="109_expand.png" alt="3段広げたときの範囲。面の既定は斜めにも広がる。" loading="lazy" decoding="async"></div>
+            <figcaption>3段広げたときの範囲。面の既定は斜めにも広がる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>段数</th><th>点のグループ</th><th>面（辺を共有する隣だけ）</th><th>面（角を共有する隣まで・既定）</th><th>菱形の式</th><th>正方形の式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td class="num">1</td><td class="num">5</td><td class="num">5</td><td class="num">9</td><td class="num">5</td><td class="num">9</td></tr>
+              <tr><td class="num">2</td><td class="num">13</td><td class="num">13</td><td class="num">25</td><td class="num">13</td><td class="num">25</td></tr>
+              <tr><td class="num">3</td><td class="num">25</td><td class="num">25</td><td class="num">49</td><td class="num">25</td><td class="num">49</td></tr>
+              <tr><td class="num">4</td><td class="num">41</td><td class="num">41</td><td class="num">81</td><td class="num">41</td><td class="num">81</td></tr>
+              <tr><td class="num">6</td><td class="num">85</td><td class="num">85</td><td class="num">169</td><td class="num">85</td><td class="num">169</td></tr>
+              <tr><td class="num">8</td><td class="num">145</td><td class="num">145</td><td class="num">289</td><td class="num">145</td><td class="num">289</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">点は 21×21 の格子の真ん中の点から、面は 21×21 枚の真ん中の面から。</p>
+
+        <p class="label">縮める（負の段数）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>段数</th><th>数</th><th>式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">81</td><td class="num">81</td></tr>
+              <tr><td class="num">-1</td><td class="num">49</td><td class="num">49</td></tr>
+              <tr><td class="num">-2</td><td class="num">25</td><td class="num">25</td></tr>
+              <tr><td class="num">-4</td><td class="num">1</td><td class="num">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">9×9 の点の塊から。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>点は辺でつながった隣へ。</strong>k 段で 2k²+2k+1 個の菱形。</li>
+          <li><strong>面の既定は、角を共有する隣まで。</strong>k 段で (2k+1)² 個の正方形。辺でつながった隣だけにしたいときは Require Primitives Share Edge を入れる。</li>
+          <li><strong>負の段数は、外周を1列ずつ削る。</strong>9×9 → 7×7 → 5×5。</li>
+          <li><strong>速い。</strong>21×21 の格子なら、どの段数でも1ミリ秒未満（最初の1回を除く）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 110 ===================== -->
+    <article class="entry entry--current" id="exp110">
+      <div class="badge">110</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>copyxform は「1回分をくり返す」ではなく「値を i 倍して1回かける」 — 回転＋移動は輪にならない</h2>
+        <p class="path">examples/110_copyxform.py &nbsp;·&nbsp; i個目は 移動i倍・回転i倍・拡大i乗 を1回かけた形。回転＋移動は輪にならず、6個目が x=10.5</p>
+
+        <div class="prose">
+          <p>copyxform（Copy and Transform）は、1つ置くたびに同じ変形を重ねていく箱だと思われがち。もしそうなら、i 個目は「1回分の変形 M を i 回かけたもの（M^i）」になる。ところが、もう1つの読み方がある。**移動を i 倍・回転を i 倍・拡大を i 乗した値で、1回だけ変形する**。移動だけ・拡大だけなら2つは同じ答えになるが、回転と移動を組み合わせると大きく分かれる。4通りで確かめた。</p>
+          <p>結果は **4通りすべてで「値を i 倍して1回」の式と一致**（ずれは最大 0.000001）。「i 回くり返す」の式とは、回転を含む2通りで 10.000・10.000 ずれた。</p>
+          <p>たとえば回転 72°＋移動 2 を6個並べると、5回で1周するはずなのに、6個目は x=10.5 にいる。移動 2×5=10 と、360° 回った元の位置 0.5 の和。輪（正五角形）にはならず、蛇行しながら x の方へ進む。</p>
+          <p>拡大は i 乗だった（0.8 → 0.64 → 0.512…）。i 倍（0.8 → 0.6 → 0.4）ではない。</p>
+        </div>
+
+        <p class="label">2つの読み方と、実測とのずれ（各コピーの中心の最大距離）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="110_turn.png" alt="青が実測。輪になるのは「くり返す」読み方（橙の破線）のとき。" loading="lazy" decoding="async"></div>
+            <figcaption>青が実測。輪になるのは「くり返す」読み方（橙の破線）のとき。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>置き方</th><th>個数</th><th>値を i 倍して1回</th><th>1回分を i 回くり返す</th></tr></thead>
+            <tbody>
+              <tr><td>移動だけ（x+1）</td><td class="num">5</td><td class="num">0.000000</td><td class="num">0.000000</td></tr>
+              <tr><td>拡大だけ（0.8倍）</td><td class="num">5</td><td class="num">0.000000</td><td class="num">0.000000</td></tr>
+              <tr><td>回転72°＋移動2（SRT）</td><td class="num">6</td><td class="num">0.000001</td><td class="num">10.000000</td></tr>
+              <tr><td>回転72°＋移動2（TRS）</td><td class="num">6</td><td class="num">0.000001</td><td class="num">10.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">元の形は x=0.5 に置いた一辺 0.2 の箱。中心は箱の8点の平均。</p>
+
+        <p class="label">回転72°＋移動2（SRT）の各コピーの中心</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>i</th><th>x</th><th>z</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.500000</td><td class="num">0.000000</td></tr>
+              <tr><td class="num">1</td><td class="num">2.154508</td><td class="num">-0.475528</td></tr>
+              <tr><td class="num">2</td><td class="num">3.595492</td><td class="num">-0.293893</td></tr>
+              <tr><td class="num">3</td><td class="num">5.595492</td><td class="num">0.293893</td></tr>
+              <tr><td class="num">4</td><td class="num">8.154509</td><td class="num">0.475528</td></tr>
+              <tr><td class="num">5</td><td class="num">10.500000</td><td class="num">0.000000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">i 個目 = 拡大 → 回転 i×72° → 移動 i×2。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>値を i 倍して1回かける。</strong>移動は i 倍、回転は i 倍、拡大は i 乗。それを Transform Order の順で1回かける。</li>
+          <li><strong>回転と移動を混ぜると輪にならない。</strong>72°×5 で1周しても、移動は 2×5=10 進んでいる。輪に並べたいときは、Pivot を輪の中心に置くか、<button class="term" data-term="copy to points">copy to points</button> で円周上の点に置く（どちらも今回は試していない）。</li>
+          <li><strong>回転の軸と同じ向きの移動なら、らせん階段になる。</strong>軸方向の移動は回転と入れ替えても同じなので、2つの読み方が一致する（式から言えること。今回は測っていない）。</li>
+          <li><strong>拡大は i 乗。</strong>0.8 なら 5個目で 0.8⁴≒0.41 倍。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 111 ===================== -->
+    <article class="entry entry--current" id="exp111">
+      <div class="badge">111</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>pointjitter の Scale は「幅」 — 各軸 −s/2〜+s/2 の一様で、箱の中に散る</h2>
+        <p class="path">examples/111_jitter.py &nbsp;·&nbsp; Scale は幅: 各軸 −s/2〜+s/2 の一様（分散 s²/12）。球ではなく箱の中に散る</p>
+
+        <div class="prose">
+          <p>99,856 点に pointjitter をかけ、元の位置からの動きを軸ごとに数えた。Scale が「動く幅」なら動きは −s/2〜+s/2 の一様で分散は s²/12、「半径」なら −s〜+s で分散は s²/3 になる。</p>
+          <p>**Scale は幅だった。** Scale 1 で動きは各軸 -0.500〜+0.500、分散は x 0.08336（式 1/12 = 0.08333）。Scale 0.1・1・2 の3通り×3軸で、分散のずれは 0.88% 以内。</p>
+          <p>**散る範囲は球ではなく箱。** 動いた距離の最大は 0.8516 で、軸の端 0.5 を超えて、箱の角 0.5×√3 ≒ 0.866 の近くまで届いた。</p>
+          <p>Axis Scales は軸ごとの倍率。(1, 0, 0.5) にすると y は1点も動かず、z は −0.250〜0.250（幅が半分）。x の動きは Axis Scales を触らないときと1点残らず同じで、同じ乱数に倍率を掛けているだけだと分かる。</p>
+          <p>Seed を 1→2 に変えると、x の動きが同じだった点は 0%。</p>
+        </div>
+
+        <p class="label">Scale と動きの範囲・分散（99,856 点）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="111_var.png" alt="実測は s²/12 の線に乗る。s²/3（半径の読み方）とは4倍ちがう。" loading="lazy" decoding="async"></div>
+            <figcaption>実測は s²/12 の線に乗る。s²/3（半径の読み方）とは4倍ちがう。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>設定</th><th>x の範囲</th><th>y の範囲</th><th>z の範囲</th><th>x の分散</th><th>y の分散</th><th>z の分散</th><th>距離の最大</th></tr></thead>
+            <tbody>
+              <tr><td>Scale 0.1</td><td>-0.0500〜+0.0500</td><td>-0.0500〜+0.0500</td><td>-0.0500〜+0.0500</td><td class="num">0.000834</td><td class="num">0.000826</td><td class="num">0.000835</td><td class="num">0.0852</td></tr>
+              <tr><td>Scale 1</td><td>-0.5000〜+0.5000</td><td>-0.5000〜+0.5000</td><td>-0.5000〜+0.5000</td><td class="num">0.083362</td><td class="num">0.082599</td><td class="num">0.083459</td><td class="num">0.8516</td></tr>
+              <tr><td>Scale 2</td><td>-0.9999〜+1.0000</td><td>-1.0000〜+1.0000</td><td>-0.9999〜+0.9999</td><td class="num">0.333446</td><td class="num">0.330397</td><td class="num">0.333837</td><td class="num">1.7031</td></tr>
+              <tr><td>Scale 1・Axis (1, 0, 0.5)</td><td>-0.5000〜+0.5000</td><td>+0.0000〜+0.0000</td><td>-0.2500〜+0.2500</td><td class="num">0.083362</td><td class="num">0.000000</td><td class="num">0.020865</td><td class="num">0.5578</td></tr>
+              <tr><td>Scale 1・Seed 2</td><td>-0.5000〜+0.5000</td><td>-0.5000〜+0.5000</td><td>-0.5000〜+0.5000</td><td class="num">0.083350</td><td class="num">0.083062</td><td class="num">0.082991</td><td class="num">0.8599</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">動き = jitter 後の位置 − 元の位置。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Scale は動く幅。</strong>各軸 −s/2〜+s/2。0.05 だけ揺らしたいなら Scale 0.1。</li>
+          <li><strong>箱の中に散る。</strong>角の方向には √3 倍（約1.73倍）遠くまで動く。距離をそろえたいなら、attribrandomize の Inside Sphere で動きを作って足す（<a href="#exp106">実験106</a>）。</li>
+          <li><strong>Axis Scales は同じ乱数への倍率。</strong>0 にした軸は動かない。</li>
+          <li><strong>速い。</strong>10万点で 0.04 秒（最初の1回を除く）。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
