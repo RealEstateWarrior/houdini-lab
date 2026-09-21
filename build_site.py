@@ -936,6 +936,12 @@ DONE = [
      "shots": ["134_expr.png"],
      "title": "最初から式が入っているつまみは SOP 全体で488個 — set しても式が残り、値は変わらない",
      "note": "SOP 1,031種類のうち176種類・488個のつまみに最初から式。set は式を消さず値も変わらない"},
+    {"no": "135", "anchor": "exp135",
+     "tags": ["VEX", "ノイズ", "検算"],
+     "log": "log_pm", "thumb": "135_noise.png",
+     "shots": ["135_noise.png"],
+     "title": "VEX のノイズの値の範囲 — noise() は 0.06〜0.92 にしか届かず、snoise() は ±1 を超える",
+     "note": "noise() は 0.06〜0.92（標準偏差0.1）、snoise() は −1.95〜2.28 で ±1 を超える。flownoise(P,0) は noise と同じ"},
 ]
 
 PLANNED = []

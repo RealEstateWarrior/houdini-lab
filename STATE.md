@@ -15,6 +15,9 @@
   - 119 面に沿った距離 / 120 measurethickness（box の Use Divisions は線の籠）/ 121 点検
   - ノードは nodes_add_5.py まで（274件。deform・measure の2グループを新設）
   - **Write で作ったファイルを sed や python で書き換えると、ファイル全体が差分として返ってきてトークンを食う。Edit を使う**
+  - 122〜134: polyexpand2d / shrinkwrap / lsystem / 数の式 / cluster / 最短経路 / extracttransform / 曲率 / Cusp / bend / attribpromote / ray / 式の入ったつまみ
+  - **スクリプトの落とし穴: 最初から式が入っているつまみ（SOP で488個。ray の dir は @N.x）は set しても変わらない。deleteAllKeyframes() してから set**（実験133・134）
+  - 実験で分かったことを既存ノードに足すのは nodes_notes.py（名前 → 追記文と実験番号）
   - node_dump.py がメニューを12個で切っていた → 直した（vdbcombine は18個）
 - 091〜104 は「答えが計算で出る形と突き合わせる」型（検算）で回した。効きが良い
   - 式と6桁一致したもの: boolean(098) / peak(100) / polyextrude(102) / transform の回転順序(103) / carve(104)

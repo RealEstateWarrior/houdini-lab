@@ -6903,7 +6903,11 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
               <tr><td>filecache</td><td>clampfirst</td><td>Clamp First Frame</td><td>ch(&quot;f1&quot;)</td></tr>
               <tr><td>filecache</td><td>clamplast</td><td>Clamp Last Frame</td><td>ch(&quot;f2&quot;)</td></tr>
               <tr><td>filecache</td><td>index</td><td>Sequence Index</td><td>$FF-1</td></tr>
-              <tr><td>filecache</td><td>frame</td><td>Frame</td><td>{     if(ch(&quot;timedependent&quot;))     {         rawframe = $T * $FPS + 1;       </td></tr>
+              <tr><td>filecache</td><td>frame</td><td>Frame</td><td>{
+     if(ch(&quot;timedependent&quot;))
+     {
+         rawframe = $T * $FPS + 1;
+       </td></tr>
               <tr><td>filecache</td><td>descriptivelabel</td><td>Descriptive Label</td><td>ifs(ch(&quot;filemethod&quot;),chsraw(&quot;file&quot;),strreplace(strreplace(chs(&quot;cachename&quot;),chs(&quot;</td></tr>
               <tr><td>filecache</td><td>sopoutput</td><td>Output File</td><td>{     if(ch(&#x27;filemethod&#x27;))     {         return chs(&#x27;file&#x27;);     }     else     </td></tr>
               <tr><td>mpmsurface</td><td>sdferode</td><td>Erode</td><td>ch(&quot;sdfdilate&quot;)</td></tr>
@@ -6966,6 +6970,59 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <li><strong>式の入ったつまみは 488 個。</strong>大半はフレーム範囲（$FSTART・$FEND）。</li>
           <li><strong>set は式を消さない。</strong>値を入れたいときは deleteAllKeyframes() が先。</li>
           <li><strong>@N などの属性の式は要注意。</strong>入力に属性が無いと 0 になり、黙って効かない（ray が動かなかった）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 135 ===================== -->
+    <article class="entry entry--current" id="exp135">
+      <div class="badge">135</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>VEX のノイズの値の範囲 — noise() は 0.06〜0.92 にしか届かず、snoise() は ±1 を超える</h2>
+        <p class="path">examples/135_noise_range.py &nbsp;·&nbsp; noise() は 0.06〜0.92（標準偏差0.1）、snoise() は −1.95〜2.28 で ±1 を超える。flownoise(P,0) は noise と同じ</p>
+
+        <div class="prose">
+          <p><button class="term" data-term="VEX">VEX</button> の<button class="term" data-term="ノイズ">ノイズ</button>関数を、約100万点（100×100×100 の格子、間隔 0.37）で呼んで、出てきた値の最小・最大・平均・標準偏差を数えた。「0〜1」「−1〜1」という思い込みを実測で確かめる。</p>
+          <p>**noise() は 0〜1 の真ん中に固まる。** 最小 0.06132・最大 0.92433・平均 0.49996・標準偏差 0.10024。0 や 1 には近づかない。マスクに使うなら、fit で伸ばさないとコントラストが弱い。xnoise() も似ていて 0.04157〜0.98223（標準偏差 0.12594）。</p>
+          <p>**snoise() は −1〜1 に収まらない。** -1.94708〜2.27867。平均も 0.02992 と少しプラスに寄る。</p>
+          <p>onoise() は -0.94249〜0.98991（平均ほぼ0）、anoise() は 0〜0.98619 で平均 0.13305（0 の側に寄る）、curlnoise() の x 成分は -1.47739〜1.4839。</p>
+          <p>**flownoise(P, 0) は、noise(P) と同じ値だった**（最小・最大・標準偏差がすべて一致）。流れの位相が0のときは、ふつうの noise と同じ。vector を受ける noise() の x 成分も、float の noise() と同じ値だった。</p>
+          <p>比べとして rand() は 0〜1、標準偏差 0.2888（一様なら 0.2887）。</p>
+        </div>
+
+        <p class="label">関数ごとの値の範囲（約100万点）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="135_noise.png" alt="noise・xnoise は 0.5 のまわりに狭く、snoise は ±1 を" loading="lazy" decoding="async"></div>
+            <figcaption>noise・xnoise は 0.5 のまわりに狭く、snoise は ±1 を超える。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>関数</th><th>最小</th><th>最大</th><th>平均</th><th>標準偏差</th><th>0〜1 に入る割合</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>noise(P)</td><td class="num">0.06132</td><td class="num">0.92433</td><td class="num">0.49996</td><td class="num">0.10024</td><td>100.0%</td><td class="num">0.160</td></tr>
+              <tr><td>snoise(P)</td><td class="num">-1.94708</td><td class="num">2.27867</td><td class="num">0.02992</td><td class="num">0.34386</td><td>53.3%</td><td class="num">0.033</td></tr>
+              <tr><td>onoise(P)</td><td class="num">-0.94249</td><td class="num">0.98991</td><td>-2e-05</td><td class="num">0.27386</td><td>49.8%</td><td class="num">0.029</td></tr>
+              <tr><td>anoise(P)</td><td class="num">0</td><td class="num">0.98619</td><td class="num">0.13305</td><td class="num">0.15766</td><td>100.0%</td><td class="num">0.033</td></tr>
+              <tr><td>xnoise(P)</td><td class="num">0.04157</td><td class="num">0.98223</td><td class="num">0.50006</td><td class="num">0.12594</td><td>100.0%</td><td class="num">0.031</td></tr>
+              <tr><td>flownoise(P, 0)</td><td class="num">0.06132</td><td class="num">0.92433</td><td class="num">0.49996</td><td class="num">0.10024</td><td>100.0%</td><td class="num">0.030</td></tr>
+              <tr><td>curlnoise(P).x</td><td class="num">-1.47739</td><td class="num">1.4839</td><td>-6e-05</td><td class="num">0.34692</td><td>49.9%</td><td class="num">0.033</td></tr>
+              <tr><td>vector noise(P).x</td><td class="num">0.06132</td><td class="num">0.92433</td><td class="num">0.49996</td><td class="num">0.10024</td><td>100.0%</td><td class="num">0.031</td></tr>
+              <tr><td>rand(P)</td><td class="num">0</td><td class="num">1</td><td class="num">0.5005</td><td class="num">0.2888</td><td>100.0%</td><td class="num">0.029</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">位置は整数格子 × 0.37 +（0.123, 0.456, 0.789）。周波数は変えていない。秒は1回の計算（最初の関数はコンパイルを含む）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>noise() は 0.06〜0.92。</strong>0〜1 いっぱいに使いたいなら fit(v, 0.1, 0.9, 0, 1) などで伸ばす（端の値は目安。場所を変えれば少し変わる）。</li>
+          <li><strong>snoise() は ±2 近くまで出る。</strong>clamp せずに色や高さに使うと、はみ出す。</li>
+          <li><strong>anoise() は 0 の側に寄る。</strong>平均 0.13。</li>
+          <li><strong>flownoise の位相0は noise と同じ。</strong></li>
         </ul>
       </div>
     </article>

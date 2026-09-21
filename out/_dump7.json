@@ -1,0 +1,6969 @@
+[
+ {
+  "spec": "vop/add",
+  "ok": true,
+  "category": "VOP",
+  "name": "add",
+  "label": "Add",
+  "parms": [],
+  "min_inputs": 1,
+  "max_inputs": 2048
+ },
+ {
+  "spec": "vop/multiply",
+  "ok": true,
+  "category": "VOP",
+  "name": "multiply",
+  "label": "Multiply",
+  "parms": [],
+  "min_inputs": 1,
+  "max_inputs": 2048
+ },
+ {
+  "spec": "vop/subtract",
+  "ok": true,
+  "category": "VOP",
+  "name": "subtract",
+  "label": "Subtract",
+  "parms": [],
+  "min_inputs": 1,
+  "max_inputs": 2048
+ },
+ {
+  "spec": "vop/divide",
+  "ok": true,
+  "category": "VOP",
+  "name": "divide",
+  "label": "Divide",
+  "parms": [],
+  "min_inputs": 1,
+  "max_inputs": 2048
+ },
+ {
+  "spec": "vop/bind",
+  "ok": true,
+  "category": "VOP",
+  "name": "bind",
+  "label": "Bind",
+  "parms": [
+   {
+    "name": "parmname",
+    "label": "Name",
+    "default": [
+     "parm"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmtype",
+    "label": "Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "float",
+      "Float (float)"
+     ],
+     [
+      "int",
+      "Integer (int)"
+     ],
+     [
+      "toggle",
+      "Toggle (int)"
+     ],
+     [
+      "angle",
+      "Angle (float)"
+     ],
+     [
+      "logfloat",
+      "Logarithmic (float)"
+     ],
+     [
+      "float2",
+      "2 Floats (vector2)"
+     ],
+     [
+      "float3",
+      "3 Floats (vector)"
+     ],
+     [
+      "vector",
+      "Vector (vector)"
+     ],
+     [
+      "normal",
+      "Normal (normal)"
+     ],
+     [
+      "point",
+      "Point (point)"
+     ],
+     [
+      "direction",
+      "Direction (vector)"
+     ],
+     [
+      "float4",
+      "4 Floats (vector4)"
+     ],
+     [
+      "floatm2",
+      "4 Floats (matrix2)"
+     ],
+     [
+      "float9",
+      "9 Floats (matrix3)"
+     ],
+     [
+      "float16",
+      "16 Floats (matrix)"
+     ],
+     [
+      "string",
+      "String (string)"
+     ],
+     [
+      "file",
+      "File (string)"
+     ],
+     [
+      "image",
+      "Image (string)"
+     ],
+     [
+      "geometry",
+      "Geometry (string)"
+     ],
+     [
+      "color",
+      "Color (color)"
+     ],
+     [
+      "coloralpha",
+      "Color with Alpha (vector4)"
+     ],
+     [
+      "bsdf",
+      "BSDF (F)"
+     ],
+     [
+      "dict",
+      "Dictionary (dict)"
+     ],
+     [
+      "coshader",
+      "Co-Shader (shader)"
+     ],
+     [
+      "surface",
+      "Surface (shader)"
+     ],
+     [
+      "displacement",
+      "Displacement (shader)"
+     ],
+     [
+      "atmosphere",
+      "Volume (shader)"
+     ],
+     [
+      "light",
+      "Light (shader)"
+     ],
+     [
+      "lightfilter",
+      "Light Filter (shader)"
+     ],
+     [
+      "floata",
+      "Float Array (float[])"
+     ],
+     [
+      "inta",
+      "Integer Array (int[])"
+     ],
+     [
+      "vector2a",
+      "2 Float Array (vector2[])"
+     ],
+     [
+      "vectora",
+      "Vector Array (vector[])"
+     ],
+     [
+      "pointa",
+      "Point Array (point[])"
+     ],
+     [
+      "normala",
+      "Normal Array (normal[])"
+     ],
+     [
+      "colora",
+      "Color Array (color[])"
+     ],
+     [
+      "float4a",
+      "4 Float Array (vector4[])"
+     ],
+     [
+      "floatm2a",
+      "4 Float Array (matrix2[])"
+     ],
+     [
+      "float9a",
+      "9 Float Array (matrix3[])"
+     ],
+     [
+      "float16a",
+      "16 Float Array (matrix4[])"
+     ],
+     [
+      "stringa",
+      "String Array (string[])"
+     ],
+     [
+      "dicta",
+      "Dictionary Array (dict[])"
+     ],
+     [
+      "coshadera",
+      "Co-Shader Array (shader[])"
+     ],
+     [
+      "struct",
+      "Custom (struct)"
+     ]
+    ]
+   },
+   {
+    "name": "parmtypename",
+    "label": "Type Name",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "overridetype",
+    "label": "Override Type with Input",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "floatdef",
+    "label": "1 Float Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "intdef",
+    "label": "Integer Default",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "toggledef",
+    "label": "Toggle Default",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "angledef",
+    "label": "Angle Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "logfloatdef",
+    "label": "Logarithmic Float Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float2def",
+    "label": "2 Float Default",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float3def",
+    "label": "3 Float Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vectordef",
+    "label": "Vector Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "normaldef",
+    "label": "Normal Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pointdef",
+    "label": "Point Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "directiondef",
+    "label": "Direction Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float4def",
+    "label": "4 Float Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "floatm2def",
+    "label": "4 Matrix Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float9def",
+    "label": "9 Float Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float16def",
+    "label": "16 Matrix Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "stringdef",
+    "label": "String Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "filedef",
+    "label": "File Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "imagedef",
+    "label": "Image Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "geometrydef",
+    "label": "Geometry Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "colordef",
+    "label": "Color Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "color4def",
+    "label": "Color with Alpha Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bsdfdef",
+    "label": "BSDF Default",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "dictdef",
+    "label": "Dictionary Default",
+    "default": null,
+    "kind": "Data",
+    "menu": []
+   },
+   {
+    "name": "coshaderdef",
+    "label": "Co-Shader",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "surfacedef",
+    "label": "Surface Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "displacementdef",
+    "label": "Displacement Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "atmospheredef",
+    "label": "Volume Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "lightdef",
+    "label": "Light Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "lightfilterdef",
+    "label": "Light Filter Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "coshaderadef",
+    "label": "Co-Shader Array Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "structdef",
+    "label": "Custom Default",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "useasparmdefiner",
+    "label": "Use This Node to Set Parameter Attributes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "useownexportcontext",
+    "label": "Use Own Export Context",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "parmuniform",
+    "label": "Uniform (not Varying)",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usebound",
+    "label": "Use Input Value If Not Bound",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "exportparm",
+    "label": "Export",
+    "default": 0,
+    "kind": "Menu",
+    "menu": []
+   },
+   {
+    "name": "exportcontext",
+    "label": "Export in Context",
+    "default": [
+     "surface"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/geometryvopglobal",
+  "ok": false,
+  "why": "作れない: Failed to match node type definition.\nError:       Error in child VOP 'P'.\n             Error in child VOP 'Time'.\n             Error in child VOP 'N'."
+ },
+ {
+  "spec": "vop/geometryvopoutput",
+  "ok": false,
+  "why": "作れない: Failed to match node type definition.\nError:       Error in child VOP 'P'.\n             Error in child VOP 'N'."
+ },
+ {
+  "spec": "vop/constant",
+  "ok": true,
+  "category": "VOP",
+  "name": "constant",
+  "label": "Constant",
+  "parms": [
+   {
+    "name": "consttype",
+    "label": "Constant Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "float",
+      "Float (float)"
+     ],
+     [
+      "int",
+      "Integer (int)"
+     ],
+     [
+      "toggle",
+      "Toggle (int)"
+     ],
+     [
+      "angle",
+      "Angle (float)"
+     ],
+     [
+      "logfloat",
+      "Logarithmic (float)"
+     ],
+     [
+      "float2",
+      "2 Floats (vector2)"
+     ],
+     [
+      "float3",
+      "3 Floats (vector)"
+     ],
+     [
+      "vector",
+      "Vector (vector)"
+     ],
+     [
+      "normal",
+      "Normal (normal)"
+     ],
+     [
+      "point",
+      "Point (point)"
+     ],
+     [
+      "direction",
+      "Direction (vector)"
+     ],
+     [
+      "float4",
+      "4 Floats (vector4)"
+     ],
+     [
+      "floatm2",
+      "4 Floats (matrix2)"
+     ],
+     [
+      "float9",
+      "9 Floats (matrix3)"
+     ],
+     [
+      "float16",
+      "16 Floats (matrix)"
+     ],
+     [
+      "string",
+      "String (string)"
+     ],
+     [
+      "file",
+      "File (string)"
+     ],
+     [
+      "image",
+      "Image (string)"
+     ],
+     [
+      "geometry",
+      "Geometry (string)"
+     ],
+     [
+      "color",
+      "Color (color)"
+     ],
+     [
+      "coloralpha",
+      "Color with Alpha (vector4)"
+     ],
+     [
+      "bsdf",
+      "BSDF (F)"
+     ],
+     [
+      "dict",
+      "Dictionary (dict)"
+     ],
+     [
+      "coshader",
+      "Co-Shader (shader)"
+     ],
+     [
+      "surface",
+      "Surface (shader)"
+     ],
+     [
+      "displacement",
+      "Displacement (shader)"
+     ],
+     [
+      "atmosphere",
+      "Volume (shader)"
+     ],
+     [
+      "light",
+      "Light (shader)"
+     ],
+     [
+      "lightfilter",
+      "Light Filter (shader)"
+     ],
+     [
+      "floata",
+      "Float Array (float[])"
+     ],
+     [
+      "inta",
+      "Integer Array (int[])"
+     ],
+     [
+      "vector2a",
+      "2 Float Array (vector2[])"
+     ],
+     [
+      "vectora",
+      "Vector Array (vector[])"
+     ],
+     [
+      "pointa",
+      "Point Array (point[])"
+     ],
+     [
+      "normala",
+      "Normal Array (normal[])"
+     ],
+     [
+      "colora",
+      "Color Array (color[])"
+     ],
+     [
+      "float4a",
+      "4 Float Array (vector4[])"
+     ],
+     [
+      "floatm2a",
+      "4 Float Array (matrix2[])"
+     ],
+     [
+      "float9a",
+      "9 Float Array (matrix3[])"
+     ],
+     [
+      "float16a",
+      "16 Float Array (matrix4[])"
+     ],
+     [
+      "stringa",
+      "String Array (string[])"
+     ],
+     [
+      "dicta",
+      "Dictionary Array (dict[])"
+     ],
+     [
+      "coshadera",
+      "Co-Shader Array (shader[])"
+     ],
+     [
+      "struct",
+      "Custom (struct)"
+     ]
+    ]
+   },
+   {
+    "name": "floatdef",
+    "label": "1 Float Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "intdef",
+    "label": "Integer Default",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "toggledef",
+    "label": "Toggle Default",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "angledef",
+    "label": "Angle Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "logfloatdef",
+    "label": "Logarithmic Float Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float2def",
+    "label": "2 Float Default",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float3def",
+    "label": "3 Float Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vectordef",
+    "label": "Vector Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "normaldef",
+    "label": "Normal Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pointdef",
+    "label": "Point Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "directiondef",
+    "label": "Direction Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float4def",
+    "label": "4 Float Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "floatm2def",
+    "label": "4 Matrix Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float9def",
+    "label": "9 Float Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float16def",
+    "label": "16 Matrix Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "stringdef",
+    "label": "String Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "filedef",
+    "label": "File Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "imagedef",
+    "label": "Image Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "geometrydef",
+    "label": "Geometry Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "colordef",
+    "label": "Color Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "color4def",
+    "label": "Color with Alpha Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bsdfdef",
+    "label": "BSDF Default",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "dictdef",
+    "label": "Dictionary Default",
+    "default": null,
+    "kind": "Data",
+    "menu": []
+   },
+   {
+    "name": "coshaderdef",
+    "label": "Co-Shader",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "surfacedef",
+    "label": "Surface Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "displacementdef",
+    "label": "Displacement Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "atmospheredef",
+    "label": "Volume Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "lightdef",
+    "label": "Light Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "lightfilterdef",
+    "label": "Light Filter Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "coshaderadef",
+    "label": "Co-Shader Array Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "structdef",
+    "label": "Custom Default",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "parmuniform",
+    "label": "Uniform (not Varying)",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "constname",
+    "label": "Constant Name",
+    "default": [
+     "Value"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "constlabel",
+    "label": "Constant Label",
+    "default": [
+     "Constant"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 0
+ },
+ {
+  "spec": "vop/parameter",
+  "ok": true,
+  "category": "VOP",
+  "name": "parameter",
+  "label": "Parameter",
+  "parms": [
+   {
+    "name": "parmscope",
+    "label": "Scope",
+    "default": [
+     "shaderparm"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmaccess",
+    "label": "Access Level",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "",
+      "Default"
+     ],
+     [
+      "public",
+      "Public"
+     ],
+     [
+      "private",
+      "Private"
+     ]
+    ]
+   },
+   {
+    "name": "parmname",
+    "label": "Name",
+    "default": [
+     "parm"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmprefix",
+    "label": "Prefix",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmpostfix",
+    "label": "Postfix",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmlabel",
+    "label": "Label",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "showlabel",
+    "label": "Show Label",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "parmtype",
+    "label": "Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "float",
+      "Float (float)"
+     ],
+     [
+      "int",
+      "Integer (int)"
+     ],
+     [
+      "toggle",
+      "Toggle (int)"
+     ],
+     [
+      "angle",
+      "Angle (float)"
+     ],
+     [
+      "logfloat",
+      "Logarithmic (float)"
+     ],
+     [
+      "float2",
+      "2 Floats (vector2)"
+     ],
+     [
+      "float3",
+      "3 Floats (vector)"
+     ],
+     [
+      "vector",
+      "Vector (vector)"
+     ],
+     [
+      "normal",
+      "Normal (normal)"
+     ],
+     [
+      "point",
+      "Point (point)"
+     ],
+     [
+      "direction",
+      "Direction (vector)"
+     ],
+     [
+      "float4",
+      "4 Floats (vector4)"
+     ],
+     [
+      "floatm2",
+      "4 Floats (matrix2)"
+     ],
+     [
+      "float9",
+      "9 Floats (matrix3)"
+     ],
+     [
+      "float16",
+      "16 Floats (matrix)"
+     ],
+     [
+      "string",
+      "String (string)"
+     ],
+     [
+      "file",
+      "File (string)"
+     ],
+     [
+      "image",
+      "Image (string)"
+     ],
+     [
+      "geometry",
+      "Geometry (string)"
+     ],
+     [
+      "color",
+      "Color (color)"
+     ],
+     [
+      "coloralpha",
+      "Color with Alpha (vector4)"
+     ],
+     [
+      "bsdf",
+      "BSDF (F)"
+     ],
+     [
+      "dict",
+      "Dictionary (dict)"
+     ],
+     [
+      "coshader",
+      "Co-Shader (shader)"
+     ],
+     [
+      "surface",
+      "Surface (shader)"
+     ],
+     [
+      "displacement",
+      "Displacement (shader)"
+     ],
+     [
+      "atmosphere",
+      "Volume (shader)"
+     ],
+     [
+      "light",
+      "Light (shader)"
+     ],
+     [
+      "lightfilter",
+      "Light Filter (shader)"
+     ],
+     [
+      "floata",
+      "Float Array (float[])"
+     ],
+     [
+      "inta",
+      "Integer Array (int[])"
+     ],
+     [
+      "vector2a",
+      "2 Float Array (vector2[])"
+     ],
+     [
+      "vectora",
+      "Vector Array (vector[])"
+     ],
+     [
+      "pointa",
+      "Point Array (point[])"
+     ],
+     [
+      "normala",
+      "Normal Array (normal[])"
+     ],
+     [
+      "colora",
+      "Color Array (color[])"
+     ],
+     [
+      "float4a",
+      "4 Float Array (vector4[])"
+     ],
+     [
+      "floatm2a",
+      "4 Float Array (matrix2[])"
+     ],
+     [
+      "float9a",
+      "9 Float Array (matrix3[])"
+     ],
+     [
+      "float16a",
+      "16 Float Array (matrix4[])"
+     ],
+     [
+      "stringa",
+      "String Array (string[])"
+     ],
+     [
+      "dicta",
+      "Dictionary Array (dict[])"
+     ],
+     [
+      "coshadera",
+      "Co-Shader Array (shader[])"
+     ],
+     [
+      "struct",
+      "Custom (struct)"
+     ]
+    ]
+   },
+   {
+    "name": "parmtypename",
+    "label": "Type Name",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "floatdef",
+    "label": "1 Float Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "intdef",
+    "label": "Integer Default",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "toggledef",
+    "label": "Toggle Default",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "angledef",
+    "label": "Angle Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "logfloatdef",
+    "label": "Logarithmic Float Default",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float2def",
+    "label": "2 Float Default",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float3def",
+    "label": "3 Float Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vectordef",
+    "label": "Vector Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "normaldef",
+    "label": "Normal Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pointdef",
+    "label": "Point Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "directiondef",
+    "label": "Direction Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float4def",
+    "label": "4 Float Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "floatm2def",
+    "label": "4 Matrix Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float9def",
+    "label": "9 Float Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "float16def",
+    "label": "16 Matrix Default",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "stringdef",
+    "label": "String Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "filedef",
+    "label": "File Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "imagedef",
+    "label": "Image Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "geometrydef",
+    "label": "Geometry Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "colordef",
+    "label": "Color Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "color4def",
+    "label": "Color with Alpha Default",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bsdfdef",
+    "label": "BSDF Default",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "dictdef",
+    "label": "Dictionary Default",
+    "default": null,
+    "kind": "Data",
+    "menu": []
+   },
+   {
+    "name": "coshaderdef",
+    "label": "Co-Shader",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "surfacedef",
+    "label": "Surface Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "displacementdef",
+    "label": "Displacement Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "atmospheredef",
+    "label": "Volume Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "lightdef",
+    "label": "Light Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "lightfilterdef",
+    "label": "Light Filter Shader",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "coshaderadef",
+    "label": "Co-Shader Array Default",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "structdef",
+    "label": "Custom Default",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   },
+   {
+    "name": "rangeflt",
+    "label": "Float Range",
+    "default": [
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rangeint",
+    "label": "Integer Range",
+    "default": [
+     0.0,
+     10.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "stringtype",
+    "label": "String Qualifier",
+    "default": [
+     "off"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "off",
+      "Just A String"
+     ],
+     [
+      "oplist",
+      "A List Of Objects"
+     ]
+    ]
+   },
+   {
+    "name": "opfilter",
+    "label": " Operator Filter",
+    "default": [
+     "!!OBJ/LIGHT!!"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "!!OBJ!!",
+      "Any Object"
+     ],
+     [
+      "!!SOP!!",
+      "Any SOP"
+     ],
+     [
+      "!!DOP!!",
+      "Any DOP"
+     ],
+     [
+      "!!POP!!",
+      "Any POP"
+     ],
+     [
+      "!!CHOP!!",
+      "Any CHOP"
+     ],
+     [
+      "!!COP2!!",
+      "Any COP"
+     ],
+     [
+      "!!VOP!!",
+      "Any VOP"
+     ],
+     [
+      "!!LOP!!",
+      "Any LOP"
+     ],
+     [
+      "!!TOP!!",
+      "Any TOP"
+     ],
+     [
+      "!!ROP!!",
+      "Any ROP"
+     ],
+     [
+      "!!OBJ/GEOMETRY!!",
+      "Object: Geometry Only"
+     ],
+     [
+      "!!OBJ/NULL!!",
+      "Object: Null Only"
+     ],
+     [
+      "!!OBJ/LIGHT!!",
+      "Object: Light Only"
+     ],
+     [
+      "!!OBJ/CAMERA!!",
+      "Object: Camera Only"
+     ],
+     [
+      "!!OBJ/FOG!!",
+      "Object: Fog Only"
+     ],
+     [
+      "!!OBJ/BONE!!",
+      "Object: Bone Only"
+     ],
+     [
+      "!!OBJ/NULL!!",
+      "Object: Null Only"
+     ],
+     [
+      "!!OBJ/MUSCLE!!",
+      "Object: Muscle Only"
+     ],
+     [
+      "!!CUSTOM/MATERIAL!!",
+      "Any Material"
+     ],
+     [
+      "!!SHOP/SURFACE!!",
+      "SHOP: Surface Only"
+     ],
+     [
+      "!!SHOP/DISPLACEMENT!!",
+      "SHOP: Displacement Only"
+     ],
+     [
+      "!!SHOP/LIGHT!!",
+      "SHOP: Light Only"
+     ],
+     [
+      "!!SHOP/LIGHT_SHADOW!!",
+      "SHOP: Shadow Only"
+     ],
+     [
+      "!!SHOP/ATMOSPHERE!!",
+      "SHOP: Fog Only"
+     ],
+     [
+      "!!SHOP/PHOTON!!",
+      "SHOP: Photon Only"
+     ],
+     [
+      "!!SHOP/IMAGE3D!!",
+      "SHOP: Image3D Only"
+     ],
+     [
+      "!!TOP/SCHEDULER!!",
+      "TOP: Schedulers Only"
+     ],
+     [
+      "!!TOP/PROCESSOR!!",
+      "TOP: Processors Only"
+     ],
+     [
+      "!!TOP/PARTITIONER!!",
+      "TOP: Partitioners Only"
+     ],
+     [
+      "!!TOP/MAPPER!!",
+      "TOP: Mappers Only"
+     ]
+    ]
+   },
+   {
+    "name": "parmcomment",
+    "label": "Comment",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "useasparmdefiner",
+    "label": "Use This Node to Set Parameter Attributes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "useownexportcontext",
+    "label": "Use Own Export Context",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "parmuniform",
+    "label": "Uniform (not Varying)",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usebound",
+    "label": "Use Input Value If Parameter Not Bound",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "hasconnector",
+    "label": "Has Corresponding Connector",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "exportparm",
+    "label": "Export",
+    "default": 0,
+    "kind": "Menu",
+    "menu": []
+   },
+   {
+    "name": "exportcontext",
+    "label": "Export in Context",
+    "default": [
+     "surface"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "providemenu",
+    "label": "Provide Menu",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "off",
+      "No Menu"
+     ],
+     [
+      "on",
+      "Menu from Items"
+     ],
+     [
+      "menuscript",
+      "Menu from Script"
+     ],
+     [
+      "itemstoken",
+      "Menu from Items as Token"
+     ],
+     [
+      "menuscripttoken",
+      "Menu from Script as Token"
+     ]
+    ]
+   },
+   {
+    "name": "menuchoices",
+    "label": "Menu Items",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "menuscript",
+    "label": "Menu Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "menuscriptlanguage",
+    "label": "Menu Script Language",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "hscript",
+      "HScript"
+     ],
+     [
+      "python",
+      "Python"
+     ]
+    ]
+   },
+   {
+    "name": "invisible",
+    "label": "Invisible",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "joinnext",
+    "label": "Horizontally Join to Next Parameter",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "disablewhen",
+    "label": "Disable When",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "hidewhen",
+    "label": "Hide When",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "callback",
+    "label": "Callback Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "tags",
+    "label": "Tags",
+    "default": null,
+    "kind": "Data",
+    "menu": []
+   },
+   {
+    "name": "help",
+    "label": "Help",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/fit",
+  "ok": true,
+  "category": "VOP",
+  "name": "fit",
+  "label": "Fit Range",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "srcmin",
+    "label": "Source Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax",
+    "label": "Source Max",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin",
+    "label": "Destination Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax",
+    "label": "Destination Max",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_v2",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_v2",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_v2",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_v2",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_v",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_v",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_v",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_v",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_p",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_p",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_p",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_p",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_n",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_n",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_n",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_n",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_c",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_c",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_c",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_c",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_v4",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_v4",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_v4",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_v4",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_uf",
+    "label": "Source Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_uf",
+    "label": "Source Max",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_uf",
+    "label": "Destination Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_uf",
+    "label": "Destination Max",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_uv",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_uv",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_uv",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_uv",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_up",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_up",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_up",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_up",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_un",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_un",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_un",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_un",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmin_uc",
+    "label": "Source Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "srcmax_uc",
+    "label": "Source Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmin_uc",
+    "label": "Destination Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "destmax_uc",
+    "label": "Destination Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 5
+ },
+ {
+  "spec": "vop/clamp",
+  "ok": true,
+  "category": "VOP",
+  "name": "clamp",
+  "label": "Clamp",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "min",
+    "label": "Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max",
+    "label": "Max",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_i",
+    "label": "Min",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "max_i",
+    "label": "Max",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "min_u",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_u",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_v",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_v",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_p",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_p",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_n",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_n",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_c",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_c",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_v4",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_v4",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_uf",
+    "label": "Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_uf",
+    "label": "Max",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_uv",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_uv",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_up",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_up",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_un",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_un",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "min_uc",
+    "label": "Min",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "max_uc",
+    "label": "Max",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 3
+ },
+ {
+  "spec": "vop/mix",
+  "ok": true,
+  "category": "VOP",
+  "name": "mix",
+  "label": "Mix",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "bias",
+    "label": "Bias",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1",
+    "label": "Input 1",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2",
+    "label": "Input 2",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_u",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_u",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_v",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_v",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_p",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_p",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_n",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_n",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_c",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_c",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_v4",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_v4",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_uf",
+    "label": "Input 1",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_uf",
+    "label": "Input 2",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_uv",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_uv",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_up",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_up",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_un",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_un",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input1_uc",
+    "label": "Input 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_uc",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 3
+ },
+ {
+  "spec": "vop/length",
+  "ok": true,
+  "category": "VOP",
+  "name": "length",
+  "label": "Length",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vec",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_u",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_p",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_n",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_v4",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_uv",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_up",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_un",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/normalize",
+  "ok": true,
+  "category": "VOP",
+  "name": "normalize",
+  "label": "Normalize",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vec",
+    "label": "Normal",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_u",
+    "label": "Normal",
+    "default": [
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_p",
+    "label": "Normal",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_v",
+    "label": "Normal",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_v4",
+    "label": "Quaternion",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_un",
+    "label": "Normal",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_up",
+    "label": "Normal",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_uv",
+    "label": "Normal",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/dot",
+  "ok": true,
+  "category": "VOP",
+  "name": "dot",
+  "label": "Dot Product",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vec1",
+    "label": "Vector 1",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec2",
+    "label": "Vector 2",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec1_c",
+    "label": "Color 1",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec2_c",
+    "label": "Color 2",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec1_uv",
+    "label": "Vector 1",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec2_uv",
+    "label": "Vector 2",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec1_uc",
+    "label": "Color 1",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec2_uc",
+    "label": "Color 2",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2
+ },
+ {
+  "spec": "vop/cross",
+  "ok": true,
+  "category": "VOP",
+  "name": "cross",
+  "label": "Cross Product",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vec1",
+    "label": "Vector 1",
+    "default": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec2",
+    "label": "Vector 2",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2
+ },
+ {
+  "spec": "vop/distance",
+  "ok": true,
+  "category": "VOP",
+  "name": "distance",
+  "label": "Distance",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "p1",
+    "label": "Point 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p2",
+    "label": "Point 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p1_v4",
+    "label": "Point 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p2_v4",
+    "label": "Point 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p1_up",
+    "label": "Point 1",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "p2_up",
+    "label": "Point 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2
+ },
+ {
+  "spec": "vop/rampparm",
+  "ok": true,
+  "category": "VOP",
+  "name": "rampparm",
+  "label": "Ramp Parameter",
+  "parms": [
+   {
+    "name": "parmscope",
+    "label": "Scope",
+    "default": [
+     "shaderparm"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmaccess",
+    "label": "Access Level",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "",
+      "Default"
+     ],
+     [
+      "public",
+      "Public"
+     ],
+     [
+      "private",
+      "Private"
+     ]
+    ]
+   },
+   {
+    "name": "parmname",
+    "label": "Name",
+    "default": [
+     "ramp"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmprefix",
+    "label": "Prefix",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmpostfix",
+    "label": "Postfix",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "parmlabel",
+    "label": "Label",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "ramptype",
+    "label": "Ramp Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "rgb",
+      "RGB Color Ramp"
+     ],
+     [
+      "flt",
+      "Spline Ramp (float)"
+     ]
+    ]
+   },
+   {
+    "name": "rampcolortype",
+    "label": "Color Type",
+    "default": [
+     "rgb"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "rgb",
+      "RGB"
+     ],
+     [
+      "hsv",
+      "HSV"
+     ],
+     [
+      "lab",
+      "LAB"
+     ],
+     [
+      "hsl",
+      "HSL"
+     ],
+     [
+      "xyz",
+      "XYZ"
+     ]
+    ]
+   },
+   {
+    "name": "rampbasisdefault",
+    "label": "Default Interpolation",
+    "default": [
+     "linear"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "rampcolordefault",
+    "label": "Ramp Default",
+    "default": 2,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "rampfloatdefault",
+    "label": "Ramp Default",
+    "default": 2,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "useasparmdefiner",
+    "label": "Use This Node to Set Parameter Attributes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "rampshowcontrolsdefault",
+    "label": "Show UI Controls By Default",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "disablewhen",
+    "label": "Disable When",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "hidewhen",
+    "label": "Hide When",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "callback",
+    "label": "Callback Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "help",
+    "label": "Help",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "rampcolordefault1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampcolordefault1c",
+    "label": "Color",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampcolordefault1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "rampcolordefault2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampcolordefault2c",
+    "label": "Color",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampcolordefault2interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "rampfloatdefault1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampfloatdefault1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampfloatdefault1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "rampfloatdefault2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampfloatdefault2value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rampfloatdefault2interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/colormix",
+  "ok": true,
+  "category": "VOP",
+  "name": "colormix",
+  "label": "Color Mix",
+  "parms": [
+   {
+    "name": "primary",
+    "label": "Primary Color",
+    "default": [
+     1.0,
+     0.7,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondary",
+    "label": "Secondary Color",
+    "default": [
+     0.3,
+     0.3,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bias",
+    "label": "Bias Amount",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "adjust",
+    "label": "Adjust Bias",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": [
+     [
+      "0",
+      "Use As Is"
+     ],
+     [
+      "1",
+      "Clamp To Unit Range"
+     ],
+     [
+      "2",
+      "Ease In/Out Within Unit Range"
+     ],
+     [
+      "3",
+      "Smooth With Cardinal Spline"
+     ]
+    ]
+   },
+   {
+    "name": "space",
+    "label": "Color Blending Space",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": [
+     [
+      "0",
+      "RGB (Unaffected)"
+     ],
+     [
+      "1",
+      "HSV"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 5
+ },
+ {
+  "spec": "vop/compare",
+  "ok": true,
+  "category": "VOP",
+  "name": "compare",
+  "label": "Compare",
+  "parms": [
+   {
+    "name": "cmp",
+    "label": "Test",
+    "default": [
+     "eq"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "eq",
+      "Equal\t(==)"
+     ],
+     [
+      "lt",
+      "Less Than\t(<)"
+     ],
+     [
+      "gt",
+      "Greater Than\t(>)"
+     ],
+     [
+      "lte",
+      "Less Than Or Equal\t(<=)"
+     ],
+     [
+      "gte",
+      "Greater Than Or Equal\t(>=)"
+     ],
+     [
+      "neq",
+      "Not Equal\t(!=)"
+     ]
+    ]
+   },
+   {
+    "name": "input2",
+    "label": "Compare to Float",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_i",
+    "label": "Compare to Integer",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "input2_s",
+    "label": "Compare to String",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "vop/twoway",
+  "ok": true,
+  "category": "VOP",
+  "name": "twoway",
+  "label": "Two Way Switch",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "condtype",
+    "label": "Condition",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": [
+     [
+      "true",
+      "Use Input 1 If Condition True"
+     ],
+     [
+      "false",
+      "Use Input 1 If Condition False"
+     ]
+    ]
+   },
+   {
+    "name": "input2",
+    "label": "Input 2",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_i",
+    "label": "Input 2",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "input2_s",
+    "label": "Input 2",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "input2_u",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_v",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_p",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_n",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_c",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_v4",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_m2",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_m3",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_m",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_uf",
+    "label": "Input 2",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_uv",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_up",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_un",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_uc",
+    "label": "Input 2",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "input2_um",
+    "label": "Input 2",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 3
+ },
+ {
+  "spec": "vop/switch",
+  "ok": true,
+  "category": "VOP",
+  "name": "switch",
+  "label": "Switch",
+  "parms": [
+   {
+    "name": "switcher",
+    "label": "Switcher Index",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "outofbounds",
+    "label": "Out Of Bounds Behavior",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "last",
+      "Output Last Input Value"
+     ],
+     [
+      "zero",
+      "Output Zero"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2048
+ },
+ {
+  "spec": "vop/sin",
+  "ok": false,
+  "why": "この版には無い"
+ },
+ {
+  "spec": "vop/cos",
+  "ok": false,
+  "why": "この版には無い"
+ },
+ {
+  "spec": "vop/pow",
+  "ok": true,
+  "category": "VOP",
+  "name": "pow",
+  "label": "Power",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "val",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_u",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_p",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_n",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_c",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v4",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uf",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uv",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_up",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_un",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uc",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "exp",
+    "label": "Exponent",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2
+ },
+ {
+  "spec": "vop/abs",
+  "ok": true,
+  "category": "VOP",
+  "name": "abs",
+  "label": "Absolute",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "val",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_i",
+    "label": "Value",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "val_u",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_p",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_n",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_c",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v4",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uf",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uv",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_up",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_un",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uc",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/floor",
+  "ok": true,
+  "category": "VOP",
+  "name": "floor",
+  "label": "Floor",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "val",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_u",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_p",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_n",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_c",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v4",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uf",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uv",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_up",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_un",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uc",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/ceil",
+  "ok": false,
+  "why": "この版には無い"
+ },
+ {
+  "spec": "vop/frac",
+  "ok": true,
+  "category": "VOP",
+  "name": "frac",
+  "label": "Fraction",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "val",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_i",
+    "label": "Value",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "val_u",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_p",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_n",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_c",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_v4",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uf",
+    "label": "Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uv",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_up",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_un",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "val_uc",
+    "label": "Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/unifiednoise",
+  "ok": true,
+  "category": "VOP",
+  "name": "unifiednoise::3.0",
+  "label": "Unified Noise",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "basis",
+    "label": "Noise Type",
+    "default": [
+     "simplex"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "value_fast",
+      "Fast"
+     ],
+     [
+      "sparse",
+      "Sparse Convolution"
+     ],
+     [
+      "alligator",
+      "Alligator"
+     ],
+     [
+      "perlin",
+      "Perlin"
+     ],
+     [
+      "flow",
+      "Perlin Flow"
+     ],
+     [
+      "simplex",
+      "Simplex"
+     ],
+     [
+      "worleyFA",
+      "Worley Cellular F1"
+     ],
+     [
+      "worleyFB",
+      "Worley Cellular F2-F1"
+     ],
+     [
+      "mworleyFA",
+      "Manhattan Cellular F1"
+     ],
+     [
+      "mworleyFB",
+      "Manhattan Cellular F2-F1"
+     ],
+     [
+      "cworleyFA",
+      "Chebyshev Cellular F1"
+     ],
+     [
+      "cworleyFB",
+      "Chebyshev Cellular F2-F1"
+     ]
+    ]
+   },
+   {
+    "name": "freq",
+    "label": "Frequency",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset",
+    "label": "Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "periodic",
+    "label": "Periodic",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "period",
+    "label": "Period",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "folder1",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "fractal",
+    "label": "Fractal Type",
+    "default": [
+     "none"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "fBm",
+      "Standard (fBm)"
+     ],
+     [
+      "mfT",
+      "Terrain"
+     ],
+     [
+      "hmfT",
+      "Hybrid Terrain"
+     ]
+    ]
+   },
+   {
+    "name": "oct",
+    "label": "Max Octaves",
+    "default": [
+     8.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "lac",
+    "label": "Lacunarity",
+    "default": [
+     2.01234
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rough",
+    "label": "Roughness",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "folder2",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "dolwarp",
+    "label": "Enable Lattice Warp",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "accuml",
+    "label": "Accumulate Lattice Warp",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "disp",
+    "label": "Lattice Warp",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dispfreq",
+    "label": "Freq",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dogwarp",
+    "label": "Enable Gradient Warp",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "accumg",
+    "label": "Accumulate Gradient Warp",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "gflow",
+    "label": "Gradient Warp",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "flowrot",
+    "label": "Flow Rotation",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "folder0_1",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "cc_fold",
+    "label": "Fold",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cc_dobias",
+    "label": "Bias",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cc_bias",
+    "label": "Bias",
+    "default": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "cc_dogain",
+    "label": "Gain",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cc_gain",
+    "label": "Gain",
+    "default": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "cc_inv",
+    "label": "Complement",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cc_dorng",
+    "label": "Output Range (Clamped)",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cc_rnglo",
+    "label": "New Minimum",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "cc_rnghi",
+    "label": "New Maximum",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "cc_amp",
+    "label": "Final Amplitude",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "fscale",
+    "label": "Filter Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 32
+ },
+ {
+  "spec": "vop/curlnoise",
+  "ok": true,
+  "category": "VOP",
+  "name": "curlnoise",
+  "label": "Curl Noise",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "type",
+    "label": "Noise Type",
+    "default": [
+     "pnoise"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "pnoise",
+      "Perlin Noise"
+     ],
+     [
+      "onoise",
+      "Original Perlin Noise"
+     ],
+     [
+      "snoise",
+      "Sparse Convolution Noise"
+     ],
+     [
+      "anoise",
+      "Alligator Noise"
+     ],
+     [
+      "xnoise",
+      "Simplex Noise"
+     ],
+     [
+      "exact_pnoise",
+      "Analytic Perlin Noise"
+     ],
+     [
+      "exact_xnoise",
+      "Analytic Simplex Noise"
+     ],
+     [
+      "exact_gxnoise",
+      "Analytic Fast Simplex Noise"
+     ]
+    ]
+   },
+   {
+    "name": "pos",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_vp",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "freq",
+    "label": "Frequency",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "freq_vp",
+    "label": "Frequency",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset",
+    "label": "Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset_vp",
+    "label": "Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "amp",
+    "label": "Amplitude",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rough",
+    "label": "Roughness",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "atten",
+    "label": "Attenuation",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "turb",
+    "label": "Turbulence",
+    "default": [
+     3
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "h",
+    "label": "Step Size",
+    "default": [
+     0.0001
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radius",
+    "label": "Surface Effect Radius",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dist",
+    "label": "Distance to Surface",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "normal",
+    "label": "Surface Normal",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "sdf",
+    "label": "Collision SDF",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "bounce",
+    "label": "Enable Bouncing SDF",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 14
+ },
+ {
+  "spec": "vop/turbnoise",
+  "ok": true,
+  "category": "VOP",
+  "name": "turbnoise",
+  "label": "Turbulent Noise",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "type",
+    "label": "Noise Type",
+    "default": [
+     "anoise"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "pnoise",
+      "Perlin Noise"
+     ],
+     [
+      "onoise",
+      "Original Perlin Noise"
+     ],
+     [
+      "snoise",
+      "Sparse Convolution Noise"
+     ],
+     [
+      "anoise",
+      "Alligator Noise"
+     ],
+     [
+      "xnoise",
+      "Simplex Noise"
+     ],
+     [
+      "correctnoise",
+      "Zero Centered Perlin Noise"
+     ]
+    ]
+   },
+   {
+    "name": "pos",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "freq",
+    "label": "Frequency",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset",
+    "label": "Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "amp",
+    "label": "Amplitude",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rough",
+    "label": "Roughness",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "atten",
+    "label": "Attenuation",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "turb",
+    "label": "Turbulence",
+    "default": [
+     5
+    ],
+    "kind": "Int",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 8
+ },
+ {
+  "spec": "vop/aanoise",
+  "ok": true,
+  "category": "VOP",
+  "name": "aanoise",
+  "label": "Anti-Aliased Noise",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pos_ff",
+    "label": "1D Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos",
+    "label": "3D Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_fp",
+    "label": "4D Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "freq_ff",
+    "label": "1D Frequency",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "freq",
+    "label": "3D Frequency",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "freq_fp",
+    "label": "4D Frequency",
+    "default": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset_ff",
+    "label": "1D Offset",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset",
+    "label": "3D Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset_fp",
+    "label": "4D Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "amp",
+    "label": "Amplitude",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "rough",
+    "label": "Roughness",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maxoctave",
+    "label": "Max Octaves",
+    "default": [
+     8
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "noisetype",
+    "label": "Noise Type",
+    "default": [
+     "noise"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "noise",
+      "Perlin"
+     ],
+     [
+      "xnoise",
+      "Simplex"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 7
+ },
+ {
+  "spec": "vop/getattrib",
+  "ok": true,
+  "category": "VOP",
+  "name": "getattrib::2.0",
+  "label": "Get Attribute",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "opinput",
+    "label": "Input",
+    "default": [
+     "file"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "file",
+      "File"
+     ],
+     [
+      "opinput:0",
+      "First Input"
+     ],
+     [
+      "opinput:1",
+      "Second Input"
+     ],
+     [
+      "opinput:2",
+      "Third Input"
+     ],
+     [
+      "opinput:3",
+      "Fourth Input"
+     ]
+    ]
+   },
+   {
+    "name": "file",
+    "label": "Geometry File",
+    "default": [
+     "$HH/geo/defgeo.bgeo"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "atype",
+    "label": "Attribute Class",
+    "default": [
+     "point"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "detail",
+      "Detail"
+     ],
+     [
+      "point",
+      "Point"
+     ],
+     [
+      "prim",
+      "Primitive"
+     ],
+     [
+      "vertex",
+      "Vertex"
+     ],
+     [
+      "pointgroup",
+      "Point Group"
+     ],
+     [
+      "primgroup",
+      "Primitive Group"
+     ]
+    ]
+   },
+   {
+    "name": "attrib",
+    "label": "Attribute",
+    "default": [
+     "Cd"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "i1",
+    "label": "Point or Primitive",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "i2",
+    "label": "Vertex",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 6
+ },
+ {
+  "spec": "vop/setattrib",
+  "ok": true,
+  "category": "VOP",
+  "name": "setattrib",
+  "label": "Set Attribute",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "handle",
+    "label": "Geometry Handle",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "atype",
+    "label": "Attribute Class",
+    "default": [
+     "point"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "detail",
+      "Detail"
+     ],
+     [
+      "point",
+      "Point"
+     ],
+     [
+      "prim",
+      "Primitive"
+     ],
+     [
+      "vertex",
+      "Vertex"
+     ],
+     [
+      "pointgroup",
+      "Point Group"
+     ],
+     [
+      "primgroup",
+      "Primitive Group"
+     ],
+     [
+      "primintrinsic",
+      "Primitive Intrinsic"
+     ]
+    ]
+   },
+   {
+    "name": "mode",
+    "label": "Merge Mode",
+    "default": [
+     "set"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "set",
+      "Set"
+     ],
+     [
+      "add",
+      "Add"
+     ],
+     [
+      "max",
+      "Maximum"
+     ],
+     [
+      "min",
+      "Minimum"
+     ],
+     [
+      "multiply",
+      "Multiply"
+     ],
+     [
+      "toggle",
+      "Toggle"
+     ]
+    ]
+   },
+   {
+    "name": "attrib",
+    "label": "Attribute",
+    "default": [
+     "Cd"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "i1",
+    "label": "Point or Primitive",
+    "default": [
+     -1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "i2",
+    "label": "Vertex",
+    "default": [
+     -1
+    ],
+    "kind": "Int",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 7
+ },
+ {
+  "spec": "vop/pcopen",
+  "ok": true,
+  "category": "VOP",
+  "name": "pcopen",
+  "label": "Point Cloud Open",
+  "parms": [
+   {
+    "name": "file",
+    "label": "Point Cloud Texture",
+    "default": [
+     "defgeo.bgeo"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pchannel",
+    "label": "Position Channel",
+    "default": [
+     "P"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "P",
+    "label": "Query Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "nchannel",
+    "label": "Normal Channel",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "N",
+    "label": "Query Normal",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "radius",
+    "label": "Search radius",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maxpoints",
+    "label": "Number of points",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "cone",
+    "label": "Cone Angle",
+    "default": [
+     90.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "preload",
+    "label": "Preload Map",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 9
+ },
+ {
+  "spec": "vop/pcfilter",
+  "ok": true,
+  "category": "VOP",
+  "name": "pcfilter",
+  "label": "Point Cloud Filter",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "handle",
+    "label": "PCOpen Handle",
+    "default": [
+     -1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "channel",
+    "label": "Channel",
+    "default": [
+     "P"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2
+ },
+ {
+  "spec": "vop/nearpoint",
+  "ok": true,
+  "category": "VOP",
+  "name": "nearpoint",
+  "label": "Near Point",
+  "parms": [
+   {
+    "name": "input",
+    "label": "Geometry File",
+    "default": [
+     "$HH/geo/defgeo.bgeo"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2
+ },
+ {
+  "spec": "vop/importpoint",
+  "ok": true,
+  "category": "VOP",
+  "name": "importpoint",
+  "label": "Import Point Attribute",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "opinput",
+    "label": "Input",
+    "default": [
+     "file"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "file",
+      "File"
+     ],
+     [
+      "opinput:0",
+      "First Input"
+     ],
+     [
+      "opinput:1",
+      "Second Input"
+     ],
+     [
+      "opinput:2",
+      "Third Input"
+     ],
+     [
+      "opinput:3",
+      "Fourth Input"
+     ]
+    ]
+   },
+   {
+    "name": "file",
+    "label": "File",
+    "default": [
+     "defgeo.bgeo"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "attribute",
+    "label": "Attribute",
+    "default": [
+     "P"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 4
+ },
+ {
+  "spec": "vop/vectofloat",
+  "ok": true,
+  "category": "VOP",
+  "name": "vectofloat",
+  "label": "Vector to Float",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vec",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_p",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_n",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_c",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_uv",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_up",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_un",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vec_uc",
+    "label": "Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/floattovec",
+  "ok": true,
+  "category": "VOP",
+  "name": "floattovec",
+  "label": "Float to Vector",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "fval1",
+    "label": "Component 1",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "fval2",
+    "label": "Component 2",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "fval3",
+    "label": "Component 3",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "fval1_uv",
+    "label": "Component 1",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "fval2_uv",
+    "label": "Component 2",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "fval3_uv",
+    "label": "Component 3",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 3
+ },
+ {
+  "spec": "vop/random",
+  "ok": true,
+  "category": "VOP",
+  "name": "random",
+  "label": "Random",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_i",
+    "label": "Position",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pos_v1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_p1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_n1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_c1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_v41d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_uf1d",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_uv1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_up1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_un1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "pos_uc1d",
+    "label": "Position",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "roundtoint",
+    "label": "Clamp Position to Integer",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "vop/xyzdist",
+  "ok": true,
+  "category": "VOP",
+  "name": "xyzdist",
+  "label": "XYZ Distance",
+  "parms": [
+   {
+    "name": "input",
+    "label": "Geometry File",
+    "default": [
+     "$HH/geo/defgeo.bgeo"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "group",
+    "label": "Primitive Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "maxdist",
+    "label": "Max Search Distance",
+    "default": [
+     10000000000.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 4
+ },
+ {
+  "spec": "vop/primuv",
+  "ok": true,
+  "category": "VOP",
+  "name": "primuv",
+  "label": "Primitive Attribute",
+  "parms": [
+   {
+    "name": "signature",
+    "label": "Signature",
+    "default": [
+     "default"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "file",
+    "label": "Geometry File",
+    "default": [
+     "$HH/geo/defgeo.bgeo"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "attrib",
+    "label": "Attribute",
+    "default": [
+     "Cd"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "prim",
+    "label": "Primitive",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "uv",
+    "label": "UV Coordinate",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "u",
+    "label": "U Coordinate",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "v",
+    "label": "V Coordinate",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "w",
+    "label": "W Coordinate",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 7
+ }
+]
