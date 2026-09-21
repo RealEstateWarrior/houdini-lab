@@ -1,0 +1,160 @@
+{
+ "rows": [
+  {
+   "case": "poisson_edges",
+   "res": 21,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 231,
+   "sec": 0.1737
+  },
+  {
+   "case": "eikonal_edge",
+   "res": 21,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 231,
+   "sec": 0.0064
+  },
+  {
+   "case": "eikonal_point",
+   "res": 21,
+   "mean_abs": 0.334572,
+   "max_abs": 0.763932,
+   "mean": 0.334572,
+   "n": 231,
+   "sec": 0.0062
+  },
+  {
+   "case": "eikonal_point_vs_manhattan",
+   "res": 21,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": -0.0,
+   "n": 231
+  },
+  {
+   "case": "eikonal_point_tris",
+   "res": 21,
+   "mean_abs": 0.202707,
+   "max_abs": 0.763932,
+   "mean": 0.202707,
+   "n": 231
+  },
+  {
+   "case": "poisson_edges",
+   "res": 41,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 861,
+   "sec": 0.0027
+  },
+  {
+   "case": "eikonal_edge",
+   "res": 41,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 861,
+   "sec": 0.0015
+  },
+  {
+   "case": "eikonal_point",
+   "res": 41,
+   "mean_abs": 0.325229,
+   "max_abs": 0.763932,
+   "mean": 0.325229,
+   "n": 861,
+   "sec": 0.0017
+  },
+  {
+   "case": "eikonal_point_vs_manhattan",
+   "res": 41,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": -0.0,
+   "n": 861
+  },
+  {
+   "case": "eikonal_point_tris",
+   "res": 41,
+   "mean_abs": 0.198002,
+   "max_abs": 0.763932,
+   "mean": 0.198002,
+   "n": 861
+  },
+  {
+   "case": "poisson_edges",
+   "res": 81,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 3321,
+   "sec": 0.0068
+  },
+  {
+   "case": "eikonal_edge",
+   "res": 81,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": 0.0,
+   "n": 3321,
+   "sec": 0.0031
+  },
+  {
+   "case": "eikonal_point",
+   "res": 81,
+   "mean_abs": 0.319703,
+   "max_abs": 0.763932,
+   "mean": 0.319703,
+   "n": 3321,
+   "sec": 0.0034
+  },
+  {
+   "case": "eikonal_point_vs_manhattan",
+   "res": 81,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": -0.0,
+   "n": 3321
+  },
+  {
+   "case": "eikonal_point_tris",
+   "res": 81,
+   "mean_abs": 0.194997,
+   "max_abs": 0.763932,
+   "mean": 0.194997,
+   "n": 3321
+  },
+  {
+   "case": "eikonal_sphere",
+   "res": 24,
+   "mean_abs": 0.001221,
+   "max_abs": 0.002442,
+   "mean": -0.001221,
+   "n": 1058,
+   "sec": 0.0078
+  },
+  {
+   "case": "eikonal_sphere",
+   "res": 48,
+   "mean_abs": 0.000292,
+   "max_abs": 0.000585,
+   "mean": -0.000292,
+   "n": 4418,
+   "sec": 0.007
+  },
+  {
+   "case": "eikonal_sphere",
+   "res": 96,
+   "mean_abs": 7.2e-05,
+   "max_abs": 0.000143,
+   "mean": -7.2e-05,
+   "n": 18050,
+   "sec": 0.0244
+  }
+ ]
+}

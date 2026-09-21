@@ -1,0 +1,47 @@
+{
+ "rows": [
+  {
+   "shape": "cylinder",
+   "method": "scp",
+   "ratio_mean": 0.159252,
+   "spread": 1e-06,
+   "uv_w": 0.999893,
+   "uv_h": 0.318503,
+   "aspect": 3.139349,
+   "sec": 0.1822
+  },
+  {
+   "shape": "cylinder",
+   "method": "abf",
+   "ratio_mean": 0.159252,
+   "spread": 2.1e-05,
+   "uv_w": 0.999893,
+   "uv_h": 0.318504,
+   "aspect": 3.13934,
+   "sec": 0.0243
+  },
+  {
+   "shape": "hemisphere",
+   "method": "scp",
+   "ratio_mean": 0.304534,
+   "spread": 0.134943,
+   "uv_w": 0.999893,
+   "uv_h": 0.770752,
+   "aspect": 1.297295,
+   "sec": 0.0185
+  },
+  {
+   "shape": "hemisphere",
+   "method": "abf",
+   "ratio_mean": 0.316704,
+   "spread": 0.104452,
+   "uv_w": 0.999893,
+   "uv_h": 0.889094,
+   "aspect": 1.12462,
+   "sec": 0.0165
+  }
+ ],
+ "want_aspect": 3.13935,
+ "cols": 49,
+ "rows_n": 17
+}
