@@ -1,0 +1,97 @@
+{
+ "rows": [
+  {
+   "case": "cube",
+   "inner": 0,
+   "input_points": 8,
+   "out_points": 8,
+   "out_prims": 6,
+   "volume": 1.0,
+   "want": 1.0,
+   "sec": 0.0749
+  },
+  {
+   "case": "cube",
+   "inner": 100,
+   "input_points": 41,
+   "out_points": 8,
+   "out_prims": 6,
+   "volume": 1.0,
+   "want": 1.0,
+   "sec": 0.0129
+  },
+  {
+   "case": "cube",
+   "inner": 10000,
+   "input_points": 3235,
+   "out_points": 8,
+   "out_prims": 6,
+   "volume": 1.0,
+   "want": 1.0,
+   "sec": 0.0136
+  },
+  {
+   "case": "octahedron",
+   "inner": 0,
+   "input_points": 6,
+   "out_points": 6,
+   "out_prims": 8,
+   "volume": 1.333333,
+   "want": 1.333333,
+   "sec": 0.0112
+  },
+  {
+   "case": "octahedron",
+   "inner": 100,
+   "input_points": 39,
+   "out_points": 6,
+   "out_prims": 8,
+   "volume": 1.333333,
+   "want": 1.333333,
+   "sec": 0.0116
+  },
+  {
+   "case": "octahedron",
+   "inner": 10000,
+   "input_points": 3233,
+   "out_points": 6,
+   "out_prims": 8,
+   "volume": 1.333333,
+   "want": 1.333333,
+   "sec": 0.0133
+  },
+  {
+   "case": "plane2d",
+   "inner": 20,
+   "input_points": 20,
+   "out_points": 8,
+   "out_prims": 1,
+   "area": 9.345696,
+   "want": 9.345697,
+   "hull_points": 9,
+   "sec": 0.0004
+  },
+  {
+   "case": "plane2d",
+   "inner": 1000,
+   "input_points": 1000,
+   "out_points": 17,
+   "out_prims": 1,
+   "area": 11.858295,
+   "want": 11.858296,
+   "hull_points": 61,
+   "sec": 0.0086
+  },
+  {
+   "case": "plane2d",
+   "inner": 100000,
+   "input_points": 100000,
+   "out_points": 20,
+   "out_prims": 1,
+   "area": 11.999428,
+   "want": 11.999428,
+   "hull_points": 20,
+   "sec": 0.1012
+  }
+ ]
+}

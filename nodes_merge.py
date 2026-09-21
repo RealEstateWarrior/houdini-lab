@@ -15,6 +15,7 @@ import nodes_add_2
 import nodes_add_3
 import nodes_add_4
 import nodes_add_5
+import nodes_notes
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -93,6 +94,9 @@ def main():
         raise SystemExit("直してから通す")
 
     data["groups"] = [groups[gid] for gid in ORDER if gid in groups]
+    missing = nodes_notes.apply(data["groups"])
+    if missing:
+        print("書き足す先のノードが無い:", missing)
     total = sum(len(g["nodes"]) for g in data["groups"])
     with io.open(os.path.join(HERE, "nodes.json"), "w", encoding="utf-8") as fp:
         json.dump(data, fp, ensure_ascii=False, indent=1)

@@ -4,12 +4,17 @@
 
 ## いまの状態
 
-- 実験 001〜113 完了。振り返り点検は 090 まで済み、次は 120（対象 091〜120）
+- 実験 001〜121 完了。振り返り点検は 121（091〜120 を全部流し直し。examples/121_audit.py）まで済み、次は 150
+  （点検の番号は 030・060・090・121。120 を厚みの実験に使ったので1つずれた）
 - 2026-09-21 の作業（105〜）: 実験を片付けるのは `python examples/finish_exp.py NNN "タグ,…" "一言" 図.png`
   （記事の差し込みと DONE への追加を1回で）。ノードは nodes_add_4.py、用語は gloss_add_4.py
   - 105 spiral の長さ / 106 attribrandomize の分布 / 107 extractcentroid の中心 / 108 triangulate2d の枚数
   - 109 groupexpand の広がり / 110 copyxform は「値を i 倍して1回」 / 111 pointjitter は幅
   - 112 vdbcombine の和積差 / 113 timeblend（v は1秒あたり）
+  - 114 sweep の体積 / 115 attribfill の到着時間 / 116 uvflatten / 117 relax / 118 revolve の裏返し
+  - 119 面に沿った距離 / 120 measurethickness（box の Use Divisions は線の籠）/ 121 点検
+  - ノードは nodes_add_5.py まで（274件。deform・measure の2グループを新設）
+  - **Write で作ったファイルを sed や python で書き換えると、ファイル全体が差分として返ってきてトークンを食う。Edit を使う**
   - node_dump.py がメニューを12個で切っていた → 直した（vdbcombine は18個）
 - 091〜104 は「答えが計算で出る形と突き合わせる」型（検算）で回した。効きが良い
   - 式と6桁一致したもの: boolean(098) / peak(100) / polyextrude(102) / transform の回転順序(103) / carve(104)

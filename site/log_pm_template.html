@@ -6189,6 +6189,167 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 122 ===================== -->
+    <article class="entry entry--current" id="exp122">
+      <div class="badge">122</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>polyexpand2d は角を丸めずに尖らせる — 20°の鋭い角でも。Divisions は距離を等分する</h2>
+        <p class="path">examples/122_polyexpand.py &nbsp;·&nbsp; 角は丸めず尖らせる（20°の角でも）。Divisions は Offset の距離を等分する</p>
+
+        <div class="prose">
+          <p>1辺2の正方形を polyexpand2d で外と内へずらし、できた線の周の長さを測った。外へ d ずらしたとき、角を尖らせる（留め継ぎ）なら 4·(2+2d)、角を丸めるなら 8 + 2πd になるので、周の長さでどちらか分かる。</p>
+          <p>**角は尖らせていた。** 3通りの d で、外へずらした周は 4·(2+2d) と一致（差は最大 0.000000）。点の数も4のまま。内へずらした周も 4·(2−2d) どおり。</p>
+          <p>**頂角20°の鋭い三角形でも、尖らせたまま。** 外へずらした線は元と相似な三角形になり、周の長さは (内接円の半径 + d)/(内接円の半径) 倍の式と一致した（差は最大 0.000001）。d = 0.2 だと、先端は 1.152 も外へ伸びる（d ÷ sin(10°)）。角を丸める道具ではないので、鋭い角の縁取りは先が大きく飛び出す。</p>
+          <p>**Divisions は、ずらす距離を等分する。** Offset 0.2・Divisions 4 にすると、0.2 ずつ4本ではなく、0.05 刻みで 0.05・0.1・0.15・0.2 の4本ができた（内側の周 6.4, 6.8, 7.2, 7.6、外側 8.4, 8.8, 9.2, 9.6）。</p>
+        </div>
+
+        <p class="label">正方形（1辺2）をずらしたときの周の長さ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="122_offset.png" alt="鋭い三角形でも、測った値は「尖らせる式」に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>鋭い三角形でも、測った値は「尖らせる式」に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>d</th><th>向き</th><th>周の長さ</th><th>尖らせる式</th><th>丸める式</th><th>点</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.1</td><td>外</td><td class="num">8.800000</td><td class="num">8.800000</td><td class="num">8.628319</td><td class="num">4</td></tr>
+              <tr><td class="num">0.1</td><td>内</td><td class="num">7.200000</td><td class="num">7.200000</td><td class="num muted">—</td><td class="num">4</td></tr>
+              <tr><td class="num">0.25</td><td>外</td><td class="num">10.000000</td><td class="num">10.000000</td><td class="num">9.570796</td><td class="num">4</td></tr>
+              <tr><td class="num">0.25</td><td>内</td><td class="num">6.000000</td><td class="num">6.000000</td><td class="num muted">—</td><td class="num">4</td></tr>
+              <tr><td class="num">0.5</td><td>外</td><td class="num">12.000000</td><td class="num">12.000000</td><td class="num">11.141593</td><td class="num">4</td></tr>
+              <tr><td class="num">0.5</td><td>内</td><td class="num">4.000000</td><td class="num">4.000000</td><td class="num muted">—</td><td class="num">4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Output = Offset Curves。周の長さは measure の Perimeter。</p>
+
+        <p class="label">頂角20°の二等辺三角形（高さ2）を外へずらす</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>d</th><th>周の長さ</th><th>尖らせる式</th><th>丸める式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td class="num">5.572494</td><td class="num">5.572493</td><td class="num">5.081174</td></tr>
+              <tr><td class="num">0.1</td><td class="num">6.377973</td><td class="num">6.377972</td><td class="num">5.395333</td></tr>
+              <tr><td class="num">0.2</td><td class="num">7.988931</td><td class="num">7.988930</td><td class="num">6.023651</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">尖らせる式 = 元の周 × (r + d)/r（r は内接円の半径）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>角は尖らせる。</strong>丸い縁取りがほしいときは、別の方法（VDB で太らせて戻すなど）を使う（今回は試していない）。</li>
+          <li><strong>鋭い角ほど先が伸びる。</strong>頂角20°で d=0.2 なら、先端は 1.15 外へ出る。</li>
+          <li><strong>Divisions は Offset を等分。</strong>「0.2 間隔で4本」なら Offset 0.8・Divisions 4 にする。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 123 ===================== -->
+    <article class="entry entry--current" id="exp123">
+      <div class="badge">123</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>shrinkwrap は凸包そのもの — 中の点をいくら足しても立方体は体積1.000000、同じ平面の三角形はまとめる</h2>
+        <p class="path">examples/123_shrinkwrap.py &nbsp;·&nbsp; 中の点を足しても立方体は体積1.000000。2D も別計算の凸包と一致。scatter の点は既定で縁に乗る（1000点中52点）</p>
+
+        <div class="prose">
+          <p>答えが決まる点の置き方で、shrinkwrap の外形が凸包（へこみの無い、いちばん小さな外形）かを確かめた。</p>
+          <p>**3D: 立方体の角8つに、中の点を最大3,000個ほど足しても、外形は立方体のまま。** 体積は 1.000000、正八面体は 4/3 と一致（差は最大 0.000000）。中の点は外形に1つも使われず、出てきた点は立方体で8個・正八面体で6個だけ。面の数は立方体で6枚（同じ平面の三角形を1枚の四角形にまとめている）、正八面体で8枚。</p>
+          <p>**2D: <button class="term" data-term="scatter">scatter</button> した点の外形の面積は、Python で別に計算した凸包の面積と一致**（差は最大 0.000001）。</p>
+          <p>**ついでに分かったこと: scatter の点は、既定の Relax Iterations で板の縁にぴったり乗る。** 1,000 点のうち 52 点が、板の縁の上にあった（Relax を切ると 0 点）。shrinkwrap は一直線上の点を外すので、外形の点は 17 個まで減る（縁に乗った点を数えると 61 個）。</p>
+          <p>速さ: 10万点の 2D で 0.10 秒。</p>
+        </div>
+
+        <p class="label">点の置き方と、外形の大きさ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="123_hull.png" alt="shrinkwrap（青）と Python の凸包（緑の破線）は重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>shrinkwrap（青）と Python の凸包（緑の破線）は重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>点の置き方</th><th>入力の点</th><th>外形の点</th><th>外形の面</th><th>体積・面積</th><th>式・別計算</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>立方体の角8つ＋中の点</td><td class="num">8</td><td class="num">8</td><td class="num">6</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">0.0749</td></tr>
+              <tr><td>立方体の角8つ＋中の点</td><td class="num">41</td><td class="num">8</td><td class="num">6</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">0.0129</td></tr>
+              <tr><td>立方体の角8つ＋中の点</td><td class="num">3,235</td><td class="num">8</td><td class="num">6</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">0.0136</td></tr>
+              <tr><td>正八面体の頂点6つ＋中の点</td><td class="num">6</td><td class="num">6</td><td class="num">8</td><td class="num">1.333333</td><td class="num">1.333333</td><td class="num">0.0112</td></tr>
+              <tr><td>正八面体の頂点6つ＋中の点</td><td class="num">39</td><td class="num">6</td><td class="num">8</td><td class="num">1.333333</td><td class="num">1.333333</td><td class="num">0.0116</td></tr>
+              <tr><td>正八面体の頂点6つ＋中の点</td><td class="num">3,233</td><td class="num">6</td><td class="num">8</td><td class="num">1.333333</td><td class="num">1.333333</td><td class="num">0.0133</td></tr>
+              <tr><td>板（4×3）に scatter した点（2D）</td><td class="num">20</td><td class="num">8</td><td class="num">1</td><td class="num">9.345696</td><td class="num">9.345697</td><td class="num">0.0004</td></tr>
+              <tr><td>板（4×3）に scatter した点（2D）</td><td class="num">1,000</td><td class="num">17</td><td class="num">1</td><td class="num">11.858295</td><td class="num">11.858296</td><td class="num">0.0086</td></tr>
+              <tr><td>板（4×3）に scatter した点（2D）</td><td class="num">100,000</td><td class="num">20</td><td class="num">1</td><td class="num">11.999428</td><td class="num">11.999428</td><td class="num">0.1012</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">中の点は |x|+|y|+|z| &lt; 0.49 の範囲だけに置いた（立方体・正八面体のどちらの内側にも入る）。体積・面積は measure で出した。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>shrinkwrap は凸包。</strong>中の点は使われず、角の点だけが残る。</li>
+          <li><strong>同じ平面の面はまとめる。</strong>立方体の外形は三角形12枚ではなく四角形6枚。</li>
+          <li><strong>scatter の点は縁にも乗る。</strong>Relax を入れたまま（既定）だと、1,000点中52点が縁の上。縁から離したいときは Relax を切るか、少し内側の板に散らす。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 124 ===================== -->
+    <article class="entry entry--current" id="exp124">
+      <div class="badge">124</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>L-System のコッホ曲線は式どおり — 全長4^n・端の間隔3^n。小数の世代は途中の形になる</h2>
+        <p class="path">examples/124_lsystem.py &nbsp;·&nbsp; 0〜6世代すべて 全長4^n・端の間隔3^n。Generations 2.5 は3世代と同じ点の数で、全長40</p>
+
+        <div class="prose">
+          <p>lsystem に、始まり F、規則 F → F+F--F+F、角度 60°、1歩の長さ 1 を入れて、コッホ曲線を育てた。n 世代で、線分は 4^n 本、全長は 4^n、端から端までの距離は 3^n になるはず。</p>
+          <p>**0〜6 世代のすべてで式どおり。** 線分の数は 4^n 本で一致、端の間隔は 3^n（差は最大 0.000000）、全長のずれは最大 0.5 ppm（6世代で 4096.001953。小数の丸めの範囲）。6世代は 4,097 点を 1.6 ミリ秒で作った。</p>
+          <p>曲線は y 方向（上）へ伸び、盛り上がりは x 方向に出た。高さは端の間隔の √3/6 倍（6世代で 210.4445 ＝ 729 × √3/6）。</p>
+          <p>**Generations に 2.5 を入れると、点の数は3世代と同じ 65 点**で、全長は 40（2世代 16 と3世代 64 の間）、端の間隔は 21.2942。3世代の形へ向かう途中の形らしい（Continuous Length が既定で入っている。線分1本ずつの長さと、切った場合は確かめていない）。</p>
+        </div>
+
+        <p class="label">世代と、線分・全長・端の間隔</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="124_koch.png" alt="log を取ると、全長（底4）と端の間隔（底3）はどちらも世代の数に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>log を取ると、全長（底4）と端の間隔（底3）はどちらも世代の数に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>世代</th><th>点</th><th>全長</th><th>4^n</th><th>端の間隔</th><th>3^n</th><th>ミリ秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">2</td><td class="num">1.000000</td><td class="num">1</td><td class="num">1.000000</td><td class="num">1</td><td class="num">15.4</td></tr>
+              <tr><td class="num">1</td><td class="num">5</td><td class="num">4.000000</td><td class="num">4</td><td class="num">3.000000</td><td class="num">3</td><td class="num">0.4</td></tr>
+              <tr><td class="num">2</td><td class="num">17</td><td class="num">16.000000</td><td class="num">16</td><td class="num">9.000000</td><td class="num">9</td><td class="num">0.3</td></tr>
+              <tr><td class="num">3</td><td class="num">65</td><td class="num">64.000000</td><td class="num">64</td><td class="num">27.000000</td><td class="num">27</td><td class="num">0.5</td></tr>
+              <tr><td class="num">4</td><td class="num">257</td><td class="num">256.000031</td><td class="num">256</td><td class="num">81.000000</td><td class="num">81</td><td class="num">0.4</td></tr>
+              <tr><td class="num">5</td><td class="num">1,025</td><td class="num">1023.999939</td><td class="num">1024</td><td class="num">243.000000</td><td class="num">243</td><td class="num">0.6</td></tr>
+              <tr><td class="num">6</td><td class="num">4,097</td><td class="num">4096.001953</td><td class="num">4096</td><td class="num">729.000000</td><td class="num">729</td><td class="num">1.6</td></tr>
+              <tr><td class="num">2.5</td><td class="num">65</td><td class="num">40.000000</td><td class="num muted">—</td><td class="num">21.294228</td><td class="num muted">—</td><td class="num">0.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">全長は measure の Perimeter。端の間隔は最初と最後の点の距離。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>規則どおりに育つ。</strong>線分 4^n 本、全長 4^n、端の間隔 3^n。</li>
+          <li><strong>速い。</strong>4,097 点でも 2 ミリ秒。</li>
+          <li><strong>小数の世代は、次の世代と同じ点の数で、長さは途中の値。</strong></li>
+          <li><strong>全長 ÷ 端の間隔 = (4/3)^n。</strong>世代を増やすほど、同じ幅に長い線が詰まる（<button class="term" data-term="フラクタル">フラクタル</button>）。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
