@@ -1,0 +1,75 @@
+{
+ "rows": [
+  {
+   "case": "slab_polymesh",
+   "want": 0.3,
+   "sec": 0.2543,
+   "prims": 880,
+   "open_prims": 0,
+   "volume": 4.8,
+   "n": 450,
+   "mean": 0.296737,
+   "min": 0.279922,
+   "max": 0.3,
+   "nofilter": {
+    "n": 450,
+    "mean": 0.3,
+    "min": 0.3,
+    "max": 0.3
+   }
+  },
+  {
+   "case": "slab_poly_usedivisions",
+   "want": 0.3,
+   "sec": 0.0369,
+   "prims": 616,
+   "open_prims": 616,
+   "volume": 0.0,
+   "n": 512,
+   "mean": 0.002308,
+   "min": 0.002308,
+   "max": 0.002308,
+   "nofilter": {
+    "n": 512,
+    "mean": 0.002308,
+    "min": 0.002308,
+    "max": 0.002308
+   }
+  },
+  {
+   "case": "shell_0.5",
+   "want": 0.5,
+   "sec": 0.1234,
+   "n": 36100,
+   "mean": 0.5,
+   "min": 0.499999,
+   "max": 0.500001
+  },
+  {
+   "case": "shell_0.8",
+   "want": 0.2,
+   "sec": 0.0981,
+   "n": 36100,
+   "mean": 0.2,
+   "min": 0.199999,
+   "max": 0.200001
+  },
+  {
+   "case": "shell_0.95",
+   "want": 0.05,
+   "sec": 0.0907,
+   "n": 36100,
+   "mean": 0.05,
+   "min": 0.05,
+   "max": 0.05
+  },
+  {
+   "case": "solid_sphere",
+   "want": 2.0,
+   "n": 18050,
+   "mean": 1.999996,
+   "min": 1.999994,
+   "max": 2.0
+  }
+ ]
+}

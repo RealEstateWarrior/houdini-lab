@@ -1,0 +1,92 @@
+{
+ "r1": 1.0,
+ "r2": 0.4,
+ "h": 1.5,
+ "rows": [
+  {
+   "case": "frustum",
+   "k": 4,
+   "area": 6.172714,
+   "want_poly": 6.172714,
+   "want_smooth": 7.105558,
+   "prims": 4,
+   "sec": 0.1413
+  },
+  {
+   "case": "frustum",
+   "k": 8,
+   "area": 6.854042,
+   "want_poly": 6.854042,
+   "want_smooth": 7.105558,
+   "prims": 8,
+   "sec": 0.0038
+  },
+  {
+   "case": "frustum",
+   "k": 16,
+   "area": 7.041433,
+   "want_poly": 7.041433,
+   "want_smooth": 7.105558,
+   "prims": 16,
+   "sec": 0.0035
+  },
+  {
+   "case": "frustum",
+   "k": 64,
+   "area": 7.101525,
+   "want_poly": 7.101525,
+   "want_smooth": 7.105558,
+   "prims": 64,
+   "sec": 0.0042
+  },
+  {
+   "case": "frustum",
+   "k": 256,
+   "area": 7.105305,
+   "want_poly": 7.105305,
+   "want_smooth": 7.105558,
+   "prims": 256,
+   "sec": 0.0066
+  },
+  {
+   "case": "square_ring",
+   "k": 4,
+   "volume": -1.25,
+   "want_poly": 1.25,
+   "want_smooth": 1.963495,
+   "prims": 16
+  },
+  {
+   "case": "square_ring",
+   "k": 8,
+   "volume": -1.767767,
+   "want_poly": 1.767767,
+   "want_smooth": 1.963495,
+   "prims": 32
+  },
+  {
+   "case": "square_ring",
+   "k": 16,
+   "volume": -1.913417,
+   "want_poly": 1.913417,
+   "want_smooth": 1.963495,
+   "prims": 64
+  },
+  {
+   "case": "square_ring",
+   "k": 64,
+   "volume": -1.960343,
+   "want_poly": 1.960343,
+   "want_smooth": 1.963495,
+   "prims": 256
+  },
+  {
+   "case": "square_ring",
+   "k": 256,
+   "volume": -1.963298,
+   "want_poly": 1.963298,
+   "want_smooth": 1.963495,
+   "prims": 1024
+  }
+ ]
+}

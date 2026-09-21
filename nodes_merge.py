@@ -14,11 +14,12 @@ import nodes_add_1
 import nodes_add_2
 import nodes_add_3
 import nodes_add_4
+import nodes_add_5
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # ページに出す順
-ORDER = ["make", "shape", "vdb", "scatter", "attrib", "group", "flow", "pack",
+ORDER = ["make", "shape", "deform", "measure", "vdb", "scatter", "attrib", "group", "flow", "pack",
          "uv", "program", "sim", "pop", "force", "terrain", "rig", "groom",
          "mpm", "obj", "rop", "vop"]
 
@@ -61,7 +62,8 @@ def main():
     added = 0
     unknown = []
 
-    for module in (nodes_add_1, nodes_add_2, nodes_add_3, nodes_add_4):
+    for module in (nodes_add_1, nodes_add_2, nodes_add_3, nodes_add_4,
+                   nodes_add_5):
         for gid, label, note in getattr(module, "GROUPS_NEW", []):
             if gid not in groups:
                 groups[gid] = {"id": gid, "label": label, "note": note,

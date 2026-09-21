@@ -1,0 +1,160 @@
+{
+ "title": "面に沿った距離は Surface が正解 — Edge と attribfill は辺の道のり、Heat は約1%短い",
+ "summary": "2×2 の平らな板の真ん中から、面に沿った距離を5通りの方法で測り、本当の距離 √(x²+z²) と比べた。網は、四角（41×41）・三角（同じ点を三角形でつないだもの）・remesh（向きがばらばらの三角形）の3つ。\n\n**distancealonggeometry の Surface（既定）は、ほぼ正解。** 四角の網でずれ 0.000000、三角の網・remesh でも最大 0.0003 未満。辺をたどるのではなく、面の上をまっすぐ進んだ距離を出している。\n\n**Edge は、辺をたどった道のり。** 四角の網では |x|+|z| になり、角で最大 0.5858（= 2 − √2）ずれる。attribfill の Arrival Time は、3つの網すべてで Edge と違う値だった（実験115 の「縦横の道のり」の正体）。remesh した網では辺の向きがばらけるので、ずれの平均は 0.039 まで減る。\n\n**Heat Geodesic は、どの網でも少し短く出る**（平均で 0.0090、heatgeodesic ノードは 0.0125）。網の向きには左右されにくい。\n\n速さは、どれも 1,700〜1,900 点で 0.04 秒以下（最初の1回を除く）。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "網と測り方ごとの、本当の距離とのずれ",
+   "note": "始まりは板の真ん中の点。remesh では原点に一番近い点を始まりにして、全体をずらして原点に合わせた。",
+   "images": [
+    {
+     "path": "119_distance.png",
+     "caption": "Surface（緑）はどの網でも0に近い。Edge と attribfill（破線）は重なる。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "網",
+    "測り方",
+    "ずれの平均",
+    "ずれの最大",
+    "ずれの向き（平均）",
+    "秒"
+   ],
+   "rows": [
+    [
+     "四角の網",
+     "distancealonggeometry・Edge",
+     "0.240251",
+     "0.585786",
+     "+0.240251",
+     "0.0350"
+    ],
+    [
+     "四角の網",
+     "distancealonggeometry・Surface",
+     "0.000000",
+     "0.000000",
+     "-0.000000",
+     "0.0036"
+    ],
+    [
+     "四角の網",
+     "distancealonggeometry・Heat Geodesic",
+     "0.008959",
+     "0.046040",
+     "-0.008959",
+     "0.1304"
+    ],
+    [
+     "四角の網",
+     "heatgeodesic",
+     "0.012460",
+     "0.058876",
+     "-0.012452",
+     "0.0203"
+    ],
+    [
+     "四角の網",
+     "attribfill・Arrival Time",
+     "0.240251",
+     "0.585786",
+     "+0.240251",
+     "0.0124"
+    ],
+    [
+     "三角の網",
+     "distancealonggeometry・Edge",
+     "0.140238",
+     "0.585786",
+     "+0.140238",
+     "0.0066"
+    ],
+    [
+     "三角の網",
+     "distancealonggeometry・Surface",
+     "0.000005",
+     "0.000269",
+     "+0.000005",
+     "0.0043"
+    ],
+    [
+     "三角の網",
+     "distancealonggeometry・Heat Geodesic",
+     "0.008959",
+     "0.046040",
+     "-0.008959",
+     "0.0165"
+    ],
+    [
+     "三角の網",
+     "heatgeodesic",
+     "0.012460",
+     "0.058876",
+     "-0.012452",
+     "0.0136"
+    ],
+    [
+     "三角の網",
+     "attribfill・Arrival Time",
+     "0.140238",
+     "0.585786",
+     "+0.140238",
+     "0.0020"
+    ],
+    [
+     "remesh した網",
+     "distancealonggeometry・Edge",
+     "0.038608",
+     "0.080720",
+     "+0.038608",
+     "0.0075"
+    ],
+    [
+     "remesh した網",
+     "distancealonggeometry・Surface",
+     "0.000018",
+     "0.000235",
+     "+0.000018",
+     "0.0048"
+    ],
+    [
+     "remesh した網",
+     "distancealonggeometry・Heat Geodesic",
+     "0.005626",
+     "0.017211",
+     "-0.005625",
+     "0.0223"
+    ],
+    [
+     "remesh した網",
+     "heatgeodesic",
+     "0.007247",
+     "0.021913",
+     "-0.007245",
+     "0.0188"
+    ],
+    [
+     "remesh した網",
+     "attribfill・Arrival Time",
+     "0.038607",
+     "0.080720",
+     "+0.038607",
+     "0.0023"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>面に沿った本当の距離がほしいなら、distancealonggeometry の Surface。</strong>既定のまま使える。",
+  "<strong>Edge と attribfill の Arrival Time は、辺の道のり。</strong>網の向きに引っぱられる。四角の網では最大で約 41%（2 − √2 を √2 で割った割合）長くなる。",
+  "<strong>Heat Geodesic は約1%短い。</strong>向きには強いが、ぴったりではない。",
+  "<strong>remesh すると辺の道のりのずれは小さくなる</strong>が、0 にはならない。"
+ ],
+ "next": [
+  "曲がった面（球・波打つ面）で、Surface がどこまで正確か",
+  "findshortestpath の cost が Edge と同じになるか",
+  "Heat Geodesic の Smoothing を変えると、短く出る分が変わるか"
+ ]
+}

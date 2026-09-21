@@ -1,0 +1,154 @@
+{
+ "rows": [
+  {
+   "mesh": "quad",
+   "method": "distancealonggeometry_edge",
+   "n": 1681,
+   "mean_abs": 0.240251,
+   "max_abs": 0.585786,
+   "mean": 0.240251,
+   "sec": 0.035,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "quad",
+   "method": "distancealonggeometry_surface",
+   "n": 1681,
+   "mean_abs": 0.0,
+   "max_abs": 0.0,
+   "mean": -0.0,
+   "sec": 0.0036,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "quad",
+   "method": "distancealonggeometry_heat",
+   "n": 1681,
+   "mean_abs": 0.008959,
+   "max_abs": 0.04604,
+   "mean": -0.008959,
+   "sec": 0.1304,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "quad",
+   "method": "heatgeodesic",
+   "n": 1681,
+   "mean_abs": 0.01246,
+   "max_abs": 0.058876,
+   "mean": -0.012452,
+   "sec": 0.0203,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "quad",
+   "method": "attribfill_eikonal",
+   "n": 1681,
+   "mean_abs": 0.240251,
+   "max_abs": 0.585786,
+   "mean": 0.240251,
+   "sec": 0.0124,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "tri",
+   "method": "distancealonggeometry_edge",
+   "n": 1681,
+   "mean_abs": 0.140238,
+   "max_abs": 0.585786,
+   "mean": 0.140238,
+   "sec": 0.0066,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "tri",
+   "method": "distancealonggeometry_surface",
+   "n": 1681,
+   "mean_abs": 5e-06,
+   "max_abs": 0.000269,
+   "mean": 5e-06,
+   "sec": 0.0043,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "tri",
+   "method": "distancealonggeometry_heat",
+   "n": 1681,
+   "mean_abs": 0.008959,
+   "max_abs": 0.04604,
+   "mean": -0.008959,
+   "sec": 0.0165,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "tri",
+   "method": "heatgeodesic",
+   "n": 1681,
+   "mean_abs": 0.01246,
+   "max_abs": 0.058876,
+   "mean": -0.012452,
+   "sec": 0.0136,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "tri",
+   "method": "attribfill_eikonal",
+   "n": 1681,
+   "mean_abs": 0.140238,
+   "max_abs": 0.585786,
+   "mean": 0.140238,
+   "sec": 0.002,
+   "start_offset": 0.0
+  },
+  {
+   "mesh": "remesh",
+   "method": "distancealonggeometry_edge",
+   "n": 1928,
+   "mean_abs": 0.038608,
+   "max_abs": 0.08072,
+   "mean": 0.038608,
+   "sec": 0.0075,
+   "start_offset": 0.022131
+  },
+  {
+   "mesh": "remesh",
+   "method": "distancealonggeometry_surface",
+   "n": 1928,
+   "mean_abs": 1.8e-05,
+   "max_abs": 0.000235,
+   "mean": 1.8e-05,
+   "sec": 0.0048,
+   "start_offset": 0.022131
+  },
+  {
+   "mesh": "remesh",
+   "method": "distancealonggeometry_heat",
+   "n": 1928,
+   "mean_abs": 0.005626,
+   "max_abs": 0.017211,
+   "mean": -0.005625,
+   "sec": 0.0223,
+   "start_offset": 0.022131
+  },
+  {
+   "mesh": "remesh",
+   "method": "heatgeodesic",
+   "n": 1928,
+   "mean_abs": 0.007247,
+   "max_abs": 0.021913,
+   "mean": -0.007245,
+   "sec": 0.0188,
+   "start_offset": 0.022131
+  },
+  {
+   "mesh": "remesh",
+   "method": "attribfill_eikonal",
+   "n": 1928,
+   "mean_abs": 0.038607,
+   "max_abs": 0.08072,
+   "mean": 0.038607,
+   "sec": 0.0023,
+   "start_offset": 0.022131
+  }
+ ]
+}

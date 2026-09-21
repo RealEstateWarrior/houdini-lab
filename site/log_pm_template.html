@@ -5916,6 +5916,186 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 118 ===================== -->
+    <article class="entry entry--current" id="exp118">
+      <div class="badge">118</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>revolve の面積・体積は k 角の式に6桁一致 — ただし閉じた断面を回すと体積がマイナス（裏返し）</h2>
+        <p class="path">examples/118_revolve.py &nbsp;·&nbsp; 側面積・体積とも k 角の式に6桁一致。閉じた断面を回すと体積がマイナス（裏返し）。Reverse Cross Sections で直る</p>
+
+        <div class="prose">
+          <p>線分 (1, 0)→(0.4, 1.5) を y 軸のまわりに一周させ、できた円錐台の側面積を式と比べた。一周を k 分割すると、1枚の面は等脚台形になるので、面積は k 角の角錐台の式で出せる。</p>
+          <p>**側面積は、5通りすべて k 角の式と一致**（差は最大 0.000000）。なめらかな円錐台の式との比は、k=16 で 0.9910、k=256 で 0.999964。</p>
+          <p>次に、正方形（0.5×0.5、軸から 1.0〜1.5）を回して、四角い断面のドーナツを作った。体積はパップス・ギュルダンの定理（断面積 × 重心の回る長さ）で出る。**大きさは k 角の式と一致**（差は最大 0.000000）。**ところが符号がすべてマイナスだった。** k=64 で -1.960343。面の表が内側を向いている（裏返し）ということ。</p>
+          <p>直し方は3つとも効いた: revolve の Reverse Cross Sections を入れる (+1.960343)、後ろに reverse を置く (+1.960343)、回す前の断面を reverse で裏返す (+1.960343)。</p>
+          <p>断面は xy 平面で反時計回り（手前から見て）に点を並べた。時計回りに並べていれば、最初から表向きになるはず（確かめていない）。</p>
+        </div>
+
+        <p class="label">円錐台の側面積（下の半径1・上の半径0.4・高さ1.5）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="118_revolve.png" alt="どちらも分割を増やすと比が1に近づく。体積は符号を外して比べた。" loading="lazy" decoding="async"></div>
+            <figcaption>どちらも分割を増やすと比が1に近づく。体積は符号を外して比べた。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>一周の分割</th><th>面の数</th><th>面積</th><th>k 角の式</th><th>なめらかな式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">4</td><td class="num">4</td><td class="num">6.172714</td><td class="num">6.172714</td><td class="num">7.105558</td></tr>
+              <tr><td class="num">8</td><td class="num">8</td><td class="num">6.854042</td><td class="num">6.854042</td><td class="num">7.105558</td></tr>
+              <tr><td class="num">16</td><td class="num">16</td><td class="num">7.041433</td><td class="num">7.041433</td><td class="num">7.105558</td></tr>
+              <tr><td class="num">64</td><td class="num">64</td><td class="num">7.101525</td><td class="num">7.101525</td><td class="num">7.105558</td></tr>
+              <tr><td class="num">256</td><td class="num">256</td><td class="num">7.105305</td><td class="num">7.105305</td><td class="num">7.105558</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">k 角の式 = k × (上下の辺の和 / 2) × 斜めの高さ。上下の辺 = 2r·sin(π/k)、斜めの高さ = √(h² + ((r2−r1)·cos(π/k))²)。</p>
+
+        <p class="label">四角い断面のドーナツの体積</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>一周の分割</th><th>面の数</th><th>体積（measure）</th><th>k 角の式</th><th>なめらかな式</th></tr></thead>
+            <tbody>
+              <tr><td class="num">4</td><td class="num">16</td><td class="num">-1.250000</td><td class="num">1.250000</td><td class="num">1.963495</td></tr>
+              <tr><td class="num">8</td><td class="num">32</td><td class="num">-1.767767</td><td class="num">1.767767</td><td class="num">1.963495</td></tr>
+              <tr><td class="num">16</td><td class="num">64</td><td class="num">-1.913417</td><td class="num">1.913417</td><td class="num">1.963495</td></tr>
+              <tr><td class="num">64</td><td class="num">256</td><td class="num">-1.960343</td><td class="num">1.960343</td><td class="num">1.963495</td></tr>
+              <tr><td class="num">256</td><td class="num">1024</td><td class="num">-1.963298</td><td class="num">1.963298</td><td class="num">1.963495</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">k 角の式 = (k/2)·sin(2π/k)·(1.5² − 1.0²)·0.5。なめらかな式 = 0.25 × 2π × 1.25。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>回した面の面積は k 角の式どおり。</strong>既定の分割のまま面積を出すなら、k 角の式で補正できる。</li>
+          <li><strong>閉じた断面を回すと、裏返しになることがある。</strong>体積がマイナスになったら、Reverse Cross Sections を入れる。</li>
+          <li><strong>裏返しは見た目では気づきにくい。</strong>measure の体積の符号で見つかる（<a href="#exp098">実験098</a> の「答えが計算で出る形で試す」がここでも効いた）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 119 ===================== -->
+    <article class="entry entry--current" id="exp119">
+      <div class="badge">119</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>面に沿った距離は Surface が正解 — Edge と attribfill は辺の道のり、Heat は約1%短い</h2>
+        <p class="path">examples/119_surface_distance.py &nbsp;·&nbsp; Surface はずれ0.0003未満。Edge と attribfill は辺の道のり（四角の網で |x|+|z|）、Heat は約1%短い</p>
+
+        <div class="prose">
+          <p>2×2 の平らな板の真ん中から、面に沿った距離を5通りの方法で測り、本当の距離 √(x²+z²) と比べた。網は、四角（41×41）・三角（同じ点を三角形でつないだもの）・remesh（向きがばらばらの三角形）の3つ。</p>
+          <p>**distancealonggeometry の Surface（既定）は、ほぼ正解。** 四角の網でずれ 0.000000、三角の網・remesh でも最大 0.0003 未満。辺をたどるのではなく、面の上をまっすぐ進んだ距離を出している。</p>
+          <p>**Edge は、辺をたどった道のり。** 四角の網では |x|+|z| になり、角で最大 0.5858（= 2 − √2）ずれる。attribfill の Arrival Time は、3つの網すべてで Edge と違う値だった（<a href="#exp115">実験115</a> の「縦横の道のり」の正体）。remesh した網では辺の向きがばらけるので、ずれの平均は 0.039 まで減る。</p>
+          <p>**Heat Geodesic は、どの網でも少し短く出る**（平均で 0.0090、heatgeodesic <button class="term" data-term="ノード">ノード</button>は 0.0125）。網の向きには左右されにくい。</p>
+          <p>速さは、どれも 1,700〜1,900 点で 0.04 秒以下（最初の1回を除く）。</p>
+        </div>
+
+        <p class="label">網と測り方ごとの、本当の距離とのずれ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="119_distance.png" alt="Surface（緑）はどの網でも0に近い。Edge と attribfill（破" loading="lazy" decoding="async"></div>
+            <figcaption>Surface（緑）はどの網でも0に近い。Edge と attribfill（破線）は重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>網</th><th>測り方</th><th>ずれの平均</th><th>ずれの最大</th><th>ずれの向き（平均）</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>四角の網</td><td>distancealonggeometry・Edge</td><td class="num">0.240251</td><td class="num">0.585786</td><td class="num">+0.240251</td><td class="num">0.0350</td></tr>
+              <tr><td>四角の網</td><td>distancealonggeometry・Surface</td><td class="num">0.000000</td><td class="num">0.000000</td><td class="num">-0.000000</td><td class="num">0.0036</td></tr>
+              <tr><td>四角の網</td><td>distancealonggeometry・Heat Geodesic</td><td class="num">0.008959</td><td class="num">0.046040</td><td class="num">-0.008959</td><td class="num">0.1304</td></tr>
+              <tr><td>四角の網</td><td>heatgeodesic</td><td class="num">0.012460</td><td class="num">0.058876</td><td class="num">-0.012452</td><td class="num">0.0203</td></tr>
+              <tr><td>四角の網</td><td>attribfill・Arrival Time</td><td class="num">0.240251</td><td class="num">0.585786</td><td class="num">+0.240251</td><td class="num">0.0124</td></tr>
+              <tr><td>三角の網</td><td>distancealonggeometry・Edge</td><td class="num">0.140238</td><td class="num">0.585786</td><td class="num">+0.140238</td><td class="num">0.0066</td></tr>
+              <tr><td>三角の網</td><td>distancealonggeometry・Surface</td><td class="num">0.000005</td><td class="num">0.000269</td><td class="num">+0.000005</td><td class="num">0.0043</td></tr>
+              <tr><td>三角の網</td><td>distancealonggeometry・Heat Geodesic</td><td class="num">0.008959</td><td class="num">0.046040</td><td class="num">-0.008959</td><td class="num">0.0165</td></tr>
+              <tr><td>三角の網</td><td>heatgeodesic</td><td class="num">0.012460</td><td class="num">0.058876</td><td class="num">-0.012452</td><td class="num">0.0136</td></tr>
+              <tr><td>三角の網</td><td>attribfill・Arrival Time</td><td class="num">0.140238</td><td class="num">0.585786</td><td class="num">+0.140238</td><td class="num">0.0020</td></tr>
+              <tr><td>remesh した網</td><td>distancealonggeometry・Edge</td><td class="num">0.038608</td><td class="num">0.080720</td><td class="num">+0.038608</td><td class="num">0.0075</td></tr>
+              <tr><td>remesh した網</td><td>distancealonggeometry・Surface</td><td class="num">0.000018</td><td class="num">0.000235</td><td class="num">+0.000018</td><td class="num">0.0048</td></tr>
+              <tr><td>remesh した網</td><td>distancealonggeometry・Heat Geodesic</td><td class="num">0.005626</td><td class="num">0.017211</td><td class="num">-0.005625</td><td class="num">0.0223</td></tr>
+              <tr><td>remesh した網</td><td>heatgeodesic</td><td class="num">0.007247</td><td class="num">0.021913</td><td class="num">-0.007245</td><td class="num">0.0188</td></tr>
+              <tr><td>remesh した網</td><td>attribfill・Arrival Time</td><td class="num">0.038607</td><td class="num">0.080720</td><td class="num">+0.038607</td><td class="num">0.0023</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">始まりは板の真ん中の点。remesh では原点に一番近い点を始まりにして、全体をずらして原点に合わせた。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>面に沿った本当の距離がほしいなら、distancealonggeometry の Surface。</strong>既定のまま使える。</li>
+          <li><strong>Edge と attribfill の Arrival Time は、辺の道のり。</strong>網の向きに引っぱられる。四角の網では最大で約 41%（2 − √2 を √2 で割った割合）長くなる。</li>
+          <li><strong>Heat Geodesic は約1%短い。</strong>向きには強いが、ぴったりではない。</li>
+          <li><strong>remesh すると辺の道のりのずれは小さくなる</strong>が、0 にはならない。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 120 ===================== -->
+    <article class="entry entry--current" id="exp120">
+      <div class="badge">120</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>measurethickness は殻の厚みを6桁で返す — 板の縁ではぼかしで細く出る。box の Use Divisions は面にならない</h2>
+        <p class="path">examples/120_thickness.py &nbsp;·&nbsp; 殻の厚みはずれ0.000001。板は既定のぼかしで縁が細く出る。box の Use Divisions（Polygon）は開いた線の籠</p>
+
+        <div class="prose">
+          <p>厚みが分かっている形を3つ作って、measurethickness の値と比べた。</p>
+          <p>**殻（半径1の球の中に、裏返した半径 r の球）は、ほぼぴったり 1−r。** r = 0.5・0.8・0.95 のすべての点で、ずれは最大 0.000001。詰まった球は直径 2 に対して 1.999994〜2.000000。</p>
+          <p>**板（4×0.3×4）は、既定のままだと少し薄く出る。** 上と下の面の真ん中あたりの点で、平均 0.2967、最小 0.2799。ぼかし（Use Blur）と、まわりの中央値（Median of Neighbors）を切ると、全部 0.300000 になった。縁に近い所の短い値が、ぼかしで内側へにじんでいる。</p>
+          <p>**つまずいた点: box を Polygon のまま Use Divisions で割ると、面ではなく開いた線の籠になる。** 616 本すべてが閉じていない線で、体積は 0。measurethickness は 0.002308 という意味の無い値を返した。点を増やした箱がほしいときは、Primitive Type を Polygon Mesh にして Axis Divisions で割る。</p>
+        </div>
+
+        <p class="label">作った厚みと、測った厚み</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="120_thickness.png" alt="殻・詰まった球は線の上。板は既定のぼかしで少し下に出る。" loading="lazy" decoding="async"></div>
+            <figcaption>殻・詰まった球は線の上。板は既定のぼかしで少し下に出る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形</th><th>作った厚み</th><th>平均</th><th>最小</th><th>最大</th><th>点の数</th></tr></thead>
+            <tbody>
+              <tr><td>板 0.3（Polygon Mesh）</td><td class="num">0.3</td><td class="num">0.296737</td><td class="num">0.279922</td><td class="num">0.300000</td><td class="num">450</td></tr>
+              <tr><td>板 0.3（Polygon + Use Divisions）</td><td class="num">0.3</td><td class="num">0.002308</td><td class="num">0.002308</td><td class="num">0.002308</td><td class="num">512</td></tr>
+              <tr><td>殻 1−0.5</td><td class="num">0.5</td><td class="num">0.500000</td><td class="num">0.499999</td><td class="num">0.500001</td><td class="num">36100</td></tr>
+              <tr><td>殻 1−0.8</td><td class="num">0.2</td><td class="num">0.200000</td><td class="num">0.199999</td><td class="num">0.200001</td><td class="num">36100</td></tr>
+              <tr><td>殻 1−0.95</td><td class="num">0.05</td><td class="num">0.050000</td><td class="num">0.050000</td><td class="num">0.050000</td><td class="num">36100</td></tr>
+              <tr><td>詰まった球（直径2）</td><td class="num">2</td><td class="num">1.999996</td><td class="num">1.999994</td><td class="num">2.000000</td><td class="num">18050</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">球は polymesh 96×192。板は上と下の面の、縁から 0.5 以上内側の点だけを数えた。</p>
+
+        <p class="label">板で、ぼかしを切ったとき</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>作り方</th><th>既定の平均</th><th>既定の最小</th><th>ぼかし無しの平均</th><th>ぼかし無しの最小</th></tr></thead>
+            <tbody>
+              <tr><td>板 0.3（Polygon Mesh）</td><td class="num">0.296737</td><td class="num">0.279922</td><td class="num">0.300000</td><td class="num">0.300000</td></tr>
+              <tr><td>板 0.3（Polygon + Use Divisions）</td><td class="num">0.002308</td><td class="num">0.002308</td><td class="num">0.002308</td><td class="num">0.002308</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Use Blur と Median of Neighbors を切った。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>丸い殻の厚みは正確。</strong>ずれは 0.000001 程度。</li>
+          <li><strong>角のある形では、ぼかしで縁の値がにじむ。</strong>正確な値がほしいなら Use Blur と Median of Neighbors を切る。</li>
+          <li><strong>box の Use Divisions（Polygon のとき）は開いた線の籠。</strong>measure の体積が0になる。点を増やすなら Polygon Mesh にする。</li>
+          <li><strong>速い。</strong>36,100 点の殻で約0.1秒。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
