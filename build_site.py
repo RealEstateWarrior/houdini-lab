@@ -942,6 +942,18 @@ DONE = [
      "shots": ["135_noise.png"],
      "title": "VEX のノイズの値の範囲 — noise() は 0.06〜0.92 にしか届かず、snoise() は ±1 を超える",
      "note": "noise() は 0.06〜0.92（標準偏差0.1）、snoise() は −1.95〜2.28 で ±1 を超える。flownoise(P,0) は noise と同じ"},
+    {"no": "136", "anchor": "exp136",
+     "tags": ["VEX", "nearpoints", "検算"],
+     "log": "log_pm", "thumb": "136_near.png",
+     "shots": ["136_near.png"],
+     "title": "nearpoints は自分を先頭に数え、近い順に返す — 半径ちょうど1は入るが、ちょうど√2は入らなかった",
+     "note": "自分が先頭で近い順。最大数は自分込み。半径ちょうど1は入るが、ちょうど√2は丸めで入らない。pcfind も同じ"},
+    {"no": "137", "anchor": "exp137",
+     "tags": ["VEX", "fit", "検算"],
+     "log": "log_pm", "thumb": "137_fit.png",
+     "shots": ["137_fit.png"],
+     "title": "VEX の fit は範囲の外で止まり、efit と lerp は伸び続ける — smooth は 3x²−2x³",
+     "note": "fit・fit01・smooth は範囲の外で止まり、efit・lerp は伸びる。smooth は 3x²−2x³ と一致"},
 ]
 
 PLANNED = []

@@ -7027,6 +7027,113 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 136 ===================== -->
+    <article class="entry entry--current" id="exp136">
+      <div class="badge">136</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>nearpoints は自分を先頭に数え、近い順に返す — 半径ちょうど1は入るが、ちょうど√2は入らなかった</h2>
+        <p class="path">examples/136_nearpoints.py &nbsp;·&nbsp; 自分が先頭で近い順。最大数は自分込み。半径ちょうど1は入るが、ちょうど√2は丸めで入らない。pcfind も同じ</p>
+
+        <div class="prose">
+          <p>間隔1の格子（21×21）の真ん中の点で nearpoints(0, P, 半径, 最大数) を呼び、返ってきた点の数・順番・距離を調べた。格子なら、答えは数えられる（半径1で自分＋上下左右の5、√2 で斜めを足して9、2で13）。</p>
+          <p>**自分自身も数に入り、いつも先頭に来る。** どの半径でも、1番目は距離0の自分。ほかの点は、距離の近い順に並んでいた。</p>
+          <p>**最大数は自分を含めて数える。** 最大数3なら、自分＋いちばん近い2点。1なら自分だけ。「近くの別の点を1つ」のつもりで最大数1にすると、自分しか返らない。</p>
+          <p>**半径ちょうど 1.0 の点は入った（5点）。** ところが半径を √2 ちょうど（1.414214）にすると、斜めの点は入らず5点のまま。1.4143 にすると9点になった。√2 は小数で正確に表せないので、ほんのわずかな丸めで外に出る。境目の点を確実に入れたいなら、半径を少し大きくする。</p>
+          <p>pcfind() は、すべての場合で nearpoints() と同じ結果だった。</p>
+        </div>
+
+        <p class="label">半径・最大数と、返ってきた点</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="136_near.png" alt="半径が格子の距離（1・√2・2）を越えるたびに、点が増える。" loading="lazy" decoding="async"></div>
+            <figcaption>半径が格子の距離（1・√2・2）を越えるたびに、点が増える。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>関数</th><th>半径</th><th>最大数</th><th>点の数</th><th>自分が先頭</th><th>近い順</th><th>距離</th></tr></thead>
+            <tbody>
+              <tr><td>nearpoints</td><td class="num">0.5</td><td class="num">100</td><td class="num">1</td><td>はい</td><td>はい</td><td class="num">0</td></tr>
+              <tr><td>pcfind</td><td class="num">0.5</td><td class="num">100</td><td class="num">1</td><td>はい</td><td>はい</td><td class="num">0</td></tr>
+              <tr><td>nearpoints</td><td class="num">0.999</td><td class="num">100</td><td class="num">1</td><td>はい</td><td>はい</td><td class="num">0</td></tr>
+              <tr><td>pcfind</td><td class="num">0.999</td><td class="num">100</td><td class="num">1</td><td>はい</td><td>はい</td><td class="num">0</td></tr>
+              <tr><td>nearpoints</td><td class="num">1</td><td class="num">100</td><td class="num">5</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1</td></tr>
+              <tr><td>pcfind</td><td class="num">1</td><td class="num">100</td><td class="num">5</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1</td></tr>
+              <tr><td>nearpoints</td><td class="num">1.001</td><td class="num">100</td><td class="num">5</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1</td></tr>
+              <tr><td>pcfind</td><td class="num">1.001</td><td class="num">100</td><td class="num">5</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1</td></tr>
+              <tr><td>nearpoints</td><td class="num">1.41421</td><td class="num">100</td><td class="num">5</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1</td></tr>
+              <tr><td>pcfind</td><td class="num">1.41421</td><td class="num">100</td><td class="num">5</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1</td></tr>
+              <tr><td>nearpoints</td><td class="num">1.41431</td><td class="num">100</td><td class="num">9</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1, 1.41421, 1.41421, 1.41421, 1.41421</td></tr>
+              <tr><td>pcfind</td><td class="num">1.41431</td><td class="num">100</td><td class="num">9</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1, 1.41421, 1.41421, 1.41421, 1.41421</td></tr>
+              <tr><td>nearpoints</td><td class="num">2</td><td class="num">100</td><td class="num">13</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1, 1.41421, 1.41421, 1.41421, 1.41421, 2, 2, 2, 2</td></tr>
+              <tr><td>pcfind</td><td class="num">2</td><td class="num">100</td><td class="num">13</td><td>はい</td><td>はい</td><td>0, 1, 1, 1, 1, 1.41421, 1.41421, 1.41421, 1.41421, 2, 2, 2, 2</td></tr>
+              <tr><td>nearpoints</td><td class="num">2</td><td class="num">3</td><td class="num">3</td><td>はい</td><td>はい</td><td>0, 1, 1</td></tr>
+              <tr><td>pcfind</td><td class="num">2</td><td class="num">3</td><td class="num">3</td><td>はい</td><td>はい</td><td>0, 1, 1</td></tr>
+              <tr><td>nearpoints</td><td class="num">2</td><td class="num">1</td><td class="num">1</td><td>はい</td><td>はい</td><td class="num">0</td></tr>
+              <tr><td>pcfind</td><td class="num">2</td><td class="num">1</td><td class="num">1</td><td>はい</td><td>はい</td><td class="num">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">距離は、返ってきた点までの距離を順に（最初の14個まで）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>自分も返る。</strong>ほかの点だけがほしいなら、最大数を1つ多くして先頭を捨てる。</li>
+          <li><strong>近い順に並ぶ。</strong>2番目が「いちばん近い別の点」。</li>
+          <li><strong>半径の境目は丸めで揺れる。</strong>格子の間隔ちょうどを半径にするなら、少し足しておく。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 137 ===================== -->
+    <article class="entry entry--current" id="exp137">
+      <div class="badge">137</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>VEX の fit は範囲の外で止まり、efit と lerp は伸び続ける — smooth は 3x²−2x³</h2>
+        <p class="path">examples/137_vex_fit.py &nbsp;·&nbsp; fit・fit01・smooth は範囲の外で止まり、efit・lerp は伸びる。smooth は 3x²−2x³ と一致</p>
+
+        <div class="prose">
+          <p>x を −0.5〜1.5 まで振って、範囲を直す <button class="term" data-term="VEX">VEX</button> の関数が、範囲の外でどうなるかを見た。</p>
+          <p>**fit() と fit01() は、範囲の外で止まる（クランプする）。** fit(x, 0, 1, 0, 10) は x = −0.5 で 0、x = 1.5 で 10。</p>
+          <p>**efit() と lerp() は、止まらずに伸びる。** 同じ x で -5 と 15。この2つは全部の x で同じ値だった。範囲の外も比例で伸ばしたい（外挿したい）ときは efit を使う。</p>
+          <p>**smooth(0, 1, x) は、0〜1 の中では 3x² − 2x³（スムーズステップ）と一致**（ずれ最大 0.000000）し、外では 0 と 1 で止まる。両端でなめらかに止まる曲線。</p>
+          <p>clamp(x, 0, 1) は、もちろん 0 と 1 で止まる。</p>
+        </div>
+
+        <p class="label">関数ごとの値（x = −0.5, 0, 0.5, 1, 1.5）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="137_fit.png" alt="fit（青）は 0 と 10 で止まり、efit・lerp（橙の破線）はまっすぐ" loading="lazy" decoding="async"></div>
+            <figcaption>fit（青）は 0 と 10 で止まり、efit・lerp（橙の破線）はまっすぐ伸びる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>関数</th><th>x=−0.5</th><th>x=0</th><th>x=0.5</th><th>x=1</th><th>x=1.5</th><th>範囲の外</th></tr></thead>
+            <tbody>
+              <tr><td>fit(x, 0, 1, 0, 10)</td><td class="num">0</td><td class="num">0</td><td class="num">5</td><td class="num">10</td><td class="num">10</td><td>止まる</td></tr>
+              <tr><td>efit(x, 0, 1, 0, 10)</td><td class="num">-5</td><td class="num">0</td><td class="num">5</td><td class="num">10</td><td class="num">15</td><td>伸びる</td></tr>
+              <tr><td>fit01(x, 0, 10)</td><td class="num">0</td><td class="num">0</td><td class="num">5</td><td class="num">10</td><td class="num">10</td><td>止まる</td></tr>
+              <tr><td>lerp(0.0, 10.0, x)</td><td class="num">-5</td><td class="num">0</td><td class="num">5</td><td class="num">10</td><td class="num">15</td><td>伸びる</td></tr>
+              <tr><td>smooth(0.0, 1.0, x)</td><td class="num">0</td><td class="num">0</td><td class="num">0.5</td><td class="num">1</td><td class="num">1</td><td>止まる</td></tr>
+              <tr><td>clamp(x, 0.0, 1.0)</td><td class="num">0</td><td class="num">0</td><td class="num">0.5</td><td class="num">1</td><td class="num">1</td><td>止まる</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>fit はクランプする。</strong>範囲の外の値を残したいなら efit。</li>
+          <li><strong>efit と lerp は同じ直線。</strong>書きやすい方を使えばよい。</li>
+          <li><strong>smooth は 3x²−2x³。</strong>端でなめらかに止めたいマスクに向く。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
