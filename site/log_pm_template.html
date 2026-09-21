@@ -7134,6 +7134,96 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 138 ===================== -->
+    <article class="entry entry--current" id="exp138">
+      <div class="badge">138</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>vdbfrompolygons の SDF は帯の中だけ本当の距離（ずれ0.0008以下）— 帯の外は ±（Band Voxels×ボクセル）で平ら</h2>
+        <p class="path">examples/138_sdf_values.py &nbsp;·&nbsp; 帯の中は本当の距離とずれ0.0008以下。帯の外は ±（Band Voxels×ボクセル）で平ら</p>
+
+        <div class="prose">
+          <p>半径1の球（polymesh 200×200）から vdbfrompolygons で SDF を作り、中心から斜めに伸ばした線の上で volumesample した値を、本当の符号付き距離 |p| − 1 と比べた。</p>
+          <p>**表面の近くの帯の中では、SDF は本当の距離と一致した**（4通りでずれ最大 0.0008）。<button class="term" data-term="ボクセル">ボクセル</button> 0.02 なら 0.0002 まで小さくなる。</p>
+          <p>**帯の外では値が一定になる。** 外側は +（Band Voxels × ボクセル）、内側は −（同じ）で平らになった: ボクセル 0.05・Band Voxels 3 で ±0.15、ボクセル 0.05・Band Voxels 6 で ±0.3、ボクセル 0.02・Band Voxels 3 で ±0.06、ボクセル 0.02・Band Voxels 6 で ±0.12。帯の幅は、Exterior / Interior Band Voxels（ボクセルの数）× ボクセルの大きさ。</p>
+          <p>つまり、表面から帯の幅より遠い所では「どれだけ遠いか」の情報は無い。SDF で表面からの距離を使ったマスクを作るときは、帯を必要な距離まで広げておく。</p>
+        </div>
+
+        <p class="label">ボクセル・帯の幅と、SDF のずれ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="138_sdf.png" alt="SDF（実線）は、表面のまわりだけ本当の距離（破線）に重なり、外では平らになる。" loading="lazy" decoding="async"></div>
+            <figcaption>SDF（実線）は、表面のまわりだけ本当の距離（破線）に重なり、外では平らになる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>ボクセル</th><th>Band Voxels</th><th>帯の幅</th><th>帯の中のずれ（最大）</th><th>帯の外の値</th><th>作る秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td class="num">3</td><td class="num">0.15</td><td class="num">0.000708</td><td>-0.15, 0.15</td><td class="num">0.046</td></tr>
+              <tr><td class="num">0.05</td><td class="num">6</td><td class="num">0.3</td><td class="num">0.000809</td><td>-0.3, 0.3</td><td class="num">0.029</td></tr>
+              <tr><td class="num">0.02</td><td class="num">3</td><td class="num">0.06</td><td class="num">0.000201</td><td>-0.06, 0.06</td><td class="num">0.032</td></tr>
+              <tr><td class="num">0.02</td><td class="num">6</td><td class="num">0.12</td><td class="num">0.000201</td><td>-0.12, 0.12</td><td class="num">0.054</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">帯の中 = 表面からの距離が（帯の幅 − 1ボクセル）より近い所。帯の外 = （帯の幅 + 1ボクセル）より遠い所。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>帯の中は本当の距離。</strong>ずれは 0.001 未満。</li>
+          <li><strong>帯の外は ±帯の幅で止まる。</strong>遠くの距離を使いたいなら、Band Voxels を増やす。</li>
+          <li><strong>帯の幅 = Band Voxels × ボクセル。</strong>ボクセルを細かくすると、同じ Band Voxels でも帯は細くなる。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 139 ===================== -->
+    <article class="entry entry--current" id="exp139">
+      <div class="badge">139</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>attribblur の1回は「となりの平均へ半分近づく」を2度 — ぼけ幅は √回数。線では Pin Border で全く動かない</h2>
+        <p class="path">examples/139_attribblur.py &nbsp;·&nbsp; 線では Pin Border で1点も動かない。切ると1回＝『となりの平均へ s だけ近づく』を2度、ぼけ幅は √(2sN)</p>
+
+        <div class="prose">
+          <p>401点の線（点の間隔 0.01）に段差の値（左 0・右 1）を入れて attribblur にかけ、Python で同じ計算をくり返したものと1点ずつ比べた。</p>
+          <p>**既定のままだと、1点も変わらなかった**（100回かけて、変わった点 0 個）。Pin Border（縁を止める）が入っていて、開いた線では全部の点が縁とみなされるため。線をぼかすときは Pin Border を切る。</p>
+          <p>**切ると、1回のぼかしは「v ← v + s·((左 + 右)/2 − v)」を2度くり返したものと一致した**（Step Size s = 0.5、1〜1000回でずれ最大 0.0000021）。1度だけの計算とは最大 0.08 ずれる。Odd / Even Step Size という2つのつまみがあることとも合う（奇数・偶数の段で1度ずつ）。</p>
+          <p>**段差のぼけ幅（標準偏差）は、回数の平方根で広がった。** 1・10・100・1000 回で 1・3.1623・10・31.6224 点ぶん（= √(2·s·N)）。ぼけ幅を2倍にしたいなら、回数を4倍にする。</p>
+        </div>
+
+        <p class="label">回数と、ぼけ方</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="139_blur.png" alt="実測（青）は √(2·s·N) の線に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>実測（青）は √(2·s·N) の線に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>回数</th><th>2度ずつの計算とのずれ</th><th>1度ずつの計算とのずれ</th><th>ぼけ幅</th><th>√(2·s·N)</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">0.0000000</td><td class="num">0.0625</td><td class="num">1.0000</td><td class="num">1.0000</td><td class="num">0.0120</td></tr>
+              <tr><td class="num">10</td><td class="num">0.0000001</td><td class="num">0.0832</td><td class="num">3.1623</td><td class="num">3.1623</td><td class="num">0.0120</td></tr>
+              <tr><td class="num">100</td><td class="num">0.0000002</td><td class="num">0.0831</td><td class="num">10.0000</td><td class="num">10.0000</td><td class="num">0.0135</td></tr>
+              <tr><td class="num">1000</td><td class="num">0.0000021</td><td class="num">0.0830</td><td class="num">31.6224</td><td class="num">31.6228</td><td class="num">0.0233</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">ぼけ幅 = となりとの差を分布とみなしたときの標準偏差（点の数で）。端の点は、となり1点に近づく。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>開いた線では Pin Border を切る。</strong>入れたままだと何も起きない（エラーも出ない）。</li>
+          <li><strong>1回 = 2度のぼかし。</strong>Step Size 0.5 なら、となりの平均との差の半分だけ近づく計算を2度。</li>
+          <li><strong>ぼけ幅は √回数。</strong>4倍の回数で2倍の幅。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

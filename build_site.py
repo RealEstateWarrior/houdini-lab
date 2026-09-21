@@ -954,6 +954,18 @@ DONE = [
      "shots": ["137_fit.png"],
      "title": "VEX の fit は範囲の外で止まり、efit と lerp は伸び続ける — smooth は 3x²−2x³",
      "note": "fit・fit01・smooth は範囲の外で止まり、efit・lerp は伸びる。smooth は 3x²−2x³ と一致"},
+    {"no": "138", "anchor": "exp138",
+     "tags": ["VDB", "SDF", "検算"],
+     "log": "log_pm", "thumb": "138_sdf.png",
+     "shots": ["138_sdf.png"],
+     "title": "vdbfrompolygons の SDF は帯の中だけ本当の距離（ずれ0.0008以下）— 帯の外は ±（Band Voxels×ボクセル）で平ら",
+     "note": "帯の中は本当の距離とずれ0.0008以下。帯の外は ±（Band Voxels×ボクセル）で平ら"},
+    {"no": "139", "anchor": "exp139",
+     "tags": ["モデリング", "attribblur", "ぼかし", "検算"],
+     "log": "log_pm", "thumb": "139_blur.png",
+     "shots": ["139_blur.png"],
+     "title": "attribblur の1回は「となりの平均へ半分近づく」を2度 — ぼけ幅は √回数。線では Pin Border で全く動かない",
+     "note": "線では Pin Border で1点も動かない。切ると1回＝『となりの平均へ s だけ近づく』を2度、ぼけ幅は √(2sN)"},
 ]
 
 PLANNED = []
