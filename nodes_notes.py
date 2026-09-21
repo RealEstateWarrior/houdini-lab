@@ -34,6 +34,8 @@ NOTES = {
     "ray": ("Direction（dirx・diry・dirz）には最初から @N.x などの式が入っていて、Python の set では値が変わらない。deleteAllKeyframes() してから入れる。法線の無い形から飛ばすと面の向きへ飛ぶ（実験133・134）。", ["133", "134"]),
     "vdbfrompolygons": ("SDF の値は、表面のまわりの帯の中だけ本当の距離（ずれ0.001未満）。帯の外は ±（Band Voxels × ボクセル）で平らになる（実験138）。", ["138"]),
     "attribblur": ("開いた線では、既定の Pin Border で全部の点が縁とみなされ、1点も動かない。1回のぼかしは「となりの平均へ Step Size だけ近づく」を2度で、ぼけ幅は √(2·s·回数)（実験139）。", ["139"]),
+    "copytopoints::2.0": ("N は元の +z を、up は +y を合わせる。orient があれば N と up は使われない。pscale と scale は掛け算（実験140）。", ["140"]),
+    "pointsfromvolume": ("1点あたりの体積は、Grid なら s³、Tetrahedral なら s³/√2。箱を Grid で埋めると面の上にも点が並ぶ（実験141）。", ["141"]),
 }
 
 
