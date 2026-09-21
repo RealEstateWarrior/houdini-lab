@@ -1,0 +1,58 @@
+{
+ "dir_expressions": [
+  "@N.x",
+  "@N.y",
+  "@N.z"
+ ],
+ "dir_after_plain_set": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "point": [
+  {
+   "res": 24,
+   "method": "project",
+   "hits": 921,
+   "missed_stayed": 40,
+   "err_max": 0.0253,
+   "err_mean": 0.003635,
+   "r_min": 0.995734,
+   "r_max": 1.0,
+   "sec": 0.0023
+  },
+  {
+   "res": 24,
+   "method": "minimum",
+   "hits": 961,
+   "missed_stayed": 0,
+   "err_max": 0.037646,
+   "err_mean": 0.019475,
+   "r_min": 0.997394,
+   "r_max": 1.0,
+   "sec": 0.0027
+  },
+  {
+   "res": 96,
+   "method": "project",
+   "hits": 921,
+   "missed_stayed": 40,
+   "err_max": 0.001783,
+   "err_mean": 0.000209,
+   "r_min": 0.999754,
+   "r_max": 1.0,
+   "sec": 0.0102
+  },
+  {
+   "res": 96,
+   "method": "minimum",
+   "hits": 961,
+   "missed_stayed": 0,
+   "err_max": 0.009621,
+   "err_mean": 0.004528,
+   "r_min": 0.999854,
+   "r_max": 1.0,
+   "sec": 0.0091
+  }
+ ]
+}

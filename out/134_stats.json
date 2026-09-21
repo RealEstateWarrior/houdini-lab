@@ -1,0 +1,3075 @@
+{
+ "nodes_made": 1031,
+ "failed": 7,
+ "sec": 8.5,
+ "parms_with_expr": 488,
+ "nodes_with_expr": 176,
+ "top_nodes": [
+  [
+   "remeshtocamera",
+   14
+  ],
+  [
+   "primitive",
+   13
+  ],
+  [
+   "heightfield_output",
+   10
+  ],
+  [
+   "kinefx::configureclipinfo",
+   10
+  ],
+  [
+   "usdconfigureprimsfrompoints",
+   10
+  ],
+  [
+   "kinefx::mocapimport",
+   9
+  ],
+  [
+   "kinefx::scenecharacterimport",
+   9
+  ],
+  [
+   "rbdio",
+   9
+  ],
+  [
+   "rbdio::2.0",
+   9
+  ],
+  [
+   "vellumio",
+   9
+  ],
+  [
+   "vellumio::2.0",
+   9
+  ],
+  [
+   "filecache",
+   8
+  ],
+  [
+   "filecache::2.0",
+   8
+  ],
+  [
+   "kinefx::agentanimationunpack",
+   8
+  ],
+  [
+   "kinefx::agentcharacterunpack",
+   8
+  ]
+ ],
+ "top_exprs": [
+  [
+   "$FSTART",
+   84
+  ],
+  [
+   "$FEND",
+   62
+  ],
+  [
+   "$T",
+   28
+  ],
+  [
+   "$TSTART",
+   23
+  ],
+  [
+   "$FF",
+   21
+  ],
+  [
+   "ch(\"concrete_edgedetail\")",
+   15
+  ],
+  [
+   "$FPS",
+   14
+  ],
+  [
+   "$TEND",
+   13
+  ],
+  [
+   "$F",
+   12
+  ],
+  [
+   "1/$FPS",
+   9
+  ],
+  [
+   "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    ",
+   8
+  ],
+  [
+   "$FF-1",
+   7
+  ],
+  [
+   "ch(\"f1\")",
+   6
+  ],
+  [
+   "ch(\"f2\")",
+   6
+  ],
+  [
+   "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\"",
+   6
+  ]
+ ],
+ "found": [
+  {
+   "node": "agent",
+   "parm": "clipoffset",
+   "label": "Clip Offset",
+   "expr": "$T"
+  },
+  {
+   "node": "agent",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "agent",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "agentclip",
+   "parm": "cliptime",
+   "label": "Clip Time",
+   "expr": "$T"
+  },
+  {
+   "node": "agentclip",
+   "parm": "framerange1_1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "agentclip",
+   "parm": "framerange1_2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "agentclip::2.0",
+   "parm": "cliptime",
+   "label": "Clip Time",
+   "expr": "$T"
+  },
+  {
+   "node": "agentclip::2.0",
+   "parm": "framerange1_1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "agentclip::2.0",
+   "parm": "framerange1_2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "agentdefinitioncache",
+   "parm": "clipoffset",
+   "label": "Clip Offset",
+   "expr": "$T"
+  },
+  {
+   "node": "agentlookat::2.0",
+   "parm": "startframe",
+   "label": "Start Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "agentterrainadaptation",
+   "parm": "startframe",
+   "label": "Start Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "agenttransformgroup",
+   "parm": "descriptiveparm",
+   "label": "Description",
+   "expr": "chs(\"./DESCRIPTION/text\")"
+  },
+  {
+   "node": "agentvellumunpack",
+   "parm": "crowdstartframe",
+   "label": "Crowd Start Frame",
+   "expr": "ch(\"startframe\")"
+  },
+  {
+   "node": "alembic",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "alembic",
+   "parm": "fps",
+   "label": "Frames per Second",
+   "expr": "$FPS"
+  },
+  {
+   "node": "alembicprimitive",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "alembicprimitive",
+   "parm": "fps",
+   "label": "Frames per Second",
+   "expr": "$FPS"
+  },
+  {
+   "node": "apex::animationfromskeleton",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "apex::animationfromskeleton",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "apex::autorigcomponent",
+   "parm": "snippetsourceversioncount",
+   "label": "Snippet Source Version Count",
+   "expr": "len(hou.pwd().parm('snippetsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::autorigcomponent",
+   "parm": "componentsourceversioncount2",
+   "label": "Component Source Version Count",
+   "expr": "len(hou.pwd().parm('componentsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::autorigcomponent",
+   "parm": "componentsourceversioncount",
+   "label": "Component Source Version Count",
+   "expr": "len(hou.pwd().parm('componentsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::autorigcomponent::2.0",
+   "parm": "componentsourceversioncount",
+   "label": "Component Source Version Count",
+   "expr": "len(hou.pwd().parm('componentsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::autorigcomponent::2.0",
+   "parm": "snippetsourceversioncount",
+   "label": "Snippet Source Version Count",
+   "expr": "len(hou.pwd().parm('snippetsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::autorigcomponent::3.0",
+   "parm": "snippetsourceversioncount",
+   "label": "Snippet Source Version Count",
+   "expr": "len(hou.pwd().parm('snippetsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::autorigcomponent::3.0",
+   "parm": "componentsourceversioncount2",
+   "label": "Component Source Version Count",
+   "expr": "len(hou.pwd().parm('componentsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::autorigcomponent::3.0",
+   "parm": "componentsourceversioncount",
+   "label": "Component Source Version Count",
+   "expr": "len(hou.pwd().parm('componentsourceversion').menuItems())"
+  },
+  {
+   "node": "apex::graph",
+   "parm": "execute",
+   "label": "Save to Disk",
+   "expr": "ch(\"../execute\")"
+  },
+  {
+   "node": "apex::packcharacter",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "apex::packcharacter",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "apex::sceneaddanimation",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "apex::sceneaddanimation",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "apex::sceneaddanimation::2.0",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "apex::sceneaddanimation::2.0",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "apex::sceneaddcharacter",
+   "parm": "charactername",
+   "label": "Character Name",
+   "expr": "$OS"
+  },
+  {
+   "node": "apex::sceneaddprop",
+   "parm": "propname",
+   "label": "Prop Name",
+   "expr": "$OS"
+  },
+  {
+   "node": "apex::sceneinvoke",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "apex::sceneinvoke::2.0",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "attribpaint",
+   "parm": "attribpainted1",
+   "label": "Attribute Painted",
+   "expr": "phm().isattribpainted(pwd(), pwd().parm( expandString('$CH') ).multiParmInstance"
+  },
+  {
+   "node": "attribremap",
+   "parm": "descriptiveparm",
+   "label": "Label",
+   "expr": "chs(\"inname\") + ifs(strcmp(chs(\"outname\"), \"\"), \" -> \" + chs(\"outname\"), \"\")"
+  },
+  {
+   "node": "cache",
+   "parm": "range1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "cache",
+   "parm": "range2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "cache",
+   "parm": "index",
+   "label": "Index",
+   "expr": "$F"
+  },
+  {
+   "node": "cop2net",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "cregion",
+   "parm": "colorr",
+   "label": "Display Color",
+   "expr": "ch(\"../dcolorr\")"
+  },
+  {
+   "node": "cregion",
+   "parm": "colorg",
+   "label": "Display Color",
+   "expr": "ch(\"../dcolorg\")"
+  },
+  {
+   "node": "cregion",
+   "parm": "colorb",
+   "label": "Display Color",
+   "expr": "ch(\"../dcolorb\")"
+  },
+  {
+   "node": "crowdmotionpath",
+   "parm": "framerange1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "crowdmotionpath",
+   "parm": "framerange2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "crowdmotionpathavoid",
+   "parm": "startframe",
+   "label": "Start Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "crowdmotionpathavoid",
+   "parm": "endframe",
+   "label": "End Frame",
+   "expr": "$FEND"
+  },
+  {
+   "node": "crowdmotionpathevaluate",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "crowdmotionpathlayer",
+   "parm": "blendoutframes",
+   "label": "Blend Out Frames",
+   "expr": "ch(\"blendinframes\")"
+  },
+  {
+   "node": "crowdsource",
+   "parm": "randomizeagentmax",
+   "label": "Max Primitive Number",
+   "expr": "nprims(opinputpath(\".\", 0)) - 1"
+  },
+  {
+   "node": "crowdsource",
+   "parm": "randomcliptime",
+   "label": "Clip Time",
+   "expr": "$T"
+  },
+  {
+   "node": "crowdsource::2.0",
+   "parm": "randomizeagentmax",
+   "label": "Max Primitive Number",
+   "expr": "nprims(opinputpath(\".\", 0)) - 1"
+  },
+  {
+   "node": "crowdsource::3.0",
+   "parm": "randomizeagentmax",
+   "label": "Max Primitive Number",
+   "expr": "nprims(opinputpath(\".\", 0)) - 1"
+  },
+  {
+   "node": "crowdsource::3.0",
+   "parm": "randomcliptime",
+   "label": "Clip Time",
+   "expr": "$T"
+  },
+  {
+   "node": "delete",
+   "parm": "rangeend",
+   "label": "Start / End",
+   "expr": "$N"
+  },
+  {
+   "node": "dembones_skinningconverter::1.0",
+   "parm": "f1",
+   "label": "Frame Range",
+   "expr": "$RFSTART"
+  },
+  {
+   "node": "dembones_skinningconverter::1.0",
+   "parm": "f2",
+   "label": "Frame Range",
+   "expr": "$RFEND"
+  },
+  {
+   "node": "dembones_skinningconverter::1.0",
+   "parm": "iBindposeFrame",
+   "label": "Bind Pose Frame",
+   "expr": "$RFSTART"
+  },
+  {
+   "node": "dopimport",
+   "parm": "integrateovertime",
+   "label": "Integrate Over Time",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "dopimport::2.0",
+   "parm": "integrateovertime",
+   "label": "Integrate Over Time",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "dopnet",
+   "parm": "timestep",
+   "label": "Timestep",
+   "expr": "ch(\"timescale\")/(ch(\"substep\")*$FPS)"
+  },
+  {
+   "node": "dopnet",
+   "parm": "timeoffset",
+   "label": "Offset Time",
+   "expr": "(ch(\"startframe\")-1)/$FPS"
+  },
+  {
+   "node": "feathersurface",
+   "parm": "barbrgroup",
+   "label": "Right Barbs Group",
+   "expr": "chs(\"barblgroup\")"
+  },
+  {
+   "node": "featheruncondense",
+   "parm": "barbrgroup",
+   "label": "Right Barbs Group",
+   "expr": "chs(\"barblgroup\")"
+  },
+  {
+   "node": "featherutility",
+   "parm": "info",
+   "label": "Info",
+   "expr": "info = \"\"\nif hou.ch(\"firstbarbpt\"):\n    firstbarbptattrib = hou.ch(\"firstbarbpta"
+  },
+  {
+   "node": "filament_advect_pos",
+   "parm": "timestep",
+   "label": "Timestep",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "file",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-ch(\"f1\")"
+  },
+  {
+   "node": "filecache",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "filecache",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "filecache",
+   "parm": "clampfirst",
+   "label": "Clamp First Frame",
+   "expr": "ch(\"f1\")"
+  },
+  {
+   "node": "filecache",
+   "parm": "clamplast",
+   "label": "Clamp Last Frame",
+   "expr": "ch(\"f2\")"
+  },
+  {
+   "node": "filecache",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-1"
+  },
+  {
+   "node": "filecache",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "{\r\n    if(ch(\"timedependent\"))\r\n    {\r\n        rawframe = $T * $FPS + 1;\r\n      "
+  },
+  {
+   "node": "filecache",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\""
+  },
+  {
+   "node": "filecache",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "clampfirst",
+   "label": "Clamp First Frame",
+   "expr": "ch(\"f1\")"
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "clamplast",
+   "label": "Clamp Last Frame",
+   "expr": "ch(\"f2\")"
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-1"
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "{\r\n    if(ch(\"timedependent\"))\r\n    {\r\n        rawframe = $T * $FPS + 1;\r\n      "
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\""
+  },
+  {
+   "node": "filecache::2.0",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "fluidcompress",
+   "parm": "advecttime",
+   "label": "Advection Time",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "groomblend",
+   "parm": "hasguides",
+   "label": "Has Guides",
+   "expr": "strlen(opinputpath(\".\", 3))"
+  },
+  {
+   "node": "groomblend",
+   "parm": "hasskin",
+   "label": "Has Skin",
+   "expr": "strlen(opinputpath(\".\", 1)) && strlen(opinputpath(\".\", 4))"
+  },
+  {
+   "node": "guidedraw",
+   "parm": "stroke_projgeoinput",
+   "label": "stroke_projgeoinput",
+   "expr": "lock(1)"
+  },
+  {
+   "node": "guidedraw",
+   "parm": "stroke_projtype",
+   "label": "Projection Type",
+   "expr": "if(ch(\"strokeproj\") == 3, 3, 4)"
+  },
+  {
+   "node": "guidedraw",
+   "parm": "stroke_tool",
+   "label": "Tool",
+   "expr": "hou.pwd().hdaModule().buildToolIndex()"
+  },
+  {
+   "node": "guidegroom",
+   "parm": "hasstash",
+   "label": "Has Stash",
+   "expr": "evalParm(\"strokes\") is not None or evalParm(\"groom\") is not None"
+  },
+  {
+   "node": "guidegroom::2.0",
+   "parm": "hasstash",
+   "label": "Has Stash",
+   "expr": "evalParm(\"strokes\") is not None or evalParm(\"groom\") is not None"
+  },
+  {
+   "node": "guidemask",
+   "parm": "geoblurradius",
+   "label": "Blur Radius",
+   "expr": "2*ch(\"geovoxelsize\")"
+  },
+  {
+   "node": "guideprocess",
+   "parm": "description",
+   "label": "Description",
+   "expr": "opsparm = parmTuple(\"operations\")\nnumops = opsparm[0].eval()\n\nparms = [hou.pwd()"
+  },
+  {
+   "node": "haircardgen",
+   "parm": "hasclusterpoints",
+   "label": "OpExists",
+   "expr": "opexist(opinputpath('.',2))"
+  },
+  {
+   "node": "haircardgen",
+   "parm": "hasnormaloverride",
+   "label": "OpExists",
+   "expr": "opexist(opinputpath('.',3))"
+  },
+  {
+   "node": "hairgrowthfield",
+   "parm": "scalpblendwidthinner",
+   "label": "Blend Width",
+   "expr": "ch(\"scalpblendwidth\")"
+  },
+  {
+   "node": "heightfield_file",
+   "parm": "frame",
+   "label": "Animated",
+   "expr": "$F"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "volume_resx",
+   "label": "Volume Res",
+   "expr": "if(ch(\"specify_res\")==1, ch(\"resolutionx\"), ch(\"actual_resx\"))"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "volume_resy",
+   "label": "Volume Res",
+   "expr": "if(ch(\"specify_res\")==1, ch(\"resolutiony\"), ch(\"actual_resy\"))"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "f1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "f2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "red_final_rangex",
+   "label": "Red Final Range",
+   "expr": "if(ch(\"red_out_range\")==1, ch(\"red_auto_rangex\"),ch(\"red_from_rangex\"))"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "red_final_rangey",
+   "label": "Red Final Range",
+   "expr": "if(ch(\"red_out_range\")==1, ch(\"red_auto_rangey\"),ch(\"red_from_rangey\"))"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "actual_tile_sizex",
+   "label": "Actual Tile Size",
+   "expr": "if(ch(\"tile_method\")==0,ch(\"tile_sizex\"), ceil(ch(\"volume_resx\")/ch(\"num_tilesx\""
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "actual_tile_sizey",
+   "label": "Actual Tile Size",
+   "expr": "if(ch(\"tile_method\")==0, ch(\"tile_sizey\"), ceil(ch(\"volume_resy\")/ch(\"num_tilesy"
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "actual_num_tilesx",
+   "label": "Actual Num Tiles",
+   "expr": "if(ch(\"tile_method\")==1, ch(\"num_tilesx\"), if(ch(\"volume_resx\")%(ch(\"tile_sizex\""
+  },
+  {
+   "node": "heightfield_output",
+   "parm": "actual_num_tilesy",
+   "label": "Actual Num Tiles",
+   "expr": "if(ch(\"tile_method\")==1, ch(\"num_tilesy\"), if(ch(\"volume_resy\")%(ch(\"tile_sizey\""
+  },
+  {
+   "node": "kinefx::adapttoterrain",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::adapttoterrain",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::adapttoterrain::2.0",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::adapttoterrain::2.0",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::agentanimationunpack",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::agentcharacterunpack",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::characterio",
+   "parm": "animatedpose_samplerate",
+   "label": "Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::characterio",
+   "parm": "animatedpose_motioncliprangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::characterio",
+   "parm": "animatedpose_motioncliprangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::characterio",
+   "parm": "targettopnetwork",
+   "label": "Top Network",
+   "expr": "hou.phm().targetTopNetwork()"
+  },
+  {
+   "node": "kinefx::characterio",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(chs(\"cachename\"),chs(\"basename\"),"
+  },
+  {
+   "node": "kinefx::characterio",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "kinefx::characterio::2.0",
+   "parm": "animatedpose_samplerate",
+   "label": "Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::characterio::2.0",
+   "parm": "animatedpose_motioncliprangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::characterio::2.0",
+   "parm": "animatedpose_motioncliprangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::characterio::2.0",
+   "parm": "targettopnetwork",
+   "label": "Top Network",
+   "expr": "hou.phm().targetTopNetwork()"
+  },
+  {
+   "node": "kinefx::characterio::2.0",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(chs(\"cachename\"),chs(\"basename\"),"
+  },
+  {
+   "node": "kinefx::characterio::2.0",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "samplerate",
+   "label": "Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "range1",
+   "label": "Clip Range",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "range2",
+   "label": "Clip Range",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "framerange1",
+   "label": "Clip Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "framerange2",
+   "label": "Clip Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "sourcesamplerate",
+   "label": "Source Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "sourcerange1",
+   "label": "Source Clip Range",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "sourcerange2",
+   "label": "Source Clip Range",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "sourceframerange1",
+   "label": "Source Clip Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::configureclipinfo",
+   "parm": "sourceframerange2",
+   "label": "Source Clip Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::configurejointlimits",
+   "parm": "framerangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::configurejointlimits",
+   "parm": "framerangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::configurejoints",
+   "parm": "framerangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::configurejoints",
+   "parm": "framerangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::dembones_skinningconverter",
+   "parm": "f1",
+   "label": "Frame Range",
+   "expr": "$RFSTART"
+  },
+  {
+   "node": "kinefx::dembones_skinningconverter",
+   "parm": "f2",
+   "label": "Frame Range",
+   "expr": "$RFEND"
+  },
+  {
+   "node": "kinefx::dembones_skinningconverter",
+   "parm": "iBindposeFrame",
+   "label": "Bind Pose Frame",
+   "expr": "$RFSTART"
+  },
+  {
+   "node": "kinefx::dynamicwarp",
+   "parm": "samplerate",
+   "label": "Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::extractlocomotion",
+   "parm": "startframe",
+   "label": "Anim Start Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::fbxanimimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::fbxcharacterimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::gltfanimimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::gltfcharacterimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::jointcapturepaint",
+   "parm": "value",
+   "label": "Value",
+   "expr": "ch('set_value')"
+  },
+  {
+   "node": "kinefx::jointcapturepaint",
+   "parm": "falloff",
+   "label": "Falloff",
+   "expr": "ch('set_falloff')"
+  },
+  {
+   "node": "kinefx::jointcapturepaint",
+   "parm": "spacing",
+   "label": "Spacing",
+   "expr": "ch('set_spacing')"
+  },
+  {
+   "node": "kinefx::jointcapturepaint",
+   "parm": "opacity",
+   "label": "Opacity",
+   "expr": "ch('set_opacity')"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "framerate",
+   "label": "Frame Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::mocapimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclip",
+   "parm": "restframe",
+   "label": "Rest Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclip",
+   "parm": "samplerate",
+   "label": "Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::motionclip",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclip",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionclipcycle",
+   "parm": "framerangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclipcycle",
+   "parm": "framerangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionclipcycle::2.0",
+   "parm": "framerangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclipcycle::2.0",
+   "parm": "framerangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionclipevaluate",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "kinefx::motionclipextract",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclipextract",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionclipextractkeyposes",
+   "parm": "rangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclipextractkeyposes",
+   "parm": "rangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionclipretime",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::motionclipretime",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::motionclipretime",
+   "parm": "outputrange1",
+   "label": "Output Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionclipretime",
+   "parm": "outputrange2",
+   "label": "Output Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionclipretime",
+   "parm": "outputsamplerate",
+   "label": "Output Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::motionmixer",
+   "parm": "mixerstart",
+   "label": "Start Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionmixer",
+   "parm": "mixerend",
+   "label": "End Frame",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionmixer",
+   "parm": "mixerfps",
+   "label": "Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::motionmixerretime",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::motionmixerretime",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::motionmixerretime",
+   "parm": "hold",
+   "label": "Hold",
+   "expr": "constant()"
+  },
+  {
+   "node": "kinefx::motionmixerretime",
+   "parm": "frangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::motionmixerretime",
+   "parm": "frangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::motionmixerretime",
+   "parm": "rate",
+   "label": "Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::pendulummotion",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::pendulummotion",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::projectilemotion",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::projectilemotion",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::ragdollsolver",
+   "parm": "targetorientstiffness1",
+   "label": "Orientation Stiffness",
+   "expr": "ch(\"targetposstiffness1\")"
+  },
+  {
+   "node": "kinefx::ragdollsolver",
+   "parm": "targetorientdampingratio1",
+   "label": "Orientation Damping",
+   "expr": "ch(\"targetposdampingratio1\")"
+  },
+  {
+   "node": "kinefx::ragdollsolver::2.0",
+   "parm": "targetorientstiffness1",
+   "label": "Orientation Stiffness",
+   "expr": "ch(\"targetposstiffness1\")"
+  },
+  {
+   "node": "kinefx::ragdollsolver::2.0",
+   "parm": "targetorientdampingratio1",
+   "label": "Orientation Damping",
+   "expr": "ch(\"targetposdampingratio1\")"
+  },
+  {
+   "node": "kinefx::rop_fbxanimoutput",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::rop_fbxanimoutput",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::rop_fbxcharacteroutput",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::rop_fbxcharacteroutput",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::rop_gltfcharacteroutput",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::rop_gltfcharacteroutput",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::scenecharacterexport",
+   "parm": "start_end1",
+   "label": "Start/End",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::scenecharacterexport",
+   "parm": "start_end2",
+   "label": "Start/End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::scenecharacterexport",
+   "parm": "rate",
+   "label": "Sample Rate",
+   "expr": "$FPS"
+  },
+  {
+   "node": "kinefx::scenecharacterexport",
+   "parm": "export",
+   "label": "Live OBJ Subnet",
+   "expr": "chs(\"target\")"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "reload",
+   "label": "Reload",
+   "expr": "ch(\"../reload\")"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::scenecharacterimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::secondarymotion",
+   "parm": "framerangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::secondarymotion",
+   "parm": "framerangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::smoothmotion",
+   "parm": "framerangex",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::smoothmotion",
+   "parm": "framerangey",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::stabilizejoint",
+   "parm": "framerange1",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::stabilizejoint",
+   "parm": "framerange2",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::usdanimimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "animationstarttime",
+   "label": "Animation Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "animationendtime",
+   "label": "Animation End",
+   "expr": "$TEND"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "playbackstarttime",
+   "label": "Playback Start",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "animationstartframe",
+   "label": "Animation Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "animationendframe",
+   "label": "Animation End",
+   "expr": "$FEND"
+  },
+  {
+   "node": "kinefx::usdcharacterimport",
+   "parm": "playbackstartframe",
+   "label": "Playback Start",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "lopimport",
+   "parm": "importframe",
+   "label": "Import Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "lopimport::2.0",
+   "parm": "importframe",
+   "label": "Import Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "mdd",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "ml_extractexample",
+   "parm": "index",
+   "label": "Index",
+   "expr": "$F"
+  },
+  {
+   "node": "mpmdebrissource",
+   "parm": "remapstretchinx",
+   "label": "In",
+   "expr": "ch(\"mindjp\")"
+  },
+  {
+   "node": "mpmdebrissource",
+   "parm": "remapstretchiny",
+   "label": "In",
+   "expr": "ch(\"remapstretchinx\")*10"
+  },
+  {
+   "node": "mpmdebrissource",
+   "parm": "remapspeedinx",
+   "label": "In",
+   "expr": "ch(\"minspeed\")"
+  },
+  {
+   "node": "mpmdebrissource",
+   "parm": "remapspeediny",
+   "label": "In",
+   "expr": "ch(\"remapspeedinx\")*10"
+  },
+  {
+   "node": "mpmsurface",
+   "parm": "sdferode",
+   "label": "Erode",
+   "expr": "ch(\"sdfdilate\")"
+  },
+  {
+   "node": "muscleconstraintpropertiesotis",
+   "parm": "tposeframe",
+   "label": "Initialization Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "muscleconstraintpropertiesvellum",
+   "parm": "tposeframe",
+   "label": "Initialization Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "muscleflex",
+   "parm": "tposeframe",
+   "label": "Initialization Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "muscleflex::2.0",
+   "parm": "tposeframe",
+   "label": "Initialization Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "musclesolidify",
+   "parm": "initframe",
+   "label": "Initialization Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "muscletensionlines",
+   "parm": "tposeframe",
+   "label": "Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "oceanevaluate",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "oceanevaluate::2.0",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "oceanfoam",
+   "parm": "seed",
+   "label": "Seed",
+   "expr": "$T"
+  },
+  {
+   "node": "oceanfoam",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "oceanfoam",
+   "parm": "resimulate",
+   "label": "Reset Simulation",
+   "expr": "ch(\"../../resimulate\")"
+  },
+  {
+   "node": "oceansource",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "oceansource::2.0",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "oceanspectrum",
+   "parm": "noiseinputmin",
+   "label": "Input Range",
+   "expr": "-ch(\"noiseinputmax\")"
+  },
+  {
+   "node": "packeddiskedit",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-1"
+  },
+  {
+   "node": "particlefluidsurface",
+   "parm": "doerode",
+   "label": "Label",
+   "expr": "ch(\"dodilate\")"
+  },
+  {
+   "node": "particlefluidsurface",
+   "parm": "erodeoffset",
+   "label": "Erode",
+   "expr": "ch(\"dilateoffset\")"
+  },
+  {
+   "node": "particlefluidsurface",
+   "parm": "erodemask",
+   "label": "Mask",
+   "expr": "ch(\"dilatemask\")"
+  },
+  {
+   "node": "particlefluidsurface::2.0",
+   "parm": "doerode",
+   "label": "Label",
+   "expr": "ch(\"dodilate\")"
+  },
+  {
+   "node": "particlefluidsurface::2.0",
+   "parm": "erodeoffset",
+   "label": "Erode",
+   "expr": "ch(\"dilateoffset\")"
+  },
+  {
+   "node": "particlefluidsurface::2.0",
+   "parm": "erodemask",
+   "label": "Mask",
+   "expr": "ch(\"dilatemask\")"
+  },
+  {
+   "node": "particlefluidsurface::3.0",
+   "parm": "doerode",
+   "label": "Label",
+   "expr": "ch(\"dodilate\")"
+  },
+  {
+   "node": "particlefluidsurface::3.0",
+   "parm": "erodeoffset",
+   "label": "Erode",
+   "expr": "ch(\"dilateoffset\")"
+  },
+  {
+   "node": "particlefluidsurface::3.0",
+   "parm": "erodemask",
+   "label": "Mask",
+   "expr": "ch(\"dilatemask\")"
+  },
+  {
+   "node": "particlefluidtank",
+   "parm": "upx",
+   "label": "Up",
+   "expr": "ch(\"./upaxis\") == 0"
+  },
+  {
+   "node": "particlefluidtank",
+   "parm": "upy",
+   "label": "Up",
+   "expr": "ch(\"./upaxis\") == 1"
+  },
+  {
+   "node": "particlefluidtank",
+   "parm": "upz",
+   "label": "Up",
+   "expr": "ch(\"./upaxis\") == 2"
+  },
+  {
+   "node": "pointvelocity",
+   "parm": "framerangemin",
+   "label": "Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "pointvelocity",
+   "parm": "framerangemax",
+   "label": "Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "polywire",
+   "parm": "segscale1",
+   "label": "Segment Scales",
+   "expr": "1.0 / $NSEG"
+  },
+  {
+   "node": "polywire",
+   "parm": "segscale2",
+   "label": "Segment Scales",
+   "expr": "1.0 - 1.0 / $NSEG"
+  },
+  {
+   "node": "primitive",
+   "parm": "px",
+   "label": "Pivot Translate",
+   "expr": "$CEX"
+  },
+  {
+   "node": "primitive",
+   "parm": "py",
+   "label": "Pivot Translate",
+   "expr": "$CEY"
+  },
+  {
+   "node": "primitive",
+   "parm": "pz",
+   "label": "Pivot Translate",
+   "expr": "$CEZ"
+  },
+  {
+   "node": "primitive",
+   "parm": "upvectorx",
+   "label": "Up-Vector",
+   "expr": "@N.x"
+  },
+  {
+   "node": "primitive",
+   "parm": "upvectory",
+   "label": "Up-Vector",
+   "expr": "@N.y"
+  },
+  {
+   "node": "primitive",
+   "parm": "upvectorz",
+   "label": "Up-Vector",
+   "expr": "@N.z"
+  },
+  {
+   "node": "primitive",
+   "parm": "diffr",
+   "label": "Color",
+   "expr": "@Cd.r"
+  },
+  {
+   "node": "primitive",
+   "parm": "diffg",
+   "label": "Color",
+   "expr": "@Cd.g"
+  },
+  {
+   "node": "primitive",
+   "parm": "diffb",
+   "label": "Color",
+   "expr": "@Cd.b"
+  },
+  {
+   "node": "primitive",
+   "parm": "alpha",
+   "label": "Alpha",
+   "expr": "@Alpha"
+  },
+  {
+   "node": "primitive",
+   "parm": "crease",
+   "label": "Crease",
+   "expr": "@creaseweight"
+  },
+  {
+   "node": "primitive",
+   "parm": "metaweight",
+   "label": "Weight",
+   "expr": "$WEIGHT"
+  },
+  {
+   "node": "primitive",
+   "parm": "prblur",
+   "label": "Particle Blur",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "pyroburstsource",
+   "parm": "source_noiseoffset1",
+   "label": "Offset",
+   "expr": "1"
+  },
+  {
+   "node": "pyroburstsource",
+   "parm": "source_seedoffset1",
+   "label": "Seed Offset",
+   "expr": "1"
+  },
+  {
+   "node": "pyroburstsource",
+   "parm": "source_noiseoffset2",
+   "label": "Offset",
+   "expr": "2"
+  },
+  {
+   "node": "pyroburstsource",
+   "parm": "source_seedoffset2",
+   "label": "Seed Offset",
+   "expr": "2"
+  },
+  {
+   "node": "pyroburstsource",
+   "parm": "source_noiseoffset3",
+   "label": "Offset",
+   "expr": "3"
+  },
+  {
+   "node": "pyroburstsource",
+   "parm": "source_seedoffset3",
+   "label": "Seed Offset",
+   "expr": "3"
+  },
+  {
+   "node": "pyrothrusterexhaust",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "ray",
+   "parm": "dirx",
+   "label": "Direction",
+   "expr": "@N.x"
+  },
+  {
+   "node": "ray",
+   "parm": "diry",
+   "label": "Direction",
+   "expr": "@N.y"
+  },
+  {
+   "node": "ray",
+   "parm": "dirz",
+   "label": "Direction",
+   "expr": "@N.z"
+  },
+  {
+   "node": "rbdbulletsolver",
+   "parm": "guidecaptureframe",
+   "label": "Guide Capture Frame",
+   "expr": "ch(\"startframe\")"
+  },
+  {
+   "node": "rbdbulletsolver",
+   "parm": "emission_cachemaxsize",
+   "label": "Emission Cache Memory (MB)",
+   "expr": "ch(\"cachemaxsize\")"
+  },
+  {
+   "node": "rbdbulletsolver",
+   "parm": "collision_solvefirstframe",
+   "label": "Solve on Creation Frame",
+   "expr": "ch(\"solvefirstframe\")"
+  },
+  {
+   "node": "rbdbulletsolver",
+   "parm": "guide_startframe",
+   "label": "Start Frame",
+   "expr": "ch(\"startframe\")"
+  },
+  {
+   "node": "rbdcarfracture",
+   "parm": "seed1",
+   "label": "Seed",
+   "expr": "1"
+  },
+  {
+   "node": "rbdconfigure",
+   "parm": "bboxonoff",
+   "label": "Show Bbox",
+   "expr": "ch(\"boundingtype\")==0"
+  },
+  {
+   "node": "rbdconfigure",
+   "parm": "shrinkamount1",
+   "label": "Shrink Amount",
+   "expr": "ch(\"collisionmargin1\")"
+  },
+  {
+   "node": "rbdconfigure",
+   "parm": "density1",
+   "label": "Density (kg/m3)",
+   "expr": "chs(\"material\"+opdigits($CH))"
+  },
+  {
+   "node": "rbdconstraintsfromcurves",
+   "parm": "hasinput",
+   "label": "hasinput",
+   "expr": "inputs = hou.pwd().inputs()\nretVal = 0\nif len(inputs) == 4 and inputs[3] and inp"
+  },
+  {
+   "node": "rbdconstraintsfromcurves",
+   "parm": "descriptiveparm",
+   "label": "Label",
+   "expr": "ifs(ch(\"group\"), ifs(ch(\"group\")==1, chs(\"groupname\"), chs(\"tag\")), \"\")"
+  },
+  {
+   "node": "rbdconstraintsfromlines",
+   "parm": "descriptiveparm",
+   "label": "Label",
+   "expr": "ifs(ch(\"group\"), ifs(ch(\"group\")==1, chs(\"groupname\"), chs(\"tag\")), \"\")"
+  },
+  {
+   "node": "rbdconstraintsfromrules",
+   "parm": "hasinput",
+   "label": "hasinput",
+   "expr": "inputs = hou.pwd().inputs()\nretVal = 0\nif len(inputs) >= 2 and inputs[1] and inp"
+  },
+  {
+   "node": "rbdconstraintsfromrules",
+   "parm": "descriptiveparm",
+   "label": "Label",
+   "expr": "ifs(ch(\"group\"), ifs(ch(\"group\")==1, chs(\"groupname\"), chs(\"tag\")), \"\")"
+  },
+  {
+   "node": "rbddeformpieces",
+   "parm": "restframe",
+   "label": "Rest Frame",
+   "expr": "$RFSTART"
+  },
+  {
+   "node": "rbdio",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rbdio",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "rbdio",
+   "parm": "clampfirst",
+   "label": "Clamp First Frame",
+   "expr": "ch(\"f1\")"
+  },
+  {
+   "node": "rbdio",
+   "parm": "clamplast",
+   "label": "Clamp Last Frame",
+   "expr": "ch(\"f2\")"
+  },
+  {
+   "node": "rbdio",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-1"
+  },
+  {
+   "node": "rbdio",
+   "parm": "targettopnetwork",
+   "label": "Top Network",
+   "expr": "hou.phm().targetTopNetwork()"
+  },
+  {
+   "node": "rbdio",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "{\n    if(ch(\"timedependent\"))\n    {\n        rawframe = $T * $FPS + 1;\n        ra"
+  },
+  {
+   "node": "rbdio",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\""
+  },
+  {
+   "node": "rbdio",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "clampfirst",
+   "label": "Clamp First Frame",
+   "expr": "ch(\"f1\")"
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "clamplast",
+   "label": "Clamp Last Frame",
+   "expr": "ch(\"f2\")"
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-1"
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "targettopnetwork",
+   "label": "Top Network",
+   "expr": "hou.phm().targetTopNetwork()"
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "{\n    if(ch(\"timedependent\"))\n    {\n        rawframe = $T * $FPS + 1;\n        ra"
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\""
+  },
+  {
+   "node": "rbdio::2.0",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "rbdmaterialfracture",
+   "parm": "enabledetail_",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture",
+   "parm": "enabledetail__2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture",
+   "parm": "enabledetail_2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture",
+   "parm": "enabledetail1",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture",
+   "parm": "enabledetail2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::2.0",
+   "parm": "enabledetail_",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::2.0",
+   "parm": "enabledetail__2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::2.0",
+   "parm": "enabledetail_2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::2.0",
+   "parm": "enabledetail1",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::2.0",
+   "parm": "enabledetail2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::3.0",
+   "parm": "enabledetail_",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::3.0",
+   "parm": "enabledetail__2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::3.0",
+   "parm": "enabledetail_2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::3.0",
+   "parm": "enabledetail1",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "rbdmaterialfracture::3.0",
+   "parm": "enabledetail2",
+   "label": "Enable Detail",
+   "expr": "ch(\"concrete_edgedetail\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "resx",
+   "label": "Resolution",
+   "expr": "ch(chsop(\"camera\") + \"/resx\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "resy",
+   "label": "Resolution",
+   "expr": "ch(chsop(\"camera\") + \"/resy\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "focal",
+   "label": "Focal",
+   "expr": "ch(chsop(\"camera\") + \"/focal\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "aperture",
+   "label": "Aperture",
+   "expr": "ch(chsop(\"camera\") + \"/aperture\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "camtx",
+   "label": "Translate",
+   "expr": "explodematrix(optransform(chsop(\"camera\")), \"SRT\", \"XYZ\", \"tx\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "camty",
+   "label": "Translate",
+   "expr": "explodematrix(optransform(chsop(\"camera\")), \"SRT\", \"XYZ\", \"ty\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "camtz",
+   "label": "Translate",
+   "expr": "explodematrix(optransform(chsop(\"camera\")), \"SRT\", \"XYZ\", \"tz\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "camrx",
+   "label": "Rotate",
+   "expr": "explodematrix(optransform(chsop(\"camera\")), \"SRT\", \"XYZ\", \"rx\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "camry",
+   "label": "Rotate",
+   "expr": "explodematrix(optransform(chsop(\"camera\")), \"SRT\", \"XYZ\", \"ry\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "camrz",
+   "label": "Rotate",
+   "expr": "explodematrix(optransform(chsop(\"camera\")), \"SRT\", \"XYZ\", \"rz\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "near",
+   "label": "Near",
+   "expr": "ch(chsop(\"camera\") + \"/near\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "far",
+   "label": "Far",
+   "expr": "ch(chsop(\"camera\") + \"/far\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "winx",
+   "label": "Screen Window X/Y",
+   "expr": "ch(chsop(\"camera\") + \"/winx\")"
+  },
+  {
+   "node": "remeshtocamera",
+   "parm": "winy",
+   "label": "Screen Window X/Y",
+   "expr": "ch(chsop(\"camera\") + \"/winy\")"
+  },
+  {
+   "node": "retime",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "retime",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "retime",
+   "parm": "startframe",
+   "label": "Start Frame",
+   "expr": "ch(\"inputrangex\")"
+  },
+  {
+   "node": "retime",
+   "parm": "outputrangex",
+   "label": "Output Frame Range",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "retime",
+   "parm": "outputrangey",
+   "label": "Output Frame Range",
+   "expr": "$FEND"
+  },
+  {
+   "node": "retime",
+   "parm": "timestep",
+   "label": "Input Timestep",
+   "expr": "1 / $FPS"
+  },
+  {
+   "node": "rop_alembic",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rop_alembic",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "rop_fbx",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rop_fbx",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "rop_geometry",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rop_geometry",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "rop_geometryraw",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rop_geometryraw",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "rop_gltf",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rop_gltf",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "rop_ml_exampleraw",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "rop_ml_exampleraw",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "sblend",
+   "parm": "timestep",
+   "label": "Timestep",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "sblend::2.0",
+   "parm": "timestep",
+   "label": "Timestep",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "skindeform",
+   "parm": "skinsliding_lowresslideiterations",
+   "label": "Slide Iterations",
+   "expr": "ch(\"skinsliding_lowresrelaxiterations\")/4"
+  },
+  {
+   "node": "skindeform",
+   "parm": "skinsliding_slideiterations",
+   "label": "Slide Iterations",
+   "expr": "ch(\"skinsliding_relaxiterations\")/4"
+  },
+  {
+   "node": "skybox",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "testgeometry_capybara",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "testgeometry_crag",
+   "parm": "frame",
+   "label": "Animation Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "testgeometry_otto",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$FF"
+  },
+  {
+   "node": "testsim_crowdtransition",
+   "parm": "startframe",
+   "label": "Start Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "testsim_ragdoll",
+   "parm": "startframe",
+   "label": "Start Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "timeshift",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "timeshift",
+   "parm": "time",
+   "label": "Time",
+   "expr": "$T"
+  },
+  {
+   "node": "timeshift",
+   "parm": "frange1",
+   "label": "Start/End Frame",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "timeshift",
+   "parm": "frange2",
+   "label": "Start/End Frame",
+   "expr": "$FEND"
+  },
+  {
+   "node": "timeshift",
+   "parm": "trange1",
+   "label": "Start/End Time",
+   "expr": "$TSTART"
+  },
+  {
+   "node": "timeshift",
+   "parm": "trange2",
+   "label": "Start/End Time",
+   "expr": "$TEND"
+  },
+  {
+   "node": "trace",
+   "parm": "copframe",
+   "label": "COP Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "trim",
+   "parm": "altitude",
+   "label": "Altitude",
+   "expr": "$ALTITUDE"
+  },
+  {
+   "node": "usdconfigure",
+   "parm": "sampleframe",
+   "label": "Sample Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_color",
+   "label": "Hide color",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"Xform Scope Capsule_1 Cone Cube Cylinder_"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_radius",
+   "label": "Hide radius",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"Cone Sphere CylinderLight DiskLight Spher"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_size",
+   "label": "Hide size",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"Cube\")"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_radiusTop",
+   "label": "Hide radiusTop",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"Capsule_1 Cylinder_1\")"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_radiusBottom",
+   "label": "Hide radiusBottom",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"Capsule_1 Cylinder_1\")"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_height",
+   "label": "Hide height",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"Capsule_1 Cone Cylinder_1 RectLight\")"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_width",
+   "label": "Hide width",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"RectLight\")"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_length",
+   "label": "Hide length",
+   "expr": "!strcasematch(\"*\"+chs(\"primtype\")+\"*\",\"CylinderLight\")"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_intensity",
+   "label": "Hide intensity",
+   "expr": "!strcasematch(\"*Light\",chs(\"primtype\"))"
+  },
+  {
+   "node": "usdconfigureprimsfrompoints",
+   "parm": "hide_exposure",
+   "label": "Hide exposure",
+   "expr": "!strcasematch(\"*Light\",chs(\"primtype\"))"
+  },
+  {
+   "node": "usdexport",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "usdexport",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "usdimport",
+   "parm": "importtime",
+   "label": "Import Frame",
+   "expr": "$F"
+  },
+  {
+   "node": "vdbadvectpoints",
+   "parm": "timestep",
+   "label": "Timestep",
+   "expr": "1.0/$FPS"
+  },
+  {
+   "node": "vdbadvectsdf",
+   "parm": "timestep",
+   "label": "Timestep",
+   "expr": "1.0/$FPS"
+  },
+  {
+   "node": "vdbmorphsdf",
+   "parm": "timestep",
+   "label": "Timestep",
+   "expr": "1.0/$FPS"
+  },
+  {
+   "node": "vdbpointsgroup",
+   "parm": "viewportgroupname",
+   "label": "Name",
+   "expr": "chs(\"groupname\")"
+  },
+  {
+   "node": "vdbrasterizefrustum",
+   "parm": "framespersecond",
+   "label": "Frames / Second",
+   "expr": "$FPS"
+  },
+  {
+   "node": "vellumio",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "vellumio",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "vellumio",
+   "parm": "clampfirst",
+   "label": "Clamp First Frame",
+   "expr": "ch(\"f1\")"
+  },
+  {
+   "node": "vellumio",
+   "parm": "clamplast",
+   "label": "Clamp Last Frame",
+   "expr": "ch(\"f2\")"
+  },
+  {
+   "node": "vellumio",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-1"
+  },
+  {
+   "node": "vellumio",
+   "parm": "targettopnetwork",
+   "label": "Top Network",
+   "expr": "hou.phm().targetTopNetwork()"
+  },
+  {
+   "node": "vellumio",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "{\n    if(ch(\"timedependent\"))\n    {\n        rawframe = $T * $FPS + 1;\n        ra"
+  },
+  {
+   "node": "vellumio",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\""
+  },
+  {
+   "node": "vellumio",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "f1",
+   "label": "Start/End/Inc",
+   "expr": "$FSTART"
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "f2",
+   "label": "Start/End/Inc",
+   "expr": "$FEND"
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "clampfirst",
+   "label": "Clamp First Frame",
+   "expr": "ch(\"f1\")"
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "clamplast",
+   "label": "Clamp Last Frame",
+   "expr": "ch(\"f2\")"
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "index",
+   "label": "Sequence Index",
+   "expr": "$FF-1"
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "targettopnetwork",
+   "label": "Top Network",
+   "expr": "hou.phm().targetTopNetwork()"
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "frame",
+   "label": "Frame",
+   "expr": "{\n    if(ch(\"timedependent\"))\n    {\n        rawframe = $T * $FPS + 1;\n        ra"
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "descriptivelabel",
+   "label": "Descriptive Label",
+   "expr": "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\""
+  },
+  {
+   "node": "vellumio::2.0",
+   "parm": "sopoutput",
+   "label": "Output File",
+   "expr": "{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    "
+  },
+  {
+   "node": "vellumxformpieces",
+   "parm": "integrateovertime",
+   "label": "Integrate Over Time",
+   "expr": "1/$FPS"
+  },
+  {
+   "node": "volumemix",
+   "parm": "expr",
+   "label": "Value",
+   "expr": "$V"
+  },
+  {
+   "node": "volumevelocity",
+   "parm": "objframe",
+   "label": "Frame",
+   "expr": "$FF-0.5"
+  },
+  {
+   "node": "volumevelocityfromcurves",
+   "parm": "hasvolumeinput",
+   "label": "Has Volume Input",
+   "expr": "strlen(opinputpath(\".\", 2)) > 0"
+  },
+  {
+   "node": "volumevelocityfromcurves",
+   "parm": "hassurfaceinput",
+   "label": "Has Surface Input",
+   "expr": "strlen(opinputpath(\".\", 1)) > 0"
+  },
+  {
+   "node": "volumevelocityfromsurface",
+   "parm": "exteriorband",
+   "label": "Exterior Band",
+   "expr": "3*ch(\"voxelsize\")"
+  },
+  {
+   "node": "xformpieces",
+   "parm": "integrateovertime",
+   "label": "Integrate Over Time",
+   "expr": "1/$FPS"
+  }
+ ],
+ "set_probe": {
+  "before": [
+   "@N.y",
+   0.0
+  ],
+  "after_set": [
+   "@N.y",
+   0.0
+  ],
+  "after_delete": [
+   null,
+   -1.0
+  ]
+ }
+}

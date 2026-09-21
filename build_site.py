@@ -924,6 +924,18 @@ DONE = [
      "shots": ["132_promote.png"],
      "title": "attribpromote の11通りのまとめ方 — Median は偶数個なら上の方、Mode は同数なら最小の値",
      "note": "8通りは式どおり。Median は偶数個なら上の方（4.5 ではなく5）、Mode は同数なら最小の値"},
+    {"no": "133", "anchor": "exp133",
+     "tags": ["モデリング", "ray", "つまずき", "検算"],
+     "log": "log_pm", "thumb": "133_ray.png",
+     "shots": ["133_ray.png"],
+     "title": "ray の Direction には最初から @N の式が入っている — Python で set しても変わらず、真下に落ちなかった",
+     "note": "Direction には最初から @N の式。set しても値が変わらず真下に落ちない。式を消せば式の位置に落ちる"},
+    {"no": "134", "anchor": "exp134",
+     "tags": ["ツール", "スクリプト", "つまずき"],
+     "log": "log_pm", "thumb": "134_expr.png",
+     "shots": ["134_expr.png"],
+     "title": "最初から式が入っているつまみは SOP 全体で488個 — set しても式が残り、値は変わらない",
+     "note": "SOP 1,031種類のうち176種類・488個のつまみに最初から式。set は式を消さず値も変わらない"},
 ]
 
 PLANNED = []

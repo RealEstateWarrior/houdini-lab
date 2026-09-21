@@ -1,0 +1,450 @@
+{
+ "title": "最初から式が入っているつまみは SOP 全体で488個 — set しても式が残り、値は変わらない",
+ "summary": "実験133 で、ray の Direction に最初から式が入っていて、Python の set が効かないと分かった。同じ落とし穴がどれだけあるかを、SOP の全ノード 1,031 種類を1つずつ作って数えた（8.5 秒）。\n\n**最初から式が入っているつまみは 488 個、176 種類のノードにあった。** 式の中身は、時間（$F・$T など） 275 個、ほかのつまみの参照（ch） 135 個、その他 67 個、属性（@N など） 11 個。多いのは $FSTART・$FEND（フレーム範囲）で、キャッシュや読み込みの箱に集まっている。\n\nこのサイトで解説しているノードでは 69 個。属性を読む式（@N など）は SOP 全体で 11 個で、ray の Direction がその代表。\n\n**式の入ったつまみに set すると、式は残り、値は変わらない。** ray の diry で、set(−1) の前は 式 @N.y・値 0、後も 式 @N.y・値 0。deleteAllKeyframes() で式を消してから set すると、値 -1 になった。\n\nスクリプトでつまみを入れるときは、keyframes() で式の有無を確かめ、あれば消してから入れる。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "このサイトで解説しているノードの、式の入ったつまみ",
+   "note": "式は最初の80文字まで。",
+   "images": [
+    {
+     "path": "134_expr.png",
+     "caption": "式の種類ごとの数。時間の式が大半。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "ノード",
+    "つまみ",
+    "画面の名前",
+    "式"
+   ],
+   "rows": [
+    [
+     "alembic",
+     "frame",
+     "Frame",
+     "$FF"
+    ],
+    [
+     "alembic",
+     "fps",
+     "Frames per Second",
+     "$FPS"
+    ],
+    [
+     "attribremap",
+     "descriptiveparm",
+     "Label",
+     "chs(\"inname\") + ifs(strcmp(chs(\"outname\"), \"\"), \" -> \" + chs(\"outname\"), \"\")"
+    ],
+    [
+     "cache",
+     "range1",
+     "Start/End/Inc",
+     "$FSTART"
+    ],
+    [
+     "cache",
+     "range2",
+     "Start/End/Inc",
+     "$FEND"
+    ],
+    [
+     "cache",
+     "index",
+     "Index",
+     "$F"
+    ],
+    [
+     "delete",
+     "rangeend",
+     "Start / End",
+     "$N"
+    ],
+    [
+     "dopimport",
+     "integrateovertime",
+     "Integrate Over Time",
+     "1/$FPS"
+    ],
+    [
+     "dopnet",
+     "timestep",
+     "Timestep",
+     "ch(\"timescale\")/(ch(\"substep\")*$FPS)"
+    ],
+    [
+     "dopnet",
+     "timeoffset",
+     "Offset Time",
+     "(ch(\"startframe\")-1)/$FPS"
+    ],
+    [
+     "file",
+     "index",
+     "Sequence Index",
+     "$FF-ch(\"f1\")"
+    ],
+    [
+     "filecache",
+     "f1",
+     "Start/End/Inc",
+     "$FSTART"
+    ],
+    [
+     "filecache",
+     "f2",
+     "Start/End/Inc",
+     "$FEND"
+    ],
+    [
+     "filecache",
+     "clampfirst",
+     "Clamp First Frame",
+     "ch(\"f1\")"
+    ],
+    [
+     "filecache",
+     "clamplast",
+     "Clamp Last Frame",
+     "ch(\"f2\")"
+    ],
+    [
+     "filecache",
+     "index",
+     "Sequence Index",
+     "$FF-1"
+    ],
+    [
+     "filecache",
+     "frame",
+     "Frame",
+     "{\r     if(ch(\"timedependent\"))\r     {\r         rawframe = $T * $FPS + 1;\r       "
+    ],
+    [
+     "filecache",
+     "descriptivelabel",
+     "Descriptive Label",
+     "ifs(ch(\"filemethod\"),chsraw(\"file\"),strreplace(strreplace(chs(\"cachename\"),chs(\""
+    ],
+    [
+     "filecache",
+     "sopoutput",
+     "Output File",
+     "{     if(ch('filemethod'))     {         return chs('file');     }     else     "
+    ],
+    [
+     "mpmsurface",
+     "sdferode",
+     "Erode",
+     "ch(\"sdfdilate\")"
+    ],
+    [
+     "particlefluidsurface",
+     "doerode",
+     "Label",
+     "ch(\"dodilate\")"
+    ],
+    [
+     "particlefluidsurface",
+     "erodeoffset",
+     "Erode",
+     "ch(\"dilateoffset\")"
+    ],
+    [
+     "particlefluidsurface",
+     "erodemask",
+     "Mask",
+     "ch(\"dilatemask\")"
+    ],
+    [
+     "pointvelocity",
+     "framerangemin",
+     "Frame Range",
+     "$FSTART"
+    ],
+    [
+     "pointvelocity",
+     "framerangemax",
+     "Frame Range",
+     "$FEND"
+    ],
+    [
+     "polywire",
+     "segscale1",
+     "Segment Scales",
+     "1.0 / $NSEG"
+    ],
+    [
+     "polywire",
+     "segscale2",
+     "Segment Scales",
+     "1.0 - 1.0 / $NSEG"
+    ],
+    [
+     "primitive",
+     "px",
+     "Pivot Translate",
+     "$CEX"
+    ],
+    [
+     "primitive",
+     "py",
+     "Pivot Translate",
+     "$CEY"
+    ],
+    [
+     "primitive",
+     "pz",
+     "Pivot Translate",
+     "$CEZ"
+    ],
+    [
+     "primitive",
+     "upvectorx",
+     "Up-Vector",
+     "@N.x"
+    ],
+    [
+     "primitive",
+     "upvectory",
+     "Up-Vector",
+     "@N.y"
+    ],
+    [
+     "primitive",
+     "upvectorz",
+     "Up-Vector",
+     "@N.z"
+    ],
+    [
+     "primitive",
+     "diffr",
+     "Color",
+     "@Cd.r"
+    ],
+    [
+     "primitive",
+     "diffg",
+     "Color",
+     "@Cd.g"
+    ],
+    [
+     "primitive",
+     "diffb",
+     "Color",
+     "@Cd.b"
+    ],
+    [
+     "primitive",
+     "alpha",
+     "Alpha",
+     "@Alpha"
+    ],
+    [
+     "primitive",
+     "crease",
+     "Crease",
+     "@creaseweight"
+    ],
+    [
+     "primitive",
+     "metaweight",
+     "Weight",
+     "$WEIGHT"
+    ],
+    [
+     "primitive",
+     "prblur",
+     "Particle Blur",
+     "1/$FPS"
+    ],
+    [
+     "ray",
+     "dirx",
+     "Direction",
+     "@N.x"
+    ],
+    [
+     "ray",
+     "diry",
+     "Direction",
+     "@N.y"
+    ],
+    [
+     "ray",
+     "dirz",
+     "Direction",
+     "@N.z"
+    ],
+    [
+     "rbdbulletsolver",
+     "guidecaptureframe",
+     "Guide Capture Frame",
+     "ch(\"startframe\")"
+    ],
+    [
+     "rbdbulletsolver",
+     "emission_cachemaxsize",
+     "Emission Cache Memory (MB)",
+     "ch(\"cachemaxsize\")"
+    ],
+    [
+     "rbdbulletsolver",
+     "collision_solvefirstframe",
+     "Solve on Creation Frame",
+     "ch(\"solvefirstframe\")"
+    ],
+    [
+     "rbdbulletsolver",
+     "guide_startframe",
+     "Start Frame",
+     "ch(\"startframe\")"
+    ],
+    [
+     "rbdconfigure",
+     "bboxonoff",
+     "Show Bbox",
+     "ch(\"boundingtype\")==0"
+    ],
+    [
+     "rbdconfigure",
+     "shrinkamount1",
+     "Shrink Amount",
+     "ch(\"collisionmargin1\")"
+    ],
+    [
+     "rbdconfigure",
+     "density1",
+     "Density (kg/m3)",
+     "chs(\"material\"+opdigits($CH))"
+    ],
+    [
+     "rbdmaterialfracture",
+     "enabledetail_",
+     "Enable Detail",
+     "ch(\"concrete_edgedetail\")"
+    ],
+    [
+     "rbdmaterialfracture",
+     "enabledetail__2",
+     "Enable Detail",
+     "ch(\"concrete_edgedetail\")"
+    ],
+    [
+     "rbdmaterialfracture",
+     "enabledetail_2",
+     "Enable Detail",
+     "ch(\"concrete_edgedetail\")"
+    ],
+    [
+     "rbdmaterialfracture",
+     "enabledetail1",
+     "Enable Detail",
+     "ch(\"concrete_edgedetail\")"
+    ],
+    [
+     "rbdmaterialfracture",
+     "enabledetail2",
+     "Enable Detail",
+     "ch(\"concrete_edgedetail\")"
+    ],
+    [
+     "retime",
+     "frame",
+     "Frame",
+     "$FF"
+    ],
+    [
+     "retime",
+     "time",
+     "Time",
+     "$T"
+    ],
+    [
+     "retime",
+     "startframe",
+     "Start Frame",
+     "ch(\"inputrangex\")"
+    ],
+    [
+     "retime",
+     "outputrangex",
+     "Output Frame Range",
+     "$FSTART"
+    ],
+    [
+     "retime",
+     "outputrangey",
+     "Output Frame Range",
+     "$FEND"
+    ],
+    [
+     "retime",
+     "timestep",
+     "Input Timestep",
+     "1 / $FPS"
+    ],
+    [
+     "timeshift",
+     "frame",
+     "Frame",
+     "$F"
+    ],
+    [
+     "timeshift",
+     "time",
+     "Time",
+     "$T"
+    ],
+    [
+     "timeshift",
+     "frange1",
+     "Start/End Frame",
+     "$FSTART"
+    ],
+    [
+     "timeshift",
+     "frange2",
+     "Start/End Frame",
+     "$FEND"
+    ],
+    [
+     "timeshift",
+     "trange1",
+     "Start/End Time",
+     "$TSTART"
+    ],
+    [
+     "timeshift",
+     "trange2",
+     "Start/End Time",
+     "$TEND"
+    ],
+    [
+     "trace",
+     "copframe",
+     "COP Frame",
+     "$F"
+    ],
+    [
+     "trim",
+     "altitude",
+     "Altitude",
+     "$ALTITUDE"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>式の入ったつまみは 488 個。</strong>大半はフレーム範囲（$FSTART・$FEND）。",
+  "<strong>set は式を消さない。</strong>値を入れたいときは deleteAllKeyframes() が先。",
+  "<strong>@N などの属性の式は要注意。</strong>入力に属性が無いと 0 になり、黙って効かない（ray が動かなかった）。"
+ ],
+ "next": [
+  "DOP・LOP でも同じように数える",
+  "hou.Parm.set ではなく setExpression / 値の上書き（lock）の振る舞いを比べる"
+ ]
+}

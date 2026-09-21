@@ -6814,6 +6814,162 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 133 ===================== -->
+    <article class="entry entry--current" id="exp133">
+      <div class="badge">133</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>ray の Direction には最初から @N の式が入っている — Python で set しても変わらず、真下に落ちなかった</h2>
+        <p class="path">examples/133_ray.py &nbsp;·&nbsp; Direction には最初から @N の式。set しても値が変わらず真下に落ちない。式を消せば式の位置に落ちる</p>
+
+        <div class="prose">
+          <p>半径1の球の上に格子（31×31点、高さ2）を置き、ray で球に落とした。真下へ落とせば、当たった点は y = √(1 − x² − z²) に来るはず。</p>
+          <p>**最初は1点も動かなかった。** 調べると、ray の Direction（dirx・diry・dirz）には最初から @N.x, @N.y, @N.z という式が入っていた。Python で parmTuple(&quot;dir&quot;).set((0, −1, 0)) としても、式が残ったままで値は (0.0, 0.0, 0.0) のまま。格子には<button class="term" data-term="法線">法線</button>が無いので、光線は格子の向き（上）へ飛び、下の球には当たらなかった。**式を消してから（deleteAllKeyframes）入れると、正しく真下へ落ちた。** （画面で値を打ち込んだときに式が置き換わるかは、確かめていない。格子を球の下に置くと、同じ設定のまま下の面に当たったので、光線が上へ飛んでいたことは確か）</p>
+          <p>**真下へ落とした点は、式の位置と一致した**（段数96でずれ最大 0.0018、平均 0.00021）。ずれは球が多角形である分で、段数24では最大 0.0253。球の外側を通る光線の点（40 点）は、元の高さのまま残った。</p>
+          <p>**Minimum Distance は、いちばん近い面の上へ動かす。** 中心から放射状に落とした位置とのずれは、段数96で最大 0.0096。多角形の平らな面の上では「いちばん近い点」と「放射状の点」が少し違うため、Project より大きい。</p>
+        </div>
+
+        <p class="label">落とし方と、式とのずれ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="133_ray.png" alt="どちらも、球を細かくするとずれが減る。" loading="lazy" decoding="async"></div>
+            <figcaption>どちらも、球を細かくするとずれが減る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>球の段数</th><th>落とし方</th><th>当たった点</th><th>外れて残った点</th><th>ずれの最大</th><th>ずれの平均</th><th>中心からの距離（最小）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">24</td><td>Project（真下）</td><td class="num">921</td><td class="num">40</td><td class="num">0.025300</td><td class="num">0.003635</td><td class="num">0.995734</td></tr>
+              <tr><td class="num">24</td><td>Minimum Distance</td><td class="num">961</td><td class="num">0</td><td class="num">0.037646</td><td class="num">0.019475</td><td class="num">0.997394</td></tr>
+              <tr><td class="num">96</td><td>Project（真下）</td><td class="num">921</td><td class="num">40</td><td class="num">0.001783</td><td class="num">0.000209</td><td class="num">0.999754</td></tr>
+              <tr><td class="num">96</td><td>Minimum Distance</td><td class="num">961</td><td class="num">0</td><td class="num">0.009621</td><td class="num">0.004528</td><td class="num">0.999854</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Project の式は y = √(1 − x² − z²)。Minimum Distance は 点 ÷ 中心からの距離（放射状）と比べた。当たった点の中心からの距離も出した（1 なら球の上）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ray の Direction は、最初は @N の式。</strong>スクリプトで向きを入れるときは、先に deleteAllKeyframes() で式を消す。</li>
+          <li><strong>法線の無い形から飛ばすと、面の向き（格子なら上）へ飛ぶ。</strong>落としたい向きを必ず決める。</li>
+          <li><strong>外れた点は動かない。</strong>外れた点を消したいときは、別に選んで消す。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 134 ===================== -->
+    <article class="entry entry--current" id="exp134">
+      <div class="badge">134</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>最初から式が入っているつまみは SOP 全体で488個 — set しても式が残り、値は変わらない</h2>
+        <p class="path">examples/134_default_expr.py &nbsp;·&nbsp; SOP 1,031種類のうち176種類・488個のつまみに最初から式。set は式を消さず値も変わらない</p>
+
+        <div class="prose">
+          <p><a href="#exp133">実験133</a> で、ray の Direction に最初から式が入っていて、Python の set が効かないと分かった。同じ落とし穴がどれだけあるかを、<button class="term" data-term="SOP">SOP</button> の全<button class="term" data-term="ノード">ノード</button> 1,031 種類を1つずつ作って数えた（8.5 秒）。</p>
+          <p>**最初から式が入っているつまみは 488 個、176 種類のノードにあった。** 式の中身は、時間（$F・$T など） 275 個、ほかのつまみの参照（ch） 135 個、その他 67 個、属性（@N など） 11 個。多いのは $FSTART・$FEND（フレーム範囲）で、<button class="term" data-term="キャッシュ">キャッシュ</button>や読み込みの箱に集まっている。</p>
+          <p>このサイトで解説しているノードでは 69 個。属性を読む式（@N など）は SOP 全体で 11 個で、ray の Direction がその代表。</p>
+          <p>**式の入ったつまみに set すると、式は残り、値は変わらない。** ray の diry で、set(−1) の前は 式 @N.y・値 0、後も 式 @N.y・値 0。deleteAllKeyframes() で式を消してから set すると、値 -1 になった。</p>
+          <p>スクリプトでつまみを入れるときは、keyframes() で式の有無を確かめ、あれば消してから入れる。</p>
+        </div>
+
+        <p class="label">このサイトで解説しているノードの、式の入ったつまみ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="134_expr.png" alt="式の種類ごとの数。時間の式が大半。" loading="lazy" decoding="async"></div>
+            <figcaption>式の種類ごとの数。時間の式が大半。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>ノード</th><th>つまみ</th><th>画面の名前</th><th>式</th></tr></thead>
+            <tbody>
+              <tr><td>alembic</td><td>frame</td><td>Frame</td><td>$FF</td></tr>
+              <tr><td>alembic</td><td>fps</td><td>Frames per Second</td><td>$FPS</td></tr>
+              <tr><td>attribremap</td><td>descriptiveparm</td><td>Label</td><td>chs(&quot;inname&quot;) + ifs(strcmp(chs(&quot;outname&quot;), &quot;&quot;), &quot; -&gt; &quot; + chs(&quot;outname&quot;), &quot;&quot;)</td></tr>
+              <tr><td>cache</td><td>range1</td><td>Start/End/Inc</td><td>$FSTART</td></tr>
+              <tr><td>cache</td><td>range2</td><td>Start/End/Inc</td><td>$FEND</td></tr>
+              <tr><td>cache</td><td>index</td><td>Index</td><td>$F</td></tr>
+              <tr><td>delete</td><td>rangeend</td><td>Start / End</td><td>$N</td></tr>
+              <tr><td>dopimport</td><td>integrateovertime</td><td>Integrate Over Time</td><td>1/$FPS</td></tr>
+              <tr><td>dopnet</td><td>timestep</td><td>Timestep</td><td>ch(&quot;timescale&quot;)/(ch(&quot;substep&quot;)*$FPS)</td></tr>
+              <tr><td>dopnet</td><td>timeoffset</td><td>Offset Time</td><td>(ch(&quot;startframe&quot;)-1)/$FPS</td></tr>
+              <tr><td>file</td><td>index</td><td>Sequence Index</td><td>$FF-ch(&quot;f1&quot;)</td></tr>
+              <tr><td>filecache</td><td>f1</td><td>Start/End/Inc</td><td>$FSTART</td></tr>
+              <tr><td>filecache</td><td>f2</td><td>Start/End/Inc</td><td>$FEND</td></tr>
+              <tr><td>filecache</td><td>clampfirst</td><td>Clamp First Frame</td><td>ch(&quot;f1&quot;)</td></tr>
+              <tr><td>filecache</td><td>clamplast</td><td>Clamp Last Frame</td><td>ch(&quot;f2&quot;)</td></tr>
+              <tr><td>filecache</td><td>index</td><td>Sequence Index</td><td>$FF-1</td></tr>
+              <tr><td>filecache</td><td>frame</td><td>Frame</td><td>{     if(ch(&quot;timedependent&quot;))     {         rawframe = $T * $FPS + 1;       </td></tr>
+              <tr><td>filecache</td><td>descriptivelabel</td><td>Descriptive Label</td><td>ifs(ch(&quot;filemethod&quot;),chsraw(&quot;file&quot;),strreplace(strreplace(chs(&quot;cachename&quot;),chs(&quot;</td></tr>
+              <tr><td>filecache</td><td>sopoutput</td><td>Output File</td><td>{     if(ch(&#x27;filemethod&#x27;))     {         return chs(&#x27;file&#x27;);     }     else     </td></tr>
+              <tr><td>mpmsurface</td><td>sdferode</td><td>Erode</td><td>ch(&quot;sdfdilate&quot;)</td></tr>
+              <tr><td>particlefluidsurface</td><td>doerode</td><td>Label</td><td>ch(&quot;dodilate&quot;)</td></tr>
+              <tr><td>particlefluidsurface</td><td>erodeoffset</td><td>Erode</td><td>ch(&quot;dilateoffset&quot;)</td></tr>
+              <tr><td>particlefluidsurface</td><td>erodemask</td><td>Mask</td><td>ch(&quot;dilatemask&quot;)</td></tr>
+              <tr><td>pointvelocity</td><td>framerangemin</td><td>Frame Range</td><td>$FSTART</td></tr>
+              <tr><td>pointvelocity</td><td>framerangemax</td><td>Frame Range</td><td>$FEND</td></tr>
+              <tr><td>polywire</td><td>segscale1</td><td>Segment Scales</td><td>1.0 / $NSEG</td></tr>
+              <tr><td>polywire</td><td>segscale2</td><td>Segment Scales</td><td>1.0 - 1.0 / $NSEG</td></tr>
+              <tr><td>primitive</td><td>px</td><td>Pivot Translate</td><td>$CEX</td></tr>
+              <tr><td>primitive</td><td>py</td><td>Pivot Translate</td><td>$CEY</td></tr>
+              <tr><td>primitive</td><td>pz</td><td>Pivot Translate</td><td>$CEZ</td></tr>
+              <tr><td>primitive</td><td>upvectorx</td><td>Up-Vector</td><td>@N.x</td></tr>
+              <tr><td>primitive</td><td>upvectory</td><td>Up-Vector</td><td>@N.y</td></tr>
+              <tr><td>primitive</td><td>upvectorz</td><td>Up-Vector</td><td>@N.z</td></tr>
+              <tr><td>primitive</td><td>diffr</td><td>Color</td><td>@Cd.r</td></tr>
+              <tr><td>primitive</td><td>diffg</td><td>Color</td><td>@Cd.g</td></tr>
+              <tr><td>primitive</td><td>diffb</td><td>Color</td><td>@Cd.b</td></tr>
+              <tr><td>primitive</td><td>alpha</td><td>Alpha</td><td>@Alpha</td></tr>
+              <tr><td>primitive</td><td>crease</td><td>Crease</td><td>@creaseweight</td></tr>
+              <tr><td>primitive</td><td>metaweight</td><td>Weight</td><td>$WEIGHT</td></tr>
+              <tr><td>primitive</td><td>prblur</td><td>Particle Blur</td><td>1/$FPS</td></tr>
+              <tr><td>ray</td><td>dirx</td><td>Direction</td><td>@N.x</td></tr>
+              <tr><td>ray</td><td>diry</td><td>Direction</td><td>@N.y</td></tr>
+              <tr><td>ray</td><td>dirz</td><td>Direction</td><td>@N.z</td></tr>
+              <tr><td>rbdbulletsolver</td><td>guidecaptureframe</td><td>Guide Capture Frame</td><td>ch(&quot;startframe&quot;)</td></tr>
+              <tr><td>rbdbulletsolver</td><td>emission_cachemaxsize</td><td>Emission Cache Memory (MB)</td><td>ch(&quot;cachemaxsize&quot;)</td></tr>
+              <tr><td>rbdbulletsolver</td><td>collision_solvefirstframe</td><td>Solve on Creation Frame</td><td>ch(&quot;solvefirstframe&quot;)</td></tr>
+              <tr><td>rbdbulletsolver</td><td>guide_startframe</td><td>Start Frame</td><td>ch(&quot;startframe&quot;)</td></tr>
+              <tr><td>rbdconfigure</td><td>bboxonoff</td><td>Show Bbox</td><td>ch(&quot;boundingtype&quot;)==0</td></tr>
+              <tr><td>rbdconfigure</td><td>shrinkamount1</td><td>Shrink Amount</td><td>ch(&quot;collisionmargin1&quot;)</td></tr>
+              <tr><td>rbdconfigure</td><td>density1</td><td>Density (kg/m3)</td><td>chs(&quot;material&quot;+opdigits($CH))</td></tr>
+              <tr><td>rbdmaterialfracture</td><td>enabledetail_</td><td>Enable Detail</td><td>ch(&quot;concrete_edgedetail&quot;)</td></tr>
+              <tr><td>rbdmaterialfracture</td><td>enabledetail__2</td><td>Enable Detail</td><td>ch(&quot;concrete_edgedetail&quot;)</td></tr>
+              <tr><td>rbdmaterialfracture</td><td>enabledetail_2</td><td>Enable Detail</td><td>ch(&quot;concrete_edgedetail&quot;)</td></tr>
+              <tr><td>rbdmaterialfracture</td><td>enabledetail1</td><td>Enable Detail</td><td>ch(&quot;concrete_edgedetail&quot;)</td></tr>
+              <tr><td>rbdmaterialfracture</td><td>enabledetail2</td><td>Enable Detail</td><td>ch(&quot;concrete_edgedetail&quot;)</td></tr>
+              <tr><td>retime</td><td>frame</td><td>Frame</td><td>$FF</td></tr>
+              <tr><td>retime</td><td>time</td><td>Time</td><td>$T</td></tr>
+              <tr><td>retime</td><td>startframe</td><td>Start Frame</td><td>ch(&quot;inputrangex&quot;)</td></tr>
+              <tr><td>retime</td><td>outputrangex</td><td>Output Frame Range</td><td>$FSTART</td></tr>
+              <tr><td>retime</td><td>outputrangey</td><td>Output Frame Range</td><td>$FEND</td></tr>
+              <tr><td>retime</td><td>timestep</td><td>Input Timestep</td><td>1 / $FPS</td></tr>
+              <tr><td>timeshift</td><td>frame</td><td>Frame</td><td>$F</td></tr>
+              <tr><td>timeshift</td><td>time</td><td>Time</td><td>$T</td></tr>
+              <tr><td>timeshift</td><td>frange1</td><td>Start/End Frame</td><td>$FSTART</td></tr>
+              <tr><td>timeshift</td><td>frange2</td><td>Start/End Frame</td><td>$FEND</td></tr>
+              <tr><td>timeshift</td><td>trange1</td><td>Start/End Time</td><td>$TSTART</td></tr>
+              <tr><td>timeshift</td><td>trange2</td><td>Start/End Time</td><td>$TEND</td></tr>
+              <tr><td>trace</td><td>copframe</td><td>COP Frame</td><td>$F</td></tr>
+              <tr><td>trim</td><td>altitude</td><td>Altitude</td><td>$ALTITUDE</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">式は最初の80文字まで。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>式の入ったつまみは 488 個。</strong>大半はフレーム範囲（$FSTART・$FEND）。</li>
+          <li><strong>set は式を消さない。</strong>値を入れたいときは deleteAllKeyframes() が先。</li>
+          <li><strong>@N などの属性の式は要注意。</strong>入力に属性が無いと 0 になり、黙って効かない（ray が動かなかった）。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
