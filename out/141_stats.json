@@ -1,0 +1,124 @@
+{
+ "rows": [
+  {
+   "shape": "box",
+   "init": "grid",
+   "sep": 0.1,
+   "points": 2541,
+   "grid_est": 2.541,
+   "fcc_est": 1.796758,
+   "volume": 2.0,
+   "sec": 0.222
+  },
+  {
+   "shape": "box",
+   "init": "grid",
+   "sep": 0.05,
+   "points": 18081,
+   "grid_est": 2.260125,
+   "fcc_est": 1.59815,
+   "volume": 2.0,
+   "sec": 0.164
+  },
+  {
+   "shape": "box",
+   "init": "grid",
+   "sep": 0.025,
+   "points": 136161,
+   "grid_est": 2.127516,
+   "fcc_est": 1.504381,
+   "volume": 2.0,
+   "sec": 0.107
+  },
+  {
+   "shape": "box",
+   "init": "tetrahedral",
+   "sep": 0.1,
+   "points": 3051,
+   "grid_est": 3.051,
+   "fcc_est": 2.157383,
+   "volume": 2.0,
+   "sec": 0.177
+  },
+  {
+   "shape": "box",
+   "init": "tetrahedral",
+   "sep": 0.05,
+   "points": 23287,
+   "grid_est": 2.910875,
+   "fcc_est": 2.058299,
+   "volume": 2.0,
+   "sec": 0.132
+  },
+  {
+   "shape": "box",
+   "init": "tetrahedral",
+   "sep": 0.025,
+   "points": 183447,
+   "grid_est": 2.866359,
+   "fcc_est": 2.026822,
+   "volume": 2.0,
+   "sec": 0.225
+  },
+  {
+   "shape": "sphere",
+   "init": "grid",
+   "sep": 0.1,
+   "points": 4165,
+   "grid_est": 4.165,
+   "fcc_est": 2.9451,
+   "volume": 4.18879,
+   "sec": 0.106
+  },
+  {
+   "shape": "sphere",
+   "init": "grid",
+   "sep": 0.05,
+   "points": 33381,
+   "grid_est": 4.172625,
+   "fcc_est": 2.950491,
+   "volume": 4.18879,
+   "sec": 0.197
+  },
+  {
+   "shape": "sphere",
+   "init": "grid",
+   "sep": 0.025,
+   "points": 267741,
+   "grid_est": 4.183453,
+   "fcc_est": 2.958148,
+   "volume": 4.18879,
+   "sec": 0.119
+  },
+  {
+   "shape": "sphere",
+   "init": "tetrahedral",
+   "sep": 0.1,
+   "points": 5873,
+   "grid_est": 5.873,
+   "fcc_est": 4.152838,
+   "volume": 4.18879,
+   "sec": 0.185
+  },
+  {
+   "shape": "sphere",
+   "init": "tetrahedral",
+   "sep": 0.05,
+   "points": 47289,
+   "grid_est": 5.911125,
+   "fcc_est": 4.179797,
+   "volume": 4.18879,
+   "sec": 0.211
+  },
+  {
+   "shape": "sphere",
+   "init": "tetrahedral",
+   "sep": 0.025,
+   "points": 378921,
+   "grid_est": 5.920641,
+   "fcc_est": 4.186525,
+   "volume": 4.18879,
+   "sec": 0.161
+  }
+ ]
+}

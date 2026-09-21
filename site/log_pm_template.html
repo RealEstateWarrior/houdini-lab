@@ -7224,6 +7224,108 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 140 ===================== -->
+    <article class="entry entry--current" id="exp140">
+      <div class="badge">140</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>copytopoints の向きは orient が N に勝つ — N は +z を、up は +y を合わせる。scale と pscale は掛け算</h2>
+        <p class="path">examples/140_copy_attrs.py &nbsp;·&nbsp; N は +z、up は +y を合わせる。orient があれば N は無視。scale と pscale は掛け算</p>
+
+        <div class="prose">
+          <p>+z 方向の矢（原点・(0,0,1)・(0,1,0) の3点）を、属性を変えた点1つにコピーして、矢の z 軸と y 軸がどこを向いたか・どれだけ伸びたかを調べた。</p>
+          <p>**N だけなら、元の +z が N の向きになる**（N = (1,0,0) で z 軸 → (1, 0, 0)）。y 軸は (0, 1, 0) のまま。</p>
+          <p>**up を足すと、元の +y が up の向きになる**（up = (0,0,1) で y 軸 → (0, 0, 1)）。N だけでは決まらない「ひねり」を up で決める。</p>
+          <p>**orient があると、N より orient が勝つ。** N = (1,0,0) と、x 軸まわり 90° の orient を両方付けると、z 軸は (0, -1, 0)（orient だけのときと同じ）。N の向き (1,0,0) は無視された。</p>
+          <p>**pscale は全体の倍率、scale は軸ごとの倍率で、両方あれば掛け算。** pscale 2 で矢の長さ 2、scale (1,2,3) と pscale 2 で z 軸 6・y 軸 4（= 3×2、2×2）。</p>
+        </div>
+
+        <p class="label">点の属性と、コピーの向き・大きさ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="140_copy.png" alt="N は z 軸を、up は y 軸を動かす。orient があれば N は効かな" loading="lazy" decoding="async"></div>
+            <figcaption>N は z 軸を、up は y 軸を動かす。orient があれば N は効かない。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>点の属性</th><th>z 軸の行き先</th><th>y 軸の行き先</th><th>z の長さ</th><th>y の長さ</th></tr></thead>
+            <tbody>
+              <tr><td>何も付けない</td><td>(0, 0, 1)</td><td>(0, 1, 0)</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td>N = (1,0,0)</td><td>(1, 0, 0)</td><td>(0, 1, 0)</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td>N と up = (0,0,1)</td><td>(1, 0, 0)</td><td>(0, 0, 1)</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td>orient（x軸90°）と N</td><td>(0, -1, 0)</td><td>(0, 0, 1)</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td>orient（x軸90°）だけ</td><td>(0, -1, 0)</td><td>(0, 0, 1)</td><td class="num">1</td><td class="num">1</td></tr>
+              <tr><td>pscale = 2</td><td>(0, 0, 2)</td><td>(0, 2, 0)</td><td class="num">2</td><td class="num">2</td></tr>
+              <tr><td>scale = (1,2,3) と pscale 2</td><td>(0, 0, 6)</td><td>(0, 4, 0)</td><td class="num">6</td><td class="num">4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">矢の z 軸 = 原点から (0,0,1) だった点へのベクトル。y 軸 = (0,1,0) だった点へのベクトル。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>N は +z、up は +y を合わせる。</strong>コピーする形は、+z を「前」にして作っておく。</li>
+          <li><strong>orient があれば N と up は使われない。</strong>向きがおかしいときは、上流で orient が残っていないかを見る。</li>
+          <li><strong>pscale × scale。</strong>全体の大きさと、軸ごとの伸びを別々に付けられる。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 141 ===================== -->
+    <article class="entry entry--current" id="exp141">
+      <div class="badge">141</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>pointsfromvolume の点は、格子なら1点 s³・四面体なら s³/√2 — 箱では面の上にも並ぶ</h2>
+        <p class="path">examples/141_points_from_volume.py &nbsp;·&nbsp; 格子は1点 s³、四面体は s³/√2（球で0.05%以内）。箱では面の上にも点が並び (2/s+1)(1/s+1)² 個</p>
+
+        <div class="prose">
+          <p>箱（2×1×1）と球（半径1）の中を、pointsfromvolume で間隔 s の点で埋め、点の数を数えた。</p>
+          <p>**格子（Grid）で埋めると、1点あたりの体積は s³。** 球では、点の数 × s³ が s = 0.025 で 4.1835（体積 4.1888、-0.13%）。</p>
+          <p>**四面体（Tetrahedral）で埋めると、同じ間隔で約1.41倍の点が入る。** 点の数 × s³/√2 が 4.1865（-0.05%）。面心立方の詰め方と同じ<button class="term" data-term="密度">密度</button>。</p>
+          <p>**箱を格子で埋めると、点は面の上にも並ぶ。** 点の数は (2/s + 1)·(1/s + 1)² と3通りすべて一致（s = 0.1 で 2,541 = 21×11×11）。そのため、点の数 × s³ は箱の体積より多い（s = 0.1 で 2.541、体積は 2）。点を粒とみなすと、粒の中心が面の上に来る。</p>
+        </div>
+
+        <p class="label">形・並べ方・間隔と、点の数</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="141_points.png" alt="間隔を細かくすると、格子（s³）も四面体（s³/√2）も球の体積に近づく。" loading="lazy" decoding="async"></div>
+            <figcaption>間隔を細かくすると、格子（s³）も四面体（s³/√2）も球の体積に近づく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形</th><th>並べ方</th><th>間隔</th><th>点の数</th><th>点×s³</th><th>点×s³/√2</th><th>体積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>box</td><td>grid</td><td class="num">0.1</td><td class="num">2,541</td><td class="num">2.5410</td><td class="num">1.7968</td><td class="num">2.0000</td><td class="num">0.222</td></tr>
+              <tr><td>box</td><td>grid</td><td class="num">0.05</td><td class="num">18,081</td><td class="num">2.2601</td><td class="num">1.5981</td><td class="num">2.0000</td><td class="num">0.164</td></tr>
+              <tr><td>box</td><td>grid</td><td class="num">0.025</td><td class="num">136,161</td><td class="num">2.1275</td><td class="num">1.5044</td><td class="num">2.0000</td><td class="num">0.107</td></tr>
+              <tr><td>box</td><td>tetrahedral</td><td class="num">0.1</td><td class="num">3,051</td><td class="num">3.0510</td><td class="num">2.1574</td><td class="num">2.0000</td><td class="num">0.177</td></tr>
+              <tr><td>box</td><td>tetrahedral</td><td class="num">0.05</td><td class="num">23,287</td><td class="num">2.9109</td><td class="num">2.0583</td><td class="num">2.0000</td><td class="num">0.132</td></tr>
+              <tr><td>box</td><td>tetrahedral</td><td class="num">0.025</td><td class="num">183,447</td><td class="num">2.8664</td><td class="num">2.0268</td><td class="num">2.0000</td><td class="num">0.225</td></tr>
+              <tr><td>sphere</td><td>grid</td><td class="num">0.1</td><td class="num">4,165</td><td class="num">4.1650</td><td class="num">2.9451</td><td class="num">4.1888</td><td class="num">0.106</td></tr>
+              <tr><td>sphere</td><td>grid</td><td class="num">0.05</td><td class="num">33,381</td><td class="num">4.1726</td><td class="num">2.9505</td><td class="num">4.1888</td><td class="num">0.197</td></tr>
+              <tr><td>sphere</td><td>grid</td><td class="num">0.025</td><td class="num">267,741</td><td class="num">4.1835</td><td class="num">2.9581</td><td class="num">4.1888</td><td class="num">0.119</td></tr>
+              <tr><td>sphere</td><td>tetrahedral</td><td class="num">0.1</td><td class="num">5,873</td><td class="num">5.8730</td><td class="num">4.1528</td><td class="num">4.1888</td><td class="num">0.185</td></tr>
+              <tr><td>sphere</td><td>tetrahedral</td><td class="num">0.05</td><td class="num">47,289</td><td class="num">5.9111</td><td class="num">4.1798</td><td class="num">4.1888</td><td class="num">0.211</td></tr>
+              <tr><td>sphere</td><td>tetrahedral</td><td class="num">0.025</td><td class="num">378,921</td><td class="num">5.9206</td><td class="num">4.1865</td><td class="num">4.1888</td><td class="num">0.161</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">球は polymesh 96×192。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>格子は s³、四面体は s³/√2。</strong>同じ間隔なら四面体のほうが約1.41倍詰まる。</li>
+          <li><strong>箱では面の上にも点が並ぶ。</strong>粒の<button class="term" data-term="シミュレーション">シミュレーション</button>で体積をそろえたいときは注意。</li>
+          <li><strong>間隔を半分にすると点は8倍。</strong>0.025 で球の中に約27万〜38万点。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

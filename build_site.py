@@ -966,6 +966,18 @@ DONE = [
      "shots": ["139_blur.png"],
      "title": "attribblur の1回は「となりの平均へ半分近づく」を2度 — ぼけ幅は √回数。線では Pin Border で全く動かない",
      "note": "線では Pin Border で1点も動かない。切ると1回＝『となりの平均へ s だけ近づく』を2度、ぼけ幅は √(2sN)"},
+    {"no": "140", "anchor": "exp140",
+     "tags": ["モデリング", "copytopoints", "向き", "検算"],
+     "log": "log_pm", "thumb": "140_copy.png",
+     "shots": ["140_copy.png"],
+     "title": "copytopoints の向きは orient が N に勝つ — N は +z を、up は +y を合わせる。scale と pscale は掛け算",
+     "note": "N は +z、up は +y を合わせる。orient があれば N は無視。scale と pscale は掛け算"},
+    {"no": "141", "anchor": "exp141",
+     "tags": ["モデリング", "pointsfromvolume", "点の数", "検算"],
+     "log": "log_pm", "thumb": "141_points.png",
+     "shots": ["141_points.png"],
+     "title": "pointsfromvolume の点は、格子なら1点 s³・四面体なら s³/√2 — 箱では面の上にも並ぶ",
+     "note": "格子は1点 s³、四面体は s³/√2（球で0.05%以内）。箱では面の上にも点が並び (2/s+1)(1/s+1)² 個"},
 ]
 
 PLANNED = []
