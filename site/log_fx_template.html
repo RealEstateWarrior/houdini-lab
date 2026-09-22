@@ -5389,7 +5389,56 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <ul class="findings">
           <li><strong>決まった数を生みたいなら、Rate を fps の倍数に。</strong>2400（24 fps で 100 粒/フレーム）ならぴったり。</li>
           <li><strong>少ない Rate は、運で数が揺れる。</strong>Rate 10 では 2 秒で 20 のはずが 27。</li>
-          <li><strong>Life は 1 フレーム早く尽きる。</strong>0.5 秒なら 11 フレーム。ぴったり 12 フレーム残したいなら少し長めに（確かめていない）。</li>
+          <li><strong>Life は 1 フレーム早く尽きる。</strong>0.5 秒なら 11 フレーム。ぴったり 12 フレーム残したいなら 0.54 秒に（<a href="#exp194">実験194</a>）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 194 ===================== -->
+    <article class="entry entry--current" id="exp194">
+      <div class="badge">194</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>POP の粒が数えられるフレームは Life × fps − 1/Substeps — 0.5 秒の粒は Substeps 1 で 11 フレーム、4 で 11.75</h2>
+        <p class="path">examples/194_pop_life.py &nbsp;·&nbsp; 粒が数えられるフレームは Life×fps − 1/Substeps</p>
+
+        <div class="prose">
+          <p><a href="#exp193">実験193</a> の続き。Constant Birth Rate 2400（24 fps で 1 フレーム 100 粒）で粒を生み続け、Life Expectancy（ばらつき 0）と <button class="term" data-term="DOP">DOP</button> Network の Substeps を変えて、数が止まったときの粒の数を読んだ。止まった数 ÷ 100 が、1 粒が平均で何フレーム数えられるかになる。</p>
+          <p>**平均のフレーム数は Life × 24 − 1/Substeps に合った**（9 通りで差は最大 0.08 フレーム）。Life 0.5 秒（12 フレーム）なら、Substeps 1 で 11、2 で 11.5、4 で 11.75。</p>
+          <p>**Substeps を上げると、粒はフレームの途中（<button class="term" data-term="サブステップ">サブステップ</button>ごと）に生まれる。**生まれた時刻がばらけるぶん、1 フレームの半端が小さくなり、寿命が Life × fps に近づく。Substeps 1 では、生まれた瞬間から 1 ステップぶん先に進む（<a href="#exp165">実験165</a>）ことと合わせて、ちょうど 1 フレーム短くなる。</p>
+          <p>**Life を 1/fps の端数だけ延ばせば、Substeps 1 でも 12 フレームになる。**Life 0.54 秒で 11.99 フレーム。</p>
+        </div>
+
+        <p class="label">Life・Substeps と、止まった粒の数</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="194_life.png" alt="測った値は点線の式に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>測った値は点線の式に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Life（秒）</th><th>Substeps</th><th>止まった数</th><th>平均のフレーム数</th><th>Life × 24 − 1/Substeps</th><th>49 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">1,100</td><td class="num">11.00</td><td class="num">11.00</td><td class="num">0.360</td></tr>
+              <tr><td class="num">0.5</td><td class="num">2</td><td class="num">1,150</td><td class="num">11.50</td><td class="num">11.50</td><td class="num">0.371</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">1,175</td><td class="num">11.75</td><td class="num">11.75</td><td class="num">0.435</td></tr>
+              <tr><td class="num">0.52</td><td class="num">1</td><td class="num">1,140</td><td class="num">11.40</td><td class="num">11.48</td><td class="num">0.303</td></tr>
+              <tr><td class="num">0.52</td><td class="num">2</td><td class="num">1,199</td><td class="num">11.99</td><td class="num">11.98</td><td class="num">0.371</td></tr>
+              <tr><td class="num">0.52</td><td class="num">4</td><td class="num">1,222</td><td class="num">12.22</td><td class="num">12.23</td><td class="num">0.509</td></tr>
+              <tr><td class="num">0.54</td><td class="num">1</td><td class="num">1,199</td><td class="num">11.99</td><td class="num">11.96</td><td class="num">0.309</td></tr>
+              <tr><td class="num">0.54</td><td class="num">2</td><td class="num">1,246</td><td class="num">12.46</td><td class="num">12.46</td><td class="num">0.379</td></tr>
+              <tr><td class="num">0.54</td><td class="num">4</td><td class="num">1,273</td><td class="num">12.73</td><td class="num">12.71</td><td class="num">0.522</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>粒の寿命は Life × fps − 1/Substeps フレーム。</strong>Substeps 1 では 1 フレーム短い。</li>
+          <li><strong>ぴったり n フレーム生かしたいなら、Life を (n + 1)/fps より少し短く（Substeps 1）。</strong>12 フレームなら 0.54 秒。</li>
+          <li><strong>Substeps を上げると、生まれる時刻がフレームの途中に散らばる。</strong>粒の数がフレームごとに揃わなくなる。</li>
         </ul>
       </div>
     </article>

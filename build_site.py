@@ -1300,6 +1300,12 @@ DONE = [
      "shots": ["193_birth.png"],
      "title": "popsource の Constant Birth Rate は1秒あたり — 端数の粒はフレームごとに運で決まり、Life 0.5 秒の粒は 11 フレームで消える",
      "note": "Birth Rate は1秒あたり。端数は運で決まり、Life 0.5秒の粒は11フレームで消える"},
+    {"no": "194", "anchor": "exp194",
+     "tags": ["シミュレーション", "パーティクル", "検算"],
+     "log": "log_fx", "thumb": "194_life.png",
+     "shots": ["194_life.png"],
+     "title": "POP の粒が数えられるフレームは Life × fps − 1/Substeps — 0.5 秒の粒は Substeps 1 で 11 フレーム、4 で 11.75",
+     "note": "粒が数えられるフレームは Life×fps − 1/Substeps"},
 ]
 
 PLANNED = []
