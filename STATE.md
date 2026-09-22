@@ -16,6 +16,12 @@
   AIアイコンは候補一覧を出さず直接チャット入力（プレースホルダー「AI に何を聞きますか？」）、検索は今までどおり。
   入力欄は元々共有なので、検索で打った文字のまま「AI に聞く」を押せば質問になる（実装済みの構造で確認しただけ）。
   実サイトで3点とも実機確認済み
+- **2026-09-22 さらに作り直し（Houdini実験道場セッションが担当・push済み 347e095）**:
+  「AI に聞く」は検索と別の専用チャット画面（#chat-sheet。広い画面は右から出る460pxの板、スマホは全面）に。
+  Enter送信・Shift+Enter改行、会話前に質問例3つ、検索側は「この言葉でAIに聞く」ボタンでチャットへ移動して即送信、
+  upstream_error/rate_limited/empty_completion は1回だけ自動再送。worker.js は変更なし。
+  **partial_chrome.html・base.css の AI 関連部分は当面 Houdini実験道場セッションが持つ。
+  触る前に一声かける（向こうからの申し出）**
 - 2026-09-21 の作業（105〜）: 実験を片付けるのは `python examples/finish_exp.py NNN "タグ,…" "一言" 図.png`
   （記事の差し込みと DONE への追加を1回で）。ノードは nodes_add_4.py、用語は gloss_add_4.py
   - 105 spiral の長さ / 106 attribrandomize の分布 / 107 extractcentroid の中心 / 108 triangulate2d の枚数

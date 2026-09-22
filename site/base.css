@@ -2148,22 +2148,21 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .chat-sheet .ask-msg--a .ask-body { max-width: none; overflow-wrap: anywhere; }
 .chat-sheet .ask-msg { min-width: 0; }
 .chat-sheet .ask-log { grid-template-columns: minmax(0, 1fr); }
-.chat-foot {
+.chat-top {
   flex: none;
-  padding: 10px 16px 14px;
-  border-top: 1px solid var(--wire-dim);
+  padding: 14px 20px 0;
   background: var(--ground);
 }
+/* 検索の欄と同じ見た目: 大きな字で、打っている言葉がそのまま読める */
 .chat-compose {
   display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  padding: 6px 6px 6px 14px;
-  border: 1px solid var(--wire);
-  border-radius: 20px;
-  background: var(--ground);
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid var(--wire);
+  padding: 4px 0 14px;
 }
-.chat-compose:focus-within { border-color: var(--ink-mid); }
+.chat-compose:focus-within { border-bottom-color: var(--ink-mid); }
+.chat-mark { width: 24px; height: 24px; flex: none; color: var(--ink-dim); margin-top: 5px; }
 .chat-compose textarea {
   flex: 1;
   min-width: 0;
@@ -2172,13 +2171,16 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   outline: none;
   background: transparent;
   font: inherit;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
   color: var(--ink);
-  padding: 5px 0;
+  padding: 0;
   max-height: 160px;
 }
-.chat-compose textarea::placeholder { color: var(--ink-dim); }
+.chat-compose textarea::placeholder { color: var(--ink-dim); font-weight: 500; }
 .chat-send {
   flex: none;
   width: 34px;
@@ -2196,14 +2198,18 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .chat-send:disabled { background: var(--ground-2); color: var(--ink-dim); cursor: default; }
 .chat-send[hidden] { display: none; }
 .chat-send:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
-.chat-foot .ask-fine { margin-top: 8px; }
+.chat-scroll .ask-fine { margin-top: 22px; }
+.chat-sheet .ask-log { gap: 26px; }
+.ask-turn { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+.ask-turn + .ask-turn { padding-top: 26px; border-top: 1px solid var(--wire-dim); }
+.chat-compose .chat-send { margin-top: 2px; }
 
 @media (max-width: 720px) {
   .chat-sheet { width: 100%; border-left: none; box-shadow: none; }
   .chat-head { padding-left: 16px; }
   .chat-scroll { padding: 16px 16px 10px; }
-  .chat-foot { padding: 8px 12px 12px; }
-  .chat-compose textarea { font-size: 16px; } /* iOS が拡大しないように */
+  .chat-top { padding: 10px 16px 0; }
+  .chat-compose textarea { font-size: 1.35rem; } /* 16px 以上なので iOS は拡大しない */
 }
 
 /* ---------- 手順の中の、本物の Houdini 画面 ---------- */

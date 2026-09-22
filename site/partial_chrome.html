@@ -76,20 +76,15 @@
       </svg>
     </button>
   </div>
-  <div class="chat-scroll" id="chat-scroll">
-    <div class="chat-welcome" id="chat-welcome">
-      <p class="chat-welcome-lead">Houdini のことを、このサイトの記録をもとに答えます。</p>
-      <div class="chat-starters" id="chat-starters">
-        <button type="button">煙を出したい</button>
-        <button type="button">VDB の升目を細かくすると体積はどう変わる？</button>
-        <button type="button">mirror の継ぎ目がくっつかない</button>
-      </div>
-    </div>
-    <div class="ask-log" id="ask-log" aria-live="polite"></div>
-  </div>
-  <div class="chat-foot">
+  <div class="chat-top">
     <div class="chat-compose">
-      <textarea id="chat-input" rows="1" placeholder="AI に何を聞きますか？" aria-label="AI への質問"></textarea>
+      <svg class="chat-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z"
+              stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor"/>
+      </svg>
+      <textarea id="chat-input" rows="1" placeholder="AI に何を聞きますか？" aria-label="AI への質問"
+                enterkeyhint="send"></textarea>
       <button type="button" class="chat-send" id="chat-send" aria-label="送る" disabled>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="currentColor" stroke-width="2"
@@ -100,10 +95,20 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/></svg>
       </button>
     </div>
+  </div>
+  <div class="chat-scroll" id="chat-scroll">
+    <div class="chat-welcome" id="chat-welcome">
+      <p class="chat-welcome-lead">Houdini のことを、このサイトの記録をもとに答えます。</p>
+      <div class="chat-starters" id="chat-starters">
+        <button type="button">煙を出したい</button>
+        <button type="button">VDB の升目を細かくすると体積はどう変わる？</button>
+        <button type="button">mirror の継ぎ目がくっつかない</button>
+      </div>
+    </div>
+    <div class="ask-log" id="ask-log" aria-live="polite"></div>
     <p class="ask-fine">
-      答えの根拠はこのサイトの記録だけで、書いていないことは「まだ確かめていない」と答えます。
+      新しいやり取りほど上に出ます。答えの根拠はこのサイトの記録だけで、書いていないことは「まだ確かめていない」と答えます。
       直近8往復ぶんは話の流れを覚えています。<span id="ask-engine">あなたの Claude の利用枠を使います。</span>
-      Enter で送信、Shift+Enter で改行。
     </p>
   </div>
 </div>
@@ -751,14 +756,25 @@
       body.className = "ask-body";
       body.textContent = text;
       div.appendChild(body);
-      askLog.appendChild(div);
+      (currentTurn || askLog).appendChild(div);
       chatWelcome.hidden = true;
       toBottom();
       return div;
     }
 
+    /* 入力欄が上にあるので、新しい1往復（質問と答え）を一番上に差し込み、
+       見る位置も一番上に戻す。スマホでキーボードが出ていても、打った言葉と
+       その答えが同じ画面に入る（2026-09-22、ユーザーの要望） */
+    var currentTurn = null;
+
+    function newTurn() {
+      currentTurn = document.createElement("div");
+      currentTurn.className = "ask-turn";
+      askLog.insertBefore(currentTurn, askLog.firstChild);
+    }
+
     function toBottom() {
-      chatScroll.scrollTop = chatScroll.scrollHeight;
+      chatScroll.scrollTop = 0;
     }
 
     function addRefs(msg, list) {
@@ -827,6 +843,8 @@
       if (!sampleFn || !q || askCtl) { return; }
       chatInput.value = "";
       growInput();
+      // スマホでは送ったらキーボードを閉じ、答えが画面に入るようにする
+      if (window.matchMedia("(pointer: coarse)").matches) { chatInput.blur(); }
       var ctx = askContext(q);
       var msgs = [{ role: "user", content: RULES }]
         .concat(turns.slice(-8))
@@ -834,6 +852,7 @@
           "質問: " + q + "\n\nこのサイトの資料:\n" +
           (ctx.text || "（この質問に当たる資料は見つかりませんでした）") }]);
 
+      newTurn();
       bubble("q", q);
       var msg = bubble("a", "考えています…");
       var body = msg.querySelector(".ask-body");
@@ -890,7 +909,6 @@
         askCtl = null;
         askBusy(false);
         toBottom();
-        chatInput.focus();
       });
     }
 
