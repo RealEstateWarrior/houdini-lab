@@ -31,7 +31,7 @@ def main():
             f"半径 1 の球を vdbfrompolygons（Voxel Size {vox}）で SDF にし、vdbreshapesdf の Operation と Offset（升目の数）を変えた。"
             "convertvdb で面に戻して体積を測り、同じ体積の球の半径に直して比べた。\n\n"
             f"**Dilate は半径を + Offset × {vox}、Erode は − Offset × {vox} だけ変えた。**6 通りで、ずれは最大 {worst:.3f} 升"
-            f"（Offset 5 の Dilate で +{de[4]['change']:.4f}、Erode で {[r for r in de if r['operation'] == 'erode' and r['offset'] == 5][0]['change']:.4f}）。"
+            f"（Offset 5 の Dilate で {[r for r in de if r['operation'] == 'dilate' and r['offset'] == 5][0]['change']:+.4f}、Erode で {[r for r in de if r['operation'] == 'erode' and r['offset'] == 5][0]['change']:+.4f}）。"
             "SDF の値から Offset を引く（足す）だけの、面を等しく押し出す処理になっている。\n\n"
             f"**Iterations（既定 4）を 1 にしても、結果は同じだった**（{'すべて一致' if same_it else '違いがあった'}）。Dilate・Erode には効かないつまみとみられる。\n\n"
             f"**Open（Erode してから Dilate）と Close（その逆）は、球をほぼ元のまま残した**（半径の変化 {op[0]['change_in_voxels']:.3f}・{op[1]['change_in_voxels']:.3f} 升）。"

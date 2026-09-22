@@ -1,0 +1,74 @@
+{
+  "rows": [
+    {
+      "operation": "（なし）",
+      "offset": 0,
+      "r": 0.0,
+      "volume": 1.0,
+      "want": 1.0,
+      "sec": 0.0
+    },
+    {
+      "operation": "open",
+      "offset": 5,
+      "r": 0.05,
+      "volume": 0.988964,
+      "want": 0.993729,
+      "ratio_to_base": 0.988963,
+      "want_ratio": 0.993729,
+      "sec": 0.732
+    },
+    {
+      "operation": "open",
+      "offset": 10,
+      "r": 0.1,
+      "volume": 0.966629,
+      "want": 0.975587,
+      "ratio_to_base": 0.966629,
+      "want_ratio": 0.975587,
+      "sec": 0.805
+    },
+    {
+      "operation": "open",
+      "offset": 20,
+      "r": 0.2,
+      "volume": 0.887152,
+      "want": 0.907705,
+      "ratio_to_base": 0.887152,
+      "want_ratio": 0.907705,
+      "sec": 0.887
+    },
+    {
+      "operation": "close",
+      "offset": 5,
+      "r": 0.05,
+      "volume": 0.996274,
+      "want": 1.0,
+      "ratio_to_base": 0.996274,
+      "want_ratio": 1.0,
+      "sec": 0.727
+    },
+    {
+      "operation": "close",
+      "offset": 10,
+      "r": 0.1,
+      "volume": 0.992465,
+      "want": 1.0,
+      "ratio_to_base": 0.992465,
+      "want_ratio": 1.0,
+      "sec": 0.829
+    },
+    {
+      "operation": "close",
+      "offset": 20,
+      "r": 0.2,
+      "volume": 0.988423,
+      "want": 1.0,
+      "ratio_to_base": 0.988423,
+      "want_ratio": 1.0,
+      "sec": 1.095
+    }
+  ],
+  "voxel": 0.01,
+  "base_volume": 1.0
+}

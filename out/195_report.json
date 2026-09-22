@@ -1,6 +1,6 @@
 {
  "title": "vdbreshapesdf の Dilate・Erode は、球の半径を Offset × 升の大きさだけ変える — Iterations は効かず、Open・Close は形をほぼ変えない",
- "summary": "半径 1 の球を vdbfrompolygons（Voxel Size 0.02）で SDF にし、vdbreshapesdf の Operation と Offset（升目の数）を変えた。convertvdb で面に戻して体積を測り、同じ体積の球の半径に直して比べた。\n\n**Dilate は半径を + Offset × 0.02、Erode は − Offset × 0.02 だけ変えた。**6 通りで、ずれは最大 0.036 升（Offset 5 の Dilate で +-0.0402、Erode で -0.1006）。SDF の値から Offset を引く（足す）だけの、面を等しく押し出す処理になっている。\n\n**Iterations（既定 4）を 1 にしても、結果は同じだった**（すべて一致）。Dilate・Erode には効かないつまみとみられる。\n\n**Open（Erode してから Dilate）と Close（その逆）は、球をほぼ元のまま残した**（半径の変化 -0.022・-0.022 升）。丸い形には削れる角がないため。尖った角のある形で差が出るはず（確かめていない）。\n\n**時間は 1 回 0.5 秒前後**（SDF にするところと面に戻すところを含む）。",
+ "summary": "半径 1 の球を vdbfrompolygons（Voxel Size 0.02）で SDF にし、vdbreshapesdf の Operation と Offset（升目の数）を変えた。convertvdb で面に戻して体積を測り、同じ体積の球の半径に直して比べた。\n\n**Dilate は半径を + Offset × 0.02、Erode は − Offset × 0.02 だけ変えた。**6 通りで、ずれは最大 0.036 升（Offset 5 の Dilate で +0.0993、Erode で -0.1006）。SDF の値から Offset を引く（足す）だけの、面を等しく押し出す処理になっている。\n\n**Iterations（既定 4）を 1 にしても、結果は同じだった**（すべて一致）。Dilate・Erode には効かないつまみとみられる。\n\n**Open（Erode してから Dilate）と Close（その逆）は、球をほぼ元のまま残した**（半径の変化 -0.022・-0.022 升）。丸い形には削れる角がないため。尖った角のある形で差が出るはず（確かめていない）。\n\n**時間は 1 回 0.5 秒前後**（SDF にするところと面に戻すところを含む）。",
  "graph": "",
  "graph_image": "",
  "comparisons": [

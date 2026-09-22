@@ -1312,6 +1312,12 @@ DONE = [
      "shots": ["195_reshape.png"],
      "title": "vdbreshapesdf の Dilate・Erode は、球の半径を Offset × 升の大きさだけ変える — Iterations は効かず、Open・Close は形をほぼ変えない",
      "note": "Dilate・Erode は半径を Offset×升の大きさだけ変える。Iterations は効かない"},
+    {"no": "196", "anchor": "exp196",
+     "tags": ["VDB", "落とし穴", "vdbreshapesdf"],
+     "log": "log_pm", "thumb": "196_open.png",
+     "shots": ["196_open.png"],
+     "title": "vdbreshapesdf の Open は箱の角を r より少し大きく丸める — Close も凸な箱を少しだけ削る",
+     "note": "Open は箱の角を r より1〜3割大きく丸める。Close も凸な箱を少し削る"},
 ]
 
 PLANNED = []
