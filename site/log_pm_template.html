@@ -9350,6 +9350,52 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 191 ===================== -->
+    <article class="entry entry--current" id="exp191">
+      <div class="badge">191</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>多角形の球のいちばん深いへこみは sin²(Δ/2) — 分割を倍にするたびに 1/4、平均はその 0.56 倍</h2>
+        <p class="path">examples/191_sphere_gap.py &nbsp;·&nbsp; 多角形の球のいちばん深いへこみは sin²(Δ/2)。分割を倍にすると 1/4</p>
+
+        <div class="prose">
+          <p>半径 1 の本当の球の上に 2 万点を一様に撒き、<button class="term" data-term="VEX">VEX</button> の xyzdist で多角形の球（Polygon Mesh、Columns = 2 × (Rows − 1)）までの距離を測った。多角形は球の内側に入るので、距離は「その場所のへこみ」になる。</p>
+          <p>**いちばん深いへこみは、四角形の真ん中の sin²(Δ/2) に合った。**Δ = π/(Rows − 1) は隣の点どうしの角度。Rows 97 で 0.0002676（式 0.0002677）、Rows 13 で 0.01689（式 0.01704）。辺の真ん中だけのへこみ 1 − cos(Δ/2) の、ほぼ 2 倍（縦と横の両方向ぶん）。</p>
+          <p>**分割を倍にすると、へこみは約 1/4**（Rows を倍にするごとに 3.84 → 3.96 → 3.99 → 4.0 分の 1）。</p>
+          <p>**平均のへこみは、いちばん深いへこみの約 0.56 倍**（0.576・0.562・0.558・0.557・0.556）。</p>
+          <p>**xyzdist は速い。**2 万点で 12 ミリ秒（Rows 97、面 18,432 枚）。</p>
+        </div>
+
+        <p class="label">分割と、へこみ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="191_gap.png" alt="測った値（青）は点線の式にほぼ重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>測った値（青）は点線の式にほぼ重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rows</th><th>Columns</th><th>いちばん深いへこみ</th><th>sin²(Δ/2)</th><th>辺の真ん中 1 − cos(Δ/2)</th><th>平均</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">7</td><td class="num">12</td><td class="num">0.0648701</td><td class="num">0.0669873</td><td class="num">0.0340742</td><td class="num">0.0373800</td><td class="num">0.0913</td></tr>
+              <tr><td class="num">13</td><td class="num">24</td><td class="num">0.0168941</td><td class="num">0.0170371</td><td class="num">0.0085551</td><td class="num">0.0094912</td><td class="num">0.0031</td></tr>
+              <tr><td class="num">25</td><td class="num">48</td><td class="num">0.0042660</td><td class="num">0.0042776</td><td class="num">0.0021411</td><td class="num">0.0023806</td><td class="num">0.0042</td></tr>
+              <tr><td class="num">49</td><td class="num">96</td><td class="num">0.0010699</td><td class="num">0.0010705</td><td class="num">0.0005354</td><td class="num">0.0005962</td><td class="num">0.0055</td></tr>
+              <tr><td class="num">97</td><td class="num">192</td><td class="num">0.0002676</td><td class="num">0.0002677</td><td class="num">0.0001339</td><td class="num">0.0001488</td><td class="num">0.0119</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>球のへこみは sin²(π/(2(Rows − 1)))。</strong>欲しい精度から分割を逆算できる（へこみ 0.001 なら Rows 約 50）。</li>
+          <li><strong>分割を倍にすると誤差は 1/4、点の数は 4 倍。</strong></li>
+          <li><strong>表面までの距離をはかるなら xyzdist。</strong>2 万点で数ミリ秒。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

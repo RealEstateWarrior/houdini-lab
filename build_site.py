@@ -1282,6 +1282,12 @@ DONE = [
      "shots": ["190_size.png"],
      "title": "箱 1 万個の USD — Point Instancer は 0.32 MB・8 ミリ秒、Native Instances は 4.6 倍、Unpack は 7.4 倍の大きさ",
      "note": "1万個の USD は Point Instancer が 0.32MB・8ミリ秒。Native Instances は4.6倍、Unpack は7.4倍"},
+    {"no": "191", "anchor": "exp191",
+     "tags": ["モデリング", "検算", "VEX"],
+     "log": "log_pm", "thumb": "191_gap.png",
+     "shots": ["191_gap.png"],
+     "title": "多角形の球のいちばん深いへこみは sin²(Δ/2) — 分割を倍にするたびに 1/4、平均はその 0.56 倍",
+     "note": "多角形の球のいちばん深いへこみは sin²(Δ/2)。分割を倍にすると 1/4"},
 ]
 
 PLANNED = []

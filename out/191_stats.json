@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "rows": 7,
+      "cols": 12,
+      "max_gap": 0.0648701,
+      "mean_gap": 0.03738,
+      "edge_formula": 0.0340742,
+      "face_formula": 0.0669873,
+      "sec": 0.0913
+    },
+    {
+      "rows": 13,
+      "cols": 24,
+      "max_gap": 0.0168941,
+      "mean_gap": 0.0094912,
+      "edge_formula": 0.0085551,
+      "face_formula": 0.0170371,
+      "sec": 0.0031
+    },
+    {
+      "rows": 25,
+      "cols": 48,
+      "max_gap": 0.004266,
+      "mean_gap": 0.0023806,
+      "edge_formula": 0.0021411,
+      "face_formula": 0.0042776,
+      "sec": 0.0042
+    },
+    {
+      "rows": 49,
+      "cols": 96,
+      "max_gap": 0.0010699,
+      "mean_gap": 0.0005962,
+      "edge_formula": 0.0005354,
+      "face_formula": 0.0010705,
+      "sec": 0.0055
+    },
+    {
+      "rows": 97,
+      "cols": 192,
+      "max_gap": 0.0002676,
+      "mean_gap": 0.0001488,
+      "edge_formula": 0.0001339,
+      "face_formula": 0.0002677,
+      "sec": 0.0119
+    }
+  ]
+}
