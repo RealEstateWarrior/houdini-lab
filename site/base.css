@@ -1725,8 +1725,13 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   .sidenav > .nav-inner > ul:not(.nav-depts) { display: none; }
   .nav-burger { display: grid; }
   /* タブを畳むと伸びる要素が無くなる。space-between だと検索が真ん中に来るので、
-     検索から先を右へ寄せて、ハンバーガーと並べる */
-  .nav-inner > #search-open { margin-left: auto; }
+     右へ寄せてハンバーガーと並べる。寄せる先は、AI アイコンが出ていれば
+     AI アイコン（検索はすぐ右に付いてくる）、出ていなければ検索そのもの。
+     AI アイコンは元々 hidden で display:none なので、margin は効かないだけで
+     悪さはしない */
+  .nav-inner > .nav-ai:not([hidden]) { margin-left: auto; }
+  .nav-inner > .nav-ai:not([hidden]) + #search-open { margin-left: 0; }
+  .nav-inner > .nav-ai[hidden] + #search-open { margin-left: auto; }
   .nav-inner > #search-open + .nav-burger { margin-left: -6px; }
 }
 

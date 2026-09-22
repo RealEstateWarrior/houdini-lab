@@ -1729,8 +1729,13 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   .sidenav > .nav-inner > ul:not(.nav-depts) { display: none; }
   .nav-burger { display: grid; }
   /* タブを畳むと伸びる要素が無くなる。space-between だと検索が真ん中に来るので、
-     検索から先を右へ寄せて、ハンバーガーと並べる */
-  .nav-inner > #search-open { margin-left: auto; }
+     右へ寄せてハンバーガーと並べる。寄せる先は、AI アイコンが出ていれば
+     AI アイコン（検索はすぐ右に付いてくる）、出ていなければ検索そのもの。
+     AI アイコンは元々 hidden で display:none なので、margin は効かないだけで
+     悪さはしない */
+  .nav-inner > .nav-ai:not([hidden]) { margin-left: auto; }
+  .nav-inner > .nav-ai:not([hidden]) + #search-open { margin-left: 0; }
+  .nav-inner > .nav-ai[hidden] + #search-open { margin-left: auto; }
   .nav-inner > #search-open + .nav-burger { margin-left: -6px; }
 }
 
@@ -2992,18 +2997,31 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
       buttons[cursor].scrollIntoView({ block: "nearest" });
     }
 
+    var searchPlaceholder = input.placeholder;
+
     document.getElementById("search-open").addEventListener("click", function () {
+      hint.hidden = false;
+      results.hidden = false;
+      input.placeholder = searchPlaceholder;
       show(searchSheet);
       input.value = "";
       render("");
       setTimeout(function () { input.focus(); }, 30);
     });
 
-    /* 検索の横の AI アイコン。AI が使える環境でだけ出す。開くのは検索と同じ画面 */
+    /* 検索の横の AI アイコン。AI が使える環境でだけ出す。
+       検索とは別に、候補一覧を出さず AI のチャットへ直接開く。
+       同じ入力欄を使うので、検索で打った文字のまま「AI に聞く」へ移っても
+       (search-open を経由し直さない限り)そのまま引き継がれる。 */
     var askOpen = document.getElementById("ask-open");
     if (askOpen) {
       askOpen.addEventListener("click", function () {
-        document.getElementById("search-open").click();
+        hint.hidden = true;
+        results.hidden = true;
+        input.placeholder = "AI に何を聞きますか？";
+        show(searchSheet);
+        input.value = "";
+        setTimeout(function () { input.focus(); }, 30);
       });
     }
 

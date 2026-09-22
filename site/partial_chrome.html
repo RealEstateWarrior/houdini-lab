@@ -557,18 +557,31 @@
       buttons[cursor].scrollIntoView({ block: "nearest" });
     }
 
+    var searchPlaceholder = input.placeholder;
+
     document.getElementById("search-open").addEventListener("click", function () {
+      hint.hidden = false;
+      results.hidden = false;
+      input.placeholder = searchPlaceholder;
       show(searchSheet);
       input.value = "";
       render("");
       setTimeout(function () { input.focus(); }, 30);
     });
 
-    /* 検索の横の AI アイコン。AI が使える環境でだけ出す。開くのは検索と同じ画面 */
+    /* 検索の横の AI アイコン。AI が使える環境でだけ出す。
+       検索とは別に、候補一覧を出さず AI のチャットへ直接開く。
+       同じ入力欄を使うので、検索で打った文字のまま「AI に聞く」へ移っても
+       (search-open を経由し直さない限り)そのまま引き継がれる。 */
     var askOpen = document.getElementById("ask-open");
     if (askOpen) {
       askOpen.addEventListener("click", function () {
-        document.getElementById("search-open").click();
+        hint.hidden = true;
+        results.hidden = true;
+        input.placeholder = "AI に何を聞きますか？";
+        show(searchSheet);
+        input.value = "";
+        setTimeout(function () { input.focus(); }, 30);
       });
     }
 
