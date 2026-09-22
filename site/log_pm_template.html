@@ -9396,6 +9396,58 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 192 ===================== -->
+    <article class="entry entry--current" id="exp192">
+      <div class="badge">192</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>polyextrude の Inset は上の面を i だけ内側へ寄せる — 体積は角錐台の式どおり、i ≥ 0.5 で四角錐になり、それ以上は裏返らない</h2>
+        <p class="path">examples/192_extrude_inset.py &nbsp;·&nbsp; Inset は上の面を i だけ内側へ。体積は角錐台の式、0.5 で四角錐、それ以上は裏返らない</p>
+
+        <div class="prose">
+          <p>1 × 1 の正方形1枚を <button class="term" data-term="polyextrude">polyextrude</button>（Output Back 入）で押し出し、Distance d と Inset i を変えて、上の面の大きさと体積を測った。</p>
+          <p>**上の面は、辺が 1 − 2i の正方形になった。**体積は角錐台の式 d/3 · (A₁ + A₂ + √(A₁A₂))（A₁ = 1、A₂ = (1 − 2i)²）と、i ≤ 0.5 の 10 通りすべてで差 0e+00 以内。上の面は、Distance の高さにちょうど乗る。</p>
+          <p>**i = 0.5 で上の面が点になり、四角錐になる**（体積 d/3、d = 1 で 0.333333）。</p>
+          <p>**i を 0.5 より大きくしても、上の面は裏返らない。**i = 0.6 で上の面は 0.0001 の小さな正方形のまま止まり、体積は 0.333367（四角錐とほぼ同じ）。点の数も 8 のまま（上の4点がほぼ重なる）。Inset を大きくしすぎると、見た目は尖っていても、点が重なった形になる。</p>
+        </div>
+
+        <p class="label">Distance・Inset と形</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="192_inset.png" alt="測った体積（実線）は式（点線）に重なり、0.5 から先は平らになる。" loading="lazy" decoding="async"></div>
+            <figcaption>測った体積（実線）は式（点線）に重なり、0.5 から先は平らになる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Distance</th><th>Inset</th><th>点</th><th>面</th><th>上の面の辺</th><th>1 − 2i</th><th>体積</th><th>角錐台の式</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">0</td><td class="num">8</td><td class="num">6</td><td class="num">1</td><td class="num">1</td><td class="num">0.500000</td><td class="num">0.500000</td><td class="num">0.0006</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.1</td><td class="num">8</td><td class="num">6</td><td class="num">0.8</td><td class="num">0.8</td><td class="num">0.406667</td><td class="num">0.406667</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.25</td><td class="num">8</td><td class="num">6</td><td class="num">0.5</td><td class="num">0.5</td><td class="num">0.291667</td><td class="num">0.291667</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.4</td><td class="num">8</td><td class="num">6</td><td class="num">0.2</td><td class="num">0.2</td><td class="num">0.206667</td><td class="num">0.206667</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.5</td><td class="num">8</td><td class="num">6</td><td class="num">0</td><td class="num">0</td><td class="num">0.166667</td><td class="num">0.166667</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.6</td><td class="num">8</td><td class="num">6</td><td class="num">0.0001</td><td class="num">0</td><td class="num">0.166683</td><td class="num">0.166667</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">1</td><td class="num">0</td><td class="num">8</td><td class="num">6</td><td class="num">1</td><td class="num">1</td><td class="num">1.000000</td><td class="num">1.000000</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td class="num">0.1</td><td class="num">8</td><td class="num">6</td><td class="num">0.8</td><td class="num">0.8</td><td class="num">0.813333</td><td class="num">0.813333</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">1</td><td class="num">0.25</td><td class="num">8</td><td class="num">6</td><td class="num">0.5</td><td class="num">0.5</td><td class="num">0.583333</td><td class="num">0.583333</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td class="num">0.4</td><td class="num">8</td><td class="num">6</td><td class="num">0.2</td><td class="num">0.2</td><td class="num">0.413333</td><td class="num">0.413333</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td class="num">0.5</td><td class="num">8</td><td class="num">6</td><td class="num">0</td><td class="num">0</td><td class="num">0.333333</td><td class="num">0.333333</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">1</td><td class="num">0.6</td><td class="num">8</td><td class="num">6</td><td class="num">0.0001</td><td class="num">0</td><td class="num">0.333367</td><td class="num">0.333333</td><td class="num">0.0002</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Inset は面の縁から内側へ寄せる距離。</strong>上の面の辺は 1 − 2i。</li>
+          <li><strong>押し出した体積は角錐台の式で出せる。</strong>i = 0.25・d = 1 で 0.583333。</li>
+          <li><strong>Inset を面の半分より大きくすると、上の点が重なる。</strong>尖らせたいなら、あとで fuse してまとめる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

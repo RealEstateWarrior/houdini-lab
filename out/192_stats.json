@@ -1,0 +1,148 @@
+{
+  "rows": [
+    {
+      "dist": 0.5,
+      "inset": 0.0,
+      "points": 8,
+      "prims": 6,
+      "top_y": 0.5,
+      "top_side": 1.0,
+      "want_side": 1.0,
+      "volume": 0.5,
+      "want_volume": 0.5,
+      "sec": 0.0006
+    },
+    {
+      "dist": 0.5,
+      "inset": 0.1,
+      "points": 8,
+      "prims": 6,
+      "top_y": 0.5,
+      "top_side": 0.8,
+      "want_side": 0.8,
+      "volume": 0.406667,
+      "want_volume": 0.406667,
+      "sec": 0.0002
+    },
+    {
+      "dist": 0.5,
+      "inset": 0.25,
+      "points": 8,
+      "prims": 6,
+      "top_y": 0.5,
+      "top_side": 0.5,
+      "want_side": 0.5,
+      "volume": 0.291667,
+      "want_volume": 0.291667,
+      "sec": 0.0003
+    },
+    {
+      "dist": 0.5,
+      "inset": 0.4,
+      "points": 8,
+      "prims": 6,
+      "top_y": 0.5,
+      "top_side": 0.2,
+      "want_side": 0.2,
+      "volume": 0.206667,
+      "want_volume": 0.206667,
+      "sec": 0.0001
+    },
+    {
+      "dist": 0.5,
+      "inset": 0.5,
+      "points": 8,
+      "prims": 6,
+      "top_y": 0.5,
+      "top_side": 0.0,
+      "want_side": 0.0,
+      "volume": 0.166667,
+      "want_volume": 0.166667,
+      "sec": 0.0002
+    },
+    {
+      "dist": 0.5,
+      "inset": 0.6,
+      "points": 8,
+      "prims": 6,
+      "top_y": 0.5,
+      "top_side": 0.0001,
+      "want_side": 0.0,
+      "volume": 0.166683,
+      "want_volume": 0.166667,
+      "sec": 0.0002
+    },
+    {
+      "dist": 1.0,
+      "inset": 0.0,
+      "points": 8,
+      "prims": 6,
+      "top_y": 1.0,
+      "top_side": 1.0,
+      "want_side": 1.0,
+      "volume": 1.0,
+      "want_volume": 1.0,
+      "sec": 0.0001
+    },
+    {
+      "dist": 1.0,
+      "inset": 0.1,
+      "points": 8,
+      "prims": 6,
+      "top_y": 1.0,
+      "top_side": 0.8,
+      "want_side": 0.8,
+      "volume": 0.813333,
+      "want_volume": 0.813333,
+      "sec": 0.0002
+    },
+    {
+      "dist": 1.0,
+      "inset": 0.25,
+      "points": 8,
+      "prims": 6,
+      "top_y": 1.0,
+      "top_side": 0.5,
+      "want_side": 0.5,
+      "volume": 0.583333,
+      "want_volume": 0.583333,
+      "sec": 0.0001
+    },
+    {
+      "dist": 1.0,
+      "inset": 0.4,
+      "points": 8,
+      "prims": 6,
+      "top_y": 1.0,
+      "top_side": 0.2,
+      "want_side": 0.2,
+      "volume": 0.413333,
+      "want_volume": 0.413333,
+      "sec": 0.0001
+    },
+    {
+      "dist": 1.0,
+      "inset": 0.5,
+      "points": 8,
+      "prims": 6,
+      "top_y": 1.0,
+      "top_side": 0.0,
+      "want_side": 0.0,
+      "volume": 0.333333,
+      "want_volume": 0.333333,
+      "sec": 0.0002
+    },
+    {
+      "dist": 1.0,
+      "inset": 0.6,
+      "points": 8,
+      "prims": 6,
+      "top_y": 1.0,
+      "top_side": 0.0001,
+      "want_side": 0.0,
+      "volume": 0.333367,
+      "want_volume": 0.333333,
+      "sec": 0.0002
+    }
+  ]
+}
