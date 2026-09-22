@@ -1294,6 +1294,12 @@ DONE = [
      "shots": ["192_inset.png"],
      "title": "polyextrude の Inset は上の面を i だけ内側へ寄せる — 体積は角錐台の式どおり、i ≥ 0.5 で四角錐になり、それ以上は裏返らない",
      "note": "Inset は上の面を i だけ内側へ。体積は角錐台の式、0.5 で四角錐、それ以上は裏返らない"},
+    {"no": "193", "anchor": "exp193",
+     "tags": ["シミュレーション", "パーティクル", "落とし穴"],
+     "log": "log_fx", "thumb": "193_birth.png",
+     "shots": ["193_birth.png"],
+     "title": "popsource の Constant Birth Rate は1秒あたり — 端数の粒はフレームごとに運で決まり、Life 0.5 秒の粒は 11 フレームで消える",
+     "note": "Birth Rate は1秒あたり。端数は運で決まり、Life 0.5秒の粒は11フレームで消える"},
 ]
 
 PLANNED = []
