@@ -20,6 +20,7 @@ import gloss_add_6
 import gloss_add_7
 import gloss_add_8
 import gloss_add_9
+import gloss_add_10
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -46,7 +47,7 @@ def main():
     added = 0
 
     for module in (gloss_add_1, gloss_add_2, gloss_add_3, gloss_add_4,
-                   gloss_add_5, gloss_add_6, gloss_add_7, gloss_add_8, gloss_add_9):
+                   gloss_add_5, gloss_add_6, gloss_add_7, gloss_add_8, gloss_add_9, gloss_add_10):
         for cid, label, note in getattr(module, "CATEGORIES_NEW", []):
             if cid not in cats:
                 cats[cid] = {"id": cid, "label": label, "note": note,

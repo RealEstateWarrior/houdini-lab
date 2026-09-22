@@ -50,7 +50,19 @@ NOTES = {
     "voronoifracture::2.0": ("種 N 個で N 個のかけらになり、体積の合計は元のまま。Create Interior Surfaces を切ると表面に触れないかけらは消える。scatter の relax で種を広げると、種が壁へ寄ってかえって大きさがばらつく（実験157・158）。", ["157", "158"]),
     "trail": ("Compute Velocity の v は1秒あたりで、差分の式どおり。Compute Acceleration は Central Difference のときだけ値が入り、Velocity Scale の2乗で縮む（実験159）。", ["159"]),
     "uvlayout::3.0": ("島どうしの大きさの比は保って並べる。長方形12枚で升の48〜84%を埋めた。Island Padding は Search Resolution が粗いほど大きく効く（実験160）。", ["160"]),
-    "attribwrangle": ("neighbourcount(0, @ptnum) の合計 ÷ 2 は辺の数。V − E + F で板 1・球 2・トーラス 0 を見分けられた（実験153）。", ["153"]),
+    "attribwrangle": ("neighbourcount(0, @ptnum) の合計 ÷ 2 は辺の数。V − E + F で板 1・球 2・トーラス 0 を見分けられた（実験153）。 Python の hou で cook(force=True) しても計算し直さないことがある（時間をはかるときは、コードが読むつまみを変える）。Run Over = Points は Detail のループの約170倍速い（実験173・174）。", ["153", "173", "174"]),
+    "attribtransfer": ("Distance Threshold までは値をそのまま運び、その外側 Blend Width の幅で (1 − t²)² に弱める（t = はみ出した距離 ÷ 幅）。届く距離は Threshold + Blend Width（実験161）。", ["161"]),
+    "subdivide": ("OpenSubdiv Catmull-Clark では、辺の crease の重み w は「何回目の細分まで尖らせるか」。w ≥ Iterations なら箱は元の形のまま（体積 1）。重み 0 の箱は体積 1/3 ほどに縮む（実験162）。", ["162"]),
+    "crease": ("付けた重みは subdivide（OpenSubdiv）で「尖ったまま残す細分の回数」として効く（実験162）。", ["162"]),
+    "vellumconstraints": ("Cloth は網を三角形にしてから、辺ごとに伸び（distance）、内側の辺ごとに曲げ（bend）の拘束を作る。四角形で渡しても三角形で渡しても本数は同じ（実験163）。", ["163"]),
+    "vellumsolver": ("既定（Constraint Iterations 100・Substeps 1）では、ぶら下げた布が 2.3% 伸びる。伸びは Iterations を上げる方が安く減る（400 回で 0.2%・時間 1.5 倍）。Stretch Stiffness は Substeps 1 では 10^4 と 10^10 で差が出ない（実験170・177）。", ["170", "177"]),
+    "vdbfromparticles": ("粒は pscale を半径にした球。重なった粒は尖った和（2つの球の和の体積）になり、Voxel Size を半分にすると体積の不足は約 1/4（実験164）。", ["164"]),
+    "popsolver::2.0": ("粒は生まれたフレームでもう1ステップ進む。重力の落下は「速さを先に足す」半陰的オイラーで、1 秒後の落下は Substeps 1 で +13%、誤差は 1/Substeps で縮む（実験165）。", ["165"]),
+    "popdrag": ("重力と組み合わせた終端速度は g/k ではなく √(g/k) に近づく（差の2乗に比例する抵抗）。Substeps 1 では 6〜12% 遅い。止まった空気の popwind と同じ落ち方（実験166・179）。", ["166", "179"]),
+    "popwind": ("風との速さの差は u₀/(1 + u₀·k·t) で縮む（差の2乗に比例する抵抗）。風だけなら Substeps によらず同じ値。Wind Velocity は windx・windy・windz で、Wind Speed はその倍率（実験175・179）。", ["175", "179"]),
+    "rbdbulletsolver": ("落とした箱は地面ぴったり（底 −0.0001）で止まり、Collision Padding を 0・0.02・0.05 と変えても止まる高さは6桁まで同じ。当たった瞬間だけ 0.007〜0.008 沈む（実験167）。", ["167"]),
+    "heightfield_noise": ("Amplitude は高さの幅ではない。幅は地面に入る模様の数で決まり、Element Size が地面の半分なら Amplitude の 23%、1/20 なら 62%。高さは Amplitude にぴったり比例し、Center Noise を切ると全体が Amplitude/2 上がる（実験168・176）。", ["168", "176"]),
+    "heightfield_erode": ("土の量（高さの合計）を保たない。40 フレームで平均の高さが約 5 下がり、sediment・debris を足しても元に戻らない（実験169）。", ["169"]),
 }
 
 

@@ -1,0 +1,393 @@
+[
+ {
+  "spec": "sop/python",
+  "ok": true,
+  "category": "SOP",
+  "name": "python",
+  "label": "Python",
+  "parms": [
+   {
+    "name": "python",
+    "label": "Python Code",
+    "default": [
+     "node = hou.pwd()\ngeo = node.geometry()\n\n# Add code to modify contents of geo.\n# Use drop down menu to select examples.\n"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "maintainstate",
+    "label": "Maintain State",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 4
+ },
+ {
+  "spec": "sop/block_begin",
+  "ok": true,
+  "category": "SOP",
+  "name": "block_begin",
+  "label": "Block Begin",
+  "parms": [
+   {
+    "name": "method",
+    "label": "Method",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "feedback",
+      "Fetch Feedback"
+     ],
+     [
+      "piece",
+      "Extract Piece or Point"
+     ],
+     [
+      "metadata",
+      "Fetch Metadata"
+     ],
+     [
+      "input",
+      "Fetch Input"
+     ]
+    ]
+   },
+   {
+    "name": "blockpath",
+    "label": "Block Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "resetcookpass",
+    "label": "Reset Cached Pass",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "createmetablock",
+    "label": "Create Meta Import Node",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "label1",
+    "label": "Detail Attributes:",
+    "default": null,
+    "kind": "Label",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/block_end",
+  "ok": true,
+  "category": "SOP",
+  "name": "block_end",
+  "label": "Block End",
+  "parms": [
+   {
+    "name": "itermethod",
+    "label": "Iteration Method",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "auto",
+      "Auto Detect from Inputs"
+     ],
+     [
+      "pieces",
+      "By Pieces or Points"
+     ],
+     [
+      "count",
+      "By Count"
+     ]
+    ]
+   },
+   {
+    "name": "method",
+    "label": "Gather Method",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "feedback",
+      "Feedback Each Iteration"
+     ],
+     [
+      "merge",
+      "Merge Each Iteration"
+     ]
+    ]
+   },
+   {
+    "name": "iterations",
+    "label": "Iterations",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "startvalue",
+    "label": "Start Value",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "increment",
+    "label": "Increment",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "class",
+    "label": "Piece Elements",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "primitive",
+      "Primitives"
+     ],
+     [
+      "point",
+      "Points"
+     ]
+    ]
+   },
+   {
+    "name": "useattrib",
+    "label": "Piece Attribute",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "attrib",
+    "label": "Piece Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "usemaxiter",
+    "label": "Max Iterations",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "maxiter",
+    "label": "Max Iterations",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "blockpath",
+    "label": "Default Block Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "templatepath",
+    "label": "Piece Block Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "resetcookpass",
+    "label": "Reset Cached Pass",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "dosinglepass",
+    "label": "Do Single Pass",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "singlepass",
+    "label": "Single Pass",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "stopcondition",
+    "label": "Stop Condition",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "stopattrib",
+    "label": "Stop Attribute",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "multithread",
+    "label": "Multithread when Compiled",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 2
+ },
+ {
+  "spec": "sop/compile_begin",
+  "ok": true,
+  "category": "SOP",
+  "name": "compile_begin",
+  "label": "Block Begin Compile",
+  "parms": [
+   {
+    "name": "blockpath",
+    "label": "Block Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "name",
+    "label": "Input Name",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "optional",
+    "label": "Optional Input",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "createbeginblock",
+    "label": "Create Block Begin Node",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/compile_end",
+  "ok": true,
+  "category": "SOP",
+  "name": "compile_end",
+  "label": "Block End Compile",
+  "parms": [
+   {
+    "name": "docompile",
+    "label": "Enable Compiling",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "unload",
+    "label": "Unload Behavior",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "never",
+      "Never"
+     ],
+     [
+      "flag",
+      "Use Node's Flag"
+     ],
+     [
+      "always",
+      "Always"
+     ]
+    ]
+   },
+   {
+    "name": "primarypath",
+    "label": "Primary Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "forcerecompile",
+    "label": "Force Compile",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "delayillegal",
+    "label": "Delay Incompatible Node Errors Until Cooked",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "fallback",
+    "label": "Fallback to Traditional Cook If Compile Fails",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ }
+]
