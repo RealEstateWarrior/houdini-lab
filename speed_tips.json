@@ -287,6 +287,13 @@
      "exps": [
       "173"
      ]
+    },
+    {
+     "rule": "かけらごとの処理は for-each より wrangle 1つで。for-each なら compile block で囲む",
+     "evidence": "1000 個のかけらを縮める処理で、for-each 37 ミリ秒、compile block で 24 ミリ秒、wrangle 1つで 1.2 ミリ秒。軽い処理では Multithread はかえって遅い（39 ミリ秒）。",
+     "exps": [
+      "174"
+     ]
     }
    ]
   },

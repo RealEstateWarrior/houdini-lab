@@ -1180,6 +1180,12 @@ DONE = [
      "shots": ["173_speed.png"],
      "title": "同じ計算でも VEX（点ごと）は Detail のループの約170倍、Python の約260倍速い — 100 万点で 1.3 ミリ秒",
      "note": "VEX（点ごと）は Detail のループの約170倍、Python の約260倍速い"},
+    {"no": "174", "anchor": "exp174",
+     "tags": ["効率化", "VEX", "for-each"],
+     "log": "log_pm", "thumb": "174_loop.png",
+     "shots": ["174_loop.png"],
+     "title": "for-each はかけら1つあたり約 0.037 ミリ秒 — compile block で 35% 速く、wrangle 1つにまとめれば 30 倍速い",
+     "note": "for-each は1かけら約0.037ミリ秒。compile で35%速く、wrangle 1つなら30倍速い"},
 ]
 
 PLANNED = []

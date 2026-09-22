@@ -1,0 +1,124 @@
+{
+  "rows": [
+    {
+      "pieces": 10,
+      "mode": "foreach",
+      "points": 80,
+      "sec": 0.0004,
+      "ms_per_piece": 0.039,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 10,
+      "mode": "compiled",
+      "points": 80,
+      "sec": 0.0003,
+      "ms_per_piece": 0.0276,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 10,
+      "mode": "compiled_mt",
+      "points": 80,
+      "sec": 0.0011,
+      "ms_per_piece": 0.1062,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 10,
+      "mode": "one_wrangle",
+      "points": 80,
+      "sec": 0.0001,
+      "ms_per_piece": 0.0081,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 100,
+      "mode": "foreach",
+      "points": 800,
+      "sec": 0.0036,
+      "ms_per_piece": 0.0362,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 100,
+      "mode": "compiled",
+      "points": 800,
+      "sec": 0.0023,
+      "ms_per_piece": 0.0229,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 100,
+      "mode": "compiled_mt",
+      "points": 800,
+      "sec": 0.0037,
+      "ms_per_piece": 0.0367,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 100,
+      "mode": "one_wrangle",
+      "points": 800,
+      "sec": 0.0004,
+      "ms_per_piece": 0.0042,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 1000,
+      "mode": "foreach",
+      "points": 8000,
+      "sec": 0.037,
+      "ms_per_piece": 0.037,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 1000,
+      "mode": "compiled",
+      "points": 8000,
+      "sec": 0.0242,
+      "ms_per_piece": 0.0242,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 1000,
+      "mode": "compiled_mt",
+      "points": 8000,
+      "sec": 0.0394,
+      "ms_per_piece": 0.0394,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    },
+    {
+      "pieces": 1000,
+      "mode": "one_wrangle",
+      "points": 8000,
+      "sec": 0.0012,
+      "ms_per_piece": 0.0012,
+      "warn": "",
+      "err": "",
+      "max_diff": 0.0
+    }
+  ]
+}
