@@ -9298,8 +9298,54 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><strong>数を増やすなら Point Instancer。</strong>100 個でもプリムは 6。</li>
-          <li><strong>1 個ずつ別の見た目にしたいなら Native Instances か Xforms。</strong>Xforms は形を 100 回持つので重くなる。</li>
+          <li><strong>1 個ずつを別のプリムとして選んだり動かしたりしたいなら Native Instances か Xforms。</strong>その分ファイルは大きくなる（1 万個で Point Instancer の 4.6〜5.1 倍、<a href="#exp190">実験190</a>）。</li>
           <li><strong>パックせずに読み込むと、全部が1つの<button class="term" data-term="メッシュ">メッシュ</button>になる。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 190 ===================== -->
+    <article class="entry entry--current" id="exp190">
+      <div class="badge">190</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>箱 1 万個の USD — Point Instancer は 0.32 MB・8 ミリ秒、Native Instances は 4.6 倍、Unpack は 7.4 倍の大きさ</h2>
+        <p class="path">examples/190_usd_scale.py &nbsp;·&nbsp; 1万個の USD は Point Instancer が 0.32MB・8ミリ秒。Native Instances は4.6倍、Unpack は7.4倍</p>
+
+        <div class="prose">
+          <p><a href="#exp189">実験189</a> の続き。箱を 100 × 100 = 1 万個並べて sopimport で USD にし、読み込み時間と、ステージを .usdc で書き出したファイルの大きさを比べた（USD の立ち上げは先に済ませた）。</p>
+          <p>**Point Instancer がいちばん軽く、速い。**プリム 6、ファイル 0.32 MB、読み込み 8 ミリ秒。1 万個の位置と向きを、1 つのプリムの配列として持つ。</p>
+          <p>**Native Instances はプリムが 1 万を超え、ファイルは 4.6 倍**（1.49 MB、読み込み 123 ミリ秒、書き出し 0.43 秒）。Xforms は 1.64 MB（5.1 倍、書き出し 1.22 秒）、Unpack は 2.40 MB（7.4 倍）でいちばん大きい。</p>
+          <p>**Xforms（形を 1 万回持つ）は、Unpack より小さかった。**同じ形の<button class="term" data-term="メッシュ">メッシュ</button>を、書き出すときにまとめている可能性があるが、確かめていない。<a href="#exp189">実験189</a> で「Xforms は重くなる」と書いたのは、Native Instances や Point Instancer と比べたときの話で、Unpack よりは軽い。</p>
+          <p>**パックせずに読むと、1 万個の箱が Mesh 1 つになり 0.96 MB。**1 個ずつ扱えない代わりに、ファイルは Native Instances より小さい。</p>
+        </div>
+
+        <p class="label">読み込み方と、プリム・時間・ファイル</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="190_size.png" alt="Point Instancer（2）が大きさも時間もいちばん下。" loading="lazy" decoding="async"></div>
+            <figcaption>Point Instancer（2）が大きさも時間もいちばん下。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>SOP</th><th>Packed Primitives</th><th>プリム</th><th>読み込みの秒</th><th>書き出しの秒</th><th>.usdc の大きさ</th><th>Point Instancer の何倍</th></tr></thead>
+            <tbody>
+              <tr><td>パックしない</td><td>パックしない</td><td class="num">3</td><td class="num">0.0102</td><td class="num">0.0031</td><td>0.96 MB</td><td class="num">3.0</td></tr>
+              <tr><td>パックした</td><td>Native Instances（既定）</td><td class="num">10,005</td><td class="num">0.1229</td><td class="num">0.4261</td><td>1.49 MB</td><td class="num">4.6</td></tr>
+              <tr><td>パックした</td><td>Point Instancer</td><td class="num">6</td><td class="num">0.0084</td><td class="num">0.0021</td><td>0.32 MB</td><td class="num">1.0</td></tr>
+              <tr><td>パックした</td><td>Xforms</td><td class="num">20,002</td><td class="num">0.2576</td><td class="num">1.2195</td><td>1.64 MB</td><td class="num">5.1</td></tr>
+              <tr><td>パックした</td><td>Unpack</td><td class="num">10,002</td><td class="num">0.3963</td><td class="num">1.0674</td><td>2.40 MB</td><td class="num">7.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>たくさん並べるなら Point Instancer。</strong>1 万個で 0.32 MB。</li>
+          <li><strong>Native Instances は、1 個ずつがプリムになる分だけ重い。</strong>1 万個で 1.5 MB、書き出し 0.4 秒。</li>
+          <li><strong>Unpack がいちばん大きい。</strong>パックを USD に渡すとき、わざわざ解く必要はない。</li>
         </ul>
       </div>
     </article>

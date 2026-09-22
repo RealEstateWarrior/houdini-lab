@@ -1276,6 +1276,12 @@ DONE = [
      "shots": ["189_prims.png"],
      "title": "箱 100 個を USD にすると、パックしなければメッシュ 1 つ、Point Instancer なら 6 プリム、Xforms なら 202 プリム",
      "note": "箱100個はパックしなければメッシュ1つ、Point Instancer なら6プリム、Xforms なら202"},
+    {"no": "190", "anchor": "exp190",
+     "tags": ["レンダリング", "USD", "効率化"],
+     "log": "log_pm", "thumb": "190_size.png",
+     "shots": ["190_size.png"],
+     "title": "箱 1 万個の USD — Point Instancer は 0.32 MB・8 ミリ秒、Native Instances は 4.6 倍、Unpack は 7.4 倍の大きさ",
+     "note": "1万個の USD は Point Instancer が 0.32MB・8ミリ秒。Native Instances は4.6倍、Unpack は7.4倍"},
 ]
 
 PLANNED = []

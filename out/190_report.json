@@ -1,0 +1,83 @@
+{
+ "title": "箱 1 万個の USD — Point Instancer は 0.32 MB・8 ミリ秒、Native Instances は 4.6 倍、Unpack は 7.4 倍の大きさ",
+ "summary": "実験189 の続き。箱を 100 × 100 = 1 万個並べて sopimport で USD にし、読み込み時間と、ステージを .usdc で書き出したファイルの大きさを比べた（USD の立ち上げは先に済ませた）。\n\n**Point Instancer がいちばん軽く、速い。**プリム 6、ファイル 0.32 MB、読み込み 8 ミリ秒。1 万個の位置と向きを、1 つのプリムの配列として持つ。\n\n**Native Instances はプリムが 1 万を超え、ファイルは 4.6 倍**（1.49 MB、読み込み 123 ミリ秒、書き出し 0.43 秒）。Xforms は 1.64 MB（5.1 倍、書き出し 1.22 秒）、Unpack は 2.40 MB（7.4 倍）でいちばん大きい。\n\n**Xforms（形を 1 万回持つ）は、Unpack より小さかった。**同じ形のメッシュを、書き出すときにまとめている可能性があるが、確かめていない。実験189 で「Xforms は重くなる」と書いたのは、Native Instances や Point Instancer と比べたときの話で、Unpack よりは軽い。\n\n**パックせずに読むと、1 万個の箱が Mesh 1 つになり 0.96 MB。**1 個ずつ扱えない代わりに、ファイルは Native Instances より小さい。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "読み込み方と、プリム・時間・ファイル",
+   "images": [
+    {
+     "path": "190_size.png",
+     "caption": "Point Instancer（2）が大きさも時間もいちばん下。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "SOP",
+    "Packed Primitives",
+    "プリム",
+    "読み込みの秒",
+    "書き出しの秒",
+    ".usdc の大きさ",
+    "Point Instancer の何倍"
+   ],
+   "rows": [
+    [
+     "パックしない",
+     "パックしない",
+     "3",
+     "0.0102",
+     "0.0031",
+     "0.96 MB",
+     "3.0"
+    ],
+    [
+     "パックした",
+     "Native Instances（既定）",
+     "10,005",
+     "0.1229",
+     "0.4261",
+     "1.49 MB",
+     "4.6"
+    ],
+    [
+     "パックした",
+     "Point Instancer",
+     "6",
+     "0.0084",
+     "0.0021",
+     "0.32 MB",
+     "1.0"
+    ],
+    [
+     "パックした",
+     "Xforms",
+     "20,002",
+     "0.2576",
+     "1.2195",
+     "1.64 MB",
+     "5.1"
+    ],
+    [
+     "パックした",
+     "Unpack",
+     "10,002",
+     "0.3963",
+     "1.0674",
+     "2.40 MB",
+     "7.4"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>たくさん並べるなら Point Instancer。</strong>1 万個で 0.32 MB。",
+  "<strong>Native Instances は、1 個ずつがプリムになる分だけ重い。</strong>1 万個で 1.5 MB、書き出し 0.4 秒。",
+  "<strong>Unpack がいちばん大きい。</strong>パックを USD に渡すとき、わざわざ解く必要はない。"
+ ],
+ "next": [
+  "Point Instancer と Native Instances の Karma でのレンダー時間",
+  "10 万個にしたときの伸び方"
+ ]
+}

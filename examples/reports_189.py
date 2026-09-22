@@ -45,7 +45,7 @@ def main():
                       r["prototypes"], f"{r['sec']:.4f}"] for r in rows]}],
         "notes": [
             "<strong>数を増やすなら Point Instancer。</strong>100 個でもプリムは 6。",
-            "<strong>1 個ずつ別の見た目にしたいなら Native Instances か Xforms。</strong>Xforms は形を 100 回持つので重くなる。",
+            "<strong>1 個ずつを別のプリムとして選んだり動かしたりしたいなら Native Instances か Xforms。</strong>その分ファイルは大きくなる（1 万個で Point Instancer の 4.6〜5.1 倍、実験190）。",
             "<strong>パックせずに読み込むと、全部が1つのメッシュになる。</strong>",
         ],
         "next": ["1 万個にしたときの読み込み時間とファイルの大きさ", "Point Instancer をレンダーしたときの時間"],
