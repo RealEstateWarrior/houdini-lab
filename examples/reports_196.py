@@ -51,7 +51,7 @@ def main():
             + "、".join(f"r = {r['r']:g} で {r['volume']:.4f}（式 {r['want']:.4f}）" for r in opens)
             + "。同じ体積になる丸みの半径は "
             + "・".join(f"{r['r_eff']:.3f}" for r in opens)
-            + f"（r の {opens[-1]['r_eff'] / opens[-1]['r']:.2f} 倍前後）。\n\n"
+            + f"（r の {opens[0]['r_eff'] / opens[0]['r']:.2f}〜{opens[-1]['r_eff'] / opens[-1]['r']:.2f} 倍。Offset が小さいほど倍率が大きい）。\n\n"
             "**Close は、へこみの無い箱を変えないはずだが、少し削った**（"
             + "・".join(f"r = {r['r']:g} で {(r['volume'] - 1) * 100:+.2f}%" for r in closes)
             + "）。Offset が SDF の帯（既定 3 升）を超えるほど大きいと、太らせて戻す途中で角の情報が失われるとみられるが、確かめていない。\n\n"
