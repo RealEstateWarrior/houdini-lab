@@ -1,0 +1,238 @@
+{
+  "rows": [
+    {
+      "n": 12,
+      "mode": "none",
+      "label": "Single Polygon",
+      "added_prims": 2,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 0,
+      "sides": {
+        "12": 2
+      },
+      "cap_area": 6.0,
+      "want_cap": 6.0,
+      "volume": 3.0,
+      "want_volume": 3.0,
+      "side_area": 6.211657,
+      "sec": 0.0002
+    },
+    {
+      "n": 12,
+      "mode": "tris",
+      "label": "Triangles",
+      "added_prims": 20,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 0,
+      "sides": {
+        "3": 20
+      },
+      "cap_area": 6.0,
+      "want_cap": 6.0,
+      "volume": 3.0,
+      "want_volume": 3.0,
+      "side_area": 6.211657,
+      "sec": 0.0001
+    },
+    {
+      "n": 12,
+      "mode": "trifan",
+      "label": "Triangle Fan",
+      "added_prims": 24,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 2,
+      "sides": {
+        "3": 24
+      },
+      "cap_area": 6.0,
+      "want_cap": 6.0,
+      "volume": 3.0,
+      "want_volume": 3.0,
+      "side_area": 6.211657,
+      "sec": 0.0001
+    },
+    {
+      "n": 12,
+      "mode": "quadfan",
+      "label": "Quadrilateral Fan",
+      "added_prims": 12,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 2,
+      "sides": {
+        "4": 12
+      },
+      "cap_area": 6.0,
+      "want_cap": 6.0,
+      "volume": 3.0,
+      "want_volume": 3.0,
+      "side_area": 6.211657,
+      "sec": 0.0001
+    },
+    {
+      "n": 12,
+      "mode": "quads",
+      "label": "Quadrilaterals",
+      "added_prims": 18,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 8,
+      "sides": {
+        "4": 18
+      },
+      "cap_area": 6.0,
+      "want_cap": 6.0,
+      "volume": 3.0,
+      "want_volume": 3.0,
+      "side_area": 6.211657,
+      "sec": 0.0003
+    },
+    {
+      "n": 12,
+      "mode": "gridquads",
+      "label": "Quadrilateral Grid",
+      "added_prims": 18,
+      "warning": "",
+      "cap_y_spread": 1.00992,
+      "added_points": 8,
+      "sides": {
+        "4": 18
+      },
+      "cap_area": 6.000172,
+      "want_cap": 6.0,
+      "volume": 3.014671,
+      "want_volume": 3.0,
+      "side_area": 6.211657,
+      "sec": 0.0002
+    },
+    {
+      "n": 13,
+      "mode": "none",
+      "label": "Single Polygon",
+      "added_prims": 2,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 0,
+      "sides": {
+        "13": 2
+      },
+      "cap_area": 6.041401,
+      "want_cap": 6.041401,
+      "volume": 3.020701,
+      "want_volume": 3.020701,
+      "side_area": 6.222207,
+      "sec": 0.0001
+    },
+    {
+      "n": 13,
+      "mode": "tris",
+      "label": "Triangles",
+      "added_prims": 22,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 0,
+      "sides": {
+        "3": 22
+      },
+      "cap_area": 6.041401,
+      "want_cap": 6.041401,
+      "volume": 3.020701,
+      "want_volume": 3.020701,
+      "side_area": 6.222207,
+      "sec": 0.0001
+    },
+    {
+      "n": 13,
+      "mode": "trifan",
+      "label": "Triangle Fan",
+      "added_prims": 26,
+      "warning": "",
+      "cap_y_spread": 1.0,
+      "added_points": 2,
+      "sides": {
+        "3": 26
+      },
+      "cap_area": 6.041401,
+      "want_cap": 6.041401,
+      "volume": 3.020701,
+      "want_volume": 3.020701,
+      "side_area": 6.222207,
+      "sec": 0.0001
+    },
+    {
+      "n": 13,
+      "mode": "quadfan",
+      "label": "Quadrilateral Fan",
+      "added_prims": 0,
+      "warning": "Some patches were not created because they contain an odd number of edges.  Change the Fill Mode to generate all patches.",
+      "cap_y_spread": 0.0,
+      "added_points": 0,
+      "sides": {},
+      "cap_area": 0,
+      "want_cap": 6.041401,
+      "volume": 2.0138,
+      "want_volume": 3.020701,
+      "side_area": 6.222207,
+      "sec": 0.0004
+    },
+    {
+      "n": 13,
+      "mode": "quads",
+      "label": "Quadrilaterals",
+      "added_prims": 0,
+      "warning": "Some patches were not created because they contain an odd number of edges.  Change the Fill Mode to generate all patches.",
+      "cap_y_spread": 0.0,
+      "added_points": 0,
+      "sides": {},
+      "cap_area": 0,
+      "want_cap": 6.041401,
+      "volume": 2.0138,
+      "want_volume": 3.020701,
+      "side_area": 6.222207,
+      "sec": 0.0001
+    },
+    {
+      "n": 13,
+      "mode": "gridquads",
+      "label": "Quadrilateral Grid",
+      "added_prims": 0,
+      "warning": "Some patches were not created because they contain an odd number of edges.  Change the Fill Mode to generate all patches.",
+      "cap_y_spread": 0.0,
+      "added_points": 0,
+      "sides": {},
+      "cap_area": 0,
+      "want_cap": 6.041401,
+      "volume": 2.0138,
+      "want_volume": 3.020701,
+      "side_area": 6.222207,
+      "sec": 0.0001
+    }
+  ],
+  "labels": {
+    "none": "Single Polygon",
+    "tris": "Triangles",
+    "trifan": "Triangle Fan",
+    "quadfan": "Quadrilateral Fan",
+    "quads": "Quadrilaterals",
+    "gridquads": "Quadrilateral Grid"
+  },
+  "gridquads_smooth": [
+    {
+      "smooth": 1,
+      "strength": 50.0,
+      "cap_area": 6.000172,
+      "top_y_min": 0.5,
+      "top_y_max": 0.50496
+    },
+    {
+      "smooth": 0,
+      "strength": 50.0,
+      "cap_area": 6.033112,
+      "top_y_min": 0.5,
+      "top_y_max": 0.560072
+    }
+  ]
+}

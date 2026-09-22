@@ -1,0 +1,129 @@
+{
+  "rows": [
+    {
+      "div": 3,
+      "points": 6,
+      "prims": 5,
+      "rmin": 0.1,
+      "rmax": 0.1,
+      "x_span": [
+        0.0,
+        2.0
+      ],
+      "area": 1.065211,
+      "want_side": 1.03923,
+      "want_caps": 0.025981,
+      "volume": 0.025981,
+      "want_volume": 0.025981,
+      "sec": 0.0004
+    },
+    {
+      "div": 4,
+      "points": 8,
+      "prims": 6,
+      "rmin": 0.1,
+      "rmax": 0.1,
+      "x_span": [
+        0.0,
+        2.0
+      ],
+      "area": 1.171371,
+      "want_side": 1.131371,
+      "want_caps": 0.04,
+      "volume": 0.04,
+      "want_volume": 0.04,
+      "sec": 0.0002
+    },
+    {
+      "div": 6,
+      "points": 12,
+      "prims": 8,
+      "rmin": 0.1,
+      "rmax": 0.1,
+      "x_span": [
+        0.0,
+        2.0
+      ],
+      "area": 1.251962,
+      "want_side": 1.2,
+      "want_caps": 0.051962,
+      "volume": 0.051962,
+      "want_volume": 0.051962,
+      "sec": 0.0002
+    },
+    {
+      "div": 8,
+      "points": 16,
+      "prims": 10,
+      "rmin": 0.1,
+      "rmax": 0.1,
+      "x_span": [
+        0.0,
+        2.0
+      ],
+      "area": 1.281156,
+      "want_side": 1.224587,
+      "want_caps": 0.056569,
+      "volume": 0.056569,
+      "want_volume": 0.056569,
+      "sec": 0.0002
+    },
+    {
+      "div": 16,
+      "points": 32,
+      "prims": 18,
+      "rmin": 0.1,
+      "rmax": 0.1,
+      "x_span": [
+        0.0,
+        2.0
+      ],
+      "area": 1.309807,
+      "want_side": 1.248578,
+      "want_caps": 0.061229,
+      "volume": 0.061229,
+      "want_volume": 0.061229,
+      "sec": 0.0002
+    },
+    {
+      "div": 32,
+      "points": 64,
+      "prims": 34,
+      "rmin": 0.1,
+      "rmax": 0.1,
+      "x_span": [
+        0.0,
+        2.0
+      ],
+      "area": 1.317048,
+      "want_side": 1.254619,
+      "want_caps": 0.062429,
+      "volume": 0.062429,
+      "want_volume": 0.062429,
+      "sec": 0.0002
+    }
+  ],
+  "radius": 0.1,
+  "joints": [
+    {
+      "jointcorrect": 1,
+      "ring_points": 16,
+      "dist_min": 0.1,
+      "dist_max": 0.141421,
+      "inplane_max": 0.141421,
+      "off_bisector": 0.0,
+      "want_inplane": 0.141421,
+      "area": 1.30715
+    },
+    {
+      "jointcorrect": 0,
+      "ring_points": 16,
+      "dist_min": 0.1,
+      "dist_max": 0.1,
+      "inplane_max": 0.1,
+      "off_bisector": 0.0,
+      "want_inplane": 0.141421,
+      "area": 1.220392
+    }
+  ]
+}

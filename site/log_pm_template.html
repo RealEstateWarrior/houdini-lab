@@ -8073,6 +8073,184 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 154 ===================== -->
+    <article class="entry entry--current" id="exp154">
+      <div class="badge">154</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>polyfill の四角形の塞ぎ方は、辺が奇数の穴を塞がない — 三角形は 1つの穴に n−2 枚、Grid は少しふくらむ</h2>
+        <p class="path">examples/154_polyfill_modes.py &nbsp;·&nbsp; 四角形の塞ぎ方は辺が奇数の穴を塞がない。Grid は蓋がふくらむ</p>
+
+        <div class="prose">
+          <p>蓋のない tube（半径1・高さ1・Columns = n）の上下の穴を polyfill で塞ぎ、Fill Mode ごとに足された面を数えた。穴は正 n 角形なので、塞いだ面積は2つで n·sin(2π/n)（n = 12 で 6）のはず。</p>
+          <p>**n = 12（偶数）では、6通りとも穴が塞がった。**1つの穴あたり Single Polygon は 1 枚、Triangles は n−2 枚（計 20）、Triangle Fan は中心に点を1つ足して n 枚、Quadrilateral Fan は n/2 枚、Quadrilaterals は 9 枚（点を 4 個足す）。面積は Grid 以外の5通りで 6.000000、体積は正12角柱の 3.000000 とぴったり合った。</p>
+          <p>**n = 13（奇数）では、四角形の3通りが何も足さなかった。**Single・Triangles・Triangle Fan は塞がる。<button class="term" data-term="ノード">ノード</button>には「Some patches were not created because they contain an odd number of edges」という警告が出る（エラーではないので、<button class="term" data-term="ネットワーク">ネットワーク</button>を流れる形は穴があいたまま進む）。</p>
+          <p>**Quadrilateral Grid は、蓋が外へふくらむ。**既定（Smooth 入り・強さ 50）で上の蓋の点が y = 0.50496（縁は 0.5）まで出て、面積 6.000172、体積 3.014671（+0.49%）。Smooth を切るとさらにふくらみ、y = 0.560072・面積 6.033112 になった。</p>
+        </div>
+
+        <p class="label">Fill Mode ごとの塞がり方</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="154_counts.png" alt="n = 13 では Quad Fan・Quads・Grid が 0 枚。" loading="lazy" decoding="async"></div>
+            <figcaption>n = 13 では Quad Fan・Quads・Grid が 0 枚。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>n</th><th>Fill Mode</th><th>足した面</th><th>足した点</th><th>面の形</th><th>蓋の面積</th><th>式</th><th>体積</th><th>正 n 角柱の式</th><th>上下の広がり</th><th>警告</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">12</td><td>Single Polygon</td><td class="num">2</td><td class="num">0</td><td>12角形 2</td><td class="num">6.000000</td><td class="num">6.000000</td><td class="num">3.000000</td><td class="num">3.000000</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">12</td><td>Triangles</td><td class="num">20</td><td class="num">0</td><td>3角形 20</td><td class="num">6.000000</td><td class="num">6.000000</td><td class="num">3.000000</td><td class="num">3.000000</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">12</td><td>Triangle Fan</td><td class="num">24</td><td class="num">2</td><td>3角形 24</td><td class="num">6.000000</td><td class="num">6.000000</td><td class="num">3.000000</td><td class="num">3.000000</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">12</td><td>Quadrilateral Fan</td><td class="num">12</td><td class="num">2</td><td>4角形 12</td><td class="num">6.000000</td><td class="num">6.000000</td><td class="num">3.000000</td><td class="num">3.000000</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">12</td><td>Quadrilaterals</td><td class="num">18</td><td class="num">8</td><td>4角形 18</td><td class="num">6.000000</td><td class="num">6.000000</td><td class="num">3.000000</td><td class="num">3.000000</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">12</td><td>Quadrilateral Grid</td><td class="num">18</td><td class="num">8</td><td>4角形 18</td><td class="num">6.000172</td><td class="num">6.000000</td><td class="num">3.014671</td><td class="num">3.000000</td><td class="num">1.00992</td><td class="num muted">—</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">13</td><td>Single Polygon</td><td class="num">2</td><td class="num">0</td><td>13角形 2</td><td class="num">6.041401</td><td class="num">6.041401</td><td class="num">3.020701</td><td class="num">3.020701</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">13</td><td>Triangles</td><td class="num">22</td><td class="num">0</td><td>3角形 22</td><td class="num">6.041401</td><td class="num">6.041401</td><td class="num">3.020701</td><td class="num">3.020701</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">13</td><td>Triangle Fan</td><td class="num">26</td><td class="num">2</td><td>3角形 26</td><td class="num">6.041401</td><td class="num">6.041401</td><td class="num">3.020701</td><td class="num">3.020701</td><td class="num">1</td><td class="num muted">—</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">13</td><td>Quadrilateral Fan</td><td class="num">0</td><td class="num">0</td><td class="num muted">—</td><td class="num">0.000000</td><td class="num">6.041401</td><td class="num">2.013800</td><td class="num">3.020701</td><td class="num">0</td><td>あり</td><td class="num">0.0004</td></tr>
+              <tr><td class="num">13</td><td>Quadrilaterals</td><td class="num">0</td><td class="num">0</td><td class="num muted">—</td><td class="num">0.000000</td><td class="num">6.041401</td><td class="num">2.013800</td><td class="num">3.020701</td><td class="num">0</td><td>あり</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">13</td><td>Quadrilateral Grid</td><td class="num">0</td><td class="num">0</td><td class="num muted">—</td><td class="num">0.000000</td><td class="num">6.041401</td><td class="num">2.013800</td><td class="num">3.020701</td><td class="num">0</td><td>あり</td><td class="num">0.0001</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">Quadrilateral Grid の Smooth（n = 12）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Smooth</th><th>強さ</th><th>蓋の面積</th><th>上の蓋の y（最小〜最大）</th></tr></thead>
+            <tbody>
+              <tr><td>入</td><td class="num">50</td><td class="num">6.000172</td><td class="num">0.5〜0.50496</td></tr>
+              <tr><td>切</td><td class="num">50</td><td class="num">6.033112</td><td class="num">0.5〜0.560072</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>奇数の穴に四角形の塞ぎ方を使うと、穴のまま進む。</strong>警告は出るが、止まらない。</li>
+          <li><strong>平らに塞ぎたいなら Single Polygon・Triangles・Triangle Fan・Quadrilateral Fan・Quadrilaterals。</strong>Grid だけ中がふくらむ。</li>
+          <li><strong>Triangles は 1つの穴に n−2 枚。</strong>divide（<a href="#exp125">実験125</a>）の三角形分割と同じ枚数。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 155 ===================== -->
+    <article class="entry entry--current" id="exp155">
+      <div class="badge">155</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>scatter の density 属性は点を k/(1+k) に分ける — 数を決めないと Density Scale × 面積のあたりで揺れる</h2>
+        <p class="path">examples/155_scatter_density.py &nbsp;·&nbsp; density は点を k/(1+k) に分ける。数を決めないと Density Scale×面積で揺れる</p>
+
+        <div class="prose">
+          <p>2×1 の板を左右2枚の面に分け、右の面の density を k、左を 1 にして、Force Total Count = N で撒いた。Global Seed を 20 通り変え、右に落ちた点の割合を数えた（Relax は切った）。</p>
+          <p>**割合は k/(1+k) に合った。**6通りで、20 通りの平均と式の差は最大 0.0024。density は「面積あたりの濃さ」として、面ごとに点を配っている。</p>
+          <p>**ばらつきは、二項分布の幅と同じか少し小さい。**点の数の標準偏差 ÷ √(N·p·(1−p)) は 0.68〜1.01。完全にでたらめに配るより、少しだけ揃う傾向がある（ばらつきの推定は 20 通りなので、±16% ほどの幅がある）。</p>
+          <p>**Force Total Count を切ると、数はおよそ Density Scale × 面積。**ぴったりではない: Density Scale 10 で 14（20）、Density Scale 100 で 193（200）、Density Scale 1000 で 1,976（2000）。決まった数が要るなら Force Total Count を入れる。</p>
+        </div>
+
+        <p class="label">density の比と、右に落ちた割合（Force Total Count 入り）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="155_share.png" alt="点線 k/(1+k) に、N = 1,000 も 10,000 も乗る。" loading="lazy" decoding="async"></div>
+            <figcaption>点線 k/(1+k) に、N = 1,000 も 10,000 も乗る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>k</th><th>N</th><th>k/(1+k)</th><th>平均</th><th>最小〜最大</th><th>点の数の標準偏差</th><th>二項分布の幅</th><th>比</th><th>1回の秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">1,000</td><td class="num">0.5000</td><td class="num">0.4991</td><td class="num">0.4770〜0.5230</td><td class="num">15.2</td><td class="num">15.8</td><td class="num">0.96</td><td class="num">0.0038</td></tr>
+              <tr><td class="num">1</td><td class="num">10,000</td><td class="num">0.5000</td><td class="num">0.4985</td><td class="num">0.4913〜0.5101</td><td class="num">44.8</td><td class="num">50.0</td><td class="num">0.90</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">3</td><td class="num">1,000</td><td class="num">0.7500</td><td class="num">0.7500</td><td class="num">0.7230〜0.7760</td><td class="num">13.8</td><td class="num">13.7</td><td class="num">1.01</td><td class="num">0.0009</td></tr>
+              <tr><td class="num">3</td><td class="num">10,000</td><td class="num">0.7500</td><td class="num">0.7493</td><td class="num">0.7431〜0.7561</td><td class="num">39.7</td><td class="num">43.3</td><td class="num">0.92</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">9</td><td class="num">1,000</td><td class="num">0.9000</td><td class="num">0.8976</td><td class="num">0.8770〜0.9140</td><td class="num">8.7</td><td class="num">9.5</td><td class="num">0.91</td><td class="num">0.0008</td></tr>
+              <tr><td class="num">9</td><td class="num">10,000</td><td class="num">0.9000</td><td class="num">0.8990</td><td class="num">0.8956〜0.9043</td><td class="num">20.5</td><td class="num">30.0</td><td class="num">0.68</td><td class="num">0.0003</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">Force Total Count を切ったとき（面積 2、Seed 0）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Density Scale</th><th>点の数</th><th>Density Scale × 面積</th></tr></thead>
+            <tbody>
+              <tr><td class="num">10</td><td class="num">14</td><td class="num">20</td></tr>
+              <tr><td class="num">100</td><td class="num">193</td><td class="num">200</td></tr>
+              <tr><td class="num">1000</td><td class="num">1,976</td><td class="num">2000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>density は比で効く。</strong>右を 3 倍にすれば、右に 3/4。</li>
+          <li><strong>点の数を決めたいなら Force Total Count。</strong>切ると Density Scale × 面積のあたりで毎回揺れる。</li>
+          <li><strong>Seed を変えたときの揺れは √(N·p·(1−p)) くらい。</strong>N = 10,000・半々なら ±50 点ほど。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 156 ===================== -->
+    <article class="entry entry--current" id="exp156">
+      <div class="badge">156</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>polywire の管は Wire Radius に内接する正 n 角柱で両端に蓋 — 折れ目は Prevent Joint Buckling で r/cos(θ/2) に広がる</h2>
+        <p class="path">examples/156_polywire.py &nbsp;·&nbsp; 管は内接正n角柱で両端に蓋。折れ目は Prevent Joint Buckling で r/cos(θ/2) に広がる</p>
+
+        <div class="prose">
+          <p>長さ 2 のまっすぐな線と、90° に折れた線に polywire（Wire Radius r = 0.1）をかけ、点の位置・面積・体積を測った。</p>
+          <p>**まっすぐな線では、管は半径 r の円に内接する正 n 角柱。**点はどれも軸からちょうど 0.1。面の数は Divisions + 2 で、両端に n 角形の蓋が付く（閉じた形）。面積は 側面 L·2n·r·sin(π/n) ＋ 蓋 2·(n/2)r²·sin(2π/n)、体積は L·(n/2)r²·sin(2π/n) と、6通りとも合った（差は最大 2e-16）。</p>
+          <p>**折れ目では、Prevent Joint Buckling（既定で入）が輪を曲がりの面の中だけ広げる。**90° の折れ目の輪は、曲がりの面の中で 0.141421（= r/cos 45° = 0.141421）、面に垂直な向きは 0.1 のまま。輪は2本の線の間の、ちょうど半分の角度の面に乗っている。管の太さが折れ目でも変わらないようにする仕組み。</p>
+          <p>**切ると、折れ目の輪は半径 r の円のまま（0.1）。**曲がりの内側で管が細くくびれる。面積は 1.307150 → 1.220392 に減った。</p>
+        </div>
+
+        <p class="label">まっすぐな線（長さ 2）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="156_wire.png" alt="内接多角形なので、どちらも 1 より下から近づく。" loading="lazy" decoding="async"></div>
+            <figcaption>内接多角形なので、どちらも 1 より下から近づく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Divisions</th><th>点</th><th>面</th><th>軸からの距離</th><th>面積</th><th>側面＋蓋の式</th><th>体積</th><th>式</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">6</td><td class="num">5</td><td class="num">0.1〜0.1</td><td class="num">1.065211</td><td class="num">1.065211</td><td class="num">0.025981</td><td class="num">0.025981</td><td class="num">0.0004</td></tr>
+              <tr><td class="num">4</td><td class="num">8</td><td class="num">6</td><td class="num">0.1〜0.1</td><td class="num">1.171371</td><td class="num">1.171371</td><td class="num">0.040000</td><td class="num">0.040000</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">6</td><td class="num">12</td><td class="num">8</td><td class="num">0.1〜0.1</td><td class="num">1.251962</td><td class="num">1.251962</td><td class="num">0.051962</td><td class="num">0.051962</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">8</td><td class="num">16</td><td class="num">10</td><td class="num">0.1〜0.1</td><td class="num">1.281156</td><td class="num">1.281156</td><td class="num">0.056569</td><td class="num">0.056569</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">16</td><td class="num">32</td><td class="num">18</td><td class="num">0.1〜0.1</td><td class="num">1.309807</td><td class="num">1.309807</td><td class="num">0.061229</td><td class="num">0.061229</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">32</td><td class="num">64</td><td class="num">34</td><td class="num">0.1〜0.1</td><td class="num">1.317048</td><td class="num">1.317048</td><td class="num">0.062429</td><td class="num">0.062429</td><td class="num">0.0002</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">90° の折れ目の輪（Divisions 16）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Prevent Joint Buckling</th><th>輪の点</th><th>折れ目からの距離（最小〜最大）</th><th>曲がりの面の中の広がり</th><th>r/cos 45°</th><th>二等分面からのずれ</th><th>全体の面積</th></tr></thead>
+            <tbody>
+              <tr><td>入</td><td class="num">16</td><td class="num">0.1〜0.141421</td><td class="num">0.141421</td><td class="num">0.141421</td><td class="num">0</td><td class="num">1.307150</td></tr>
+              <tr><td>切</td><td class="num">16</td><td class="num">0.1〜0.1</td><td class="num">0.1</td><td class="num">0.141421</td><td class="num">0</td><td class="num">1.220392</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>polywire の管は内接多角形。</strong>Divisions 4 だと断面積は円の 64%。</li>
+          <li><strong>両端には蓋が付く。</strong>体積をそのまま measure で測れる。</li>
+          <li><strong>折れ目で細くなるなら、Prevent Joint Buckling が切れていないか。</strong>入れると r/cos(θ/2) に広がって太さを保つ。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
