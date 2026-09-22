@@ -1270,6 +1270,12 @@ DONE = [
      "shots": ["188_density.png"],
      "title": "hairgen の毛の本数は Density × 面積 — 1本は Segments + 1 点、長さは Length ちょうど",
      "note": "毛の本数は Density×面積。1本は Segments+1 点、長さは Length ちょうど"},
+    {"no": "189", "anchor": "exp189",
+     "tags": ["レンダリング", "USD", "Solaris"],
+     "log": "log_pm", "thumb": "189_prims.png",
+     "shots": ["189_prims.png"],
+     "title": "箱 100 個を USD にすると、パックしなければメッシュ 1 つ、Point Instancer なら 6 プリム、Xforms なら 202 プリム",
+     "note": "箱100個はパックしなければメッシュ1つ、Point Instancer なら6プリム、Xforms なら202"},
 ]
 
 PLANNED = []

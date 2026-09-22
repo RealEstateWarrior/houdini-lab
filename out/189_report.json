@@ -1,0 +1,83 @@
+{
+ "title": "箱 100 個を USD にすると、パックしなければメッシュ 1 つ、Point Instancer なら 6 プリム、Xforms なら 202 プリム",
+ "summary": "SOP で箱を 100 個並べ（copytopoints）、パックしたもの（Pack and Instance）としないものを LOP の sopimport で読み込み、できた USD のプリムを種類ごとに数えた（SOP では、パックしない方が面 600 枚、パックした方がパック 100 個）。\n\n**パックしないと、100 個の箱は Mesh 1 つにまとまる**（プリムは全部で 3）。1 つずつ動かしたり選んだりはできない。\n\n**パックしたものは、Packed Primitives の扱いでまったく違う形になる。**既定の Native Instances では Xform 102・インスタンス 100・元の形（プロトタイプ）1。Point Instancer では PointInstancer が 1 つで、プリムは全部で 6。Xforms では Xform と Mesh が 100 個ずつ（202）で、同じ形を 100 回持つ。Unpack では Mesh 100 個（102）。\n\n**読み込みの時間はどれも数ミリ秒。**ただし、そのセッションで最初の LOP だけは 21 秒かかった（USD の立ち上げ）。時間をはかるときは、先に1回読み込んでおく必要がある。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "読み込み方と USD のプリム",
+   "images": [
+    {
+     "path": "189_prims.png",
+     "caption": "Xforms（3）が一番多く、Point Instancer（2）が一番少ない。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "SOP",
+    "Packed Primitives",
+    "プリムの数",
+    "種類",
+    "インスタンス",
+    "プロトタイプ",
+    "秒"
+   ],
+   "rows": [
+    [
+     "パックしない",
+     "パックしない",
+     3,
+     "Xform 1・Mesh 1・HoudiniLayerInfo 1",
+     0,
+     0,
+     "0.0034"
+    ],
+    [
+     "パックした",
+     "Native Instances（既定）",
+     105,
+     "Xform 102・Scope 1・Mesh 1・HoudiniLayerInfo 1",
+     100,
+     1,
+     "0.0048"
+    ],
+    [
+     "パックした",
+     "Point Instancer",
+     6,
+     "Xform 2・PointInstancer 1・Scope 1・Mesh 1・HoudiniLayerInfo 1",
+     0,
+     0,
+     "0.0037"
+    ],
+    [
+     "パックした",
+     "Xforms",
+     202,
+     "Xform 101・Mesh 100・HoudiniLayerInfo 1",
+     0,
+     0,
+     "0.0054"
+    ],
+    [
+     "パックした",
+     "Unpack",
+     102,
+     "Xform 1・Mesh 100・HoudiniLayerInfo 1",
+     0,
+     0,
+     "0.0052"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>数を増やすなら Point Instancer。</strong>100 個でもプリムは 6。",
+  "<strong>1 個ずつ別の見た目にしたいなら Native Instances か Xforms。</strong>Xforms は形を 100 回持つので重くなる。",
+  "<strong>パックせずに読み込むと、全部が1つのメッシュになる。</strong>"
+ ],
+ "next": [
+  "1 万個にしたときの読み込み時間とファイルの大きさ",
+  "Point Instancer をレンダーしたときの時間"
+ ]
+}

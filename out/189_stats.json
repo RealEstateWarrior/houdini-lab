@@ -1,0 +1,74 @@
+{
+  "rows": [
+    {
+      "case": "パックしない",
+      "mode": "—",
+      "prims": 3,
+      "types": {
+        "Xform": 1,
+        "Mesh": 1,
+        "HoudiniLayerInfo": 1
+      },
+      "instances": 0,
+      "prototypes": 0,
+      "sec": 0.0034
+    },
+    {
+      "case": "パックした",
+      "mode": "nativeinstances",
+      "prims": 105,
+      "types": {
+        "Xform": 102,
+        "Scope": 1,
+        "Mesh": 1,
+        "HoudiniLayerInfo": 1
+      },
+      "instances": 100,
+      "prototypes": 1,
+      "sec": 0.0048
+    },
+    {
+      "case": "パックした",
+      "mode": "pointinstancer",
+      "prims": 6,
+      "types": {
+        "Xform": 2,
+        "PointInstancer": 1,
+        "Scope": 1,
+        "Mesh": 1,
+        "HoudiniLayerInfo": 1
+      },
+      "instances": 0,
+      "prototypes": 0,
+      "sec": 0.0037
+    },
+    {
+      "case": "パックした",
+      "mode": "xforms",
+      "prims": 202,
+      "types": {
+        "Xform": 101,
+        "Mesh": 100,
+        "HoudiniLayerInfo": 1
+      },
+      "instances": 0,
+      "prototypes": 0,
+      "sec": 0.0054
+    },
+    {
+      "case": "パックした",
+      "mode": "unpack",
+      "prims": 102,
+      "types": {
+        "Xform": 1,
+        "Mesh": 100,
+        "HoudiniLayerInfo": 1
+      },
+      "instances": 0,
+      "prototypes": 0,
+      "sec": 0.0052
+    }
+  ],
+  "sop_prims_plain": 600,
+  "sop_prims_packed": 100
+}

@@ -9259,6 +9259,51 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 189 ===================== -->
+    <article class="entry entry--current" id="exp189">
+      <div class="badge">189</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>箱 100 個を USD にすると、パックしなければメッシュ 1 つ、Point Instancer なら 6 プリム、Xforms なら 202 プリム</h2>
+        <p class="path">examples/189_usd_packed.py &nbsp;·&nbsp; 箱100個はパックしなければメッシュ1つ、Point Instancer なら6プリム、Xforms なら202</p>
+
+        <div class="prose">
+          <p><button class="term" data-term="SOP">SOP</button> で箱を 100 個並べ（copytopoints）、パックしたもの（Pack and Instance）としないものを LOP の sopimport で読み込み、できた USD のプリムを種類ごとに数えた（SOP では、パックしない方が面 600 枚、パックした方がパック 100 個）。</p>
+          <p>**パックしないと、100 個の箱は Mesh 1 つにまとまる**（プリムは全部で 3）。1 つずつ動かしたり選んだりはできない。</p>
+          <p>**パックしたものは、Packed Primitives の扱いでまったく違う形になる。**既定の Native Instances では Xform 102・インスタンス 100・元の形（プロトタイプ）1。Point Instancer では PointInstancer が 1 つで、プリムは全部で 6。Xforms では Xform と Mesh が 100 個ずつ（202）で、同じ形を 100 回持つ。Unpack では Mesh 100 個（102）。</p>
+          <p>**読み込みの時間はどれも数ミリ秒。**ただし、そのセッションで最初の LOP だけは 21 秒かかった（USD の立ち上げ）。時間をはかるときは、先に1回読み込んでおく必要がある。</p>
+        </div>
+
+        <p class="label">読み込み方と USD のプリム</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="189_prims.png" alt="Xforms（3）が一番多く、Point Instancer（2）が一番少ない。" loading="lazy" decoding="async"></div>
+            <figcaption>Xforms（3）が一番多く、Point Instancer（2）が一番少ない。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>SOP</th><th>Packed Primitives</th><th>プリムの数</th><th>種類</th><th>インスタンス</th><th>プロトタイプ</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>パックしない</td><td>パックしない</td><td class="num">3</td><td>Xform 1・Mesh 1・HoudiniLayerInfo 1</td><td class="num">0</td><td class="num">0</td><td class="num">0.0034</td></tr>
+              <tr><td>パックした</td><td>Native Instances（既定）</td><td class="num">105</td><td>Xform 102・Scope 1・Mesh 1・HoudiniLayerInfo 1</td><td class="num">100</td><td class="num">1</td><td class="num">0.0048</td></tr>
+              <tr><td>パックした</td><td>Point Instancer</td><td class="num">6</td><td>Xform 2・PointInstancer 1・Scope 1・Mesh 1・HoudiniLayerInfo 1</td><td class="num">0</td><td class="num">0</td><td class="num">0.0037</td></tr>
+              <tr><td>パックした</td><td>Xforms</td><td class="num">202</td><td>Xform 101・Mesh 100・HoudiniLayerInfo 1</td><td class="num">0</td><td class="num">0</td><td class="num">0.0054</td></tr>
+              <tr><td>パックした</td><td>Unpack</td><td class="num">102</td><td>Xform 1・Mesh 100・HoudiniLayerInfo 1</td><td class="num">0</td><td class="num">0</td><td class="num">0.0052</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>数を増やすなら Point Instancer。</strong>100 個でもプリムは 6。</li>
+          <li><strong>1 個ずつ別の見た目にしたいなら Native Instances か Xforms。</strong>Xforms は形を 100 回持つので重くなる。</li>
+          <li><strong>パックせずに読み込むと、全部が1つの<button class="term" data-term="メッシュ">メッシュ</button>になる。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
