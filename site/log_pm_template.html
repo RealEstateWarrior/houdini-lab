@@ -7326,6 +7326,397 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 142 ===================== -->
+    <article class="entry entry--current" id="exp142">
+      <div class="badge">142</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>platonic の Radius は、四面体・八面体・二十面体では頂点までの距離 — 立方体は辺が1、十二面体は0.9933</h2>
+        <p class="path">examples/142_platonic.py &nbsp;·&nbsp; Radius は四面体・八面体・二十面体なら頂点まで。立方体は一辺</p>
+
+        <div class="prose">
+          <p>platonic で Radius = 1 にして5種類を作り、中心から頂点までの距離・辺・面積・体積を測った。外接球の半径が 1 のときの式と比べる。</p>
+          <p>**四面体・八面体・二十面体は、Radius がそのまま頂点までの距離。**面積と体積も式と6桁一致した（二十面体の面積 9.574541、体積 2.536151）。</p>
+          <p>**立方体は違う。**頂点までは 0.866025（= √3/2）で、辺が 1。Radius = 1 は「一辺 1 の立方体」になる。面積 6・体積 1。</p>
+          <p>**十二面体も1からずれる。**頂点までは 0.993318、辺は 0.708876。外接半径 1 の式（辺 0.713644）より -0.67% 小さい。形は正十二面体のまま（どの頂点も同じ距離）で、大きさだけが違う。なぜ 0.9933 なのかは確かめていない。</p>
+        </div>
+
+        <p class="label">Radius = 1 の5種類</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="142_ratio.png" alt="青が1からずれるのは立方体（0.866）と十二面体（0.993）だけ。" loading="lazy" decoding="async"></div>
+            <figcaption>青が1からずれるのは立方体（0.866）と十二面体（0.993）だけ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形</th><th>点</th><th>面</th><th>頂点まで</th><th>辺</th><th>面積</th><th>式の面積</th><th>体積</th><th>式の体積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>Tetrahedron</td><td class="num">4</td><td class="num">4</td><td class="num">1.000001</td><td class="num">1.632995</td><td class="num">4.618802</td><td class="num">4.618802</td><td class="num">0.513200</td><td class="num">0.513200</td><td class="num">0.0078</td></tr>
+              <tr><td>Cube</td><td class="num">8</td><td class="num">6</td><td class="num">0.866025</td><td class="num">1.000000</td><td class="num">6.000000</td><td class="num">8.000000</td><td class="num">1.000000</td><td class="num">1.539601</td><td class="num">0.0050</td></tr>
+              <tr><td>Octahedron</td><td class="num">6</td><td class="num">8</td><td class="num">1.000000</td><td class="num">1.414214</td><td class="num">6.928203</td><td class="num">6.928203</td><td class="num">1.333333</td><td class="num">1.333333</td><td class="num">0.0050</td></tr>
+              <tr><td>Icosahedron</td><td class="num">12</td><td class="num">20</td><td class="num">1.000000</td><td class="num">1.051463</td><td class="num">9.574541</td><td class="num">9.574541</td><td class="num">2.536151</td><td class="num">2.536151</td><td class="num">0.0049</td></tr>
+              <tr><td>Dodecahedron</td><td class="num">20</td><td class="num">12</td><td class="num">0.993318</td><td class="num">0.708876</td><td class="num">10.374577</td><td class="num">10.514622</td><td class="num">2.729706</td><td class="num">2.785164</td><td class="num">0.0049</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">式は外接半径1のとき。Solid Type の 5（Soccer Ball）と 6（Utah Teapot）は正多面体ではないので外した。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Radius は形によって意味が違う。</strong>四面体・八面体・二十面体は外接半径、立方体は一辺。</li>
+          <li><strong>十二面体を大きさ合わせに使うなら、頂点までを測ってから。</strong>Radius=1 で 0.9933。</li>
+          <li><strong>どれも一瞬で作れる。</strong>1個 0.01 秒以下。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 143 ===================== -->
+    <article class="entry entry--current" id="exp143">
+      <div class="badge">143</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>circle の Polygon は頂点が円周に乗る正 n 角形 — 弧の Divisions は辺の数</h2>
+        <p class="path">examples/143_circle.py &nbsp;·&nbsp; Polygon の円は内接正n角形。弧の Divisions は辺の数</p>
+
+        <div class="prose">
+          <p>半径 1 の circle を Polygon にして、Divisions を 3〜768 と変え、周と面積を測った。</p>
+          <p>**頂点は全部ちょうど半径1の上。周は 2n·sin(π/n)、面積は (n/2)·sin(2π/n) と一致した**（7通りで差は最大 2e-06）。n = 12 で面積は 3（π より -4.5%）、n = 768 で 3.141556。円より少し小さく出るのは、辺が円の内側を通るから。</p>
+          <p>**弧（0〜90°）にすると、Divisions は辺の数になる。**Open Arc で Divisions = 4 なら点は 5、12 なら 13。Closed Arc は中心に1点足して閉じた扇形（周 3.560723 = 弧 + 半径2本）、Sliced Arc は中心から切った三角形が Divisions 枚（4 なら 4 枚）になる。</p>
+        </div>
+
+        <p class="label">閉じた円: Divisions と周・面積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="143_circle.png" alt="面積のほうが周より遅れて近づく。" loading="lazy" decoding="async"></div>
+            <figcaption>面積のほうが周より遅れて近づく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Divisions</th><th>点</th><th>半径（最小〜最大）</th><th>周</th><th>式の周</th><th>面積</th><th>式の面積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">3</td><td class="num">1〜1</td><td class="num">5.196152</td><td class="num">5.196152</td><td class="num">1.299038</td><td class="num">1.299038</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">4</td><td class="num">4</td><td class="num">1〜1</td><td class="num">5.656854</td><td class="num">5.656854</td><td class="num">2.000000</td><td class="num">2.000000</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">6</td><td class="num">6</td><td class="num">1〜1</td><td class="num">6.000000</td><td class="num">6.000000</td><td class="num">2.598076</td><td class="num">2.598076</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">12</td><td class="num">12</td><td class="num">1〜1</td><td class="num">6.211657</td><td class="num">6.211657</td><td class="num">3.000000</td><td class="num">3.000000</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">48</td><td class="num">48</td><td class="num">1〜1</td><td class="num">6.278700</td><td class="num">6.278700</td><td class="num">3.132628</td><td class="num">3.132629</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">192</td><td class="num">192</td><td class="num">1〜1</td><td class="num">6.282905</td><td class="num">6.282905</td><td class="num">3.141032</td><td class="num">3.141032</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">768</td><td class="num">768</td><td class="num">1〜1</td><td class="num">6.283168</td><td class="num">6.283168</td><td class="num">3.141556</td><td class="num">3.141558</td><td class="num">0.0001</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">弧（Arc Angles 0〜90）の3種類</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Arc Type</th><th>Divisions</th><th>点</th><th>面</th><th>閉じている</th><th>周（1枚目）</th><th>面積（1枚目）</th></tr></thead>
+            <tbody>
+              <tr><td>openarc</td><td class="num">4</td><td class="num">5</td><td class="num">1</td><td>いいえ</td><td class="num">1.560723</td><td class="num">0.000000</td></tr>
+              <tr><td>openarc</td><td class="num">12</td><td class="num">13</td><td class="num">1</td><td>いいえ</td><td class="num">1.569675</td><td class="num">0.000000</td></tr>
+              <tr><td>closedarc</td><td class="num">4</td><td class="num">6</td><td class="num">1</td><td>はい</td><td class="num">3.560723</td><td class="num">0.765367</td></tr>
+              <tr><td>closedarc</td><td class="num">12</td><td class="num">14</td><td class="num">1</td><td>はい</td><td class="num">3.569675</td><td class="num">0.783157</td></tr>
+              <tr><td>slicedarc</td><td class="num">4</td><td class="num">6</td><td class="num">4</td><td>はい</td><td class="num">2.390181</td><td class="num">0.191342</td></tr>
+              <tr><td>slicedarc</td><td class="num">12</td><td class="num">14</td><td class="num">12</td><td>はい</td><td class="num">2.130806</td><td class="num">0.065263</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Sliced Arc の面積は1枚目の三角形だけ。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>円の Polygon は内接多角形。</strong>面積は必ず π より小さい（12分割で −4.5%）。</li>
+          <li><strong>弧の Divisions は辺の数。</strong>点は Divisions + 1（Closed Arc はさらに中心の1点）。</li>
+          <li><strong>Sliced Arc はバラバラの三角形。</strong>ピザを切り分けた形で、面の数 = Divisions。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 144 ===================== -->
+    <article class="entry entry--current" id="exp144">
+      <div class="badge">144</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>torus の Rows は管の断面、Columns は大きな輪 — 体積は2つの内接多角形の積で決まる</h2>
+        <p class="path">examples/144_torus.py &nbsp;·&nbsp; Rows は管の断面、Columns は輪。体積は入れ替えても同じ</p>
+
+        <div class="prose">
+          <p>Radius = (1, 0.25) の torus（Polygon）で、Rows と Columns を片方ずつ 6〜96 に変え、面積と体積を測った。式は面積 4π²Rr = 9.869604、体積 2π²Rr² = 1.233701。</p>
+          <p>**Rows は管の断面を刻み、Columns は大きな輪を刻む。**Rows を増やすと点の高さの種類が増え（Rows 6 で 3、96 で 51）、Columns では変わらない。</p>
+          <p>**体積は Rows と Columns を入れ替えても同じ値になった**（Rows 6 でも Columns 6 でも 1.019534）。断面も輪も内接正多角形なので、体積 = 式 × f(Rows) × f(Columns)、f(n) = n·sin(2π/n)/2π と置くと、9通りすべて 4e-07 以内で合った。</p>
+          <p>**面積は入れ替えると違う。**6分割のとき、Rows を減らすと 9.4206（-4.5%）、Columns を減らすと 9.8634（-0.1%）。大きな輪（Columns）を粗くするほうが面積は大きく減る。</p>
+        </div>
+
+        <p class="label">Rows・Columns と面積・体積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="144_torus.png" alt="緑の体積は2本とも同じ線に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>緑の体積は2本とも同じ線に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rows</th><th>Columns</th><th>点</th><th>高さの種類</th><th>面積</th><th>面積の比</th><th>体積</th><th>予測の体積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">6</td><td class="num">96</td><td class="num">576</td><td class="num">3</td><td class="num">9.420574</td><td class="num">0.9545</td><td class="num">1.019534</td><td class="num">1.019534</td><td class="num">0.0007</td></tr>
+              <tr><td class="num">12</td><td class="num">96</td><td class="num">1,152</td><td class="num">7</td><td class="num">9.752896</td><td class="num">0.9882</td><td class="num">1.177256</td><td class="num">1.177256</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">24</td><td class="num">96</td><td class="num">2,304</td><td class="num">13</td><td class="num">9.837052</td><td class="num">0.9967</td><td class="num">1.218785</td><td class="num">1.218785</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">48</td><td class="num">96</td><td class="num">4,608</td><td class="num">26</td><td class="num">9.858160</td><td class="num">0.9988</td><td class="num">1.229302</td><td class="num">1.229302</td><td class="num">0.0007</td></tr>
+              <tr><td class="num">96</td><td class="num">96</td><td class="num">9,216</td><td class="num">51</td><td class="num">9.863441</td><td class="num">0.9994</td><td class="num">1.231940</td><td class="num">1.231940</td><td class="num">0.0012</td></tr>
+              <tr><td class="num">96</td><td class="num">6</td><td class="num">576</td><td class="num">51</td><td class="num">8.803202</td><td class="num">0.8920</td><td class="num">1.019534</td><td class="num">1.019534</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">96</td><td class="num">12</td><td class="num">1,152</td><td class="num">51</td><td class="num">9.590021</td><td class="num">0.9717</td><td class="num">1.177256</td><td class="num">1.177256</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">96</td><td class="num">24</td><td class="num">2,304</td><td class="num">51</td><td class="num">9.797642</td><td class="num">0.9927</td><td class="num">1.218785</td><td class="num">1.218785</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">96</td><td class="num">48</td><td class="num">4,608</td><td class="num">51</td><td class="num">9.850246</td><td class="num">0.9980</td><td class="num">1.229302</td><td class="num">1.229302</td><td class="num">0.0005</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">予測の体積 = 2π²Rr² × f(Rows) × f(Columns)。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Rows = 管の太さ方向、Columns = 輪の周方向。</strong>名前から逆に思いやすいので注意。</li>
+          <li><strong>体積は2つの分割の掛け算。</strong>どちらを粗くしても同じだけ減る。</li>
+          <li><strong>面積は輪の分割に敏感。</strong>見た目を保ちたいなら Columns を先に確保する。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 145 ===================== -->
+    <article class="entry entry--current" id="exp145">
+      <div class="badge">145</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>mirror の継ぎ目は「元と鏡像の距離」が Consolidate Seam 未満ならまとまる — 境目ちょうどはまとまらない</h2>
+        <p class="path">examples/145_mirror_seam.py &nbsp;·&nbsp; 継ぎ目は元と鏡像の距離で比べる。境目ちょうどはまとまらない</p>
+
+        <div class="prose">
+          <p>10×10 点の grid を、縁が面から g だけ離れるように置いて mirror し、点の数を数えた。全部まとまれば 190、まとまらなければ 200。</p>
+          <p>**比べられるのは、面からの距離 g ではなく、元と鏡像の距離 2g。**Consolidate Seam が既定の 0.0001 のとき、g = 0.00004（距離 0.00008）はまとまり、g = 0.00005（距離 0.0001、ちょうど境目）はまとまらなかった。</p>
+          <p>**まとまった点は面の上（x = 0）に寄る。**元の縁が 0.00004 離れていても、出力の継ぎ目は x = 0 の1列だけ。まとまらないと ±g の2列が残り、見た目はつながっていても面は割れている。</p>
+          <p>**Enable Consolidate Seam を切ると、隙間 0 でも 200 点。**同じ位置に点が2つずつ重なる。面の数はどの場合も 162（81 × 2）で変わらない。</p>
+        </div>
+
+        <p class="label">隙間・Consolidate Seam・点の数</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="145_seam.png" alt="距離がつまみの値に届いたところで 200 に跳ねる。" loading="lazy" decoding="async"></div>
+            <figcaption>距離がつまみの値に届いたところで 200 に跳ねる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>面からの隙間 g</th><th>継ぎ目の距離 2g</th><th>Consolidate Seam</th><th>有効</th><th>点</th><th>面</th><th>継ぎ目の x</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0</td><td class="num">0.0001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0005</td></tr>
+              <tr><td class="num">0</td><td class="num">0</td><td class="num">0.0001</td><td>切</td><td class="num">200</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0</td><td class="num">0</td><td class="num">0.001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0</td><td class="num">0</td><td class="num">0.001</td><td>切</td><td class="num">200</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td>2e-05</td><td>4e-05</td><td class="num">0.0001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td>2e-05</td><td>4e-05</td><td class="num">0.0001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-2e-05 / 2e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>2e-05</td><td>4e-05</td><td class="num">0.001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td>2e-05</td><td>4e-05</td><td class="num">0.001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-2e-05 / 2e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>4e-05</td><td>8e-05</td><td class="num">0.0001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td>4e-05</td><td>8e-05</td><td class="num">0.0001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-4e-05 / 4e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>4e-05</td><td>8e-05</td><td class="num">0.001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td>4e-05</td><td>8e-05</td><td class="num">0.001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-4e-05 / 4e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>5e-05</td><td class="num">0.0001</td><td class="num">0.0001</td><td>入</td><td class="num">200</td><td class="num">162</td><td>-5e-05 / 5e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>5e-05</td><td class="num">0.0001</td><td class="num">0.0001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-5e-05 / 5e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>5e-05</td><td class="num">0.0001</td><td class="num">0.001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td>5e-05</td><td class="num">0.0001</td><td class="num">0.001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-5e-05 / 5e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>6e-05</td><td class="num">0.00012</td><td class="num">0.0001</td><td>入</td><td class="num">200</td><td class="num">162</td><td>-6e-05 / 6e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>6e-05</td><td class="num">0.00012</td><td class="num">0.0001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-6e-05 / 6e-05</td><td class="num">0.0002</td></tr>
+              <tr><td>6e-05</td><td class="num">0.00012</td><td class="num">0.001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td>6e-05</td><td class="num">0.00012</td><td class="num">0.001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-6e-05 / 6e-05</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.0001</td><td class="num">0.0002</td><td class="num">0.0001</td><td>入</td><td class="num">200</td><td class="num">162</td><td>-0.0001 / 0.0001</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.0001</td><td class="num">0.0002</td><td class="num">0.0001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-0.0001 / 0.0001</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.0001</td><td class="num">0.0002</td><td class="num">0.001</td><td>入</td><td class="num">190</td><td class="num">162</td><td class="num">0</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.0001</td><td class="num">0.0002</td><td class="num">0.001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-0.0001 / 0.0001</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.001</td><td class="num">0.002</td><td class="num">0.0001</td><td>入</td><td class="num">200</td><td class="num">162</td><td>-0.001 / 0.001</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.001</td><td class="num">0.002</td><td class="num">0.0001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-0.001 / 0.001</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.001</td><td class="num">0.002</td><td class="num">0.001</td><td>入</td><td class="num">200</td><td class="num">162</td><td>-0.001 / 0.001</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.001</td><td class="num">0.002</td><td class="num">0.001</td><td>切</td><td class="num">200</td><td class="num">162</td><td>-0.001 / 0.001</td><td class="num">0.0002</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>面から g 離れた縁は、g &lt; Consolidate Seam ÷ 2 でまとまる。</strong>比べるのは元と鏡像の距離。</li>
+          <li><strong>境目ちょうどはまとまらない</strong>（「未満」の比較）。</li>
+          <li><strong>半分だけ作って mirror するなら、縁を面の上に置く。</strong>ずれがあってもまとまった点は面へ寄る。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 146 ===================== -->
+    <article class="entry entry--current" id="exp146">
+      <div class="badge">146</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>clip で切った球の面積は 2πh — 比は切る高さに関係なく、球全体と同じだけずれる</h2>
+        <p class="path">examples/146_clip_cap.py &nbsp;·&nbsp; 切った球の面積は 2πh。Both は切り口の点を共有したまま</p>
+
+        <div class="prose">
+          <p>半径 1 の球（Polygon Mesh）を、Direction = (0,1,0)、Distance = c の面で clip し、残った面積を測った。球帯の面積は高さ h だけで決まる（2πRh）。</p>
+          <p>**Above は面より上（y ≥ c）、Below は下が残る。**Distance は原点からその向きに進んだ距離。</p>
+          <p>**面積は 2πh に合う。**分割 192×384 で、8通りすべて式から 0.014% 以内。式に対する比は、どの高さでもほぼ球全体の比（0.99994）と同じ。切り口の位置によらず、同じ分割の網を切っているだけだから。</p>
+          <p>**切り口の点は面の上に乗る。**どの場合も列の数（48 分割なら 96、192 分割なら 384）だけ、y = c ちょうどの点ができた。</p>
+          <p>**Both は2つに分けるが、切り口の点は共有のまま。**48 分割・c = 0.3 で、元の球 4,418 点・4,512 面が 4,514 点（+96）・4,608 面（+96）。点は複製されないので、上下を引き離すには別に割る処理が要る。</p>
+        </div>
+
+        <p class="label">切る高さ・残す側・面積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="146_clip.png" alt="線が水平 = 比が高さによらない。細かい分割（192）ほど 1 に近い。" loading="lazy" decoding="async"></div>
+            <figcaption>線が水平 = 比が高さによらない。細かい分割（192）ほど 1 に近い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>分割</th><th>c</th><th>Keep</th><th>点</th><th>面</th><th>y の範囲</th><th>面上の点</th><th>面積</th><th>式</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>48×96</td><td class="num">-0.5</td><td>above</td><td class="num">3,073</td><td class="num">3,072</td><td class="num">-0.5〜1</td><td class="num">96</td><td class="num">9.418171</td><td class="num">9.424778</td><td class="num">0.0023</td></tr>
+              <tr><td>48×96</td><td class="num">-0.5</td><td>below</td><td class="num">1,537</td><td class="num">1,536</td><td>-1〜-0.5</td><td class="num">96</td><td class="num">3.136699</td><td class="num">3.141593</td><td class="num">0.0015</td></tr>
+              <tr><td>48×96</td><td class="num">-0.5</td><td>both</td><td class="num">4,514</td><td class="num">4,608</td><td class="num">-1〜1</td><td class="num">96</td><td class="num">12.554870</td><td class="num muted">—</td><td class="num">0.0008</td></tr>
+              <tr><td>48×96</td><td class="num">0</td><td>above</td><td class="num">2,305</td><td class="num">2,304</td><td class="num">0〜1</td><td class="num">96</td><td class="num">6.277435</td><td class="num">6.283185</td><td class="num">0.0013</td></tr>
+              <tr><td>48×96</td><td class="num">0</td><td>below</td><td class="num">2,305</td><td class="num">2,304</td><td class="num">-1〜0</td><td class="num">96</td><td class="num">6.277435</td><td class="num">6.283185</td><td class="num">0.0019</td></tr>
+              <tr><td>48×96</td><td class="num">0</td><td>both</td><td class="num">4,514</td><td class="num">4,608</td><td class="num">-1〜1</td><td class="num">96</td><td class="num">12.554870</td><td class="num muted">—</td><td class="num">0.0007</td></tr>
+              <tr><td>48×96</td><td class="num">0.3</td><td>above</td><td class="num">1,825</td><td class="num">1,824</td><td class="num">0.3〜1</td><td class="num">96</td><td class="num">4.393643</td><td class="num">4.398230</td><td class="num">0.0016</td></tr>
+              <tr><td>48×96</td><td class="num">0.3</td><td>below</td><td class="num">2,785</td><td class="num">2,784</td><td class="num">-1〜0.3</td><td class="num">96</td><td class="num">8.161227</td><td class="num">8.168141</td><td class="num">0.0014</td></tr>
+              <tr><td>48×96</td><td class="num">0.3</td><td>both</td><td class="num">4,514</td><td class="num">4,608</td><td class="num">-1〜1</td><td class="num">96</td><td class="num">12.554870</td><td class="num muted">—</td><td class="num">0.0008</td></tr>
+              <tr><td>48×96</td><td class="num">0.7</td><td>above</td><td class="num">1,153</td><td class="num">1,152</td><td class="num">0.7〜1</td><td class="num">96</td><td class="num">1.881895</td><td class="num">1.884956</td><td class="num">0.0014</td></tr>
+              <tr><td>48×96</td><td class="num">0.7</td><td>below</td><td class="num">3,457</td><td class="num">3,456</td><td class="num">-1〜0.7</td><td class="num">96</td><td class="num">10.672975</td><td class="num">10.681415</td><td class="num">0.0015</td></tr>
+              <tr><td>48×96</td><td class="num">0.7</td><td>both</td><td class="num">4,514</td><td class="num">4,608</td><td class="num">-1〜1</td><td class="num">96</td><td class="num">12.554870</td><td class="num muted">—</td><td class="num">0.0008</td></tr>
+              <tr><td>192×384</td><td class="num">-0.5</td><td>above</td><td class="num">49,153</td><td class="num">49,152</td><td class="num">-0.5〜1</td><td class="num">384</td><td class="num">9.424370</td><td class="num">9.424778</td><td class="num">0.0112</td></tr>
+              <tr><td>192×384</td><td class="num">-0.5</td><td>below</td><td class="num">24,577</td><td class="num">24,576</td><td>-1〜-0.5</td><td class="num">384</td><td class="num">3.141295</td><td class="num">3.141593</td><td class="num">0.0152</td></tr>
+              <tr><td>192×384</td><td class="num">-0.5</td><td>both</td><td class="num">73,346</td><td class="num">73,728</td><td class="num">-1〜1</td><td class="num">384</td><td class="num">12.565665</td><td class="num muted">—</td><td class="num">0.0053</td></tr>
+              <tr><td>192×384</td><td class="num">0</td><td>above</td><td class="num">36,865</td><td class="num">36,864</td><td class="num">0〜1</td><td class="num">384</td><td class="num">6.282833</td><td class="num">6.283185</td><td class="num">0.0118</td></tr>
+              <tr><td>192×384</td><td class="num">0</td><td>below</td><td class="num">36,865</td><td class="num">36,864</td><td class="num">-1〜0</td><td class="num">384</td><td class="num">6.282833</td><td class="num">6.283185</td><td class="num">0.0146</td></tr>
+              <tr><td>192×384</td><td class="num">0</td><td>both</td><td class="num">73,346</td><td class="num">73,728</td><td class="num">-1〜1</td><td class="num">384</td><td class="num">12.565665</td><td class="num muted">—</td><td class="num">0.0063</td></tr>
+              <tr><td>192×384</td><td class="num">0.3</td><td>above</td><td class="num">29,569</td><td class="num">29,568</td><td class="num">0.3〜1</td><td class="num">384</td><td class="num">4.397957</td><td class="num">4.398230</td><td class="num">0.0135</td></tr>
+              <tr><td>192×384</td><td class="num">0.3</td><td>below</td><td class="num">44,161</td><td class="num">44,160</td><td class="num">-1〜0.3</td><td class="num">384</td><td class="num">8.167708</td><td class="num">8.168141</td><td class="num">0.0139</td></tr>
+              <tr><td>192×384</td><td class="num">0.3</td><td>both</td><td class="num">73,346</td><td class="num">73,728</td><td class="num">-1〜1</td><td class="num">384</td><td class="num">12.565665</td><td class="num muted">—</td><td class="num">0.0065</td></tr>
+              <tr><td>192×384</td><td class="num">0.7</td><td>above</td><td class="num">18,817</td><td class="num">18,816</td><td class="num">0.7〜1</td><td class="num">384</td><td class="num">1.884689</td><td class="num">1.884956</td><td class="num">0.0155</td></tr>
+              <tr><td>192×384</td><td class="num">0.7</td><td>below</td><td class="num">54,913</td><td class="num">54,912</td><td class="num">-1〜0.7</td><td class="num">384</td><td class="num">10.680977</td><td class="num">10.681415</td><td class="num">0.0103</td></tr>
+              <tr><td>192×384</td><td class="num">0.7</td><td>both</td><td class="num">73,346</td><td class="num">73,728</td><td class="num">-1〜1</td><td class="num">384</td><td class="num">12.565665</td><td class="num muted">—</td><td class="num">0.0065</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">式: Above は 2π(1 − c)、Below は 2π(1 + c)。Both は球全体。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Distance は原点から Direction の向きに進んだ位置。</strong>Above はその先（向きの側）を残す。</li>
+          <li><strong>切り口は面の上にちょうど乗る。</strong>あとで cap や polyfill で塞ぐとき、平らに閉じる。</li>
+          <li><strong>Both の上下は点を共有している。</strong>別々に動かすなら、切ったあとに割る処理を足す。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 147 ===================== -->
+    <article class="entry entry--current" id="exp147">
+      <div class="badge">147</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>twist SOP の6つの操作 — 体積を保つのは Shear だけ。Squash は長さ (1+s) 倍・太さ 1/(1+s) 倍</h2>
+        <p class="path">examples/147_twist_ops.py &nbsp;·&nbsp; 体積を保つのは Shear だけ。Squash は長さ(1+s)倍・太さ1/(1+s)倍</p>
+
+        <div class="prose">
+          <p>x が 0〜1（または 0〜2）の箱に、Primary Axis = X で6つの Operation をかけ、体積と端の点の動きを測った。</p>
+          <p>**Shear はぴったり体積を保つ。**y が Strength × x だけずれ、囲む箱の高さは 1 + s × 長さ（長さ 2・s = 1 で 3）。</p>
+          <p>**Twist の Strength は、x が 1 進むごとの回転角（度）。**x = 1 の角の点が s = 2 で 2° 回った。体積は 1.000641 倍と、わずかに増えた。側面の四角形がねじれて平らでなくなるため。</p>
+          <p>**Squash は長さを (1 + s) 倍、太さを 1/(1 + s) 倍にする。**体積は 1/(1 + s) 倍（s = 0.5 で 0.666667、s = 1 で 0.5）。名前と違い、体積は保たれない。</p>
+          <p>**Taper と Linear Taper は、Secondary Axis（Y）の位置で x 方向の長さを変える。Strength = 1 で変化なし。**Linear Taper は y = −0.5 で s 倍、+0.5 で 1/s 倍、その間は直線（s = 0.5 で 0.5〜2 倍、体積 1.25 倍）。Taper は s^(−y) 倍（y = +0.5 で 1.4142、−0.5 で 0.7071）。ただし Taper の体積 1.024674 倍は、この倍率を y で平均した値 1.020139 と 0.44% 合わない。理由は確かめていない。</p>
+          <p>**Bend の Strength の単位は確かめていない。**s = 2 で端の点が 0.05 ほど動くだけで、弧の角度として読めなかった。</p>
+        </div>
+
+        <p class="label">操作・Strength・体積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="147_volume.png" alt="Shear と Twist はほぼ 1。Squash は下がり、Taper 系は" loading="lazy" decoding="async"></div>
+            <figcaption>Shear と Twist はほぼ 1。Squash は下がり、Taper 系は s = 1 で 1 に戻る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>長さ</th><th>Operation</th><th>Strength</th><th>元の体積</th><th>体積</th><th>比</th><th>囲む箱</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td>Twist</td><td class="num">0.5</td><td class="num">1</td><td class="num">1.000322</td><td class="num">1.000322</td><td>1 × 1.0087 × 1.0087</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td>Twist</td><td class="num">1</td><td class="num">1</td><td class="num">1.000641</td><td class="num">1.000641</td><td>1 × 1.0173 × 1.0173</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Bend</td><td class="num">0.5</td><td class="num">1</td><td class="num">1.004361</td><td class="num">1.004361</td><td>1.0087 × 1.013 × 1</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td>Bend</td><td class="num">1</td><td class="num">1</td><td class="num">1.008718</td><td class="num">1.008718</td><td>1.0174 × 1.026 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Shear</td><td class="num">0.5</td><td class="num">1</td><td class="num">1.000000</td><td class="num">1.000000</td><td>1 × 1.5 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Shear</td><td class="num">1</td><td class="num">1</td><td class="num">1.000000</td><td class="num">1.000000</td><td>1 × 2 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Taper</td><td class="num">0.5</td><td class="num">1</td><td class="num">1.024674</td><td class="num">1.024674</td><td>1.4142 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Taper</td><td class="num">1</td><td class="num">1</td><td class="num">1.000000</td><td class="num">1.000000</td><td>1 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Linear Taper</td><td class="num">0.5</td><td class="num">1</td><td class="num">1.250000</td><td class="num">1.250000</td><td>2 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Linear Taper</td><td class="num">1</td><td class="num">1</td><td class="num">1.000000</td><td class="num">1.000000</td><td>1 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Squash</td><td class="num">0.5</td><td class="num">1</td><td class="num">0.666667</td><td class="num">0.666667</td><td>1.5 × 0.6667 × 0.6667</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">1</td><td>Squash</td><td class="num">1</td><td class="num">1</td><td class="num">0.500000</td><td class="num">0.500000</td><td>2 × 0.5 × 0.5</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Twist</td><td class="num">0.5</td><td class="num">2</td><td class="num">2.001282</td><td class="num">1.000641</td><td>2 × 1.0173 × 1.0173</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Twist</td><td class="num">1</td><td class="num">2</td><td class="num">2.002541</td><td class="num">1.001270</td><td>2 × 1.0343 × 1.0343</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Bend</td><td class="num">0.5</td><td class="num">2</td><td class="num">2.017449</td><td class="num">1.008724</td><td>2.0087 × 1.0261 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Bend</td><td class="num">1</td><td class="num">2</td><td class="num">2.034890</td><td class="num">1.017445</td><td>2.0174 × 1.0522 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Shear</td><td class="num">0.5</td><td class="num">2</td><td class="num">2.000000</td><td class="num">1.000000</td><td>2 × 2 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Shear</td><td class="num">1</td><td class="num">2</td><td class="num">2.000000</td><td class="num">1.000000</td><td>2 × 3 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Taper</td><td class="num">0.5</td><td class="num">2</td><td class="num">2.049347</td><td class="num">1.024674</td><td>2.8284 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Taper</td><td class="num">1</td><td class="num">2</td><td class="num">2.000000</td><td class="num">1.000000</td><td>2 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Linear Taper</td><td class="num">0.5</td><td class="num">2</td><td class="num">2.500000</td><td class="num">1.250000</td><td>4 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Linear Taper</td><td class="num">1</td><td class="num">2</td><td class="num">2.000000</td><td class="num">1.000000</td><td>2 × 1 × 1</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Squash</td><td class="num">0.5</td><td class="num">2</td><td class="num">1.333333</td><td class="num">0.666667</td><td>3 × 0.6667 × 0.6667</td><td class="num">0.0000</td></tr>
+              <tr><td class="num">2</td><td>Squash</td><td class="num">1</td><td class="num">2</td><td class="num">1.000000</td><td class="num">0.500000</td><td>4 × 0.5 × 0.5</td><td class="num">0.0000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">x = 1・z = 0.5 の端の点の行き先（長さ 1 の箱）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Operation</th><th>Strength</th><th>元の y</th><th>行き先 (x, y, z)</th></tr></thead>
+            <tbody>
+              <tr><td>Twist</td><td class="num">0.5</td><td class="num">-0.5</td><td>1, -0.4956, 0.5043</td></tr>
+              <tr><td>Twist</td><td class="num">0.5</td><td class="num">0.5</td><td>1, 0.5043, 0.4956</td></tr>
+              <tr><td>Twist</td><td class="num">2</td><td class="num">-0.5</td><td>1, -0.4822, 0.5171</td></tr>
+              <tr><td>Twist</td><td class="num">2</td><td class="num">0.5</td><td>1, 0.5171, 0.4822</td></tr>
+              <tr><td>Bend</td><td class="num">0.5</td><td class="num">-0.5</td><td>1.0022, -0.4956, 0.5</td></tr>
+              <tr><td>Bend</td><td class="num">0.5</td><td class="num">0.5</td><td>0.9934, 0.513, 0.5</td></tr>
+              <tr><td>Bend</td><td class="num">2</td><td class="num">-0.5</td><td>1.0086, -0.4825, 0.5</td></tr>
+              <tr><td>Bend</td><td class="num">2</td><td class="num">0.5</td><td>0.9725, 0.5517, 0.5</td></tr>
+              <tr><td>Shear</td><td class="num">0.5</td><td class="num">-0.5</td><td>1, 0, 0.5</td></tr>
+              <tr><td>Shear</td><td class="num">0.5</td><td class="num">0.5</td><td>1, 1, 0.5</td></tr>
+              <tr><td>Shear</td><td class="num">2</td><td class="num">-0.5</td><td>1, 1.5, 0.5</td></tr>
+              <tr><td>Shear</td><td class="num">2</td><td class="num">0.5</td><td>1, 2.5, 0.5</td></tr>
+              <tr><td>Taper</td><td class="num">0.5</td><td class="num">-0.5</td><td>0.7071, -0.5, 0.5</td></tr>
+              <tr><td>Taper</td><td class="num">0.5</td><td class="num">0.5</td><td>1.4142, 0.5, 0.5</td></tr>
+              <tr><td>Taper</td><td class="num">2</td><td class="num">-0.5</td><td>1.4142, -0.5, 0.5</td></tr>
+              <tr><td>Taper</td><td class="num">2</td><td class="num">0.5</td><td>0.7071, 0.5, 0.5</td></tr>
+              <tr><td>Linear Taper</td><td class="num">0.5</td><td class="num">-0.5</td><td>0.5, -0.5, 0.5</td></tr>
+              <tr><td>Linear Taper</td><td class="num">0.5</td><td class="num">0.5</td><td>2, 0.5, 0.5</td></tr>
+              <tr><td>Linear Taper</td><td class="num">2</td><td class="num">-0.5</td><td>2, -0.5, 0.5</td></tr>
+              <tr><td>Linear Taper</td><td class="num">2</td><td class="num">0.5</td><td>0.5, 0.5, 0.5</td></tr>
+              <tr><td>Squash</td><td class="num">0.5</td><td class="num">-0.5</td><td>1.5, -0.3333, 0.3333</td></tr>
+              <tr><td>Squash</td><td class="num">0.5</td><td class="num">0.5</td><td>1.5, 0.3333, 0.3333</td></tr>
+              <tr><td>Squash</td><td class="num">2</td><td class="num">-0.5</td><td>3, -0.1667, 0.1667</td></tr>
+              <tr><td>Squash</td><td class="num">2</td><td class="num">0.5</td><td>3, 0.1667, 0.1667</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>体積を保ちたいなら Shear。</strong>Twist もほぼ保つ（ねじれた面の分だけずれる）。</li>
+          <li><strong>Squash は体積を保たない。</strong>伸ばして細くする量が、同じ (1+s) で釣り合っていない。</li>
+          <li><strong>Taper 系は Strength = 1 が「何もしない」。</strong>0 にすると片側がつぶれる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

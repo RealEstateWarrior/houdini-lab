@@ -1,0 +1,98 @@
+{
+  "rows": [
+    {
+      "rows": 6,
+      "cols": 96,
+      "points": 576,
+      "prims": 576,
+      "heights": 3,
+      "area": 9.420574,
+      "volume": 1.019534,
+      "sec": 0.0007
+    },
+    {
+      "rows": 12,
+      "cols": 96,
+      "points": 1152,
+      "prims": 1152,
+      "heights": 7,
+      "area": 9.752896,
+      "volume": 1.177256,
+      "sec": 0.0002
+    },
+    {
+      "rows": 24,
+      "cols": 96,
+      "points": 2304,
+      "prims": 2304,
+      "heights": 13,
+      "area": 9.837052,
+      "volume": 1.218785,
+      "sec": 0.0003
+    },
+    {
+      "rows": 48,
+      "cols": 96,
+      "points": 4608,
+      "prims": 4608,
+      "heights": 26,
+      "area": 9.85816,
+      "volume": 1.229302,
+      "sec": 0.0007
+    },
+    {
+      "rows": 96,
+      "cols": 96,
+      "points": 9216,
+      "prims": 9216,
+      "heights": 51,
+      "area": 9.863441,
+      "volume": 1.23194,
+      "sec": 0.0012
+    },
+    {
+      "rows": 96,
+      "cols": 6,
+      "points": 576,
+      "prims": 576,
+      "heights": 51,
+      "area": 8.803202,
+      "volume": 1.019534,
+      "sec": 0.0003
+    },
+    {
+      "rows": 96,
+      "cols": 12,
+      "points": 1152,
+      "prims": 1152,
+      "heights": 51,
+      "area": 9.590021,
+      "volume": 1.177256,
+      "sec": 0.0002
+    },
+    {
+      "rows": 96,
+      "cols": 24,
+      "points": 2304,
+      "prims": 2304,
+      "heights": 51,
+      "area": 9.797642,
+      "volume": 1.218785,
+      "sec": 0.0003
+    },
+    {
+      "rows": 96,
+      "cols": 48,
+      "points": 4608,
+      "prims": 4608,
+      "heights": 51,
+      "area": 9.850246,
+      "volume": 1.229302,
+      "sec": 0.0005
+    }
+  ],
+  "R": 1.0,
+  "r": 0.25,
+  "want_area": 9.869604401089358,
+  "want_volume": 1.2337005501361697
+}

@@ -1,0 +1,137 @@
+{
+  "rows": [
+    {
+      "divs": 3,
+      "points": 3,
+      "rmin": 1.0,
+      "rmax": 1.0,
+      "perimeter": 5.196152,
+      "area": 1.299038,
+      "want_perimeter": 5.196152,
+      "want_area": 1.299038,
+      "sec": 0.0001
+    },
+    {
+      "divs": 4,
+      "points": 4,
+      "rmin": 1.0,
+      "rmax": 1.0,
+      "perimeter": 5.656854,
+      "area": 2.0,
+      "want_perimeter": 5.656854,
+      "want_area": 2.0,
+      "sec": 0.0
+    },
+    {
+      "divs": 6,
+      "points": 6,
+      "rmin": 1.0,
+      "rmax": 1.0,
+      "perimeter": 6.0,
+      "area": 2.598076,
+      "want_perimeter": 6.0,
+      "want_area": 2.598076,
+      "sec": 0.0
+    },
+    {
+      "divs": 12,
+      "points": 12,
+      "rmin": 1.0,
+      "rmax": 1.0,
+      "perimeter": 6.211657,
+      "area": 3.0,
+      "want_perimeter": 6.211657,
+      "want_area": 3.0,
+      "sec": 0.0
+    },
+    {
+      "divs": 48,
+      "points": 48,
+      "rmin": 1.0,
+      "rmax": 1.0,
+      "perimeter": 6.2787,
+      "area": 3.132628,
+      "want_perimeter": 6.2787,
+      "want_area": 3.132629,
+      "sec": 0.0
+    },
+    {
+      "divs": 192,
+      "points": 192,
+      "rmin": 1.0,
+      "rmax": 1.0,
+      "perimeter": 6.282905,
+      "area": 3.141032,
+      "want_perimeter": 6.282905,
+      "want_area": 3.141032,
+      "sec": 0.0
+    },
+    {
+      "divs": 768,
+      "points": 768,
+      "rmin": 1.0,
+      "rmax": 1.0,
+      "perimeter": 6.283168,
+      "area": 3.141556,
+      "want_perimeter": 6.283168,
+      "want_area": 3.141558,
+      "sec": 0.0001
+    }
+  ],
+  "arcs": [
+    {
+      "arc": "openarc",
+      "divs": 4,
+      "points": 5,
+      "prims": 1,
+      "closed": false,
+      "perimeter": 1.560723,
+      "area": 0.0
+    },
+    {
+      "arc": "openarc",
+      "divs": 12,
+      "points": 13,
+      "prims": 1,
+      "closed": false,
+      "perimeter": 1.569675,
+      "area": 0.0
+    },
+    {
+      "arc": "closedarc",
+      "divs": 4,
+      "points": 6,
+      "prims": 1,
+      "closed": true,
+      "perimeter": 3.560723,
+      "area": 0.765367
+    },
+    {
+      "arc": "closedarc",
+      "divs": 12,
+      "points": 14,
+      "prims": 1,
+      "closed": true,
+      "perimeter": 3.569675,
+      "area": 0.783157
+    },
+    {
+      "arc": "slicedarc",
+      "divs": 4,
+      "points": 6,
+      "prims": 4,
+      "closed": true,
+      "perimeter": 2.390181,
+      "area": 0.191342
+    },
+    {
+      "arc": "slicedarc",
+      "divs": 12,
+      "points": 14,
+      "prims": 12,
+      "closed": true,
+      "perimeter": 2.130806,
+      "area": 0.065263
+    }
+  ]
+}
