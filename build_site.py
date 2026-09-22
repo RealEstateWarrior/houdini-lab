@@ -1240,6 +1240,12 @@ DONE = [
      "shots": ["183_substeps.png"],
      "title": "rbdbulletsolver の沈み込みは Bullet Substeps で決まる — 1 だと 0.38 めり込んで沈んだまま、50 でほぼ 0",
      "note": "沈み込みは Bullet Substeps で決まる。1 だと 0.38 めり込み沈んだまま"},
+    {"no": "184", "anchor": "exp184",
+     "tags": ["シミュレーション", "MPM", "検算"],
+     "log": "log_fx", "thumb": "184_count.png",
+     "shots": ["184_count.png"],
+     "title": "mpmsource は箱に「体積 ÷ Particle Separation³」個の粒を詰める — pscale には Separation そのものが入る",
+     "note": "箱に体積÷Separation³個の粒を詰める。pscale には Separation そのものが入る"},
 ]
 
 PLANNED = []

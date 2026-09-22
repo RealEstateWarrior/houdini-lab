@@ -5303,6 +5303,52 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 184 ===================== -->
+    <article class="entry entry--current" id="exp184">
+      <div class="badge">184</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>mpmsource は箱に「体積 ÷ Particle Separation³」個の粒を詰める — pscale には Separation そのものが入る</h2>
+        <p class="path">examples/184_mpm_count.py &nbsp;·&nbsp; 箱に体積÷Separation³個の粒を詰める。pscale には Separation そのものが入る</p>
+
+        <div class="prose">
+          <p>1 × 1 × 1 の箱を mpmsource（入力 2 に mpmcontainer）で粒にし、mpmcontainer の Particle Separation s と、mpmsource の Jitter Scale を変えた。</p>
+          <p>**既定（Jitter Scale 1）では、粒の数 × s³ が箱の体積 1 にほぼ一致した**（s = 0.1 で 1.0010・s = 0.05 で 0.9980・s = 0.025 で 0.9993）。粒1つが s³ の体積を受け持つ。</p>
+          <p>**Jitter Scale 0 だと、粒は升目どおりに並び、箱の面の上にも乗る。**数は (1/s + 1)³ と3通りとも一致（s = 0.1 で 1,331 = 11³）。x の並びは −0.5 から 0.5 まで 11 層。そのぶん、粒の数 × s³ は体積より多くなる（<a href="#exp141">実験141</a> の pointsfromvolume の Grid と同じ）。揺らぎ（Jitter）を入れると、面の上に並ぶぶんが消えて数が合う。</p>
+          <p>**粒には pscale と density が付き、mass は付かない。**pscale は Particle Separation と同じ値（s = 0.05 なら 0.05。半径なら半分のはずだが、そうではない）、density はどの粒も既定の 400。</p>
+        </div>
+
+        <p class="label">Particle Separation・Jitter と粒</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="184_count.png" alt="Jitter 1（青）は 1 に乗る。Jitter 0（橙）は面の上の分だけ多い" loading="lazy" decoding="async"></div>
+            <figcaption>Jitter 1（青）は 1 に乗る。Jitter 0（橙）は面の上の分だけ多い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Separation</th><th>Jitter Scale</th><th>粒の数</th><th>粒の数 × s³</th><th>(1/s+1)³</th><th>pscale</th><th>density</th><th>x の層</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.1</td><td class="num">1</td><td class="num">1,001</td><td class="num">1.00100</td><td class="num">1,331</td><td class="num">0.1</td><td class="num">400</td><td class="num muted">—</td><td class="num">0.306</td></tr>
+              <tr><td class="num">0.1</td><td class="num">0</td><td class="num">1,331</td><td class="num">1.33100</td><td class="num">1,331</td><td class="num">0.1</td><td class="num">400</td><td class="num">11</td><td class="num">0.173</td></tr>
+              <tr><td class="num">0.05</td><td class="num">1</td><td class="num">7,984</td><td class="num">0.99800</td><td class="num">9,261</td><td class="num">0.05</td><td class="num">400</td><td class="num muted">—</td><td class="num">0.214</td></tr>
+              <tr><td class="num">0.05</td><td class="num">0</td><td class="num">9,261</td><td class="num">1.15763</td><td class="num">9,261</td><td class="num">0.05</td><td class="num">400</td><td class="num">21</td><td class="num">0.198</td></tr>
+              <tr><td class="num">0.025</td><td class="num">1</td><td class="num">63,956</td><td class="num">0.99931</td><td class="num">68,921</td><td class="num">0.025</td><td class="num">400</td><td class="num muted">—</td><td class="num">0.242</td></tr>
+              <tr><td class="num">0.025</td><td class="num">0</td><td class="num">68,921</td><td class="num">1.07689</td><td class="num">68,921</td><td class="num">0.025</td><td class="num">400</td><td class="num">41</td><td class="num">0.143</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>粒の数は 体積 ÷ Separation³。</strong>Separation を半分にすると粒は 8 倍（重さの見積もりに使える）。</li>
+          <li><strong>pscale は Separation と同じ値。</strong>粒を球で見せるとき、そのまま使うと隣と重なる。</li>
+          <li><strong>Jitter を 0 にすると、面の上にも粒が並ぶ。</strong>数が (1/s + 1)³ に増える。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

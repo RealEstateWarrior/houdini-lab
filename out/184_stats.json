@@ -1,0 +1,130 @@
+{
+  "rows": [
+    {
+      "sep": 0.1,
+      "jitter": 1.0,
+      "points": 1001,
+      "n_s3": 1.001,
+      "pscale_min": 0.1,
+      "pscale_max": 0.1,
+      "density_min": 400.0,
+      "density_max": 400.0,
+      "mass_sum": null,
+      "volume_sum": null,
+      "x_layers": 0,
+      "x_min": null,
+      "x_max": null,
+      "attrs": [
+        "v",
+        "pscale",
+        "density"
+      ],
+      "sec": 0.306
+    },
+    {
+      "sep": 0.1,
+      "jitter": 0.0,
+      "points": 1331,
+      "n_s3": 1.331,
+      "pscale_min": 0.1,
+      "pscale_max": 0.1,
+      "density_min": 400.0,
+      "density_max": 400.0,
+      "mass_sum": null,
+      "volume_sum": null,
+      "x_layers": 11,
+      "x_min": -0.5,
+      "x_max": 0.5,
+      "attrs": [
+        "v",
+        "pscale",
+        "density"
+      ],
+      "sec": 0.173
+    },
+    {
+      "sep": 0.05,
+      "jitter": 1.0,
+      "points": 7984,
+      "n_s3": 0.998,
+      "pscale_min": 0.05,
+      "pscale_max": 0.05,
+      "density_min": 400.0,
+      "density_max": 400.0,
+      "mass_sum": null,
+      "volume_sum": null,
+      "x_layers": 0,
+      "x_min": null,
+      "x_max": null,
+      "attrs": [
+        "v",
+        "pscale",
+        "density"
+      ],
+      "sec": 0.214
+    },
+    {
+      "sep": 0.05,
+      "jitter": 0.0,
+      "points": 9261,
+      "n_s3": 1.15763,
+      "pscale_min": 0.05,
+      "pscale_max": 0.05,
+      "density_min": 400.0,
+      "density_max": 400.0,
+      "mass_sum": null,
+      "volume_sum": null,
+      "x_layers": 21,
+      "x_min": -0.5,
+      "x_max": 0.5,
+      "attrs": [
+        "v",
+        "pscale",
+        "density"
+      ],
+      "sec": 0.198
+    },
+    {
+      "sep": 0.025,
+      "jitter": 1.0,
+      "points": 63956,
+      "n_s3": 0.99931,
+      "pscale_min": 0.025,
+      "pscale_max": 0.025,
+      "density_min": 400.0,
+      "density_max": 400.0,
+      "mass_sum": null,
+      "volume_sum": null,
+      "x_layers": 0,
+      "x_min": null,
+      "x_max": null,
+      "attrs": [
+        "v",
+        "pscale",
+        "density"
+      ],
+      "sec": 0.242
+    },
+    {
+      "sep": 0.025,
+      "jitter": 0.0,
+      "points": 68921,
+      "n_s3": 1.07689,
+      "pscale_min": 0.025,
+      "pscale_max": 0.025,
+      "density_min": 400.0,
+      "density_max": 400.0,
+      "mass_sum": null,
+      "volume_sum": null,
+      "x_layers": 41,
+      "x_min": -0.5,
+      "x_max": 0.5,
+      "attrs": [
+        "v",
+        "pscale",
+        "density"
+      ],
+      "sec": 0.143
+    }
+  ]
+}
