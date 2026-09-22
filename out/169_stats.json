@@ -1,0 +1,87 @@
+{
+  "rows": [
+    {
+      "frame": 1,
+      "elapsed": 1.11,
+      "height_sum": 43046.8,
+      "height_min": -57.07,
+      "height_max": 84.74,
+      "debris_sum": 529.33,
+      "flow_sum": 3300.37,
+      "flowdir.x_sum": -720.29,
+      "flowdir.y_sum": 584.44,
+      "mask_sum": 0.0,
+      "sediment_sum": 3727.45
+    },
+    {
+      "frame": 2,
+      "elapsed": 1.4,
+      "height_sum": 40936.7,
+      "height_min": -54.15,
+      "height_max": 84.74,
+      "debris_sum": 748.07,
+      "flow_sum": 6119.33,
+      "flowdir.x_sum": -1439.24,
+      "flowdir.y_sum": 1206.35,
+      "mask_sum": 0.0,
+      "sediment_sum": 6947.1
+    },
+    {
+      "frame": 5,
+      "elapsed": 1.59,
+      "height_sum": 34771.4,
+      "height_min": -47.48,
+      "height_max": 84.21,
+      "debris_sum": 1150.78,
+      "flow_sum": 13656.79,
+      "flowdir.x_sum": -3250.32,
+      "flowdir.y_sum": 2706.92,
+      "mask_sum": 0.0,
+      "sediment_sum": 14655.25
+    },
+    {
+      "frame": 10,
+      "elapsed": 1.89,
+      "height_sum": 24074.9,
+      "height_min": -43.7,
+      "height_max": 82.0,
+      "debris_sum": 1298.0,
+      "flow_sum": 24056.32,
+      "flowdir.x_sum": -5644.38,
+      "flowdir.y_sum": 4616.0,
+      "mask_sum": 0.0,
+      "sediment_sum": 22453.14
+    },
+    {
+      "frame": 20,
+      "elapsed": 2.52,
+      "height_sum": 3031.9,
+      "height_min": -40.23,
+      "height_max": 78.68,
+      "debris_sum": 1198.81,
+      "flow_sum": 40289.77,
+      "flowdir.x_sum": -9342.29,
+      "flowdir.y_sum": 7484.43,
+      "mask_sum": 0.0,
+      "sediment_sum": 29872.08
+    },
+    {
+      "frame": 40,
+      "elapsed": 3.77,
+      "height_sum": -33644.4,
+      "height_min": -39.19,
+      "height_max": 72.09,
+      "debris_sum": 1458.98,
+      "flow_sum": 64395.93,
+      "flowdir.x_sum": -14967.95,
+      "flowdir.y_sum": 11815.12,
+      "mask_sum": 0.0,
+      "sediment_sum": 33990.44
+    }
+  ],
+  "base_sum": 45591.1,
+  "base_min": -62.81,
+  "base_max": 84.74,
+  "cells": 15625,
+  "cell_area": 64.0
+}

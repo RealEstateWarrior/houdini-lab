@@ -5009,6 +5009,52 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 169 ===================== -->
+    <article class="entry entry--current" id="exp169">
+      <div class="badge">169</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>heightfield_erode は土の量を保たない — 40 フレームで height の平均が 5 下がり、削れた分の大半は地形から消える</h2>
+        <p class="path">examples/169_hf_erode_mass.py &nbsp;·&nbsp; erode は土の量を保たない。40 フレームで平均の高さが 5 下がる</p>
+
+        <div class="prose">
+          <p>1000 × 1000 の heightfield（125 × 125 の升）に heightfield_noise（Amplitude 500）で山を作り、heightfield_erode（既定。Freeze は切った）をフレーム 1 から 40 まで進めた。height と、erode が作る層（sediment・debris など）を升ごとに足し合わせた。</p>
+          <p>**height の合計は減り続けた。**最初は 45,591、フレーム 40 で -33,644。升1つあたりの平均では 2.92 → -2.15（-5.07）。最高点は 84.74 → 72.09、最低点は -62.81 → -39.19 と、山は低く、谷は浅くなった。</p>
+          <p>**削れた分を sediment と debris に足しても、元の量にならない。**3つを足した合計は、フレーム 5 まではむしろ最初より多く（50,577）、そのあと減って、フレーム 40 で 1,805（最初の 4%）。流れる水と一緒に端から出ていく、か、層の値が「量」ではなく「濃さ」を表している、かのどちらかとみられるが、確かめていない。</p>
+          <p>**速い。**125 × 125 の升で、40 フレームを 3.8 秒。</p>
+        </div>
+
+        <p class="label">フレームごとの合計</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="169_mass.png" alt="青（height）は直線的に減り、橙（層を足したもの）も途中から下がる。" loading="lazy" decoding="async"></div>
+            <figcaption>青（height）は直線的に減り、橙（層を足したもの）も途中から下がる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>フレーム</th><th>経った秒</th><th>height の合計</th><th>平均</th><th>最低</th><th>最高</th><th>sediment</th><th>debris</th><th>3つの合計</th><th>flow</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">1.11</td><td class="num">43,047</td><td class="num">2.75</td><td class="num">-57.07</td><td class="num">84.74</td><td class="num">3,727</td><td class="num">529</td><td class="num">47,304</td><td class="num">3,300</td></tr>
+              <tr><td class="num">2</td><td class="num">1.40</td><td class="num">40,937</td><td class="num">2.62</td><td class="num">-54.15</td><td class="num">84.74</td><td class="num">6,947</td><td class="num">748</td><td class="num">48,632</td><td class="num">6,119</td></tr>
+              <tr><td class="num">5</td><td class="num">1.59</td><td class="num">34,771</td><td class="num">2.23</td><td class="num">-47.48</td><td class="num">84.21</td><td class="num">14,655</td><td class="num">1,151</td><td class="num">50,577</td><td class="num">13,657</td></tr>
+              <tr><td class="num">10</td><td class="num">1.89</td><td class="num">24,075</td><td class="num">1.54</td><td class="num">-43.7</td><td class="num">82</td><td class="num">22,453</td><td class="num">1,298</td><td class="num">47,826</td><td class="num">24,056</td></tr>
+              <tr><td class="num">20</td><td class="num">2.52</td><td class="num">3,032</td><td class="num">0.19</td><td class="num">-40.23</td><td class="num">78.68</td><td class="num">29,872</td><td class="num">1,199</td><td class="num">34,103</td><td class="num">40,290</td></tr>
+              <tr><td class="num">40</td><td class="num">3.77</td><td class="num">-33,644</td><td class="num">-2.15</td><td class="num">-39.19</td><td class="num">72.09</td><td class="num">33,990</td><td class="num">1,459</td><td class="num">1,805</td><td class="num">64,396</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>erode をかけると、地形全体が低くなる。</strong>40 フレームで平均 5 ほど。海面や建物の高さを決めるのは erode のあと。</li>
+          <li><strong>山は削れ、谷は埋まる。</strong>最高点も最低点も真ん中へ寄る。</li>
+          <li><strong>sediment・debris の値を「土の量」として足しても合わない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

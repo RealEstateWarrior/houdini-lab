@@ -1144,6 +1144,18 @@ DONE = [
      "shots": ["167_drop.png"],
      "title": "rbdbulletsolver の箱は地面ぴったりで止まる — Collision Padding を変えても止まる高さは同じ、当たった瞬間だけ少し沈む",
      "note": "箱は地面ぴったりで止まる。Collision Padding は止まる高さを変えない"},
+    {"no": "168", "anchor": "exp168",
+     "tags": ["地形", "検算", "heightfield"],
+     "log": "log_pm", "thumb": "168_amp.png",
+     "shots": ["168_amp.png"],
+     "title": "heightfield_noise の Amplitude は高さの幅ではない — 幅は Amplitude の 23〜29%、Center Noise を切ると Amplitude の半分だけ上がる",
+     "note": "Amplitude は高さの幅ではない。幅は Amplitude の 23〜29%"},
+    {"no": "169", "anchor": "exp169",
+     "tags": ["地形", "シミュレーション", "heightfield"],
+     "log": "log_fx", "thumb": "169_mass.png",
+     "shots": ["169_mass.png"],
+     "title": "heightfield_erode は土の量を保たない — 40 フレームで height の平均が 5 下がり、削れた分の大半は地形から消える",
+     "note": "erode は土の量を保たない。40 フレームで平均の高さが 5 下がる"},
 ]
 
 PLANNED = []
