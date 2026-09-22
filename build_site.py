@@ -1126,6 +1126,18 @@ DONE = [
      "shots": ["164_union.png"],
      "title": "vdbfromparticles の粒は pscale を半径にした球 — 2つ重ねると「2つの球の和」の体積に、升目の2乗で近づく",
      "note": "粒は pscale を半径にした球。2つ重ねると球の和の体積に、升目の2乗で近づく"},
+    {"no": "165", "anchor": "exp165",
+     "tags": ["シミュレーション", "パーティクル", "検算"],
+     "log": "log_pm", "thumb": "165_fall.png",
+     "shots": ["165_fall.png"],
+     "title": "POP の粒は、生まれたフレームで 1 ステップ先に進む — 1 秒後の落下は Substeps 1 で 13% 多く、誤差は Substeps に反比例して縮む",
+     "note": "粒は生まれたフレームで1ステップ先に進む。落下の誤差は Substeps に反比例"},
+    {"no": "166", "anchor": "exp166",
+     "tags": ["シミュレーション", "パーティクル", "検算", "落とし穴"],
+     "log": "log_pm", "thumb": "166_drag.png",
+     "shots": ["166_drag.png"],
+     "title": "popdrag の終端速度は g/k ではなく √(g/k) に近づく — 速さの2乗に比例する抵抗と同じ振る舞い",
+     "note": "popdrag の終端速度は g/k ではなく √(g/k) に近づく"},
 ]
 
 PLANNED = []

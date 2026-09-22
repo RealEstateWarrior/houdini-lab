@@ -8689,6 +8689,139 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 165 ===================== -->
+    <article class="entry entry--current" id="exp165">
+      <div class="badge">165</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>POP の粒は、生まれたフレームで 1 ステップ先に進む — 1 秒後の落下は Substeps 1 で 13% 多く、誤差は Substeps に反比例して縮む</h2>
+        <p class="path">examples/165_pop_gravity.py &nbsp;·&nbsp; 粒は生まれたフレームで1ステップ先に進む。落下の誤差は Substeps に反比例</p>
+
+        <div class="prose">
+          <p>原点の 1 点から、最初のフレームにだけ 1 粒を生み（初速 0）、popsolver の後ろに gravity（−9.80665）をつないだ。24 fps で、フレーム 2・13・25（生まれてから 1/24 秒・0.5 秒・1 秒）の y と v.y を読んだ。</p>
+          <p>**粒は「生まれたフレームのうちに、もう 1 ステップ」進んでいる。**Substeps 1・フレーム 25 の v.y は -10.2153（1 秒ぶんの −9.80665 ではなく、1 + 1/24 秒ぶん）。進んだステップ数を n = (フレーム − 1) × Substeps + 1、1 ステップ h = 1/(24 × Substeps) とすると、12 通りすべてで v.y = −g·h·n（差は最大 1e-05）、y = −g·h²·n(n + 1)/2（差は最大 5e-06）と合った。「速さを先に足し、その速さで位置を進める」やり方（半陰的オイラー）。</p>
+          <p>**そのため、1 秒後の落下量は −½gt² より多い。**Substeps 1 で -5.5333（正しい値 -4.9033 より +12.8%）。Substeps を倍にするたびに誤差はほぼ半分になり、8 で +1.6%。誤差のもとは、生まれた瞬間の1ステップと、1ステップごとの足し方の2つ。</p>
+          <p>**時間はどれも 25 フレームで 0.3〜0.4 秒。**粒が1つなので、Substeps を増やしても重さはほとんど変わらない。</p>
+        </div>
+
+        <p class="label">Substeps・フレームと、落ちた量</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="165_fall.png" alt="誤差は Substeps に反比例して縮む（1 で +12.8%、8 で +1." loading="lazy" decoding="async"></div>
+            <figcaption>誤差は Substeps に反比例して縮む（1 で +12.8%、8 で +1.6%）。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Substeps</th><th>フレーム</th><th>経った時間</th><th>ステップ数 n</th><th>y</th><th>−g·h²·n(n+1)/2</th><th>−½gt²</th><th>誤差</th><th>v.y</th><th>−g·h·n</th><th>25 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">2</td><td class="num">0.0417</td><td class="num">2</td><td class="num">-0.051076</td><td class="num">-0.051076</td><td class="num">-0.008513</td><td>+500.0%</td><td class="num">-0.817221</td><td class="num">-0.817221</td><td class="num">0.412</td></tr>
+              <tr><td class="num">1</td><td class="num">13</td><td class="num">0.5000</td><td class="num">13</td><td class="num">-1.549314</td><td class="num">-1.549314</td><td class="num">-1.225831</td><td>+26.4%</td><td class="num">-5.311935</td><td class="num">-5.311935</td><td class="num">0.412</td></tr>
+              <tr><td class="num">1</td><td class="num">25</td><td class="num">1.0000</td><td class="num">25</td><td class="num">-5.533266</td><td class="num">-5.533266</td><td class="num">-4.903325</td><td>+12.8%</td><td class="num">-10.215260</td><td class="num">-10.215260</td><td class="num">0.412</td></tr>
+              <tr><td class="num">2</td><td class="num">2</td><td class="num">0.0417</td><td class="num">3</td><td class="num">-0.025538</td><td class="num">-0.025538</td><td class="num">-0.008513</td><td>+200.0%</td><td class="num">-0.612916</td><td class="num">-0.612916</td><td class="num">0.312</td></tr>
+              <tr><td class="num">2</td><td class="num">13</td><td class="num">0.5000</td><td class="num">25</td><td class="num">-1.383317</td><td class="num">-1.383317</td><td class="num">-1.225831</td><td>+12.8%</td><td class="num">-5.107630</td><td class="num">-5.107630</td><td class="num">0.312</td></tr>
+              <tr><td class="num">2</td><td class="num">25</td><td class="num">1.0000</td><td class="num">49</td><td class="num">-5.214039</td><td class="num">-5.214039</td><td class="num">-4.903325</td><td>+6.3%</td><td class="num">-10.010959</td><td class="num">-10.010955</td><td class="num">0.312</td></tr>
+              <tr><td class="num">4</td><td class="num">2</td><td class="num">0.0417</td><td class="num">5</td><td class="num">-0.015961</td><td class="num">-0.015961</td><td class="num">-0.008513</td><td>+87.5%</td><td class="num">-0.510763</td><td class="num">-0.510763</td><td class="num">0.343</td></tr>
+              <tr><td class="num">4</td><td class="num">13</td><td class="num">0.5000</td><td class="num">49</td><td class="num">-1.303510</td><td class="num">-1.303510</td><td class="num">-1.225831</td><td>+6.3%</td><td class="num">-5.005479</td><td class="num">-5.005478</td><td class="num">0.343</td></tr>
+              <tr><td class="num">4</td><td class="num">25</td><td class="num">1.0000</td><td class="num">97</td><td class="num">-5.057621</td><td class="num">-5.057618</td><td class="num">-4.903325</td><td>+3.1%</td><td class="num">-9.908814</td><td class="num">-9.908803</td><td class="num">0.343</td></tr>
+              <tr><td class="num">8</td><td class="num">2</td><td class="num">0.0417</td><td class="num">9</td><td class="num">-0.011971</td><td class="num">-0.011971</td><td class="num">-0.008513</td><td>+40.6%</td><td class="num">-0.459687</td><td class="num">-0.459687</td><td class="num">0.407</td></tr>
+              <tr><td class="num">8</td><td class="num">13</td><td class="num">0.5000</td><td class="num">97</td><td class="num">-1.264405</td><td class="num">-1.264404</td><td class="num">-1.225831</td><td>+3.1%</td><td class="num">-4.954407</td><td class="num">-4.954401</td><td class="num">0.407</td></tr>
+              <tr><td class="num">8</td><td class="num">25</td><td class="num">1.0000</td><td class="num">193</td><td class="num">-4.980210</td><td class="num">-4.980205</td><td class="num">-4.903325</td><td>+1.6%</td><td class="num">-9.857725</td><td class="num">-9.857726</td><td class="num">0.407</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong><button class="term" data-term="POP">POP</button> の落下は、正しい放物線より少し先を行く。</strong>1 秒で Substeps 1 なら +13%。</li>
+          <li><strong>正確に合わせたいなら Substeps を上げる。</strong>誤差はほぼ 1/Substeps。</li>
+          <li><strong>生まれたフレームでもう 1 ステップ進む。</strong>生まれた直後の位置が、生みの点からずれている理由。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 166 ===================== -->
+    <article class="entry entry--current" id="exp166">
+      <div class="badge">166</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>popdrag の終端速度は g/k ではなく √(g/k) に近づく — 速さの2乗に比例する抵抗と同じ振る舞い</h2>
+        <p class="path">examples/166_pop_drag.py &nbsp;·&nbsp; popdrag の終端速度は g/k ではなく √(g/k) に近づく</p>
+
+        <div class="prose">
+          <p><a href="#exp165">実験165</a> と同じ 1 粒を重力で落とし、popsolver の力の入力に popdrag（Wind Velocity 0、Ignore Mass 入）をつないだ。Air Resistance k を変えて、何秒たっても変わらなくなった落下の速さ（終端速度）を読んだ。</p>
+          <p>**終端速度は g/k にならなかった。**k = 1 なら、速さに比例する抵抗の式では 9.80665 になるはずが、4 秒後で -2.9339。k = 0.5・1・2・5 のどれでも、g/k よりずっと遅いところで頭打ちになった（1 秒前後でもう止まる）。</p>
+          <p>**Substeps を増やすと、√(g/k) に近づいた。**k = 1 では √9.80665 = 3.1316 へ、k = 4 では 1.5658 へ。足りない割合は Substeps 1 → 4 → 16 → 64 で k = 1 で 6.31% → 1.62% → 0.41% → 0.10%、k = 4 で 12.20% → 3.21% → 0.81% → 0.20%（Substeps を4倍にすると約1/4）。2つの k の両方で √(g/k) に向かうので、速さの2乗に比例する抵抗と同じ終端速度になっている。中の計算式そのものは確かめていない。</p>
+          <p>**時間は 97 フレームで 0.4〜0.6 秒。**</p>
+        </div>
+
+        <p class="label">Substeps を増やしたときの 2 秒後の速さ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="166_drag.png" alt="どちらの k も、Substeps を4倍にするたびに足りない分が約1/4になる" loading="lazy" decoding="async"></div>
+            <figcaption>どちらの k も、Substeps を4倍にするたびに足りない分が約1/4になる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Air Resistance k</th><th>Substeps</th><th>2 秒後の v.y</th><th>−√(g/k)</th><th>足りない割合</th><th>−g/k（比例の抵抗なら）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">-2.93389</td><td class="num">-3.13156</td><td>6.31%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">-3.08088</td><td class="num">-3.13156</td><td>1.62%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">1</td><td class="num">16</td><td class="num">-3.11879</td><td class="num">-3.13156</td><td>0.41%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">1</td><td class="num">64</td><td class="num">-3.12835</td><td class="num">-3.13156</td><td>0.10%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">4</td><td class="num">1</td><td class="num">-1.37475</td><td class="num">-1.56578</td><td>12.20%</td><td class="num">-2.4517</td></tr>
+              <tr><td class="num">4</td><td class="num">4</td><td class="num">-1.51553</td><td class="num">-1.56578</td><td>3.21%</td><td class="num">-2.4517</td></tr>
+              <tr><td class="num">4</td><td class="num">16</td><td class="num">-1.55306</td><td class="num">-1.56578</td><td>0.81%</td><td class="num">-2.4517</td></tr>
+              <tr><td class="num">4</td><td class="num">64</td><td class="num">-1.56258</td><td class="num">-1.56578</td><td>0.20%</td><td class="num">-2.4517</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">k・Substeps と、1・2・4 秒後の速さ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>k</th><th>Substeps</th><th>経った秒</th><th>v.y</th><th>−g/k</th><th>比例の抵抗の式</th><th>97 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">1</td><td class="num">-4.1496</td><td class="num">-19.6133</td><td class="num">-7.7172</td><td class="num">0.415</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">2</td><td class="num">-4.2281</td><td class="num">-19.6133</td><td class="num">-12.3980</td><td class="num">0.415</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">4</td><td class="num">-4.2291</td><td class="num">-19.6133</td><td class="num">-16.9589</td><td class="num">0.415</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">1</td><td class="num">-4.2804</td><td class="num">-19.6133</td><td class="num">-7.7172</td><td class="num">0.491</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">2</td><td class="num">-4.3767</td><td class="num">-19.6133</td><td class="num">-12.3980</td><td class="num">0.491</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">4</td><td class="num">-4.3779</td><td class="num">-19.6133</td><td class="num">-16.9589</td><td class="num">0.491</td></tr>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">-2.9258</td><td class="num">-9.8066</td><td class="num">-6.1990</td><td class="num">0.290</td></tr>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">-2.9339</td><td class="num">-9.8066</td><td class="num">-8.4795</td><td class="num">0.290</td></tr>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">4</td><td class="num">-2.9339</td><td class="num">-9.8066</td><td class="num">-9.6270</td><td class="num">0.290</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">1</td><td class="num">-3.0701</td><td class="num">-9.8066</td><td class="num">-6.1990</td><td class="num">0.497</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">2</td><td class="num">-3.0809</td><td class="num">-9.8066</td><td class="num">-8.4795</td><td class="num">0.497</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">4</td><td class="num">-3.0809</td><td class="num">-9.8066</td><td class="num">-9.6270</td><td class="num">0.497</td></tr>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">1</td><td class="num">-2.0191</td><td class="num">-4.9033</td><td class="num">-4.2397</td><td class="num">0.292</td></tr>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">2</td><td class="num">-2.0194</td><td class="num">-4.9033</td><td class="num">-4.8135</td><td class="num">0.292</td></tr>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">4</td><td class="num">-2.0194</td><td class="num">-4.9033</td><td class="num">-4.9017</td><td class="num">0.292</td></tr>
+              <tr><td class="num">2</td><td class="num">4</td><td class="num">1</td><td class="num">-2.1633</td><td class="num">-4.9033</td><td class="num">-4.2397</td><td class="num">0.497</td></tr>
+              <tr><td class="num">2</td><td class="num">4</td><td class="num">2</td><td class="num">-2.1639</td><td class="num">-4.9033</td><td class="num">-4.8135</td><td class="num">0.497</td></tr>
+              <tr><td class="num">2</td><td class="num">4</td><td class="num">4</td><td class="num">-2.1639</td><td class="num">-4.9033</td><td class="num">-4.9017</td><td class="num">0.497</td></tr>
+              <tr><td class="num">5</td><td class="num">1</td><td class="num">1</td><td class="num">-1.2110</td><td class="num">-1.9613</td><td class="num">-1.9481</td><td class="num">0.294</td></tr>
+              <tr><td class="num">5</td><td class="num">1</td><td class="num">2</td><td class="num">-1.2110</td><td class="num">-1.9613</td><td class="num">-1.9612</td><td class="num">0.294</td></tr>
+              <tr><td class="num">5</td><td class="num">1</td><td class="num">4</td><td class="num">-1.2110</td><td class="num">-1.9613</td><td class="num">-1.9613</td><td class="num">0.294</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">1</td><td class="num">-1.3503</td><td class="num">-1.9613</td><td class="num">-1.9481</td><td class="num">0.488</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">2</td><td class="num">-1.3503</td><td class="num">-1.9613</td><td class="num">-1.9612</td><td class="num">0.488</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">4</td><td class="num">-1.3503</td><td class="num">-1.9613</td><td class="num">-1.9613</td><td class="num">0.488</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>popdrag の終端速度は √(g/k)。</strong>k を4倍にしても、落ちる速さは半分にしかならない。</li>
+          <li><strong>Substeps が少ないと、終端速度はさらに遅い。</strong>Substeps 1 で 6% ほど遅い（k = 1）。</li>
+          <li><strong>Air Resistance は「速さに比例する係数」ではない。</strong>欲しい終端速度 v から k = g/v² で逆算できる（Substeps を十分とったとき）。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
