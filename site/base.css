@@ -253,6 +253,13 @@ h2 {
   font-variant-numeric: tabular-nums;
 }
 .facts div { display: flex; flex-direction: column; align-items: center; }
+/* 数字の札ごと押せる（dt のリンクを札全体に広げる） */
+.facts div { position: relative; border-radius: 12px; transition: background 0.2s ease; }
+.facts div:hover { background: var(--ground-2); }
+.facts-link { color: inherit; text-decoration: none; }
+.facts-link::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+.facts-link:focus-visible::after { outline: 2px solid var(--flag); outline-offset: 2px; }
+a.chip-card { text-decoration: none; }
 
 .hint { margin: 16px 0 0; font-size: 0.84rem; color: var(--ink-dim); max-width: 42em; }
 .hero .hint { margin-left: auto; margin-right: auto; }

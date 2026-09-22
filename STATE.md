@@ -22,6 +22,10 @@
   upstream_error/rate_limited/empty_completion は1回だけ自動再送。worker.js は変更なし。
   **partial_chrome.html・base.css の AI 関連部分は当面 Houdini実験道場セッションが持つ。
   触る前に一声かける（向こうからの申し出）**
+- **2026-09-22「考察（未確認）」を追加（push 6fde578）**: パラメータ調整やVEXの質問で資料が足りないときだけ、
+  本文のあとに見出し「考察（未確認）」を置き、一般知識の案を2つまで（末尾は必ず「このサイトではまだ確かめていません。」、
+  パラメータ名は実際の表示名、実測値のような書き方は禁止）。画面では点線の枠で本文と分ける。本文側は今までどおり資料のみが根拠。
+  やることメモ open06 は完了扱いにした
 - 2026-09-21 の作業（105〜）: 実験を片付けるのは `python examples/finish_exp.py NNN "タグ,…" "一言" 図.png`
   （記事の差し込みと DONE への追加を1回で）。ノードは nodes_add_4.py、用語は gloss_add_4.py
   - 105 spiral の長さ / 106 attribrandomize の分布 / 107 extractcentroid の中心 / 108 triangulate2d の枚数

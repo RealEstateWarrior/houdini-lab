@@ -1565,10 +1565,12 @@ def render_requests(requests):
     return "\n".join(out)
 
 
-def render_strip(guides):
+def render_strip(guides, urls):
     """ホームの帯。小さな札が横へ流れる。
 
     乗せると止まり、押すとその実践がそのまま開く。
+    実践の中身は実践のページにしか無いので、札はそのページへのリンクにする
+    （以前は button で、ホームでは押しても何も起きなかった。2026-09-22）。
     継ぎ目なく回すために、同じ並びを2回置いて半分ぶん動かす。
     2周目は読み上げに要らないので隠す。
     """
@@ -1580,12 +1582,11 @@ def render_strip(guides):
     for pass_no in (1, 2):
         hidden = ' aria-hidden="true" tabindex="-1"' if pass_no == 2 else ""
         for guide in items:
-            out.append('          <button type="button" class="chip-card"'
-                       f' data-guide="{guide["id"]}"{hidden}>')
+            out.append(f'          <a class="chip-card" href="{guide_url(urls, guide["id"])}"{hidden}>')
             out.append(f'            <img src="{guide["hero"]}" alt=""'
                        ' loading="lazy" decoding="async">')
             out.append(f'            <span>{html.escape(guide["title"])}</span>')
-            out.append("          </button>")
+            out.append("          </a>")
     out.append("        </div>")
     out.append("      </div>")
     return "\n".join(out)
@@ -2130,7 +2131,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GUIDES-->", render_guides(guides, works, urls)),
         ("<!--GUIDE_CARDS-->", render_guide_cards(guides)),
         ("<!--WORK_CARDS-->", render_work_cards(works)),
-        ("<!--STRIP-->", render_strip(guides)),
+        ("<!--STRIP-->", render_strip(guides, urls)),
         ("<!--REQUESTS-->", render_requests(requests)),
         ("<!--REQUEST_COUNT-->", str(len(requests["requests"]))),
         ("<!--ISSUE_NEW-->", ISSUE_NEW),
@@ -2152,6 +2153,8 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--URL_GUIDES-->", panel_url(urls, "guides")),
         ("<!--URL_EXPERIMENTS-->", panel_url(urls, "experiments")),
         ("<!--URL_GLOSSARY-->", panel_url(urls, "glossary")),
+        ("<!--URL_NODES-->", panel_url(urls, "nodes")),
+        ("<!--NOTEBOOK_URL-->", NOTEBOOK_URL),
         ("<!--HOME_URL-->", urls["home"]),
         ("<!--LOG_URL-->", urls["log"]),
         ("<!--LOGPM_URL-->", urls["log_pm"]),
