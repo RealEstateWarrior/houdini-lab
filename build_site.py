@@ -1234,6 +1234,12 @@ DONE = [
      "shots": ["182_kernel.png"],
      "title": "pcfilter の重みは「半径に対する距離」だけでは決まらない — 見つかった点どうしの並びで変わり、式は分からなかった",
      "note": "pcfilter の重みは半径に対する距離だけでは決まらない。点の並びで変わる"},
+    {"no": "183", "anchor": "exp183",
+     "tags": ["シミュレーション", "RBD", "Bullet"],
+     "log": "log_fx", "thumb": "183_substeps.png",
+     "shots": ["183_substeps.png"],
+     "title": "rbdbulletsolver の沈み込みは Bullet Substeps で決まる — 1 だと 0.38 めり込んで沈んだまま、50 でほぼ 0",
+     "note": "沈み込みは Bullet Substeps で決まる。1 だと 0.38 めり込み沈んだまま"},
 ]
 
 PLANNED = []

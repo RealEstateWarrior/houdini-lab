@@ -5255,6 +5255,54 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 183 ===================== -->
+    <article class="entry entry--current" id="exp183">
+      <div class="badge">183</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>rbdbulletsolver の沈み込みは Bullet Substeps で決まる — 1 だと 0.38 めり込んで沈んだまま、50 でほぼ 0</h2>
+        <p class="path">examples/183_rbd_bounce.py &nbsp;·&nbsp; 沈み込みは Bullet Substeps で決まる。1 だと 0.38 めり込み沈んだまま</p>
+
+        <div class="prose">
+          <p><a href="#exp167">実験167</a> の続き。1×1×1 の箱（底は y = 1.5 から）を Ground Plane に落とし、Bounce（箱と地面の両方）と Bullet Substeps（既定 10）を変えて、箱の底の y を毎フレーム読んだ。</p>
+          <p>**Bullet Substeps 1 では、当たった瞬間に 0.379 めり込み、止まっても 0.064 沈んだまま**だった。既定の 10 で 0.0050、50 で 0.000008（止まった底は -0）。Substeps を減らして軽くすると、地面の中に沈んだ絵になる。</p>
+          <p>**跳ね返りの高さは、Bounce から想像するよりずっと低い。**落とした高さ 1.5 に対して、Bounce 0・0.25・0.5・0.75 で 0.0011・0.0091・0.0387・0.0860（1.5 × Bounce² なら 0・0.094・0.375・0.84）。ただしフレームごとに読んだ値なので、跳ね返りのいちばん高い所を逃している可能性がある。</p>
+          <p>**Bounce 1 だと、4 秒たっても跳ね続けた**（4 秒後の底が 1.87）。エネルギーがほとんど減らない。</p>
+          <p>**時間はどれも 97 フレームで 0.3〜0.6 秒。**Substeps 50 でも 0.37 秒。</p>
+        </div>
+
+        <p class="label">Bounce・Bullet Substeps と、沈み込み・跳ね返り</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="183_substeps.png" alt="Substeps 1（青）だけが、当たったあと 0 より下に沈む。" loading="lazy" decoding="async"></div>
+            <figcaption>Substeps 1（青）だけが、当たったあと 0 より下に沈む。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Bounce</th><th>Bullet Substeps</th><th>いちばん深い所</th><th>止まった底の y</th><th>跳ね返りの高さ</th><th>当たったフレーム</th><th>97 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">10</td><td class="num">-0.008692</td><td class="num">-0.000104</td><td class="num">0.0011</td><td class="num">15</td><td class="num">0.553</td></tr>
+              <tr><td class="num">0.25</td><td class="num">10</td><td class="num">-0.006908</td><td class="num">-0.000092</td><td class="num">0.0091</td><td class="num">15</td><td class="num">0.291</td></tr>
+              <tr><td class="num">0.5</td><td class="num">10</td><td class="num">-0.005043</td><td class="num">-0.000090</td><td class="num">0.0387</td><td class="num">15</td><td class="num">0.288</td></tr>
+              <tr><td class="num">0.75</td><td class="num">10</td><td class="num">-0.002914</td><td class="num">-0.000010</td><td class="num">0.0860</td><td class="num">15</td><td class="num">0.291</td></tr>
+              <tr><td class="num">1</td><td class="num">10</td><td class="num">0.015005</td><td class="num">1.868791</td><td class="num">0.8294</td><td class="num">41</td><td class="num">0.287</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">-0.378997</td><td class="num">-0.063566</td><td class="num">-0.0170</td><td class="num">14</td><td class="num">0.280</td></tr>
+              <tr><td class="num">0.5</td><td class="num">50</td><td class="num">-0.000008</td><td class="num">-0.000000</td><td class="num">0.0162</td><td class="num">15</td><td class="num">0.373</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong><button class="term" data-term="RBD">RBD</button> が地面に沈むなら、まず Bullet Substeps。</strong>1 では 0.38 めり込み、そのまま 0.06 沈む。</li>
+          <li><strong>既定の 10 でも、当たった瞬間は 0.005 沈む。</strong>アップで見せるなら 50。時間はほぼ変わらない。</li>
+          <li><strong>Bounce 1 は止まらない。</strong>跳ね続けてほしくないなら 1 未満に。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
