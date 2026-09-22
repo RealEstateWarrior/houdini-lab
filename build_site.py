@@ -1096,6 +1096,12 @@ DONE = [
      "shots": ["159_vel.png"],
      "title": "trail の速さは1秒あたり、差分の式どおり — 加速度は Central Difference のときだけ出て、Velocity Scale の2乗で縮む",
      "note": "trail の速さは1秒あたり。加速度は Central のときだけ出て、Scale の2乗で縮む"},
+    {"no": "160", "anchor": "exp160",
+     "tags": ["モデリング", "UV", "uvlayout"],
+     "log": "log_pm", "thumb": "160_fill.png",
+     "shots": ["160_fill.png"],
+     "title": "uvlayout は長方形 12 枚で升の 48〜84% を埋める — Padding は Search Resolution が粗いほど大きく効く",
+     "note": "長方形 12 枚で升の 48〜84% を埋める。Padding は Search Resolution が粗いほど効く"},
 ]
 
 PLANNED = []

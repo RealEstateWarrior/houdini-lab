@@ -17,7 +17,7 @@ NOTES = {
     "box": ("Primitive Type が Polygon のまま Use Divisions を入れると、面ではなく開いた線の籠になる（体積0）。点を増やすなら Polygon Mesh と Axis Divisions（実験120）。", ["120"]),
     "polyexpand2d": ("角は丸めずに尖らせる（頂角20°でも）。Divisions は Offset の距離を等分する（0.2・4本なら0.05刻み）（実験122）。", ["122"]),
     "shrinkwrap::2.0": ("中の点は使われず、凸包そのものになる。同じ平面の三角形は1枚の多角形にまとめる（実験123）。", ["123"]),
-    "scatter": ("既定の Relax Iterations のままだと、点の一部が板の縁の上にぴったり乗る（1,000点中52点）（実験123）。", ["123"]),
+    "scatter": ("既定の Relax Iterations のままだと、点の一部が板の縁の上にぴったり乗る（1,000点中52点）（実験123）。 density 属性は点を面積あたりの比で配り、Force Total Count を切ると数は Density Scale × 面積のあたりで揺れる（実験155）。", ["123", "155"]),
     "lsystem": ("コッホ曲線（F=F+F--F+F、60°）は 全長4^n・端の間隔3^n どおり。小数の世代は次の世代と同じ点の数で、長さは途中の値（実験124）。", ["124"]),
     "divide": ("既定では n 角形1枚を三角形 n−2 枚に割る（3〜100角形で確認）（実験125）。Maximum Edges = 4 なら (n−2)/2 枚（切り上げ、奇数角形は三角形が1枚混ざる）。Bricker の線は形の端＋Offset から Size おき（実験149）。", ["125", "149"]),
     "facet": ("Unique Points を入れると、点の数が頂点の数まで増える（球 12×24 で 242→1,008）（実験125）。", ["125"]),
@@ -43,6 +43,14 @@ NOTES = {
     "clip": ("切った球の面積は 2πh に合う。切り口の点は面の上に乗る。Keep = Both は上下を分けるが、切り口の点は共有のまま（実験146）。", ["146"]),
     "twist": ("体積を保つのは Shear だけ（Twist はほぼ）。Twist の Strength は長さ1あたりの角度（度）。Squash は長さ(1+s)倍・太さ1/(1+s)倍。Taper 系は Strength=1 で変化なし（実験147）。", ["147"]),
     "tube": ("Radius の1つ目が上。体積は円錐台の式 × n·sin(2π/n)/2π。円錐にしても先の点は Columns 個重なったまま（実験148）。", ["148"]),
+    "sphere": ("Primitive Type = Polygon は二十面体を分けた測地球で、点 10f²+2・面 20f²（f = Frequency）。同じ点の数なら Polygon Mesh より体積の不足が約3割小さい（実験151）。", ["151"]),
+    "polybevel": ("Offset は丸みの半径。Round は Divisions を増やすと角を丸めた箱の体積に近づき、Divisions 1 は Solid（平らな面取り、箱なら 1−6d²+(16/3)d³）と同じ形（実験152）。", ["152"]),
+    "polyfill": ("四角形の塞ぎ方（Quadrilateral Fan / Quadrilaterals / Quadrilateral Grid）は辺が奇数の穴を塞がず、警告だけ出して穴のまま流す。Grid は蓋が外へふくらむ。Triangles は1つの穴に n−2 枚（実験154）。", ["154"]),
+    "polywire": ("管は Wire Radius の円に内接する正 n 角柱で、両端に蓋が付く（体積を測れる）。Prevent Joint Buckling を入れると、折れ目の輪が曲がりの面の中で r/cos(θ/2) に広がって太さを保つ（実験156）。", ["156"]),
+    "voronoifracture::2.0": ("種 N 個で N 個のかけらになり、体積の合計は元のまま。Create Interior Surfaces を切ると表面に触れないかけらは消える。scatter の relax で種を広げると、種が壁へ寄ってかえって大きさがばらつく（実験157・158）。", ["157", "158"]),
+    "trail": ("Compute Velocity の v は1秒あたりで、差分の式どおり。Compute Acceleration は Central Difference のときだけ値が入り、Velocity Scale の2乗で縮む（実験159）。", ["159"]),
+    "uvlayout::3.0": ("島どうしの大きさの比は保って並べる。長方形12枚で升の48〜84%を埋めた。Island Padding は Search Resolution が粗いほど大きく効く（実験160）。", ["160"]),
+    "attribwrangle": ("neighbourcount(0, @ptnum) の合計 ÷ 2 は辺の数。V − E + F で板 1・球 2・トーラス 0 を見分けられた（実験153）。", ["153"]),
 }
 
 

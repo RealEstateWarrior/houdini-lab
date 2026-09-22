@@ -8422,6 +8422,71 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 160 ===================== -->
+    <article class="entry entry--current" id="exp160">
+      <div class="badge">160</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>uvlayout は長方形 12 枚で升の 48〜84% を埋める — Padding は Search Resolution が粗いほど大きく効く</h2>
+        <p class="path">examples/160_uvlayout_fill.py &nbsp;·&nbsp; 長方形 12 枚で升の 48〜84% を埋める。Padding は Search Resolution が粗いほど効く</p>
+
+        <div class="prose">
+          <p>大きさの違う長方形 12 枚（辺 0.4〜2.0）に形そのままの UV を付けて uvlayout にかけ、並べたあとの UV の面積の合計（0〜1 の升が埋まった割合）を測った。Island Padding・Island Rotation Step・Search Resolution を変えた。</p>
+          <p>**島どうしの大きさの比は保たれた。**全24通りで、元の面積に対する UV の面積の比は、島の間で最大 1.000001 倍しか違わない。どの島も同じ倍率で縮めて並べている。</p>
+          <p>**埋まった割合は 48〜84%。**いちばん良かったのは 90° 回転あり・Padding 0・res3 の 83.7%。回転なしでも同じ条件で 81.1%。長方形でも、回していい向きがあると少し詰まる。</p>
+          <p>**Padding は Search Resolution が粗いほど大きく効く。**Padding 16 で、res1 は 47.8%、res3 は 71.5%。Padding が「探す升目の何個分」で決まっているように見えるが、確かめていない。</p>
+          <p>**速い。**どれも 0.016 秒以下（12 枚）。細かい res3 でも数ミリ秒。</p>
+        </div>
+
+        <p class="label">Rotation Step・Padding・Search Resolution と埋まった割合</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="160_fill.png" alt="res1（青）は Padding を上げると急に落ちる。" loading="lazy" decoding="async"></div>
+            <figcaption>res1（青）は Padding を上げると急に落ちる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rotation Step</th><th>Padding</th><th>Search Resolution</th><th>埋まった割合</th><th>島の倍率の最大比</th><th>U の範囲</th><th>V の範囲</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>none</td><td class="num">0</td><td>res1</td><td>78.6%</td><td class="num">1.000000</td><td class="num">0〜0.9699</td><td class="num">0〜0.9902</td><td class="num">0.003</td></tr>
+              <tr><td>none</td><td class="num">0</td><td>res2</td><td>80.9%</td><td class="num">1.000000</td><td class="num">0〜0.9829</td><td class="num">0〜0.9998</td><td class="num">0.003</td></tr>
+              <tr><td>none</td><td class="num">0</td><td>res3</td><td>81.1%</td><td class="num">1.000000</td><td class="num">0〜0.9851</td><td class="num">0〜1</td><td class="num">0.006</td></tr>
+              <tr><td>none</td><td class="num">1</td><td>res1</td><td>74.5%</td><td class="num">1.000000</td><td class="num">0〜0.999</td><td class="num">0〜0.9842</td><td class="num">0.002</td></tr>
+              <tr><td>none</td><td class="num">1</td><td>res2</td><td>79.7%</td><td class="num">1.000000</td><td class="num">0〜0.9792</td><td class="num">0〜0.9988</td><td class="num">0.003</td></tr>
+              <tr><td>none</td><td class="num">1</td><td>res3</td><td>80.0%</td><td class="num">1.000000</td><td class="num">0〜0.9797</td><td class="num">0〜0.9972</td><td class="num">0.005</td></tr>
+              <tr><td>none</td><td class="num">4</td><td>res1</td><td>70.5%</td><td class="num">1.000001</td><td class="num">0〜0.9991</td><td class="num">0〜0.9999</td><td class="num">0.002</td></tr>
+              <tr><td>none</td><td class="num">4</td><td>res2</td><td>73.9%</td><td class="num">1.000000</td><td class="num">0〜1</td><td class="num">0〜0.9934</td><td class="num">0.003</td></tr>
+              <tr><td>none</td><td class="num">4</td><td>res3</td><td>78.3%</td><td class="num">1.000000</td><td class="num">0〜0.9743</td><td class="num">0〜0.9968</td><td class="num">0.005</td></tr>
+              <tr><td>none</td><td class="num">16</td><td>res1</td><td>47.8%</td><td class="num">1.000001</td><td class="num">0〜1</td><td class="num">0〜0.9712</td><td class="num">0.002</td></tr>
+              <tr><td>none</td><td class="num">16</td><td>res2</td><td>64.1%</td><td class="num">1.000001</td><td class="num">0〜0.9676</td><td class="num">0〜0.9953</td><td class="num">0.003</td></tr>
+              <tr><td>none</td><td class="num">16</td><td>res3</td><td>71.5%</td><td class="num">1.000000</td><td class="num">0〜0.9999</td><td class="num">0〜0.9999</td><td class="num">0.005</td></tr>
+              <tr><td>PI2</td><td class="num">0</td><td>res1</td><td>82.8%</td><td class="num">1.000001</td><td class="num">0〜0.9954</td><td class="num">0〜0.9921</td><td class="num">0.002</td></tr>
+              <tr><td>PI2</td><td class="num">0</td><td>res2</td><td>82.8%</td><td class="num">1.000001</td><td class="num">0〜0.9954</td><td class="num">0〜0.9862</td><td class="num">0.005</td></tr>
+              <tr><td>PI2</td><td class="num">0</td><td>res3</td><td>83.7%</td><td class="num">1.000000</td><td class="num">0〜0.9996</td><td class="num">0〜0.9908</td><td class="num">0.013</td></tr>
+              <tr><td>PI2</td><td class="num">1</td><td>res1</td><td>78.6%</td><td class="num">1.000000</td><td class="num">0〜0.9573</td><td class="num">0〜0.9999</td><td class="num">0.002</td></tr>
+              <tr><td>PI2</td><td class="num">1</td><td>res2</td><td>79.7%</td><td class="num">1.000000</td><td class="num">0〜0.9792</td><td class="num">0〜0.9988</td><td class="num">0.005</td></tr>
+              <tr><td>PI2</td><td class="num">1</td><td>res3</td><td>81.1%</td><td class="num">1.000000</td><td class="num">0〜0.9871</td><td class="num">0〜0.9791</td><td class="num">0.013</td></tr>
+              <tr><td>PI2</td><td class="num">4</td><td>res1</td><td>70.5%</td><td class="num">1.000001</td><td class="num">0〜0.9991</td><td class="num">0〜0.9999</td><td class="num">0.002</td></tr>
+              <tr><td>PI2</td><td class="num">4</td><td>res2</td><td>74.5%</td><td class="num">1.000000</td><td class="num">0〜0.9828</td><td class="num">0〜0.996</td><td class="num">0.005</td></tr>
+              <tr><td>PI2</td><td class="num">4</td><td>res3</td><td>79.4%</td><td class="num">1.000001</td><td class="num">0〜0.9611</td><td class="num">0〜0.9986</td><td class="num">0.016</td></tr>
+              <tr><td>PI2</td><td class="num">16</td><td>res1</td><td>54.2%</td><td class="num">1.000000</td><td class="num">0〜0.9883</td><td class="num">0〜0.9921</td><td class="num">0.002</td></tr>
+              <tr><td>PI2</td><td class="num">16</td><td>res2</td><td>64.1%</td><td class="num">1.000000</td><td class="num">0〜0.9969</td><td class="num">0〜0.8956</td><td class="num">0.004</td></tr>
+              <tr><td>PI2</td><td class="num">16</td><td>res3</td><td>71.5%</td><td class="num">1.000000</td><td class="num">0〜0.9999</td><td class="num">0〜0.9999</td><td class="num">0.012</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>島の大きさの比は変えない。</strong>1 枚だけ大きくしたいなら、先に UV を拡大しておく（島ごとの倍率の属性もある）。</li>
+          <li><strong>Padding を大きくするなら Search Resolution も上げる。</strong>粗いままだと升の半分しか使わない。</li>
+          <li><strong>長方形の島でも 90° 回転を許すと数 % 詰まる。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
