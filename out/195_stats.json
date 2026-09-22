@@ -1,0 +1,155 @@
+{
+  "rows": [
+    {
+      "operation": "（なし）",
+      "offset": 0,
+      "iterations": 0,
+      "radius": 0.999696,
+      "change": 0.0,
+      "want": 0.0,
+      "sec": 0.0
+    },
+    {
+      "operation": "dilate",
+      "offset": 1,
+      "iterations": 4,
+      "radius": 1.019624,
+      "change": 0.019928,
+      "want": 0.02,
+      "change_in_voxels": 0.996,
+      "sec": 0.533
+    },
+    {
+      "operation": "dilate",
+      "offset": 1,
+      "iterations": 1,
+      "radius": 1.019624,
+      "change": 0.019928,
+      "want": 0.02,
+      "change_in_voxels": 0.996,
+      "sec": 0.517
+    },
+    {
+      "operation": "dilate",
+      "offset": 2,
+      "iterations": 4,
+      "radius": 1.039501,
+      "change": 0.039805,
+      "want": 0.04,
+      "change_in_voxels": 1.99,
+      "sec": 0.567
+    },
+    {
+      "operation": "dilate",
+      "offset": 2,
+      "iterations": 1,
+      "radius": 1.039501,
+      "change": 0.039805,
+      "want": 0.04,
+      "change_in_voxels": 1.99,
+      "sec": 0.541
+    },
+    {
+      "operation": "dilate",
+      "offset": 5,
+      "iterations": 4,
+      "radius": 1.098986,
+      "change": 0.099289,
+      "want": 0.1,
+      "change_in_voxels": 4.964,
+      "sec": 0.645
+    },
+    {
+      "operation": "dilate",
+      "offset": 5,
+      "iterations": 1,
+      "radius": 1.098986,
+      "change": 0.099289,
+      "want": 0.1,
+      "change_in_voxels": 4.964,
+      "sec": 0.632
+    },
+    {
+      "operation": "erode",
+      "offset": 1,
+      "iterations": 4,
+      "radius": 0.979612,
+      "change": -0.020084,
+      "want": -0.02,
+      "change_in_voxels": -1.004,
+      "sec": 0.487
+    },
+    {
+      "operation": "erode",
+      "offset": 1,
+      "iterations": 1,
+      "radius": 0.979612,
+      "change": -0.020084,
+      "want": -0.02,
+      "change_in_voxels": -1.004,
+      "sec": 0.475
+    },
+    {
+      "operation": "erode",
+      "offset": 2,
+      "iterations": 4,
+      "radius": 0.959474,
+      "change": -0.040223,
+      "want": -0.04,
+      "change_in_voxels": -2.011,
+      "sec": 0.494
+    },
+    {
+      "operation": "erode",
+      "offset": 2,
+      "iterations": 1,
+      "radius": 0.959474,
+      "change": -0.040223,
+      "want": -0.04,
+      "change_in_voxels": -2.011,
+      "sec": 0.477
+    },
+    {
+      "operation": "erode",
+      "offset": 5,
+      "iterations": 4,
+      "radius": 0.899075,
+      "change": -0.100621,
+      "want": -0.1,
+      "change_in_voxels": -5.031,
+      "sec": 0.458
+    },
+    {
+      "operation": "erode",
+      "offset": 5,
+      "iterations": 1,
+      "radius": 0.899075,
+      "change": -0.100621,
+      "want": -0.1,
+      "change_in_voxels": -5.031,
+      "sec": 0.447
+    },
+    {
+      "operation": "open",
+      "offset": 2,
+      "iterations": 4,
+      "radius": 0.999247,
+      "change": -0.000449,
+      "want": 0.0,
+      "change_in_voxels": -0.022,
+      "sec": 0.547
+    },
+    {
+      "operation": "close",
+      "offset": 2,
+      "iterations": 4,
+      "radius": 0.999265,
+      "change": -0.000432,
+      "want": 0.0,
+      "change_in_voxels": -0.022,
+      "sec": 0.533
+    }
+  ],
+  "voxel": 0.02,
+  "base_volume": 4.184977
+}

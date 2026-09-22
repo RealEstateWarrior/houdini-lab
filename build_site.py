@@ -1306,6 +1306,12 @@ DONE = [
      "shots": ["194_life.png"],
      "title": "POP の粒が数えられるフレームは Life × fps − 1/Substeps — 0.5 秒の粒は Substeps 1 で 11 フレーム、4 で 11.75",
      "note": "粒が数えられるフレームは Life×fps − 1/Substeps"},
+    {"no": "195", "anchor": "exp195",
+     "tags": ["VDB", "検算", "vdbreshapesdf"],
+     "log": "log_pm", "thumb": "195_reshape.png",
+     "shots": ["195_reshape.png"],
+     "title": "vdbreshapesdf の Dilate・Erode は、球の半径を Offset × 升の大きさだけ変える — Iterations は効かず、Open・Close は形をほぼ変えない",
+     "note": "Dilate・Erode は半径を Offset×升の大きさだけ変える。Iterations は効かない"},
 ]
 
 PLANNED = []

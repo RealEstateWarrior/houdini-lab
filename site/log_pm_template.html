@@ -9448,6 +9448,62 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 195 ===================== -->
+    <article class="entry entry--current" id="exp195">
+      <div class="badge">195</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>vdbreshapesdf の Dilate・Erode は、球の半径を Offset × 升の大きさだけ変える — Iterations は効かず、Open・Close は形をほぼ変えない</h2>
+        <p class="path">examples/195_vdb_reshape.py &nbsp;·&nbsp; Dilate・Erode は半径を Offset×升の大きさだけ変える。Iterations は効かない</p>
+
+        <div class="prose">
+          <p>半径 1 の球を vdbfrompolygons（Voxel Size 0.02）で SDF にし、vdbreshapesdf の Operation と Offset（升目の数）を変えた。convertvdb で面に戻して体積を測り、同じ体積の球の半径に直して比べた。</p>
+          <p>**Dilate は半径を + Offset × 0.02、Erode は − Offset × 0.02 だけ変えた。**6 通りで、ずれは最大 0.036 升（Offset 5 の Dilate で +-0.0402、Erode で -0.1006）。SDF の値から Offset を引く（足す）だけの、面を等しく押し出す処理になっている。</p>
+          <p>**Iterations（既定 4）を 1 にしても、結果は同じだった**（すべて一致）。Dilate・Erode には効かないつまみとみられる。</p>
+          <p>**Open（Erode してから Dilate）と Close（その逆）は、球をほぼ元のまま残した**（半径の変化 -0.022・-0.022 升）。丸い形には削れる角がないため。尖った角のある形で差が出るはず（確かめていない）。</p>
+          <p>**時間は 1 回 0.5 秒前後**（SDF にするところと面に戻すところを含む）。</p>
+        </div>
+
+        <p class="label">Operation・Offset・Iterations と半径</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="195_reshape.png" alt="測った点は点線（Offset どおり）にほぼ乗る。" loading="lazy" decoding="async"></div>
+            <figcaption>測った点は点線（Offset どおり）にほぼ乗る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Operation</th><th>Offset（升）</th><th>Iterations</th><th>半径</th><th>変化</th><th>Offset × 升の大きさ</th><th>変化 ÷ 升</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>（なし）</td><td class="num">0</td><td class="num">0</td><td class="num">0.999696</td><td class="num">+0.000000</td><td class="num">+0.0000</td><td class="num">+0.000</td><td class="num">0.000</td></tr>
+              <tr><td>dilate</td><td class="num">1</td><td class="num">4</td><td class="num">1.019624</td><td class="num">+0.019928</td><td class="num">+0.0200</td><td class="num">+0.996</td><td class="num">0.533</td></tr>
+              <tr><td>dilate</td><td class="num">1</td><td class="num">1</td><td class="num">1.019624</td><td class="num">+0.019928</td><td class="num">+0.0200</td><td class="num">+0.996</td><td class="num">0.517</td></tr>
+              <tr><td>dilate</td><td class="num">2</td><td class="num">4</td><td class="num">1.039501</td><td class="num">+0.039805</td><td class="num">+0.0400</td><td class="num">+1.990</td><td class="num">0.567</td></tr>
+              <tr><td>dilate</td><td class="num">2</td><td class="num">1</td><td class="num">1.039501</td><td class="num">+0.039805</td><td class="num">+0.0400</td><td class="num">+1.990</td><td class="num">0.541</td></tr>
+              <tr><td>dilate</td><td class="num">5</td><td class="num">4</td><td class="num">1.098986</td><td class="num">+0.099289</td><td class="num">+0.1000</td><td class="num">+4.964</td><td class="num">0.645</td></tr>
+              <tr><td>dilate</td><td class="num">5</td><td class="num">1</td><td class="num">1.098986</td><td class="num">+0.099289</td><td class="num">+0.1000</td><td class="num">+4.964</td><td class="num">0.632</td></tr>
+              <tr><td>erode</td><td class="num">1</td><td class="num">4</td><td class="num">0.979612</td><td class="num">-0.020084</td><td class="num">-0.0200</td><td class="num">-1.004</td><td class="num">0.487</td></tr>
+              <tr><td>erode</td><td class="num">1</td><td class="num">1</td><td class="num">0.979612</td><td class="num">-0.020084</td><td class="num">-0.0200</td><td class="num">-1.004</td><td class="num">0.475</td></tr>
+              <tr><td>erode</td><td class="num">2</td><td class="num">4</td><td class="num">0.959474</td><td class="num">-0.040223</td><td class="num">-0.0400</td><td class="num">-2.011</td><td class="num">0.494</td></tr>
+              <tr><td>erode</td><td class="num">2</td><td class="num">1</td><td class="num">0.959474</td><td class="num">-0.040223</td><td class="num">-0.0400</td><td class="num">-2.011</td><td class="num">0.477</td></tr>
+              <tr><td>erode</td><td class="num">5</td><td class="num">4</td><td class="num">0.899075</td><td class="num">-0.100621</td><td class="num">-0.1000</td><td class="num">-5.031</td><td class="num">0.458</td></tr>
+              <tr><td>erode</td><td class="num">5</td><td class="num">1</td><td class="num">0.899075</td><td class="num">-0.100621</td><td class="num">-0.1000</td><td class="num">-5.031</td><td class="num">0.447</td></tr>
+              <tr><td>open</td><td class="num">2</td><td class="num">4</td><td class="num">0.999247</td><td class="num">-0.000449</td><td class="num">+0.0000</td><td class="num">-0.022</td><td class="num">0.547</td></tr>
+              <tr><td>close</td><td class="num">2</td><td class="num">4</td><td class="num">0.999265</td><td class="num">-0.000432</td><td class="num">+0.0000</td><td class="num">-0.022</td><td class="num">0.533</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>SDF をちょうど d だけ太らせる（痩せさせる）なら、Offset = d ÷ 升の大きさ。</strong></li>
+          <li><strong>Iterations は Dilate・Erode の量を変えない。</strong></li>
+          <li><strong>Open・Close は丸い形をほとんど変えない。</strong>細い突起や小さな穴を消すための処理。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
