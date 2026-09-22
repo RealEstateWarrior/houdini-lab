@@ -1114,6 +1114,18 @@ DONE = [
      "shots": ["162_crease.png"],
      "title": "subdivide の crease は「重み w の回数までは尖ったまま」— w ≥ Iterations なら箱はそのまま、体積 1",
      "note": "crease の重みは細分の回数。w ≥ Iterations なら箱はそのまま体積 1"},
+    {"no": "163", "anchor": "exp163",
+     "tags": ["シミュレーション", "Vellum", "検算"],
+     "log": "log_pm", "thumb": "163_counts.png",
+     "shots": ["163_counts.png"],
+     "title": "vellumconstraints の Cloth は網を三角形にしてから、辺ごとに伸びの拘束、内側の辺ごとに曲げの拘束を作る",
+     "note": "Cloth は網を三角形にしてから、辺ごとに伸び・内側の辺ごとに曲げの拘束を作る"},
+    {"no": "164", "anchor": "exp164",
+     "tags": ["エフェクト", "VDB", "検算"],
+     "log": "log_pm", "thumb": "164_union.png",
+     "shots": ["164_union.png"],
+     "title": "vdbfromparticles の粒は pscale を半径にした球 — 2つ重ねると「2つの球の和」の体積に、升目の2乗で近づく",
+     "note": "粒は pscale を半径にした球。2つ重ねると球の和の体積に、升目の2乗で近づく"},
 ]
 
 PLANNED = []

@@ -8589,6 +8589,106 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 163 ===================== -->
+    <article class="entry entry--current" id="exp163">
+      <div class="badge">163</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>vellumconstraints の Cloth は網を三角形にしてから、辺ごとに伸びの拘束、内側の辺ごとに曲げの拘束を作る</h2>
+        <p class="path">examples/163_vellum_counts.py &nbsp;·&nbsp; Cloth は網を三角形にしてから、辺ごとに伸び・内側の辺ごとに曲げの拘束を作る</p>
+
+        <div class="prose">
+          <p>rows × cols の grid（四角形の網）と、先に divide で三角形にした網に、vellumconstraints（Constraint Type = Cloth）をかけ、2つ目の出力の拘束を type 属性ごとに数えた。</p>
+          <p>**伸び（distance）の拘束は、三角形にした網の辺の数と3通りとも一致。**四角形のまま渡しても、四角形の対角線にも拘束が張られる（10×10 で辺 180 本に対して 261 本 = 辺 + 面の数）。</p>
+          <p>**曲げ（bend）の拘束は、三角形にした網の内側の辺の数と一致。**2枚の三角形にはさまれた辺ごとに1本で、縁の辺には付かない。</p>
+          <p>**四角形で渡しても、三角形で渡しても、拘束の数は同じ**（3通りとも同じ）。Cloth は中で三角形に分けてから拘束を作っている。</p>
+          <p>**拘束づくりは 1 回 0.16 秒前後。**網の大きさ（9〜100 点）にはほとんど左右されない（最初の1回だけ 0.28 秒）。</p>
+        </div>
+
+        <p class="label">網と拘束の本数</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="163_counts.png" alt="伸び（青）は点線（三角形の網の辺の数）に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>伸び（青）は点線（三角形の網の辺の数）に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>grid</th><th>網</th><th>点</th><th>面</th><th>辺</th><th>内側の辺</th><th>distance</th><th>bend</th><th>合計</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>3×3</td><td>quads</td><td class="num">9</td><td class="num">4</td><td class="num">12</td><td class="num">4</td><td class="num">16</td><td class="num">8</td><td class="num">24</td><td class="num">0.2774</td></tr>
+              <tr><td>3×3</td><td>triangles</td><td class="num">9</td><td class="num">8</td><td class="num">16</td><td class="num">8</td><td class="num">16</td><td class="num">8</td><td class="num">24</td><td class="num">0.1619</td></tr>
+              <tr><td>5×8</td><td>quads</td><td class="num">40</td><td class="num">28</td><td class="num">67</td><td class="num">45</td><td class="num">95</td><td class="num">73</td><td class="num">168</td><td class="num">0.1616</td></tr>
+              <tr><td>5×8</td><td>triangles</td><td class="num">40</td><td class="num">56</td><td class="num">95</td><td class="num">73</td><td class="num">95</td><td class="num">73</td><td class="num">168</td><td class="num">0.1608</td></tr>
+              <tr><td>10×10</td><td>quads</td><td class="num">100</td><td class="num">81</td><td class="num">180</td><td class="num">144</td><td class="num">261</td><td class="num">225</td><td class="num">486</td><td class="num">0.1669</td></tr>
+              <tr><td>10×10</td><td>triangles</td><td class="num">100</td><td class="num">162</td><td class="num">261</td><td class="num">225</td><td class="num">261</td><td class="num">225</td><td class="num">486</td><td class="num">0.1628</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>伸びの拘束 = 三角形の辺、曲げの拘束 = 内側の辺。</strong>本数は計算で出せる。</li>
+          <li><strong>四角形の網でも対角線に伸びの拘束が張られる。</strong>対角線の向きは divide と同じとは限らない（確かめていない）。</li>
+          <li><strong>点を倍にすると拘束もほぼ倍。</strong>計算の重さの見積もりに使える。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 164 ===================== -->
+    <article class="entry entry--current" id="exp164">
+      <div class="badge">164</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>vdbfromparticles の粒は pscale を半径にした球 — 2つ重ねると「2つの球の和」の体積に、升目の2乗で近づく</h2>
+        <p class="path">examples/164_vdb_particles.py &nbsp;·&nbsp; 粒は pscale を半径にした球。2つ重ねると球の和の体積に、升目の2乗で近づく</p>
+
+        <div class="prose">
+          <p>pscale = 0.5 の2点を間隔 s に置き、vdbfromparticles（距離の VDB）→ convertvdb（Polygons）で面にして体積を測った。比べる式は、半径 r の球2つを間隔 s で重ねた体積 2·(4/3)πr³ − π(4r + s)(2r − s)²/12。</p>
+          <p>**粒の半径は pscale そのまま。**間隔 0（1つの球）で、囲む箱の幅は 1 に近づいた（Voxel 0.0125 で 0.9997）。間隔 1.2（離れた2つ）では横幅がちょうど 2.2。</p>
+          <p>**重なった2つの粒の体積は、2つの球の和の式に合う。**Voxel 0.0125 で、4通りとも式の 99.93〜99.94%。重なった部分でふくらんだり、なめらかに埋まったりはしない（尖った和のまま）。</p>
+          <p>**いつも少し小さく、Voxel を半分にすると不足が約 1/4 になる。**不足の縮み方は 間隔 0 で 4.01・3.99 倍、間隔 0.5 で 3.96・3.93 倍、間隔 0.8 で 3.95・4.03 倍、間隔 1.2 で 4.01・3.99 倍。Voxel 0.05 で約 1%、0.025 で 0.3%、0.0125 で 0.07%。</p>
+          <p>**面の数は Voxel を半分にするとほぼ4倍**（間隔 0 で 1,830 → 30,078）。時間はどれも 0.01 秒前後（1回目だけ 0.09 秒）。</p>
+        </div>
+
+        <p class="label">間隔・Voxel Size と体積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="164_union.png" alt="4本の線がほぼ重なる。重なり方によらず、升目の細かさだけで決まる。" loading="lazy" decoding="async"></div>
+            <figcaption>4本の線がほぼ重なる。重なり方によらず、升目の細かさだけで決まる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>間隔 s</th><th>Voxel Size</th><th>体積</th><th>2つの球の和</th><th>比</th><th>横幅</th><th>式の横幅</th><th>縦</th><th>面</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.05</td><td class="num">0.517568</td><td class="num">0.523599</td><td class="num">0.98848</td><td class="num">0.995</td><td class="num">1</td><td class="num">0.995</td><td class="num">1,830</td><td class="num">0.087</td></tr>
+              <tr><td class="num">0</td><td class="num">0.025</td><td class="num">0.522098</td><td class="num">0.523599</td><td class="num">0.99713</td><td class="num">0.9987</td><td class="num">1</td><td class="num">0.9987</td><td class="num">7,470</td><td class="num">0.004</td></tr>
+              <tr><td class="num">0</td><td class="num">0.0125</td><td class="num">0.523224</td><td class="num">0.523599</td><td class="num">0.99928</td><td class="num">0.9997</td><td class="num">1</td><td class="num">0.9997</td><td class="num">30,078</td><td class="num">0.009</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.05</td><td class="num">0.875323</td><td class="num">0.883573</td><td class="num">0.99066</td><td class="num">1.495</td><td class="num">1.5</td><td class="num">0.995</td><td class="num">2,710</td><td class="num">0.014</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.025</td><td class="num">0.881490</td><td class="num">0.883573</td><td class="num">0.99764</td><td class="num">1.4987</td><td class="num">1.5</td><td class="num">0.9987</td><td class="num">11,102</td><td class="num">0.004</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.0125</td><td class="num">0.883046</td><td class="num">0.883573</td><td class="num">0.99940</td><td class="num">1.4997</td><td class="num">1.5</td><td class="num">0.9997</td><td class="num">44,798</td><td class="num">0.010</td></tr>
+              <tr><td class="num">0.8</td><td class="num">0.05</td><td class="num">1.007350</td><td class="num">1.017876</td><td class="num">0.98966</td><td class="num">1.795</td><td class="num">1.8</td><td class="num">0.995</td><td class="num">3,326</td><td class="num">0.014</td></tr>
+              <tr><td class="num">0.8</td><td class="num">0.025</td><td class="num">1.015214</td><td class="num">1.017876</td><td class="num">0.99738</td><td class="num">1.7987</td><td class="num">1.8</td><td class="num">0.9987</td><td class="num">13,566</td><td class="num">0.004</td></tr>
+              <tr><td class="num">0.8</td><td class="num">0.0125</td><td class="num">1.017214</td><td class="num">1.017876</td><td class="num">0.99935</td><td class="num">1.7997</td><td class="num">1.8</td><td class="num">0.9997</td><td class="num">54,510</td><td class="num">0.009</td></tr>
+              <tr><td class="num">1.2</td><td class="num">0.05</td><td class="num">1.035145</td><td class="num">1.047198</td><td class="num">0.98849</td><td class="num">2.2</td><td class="num">2.2</td><td class="num">0.995</td><td class="num">3,700</td><td class="num">0.013</td></tr>
+              <tr><td class="num">1.2</td><td class="num">0.025</td><td class="num">1.044196</td><td class="num">1.047198</td><td class="num">0.99713</td><td class="num">2.2</td><td class="num">2.2</td><td class="num">0.9987</td><td class="num">14,980</td><td class="num">0.004</td></tr>
+              <tr><td class="num">1.2</td><td class="num">0.0125</td><td class="num">1.046448</td><td class="num">1.047198</td><td class="num">0.99928</td><td class="num">2.2</td><td class="num">2.2</td><td class="num">0.9997</td><td class="num">60,196</td><td class="num">0.010</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>粒の大きさは pscale（半径）で決まる。</strong>直径ではない。</li>
+          <li><strong>重なりは尖った和。</strong>くっついた所をなめらかにしたいなら、あとで vdbsmoothsdf などをかける（確かめていない）。</li>
+          <li><strong>Voxel Size を半分にすると、体積の不足は約 1/4、面は約 4 倍。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
