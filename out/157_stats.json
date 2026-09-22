@@ -1,0 +1,124 @@
+{
+  "rows": [
+    {
+      "N": 2,
+      "interior": 1,
+      "seeds": 2,
+      "pieces": 2,
+      "prims": 12,
+      "points": 16,
+      "volume": 1.0,
+      "vmin": 0.324096,
+      "vmax": 0.675904,
+      "sec": 0.1507
+    },
+    {
+      "N": 2,
+      "interior": 0,
+      "seeds": 2,
+      "pieces": 2,
+      "prims": 10,
+      "points": 16,
+      "volume": null,
+      "vmin": null,
+      "vmax": null,
+      "sec": 0.012
+    },
+    {
+      "N": 5,
+      "interior": 1,
+      "seeds": 5,
+      "pieces": 5,
+      "prims": 36,
+      "points": 52,
+      "volume": 1.0,
+      "vmin": 0.06748,
+      "vmax": 0.306878,
+      "sec": 0.0082
+    },
+    {
+      "N": 5,
+      "interior": 0,
+      "seeds": 5,
+      "pieces": 5,
+      "prims": 18,
+      "points": 44,
+      "volume": null,
+      "vmin": null,
+      "vmax": null,
+      "sec": 0.0072
+    },
+    {
+      "N": 10,
+      "interior": 1,
+      "seeds": 10,
+      "pieces": 10,
+      "prims": 86,
+      "points": 132,
+      "volume": 1.0,
+      "vmin": 0.021517,
+      "vmax": 0.231785,
+      "sec": 0.0092
+    },
+    {
+      "N": 10,
+      "interior": 0,
+      "seeds": 10,
+      "pieces": 10,
+      "prims": 30,
+      "points": 88,
+      "volume": null,
+      "vmin": null,
+      "vmax": null,
+      "sec": 0.0077
+    },
+    {
+      "N": 50,
+      "interior": 1,
+      "seeds": 50,
+      "pieces": 50,
+      "prims": 554,
+      "points": 908,
+      "volume": 1.0,
+      "vmin": 9.8e-05,
+      "vmax": 0.054061,
+      "sec": 0.017
+    },
+    {
+      "N": 50,
+      "interior": 0,
+      "seeds": 50,
+      "pieces": 43,
+      "prims": 84,
+      "points": 328,
+      "volume": null,
+      "vmin": null,
+      "vmax": null,
+      "sec": 0.009
+    },
+    {
+      "N": 200,
+      "interior": 1,
+      "seeds": 200,
+      "pieces": 200,
+      "prims": 2378,
+      "points": 3956,
+      "volume": 1.0,
+      "vmin": 0.000173,
+      "vmax": 0.014229,
+      "sec": 0.047
+    },
+    {
+      "N": 200,
+      "interior": 0,
+      "seeds": 200,
+      "pieces": 154,
+      "prims": 222,
+      "points": 1048,
+      "volume": null,
+      "vmin": null,
+      "vmax": null,
+      "sec": 0.0116
+    }
+  ]
+}
