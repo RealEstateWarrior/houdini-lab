@@ -22,8 +22,11 @@ def main():
         report = json.load(fp)
     script = [n for n in os.listdir(os.path.join(HERE, "examples"))
               if n.startswith(no + "_") and n.endswith(".py")][0]
+    # シミュレーション・エフェクトの実験はエフェクト編へ（2026-09-22 から。それまでは全部モデリング編だった）
+    fx = any(t in ("シミュレーション", "エフェクト") for t in tags.split(","))
+    log, chip = ("log_fx", "エフェクト") if fx else ("log_pm", "モデリング")
     subprocess.check_call([sys.executable, os.path.join(HERE, "examples", "make_entry.py"),
-                           no, "log_pm", "モデリング", f"examples/{script}", note])
+                           no, log, chip, f"examples/{script}", note])
     path = os.path.join(HERE, "build_site.py")
     s = io.open(path, encoding="utf-8").read()
     if f'{{"no": "{no}"' in s:
@@ -33,7 +36,7 @@ def main():
     shot_list = ", ".join(json.dumps(x) for x in shots)
     entry = (f'    {{"no": "{no}", "anchor": "exp{no}",\n'
              f'     "tags": [{tag_list}],\n'
-             f'     "log": "log_pm", "thumb": "{shots[0]}",\n'
+             f'     "log": "{log}", "thumb": "{shots[0]}",\n'
              f'     "shots": [{shot_list}],\n'
              f'     "title": {json.dumps(report["title"], ensure_ascii=False)},\n'
              f'     "note": {json.dumps(note, ensure_ascii=False)}}},\n')

@@ -4611,6 +4611,404 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 157 ===================== -->
+    <article class="entry entry--current" id="exp157">
+      <div class="badge">157</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>voronoifracture は種 N 個で N 個のかけら、体積の合計は元のまま — 切り口を作らないと、中のかけらは消える</h2>
+        <p class="path">examples/157_voronoi_pieces.py &nbsp;·&nbsp; 種 N 個で N 個のかけら、体積の合計は元のまま。切り口を作らないと中のかけらは消える</p>
+
+        <div class="prose">
+          <p>1×1×1 の箱の中に <button class="term" data-term="scatter">scatter</button> で N 個の点を撒き（isooffset で中を埋めてから撒いた）、voronoifracture で割った。かけらは name 属性の種類で数え、measure で体積を測った。</p>
+          <p>**かけらは種の数と同じ N 個、体積を足すとちょうど 1。**5通りすべてそうなった（6桁）。すき間も重なりもなく、箱をちょうど分けている。</p>
+          <p>**かけらの大きさはそろわない。**N = 50 で、いちばん小さいかけら 0.000098、大きいかけら 0.054061（552 倍）。平均は 1/N = 0.02。種を撒いた場所しだいで決まる。</p>
+          <p>**Create Interior Surfaces を切ると、切り口の面が作られない。**残るのは元の箱の表面を割った面だけで、箱の表面に触れないかけらは消える（N = 50 で 43 個、200 で 154 個）。形が閉じないので体積も測れない。</p>
+          <p>**速い。**N = 200 でも 0.047 秒（1回目だけ 0.151 秒かかった）。</p>
+        </div>
+
+        <p class="label">種の数・切り口の有無と、かけら</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="157_pieces.png" alt="切り口ありは点線（N）にぴったり乗る。切ると中のかけらの分だけ下がる。" loading="lazy" decoding="async"></div>
+            <figcaption>切り口ありは点線（N）にぴったり乗る。切ると中のかけらの分だけ下がる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>N</th><th>切り口</th><th>かけら</th><th>面</th><th>点</th><th>体積の合計</th><th>最小のかけら</th><th>最大のかけら</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">2</td><td>作る</td><td class="num">2</td><td class="num">12</td><td class="num">16</td><td class="num">1.000000</td><td class="num">0.324096</td><td class="num">0.675904</td><td class="num">0.1507</td></tr>
+              <tr><td class="num">2</td><td>作らない</td><td class="num">2</td><td class="num">10</td><td class="num">16</td><td class="num muted">—</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">0.0120</td></tr>
+              <tr><td class="num">5</td><td>作る</td><td class="num">5</td><td class="num">36</td><td class="num">52</td><td class="num">1.000000</td><td class="num">0.067480</td><td class="num">0.306878</td><td class="num">0.0082</td></tr>
+              <tr><td class="num">5</td><td>作らない</td><td class="num">5</td><td class="num">18</td><td class="num">44</td><td class="num muted">—</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">0.0072</td></tr>
+              <tr><td class="num">10</td><td>作る</td><td class="num">10</td><td class="num">86</td><td class="num">132</td><td class="num">1.000000</td><td class="num">0.021517</td><td class="num">0.231785</td><td class="num">0.0092</td></tr>
+              <tr><td class="num">10</td><td>作らない</td><td class="num">10</td><td class="num">30</td><td class="num">88</td><td class="num muted">—</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">0.0077</td></tr>
+              <tr><td class="num">50</td><td>作る</td><td class="num">50</td><td class="num">554</td><td class="num">908</td><td class="num">1.000000</td><td class="num">0.000098</td><td class="num">0.054061</td><td class="num">0.0170</td></tr>
+              <tr><td class="num">50</td><td>作らない</td><td class="num">43</td><td class="num">84</td><td class="num">328</td><td class="num muted">—</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">0.0090</td></tr>
+              <tr><td class="num">200</td><td>作る</td><td class="num">200</td><td class="num">2,378</td><td class="num">3,956</td><td class="num">1.000000</td><td class="num">0.000173</td><td class="num">0.014229</td><td class="num">0.0470</td></tr>
+              <tr><td class="num">200</td><td>作らない</td><td class="num">154</td><td class="num">222</td><td class="num">1,048</td><td class="num muted">—</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">0.0116</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>かけらの数は種の点の数で決まる。</strong>欲しい数だけ点を撒く。</li>
+          <li><strong>体積は割っても変わらない。</strong><button class="term" data-term="密度">密度</button>が同じなら、<button class="term" data-term="RBD">RBD</button> の質量の合計も元のままのはず（RBD では確かめていない）。</li>
+          <li><strong>大きさは最大と最小で数百倍ちがう。</strong>scatter の relax で種を広げると、かえってばらつく（<a href="#exp158">実験158</a>）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 158 ===================== -->
+    <article class="entry entry--current" id="exp158">
+      <div class="badge">158</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>種を relax すると、voronoifracture のかけらはそろうどころかばらつく — 種が箱の壁へ押し出される</h2>
+        <p class="path">examples/158_voronoi_relax.py &nbsp;·&nbsp; 種を relax するとかけらはばらつく。種が箱の壁へ押し出される</p>
+
+        <div class="prose">
+          <p><a href="#exp157">実験157</a> と同じ 1×1×1 の箱に <button class="term" data-term="scatter">scatter</button> で 50 個の種を撒き、Relax Iterations を 0〜100 と変えて voronoifracture で割った。Global Seed は 3 通り。かけらの体積の変動係数（標準偏差 ÷ 平均）を比べた。</p>
+          <p>**relax を強くするほど、かけらの大きさはばらついた。**変動係数は 0 回で平均 0.53、100 回で 0.77。「relax で種を広げればそろう」という予想（<a href="#exp157">実験157</a> の次の課題）は外れた。</p>
+          <p>**理由: relax は種を箱の壁へ押し出す。**壁から 0.02 以内にある種は 0 回で平均 32%、100 回で 82%。壁までの距離の平均は、15 通りのうち 6 通りでマイナス（箱の外）になった。壁に張りついた種は、壁ぞいの薄いかけらと、中の大きなかけらを作る。</p>
+          <p>**種どうしの最短距離は伸びる。**relax 自体は「点どうしを離す」ことをしている。ただし、壁で止まらない。</p>
+          <p>**relax なしでも、壁から 0.02 以内の種が約 3 割あった。**一様に撒けば約 12% のはずで、isooffset で作った中身の範囲が箱より少し広いためとみられるが、確かめていない。</p>
+        </div>
+
+        <p class="label">Relax Iterations・Seed ごとのかけら</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="158_relax.png" alt="変動係数（青）と、壁ぎわの種の割合（橙）が一緒に上がる。" loading="lazy" decoding="async"></div>
+            <figcaption>変動係数（青）と、壁ぎわの種の割合（橙）が一緒に上がる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Relax</th><th>Seed</th><th>かけら</th><th>体積の合計</th><th>変動係数</th><th>最大 ÷ 最小</th><th>種の最短距離</th><th>壁から 0.02 以内</th><th>壁までの平均</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">3</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.620</td><td class="num">23.77</td><td class="num">0.0309</td><td>34%</td><td class="num">+0.0974</td><td class="num">0.0911</td></tr>
+              <tr><td class="num">0</td><td class="num">7</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.513</td><td class="num">37.74</td><td class="num">0.0423</td><td>34%</td><td class="num">+0.0859</td><td class="num">0.0128</td></tr>
+              <tr><td class="num">0</td><td class="num">11</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.464</td><td class="num">15.41</td><td class="num">0.0773</td><td>28%</td><td class="num">+0.1195</td><td class="num">0.0121</td></tr>
+              <tr><td class="num">5</td><td class="num">3</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.632</td><td class="num">29.39</td><td class="num">0.0444</td><td>58%</td><td class="num">+0.0426</td><td class="num">0.0122</td></tr>
+              <tr><td class="num">5</td><td class="num">7</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.696</td><td class="num">31.11</td><td class="num">0.0940</td><td>76%</td><td class="num">+0.0004</td><td class="num">0.0124</td></tr>
+              <tr><td class="num">5</td><td class="num">11</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.577</td><td class="num">14.84</td><td class="num">0.1351</td><td>54%</td><td class="num">+0.0492</td><td class="num">0.0125</td></tr>
+              <tr><td class="num">20</td><td class="num">3</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.725</td><td class="num">444.58</td><td class="num">0.0454</td><td>74%</td><td class="num">+0.0038</td><td class="num">0.0125</td></tr>
+              <tr><td class="num">20</td><td class="num">7</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.729</td><td class="num">25.8</td><td class="num">0.0940</td><td>82%</td><td class="num">-0.0124</td><td class="num">0.0125</td></tr>
+              <tr><td class="num">20</td><td class="num">11</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.668</td><td class="num">118.04</td><td class="num">0.1351</td><td>68%</td><td class="num">+0.0161</td><td class="num">0.0119</td></tr>
+              <tr><td class="num">50</td><td class="num">3</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.772</td><td class="num">443.72</td><td class="num">0.0454</td><td>82%</td><td class="num">-0.0090</td><td class="num">0.0127</td></tr>
+              <tr><td class="num">50</td><td class="num">7</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.761</td><td class="num">28.07</td><td class="num">0.0940</td><td>84%</td><td class="num">-0.0175</td><td class="num">0.0131</td></tr>
+              <tr><td class="num">50</td><td class="num">11</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.711</td><td class="num">103.65</td><td class="num">0.1390</td><td>74%</td><td class="num">+0.0116</td><td class="num">0.0122</td></tr>
+              <tr><td class="num">100</td><td class="num">3</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.774</td><td class="num">460.26</td><td class="num">0.0454</td><td>82%</td><td class="num">-0.0104</td><td class="num">0.0124</td></tr>
+              <tr><td class="num">100</td><td class="num">7</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.758</td><td class="num">27.56</td><td class="num">0.0940</td><td>84%</td><td class="num">-0.0175</td><td class="num">0.0126</td></tr>
+              <tr><td class="num">100</td><td class="num">11</td><td class="num">50</td><td class="num">1.000000</td><td class="num">0.768</td><td class="num">125.38</td><td class="num">0.1390</td><td>80%</td><td class="num">-0.0039</td><td class="num">0.0140</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>かけらをそろえる目的で scatter の relax を使うと逆効果。</strong>種が壁に寄る。</li>
+          <li><strong>体積の合計は、relax しても 1 のまま。</strong>かけらの数も 50 のまま。</li>
+          <li><strong>壁の外に出た種もある。</strong>割る形の中に種が収まっているか確かめてから使う。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 159 ===================== -->
+    <article class="entry entry--current" id="exp159">
+      <div class="badge">159</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>trail の速さは1秒あたり、差分の式どおり — 加速度は Central Difference のときだけ出て、Velocity Scale の2乗で縮む</h2>
+        <p class="path">examples/159_trail_velocity.py &nbsp;·&nbsp; trail の速さは1秒あたり。加速度は Central のときだけ出て、Scale の2乗で縮む</p>
+
+        <div class="prose">
+          <p>点を x = 0.1·F²（F はフレーム）で動かし、trail（Result Type = Compute Velocity）で v と加速度を出した。fps は 24 と 30、Velocity Approximation は3通り、Velocity Scale は 1 と 0.5。</p>
+          <p>**v は1秒あたりで、差分の式と合った**（24通りで差は最大 5e-05）。Backward は (x(F) − x(F−1))·fps、Forward は (x(F+1) − x(F))·fps、Central は2つの平均。x が2次式なので Central だけが正しい値 0.2·F·fps にぴったり重なり、Backward は 0.1·fps 小さく、Forward は同じだけ大きい（24 fps・フレーム 10 で 45.6 / 48 / 50.4）。</p>
+          <p>**Compute Acceleration は Central Difference のときだけ値が入った。**Backward と Forward ではすべて 0。Central での値は 0.2·fps²（24 fps で 115.2）と合った。</p>
+          <p>**Velocity Scale は v を掛け算し、加速度はその2乗で掛かる。**Scale 0.5 で v は半分、加速度は 1/4（115.2 → 28.8。差は最大 0.0027）。時間の進みを縮めたのと同じ効き方。</p>
+        </div>
+
+        <p class="label">fps・差分・Scale ごとの v と加速度</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="159_vel.png" alt="Central（橙）だけが点線に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>Central（橙）だけが点線に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>fps</th><th>Velocity Approximation</th><th>Scale</th><th>フレーム</th><th>x</th><th>v.x</th><th>差分の式</th><th>正しい値</th><th>加速度</th><th>正しい値</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">24</td><td>Backward Difference</td><td class="num">1</td><td class="num">10</td><td class="num">10</td><td class="num">45.6000</td><td class="num">45.6000</td><td class="num">48</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00023</td></tr>
+              <tr><td class="num">24</td><td>Backward Difference</td><td class="num">1</td><td class="num">20</td><td class="num">40</td><td class="num">93.6000</td><td class="num">93.6000</td><td class="num">96</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00006</td></tr>
+              <tr><td class="num">24</td><td>Backward Difference</td><td class="num">0.5</td><td class="num">10</td><td class="num">10</td><td class="num">22.8000</td><td class="num">22.8000</td><td class="num">48</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00006</td></tr>
+              <tr><td class="num">24</td><td>Backward Difference</td><td class="num">0.5</td><td class="num">20</td><td class="num">40</td><td class="num">46.8000</td><td class="num">46.8000</td><td class="num">96</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00005</td></tr>
+              <tr><td class="num">24</td><td>Central Difference</td><td class="num">1</td><td class="num">10</td><td class="num">10</td><td class="num">48.0000</td><td class="num">48.0000</td><td class="num">48</td><td class="num">115.200</td><td class="num">115.2</td><td class="num">0.00008</td></tr>
+              <tr><td class="num">24</td><td>Central Difference</td><td class="num">1</td><td class="num">20</td><td class="num">40</td><td class="num">96.0000</td><td class="num">96.0000</td><td class="num">96</td><td class="num">115.198</td><td class="num">115.2</td><td class="num">0.00007</td></tr>
+              <tr><td class="num">24</td><td>Central Difference</td><td class="num">0.5</td><td class="num">10</td><td class="num">10</td><td class="num">24.0000</td><td class="num">24.0000</td><td class="num">48</td><td class="num">28.800</td><td class="num">115.2</td><td class="num">0.00010</td></tr>
+              <tr><td class="num">24</td><td>Central Difference</td><td class="num">0.5</td><td class="num">20</td><td class="num">40</td><td class="num">48.0000</td><td class="num">48.0000</td><td class="num">96</td><td class="num">28.800</td><td class="num">115.2</td><td class="num">0.00005</td></tr>
+              <tr><td class="num">24</td><td>Forward Difference</td><td class="num">1</td><td class="num">10</td><td class="num">10</td><td class="num">50.4000</td><td class="num">50.4000</td><td class="num">48</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00013</td></tr>
+              <tr><td class="num">24</td><td>Forward Difference</td><td class="num">1</td><td class="num">20</td><td class="num">40</td><td class="num">98.4000</td><td class="num">98.4000</td><td class="num">96</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00008</td></tr>
+              <tr><td class="num">24</td><td>Forward Difference</td><td class="num">0.5</td><td class="num">10</td><td class="num">10</td><td class="num">25.2000</td><td class="num">25.2000</td><td class="num">48</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00006</td></tr>
+              <tr><td class="num">24</td><td>Forward Difference</td><td class="num">0.5</td><td class="num">20</td><td class="num">40</td><td class="num">49.2000</td><td class="num">49.2000</td><td class="num">96</td><td class="num">0.000</td><td class="num">115.2</td><td class="num">0.00004</td></tr>
+              <tr><td class="num">30</td><td>Backward Difference</td><td class="num">1</td><td class="num">10</td><td class="num">10</td><td class="num">57.0000</td><td class="num">57.0000</td><td class="num">60</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00006</td></tr>
+              <tr><td class="num">30</td><td>Backward Difference</td><td class="num">1</td><td class="num">20</td><td class="num">40</td><td class="num">117.0000</td><td class="num">117.0000</td><td class="num">120</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00004</td></tr>
+              <tr><td class="num">30</td><td>Backward Difference</td><td class="num">0.5</td><td class="num">10</td><td class="num">10</td><td class="num">28.5000</td><td class="num">28.5000</td><td class="num">60</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00006</td></tr>
+              <tr><td class="num">30</td><td>Backward Difference</td><td class="num">0.5</td><td class="num">20</td><td class="num">40</td><td class="num">58.5000</td><td class="num">58.5000</td><td class="num">120</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00004</td></tr>
+              <tr><td class="num">30</td><td>Central Difference</td><td class="num">1</td><td class="num">10</td><td class="num">10</td><td class="num">60.0000</td><td class="num">60.0000</td><td class="num">60</td><td class="num">180.001</td><td class="num">180</td><td class="num">0.00007</td></tr>
+              <tr><td class="num">30</td><td>Central Difference</td><td class="num">1</td><td class="num">20</td><td class="num">40</td><td class="num">120.0000</td><td class="num">120.0000</td><td class="num">120</td><td class="num">179.997</td><td class="num">180</td><td class="num">0.00005</td></tr>
+              <tr><td class="num">30</td><td>Central Difference</td><td class="num">0.5</td><td class="num">10</td><td class="num">10</td><td class="num">30.0000</td><td class="num">30.0000</td><td class="num">60</td><td class="num">45.000</td><td class="num">180</td><td class="num">0.00007</td></tr>
+              <tr><td class="num">30</td><td>Central Difference</td><td class="num">0.5</td><td class="num">20</td><td class="num">40</td><td class="num">60.0000</td><td class="num">60.0000</td><td class="num">120</td><td class="num">44.999</td><td class="num">180</td><td class="num">0.00006</td></tr>
+              <tr><td class="num">30</td><td>Forward Difference</td><td class="num">1</td><td class="num">10</td><td class="num">10</td><td class="num">63.0000</td><td class="num">63.0000</td><td class="num">60</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00006</td></tr>
+              <tr><td class="num">30</td><td>Forward Difference</td><td class="num">1</td><td class="num">20</td><td class="num">40</td><td class="num">123.0000</td><td class="num">123.0000</td><td class="num">120</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00004</td></tr>
+              <tr><td class="num">30</td><td>Forward Difference</td><td class="num">0.5</td><td class="num">10</td><td class="num">10</td><td class="num">31.5000</td><td class="num">31.5000</td><td class="num">60</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00005</td></tr>
+              <tr><td class="num">30</td><td>Forward Difference</td><td class="num">0.5</td><td class="num">20</td><td class="num">40</td><td class="num">61.5000</td><td class="num">61.5000</td><td class="num">120</td><td class="num">0.000</td><td class="num">180</td><td class="num">0.00004</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>v は 1 秒あたり。</strong>1 フレームあたりにしたいなら fps で割る。</li>
+          <li><strong>動きが加速しているなら Central Difference。</strong>Backward・Forward は半フレームずれた速さになる。</li>
+          <li><strong>加速度が 0 なら、差分が Central になっているか見る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 163 ===================== -->
+    <article class="entry entry--current" id="exp163">
+      <div class="badge">163</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>vellumconstraints の Cloth は網を三角形にしてから、辺ごとに伸びの拘束、内側の辺ごとに曲げの拘束を作る</h2>
+        <p class="path">examples/163_vellum_counts.py &nbsp;·&nbsp; Cloth は網を三角形にしてから、辺ごとに伸び・内側の辺ごとに曲げの拘束を作る</p>
+
+        <div class="prose">
+          <p>rows × cols の grid（四角形の網）と、先に divide で三角形にした網に、vellumconstraints（Constraint Type = Cloth）をかけ、2つ目の出力の拘束を type 属性ごとに数えた。</p>
+          <p>**伸び（distance）の拘束は、三角形にした網の辺の数と3通りとも一致。**四角形のまま渡しても、四角形の対角線にも拘束が張られる（10×10 で辺 180 本に対して 261 本 = 辺 + 面の数）。</p>
+          <p>**曲げ（bend）の拘束は、三角形にした網の内側の辺の数と一致。**2枚の三角形にはさまれた辺ごとに1本で、縁の辺には付かない。</p>
+          <p>**四角形で渡しても、三角形で渡しても、拘束の数は同じ**（3通りとも同じ）。Cloth は中で三角形に分けてから拘束を作っている。</p>
+          <p>**拘束づくりは 1 回 0.16 秒前後。**網の大きさ（9〜100 点）にはほとんど左右されない（最初の1回だけ 0.28 秒）。</p>
+        </div>
+
+        <p class="label">網と拘束の本数</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="163_counts.png" alt="伸び（青）は点線（三角形の網の辺の数）に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>伸び（青）は点線（三角形の網の辺の数）に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>grid</th><th>網</th><th>点</th><th>面</th><th>辺</th><th>内側の辺</th><th>distance</th><th>bend</th><th>合計</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>3×3</td><td>quads</td><td class="num">9</td><td class="num">4</td><td class="num">12</td><td class="num">4</td><td class="num">16</td><td class="num">8</td><td class="num">24</td><td class="num">0.2774</td></tr>
+              <tr><td>3×3</td><td>triangles</td><td class="num">9</td><td class="num">8</td><td class="num">16</td><td class="num">8</td><td class="num">16</td><td class="num">8</td><td class="num">24</td><td class="num">0.1619</td></tr>
+              <tr><td>5×8</td><td>quads</td><td class="num">40</td><td class="num">28</td><td class="num">67</td><td class="num">45</td><td class="num">95</td><td class="num">73</td><td class="num">168</td><td class="num">0.1616</td></tr>
+              <tr><td>5×8</td><td>triangles</td><td class="num">40</td><td class="num">56</td><td class="num">95</td><td class="num">73</td><td class="num">95</td><td class="num">73</td><td class="num">168</td><td class="num">0.1608</td></tr>
+              <tr><td>10×10</td><td>quads</td><td class="num">100</td><td class="num">81</td><td class="num">180</td><td class="num">144</td><td class="num">261</td><td class="num">225</td><td class="num">486</td><td class="num">0.1669</td></tr>
+              <tr><td>10×10</td><td>triangles</td><td class="num">100</td><td class="num">162</td><td class="num">261</td><td class="num">225</td><td class="num">261</td><td class="num">225</td><td class="num">486</td><td class="num">0.1628</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>伸びの拘束 = 三角形の辺、曲げの拘束 = 内側の辺。</strong>本数は計算で出せる。</li>
+          <li><strong>四角形の網でも対角線に伸びの拘束が張られる。</strong>対角線の向きは divide と同じとは限らない（確かめていない）。</li>
+          <li><strong>点を倍にすると拘束もほぼ倍。</strong>計算の重さの見積もりに使える。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 165 ===================== -->
+    <article class="entry entry--current" id="exp165">
+      <div class="badge">165</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>POP の粒は、生まれたフレームで 1 ステップ先に進む — 1 秒後の落下は Substeps 1 で 13% 多く、誤差は Substeps に反比例して縮む</h2>
+        <p class="path">examples/165_pop_gravity.py &nbsp;·&nbsp; 粒は生まれたフレームで1ステップ先に進む。落下の誤差は Substeps に反比例</p>
+
+        <div class="prose">
+          <p>原点の 1 点から、最初のフレームにだけ 1 粒を生み（初速 0）、popsolver の後ろに gravity（−9.80665）をつないだ。24 fps で、フレーム 2・13・25（生まれてから 1/24 秒・0.5 秒・1 秒）の y と v.y を読んだ。</p>
+          <p>**粒は「生まれたフレームのうちに、もう 1 ステップ」進んでいる。**Substeps 1・フレーム 25 の v.y は -10.2153（1 秒ぶんの −9.80665 ではなく、1 + 1/24 秒ぶん）。進んだステップ数を n = (フレーム − 1) × Substeps + 1、1 ステップ h = 1/(24 × Substeps) とすると、12 通りすべてで v.y = −g·h·n（差は最大 1e-05）、y = −g·h²·n(n + 1)/2（差は最大 5e-06）と合った。「速さを先に足し、その速さで位置を進める」やり方（半陰的オイラー）。</p>
+          <p>**そのため、1 秒後の落下量は −½gt² より多い。**Substeps 1 で -5.5333（正しい値 -4.9033 より +12.8%）。Substeps を倍にするたびに誤差はほぼ半分になり、8 で +1.6%。誤差のもとは、生まれた瞬間の1ステップと、1ステップごとの足し方の2つ。</p>
+          <p>**時間はどれも 25 フレームで 0.3〜0.4 秒。**粒が1つなので、Substeps を増やしても重さはほとんど変わらない。</p>
+        </div>
+
+        <p class="label">Substeps・フレームと、落ちた量</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="165_fall.png" alt="誤差は Substeps に反比例して縮む（1 で +12.8%、8 で +1." loading="lazy" decoding="async"></div>
+            <figcaption>誤差は Substeps に反比例して縮む（1 で +12.8%、8 で +1.6%）。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Substeps</th><th>フレーム</th><th>経った時間</th><th>ステップ数 n</th><th>y</th><th>−g·h²·n(n+1)/2</th><th>−½gt²</th><th>誤差</th><th>v.y</th><th>−g·h·n</th><th>25 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">2</td><td class="num">0.0417</td><td class="num">2</td><td class="num">-0.051076</td><td class="num">-0.051076</td><td class="num">-0.008513</td><td>+500.0%</td><td class="num">-0.817221</td><td class="num">-0.817221</td><td class="num">0.412</td></tr>
+              <tr><td class="num">1</td><td class="num">13</td><td class="num">0.5000</td><td class="num">13</td><td class="num">-1.549314</td><td class="num">-1.549314</td><td class="num">-1.225831</td><td>+26.4%</td><td class="num">-5.311935</td><td class="num">-5.311935</td><td class="num">0.412</td></tr>
+              <tr><td class="num">1</td><td class="num">25</td><td class="num">1.0000</td><td class="num">25</td><td class="num">-5.533266</td><td class="num">-5.533266</td><td class="num">-4.903325</td><td>+12.8%</td><td class="num">-10.215260</td><td class="num">-10.215260</td><td class="num">0.412</td></tr>
+              <tr><td class="num">2</td><td class="num">2</td><td class="num">0.0417</td><td class="num">3</td><td class="num">-0.025538</td><td class="num">-0.025538</td><td class="num">-0.008513</td><td>+200.0%</td><td class="num">-0.612916</td><td class="num">-0.612916</td><td class="num">0.312</td></tr>
+              <tr><td class="num">2</td><td class="num">13</td><td class="num">0.5000</td><td class="num">25</td><td class="num">-1.383317</td><td class="num">-1.383317</td><td class="num">-1.225831</td><td>+12.8%</td><td class="num">-5.107630</td><td class="num">-5.107630</td><td class="num">0.312</td></tr>
+              <tr><td class="num">2</td><td class="num">25</td><td class="num">1.0000</td><td class="num">49</td><td class="num">-5.214039</td><td class="num">-5.214039</td><td class="num">-4.903325</td><td>+6.3%</td><td class="num">-10.010959</td><td class="num">-10.010955</td><td class="num">0.312</td></tr>
+              <tr><td class="num">4</td><td class="num">2</td><td class="num">0.0417</td><td class="num">5</td><td class="num">-0.015961</td><td class="num">-0.015961</td><td class="num">-0.008513</td><td>+87.5%</td><td class="num">-0.510763</td><td class="num">-0.510763</td><td class="num">0.343</td></tr>
+              <tr><td class="num">4</td><td class="num">13</td><td class="num">0.5000</td><td class="num">49</td><td class="num">-1.303510</td><td class="num">-1.303510</td><td class="num">-1.225831</td><td>+6.3%</td><td class="num">-5.005479</td><td class="num">-5.005478</td><td class="num">0.343</td></tr>
+              <tr><td class="num">4</td><td class="num">25</td><td class="num">1.0000</td><td class="num">97</td><td class="num">-5.057621</td><td class="num">-5.057618</td><td class="num">-4.903325</td><td>+3.1%</td><td class="num">-9.908814</td><td class="num">-9.908803</td><td class="num">0.343</td></tr>
+              <tr><td class="num">8</td><td class="num">2</td><td class="num">0.0417</td><td class="num">9</td><td class="num">-0.011971</td><td class="num">-0.011971</td><td class="num">-0.008513</td><td>+40.6%</td><td class="num">-0.459687</td><td class="num">-0.459687</td><td class="num">0.407</td></tr>
+              <tr><td class="num">8</td><td class="num">13</td><td class="num">0.5000</td><td class="num">97</td><td class="num">-1.264405</td><td class="num">-1.264404</td><td class="num">-1.225831</td><td>+3.1%</td><td class="num">-4.954407</td><td class="num">-4.954401</td><td class="num">0.407</td></tr>
+              <tr><td class="num">8</td><td class="num">25</td><td class="num">1.0000</td><td class="num">193</td><td class="num">-4.980210</td><td class="num">-4.980205</td><td class="num">-4.903325</td><td>+1.6%</td><td class="num">-9.857725</td><td class="num">-9.857726</td><td class="num">0.407</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong><button class="term" data-term="POP">POP</button> の落下は、正しい放物線より少し先を行く。</strong>1 秒で Substeps 1 なら +13%。</li>
+          <li><strong>正確に合わせたいなら Substeps を上げる。</strong>誤差はほぼ 1/Substeps。</li>
+          <li><strong>生まれたフレームでもう 1 ステップ進む。</strong>生まれた直後の位置が、生みの点からずれている理由。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 166 ===================== -->
+    <article class="entry entry--current" id="exp166">
+      <div class="badge">166</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>popdrag の終端速度は g/k ではなく √(g/k) に近づく — 速さの2乗に比例する抵抗と同じ振る舞い</h2>
+        <p class="path">examples/166_pop_drag.py &nbsp;·&nbsp; popdrag の終端速度は g/k ではなく √(g/k) に近づく</p>
+
+        <div class="prose">
+          <p><a href="#exp165">実験165</a> と同じ 1 粒を重力で落とし、popsolver の力の入力に popdrag（Wind Velocity 0、Ignore Mass 入）をつないだ。Air Resistance k を変えて、何秒たっても変わらなくなった落下の速さ（終端速度）を読んだ。</p>
+          <p>**終端速度は g/k にならなかった。**k = 1 なら、速さに比例する抵抗の式では 9.80665 になるはずが、4 秒後で -2.9339。k = 0.5・1・2・5 のどれでも、g/k よりずっと遅いところで頭打ちになった（1 秒前後でもう止まる）。</p>
+          <p>**Substeps を増やすと、√(g/k) に近づいた。**k = 1 では √9.80665 = 3.1316 へ、k = 4 では 1.5658 へ。足りない割合は Substeps 1 → 4 → 16 → 64 で k = 1 で 6.31% → 1.62% → 0.41% → 0.10%、k = 4 で 12.20% → 3.21% → 0.81% → 0.20%（Substeps を4倍にすると約1/4）。2つの k の両方で √(g/k) に向かうので、速さの2乗に比例する抵抗と同じ終端速度になっている。中の計算式そのものは確かめていない。</p>
+          <p>**時間は 97 フレームで 0.4〜0.6 秒。**</p>
+        </div>
+
+        <p class="label">Substeps を増やしたときの 2 秒後の速さ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="166_drag.png" alt="どちらの k も、Substeps を4倍にするたびに足りない分が約1/4になる" loading="lazy" decoding="async"></div>
+            <figcaption>どちらの k も、Substeps を4倍にするたびに足りない分が約1/4になる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Air Resistance k</th><th>Substeps</th><th>2 秒後の v.y</th><th>−√(g/k)</th><th>足りない割合</th><th>−g/k（比例の抵抗なら）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">-2.93389</td><td class="num">-3.13156</td><td>6.31%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">-3.08088</td><td class="num">-3.13156</td><td>1.62%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">1</td><td class="num">16</td><td class="num">-3.11879</td><td class="num">-3.13156</td><td>0.41%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">1</td><td class="num">64</td><td class="num">-3.12835</td><td class="num">-3.13156</td><td>0.10%</td><td class="num">-9.8066</td></tr>
+              <tr><td class="num">4</td><td class="num">1</td><td class="num">-1.37475</td><td class="num">-1.56578</td><td>12.20%</td><td class="num">-2.4517</td></tr>
+              <tr><td class="num">4</td><td class="num">4</td><td class="num">-1.51553</td><td class="num">-1.56578</td><td>3.21%</td><td class="num">-2.4517</td></tr>
+              <tr><td class="num">4</td><td class="num">16</td><td class="num">-1.55306</td><td class="num">-1.56578</td><td>0.81%</td><td class="num">-2.4517</td></tr>
+              <tr><td class="num">4</td><td class="num">64</td><td class="num">-1.56258</td><td class="num">-1.56578</td><td>0.20%</td><td class="num">-2.4517</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">k・Substeps と、1・2・4 秒後の速さ</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>k</th><th>Substeps</th><th>経った秒</th><th>v.y</th><th>−g/k</th><th>比例の抵抗の式</th><th>97 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">1</td><td class="num">-4.1496</td><td class="num">-19.6133</td><td class="num">-7.7172</td><td class="num">0.415</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">2</td><td class="num">-4.2281</td><td class="num">-19.6133</td><td class="num">-12.3980</td><td class="num">0.415</td></tr>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">4</td><td class="num">-4.2291</td><td class="num">-19.6133</td><td class="num">-16.9589</td><td class="num">0.415</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">1</td><td class="num">-4.2804</td><td class="num">-19.6133</td><td class="num">-7.7172</td><td class="num">0.491</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">2</td><td class="num">-4.3767</td><td class="num">-19.6133</td><td class="num">-12.3980</td><td class="num">0.491</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">4</td><td class="num">-4.3779</td><td class="num">-19.6133</td><td class="num">-16.9589</td><td class="num">0.491</td></tr>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">-2.9258</td><td class="num">-9.8066</td><td class="num">-6.1990</td><td class="num">0.290</td></tr>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">-2.9339</td><td class="num">-9.8066</td><td class="num">-8.4795</td><td class="num">0.290</td></tr>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">4</td><td class="num">-2.9339</td><td class="num">-9.8066</td><td class="num">-9.6270</td><td class="num">0.290</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">1</td><td class="num">-3.0701</td><td class="num">-9.8066</td><td class="num">-6.1990</td><td class="num">0.497</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">2</td><td class="num">-3.0809</td><td class="num">-9.8066</td><td class="num">-8.4795</td><td class="num">0.497</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">4</td><td class="num">-3.0809</td><td class="num">-9.8066</td><td class="num">-9.6270</td><td class="num">0.497</td></tr>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">1</td><td class="num">-2.0191</td><td class="num">-4.9033</td><td class="num">-4.2397</td><td class="num">0.292</td></tr>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">2</td><td class="num">-2.0194</td><td class="num">-4.9033</td><td class="num">-4.8135</td><td class="num">0.292</td></tr>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">4</td><td class="num">-2.0194</td><td class="num">-4.9033</td><td class="num">-4.9017</td><td class="num">0.292</td></tr>
+              <tr><td class="num">2</td><td class="num">4</td><td class="num">1</td><td class="num">-2.1633</td><td class="num">-4.9033</td><td class="num">-4.2397</td><td class="num">0.497</td></tr>
+              <tr><td class="num">2</td><td class="num">4</td><td class="num">2</td><td class="num">-2.1639</td><td class="num">-4.9033</td><td class="num">-4.8135</td><td class="num">0.497</td></tr>
+              <tr><td class="num">2</td><td class="num">4</td><td class="num">4</td><td class="num">-2.1639</td><td class="num">-4.9033</td><td class="num">-4.9017</td><td class="num">0.497</td></tr>
+              <tr><td class="num">5</td><td class="num">1</td><td class="num">1</td><td class="num">-1.2110</td><td class="num">-1.9613</td><td class="num">-1.9481</td><td class="num">0.294</td></tr>
+              <tr><td class="num">5</td><td class="num">1</td><td class="num">2</td><td class="num">-1.2110</td><td class="num">-1.9613</td><td class="num">-1.9612</td><td class="num">0.294</td></tr>
+              <tr><td class="num">5</td><td class="num">1</td><td class="num">4</td><td class="num">-1.2110</td><td class="num">-1.9613</td><td class="num">-1.9613</td><td class="num">0.294</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">1</td><td class="num">-1.3503</td><td class="num">-1.9613</td><td class="num">-1.9481</td><td class="num">0.488</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">2</td><td class="num">-1.3503</td><td class="num">-1.9613</td><td class="num">-1.9612</td><td class="num">0.488</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">4</td><td class="num">-1.3503</td><td class="num">-1.9613</td><td class="num">-1.9613</td><td class="num">0.488</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>popdrag の終端速度は √(g/k)。</strong>k を4倍にしても、落ちる速さは半分にしかならない。</li>
+          <li><strong>Substeps が少ないと、終端速度はさらに遅い。</strong>Substeps 1 で 6% ほど遅い（k = 1）。</li>
+          <li><strong>Air Resistance は「速さに比例する係数」ではない。</strong>欲しい終端速度 v から k = g/v² で逆算できる（Substeps を十分とったとき）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 167 ===================== -->
+    <article class="entry entry--current" id="exp167">
+      <div class="badge">167</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>rbdbulletsolver の箱は地面ぴったりで止まる — Collision Padding を変えても止まる高さは同じ、当たった瞬間だけ少し沈む</h2>
+        <p class="path">examples/167_rbd_rest.py &nbsp;·&nbsp; 箱は地面ぴったりで止まる。Collision Padding は止まる高さを変えない</p>
+
+        <div class="prose">
+          <p>1×1×1 の箱（中心 y = 2）に name を付けて rbdbulletsolver に入れ、Ground Plane（y = 0）へ落とした。Collision Padding（0・0.02・0.05）と Bounce（0.25・0.8。地面の Bounce も同じ値）を変え、箱の底（点の y の最小）を毎フレーム読んだ。</p>
+          <p>**止まった箱の底は y = 0 のすぐ近く。**4 秒後の底は -0.000092、中心は 0.499950。形のまわりに余白を付けるつまみがあっても、見た目の形は地面から浮かない。</p>
+          <p>**Collision Padding を 0・0.02・0.05 と変えても、結果は6桁まで同じだった**（すべての値が一致）。この形（凸包）では、余白が止まる高さにも跳ね方にも出ない。Bullet が余白の分だけ形を内側へ縮めてから余白を足している可能性があるが、確かめていない。</p>
+          <p>**当たった瞬間だけ、少し地面にめり込む**（いちばん深くて -0.0082）。15 フレーム目に当たる。</p>
+          <p>**Bounce で跳ね返りの高さが大きく変わる。**最初の跳ね返りの高さ（底の y）は Bounce 0.25 で 0.0091、0.8 で 0.2286。落とした高さ（底が 1.5 から）に対して、それぞれ 0.6%・15%。</p>
+        </div>
+
+        <p class="label">Collision Padding・Bounce と、止まり方</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="167_drop.png" alt="Bounce 0.8（橙）は何度か跳ねてから止まる。0.25（青）はほぼ跳ねない" loading="lazy" decoding="async"></div>
+            <figcaption>Bounce 0.8（橙）は何度か跳ねてから止まる。0.25（青）はほぼ跳ねない。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Collision Padding</th><th>Bounce</th><th>止まった底の y</th><th>止まった中心の y</th><th>いちばん深い所</th><th>当たったフレーム</th><th>跳ね返りの高さ</th><th>97 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">0.25</td><td class="num">-0.000092</td><td class="num">0.499950</td><td class="num">-0.006908</td><td class="num">15</td><td class="num">0.0091</td><td class="num">0.582</td></tr>
+              <tr><td class="num">0</td><td class="num">0.8</td><td class="num">-0.000007</td><td class="num">0.499996</td><td class="num">-0.008162</td><td class="num">15</td><td class="num">0.2286</td><td class="num">0.294</td></tr>
+              <tr><td class="num">0.02</td><td class="num">0.25</td><td class="num">-0.000092</td><td class="num">0.499950</td><td class="num">-0.006908</td><td class="num">15</td><td class="num">0.0091</td><td class="num">0.291</td></tr>
+              <tr><td class="num">0.02</td><td class="num">0.8</td><td class="num">-0.000007</td><td class="num">0.499996</td><td class="num">-0.008162</td><td class="num">15</td><td class="num">0.2286</td><td class="num">0.288</td></tr>
+              <tr><td class="num">0.05</td><td class="num">0.25</td><td class="num">-0.000092</td><td class="num">0.499950</td><td class="num">-0.006908</td><td class="num">15</td><td class="num">0.0091</td><td class="num">0.291</td></tr>
+              <tr><td class="num">0.05</td><td class="num">0.8</td><td class="num">-0.000007</td><td class="num">0.499996</td><td class="num">-0.008162</td><td class="num">15</td><td class="num">0.2286</td><td class="num">0.295</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>箱は地面ぴったりで止まる。</strong>Collision Padding で浮いて見えることはなかった。</li>
+          <li><strong>当たった瞬間は 0.007〜0.008（箱の一辺 1 に対して）沈む。</strong>速い物ほど深い可能性がある（確かめていない）。</li>
+          <li><strong>跳ね返りは Bounce しだい。</strong>0.25 ではほとんど跳ねない。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
