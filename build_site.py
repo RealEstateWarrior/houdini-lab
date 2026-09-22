@@ -1102,6 +1102,18 @@ DONE = [
      "shots": ["160_fill.png"],
      "title": "uvlayout は長方形 12 枚で升の 48〜84% を埋める — Padding は Search Resolution が粗いほど大きく効く",
      "note": "長方形 12 枚で升の 48〜84% を埋める。Padding は Search Resolution が粗いほど効く"},
+    {"no": "161", "anchor": "exp161",
+     "tags": ["属性", "検算", "attribtransfer"],
+     "log": "log_pm", "thumb": "161_blend.png",
+     "shots": ["161_blend.png"],
+     "title": "attribtransfer は Distance Threshold までそのまま運び、Blend Width の外側で (1 − t²)² に落とす",
+     "note": "Threshold までそのまま、Blend Width の外側で (1−t²)² に落とす"},
+    {"no": "162", "anchor": "exp162",
+     "tags": ["モデリング", "検算", "subdivide"],
+     "log": "log_pm", "thumb": "162_crease.png",
+     "shots": ["162_crease.png"],
+     "title": "subdivide の crease は「重み w の回数までは尖ったまま」— w ≥ Iterations なら箱はそのまま、体積 1",
+     "note": "crease の重みは細分の回数。w ≥ Iterations なら箱はそのまま体積 1"},
 ]
 
 PLANNED = []

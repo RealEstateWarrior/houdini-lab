@@ -8487,6 +8487,108 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 161 ===================== -->
+    <article class="entry entry--current" id="exp161">
+      <div class="badge">161</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>attribtransfer は Distance Threshold までそのまま運び、Blend Width の外側で (1 − t²)² に落とす</h2>
+        <p class="path">examples/161_attribtransfer_blend.py &nbsp;·&nbsp; Threshold までそのまま、Blend Width の外側で (1−t²)² に落とす</p>
+
+        <div class="prose">
+          <p>x = 0〜2 に 0.01 刻みで並べた 201 点へ、原点の 1 点から val = 1 を attribtransfer で運んだ。Distance Threshold（d）と Blend Width（b）を変え、距離ごとに受け取った値を読んだ。</p>
+          <p>**d までは 1 のまま、d から d + b で 0 まで下がる。**弱まる区間は Threshold の内側ではなく外側に付く（d = 0.5・b = 0.25 で、0.5 まで 1、0.74 まで何か届き、0.75 から 0）。Blend Width = 0 なら d でぷつりと切れる。</p>
+          <p>**下がり方は直線ではなく (1 − t²)²（t = (距離 − d)/b）。**記録した点すべてで、この式との差は最大 0.0000。始まりはゆっくり、真ん中で急に、終わりはまたゆっくり 0 へ着く。t = 0.5 で 0.5625。</p>
+          <p>**時間はほとんどかからない。**1回目だけ 0.09 秒（最初の組み立て）、あとは 0.0001 秒。</p>
+        </div>
+
+        <p class="label">Threshold・Blend と、値の届き方</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="161_blend.png" alt="どの線も Threshold までは 1。Blend の分だけ外へなだらかに伸び" loading="lazy" decoding="async"></div>
+            <figcaption>どの線も Threshold までは 1。Blend の分だけ外へなだらかに伸びる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Distance Threshold</th><th>Blend Width</th><th>1 のままの所まで</th><th>届く所まで</th><th>中間の点</th><th>直線との差（最大）</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">0</td><td class="num">0.5</td><td class="num">0.5</td><td class="num">0</td><td class="num muted">—</td><td class="num">0.0868</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.25</td><td class="num">0.5</td><td class="num">0.74</td><td class="num">24</td><td class="num">0.1293</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.5</td><td class="num">0.5</td><td class="num">0.99</td><td class="num">49</td><td class="num">0.1294</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num muted">—</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td class="num">0.25</td><td class="num">1</td><td class="num">1.24</td><td class="num">24</td><td class="num">0.1293</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">1</td><td class="num">0.5</td><td class="num">1</td><td class="num">1.49</td><td class="num">49</td><td class="num">0.1294</td><td class="num">0.0001</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Blend Width は Threshold の外に足される。</strong>届く距離は d + b。</li>
+          <li><strong>弱まり方は (1 − t²)²。</strong>直線より、端がなめらか。</li>
+          <li><strong>ここまでの結果は、渡す点が 1 つのとき。</strong>Max Sample Count を上げて複数の点を混ぜるときは別の話。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 162 ===================== -->
+    <article class="entry entry--current" id="exp162">
+      <div class="badge">162</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>subdivide の crease は「重み w の回数までは尖ったまま」— w ≥ Iterations なら箱はそのまま、体積 1</h2>
+        <p class="path">examples/162_subdiv_crease.py &nbsp;·&nbsp; crease の重みは細分の回数。w ≥ Iterations なら箱はそのまま体積 1</p>
+
+        <div class="prose">
+          <p>1×1×1 の箱の辺すべてに crease <button class="term" data-term="SOP">SOP</button>（Operation = Set）で重み w を付け、<button class="term" data-term="subdivide">subdivide</button>（Algorithm = OpenSubdiv <button class="term" data-term="Catmull-Clark">Catmull-Clark</button>）でIterations 2 回と 4 回の細分をかけた。体積と、角の点が元の角 (0.5, 0.5, 0.5) からどれだけ離れたかを測った。</p>
+          <p>**重みが細分の回数以上なら、形は元の箱のまま。**体積 1.000000、角のずれ 0 になったのは、w ≥ Iterations のときだけ（16通りすべてこの通り）。w = 2 は Iterations 2 で箱のまま、4 では 0.945526 に丸まる。重みは「何回目の細分まで尖らせるか」の回数として効いている。</p>
+          <p>**重み 0 はただの Catmull-Clark。**Iterations 4 で体積 0.328926、角は 0.433 内側へ下がる。</p>
+          <p>**重みの小数も効く。**w = 0.5・1.5 は、その前後の整数の間の丸さになった（Iterations 4 で 0.529・0.865）。w ≥ 1 になると、面の真ん中は元の面の上（外へ 0.5）まで届く。</p>
+        </div>
+
+        <p class="label">crease の重み・Iterations と形</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="162_crease.png" alt="Iterations 2（青）は w = 2 で体積 1 に届き、4（橙）は w" loading="lazy" decoding="async"></div>
+            <figcaption>Iterations 2（青）は w = 2 で体積 1 に届き、4（橙）は w = 4 で届く。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>重み w</th><th>Iterations</th><th>点</th><th>面</th><th>体積</th><th>角のずれ</th><th>いちばん外の座標</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">0.350192</td><td class="num">0.424994</td><td class="num">0.439236</td><td class="num">0.0008</td></tr>
+              <tr><td class="num">0</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">0.328926</td><td class="num">0.432790</td><td class="num">0.420959</td><td class="num">0.0012</td></tr>
+              <tr><td class="num">0.5</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">0.561682</td><td class="num">0.308722</td><td class="num">0.469618</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">0.5</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">0.529197</td><td class="num">0.324314</td><td class="num">0.46048</td><td class="num">0.0009</td></tr>
+              <tr><td class="num">1</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">0.834635</td><td class="num">0.192450</td><td class="num">0.5</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">1</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">0.789774</td><td class="num">0.215838</td><td class="num">0.5</td><td class="num">0.0008</td></tr>
+              <tr><td class="num">1.5</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">0.913194</td><td class="num">0.096225</td><td class="num">0.5</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">1.5</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">0.864630</td><td class="num">0.161043</td><td class="num">0.5</td><td class="num">0.0013</td></tr>
+              <tr><td class="num">2</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">1.000000</td><td class="num">0.000000</td><td class="num">0.5</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">2</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">0.945526</td><td class="num">0.106248</td><td class="num">0.5</td><td class="num">0.0008</td></tr>
+              <tr><td class="num">3</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">1.000000</td><td class="num">0.000000</td><td class="num">0.5</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">3</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">0.988627</td><td class="num">0.048113</td><td class="num">0.5</td><td class="num">0.0008</td></tr>
+              <tr><td class="num">4</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">1.000000</td><td class="num">0.000000</td><td class="num">0.5</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">4</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">1.000000</td><td class="num">0.000000</td><td class="num">0.5</td><td class="num">0.0009</td></tr>
+              <tr><td class="num">10</td><td class="num">2</td><td class="num">98</td><td class="num">96</td><td class="num">1.000000</td><td class="num">0.000000</td><td class="num">0.5</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">10</td><td class="num">4</td><td class="num">1,538</td><td class="num">1,536</td><td class="num">1.000000</td><td class="num">0.000000</td><td class="num">0.5</td><td class="num">0.0010</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>crease の重みは「細分の回数」。</strong>Iterations を増やしたら、同じ硬さに見せるには重みも増やす。</li>
+          <li><strong>完全に尖らせたいなら、重みを Iterations 以上に。</strong>10 のような大きな値なら回数を気にしなくてよい。</li>
+          <li><strong>重み 0 の箱は、体積が 1/3 ほどまで縮む。</strong>形を保ちたい所には crease か、辺を足す。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
