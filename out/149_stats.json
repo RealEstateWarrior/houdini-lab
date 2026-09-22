@@ -1,0 +1,212 @@
+{
+  "rows": [
+    {
+      "size": 0.5,
+      "offset": 0.0,
+      "prims": 4,
+      "points": 9,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0003
+    },
+    {
+      "size": 0.5,
+      "offset": 0.05,
+      "prims": 9,
+      "points": 16,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0001
+    },
+    {
+      "size": 0.25,
+      "offset": 0.0,
+      "prims": 16,
+      "points": 25,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0001
+    },
+    {
+      "size": 0.25,
+      "offset": 0.05,
+      "prims": 25,
+      "points": 36,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0001
+    },
+    {
+      "size": 0.3,
+      "offset": 0.0,
+      "prims": 16,
+      "points": 25,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0001
+    },
+    {
+      "size": 0.3,
+      "offset": 0.05,
+      "prims": 25,
+      "points": 36,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0001
+    },
+    {
+      "size": 0.1,
+      "offset": 0.0,
+      "prims": 100,
+      "points": 121,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0006
+    },
+    {
+      "size": 0.1,
+      "offset": 0.05,
+      "prims": 121,
+      "points": 144,
+      "sides": [
+        4
+      ],
+      "area": 1.0,
+      "sec": 0.0005
+    }
+  ],
+  "convex": [
+    {
+      "n": 5,
+      "max_edges": 3,
+      "prims": 3,
+      "sides": [
+        3,
+        3,
+        3
+      ],
+      "area": 2.377641,
+      "area0": 2.377641
+    },
+    {
+      "n": 5,
+      "max_edges": 4,
+      "prims": 2,
+      "sides": [
+        3,
+        4
+      ],
+      "area": 2.377641,
+      "area0": 2.377641
+    },
+    {
+      "n": 8,
+      "max_edges": 3,
+      "prims": 6,
+      "sides": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "area": 2.828427,
+      "area0": 2.828427
+    },
+    {
+      "n": 8,
+      "max_edges": 4,
+      "prims": 3,
+      "sides": [
+        4,
+        4,
+        4
+      ],
+      "area": 2.828427,
+      "area0": 2.828427
+    },
+    {
+      "n": 12,
+      "max_edges": 3,
+      "prims": 10,
+      "sides": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "area": 3.0,
+      "area0": 3.0
+    },
+    {
+      "n": 12,
+      "max_edges": 4,
+      "prims": 5,
+      "sides": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "area": 3.0,
+      "area0": 3.0
+    },
+    {
+      "n": 13,
+      "max_edges": 3,
+      "prims": 11,
+      "sides": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "area": 3.020701,
+      "area0": 3.020701
+    },
+    {
+      "n": 13,
+      "max_edges": 4,
+      "prims": 6,
+      "sides": [
+        3,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "area": 3.020701,
+      "area0": 3.020701
+    }
+  ]
+}

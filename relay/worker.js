@@ -110,7 +110,14 @@ export default {
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: String((system && system.content) || "") }] },
           contents,
-          generationConfig: { maxOutputTokens: 1024 },
+          // 3.x 系は「考える」分のトークンも maxOutputTokens から引かれる。
+          // 1024 だと考える分だけで使い切り、答えの文章が全部出ていても
+          // finishReason が MAX_TOKENS になっていた（2026-09-22、Opus 側の報告）。
+          // 上限を上げ、考える分の上限も別枠で絞る。
+          generationConfig: {
+            maxOutputTokens: 4096,
+            thinkingConfig: { thinkingBudget: 512 },
+          },
         }),
       });
     } catch (e) {

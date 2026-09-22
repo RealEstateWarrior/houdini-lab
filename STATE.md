@@ -75,6 +75,11 @@
 - 鍵は Cloudflare の Secret（`GEMINI_API_KEY`）。モデル名は `GEMINI_MODEL`（既定 `gemini-3.6-flash`。ユーザー指定、動作確認済み）
 - 許可する呼び出し元は worker.js の `ALLOW_ORIGINS`（`https://realestatewarrior.github.io` と手元確認用の localhost:8765）
 - curl で GET・許可外origin・許可origin の3通りを確認済み（405 / 403 / 200 で Gemini の答えが返る）
+- **2026-09-22 修正**: maxOutputTokens が 1024 だと、3.x系は「考える」分もそこから引かれ、
+  答えが全部出ていても finishReason が MAX_TOKENS になり「答えが途中で切れました」と誤表示された
+  （Opus 側が実機で発見）。maxOutputTokens を 4096 に上げ、thinkingConfig.thinkingBudget を 512 に絞って
+  wrangler deploy で直した。curl で truncated:false を確認済み。GitHub Pages 版でも実機確認済み
+  （2026-09-22、実験145を根拠にした質問で最後まで答えが返り、誤表示は出なくなった）
 - サイト側の呼び出し口は `site/partial_chrome.html`（`window.claude` が無いときだけ relay を使う）。
   build_site.py 側の変更は無し。**GitHub Pages に公開した後の実機確認はまだ**（publish.py 待ち）
 

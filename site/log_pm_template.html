@@ -7717,6 +7717,194 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 148 ===================== -->
+    <article class="entry entry--current" id="exp148">
+      <div class="badge">148</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>tube の円錐台は式 × 内接多角形の比 — Radius の1つ目が上、円錐の先は点が重なったまま</h2>
+        <p class="path">examples/148_tube_cone.py &nbsp;·&nbsp; 円錐台は式×内接多角形の比。Radius の1つ目が上</p>
+
+        <div class="prose">
+          <p>tube（Polygon、End Caps 入り、Height 1）で、Radius を (1, 0)・(1, 0.5)・(0.5, 1) にし、Columns を 12〜384 と変えて体積と面積を測った。</p>
+          <p>**Radius の1つ目が上（y = +0.5）、2つ目が下。**(0.5, 1) では上の半径が 0.5 になった。上下を入れ替えても、体積と面積は同じ値。</p>
+          <p>**体積は、円錐台の式 × n·sin(2π/n)/2π に合う**（9通りで差は最大 1e-05）。断面が内接正 n 角形なので、円（<a href="#exp143">実験143</a>）と同じだけ小さくなる。Columns 12 の円錐は 1.00001（式 1.047198）。</p>
+          <p>**円錐（Radius の片方 0）でも、先の点は Columns の数だけ重なって残る。**Columns 12 で点は 24（上の輪 12 ＋ 先 12）。先を1点にしたいときは fuse が要る。</p>
+          <p>**面積も式（側面 + 蓋2枚）に近づく。**Columns 384 で、円錐 7.584235（式 7.584476）。</p>
+        </div>
+
+        <p class="label">Radius・Columns と体積・面積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="148_cone.png" alt="円錐も円錐台も、点線（内接多角形の比）に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>円錐も円錐台も、点線（内接多角形の比）に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Radius</th><th>Columns</th><th>点</th><th>面</th><th>上の半径</th><th>体積</th><th>予測</th><th>式の体積</th><th>面積</th><th>式の面積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>(1, 0)</td><td class="num">12</td><td class="num">24</td><td class="num">14</td><td class="num">1</td><td class="num">1.000010</td><td class="num">1.000000</td><td class="num">1.047198</td><td class="num">7.318143</td><td class="num">7.584476</td><td class="num">0.0002</td></tr>
+              <tr><td>(1, 0)</td><td class="num">48</td><td class="num">96</td><td class="num">50</td><td class="num">1</td><td class="num">1.044220</td><td class="num">1.044210</td><td class="num">1.047198</td><td class="num">7.567612</td><td class="num">7.584476</td><td class="num">0.0001</td></tr>
+              <tr><td>(1, 0)</td><td class="num">384</td><td class="num">768</td><td class="num">386</td><td class="num">1</td><td class="num">1.047161</td><td class="num">1.047151</td><td class="num">1.047198</td><td class="num">7.584235</td><td class="num">7.584476</td><td class="num">0.0003</td></tr>
+              <tr><td>(1, 0.5)</td><td class="num">12</td><td class="num">24</td><td class="num">14</td><td class="num">1</td><td class="num">1.750000</td><td class="num">1.750000</td><td class="num">1.832596</td><td class="num">8.923624</td><td class="num">9.195602</td><td class="num">0.0001</td></tr>
+              <tr><td>(1, 0.5)</td><td class="num">48</td><td class="num">96</td><td class="num">50</td><td class="num">1</td><td class="num">1.827367</td><td class="num">1.827367</td><td class="num">1.832596</td><td class="num">9.178383</td><td class="num">9.195602</td><td class="num">0.0001</td></tr>
+              <tr><td>(1, 0.5)</td><td class="num">384</td><td class="num">768</td><td class="num">386</td><td class="num">1</td><td class="num">1.832514</td><td class="num">1.832514</td><td class="num">1.832596</td><td class="num">9.195334</td><td class="num">9.195602</td><td class="num">0.0002</td></tr>
+              <tr><td>(0.5, 1)</td><td class="num">12</td><td class="num">24</td><td class="num">14</td><td class="num">0.5</td><td class="num">1.750000</td><td class="num">1.750000</td><td class="num">1.832596</td><td class="num">8.923624</td><td class="num">9.195602</td><td class="num">0.0001</td></tr>
+              <tr><td>(0.5, 1)</td><td class="num">48</td><td class="num">96</td><td class="num">50</td><td class="num">0.5</td><td class="num">1.827367</td><td class="num">1.827367</td><td class="num">1.832596</td><td class="num">9.178383</td><td class="num">9.195602</td><td class="num">0.0001</td></tr>
+              <tr><td>(0.5, 1)</td><td class="num">384</td><td class="num">768</td><td class="num">386</td><td class="num">0.5</td><td class="num">1.832514</td><td class="num">1.832514</td><td class="num">1.832596</td><td class="num">9.195334</td><td class="num">9.195602</td><td class="num">0.0002</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">予測の体積 = πh(r1² + r1r2 + r2²)/3 × n·sin(2π/n)/2π。式の面積 = 側面 π(r1 + r2)√((r1 − r2)² + h²) + 蓋 π(r1² + r2²)。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Radius の1つ目 = 上、2つ目 = 下。</strong></li>
+          <li><strong>tube の円錐は先が閉じていない。</strong>点が Columns 個重なっているので、fuse してから使う。</li>
+          <li><strong>体積の不足は Columns だけで決まる。</strong>12 で −4.5%、48 で −0.3%、384 で −0.004%。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 149 ===================== -->
+    <article class="entry entry--current" id="exp149">
+      <div class="badge">149</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>divide の Bricker は原点から Size おきに線を引く — Convex は n 角形を n−2 枚の三角形か、その半分の四角形に</h2>
+        <p class="path">examples/149_divide.py &nbsp;·&nbsp; Bricker は原点から Size おき。Convex は n−2 枚の三角形</p>
+
+        <div class="prose">
+          <p>1×1 の正方形1枚（中心が原点）を Bricker Polygons で、正 n 角形を Convex Polygons で割り、枚数を数えた。</p>
+          <p>**Bricker は、原点（＋ Offset）から Size おきに切る線を引く。形の端からではない。**枚数は「正方形の内側を通る線の数 + 1」の2乗で、8通りで一致しないものがあった。Size 0.3 だと線は −0.3・0・0.3 の3本で 16 枚（端の升は 0.2 幅）。Offset 0.05 でずらすと線が1本増えて 25 枚。Size 0.5 は 0.5 ちょうどの線が縁に重なるので 4 枚、ずらすと 9 枚。</p>
+          <p>**Convex で Maximum Edges = 3 なら n − 2 枚の三角形、4 なら (n − 2)/2 枚（切り上げ）。**8通りすべてこの数。奇数角形を 4 で割ると、三角形が1枚だけ混ざる（13角形で三角形1＋四角形5）。</p>
+          <p>**どちらも面積は変わらない。**割る前と後で6桁一致した。</p>
+        </div>
+
+        <p class="label">Bricker: Size・Offset と枚数（1×1 の正方形）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Size</th><th>Offset</th><th>面</th><th>予測</th><th>点</th><th>何角形か</th><th>面積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">0</td><td class="num">4</td><td class="num">4</td><td class="num">9</td><td class="num">4</td><td class="num">1</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.05</td><td class="num">9</td><td class="num">9</td><td class="num">16</td><td class="num">4</td><td class="num">1</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">0.25</td><td class="num">0</td><td class="num">16</td><td class="num">16</td><td class="num">25</td><td class="num">4</td><td class="num">1</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">0.25</td><td class="num">0.05</td><td class="num">25</td><td class="num">25</td><td class="num">36</td><td class="num">4</td><td class="num">1</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">0.3</td><td class="num">0</td><td class="num">16</td><td class="num">16</td><td class="num">25</td><td class="num">4</td><td class="num">1</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">0.3</td><td class="num">0.05</td><td class="num">25</td><td class="num">16</td><td class="num">36</td><td class="num">4</td><td class="num">1</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">0.1</td><td class="num">0</td><td class="num">100</td><td class="num">100</td><td class="num">121</td><td class="num">4</td><td class="num">1</td><td class="num">0.0006</td></tr>
+              <tr><td class="num">0.1</td><td class="num">0.05</td><td class="num">121</td><td class="num">121</td><td class="num">144</td><td class="num">4</td><td class="num">1</td><td class="num">0.0005</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Offset は x・y・z に同じ値。予測 = (内側を通る線の数 + 1)²。</p>
+
+        <p class="label">Convex: 正 n 角形を割る</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="149_convex.png" alt="3 で割ると n − 2 枚、4 で割るとその約半分。" loading="lazy" decoding="async"></div>
+            <figcaption>3 で割ると n − 2 枚、4 で割るとその約半分。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>n</th><th>Maximum Edges</th><th>面</th><th>予測</th><th>面ごとの角の数</th><th>面積</th><th>割る前</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td>3・3・3</td><td class="num">2.377641</td><td class="num">2.377641</td></tr>
+              <tr><td class="num">5</td><td class="num">4</td><td class="num">2</td><td class="num">2</td><td>3・4</td><td class="num">2.377641</td><td class="num">2.377641</td></tr>
+              <tr><td class="num">8</td><td class="num">3</td><td class="num">6</td><td class="num">6</td><td>3・3・3・3・3・3</td><td class="num">2.828427</td><td class="num">2.828427</td></tr>
+              <tr><td class="num">8</td><td class="num">4</td><td class="num">3</td><td class="num">3</td><td>4・4・4</td><td class="num">2.828427</td><td class="num">2.828427</td></tr>
+              <tr><td class="num">12</td><td class="num">3</td><td class="num">10</td><td class="num">10</td><td>3・3・3・3・3・3・3・3・3・3</td><td class="num">3.000000</td><td class="num">3.000000</td></tr>
+              <tr><td class="num">12</td><td class="num">4</td><td class="num">5</td><td class="num">5</td><td>4・4・4・4・4</td><td class="num">3.000000</td><td class="num">3.000000</td></tr>
+              <tr><td class="num">13</td><td class="num">3</td><td class="num">11</td><td class="num">11</td><td>3・3・3・3・3・3・3・3・3・3・3</td><td class="num">3.020701</td><td class="num">3.020701</td></tr>
+              <tr><td class="num">13</td><td class="num">4</td><td class="num">6</td><td class="num">6</td><td>3・4・4・4・4・4</td><td class="num">3.020701</td><td class="num">3.020701</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Bricker の升目は原点から並ぶ。</strong>形の端とそろえたいなら Offset を形の端に合わせる。</li>
+          <li><strong>Size ちょうどで割り切れる形は、線が縁に重なって余計な升ができない。</strong>0.01 ずれると1列増える。</li>
+          <li><strong>Maximum Edges = 4 は、奇数角形だと三角形が1枚混ざる。</strong>全部四角にはならない。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 150 ===================== -->
+    <article class="entry entry--current" id="exp150">
+      <div class="badge">150</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>122〜149 の振り返り点検 — 28本すべて流し直し、時間以外の数字は全部一致</h2>
+        <p class="path">examples/150_audit.py &nbsp;·&nbsp; 122〜149 の28本を流し直し、時間以外は全部一致</p>
+
+        <div class="prose">
+          <p>30件ごとの点検（030・060・090・121 に続いて5回目）。122〜149 の28本を、121 と同じやり方で全部流し直した。記録（out/NNN_*.json）を控えに退避し、台本を <button class="term" data-term="hython">hython</button> で流し、新しい値と控えを数字1つずつ比べて、最後に控えを戻した（記録は変えていない）。</p>
+          <p>比べた値は 6,316 個。かかった時間は全部で 54 秒。</p>
+          <p>**時間以外の数字は全部一致した。**時間の項目は流すたびに揺れるので、比べる対象から外している。121 で見つかった「ファイルの大きさが1バイト違う」「記録に手で足した項目」の類いは、今回は無かった。</p>
+          <p>**記事を書く前に直したもの: 1件。**<a href="#exp149">実験149</a> で、Bricker の線は原点から引かれると一度書いたが、Offset 0.05・Size 0.3 の枚数が予測と合わなかった。点の位置を測り直すと、線は形の端から引かれていた。公開前に記事を直した。予測の式を表に並べておいたので、ずれに気づけた。</p>
+          <p>**理由が分かっていないもの: 1件。**<a href="#exp147">実験147</a> の Taper の体積（倍率を平均した値と 0.45% 違う）。</p>
+          <p>**スクリプトで見つけた落とし穴: 122〜149 で6件**（最初から式の入ったつまみは set しても変わらない 133・134、attribblur は Pin Border が入っていると曲線では何も変わらない 139、mirror の継ぎ目は距離がつまみ未満でないとまとまらない 145、clip の Both は切り口の点を共有したまま 146、tube の円錐は先の点が重なったまま 148、Bricker の升目は形の端から 149）。</p>
+        </div>
+
+        <p class="label">実験ごとの測り直し</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="150_audit.png" alt="28本とも、時間以外の数字がすべて一致。" loading="lazy" decoding="async"></div>
+            <figcaption>28本とも、時間以外の数字がすべて一致。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>実験</th><th>台本</th><th>比べた値</th><th>時間以外のずれ</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">122</td><td>122_polyexpand.py</td><td class="num">65</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">123</td><td>123_shrinkwrap.py</td><td class="num">66</td><td class="num">0</td><td class="num">1.4</td></tr>
+              <tr><td class="num">124</td><td>124_lsystem.py</td><td class="num">88</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">125</td><td>125_counts.py</td><td class="num">174</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">126</td><td>126_cluster.py</td><td class="num">41</td><td class="num">0</td><td class="num">1.3</td></tr>
+              <tr><td class="num">127</td><td>127_shortest_path.py</td><td class="num">23</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">128</td><td>128_extracttransform.py</td><td class="num">124</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">129</td><td>129_curvature.py</td><td class="num">360</td><td class="num">0</td><td class="num">1.4</td></tr>
+              <tr><td class="num">130</td><td>130_cusp.py</td><td class="num">354</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">131</td><td>131_bend.py</td><td class="num">170</td><td class="num">0</td><td class="num">3.3</td></tr>
+              <tr><td class="num">132</td><td>132_promote.py</td><td class="num">72</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">133</td><td>133_ray.py</td><td class="num">38</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">134</td><td>134_default_expr.py</td><td class="num">2,022</td><td class="num">0</td><td class="num">9.9</td></tr>
+              <tr><td class="num">135</td><td>135_noise_range.py</td><td class="num">63</td><td class="num">0</td><td class="num">2.6</td></tr>
+              <tr><td class="num">136</td><td>136_nearpoints.py</td><td class="num">194</td><td class="num">0</td><td class="num">1.2</td></tr>
+              <tr><td class="num">137</td><td>137_vex_fit.py</td><td class="num">287</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">138</td><td>138_sdf_values.py</td><td class="num">436</td><td class="num">0</td><td class="num">1.3</td></tr>
+              <tr><td class="num">139</td><td>139_attribblur.py</td><td class="num">110</td><td class="num">0</td><td class="num">1.5</td></tr>
+              <tr><td class="num">140</td><td>140_copy_attrs.py</td><td class="num">84</td><td class="num">0</td><td class="num">1.2</td></tr>
+              <tr><td class="num">141</td><td>141_points_from_volume.py</td><td class="num">84</td><td class="num">0</td><td class="num">2.8</td></tr>
+              <tr><td class="num">142</td><td>142_platonic.py</td><td class="num">77</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">143</td><td>143_circle.py</td><td class="num">98</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">144</td><td>144_torus.py</td><td class="num">67</td><td class="num">0</td><td class="num">1.6</td></tr>
+              <tr><td class="num">145</td><td>145_mirror_seam.py</td><td class="num">185</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">146</td><td>146_clip_cap.py</td><td class="num">288</td><td class="num">0</td><td class="num">8.3</td></tr>
+              <tr><td class="num">147</td><td>147_twist_ops.py</td><td class="num">504</td><td class="num">0</td><td class="num">1.1</td></tr>
+              <tr><td class="num">148</td><td>148_tube_cone.py</td><td class="num">108</td><td class="num">0</td><td class="num">1.0</td></tr>
+              <tr><td class="num">149</td><td>149_divide.py</td><td class="num">134</td><td class="num">0</td><td class="num">1.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">時間の項目（sec など）は除いて比べた。許す差は 0.000001（相対）。</p>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>28本すべて流し直せた。</strong>全部で約54秒。</li>
+          <li><strong>予測の式を表に並べておくと、書き間違いに気づける。</strong>149 の Bricker がそうだった。</li>
+          <li><strong>次の点検は180。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
