@@ -2089,6 +2089,126 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   .ask-msg.is-thinking .ask-body { animation: none; }
 }
+.ask-detail { margin: 4px 0 0; font-size: 0.7rem; color: var(--ink-dim); word-break: break-all; }
+
+/* ---------- AI のチャット画面 ----------
+   広い画面では右から出る幅 460px の板、狭い画面では全面。
+   上に見出し、真ん中に会話（ここだけ流れる）、下に入力欄。 */
+
+.chat-sheet {
+  left: auto;
+  width: min(460px, 100%);
+  overflow: hidden;
+  border-left: 1px solid var(--wire-dim);
+  box-shadow: -18px 0 48px rgba(0, 0, 0, 0.12);
+}
+.chat-head {
+  flex: none;
+  height: var(--bar);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px 0 20px;
+  border-bottom: 1px solid var(--wire-dim);
+}
+.chat-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  white-space: nowrap;
+  min-width: 0;
+}
+.chat-title svg { width: 18px; height: 18px; flex: none; }
+.chat-head .ask-sub { white-space: nowrap; }
+.chat-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 20px 12px;
+}
+.chat-scroll .ask-log { margin-top: 0; }
+.chat-welcome[hidden] { display: none; }
+.chat-welcome-lead { margin: 4px 0 14px; font-size: 0.9rem; line-height: 1.7; color: var(--ink-mid); }
+.chat-starters { display: grid; gap: 8px; }
+.chat-starters button {
+  font: inherit;
+  font-size: 0.84rem;
+  text-align: left;
+  padding: 10px 14px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 12px;
+  background: var(--ground);
+  color: var(--ink);
+  cursor: pointer;
+}
+.chat-starters button:hover { background: var(--ground-2); }
+.chat-starters button:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.chat-sheet .ask-msg--a .ask-body { max-width: none; overflow-wrap: anywhere; }
+.chat-sheet .ask-msg { min-width: 0; }
+.chat-sheet .ask-log { grid-template-columns: minmax(0, 1fr); }
+.chat-foot {
+  flex: none;
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--wire-dim);
+  background: var(--ground);
+}
+.chat-compose {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 6px 6px 6px 14px;
+  border: 1px solid var(--wire);
+  border-radius: 20px;
+  background: var(--ground);
+}
+.chat-compose:focus-within { border-color: var(--ink-mid); }
+.chat-compose textarea {
+  flex: 1;
+  min-width: 0;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 5px 0;
+  max-height: 160px;
+}
+.chat-compose textarea::placeholder { color: var(--ink-dim); }
+.chat-send {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+}
+.chat-send svg { width: 18px; height: 18px; display: block; }
+.chat-send:disabled { background: var(--ground-2); color: var(--ink-dim); cursor: default; }
+.chat-send[hidden] { display: none; }
+.chat-send:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.chat-foot .ask-fine { margin-top: 8px; }
+
+@media (max-width: 720px) {
+  .chat-sheet { width: 100%; border-left: none; box-shadow: none; }
+  .chat-head { padding-left: 16px; }
+  .chat-scroll { padding: 16px 16px 10px; }
+  .chat-foot { padding: 8px 12px 12px; }
+  .chat-compose textarea { font-size: 16px; } /* iOS が拡大しないように */
+}
 
 /* ---------- 手順の中の、本物の Houdini 画面 ---------- */
 
@@ -2487,20 +2607,64 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
             <path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"
                   fill="currentColor"/>
           </svg>
-          <span>AI に聞く</span>
+          <span>この言葉で AI に聞く</span>
         </button>
         <span class="ask-beta">Beta 版</span>
-        <button type="button" class="ask-sub" id="ask-stop" hidden>止める</button>
-        <button type="button" class="ask-sub" id="ask-clear" hidden>会話を消す</button>
       </div>
-      <div class="ask-log" id="ask-log" aria-live="polite"></div>
-      <p class="ask-fine">
-        まだベータです。答えの根拠はこのサイトの記録だけで、書いていないことは「まだ確かめていない」と答えます。
-        続けて聞けば、直近8往復ぶんは話の流れを覚えています。<span id="ask-engine">あなたの Claude の利用枠を使います。</span>
-      </p>
     </div>
     <p class="search-hint" id="search-hint">よく見るところ</p>
     <ul class="search-results" id="search-results"></ul>
+  </div>
+</div>
+
+<div class="sheet chat-sheet" id="chat-sheet" role="dialog" aria-modal="true" aria-labelledby="chat-title" hidden>
+  <div class="chat-head">
+    <div class="chat-title">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z"
+              stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor"/>
+      </svg>
+      <span id="chat-title">AI に聞く</span>
+      <span class="ask-beta">Beta 版</span>
+    </div>
+    <button type="button" class="ask-sub" id="ask-clear" hidden>会話を消す</button>
+    <button type="button" class="nav-icon sheet-close" aria-label="閉じる">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="chat-scroll" id="chat-scroll">
+    <div class="chat-welcome" id="chat-welcome">
+      <p class="chat-welcome-lead">Houdini のことを、このサイトの記録をもとに答えます。</p>
+      <div class="chat-starters" id="chat-starters">
+        <button type="button">煙を出したい</button>
+        <button type="button">VDB の升目を細かくすると体積はどう変わる？</button>
+        <button type="button">mirror の継ぎ目がくっつかない</button>
+      </div>
+    </div>
+    <div class="ask-log" id="ask-log" aria-live="polite"></div>
+  </div>
+  <div class="chat-foot">
+    <div class="chat-compose">
+      <textarea id="chat-input" rows="1" placeholder="AI に何を聞きますか？" aria-label="AI への質問"></textarea>
+      <button type="button" class="chat-send" id="chat-send" aria-label="送る" disabled>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button type="button" class="chat-send chat-stop" id="ask-stop" aria-label="止める" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <p class="ask-fine">
+      答えの根拠はこのサイトの記録だけで、書いていないことは「まだ確かめていない」と答えます。
+      直近8往復ぶんは話の流れを覚えています。<span id="ask-engine">あなたの Claude の利用枠を使います。</span>
+      Enter で送信、Shift+Enter で改行。
+    </p>
   </div>
 </div>
 
@@ -3010,19 +3174,31 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
     });
 
     /* 検索の横の AI アイコン。AI が使える環境でだけ出す。
-       検索とは別に、候補一覧を出さず AI のチャットへ直接開く。
-       同じ入力欄を使うので、検索で打った文字のまま「AI に聞く」へ移っても
-       (search-open を経由し直さない限り)そのまま引き継がれる。 */
+       検索とは別の、チャットの画面（#chat-sheet）を開く。
+       会話はページを閉じるまで残るので、閉じて開き直しても続きから話せる。 */
     var askOpen = document.getElementById("ask-open");
+    var chatSheet = document.getElementById("chat-sheet");
+    var chatInput = document.getElementById("chat-input");
+    var chatSend = document.getElementById("chat-send");
+    var chatScroll = document.getElementById("chat-scroll");
+    var chatWelcome = document.getElementById("chat-welcome");
+
+    function openChat(text) {
+      show(chatSheet);
+      if (typeof text === "string") { chatInput.value = text; }
+      growInput();
+      updateAsk();
+      setTimeout(function () { chatInput.focus(); }, 30);
+    }
+
+    /* 入力欄は打った行数に合わせて伸ばす（6行まで） */
+    function growInput() {
+      chatInput.style.height = "auto";
+      chatInput.style.height = Math.min(chatInput.scrollHeight, 160) + "px";
+    }
+
     if (askOpen) {
-      askOpen.addEventListener("click", function () {
-        hint.hidden = true;
-        results.hidden = true;
-        input.placeholder = "AI に何を聞きますか？";
-        show(searchSheet);
-        input.value = "";
-        setTimeout(function () { input.focus(); }, 30);
-      });
+      askOpen.addEventListener("click", function () { openChat(); });
     }
 
     input.addEventListener("input", function () {
@@ -3136,8 +3312,13 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
       body.textContent = text;
       div.appendChild(body);
       askLog.appendChild(div);
-      if (div.scrollIntoView) { div.scrollIntoView({ block: "nearest" }); }
+      chatWelcome.hidden = true;
+      toBottom();
       return div;
+    }
+
+    function toBottom() {
+      chatScroll.scrollTop = chatScroll.scrollHeight;
     }
 
     function addRefs(msg, list) {
@@ -3167,13 +3348,34 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 
     function updateAsk() {
       if (!sampleFn) { return; }
-      askGo.disabled = !input.value.trim() || !!askCtl;
+      askGo.disabled = !input.value.trim();
+      chatSend.disabled = !chatInput.value.trim() || !!askCtl;
     }
 
     function askBusy(on) {
       askStop.hidden = !on;
+      chatSend.hidden = on;
       askClear.hidden = on || !turns.length;
       updateAsk();
+    }
+
+    /* 無料枠の Gemini は、たまに一度だけ失敗して次は通る（2026-09-22、
+       同じ質問が一度「接続が切れた」になり、送り直すと答えた）。
+       そこで、止めた・断られた以外の失敗は、少し待って1回だけ自動で送り直す。 */
+    var RETRY_ONCE = ["upstream_error", "rate_limited", "empty_completion"];
+
+    function sampleWithRetry(msgs, opts, onRetry) {
+      return sampleFn(msgs, opts).catch(function (e) {
+        var code = (e && e.code) || "upstream_error";
+        if (RETRY_ONCE.indexOf(code) === -1 || (opts.signal && opts.signal.aborted)) { throw e; }
+        if (onRetry) { onRetry(); }
+        return new Promise(function (resolve) {
+          setTimeout(resolve, code === "rate_limited" ? 4000 : 1500);
+        }).then(function () {
+          if (opts.signal && opts.signal.aborted) { throw errorWith("cancelled", ""); }
+          return sampleFn(msgs, opts);
+        });
+      });
     }
 
     /* これが返ってきたら、この閲覧では AI を使えない。二度と頼まない */
@@ -3181,8 +3383,10 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
                 "capability_disabled", "capability_removed", "tools_unavailable"];
 
     function send() {
-      var q = input.value.trim();
+      var q = chatInput.value.trim();
       if (!sampleFn || !q || askCtl) { return; }
+      chatInput.value = "";
+      growInput();
       var ctx = askContext(q);
       var msgs = [{ role: "user", content: RULES }]
         .concat(turns.slice(-8))
@@ -3197,13 +3401,16 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 
       askCtl = new AbortController();
       askBusy(true);
-      sampleFn(msgs, {
+      sampleWithRetry(msgs, {
         cache: false,
         signal: askCtl.signal,
         onText: function (u) {
           msg.classList.remove("is-thinking");
           fillAnswer(body, u.text);
+          toBottom();
         }
+      }, function () {
+        body.textContent = "つながりにくいので、もう一度送っています…";
       }).then(function (res) {
         msg.classList.remove("is-thinking");
         fillAnswer(body, res.text);
@@ -3232,22 +3439,52 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           refused: "この質問には答えられませんでした。言い方を変えてみてください。",
           empty_completion: "答えが空でした。質問を短くしてみてください。",
           prompt_too_large: "質問が長すぎました。短くしてみてください。"
-        }[code] || "途中で接続が切れました。もう一度押してください。");
+        }[code] || "つながりませんでした（自動で1回送り直しても通りませんでした）。少し待ってから、もう一度送ってください。");
+        if (e && e.message && e.message !== code && sampleFn === relaySample) {
+          var detail = document.createElement("p");
+          detail.className = "ask-detail";
+          detail.textContent = "詳しく: " + String(e.message).slice(0, 160);
+          msg.appendChild(detail);
+        }
       }).then(function () {
         askCtl = null;
         askBusy(false);
+        toBottom();
+        chatInput.focus();
       });
     }
 
-    askGo.addEventListener("click", send);
+    /* 検索画面の「この言葉で AI に聞く」: 打った言葉を持ってチャットへ移り、そのまま送る */
+    askGo.addEventListener("click", function () {
+      var q = input.value.trim();
+      if (!q) { return; }
+      openChat(q);
+      send();
+    });
+    chatSend.addEventListener("click", send);
     askStop.addEventListener("click", function () { if (askCtl) { askCtl.abort(); } });
     askClear.addEventListener("click", function () {
       turns = [];
       askLog.textContent = "";
       askClear.hidden = true;
-      input.focus();
+      chatWelcome.hidden = false;
+      chatInput.focus();
     });
     input.addEventListener("input", updateAsk);
+    chatInput.addEventListener("input", function () { growInput(); updateAsk(); });
+    chatInput.addEventListener("keydown", function (event) {
+      // 日本語の変換中の Enter は確定なので送らない
+      if (event.key === "Enter" && !event.shiftKey && !event.isComposing && event.keyCode !== 229) {
+        event.preventDefault();
+        send();
+      }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#chat-starters button"), function (b) {
+      b.addEventListener("click", function () {
+        chatInput.value = b.textContent;
+        send();
+      });
+    });
 
     if (window.claude && typeof window.claude.use === "function") {
       window.claude.use("sample").then(function (s) {
@@ -3271,7 +3508,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
       else if (event.key === "ArrowUp") { event.preventDefault(); moveCursor(-1); }
       else if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
         event.preventDefault();
-        send();
+        askGo.click();
       }
       else if (event.key === "Enter") {
         event.preventDefault();

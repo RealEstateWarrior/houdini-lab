@@ -2085,6 +2085,126 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   .ask-msg.is-thinking .ask-body { animation: none; }
 }
+.ask-detail { margin: 4px 0 0; font-size: 0.7rem; color: var(--ink-dim); word-break: break-all; }
+
+/* ---------- AI のチャット画面 ----------
+   広い画面では右から出る幅 460px の板、狭い画面では全面。
+   上に見出し、真ん中に会話（ここだけ流れる）、下に入力欄。 */
+
+.chat-sheet {
+  left: auto;
+  width: min(460px, 100%);
+  overflow: hidden;
+  border-left: 1px solid var(--wire-dim);
+  box-shadow: -18px 0 48px rgba(0, 0, 0, 0.12);
+}
+.chat-head {
+  flex: none;
+  height: var(--bar);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px 0 20px;
+  border-bottom: 1px solid var(--wire-dim);
+}
+.chat-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  white-space: nowrap;
+  min-width: 0;
+}
+.chat-title svg { width: 18px; height: 18px; flex: none; }
+.chat-head .ask-sub { white-space: nowrap; }
+.chat-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 20px 12px;
+}
+.chat-scroll .ask-log { margin-top: 0; }
+.chat-welcome[hidden] { display: none; }
+.chat-welcome-lead { margin: 4px 0 14px; font-size: 0.9rem; line-height: 1.7; color: var(--ink-mid); }
+.chat-starters { display: grid; gap: 8px; }
+.chat-starters button {
+  font: inherit;
+  font-size: 0.84rem;
+  text-align: left;
+  padding: 10px 14px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 12px;
+  background: var(--ground);
+  color: var(--ink);
+  cursor: pointer;
+}
+.chat-starters button:hover { background: var(--ground-2); }
+.chat-starters button:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.chat-sheet .ask-msg--a .ask-body { max-width: none; overflow-wrap: anywhere; }
+.chat-sheet .ask-msg { min-width: 0; }
+.chat-sheet .ask-log { grid-template-columns: minmax(0, 1fr); }
+.chat-foot {
+  flex: none;
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--wire-dim);
+  background: var(--ground);
+}
+.chat-compose {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 6px 6px 6px 14px;
+  border: 1px solid var(--wire);
+  border-radius: 20px;
+  background: var(--ground);
+}
+.chat-compose:focus-within { border-color: var(--ink-mid); }
+.chat-compose textarea {
+  flex: 1;
+  min-width: 0;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 5px 0;
+  max-height: 160px;
+}
+.chat-compose textarea::placeholder { color: var(--ink-dim); }
+.chat-send {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+}
+.chat-send svg { width: 18px; height: 18px; display: block; }
+.chat-send:disabled { background: var(--ground-2); color: var(--ink-dim); cursor: default; }
+.chat-send[hidden] { display: none; }
+.chat-send:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.chat-foot .ask-fine { margin-top: 8px; }
+
+@media (max-width: 720px) {
+  .chat-sheet { width: 100%; border-left: none; box-shadow: none; }
+  .chat-head { padding-left: 16px; }
+  .chat-scroll { padding: 16px 16px 10px; }
+  .chat-foot { padding: 8px 12px 12px; }
+  .chat-compose textarea { font-size: 16px; } /* iOS が拡大しないように */
+}
 
 /* ---------- 手順の中の、本物の Houdini 画面 ---------- */
 
