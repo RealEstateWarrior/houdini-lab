@@ -1246,6 +1246,12 @@ DONE = [
      "shots": ["184_count.png"],
      "title": "mpmsource は箱に「体積 ÷ Particle Separation³」個の粒を詰める — pscale には Separation そのものが入る",
      "note": "箱に体積÷Separation³個の粒を詰める。pscale には Separation そのものが入る"},
+    {"no": "185", "anchor": "exp185",
+     "tags": ["モデリング", "検算", "smooth"],
+     "log": "log_pm", "thumb": "185_smooth.png",
+     "shots": ["185_smooth.png"],
+     "title": "smooth の縮み方は r = 1/(1 + Strength·L^q/C(2q, q)) — 36 通りで6桁一致。Filter Quality を上げるほど形を保つ",
+     "note": "縮み方は r = 1/(1+S·L^q/C(2q,q))。36通りで6桁一致"},
 ]
 
 PLANNED = []

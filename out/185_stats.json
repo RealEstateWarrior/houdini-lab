@@ -1,0 +1,328 @@
+{
+  "rows": [
+    {
+      "n": 12,
+      "strength": 1.0,
+      "quality": 1,
+      "r": 0.881854,
+      "r_spread": 2e-07,
+      "neg_ln_r_over_k": 0.93845,
+      "sec": 0.0004
+    },
+    {
+      "n": 12,
+      "strength": 1.0,
+      "quality": 2,
+      "r": 0.9881754,
+      "r_spread": 2e-07,
+      "neg_ln_r_over_k": 0.08879,
+      "sec": 0.0002
+    },
+    {
+      "n": 12,
+      "strength": 1.0,
+      "quality": 3,
+      "r": 0.999039,
+      "r_spread": 2e-07,
+      "neg_ln_r_over_k": 0.00718,
+      "sec": 0.0002
+    },
+    {
+      "n": 12,
+      "strength": 10.0,
+      "quality": 1,
+      "r": 0.4273968,
+      "r_spread": 6e-07,
+      "neg_ln_r_over_k": 6.3448,
+      "sec": 0.0002
+    },
+    {
+      "n": 12,
+      "strength": 10.0,
+      "quality": 2,
+      "r": 0.8931273,
+      "r_spread": 8e-07,
+      "neg_ln_r_over_k": 0.84364,
+      "sec": 0.0001
+    },
+    {
+      "n": 12,
+      "strength": 10.0,
+      "quality": 3,
+      "r": 0.9904727,
+      "r_spread": 1.3e-06,
+      "neg_ln_r_over_k": 0.07145,
+      "sec": 0.0001
+    },
+    {
+      "n": 12,
+      "strength": 100.0,
+      "quality": 1,
+      "r": 0.0694567,
+      "r_spread": 2e-07,
+      "neg_ln_r_over_k": 19.90715,
+      "sec": 0.0001
+    },
+    {
+      "n": 12,
+      "strength": 100.0,
+      "quality": 2,
+      "r": 0.4552464,
+      "r_spread": 5e-07,
+      "neg_ln_r_over_k": 5.87363,
+      "sec": 0.0001
+    },
+    {
+      "n": 12,
+      "strength": 100.0,
+      "quality": 3,
+      "r": 0.9122511,
+      "r_spread": 4e-07,
+      "neg_ln_r_over_k": 0.6855,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 1.0,
+      "quality": 1,
+      "r": 0.9670486,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.98334,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 1.0,
+      "quality": 2,
+      "r": 0.9992266,
+      "r_spread": 2e-07,
+      "neg_ln_r_over_k": 0.02271,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 1.0,
+      "quality": 3,
+      "r": 0.9999842,
+      "r_spread": 2e-07,
+      "neg_ln_r_over_k": 0.00046,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 10.0,
+      "quality": 1,
+      "r": 0.7458558,
+      "r_spread": 1.3e-06,
+      "neg_ln_r_over_k": 8.60543,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 10.0,
+      "quality": 2,
+      "r": 0.9923191,
+      "r_spread": 5e-07,
+      "neg_ln_r_over_k": 0.22629,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 10.0,
+      "quality": 3,
+      "r": 0.999842,
+      "r_spread": 6e-07,
+      "neg_ln_r_over_k": 0.00464,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 100.0,
+      "quality": 1,
+      "r": 0.2268902,
+      "r_spread": 4e-07,
+      "neg_ln_r_over_k": 43.53118,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 100.0,
+      "quality": 2,
+      "r": 0.9281576,
+      "r_spread": 9e-07,
+      "neg_ln_r_over_k": 2.18799,
+      "sec": 0.0001
+    },
+    {
+      "n": 24,
+      "strength": 100.0,
+      "quality": 3,
+      "r": 0.99842,
+      "r_spread": 9e-07,
+      "neg_ln_r_over_k": 0.0464,
+      "sec": 0.0001
+    },
+    {
+      "n": 48,
+      "strength": 1.0,
+      "quality": 1,
+      "r": 0.9915174,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.99575,
+      "sec": 0.0001
+    },
+    {
+      "n": 48,
+      "strength": 1.0,
+      "quality": 2,
+      "r": 0.9999512,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.0057,
+      "sec": 0.0002
+    },
+    {
+      "n": 48,
+      "strength": 1.0,
+      "quality": 3,
+      "r": 1.0,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.0,
+      "sec": 0.0001
+    },
+    {
+      "n": 48,
+      "strength": 10.0,
+      "quality": 1,
+      "r": 0.9211908,
+      "r_spread": 3e-07,
+      "neg_ln_r_over_k": 9.59517,
+      "sec": 0.0004
+    },
+    {
+      "n": 48,
+      "strength": 10.0,
+      "quality": 2,
+      "r": 0.9995124,
+      "r_spread": 5e-07,
+      "neg_ln_r_over_k": 0.05701,
+      "sec": 0.0002
+    },
+    {
+      "n": 48,
+      "strength": 10.0,
+      "quality": 3,
+      "r": 1.0,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.0,
+      "sec": 0.0001
+    },
+    {
+      "n": 48,
+      "strength": 100.0,
+      "quality": 1,
+      "r": 0.5389343,
+      "r_spread": 3e-07,
+      "neg_ln_r_over_k": 72.25618,
+      "sec": 0.0001
+    },
+    {
+      "n": 48,
+      "strength": 100.0,
+      "quality": 2,
+      "r": 0.9951443,
+      "r_spread": 6e-07,
+      "neg_ln_r_over_k": 0.56896,
+      "sec": 0.0002
+    },
+    {
+      "n": 48,
+      "strength": 100.0,
+      "quality": 3,
+      "r": 0.9999762,
+      "r_spread": 9e-07,
+      "neg_ln_r_over_k": 0.00278,
+      "sec": 0.0002
+    },
+    {
+      "n": 96,
+      "strength": 1.0,
+      "quality": 1,
+      "r": 0.9978635,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.99893,
+      "sec": 0.0001
+    },
+    {
+      "n": 96,
+      "strength": 1.0,
+      "quality": 2,
+      "r": 1.0,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.0,
+      "sec": 0.0001
+    },
+    {
+      "n": 96,
+      "strength": 1.0,
+      "quality": 3,
+      "r": 1.0,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.0,
+      "sec": 0.0002
+    },
+    {
+      "n": 96,
+      "strength": 10.0,
+      "quality": 1,
+      "r": 0.979038,
+      "r_spread": 2e-07,
+      "neg_ln_r_over_k": 9.89445,
+      "sec": 0.0002
+    },
+    {
+      "n": 96,
+      "strength": 10.0,
+      "quality": 2,
+      "r": 0.9999707,
+      "r_spread": 6e-07,
+      "neg_ln_r_over_k": 0.01366,
+      "sec": 0.0002
+    },
+    {
+      "n": 96,
+      "strength": 10.0,
+      "quality": 3,
+      "r": 1.0,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.0,
+      "sec": 0.0003
+    },
+    {
+      "n": 96,
+      "strength": 100.0,
+      "quality": 1,
+      "r": 0.8236502,
+      "r_spread": 3e-07,
+      "neg_ln_r_over_k": 90.613,
+      "sec": 0.0001
+    },
+    {
+      "n": 96,
+      "strength": 100.0,
+      "quality": 2,
+      "r": 0.9996945,
+      "r_spread": 4e-07,
+      "neg_ln_r_over_k": 0.14269,
+      "sec": 0.0002
+    },
+    {
+      "n": 96,
+      "strength": 100.0,
+      "quality": 3,
+      "r": 1.0,
+      "r_spread": 1e-07,
+      "neg_ln_r_over_k": 0.0,
+      "sec": 0.0002
+    }
+  ]
+}

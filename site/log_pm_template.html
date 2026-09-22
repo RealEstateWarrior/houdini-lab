@@ -9026,6 +9026,83 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 185 ===================== -->
+    <article class="entry entry--current" id="exp185">
+      <div class="badge">185</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>smooth の縮み方は r = 1/(1 + Strength·L^q/C(2q, q)) — 36 通りで6桁一致。Filter Quality を上げるほど形を保つ</h2>
+        <p class="path">examples/185_smooth_circle.py &nbsp;·&nbsp; 縮み方は r = 1/(1+S·L^q/C(2q,q))。36通りで6桁一致</p>
+
+        <div class="prose">
+          <p>半径 1 の circle（Polygon、n 角形）に smooth（smooth::2.0、Method = Uniform、Constrained Boundary なし）をかけ、残った半径 r を測った。点の数 n・Strength S・Filter Quality q を変えた（36 通り）。</p>
+          <p>**Filter Quality 1 では r = 1/(1 + S·(1 − cos θ))（θ = 2π/n）。**n = 12・S = 10 で 0.4273968（式 0.4273968）。となりの平均へ近づける計算を、1 回で「行き先から逆算して」解く形（陰的な1ステップ）になっている。S をいくら大きくしても、半径は 0 にはならない。</p>
+          <p>**Filter Quality q を上げると、r = 1/(1 + S·L^q/C(2q, q))。**L = 2(1 − cos θ)（となりとの差の強さ）、C(2q, q) は二項係数（q = 1・2・3 で 2・6・20）。36 通りすべてで、この式との差は最大 3e-06。L は 1 より小さいので、q を上げるほど縮みにくくなる。細かいでこぼこ（L が大きい）は消し、なだらかな形（L が小さい）は残すフィルタになっている。</p>
+          <p>**点の数が多いほど縮まない。**同じ Strength 10・Quality 1 で、n = 12 は 0.427、n = 96 は 0.979。細かい網ほど、となりとの差が小さいため。</p>
+          <p>**どの点も同じだけ縮む**（半径のばらつきは最大 1.3e-6）。形は円のまま小さくなる。</p>
+        </div>
+
+        <p class="label">点の数・Strength・Filter Quality と、残った半径</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="185_smooth.png" alt="Quality 3（緑）は n = 24 でもほぼ縮まない。" loading="lazy" decoding="async"></div>
+            <figcaption>Quality 3（緑）は n = 24 でもほぼ縮まない。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>n</th><th>Strength</th><th>Filter Quality</th><th>残った半径</th><th>式</th><th>−ln r ÷ (1 − cos θ)</th><th>点ごとの差</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">12</td><td class="num">1</td><td class="num">1</td><td class="num">0.8818540</td><td class="num">0.8818540</td><td class="num">0.93845</td><td>2.0e-07</td><td class="num">0.0004</td></tr>
+              <tr><td class="num">12</td><td class="num">1</td><td class="num">2</td><td class="num">0.9881754</td><td class="num">0.9881754</td><td class="num">0.08879</td><td>2.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">12</td><td class="num">1</td><td class="num">3</td><td class="num">0.9990390</td><td class="num">0.9990390</td><td class="num">0.00718</td><td>2.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">12</td><td class="num">10</td><td class="num">1</td><td class="num">0.4273968</td><td class="num">0.4273968</td><td class="num">6.3448</td><td>6.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">12</td><td class="num">10</td><td class="num">2</td><td class="num">0.8931273</td><td class="num">0.8931272</td><td class="num">0.84364</td><td>8.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">12</td><td class="num">10</td><td class="num">3</td><td class="num">0.9904727</td><td class="num">0.9904727</td><td class="num">0.07145</td><td>1.3e-06</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">12</td><td class="num">100</td><td class="num">1</td><td class="num">0.0694567</td><td class="num">0.0694567</td><td class="num">19.9072</td><td>2.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">12</td><td class="num">100</td><td class="num">2</td><td class="num">0.4552464</td><td class="num">0.4552464</td><td class="num">5.87363</td><td>5.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">12</td><td class="num">100</td><td class="num">3</td><td class="num">0.9122511</td><td class="num">0.9122511</td><td class="num">0.6855</td><td>4.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">1</td><td class="num">1</td><td class="num">0.9670486</td><td class="num">0.9670486</td><td class="num">0.98334</td><td>1.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">1</td><td class="num">2</td><td class="num">0.9992266</td><td class="num">0.9992266</td><td class="num">0.02271</td><td>2.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">1</td><td class="num">3</td><td class="num">0.9999842</td><td class="num">0.9999842</td><td class="num">0.00046</td><td>2.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">10</td><td class="num">1</td><td class="num">0.7458558</td><td class="num">0.7458558</td><td class="num">8.60543</td><td>1.3e-06</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">10</td><td class="num">2</td><td class="num">0.9923191</td><td class="num">0.9923191</td><td class="num">0.22629</td><td>5.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">10</td><td class="num">3</td><td class="num">0.9998420</td><td class="num">0.9998418</td><td class="num">0.00464</td><td>6.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">100</td><td class="num">1</td><td class="num">0.2268902</td><td class="num">0.2268902</td><td class="num">43.5312</td><td>4.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">100</td><td class="num">2</td><td class="num">0.9281576</td><td class="num">0.9281576</td><td class="num">2.18799</td><td>9.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">24</td><td class="num">100</td><td class="num">3</td><td class="num">0.9984200</td><td class="num">0.9984200</td><td class="num">0.0464</td><td>9.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">48</td><td class="num">1</td><td class="num">1</td><td class="num">0.9915174</td><td class="num">0.9915174</td><td class="num">0.99575</td><td>1.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">48</td><td class="num">1</td><td class="num">2</td><td class="num">0.9999512</td><td class="num">0.9999512</td><td class="num">0.0057</td><td>1.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">48</td><td class="num">1</td><td class="num">3</td><td class="num">1.0000000</td><td class="num">0.9999997</td><td class="num">0</td><td>1.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">48</td><td class="num">10</td><td class="num">1</td><td class="num">0.9211908</td><td class="num">0.9211908</td><td class="num">9.59517</td><td>3.0e-07</td><td class="num">0.0004</td></tr>
+              <tr><td class="num">48</td><td class="num">10</td><td class="num">2</td><td class="num">0.9995124</td><td class="num">0.9995123</td><td class="num">0.05701</td><td>5.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">48</td><td class="num">10</td><td class="num">3</td><td class="num">1.0000000</td><td class="num">0.9999975</td><td class="num">0</td><td>1.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">48</td><td class="num">100</td><td class="num">1</td><td class="num">0.5389343</td><td class="num">0.5389343</td><td class="num">72.2562</td><td>3.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">48</td><td class="num">100</td><td class="num">2</td><td class="num">0.9951443</td><td class="num">0.9951443</td><td class="num">0.56896</td><td>6.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">48</td><td class="num">100</td><td class="num">3</td><td class="num">0.9999762</td><td class="num">0.9999750</td><td class="num">0.00278</td><td>9.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">96</td><td class="num">1</td><td class="num">1</td><td class="num">0.9978635</td><td class="num">0.9978635</td><td class="num">0.99893</td><td>1.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">96</td><td class="num">1</td><td class="num">2</td><td class="num">1.0000000</td><td class="num">0.9999969</td><td class="num">0</td><td>1.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">96</td><td class="num">1</td><td class="num">3</td><td class="num">1.0000000</td><td class="num">1.0000000</td><td class="num">0</td><td>1.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">96</td><td class="num">10</td><td class="num">1</td><td class="num">0.9790380</td><td class="num">0.9790380</td><td class="num">9.89445</td><td>2.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">96</td><td class="num">10</td><td class="num">2</td><td class="num">0.9999707</td><td class="num">0.9999694</td><td class="num">0.01366</td><td>6.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">96</td><td class="num">10</td><td class="num">3</td><td class="num">1.0000000</td><td class="num">1.0000000</td><td class="num">0</td><td>1.0e-07</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">96</td><td class="num">100</td><td class="num">1</td><td class="num">0.8236502</td><td class="num">0.8236502</td><td class="num">90.613</td><td>3.0e-07</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">96</td><td class="num">100</td><td class="num">2</td><td class="num">0.9996945</td><td class="num">0.9996945</td><td class="num">0.14269</td><td>4.0e-07</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">96</td><td class="num">100</td><td class="num">3</td><td class="num">1.0000000</td><td class="num">0.9999996</td><td class="num">0</td><td>1.0e-07</td><td class="num">0.0002</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>smooth は何度かけても、1 回の Strength を上げても、ゼロまでは縮まない。</strong>1/(1 + S·…) の形。</li>
+          <li><strong>形を保ったまま細かいでこぼこだけ消したいなら Filter Quality を上げる。</strong>3 なら 96 角形の円はまったく縮まない。</li>
+          <li><strong>粗い網ほど縮む。</strong>同じ Strength でも、点が少ない所は形が大きく変わる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
