@@ -1174,6 +1174,12 @@ DONE = [
      "shots": ["172_crowd.png"],
      "title": "curlnoise で流した粒は混み具合をほぼ保つ — ふつうのノイズで流すと、平均で2倍以上に固まる",
      "note": "curlnoise で流した粒は混み具合をほぼ保つ。ふつうのノイズでは2倍以上に固まる"},
+    {"no": "173", "anchor": "exp173",
+     "tags": ["VEX", "効率化", "Python"],
+     "log": "log_pm", "thumb": "173_speed.png",
+     "shots": ["173_speed.png"],
+     "title": "同じ計算でも VEX（点ごと）は Detail のループの約170倍、Python の約260倍速い — 100 万点で 1.3 ミリ秒",
+     "note": "VEX（点ごと）は Detail のループの約170倍、Python の約260倍速い"},
 ]
 
 PLANNED = []

@@ -1,0 +1,81 @@
+{
+  "rows": [
+    {
+      "points": 10000,
+      "method": "VEX（点ごと）",
+      "sec": 0.00016,
+      "us_per_point": 0.0163,
+      "max_diff": 0.0
+    },
+    {
+      "points": 10000,
+      "method": "VEX（Detail でループ）",
+      "sec": 0.00203,
+      "us_per_point": 0.2026,
+      "max_diff": 0.0
+    },
+    {
+      "points": 10000,
+      "method": "Python（まとめて書く）",
+      "sec": 0.00298,
+      "us_per_point": 0.2978,
+      "max_diff": 1.9185245037078857e-07
+    },
+    {
+      "points": 10000,
+      "method": "Python（1点ずつ）",
+      "sec": 0.01553,
+      "us_per_point": 1.553,
+      "max_diff": 1.9185245037078857e-07
+    },
+    {
+      "points": 99856,
+      "method": "VEX（点ごと）",
+      "sec": 0.00041,
+      "us_per_point": 0.0041,
+      "max_diff": 0.0
+    },
+    {
+      "points": 99856,
+      "method": "VEX（Detail でループ）",
+      "sec": 0.0192,
+      "us_per_point": 0.1923,
+      "max_diff": 0.0
+    },
+    {
+      "points": 99856,
+      "method": "Python（まとめて書く）",
+      "sec": 0.03133,
+      "us_per_point": 0.3138,
+      "max_diff": 1.9744038581848145e-07
+    },
+    {
+      "points": 99856,
+      "method": "Python（1点ずつ）",
+      "sec": 0.17413,
+      "us_per_point": 1.7438,
+      "max_diff": 1.9744038581848145e-07
+    },
+    {
+      "points": 1000000,
+      "method": "VEX（点ごと）",
+      "sec": 0.00134,
+      "us_per_point": 0.0013,
+      "max_diff": 0.0
+    },
+    {
+      "points": 1000000,
+      "method": "VEX（Detail でループ）",
+      "sec": 0.22212,
+      "us_per_point": 0.2221,
+      "max_diff": 7.450580596923828e-09
+    },
+    {
+      "points": 1000000,
+      "method": "Python（まとめて書く）",
+      "sec": 0.35007,
+      "us_per_point": 0.3501,
+      "max_diff": 1.9371509552001953e-07
+    }
+  ]
+}
