@@ -1222,6 +1222,18 @@ DONE = [
      "shots": ["180_audit.png"],
      "title": "151〜179 の振り返り点検 — 29本すべて流し直し、時間以外の数字は全部一致",
      "note": "151〜179 の29本を流し直し、時間以外は全部一致"},
+    {"no": "181", "anchor": "exp181",
+     "tags": ["VEX", "効率化", "pcfind"],
+     "log": "log_pm", "thumb": "181_speed.png",
+     "shots": ["181_speed.png"],
+     "title": "pcfind と nearpoints は同じ結果・同じ速さ — pcopen + pcfilter は 1.6 倍遅く、距離で重みを付けた平均になる",
+     "note": "pcfind と nearpoints は同じ結果・同じ速さ。pcopen+pcfilter は1.6倍遅く重み付き平均"},
+    {"no": "182", "anchor": "exp182",
+     "tags": ["VEX", "pcfilter", "落とし穴"],
+     "log": "log_pm", "thumb": "182_kernel.png",
+     "shots": ["182_kernel.png"],
+     "title": "pcfilter の重みは「半径に対する距離」だけでは決まらない — 見つかった点どうしの並びで変わり、式は分からなかった",
+     "note": "pcfilter の重みは半径に対する距離だけでは決まらない。点の並びで変わる"},
 ]
 
 PLANNED = []

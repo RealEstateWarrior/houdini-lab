@@ -8911,6 +8911,121 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 181 ===================== -->
+    <article class="entry entry--current" id="exp181">
+      <div class="badge">181</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>pcfind と nearpoints は同じ結果・同じ速さ — pcopen + pcfilter は 1.6 倍遅く、距離で重みを付けた平均になる</h2>
+        <p class="path">examples/181_pc_speed.py &nbsp;·&nbsp; pcfind と nearpoints は同じ結果・同じ速さ。pcopen+pcfilter は1.6倍遅く重み付き平均</p>
+
+        <div class="prose">
+          <p><a href="#exp178">実験178</a> と同じ 10 万点で、全部の点について「半径 0.05 以内・最大 50 点」の位置の平均を、3通りの書き方で出した（2 回の速い方）。</p>
+          <p>**pcfind と nearpoints は、結果が1点も違わなかった**（差 0）。時間も 17.3 と 16.9 ミリ秒でほぼ同じ。どちらも見つかる数は平均 38.41（端の点で少なくなる）。</p>
+          <p>**pcopen + pcfilter は 28.1 ミリ秒（1.6 倍）。**値も少し違い、平均の差は 0.0043、いちばん大きくて 0.0212。pcfilter は近い点ほど重く数える平均なので、ただの平均とはずれる。</p>
+          <p>**見つけた点の P を point() で読む手間は小さい。**数えるだけなら 15.1 ミリ秒、P を読んで平均すると 17.3 ミリ秒（+15%）。</p>
+        </div>
+
+        <p class="label">書き方と、時間・結果</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="181_speed.png" alt="2（pcopen + pcfilter）だけが高い。" loading="lazy" decoding="async"></div>
+            <figcaption>2（pcopen + pcfilter）だけが高い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>書き方</th><th>秒（10 万点）</th><th>1 点あたり（マイクロ秒）</th><th>見つかった数の平均</th><th>pcfind との差（平均）</th><th>差（最大）</th></tr></thead>
+            <tbody>
+              <tr><td>pcfind + point</td><td class="num">0.0173</td><td class="num">0.173</td><td class="num">38.41</td><td class="num">0.00000</td><td class="num">0.00000</td></tr>
+              <tr><td>nearpoints + point</td><td class="num">0.0169</td><td class="num">0.169</td><td class="num">38.41</td><td class="num">0.00000</td><td class="num">0.00000</td></tr>
+              <tr><td>pcopen + pcfilter</td><td class="num">0.0281</td><td class="num">0.281</td><td class="num">38.41</td><td class="num">0.00427</td><td class="num">0.02117</td></tr>
+              <tr><td>pcfind のみ（数えるだけ）</td><td class="num">0.0151</td><td class="num">0.151</td><td class="num">38.41</td><td>（比べない）</td><td class="num muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>近くの点の番号が欲しいなら pcfind か nearpoints。</strong>どちらでも同じ。</li>
+          <li><strong>pcfilter は重み付きの平均。</strong>ただの平均が欲しいなら、番号を取って自分で足す。</li>
+          <li><strong>見つけた点の値を読むのは安い。</strong>重いのは探すところ（<a href="#exp178">実験178</a>）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 182 ===================== -->
+    <article class="entry entry--current" id="exp182">
+      <div class="badge">182</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>pcfilter の重みは「半径に対する距離」だけでは決まらない — 見つかった点どうしの並びで変わり、式は分からなかった</h2>
+        <p class="path">examples/182_pcfilter_kernel.py &nbsp;·&nbsp; pcfilter の重みは半径に対する距離だけでは決まらない。点の並びで変わる</p>
+
+        <div class="prose">
+          <p>pcopen（半径 1）→ pcfilter で、点の重みが距離とともにどう下がるかを調べた。中心から 0.5 の所に val = 0 の点、距離 d に val = 1 の点を置き、結果 a から重みの比 w(d)/w(0.5) = a/(1 − a) を出した。</p>
+          <p>**近い点ほど重いが、形は単純な式にならない。**d = 0.05 で 41.9 倍、d = 0.95 でも 0.044 倍（半径の端でも 0 にならない）。d = 0.5 をはさんで急に変わり、両端では平らになる。</p>
+          <p>**3〜4 点で候補の式と比べても、ぴったり合うものは無かった。**d を「いちばん遠く見つかった点の距離」で割った 1 − t がいちばん近かったが、それでも最大 0.027 ずれた（1-t/farthest）。半径で割った形は、どれも合わなかった。重みは、見つかった点の並び（いちばん遠い点など）で決まっているとみられるが、確かめていない。</p>
+          <p>**中心ぴったりの点は特別に重い。**最初に val = 0 の点を中心（d = 0）に置くと、B をどこに置いても結果が同じ 0.0228 になり、形が読めなかった。</p>
+        </div>
+
+        <p class="label">2点での重みの比</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="182_kernel.png" alt="d = 0.5 の前後で急に下がり、両端では平ら。" loading="lazy" decoding="async"></div>
+            <figcaption>d = 0.5 の前後で急に下がり、両端では平ら。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>d</th><th>pcfilter の結果 a</th><th>w(d) ÷ w(0.5)</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td class="num">0.976709</td><td class="num">41.9355</td></tr>
+              <tr><td class="num">0.1</td><td class="num">0.975120</td><td class="num">39.1936</td></tr>
+              <tr><td class="num">0.15</td><td class="num">0.972297</td><td class="num">35.0968</td></tr>
+              <tr><td class="num">0.2</td><td class="num">0.967775</td><td class="num">30.0322</td></tr>
+              <tr><td class="num">0.25</td><td class="num">0.960610</td><td class="num">24.3871</td></tr>
+              <tr><td class="num">0.3</td><td class="num">0.948845</td><td class="num">18.5484</td></tr>
+              <tr><td class="num">0.35</td><td class="num">0.928074</td><td class="num">12.9032</td></tr>
+              <tr><td class="num">0.4</td><td class="num">0.886861</td><td class="num">7.8387</td></tr>
+              <tr><td class="num">0.45</td><td class="num">0.789116</td><td class="num">3.7419</td></tr>
+              <tr><td class="num">0.5</td><td class="num">0.500000</td><td class="num">1.0000</td></tr>
+              <tr><td class="num">0.55</td><td class="num">0.225689</td><td class="num">0.2915</td></tr>
+              <tr><td class="num">0.6</td><td class="num">0.136120</td><td class="num">0.1576</td></tr>
+              <tr><td class="num">0.65</td><td class="num">0.096975</td><td class="num">0.1074</td></tr>
+              <tr><td class="num">0.7</td><td class="num">0.076132</td><td class="num">0.0824</td></tr>
+              <tr><td class="num">0.75</td><td class="num">0.063534</td><td class="num">0.0678</td></tr>
+              <tr><td class="num">0.8</td><td class="num">0.055237</td><td class="num">0.0585</td></tr>
+              <tr><td class="num">0.85</td><td class="num">0.049425</td><td class="num">0.0520</td></tr>
+              <tr><td class="num">0.9</td><td class="num">0.045162</td><td class="num">0.0473</td></tr>
+              <tr><td class="num">0.95</td><td class="num">0.041923</td><td class="num">0.0438</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">3〜4 点で、候補の重みの式と比べる</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>点（距離, val）</th><th>pcfilter の結果</th><th>1-t/farthest</th><th>(1-t²)²/radius</th><th>(1-t²)²/farthest</th><th>1-t/radius</th></tr></thead>
+            <tbody>
+              <tr><td>(0.2, 1) / (0.5, 0) / (0.9, 0)</td><td class="num">0.6342</td><td class="num">0.6364</td><td class="num">0.6062</td><td class="num">0.6541</td><td class="num">0.5714</td></tr>
+              <tr><td>(0.3, 1) / (0.6, 0) / (0.8, 0) / (0.95, 0)</td><td class="num">0.5917</td><td class="num">0.5652</td><td class="num">0.6015</td><td class="num">0.6451</td><td class="num">0.5185</td></tr>
+              <tr><td>(0.1, 0) / (0.4, 1) / (0.7, 0)</td><td class="num">0.3252</td><td class="num">0.3333</td><td class="num">0.3626</td><td class="num">0.3210</td><td class="num">0.3333</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>pcfilter は「近いほど重い平均」だが、重みの形は点の並びしだい。</strong>決まった重みで混ぜたいなら、pcfind で番号を取り、自分で重みを掛けて足す。</li>
+          <li><strong>中心ぴったりに点があると、その点の値にほぼなる。</strong>自分の点を含めて探すときは注意。</li>
+          <li><strong>ただの平均が欲しいなら pcfilter は使わない</strong>（<a href="#exp181">実験181</a>）。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

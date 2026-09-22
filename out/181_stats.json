@@ -1,0 +1,36 @@
+{
+  "rows": [
+    {
+      "method": "pcfind + point",
+      "sec": 0.0173,
+      "us_per_point": 0.173,
+      "mean_found": 38.41,
+      "max_diff_vs_pcfind": 0.0,
+      "mean_diff_vs_pcfind": 0.0
+    },
+    {
+      "method": "nearpoints + point",
+      "sec": 0.0169,
+      "us_per_point": 0.169,
+      "mean_found": 38.41,
+      "max_diff_vs_pcfind": 0.0,
+      "mean_diff_vs_pcfind": 0.0
+    },
+    {
+      "method": "pcopen + pcfilter",
+      "sec": 0.0281,
+      "us_per_point": 0.281,
+      "mean_found": 38.41,
+      "max_diff_vs_pcfind": 0.021175,
+      "mean_diff_vs_pcfind": 0.0042716
+    },
+    {
+      "method": "pcfind のみ（数えるだけ）",
+      "sec": 0.0151,
+      "us_per_point": 0.151,
+      "mean_found": 38.41,
+      "max_diff_vs_pcfind": 0.0321687,
+      "mean_diff_vs_pcfind": 0.006686
+    }
+  ]
+}
