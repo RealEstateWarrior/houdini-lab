@@ -217,6 +217,14 @@
      "exps": [
       "085"
      ]
+    },
+    {
+     "rule": "Vellum の布の伸びは、Substeps より Constraint Iterations で抑える",
+     "evidence": "ぶら下げた布で、Iterations 400・Substeps 1 は 2.4 秒で伸び 0.2%。Iterations 100・Substeps 5 は 4.3 秒で 0.1%。既定（100・1）は 1.6 秒で 2.3%。",
+     "exps": [
+      "170",
+      "177"
+     ]
     }
    ]
   },
@@ -293,6 +301,13 @@
      "evidence": "1000 個のかけらを縮める処理で、for-each 37 ミリ秒、compile block で 24 ミリ秒、wrangle 1つで 1.2 ミリ秒。軽い処理では Multithread はかえって遅い（39 ミリ秒）。",
      "exps": [
       "174"
+     ]
+    },
+    {
+     "rule": "pcfind は最大の数（maxpts）を要る数だけに絞る",
+     "evidence": "10 万点・半径 0.1 で、maxpts 1000 は 1 点 0.80 マイクロ秒、100 で 0.42、10 で 0.10。時間は見つかった点の数でほぼ決まる。",
+     "exps": [
+      "178"
      ]
     }
    ]

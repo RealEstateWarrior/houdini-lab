@@ -5150,6 +5150,55 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 177 ===================== -->
+    <article class="entry entry--current" id="exp177">
+      <div class="badge">177</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Vellum の布の伸びは、Substeps より Constraint Iterations を上げる方が安く減る — 400 回で 0.2%、1600 回で 0.002%</h2>
+        <p class="path">examples/177_vellum_iterations.py &nbsp;·&nbsp; 伸びは Substeps より Constraint Iterations で安く減る。400 回で 0.2%</p>
+
+        <div class="prose">
+          <p><a href="#exp170">実験170</a> の続き。上の辺を留めた 1 × 1 の布（21 × 21 点、Stretch Stiffness は既定の 10^10）を 2 秒ぶら下げ、vellumsolver の Constraint Iterations（既定 100）と Substeps を変えて、いちばん伸びた辺の伸びと時間を測った。</p>
+          <p>**Iterations を増やすほど、伸びは速く減った。**Substeps 1 で、25・100・400・1600 回のとき 9.15%・2.32%・0.202%・0.002%。4 倍にするたびに、伸びは 1/4 より大きく減っている。</p>
+          <p>**同じ時間なら、Iterations の方が伸びが小さい。**Iterations 400・Substeps 1 は 2.4 秒で 0.20%。既定の Iterations 100 で Substeps 5 にすると 4.3 秒で 0.10%。Iterations 1600・Substeps 1 は 5.4 秒で 0.002%（ほぼ伸びない）。</p>
+          <p>**Substeps は、動きの速い物（ぶつかる・跳ねる）のためにとっておく。**伸びを抑えるだけなら Iterations で足りる。（この布はゆっくりぶら下がるだけ。速く動く布では、確かめていない。）</p>
+          <p>**Iterations を 4 倍にしても、時間は 1.5〜2.8 倍**（決まった手間があるため。Substeps 5・1600 回で 23.1 秒）。</p>
+        </div>
+
+        <p class="label">Iterations・Substeps と、伸び・時間</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="177_cost.png" alt="青（Substeps 1）の方が、同じ秒数で下（伸びが小さい）に来る。" loading="lazy" decoding="async"></div>
+            <figcaption>青（Substeps 1）の方が、同じ秒数で下（伸びが小さい）に来る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Constraint Iterations</th><th>Substeps</th><th>いちばん伸びた辺</th><th>辺の平均</th><th>下の辺の下がり</th><th>49 フレームの秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">25</td><td class="num">1</td><td>9.153%</td><td>2.255%</td><td class="num">0.04680</td><td class="num">1.77</td></tr>
+              <tr><td class="num">25</td><td class="num">5</td><td>0.526%</td><td>0.129%</td><td class="num">0.00267</td><td class="num">3.52</td></tr>
+              <tr><td class="num">100</td><td class="num">1</td><td>2.322%</td><td>0.608%</td><td class="num">0.01272</td><td class="num">1.61</td></tr>
+              <tr><td class="num">100</td><td class="num">5</td><td>0.101%</td><td>0.027%</td><td class="num">0.00055</td><td class="num">4.32</td></tr>
+              <tr><td class="num">400</td><td class="num">1</td><td>0.202%</td><td>0.052%</td><td class="num">0.00110</td><td class="num">2.42</td></tr>
+              <tr><td class="num">400</td><td class="num">5</td><td>0.009%</td><td>0.002%</td><td class="num">0.00005</td><td class="num">8.23</td></tr>
+              <tr><td class="num">1600</td><td class="num">1</td><td>0.002%</td><td>0.000%</td><td class="num">0.00001</td><td class="num">5.41</td></tr>
+              <tr><td class="num">1600</td><td class="num">5</td><td>0.000%</td><td>0.000%</td><td class="num">0.00000</td><td class="num">23.14</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>布が伸びるなら、まず Constraint Iterations を上げる。</strong>400 回で 0.2%、時間は 1.5 倍。</li>
+          <li><strong>Substeps 5 は同じくらいの伸びで時間が約 2.7 倍。</strong></li>
+          <li><strong>既定（100 回・Substeps 1）では 2.3% 伸びる。</strong>ぶら下がる布では見て分かる差。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

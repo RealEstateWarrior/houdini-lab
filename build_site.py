@@ -1198,6 +1198,18 @@ DONE = [
      "shots": ["176_element.png"],
      "title": "heightfield_noise の高さの幅は、地面に入る模様の数で決まる — Element Size を地面の 1/20 にすると Amplitude の 6 割",
      "note": "高さの幅は地面に入る模様の数で決まる。20個入って Amplitude の6割"},
+    {"no": "177", "anchor": "exp177",
+     "tags": ["シミュレーション", "Vellum", "効率化"],
+     "log": "log_fx", "thumb": "177_cost.png",
+     "shots": ["177_cost.png"],
+     "title": "Vellum の布の伸びは、Substeps より Constraint Iterations を上げる方が安く減る — 400 回で 0.2%、1600 回で 0.002%",
+     "note": "伸びは Substeps より Constraint Iterations で安く減る。400 回で 0.2%"},
+    {"no": "178", "anchor": "exp178",
+     "tags": ["VEX", "効率化", "pcfind"],
+     "log": "log_pm", "thumb": "178_cost.png",
+     "shots": ["178_cost.png"],
+     "title": "pcfind の時間は「見つかった点の数」で決まる — 半径を広げても、最大の数を 10 に絞れば 1 点 0.1 マイクロ秒",
+     "note": "pcfind の時間は見つかった点の数で決まる。maxpts を絞れば半径が広くても軽い"},
 ]
 
 PLANNED = []
