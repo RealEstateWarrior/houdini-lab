@@ -2089,6 +2089,22 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   .ask-msg.is-thinking .ask-body { animation: none; }
 }
+.ask-guess {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px dashed var(--wire);
+  border-radius: 10px;
+  color: var(--ink-mid);
+  font-size: 0.88rem;
+}
+.ask-guess-head {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-dim);
+  margin-bottom: 4px;
+}
 .ask-detail { margin: 4px 0 0; font-size: 0.7rem; color: var(--ink-dim); word-break: break-all; }
 
 /* ---------- AI のチャット画面 ----------
@@ -3268,11 +3284,13 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
       "あなたは Saito Production の「Houdini 研究部」というサイトの案内係です。",
       "読み手は Houdini を学んでいる人です。日本語の、やわらかい丁寧語で答えてください。",
       "答えの根拠は、質問に添えた「このサイトの資料」だけにしてください。",
-      "資料に書かれていないことは推測で埋めず、「このサイトではまだ確かめていません」とはっきり言ってください。",
+      "本文では、資料に書かれていないことを推測で埋めず、「このサイトではまだ確かめていません」とはっきり言ってください。",
       "数値は資料に書かれた値をそのまま使い、丸めたり新しく作ったりしないでください。",
       "実験に触れるときは「実験052」のように3桁の番号で書いてください。",
       "作り方を聞かれて、資料に「実践」があれば、その実践の名前を挙げてください。",
-      "最初の1〜2文で結論を言い、そのあと必要なら要点を3つまで。見出しや表は使わず、箇条書きは「・」で書いてください。"
+      "最初の1〜2文で結論を言い、そのあと必要なら要点を3つまで。見出しや表は使わず、箇条書きは「・」で書いてください。",
+      "ノードのパラメータの調整や VEX の書き方を聞かれて、資料だけでは足りないときに限り、本文のあとに「考察（未確認）」という1行を置き、その下にあなたの一般的な知識から「こうすると効くかもしれません」という案を2つまで書いてよいです。" +
+        "パラメータ名は Houdini の実際の表示名で書き、その見出しの最後の文は必ず「このサイトではまだ確かめていません。」にしてください。数値の実測結果のように書かないでください。これが使ってよい唯一の見出しです。"
     ].join("\n");
 
     function askContext(query) {
@@ -3295,8 +3313,27 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
     data.items.forEach(function (item) { if (item.exp) { expByNo[item.exp] = item; } });
 
     /* 答えの中の「実験052」を、その実験へのリンクにする */
+    /* 「考察（未確認）」から下は、資料に無い一般知識の案。
+       本文と混ざらないよう、枠で囲って分ける */
     function fillAnswer(el, text) {
       el.textContent = "";
+      var s = String(text);
+      var at = s.indexOf("考察（未確認）");
+      if (at === -1) { fillLinks(el, s); return; }
+      fillLinks(el, s.slice(0, at).replace(/\s+$/, ""));
+      var box = document.createElement("div");
+      box.className = "ask-guess";
+      var head = document.createElement("span");
+      head.className = "ask-guess-head";
+      head.textContent = "考察（未確認）";
+      box.appendChild(head);
+      var rest = document.createElement("div");
+      fillLinks(rest, s.slice(at + "考察（未確認）".length).replace(/^[\s：:]+/, ""));
+      box.appendChild(rest);
+      el.appendChild(box);
+    }
+
+    function fillLinks(el, text) {
       String(text).split(/(実験\d{3})/).forEach(function (part) {
         var m = /^実験(\d{3})$/.exec(part);
         if (m && expByNo[m[1]]) {

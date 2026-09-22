@@ -2085,6 +2085,22 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   .ask-msg.is-thinking .ask-body { animation: none; }
 }
+.ask-guess {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px dashed var(--wire);
+  border-radius: 10px;
+  color: var(--ink-mid);
+  font-size: 0.88rem;
+}
+.ask-guess-head {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-dim);
+  margin-bottom: 4px;
+}
 .ask-detail { margin: 4px 0 0; font-size: 0.7rem; color: var(--ink-dim); word-break: break-all; }
 
 /* ---------- AI のチャット画面 ----------
