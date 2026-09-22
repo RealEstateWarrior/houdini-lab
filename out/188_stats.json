@@ -1,0 +1,172 @@
+{
+  "rows": [
+    {
+      "skin": "grid 1×1",
+      "area": 1.0,
+      "density": 100.0,
+      "force": 0,
+      "curves": 118,
+      "per_area": 118.0,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.1
+    },
+    {
+      "skin": "grid 1×1",
+      "area": 1.0,
+      "density": 1000.0,
+      "force": 0,
+      "curves": 1049,
+      "per_area": 1049.0,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.015
+    },
+    {
+      "skin": "grid 1×1",
+      "area": 1.0,
+      "density": 5000.0,
+      "force": 0,
+      "curves": 5041,
+      "per_area": 5041.0,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.018
+    },
+    {
+      "skin": "grid 1×1",
+      "area": 1.0,
+      "density": 1000.0,
+      "force": 1,
+      "curves": 2500,
+      "per_area": 2500.0,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.016
+    },
+    {
+      "skin": "grid 2×2",
+      "area": 4.0,
+      "density": 100.0,
+      "force": 0,
+      "curves": 427,
+      "per_area": 106.75,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.012
+    },
+    {
+      "skin": "grid 2×2",
+      "area": 4.0,
+      "density": 1000.0,
+      "force": 0,
+      "curves": 4036,
+      "per_area": 1009.0,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.017
+    },
+    {
+      "skin": "grid 2×2",
+      "area": 4.0,
+      "density": 5000.0,
+      "force": 0,
+      "curves": 20125,
+      "per_area": 5031.25,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.023
+    },
+    {
+      "skin": "grid 2×2",
+      "area": 4.0,
+      "density": 1000.0,
+      "force": 1,
+      "curves": 2500,
+      "per_area": 625.0,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.05,
+      "length_spread": 0.0,
+      "sec": 0.017
+    },
+    {
+      "skin": "球 半径1",
+      "area": 12.5549,
+      "density": 100.0,
+      "force": 0,
+      "curves": 1261,
+      "per_area": 100.44,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.04997,
+      "length_spread": 5e-05,
+      "sec": 0.018
+    },
+    {
+      "skin": "球 半径1",
+      "area": 12.5549,
+      "density": 1000.0,
+      "force": 0,
+      "curves": 12602,
+      "per_area": 1003.75,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.04998,
+      "length_spread": 3e-05,
+      "sec": 0.023
+    },
+    {
+      "skin": "球 半径1",
+      "area": 12.5549,
+      "density": 5000.0,
+      "force": 0,
+      "curves": 62456,
+      "per_area": 4974.64,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.04998,
+      "length_spread": 3e-05,
+      "sec": 0.038
+    },
+    {
+      "skin": "球 半径1",
+      "area": 12.5549,
+      "density": 1000.0,
+      "force": 1,
+      "curves": 2500,
+      "per_area": 199.13,
+      "pts_per_curve": [
+        9
+      ],
+      "length_mean": 0.04998,
+      "length_spread": 4e-05,
+      "sec": 0.02
+    }
+  ]
+}

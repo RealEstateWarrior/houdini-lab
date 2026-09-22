@@ -9206,6 +9206,59 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 188 ===================== -->
+    <article class="entry entry--current" id="exp188">
+      <div class="badge">188</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>hairgen の毛の本数は Density × 面積 — 1本は Segments + 1 点、長さは Length ちょうど</h2>
+        <p class="path">examples/188_hairgen_density.py &nbsp;·&nbsp; 毛の本数は Density×面積。1本は Segments+1 点、長さは Length ちょうど</p>
+
+        <div class="prose">
+          <p>grid（面積 1・4）と球（半径 1）を皮にして、hairgen（ガイドなし）を Density 100・1000・5000 で生やし、毛（線）の本数・点の数・長さを数えた。</p>
+          <p>**本数 ÷ 面積 は Density に合う。**Density 5000 では grid 1×1 で 5041・grid 2×2 で 5031.25・球 半径1 で 4974.64。本数が少ないほどずれが大きく（Density 100・面積 1 で 118 本、+18%）、でたらめに撒いたときの揺れ（1/√本数、ここでは ±10%）くらいの大きさ。</p>
+          <p>**Force Count を入れると、面積によらず指定の本数ちょうど**（3通りとも 2,500 本）。面積あたりの<button class="term" data-term="密度">密度</button>は、面の広さで変わる。</p>
+          <p>**1本の毛は 9 点（既定の Segments 8 + 1）、長さは既定の Length 0.05 ちょうど。**grid ではどの毛も 0.05000、球では 0.04998 前後（ばらつき 0.00005 未満）。</p>
+          <p>**速い。**球に 62,456 本でも 0.038 秒。</p>
+        </div>
+
+        <p class="label">皮・Density と毛</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="188_density.png" alt="本数が多いほど 1 に近づく。" loading="lazy" decoding="async"></div>
+            <figcaption>本数が多いほど 1 に近づく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>皮</th><th>面積</th><th>Density</th><th>Force Count</th><th>毛の本数</th><th>面積あたり</th><th>1本の点</th><th>長さの平均</th><th>長さの差</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>grid 1×1</td><td class="num">1</td><td class="num">100</td><td>切</td><td class="num">118</td><td class="num">118</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.100</td></tr>
+              <tr><td>grid 1×1</td><td class="num">1</td><td class="num">1000</td><td>切</td><td class="num">1,049</td><td class="num">1049</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.015</td></tr>
+              <tr><td>grid 1×1</td><td class="num">1</td><td class="num">5000</td><td>切</td><td class="num">5,041</td><td class="num">5041</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.018</td></tr>
+              <tr><td>grid 1×1</td><td class="num">1</td><td class="num">1000</td><td>入</td><td class="num">2,500</td><td class="num">2500</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.016</td></tr>
+              <tr><td>grid 2×2</td><td class="num">4</td><td class="num">100</td><td>切</td><td class="num">427</td><td class="num">106.75</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.012</td></tr>
+              <tr><td>grid 2×2</td><td class="num">4</td><td class="num">1000</td><td>切</td><td class="num">4,036</td><td class="num">1009</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.017</td></tr>
+              <tr><td>grid 2×2</td><td class="num">4</td><td class="num">5000</td><td>切</td><td class="num">20,125</td><td class="num">5031.25</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.023</td></tr>
+              <tr><td>grid 2×2</td><td class="num">4</td><td class="num">1000</td><td>入</td><td class="num">2,500</td><td class="num">625</td><td class="num">9</td><td class="num">0.05000</td><td class="num">0.00000</td><td class="num">0.017</td></tr>
+              <tr><td>球 半径1</td><td class="num">12.5549</td><td class="num">100</td><td>切</td><td class="num">1,261</td><td class="num">100.44</td><td class="num">9</td><td class="num">0.04997</td><td class="num">0.00005</td><td class="num">0.018</td></tr>
+              <tr><td>球 半径1</td><td class="num">12.5549</td><td class="num">1000</td><td>切</td><td class="num">12,602</td><td class="num">1003.75</td><td class="num">9</td><td class="num">0.04998</td><td class="num">0.00003</td><td class="num">0.023</td></tr>
+              <tr><td>球 半径1</td><td class="num">12.5549</td><td class="num">5000</td><td>切</td><td class="num">62,456</td><td class="num">4974.64</td><td class="num">9</td><td class="num">0.04998</td><td class="num">0.00003</td><td class="num">0.038</td></tr>
+              <tr><td>球 半径1</td><td class="num">12.5549</td><td class="num">1000</td><td>入</td><td class="num">2,500</td><td class="num">199.13</td><td class="num">9</td><td class="num">0.04998</td><td class="num">0.00004</td><td class="num">0.020</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>毛の本数は Density × 面積で見積もれる。</strong>面積 4 の板に Density 1000 なら約 4,000 本。</li>
+          <li><strong>皮を大きくしても毛の密度を保つなら Density、本数を決めたいなら Force Count。</strong></li>
+          <li><strong>1本の点の数は Segments + 1。</strong>点の総数は 本数 × 9 で、重さの見積もりに使える。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

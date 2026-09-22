@@ -1264,6 +1264,12 @@ DONE = [
      "shots": ["187_uneven.png"],
      "title": "点の間隔がそろわない円では、smooth は粗い側を大きく縮める — 3つの Method の差は小さく、どれも丸さを保たない",
      "note": "間隔がそろわない円では粗い側を大きく縮める。Method の差は小さい"},
+    {"no": "188", "anchor": "exp188",
+     "tags": ["毛", "グルーム", "検算"],
+     "log": "log_pm", "thumb": "188_density.png",
+     "shots": ["188_density.png"],
+     "title": "hairgen の毛の本数は Density × 面積 — 1本は Segments + 1 点、長さは Length ちょうど",
+     "note": "毛の本数は Density×面積。1本は Segments+1 点、長さは Length ちょうど"},
 ]
 
 PLANNED = []
