@@ -5104,6 +5104,52 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 175 ===================== -->
+    <article class="entry entry--current" id="exp175">
+      <div class="badge">175</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>popwind の粒は、風との速さの差が 5/(1 + 5·k·t) で縮む — 差の2乗に比例する抵抗を、Substeps によらずぴったり解いている</h2>
+        <p class="path">examples/175_pop_wind.py &nbsp;·&nbsp; 風との差は 5/(1+5kt) で縮む。差の2乗の抵抗を Substeps によらずぴったり解く</p>
+
+        <div class="prose">
+          <p>1 粒（初速 0、重力なし）に popwind（Wind Velocity = (5, 0, 0)、Wind Speed 1）をつなぎ、Air Resistance k と Substeps を変えて v.x を毎フレーム読んだ。</p>
+          <p>**風との差 u は、u = 5 / (1 + 5·k·t) どおりに縮んだ。**3 通りの k・73 フレームのすべてで、この式との差は最大 4e-06。k = 1 なら 1 秒後に v.x = 4.166667（= 5 − 5/6）。差が半分になるのは t = 1/(5k)（k = 1 で 0.2 秒 = 約 5 フレーム）で、そこからさらに半分になるには倍の時間がかかる。差に比例する抵抗（指数で縮む）ではなく、差の2乗に比例する抵抗の形。</p>
+          <p>**Substeps 1 と 8 で、速さは同じだった**（差は 0.00001 未満）。1 ステップごとに、この式を近似せずに解いているとみられる。<a href="#exp166">実験166</a> の popdrag（重力と組み合わせると Substeps で結果が変わった）とは違う。</p>
+          <p>**生まれたフレームの余分な 1 ステップも無い。**フレーム 25（1 秒後）の値が t = 1 の式とそのまま合う（<a href="#exp165">実験165</a> の重力では t + 1/24 になった）。</p>
+        </div>
+
+        <p class="label">Air Resistance・Substeps と速さ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="175_wind.png" alt="どの k も、点線の 5 にゆっくり近づく（半分になる時間がだんだん延びる）。" loading="lazy" decoding="async"></div>
+            <figcaption>どの k も、点線の 5 にゆっくり近づく（半分になる時間がだんだん延びる）。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Air Resistance</th><th>Substeps</th><th>1 秒後の v.x</th><th>差の2乗の式</th><th>差に比例の式</th><th>3 秒後</th><th>差が 1/2 のフレーム</th><th>1/4</th><th>1/8</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.5</td><td class="num">1</td><td class="num">3.571428</td><td class="num">3.571429</td><td class="num">1.967347</td><td class="num">4.411764</td><td class="num">11</td><td class="num">30</td><td class="num">69</td><td class="num">0.421</td></tr>
+              <tr><td class="num">0.5</td><td class="num">8</td><td class="num">3.571428</td><td class="num">3.571429</td><td class="num">1.967347</td><td class="num">4.411763</td><td class="num">11</td><td class="num">30</td><td class="num">69</td><td class="num">0.645</td></tr>
+              <tr><td class="num">1</td><td class="num">1</td><td class="num">4.166667</td><td class="num">4.166667</td><td class="num">3.160603</td><td class="num">4.687499</td><td class="num">6</td><td class="num">16</td><td class="num">35</td><td class="num">0.306</td></tr>
+              <tr><td class="num">1</td><td class="num">8</td><td class="num">4.166667</td><td class="num">4.166667</td><td class="num">3.160603</td><td class="num">4.687498</td><td class="num">6</td><td class="num">16</td><td class="num">35</td><td class="num">0.644</td></tr>
+              <tr><td class="num">2</td><td class="num">1</td><td class="num">4.545455</td><td class="num">4.545455</td><td class="num">4.323324</td><td class="num">4.838710</td><td class="num">4</td><td class="num">9</td><td class="num">18</td><td class="num">0.305</td></tr>
+              <tr><td class="num">2</td><td class="num">8</td><td class="num">4.545455</td><td class="num">4.545455</td><td class="num">4.323324</td><td class="num">4.838708</td><td class="num">4</td><td class="num">9</td><td class="num">18</td><td class="num">0.640</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>風に乗る速さは、最初は速く、あとはゆっくり。</strong>差が 1/2 → 1/4 → 1/8 になるのに、倍・倍の時間がかかる。</li>
+          <li><strong>Air Resistance を倍にすると、同じ所まで近づく時間は半分。</strong></li>
+          <li><strong>popwind は Substeps を上げても変わらない。</strong>風だけなら Substeps で重くする必要はない。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

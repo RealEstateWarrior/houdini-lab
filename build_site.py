@@ -1186,6 +1186,18 @@ DONE = [
      "shots": ["174_loop.png"],
      "title": "for-each はかけら1つあたり約 0.037 ミリ秒 — compile block で 35% 速く、wrangle 1つにまとめれば 30 倍速い",
      "note": "for-each は1かけら約0.037ミリ秒。compile で35%速く、wrangle 1つなら30倍速い"},
+    {"no": "175", "anchor": "exp175",
+     "tags": ["シミュレーション", "パーティクル", "検算"],
+     "log": "log_fx", "thumb": "175_wind.png",
+     "shots": ["175_wind.png"],
+     "title": "popwind の粒は、風との速さの差が 5/(1 + 5·k·t) で縮む — 差の2乗に比例する抵抗を、Substeps によらずぴったり解いている",
+     "note": "風との差は 5/(1+5kt) で縮む。差の2乗の抵抗を Substeps によらずぴったり解く"},
+    {"no": "176", "anchor": "exp176",
+     "tags": ["地形", "検算", "heightfield"],
+     "log": "log_pm", "thumb": "176_element.png",
+     "shots": ["176_element.png"],
+     "title": "heightfield_noise の高さの幅は、地面に入る模様の数で決まる — Element Size を地面の 1/20 にすると Amplitude の 6 割",
+     "note": "高さの幅は地面に入る模様の数で決まる。20個入って Amplitude の6割"},
 ]
 
 PLANNED = []

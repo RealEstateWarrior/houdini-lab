@@ -8732,6 +8732,59 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 176 ===================== -->
+    <article class="entry entry--current" id="exp176">
+      <div class="badge">176</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>heightfield_noise の高さの幅は、地面に入る模様の数で決まる — Element Size を地面の 1/20 にすると Amplitude の 6 割</h2>
+        <p class="path">examples/176_hf_element_size.py &nbsp;·&nbsp; 高さの幅は地面に入る模様の数で決まる。20個入って Amplitude の6割</p>
+
+        <div class="prose">
+          <p><a href="#exp168">実験168</a> の続き。1000 × 1000 の heightfield に heightfield_noise（Amplitude 1000、Center Noise 入）をかけ、Element Size を 50〜2000 と変えて、高さの幅（最高 − 最低）÷ Amplitude を測った。</p>
+          <p>**地面に模様がたくさん入るほど、幅は Amplitude に近づく。**Fractal なしで、地面の幅 ÷ Element Size が 0.5 なら 7%、1 なら 18%、2（<a href="#exp168">実験168</a>）なら 23%、4 なら 30%、10 なら 55%、20 なら 62%。模様が少ないと、<button class="term" data-term="ノイズ">ノイズ</button>の高い山や深い谷に当たる前に地面が終わる。</p>
+          <p>**標準偏差 ÷ Amplitude は、模様が 10 個を超えると約 7% で落ち着く**（10 で 6.9%、20 で 7.2%）。幅は広がり続けるが、ならした高さのばらつきは頭打ちになる。</p>
+          <p>**hmfT（既定）も同じ傾向。**模様が多いときは Fractal なしより幅が少し狭い（20 個で 56%）、少ないときは広い。</p>
+          <p>**20 個入っても、幅は Amplitude の 6 割どまり。**Amplitude は「山と谷の差」ではなく、ノイズの値に掛ける数とみられる。</p>
+        </div>
+
+        <p class="label">Element Size と高さ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="176_element.png" alt="模様の数を倍にするたびに幅が広がる。" loading="lazy" decoding="async"></div>
+            <figcaption>模様の数を倍にするたびに幅が広がる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Fractal</th><th>Element Size</th><th>地面 ÷ Element Size</th><th>幅 ÷ Amplitude</th><th>標準偏差 ÷ Amplitude</th><th>最低</th><th>最高</th><th>平均</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>none</td><td class="num">50</td><td class="num">20</td><td class="num">0.6170</td><td class="num">0.0716</td><td class="num">-264.4</td><td class="num">352.6</td><td class="num">-2.83</td><td class="num">0.333</td></tr>
+              <tr><td>none</td><td class="num">100</td><td class="num">10</td><td class="num">0.5475</td><td class="num">0.0687</td><td class="num">-245.7</td><td class="num">301.8</td><td class="num">0.85</td><td class="num">0.206</td></tr>
+              <tr><td>none</td><td class="num">250</td><td class="num">4</td><td class="num">0.3031</td><td class="num">0.0567</td><td class="num">-123.8</td><td class="num">179.3</td><td class="num">14.89</td><td class="num">0.204</td></tr>
+              <tr><td>none</td><td class="num">500</td><td class="num">2</td><td class="num">0.2316</td><td class="num">0.0494</td><td class="num">-123.8</td><td class="num">107.8</td><td class="num">-6.34</td><td class="num">0.205</td></tr>
+              <tr><td>none</td><td class="num">1000</td><td class="num">1</td><td class="num">0.1801</td><td class="num">0.0319</td><td class="num">-85.2</td><td class="num">94.9</td><td class="num">-25.87</td><td class="num">0.204</td></tr>
+              <tr><td>none</td><td class="num">2000</td><td class="num">0.5</td><td class="num">0.0713</td><td class="num">0.0126</td><td class="num">-55.5</td><td class="num">15.8</td><td class="num">-39.14</td><td class="num">0.206</td></tr>
+              <tr><td>hmfT</td><td class="num">50</td><td class="num">20</td><td class="num">0.5603</td><td class="num">0.0664</td><td class="num">-275.7</td><td class="num">284.6</td><td class="num">-6.37</td><td class="num">0.230</td></tr>
+              <tr><td>hmfT</td><td class="num">100</td><td class="num">10</td><td class="num">0.4786</td><td class="num">0.0655</td><td class="num">-217.2</td><td class="num">261.4</td><td class="num">-1.95</td><td class="num">0.225</td></tr>
+              <tr><td>hmfT</td><td class="num">250</td><td class="num">4</td><td class="num">0.3823</td><td class="num">0.0593</td><td class="num">-135.5</td><td class="num">246.8</td><td class="num">11.54</td><td class="num">0.223</td></tr>
+              <tr><td>hmfT</td><td class="num">500</td><td class="num">2</td><td class="num">0.2939</td><td class="num">0.0536</td><td class="num">-125.8</td><td class="num">168.1</td><td class="num">5.83</td><td class="num">0.233</td></tr>
+              <tr><td>hmfT</td><td class="num">1000</td><td class="num">1</td><td class="num">0.2141</td><td class="num">0.0452</td><td class="num">-86.1</td><td class="num">128</td><td class="num">-11.7</td><td class="num">0.228</td></tr>
+              <tr><td>hmfT</td><td class="num">2000</td><td class="num">0.5</td><td class="num">0.1987</td><td class="num">0.0446</td><td class="num">-70.2</td><td class="num">128.5</td><td class="num">-20.71</td><td class="num">0.226</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>欲しい高さの幅から Amplitude を決めるときは、Element Size も一緒に見る。</strong>同じ Amplitude でも幅は 7〜62%。</li>
+          <li><strong>Element Size を小さくすると、同じ Amplitude でも山が高くなる。</strong>細かい起伏を足したつもりが、高さも変わる。</li>
+          <li><strong>平均も揺れる。</strong>模様が少ないと、Center Noise 入でも平均が 0 から数十ずれる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

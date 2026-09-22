@@ -1,0 +1,136 @@
+{
+  "rows": [
+    {
+      "fractal": "none",
+      "element": 50.0,
+      "size_over_element": 20.0,
+      "range_over_amp": 0.617,
+      "sd_over_amp": 0.0716,
+      "mean": -2.83,
+      "min": -264.4,
+      "max": 352.6,
+      "sec": 0.333
+    },
+    {
+      "fractal": "none",
+      "element": 100.0,
+      "size_over_element": 10.0,
+      "range_over_amp": 0.5475,
+      "sd_over_amp": 0.0687,
+      "mean": 0.85,
+      "min": -245.7,
+      "max": 301.8,
+      "sec": 0.206
+    },
+    {
+      "fractal": "none",
+      "element": 250.0,
+      "size_over_element": 4.0,
+      "range_over_amp": 0.3031,
+      "sd_over_amp": 0.0567,
+      "mean": 14.89,
+      "min": -123.8,
+      "max": 179.3,
+      "sec": 0.204
+    },
+    {
+      "fractal": "none",
+      "element": 500.0,
+      "size_over_element": 2.0,
+      "range_over_amp": 0.2316,
+      "sd_over_amp": 0.0494,
+      "mean": -6.34,
+      "min": -123.8,
+      "max": 107.8,
+      "sec": 0.205
+    },
+    {
+      "fractal": "none",
+      "element": 1000.0,
+      "size_over_element": 1.0,
+      "range_over_amp": 0.1801,
+      "sd_over_amp": 0.0319,
+      "mean": -25.87,
+      "min": -85.2,
+      "max": 94.9,
+      "sec": 0.204
+    },
+    {
+      "fractal": "none",
+      "element": 2000.0,
+      "size_over_element": 0.5,
+      "range_over_amp": 0.0713,
+      "sd_over_amp": 0.0126,
+      "mean": -39.14,
+      "min": -55.5,
+      "max": 15.8,
+      "sec": 0.206
+    },
+    {
+      "fractal": "hmfT",
+      "element": 50.0,
+      "size_over_element": 20.0,
+      "range_over_amp": 0.5603,
+      "sd_over_amp": 0.0664,
+      "mean": -6.37,
+      "min": -275.7,
+      "max": 284.6,
+      "sec": 0.23
+    },
+    {
+      "fractal": "hmfT",
+      "element": 100.0,
+      "size_over_element": 10.0,
+      "range_over_amp": 0.4786,
+      "sd_over_amp": 0.0655,
+      "mean": -1.95,
+      "min": -217.2,
+      "max": 261.4,
+      "sec": 0.225
+    },
+    {
+      "fractal": "hmfT",
+      "element": 250.0,
+      "size_over_element": 4.0,
+      "range_over_amp": 0.3823,
+      "sd_over_amp": 0.0593,
+      "mean": 11.54,
+      "min": -135.5,
+      "max": 246.8,
+      "sec": 0.223
+    },
+    {
+      "fractal": "hmfT",
+      "element": 500.0,
+      "size_over_element": 2.0,
+      "range_over_amp": 0.2939,
+      "sd_over_amp": 0.0536,
+      "mean": 5.83,
+      "min": -125.8,
+      "max": 168.1,
+      "sec": 0.233
+    },
+    {
+      "fractal": "hmfT",
+      "element": 1000.0,
+      "size_over_element": 1.0,
+      "range_over_amp": 0.2141,
+      "sd_over_amp": 0.0452,
+      "mean": -11.7,
+      "min": -86.1,
+      "max": 128.0,
+      "sec": 0.228
+    },
+    {
+      "fractal": "hmfT",
+      "element": 2000.0,
+      "size_over_element": 0.5,
+      "range_over_amp": 0.1987,
+      "sd_over_amp": 0.0446,
+      "mean": -20.71,
+      "min": -70.2,
+      "max": 128.5,
+      "sec": 0.226
+    }
+  ]
+}
