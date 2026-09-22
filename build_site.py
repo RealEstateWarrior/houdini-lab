@@ -1216,6 +1216,12 @@ DONE = [
      "shots": ["179_speed.png"],
      "title": "止まった空気の popwind と重力は、popdrag とぴったり同じ落ち方 — Substeps で差が出るのは重力と組み合わせたとき。Wind Speed は掛け算",
      "note": "止まった空気の popwind＋重力は popdrag と同じ落ち方。Wind Speed は掛け算"},
+    {"no": "180", "anchor": "exp180",
+     "tags": ["点検"],
+     "log": "log_pm", "thumb": "180_audit.png",
+     "shots": ["180_audit.png"],
+     "title": "151〜179 の振り返り点検 — 29本すべて流し直し、時間以外の数字は全部一致",
+     "note": "151〜179 の29本を流し直し、時間以外は全部一致"},
 ]
 
 PLANNED = []

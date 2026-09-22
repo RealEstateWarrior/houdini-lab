@@ -1,0 +1,557 @@
+[
+ {
+  "no": "151",
+  "script": "151_sphere_freq.py",
+  "records": [
+   "151_stats.json"
+  ],
+  "returncode": 0,
+  "values": 142,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.2
+ },
+ {
+  "no": "152",
+  "script": "152_bevel_volume.py",
+  "records": [
+   "152_stats.json"
+  ],
+  "returncode": 0,
+  "values": 180,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "153",
+  "script": "153_neighbours.py",
+  "records": [
+   "153_stats.json"
+  ],
+  "returncode": 0,
+  "values": 50,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "154",
+  "script": "154_polyfill_modes.py",
+  "records": [
+   "154_stats.json"
+  ],
+  "returncode": 0,
+  "values": 169,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "155",
+  "script": "155_scatter_density.py",
+  "records": [
+   "155_stats.json"
+  ],
+  "returncode": 0,
+  "values": 60,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 4.5
+ },
+ {
+  "no": "156",
+  "script": "156_polywire.py",
+  "records": [
+   "156_stats.json"
+  ],
+  "returncode": 0,
+  "values": 89,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "157",
+  "script": "157_voronoi_pieces.py",
+  "records": [
+   "157_stats.json"
+  ],
+  "returncode": 0,
+  "values": 90,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.3
+ },
+ {
+  "no": "158",
+  "script": "158_voronoi_relax.py",
+  "records": [
+   "158_stats.json"
+  ],
+  "returncode": 0,
+  "values": 135,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.6
+ },
+ {
+  "no": "159",
+  "script": "159_trail_velocity.py",
+  "records": [
+   "159_stats.json"
+  ],
+  "returncode": 0,
+  "values": 240,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "160",
+  "script": "160_uvlayout_fill.py",
+  "records": [
+   "160_stats.json"
+  ],
+  "returncode": 0,
+  "values": 241,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.2
+ },
+ {
+  "no": "161",
+  "script": "161_attribtransfer_blend.py",
+  "records": [
+   "161_stats.json"
+  ],
+  "returncode": 0,
+  "values": 312,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "162",
+  "script": "162_subdiv_crease.py",
+  "records": [
+   "162_stats.json"
+  ],
+  "returncode": 0,
+  "values": 112,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.3
+ },
+ {
+  "no": "163",
+  "script": "163_vellum_counts.py",
+  "records": [
+   "163_stats.json"
+  ],
+  "returncode": 0,
+  "values": 54,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.7
+ },
+ {
+  "no": "164",
+  "script": "164_vdb_particles.py",
+  "records": [
+   "164_stats.json"
+  ],
+  "returncode": 0,
+  "values": 109,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 3.8
+ },
+ {
+  "no": "165",
+  "script": "165_pop_gravity.py",
+  "records": [
+   "165_stats.json"
+  ],
+  "returncode": 0,
+  "values": 121,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 2.1
+ },
+ {
+  "no": "166",
+  "script": "166_pop_drag.py",
+  "records": [
+   "166_stats.json"
+  ],
+  "returncode": 0,
+  "values": 209,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 11.8
+ },
+ {
+  "no": "167",
+  "script": "167_rbd_rest.py",
+  "records": [
+   "167_stats.json"
+  ],
+  "returncode": 0,
+  "values": 624,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 3.3
+ },
+ {
+  "no": "168",
+  "script": "168_hf_noise_amp.py",
+  "records": [
+   "168_stats.json"
+  ],
+  "returncode": 0,
+  "values": 120,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.8
+ },
+ {
+  "no": "169",
+  "script": "169_hf_erode_mass.py",
+  "records": [
+   "169_stats.json"
+  ],
+  "returncode": 0,
+  "values": 65,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 4.1
+ },
+ {
+  "no": "170",
+  "script": "170_vellum_stretch.py",
+  "records": [
+   "170_stats.json"
+  ],
+  "returncode": 0,
+  "values": 57,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 23.8
+ },
+ {
+  "no": "171",
+  "script": "171_curl_divergence.py",
+  "records": [
+   "171_stats.json"
+  ],
+  "returncode": 0,
+  "values": 48,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.5
+ },
+ {
+  "no": "172",
+  "script": "172_curl_advect.py",
+  "records": [
+   "172_stats.json"
+  ],
+  "returncode": 0,
+  "values": 24,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.4
+ },
+ {
+  "no": "173",
+  "script": "173_vex_vs_python.py",
+  "records": [
+   "173_stats.json"
+  ],
+  "returncode": 0,
+  "values": 44,
+  "diffs": [
+   [
+    "173_stats.json",
+    ".rows[0].us_per_point",
+    0.0163,
+    0.0277
+   ],
+   [
+    "173_stats.json",
+    ".rows[10].us_per_point",
+    0.3501,
+    0.3468
+   ],
+   [
+    "173_stats.json",
+    ".rows[1].us_per_point",
+    0.2026,
+    0.2101
+   ],
+   [
+    "173_stats.json",
+    ".rows[2].us_per_point",
+    0.2978,
+    0.2939
+   ],
+   [
+    "173_stats.json",
+    ".rows[3].us_per_point",
+    1.553,
+    1.5465
+   ],
+   [
+    "173_stats.json",
+    ".rows[4].us_per_point",
+    0.0041,
+    0.0042
+   ],
+   [
+    "173_stats.json",
+    ".rows[5].us_per_point",
+    0.1923,
+    0.1912
+   ],
+   [
+    "173_stats.json",
+    ".rows[6].us_per_point",
+    0.3138,
+    0.3147
+   ],
+   [
+    "173_stats.json",
+    ".rows[7].us_per_point",
+    1.7438,
+    1.7331
+   ],
+   [
+    "173_stats.json",
+    ".rows[9].us_per_point",
+    0.2221,
+    0.2196
+   ]
+  ],
+  "n_diffs": 10,
+  "sec": 5.0
+ },
+ {
+  "no": "174",
+  "script": "174_foreach_compile.py",
+  "records": [
+   "174_stats.json"
+  ],
+  "returncode": 0,
+  "values": 84,
+  "diffs": [
+   [
+    "174_stats.json",
+    ".rows[0].ms_per_piece",
+    0.039,
+    0.04
+   ],
+   [
+    "174_stats.json",
+    ".rows[10].ms_per_piece",
+    0.0394,
+    0.0374
+   ],
+   [
+    "174_stats.json",
+    ".rows[11].ms_per_piece",
+    0.0012,
+    0.0009
+   ],
+   [
+    "174_stats.json",
+    ".rows[1].ms_per_piece",
+    0.0276,
+    0.0288
+   ],
+   [
+    "174_stats.json",
+    ".rows[2].ms_per_piece",
+    0.1062,
+    0.0501
+   ],
+   [
+    "174_stats.json",
+    ".rows[3].ms_per_piece",
+    0.0081,
+    0.0082
+   ],
+   [
+    "174_stats.json",
+    ".rows[4].ms_per_piece",
+    0.0362,
+    0.037
+   ],
+   [
+    "174_stats.json",
+    ".rows[5].ms_per_piece",
+    0.0229,
+    0.0232
+   ],
+   [
+    "174_stats.json",
+    ".rows[6].ms_per_piece",
+    0.0367,
+    0.0356
+   ],
+   [
+    "174_stats.json",
+    ".rows[7].ms_per_piece",
+    0.0042,
+    0.0043
+   ],
+   [
+    "174_stats.json",
+    ".rows[8].ms_per_piece",
+    0.037,
+    0.0364
+   ],
+   [
+    "174_stats.json",
+    ".rows[9].ms_per_piece",
+    0.0242,
+    0.0239
+   ]
+  ],
+  "n_diffs": 12,
+  "sec": 1.9
+ },
+ {
+  "no": "175",
+  "script": "175_pop_wind.py",
+  "records": [
+   "175_stats.json"
+  ],
+  "returncode": 0,
+  "values": 517,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 3.9
+ },
+ {
+  "no": "176",
+  "script": "176_hf_element_size.py",
+  "records": [
+   "176_stats.json"
+  ],
+  "returncode": 0,
+  "values": 96,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.8
+ },
+ {
+  "no": "177",
+  "script": "177_vellum_iterations.py",
+  "records": [
+   "177_stats.json"
+  ],
+  "returncode": 0,
+  "values": 49,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 51.0
+ },
+ {
+  "no": "178",
+  "script": "178_pcfind_cost.py",
+  "records": [
+   "178_stats.json"
+  ],
+  "returncode": 0,
+  "values": 60,
+  "diffs": [
+   [
+    "178_stats.json",
+    ".rows[0].us_per_point",
+    0.053,
+    0.05
+   ],
+   [
+    "178_stats.json",
+    ".rows[10].us_per_point",
+    0.423,
+    0.666
+   ],
+   [
+    "178_stats.json",
+    ".rows[11].us_per_point",
+    0.8,
+    1.225
+   ],
+   [
+    "178_stats.json",
+    ".rows[1].us_per_point",
+    0.047,
+    0.049
+   ],
+   [
+    "178_stats.json",
+    ".rows[2].us_per_point",
+    0.05,
+    0.049
+   ],
+   [
+    "178_stats.json",
+    ".rows[3].us_per_point",
+    0.063,
+    0.056
+   ],
+   [
+    "178_stats.json",
+    ".rows[4].us_per_point",
+    0.057,
+    0.056
+   ],
+   [
+    "178_stats.json",
+    ".rows[5].us_per_point",
+    0.061,
+    0.055
+   ],
+   [
+    "178_stats.json",
+    ".rows[6].us_per_point",
+    0.09,
+    0.093
+   ],
+   [
+    "178_stats.json",
+    ".rows[7].us_per_point",
+    0.145,
+    0.195
+   ],
+   [
+    "178_stats.json",
+    ".rows[8].us_per_point",
+    0.147,
+    0.203
+   ],
+   [
+    "178_stats.json",
+    ".rows[9].us_per_point",
+    0.099,
+    0.14
+   ]
+  ],
+  "n_diffs": 12,
+  "sec": 2.0
+ },
+ {
+  "no": "179",
+  "script": "179_pop_wind_gravity.py",
+  "records": [
+   "179_stats.json"
+  ],
+  "returncode": 0,
+  "values": 29,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 3.6
+ }
+]
