@@ -1,11 +1,22 @@
 # STATE — 新しいセッションはまずこれだけ読む
 
-最終更新: 2026-09-22（実験150・実践36本・ノード370件・用語386語・効率化44項目）
+最終更新: 2026-09-22 18:30（実験180・実践36本・ノード375件・用語403語・効率化48項目）
 
 ## いまの状態
 
-- 実験 001〜150 完了。Artifact は 150 時点で8ページとも再発行済み（2026-09-22）。振り返り点検は 150（122〜149 を全部流し直し、全部一致。examples/150_audit.py）まで済み、次は 180
-  （点検の番号は 030・060・090・121・150）
+- 実験 001〜180 完了。振り返り点検は 180（151〜179 を全部流し直し、時間以外は全部一致。examples/180_audit.py）まで済み、次は 210
+  （点検の番号は 030・060・090・121・150・180）。Artifact は 150 時点のまま（今日の作業の最後にまとめて出し直す）
+- **2026-09-22 見た目の刷新をサイトに当てた（17a74ea）**: tools_redesign_2026_09_22.py。白黒＋青（--flag）とコーラル（--coral、AI だけ）、
+  ライト/ダーク（右上の自動・明・暗）、フォントは Schibsted Grotesk + Zen Kaku Gothic New、上のバーは4つの見出し＋区分のタブの列（.subnav。
+  降りてくるパネルは display:none）、ホーム冒頭は動く灰色の帯（.band。検索窓・AI・新着の実験8件の重なったカード）、
+  区画の題は英語＋日本語、バージョンと件数はホームの最後（.site-facts）。参考は Apple・Superlist・landsolution・チケプラTrade
+- 151〜179 の要点: sphere の測地球 / polybevel / neighbourcount とオイラー標数 / polyfill は奇数の穴を四角で塞がない / scatter density /
+  polywire / voronoifracture（relax で種が壁へ）/ trail / uvlayout / attribtransfer の (1−t²)² / subdivide の crease = 回数 /
+  vellumconstraints の本数 / vdbfromparticles / POP 落下（生まれたフレームで1ステップ）/ popdrag は √(g/k) / RBD の Padding /
+  heightfield の Amplitude・erode / Vellum の伸び（Iterations の方が安い）/ curlnoise の発散 / VEX と Python / for-each と compile / pcfind / popwind
+  - **finish_exp.py は、タグに「シミュレーション」か「エフェクト」があればエフェクト編（log_fx）へ入れる**（それまでは全部モデリング編だった。157〜159・163・165〜167 を移した）
+  - **時間をはかる台本の落とし穴: hou の cook(force=True) では VEX の wrangle が計算し直さない。コードが読むつまみ（ch('k')）を毎回わずかに変える**（実験173）
+  - ノードは nodes_add_9.py（Python SOP・for-each・compile の5件）、用語は gloss_add_9.py・gloss_add_10.py
 - 142〜149: platonic の Radius / circle の内接多角形 / torus の Rows・Columns / mirror の継ぎ目 / clip と 2πh / twist の6操作 / tube の円錐台 / divide の Bricker
   - ノードは nodes_add_8.py（19件）、用語は gloss_add_8.py（12語）。新しいノードの素性は out/_dump8.json → _nodes_dump.json に足した
   - 147 の Taper の体積が倍率の平均と 0.45% 合わない理由は確かめていない
