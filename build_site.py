@@ -1156,6 +1156,12 @@ DONE = [
      "shots": ["169_mass.png"],
      "title": "heightfield_erode は土の量を保たない — 40 フレームで height の平均が 5 下がり、削れた分の大半は地形から消える",
      "note": "erode は土の量を保たない。40 フレームで平均の高さが 5 下がる"},
+    {"no": "170", "anchor": "exp170",
+     "tags": ["シミュレーション", "Vellum", "布"],
+     "log": "log_fx", "thumb": "170_stretch.png",
+     "shots": ["170_stretch.png"],
+     "title": "Vellum の布は既定の硬さでも 2% 伸びる — 硬さの上限は Stretch Stiffness ではなく Substeps で決まる",
+     "note": "既定の硬さでも 2% 伸びる。硬さの上限は Stretch Stiffness ではなく Substeps"},
 ]
 
 PLANNED = []

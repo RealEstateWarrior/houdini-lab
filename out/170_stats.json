@@ -1,0 +1,85 @@
+{
+  "rows": [
+    {
+      "exp": 10,
+      "stiffness": 10000000000.0,
+      "substeps": 1,
+      "max_stretch": 1.02322,
+      "mean_stretch": 1.00608,
+      "bottom_y": -0.51272,
+      "sag": 0.01272,
+      "sec_49f": 1.97
+    },
+    {
+      "exp": 10,
+      "stiffness": 10000000000.0,
+      "substeps": 5,
+      "max_stretch": 1.00101,
+      "mean_stretch": 1.00027,
+      "bottom_y": -0.50055,
+      "sag": 0.00055,
+      "sec_49f": 4.3
+    },
+    {
+      "exp": 4,
+      "stiffness": 10000.0,
+      "substeps": 1,
+      "max_stretch": 1.03268,
+      "mean_stretch": 1.00874,
+      "bottom_y": -0.51802,
+      "sag": 0.01802,
+      "sec_49f": 1.64
+    },
+    {
+      "exp": 4,
+      "stiffness": 10000.0,
+      "substeps": 5,
+      "max_stretch": 1.02285,
+      "mean_stretch": 1.00506,
+      "bottom_y": -0.51029,
+      "sag": 0.01029,
+      "sec_49f": 4.31
+    },
+    {
+      "exp": 3,
+      "stiffness": 1000.0,
+      "substeps": 1,
+      "max_stretch": 1.29129,
+      "mean_stretch": 1.06847,
+      "bottom_y": -0.6359,
+      "sag": 0.1359,
+      "sec_49f": 1.68
+    },
+    {
+      "exp": 3,
+      "stiffness": 1000.0,
+      "substeps": 5,
+      "max_stretch": 1.24779,
+      "mean_stretch": 1.05957,
+      "bottom_y": -0.61566,
+      "sag": 0.11566,
+      "sec_49f": 4.51
+    },
+    {
+      "exp": 2,
+      "stiffness": 100.0,
+      "substeps": 1,
+      "max_stretch": 2.83714,
+      "mean_stretch": 1.40138,
+      "bottom_y": -1.28988,
+      "sag": 0.78988,
+      "sec_49f": 1.73
+    },
+    {
+      "exp": 2,
+      "stiffness": 100.0,
+      "substeps": 5,
+      "max_stretch": 2.85474,
+      "mean_stretch": 1.41552,
+      "bottom_y": -1.33993,
+      "sag": 0.83993,
+      "sec_49f": 4.64
+    }
+  ],
+  "rest_edge": 0.05
+}
