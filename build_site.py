@@ -1160,8 +1160,20 @@ DONE = [
      "tags": ["シミュレーション", "Vellum", "布"],
      "log": "log_fx", "thumb": "170_stretch.png",
      "shots": ["170_stretch.png"],
-     "title": "Vellum の布は既定の硬さでも 2% 伸びる — 硬さの上限は Stretch Stiffness ではなく Substeps で決まる",
-     "note": "既定の硬さでも 2% 伸びる。硬さの上限は Stretch Stiffness ではなく Substeps"},
+     "title": "Vellum の布は既定の硬さでも Substeps 1 で 2% 伸びる — Substeps 1 では 10^4 と 10^10 の差が出ない",
+     "note": "既定の硬さでも Substeps 1 で 2% 伸びる。Substeps 1 では 10^4 と 10^10 の差が出ない"},
+    {"no": "171", "anchor": "exp171",
+     "tags": ["VEX", "検算", "ノイズ"],
+     "log": "log_pm", "thumb": "171_div.png",
+     "shots": ["171_div.png"],
+     "title": "curlnoise() はほぼ湧き出しのない流れ — 発散は、ふつうのノイズの約 3.5 万分の 1（周波数 1）",
+     "note": "curlnoise はほぼ湧き出しのない流れ。発散はふつうのノイズの約 3.5 万分の 1"},
+    {"no": "172", "anchor": "exp172",
+     "tags": ["VEX", "パーティクル", "ノイズ"],
+     "log": "log_pm", "thumb": "172_crowd.png",
+     "shots": ["172_crowd.png"],
+     "title": "curlnoise で流した粒は混み具合をほぼ保つ — ふつうのノイズで流すと、平均で2倍以上に固まる",
+     "note": "curlnoise で流した粒は混み具合をほぼ保つ。ふつうのノイズでは2倍以上に固まる"},
 ]
 
 PLANNED = []

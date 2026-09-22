@@ -1,0 +1,37 @@
+{
+  "rows": [
+    {
+      "kind": "撒いた直後",
+      "mean_nb": 9.714,
+      "cv": 0.3167,
+      "max": 25,
+      "min": 1,
+      "inner": 4060,
+      "expect": 10.47,
+      "moved": 0.0,
+      "sec": 0.0
+    },
+    {
+      "kind": "curlnoise",
+      "mean_nb": 9.037,
+      "cv": 0.3481,
+      "max": 21,
+      "min": 0,
+      "inner": 4060,
+      "expect": 10.47,
+      "moved": 0.4765,
+      "sec": 0.013
+    },
+    {
+      "kind": "noise（ふつう）",
+      "mean_nb": 22.493,
+      "cv": 1.1153,
+      "max": 136,
+      "min": 0,
+      "inner": 4060,
+      "expect": 10.47,
+      "moved": 0.1741,
+      "sec": 0.015
+    }
+  ]
+}

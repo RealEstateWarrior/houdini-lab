@@ -5061,8 +5061,8 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <div class="badge">170</div>
       <div class="body">
         <span class="chip chip--fx">エフェクト</span>
-        <h2>Vellum の布は既定の硬さでも 2% 伸びる — 硬さの上限は Stretch Stiffness ではなく Substeps で決まる</h2>
-        <p class="path">examples/170_vellum_stretch.py &nbsp;·&nbsp; 既定の硬さでも 2% 伸びる。硬さの上限は Stretch Stiffness ではなく Substeps</p>
+        <h2>Vellum の布は既定の硬さでも Substeps 1 で 2% 伸びる — Substeps 1 では 10^4 と 10^10 の差が出ない</h2>
+        <p class="path">examples/170_vellum_stretch.py &nbsp;·&nbsp; 既定の硬さでも Substeps 1 で 2% 伸びる。Substeps 1 では 10^4 と 10^10 の差が出ない</p>
 
         <div class="prose">
           <p>1 × 1 の布（21 × 21 点）を縦に立て、上の辺を Pin Points で留めて、重力で 2 秒（49 フレーム）ぶら下げた。vellumconstraints（Cloth）の Stretch Stiffness を 1 × 10^e で変え、四角形の辺の長さが元の何倍になったかを測った。</p>
@@ -5075,8 +5075,8 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <p class="label">Stretch Stiffness・Substeps と伸び</p>
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="170_stretch.png" alt="10^4 より上では線が平らになる（硬さではなく Substeps が決める）。" loading="lazy" decoding="async"></div>
-            <figcaption>10^4 より上では線が平らになる（硬さではなく Substeps が決める）。</figcaption>
+            <div class="frame-light"><img src="170_stretch.png" alt="Substeps 1（青）は 10^4 より上で平ら。Substeps 5（橙）" loading="lazy" decoding="async"></div>
+            <figcaption>Substeps 1（青）は 10^4 より上で平ら。Substeps 5（橙）は 10^10 まで下がり続ける。</figcaption>
           </figure>
         </div>
         <div class="scroll">
@@ -5098,7 +5098,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <p class="label">わかったこと</p>
         <ul class="findings">
           <li><strong>布が伸びて見えるなら、まず Substeps を上げる。</strong>既定の硬さのままで、伸びは 2.3% → 0.1%。</li>
-          <li><strong>Stretch Stiffness は 10^4 より上ではほぼ同じ。</strong>ゴムのように伸ばしたいときだけ 10^3 以下へ。</li>
+          <li><strong>Substeps 1 なら、Stretch Stiffness は 10^4 より上ではほぼ同じ。</strong>Substeps 5 では 10^4 でも 2.3% 伸びるので、硬さも要る。</li>
           <li><strong>Substeps 5 で時間は約 2.5 倍。</strong></li>
         </ul>
       </div>

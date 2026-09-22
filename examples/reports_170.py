@@ -23,7 +23,7 @@ def main():
     t1 = sum(r["sec_49f"] for r in rows if r["substeps"] == 1) / 4
     t5 = sum(r["sec_49f"] for r in rows if r["substeps"] == 5) / 4
     payload = {
-        "title": "Vellum の布は既定の硬さでも 2% 伸びる — 硬さの上限は Stretch Stiffness ではなく Substeps で決まる",
+        "title": "Vellum の布は既定の硬さでも Substeps 1 で 2% 伸びる — Substeps 1 では 10^4 と 10^10 の差が出ない",
         "summary":
             "1 × 1 の布（21 × 21 点）を縦に立て、上の辺を Pin Points で留めて、重力で 2 秒（49 フレーム）ぶら下げた。"
             "vellumconstraints（Cloth）の Stretch Stiffness を 1 × 10^e で変え、四角形の辺の長さが元の何倍になったかを測った。\n\n"
@@ -38,14 +38,14 @@ def main():
         "graph": "", "graph_image": "",
         "comparisons": [{
             "label": "Stretch Stiffness・Substeps と伸び",
-            "images": [{"path": "170_stretch.png", "caption": "10^4 より上では線が平らになる（硬さではなく Substeps が決める）。"}],
+            "images": [{"path": "170_stretch.png", "caption": "Substeps 1（青）は 10^4 より上で平ら。Substeps 5（橙）は 10^10 まで下がり続ける。"}],
             "per_row": 1,
             "columns": ["Stretch Stiffness", "Substeps", "いちばん伸びた辺", "辺の平均", "下の辺の下がり", "49 フレームの秒"],
             "rows": [[f"1e{r['exp']}", r["substeps"], f"{(r['max_stretch'] - 1) * 100:.2f}%", f"{(r['mean_stretch'] - 1) * 100:.2f}%",
                       f"{r['sag']:.4f}", f"{r['sec_49f']:.2f}"] for r in rows]}],
         "notes": [
             "<strong>布が伸びて見えるなら、まず Substeps を上げる。</strong>既定の硬さのままで、伸びは 2.3% → 0.1%。",
-            "<strong>Stretch Stiffness は 10^4 より上ではほぼ同じ。</strong>ゴムのように伸ばしたいときだけ 10^3 以下へ。",
+            "<strong>Substeps 1 なら、Stretch Stiffness は 10^4 より上ではほぼ同じ。</strong>Substeps 5 では 10^4 でも 2.3% 伸びるので、硬さも要る。",
             "<strong>Substeps 5 で時間は約 2.5 倍。</strong>",
         ],
         "next": ["Constraint Iterations を増やしたときの伸び", "布の細かさ（点の数）で伸びがどう変わるか"],

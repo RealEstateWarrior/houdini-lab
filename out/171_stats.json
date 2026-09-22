@@ -1,0 +1,70 @@
+{
+  "rows": [
+    {
+      "kind": "curlnoise",
+      "freq": 1.0,
+      "points": 8000,
+      "mean_abs_div": 3.3476265508397775e-05,
+      "max_abs_div": 0.00019371509552001953,
+      "mean_grad": 0.698373,
+      "ratio": 4.7934671080986915e-05,
+      "mean_speed": 0.498729,
+      "sec": 0.0994
+    },
+    {
+      "kind": "curlnoise",
+      "freq": 4.0,
+      "points": 8000,
+      "mean_abs_div": 0.00510289052246344,
+      "max_abs_div": 0.07582449913024902,
+      "mean_grad": 2.342529,
+      "ratio": 0.002178367870475297,
+      "mean_speed": 0.546442,
+      "sec": 0.0024
+    },
+    {
+      "kind": "curlxnoise",
+      "freq": 1.0,
+      "points": 8000,
+      "mean_abs_div": 0.0032365881116820676,
+      "max_abs_div": 2.209782600402832,
+      "mean_grad": 0.9653,
+      "ratio": 0.0033529332318822684,
+      "mean_speed": 0.844758,
+      "sec": 0.0025
+    },
+    {
+      "kind": "curlxnoise",
+      "freq": 4.0,
+      "points": 8000,
+      "mean_abs_div": 0.002389342388945806,
+      "max_abs_div": 1.7272377014160156,
+      "mean_grad": 3.845154,
+      "ratio": 0.0006213905287572218,
+      "mean_speed": 0.767525,
+      "sec": 0.003
+    },
+    {
+      "kind": "noise（ふつう）",
+      "freq": 1.0,
+      "points": 8000,
+      "mean_abs_div": 0.342073981434165,
+      "max_abs_div": 1.0057090520858765,
+      "mean_grad": 0.203575,
+      "ratio": 1.680337617754917,
+      "mean_speed": 0.848606,
+      "sec": 0.0028
+    },
+    {
+      "kind": "noise（ふつう）",
+      "freq": 4.0,
+      "points": 8000,
+      "mean_abs_div": 1.3386376722410787,
+      "max_abs_div": 6.480037689208984,
+      "mean_grad": 0.792337,
+      "ratio": 1.6894800437561264,
+      "mean_speed": 0.868947,
+      "sec": 0.0027
+    }
+  ]
+}
