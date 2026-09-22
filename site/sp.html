@@ -1704,6 +1704,21 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .nav-icon svg { width: 20px; height: 20px; display: block; }
 .nav-icon:hover { background: var(--ground-2); color: var(--ink); }
 .nav-icon:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.nav-ai { position: relative; }
+.nav-ai[hidden] { display: none; }
+.nav-beta {
+  position: absolute;
+  right: -4px;
+  bottom: 0;
+  font-size: 0.52rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  padding: 2px 3px;
+  border-radius: 3px;
+  background: var(--ground);
+  border: 1px solid var(--wire-dim);
+  color: var(--ink-dim);
+}
 .nav-burger { display: none; }
 
 /* スマホではタブを畳んで、ハンバーガーに入れる。
@@ -2279,6 +2294,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
         <li><a href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu">Houdini 研究部</a></li>
         <li><span class="soon">映像制作部<small>準備中</small></span></li>
       </ul>
+      <button type="button" class="nav-icon nav-ai" id="ask-open" hidden aria-label="AI に聞く（Beta 版）" title="AI に聞く（Beta 版）"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor"/></svg><span class="nav-beta">Beta</span></button>
       <button type="button" class="nav-icon" id="search-open" aria-label="Saito Production 全体を検索"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     </div>
   </nav>
@@ -2468,14 +2484,14 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
           </svg>
           <span>AI に聞く</span>
         </button>
-        <span class="ask-beta">ベータ</span>
+        <span class="ask-beta">Beta 版</span>
         <button type="button" class="ask-sub" id="ask-stop" hidden>止める</button>
         <button type="button" class="ask-sub" id="ask-clear" hidden>会話を消す</button>
       </div>
       <div class="ask-log" id="ask-log" aria-live="polite"></div>
       <p class="ask-fine">
         まだベータです。答えの根拠はこのサイトの記録だけで、書いていないことは「まだ確かめていない」と答えます。
-        続けて聞けば、直近8往復ぶんは話の流れを覚えています。あなたの Claude の利用枠を使います。
+        続けて聞けば、直近8往復ぶんは話の流れを覚えています。<span id="ask-engine">あなたの Claude の利用枠を使います。</span>
       </p>
     </div>
     <p class="search-hint" id="search-hint">よく見るところ</p>
@@ -2983,18 +2999,57 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
       setTimeout(function () { input.focus(); }, 30);
     });
 
+    /* 検索の横の AI アイコン。AI が使える環境でだけ出す。開くのは検索と同じ画面 */
+    var askOpen = document.getElementById("ask-open");
+    if (askOpen) {
+      askOpen.addEventListener("click", function () {
+        document.getElementById("search-open").click();
+      });
+    }
+
     input.addEventListener("input", function () {
       render(input.value.trim());
     });
 
     /* ---- AI に聞く ----
 
-       Claude 版のページ（Artifact）だけで動く。GitHub Pages 版には
-       window.claude が無いので、ボタンごと出てこない。
+       Claude 版のページ（Artifact）は window.claude の sample を使う。
+       GitHub Pages 版は window.claude が無いので、2026-09-22 から
+       houdini-relay（Cloudflare Workers 経由の Gemini）を代わりに使う。
+       どちらも sampleFn(msgs, opts) -> Promise<{text, truncated}> という
+       同じ形にして、下の send() 以降は呼び分けをしない。
 
-       正確さのために、質問のたびにサイト内をあいまい検索して上位10件の
-       中身を添え、「それ以外を根拠にしない」と頼む。答えの下には、
-       添えた記録をリンクで並べる。根拠を自分でたどれるようにするため。 */
+       正確さのために、質問のたびにサイト内をあいまい検索して中身を添え、
+       「それ以外を根拠にしない」と頼む。答えの下には、添えた記録をリンクで
+       並べる。根拠を自分でたどれるようにするため。Gemini 側は無料枠なので、
+       件数と抜粋を Claude 版より絞る（askContext 内）。 */
+    var RELAY_URL = "https://houdini-relay.fko2547009.workers.dev/";
+
+    function relaySample(msgs, opts) {
+      return fetch(RELAY_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: msgs }),
+        signal: opts && opts.signal
+      }).then(function (res) {
+        return res.json().catch(function () {
+          throw errorWith("upstream_error", "応答が読めませんでした");
+        }).then(function (data) {
+          if (data && data.code) { throw errorWith(data.code, data.message || ""); }
+          return data;
+        });
+      }, function (e) {
+        if (e && e.name === "AbortError") { throw errorWith("cancelled", ""); }
+        throw errorWith("upstream_error", "");
+      });
+    }
+
+    function errorWith(code, message) {
+      var e = new Error(message || code);
+      e.code = code;
+      return e;
+    }
+
     var ask = document.getElementById("ask");
     var askGo = document.getElementById("ask-go");
     var askStop = document.getElementById("ask-stop");
@@ -3016,11 +3071,15 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
     ].join("\n");
 
     function askContext(query) {
-      var list = rankItems(query).list.slice(0, 10);
+      // Gemini（無料枠）を使う relay 版は、件数と抜粋を Claude 版より絞る
+      var viaRelay = sampleFn === relaySample;
+      var count = viaRelay ? 4 : 10;
+      var bodyLimit = viaRelay ? 220 : 360;
+      var list = rankItems(query).list.slice(0, count);
       var text = list.map(function (item, i) {
         var parts = ["[" + (i + 1) + "] " + item.kind + "：" + item.label];
         if (item.note) { parts.push("要点: " + item.note); }
-        if (item.body) { parts.push("内容: " + String(item.body).slice(0, 360)); }
+        if (item.body) { parts.push("内容: " + String(item.body).slice(0, bodyLimit)); }
         if (item.facts) { parts.push("わかったこと: " + item.facts); }
         return parts.join("\n");
       }).join("\n\n");
@@ -3177,8 +3236,16 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
         if (!s) { return; }
         sampleFn = s;
         ask.hidden = false;
+        if (askOpen) { askOpen.hidden = false; }
         updateAsk();
       }, function () {});
+    } else if (RELAY_URL) {
+      sampleFn = relaySample;
+      ask.hidden = false;
+      var engine = document.getElementById("ask-engine");
+      if (engine) { engine.textContent = "Google の Gemini（無料枠）で答えます。混んでいると答えられないことがあります。"; }
+      if (askOpen) { askOpen.hidden = false; }
+      updateAsk();
     }
 
     input.addEventListener("keydown", function (event) {

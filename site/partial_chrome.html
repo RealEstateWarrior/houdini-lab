@@ -49,14 +49,14 @@
           </svg>
           <span>AI に聞く</span>
         </button>
-        <span class="ask-beta">ベータ</span>
+        <span class="ask-beta">Beta 版</span>
         <button type="button" class="ask-sub" id="ask-stop" hidden>止める</button>
         <button type="button" class="ask-sub" id="ask-clear" hidden>会話を消す</button>
       </div>
       <div class="ask-log" id="ask-log" aria-live="polite"></div>
       <p class="ask-fine">
         まだベータです。答えの根拠はこのサイトの記録だけで、書いていないことは「まだ確かめていない」と答えます。
-        続けて聞けば、直近8往復ぶんは話の流れを覚えています。あなたの Claude の利用枠を使います。
+        続けて聞けば、直近8往復ぶんは話の流れを覚えています。<span id="ask-engine">あなたの Claude の利用枠を使います。</span>
       </p>
     </div>
     <p class="search-hint" id="search-hint">よく見るところ</p>
@@ -564,18 +564,57 @@
       setTimeout(function () { input.focus(); }, 30);
     });
 
+    /* 検索の横の AI アイコン。AI が使える環境でだけ出す。開くのは検索と同じ画面 */
+    var askOpen = document.getElementById("ask-open");
+    if (askOpen) {
+      askOpen.addEventListener("click", function () {
+        document.getElementById("search-open").click();
+      });
+    }
+
     input.addEventListener("input", function () {
       render(input.value.trim());
     });
 
     /* ---- AI に聞く ----
 
-       Claude 版のページ（Artifact）だけで動く。GitHub Pages 版には
-       window.claude が無いので、ボタンごと出てこない。
+       Claude 版のページ（Artifact）は window.claude の sample を使う。
+       GitHub Pages 版は window.claude が無いので、2026-09-22 から
+       houdini-relay（Cloudflare Workers 経由の Gemini）を代わりに使う。
+       どちらも sampleFn(msgs, opts) -> Promise<{text, truncated}> という
+       同じ形にして、下の send() 以降は呼び分けをしない。
 
-       正確さのために、質問のたびにサイト内をあいまい検索して上位10件の
-       中身を添え、「それ以外を根拠にしない」と頼む。答えの下には、
-       添えた記録をリンクで並べる。根拠を自分でたどれるようにするため。 */
+       正確さのために、質問のたびにサイト内をあいまい検索して中身を添え、
+       「それ以外を根拠にしない」と頼む。答えの下には、添えた記録をリンクで
+       並べる。根拠を自分でたどれるようにするため。Gemini 側は無料枠なので、
+       件数と抜粋を Claude 版より絞る（askContext 内）。 */
+    var RELAY_URL = "https://houdini-relay.fko2547009.workers.dev/";
+
+    function relaySample(msgs, opts) {
+      return fetch(RELAY_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: msgs }),
+        signal: opts && opts.signal
+      }).then(function (res) {
+        return res.json().catch(function () {
+          throw errorWith("upstream_error", "応答が読めませんでした");
+        }).then(function (data) {
+          if (data && data.code) { throw errorWith(data.code, data.message || ""); }
+          return data;
+        });
+      }, function (e) {
+        if (e && e.name === "AbortError") { throw errorWith("cancelled", ""); }
+        throw errorWith("upstream_error", "");
+      });
+    }
+
+    function errorWith(code, message) {
+      var e = new Error(message || code);
+      e.code = code;
+      return e;
+    }
+
     var ask = document.getElementById("ask");
     var askGo = document.getElementById("ask-go");
     var askStop = document.getElementById("ask-stop");
@@ -597,11 +636,15 @@
     ].join("\n");
 
     function askContext(query) {
-      var list = rankItems(query).list.slice(0, 10);
+      // Gemini（無料枠）を使う relay 版は、件数と抜粋を Claude 版より絞る
+      var viaRelay = sampleFn === relaySample;
+      var count = viaRelay ? 4 : 10;
+      var bodyLimit = viaRelay ? 220 : 360;
+      var list = rankItems(query).list.slice(0, count);
       var text = list.map(function (item, i) {
         var parts = ["[" + (i + 1) + "] " + item.kind + "：" + item.label];
         if (item.note) { parts.push("要点: " + item.note); }
-        if (item.body) { parts.push("内容: " + String(item.body).slice(0, 360)); }
+        if (item.body) { parts.push("内容: " + String(item.body).slice(0, bodyLimit)); }
         if (item.facts) { parts.push("わかったこと: " + item.facts); }
         return parts.join("\n");
       }).join("\n\n");
@@ -758,8 +801,16 @@
         if (!s) { return; }
         sampleFn = s;
         ask.hidden = false;
+        if (askOpen) { askOpen.hidden = false; }
         updateAsk();
       }, function () {});
+    } else if (RELAY_URL) {
+      sampleFn = relaySample;
+      ask.hidden = false;
+      var engine = document.getElementById("ask-engine");
+      if (engine) { engine.textContent = "Google の Gemini（無料枠）で答えます。混んでいると答えられないことがあります。"; }
+      if (askOpen) { askOpen.hidden = false; }
+      updateAsk();
     }
 
     input.addEventListener("keydown", function (event) {

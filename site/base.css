@@ -1700,6 +1700,21 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .nav-icon svg { width: 20px; height: 20px; display: block; }
 .nav-icon:hover { background: var(--ground-2); color: var(--ink); }
 .nav-icon:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+.nav-ai { position: relative; }
+.nav-ai[hidden] { display: none; }
+.nav-beta {
+  position: absolute;
+  right: -4px;
+  bottom: 0;
+  font-size: 0.52rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  padding: 2px 3px;
+  border-radius: 3px;
+  background: var(--ground);
+  border: 1px solid var(--wire-dim);
+  color: var(--ink-dim);
+}
 .nav-burger { display: none; }
 
 /* スマホではタブを畳んで、ハンバーガーに入れる。

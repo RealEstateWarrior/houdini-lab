@@ -121,6 +121,16 @@ SEARCH_SVG = (
     '<path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8"'
     ' stroke-linecap="round"/></svg>'
 )
+AI_SVG = (
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+    '<path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z"'
+    ' stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'
+    '<path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"'
+    ' fill="currentColor"/></svg>'
+)
+AI_BUTTON = ('      <button type="button" class="nav-icon nav-ai" id="ask-open" hidden'
+             ' aria-label="AI に聞く（Beta 版）" title="AI に聞く（Beta 版）">'
+             + AI_SVG + '<span class="nav-beta">Beta</span></button>')
 BURGER_SVG = (
     '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
     '<path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.8"'
@@ -1070,6 +1080,7 @@ def render_nav(active, tabs, urls, panels=None):
     out.append(f'        <li><a href="{NOTEBOOK_URL}" class="nav-ext"'
                ' target="_blank" rel="noopener noreferrer">Notebook</a></li>')
     out.append("      </ul>")
+    out.append(AI_BUTTON)
     out.append('      <button type="button" class="nav-icon" id="search-open"'
                ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + "</button>")
     out.append('      <button type="button" class="nav-icon nav-burger" id="menu-open"'
@@ -1098,6 +1109,7 @@ def render_parent_nav(urls):
             out.append(f'        <li><span class="soon">{html.escape(label)}'
                        "<small>準備中</small></span></li>")
     out.append("      </ul>")
+    out.append(AI_BUTTON)
     out.append('      <button type="button" class="nav-icon" id="search-open"'
                ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + "</button>")
     out += ["    </div>", "  </nav>"]

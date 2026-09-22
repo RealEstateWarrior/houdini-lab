@@ -64,6 +64,20 @@
 6. Artifact を再発行する（公開先の URL は auto-memory の houdini-sites）
 7. この STATE.md を更新する
 
+## Gemini 中継（houdini-relay）2026-09-22 に動作確認
+
+- Cloudflare Worker。コードは `D:\Claude\houdini\relay\worker.js`、設定は同じ場所の `wrangler.toml`
+- デプロイは **`npx.cmd wrangler deploy`**（`relay` フォルダで）。
+  Cloudflare のダッシュボードの「Deploy」ボタンは効かなかった（Active が切り替わらない、原因不明）。
+  今後の更新もダッシュボードではなく wrangler を使う
+- PowerShell で `npx wrangler ...` がそのまま通らないときは `npx.cmd wrangler ...`
+  （実行ポリシーで .ps1 が止められるため。設定は変えない）
+- 鍵は Cloudflare の Secret（`GEMINI_API_KEY`）。モデル名は `GEMINI_MODEL`（既定 `gemini-3.6-flash`。ユーザー指定、動作確認済み）
+- 許可する呼び出し元は worker.js の `ALLOW_ORIGINS`（`https://realestatewarrior.github.io` と手元確認用の localhost:8765）
+- curl で GET・許可外origin・許可origin の3通りを確認済み（405 / 403 / 200 で Gemini の答えが返る）
+- サイト側の呼び出し口は `site/partial_chrome.html`（`window.claude` が無いときだけ relay を使う）。
+  build_site.py 側の変更は無し。**GitHub Pages に公開した後の実機確認はまだ**（publish.py 待ち）
+
 ## やることメモ（全チャット共通。2026-09-21 に共有データ化）
 
 https://claude.ai/artifact/7Yd8cWYRkjTEaB6wRe6kqj （サイドバーに固定済み。ページの「編集モード」で直せる）
@@ -97,7 +111,7 @@ https://claude.ai/artifact/7Yd8cWYRkjTEaB6wRe6kqj （サイドバーに固定済
 **3実験に1回**（ユーザー決定 2026-09-20）。GitHub Pages は実験ごとに `publish.py` で更新し、Artifact だけ間を空ける。
 
 - 最後に再発行した実験: **141**（2026-09-22 に8ページ全部を force で再発行。足すファイルは「前回公開時の site/ の git 一覧」との差で出した: 親6・概要と実験74・ログ前半37）
-- 次は **107** を終えたとき。その次は 110
+- 次は **144** を終えたとき。その次は 147
 - 再発行したら、上の番号を書き換え、下の「使用量の記録」に1行足す
 
 ### 再発行の手順（2026-09-21 に確立。トークンを食うのは公開中の版を読むところ）
