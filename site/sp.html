@@ -1,6 +1,6 @@
 <title>Saito Production</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Houdini 研究ハブ — 明るい配色。Apple のサイトのような、白地・広い余白・
    大きな図版を基本にする。色は単一テーマ（ライト）に決め打ちし、
@@ -19,15 +19,42 @@
   --ink: #1d1d1f;
   --ink-mid: #4a4a4f;
   --ink-dim: #86868b;
+  --on-ink: #ffffff;
+  --ink-hover: #3a3a3f;
 
-  --flag: #0066cc;
+  /* 足した2色。青は「進む・今いる場所」、コーラルは AI だけ */
+  --flag: #0071e3;
+  --flag-hover: #0062c4;
+  --flag-soft: rgba(0, 113, 227, 0.12);
+  --on-flag: #ffffff;
+  --coral: #f2552c;
+  --on-coral: #ffffff;
+
   --fx: #9a4b00;
   --alert: #b3261e;
+  --ok: #2f6b3c;
+  --warn-bg: #fff8f2;
+  --warn-line: #f0ddc9;
+  --tag-wait: #f3e4d6;
+  --tag-open: #e3edf7;
+  --tag-done: #e2efe4;
+  --bar-bg: rgba(255, 255, 255, 0.82);
 
-  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-                  "Noto Sans JP", system-ui, sans-serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-               "Noto Sans JP", system-ui, sans-serif;
+  /* 冒頭の帯（灰色の霞に、青とコーラルをごく薄く） */
+  --band: #6f757e;
+  --band-1: rgba(214, 219, 226, 0.75);
+  --band-2: rgba(58, 66, 78, 0.8);
+  --band-3: rgba(160, 168, 180, 0.7);
+  --band-blue: rgba(0, 113, 227, 0.26);
+  --band-coral: rgba(255, 94, 58, 0.16);
+  --band-word: rgba(255, 255, 255, 0.15);
+  --card: #ffffff;
+  --deck-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.45);
+
+  --font-display: "Schibsted Grotesk", "Zen Kaku Gothic New", -apple-system, BlinkMacSystemFont,
+                  "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  --font-body: "Schibsted Grotesk", "Zen Kaku Gothic New", -apple-system, BlinkMacSystemFont,
+               "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
 
   --shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
@@ -35,8 +62,88 @@
   --radius: 18px;
 
   --gutter: 58px;
-  --bar: 52px;
+  --bar: 56px;
   color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #000000;
+    --ground-2: #161617;
+    --panel: #1c1c1e;
+    --panel-hi: #232326;
+    --plate: #161617;
+    --wire: #3a3a3e;
+    --wire-dim: #2a2a2d;
+    --ink: #f5f5f7;
+    --ink-mid: #c7c7cc;
+    --ink-dim: #8e8e93;
+    --on-ink: #000000;
+    --ink-hover: #d9d9de;
+    --flag: #2997ff;
+    --flag-hover: #54acff;
+    --flag-soft: rgba(41, 151, 255, 0.16);
+    --coral: #ff6a45;
+    --fx: #f0a35e;
+    --alert: #ff6b61;
+    --ok: #7dd08f;
+    --warn-bg: #2a2118;
+    --warn-line: #4a3a28;
+    --tag-wait: #3a2c1e;
+    --tag-open: #1a2c40;
+    --tag-done: #1c3322;
+    --bar-bg: rgba(0, 0, 0, 0.72);
+    --band: #2b2f35;
+    --band-1: rgba(120, 128, 140, 0.55);
+    --band-2: rgba(10, 12, 16, 0.85);
+    --band-3: rgba(84, 92, 104, 0.6);
+    --band-blue: rgba(41, 151, 255, 0.2);
+    --band-coral: rgba(255, 106, 69, 0.12);
+    --band-word: rgba(255, 255, 255, 0.07);
+    --card: #1c1c1e;
+    --deck-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+    --shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+    --shadow-lift: 0 12px 34px rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #000000;
+  --ground-2: #161617;
+  --panel: #1c1c1e;
+  --panel-hi: #232326;
+  --plate: #161617;
+  --wire: #3a3a3e;
+  --wire-dim: #2a2a2d;
+  --ink: #f5f5f7;
+  --ink-mid: #c7c7cc;
+  --ink-dim: #8e8e93;
+  --on-ink: #000000;
+  --ink-hover: #d9d9de;
+  --flag: #2997ff;
+  --flag-hover: #54acff;
+  --flag-soft: rgba(41, 151, 255, 0.16);
+  --coral: #ff6a45;
+  --fx: #f0a35e;
+  --alert: #ff6b61;
+  --ok: #7dd08f;
+  --warn-bg: #2a2118;
+  --warn-line: #4a3a28;
+  --tag-wait: #3a2c1e;
+  --tag-open: #1a2c40;
+  --tag-done: #1c3322;
+  --bar-bg: rgba(0, 0, 0, 0.72);
+  --band: #2b2f35;
+  --band-1: rgba(120, 128, 140, 0.55);
+  --band-2: rgba(10, 12, 16, 0.85);
+  --band-3: rgba(84, 92, 104, 0.6);
+  --band-blue: rgba(41, 151, 255, 0.2);
+  --band-coral: rgba(255, 106, 69, 0.12);
+  --band-word: rgba(255, 255, 255, 0.07);
+  --card: #1c1c1e;
+  --deck-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  --shadow-lift: 0 12px 34px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -64,7 +171,7 @@ a { color: var(--flag); text-underline-offset: 2px; }
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--bar-bg);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--wire-dim);
@@ -163,7 +270,7 @@ a { color: var(--flag); text-underline-offset: 2px; }
 .sidenav a[aria-current="page"],
 .sidenav button.nav-tab[aria-selected="true"] {
   background: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
 }
 .sidenav a:focus-visible,
 .sidenav button.nav-tab:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
@@ -421,9 +528,9 @@ a.chip-card { text-decoration: none; }
 .tagchip.is-on {
   background: var(--ink);
   border-color: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
 }
-.tagchip.is-on span { color: rgba(255, 255, 255, 0.7); }
+.tagchip.is-on span { color: var(--on-ink); opacity: 0.7; }
 .tagchip:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 
 .thumb-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
@@ -572,7 +679,7 @@ a.chip-card { text-decoration: none; }
   cursor: pointer;
   z-index: 3;
 }
-.modal-close:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.modal-close:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .modal-close:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 .modal-body {
   padding: 26px 30px 30px;
@@ -626,12 +733,12 @@ a.chip-card { text-decoration: none; }
   padding: 9px 20px;
   border-radius: 980px;
   background: var(--flag);
-  color: #ffffff;
+  color: var(--on-flag);
   font-size: 0.86rem;
   font-weight: 500;
   text-decoration: none;
 }
-.m-more:hover { background: #0055aa; }
+.m-more:hover { background: var(--flag-hover); }
 
 /* ---------- ノード解説 ---------- */
 
@@ -692,8 +799,8 @@ a.chip-card { text-decoration: none; }
 
 .gotcha {
   margin: 14px 0 0;
-  background: #fff8f2;
-  border: 1px solid #f0ddc9;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
   border-radius: 12px;
   padding: 12px 15px;
   font-size: 0.84rem;
@@ -721,7 +828,7 @@ a.chip-card { text-decoration: none; }
   background: var(--ground-2);
   color: var(--ink-mid);
 }
-.node-exps a:hover { background: var(--ink); color: #ffffff; }
+.node-exps a:hover { background: var(--ink); color: var(--on-ink); }
 
 /* ---------- 用語ポップアップ ---------- */
 
@@ -812,7 +919,7 @@ a.chip-card { text-decoration: none; }
   color: var(--ink-mid);
   font-variant-numeric: tabular-nums;
 }
-.entry--current .badge { background: var(--ink); border-color: var(--ink); color: #ffffff; }
+.entry--current .badge { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
 .entry--planned .badge { border-style: dashed; color: var(--ink-dim); }
 
 .body { padding-top: 1px; }
@@ -1049,7 +1156,7 @@ pre code {
   background: var(--ground-2);
   color: var(--ink-mid);
 }
-.gloss-nav a:hover { background: var(--ink); color: #ffffff; }
+.gloss-nav a:hover { background: var(--ink); color: var(--on-ink); }
 
 .gloss-cat { margin-top: 44px; scroll-margin-top: 70px; }
 .gloss-cat h3 {
@@ -1116,7 +1223,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   background: var(--ground-2);
   color: var(--ink);
 }
-.logswitch a:hover { background: var(--ink); color: #ffffff; }
+.logswitch a:hover { background: var(--ink); color: var(--on-ink); }
 
 /* ---------- はじめての人への順路 ---------- */
 
@@ -1141,7 +1248,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   place-items: center;
   border-radius: 50%;
   background: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
   font-family: var(--font-display);
   font-size: 0.92rem;
   font-weight: 600;
@@ -1228,7 +1335,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   place-items: center;
   border-radius: 50%;
   background: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
@@ -1251,8 +1358,8 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 @media (max-width: 760px) { .step { grid-template-columns: minmax(0, 1fr); } }
 
 .trap {
-  background: #fff8f2;
-  border: 1px solid #f0ddc9;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
   border-radius: 14px;
   padding: 20px 22px;
   margin-bottom: 14px;
@@ -1294,7 +1401,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   background: var(--ground-2);
   color: var(--ink);
 }
-.guide-more a:first-child { background: var(--flag); color: #ffffff; }
+.guide-more a:first-child { background: var(--flag); color: var(--on-flag); }
 .guide-more a:hover { opacity: 0.82; }
 
 /* ---------- 実験から、ノード解説とシーンファイルへ ---------- */
@@ -1323,7 +1430,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   background: var(--ground-2);
   color: var(--ink-mid);
 }
-.usedby a:hover { background: var(--ink); color: #ffffff; }
+.usedby a:hover { background: var(--ink); color: var(--on-ink); }
 .usedby + .path { margin-top: 4px; }
 
 .node-unused {
@@ -1362,7 +1469,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   padding: 2px 7px;
   border-radius: 980px;
   background: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
 }
 .reqform input,
 .reqform textarea {
@@ -1383,7 +1490,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 .reqform textarea:focus {
   outline: none;
   border-color: var(--ink);
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.14);
+  box-shadow: 0 0 0 3px var(--flag-soft);
 }
 .reqform-half { max-width: 260px; }
 .reqform-go { display: grid; gap: 10px; justify-items: start; margin-top: 2px; }
@@ -1395,11 +1502,11 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   padding: 11px 22px;
   border-radius: 980px;
   background: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
   text-decoration: none;
   cursor: pointer;
 }
-.reqform-send:hover { background: #3a3a3f; }
+.reqform-send:hover { background: var(--ink-hover); }
 .reqform-send[aria-disabled="true"] {
   background: var(--wire);
   color: var(--ground);
@@ -1433,10 +1540,10 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   color: var(--ink-mid);
 }
 .queue-tag b { font-size: 0.78rem; font-variant-numeric: tabular-nums; opacity: 0.7; }
-.queue--go .queue-tag { background: var(--ink); color: #ffffff; }
-.queue--wait .queue-tag { background: #f3e4d6; color: var(--fx); }
-.queue--open .queue-tag { background: #e3edf7; color: var(--flag); }
-.queue--done .queue-tag { background: #e2efe4; color: #2f6b3c; }
+.queue--go .queue-tag { background: var(--ink); color: var(--on-ink); }
+.queue--wait .queue-tag { background: var(--tag-wait); color: var(--fx); }
+.queue--open .queue-tag { background: var(--tag-open); color: var(--flag); }
+.queue--done .queue-tag { background: var(--tag-done); color: var(--ok); }
 .queue--drop .queue-tag { background: var(--ground-2); color: var(--ink-dim); }
 .queue-head p { margin: 0; font-size: 0.82rem; color: var(--ink-dim); }
 
@@ -1471,7 +1578,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   color: var(--ink);
   cursor: pointer;
 }
-.queue-go:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.queue-go:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .queue-go:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 
 /* ---------- 横へ流れる帯（ホーム） ----------
@@ -1952,7 +2059,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   place-items: center;
   border: 1px solid var(--wire-dim);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.86);
+  background: var(--bar-bg);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   backdrop-filter: saturate(180%) blur(16px);
   color: var(--ink-mid);
@@ -1961,7 +2068,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   animation: totop-in 0.22s ease both;
 }
 .totop svg { width: 20px; height: 20px; display: block; }
-.totop:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.totop:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .totop:focus-visible { outline: 2px solid var(--flag); outline-offset: 3px; }
 
 @keyframes totop-in {
@@ -2016,11 +2123,11 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   border: none;
   border-radius: 980px;
   background: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
   cursor: pointer;
 }
 .ask-go svg { width: 17px; height: 17px; display: block; }
-.ask-go:hover { background: #3a3a3f; }
+.ask-go:hover { background: var(--ink-hover); }
 .ask-go:disabled { background: var(--ground-2); color: var(--ink-dim); cursor: default; }
 .ask-go:focus-visible, .ask-sub:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 .ask-sub {
@@ -2217,7 +2324,7 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   border: none;
   border-radius: 50%;
   background: var(--ink);
-  color: #ffffff;
+  color: var(--on-ink);
   cursor: pointer;
   padding: 0;
 }
@@ -2308,9 +2415,9 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   color: var(--ink);
   cursor: pointer;
 }
-.tile-go:hover { background: var(--ink); color: #ffffff; border-color: var(--ink); }
-.tile-go--guide { background: var(--flag); border-color: var(--flag); color: #ffffff; }
-.tile-go--guide:hover { background: #0055aa; border-color: #0055aa; }
+.tile-go:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+.tile-go--guide { background: var(--flag); border-color: var(--flag); color: var(--on-flag); }
+.tile-go--guide:hover { background: var(--flag-hover); border-color: #0055aa; }
 .tile-go:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .tile .tile-img img { transition: none; } }
 
@@ -2360,8 +2467,266 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
   color: var(--ink-mid);
   cursor: pointer;
 }
-.speed-exp:hover { background: var(--ink); color: #ffffff; }
+.speed-exp:hover { background: var(--ink); color: var(--on-ink); }
 .speed-exp:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+
+
+/* =====================================================================
+   2026-09-22 刷新（tools_redesign_2026_09_22.py が足した分）
+   ===================================================================== */
+
+body { overflow-x: clip; }
+
+/* ---------- 上のバー: 4つの見出し + その区分のタブの列 ---------- */
+.sidenav { background: var(--bar-bg); }
+.nav-inner { max-width: 1120px; height: var(--bar); }
+.mega { display: none !important; }
+.nav-drop > button.nav-tab[aria-expanded="true"],
+.nav-drop > a[aria-expanded="true"] { background: none; }
+.sidenav .nav-menu { justify-content: center; }
+.sidenav .nav-menu > li > a,
+.sidenav .nav-menu > li > button.nav-tab {
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 9px 15px;
+  color: var(--ink-dim);
+}
+.sidenav .nav-menu > li.is-on > a,
+.sidenav .nav-menu > li.is-on > button.nav-tab {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+.sidenav .nav-menu > li > a:hover,
+.sidenav .nav-menu > li > button.nav-tab:hover { color: var(--ink); }
+.sidenav .nav-menu > li.is-on > a:hover,
+.sidenav .nav-menu > li.is-on > button.nav-tab:hover { color: var(--on-ink); }
+
+.subnav {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 22px 12px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.subnav::-webkit-scrollbar { display: none; }
+.subnav[hidden] { display: none; }
+.sidenav .subnav a,
+.sidenav .subnav button.nav-tab {
+  flex: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border: 1px solid var(--wire-dim);
+  border-radius: 980px;
+  color: var(--ink-mid);
+  background: var(--ground);
+}
+.sidenav .subnav a:hover,
+.sidenav .subnav button.nav-tab:hover { background: var(--ground-2); color: var(--ink); }
+.sidenav .subnav a[aria-current="page"],
+.sidenav .subnav button.nav-tab[aria-selected="true"] {
+  background: var(--flag);
+  border-color: var(--flag);
+  color: var(--on-flag);
+}
+@media (max-width: 720px) {
+  .subnav { padding: 0 16px 10px; }
+}
+
+/* 明・暗・自動の切り替え（上のバーの右端） */
+.theme-switch { display: flex; padding: 3px; border-radius: 980px; background: var(--ground-2); flex: none; }
+.theme-switch button {
+  border: none; background: none; cursor: pointer;
+  font: inherit; font-size: 0.68rem; font-weight: 700;
+  color: var(--ink-dim);
+  padding: 5px 8px; border-radius: 980px;
+}
+.theme-switch button[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16); }
+@media (max-width: 900px) { .theme-switch { display: none; } }
+
+/* AI は コーラル */
+.nav-beta { background: var(--coral); border-color: var(--coral); color: var(--on-coral); }
+.ask-go { background: var(--coral); color: var(--on-coral); }
+.ask-go:hover { background: var(--coral); filter: brightness(1.06); }
+.chat-send { background: var(--ink); color: var(--on-ink); }
+
+/* ---------- 題: 英語を大きく、日本語を小さく ---------- */
+.masthead { display: flex; flex-direction: column; padding-top: 12px; }
+.masthead .eyebrow {
+  order: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.4vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+  margin: 0;
+}
+.masthead h1 {
+  order: 1;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink-dim);
+  margin: 12px 0 16px;
+}
+.masthead .lede { order: 2; }
+.masthead > :not(.eyebrow):not(h1):not(.lede) { order: 3; }
+
+.stage h3 .en {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.6vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.stage h3:has(.en) { font-size: 0.86rem; font-weight: 700; letter-spacing: 0.02em; color: var(--ink-dim); }
+
+/* ---------- ホーム冒頭の帯（ここだけが動く） ---------- */
+.band {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--band);
+  color: #ffffff;
+  border-radius: 0 0 clamp(28px, 4.5vw, 48px) clamp(28px, 4.5vw, 48px);
+  margin: -40px calc(50% - 50vw) 0;
+  padding: clamp(28px, 4vw, 44px) 0 clamp(26px, 3.6vw, 40px);
+}
+.band-fog { position: absolute; inset: -20%; z-index: -2; pointer-events: none; }
+.band-fog i { position: absolute; border-radius: 50%; filter: blur(70px); will-change: transform; }
+.band-fog i:nth-child(1) { width: 55%; height: 70%; left: 5%; top: 0; background: var(--band-1); animation: bandf1 18s ease-in-out infinite alternate; }
+.band-fog i:nth-child(2) { width: 60%; height: 80%; right: -5%; top: 20%; background: var(--band-2); animation: bandf2 22s ease-in-out infinite alternate; }
+.band-fog i:nth-child(3) { width: 45%; height: 55%; left: 30%; bottom: -5%; background: var(--band-3); animation: bandf3 26s ease-in-out infinite alternate; }
+.band-fog i:nth-child(4) { width: 38%; height: 50%; right: 8%; top: -10%; background: var(--band-blue); animation: bandf3 24s ease-in-out infinite alternate-reverse; }
+.band-fog i:nth-child(5) { width: 30%; height: 42%; left: -6%; bottom: 0; background: var(--band-coral); animation: bandf1 28s ease-in-out infinite alternate-reverse; }
+@keyframes bandf1 { to { transform: translate(18%, 14%) scale(1.15); } }
+@keyframes bandf2 { to { transform: translate(-16%, -10%) scale(0.9); } }
+@keyframes bandf3 { to { transform: translate(-20%, -18%) scale(1.2); } }
+.band-word {
+  position: absolute; z-index: -1; left: -0.04em; top: clamp(96px, 12vw, 128px);
+  font-family: var(--font-display);
+  font-size: clamp(4.6rem, 15vw, 12rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.8;
+  color: var(--band-word); white-space: nowrap; pointer-events: none; user-select: none;
+}
+.band-inner { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+.band-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #ffffff;
+  text-align: left;
+}
+.band-lede { margin: 8px 0 0; max-width: 36em; font-size: 0.95rem; line-height: 1.7; color: rgba(255, 255, 255, 0.82); }
+
+.band-search {
+  margin-top: 20px;
+  max-width: 760px;
+  display: flex; align-items: center; gap: 8px;
+  background: #ffffff; color: #1d1d1f;
+  border-radius: 980px;
+  padding: 7px 7px 7px 24px;
+  box-shadow: 0 12px 40px -18px rgba(0, 0, 0, 0.55);
+}
+.band-search input {
+  flex: 1; min-width: 0;
+  border: none; outline: none; background: none;
+  font: inherit; font-size: 1.02rem; font-weight: 500;
+  color: #1d1d1f; padding: 12px 0;
+}
+.band-search input::placeholder { color: #8e8e93; }
+.band-go {
+  flex: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  border: none; border-radius: 980px; cursor: pointer;
+  font: inherit; font-size: 0.84rem; font-weight: 700;
+  padding: 11px 16px;
+}
+.band-go svg { width: 16px; height: 16px; display: block; }
+.band-go--find { background: #f2f2f4; color: #1d1d1f; }
+.band-go--find:hover { background: #e6e6ea; }
+.band-go--ai { background: var(--coral); color: var(--on-coral); }
+.band-go--ai:hover { filter: brightness(1.06); }
+.band-go--ai small { font-size: 0.6rem; opacity: 0.8; }
+.band-go[hidden] { display: none; }
+
+/* 重なったカード（新着の実験） */
+.deck { position: relative; height: clamp(372px, 40vw, 430px); margin-top: clamp(26px, 3.4vw, 36px); }
+.deck-card {
+  position: absolute; left: 50%; top: 0;
+  width: min(340px, 76vw);
+  border-radius: 28px;
+  background: var(--card); color: var(--ink);
+  padding: 10px 10px 18px;
+  box-shadow: var(--deck-shadow);
+  text-decoration: none;
+  transform-origin: 50% 90%;
+  transition: transform 0.6s cubic-bezier(.2,.7,.2,1), opacity 0.6s;
+}
+.deck-card img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; border-radius: 20px; display: block; background: #2a2a2e; }
+.deck-card .deck-meta { display: block; margin: 14px 10px 0; font-size: 0.74rem; font-weight: 700; color: var(--flag); }
+.deck-card .deck-t { display: block; margin: 4px 10px 0; font-family: var(--font-display); font-size: 1.06rem; line-height: 1.45; font-weight: 800; letter-spacing: -0.01em; }
+.deck-card .deck-d { display: block; margin: 6px 10px 0; font-size: 0.8rem; line-height: 1.6; color: var(--ink-mid); }
+.deck-ctrl { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.deck-play { width: 44px; height: 44px; border-radius: 50%; border: none; display: grid; place-items: center; cursor: pointer; background: #ffffff; color: #1d1d1f; flex: none; }
+.deck-play svg, .deck-arrow svg { width: 18px; height: 18px; display: block; }
+.deck-arrow { width: 40px; height: 40px; border: none; background: none; color: #ffffff; cursor: pointer; display: grid; place-items: center; border-radius: 50%; }
+.deck-arrow:hover { background: rgba(255, 255, 255, 0.12); }
+.deck-dots { display: flex; gap: 8px; align-items: center; margin-inline: auto; }
+.deck-dots button { width: 9px; height: 9px; padding: 0; border: none; border-radius: 980px; background: rgba(255, 255, 255, 0.4); cursor: pointer; transition: width 0.35s, background 0.35s; }
+.deck-dots button[aria-current="true"] { width: 34px; background: var(--flag); }
+
+@media (max-width: 720px) {
+  .band { margin-top: -28px; }
+  .band-inner { padding: 0 16px; }
+  .band-search { padding-left: 18px; }
+  .band-go--find { display: none; }
+  .band-go--ai { padding: 10px 13px; font-size: 0.78rem; }
+  .band-go--ai small { display: none; }
+  .band-search input { font-size: 16px; }
+  .deck { height: 392px; }
+}
+
+/* ホームの最後: この場所の数字と環境（冒頭からここへ移した） */
+.site-facts {
+  margin-top: clamp(72px, 9vw, 112px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--wire-dim);
+  border-bottom: 1px solid var(--wire-dim);
+}
+.site-facts a {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 22px clamp(12px, 2.2vw, 24px);
+  border-right: 1px solid var(--wire-dim);
+  transition: background 0.2s;
+}
+.site-facts a:last-child { border-right: none; }
+.site-facts a:hover { background: var(--ground-2); }
+.site-facts b { display: block; font-family: var(--font-display); font-size: clamp(1.7rem, 3.2vw, 2.4rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1; font-variant-numeric: tabular-nums; }
+.site-facts span { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.8rem; font-weight: 700; color: var(--ink-mid); }
+.site-facts em { font-style: normal; font-size: 0.64rem; letter-spacing: 0.06em; color: var(--ink-dim); }
+.site-env { margin: 14px 0 0; font-size: 0.76rem; color: var(--ink-dim); }
+@media (max-width: 720px) {
+  .site-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-facts a:nth-child(2) { border-right: none; }
+  .site-facts a:nth-child(-n+2) { border-bottom: 1px solid var(--wire-dim); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .band-fog i { animation: none; }
+  .deck-card, .deck-dots button { transition: none; }
+}
 
 
 /* ---------- 親ページ（部の入口） ---------- */
@@ -3694,6 +4059,138 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
         apply(chip.classList.contains("is-on") ? "" : chip.dataset.tag);
       });
     });
+  })();
+</script>
+
+<script>
+  /* 2026-09-22 刷新: 上のバーのタブの列・明暗の切り替え・冒頭の帯（検索と重なったカード） */
+  (function () {
+    var root = document.documentElement;
+
+    /* 明・暗・自動。選んだものは、この閲覧だけに覚えておく */
+    function setTheme(m) {
+      if (m === "light" || m === "dark") { root.setAttribute("data-theme", m); }
+      else { root.removeAttribute("data-theme"); m = "system"; }
+      Array.prototype.forEach.call(document.querySelectorAll("[data-theme-set]"), function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.themeSet === m));
+      });
+      try { localStorage.setItem("hl-theme", m); } catch (e) {}
+    }
+    try { var saved = localStorage.getItem("hl-theme"); if (saved) { setTheme(saved); } } catch (e) {}
+    Array.prototype.forEach.call(document.querySelectorAll("[data-theme-set]"), function (b) {
+      b.addEventListener("click", function () { setTheme(b.dataset.themeSet); });
+    });
+
+    /* いま居る区分のタブの列だけを出し、上の見出しに印を付ける */
+    function syncNav() {
+      var on = null;
+      Array.prototype.forEach.call(document.querySelectorAll(".subnav"), function (sub) {
+        var hit = sub.querySelector('[aria-selected="true"], [aria-current="page"]');
+        sub.hidden = !hit;
+        if (hit) { on = sub.dataset.g; }
+      });
+      Array.prototype.forEach.call(document.querySelectorAll(".nav-menu > li[data-g]"), function (li) {
+        var c = li.firstElementChild;
+        var self = c && (c.getAttribute("aria-selected") === "true" || c.getAttribute("aria-current") === "page");
+        li.classList.toggle("is-on", on !== null ? li.dataset.g === on : !!self);
+      });
+    }
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(syncNav);
+      Array.prototype.forEach.call(document.querySelectorAll(".nav-tab"), function (t) {
+        mo.observe(t, { attributes: true, attributeFilter: ["aria-selected"] });
+      });
+    }
+    syncNav();
+
+    /* 冒頭の帯の検索窓: 「探す」は検索の画面、「AI に聞く」はチャットの画面へ、打った言葉ごと渡す */
+    var bq = document.getElementById("band-q");
+    if (bq) {
+      var bandFind = document.getElementById("band-find");
+      var bandAi = document.getElementById("band-ai");
+      var askOpen = document.getElementById("ask-open");
+      bandFind.addEventListener("click", function () {
+        var v = bq.value;
+        document.getElementById("search-open").click();
+        var si = document.getElementById("search-input");
+        if (si && v) { si.value = v; si.dispatchEvent(new Event("input")); }
+      });
+      bq.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); bandFind.click(); }
+      });
+      if (askOpen && bandAi) {
+        var showAi = function () { bandAi.hidden = askOpen.hidden; };
+        showAi();
+        if (window.MutationObserver) { new MutationObserver(showAi).observe(askOpen, { attributes: true, attributeFilter: ["hidden"] }); }
+        bandAi.addEventListener("click", function () {
+          var v = bq.value.trim();
+          askOpen.click();
+          var ci = document.getElementById("chat-input");
+          if (ci && v) {
+            ci.value = v;
+            ci.dispatchEvent(new Event("input"));
+            var cs = document.getElementById("chat-send");
+            if (cs && !cs.disabled) { cs.click(); }
+          }
+        });
+      }
+    }
+
+    /* 重なったカード: 5秒ごとに次へ。止める・前後・点・指でめくる */
+    var deck = document.getElementById("deck");
+    if (deck) {
+      var cards = deck.querySelectorAll(".deck-card"), n = cards.length, cur = 0;
+      var dots = document.getElementById("deck-dots");
+      dots.innerHTML = Array.prototype.map.call(cards, function (c, i) {
+        return '<button type="button" aria-label="' + (i + 1) + '枚目"></button>';
+      }).join("");
+      var dotBtns = dots.querySelectorAll("button");
+      var narrow = window.matchMedia("(max-width: 720px)");
+      function layout() {
+        Array.prototype.forEach.call(cards, function (c, i) {
+          var d = ((i - cur) % n + n) % n; if (d > n / 2) { d -= n; }
+          var a = Math.abs(d);
+          var step = narrow.matches ? 18 : 34, rot = narrow.matches ? 0 : d * 3;
+          c.style.transform = "translateX(calc(-50% + " + (d * step) + "%)) scale(" + (1 - a * 0.1) + ") rotate(" + rot + "deg)";
+          c.style.zIndex = String(10 - a);
+          c.style.opacity = a > 2 ? "0" : String(1 - a * (narrow.matches ? 0.4 : 0.14));
+          c.style.pointerEvents = a > 2 ? "none" : "auto";
+          c.tabIndex = a === 0 ? 0 : -1;
+          c.setAttribute("aria-hidden", String(a !== 0));
+        });
+        Array.prototype.forEach.call(dotBtns, function (b, i) { b.setAttribute("aria-current", String(i === cur)); });
+      }
+      function to(i) { cur = (i + n) % n; layout(); }
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var playing = !reduce, timer = null, play = document.getElementById("deck-play");
+      var PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="3.2" height="12" rx="1" fill="currentColor"/><rect x="13.8" y="6" width="3.2" height="12" rx="1" fill="currentColor"/></svg>';
+      var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
+      function restart() { clearInterval(timer); if (playing) { timer = setInterval(function () { to(cur + 1); }, 5000); } }
+      function setPlay(on) {
+        playing = on;
+        play.innerHTML = on ? PAUSE : PLAY;
+        play.setAttribute("aria-label", on ? "自動の切り替えを止める" : "自動の切り替えを始める");
+        restart();
+      }
+      play.addEventListener("click", function () { setPlay(!playing); });
+      document.getElementById("deck-prev").addEventListener("click", function () { to(cur - 1); restart(); });
+      document.getElementById("deck-next").addEventListener("click", function () { to(cur + 1); restart(); });
+      Array.prototype.forEach.call(dotBtns, function (b, i) { b.addEventListener("click", function () { to(i); restart(); }); });
+      Array.prototype.forEach.call(cards, function (c, i) {
+        c.addEventListener("click", function (ev) { if (i !== cur) { ev.preventDefault(); to(i); restart(); } });
+      });
+      var sx = null, moved = false;
+      deck.addEventListener("pointerdown", function (e) { sx = e.clientX; moved = false; });
+      deck.addEventListener("pointerup", function (e) {
+        if (sx === null) { return; }
+        var dx = e.clientX - sx; sx = null;
+        if (Math.abs(dx) > 40) { moved = true; to(cur + (dx < 0 ? 1 : -1)); restart(); }
+      });
+      deck.addEventListener("click", function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
+      if (narrow.addEventListener) { narrow.addEventListener("change", layout); }
+      setPlay(playing);
+      layout();
+    }
   })();
 </script>
 

@@ -1,6 +1,6 @@
 <title><!--PAGE_TITLE--></title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 <!--CSS-->
 </style>
@@ -11,24 +11,28 @@
 
     <!-- ========== 概要 ========== -->
     <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
-      <header class="hero">
-        <p class="eyebrow">Saito Production — Houdini 研究部</p>
-        <h1>動かして、測って、残す。</h1>
-        <p class="lede">
-          Houdini を実際に動かして確かめたことだけを積み上げる場所。
-          推測は書かない。数字が合わなかった回も、そのまま残す。
-        </p>
-        <dl class="facts">
-          <div><dt><a class="facts-link" href="<!--URL_EXPERIMENTS-->">実験</a></dt><dd><!--EXP_COUNT--> / <!--EXP_TOTAL--></dd></div>
-          <div><dt><a class="facts-link" href="<!--URL_NODES-->">解説したノード</a></dt><dd><!--NODE_COUNT--></dd></div>
-          <div><dt><a class="facts-link" href="<!--URL_GLOSSARY-->">用語</a></dt><dd><!--TERM_COUNT--></dd></div>
-          <div><dt><a class="facts-link" href="<!--NOTEBOOK_URL-->" target="_blank" rel="noopener noreferrer">Notebook ソース</a></dt><dd>41 / 300</dd></div>
-        </dl>
-      </header>
-<!--STRIP-->
+      <div class="band">
+        <div class="band-fog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="band-word" aria-hidden="true">Houdini Lab</div>
+        <div class="band-inner">
+          <h1 class="band-title">Houdini 研究部</h1>
+          <p class="band-lede">Houdini の機能を1つずつ動かし、結果を数値で記録しています。実験の記録、作り方の手順、ノードと用語の解説を、ここから探せます。</p>
+          <form class="band-search" id="band-search" role="search" onsubmit="return false">
+            <input type="search" id="band-q" placeholder="何をお探しですか？" autocomplete="off"
+                   aria-label="探す言葉、または AI への質問">
+            <button type="submit" class="band-go band-go--find" id="band-find">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>探す
+            </button>
+            <button type="button" class="band-go band-go--ai" id="band-ai" hidden>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>AI に聞く <small>Beta</small>
+            </button>
+          </form>
+<!--DECK-->
+        </div>
+      </div>
 
       <div class="stage">
-        <h3>はじめての人へ</h3>
+        <h3><span class="en">Start Here</span>はじめての人へ</h3>
         <p>上から順に読むと、作り方 → 確かめ方 → 言葉の意味、の順で入れます。</p>
       </div>
       <div class="route">
@@ -59,13 +63,13 @@
       </div>
 
       <div class="stage">
-        <h3>これまでに作ったもの</h3>
+        <h3><span class="en">Showcase</span>これまでに作ったもの</h3>
         <p>プロシージャルモデリングから始めて、エフェクト・毛・リグ・MPM へ。カードから記録と作り方へそのまま飛べます。</p>
       </div>
 <!--SHOWCASE-->
 
       <div class="stage">
-        <h3>やり方</h3>
+        <h3><span class="en">Workflow</span>やり方</h3>
         <p>ノードの組み立ても描画も、<code>hython</code> という文字だけの実行環境から行っている。</p>
       </div>
       <div class="pipeline">
@@ -97,7 +101,7 @@
       </div>
 
       <div class="stage">
-        <h3>この場所の決めごと</h3>
+        <h3><span class="en">Rules</span>この場所の決めごと</h3>
       </div>
       <div class="pillars">
         <div class="pillar">
@@ -127,7 +131,7 @@
       </div>
 
       <div class="stage">
-        <h3>使っている道具</h3>
+        <h3><span class="en">Tools</span>使っている道具</h3>
       </div>
       <div class="scroll">
         <table>
@@ -142,12 +146,20 @@
           </tbody>
         </table>
       </div>
+
+      <nav class="site-facts" aria-label="この場所の数字">
+        <a href="<!--URL_EXPERIMENTS-->"><b><!--EXP_COUNT--></b><span>実験ログ<em>EXPERIMENTS</em></span></a>
+        <a href="<!--URL_GUIDES-->"><b><!--GUIDE_COUNT--></b><span>実践ガイド<em>PRACTICE</em></span></a>
+        <a href="<!--URL_NODES-->"><b><!--NODE_COUNT--></b><span>ノード解説<em>NODES</em></span></a>
+        <a href="<!--URL_GLOSSARY-->"><b><!--TERM_COUNT--></b><span>用語集<em>GLOSSARY</em></span></a>
+      </nav>
+      <p class="site-env">Houdini 21.0.700（Apprentice）· hython で実行 · Gemini Notebook のソース 41 / 300</p>
     </section>
 
     <!-- ========== 手順 ========== -->
     <section class="panel" id="panel-guides" role="tabpanel" aria-labelledby="tab-guides" hidden>
       <header class="masthead">
-        <p class="eyebrow">How to</p>
+        <p class="eyebrow">Practice</p>
         <h1>実践</h1>
         <p class="lede">
           作り方だけを順番に並べたもの。カードを押すと中身が開く。
@@ -162,7 +174,7 @@
     <!-- ========== 制作 ========== -->
     <section class="panel" id="panel-works" role="tabpanel" aria-labelledby="tab-works" hidden>
       <header class="masthead">
-        <p class="eyebrow">Commissions</p>
+        <p class="eyebrow">Works</p>
         <h1>制作</h1>
         <p class="lede">
           「こういうものを作って」と頼まれたものの記録。実践との違いは、
@@ -238,7 +250,7 @@
     <section class="panel" id="panel-speed" role="tabpanel" aria-labelledby="tab-speed" hidden>
       <header class="masthead">
         <p class="eyebrow">Efficiency</p>
-        <h1>重くしないために</h1>
+        <h1>効率化</h1>
       </header>
 <!--SPEED-->
     </section>
@@ -259,7 +271,7 @@
     <!-- ========== 用語集 ========== -->
     <section class="panel" id="panel-glossary" role="tabpanel" aria-labelledby="tab-glossary" hidden>
       <header class="masthead">
-        <p class="eyebrow">Terminology</p>
+        <p class="eyebrow">Glossary</p>
         <h1>用語集</h1>
         <p class="lede">
           Houdini は略語と英語の専門用語が多い。前提知識なしで読めるようにまとめた。

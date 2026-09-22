@@ -1107,3 +1107,135 @@
     });
   })();
 </script>
+
+<script>
+  /* 2026-09-22 刷新: 上のバーのタブの列・明暗の切り替え・冒頭の帯（検索と重なったカード） */
+  (function () {
+    var root = document.documentElement;
+
+    /* 明・暗・自動。選んだものは、この閲覧だけに覚えておく */
+    function setTheme(m) {
+      if (m === "light" || m === "dark") { root.setAttribute("data-theme", m); }
+      else { root.removeAttribute("data-theme"); m = "system"; }
+      Array.prototype.forEach.call(document.querySelectorAll("[data-theme-set]"), function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.themeSet === m));
+      });
+      try { localStorage.setItem("hl-theme", m); } catch (e) {}
+    }
+    try { var saved = localStorage.getItem("hl-theme"); if (saved) { setTheme(saved); } } catch (e) {}
+    Array.prototype.forEach.call(document.querySelectorAll("[data-theme-set]"), function (b) {
+      b.addEventListener("click", function () { setTheme(b.dataset.themeSet); });
+    });
+
+    /* いま居る区分のタブの列だけを出し、上の見出しに印を付ける */
+    function syncNav() {
+      var on = null;
+      Array.prototype.forEach.call(document.querySelectorAll(".subnav"), function (sub) {
+        var hit = sub.querySelector('[aria-selected="true"], [aria-current="page"]');
+        sub.hidden = !hit;
+        if (hit) { on = sub.dataset.g; }
+      });
+      Array.prototype.forEach.call(document.querySelectorAll(".nav-menu > li[data-g]"), function (li) {
+        var c = li.firstElementChild;
+        var self = c && (c.getAttribute("aria-selected") === "true" || c.getAttribute("aria-current") === "page");
+        li.classList.toggle("is-on", on !== null ? li.dataset.g === on : !!self);
+      });
+    }
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(syncNav);
+      Array.prototype.forEach.call(document.querySelectorAll(".nav-tab"), function (t) {
+        mo.observe(t, { attributes: true, attributeFilter: ["aria-selected"] });
+      });
+    }
+    syncNav();
+
+    /* 冒頭の帯の検索窓: 「探す」は検索の画面、「AI に聞く」はチャットの画面へ、打った言葉ごと渡す */
+    var bq = document.getElementById("band-q");
+    if (bq) {
+      var bandFind = document.getElementById("band-find");
+      var bandAi = document.getElementById("band-ai");
+      var askOpen = document.getElementById("ask-open");
+      bandFind.addEventListener("click", function () {
+        var v = bq.value;
+        document.getElementById("search-open").click();
+        var si = document.getElementById("search-input");
+        if (si && v) { si.value = v; si.dispatchEvent(new Event("input")); }
+      });
+      bq.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && !e.isComposing && e.keyCode !== 229) { e.preventDefault(); bandFind.click(); }
+      });
+      if (askOpen && bandAi) {
+        var showAi = function () { bandAi.hidden = askOpen.hidden; };
+        showAi();
+        if (window.MutationObserver) { new MutationObserver(showAi).observe(askOpen, { attributes: true, attributeFilter: ["hidden"] }); }
+        bandAi.addEventListener("click", function () {
+          var v = bq.value.trim();
+          askOpen.click();
+          var ci = document.getElementById("chat-input");
+          if (ci && v) {
+            ci.value = v;
+            ci.dispatchEvent(new Event("input"));
+            var cs = document.getElementById("chat-send");
+            if (cs && !cs.disabled) { cs.click(); }
+          }
+        });
+      }
+    }
+
+    /* 重なったカード: 5秒ごとに次へ。止める・前後・点・指でめくる */
+    var deck = document.getElementById("deck");
+    if (deck) {
+      var cards = deck.querySelectorAll(".deck-card"), n = cards.length, cur = 0;
+      var dots = document.getElementById("deck-dots");
+      dots.innerHTML = Array.prototype.map.call(cards, function (c, i) {
+        return '<button type="button" aria-label="' + (i + 1) + '枚目"></button>';
+      }).join("");
+      var dotBtns = dots.querySelectorAll("button");
+      var narrow = window.matchMedia("(max-width: 720px)");
+      function layout() {
+        Array.prototype.forEach.call(cards, function (c, i) {
+          var d = ((i - cur) % n + n) % n; if (d > n / 2) { d -= n; }
+          var a = Math.abs(d);
+          var step = narrow.matches ? 18 : 34, rot = narrow.matches ? 0 : d * 3;
+          c.style.transform = "translateX(calc(-50% + " + (d * step) + "%)) scale(" + (1 - a * 0.1) + ") rotate(" + rot + "deg)";
+          c.style.zIndex = String(10 - a);
+          c.style.opacity = a > 2 ? "0" : String(1 - a * (narrow.matches ? 0.4 : 0.14));
+          c.style.pointerEvents = a > 2 ? "none" : "auto";
+          c.tabIndex = a === 0 ? 0 : -1;
+          c.setAttribute("aria-hidden", String(a !== 0));
+        });
+        Array.prototype.forEach.call(dotBtns, function (b, i) { b.setAttribute("aria-current", String(i === cur)); });
+      }
+      function to(i) { cur = (i + n) % n; layout(); }
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var playing = !reduce, timer = null, play = document.getElementById("deck-play");
+      var PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="3.2" height="12" rx="1" fill="currentColor"/><rect x="13.8" y="6" width="3.2" height="12" rx="1" fill="currentColor"/></svg>';
+      var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
+      function restart() { clearInterval(timer); if (playing) { timer = setInterval(function () { to(cur + 1); }, 5000); } }
+      function setPlay(on) {
+        playing = on;
+        play.innerHTML = on ? PAUSE : PLAY;
+        play.setAttribute("aria-label", on ? "自動の切り替えを止める" : "自動の切り替えを始める");
+        restart();
+      }
+      play.addEventListener("click", function () { setPlay(!playing); });
+      document.getElementById("deck-prev").addEventListener("click", function () { to(cur - 1); restart(); });
+      document.getElementById("deck-next").addEventListener("click", function () { to(cur + 1); restart(); });
+      Array.prototype.forEach.call(dotBtns, function (b, i) { b.addEventListener("click", function () { to(i); restart(); }); });
+      Array.prototype.forEach.call(cards, function (c, i) {
+        c.addEventListener("click", function (ev) { if (i !== cur) { ev.preventDefault(); to(i); restart(); } });
+      });
+      var sx = null, moved = false;
+      deck.addEventListener("pointerdown", function (e) { sx = e.clientX; moved = false; });
+      deck.addEventListener("pointerup", function (e) {
+        if (sx === null) { return; }
+        var dx = e.clientX - sx; sx = null;
+        if (Math.abs(dx) > 40) { moved = true; to(cur + (dx < 0 ? 1 : -1)); restart(); }
+      });
+      deck.addEventListener("click", function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
+      if (narrow.addEventListener) { narrow.addEventListener("change", layout); }
+      setPlay(playing);
+      layout();
+    }
+  })();
+</script>

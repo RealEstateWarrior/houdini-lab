@@ -188,7 +188,7 @@ MENU = [
 ]
 
 # その行き先にいるときに印を付けるための対応表
-ACTIVE_OF = {"glossary": "解説", "links": "実験", "log": "実験"}
+ACTIVE_OF = {"glossary": "解説", "links": "実験", "log": "実験", "log_fx": "実験"}
 
 # Claude 版は1つの版に置けるファイルが512まで。パネルを全部1ページに入れると
 # 529 必要で入らない（実践のパラメータ画面163・実験の図145・サムネイル104…）。
@@ -1058,11 +1058,43 @@ PAGES = [
     ("home_template.html", "reference.html", "reference.html", "ref", True,
      "ref"),
     ("log_pm_template.html", "index.html", "log.html", "log", False, None),
-    ("log_fx_template.html", "log_fx.html", "log_fx.html", "log", False, None),
+    ("log_fx_template.html", "log_fx.html", "log_fx.html", "log_fx", False, None),
     ("glossary_template.html", "glossary.html", "glossary.html", "glossary",
      False, None),
     ("links_template.html", "links.html", "links.html", "links", False, None),
 ]
+
+
+THEME_SWITCH = ('      <div class="theme-switch" role="group" aria-label="表示の明るさ">'
+                '<button type="button" data-theme-set="system" aria-pressed="true">自動</button>'
+                '<button type="button" data-theme-set="light" aria-pressed="false">明</button>'
+                '<button type="button" data-theme-set="dark" aria-pressed="false">暗</button></div>')
+
+
+def render_deck(urls, count=8):
+    """ホームの帯に重ねて出す、新着の実験のカード。押すとその実験の記事へ。"""
+    items = list(reversed(DONE[-count:]))
+    out = ['          <div class="deck" id="deck" aria-roledescription="カルーセル" aria-label="新着の実験">']
+    for d in items:
+        href = f'{urls[d["log"]]}#{d["anchor"]}'
+        edition = "エフェクト編" if d["log"] == "log_fx" else "モデリング編"
+        thumb = d.get("thumb") or ""
+        thumb = f"thumb_{d['no']}.png" if os.path.exists(os.path.join(SITE, f"thumb_{d['no']}.png")) else thumb
+        out.append(f'            <a class="deck-card" href="{href}">'
+                   f'<img src="{thumb}" alt="" loading="lazy" decoding="async">'
+                   f'<span class="deck-meta">実験{d["no"]} · {edition}</span>'
+                   f'<span class="deck-t">{html.escape(d["title"].split(" — ")[0])}</span>'
+                   f'<span class="deck-d">{html.escape(d.get("note", ""))}</span></a>')
+    out.append("          </div>")
+    out.append('          <div class="deck-ctrl">'
+               '<button type="button" class="deck-play" id="deck-play" aria-label="自動の切り替えを止める"></button>'
+               '<button type="button" class="deck-arrow" id="deck-prev" aria-label="前の実験">'
+               '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+               '<div class="deck-dots" id="deck-dots"></div>'
+               '<button type="button" class="deck-arrow" id="deck-next" aria-label="次の実験">'
+               '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+               '</div>')
+    return "\n".join(out)
 
 
 def render_nav(active, tabs, urls, panels=None):
@@ -1083,30 +1115,34 @@ def render_nav(active, tabs, urls, panels=None):
         '      <ul class="nav-menu">',
     ]
 
-    def control(target, label, extra=""):
-        """行き先ひとつ。ハブではタブの切り替え、それ以外はリンクになる。"""
+    def control(target, label, extra="", ident=True):
+        """行き先ひとつ。ハブではタブの切り替え、それ以外はリンクになる。
+        ident=False は下のタブの列用（同じ id を2つ作らない）。"""
         if target.startswith("@"):
             href = urls[target[1:]]
-            return f'<a href="{href}"{extra}>{html.escape(label)}</a>'
+            here = ' aria-current="page"' if (not ident and target[1:] == active) else ""
+            return f'<a href="{href}"{extra}{here}>{html.escape(label)}</a>'
         # そのパネルを、いま出しているページが持っているならタブ。
         # 別のページが持っているなら、そのページへのリンクにする。
         if tabs and target in (panels or ()):
+            tab_id = f' id="tab-{target}"' if ident else ""
             return (f'<button type="button" class="nav-tab" role="tab"'
-                    f' id="tab-{target}" data-panel="{target}"'
+                    f'{tab_id} data-panel="{target}"'
                     f' aria-controls="panel-{target}"'
                     f' aria-selected="false"{extra}>{html.escape(label)}</button>')
-        return (f'<a href="{panel_url(urls, target)}"{extra}>'
+        here = ' aria-current="page"' if (not ident and target == active) else ""
+        return (f'<a href="{panel_url(urls, target)}"{extra}{here}>'
                 f"{html.escape(label)}</a>")
 
     for index, (head, target, columns) in enumerate(MENU):
         current = ' aria-current="page"' if ACTIVE_OF.get(active) == head else ""
         if not columns:
-            out.append("        <li>")
+            out.append(f'        <li data-g="{index}">')
             out.append("          " + control(target, head, current))
             out.append("        </li>")
             continue
 
-        out.append('        <li class="nav-drop">')
+        out.append(f'        <li class="nav-drop" data-g="{index}">')
         out.append("          " + control(
             target, head,
             current + f' aria-expanded="false" aria-controls="mega-{index}"'))
@@ -1131,9 +1167,8 @@ def render_nav(active, tabs, urls, panels=None):
         out.append("          </div>")
         out.append("        </li>")
 
-    out.append(f'        <li><a href="{NOTEBOOK_URL}" class="nav-ext"'
-               ' target="_blank" rel="noopener noreferrer">Notebook</a></li>')
     out.append("      </ul>")
+    out.append(THEME_SWITCH)
     out.append(AI_BUTTON)
     out.append('      <button type="button" class="nav-icon" id="search-open"'
                ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + "</button>")
@@ -1141,6 +1176,17 @@ def render_nav(active, tabs, urls, panels=None):
                ' aria-label="メニューを開く" aria-expanded="false">'
                + BURGER_SVG + "</button>")
     out.append("    </div>")
+    # その区分のタブの列。いま居る区分の列だけを出す（どれを出すかは partial_chrome の JS）。
+    # 降りてくるパネルの代わり。行き先は MENU の束をそのまま横に並べたもの（2026-09-22）
+    for index, (head, target, columns) in enumerate(MENU):
+        if not columns:
+            continue
+        out.append(f'    <div class="subnav" data-g="{index}" hidden>')
+        for _col_head, links in columns:
+            for child_target, child_label, note in links:
+                out.append("      " + control(child_target, child_label,
+                                              f' title="{html.escape(note)}"', ident=False))
+        out.append("    </div>")
     out.append("  </nav>")
     return "\n".join(out)
 
@@ -2132,6 +2178,8 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GUIDE_CARDS-->", render_guide_cards(guides)),
         ("<!--WORK_CARDS-->", render_work_cards(works)),
         ("<!--STRIP-->", render_strip(guides, urls)),
+        ("<!--DECK-->", render_deck(urls)),
+        ("<!--GUIDE_COUNT-->", str(len(guides["guides"]))),
         ("<!--REQUESTS-->", render_requests(requests)),
         ("<!--REQUEST_COUNT-->", str(len(requests["requests"]))),
         ("<!--ISSUE_NEW-->", ISSUE_NEW),
