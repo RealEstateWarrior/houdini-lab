@@ -10,6 +10,12 @@
   - ノードは nodes_add_8.py（19件）、用語は gloss_add_8.py（12語）。新しいノードの素性は out/_dump8.json → _nodes_dump.json に足した
   - 147 の Taper の体積が倍率の平均と 0.45% 合わない理由は確かめていない
 - GitHub Pages 版の「AI に聞く」は houdini-relay（Gemini）経由で動作確認済み。検索の横に AI アイコン（Beta の札）。Claude 版は従来どおり
+- **2026-09-22 追加修正**（ユーザー依頼、私が publish.py まで実行・コミット4a70d5e）:
+  スマホでAIアイコンが検索の左横に来るよう base.css を修正（以前は検索とハンバーガーだけ右へ寄り、AIアイコンが取り残されていた）。
+  AIアイコンと検索アイコンで同じ画面が開いていたのを分離（partial_chrome.html）。
+  AIアイコンは候補一覧を出さず直接チャット入力（プレースホルダー「AI に何を聞きますか？」）、検索は今までどおり。
+  入力欄は元々共有なので、検索で打った文字のまま「AI に聞く」を押せば質問になる（実装済みの構造で確認しただけ）。
+  実サイトで3点とも実機確認済み
 - 2026-09-21 の作業（105〜）: 実験を片付けるのは `python examples/finish_exp.py NNN "タグ,…" "一言" 図.png`
   （記事の差し込みと DONE への追加を1回で）。ノードは nodes_add_4.py、用語は gloss_add_4.py
   - 105 spiral の長さ / 106 attribrandomize の分布 / 107 extractcentroid の中心 / 108 triangulate2d の枚数
@@ -85,7 +91,7 @@
   wrangler deploy で直した。curl で truncated:false を確認済み。GitHub Pages 版でも実機確認済み
   （2026-09-22、実験145を根拠にした質問で最後まで答えが返り、誤表示は出なくなった）
 - サイト側の呼び出し口は `site/partial_chrome.html`（`window.claude` が無いときだけ relay を使う）。
-  build_site.py 側の変更は無し。**GitHub Pages に公開した後の実機確認はまだ**（publish.py 待ち）
+  build_site.py 側の変更は無し。GitHub Pages に公開した後の実機確認も済み（2026-09-22）
 
 ## やることメモ（全チャット共通。2026-09-21 に共有データ化）
 
