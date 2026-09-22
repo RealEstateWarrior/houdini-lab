@@ -7905,6 +7905,174 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 151 ===================== -->
+    <article class="entry entry--current" id="exp151">
+      <div class="badge">151</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>sphere の Polygon は点 10f²+2・面 20f² の測地球 — 同じ点の数なら Polygon Mesh より体積の不足が約3割小さい</h2>
+        <p class="path">examples/151_sphere_freq.py &nbsp;·&nbsp; Polygon は点 10f²+2 の測地球。同じ点の数なら体積の不足が約3割小さい</p>
+
+        <div class="prose">
+          <p>半径 1 の sphere を Primitive Type = Polygon にして Frequency f を 1〜12 と変え、同じくらいの点の数の Polygon Mesh（Rows = Columns/2 + 1）と比べた。</p>
+          <p>**Polygon は二十面体を分けた測地球。**点は 10f²+2、面は 20f²（すべて三角形）で、7通りすべて一致。f = 1 は正二十面体そのもの（面積 9.574541・体積 2.536151 は<a href="#exp142">実験142</a> の二十面体と同じ値）。頂点はどれも半径 1 ちょうどの上にある。</p>
+          <p>**同じ点の数なら、Polygon のほうが丸い。**体積の不足（%）× 点の数 は、点が 160 を超えたあたりから Polygon で 約 548.2、Polygon Mesh で 約 775.9。どちらも「点の数に反比例して近づく」が、係数は Polygon のほうが 29% 小さい。f = 12（1,442 点）で不足 0.381%、Mesh 48 列（1,106 点）で 0.712%。</p>
+          <p>**Polygon Mesh は極に三角形が集まる。**面は四角形と三角形が混ざる。Polygon は三角形だけで、大きさがそろっている。</p>
+        </div>
+
+        <p class="label">Polygon（Frequency）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="151_deficit.png" alt="青（Polygon）が、同じ点の数でいつも下（不足が小さい）。" loading="lazy" decoding="async"></div>
+            <figcaption>青（Polygon）が、同じ点の数でいつも下（不足が小さい）。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Frequency</th><th>点</th><th>10f²+2</th><th>面</th><th>20f²</th><th>面の形</th><th>面積</th><th>体積</th><th>体積の不足 %</th><th>不足 × 点</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">12</td><td class="num">12</td><td class="num">20</td><td class="num">20</td><td>3角形</td><td class="num">9.574541</td><td class="num">2.536151</td><td class="num">39.454</td><td class="num">473.4</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">2</td><td class="num">42</td><td class="num">42</td><td class="num">80</td><td class="num">80</td><td>3角形</td><td class="num">11.665931</td><td class="num">3.658712</td><td class="num">12.655</td><td class="num">531.5</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">3</td><td class="num">92</td><td class="num">92</td><td class="num">180</td><td class="num">180</td><td>3角形</td><td class="num">12.152844</td><td class="num">3.942285</td><td class="num">5.885</td><td class="num">541.4</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">4</td><td class="num">162</td><td class="num">162</td><td class="num">320</td><td class="num">320</td><td>3角形</td><td class="num">12.330941</td><td class="num">4.047813</td><td class="num">3.366</td><td class="num">545.2</td><td class="num">0.0001</td></tr>
+              <tr><td class="num">6</td><td class="num">362</td><td class="num">362</td><td class="num">720</td><td class="num">720</td><td>3角形</td><td class="num">12.460796</td><td class="num">4.125362</td><td class="num">1.514</td><td class="num">548.2</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">8</td><td class="num">642</td><td class="num">642</td><td class="num">1,280</td><td class="num">1,280</td><td>3角形</td><td class="num">12.506794</td><td class="num">4.152956</td><td class="num">0.855</td><td class="num">549.2</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">12</td><td class="num">1,442</td><td class="num">1,442</td><td class="num">2,880</td><td class="num">2,880</td><td>3角形</td><td class="num">12.539831</td><td class="num">4.172813</td><td class="num">0.381</td><td class="num">550.0</td><td class="num">0.0003</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">Polygon Mesh（比べる相手）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rows × Columns</th><th>点</th><th>面</th><th>面の形</th><th>面積</th><th>体積</th><th>体積の不足 %</th><th>不足 × 点</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>5 × 8</td><td class="num">26</td><td class="num">32</td><td>3・4角形</td><td class="num">11.013439</td><td class="num">3.218951</td><td class="num">23.153</td><td class="num">602.0</td><td class="num">0.0002</td></tr>
+              <tr><td>7 × 12</td><td class="num">62</td><td class="num">72</td><td>3・4角形</td><td class="num">11.861288</td><td class="num">3.732051</td><td class="num">10.904</td><td class="num">676.0</td><td class="num">0.0001</td></tr>
+              <tr><td>9 × 16</td><td class="num">114</td><td class="num">128</td><td>3・4角形</td><td class="num">12.166689</td><td class="num">3.926596</td><td class="num">6.259</td><td class="num">713.6</td><td class="num">0.0001</td></tr>
+              <tr><td>13 × 24</td><td class="num">266</td><td class="num">288</td><td>3・4角形</td><td class="num">12.387741</td><td class="num">4.070552</td><td class="num">2.823</td><td class="num">750.8</td><td class="num">0.0001</td></tr>
+              <tr><td>17 × 32</td><td class="num">482</td><td class="num">512</td><td>3・4角形</td><td class="num">12.465694</td><td class="num">4.121942</td><td class="num">1.596</td><td class="num">769.2</td><td class="num">0.0002</td></tr>
+              <tr><td>25 × 48</td><td class="num">1,106</td><td class="num">1,152</td><td>3・4角形</td><td class="num">12.521563</td><td class="num">4.158971</td><td class="num">0.712</td><td class="num">787.3</td><td class="num">0.0005</td></tr>
+              <tr><td>33 × 64</td><td class="num">1,986</td><td class="num">2,048</td><td>3・4角形</td><td class="num">12.541153</td><td class="num">4.171996</td><td class="num">0.401</td><td class="num">796.3</td><td class="num">0.0008</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Frequency f で点は 10f²+2。</strong>f を倍にすると点も面も約4倍。</li>
+          <li><strong>少ない点で丸く見せたいなら Polygon。</strong>体積の不足が同じ点の数で約3割小さい。</li>
+          <li><strong>UV や行列で扱いたいなら Polygon Mesh。</strong>Rows と Columns の格子になっている。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 152 ===================== -->
+    <article class="entry entry--current" id="exp152">
+      <div class="badge">152</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>polybevel の Round は、分割を増やすと「角を丸めた箱」の体積に近づく — 平らな面取りは 1 − 6d² + (16/3)d³</h2>
+        <p class="path">examples/152_bevel_volume.py &nbsp;·&nbsp; Round は分割を増やすと丸めた箱の式へ。平らな面取りは 1−6d²+(16/3)d³</p>
+
+        <div class="prose">
+          <p>1×1×1 の箱の辺を全部 polybevel（Offset = d）にかけ、Fillet Shape と Divisions を変えて体積を測った。比べる式は、半径 d で角を丸めた箱 (1−2d)³ + 6d(1−2d)² + 3πd²(1−2d) + (4/3)πd³。</p>
+          <p>**Divisions = 1 の Round は Solid と同じ形。**体積が3通りとも一致した。平らな面取りの体積は 1 − 6d² + (16/3)d³ と合った（差は最大 0e+00）。辺を削る 12 本ぶん（6d²）から、角で2重に削った分（(16/3)d³）が戻る形。</p>
+          <p>**Round は、Divisions を倍にするたびに式との差が 1/3.6〜1/6 に縮んだ（およそ 1/4）。**Offset 0.1・Divisions 16 で 0.975521（式 0.975587）。Offset は丸みの半径そのものとして効いている。</p>
+          <p>**Offset 0.2・Divisions 16 だけは、式をわずかに超えた**（0.907782 ＞ 0.907705、+0.0085%）。角の丸みがちょうどの球面になっていない可能性があるが、確かめていない。</p>
+          <p>**点の数は Divisions とともに増える**（1 で 24、2 で 56、4 で 152、8 で 488、16 で 1,736）。Offset には左右されない。</p>
+        </div>
+
+        <p class="label">Offset・Fillet Shape・Divisions と体積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="152_round.png" alt="Divisions 4 で 0.6% 以内、16 で 0.01% 以内。" loading="lazy" decoding="async"></div>
+            <figcaption>Divisions 4 で 0.6% 以内、16 で 0.01% 以内。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Offset</th><th>Fillet Shape</th><th>Divisions</th><th>点</th><th>面</th><th>体積</th><th>丸めた箱の式</th><th>比</th><th>平らな面取りの式</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.05</td><td>solid</td><td class="num">1</td><td class="num">24</td><td class="num">26</td><td class="num">0.985667</td><td class="num">0.993729</td><td class="num">0.99189</td><td class="num">0.985667</td><td class="num">0.0008</td></tr>
+              <tr><td class="num">0.05</td><td>round</td><td class="num">1</td><td class="num">24</td><td class="num">26</td><td class="num">0.985667</td><td class="num">0.993729</td><td class="num">0.99189</td><td class="num">0.985667</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.05</td><td>round</td><td class="num">2</td><td class="num">56</td><td class="num">54</td><td class="num">0.991514</td><td class="num">0.993729</td><td class="num">0.99777</td><td class="num">0.985667</td><td class="num">0.0005</td></tr>
+              <tr><td class="num">0.05</td><td>round</td><td class="num">4</td><td class="num">152</td><td class="num">150</td><td class="num">0.993193</td><td class="num">0.993729</td><td class="num">0.99946</td><td class="num">0.985667</td><td class="num">0.0004</td></tr>
+              <tr><td class="num">0.05</td><td>round</td><td class="num">8</td><td class="num">488</td><td class="num">486</td><td class="num">0.993602</td><td class="num">0.993729</td><td class="num">0.99987</td><td class="num">0.985667</td><td class="num">0.0006</td></tr>
+              <tr><td class="num">0.05</td><td>round</td><td class="num">16</td><td class="num">1,736</td><td class="num">1,734</td><td class="num">0.993702</td><td class="num">0.993729</td><td class="num">0.99997</td><td class="num">0.985667</td><td class="num">0.0010</td></tr>
+              <tr><td class="num">0.1</td><td>solid</td><td class="num">1</td><td class="num">24</td><td class="num">26</td><td class="num">0.945333</td><td class="num">0.975587</td><td class="num">0.96899</td><td class="num">0.945333</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.1</td><td>round</td><td class="num">1</td><td class="num">24</td><td class="num">26</td><td class="num">0.945333</td><td class="num">0.975587</td><td class="num">0.96899</td><td class="num">0.945333</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.1</td><td>round</td><td class="num">2</td><td class="num">56</td><td class="num">54</td><td class="num">0.967260</td><td class="num">0.975587</td><td class="num">0.99146</td><td class="num">0.945333</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">0.1</td><td>round</td><td class="num">4</td><td class="num">152</td><td class="num">150</td><td class="num">0.973708</td><td class="num">0.975587</td><td class="num">0.99807</td><td class="num">0.945333</td><td class="num">0.0004</td></tr>
+              <tr><td class="num">0.1</td><td>round</td><td class="num">8</td><td class="num">488</td><td class="num">486</td><td class="num">0.975176</td><td class="num">0.975587</td><td class="num">0.99958</td><td class="num">0.945333</td><td class="num">0.0005</td></tr>
+              <tr><td class="num">0.1</td><td>round</td><td class="num">16</td><td class="num">1,736</td><td class="num">1,734</td><td class="num">0.975521</td><td class="num">0.975587</td><td class="num">0.99993</td><td class="num">0.945333</td><td class="num">0.0008</td></tr>
+              <tr><td class="num">0.2</td><td>solid</td><td class="num">1</td><td class="num">24</td><td class="num">26</td><td class="num">0.802667</td><td class="num">0.907705</td><td class="num">0.88428</td><td class="num">0.802667</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">0.2</td><td>round</td><td class="num">1</td><td class="num">24</td><td class="num">26</td><td class="num">0.802667</td><td class="num">0.907705</td><td class="num">0.88428</td><td class="num">0.802667</td><td class="num">0.0002</td></tr>
+              <tr><td class="num">0.2</td><td>round</td><td class="num">2</td><td class="num">56</td><td class="num">54</td><td class="num">0.878670</td><td class="num">0.907705</td><td class="num">0.96801</td><td class="num">0.802667</td><td class="num">0.0003</td></tr>
+              <tr><td class="num">0.2</td><td>round</td><td class="num">4</td><td class="num">152</td><td class="num">150</td><td class="num">0.902333</td><td class="num">0.907705</td><td class="num">0.99408</td><td class="num">0.802667</td><td class="num">0.0004</td></tr>
+              <tr><td class="num">0.2</td><td>round</td><td class="num">8</td><td class="num">488</td><td class="num">486</td><td class="num">0.906848</td><td class="num">0.907705</td><td class="num">0.99906</td><td class="num">0.802667</td><td class="num">0.0005</td></tr>
+              <tr><td class="num">0.2</td><td>round</td><td class="num">16</td><td class="num">1,736</td><td class="num">1,734</td><td class="num">0.907782</td><td class="num">0.907705</td><td class="num">1.00008</td><td class="num">0.802667</td><td class="num">0.0009</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Offset は丸みの半径。</strong>Round の体積は、その半径で丸めた箱の式に近づく。</li>
+          <li><strong>Divisions 1 の Round は、ただの面取り（Solid）。</strong>Divisions 4 で、丸めた箱の式との差が 0.6% 以内になった。</li>
+          <li><strong>面取りした箱の体積は 1 − 6d² + (16/3)d³。</strong>d = 0.1 で 0.945333。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 153 ===================== -->
+    <article class="entry entry--current" id="exp153">
+      <div class="badge">153</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>neighbourcount() の合計の半分は辺の数 — そこから出した V − E + F は、板 1・球と箱 2・トーラスと筒 0</h2>
+        <p class="path">examples/153_neighbours.py &nbsp;·&nbsp; neighbourcount の合計÷2は辺の数。V−E+F で板・球・トーラスを見分けられる</p>
+
+        <div class="prose">
+          <p>grid・box・sphere・torus・tube（蓋なし）に attribwrangle で i@nb = neighbourcount(0, @ptnum) を入れ、隣の点の数を数えた。辺の数 E を「隣の数の合計 ÷ 2」で出し、面から数え直した辺の数とも比べた。</p>
+          <p>**隣の数の合計 ÷ 2 は、辺の数と5通りすべて一致。**neighbourcount は「辺でつながった点」を数えている。</p>
+          <p>**V − E + F（オイラー標数）は、板 1・球と箱 2・トーラスと蓋なしの筒 0 とすべて一致。**形の穴や縁を、点と面の数だけで見分けられる。</p>
+          <p>**分布で形の場所が分かる。**grid の角は 2、縁は 3、内側は 4。box の角（8点）は 3。sphere の極は Columns の数（16）だけ隣を持ち、残りは 4。torus は全部 4。</p>
+          <p>**最初の1回だけ遅い。**1つ目の <button class="term" data-term="wrangle">wrangle</button> は 0.0762 秒、2つ目からは 0.0013 秒以下。<button class="term" data-term="VEX">VEX</button> を最初に組み立てる時間とみられるが、確かめていない。</p>
+        </div>
+
+        <p class="label">形ごとの点・辺・面と、V − E + F</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="153_hist.png" alt="grid だけ 2 と 3 が出る（角と縁）。torus は 4 だけ。" loading="lazy" decoding="async"></div>
+            <figcaption>grid だけ 2 と 3 が出る（角と縁）。torus は 4 だけ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>形</th><th>V（点）</th><th>Σ neighbourcount</th><th>E = Σ/2</th><th>E（面から）</th><th>F（面）</th><th>V − E + F</th><th>答え</th><th>分布（隣の数: 点の数）</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>grid 6×9</td><td class="num">54</td><td class="num">186</td><td class="num">93</td><td class="num">93</td><td class="num">40</td><td class="num">1</td><td class="num">1</td><td>2: 4 / 3: 22 / 4: 28</td><td class="num">0.0762</td></tr>
+              <tr><td>box 4×4×4</td><td class="num">56</td><td class="num">216</td><td class="num">108</td><td class="num">108</td><td class="num">54</td><td class="num">2</td><td class="num">2</td><td>3: 8 / 4: 48</td><td class="num">0.0012</td></tr>
+              <tr><td>sphere 9×16</td><td class="num">114</td><td class="num">480</td><td class="num">240</td><td class="num">240</td><td class="num">128</td><td class="num">2</td><td class="num">2</td><td>4: 112 / 16: 2</td><td class="num">0.0011</td></tr>
+              <tr><td>torus 8×12</td><td class="num">96</td><td class="num">384</td><td class="num">192</td><td class="num">192</td><td class="num">96</td><td class="num">0</td><td class="num">0</td><td>4: 96</td><td class="num">0.0009</td></tr>
+              <tr><td>tube 5×10（蓋なし）</td><td class="num">50</td><td class="num">180</td><td class="num">90</td><td class="num">90</td><td class="num">40</td><td class="num">0</td><td class="num">0</td><td>3: 20 / 4: 30</td><td class="num">0.0013</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>neighbourcount の合計 = 辺の数 × 2。</strong>辺の数を出す別の数え方として使える。</li>
+          <li><strong>V − E + F が 2 でなければ、閉じた1つの塊ではない。</strong>穴・縁・離れた塊の見つけ方になる。</li>
+          <li><strong>極の点は隣が多い。</strong>sphere の極は Columns 個。ぼかしや平滑化で極だけ効き方が変わる理由になる。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
