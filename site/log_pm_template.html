@@ -9160,6 +9160,52 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 187 ===================== -->
+    <article class="entry entry--current" id="exp187">
+      <div class="badge">187</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>点の間隔がそろわない円では、smooth は粗い側を大きく縮める — 3つの Method の差は小さく、どれも丸さを保たない</h2>
+        <p class="path">examples/187_smooth_uneven.py &nbsp;·&nbsp; 間隔がそろわない円では粗い側を大きく縮める。Method の差は小さい</p>
+
+        <div class="prose">
+          <p><a href="#exp186">実験186</a> の続き。半径 1 の円の上に、左半分に 36 点・右半分に 12 点と偏らせて 48 点を置いた多角形に、Method を変えて smooth（Filter Quality 1）をかけた。</p>
+          <p>**粗い側ほど縮む。**Strength 10・Uniform で、細かい左半分の半径は 0.950、粗い右半分は 0.791。丸かった形が、半径の差 0.201 のゆがんだ形になった。点の間が広い所ほど、となりとの差（L）が大きいため（<a href="#exp185">実験185</a>・186 の式と同じ理由）。</p>
+          <p>**Scale Dominant と Curvature Dominant は、ほぼ同じ結果**（半径の平均 0.915098 と 0.915134）。Uniform より点の動きが少し小さい（平均 0.0942 → 0.0864）が、左右の差はむしろ少し大きい（0.201 → 0.222）。</p>
+          <p>**Strength 1 なら、どれも差はわずか**（半径の差 0.029〜0.029）。</p>
+        </div>
+
+        <p class="label">Method・Strength と形</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="187_uneven.png" alt="どの Method も右（粗い側）で大きく下がる。" loading="lazy" decoding="async"></div>
+            <figcaption>どの Method も右（粗い側）で大きく下がる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Method</th><th>Strength</th><th>半径の平均</th><th>細かい側</th><th>粗い側</th><th>半径の差（最大 − 最小）</th><th>点の動きの平均</th></tr></thead>
+            <tbody>
+              <tr><td>Uniform</td><td class="num">1</td><td class="num">0.98912</td><td class="num">0.99580</td><td class="num">0.96903</td><td class="num">0.02913</td><td class="num">0.01268</td></tr>
+              <tr><td>Uniform</td><td class="num">10</td><td class="num">0.91003</td><td class="num">0.95005</td><td class="num">0.79137</td><td class="num">0.20079</td><td class="num">0.09424</td></tr>
+              <tr><td>Scale Dominant</td><td class="num">1</td><td class="num">0.98942</td><td class="num">0.99606</td><td class="num">0.96836</td><td class="num">0.02917</td><td class="num">0.01059</td></tr>
+              <tr><td>Scale Dominant</td><td class="num">10</td><td class="num">0.91510</td><td class="num">0.95879</td><td class="num">0.77718</td><td class="num">0.22195</td><td class="num">0.08636</td></tr>
+              <tr><td>Curvature Dominant</td><td class="num">1</td><td class="num">0.98942</td><td class="num">0.99606</td><td class="num">0.96835</td><td class="num">0.02916</td><td class="num">0.01059</td></tr>
+              <tr><td>Curvature Dominant</td><td class="num">10</td><td class="num">0.91513</td><td class="num">0.95884</td><td class="num">0.77711</td><td class="num">0.22207</td><td class="num">0.08637</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>smooth の前に、点の間隔をそろえる。</strong>resample や remesh で細かさをそろえないと、粗い所だけ形が崩れる。</li>
+          <li><strong>Method を変えても、この偏りはほとんど直らない。</strong></li>
+          <li><strong>弱い Strength（1）なら、偏りはほぼ目立たない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

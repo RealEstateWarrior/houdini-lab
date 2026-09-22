@@ -1,0 +1,64 @@
+{
+  "rows": [
+    {
+      "method": "uniform",
+      "strength": 1.0,
+      "r_mean": 0.98912,
+      "r_spread": 0.029126,
+      "r_left": 0.995797,
+      "r_right": 0.969032,
+      "center_x": -0.318917,
+      "moved": 0.01268
+    },
+    {
+      "method": "uniform",
+      "strength": 10.0,
+      "r_mean": 0.910033,
+      "r_spread": 0.200788,
+      "r_left": 0.950049,
+      "r_right": 0.79137,
+      "center_x": -0.318917,
+      "moved": 0.094237
+    },
+    {
+      "method": "scaledominant",
+      "strength": 1.0,
+      "r_mean": 0.989416,
+      "r_spread": 0.02917,
+      "r_left": 0.996064,
+      "r_right": 0.968358,
+      "center_x": -0.322422,
+      "moved": 0.010592
+    },
+    {
+      "method": "scaledominant",
+      "strength": 10.0,
+      "r_mean": 0.915098,
+      "r_spread": 0.221951,
+      "r_left": 0.95879,
+      "r_right": 0.777182,
+      "center_x": -0.347702,
+      "moved": 0.086357
+    },
+    {
+      "method": "curvaturedominant",
+      "strength": 1.0,
+      "r_mean": 0.989418,
+      "r_spread": 0.029165,
+      "r_left": 0.996065,
+      "r_right": 0.968354,
+      "center_x": -0.322442,
+      "moved": 0.010592
+    },
+    {
+      "method": "curvaturedominant",
+      "strength": 10.0,
+      "r_mean": 0.915134,
+      "r_spread": 0.222071,
+      "r_left": 0.958842,
+      "r_right": 0.777112,
+      "center_x": -0.347866,
+      "moved": 0.086366
+    }
+  ]
+}

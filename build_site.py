@@ -1258,6 +1258,12 @@ DONE = [
      "shots": ["186_methods.png"],
      "title": "smooth の3つの Method は、点が等間隔の円では同じ縮み方 — 開いた線の端は Constrained Boundary で止まり、波の高さは 1/(1 + S·L/2) だけ残る",
      "note": "等間隔の円では3つの Method は同じ。端を止めた波は 1/(1+S·L/2) だけ残る"},
+    {"no": "187", "anchor": "exp187",
+     "tags": ["モデリング", "smooth", "落とし穴"],
+     "log": "log_pm", "thumb": "187_uneven.png",
+     "shots": ["187_uneven.png"],
+     "title": "点の間隔がそろわない円では、smooth は粗い側を大きく縮める — 3つの Method の差は小さく、どれも丸さを保たない",
+     "note": "間隔がそろわない円では粗い側を大きく縮める。Method の差は小さい"},
 ]
 
 PLANNED = []
