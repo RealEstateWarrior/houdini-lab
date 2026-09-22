@@ -9038,7 +9038,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <div class="prose">
           <p>半径 1 の circle（Polygon、n 角形）に smooth（smooth::2.0、Method = Uniform、Constrained Boundary なし）をかけ、残った半径 r を測った。点の数 n・Strength S・Filter Quality q を変えた（36 通り）。</p>
           <p>**Filter Quality 1 では r = 1/(1 + S·(1 − cos θ))（θ = 2π/n）。**n = 12・S = 10 で 0.4273968（式 0.4273968）。となりの平均へ近づける計算を、1 回で「行き先から逆算して」解く形（陰的な1ステップ）になっている。S をいくら大きくしても、半径は 0 にはならない。</p>
-          <p>**Filter Quality q を上げると、r = 1/(1 + S·L^q/C(2q, q))。**L = 2(1 − cos θ)（となりとの差の強さ）、C(2q, q) は二項係数（q = 1・2・3 で 2・6・20）。36 通りすべてで、この式との差は最大 3e-06。L は 1 より小さいので、q を上げるほど縮みにくくなる。細かいでこぼこ（L が大きい）は消し、なだらかな形（L が小さい）は残すフィルタになっている。</p>
+          <p>**Filter Quality q を上げると、r = 1/(1 + S·L^q/C(2q, q))。**L = 2(1 − cos θ)（となりとの差の強さ）、C(2q, q) は二項係数（q = 1・2・3 で 2・6・20）。36 通りすべてで、この式との差は最大 3e-06。ここで使った円では L は 1 より小さいので、q を上げるほど縮みにくくなる。細かいでこぼこ（L が大きい）は消し、なだらかな形（L が小さい）は残すフィルタになっている。</p>
           <p>**点の数が多いほど縮まない。**同じ Strength 10・Quality 1 で、n = 12 は 0.427、n = 96 は 0.979。細かい網ほど、となりとの差が小さいため。</p>
           <p>**どの点も同じだけ縮む**（半径のばらつきは最大 1.3e-6）。形は円のまま小さくなる。</p>
         </div>
@@ -9096,9 +9096,66 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li><strong>smooth は何度かけても、1 回の Strength を上げても、ゼロまでは縮まない。</strong>1/(1 + S·…) の形。</li>
+          <li><strong>smooth は Strength をいくら上げても、ゼロまでは縮まない。</strong>1/(1 + S·…) の形。</li>
           <li><strong>形を保ったまま細かいでこぼこだけ消したいなら Filter Quality を上げる。</strong>3 なら 96 角形の円はまったく縮まない。</li>
           <li><strong>粗い網ほど縮む。</strong>同じ Strength でも、点が少ない所は形が大きく変わる。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 186 ===================== -->
+    <article class="entry entry--current" id="exp186">
+      <div class="badge">186</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>smooth の3つの Method は、点が等間隔の円では同じ縮み方 — 開いた線の端は Constrained Boundary で止まり、波の高さは 1/(1 + S·L/2) だけ残る</h2>
+        <p class="path">examples/186_smooth_methods.py &nbsp;·&nbsp; 等間隔の円では3つの Method は同じ。端を止めた波は 1/(1+S·L/2) だけ残る</p>
+
+        <div class="prose">
+          <p><a href="#exp185">実験185</a> の続き。半径 1 の 24 角形に、Method を Uniform・Scale Dominant・Curvature Dominant と変えて smooth（Strength 10）をかけた。また、x = 0〜1 に 41 点で y = 0.1·sin(4πx) の波の線を作り、端の扱い（Constrained Boundary）を変えて smooth をかけた。</p>
+          <p>**円では、3つの Method の結果が7桁まで同じだった**（Quality ごとに同じ値。Quality 1 で 0.7458558、2 で 0.9923191）。点が等間隔で、どの点のまわりも同じ形なので、重みの付け方の違いが出ない。違いが出るのは、辺の長さや曲がり方がそろっていない網のとき（確かめていない）。</p>
+          <p>**開いた線は、Constrained Boundary = None だと端の点も動き、線が縮む。**両端が内側へ寄り、長さ 1 の線が x 方向に 0.8909 になった。既定の Unshared Edges なら、端は (0, 0) と (1, 0) のまま。</p>
+          <p>**端を止めたとき、波の高さは 67.14% 残った。**波1つが 20 点なので θ = 2π/20、L = 2(1 − cos θ) = 0.0979。<a href="#exp185">実験185</a> の式 1/(1 + S·L/2) = 0.6714 とぴったり合う。円の縮み方の式は、波にもそのまま使える。端も動くと、波の高さは 72.1% だった。</p>
+        </div>
+
+        <p class="label">24 角形と Method</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="186_methods.png" alt="3つの線は完全に重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>3つの線は完全に重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Method</th><th>Filter Quality</th><th>残った半径</th><th>点ごとの差</th></tr></thead>
+            <tbody>
+              <tr><td>Uniform</td><td class="num">1</td><td class="num">0.7458558</td><td>1.3e-06</td></tr>
+              <tr><td>Uniform</td><td class="num">2</td><td class="num">0.9923191</td><td>5.0e-07</td></tr>
+              <tr><td>Scale Dominant</td><td class="num">1</td><td class="num">0.7458558</td><td>8.0e-07</td></tr>
+              <tr><td>Scale Dominant</td><td class="num">2</td><td class="num">0.9923191</td><td>7.0e-07</td></tr>
+              <tr><td>Curvature Dominant</td><td class="num">1</td><td class="num">0.7458558</td><td>9.0e-07</td></tr>
+              <tr><td>Curvature Dominant</td><td class="num">2</td><td class="num">0.9923191</td><td>3.0e-07</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">開いた波の線（Uniform・Strength 10・Quality 1）</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Constrained Boundary</th><th>始まりの点</th><th>終わりの点</th><th>x の長さ</th><th>波の高さ</th><th>残った割合</th><th>式 1/(1 + S·L/2)</th></tr></thead>
+            <tbody>
+              <tr><td>none</td><td>(0.05455, 0.04527)</td><td>(0.94545, -0.04527)</td><td class="num">0.89089</td><td class="num">0.07207</td><td>72.07%</td><td>67.14%</td></tr>
+              <tr><td>unsharededges</td><td>(0, 0)</td><td>(1, -0)</td><td class="num">1</td><td class="num">0.06714</td><td>67.14%</td><td>67.14%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>等間隔の網なら、Method はどれでも同じ。</strong>違いが出るのは網の細かさがそろっていないとき。</li>
+          <li><strong>開いた線の端を動かしたくないなら、Constrained Boundary は既定の Unshared Edges のまま。</strong>None にすると線が縮む。</li>
+          <li><strong>波の残り方は、波1つに入る点の数で決まる。</strong>1/(1 + S·L/2)、L = 2(1 − cos(2π/点の数))。</li>
         </ul>
       </div>
     </article>

@@ -1252,6 +1252,12 @@ DONE = [
      "shots": ["185_smooth.png"],
      "title": "smooth の縮み方は r = 1/(1 + Strength·L^q/C(2q, q)) — 36 通りで6桁一致。Filter Quality を上げるほど形を保つ",
      "note": "縮み方は r = 1/(1+S·L^q/C(2q,q))。36通りで6桁一致"},
+    {"no": "186", "anchor": "exp186",
+     "tags": ["モデリング", "検算", "smooth"],
+     "log": "log_pm", "thumb": "186_methods.png",
+     "shots": ["186_methods.png"],
+     "title": "smooth の3つの Method は、点が等間隔の円では同じ縮み方 — 開いた線の端は Constrained Boundary で止まり、波の高さは 1/(1 + S·L/2) だけ残る",
+     "note": "等間隔の円では3つの Method は同じ。端を止めた波は 1/(1+S·L/2) だけ残る"},
 ]
 
 PLANNED = []

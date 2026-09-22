@@ -1,0 +1,71 @@
+{
+  "rows": [
+    {
+      "method": "uniform",
+      "quality": 1,
+      "r": 0.7458558,
+      "spread": 1.3e-06
+    },
+    {
+      "method": "uniform",
+      "quality": 2,
+      "r": 0.9923191,
+      "spread": 5e-07
+    },
+    {
+      "method": "scaledominant",
+      "quality": 1,
+      "r": 0.7458558,
+      "spread": 8e-07
+    },
+    {
+      "method": "scaledominant",
+      "quality": 2,
+      "r": 0.9923191,
+      "spread": 7e-07
+    },
+    {
+      "method": "curvaturedominant",
+      "quality": 1,
+      "r": 0.7458558,
+      "spread": 9e-07
+    },
+    {
+      "method": "curvaturedominant",
+      "quality": 2,
+      "r": 0.9923191,
+      "spread": 3e-07
+    }
+  ],
+  "line": [
+    {
+      "boundary": "none",
+      "end0": [
+        0.05455,
+        0.04527
+      ],
+      "end1": [
+        0.94545,
+        -0.04527
+      ],
+      "amp": 0.072067,
+      "amp_ratio": 0.7207,
+      "x_span": 0.89089
+    },
+    {
+      "boundary": "unsharededges",
+      "end0": [
+        0.0,
+        0.0
+      ],
+      "end1": [
+        1.0,
+        -0.0
+      ],
+      "amp": 0.06714,
+      "amp_ratio": 0.6714,
+      "x_span": 1.0
+    }
+  ],
+  "wave_L": 0.09788696740969294
+}
