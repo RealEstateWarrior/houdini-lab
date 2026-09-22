@@ -1210,6 +1210,12 @@ DONE = [
      "shots": ["178_cost.png"],
      "title": "pcfind の時間は「見つかった点の数」で決まる — 半径を広げても、最大の数を 10 に絞れば 1 点 0.1 マイクロ秒",
      "note": "pcfind の時間は見つかった点の数で決まる。maxpts を絞れば半径が広くても軽い"},
+    {"no": "179", "anchor": "exp179",
+     "tags": ["シミュレーション", "パーティクル", "検算"],
+     "log": "log_fx", "thumb": "179_speed.png",
+     "shots": ["179_speed.png"],
+     "title": "止まった空気の popwind と重力は、popdrag とぴったり同じ落ち方 — Substeps で差が出るのは重力と組み合わせたとき。Wind Speed は掛け算",
+     "note": "止まった空気の popwind＋重力は popdrag と同じ落ち方。Wind Speed は掛け算"},
 ]
 
 PLANNED = []
