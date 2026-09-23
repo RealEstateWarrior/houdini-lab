@@ -3,11 +3,11 @@
  "title": "雪だるまを作る",
  "lede": "大・中・小の3つの雪玉を少しめり込ませて重ね、mountain で手で固めたようなでこぼこを付ける。腕は曲がった線に太さを付けた枝、目とボタンは炭、鼻はにんじん。雪の材質は Subsurface（光が中で散る）を入れると雪らしくなる。",
  "hero": "pr_snowman_hero.png",
- "hero_cap": "Karma で撮った仕上がり。やわらかく光る雪の玉と、枝の腕。",
+ "hero_cap": "Karma で撮った仕上がり。雪の積もった地面に立つ雪だるま。",
  "facts": [
   [
    "足すノード",
-   "19個（材質4つ）"
+   "25個（材質4つ）"
   ],
   [
    "高さ",
@@ -15,7 +15,7 @@
   ],
   [
    "仕上がりを撮る時間",
-   "384.1秒（Karma 1280×720）"
+   "197.4秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -29,10 +29,10 @@
   {
    "title": "雪玉を3つ重ねる",
    "node": "mountain",
-   "ui_node": "hand_packed",
-   "body": "<code>sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。<code>merge</code> でまとめ、<code>mountain</code> で <strong>Height 0.018・Element Size 0.12</strong> の浅いでこぼこを付ける。手で固めた雪玉の、ゆるいでこぼこになる。",
+   "ui_node": "snow_grain",
+   "body": "<code>sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。本物の雪だるまは、玉と玉の境目に雪が詰まってつながっている。<code>vdbfrompolygons</code>（Voxel Size 0.008）で1つのボリュームにし、<code>vdbreshapesdf</code> の <strong>Close</strong>（Offset 10 升＝約 8 cm、Half Width 12）で境目のくぼみを埋めて、<code>convertvdb</code> で面に戻す。<code>mountain</code> を2つ重ね、1つ目（Height 0.022・Element Size 0.12）で手で固めたゆるいでこぼこ、2つ目（Height 0.004・Element Size 0.015）で雪の粒のざらつきを付ける。",
    "img": "pr_snowman_1.png",
-   "cap": "でこぼこの付いた3つの雪玉。"
+   "cap": "境目がつながった、ざらついた雪玉。"
   },
   {
    "title": "枝の腕を付ける",
@@ -51,18 +51,18 @@
    "cap": "顔と、胸のボタン。"
   },
   {
-   "title": "雪の材質（Subsurface）",
+   "title": "雪の地面と、雪の材質",
    "node": "merge",
    "ui_node": "snowman",
-   "body": "雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。枝・炭・にんじんは普通の材質。",
+   "body": "前の版は、雪だるまがスタジオの幕の上に立っていた。本物は雪の上に立っているので、24 m 四方の <code>grid</code> を <code>attribwrangle</code> で波打たせて、積もった雪の地面を作る（ゆるい吹きだまり・細かいざらつき・根元の盛り上がり）。後ろには大きな板を立て、明るい灰色に光らせて冬の曇り空にする。雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。地面にも同じ材質を当てる。枝・炭・にんじんは普通の材質。",
    "img": "",
    "cap": "材質を当てた状態。"
   }
  ],
  "traps": [
   {
-   "title": "でこぼこは浅く",
-   "body": "mountain の Height を 0.018 から 0.08 にすると、いちばん上の高さが 1.321 m から 1.336 m に変わり、0.08 は、いちばん小さな玉（半径 0.17 m）の半分近い深さ。でこぼこの深さは、玉の大きさと比べて決める。",
+   "title": "玉を重ねただけでは、境目がくびれる",
+   "body": "球を重ねたままだと、玉と玉の境目が深い V 字のくびれになり、3つの玉を置いただけに見える。vdbreshapesdf の Close で埋めると境目が丸くつながる（面の数は Close なしで 54,798、ありで 52,774）。",
    "img": "",
    "cap": ""
   }

@@ -2533,6 +2533,10 @@ def render_guide_sections(guides, works, urls):
         if day:
             out.append(f'          <p class="guide-date"><time datetime="{day}">{date_ja(day)} 公開</time>'
                        f'<span>{len(guide["steps"])}ステップ</span>{level_badge(guide)}</p>')
+        if guide.get("revisions"):
+            last = guide["revisions"][-1]["date"]
+            out.append(f'          <p class="guide-revised"><a href="#revisions">{html.escape(date_ja(last))} に作り直しました。'
+                       '前の版との違いは「改訂の記録」へ</a></p>')
         out.append(f'          <p class="guide-lede">{guide["lede"]}</p>')
         if guide.get("facts"):
             out.append('          <dl class="guide-facts">')
@@ -2658,6 +2662,32 @@ def render_guide_sections(guides, works, urls):
                                    f"{html.escape(trap['cap'])}</figcaption>")
                     out.append("          </figure>")
                 out.append("        </div>")
+
+        # 改訂の記録（2026-09-24）。作り直した実践は、前の版から何をなぜ変えたかを、前の仕上がりと並べて残す
+        if guide.get("revisions"):
+            out.append('        <section class="revisions" id="revisions">')
+            out.append('          <p class="label">改訂の記録</p>')
+            for rev in guide["revisions"]:
+                out.append('          <div class="revision">')
+                out.append(f'            <h4>{html.escape(date_ja(rev["date"]))} に作り直した</h4>')
+                if rev.get("why"):
+                    out.append(f'            <p>{rev["why"]}</p>')
+                out.append('            <ul>')
+                for change in rev.get("changes", []):
+                    out.append(f"              <li>{change}</li>")
+                out.append("            </ul>")
+                if rev.get("before"):
+                    out.append('            <div class="revision-compare">')
+                    for img, cap in ((rev["before"], "作り直す前"), (guide["hero"], "作り直したあと")):
+                        out.append('              <figure>')
+                        out.append(f'                <img src="{img}" loading="lazy" decoding="async" alt="{cap}の仕上がり">')
+                        out.append(f"                <figcaption>{cap}</figcaption>")
+                        out.append("              </figure>")
+                    out.append("            </div>")
+                if rev.get("reference"):
+                    out.append(f'            <p class="revision-ref">見比べた本物: {rev["reference"]}</p>')
+                out.append("          </div>")
+            out.append("        </section>")
 
         # 本物の画面（_net.png）があるときは、自動で描いた図は重複なので出さない
         graph = f'{prefix}_{guide["id"]}_graph.png'

@@ -7,8 +7,8 @@
       "name": "ball0",
       "type": "sphere",
       "pos": [
-        -7.766,
-        6.476
+        -3.765,
+        10.994
       ],
       "flags": {
         "display": false
@@ -27,8 +27,8 @@
       "name": "ball1",
       "type": "sphere",
       "pos": [
-        -5.507,
-        6.024
+        -1.506,
+        10.542
       ],
       "flags": {
         "display": false
@@ -47,8 +47,8 @@
       "name": "ball2",
       "type": "sphere",
       "pos": [
-        -3.248,
-        5.572
+        0.753,
+        10.09
       ],
       "flags": {
         "display": false
@@ -67,8 +67,8 @@
       "name": "three_balls",
       "type": "merge",
       "pos": [
-        -5.507,
-        4.593
+        -1.506,
+        9.111
       ],
       "flags": {
         "display": false
@@ -76,27 +76,88 @@
       "params": {}
     },
     {
-      "name": "hand_packed",
-      "type": "mountain::2.0",
+      "name": "to_vdb",
+      "type": "vdbfrompolygons",
       "pos": [
-        -5.507,
-        3.464
+        -1.506,
+        7.982
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "height": 0.018,
+        "voxelsize": 0.008
+      }
+    },
+    {
+      "name": "fill_joints",
+      "type": "vdbreshapesdf",
+      "pos": [
+        -1.506,
+        6.852
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "close",
+        "halfwidth": 12,
+        "voxeloffset": 10.0
+      }
+    },
+    {
+      "name": "to_mesh",
+      "type": "convertvdb",
+      "pos": [
+        -1.506,
+        5.723
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "hand_packed",
+      "type": "mountain::2.0",
+      "pos": [
+        -1.506,
+        4.593
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.022,
         "elementsize": 0.12,
         "oct": 5,
         "rough": 0.55
       }
     },
     {
+      "name": "snow_grain",
+      "type": "mountain::2.0",
+      "pos": [
+        -1.506,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.004,
+        "elementsize": 0.015,
+        "oct": 4,
+        "rough": 0.7
+      }
+    },
+    {
       "name": "twig_arms",
       "type": "attribwrangle",
       "pos": [
-        -0.424,
+        3.577,
         4.142
       ],
       "flags": {
@@ -111,7 +172,7 @@
       "name": "twig_thickness",
       "type": "polywire",
       "pos": [
-        -0.424,
+        3.577,
         3.012
       ],
       "flags": {
@@ -125,7 +186,7 @@
       "name": "coal_spots",
       "type": "attribwrangle",
       "pos": [
-        -13.273,
+        -14.92,
         2.41
       ],
       "flags": {
@@ -140,7 +201,7 @@
       "name": "coal_piece",
       "type": "sphere",
       "pos": [
-        -15.532,
+        -17.179,
         2.861
       ],
       "flags": {
@@ -159,7 +220,7 @@
       "name": "coal",
       "type": "copytopoints::2.0",
       "pos": [
-        -14.402,
+        -16.05,
         1.431
       ],
       "flags": {
@@ -171,7 +232,7 @@
       "name": "carrot",
       "type": "tube",
       "pos": [
-        -11.014,
+        -12.661,
         0.979
       ],
       "flags": {
@@ -192,7 +253,7 @@
       "name": "face",
       "type": "merge",
       "pos": [
-        -12.708,
+        -14.355,
         0.0
       ],
       "flags": {
@@ -201,10 +262,101 @@
       "params": {}
     },
     {
+      "name": "snow_ground",
+      "type": "grid",
+      "pos": [
+        -6.589,
+        6.175
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 24.0,
+        "sizey": 24.0,
+        "rows": 300,
+        "cols": 300
+      }
+    },
+    {
+      "name": "snow_drifts",
+      "type": "attribwrangle",
+      "pos": [
+        -6.589,
+        5.045
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 積もった雪の地面。ゆるい吹きだまりと、細かい粒のざらつき。雪だるまの根元は少し盛り上がる\nfloat d = length(set(@P.x, @P.z));\n@P.y = noise(@P * 0.8) * 0.12 - 0...."
+      }
+    },
+    {
+      "name": "ground_dir",
+      "type": "normal",
+      "pos": [
+        -6.589,
+        3.916
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "overcast_sky",
+      "type": "grid",
+      "pos": [
+        -9.413,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 60.0,
+        "sizey": 20.0,
+        "ty": 6.0,
+        "tz": -12.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "assign_sky",
+      "type": "material",
+      "pos": [
+        -9.413,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sky_mat"
+      }
+    },
+    {
+      "name": "assign_ground",
+      "type": "material",
+      "pos": [
+        -6.589,
+        2.786
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/snow_mat"
+      }
+    },
+    {
       "name": "assign_snow",
       "type": "material",
       "pos": [
-        -5.507,
+        -1.506,
         2.334
       ],
       "flags": {
@@ -218,7 +370,7 @@
       "name": "assign_twig",
       "type": "material",
       "pos": [
-        -0.424,
+        3.577,
         1.883
       ],
       "flags": {
@@ -232,7 +384,7 @@
       "name": "assign_coal",
       "type": "material",
       "pos": [
-        1.836,
+        5.836,
         1.431
       ],
       "flags": {
@@ -246,7 +398,7 @@
       "name": "assign_carrot",
       "type": "material",
       "pos": [
-        4.095,
+        8.095,
         0.979
       ],
       "flags": {
@@ -291,7 +443,31 @@
     {
       "from": "three_balls",
       "from_output": 0,
+      "to": "to_vdb",
+      "to_input": 0
+    },
+    {
+      "from": "to_vdb",
+      "from_output": 0,
+      "to": "fill_joints",
+      "to_input": 0
+    },
+    {
+      "from": "fill_joints",
+      "from_output": 0,
+      "to": "to_mesh",
+      "to_input": 0
+    },
+    {
+      "from": "to_mesh",
+      "from_output": 0,
       "to": "hand_packed",
+      "to_input": 0
+    },
+    {
+      "from": "hand_packed",
+      "from_output": 0,
+      "to": "snow_grain",
       "to_input": 0
     },
     {
@@ -325,7 +501,31 @@
       "to_input": 1
     },
     {
-      "from": "hand_packed",
+      "from": "snow_ground",
+      "from_output": 0,
+      "to": "snow_drifts",
+      "to_input": 0
+    },
+    {
+      "from": "snow_drifts",
+      "from_output": 0,
+      "to": "ground_dir",
+      "to_input": 0
+    },
+    {
+      "from": "overcast_sky",
+      "from_output": 0,
+      "to": "assign_sky",
+      "to_input": 0
+    },
+    {
+      "from": "ground_dir",
+      "from_output": 0,
+      "to": "assign_ground",
+      "to_input": 0
+    },
+    {
+      "from": "snow_grain",
       "from_output": 0,
       "to": "assign_snow",
       "to_input": 0
@@ -349,28 +549,40 @@
       "to_input": 0
     },
     {
-      "from": "assign_snow",
+      "from": "assign_sky",
       "from_output": 0,
       "to": "snowman",
       "to_input": 0
     },
     {
-      "from": "assign_twig",
+      "from": "assign_ground",
       "from_output": 0,
       "to": "snowman",
       "to_input": 1
     },
     {
-      "from": "assign_coal",
+      "from": "assign_snow",
       "from_output": 0,
       "to": "snowman",
       "to_input": 2
     },
     {
-      "from": "assign_carrot",
+      "from": "assign_twig",
       "from_output": 0,
       "to": "snowman",
       "to_input": 3
+    },
+    {
+      "from": "assign_coal",
+      "from_output": 0,
+      "to": "snowman",
+      "to_input": 4
+    },
+    {
+      "from": "assign_carrot",
+      "from_output": 0,
+      "to": "snowman",
+      "to_input": 5
     }
   ]
 }

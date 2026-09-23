@@ -5359,7 +5359,7 @@
         ],
         [
           "仕上がりを撮る時間",
-          "142.6秒（Karma 1280×720）"
+          "92.9秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -5375,16 +5375,16 @@
           "title": "種を黄金角で並べる",
           "node": "attribwrangle",
           "ui_node": "golden_spiral",
-          "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、<strong>count = 1400</strong> 粒の種の点を作る。i 番目の粒は、角度 <strong>i × 137.508度</strong>（黄金角）、中心からの距離 <strong>spacing × √i</strong>。こうすると粒どうしがすき間なく詰まり、右回りと左回りの渦が浮かび上がる。本物のひまわりと同じ並び方。中心を少し盛り上げ、粒の大きさ pscale と色 Cd（中心は黄緑、外はこげ茶）も付ける。",
+          "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、<strong>count = 1400</strong> 粒の種の点を作る。i 番目の粒は、角度 <strong>i × 137.508度</strong>（黄金角）、中心からの距離 <strong>spacing × √i</strong>。こうすると粒どうしがすき間なく詰まり、右回りと左回りの渦が浮かび上がる。本物のひまわりと同じ並び方。中心を少し盛り上げ、粒の大きさ pscale と色 Cd を付ける。色は本物と同じく3つの輪にする。真ん中は黄緑のつぼみ、その外は咲いた黄金色の小花、いちばん外はこげ茶。粒の向き orient は、盛り上がった面に垂直にする。",
           "img": "pr_sunflower_1.png",
           "cap": "1400 粒の渦巻き。",
           "ui_parm": "count"
         },
         {
-          "title": "種の粒を並べる",
+          "title": "小さな花を並べる",
           "node": "copytopoints",
           "ui_node": "seed_disk",
-          "body": "少しつぶれた小さな <code>sphere</code> を <code>copytopoints</code> で種の点に並べる。色を移すため、Target Attributes に「<strong>Apply to: Points</strong>」「Attributes: Cd」を足す（H21 は書かないと色が移らない）。",
+          "body": "ひまわりの中心は種ではなく、小さな筒の形の花（管状花）がびっしり詰まったもの。前の版は丸い粒を並べていたが、写真と比べると形が違った。先の細い六角の <code>tube</code>（下の半径 1・上 0.35・高さ 1.8）を <code>copytopoints</code> で点に並べる（大きさは pscale で決まる）。色を移すため、Target Attributes に「<strong>Apply to: Points</strong>」「Attributes: Cd」を足す（H21 は書かないと色が移らない）。",
           "img": "pr_sunflower_2.png",
           "cap": "渦巻きに詰まった種。"
         },
@@ -5392,9 +5392,9 @@
           "title": "花びらを1枚作る",
           "node": "attribwrangle",
           "ui_node": "petal_shape",
-          "body": "<code>grid</code>（6 × 16 に割る）を細長い板にし、<code>attribwrangle</code> で形を作る。根元から先への位置 u を使い、幅を <strong>sin</strong> の形（根元と先が細く、真ん中が太い）にして舌の形に、高さを <strong>curl × u²</strong> で先ほど反らせる。長さ 13 cm・幅 3.5 cm。色は根元がだいだい、先が黄色。",
+          "body": "<code>grid</code>（12 × 24 に割る）を細長い板にし、<code>attribwrangle</code> で形を作る。根元から先への位置 u を使い、幅を <strong>sin</strong> と <strong>(1 − u)</strong> の掛け算にして、先がとがった形にする（本物の花びらは先がとがる）。高さを <strong>curl × u²</strong> で先ほど少し反らせ、<code>sin</code> で小さく波打たせる。長さ 12 cm・幅 3 cm。色は根元が濃い黄色、先が明るい黄色で、横方向の <code>cos</code> で細い縦の筋を付ける。",
           "img": "pr_sunflower_3.png",
-          "cap": "先が反った舌の形の花びら。"
+          "cap": "先のとがった、筋のある花びら。"
         },
         {
           "title": "花びらを2重の輪に並べる",
@@ -5408,7 +5408,7 @@
           "title": "茎と裏を付けて、こちらへ向ける",
           "node": "xform",
           "ui_node": "face_camera",
-          "body": "花の裏に平たい <code>sphere</code>（こげ茶）、下に細い <code>tube</code> の茎（緑）を付け、材質を当てる。種と花びらは Base Color を白にして点の色 Cd をそのまま使う。種は <strong>Roughness 0.95</strong> でつやを消す（つやがあると、小さな粒1つ1つが空を映して白く光る）。花びらは Sheen 0.3。最後に <code>xform</code> で 62度起こして、花をカメラのほうへ向ける。",
+          "body": "花びらの後ろに、緑の萼（がく）を同じ作り方で 26 枚、少し下へ向けて並べる。花の裏に平たい <code>sphere</code>、下に細い <code>tube</code> の茎を付け、どちらも緑にする（本物の裏は緑）。種と花びらは Base Color を白にして点の色 Cd をそのまま使う。種は <strong>Roughness 0.95</strong> でつやを消す（つやがあると、小さな粒1つ1つが空を映して白く光る）。花びらは Sheen 0.3。最後に <code>xform</code> で 62度起こして、花をカメラのほうへ向ける。",
           "img": "",
           "cap": "材質を当てた状態。"
         }
@@ -5431,6 +5431,20 @@
           "body": "中心からの距離を番号そのものに比例させると、外へ行くほど粒の間が広がってしまう。√番号 にすると、円の面積（半径の2乗）が番号に比例して増えるので、どこでも同じ込み具合になる。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、本物のひまわりの写真と並べて見比べた。前の版は、中心がこげ茶の丸い粒だけで、写真のような色の輪が無かった。花びらも丸く、筋が無かった。",
+          "changes": [
+            "<strong>中心を色の輪にした。</strong>本物の中心は、真ん中が黄緑のつぼみ、その外が咲いた黄金色の小花、いちばん外がこげ茶。中心からの距離で3色に分けた。",
+            "<strong>中心の粒を、小さな筒の花に変えた。</strong>ひまわりの中心は種ではなく、筒の形の小さな花（管状花）が詰まったもの。丸い粒を、先の細い六角の筒に変え、盛り上がった面に垂直に立てた。",
+            "<strong>花びらの先をとがらせ、縦の筋と波打ちを付けた。</strong>",
+            "<strong>花びらの後ろに緑の萼（がく）を付け、花の裏を緑にした。</strong>前は裏がこげ茶だった。"
+          ],
+          "before": "pr_sunflower_hero_v1.png",
+          "reference": "Wikimedia Commons の「sunflower head close-up」の写真（中心の黄緑・黄金色・こげ茶の輪と、渦巻き）"
         }
       ]
     },
@@ -6068,11 +6082,11 @@
       "title": "雪だるまを作る",
       "lede": "大・中・小の3つの雪玉を少しめり込ませて重ね、mountain で手で固めたようなでこぼこを付ける。腕は曲がった線に太さを付けた枝、目とボタンは炭、鼻はにんじん。雪の材質は Subsurface（光が中で散る）を入れると雪らしくなる。",
       "hero": "pr_snowman_hero.png",
-      "hero_cap": "Karma で撮った仕上がり。やわらかく光る雪の玉と、枝の腕。",
+      "hero_cap": "Karma で撮った仕上がり。雪の積もった地面に立つ雪だるま。",
       "facts": [
         [
           "足すノード",
-          "19個（材質4つ）"
+          "25個（材質4つ）"
         ],
         [
           "高さ",
@@ -6080,7 +6094,7 @@
         ],
         [
           "仕上がりを撮る時間",
-          "384.1秒（Karma 1280×720）"
+          "197.4秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -6094,10 +6108,10 @@
         {
           "title": "雪玉を3つ重ねる",
           "node": "mountain",
-          "ui_node": "hand_packed",
-          "body": "<code>sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。<code>merge</code> でまとめ、<code>mountain</code> で <strong>Height 0.018・Element Size 0.12</strong> の浅いでこぼこを付ける。手で固めた雪玉の、ゆるいでこぼこになる。",
+          "ui_node": "snow_grain",
+          "body": "<code>sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。本物の雪だるまは、玉と玉の境目に雪が詰まってつながっている。<code>vdbfrompolygons</code>（Voxel Size 0.008）で1つのボリュームにし、<code>vdbreshapesdf</code> の <strong>Close</strong>（Offset 10 升＝約 8 cm、Half Width 12）で境目のくぼみを埋めて、<code>convertvdb</code> で面に戻す。<code>mountain</code> を2つ重ね、1つ目（Height 0.022・Element Size 0.12）で手で固めたゆるいでこぼこ、2つ目（Height 0.004・Element Size 0.015）で雪の粒のざらつきを付ける。",
           "img": "pr_snowman_1.png",
-          "cap": "でこぼこの付いた3つの雪玉。"
+          "cap": "境目がつながった、ざらついた雪玉。"
         },
         {
           "title": "枝の腕を付ける",
@@ -6116,20 +6130,33 @@
           "cap": "顔と、胸のボタン。"
         },
         {
-          "title": "雪の材質（Subsurface）",
+          "title": "雪の地面と、雪の材質",
           "node": "merge",
           "ui_node": "snowman",
-          "body": "雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。枝・炭・にんじんは普通の材質。",
+          "body": "前の版は、雪だるまがスタジオの幕の上に立っていた。本物は雪の上に立っているので、24 m 四方の <code>grid</code> を <code>attribwrangle</code> で波打たせて、積もった雪の地面を作る（ゆるい吹きだまり・細かいざらつき・根元の盛り上がり）。後ろには大きな板を立て、明るい灰色に光らせて冬の曇り空にする。雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。地面にも同じ材質を当てる。枝・炭・にんじんは普通の材質。",
           "img": "",
           "cap": "材質を当てた状態。"
         }
       ],
       "traps": [
         {
-          "title": "でこぼこは浅く",
-          "body": "mountain の Height を 0.018 から 0.08 にすると、いちばん上の高さが 1.321 m から 1.336 m に変わり、0.08 は、いちばん小さな玉（半径 0.17 m）の半分近い深さ。でこぼこの深さは、玉の大きさと比べて決める。",
+          "title": "玉を重ねただけでは、境目がくびれる",
+          "body": "球を重ねたままだと、玉と玉の境目が深い V 字のくびれになり、3つの玉を置いただけに見える。vdbreshapesdf の Close で埋めると境目が丸くつながる（面の数は Close なしで 54,798、ありで 52,774）。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、本物の雪だるまの写真と並べて見比べた。前の版は、なめらかな玉を3つ置いただけで、スタジオの幕の上に浮いた作り物に見えた。",
+          "changes": [
+            "<strong>玉と玉の境目をつなげた。</strong>本物の雪だるまは、境目に雪が詰まってくびれがゆるい。VDB にして Close で境目を埋めた。",
+            "<strong>雪のざらつきを足した。</strong>細かい mountain をもう1つ重ね、雪の粒の凹凸を付けた。",
+            "<strong>雪の積もった地面と、冬の曇り空を置いた。</strong>本物は雪の上に立っている。24 m 四方の地面を吹きだまりの形に波打たせ、後ろに明るい灰色の空の板を立てた。"
+          ],
+          "before": "pr_snowman_hero_v1.png",
+          "reference": "Wikimedia Commons の「snowman in snow」の写真（雪原の中、境目がつながった雪玉）"
         }
       ]
     },
@@ -6421,11 +6448,11 @@
         ],
         [
           "スプリンクル",
-          "260粒"
+          "420粒"
         ],
         [
           "仕上がりを撮る時間",
-          "138.7秒（Karma 1280×720）"
+          "156.5秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -6441,33 +6468,33 @@
           "title": "生地を作る",
           "node": "normal",
           "ui_node": "puffy_dir",
-          "body": "<code>torus</code>（半径 10 cm、太さ 4.5 cm、64 × 128 に割る）を作り、<code>attribwrangle</code> で高さを 0.82 倍につぶす。面の向き N にそってノイズでわずかに出し入れし、揚げた生地のふっくらしたむらにする。torus の出力には N が無いので、前後に <code>normal</code> を入れて向きを作る（形を変えたあとは作り直す）。",
+          "body": "本物のリングドーナツは、直径 9〜10 cm で穴は 2〜3 cm と小さい。<code>torus</code> を <strong>半径 3 cm・太さ 1.75 cm</strong>（直径 9.5 cm、穴 2.5 cm）にして 64 × 128 に割り、<code>attribwrangle</code> で高さを 0.85 倍につぶす。面の向き N にそってノイズでわずかに出し入れし、揚げた生地のふっくらしたむらにする。色は、上下を濃いきつね色、側面の真ん中を白っぽい帯にする（揚げるときに油に浸からない所）。torus の出力には N が無いので、前後に <code>normal</code> を入れて向きを作る（形を変えたあとは作り直す）。",
           "img": "pr_donut_1.png",
-          "cap": "ふっくらした生地。"
+          "cap": "ふっくらした生地と、側面の白い帯。"
         },
         {
           "title": "アイシングをかける",
-          "node": "polyextrude",
-          "ui_node": "icing_thickness",
-          "body": "生地のコピーを <code>attribwrangle</code>（Primitives）で削る。面の向きの上下成分 N.y が <strong>edge = −0.15</strong> より小さい面を消すと、上側と少し側面まで残る。edge をノイズで上下させる（wobble 0.9）と、縁が垂れたように波打つ。<code>polyextrude</code> で <strong>4 mm</strong> 押し出して厚みを付ける（Output Back で裏も閉じる）。",
+          "node": "attribdelete",
+          "ui_node": "drop_dough_color",
+          "body": "生地のコピーを <code>attribwrangle</code>（Primitives）で削る。面の向きの上下成分 N.y が <strong>edge = 0.15</strong> より小さい面を消すと、上の面だけが残る（本物のアイシングも、側面の真ん中までは届かない）。edge をノイズで上下させる（wobble 0.7）と、縁が垂れたように波打つ。<code>polyextrude</code> で <strong>2.5 mm</strong> 押し出して厚みを付ける（Output Back で裏も閉じる）。アイシングは生地から点の色 Cd（揚げ色）を受け継いでいるので、<code>attribdelete</code> で消しておく。残したままだと、材質のピンクに揚げ色が掛け合わされて、オレンジに写った。",
           "img": "pr_donut_2.png",
-          "cap": "上半分を覆う、縁の波打ったアイシング。",
+          "cap": "上の面を覆う、縁の波打ったアイシング。",
           "ui_parm": "edge"
         },
         {
           "title": "カラースプレーを散らす",
           "node": "copytopoints",
           "ui_node": "sprinkles",
-          "body": "アイシングの面に <code>scatter</code> で 260 個の点をまく（Relax で間をそろえる）。<code>attribwrangle</code> で、粒の長い向きを「面にそったばらばらの向き」、上を面の向き N に合わせた <strong>orient</strong> を作り、アイシングの厚みぶん持ち上げる。色は6色から選ぶ。細長い <code>sphere</code>（長さ 9 mm）を <code>copytopoints</code> で並べ、色は Target Attributes の「Apply to: Points」「Cd」で移す。",
+          "body": "アイシングの面に <code>scatter</code> で 420 個の点をまく（Relax で間をそろえる）。<code>attribwrangle</code> で、粒の長い向きを「面にそったばらばらの向き」、上を面の向き N に合わせた <strong>orient</strong> を作り、アイシングの厚みぶん持ち上げる。色は6色から選ぶ。細い円柱の <code>tube</code>（長さ 5.5 mm・太さ 1.1 mm、端を閉じる）を <code>copytopoints</code> で並べ、色は Target Attributes の「Apply to: Points」「Cd」で移す。",
           "img": "pr_donut_3.png",
-          "cap": "260 粒のカラースプレー。",
+          "cap": "420 粒のカラースプレー。",
           "ui_parm": "npts"
         },
         {
           "title": "材質を当てる",
           "node": "merge",
           "ui_node": "donut",
-          "body": "生地は焼き色の茶色で Roughness 0.6・Sheen 0.4。アイシングはピンクで <strong>Roughness 0.15・Coat 0.6</strong>（つや）。スプリンクルは Base Color を白にして点の色 Cd を使う。Subsurface（光が中へ入って散る）も試したが、このドーナツでは Karma が 20 分たっても撮り終わらなかったので入れていない。",
+          "body": "生地は Base Color を白にして点の色 Cd（揚げ色と白い帯）を使い、Roughness 0.65・Sheen 0.4。アイシングはピンクで <strong>Roughness 0.15・Coat 0.6</strong>（つや）。スプリンクルは Base Color を白にして点の色 Cd を使う。Subsurface（光が中へ入って散る）も試したが、このドーナツでは Karma が 20 分たっても撮り終わらなかったので入れていない。",
           "img": "",
           "cap": "材質を当てた状態。"
         }
@@ -6475,9 +6502,24 @@
       "traps": [
         {
           "title": "アイシングの広さは edge で決まる",
-          "body": "生地の 8,192 面のうち、edge −0.15 で 4,446 面（54%）がアイシングになった。wobble を 0 にすると 4,405 面で、縁がまっすぐな線になる。本物らしい垂れは wobble で出す。",
+          "body": "生地の 8,192 面のうち、edge 0.15 で 3,788 面（46%）がアイシングになった。wobble を 0 にすると 3,811 面で、縁がまっすぐな線になる。本物らしい垂れは wobble で出す。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、本物のリングドーナツの写真と並べて見比べた。前の版は、浮き輪のように細長い輪で、穴が大きすぎた。アイシングも側面の下まで垂れ、生地がほとんど見えなかった。",
+          "changes": [
+            "<strong>大きさの比率を本物に合わせた。</strong>直径 9〜10 cm・穴 2〜3 cm になるよう、torus を半径 3 cm・太さ 1.75 cm にした（前は 10 cm・4.5 cm で、穴が大きすぎた）。",
+            "<strong>揚げ色を付けた。</strong>本物は上下が濃いきつね色で、側面の真ん中に油に浸からない白っぽい帯がある。面の向きで色を分けた。",
+            "<strong>アイシングは上の面だけにした。</strong>edge を −0.15 から 0.15 にして、側面まで垂れないようにした。厚さは 4 mm から 2.5 mm に。",
+            "<strong>アイシングの色が正しく出るようにした。</strong>アイシングが生地の点の色（揚げ色）を受け継いでいて、材質のピンクに掛け合わされオレンジに写っていた。attribdelete で消した。",
+            "<strong>スプリンクルを細い円柱にして、数を 260 から 420 に増やした。</strong>本物のスプリンクルは、端の平らな細い棒。"
+          ],
+          "before": "pr_donut_hero_v1.png",
+          "reference": "Wikimedia Commons の「pink glazed donut sprinkles」の写真（穴が小さく、上の面だけにアイシング、側面に白い帯）"
         }
       ]
     },
@@ -6498,7 +6540,7 @@
         ],
         [
           "仕上がりを撮る時間",
-          "83.2秒（Karma 1280×720）"
+          "213.3秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -6520,35 +6562,33 @@
         },
         {
           "title": "回してグラスにする",
-          "node": "revolve",
+          "node": "reverse",
           "ui_node": "glass",
-          "body": "<code>revolve</code> で断面を y 軸のまわりに1周回す。<strong>Divisions 96</strong>（96 等分）で、縁の丸みがなめらかになる。閉じた断面を回すので、中まで詰まった（厚みのある）ガラスになる。",
+          "body": "<code>revolve</code> で断面を y 軸のまわりに1周回す。<strong>Divisions 96</strong>（96 等分）で、縁の丸みがなめらかになる。閉じた断面を回すので、中まで詰まった（厚みのある）ガラスになる。この断面のたどり方だと面が内向きになるので、<code>reverse</code> で外向きに戻す。向きが逆のままだと、Karma は光がガラスに入る所と出る所を取り違え、分厚いかたまりのように写った。",
           "img": "pr_glasscup_2.png",
-          "cap": "厚い底と薄い縁のグラス。",
-          "ui_parm": "divs"
+          "cap": "厚い底と薄い縁のグラス。"
         },
         {
           "title": "水を入れる",
-          "node": "revolve",
+          "node": "reverse",
           "ui_node": "water",
-          "body": "内側の壁に沿った断面を、もう1つの Detail の <code>attribwrangle</code> で描き、同じく <code>revolve</code> で回す。水面は高さ 7 cm。壁とぴったり同じ面にすると、ガラスと水の境目がちらつくので、<strong>0.2 mm だけ内側</strong>にする。<code>measure</code>（Volume）で測ると、水は 185 ml。",
+          "body": "内側の壁に沿った断面を、もう1つの Detail の <code>attribwrangle</code> で描き、同じく <code>revolve</code> で回して <code>reverse</code> で面を外向きにする。水面は高さ 7 cm。壁とぴったり同じ面にすると、ガラスと水の境目がちらつくので、<strong>0.2 mm だけ内側</strong>にする。<code>measure</code>（Volume）で測ると、水は 185 ml。",
           "img": "pr_glasscup_3.png",
-          "cap": "グラスの中の水（185 ml）。",
-          "ui_parm": "divs"
+          "cap": "グラスの中の水（185 ml）。"
         },
         {
           "title": "氷を浮かべる",
           "node": "copytopoints",
           "ui_node": "ice",
-          "body": "<code>box</code>（約 2 cm 角）を <code>polybevel</code> で 3 mm 丸め、溶けかけた角にする。Detail の <code>attribwrangle</code> で3つの点（水面のあたり）と、ばらばらの向き orient を作り、<code>copytopoints</code> で並べる。氷は水より少し軽いので、頭を少し出して浮く位置に置く。",
+          "body": "本物の氷は、角が丸く、形がいびつで、真ん中が白く濁っている。<code>box</code>（約 2 cm 角）を <code>polybevel</code> で 4 mm 丸め、<code>remesh</code> で細かい網にしてから <code>mountain</code>（Height 1.8 mm）で面をわずかに波打たせる。中に、少しゆがんだ小さな <code>sphere</code> を入れて、濁った芯にする。Detail の <code>attribwrangle</code> で5つの点（水面に寄り集まる位置）と、ばらばらの向き orient・大きさ pscale を作り、<code>copytopoints</code> で氷と芯を並べる。氷は水より少し軽いので、頭を少し出して浮く。",
           "img": "pr_glasscup_4.png",
-          "cap": "3つの氷。"
+          "cap": "5つの氷。"
         },
         {
           "title": "透明な材質を3つ当てる",
           "node": "merge",
           "ui_node": "drink",
-          "body": "どれも <code>principledshader</code> で <strong>Transparency 1・Roughness ほぼ 0</strong>。違いは IOR（屈折率）だけで、<strong>ガラス 1.5・水 1.33・氷 1.31</strong>。水には Transmission Color をほんの少し青緑にする。透明な物は、後ろの明るい所と暗い所の境目が曲がって見えることで形が分かる。撮るときは、背景に明暗の差を作る。",
+          "body": "どれも <code>principledshader</code> で <strong>Transparency 1・Roughness ほぼ 0</strong>。違いは IOR（屈折率）だけで、<strong>ガラス 1.5・水 1.33・氷 1.31</strong>。水には Transmission Color をほんの少し青緑にする。氷の芯は白っぽく、Roughness 0.7・Transparency 0.6 で、光が散ってぼんやり白く見えるようにする。透明な物は、後ろの明るい所と暗い所の境目が曲がって見えることで形が分かる。撮るときは、背景に明暗の差を作る。",
           "img": "",
           "cap": "材質を当てた状態（ビューポートでは透けない）。"
         }
@@ -6557,6 +6597,12 @@
         {
           "title": "Divisions が少ないと、水の量まで減る",
           "body": "水の revolve の Divisions を 8 にすると 167 ml、24 で 183 ml、96 で 185 ml。少ない分割では、円が内側の多角形になるので、見た目が角ばるだけでなく体積も小さく出る（実験118）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "面の向きが逆だと、ガラスが分厚いかたまりに写る",
+          "body": "水の reverse を外して measure で体積を測ると -185 ml（負）、入れると 185 ml。負の体積は、面が内向きになっている印。最初の版はグラスも水も内向きのまま撮っていて、光の入り口と出口が逆になり、グラスが分厚いかたまりのように写った（下の「改訂の記録」）。",
           "img": "",
           "cap": ""
         },
@@ -6571,6 +6617,19 @@
           "body": "はじめ 96 サンプルで撮ろうとしたら、25 分たっても終わらなかった。測ると、サンプルを 1 増やすごとに延びる時間が、不透明な物の 6 倍だった（実験203）。16 サンプルにして、ざらつきはノイズ除去（OIDN）で消す。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、本物のグラスの写真と並べて見比べた。前の版は、グラスが分厚いかたまりのように写り、氷はきれいな立方体で、グラスの真ん中に浮いていた。",
+          "changes": [
+            "<strong>面の向きを直した。</strong>断面をたどった向きのせいで、グラスも水も面が内向きになっていた（水の体積を測ると −185 ml と負になる）。<code>reverse</code> で外向きに戻すと、光の入り口と出口が正しくなり、薄いガラスの壁と、中の水の境目が見えるようになった。",
+            "<strong>氷を本物に近づけた。</strong>本物の氷は角が丸く、形がいびつで、真ん中が白く濁っている。remesh と mountain で面をわずかに波打たせ、中に白く濁った芯を入れた。3個から5個にして、水面に寄り集まって頭を出すように置き直した。",
+            "<strong>背景を少し明るい灰色にした。</strong>透明な物は、後ろの明暗の差で形が見えるため。"
+          ],
+          "before": "pr_glasscup_hero_v1.png",
+          "reference": "Wikimedia Commons の「glass of water with ice cubes」の写真（壁の薄いタンブラー、角の丸い氷が水面に集まって浮く）"
         }
       ]
     }

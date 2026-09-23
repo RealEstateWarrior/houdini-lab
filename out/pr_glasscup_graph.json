@@ -7,8 +7,8 @@
       "name": "glass_profile",
       "type": "attribwrangle",
       "pos": [
-        -2.824,
-        4.142
+        -4.66,
+        5.723
       ],
       "flags": {
         "display": false
@@ -19,11 +19,11 @@
       }
     },
     {
-      "name": "glass",
+      "name": "glass_turn",
       "type": "revolve::2.0",
       "pos": [
-        -2.824,
-        3.012
+        -4.66,
+        4.593
       ],
       "flags": {
         "display": false
@@ -34,11 +34,23 @@
       }
     },
     {
+      "name": "glass",
+      "type": "reverse",
+      "pos": [
+        -4.66,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
       "name": "water_profile",
       "type": "attribwrangle",
       "pos": [
-        -6.072,
-        2.259
+        -7.907,
+        3.388
       ],
       "flags": {
         "display": false
@@ -49,11 +61,11 @@
       }
     },
     {
-      "name": "water",
+      "name": "water_turn",
       "type": "revolve::2.0",
       "pos": [
-        -6.072,
-        1.129
+        -7.907,
+        2.259
       ],
       "flags": {
         "display": false
@@ -64,10 +76,22 @@
       }
     },
     {
+      "name": "water",
+      "type": "reverse",
+      "pos": [
+        -7.907,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
       "name": "water_volume",
       "type": "measure::2.0",
       "pos": [
-        -6.072,
+        -7.907,
         0.0
       ],
       "flags": {
@@ -89,30 +113,30 @@
       "name": "ice_block",
       "type": "box",
       "pos": [
-        2.259,
-        4.669
+        0.424,
+        7.379
       ],
       "flags": {
         "display": false
       },
       "params": {
         "sizex": 0.021,
-        "sizey": 0.019,
-        "sizez": 0.02
+        "sizey": 0.018,
+        "sizez": 0.019
       }
     },
     {
       "name": "melted_edges",
       "type": "polybevel::3.0",
       "pos": [
-        2.259,
-        3.539
+        0.424,
+        6.25
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "offset": 0.003,
+        "offset": 0.004,
         "divisions": 3,
         "profileramp1value": 0.5,
         "profileramp1interp": 2,
@@ -122,25 +146,101 @@
       }
     },
     {
+      "name": "ice_mesh",
+      "type": "remesh::2.0",
+      "pos": [
+        0.424,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetsize": 0.0012
+      }
+    },
+    {
+      "name": "ice_lumps",
+      "type": "mountain::2.0",
+      "pos": [
+        0.424,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.0018,
+        "elementsize": 0.012,
+        "oct": 4
+      }
+    },
+    {
+      "name": "cloudy_core",
+      "type": "sphere",
+      "pos": [
+        5.507,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.006,
+        "rady": 0.005,
+        "radz": 0.0055,
+        "rows": 12,
+        "cols": 18
+      }
+    },
+    {
+      "name": "core_lumps",
+      "type": "mountain::2.0",
+      "pos": [
+        5.507,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.002,
+        "elementsize": 0.006
+      }
+    },
+    {
       "name": "ice_spots",
       "type": "attribwrangle",
       "pos": [
-        4.518,
-        3.087
+        2.683,
+        3.539
       ],
       "flags": {
         "display": false
       },
       "params": {
         "class": 0,
-        "snippet": "// 氷3つの置き場所と向き。水面あたりに浮かべる\nvector places[] = {{-0.011, 0.066, 0.006}, {0.012, 0.064, -0.004}, {0.0, 0.049, -0.012}};\nf..."
+        "snippet": "// 氷5つの置き場所と向き。水面に寄り集まり、頭を少し出して浮く\nvector places[] = {{-0.012, 0.067, 0.008}, {0.011, 0.066, 0.007}, {0.0, 0.068, -0.0..."
       }
     },
     {
       "name": "ice",
       "type": "copytopoints::2.0",
       "pos": [
-        3.389,
+        1.553,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "ice_cores",
+      "type": "copytopoints::2.0",
+      "pos": [
+        5.507,
         2.108
       ],
       "flags": {
@@ -152,8 +252,8 @@
       "name": "assign_glass",
       "type": "material",
       "pos": [
-        -2.824,
-        1.883
+        -4.66,
+        2.334
       ],
       "flags": {
         "display": false
@@ -166,8 +266,8 @@
       "name": "assign_water",
       "type": "material",
       "pos": [
-        -0.565,
-        1.431
+        -2.4,
+        1.883
       ],
       "flags": {
         "display": false
@@ -180,14 +280,28 @@
       "name": "assign_ice",
       "type": "material",
       "pos": [
-        3.389,
-        0.979
+        1.553,
+        1.431
       ],
       "flags": {
         "display": false
       },
       "params": {
         "shop_materialpath1": "/mat/ice_mat"
+      }
+    },
+    {
+      "name": "assign_core",
+      "type": "material",
+      "pos": [
+        5.507,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/ice_core_mat"
       }
     },
     {
@@ -207,11 +321,23 @@
     {
       "from": "glass_profile",
       "from_output": 0,
+      "to": "glass_turn",
+      "to_input": 0
+    },
+    {
+      "from": "glass_turn",
+      "from_output": 0,
       "to": "glass",
       "to_input": 0
     },
     {
       "from": "water_profile",
+      "from_output": 0,
+      "to": "water_turn",
+      "to_input": 0
+    },
+    {
+      "from": "water_turn",
       "from_output": 0,
       "to": "water",
       "to_input": 0
@@ -231,6 +357,24 @@
     {
       "from": "melted_edges",
       "from_output": 0,
+      "to": "ice_mesh",
+      "to_input": 0
+    },
+    {
+      "from": "ice_mesh",
+      "from_output": 0,
+      "to": "ice_lumps",
+      "to_input": 0
+    },
+    {
+      "from": "cloudy_core",
+      "from_output": 0,
+      "to": "core_lumps",
+      "to_input": 0
+    },
+    {
+      "from": "ice_lumps",
+      "from_output": 0,
       "to": "ice",
       "to_input": 0
     },
@@ -238,6 +382,18 @@
       "from": "ice_spots",
       "from_output": 0,
       "to": "ice",
+      "to_input": 1
+    },
+    {
+      "from": "core_lumps",
+      "from_output": 0,
+      "to": "ice_cores",
+      "to_input": 0
+    },
+    {
+      "from": "ice_spots",
+      "from_output": 0,
+      "to": "ice_cores",
       "to_input": 1
     },
     {
@@ -259,6 +415,12 @@
       "to_input": 0
     },
     {
+      "from": "ice_cores",
+      "from_output": 0,
+      "to": "assign_core",
+      "to_input": 0
+    },
+    {
       "from": "assign_glass",
       "from_output": 0,
       "to": "drink",
@@ -275,6 +437,12 @@
       "from_output": 0,
       "to": "drink",
       "to_input": 2
+    },
+    {
+      "from": "assign_core",
+      "from_output": 0,
+      "to": "drink",
+      "to_input": 3
     }
   ]
 }

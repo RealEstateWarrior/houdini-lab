@@ -3615,6 +3615,20 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
 /* メニューを開いたとき、背後のページ全体を blur(18px) でぼかすのをやめ、薄くするだけにする */
 .layout.dimmed { filter: none; opacity: 0.25; }
 
+/* ---------- 改訂の記録（2026-09-24） ---------- */
+.guide-revised { margin: 10px 0 0; font-size: 0.85rem; }
+.guide-revised a { color: var(--flag); text-decoration: none; border-bottom: 1px dashed currentColor; }
+.revisions { margin: 36px 0 0; }
+.revision { padding: 18px 20px; border-radius: 16px; background: var(--ground-2); margin-top: 10px; }
+.revision h4 { margin: 0 0 8px; }
+.revision ul { margin: 8px 0 0; padding-left: 1.2em; }
+.revision li { margin: 4px 0; line-height: 1.7; }
+.revision-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.revision-compare img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.revision-compare figcaption { margin-top: 6px; font-size: 0.8rem; color: var(--ink-mid); }
+.revision-ref { margin: 12px 0 0; font-size: 0.8rem; color: var(--ink-mid); }
+@media (max-width: 560px) { .revision-compare { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body>
@@ -3836,7 +3850,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-e761cd328e.js"></script>
+<script src="data/glossary-data-5da451fc0f.js"></script>
 <script src="data/node-data-123d142505.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4194,7 +4208,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-83518095f7.js"></script>
+<script src="data/search-data-464fba4f49.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

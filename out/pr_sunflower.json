@@ -19,7 +19,7 @@
   ],
   [
    "仕上がりを撮る時間",
-   "142.6秒（Karma 1280×720）"
+   "92.9秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -35,16 +35,16 @@
    "title": "種を黄金角で並べる",
    "node": "attribwrangle",
    "ui_node": "golden_spiral",
-   "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、<strong>count = 1400</strong> 粒の種の点を作る。i 番目の粒は、角度 <strong>i × 137.508度</strong>（黄金角）、中心からの距離 <strong>spacing × √i</strong>。こうすると粒どうしがすき間なく詰まり、右回りと左回りの渦が浮かび上がる。本物のひまわりと同じ並び方。中心を少し盛り上げ、粒の大きさ pscale と色 Cd（中心は黄緑、外はこげ茶）も付ける。",
+   "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、<strong>count = 1400</strong> 粒の種の点を作る。i 番目の粒は、角度 <strong>i × 137.508度</strong>（黄金角）、中心からの距離 <strong>spacing × √i</strong>。こうすると粒どうしがすき間なく詰まり、右回りと左回りの渦が浮かび上がる。本物のひまわりと同じ並び方。中心を少し盛り上げ、粒の大きさ pscale と色 Cd を付ける。色は本物と同じく3つの輪にする。真ん中は黄緑のつぼみ、その外は咲いた黄金色の小花、いちばん外はこげ茶。粒の向き orient は、盛り上がった面に垂直にする。",
    "img": "pr_sunflower_1.png",
    "cap": "1400 粒の渦巻き。",
    "ui_parm": "count"
   },
   {
-   "title": "種の粒を並べる",
+   "title": "小さな花を並べる",
    "node": "copytopoints",
    "ui_node": "seed_disk",
-   "body": "少しつぶれた小さな <code>sphere</code> を <code>copytopoints</code> で種の点に並べる。色を移すため、Target Attributes に「<strong>Apply to: Points</strong>」「Attributes: Cd」を足す（H21 は書かないと色が移らない）。",
+   "body": "ひまわりの中心は種ではなく、小さな筒の形の花（管状花）がびっしり詰まったもの。前の版は丸い粒を並べていたが、写真と比べると形が違った。先の細い六角の <code>tube</code>（下の半径 1・上 0.35・高さ 1.8）を <code>copytopoints</code> で点に並べる（大きさは pscale で決まる）。色を移すため、Target Attributes に「<strong>Apply to: Points</strong>」「Attributes: Cd」を足す（H21 は書かないと色が移らない）。",
    "img": "pr_sunflower_2.png",
    "cap": "渦巻きに詰まった種。"
   },
@@ -52,9 +52,9 @@
    "title": "花びらを1枚作る",
    "node": "attribwrangle",
    "ui_node": "petal_shape",
-   "body": "<code>grid</code>（6 × 16 に割る）を細長い板にし、<code>attribwrangle</code> で形を作る。根元から先への位置 u を使い、幅を <strong>sin</strong> の形（根元と先が細く、真ん中が太い）にして舌の形に、高さを <strong>curl × u²</strong> で先ほど反らせる。長さ 13 cm・幅 3.5 cm。色は根元がだいだい、先が黄色。",
+   "body": "<code>grid</code>（12 × 24 に割る）を細長い板にし、<code>attribwrangle</code> で形を作る。根元から先への位置 u を使い、幅を <strong>sin</strong> と <strong>(1 − u)</strong> の掛け算にして、先がとがった形にする（本物の花びらは先がとがる）。高さを <strong>curl × u²</strong> で先ほど少し反らせ、<code>sin</code> で小さく波打たせる。長さ 12 cm・幅 3 cm。色は根元が濃い黄色、先が明るい黄色で、横方向の <code>cos</code> で細い縦の筋を付ける。",
    "img": "pr_sunflower_3.png",
-   "cap": "先が反った舌の形の花びら。"
+   "cap": "先のとがった、筋のある花びら。"
   },
   {
    "title": "花びらを2重の輪に並べる",
@@ -68,7 +68,7 @@
    "title": "茎と裏を付けて、こちらへ向ける",
    "node": "xform",
    "ui_node": "face_camera",
-   "body": "花の裏に平たい <code>sphere</code>（こげ茶）、下に細い <code>tube</code> の茎（緑）を付け、材質を当てる。種と花びらは Base Color を白にして点の色 Cd をそのまま使う。種は <strong>Roughness 0.95</strong> でつやを消す（つやがあると、小さな粒1つ1つが空を映して白く光る）。花びらは Sheen 0.3。最後に <code>xform</code> で 62度起こして、花をカメラのほうへ向ける。",
+   "body": "花びらの後ろに、緑の萼（がく）を同じ作り方で 26 枚、少し下へ向けて並べる。花の裏に平たい <code>sphere</code>、下に細い <code>tube</code> の茎を付け、どちらも緑にする（本物の裏は緑）。種と花びらは Base Color を白にして点の色 Cd をそのまま使う。種は <strong>Roughness 0.95</strong> でつやを消す（つやがあると、小さな粒1つ1つが空を映して白く光る）。花びらは Sheen 0.3。最後に <code>xform</code> で 62度起こして、花をカメラのほうへ向ける。",
    "img": "",
    "cap": "材質を当てた状態。"
   }

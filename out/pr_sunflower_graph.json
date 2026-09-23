@@ -7,8 +7,8 @@
       "name": "golden_spiral",
       "type": "attribwrangle",
       "pos": [
-        -5.366,
-        5.572
+        -8.133,
+        6.024
       ],
       "flags": {
         "display": false
@@ -19,28 +19,30 @@
       }
     },
     {
-      "name": "seed",
-      "type": "sphere",
+      "name": "floret",
+      "type": "tube",
       "pos": [
-        -7.625,
-        6.024
+        -10.392,
+        6.476
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "type": 2,
-        "rady": 0.8,
-        "rows": 6,
-        "cols": 8
+        "type": 1,
+        "cap": 1,
+        "ty": 0.9,
+        "rad2": 0.35,
+        "height": 1.8,
+        "cols": 6
       }
     },
     {
       "name": "seed_disk",
       "type": "copytopoints::2.0",
       "pos": [
-        -6.495,
-        4.593
+        -9.263,
+        5.045
       ],
       "flags": {
         "display": false
@@ -54,8 +56,8 @@
       "name": "petal_blank",
       "type": "grid",
       "pos": [
-        -2.542,
-        6.702
+        -5.309,
+        7.154
       ],
       "flags": {
         "display": false
@@ -64,30 +66,30 @@
         "sizex": 1.0,
         "sizey": 1.0,
         "tx": 0.5,
-        "rows": 6,
-        "cols": 16
+        "rows": 12,
+        "cols": 24
       }
     },
     {
       "name": "petal_shape",
       "type": "attribwrangle",
       "pos": [
-        -2.542,
-        5.572
+        -5.309,
+        6.024
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "snippet": "// 板を舌の形にする。u = 根元 0 → 先 1\nfloat u = clamp(@P.x, 0, 1);\nfloat w = chf('width') * pow(sin(PI * fit(u, 0, 1, 0.12, 1.0)..."
+        "snippet": "// 板を花びらの形にする。u = 根元 0 → 先 1。本物の花びらは先がとがり、縦に筋があり、少し波打つ\nfloat u = clamp(@P.x, 0, 1);\nfloat w = chf('width') * pow(sin(..."
       }
     },
     {
       "name": "petal_ring",
       "type": "attribwrangle",
       "pos": [
-        -0.282,
-        5.12
+        -3.05,
+        5.572
       ],
       "flags": {
         "display": false
@@ -101,7 +103,48 @@
       "name": "petals",
       "type": "copytopoints::2.0",
       "pos": [
-        -1.412,
+        -4.18,
+        4.593
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "bract_shape",
+      "type": "attribwrangle",
+      "pos": [
+        -0.226,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 萼（がく）：花びらの後ろに見える、緑の短い葉。先が細くとがる\nfloat u = clamp(@P.x, 0, 1);\n@P.z *= 0.022 * 2 * pow(1 - u, 0.8) * pow(sin(PI * fit..."
+      }
+    },
+    {
+      "name": "bract_ring",
+      "type": "attribwrangle",
+      "pos": [
+        2.033,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 花びらより少し内側・下に、萼の輪を置く。少し下へ向ける\nint n = 26;\nfor (int i = 0; i < n; i++) {\n    float a = (i + 0.25) * 2 * PI / n;\n    i..."
+      }
+    },
+    {
+      "name": "bracts",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.904,
         4.142
       ],
       "flags": {
@@ -113,7 +156,7 @@
       "name": "flower_back",
       "type": "sphere",
       "pos": [
-        2.542,
+        4.857,
         3.69
       ],
       "flags": {
@@ -122,9 +165,9 @@
       "params": {
         "type": 2,
         "radx": 0.13,
-        "rady": 0.05,
+        "rady": 0.04,
         "radz": 0.13,
-        "ty": -0.04,
+        "ty": -0.052,
         "rows": 12,
         "cols": 36
       }
@@ -133,7 +176,7 @@
       "name": "stem",
       "type": "tube",
       "pos": [
-        5.366,
+        7.681,
         3.238
       ],
       "flags": {
@@ -152,8 +195,8 @@
       "name": "assign_seed",
       "type": "material",
       "pos": [
-        -6.495,
-        3.464
+        -9.263,
+        3.916
       ],
       "flags": {
         "display": false
@@ -166,8 +209,8 @@
       "name": "assign_petal",
       "type": "material",
       "pos": [
-        -1.412,
-        3.012
+        -4.18,
+        3.464
       ],
       "flags": {
         "display": false
@@ -177,24 +220,38 @@
       }
     },
     {
+      "name": "assign_bract",
+      "type": "material",
+      "pos": [
+        0.904,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/bract_mat"
+      }
+    },
+    {
       "name": "assign_back",
       "type": "material",
       "pos": [
-        2.542,
+        4.857,
         2.56
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "shop_materialpath1": "/mat/back_mat"
+        "shop_materialpath1": "/mat/stem_mat"
       }
     },
     {
       "name": "assign_green",
       "type": "material",
       "pos": [
-        5.366,
+        7.681,
         2.108
       ],
       "flags": {
@@ -233,7 +290,7 @@
   ],
   "edges": [
     {
-      "from": "seed",
+      "from": "floret",
       "from_output": 0,
       "to": "seed_disk",
       "to_input": 0
@@ -263,6 +320,24 @@
       "to_input": 1
     },
     {
+      "from": "petal_blank",
+      "from_output": 0,
+      "to": "bract_shape",
+      "to_input": 0
+    },
+    {
+      "from": "bract_shape",
+      "from_output": 0,
+      "to": "bracts",
+      "to_input": 0
+    },
+    {
+      "from": "bract_ring",
+      "from_output": 0,
+      "to": "bracts",
+      "to_input": 1
+    },
+    {
       "from": "seed_disk",
       "from_output": 0,
       "to": "assign_seed",
@@ -272,6 +347,12 @@
       "from": "petals",
       "from_output": 0,
       "to": "assign_petal",
+      "to_input": 0
+    },
+    {
+      "from": "bracts",
+      "from_output": 0,
+      "to": "assign_bract",
       "to_input": 0
     },
     {
@@ -299,16 +380,22 @@
       "to_input": 1
     },
     {
-      "from": "assign_back",
+      "from": "assign_bract",
       "from_output": 0,
       "to": "sunflower",
       "to_input": 2
     },
     {
-      "from": "assign_green",
+      "from": "assign_back",
       "from_output": 0,
       "to": "sunflower",
       "to_input": 3
+    },
+    {
+      "from": "assign_green",
+      "from_output": 0,
+      "to": "sunflower",
+      "to_input": 4
     },
     {
       "from": "sunflower",

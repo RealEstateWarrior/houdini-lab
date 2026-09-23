@@ -15,7 +15,7 @@
   ],
   [
    "仕上がりを撮る時間",
-   "83.2秒（Karma 1280×720）"
+   "213.3秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -37,35 +37,33 @@
   },
   {
    "title": "回してグラスにする",
-   "node": "revolve",
+   "node": "reverse",
    "ui_node": "glass",
-   "body": "<code>revolve</code> で断面を y 軸のまわりに1周回す。<strong>Divisions 96</strong>（96 等分）で、縁の丸みがなめらかになる。閉じた断面を回すので、中まで詰まった（厚みのある）ガラスになる。",
+   "body": "<code>revolve</code> で断面を y 軸のまわりに1周回す。<strong>Divisions 96</strong>（96 等分）で、縁の丸みがなめらかになる。閉じた断面を回すので、中まで詰まった（厚みのある）ガラスになる。この断面のたどり方だと面が内向きになるので、<code>reverse</code> で外向きに戻す。向きが逆のままだと、Karma は光がガラスに入る所と出る所を取り違え、分厚いかたまりのように写った。",
    "img": "pr_glasscup_2.png",
-   "cap": "厚い底と薄い縁のグラス。",
-   "ui_parm": "divs"
+   "cap": "厚い底と薄い縁のグラス。"
   },
   {
    "title": "水を入れる",
-   "node": "revolve",
+   "node": "reverse",
    "ui_node": "water",
-   "body": "内側の壁に沿った断面を、もう1つの Detail の <code>attribwrangle</code> で描き、同じく <code>revolve</code> で回す。水面は高さ 7 cm。壁とぴったり同じ面にすると、ガラスと水の境目がちらつくので、<strong>0.2 mm だけ内側</strong>にする。<code>measure</code>（Volume）で測ると、水は 185 ml。",
+   "body": "内側の壁に沿った断面を、もう1つの Detail の <code>attribwrangle</code> で描き、同じく <code>revolve</code> で回して <code>reverse</code> で面を外向きにする。水面は高さ 7 cm。壁とぴったり同じ面にすると、ガラスと水の境目がちらつくので、<strong>0.2 mm だけ内側</strong>にする。<code>measure</code>（Volume）で測ると、水は 185 ml。",
    "img": "pr_glasscup_3.png",
-   "cap": "グラスの中の水（185 ml）。",
-   "ui_parm": "divs"
+   "cap": "グラスの中の水（185 ml）。"
   },
   {
    "title": "氷を浮かべる",
    "node": "copytopoints",
    "ui_node": "ice",
-   "body": "<code>box</code>（約 2 cm 角）を <code>polybevel</code> で 3 mm 丸め、溶けかけた角にする。Detail の <code>attribwrangle</code> で3つの点（水面のあたり）と、ばらばらの向き orient を作り、<code>copytopoints</code> で並べる。氷は水より少し軽いので、頭を少し出して浮く位置に置く。",
+   "body": "本物の氷は、角が丸く、形がいびつで、真ん中が白く濁っている。<code>box</code>（約 2 cm 角）を <code>polybevel</code> で 4 mm 丸め、<code>remesh</code> で細かい網にしてから <code>mountain</code>（Height 1.8 mm）で面をわずかに波打たせる。中に、少しゆがんだ小さな <code>sphere</code> を入れて、濁った芯にする。Detail の <code>attribwrangle</code> で5つの点（水面に寄り集まる位置）と、ばらばらの向き orient・大きさ pscale を作り、<code>copytopoints</code> で氷と芯を並べる。氷は水より少し軽いので、頭を少し出して浮く。",
    "img": "pr_glasscup_4.png",
-   "cap": "3つの氷。"
+   "cap": "5つの氷。"
   },
   {
    "title": "透明な材質を3つ当てる",
    "node": "merge",
    "ui_node": "drink",
-   "body": "どれも <code>principledshader</code> で <strong>Transparency 1・Roughness ほぼ 0</strong>。違いは IOR（屈折率）だけで、<strong>ガラス 1.5・水 1.33・氷 1.31</strong>。水には Transmission Color をほんの少し青緑にする。透明な物は、後ろの明るい所と暗い所の境目が曲がって見えることで形が分かる。撮るときは、背景に明暗の差を作る。",
+   "body": "どれも <code>principledshader</code> で <strong>Transparency 1・Roughness ほぼ 0</strong>。違いは IOR（屈折率）だけで、<strong>ガラス 1.5・水 1.33・氷 1.31</strong>。水には Transmission Color をほんの少し青緑にする。氷の芯は白っぽく、Roughness 0.7・Transparency 0.6 で、光が散ってぼんやり白く見えるようにする。透明な物は、後ろの明るい所と暗い所の境目が曲がって見えることで形が分かる。撮るときは、背景に明暗の差を作る。",
    "img": "",
    "cap": "材質を当てた状態（ビューポートでは透けない）。"
   }
@@ -74,6 +72,12 @@
   {
    "title": "Divisions が少ないと、水の量まで減る",
    "body": "水の revolve の Divisions を 8 にすると 167 ml、24 で 183 ml、96 で 185 ml。少ない分割では、円が内側の多角形になるので、見た目が角ばるだけでなく体積も小さく出る（実験118）。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "面の向きが逆だと、ガラスが分厚いかたまりに写る",
+   "body": "水の reverse を外して measure で体積を測ると -185 ml（負）、入れると 185 ml。負の体積は、面が内向きになっている印。最初の版はグラスも水も内向きのまま撮っていて、光の入り口と出口が逆になり、グラスが分厚いかたまりのように写った（下の「改訂の記録」）。",
    "img": "",
    "cap": ""
   },

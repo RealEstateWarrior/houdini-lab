@@ -3615,6 +3615,20 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
 /* メニューを開いたとき、背後のページ全体を blur(18px) でぼかすのをやめ、薄くするだけにする */
 .layout.dimmed { filter: none; opacity: 0.25; }
 
+/* ---------- 改訂の記録（2026-09-24） ---------- */
+.guide-revised { margin: 10px 0 0; font-size: 0.85rem; }
+.guide-revised a { color: var(--flag); text-decoration: none; border-bottom: 1px dashed currentColor; }
+.revisions { margin: 36px 0 0; }
+.revision { padding: 18px 20px; border-radius: 16px; background: var(--ground-2); margin-top: 10px; }
+.revision h4 { margin: 0 0 8px; }
+.revision ul { margin: 8px 0 0; padding-left: 1.2em; }
+.revision li { margin: 4px 0; line-height: 1.7; }
+.revision-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.revision-compare img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.revision-compare figcaption { margin-top: 6px; font-size: 0.8rem; color: var(--ink-mid); }
+.revision-ref { margin: 12px 0 0; font-size: 0.8rem; color: var(--ink-mid); }
+@media (max-width: 560px) { .revision-compare { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body>
@@ -3733,11 +3747,12 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <div class="guide-head">
           <h1>雪だるまを作る</h1>
           <p class="guide-date"><time datetime="2026-09-24">2026年9月24日 公開</time><span>4ステップ</span><span class="level level--1" title="難易度: 入門（シミュレーションは応用、VEX か6段以上は基本、ほかは入門）"><span class="level-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>難易度 入門</span></p>
+          <p class="guide-revised"><a href="#revisions">2026年9月24日 に作り直しました。前の版との違いは「改訂の記録」へ</a></p>
           <p class="guide-lede">大・中・小の3つの雪玉を少しめり込ませて重ね、<button class="term" data-term="mountain">mountain</button> で手で固めたようなでこぼこを付ける。腕は曲がった線に太さを付けた枝、目とボタンは炭、鼻はにんじん。雪の材質は Subsurface（光が中で散る）を入れると雪らしくなる。</p>
           <dl class="guide-facts">
-            <div><dt>足す<button class="term" data-term="ノード">ノード</button></dt><dd>19個（材質4つ）</dd></div>
+            <div><dt>足す<button class="term" data-term="ノード">ノード</button></dt><dd>25個（材質4つ）</dd></div>
             <div><dt>高さ</dt><dd>1.32 m</dd></div>
-            <div><dt>仕上がりを撮る時間</dt><dd>384.1秒（<button class="term" data-term="Karma">Karma</button> 1280×720）</dd></div>
+            <div><dt>仕上がりを撮る時間</dt><dd>197.4秒（<button class="term" data-term="Karma">Karma</button> 1280×720）</dd></div>
           </dl>
           <div class="guide-actions">
             <a class="guide-hip" href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/pr_snowman.hipnc" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>hip を開く<small>pr_snowman.hipnc</small></span></a>
@@ -3748,7 +3763,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
               <li><a href="#step-1">雪玉を3つ重ねる</a></li>
               <li><a href="#step-2">枝の腕を付ける</a></li>
               <li><a href="#step-3">炭の目とボタン、にんじんの鼻</a></li>
-              <li><a href="#step-4">雪の材質（Subsurface）</a></li>
+              <li><a href="#step-4">雪の地面と、雪の材質</a></li>
             </ol>
           </nav>
         </div>
@@ -3760,11 +3775,11 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>雪玉を3つ重ねる<code class="node-ref" data-node="mountain" tabindex="0" role="button">mountain</code></h4>
-              <p><code class="node-ref" data-node="sphere" tabindex="0" role="button">sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> でまとめ、<code class="node-ref" data-node="mountain" tabindex="0" role="button">mountain</code> で <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;mountain&quot;, &quot;name&quot;: &quot;hand_packed&quot;, &quot;rows&quot;: [[&quot;Element Size&quot;, &quot;elementsize&quot;, &quot;&quot;, &quot;0.12&quot;, false], [&quot;Height&quot;, &quot;height&quot;, &quot;&quot;, &quot;0.018&quot;, false]]}" tabindex="0" role="button">Height 0.018・Element Size 0.12</strong> の浅いでこぼこを付ける。手で固めた雪玉の、ゆるいでこぼこになる。</p>
+              <p><code class="node-ref" data-node="sphere" tabindex="0" role="button">sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。本物の雪だるまは、玉と玉の境目に雪が詰まってつながっている。<code class="node-ref" data-node="vdbfrompolygons" tabindex="0" role="button">vdbfrompolygons</code>（Voxel Size 0.008）で1つの<button class="term" data-term="ボリューム">ボリューム</button>にし、<code class="node-ref" data-node="vdbreshapesdf" tabindex="0" role="button">vdbreshapesdf</code> の <strong>Close</strong>（Offset 10 升＝約 8 cm、Half Width 12）で境目のくぼみを埋めて、<code class="node-ref" data-node="convertvdb" tabindex="0" role="button">convertvdb</code> で面に戻す。<code class="node-ref" data-node="mountain" tabindex="0" role="button">mountain</code> を2つ重ね、1つ目（Height 0.022・Element Size 0.12）で手で固めたゆるいでこぼこ、2つ目（Height 0.004・Element Size 0.015）で雪の粒のざらつきを付ける。</p>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_snowman_1.png" loading="lazy" decoding="async" alt="雪玉を3つ重ねるの結果"></div>
-              <figcaption>でこぼこの付いた3つの雪玉。</figcaption>
+              <figcaption>境目がつながった、ざらついた雪玉。</figcaption>
             </figure>
           </li>
           <li class="step" id="step-2">
@@ -3789,20 +3804,43 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           </li>
           <li class="step" id="step-4">
             <div class="step-body">
-              <h4>雪の材質（Subsurface）<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
-              <p>雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。枝・炭・にんじんは普通の材質。</p>
+              <h4>雪の地面と、雪の材質<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
+              <p>前の版は、雪だるまがスタジオの幕の上に立っていた。本物は雪の上に立っているので、24 m 四方の <code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code> を <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で波打たせて、積もった雪の地面を作る（ゆるい吹きだまり・細かいざらつき・根元の盛り上がり）。後ろには大きな板を立て、明るい灰色に光らせて冬の曇り空にする。雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。地面にも同じ材質を当てる。枝・炭・にんじんは普通の材質。</p>
             </div>
           </li>
         </ol>
         <p class="label">つまずくところ</p>
         <div class="trap">
-          <h4>でこぼこは浅く</h4>
-          <p>mountain の Height を 0.018 から 0.08 にすると、いちばん上の高さが 1.321 m から 1.336 m に変わり、0.08 は、いちばん小さな玉（半径 0.17 m）の半分近い深さ。でこぼこの深さは、玉の大きさと比べて決める。</p>
+          <h4>玉を重ねただけでは、境目がくびれる</h4>
+          <p>球を重ねたままだと、玉と玉の境目が深い V 字のくびれになり、3つの玉を置いただけに見える。vdbreshapesdf の Close で埋めると境目が丸くつながる（面の数は Close なしで 54,798、ありで 52,774）。</p>
         </div>
+        <section class="revisions" id="revisions">
+          <p class="label">改訂の記録</p>
+          <div class="revision">
+            <h4>2026年9月24日 に作り直した</h4>
+            <p>公開したあと、本物の雪だるまの写真と並べて見比べた。前の版は、なめらかな玉を3つ置いただけで、スタジオの幕の上に浮いた作り物に見えた。</p>
+            <ul>
+              <li><strong>玉と玉の境目をつなげた。</strong>本物の雪だるまは、境目に雪が詰まってくびれがゆるい。VDB にして Close で境目を埋めた。</li>
+              <li><strong>雪のざらつきを足した。</strong>細かい mountain をもう1つ重ね、雪の粒の凹凸を付けた。</li>
+              <li><strong>雪の積もった地面と、冬の曇り空を置いた。</strong>本物は雪の上に立っている。24 m 四方の地面を吹きだまりの形に波打たせ、後ろに明るい灰色の空の板を立てた。</li>
+            </ul>
+            <div class="revision-compare">
+              <figure>
+                <img src="pr_snowman_hero_v1.png" loading="lazy" decoding="async" alt="作り直す前の仕上がり">
+                <figcaption>作り直す前</figcaption>
+              </figure>
+              <figure>
+                <img src="pr_snowman_hero.png" loading="lazy" decoding="async" alt="作り直したあとの仕上がり">
+                <figcaption>作り直したあと</figcaption>
+              </figure>
+            </div>
+            <p class="revision-ref">見比べた本物: Wikimedia Commons の「snowman in snow」の写真（雪原の中、境目がつながった雪玉）</p>
+          </div>
+        </section>
         <div class="guide-end">
           <p class="label">完成図</p>
           <img src="pr_snowman_hero.png" loading="lazy" decoding="async" alt="雪だるまを作るの完成図">
-          <p>Karma で撮った仕上がり。やわらかく光る雪の玉と、枝の腕。</p>
+          <p>Karma で撮った仕上がり。雪の積もった地面に立つ雪だるま。</p>
           <p class="guide-more">
             <a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/pr_snowman.hipnc" target="_blank" rel="noopener noreferrer">pr_snowman.hipnc</a>
           </p>
@@ -3817,7 +3855,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-e761cd328e.js"></script>
+<script src="data/glossary-data-5da451fc0f.js"></script>
 <script src="data/node-data-123d142505.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4175,7 +4213,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-83518095f7.js"></script>
+<script src="data/search-data-464fba4f49.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

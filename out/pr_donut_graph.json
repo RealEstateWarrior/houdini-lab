@@ -14,8 +14,8 @@
         "display": false
       },
       "params": {
-        "radx": 0.1,
-        "rady": 0.045,
+        "radx": 0.03,
+        "rady": 0.0175,
         "rows": 64,
         "cols": 128
       }
@@ -43,7 +43,7 @@
         "display": false
       },
       "params": {
-        "snippet": "// 少しつぶして、ふっくらむらを付ける。\n@P.y *= 0.82;\n@P += @N * (noise(@P * 18) - 0.5) * 0.006;"
+        "snippet": "// 少しつぶして、ふっくらむらを付ける。\n@P.y *= 0.85;\n@P += @N * (noise(@P * 70) - 0.5) * 0.0018;\n// 揚げ色：上下は濃いきつね色、側面の真ん中は油に浸からず白っぽい帯にな..."
       }
     },
     {
@@ -63,7 +63,7 @@
       "type": "attribwrangle",
       "pos": [
         -0.377,
-        3.69
+        4.819
       ],
       "flags": {
         "display": false
@@ -78,13 +78,13 @@
       "type": "polyextrude::2.0",
       "pos": [
         -0.377,
-        2.56
+        3.69
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "dist": 0.004,
+        "dist": 0.0025,
         "outputback": 1,
         "thicknessramp1value": 1.0,
         "thicknessramp1interp": 2,
@@ -99,6 +99,20 @@
       }
     },
     {
+      "name": "drop_dough_color",
+      "type": "attribdelete",
+      "pos": [
+        -0.377,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ptdel": "Cd"
+      }
+    },
+    {
       "name": "sprinkle_spots",
       "type": "scatter::2.0",
       "pos": [
@@ -109,7 +123,7 @@
         "display": false
       },
       "params": {
-        "npts": 260,
+        "npts": 420,
         "seed": 4.0
       }
     },
@@ -129,7 +143,7 @@
     },
     {
       "name": "sprinkle",
-      "type": "sphere",
+      "type": "tube",
       "pos": [
         2.447,
         3.539
@@ -138,12 +152,13 @@
         "display": false
       },
       "params": {
-        "type": 2,
-        "radx": 0.0012,
-        "rady": 0.0012,
-        "radz": 0.0045,
-        "rows": 8,
-        "cols": 12
+        "type": 1,
+        "orient": 2,
+        "cap": 1,
+        "rad1": 0.00055,
+        "rad2": 0.00055,
+        "height": 0.0055,
+        "cols": 10
       }
     },
     {
@@ -248,6 +263,12 @@
       "to_input": 0
     },
     {
+      "from": "icing_thickness",
+      "from_output": 0,
+      "to": "drop_dough_color",
+      "to_input": 0
+    },
+    {
       "from": "icing_area",
       "from_output": 0,
       "to": "sprinkle_spots",
@@ -278,7 +299,7 @@
       "to_input": 0
     },
     {
-      "from": "icing_thickness",
+      "from": "drop_dough_color",
       "from_output": 0,
       "to": "assign_icing",
       "to_input": 0

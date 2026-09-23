@@ -11,11 +11,11 @@
   ],
   [
    "スプリンクル",
-   "260粒"
+   "420粒"
   ],
   [
    "仕上がりを撮る時間",
-   "138.7秒（Karma 1280×720）"
+   "156.5秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -31,33 +31,33 @@
    "title": "生地を作る",
    "node": "normal",
    "ui_node": "puffy_dir",
-   "body": "<code>torus</code>（半径 10 cm、太さ 4.5 cm、64 × 128 に割る）を作り、<code>attribwrangle</code> で高さを 0.82 倍につぶす。面の向き N にそってノイズでわずかに出し入れし、揚げた生地のふっくらしたむらにする。torus の出力には N が無いので、前後に <code>normal</code> を入れて向きを作る（形を変えたあとは作り直す）。",
+   "body": "本物のリングドーナツは、直径 9〜10 cm で穴は 2〜3 cm と小さい。<code>torus</code> を <strong>半径 3 cm・太さ 1.75 cm</strong>（直径 9.5 cm、穴 2.5 cm）にして 64 × 128 に割り、<code>attribwrangle</code> で高さを 0.85 倍につぶす。面の向き N にそってノイズでわずかに出し入れし、揚げた生地のふっくらしたむらにする。色は、上下を濃いきつね色、側面の真ん中を白っぽい帯にする（揚げるときに油に浸からない所）。torus の出力には N が無いので、前後に <code>normal</code> を入れて向きを作る（形を変えたあとは作り直す）。",
    "img": "pr_donut_1.png",
-   "cap": "ふっくらした生地。"
+   "cap": "ふっくらした生地と、側面の白い帯。"
   },
   {
    "title": "アイシングをかける",
-   "node": "polyextrude",
-   "ui_node": "icing_thickness",
-   "body": "生地のコピーを <code>attribwrangle</code>（Primitives）で削る。面の向きの上下成分 N.y が <strong>edge = −0.15</strong> より小さい面を消すと、上側と少し側面まで残る。edge をノイズで上下させる（wobble 0.9）と、縁が垂れたように波打つ。<code>polyextrude</code> で <strong>4 mm</strong> 押し出して厚みを付ける（Output Back で裏も閉じる）。",
+   "node": "attribdelete",
+   "ui_node": "drop_dough_color",
+   "body": "生地のコピーを <code>attribwrangle</code>（Primitives）で削る。面の向きの上下成分 N.y が <strong>edge = 0.15</strong> より小さい面を消すと、上の面だけが残る（本物のアイシングも、側面の真ん中までは届かない）。edge をノイズで上下させる（wobble 0.7）と、縁が垂れたように波打つ。<code>polyextrude</code> で <strong>2.5 mm</strong> 押し出して厚みを付ける（Output Back で裏も閉じる）。アイシングは生地から点の色 Cd（揚げ色）を受け継いでいるので、<code>attribdelete</code> で消しておく。残したままだと、材質のピンクに揚げ色が掛け合わされて、オレンジに写った。",
    "img": "pr_donut_2.png",
-   "cap": "上半分を覆う、縁の波打ったアイシング。",
+   "cap": "上の面を覆う、縁の波打ったアイシング。",
    "ui_parm": "edge"
   },
   {
    "title": "カラースプレーを散らす",
    "node": "copytopoints",
    "ui_node": "sprinkles",
-   "body": "アイシングの面に <code>scatter</code> で 260 個の点をまく（Relax で間をそろえる）。<code>attribwrangle</code> で、粒の長い向きを「面にそったばらばらの向き」、上を面の向き N に合わせた <strong>orient</strong> を作り、アイシングの厚みぶん持ち上げる。色は6色から選ぶ。細長い <code>sphere</code>（長さ 9 mm）を <code>copytopoints</code> で並べ、色は Target Attributes の「Apply to: Points」「Cd」で移す。",
+   "body": "アイシングの面に <code>scatter</code> で 420 個の点をまく（Relax で間をそろえる）。<code>attribwrangle</code> で、粒の長い向きを「面にそったばらばらの向き」、上を面の向き N に合わせた <strong>orient</strong> を作り、アイシングの厚みぶん持ち上げる。色は6色から選ぶ。細い円柱の <code>tube</code>（長さ 5.5 mm・太さ 1.1 mm、端を閉じる）を <code>copytopoints</code> で並べ、色は Target Attributes の「Apply to: Points」「Cd」で移す。",
    "img": "pr_donut_3.png",
-   "cap": "260 粒のカラースプレー。",
+   "cap": "420 粒のカラースプレー。",
    "ui_parm": "npts"
   },
   {
    "title": "材質を当てる",
    "node": "merge",
    "ui_node": "donut",
-   "body": "生地は焼き色の茶色で Roughness 0.6・Sheen 0.4。アイシングはピンクで <strong>Roughness 0.15・Coat 0.6</strong>（つや）。スプリンクルは Base Color を白にして点の色 Cd を使う。Subsurface（光が中へ入って散る）も試したが、このドーナツでは Karma が 20 分たっても撮り終わらなかったので入れていない。",
+   "body": "生地は Base Color を白にして点の色 Cd（揚げ色と白い帯）を使い、Roughness 0.65・Sheen 0.4。アイシングはピンクで <strong>Roughness 0.15・Coat 0.6</strong>（つや）。スプリンクルは Base Color を白にして点の色 Cd を使う。Subsurface（光が中へ入って散る）も試したが、このドーナツでは Karma が 20 分たっても撮り終わらなかったので入れていない。",
    "img": "",
    "cap": "材質を当てた状態。"
   }
@@ -65,7 +65,7 @@
  "traps": [
   {
    "title": "アイシングの広さは edge で決まる",
-   "body": "生地の 8,192 面のうち、edge −0.15 で 4,446 面（54%）がアイシングになった。wobble を 0 にすると 4,405 面で、縁がまっすぐな線になる。本物らしい垂れは wobble で出す。",
+   "body": "生地の 8,192 面のうち、edge 0.15 で 3,788 面（46%）がアイシングになった。wobble を 0 にすると 3,811 面で、縁がまっすぐな線になる。本物らしい垂れは wobble で出す。",
    "img": "",
    "cap": ""
   }
