@@ -9603,6 +9603,50 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 198 ===================== -->
+    <article class="entry entry--current" id="exp198">
+      <div class="badge">198</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>vdbreshapesdf の Open で丸めた辺の断面は円弧 — 半径は Offset × 升より 2.5〜3.2 升大きい</h2>
+        <p class="path">examples/198_vdb_open_arc.py &nbsp;·&nbsp; Openの断面は円弧。半径はOffset×升より約3升大きい</p>
+
+        <div class="prose">
+          <p>1 × 1 × 1 の箱を vdbfrompolygons（Voxel Size 0.01・帯は既定）で SDF にし、vdbreshapesdf の Open を Offset 5・10・20 升でかけて面に戻した。z = 0 の面の中で原点から 0〜90 度に 721 本の光線を撃って当たった点を取り、辺の近くの点に円を当てはめた（最小二乗）。</p>
+          <p>**断面は円弧だった。**当てはめの残差は RMS で 6.4e-05・3.4e-05・4.4e-05（升の 0.6% 以下）。円の中心は (0.5 − R, 0.5 − R) から 0.0017 以内で、両側の平らな面に接している。</p>
+          <p>**半径は r（= Offset × 升）より大きかった。**R = 0.0751・0.1303・0.2324（r = 0.05・0.1・0.2）。差は 2.5・3.0・3.2 升で、r によらずほぼ一定。倍率にすると 1.50・1.30・1.16 倍で、<a href="#exp196">実験196</a> で「Offset が小さいほど倍率が大きい」と見えたのは、この一定の足し分のためとみられる。足し分が帯の既定値（3 升）に近いが、帯との関係は確かめていない。</p>
+          <p>**<a href="#exp196">実験196</a> の体積から出した丸みの半径（0.067・0.117・0.223）は、この R より小さい。**体積には三つの面が集まる角の形も入るためとみられる（確かめていない）。辺の半径は断面で測った。</p>
+          <p>**時間は SDF にするところから面に戻すまで 1 回 0.14〜0.29 秒**（光線の当たり判定は含まない）。</p>
+        </div>
+
+        <p class="label">Offset と、辺の断面に当てはめた円</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="198_arc.png" alt="測った R（青）は R = r（灰の点線）より 2.5〜3.2 升上をたどる。" loading="lazy" decoding="async"></div>
+            <figcaption>測った R（青）は R = r（灰の点線）より 2.5〜3.2 升上をたどる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Offset（升）</th><th>r</th><th>当てはめた点</th><th>R</th><th>R − r（升）</th><th>中心 x</th><th>接するなら 0.5 − R</th><th>残差 RMS</th><th>残差 最大</th><th>対角の点 x</th><th>半径 r の円弧なら</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">5</td><td class="num">0.05</td><td class="num">55</td><td class="num">0.07515</td><td class="num">2.51</td><td class="num">0.42582</td><td class="num">0.42485</td><td>6.4e-05</td><td>1.4e-04</td><td class="num">0.47906</td><td class="num">0.48536</td><td class="num">0.135</td></tr>
+              <tr><td class="num">10</td><td class="num">0.1</td><td class="num">103</td><td class="num">0.13025</td><td class="num">3.02</td><td class="num">0.37147</td><td class="num">0.36975</td><td>3.4e-05</td><td>7.6e-05</td><td class="num">0.46357</td><td class="num">0.47071</td><td class="num">0.173</td></tr>
+              <tr><td class="num">20</td><td class="num">0.2</td><td class="num">217</td><td class="num">0.23235</td><td class="num">3.23</td><td class="num">0.26924</td><td class="num">0.26765</td><td>4.4e-05</td><td>1.5e-04</td><td class="num">0.43356</td><td class="num">0.44142</td><td class="num">0.294</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Open は辺をきれいな円弧で丸める。</strong>面とのつなぎ目に段差はない。</li>
+          <li><strong>半径は Offset × 升 + 約 3 升。</strong>半径 R が欲しいなら Offset ≒ R ÷ 升 − 3（升 0.01・帯既定の箱で）。</li>
+          <li><strong>丸みの半径は体積ではなく断面で測る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

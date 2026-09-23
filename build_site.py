@@ -1324,6 +1324,12 @@ DONE = [
      "shots": ["197_band.png"],
      "title": "SDF の帯を 25 升に広げると、vdbreshapesdf の Close は箱をほとんど削らなくなる — Open の丸みはかえって大きくなる",
      "note": "帯を25升に広げるとCloseはほぼ削らない。Openの丸みは逆に大きく"},
+    {"no": "198", "anchor": "exp198",
+     "tags": ["VDB", "SDF", "モデリング"],
+     "log": "log_pm", "thumb": "198_arc.png",
+     "shots": ["198_arc.png"],
+     "title": "vdbreshapesdf の Open で丸めた辺の断面は円弧 — 半径は Offset × 升より 2.5〜3.2 升大きい",
+     "note": "Openの断面は円弧。半径はOffset×升より約3升大きい"},
 ]
 
 PLANNED = []

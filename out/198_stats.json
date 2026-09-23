@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "offset": 5,
+      "r": 0.05,
+      "points": 55,
+      "cx": 0.42582,
+      "cy": 0.42582,
+      "R": 0.07515,
+      "R_over_r": 1.503,
+      "center_if_tangent": 0.42485,
+      "rms": 6.4e-05,
+      "max_dev": 0.000143,
+      "rms_in_voxels": 0.006,
+      "diag_x": 0.47906,
+      "diag_if_arc_r": 0.48536,
+      "sec": 0.135
+    },
+    {
+      "offset": 10,
+      "r": 0.1,
+      "points": 103,
+      "cx": 0.37147,
+      "cy": 0.37147,
+      "R": 0.13025,
+      "R_over_r": 1.302,
+      "center_if_tangent": 0.36975,
+      "rms": 3.4e-05,
+      "max_dev": 7.6e-05,
+      "rms_in_voxels": 0.003,
+      "diag_x": 0.46357,
+      "diag_if_arc_r": 0.47071,
+      "sec": 0.173
+    },
+    {
+      "offset": 20,
+      "r": 0.2,
+      "points": 217,
+      "cx": 0.26924,
+      "cy": 0.26924,
+      "R": 0.23235,
+      "R_over_r": 1.162,
+      "center_if_tangent": 0.26765,
+      "rms": 4.4e-05,
+      "max_dev": 0.000153,
+      "rms_in_voxels": 0.004,
+      "diag_x": 0.43356,
+      "diag_if_arc_r": 0.44142,
+      "sec": 0.294
+    }
+  ],
+  "voxel": 0.01
+}
