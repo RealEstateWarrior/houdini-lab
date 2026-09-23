@@ -27,7 +27,7 @@
  [
   "実験ログ: 煙と炎（Pyro・ボリューム）",
   "D:\\Claude\\houdini\\out\\nb\\exp_pyro.pdf",
-  8
+  9
  ],
  [
   "実験ログ: 液体と MPM（FLIP・砂・雪）",
@@ -37,7 +37,7 @@
  [
   "実験ログ: 見た目（Karma・材質・テクスチャ）",
   "D:\\Claude\\houdini\\out\\nb\\exp_look.pdf",
-  12
+  13
  ],
  [
   "実験ログ: 粒（POP）",
@@ -57,7 +57,7 @@
  [
   "実践: Houdini で作る手順",
   "D:\\Claude\\houdini\\out\\nb\\practice.md",
-  70
+  71
  ],
  [
   "ノード解説",

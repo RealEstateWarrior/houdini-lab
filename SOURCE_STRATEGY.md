@@ -18,12 +18,12 @@
 | 実験ログ: VEX・道具・速さ | out/nb/exp_tools.pdf | 8c6592c8-fb89-4259-85e7-5853abc14105 |
 | 実験ログ: 剛体と破壊（RBD） | out/nb/exp_rbd.pdf | fd1be2a5-7c57-455d-9c59-d22b95f27e66 |
 | 実験ログ: 布とやわらかい物（Vellum） | out/nb/exp_vellum.pdf | d76d1347-50aa-43bd-a30f-6cbe7276e5db |
-| 実験ログ: 煙と炎（Pyro・ボリューム） | out/nb/exp_pyro.pdf | db4b664f-b240-4831-bed8-40664646fd36 |
+| 実験ログ: 煙と炎（Pyro・ボリューム） | out/nb/exp_pyro.pdf | dc0cdadb-819c-4dc3-bc87-18366076763e |
 | 実験ログ: 液体と MPM（FLIP・砂・雪） | out/nb/exp_fluid.pdf | 7a7a9c51-8e5e-4c83-9419-f1ff1c35e812 |
-| 実験ログ: 見た目（Karma・材質・テクスチャ） | out/nb/exp_look.pdf | 29943822-bf4d-4ae8-bf8b-3f2927e4c4ad |
+| 実験ログ: 見た目（Karma・材質・テクスチャ） | out/nb/exp_look.pdf | 9cf32649-f1e5-4e05-bb4e-6b65f0bc6668 |
 | 実験ログ: 粒（POP） | out/nb/exp_pop.pdf | 049721b3-7dc6-452f-a837-c378c7947c89 |
 | 実験ログ: 毛とリグ（グルーム・APEX） | out/nb/exp_groom.pdf | b68bdae5-af17-41e0-903e-325d3787b7c7 |
-| 実践: Houdini で作る手順（70本） | out/nb/practice.md | fee1e0c9-bb70-4f65-9f55-b6a074a654ed |
+| 実践: Houdini で作る手順（71本） | out/nb/practice.md | d55e7e55-1808-4009-a4a5-101f20e4757e |
 | ノード解説（384件） | out/nb/nodes.md | 24965f13-8df0-405e-8d60-127339679bc9 |
 | 用語集: Houdini 初心者向け（433語） | out/nb/glossary.pdf | d114f525-3be0-4356-a082-db452c220203 |
 

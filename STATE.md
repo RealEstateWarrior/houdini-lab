@@ -1,6 +1,6 @@
 # STATE — 新しいセッションはまずこれだけ読む
 
-最終更新: 2026-09-24 朝（実験201・実践69本＋ドーナツ・ノード383件・用語430語・効率化50項目）
+最終更新: 2026-09-24 朝（実験203・実践71本・ノード384件・用語433語・効率化52項目）
 
 ## いまの状態
 
@@ -105,7 +105,9 @@
 - **夜（画面が消えている・ロック中）は GUI のスクショが撮れない**（真っ黒。Qt の grabWindow は前の場面が写る）。代わりに hip から描いた
   ノードのつなぎ方の図 pr_<id>_graph.png を載せる（practice_kit の save が json を書き、`python graph_report.py out/pr_<id>_graph.json out/pr_<id>_graph.png`）。
   **47〜70 の GUI 画面（guide_ui_capture / guide_parm_capture / crop_ui_shots）は、画面の点いているときに撮り直す**
-- **Karma が極端に遅くなるもの**: グラスの水（透明3種の重なり。25分で終わらず、pr_glasscup.py は未公開）、SSS、ドーナツ（654秒）。速く撮るなら SSS と重なった透明物を避け、spp を下げて `denoise=True`
+- **Karma が遅くなるもの**（実験203）: 透明な物は、サンプルを1増やすごとの時間が不透明の6倍（480×270 で 5.0 秒 vs 0.83 秒）。重ねた数はあまり効かない（+27%）。
+  1枚ごとの準備が約13秒。**透明な物は spp 16＋`denoise=True`**（グラスは 83 秒で撮れて実践71 として公開）。SSS も重い（雪だるま 384 秒）
+- **小さな物（10〜30 cm）は hero の明かりが近くに置かれて強すぎ、真っ白に飛ぶ**（ドーナツ・グラス）。key 0.1〜0.35・rim 0.5 程度に下げる
 - **トークン**: 自分で Write/Read したファイルを python や sed で書き換えると、ファイル全体が差分として返ってくる。必ず Edit を使う
 - Notebook のソースは題材ごと14本（SOURCE_STRATEGY.md の表。作り直しは nb_sources.py）。publish.py は log_A.pdf を作らなくなった
 - 落とし穴メモ: MPM は Material Type を Sandy にしないと砂にならない／Bullet の Collision Margin 0.02 で薄い物が浮く／
