@@ -10,6 +10,7 @@
   ライト/ダーク（右上の自動・明・暗）、フォントは Schibsted Grotesk + Zen Kaku Gothic New、上のバーは4つの見出し＋区分のタブの列（.subnav。
   降りてくるパネルは display:none）、ホーム冒頭は動く灰色の帯（.band。検索窓・AI・新着の実験8件の重なったカード）、
   区画の題は英語＋日本語、バージョンと件数はホームの最後（.site-facts）。参考は Apple・Superlist・landsolution・チケプラTrade
+- **2026-09-23 不具合直し**: 本文の別編への実験リンクはビルド時に向け直す（retarget_exp_anchors）。make_entry.py がレポートの `**太字**` を <strong> にする（093〜199 の107本が記号のまま出ていた）。GitHub 版に description・OGP・アイコン・sitemap.xml・robots.txt。実験196 に訂正
 - 181〜199 の要点: pcfind＝nearpoints、pcfilter は重み付き平均（重みの式は不明）/ Bullet Substeps で沈み込みが決まる /
   mpmsource の粒数＝体積÷Separation³ / smooth の縮み 1/(1+S·L^q/C(2q,q))（間隔が不ぞろいだと粗い側が縮む）/ hairgen＝Density×面積 /
   USD：Point Instancer がいちばん小さい / 球のへこみ sin²(Δ/2) / polyextrude の Inset と角錐台 / popsource の Rate と Life×fps−1/Substeps /
