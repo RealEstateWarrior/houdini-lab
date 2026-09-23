@@ -1,0 +1,78 @@
+{
+ "id": "candle",
+ "title": "ろうそくの炎をともす",
+ "lede": "ろうそくの炎は、風が無ければほとんど形の変わらない、しずく形の光。流れの計算をしなくても、箱のボリュームに「しずく形の濃さ」を VEX で書き込み、炎用の材質で光らせれば作れる。@Time を使って、ほんの少し揺らす。",
+ "hero": "pr_candle_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。暗い部屋でともる、しずく形の炎。",
+ "facts": [
+  [
+   "足すノード",
+   "8個（材質3つ・明かり1つ）"
+  ],
+  [
+   "升の数",
+   "39×90×39"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "22.5秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_candle.hipnc",
+ "tags": [
+  "エフェクト",
+  "VEX",
+  "ボリューム",
+  "炎",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "ろうそくと芯を作る",
+   "node": "merge",
+   "ui_node": "candle_and_wick",
+   "body": "<code>tube</code> で半径 2.2 cm・高さ 12 cm のろうそくを作り、上に細い <code>tube</code>（高さ 1.2 cm）の芯を立てる。",
+   "img": "pr_candle_1.png",
+   "cap": "ろうそくと芯。"
+  },
+  {
+   "title": "しずく形の濃さを書き込む",
+   "node": "volumewrangle",
+   "ui_node": "teardrop",
+   "body": "<code>volume</code> で名前 <strong>flame</strong> の小さな箱（3 × 7 × 3 cm）を芯の上に置く（升は約 0.8 mm）。<code>volumewrangle</code> で、芯の先からの高さを 0〜1 の y にし、y ごとの太さ r を <strong>sin</strong>（根元から太り、上で細る）で決める。中心からの距離が r より内側の升を光らせ、芯のまわりの下のほうだけ少し暗くする（本物の炎の暗い芯）。上のほうほど、<strong>@Time</strong> で動くノイズで横に揺らす（flicker = 4 mm）。",
+   "img": "pr_candle_2.png",
+   "cap": "しずく形の炎（ビューポートでは煙のように見える）。",
+   "ui_parm": "width"
+  },
+  {
+   "title": "炎の材質と、ろうそくの明かり",
+   "node": "merge",
+   "ui_node": "candle_lit",
+   "body": "<code>/mat</code> に <code>kma_pyroshader</code>（Karma の炎用の材質）を作り、<strong>Enable Fire</strong> を入れる。<strong>Intensity Volume と Color Volume を flame</strong> にし、Fire Color Ramp を 黒 → 赤 → 橙 → 黄白 にする。炎がとても小さく薄いので、<strong>Intensity Scale は 150</strong> まで上げる。煙は出さないので Density Scale は 0。ボリュームの光だけでは周りがほとんど照らされないので、炎の位置に弱い橙色の <code>hlight</code>（Point、Intensity 0.01）を置く。強くするとろうそくの頭が白く飛ぶ。ろうは生成りの白、Sheen 0.2。",
+   "img": "",
+   "cap": "材質と明かりを当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "小さな炎は、Intensity Scale を大きく上げる",
+   "body": "kma_pyroshader の Intensity Scale を焚き火と同じくらい（2）にすると、Karma では薄い灰色のもやにしか写らなかった。20 でうっすら光り、150 でろうそくの炎らしい明るさになった。数 mm しか厚みのない炎には、焚き火よりずっと大きな値が要った。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "箱が小さすぎると、炎の先が切れる",
+   "body": "箱の高さは 7 cm、炎の高さ height は 4.5 cm。升の数は 39×90×39 で、光っている升は 4,359 個。炎を長くするときは、箱も同じだけ高くする。箱の外には何も書き込めない。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "形の計算だけなので、すぐ出る",
+   "body": "流れの計算（Pyro のシミュレーション）を使っていないので、どのフレームでも前のフレームを待たずに形が決まる。風で大きくあおられる炎や、煙を出す炎は、Pyro で計算する（実践「焚き火を燃やす」）。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "炎の先が、ゆっくり左右に揺れる（48 フレーム＝2 秒）。"
+}

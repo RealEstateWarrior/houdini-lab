@@ -1,0 +1,78 @@
+{
+ "id": "tree",
+ "title": "L-system で木を育てる",
+ "lede": "lsystem ノードは、文字の書き換えルールを何回も繰り返して枝を伸ばす。F は「前へ伸びる」、[ ] は「枝分かれ」、& や / は「向きを変える」。葉は、できた枝の表面に点をまいてコピーする。",
+ "hero": "pr_tree_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。L-system で育てた木。",
+ "facts": [
+  [
+   "足すノード",
+   "7個（材質2つ）"
+  ],
+  [
+   "面の数",
+   "162"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "119.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_tree.hipnc",
+ "tags": [
+  "モデリング",
+  "L-system",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "葉を1枚作る",
+   "node": "attribwrangle",
+   "ui_node": "mark_leaf",
+   "body": "<code>grid</code>（縦長に 4 × 8 に割る）を <code>attribwrangle</code> で葉の形にする。付け根から先への位置 v で幅を <strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 30 cm・幅 16 cm。木の高さが 5 m ほどになるので、本物より少し大きめにしないと遠目に見えない。",
+   "img": "pr_tree_1.png",
+   "cap": "葉1枚。"
+  },
+  {
+   "title": "ルールを書いて、枝を伸ばす",
+   "node": "lsystem",
+   "ui_node": "grow",
+   "body": "<code>lsystem</code> の Type を <strong>Tube</strong>（太さのある枝）にし、ルールを書く。Premise（はじまり）は <strong>FFFA</strong>＝3回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFFA</strong> は「少し倒して3回伸び、先でまた A」。Generations 8 で、この書き換えを8回繰り返す。Thickness 0.2 で幹を太くする。Random Scale 0.25 で角度と長さをばらつかせ、Gravity 0.3 で枝先を垂らす。",
+   "img": "pr_tree_2.png",
+   "cap": "8回の書き換えで育った枝。",
+   "ui_parm": "rule1"
+  },
+  {
+   "title": "枝に葉をまいて付ける",
+   "node": "merge",
+   "ui_node": "tree",
+   "body": "<code>scatter</code> で枝の表面に 5000 個の点をまき、<code>attribwrangle</code> で高さ 2 m より下（幹）の点を消す。残った点に、ばらばらの向き orient と大きさ pscale（0.6〜1.2）を付け、<code>copytopoints</code> で葉を並べる。葉は 4,697 枚。枝先ほど枝が多いので、点も葉も自然に上のほうへ集まる。",
+   "img": "pr_tree_3.png",
+   "cap": "4,697 枚の葉が付いた木。",
+   "ui_parm": "lowest"
+  },
+  {
+   "title": "幹と葉に材質を当てる",
+   "node": "material",
+   "ui_node": "assign_leaf",
+   "body": "幹は茶色で Roughness 0.85。葉は Base Color を白にして点の色 Cd（緑）を使う。葉を作ったときに、Primitives の <code>attribwrangle</code> で面に <strong>isleaf = 1</strong> の印を付けておいた。2つ目の <code>material</code> の Group に <strong>@isleaf==1</strong> と書くと、葉だけに当たる。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "J で付けた葉は、枝先の細さに合わせて縮む",
+   "body": "はじめは Rule 2 を B=&FFFAJ にして、J の所に葉（長さ 30 cm）をコピーさせた。撮ると葉は枝先の小さな白い点にしか見えなかった。J のコピーは枝先の細さに合わせて小さくなるので、この木では scatter で点をまいて copytopoints で付けるほうが扱いやすい。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "Generations は2つずつ効く",
+   "body": "面の数は Generations 6 で 54、7 で 54（同じ）、8 で 162（3.0 倍）。A は B に、B は A に書き換わるので、2回でやっと1段伸びる。1段伸びると、枝が3本に分かれるので面は約3倍になる。奇数に上げても何も変わらないことがある。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

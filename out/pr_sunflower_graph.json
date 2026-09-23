@@ -1,0 +1,320 @@
+{
+  "title": "ひまわりを咲かせる",
+  "network": "/obj/sunflower",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "golden_spiral",
+      "type": "attribwrangle",
+      "pos": [
+        -5.366,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 黄金角の渦巻き。i 番目の種は、角度 i × 137.5度、中心からの距離 c × √i\nint n = chi('count');\nfloat golden = radians(137.508);\nfor (int i = 0..."
+      }
+    },
+    {
+      "name": "seed",
+      "type": "sphere",
+      "pos": [
+        -7.625,
+        6.024
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rady": 0.8,
+        "rows": 6,
+        "cols": 8
+      }
+    },
+    {
+      "name": "seed_disk",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -6.495,
+        4.593
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetattribs": 1,
+        "applyattribs1": "Cd"
+      }
+    },
+    {
+      "name": "petal_blank",
+      "type": "grid",
+      "pos": [
+        -2.542,
+        6.702
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "tx": 0.5,
+        "rows": 6,
+        "cols": 16
+      }
+    },
+    {
+      "name": "petal_shape",
+      "type": "attribwrangle",
+      "pos": [
+        -2.542,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 板を舌の形にする。u = 根元 0 → 先 1\nfloat u = clamp(@P.x, 0, 1);\nfloat w = chf('width') * pow(sin(PI * fit(u, 0, 1, 0.12, 1.0)..."
+      }
+    },
+    {
+      "name": "petal_ring",
+      "type": "attribwrangle",
+      "pos": [
+        -0.282,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 花びらの付け根を2重の輪に並べる。外の輪は、内の輪の間にくるよう半分ずらす\nint n = chi('count');\nfor (int layer = 0; layer < 2; layer++) {\n    for (int..."
+      }
+    },
+    {
+      "name": "petals",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -1.412,
+        4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "flower_back",
+      "type": "sphere",
+      "pos": [
+        2.542,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.13,
+        "rady": 0.05,
+        "radz": 0.13,
+        "ty": -0.04,
+        "rows": 12,
+        "cols": 36
+      }
+    },
+    {
+      "name": "stem",
+      "type": "tube",
+      "pos": [
+        5.366,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "ty": -0.49,
+        "rad1": 0.012,
+        "rad2": 0.015,
+        "height": 0.9,
+        "cols": 16
+      }
+    },
+    {
+      "name": "assign_seed",
+      "type": "material",
+      "pos": [
+        -6.495,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/seed_mat"
+      }
+    },
+    {
+      "name": "assign_petal",
+      "type": "material",
+      "pos": [
+        -1.412,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/petal_mat"
+      }
+    },
+    {
+      "name": "assign_back",
+      "type": "material",
+      "pos": [
+        2.542,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/back_mat"
+      }
+    },
+    {
+      "name": "assign_green",
+      "type": "material",
+      "pos": [
+        5.366,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/stem_mat"
+      }
+    },
+    {
+      "name": "sunflower",
+      "type": "merge",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "face_camera",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rx": 62.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "seed",
+      "from_output": 0,
+      "to": "seed_disk",
+      "to_input": 0
+    },
+    {
+      "from": "golden_spiral",
+      "from_output": 0,
+      "to": "seed_disk",
+      "to_input": 1
+    },
+    {
+      "from": "petal_blank",
+      "from_output": 0,
+      "to": "petal_shape",
+      "to_input": 0
+    },
+    {
+      "from": "petal_shape",
+      "from_output": 0,
+      "to": "petals",
+      "to_input": 0
+    },
+    {
+      "from": "petal_ring",
+      "from_output": 0,
+      "to": "petals",
+      "to_input": 1
+    },
+    {
+      "from": "seed_disk",
+      "from_output": 0,
+      "to": "assign_seed",
+      "to_input": 0
+    },
+    {
+      "from": "petals",
+      "from_output": 0,
+      "to": "assign_petal",
+      "to_input": 0
+    },
+    {
+      "from": "flower_back",
+      "from_output": 0,
+      "to": "assign_back",
+      "to_input": 0
+    },
+    {
+      "from": "stem",
+      "from_output": 0,
+      "to": "assign_green",
+      "to_input": 0
+    },
+    {
+      "from": "assign_seed",
+      "from_output": 0,
+      "to": "sunflower",
+      "to_input": 0
+    },
+    {
+      "from": "assign_petal",
+      "from_output": 0,
+      "to": "sunflower",
+      "to_input": 1
+    },
+    {
+      "from": "assign_back",
+      "from_output": 0,
+      "to": "sunflower",
+      "to_input": 2
+    },
+    {
+      "from": "assign_green",
+      "from_output": 0,
+      "to": "sunflower",
+      "to_input": 3
+    },
+    {
+      "from": "sunflower",
+      "from_output": 0,
+      "to": "face_camera",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "title": "L-system で木を育てる",
+  "network": "/obj/tree",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "leaf_blank",
+      "type": "grid",
+      "pos": [
+        0.424,
+        6.928
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "ty": 0.5,
+        "rows": 8,
+        "cols": 4
+      }
+    },
+    {
+      "name": "leaf_shape",
+      "type": "attribwrangle",
+      "pos": [
+        0.424,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 板を葉の形にする。v = 付け根 0 → 先 1\nfloat v = clamp(@P.y, 0, 1);\n@P.x *= chf('width') * sin(PI * pow(v, 0.8));      // 付け根と先が..."
+      }
+    },
+    {
+      "name": "mark_leaf",
+      "type": "attribwrangle",
+      "pos": [
+        0.424,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "i@isleaf = 1;   // 葉の面に印を付ける（あとで材質を分ける）"
+      }
+    },
+    {
+      "name": "grow",
+      "type": "lsystem",
+      "pos": [
+        -1.836,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "generations": 8.0,
+        "randscale": 0.25,
+        "randseed": 4,
+        "cols": 8,
+        "thickinit": 0.2,
+        "thickscale": 0.72,
+        "stepinit": 0.55,
+        "stepscale": 0.85,
+        "angleinit": 30.0,
+        "gravity": 0.3
+      }
+    },
+    {
+      "name": "leaf_spots",
+      "type": "scatter::2.0",
+      "pos": [
+        3.248,
+        5.346
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 5000,
+        "seed": 2.0
+      }
+    },
+    {
+      "name": "leaf_turn",
+      "type": "attribwrangle",
+      "pos": [
+        3.248,
+        4.217
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 幹の低い所には葉を付けない。向きと大きさはばらばらにする\nif (@P.y < chf('lowest')) removepoint(0, @ptnum);\np@orient = quaternion(radians(set(r..."
+      }
+    },
+    {
+      "name": "leaves",
+      "type": "copytopoints::2.0",
+      "pos": [
+        1.836,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "tree",
+      "type": "merge",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_bark",
+      "type": "material",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/bark_mat"
+      }
+    },
+    {
+      "name": "assign_leaf",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "group1": "@isleaf==1",
+        "shop_materialpath1": "/mat/leaf_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "leaf_blank",
+      "from_output": 0,
+      "to": "leaf_shape",
+      "to_input": 0
+    },
+    {
+      "from": "leaf_shape",
+      "from_output": 0,
+      "to": "mark_leaf",
+      "to_input": 0
+    },
+    {
+      "from": "grow",
+      "from_output": 0,
+      "to": "leaf_spots",
+      "to_input": 0
+    },
+    {
+      "from": "leaf_spots",
+      "from_output": 0,
+      "to": "leaf_turn",
+      "to_input": 0
+    },
+    {
+      "from": "mark_leaf",
+      "from_output": 0,
+      "to": "leaves",
+      "to_input": 0
+    },
+    {
+      "from": "leaf_turn",
+      "from_output": 0,
+      "to": "leaves",
+      "to_input": 1
+    },
+    {
+      "from": "grow",
+      "from_output": 0,
+      "to": "tree",
+      "to_input": 0
+    },
+    {
+      "from": "leaves",
+      "from_output": 0,
+      "to": "tree",
+      "to_input": 1
+    },
+    {
+      "from": "tree",
+      "from_output": 0,
+      "to": "assign_bark",
+      "to_input": 0
+    },
+    {
+      "from": "assign_bark",
+      "from_output": 0,
+      "to": "assign_leaf",
+      "to_input": 0
+    }
+  ]
+}

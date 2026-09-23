@@ -1,0 +1,128 @@
+{
+  "title": "ひび割れから光る溶岩",
+  "network": "/obj/lava",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ground",
+      "type": "grid",
+      "pos": [
+        0.0,
+        5.648
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 3.0,
+        "rows": 300,
+        "cols": 400
+      }
+    },
+    {
+      "name": "cracked_crust",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        4.518
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// wnoise：まわりに散らばった点のうち、一番近い点までの距離 f1 と、二番目に近い点までの距離 f2 を返す\nfloat f1, f2;\nint seed;\nwnoise(@P * chf('plate_size'), se..."
+      }
+    },
+    {
+      "name": "hot_colors",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 割れ目の色。熱い所ほど黄色く、冷めた所ほど暗い赤。板は黒い岩\nvector hot = lerp({0.35, 0.02, 0.0}, {1.0, 0.55, 0.08}, pow(f@heat, 2));\nvector roc..."
+      }
+    },
+    {
+      "name": "lava_faces",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// 面のグループにする。面の角の点が全部熱い（heat 0.15 より上）ときだけ lava\n// どれか1つで決めると、板の縁の斜面まで光り、網の升目どおりのギザギザが出た\nint hot = 1;\nforeach (int p;..."
+      }
+    },
+    {
+      "name": "assign_rock",
+      "type": "material",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/crust_mat"
+      }
+    },
+    {
+      "name": "assign_lava",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "group1": "lava",
+        "shop_materialpath1": "/mat/lava_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "cracked_crust",
+      "to_input": 0
+    },
+    {
+      "from": "cracked_crust",
+      "from_output": 0,
+      "to": "hot_colors",
+      "to_input": 0
+    },
+    {
+      "from": "hot_colors",
+      "from_output": 0,
+      "to": "lava_faces",
+      "to_input": 0
+    },
+    {
+      "from": "lava_faces",
+      "from_output": 0,
+      "to": "assign_rock",
+      "to_input": 0
+    },
+    {
+      "from": "assign_rock",
+      "from_output": 0,
+      "to": "assign_lava",
+      "to_input": 0
+    }
+  ]
+}

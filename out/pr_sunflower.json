@@ -1,0 +1,96 @@
+{
+ "id": "sunflower",
+ "title": "ひまわりを咲かせる",
+ "lede": "中心の種は、1粒ごとに 137.5度（黄金角）回して、中心からの距離を √番号 に比例させて並べる。これだけで本物と同じ渦巻きになる。花びらは板を舌の形に曲げ、2重の輪に外向きにコピーする。",
+ "hero": "pr_sunflower_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。種の渦巻きと、2重の花びら。",
+ "facts": [
+  [
+   "足すノード",
+   "15個（材質3つ）"
+  ],
+  [
+   "種",
+   "1400粒"
+  ],
+  [
+   "花びら",
+   "60枚"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "142.6秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_sunflower.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "複製",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "種を黄金角で並べる",
+   "node": "attribwrangle",
+   "ui_node": "golden_spiral",
+   "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、<strong>count = 1400</strong> 粒の種の点を作る。i 番目の粒は、角度 <strong>i × 137.508度</strong>（黄金角）、中心からの距離 <strong>spacing × √i</strong>。こうすると粒どうしがすき間なく詰まり、右回りと左回りの渦が浮かび上がる。本物のひまわりと同じ並び方。中心を少し盛り上げ、粒の大きさ pscale と色 Cd（中心は黄緑、外はこげ茶）も付ける。",
+   "img": "pr_sunflower_1.png",
+   "cap": "1400 粒の渦巻き。",
+   "ui_parm": "count"
+  },
+  {
+   "title": "種の粒を並べる",
+   "node": "copytopoints",
+   "ui_node": "seed_disk",
+   "body": "少しつぶれた小さな <code>sphere</code> を <code>copytopoints</code> で種の点に並べる。色を移すため、Target Attributes に「<strong>Apply to: Points</strong>」「Attributes: Cd」を足す（H21 は書かないと色が移らない）。",
+   "img": "pr_sunflower_2.png",
+   "cap": "渦巻きに詰まった種。"
+  },
+  {
+   "title": "花びらを1枚作る",
+   "node": "attribwrangle",
+   "ui_node": "petal_shape",
+   "body": "<code>grid</code>（6 × 16 に割る）を細長い板にし、<code>attribwrangle</code> で形を作る。根元から先への位置 u を使い、幅を <strong>sin</strong> の形（根元と先が細く、真ん中が太い）にして舌の形に、高さを <strong>curl × u²</strong> で先ほど反らせる。長さ 13 cm・幅 3.5 cm。色は根元がだいだい、先が黄色。",
+   "img": "pr_sunflower_3.png",
+   "cap": "先が反った舌の形の花びら。"
+  },
+  {
+   "title": "花びらを2重の輪に並べる",
+   "node": "copytopoints",
+   "ui_node": "petals",
+   "body": "もう1つの Detail の <code>attribwrangle</code> で、種の円盤のまわり（半径 12.5 cm）に <strong>30 個 × 2 段</strong>の点を置く。外の段は内の段の間にくるよう半分ずらす。点ごとの向き <strong>orient</strong> は、花びらの長い向きを外へ向け、4〜18度上へ傾ける（外の段は 10度下げる）。大きさ pscale もばらつかせる。<code>copytopoints</code> で花びらを並べる。",
+   "img": "pr_sunflower_4.png",
+   "cap": "60 枚の花びら。"
+  },
+  {
+   "title": "茎と裏を付けて、こちらへ向ける",
+   "node": "xform",
+   "ui_node": "face_camera",
+   "body": "花の裏に平たい <code>sphere</code>（こげ茶）、下に細い <code>tube</code> の茎（緑）を付け、材質を当てる。種と花びらは Base Color を白にして点の色 Cd をそのまま使う。種は <strong>Roughness 0.95</strong> でつやを消す（つやがあると、小さな粒1つ1つが空を映して白く光る）。花びらは Sheen 0.3。最後に <code>xform</code> で 62度起こして、花をカメラのほうへ向ける。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "角度が少し違うだけで、すき間ができる",
+   "body": "となりの粒までの距離の平均（200〜600 番の粒）は、137.508度で 5.80 mm、140度で 1.59 mm、120度で 0.27 mm。黄金角からずれると、粒が何本かの線の上に固まり、線と線の間がすき間になる。距離が縮むのは、固まった粒どうしが近づくため。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "種の色は Points に移す",
+   "body": "copytopoints の Target Attributes を「Apply to: Primitives」にすると、面には Cd が付いている（ビューポートでは茶色）のに、Karma では種が白く写った。「Apply to: Points」にすると茶色に写った。Karma で撮るものは、色を点に移しておく。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "距離は √番号 に比例させる",
+   "body": "中心からの距離を番号そのものに比例させると、外へ行くほど粒の間が広がってしまう。√番号 にすると、円の面積（半径の2乗）が番号に比例して増えるので、どこでも同じ込み具合になる。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

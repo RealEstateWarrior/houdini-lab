@@ -13,6 +13,15 @@ ADD = {
                  "（実践「窓ガラスを割る」で、球だけを鉄にした）。ビューポートでは透明や光る材質はそのままには見えない。",
          "params": [["shop_materialpath1", "当てる材質"], ["group1", "当てる範囲（グループ）"], ["num_materials", "当てる組の数"]]},
     ],
+    "vop": [
+        {"name": "kma_pyroshader", "kind": "VOP",
+         "one": "Karma で煙と炎を撮るための材質。",
+         "what": "ボリュームの値から、煙の濃さと炎の光を決める。Enable Fire を入れ、Intensity Volume と Color Volume に"
+                 "光らせたいボリュームの名前（flame など）を書く。色は Fire Color Ramp で決める。"
+                 "焚き火では Intensity Scale 1.5、数 mm の厚みしかないろうそくの炎では 150 が要った（実践「焚き火を燃やす」「ろうそくの炎をともす」）。",
+         "params": [["enablefire", "炎を光らせる"], ["fireintscale", "炎の明るさの倍率"], ["fireint_volumename", "明るさを読むボリューム"],
+                    ["firecolor_volumename", "色を読むボリューム"], ["firecolorramp", "炎の色の並び"], ["densityscale", "煙の濃さの倍率"]]},
+    ],
     "vdb": [
         {"name": "volume", "kind": "SOP",
          "one": "空の箱型のボリューム（升目に値を持つ入れ物）を作る。",

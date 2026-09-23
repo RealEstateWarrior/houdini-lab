@@ -1,0 +1,78 @@
+{
+ "id": "lava",
+ "title": "ひび割れから光る溶岩",
+ "lede": "冷えて固まった黒い岩の板と、そのすき間で光る溶岩を作る。VEX の wnoise で「一番近い点までの距離」と「二番目に近い点までの距離」を出し、その差が小さい所を割れ目にする。割れ目だけに光る材質を当てる。",
+ "hero": "pr_lava_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。黒い殻の割れ目から、熱い溶岩が光る。",
+ "facts": [
+  [
+   "足すノード",
+   "8個（材質2つ）"
+  ],
+  [
+   "光る点の割合",
+   "29%"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "34.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_lava.hipnc",
+ "tags": [
+  "エフェクト",
+  "VEX",
+  "ノイズ",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "細かい地面を用意する",
+   "node": "grid",
+   "ui_node": "ground",
+   "body": "<code>grid</code>（4 × 3 m）を <strong>Rows 300・Columns 400</strong> に割る（升 1 cm）。割れ目は数 cm の幅なので、網が粗いと割れ目が描けない。",
+   "img": "pr_lava_1.png",
+   "cap": "細かく割った地面。"
+  },
+  {
+   "title": "岩の板と割れ目を作る",
+   "node": "attribwrangle",
+   "ui_node": "cracked_crust",
+   "body": "<code>attribwrangle</code> で <strong>wnoise</strong> を使う。空間に散らばった点のうち、一番近い点までの距離 f1 と、二番目に近い点までの距離 f2 が返る。<strong>f2 − f1</strong> は、2つの点のちょうど中間（＝板と板の境目）で 0 になる。これが 0.07 より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。板の上は 6 cm 持ち上げ、ノイズで細かいでこぼこも付ける。plate_size = 2.2 で、板1枚は数十 cm。",
+   "img": "pr_lava_2.png",
+   "cap": "亀の甲羅のように割れた地面。",
+   "ui_parm": "crack_width"
+  },
+  {
+   "title": "熱さで色を分ける",
+   "node": "attribwrangle",
+   "ui_node": "hot_colors",
+   "body": "もう1つの <code>attribwrangle</code> で色 Cd を決める。heat が 0.02 より大きい点（割れ目）は、heat が大きいほど 暗い赤 → 黄色に、さらに heat を掛けて縁ほど暗くする。板の点はノイズで濃淡を付けた黒い岩の色。割れ目の点は <strong>lava</strong> というグループにまとめておく（光る材質を当てる所）。",
+   "img": "pr_lava_3.png",
+   "cap": "割れ目が赤く、真ん中ほど黄色い。"
+  },
+  {
+   "title": "割れ目だけを光らせる",
+   "node": "material",
+   "ui_node": "assign_lava",
+   "body": "材質は面に当てるので、Run Over を Primitives にした <code>attribwrangle</code> で、<strong>角の点が全部熱い</strong>（heat 0.15 より上）面を <strong>lava</strong> という面のグループにする。そのうえで材質を2つ当てる。まず全体に岩の材質（Base Color 白＝点の色 Cd を使う、Roughness 0.85）。次の <code>material</code> で Group を <strong>lava</strong> にして、光る材質（Base Color 黒・<strong>Emission Intensity 3</strong>・Emission Color の <strong>Use Point Color</strong>）を上書きする。割れ目は Cd の色そのままで光る。",
+   "img": "",
+   "cap": "材質を当てた状態（ビューポートでは光らない）。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "crack_width で割れ目の太さが決まる",
+   "body": "crack_width 0.07 で、光る点は全体の 29%。0.24 にすると 75%。割れ目が太いと、黒い殻より溶岩のほうが多くなり、固まりかけた溶岩に見えなくなる。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "網の細かさでは、割れ目の量は変わらない",
+   "body": "升 4 cm（Rows 75・Columns 100）にしても、光る点の割合は 29%（升 1 cm では 29%）。割れ目の量を決めるのは crack_width と plate_size で、網の細かさは割れ目の縁のなめらかさにだけ効く。試すうちは粗い網で速く回し、撮る前に細かくする。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

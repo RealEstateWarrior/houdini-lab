@@ -5337,6 +5337,412 @@
         }
       ],
       "anim_cap": "雨粒が落ちて、輪が広がって消える（96 フレーム＝4 秒）。"
+    },
+    {
+      "id": "sunflower",
+      "title": "ひまわりを咲かせる",
+      "lede": "中心の種は、1粒ごとに 137.5度（黄金角）回して、中心からの距離を √番号 に比例させて並べる。これだけで本物と同じ渦巻きになる。花びらは板を舌の形に曲げ、2重の輪に外向きにコピーする。",
+      "hero": "pr_sunflower_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。種の渦巻きと、2重の花びら。",
+      "facts": [
+        [
+          "足すノード",
+          "15個（材質3つ）"
+        ],
+        [
+          "種",
+          "1400粒"
+        ],
+        [
+          "花びら",
+          "60枚"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "142.6秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_sunflower.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "複製",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "種を黄金角で並べる",
+          "node": "attribwrangle",
+          "ui_node": "golden_spiral",
+          "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、<strong>count = 1400</strong> 粒の種の点を作る。i 番目の粒は、角度 <strong>i × 137.508度</strong>（黄金角）、中心からの距離 <strong>spacing × √i</strong>。こうすると粒どうしがすき間なく詰まり、右回りと左回りの渦が浮かび上がる。本物のひまわりと同じ並び方。中心を少し盛り上げ、粒の大きさ pscale と色 Cd（中心は黄緑、外はこげ茶）も付ける。",
+          "img": "pr_sunflower_1.png",
+          "cap": "1400 粒の渦巻き。",
+          "ui_parm": "count"
+        },
+        {
+          "title": "種の粒を並べる",
+          "node": "copytopoints",
+          "ui_node": "seed_disk",
+          "body": "少しつぶれた小さな <code>sphere</code> を <code>copytopoints</code> で種の点に並べる。色を移すため、Target Attributes に「<strong>Apply to: Points</strong>」「Attributes: Cd」を足す（H21 は書かないと色が移らない）。",
+          "img": "pr_sunflower_2.png",
+          "cap": "渦巻きに詰まった種。"
+        },
+        {
+          "title": "花びらを1枚作る",
+          "node": "attribwrangle",
+          "ui_node": "petal_shape",
+          "body": "<code>grid</code>（6 × 16 に割る）を細長い板にし、<code>attribwrangle</code> で形を作る。根元から先への位置 u を使い、幅を <strong>sin</strong> の形（根元と先が細く、真ん中が太い）にして舌の形に、高さを <strong>curl × u²</strong> で先ほど反らせる。長さ 13 cm・幅 3.5 cm。色は根元がだいだい、先が黄色。",
+          "img": "pr_sunflower_3.png",
+          "cap": "先が反った舌の形の花びら。"
+        },
+        {
+          "title": "花びらを2重の輪に並べる",
+          "node": "copytopoints",
+          "ui_node": "petals",
+          "body": "もう1つの Detail の <code>attribwrangle</code> で、種の円盤のまわり（半径 12.5 cm）に <strong>30 個 × 2 段</strong>の点を置く。外の段は内の段の間にくるよう半分ずらす。点ごとの向き <strong>orient</strong> は、花びらの長い向きを外へ向け、4〜18度上へ傾ける（外の段は 10度下げる）。大きさ pscale もばらつかせる。<code>copytopoints</code> で花びらを並べる。",
+          "img": "pr_sunflower_4.png",
+          "cap": "60 枚の花びら。"
+        },
+        {
+          "title": "茎と裏を付けて、こちらへ向ける",
+          "node": "xform",
+          "ui_node": "face_camera",
+          "body": "花の裏に平たい <code>sphere</code>（こげ茶）、下に細い <code>tube</code> の茎（緑）を付け、材質を当てる。種と花びらは Base Color を白にして点の色 Cd をそのまま使う。種は <strong>Roughness 0.95</strong> でつやを消す（つやがあると、小さな粒1つ1つが空を映して白く光る）。花びらは Sheen 0.3。最後に <code>xform</code> で 62度起こして、花をカメラのほうへ向ける。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "角度が少し違うだけで、すき間ができる",
+          "body": "となりの粒までの距離の平均（200〜600 番の粒）は、137.508度で 5.80 mm、140度で 1.59 mm、120度で 0.27 mm。黄金角からずれると、粒が何本かの線の上に固まり、線と線の間がすき間になる。距離が縮むのは、固まった粒どうしが近づくため。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "種の色は Points に移す",
+          "body": "copytopoints の Target Attributes を「Apply to: Primitives」にすると、面には Cd が付いている（ビューポートでは茶色）のに、Karma では種が白く写った。「Apply to: Points」にすると茶色に写った。Karma で撮るものは、色を点に移しておく。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "距離は √番号 に比例させる",
+          "body": "中心からの距離を番号そのものに比例させると、外へ行くほど粒の間が広がってしまう。√番号 にすると、円の面積（半径の2乗）が番号に比例して増えるので、どこでも同じ込み具合になる。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "lava",
+      "title": "ひび割れから光る溶岩",
+      "lede": "冷えて固まった黒い岩の板と、そのすき間で光る溶岩を作る。VEX の wnoise で「一番近い点までの距離」と「二番目に近い点までの距離」を出し、その差が小さい所を割れ目にする。割れ目だけに光る材質を当てる。",
+      "hero": "pr_lava_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。黒い殻の割れ目から、熱い溶岩が光る。",
+      "facts": [
+        [
+          "足すノード",
+          "8個（材質2つ）"
+        ],
+        [
+          "光る点の割合",
+          "29%"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "34.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_lava.hipnc",
+      "tags": [
+        "エフェクト",
+        "VEX",
+        "ノイズ",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "細かい地面を用意する",
+          "node": "grid",
+          "ui_node": "ground",
+          "body": "<code>grid</code>（4 × 3 m）を <strong>Rows 300・Columns 400</strong> に割る（升 1 cm）。割れ目は数 cm の幅なので、網が粗いと割れ目が描けない。",
+          "img": "pr_lava_1.png",
+          "cap": "細かく割った地面。"
+        },
+        {
+          "title": "岩の板と割れ目を作る",
+          "node": "attribwrangle",
+          "ui_node": "cracked_crust",
+          "body": "<code>attribwrangle</code> で <strong>wnoise</strong> を使う。空間に散らばった点のうち、一番近い点までの距離 f1 と、二番目に近い点までの距離 f2 が返る。<strong>f2 − f1</strong> は、2つの点のちょうど中間（＝板と板の境目）で 0 になる。これが 0.07 より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。板の上は 6 cm 持ち上げ、ノイズで細かいでこぼこも付ける。plate_size = 2.2 で、板1枚は数十 cm。",
+          "img": "pr_lava_2.png",
+          "cap": "亀の甲羅のように割れた地面。",
+          "ui_parm": "crack_width"
+        },
+        {
+          "title": "熱さで色を分ける",
+          "node": "attribwrangle",
+          "ui_node": "hot_colors",
+          "body": "もう1つの <code>attribwrangle</code> で色 Cd を決める。heat が 0.02 より大きい点（割れ目）は、heat が大きいほど 暗い赤 → 黄色に、さらに heat を掛けて縁ほど暗くする。板の点はノイズで濃淡を付けた黒い岩の色。割れ目の点は <strong>lava</strong> というグループにまとめておく（光る材質を当てる所）。",
+          "img": "pr_lava_3.png",
+          "cap": "割れ目が赤く、真ん中ほど黄色い。"
+        },
+        {
+          "title": "割れ目だけを光らせる",
+          "node": "material",
+          "ui_node": "assign_lava",
+          "body": "材質は面に当てるので、Run Over を Primitives にした <code>attribwrangle</code> で、<strong>角の点が全部熱い</strong>（heat 0.15 より上）面を <strong>lava</strong> という面のグループにする。そのうえで材質を2つ当てる。まず全体に岩の材質（Base Color 白＝点の色 Cd を使う、Roughness 0.85）。次の <code>material</code> で Group を <strong>lava</strong> にして、光る材質（Base Color 黒・<strong>Emission Intensity 3</strong>・Emission Color の <strong>Use Point Color</strong>）を上書きする。割れ目は Cd の色そのままで光る。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポートでは光らない）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "crack_width で割れ目の太さが決まる",
+          "body": "crack_width 0.07 で、光る点は全体の 29%。0.24 にすると 75%。割れ目が太いと、黒い殻より溶岩のほうが多くなり、固まりかけた溶岩に見えなくなる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "網の細かさでは、割れ目の量は変わらない",
+          "body": "升 4 cm（Rows 75・Columns 100）にしても、光る点の割合は 29%（升 1 cm では 29%）。割れ目の量を決めるのは crack_width と plate_size で、網の細かさは割れ目の縁のなめらかさにだけ効く。試すうちは粗い網で速く回し、撮る前に細かくする。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "tree",
+      "title": "L-system で木を育てる",
+      "lede": "lsystem ノードは、文字の書き換えルールを何回も繰り返して枝を伸ばす。F は「前へ伸びる」、[ ] は「枝分かれ」、& や / は「向きを変える」。葉は、できた枝の表面に点をまいてコピーする。",
+      "hero": "pr_tree_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。L-system で育てた木。",
+      "facts": [
+        [
+          "足すノード",
+          "7個（材質2つ）"
+        ],
+        [
+          "面の数",
+          "162"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "119.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_tree.hipnc",
+      "tags": [
+        "モデリング",
+        "L-system",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "葉を1枚作る",
+          "node": "attribwrangle",
+          "ui_node": "mark_leaf",
+          "body": "<code>grid</code>（縦長に 4 × 8 に割る）を <code>attribwrangle</code> で葉の形にする。付け根から先への位置 v で幅を <strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 30 cm・幅 16 cm。木の高さが 5 m ほどになるので、本物より少し大きめにしないと遠目に見えない。",
+          "img": "pr_tree_1.png",
+          "cap": "葉1枚。"
+        },
+        {
+          "title": "ルールを書いて、枝を伸ばす",
+          "node": "lsystem",
+          "ui_node": "grow",
+          "body": "<code>lsystem</code> の Type を <strong>Tube</strong>（太さのある枝）にし、ルールを書く。Premise（はじまり）は <strong>FFFA</strong>＝3回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFFA</strong> は「少し倒して3回伸び、先でまた A」。Generations 8 で、この書き換えを8回繰り返す。Thickness 0.2 で幹を太くする。Random Scale 0.25 で角度と長さをばらつかせ、Gravity 0.3 で枝先を垂らす。",
+          "img": "pr_tree_2.png",
+          "cap": "8回の書き換えで育った枝。",
+          "ui_parm": "rule1"
+        },
+        {
+          "title": "枝に葉をまいて付ける",
+          "node": "merge",
+          "ui_node": "tree",
+          "body": "<code>scatter</code> で枝の表面に 5000 個の点をまき、<code>attribwrangle</code> で高さ 2 m より下（幹）の点を消す。残った点に、ばらばらの向き orient と大きさ pscale（0.6〜1.2）を付け、<code>copytopoints</code> で葉を並べる。葉は 4,697 枚。枝先ほど枝が多いので、点も葉も自然に上のほうへ集まる。",
+          "img": "pr_tree_3.png",
+          "cap": "4,697 枚の葉が付いた木。",
+          "ui_parm": "lowest"
+        },
+        {
+          "title": "幹と葉に材質を当てる",
+          "node": "material",
+          "ui_node": "assign_leaf",
+          "body": "幹は茶色で Roughness 0.85。葉は Base Color を白にして点の色 Cd（緑）を使う。葉を作ったときに、Primitives の <code>attribwrangle</code> で面に <strong>isleaf = 1</strong> の印を付けておいた。2つ目の <code>material</code> の Group に <strong>@isleaf==1</strong> と書くと、葉だけに当たる。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "J で付けた葉は、枝先の細さに合わせて縮む",
+          "body": "はじめは Rule 2 を B=&FFFAJ にして、J の所に葉（長さ 30 cm）をコピーさせた。撮ると葉は枝先の小さな白い点にしか見えなかった。J のコピーは枝先の細さに合わせて小さくなるので、この木では scatter で点をまいて copytopoints で付けるほうが扱いやすい。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Generations は2つずつ効く",
+          "body": "面の数は Generations 6 で 54、7 で 54（同じ）、8 で 162（3.0 倍）。A は B に、B は A に書き換わるので、2回でやっと1段伸びる。1段伸びると、枝が3本に分かれるので面は約3倍になる。奇数に上げても何も変わらないことがある。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "sandpile",
+      "title": "砂の柱が崩れて山になる",
+      "lede": "MPM の砂で円柱を作り、崩す。支えの無い砂は広がりながら崩れ、低い山になって止まる。MPM は「容器（計算する範囲と粒の細かさ）」「湧かせる物」「ぶつかる物」「計算」の4つのノードで組む。",
+      "hero": "pr_sandpile_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 72）。崩れて止まった砂山。",
+      "facts": [
+        [
+          "足すノード",
+          "9個（材質2つ）"
+        ],
+        [
+          "砂粒",
+          "21,751個"
+        ],
+        [
+          "72 フレームの計算",
+          "4秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "45.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_sandpile.hipnc",
+      "tags": [
+        "シミュレーション",
+        "MPM",
+        "砂",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "砂の柱を用意する",
+          "node": "mpmsource",
+          "ui_node": "sand",
+          "body": "<code>tube</code> で半径 25 cm・高さ 90 cm の円柱を作る。<code>mpmcontainer</code> は計算する範囲（3 × 1.4 × 3 m）と、粒の間隔 <strong>Particle Separation 0.02</strong>（2 cm）を決める。<code>mpmsource</code> の左に円柱、右に容器をつなぎ、<strong>Material Preset を Sand</strong>（砂）にし、<strong>Material Type を Sandy</strong> にする。円柱の中が、2 cm おきの砂粒で満たされる。",
+          "img": "pr_sandpile_1.png",
+          "cap": "砂粒で満たした円柱。",
+          "ui_parm": "materialpreset"
+        },
+        {
+          "title": "床の上で崩す",
+          "node": "mpmsolver",
+          "ui_node": "collapse",
+          "body": "床の <code>box</code> を <code>mpmcollider</code>（ぶつかる物）にする。左に床、右に容器。<code>mpmsolver</code> には、左から砂・床・容器の3本をつなぐ。再生すると、支えの無い砂の柱は自分の重さで崩れ、広がって止まる。21,751 粒・72 フレーム（3 秒）の計算は 4 秒。止まった山は高さ 0.24 m、根元の半径 0.75 m。",
+          "img": "pr_sandpile_2.png",
+          "cap": "フレーム 72。低く広がった山になって止まった。",
+          "ui_parm": "materialpreset"
+        },
+        {
+          "title": "粒の見た目を決める",
+          "node": "merge",
+          "ui_node": "sandbox",
+          "body": "<code>attribwrangle</code> で粒ごとに大きさ <strong>pscale</strong>（間隔の 0.6 倍を 0.8〜1.2 倍にばらつかせる）と、明るさの違う砂色 Cd を付ける。Karma は、面の無い点を pscale の大きさの小さな球として撮る。材質は Base Color を白にして Cd を使う。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "Material Type を Sandy にしないと崩れない",
+          "body": "Material Preset を Sand にしただけだと Material Type は Chunky（塊）のままで、3 秒たっても高さ 0.88 m・半径 0.24 m と、柱が立ったままだった。Sandy にすると高さ 0.24 m・半径 0.75 m まで崩れた。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "崩れた山の傾き",
+          "body": "止まった山の「高さ ÷ 粒の 95% が入る半径」から出した傾きは 18度。裾に広がった粒も半径に入るので、斜面そのものの傾きよりゆるく出る測り方。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "砂の柱が崩れて、山になって止まるまで（72 フレーム＝3 秒）。"
+    },
+    {
+      "id": "candle",
+      "title": "ろうそくの炎をともす",
+      "lede": "ろうそくの炎は、風が無ければほとんど形の変わらない、しずく形の光。流れの計算をしなくても、箱のボリュームに「しずく形の濃さ」を VEX で書き込み、炎用の材質で光らせれば作れる。@Time を使って、ほんの少し揺らす。",
+      "hero": "pr_candle_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。暗い部屋でともる、しずく形の炎。",
+      "facts": [
+        [
+          "足すノード",
+          "8個（材質3つ・明かり1つ）"
+        ],
+        [
+          "升の数",
+          "39×90×39"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "22.5秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_candle.hipnc",
+      "tags": [
+        "エフェクト",
+        "VEX",
+        "ボリューム",
+        "炎",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "ろうそくと芯を作る",
+          "node": "merge",
+          "ui_node": "candle_and_wick",
+          "body": "<code>tube</code> で半径 2.2 cm・高さ 12 cm のろうそくを作り、上に細い <code>tube</code>（高さ 1.2 cm）の芯を立てる。",
+          "img": "pr_candle_1.png",
+          "cap": "ろうそくと芯。"
+        },
+        {
+          "title": "しずく形の濃さを書き込む",
+          "node": "volumewrangle",
+          "ui_node": "teardrop",
+          "body": "<code>volume</code> で名前 <strong>flame</strong> の小さな箱（3 × 7 × 3 cm）を芯の上に置く（升は約 0.8 mm）。<code>volumewrangle</code> で、芯の先からの高さを 0〜1 の y にし、y ごとの太さ r を <strong>sin</strong>（根元から太り、上で細る）で決める。中心からの距離が r より内側の升を光らせ、芯のまわりの下のほうだけ少し暗くする（本物の炎の暗い芯）。上のほうほど、<strong>@Time</strong> で動くノイズで横に揺らす（flicker = 4 mm）。",
+          "img": "pr_candle_2.png",
+          "cap": "しずく形の炎（ビューポートでは煙のように見える）。",
+          "ui_parm": "width"
+        },
+        {
+          "title": "炎の材質と、ろうそくの明かり",
+          "node": "merge",
+          "ui_node": "candle_lit",
+          "body": "<code>/mat</code> に <code>kma_pyroshader</code>（Karma の炎用の材質）を作り、<strong>Enable Fire</strong> を入れる。<strong>Intensity Volume と Color Volume を flame</strong> にし、Fire Color Ramp を 黒 → 赤 → 橙 → 黄白 にする。炎がとても小さく薄いので、<strong>Intensity Scale は 150</strong> まで上げる。煙は出さないので Density Scale は 0。ボリュームの光だけでは周りがほとんど照らされないので、炎の位置に弱い橙色の <code>hlight</code>（Point、Intensity 0.01）を置く。強くするとろうそくの頭が白く飛ぶ。ろうは生成りの白、Sheen 0.2。",
+          "img": "",
+          "cap": "材質と明かりを当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "小さな炎は、Intensity Scale を大きく上げる",
+          "body": "kma_pyroshader の Intensity Scale を焚き火と同じくらい（2）にすると、Karma では薄い灰色のもやにしか写らなかった。20 でうっすら光り、150 でろうそくの炎らしい明るさになった。数 mm しか厚みのない炎には、焚き火よりずっと大きな値が要った。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "箱が小さすぎると、炎の先が切れる",
+          "body": "箱の高さは 7 cm、炎の高さ height は 4.5 cm。升の数は 39×90×39 で、光っている升は 4,359 個。炎を長くするときは、箱も同じだけ高くする。箱の外には何も書き込めない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "形の計算だけなので、すぐ出る",
+          "body": "流れの計算（Pyro のシミュレーション）を使っていないので、どのフレームでも前のフレームを待たずに形が決まる。風で大きくあおられる炎や、煙を出す炎は、Pyro で計算する（実践「焚き火を燃やす」）。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "炎の先が、ゆっくり左右に揺れる（48 フレーム＝2 秒）。"
     }
   ]
 }

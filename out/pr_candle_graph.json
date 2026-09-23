@@ -1,0 +1,202 @@
+{
+  "title": "ろうそくの炎をともす",
+  "network": "/obj/candle",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "candle",
+      "type": "tube",
+      "pos": [
+        -10.59,
+        -0.678
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "ty": 0.06,
+        "rad1": 0.022,
+        "rad2": 0.022,
+        "height": 0.12,
+        "cols": 48
+      }
+    },
+    {
+      "name": "wick",
+      "type": "tube",
+      "pos": [
+        -8.331,
+        -1.13
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "ty": 0.126,
+        "rad1": 0.0012,
+        "rad2": 0.001,
+        "height": 0.012,
+        "cols": 8
+      }
+    },
+    {
+      "name": "candle_and_wick",
+      "type": "merge",
+      "pos": [
+        -9.46,
+        -2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "flame_box",
+      "type": "volume",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "flame",
+        "sizex": 0.03,
+        "sizey": 0.07,
+        "sizez": 0.03,
+        "ty": 0.165,
+        "samplediv": 90
+      }
+    },
+    {
+      "name": "teardrop",
+      "type": "volumewrangle",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "snippet": "// しずく形の炎。根元（芯の先）から上へ 0〜1 の高さ y を取り、y ごとの太さ r(y) の中を光らせる\nvector base = set(0, 0.127, 0);   // 芯の先（0.132）より少し下から始めて、芯を..."
+      }
+    },
+    {
+      "name": "assign_wax",
+      "type": "material",
+      "pos": [
+        -5.083,
+        -0.226
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/wax_mat"
+      }
+    },
+    {
+      "name": "assign_wick",
+      "type": "material",
+      "pos": [
+        -2.824,
+        -0.678
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/wick_mat"
+      }
+    },
+    {
+      "name": "assign_flame",
+      "type": "material",
+      "pos": [
+        0.0,
+        -1.13
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/flame_mat"
+      }
+    },
+    {
+      "name": "candle_lit",
+      "type": "merge",
+      "pos": [
+        -2.636,
+        -2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "candle",
+      "from_output": 0,
+      "to": "candle_and_wick",
+      "to_input": 0
+    },
+    {
+      "from": "wick",
+      "from_output": 0,
+      "to": "candle_and_wick",
+      "to_input": 1
+    },
+    {
+      "from": "flame_box",
+      "from_output": 0,
+      "to": "teardrop",
+      "to_input": 0
+    },
+    {
+      "from": "candle",
+      "from_output": 0,
+      "to": "assign_wax",
+      "to_input": 0
+    },
+    {
+      "from": "wick",
+      "from_output": 0,
+      "to": "assign_wick",
+      "to_input": 0
+    },
+    {
+      "from": "teardrop",
+      "from_output": 0,
+      "to": "assign_flame",
+      "to_input": 0
+    },
+    {
+      "from": "assign_wax",
+      "from_output": 0,
+      "to": "candle_lit",
+      "to_input": 0
+    },
+    {
+      "from": "assign_wick",
+      "from_output": 0,
+      "to": "candle_lit",
+      "to_input": 1
+    },
+    {
+      "from": "assign_flame",
+      "from_output": 0,
+      "to": "candle_lit",
+      "to_input": 2
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "title": "砂の柱が崩れて山になる",
+  "network": "/obj/sandpile",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sand_column",
+      "type": "tube",
+      "pos": [
+        -7.06,
+        7.003
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "ty": 0.45,
+        "rad1": 0.25,
+        "rad2": 0.25,
+        "height": 0.9,
+        "cols": 40
+      }
+    },
+    {
+      "name": "container",
+      "type": "mpmcontainer",
+      "pos": [
+        0.282,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.02,
+        "sizex": 3.0,
+        "sizey": 1.4,
+        "sizez": 3.0,
+        "centery": 0.6
+      }
+    },
+    {
+      "name": "sand",
+      "type": "mpmsource",
+      "pos": [
+        -5.93,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "materialpreset": 7,
+        "materialtype": 4
+      }
+    },
+    {
+      "name": "floor",
+      "type": "box",
+      "pos": [
+        -1.977,
+        6.551
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 3.0,
+        "sizey": 0.2,
+        "sizez": 3.0,
+        "ty": -0.1
+      }
+    },
+    {
+      "name": "floor_collider",
+      "type": "mpmcollider",
+      "pos": [
+        -1.977,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "collapse",
+      "type": "mpmsolver",
+      "pos": [
+        -2.542,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "remaptocolor1cr": 0.20000000298023224,
+        "remaptocolor1cb": 1.0,
+        "remaptocolor2pos": 0.25,
+        "remaptocolor2cg": 0.8500000238418579,
+        "remaptocolor2cb": 1.0,
+        "remaptocolor3pos": 0.5,
+        "remaptocolor3cg": 1.0,
+        "remaptocolor3cb": 0.10000000149011612,
+        "remaptocolor4pos": 0.75,
+        "remaptocolor4cr": 0.949999988079071,
+        "remaptocolor4cg": 1.0,
+        "remaptocolor5pos": 1.0,
+        "remaptocolor5cr": 1.0
+      }
+    },
+    {
+      "name": "grain_look",
+      "type": "attribwrangle",
+      "pos": [
+        -2.542,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 粒の大きさと色。砂は1粒ずつ明るさが違う\nf@pscale = chf('size') * fit01(rand(@ptnum), 0.8, 1.2);\nv@Cd = {0.78, 0.64, 0.44} * fit01(ran..."
+      }
+    },
+    {
+      "name": "assign_sand",
+      "type": "material",
+      "pos": [
+        -2.542,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sand_mat"
+      }
+    },
+    {
+      "name": "assign_floor",
+      "type": "material",
+      "pos": [
+        2.542,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/floor_mat"
+      }
+    },
+    {
+      "name": "sandbox",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "sand_column",
+      "from_output": 0,
+      "to": "sand",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "sand",
+      "to_input": 1
+    },
+    {
+      "from": "floor",
+      "from_output": 0,
+      "to": "floor_collider",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "floor_collider",
+      "to_input": 1
+    },
+    {
+      "from": "sand",
+      "from_output": 0,
+      "to": "collapse",
+      "to_input": 0
+    },
+    {
+      "from": "floor_collider",
+      "from_output": 0,
+      "to": "collapse",
+      "to_input": 1
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "collapse",
+      "to_input": 2
+    },
+    {
+      "from": "collapse",
+      "from_output": 0,
+      "to": "grain_look",
+      "to_input": 0
+    },
+    {
+      "from": "grain_look",
+      "from_output": 0,
+      "to": "assign_sand",
+      "to_input": 0
+    },
+    {
+      "from": "floor",
+      "from_output": 0,
+      "to": "assign_floor",
+      "to_input": 0
+    },
+    {
+      "from": "assign_sand",
+      "from_output": 0,
+      "to": "sandbox",
+      "to_input": 0
+    },
+    {
+      "from": "assign_floor",
+      "from_output": 0,
+      "to": "sandbox",
+      "to_input": 1
+    }
+  ]
+}

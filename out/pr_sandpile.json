@@ -1,0 +1,76 @@
+{
+ "id": "sandpile",
+ "title": "砂の柱が崩れて山になる",
+ "lede": "MPM の砂で円柱を作り、崩す。支えの無い砂は広がりながら崩れ、低い山になって止まる。MPM は「容器（計算する範囲と粒の細かさ）」「湧かせる物」「ぶつかる物」「計算」の4つのノードで組む。",
+ "hero": "pr_sandpile_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム 72）。崩れて止まった砂山。",
+ "facts": [
+  [
+   "足すノード",
+   "9個（材質2つ）"
+  ],
+  [
+   "砂粒",
+   "21,751個"
+  ],
+  [
+   "72 フレームの計算",
+   "4秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "45.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_sandpile.hipnc",
+ "tags": [
+  "シミュレーション",
+  "MPM",
+  "砂",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "砂の柱を用意する",
+   "node": "mpmsource",
+   "ui_node": "sand",
+   "body": "<code>tube</code> で半径 25 cm・高さ 90 cm の円柱を作る。<code>mpmcontainer</code> は計算する範囲（3 × 1.4 × 3 m）と、粒の間隔 <strong>Particle Separation 0.02</strong>（2 cm）を決める。<code>mpmsource</code> の左に円柱、右に容器をつなぎ、<strong>Material Preset を Sand</strong>（砂）にし、<strong>Material Type を Sandy</strong> にする。円柱の中が、2 cm おきの砂粒で満たされる。",
+   "img": "pr_sandpile_1.png",
+   "cap": "砂粒で満たした円柱。",
+   "ui_parm": "materialpreset"
+  },
+  {
+   "title": "床の上で崩す",
+   "node": "mpmsolver",
+   "ui_node": "collapse",
+   "body": "床の <code>box</code> を <code>mpmcollider</code>（ぶつかる物）にする。左に床、右に容器。<code>mpmsolver</code> には、左から砂・床・容器の3本をつなぐ。再生すると、支えの無い砂の柱は自分の重さで崩れ、広がって止まる。21,751 粒・72 フレーム（3 秒）の計算は 4 秒。止まった山は高さ 0.24 m、根元の半径 0.75 m。",
+   "img": "pr_sandpile_2.png",
+   "cap": "フレーム 72。低く広がった山になって止まった。",
+   "ui_parm": "materialpreset"
+  },
+  {
+   "title": "粒の見た目を決める",
+   "node": "merge",
+   "ui_node": "sandbox",
+   "body": "<code>attribwrangle</code> で粒ごとに大きさ <strong>pscale</strong>（間隔の 0.6 倍を 0.8〜1.2 倍にばらつかせる）と、明るさの違う砂色 Cd を付ける。Karma は、面の無い点を pscale の大きさの小さな球として撮る。材質は Base Color を白にして Cd を使う。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "Material Type を Sandy にしないと崩れない",
+   "body": "Material Preset を Sand にしただけだと Material Type は Chunky（塊）のままで、3 秒たっても高さ 0.88 m・半径 0.24 m と、柱が立ったままだった。Sandy にすると高さ 0.24 m・半径 0.75 m まで崩れた。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "崩れた山の傾き",
+   "body": "止まった山の「高さ ÷ 粒の 95% が入る半径」から出した傾きは 18度。裾に広がった粒も半径に入るので、斜面そのものの傾きよりゆるく出る測り方。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "砂の柱が崩れて、山になって止まるまで（72 フレーム＝3 秒）。"
+}
