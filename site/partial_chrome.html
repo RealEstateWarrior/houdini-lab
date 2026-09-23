@@ -1217,8 +1217,19 @@
       var bar = document.querySelector(".sidenav");
       if (!bar) { return; }
       var ticking = false;
+      var lastY = window.scrollY;
       function update() {
-        bar.classList.toggle("is-scrolled", window.scrollY > 12);
+        var y = window.scrollY;
+        bar.classList.toggle("is-scrolled", y > 12);
+        /* スマホ: 下へ読むと区分のタブをバーへしまい、上へ戻すと出す（少しの揺れでは動かさない） */
+        if (y < 60) {
+          bar.classList.remove("subnav-tucked");
+        } else if (y > lastY + 6) {
+          bar.classList.add("subnav-tucked");
+        } else if (y < lastY - 6) {
+          bar.classList.remove("subnav-tucked");
+        }
+        if (Math.abs(y - lastY) > 6) { lastY = y; }
         ticking = false;
       }
       window.addEventListener("scroll", function () {

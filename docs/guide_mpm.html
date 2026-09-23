@@ -3492,6 +3492,50 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
 .thumb:hover .thumb-img img, .thumb:focus-visible .thumb-img img { transform: scale(1.04); }
 @media (prefers-reduced-motion: reduce) { .thumb .thumb-img img { transition: none; } }
 
+/* メニューの入口: Notebook を足して4つに */
+.menu-doors { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.menu-door-mark--nb { background: var(--ink); color: var(--on-ink); }
+.menu-door-mark--nb svg { width: 24px; height: 24px; }
+@media (max-width: 900px) { .menu-doors { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .menu-doors { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- スマホの上バー（2026-09-23）: 端から端までの四角い板。ガラスはそのまま ---------- */
+@media (max-width: 720px) {
+  .sidenav { padding: 0; }
+  .sidenav .nav-inner {
+    height: 56px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    padding: 0 6px;
+  }
+  .sidenav.is-scrolled .nav-inner { border-bottom-color: var(--glass-edge); }
+
+  /* 区分のタブは流れの外に置き、下へ読むとバーへ吸い込まれて消え、上へ戻ると出てくる */
+  .sidenav { position: sticky; }
+  .subnav--row:not([hidden]) {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 12px;
+    margin: 0;
+    transform-origin: 24px 0;
+    transition: transform 0.38s cubic-bezier(0.22, 0.7, 0.24, 1), opacity 0.28s ease, filter 0.38s ease;
+  }
+  .sidenav.subnav-tucked .subnav--row {
+    transform: translateY(-34px) scale(0.55);
+    opacity: 0;
+    filter: blur(4px);
+    pointer-events: none;
+  }
+  /* タブが流れの外に出たぶん、現在地を下げて重ならないようにする */
+  .sidenav:has(.subnav--row:not([hidden])) + .crumbrow { padding-top: 58px; }
+}
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .subnav--row:not([hidden]) { transition: opacity 0.2s ease; }
+  .sidenav.subnav-tucked .subnav--row { transform: none; filter: none; }
+}
+
 </style>
 </head>
 <body>
@@ -3794,7 +3838,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-b88bd15001.js"></script>
+<script src="data/glossary-data-6ee2d6f3c9.js"></script>
 <script src="data/node-data-908d8e0db5.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4050,6 +4094,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <a class="menu-door" href="log.html"><img src="thumb_201.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>201本の実験。最新は実験201</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>375件</small></span></a>
         <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>412語</small></span></a>
+        <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
     </div>
@@ -5254,8 +5299,19 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       var bar = document.querySelector(".sidenav");
       if (!bar) { return; }
       var ticking = false;
+      var lastY = window.scrollY;
       function update() {
-        bar.classList.toggle("is-scrolled", window.scrollY > 12);
+        var y = window.scrollY;
+        bar.classList.toggle("is-scrolled", y > 12);
+        /* スマホ: 下へ読むと区分のタブをバーへしまい、上へ戻すと出す（少しの揺れでは動かさない） */
+        if (y < 60) {
+          bar.classList.remove("subnav-tucked");
+        } else if (y > lastY + 6) {
+          bar.classList.add("subnav-tucked");
+        } else if (y < lastY - 6) {
+          bar.classList.remove("subnav-tucked");
+        }
+        if (Math.abs(y - lastY) > 6) { lastY = y; }
         ticking = false;
       }
       window.addEventListener("scroll", function () {

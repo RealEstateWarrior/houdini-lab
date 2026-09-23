@@ -2368,11 +2368,18 @@ def render_menu_cards(guides, urls, data, nodes):
         (urls["log_pm"], f"thumb_{last['no']}.png", "実験ログ", f"{len(DONE)}本の実験。最新は実験{last['no']}"),
         (panel_url(urls, "nodes"), "019_graph.png", "ノード解説", f"{count_nodes(nodes)}件"),
         (panel_url(urls, "glossary"), None, "用語集", f"{count_terms(data)}語"),
+        # 2026-09-23: メニューにも Notebook を置く（ユーザー指示）
+        (NOTEBOOK_URL, "NB", "Gemini Notebook", "資料に質問できるノート"),
     )
     for href, img, label, sub in doors:
-        pic = (f'<img src="{img}" alt="" loading="lazy" decoding="async">' if img
-               else '<span class="menu-door-mark" aria-hidden="true">Aa</span>')
-        out.append(f'        <a class="menu-door" href="{href}">{pic}'
+        if img == "NB":
+            pic = '<span class="menu-door-mark menu-door-mark--nb" aria-hidden="true">' + NOTEBOOK_SVG + "</span>"
+        elif img:
+            pic = f'<img src="{img}" alt="" loading="lazy" decoding="async">'
+        else:
+            pic = '<span class="menu-door-mark" aria-hidden="true">Aa</span>'
+        ext = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
+        out.append(f'        <a class="menu-door" href="{href}"{ext}>{pic}'
                    f'<span class="menu-door-text"><strong>{label}</strong><small>{html.escape(sub)}</small></span></a>')
     out.append("      </div>")
     out.append('      <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>')
