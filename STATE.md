@@ -1,6 +1,6 @@
 # STATE — 新しいセッションはまずこれだけ読む
 
-最終更新: 2026-09-23 夜（実験201・実践36本・ノード375件・用語412語・効率化50項目）
+最終更新: 2026-09-23 夜（実験201・実践41本・ノード375件・用語412語・効率化50項目）
 
 ## いまの状態
 
@@ -75,6 +75,21 @@
   外部から画像を読む案は使えない（Artifact は自分のファイル・Google Fonts・一部CDNのみ）
 - **Houdini 22.0.368 はライセンスが無く hython が起動しない**（21 のライセンスでは動かない）
 - 残りの宿題: 実践「テクスチャを貼る」「ターンテーブル」「文字を光らせる」の Houdini 画面（GUI が要るので自動では撮れない）。要望ページ（#requests）で追う
+
+## 実践を作る型（2026-09-23 確立。目標70本）
+
+1. `examples/pr_<id>.py` を書く（`examples/practice_kit.py` の Guide を使う: node / step / mat / assign / hero / save）。
+   手順ごとのビューポート画 pr_<id>_<n>.png、Karma の仕上がり pr_<id>_hero.png（暗い幕＋キー・リム・ドーム）、hip、pr_<id>.json ができる
+2. `hython examples/pr_<id>.py` → hero を目で見て直す（見栄えが第一。サムネイルで惹きつける）
+3. `python examples/practice_merge.py <id> ...` で guides.json に足す
+4. GUI の Houdini（受け口 bridge_server が開いているほう）で撮る:
+   `python311/python.exe guide_ui_capture.py <id>` と `guide_parm_capture.py <id>`、そのあと `python crop_ui_shots.py`
+   （Houdini が2つ起動していても、受け口のあるプロセスの窓だけ撮るよう gui_capture を直した）
+5. `python publish.py "..."`。5本ごとにメモ更新
+- 落とし穴は測った値で書く。思い込みを書かない（resample・透ける色の件で2回まちがえて直した）
+- H21 の copytopoints は既定で属性（Cd など）を移さない。grid の点に並べると N に合わせて倒れる（orient を入れる）
+- Karma の炎は kma_pyroshader。明るさ・色は既定で temperature を見るので flame に変える
+- 済み: rock neon gems campfire nightcity
 
 ## ノードと用語を増やすときの型（091〜098 で確立）
 
