@@ -868,6 +868,71 @@ a.chip-card { text-decoration: none; }
   margin: 2px 0 8px;
 }
 #popover .pop-def { color: var(--ink-mid); margin: 0; }
+#popover .pop-term--node { font-family: var(--font-mono); font-weight: 500; }
+#popover .pop-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--flag);
+  text-decoration: none;
+}
+#popover .pop-link::after { content: " →"; }
+#popover .pop-link:hover { text-decoration: underline; }
+
+/* 本文のノード名。押すと種類と一言が出る。用語（点線）と見分けられるよう、下線は実線の細線 */
+code.node-ref {
+  cursor: help;
+  box-shadow: inset 0 -1px 0 var(--flag);
+}
+code.node-ref:hover { color: var(--flag); }
+code.node-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+
+/* 1本ずつの実践ページ。頭に「いまどこにいるか」を出す */
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  margin: 0 0 18px;
+}
+.crumbs a { color: var(--ink-mid); text-decoration: none; }
+.crumbs a:hover { color: var(--flag); text-decoration: underline; }
+.crumbs span[aria-hidden] { color: var(--ink-dim); }
+.crumbs [aria-current] { color: var(--ink); font-weight: 600; }
+.guide-page .guide { margin-top: 0; }
+.guide-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 10px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.guide-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 40px;
+}
+.guide-pager a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--wire);
+  border-radius: var(--radius);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+.guide-pager a small { color: var(--ink-dim); font-weight: 400; font-size: 0.76rem; }
+.guide-pager a:hover { border-color: var(--flag); }
+.guide-pager .next { text-align: right; grid-column: 2; }
 #popover .pop-rel {
   display: block;
   margin-top: 9px;
@@ -2779,3 +2844,6 @@ body { overflow-x: clip; }
 .netgraph { margin: 4px 0 10px; }
 .netgraph summary { cursor: pointer; color: var(--flag); font-size: 0.9rem; }
 .netgraph img { display: block; max-width: 100%; margin-top: 8px; border-radius: 10px; }
+
+/* ノード名のポップアップから飛んだとき、上のバーに隠れないように */
+.nodecard { scroll-margin-top: 96px; }

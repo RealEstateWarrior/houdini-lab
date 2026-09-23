@@ -872,6 +872,71 @@ a.chip-card { text-decoration: none; }
   margin: 2px 0 8px;
 }
 #popover .pop-def { color: var(--ink-mid); margin: 0; }
+#popover .pop-term--node { font-family: var(--font-mono); font-weight: 500; }
+#popover .pop-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--flag);
+  text-decoration: none;
+}
+#popover .pop-link::after { content: " →"; }
+#popover .pop-link:hover { text-decoration: underline; }
+
+/* 本文のノード名。押すと種類と一言が出る。用語（点線）と見分けられるよう、下線は実線の細線 */
+code.node-ref {
+  cursor: help;
+  box-shadow: inset 0 -1px 0 var(--flag);
+}
+code.node-ref:hover { color: var(--flag); }
+code.node-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 2px; }
+
+/* 1本ずつの実践ページ。頭に「いまどこにいるか」を出す */
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  margin: 0 0 18px;
+}
+.crumbs a { color: var(--ink-mid); text-decoration: none; }
+.crumbs a:hover { color: var(--flag); text-decoration: underline; }
+.crumbs span[aria-hidden] { color: var(--ink-dim); }
+.crumbs [aria-current] { color: var(--ink); font-weight: 600; }
+.guide-page .guide { margin-top: 0; }
+.guide-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4.2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 10px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.guide-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 40px;
+}
+.guide-pager a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--wire);
+  border-radius: var(--radius);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+.guide-pager a small { color: var(--ink-dim); font-weight: 400; font-size: 0.76rem; }
+.guide-pager a:hover { border-color: var(--flag); }
+.guide-pager .next { text-align: right; grid-column: 2; }
 #popover .pop-rel {
   display: block;
   margin-top: 9px;
@@ -2784,6 +2849,9 @@ body { overflow-x: clip; }
 .netgraph summary { cursor: pointer; color: var(--flag); font-size: 0.9rem; }
 .netgraph img { display: block; max-width: 100%; margin-top: 8px; border-radius: 10px; }
 
+/* ノード名のポップアップから飛んだとき、上のバーに隠れないように */
+.nodecard { scroll-margin-top: 96px; }
+
 
 /* ---------- 親ページ（部の入口） ---------- */
 
@@ -2975,21 +3043,21 @@ body { overflow-x: clip; }
       <p>同じものを自分で組むための手順書。1段ごとに図が付いています。</p>
     </div>
       <div class="tiles">
-        <a class="tile" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guides">
+        <a class="tile" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-snow" target="_blank" rel="noopener">
           <img src="pr_snow_hero.png" loading="lazy" decoding="async" alt="石灯籠に雪を積もらせるの完成図">
           <span class="tile-body">
             <h4>石灯籠に雪を積もらせる</h4>
             <p>雪は上から降るので、積もるのは「上を向いていて、上に何もない面」だけ。その面に粒をまき、粒をまとめて1つの塊（VDB）にすると、角の丸い、ぽってりした雪になる。形を選ばず、どん…</p>
           </span>
         </a>
-        <a class="tile" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guides">
+        <a class="tile" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-ocean" target="_blank" rel="noopener">
           <img src="pr_ocean_hero.png" loading="lazy" decoding="async" alt="夕暮れの海の波を作るの完成図">
           <span class="tile-body">
             <h4>夕暮れの海の波を作る</h4>
             <p>海はシミュレーションしなくても作れる。風の強さから波の混ざり方（スペクトル）を決め、平らな板の点をその通りに動かすだけ。波のとがった所に白い泡の色を付け、低い夕日を逆光にすると…</p>
           </span>
         </a>
-        <a class="tile" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guides">
+        <a class="tile" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-jelly" target="_blank" rel="noopener">
           <img src="pr_jelly_hero.png" loading="lazy" decoding="async" alt="ゼリーをぷるんと揺らすの完成図">
           <span class="tile-body">
             <h4>ゼリーをぷるんと揺らす</h4>
@@ -3028,14 +3096,14 @@ body { overflow-x: clip; }
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guides">すべて見る（46本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-glow"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-karma"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-vex"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-groom"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-sparks"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-sign"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-path"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-terrain"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-glow" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-karma" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-vex" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-groom" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-sparks" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-sign" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-path" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-terrain" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
         <a class="menu-door" href="https://claude.ai/artifact/XqNSd943n6cguxcULeHxBz"><img src="thumb_201.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>201本の実験。最新は実験201</small></span></a>
@@ -3511,6 +3579,11 @@ body { overflow-x: clip; }
 
     function go(item) {
       hide();
+      /* 実践は1本ずつのページ。新しいタブで開く */
+      if (item.guide) {
+        window.open(item.href, "_blank", "noopener");
+        return;
+      }
       if (data.tabs && item.tab) {
         if (window.location.hash !== "#" + item.tab) {
           window.location.hash = "#" + item.tab;
@@ -3523,14 +3596,6 @@ body { overflow-x: clip; }
                                       block: "start" });
             }
           }, 60);
-        }
-        /* 手順は、タブを開くだけでなくその手順そのものを開く。
-           一覧から探し直させない */
-        if (item.guide) {
-          setTimeout(function () {
-            var card = document.querySelector('[data-guide="' + item.guide + '"]');
-            if (card) { card.click(); }
-          }, 80);
         }
         return;
       }

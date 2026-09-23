@@ -350,12 +350,17 @@
        別のページの検索から手順を選んだときの行き先 */
     function openFromHash(hash, push) {
       var name = (hash || "").replace("#", "");
+      /* 古いリンク（#guide-<id>）は、1本ずつのページへ送る */
       if (name.indexOf("guide-") === 0) {
-        show("guides", false);
-        var id = name.slice(6);
+        window.location.replace("guide_" + name.slice(6) + ".html");
+        return true;
+      }
+      /* #node-<番号> で来たら、ノード解説を開いてその箱まで送る（ノード名のポップアップから） */
+      if (name.indexOf("node-") === 0 && panels.nodes) {
+        show("nodes", false);
         setTimeout(function () {
-          var card = document.querySelector('[data-guide="' + id + '"]');
-          if (card) { card.click(); }
+          var card = document.getElementById(name);
+          if (card) { card.scrollIntoView({ block: "start" }); }
         }, 60);
         return true;
       }
@@ -505,61 +510,12 @@
     });
   })();
 
-  /* 手順のポップアップ。
-
-     中身はページの中に隠して置いてある（#guide-store）。
-     開くときはその節そのものをポップアップへ移し、閉じるときに戻す。
-     作り直すのではなく動かすので、用語のポップアップなど、
-     すでに付いている仕掛けがそのまま生きる。 */
-  (function () {
-    var store = document.getElementById("guide-store");
-    var modal = document.getElementById("guide-modal");
-    var body = document.getElementById("guide-modal-body");
-    if (!store || !modal || !body) { return; }
-    var current = null;
-    var opener = null;
-
-    function close() {
-      if (current) { store.appendChild(current); current = null; }
-      modal.hidden = true;
-      document.body.style.overflow = "";
-      if (opener) { opener.focus(); opener = null; }
-    }
-
-    function open(id, button) {
-      var section = document.getElementById("guide-" + id);
-      if (!section) { return; }
-      if (current) { store.appendChild(current); }
-      body.appendChild(section);
-      current = section;
-      modal.hidden = false;
-      body.scrollTop = 0;
-      document.body.style.overflow = "hidden";
-      opener = button || null;
-      document.getElementById("guide-close").focus();
-    }
-
-    document.addEventListener("click", function (event) {
-      var card = event.target.closest("[data-guide]");
-      if (card) {
-        event.preventDefault();
-        open(card.dataset.guide, card);
-        return;
-      }
-      if (event.target.closest("#guide-close")) { close(); return; }
-      if (modal.hidden) { return; }
-      if (event.target === modal) { close(); }
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && !modal.hidden) { close(); }
-    });
-
-    /* タブを移る／別のポップアップが開くときは、こちらを畳む */
-    document.addEventListener("click", function (event) {
-      if (event.target.closest(".nav-tab") || event.target.closest("[data-exp]")) {
-        if (!modal.hidden) { close(); }
-      }
-    }, true);
-  })();
+  /* 実践（と制作）のカード。1本ずつのページを新しいタブで開く。
+     ページの名前は guide_<id>.html（build_site.py の guide_page）。 */
+  document.addEventListener("click", function (event) {
+    var card = event.target.closest("[data-guide]");
+    if (!card) { return; }
+    event.preventDefault();
+    window.open("guide_" + card.dataset.guide + ".html", "_blank", "noopener");
+  });
 </script>

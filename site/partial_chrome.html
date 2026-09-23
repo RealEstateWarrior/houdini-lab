@@ -483,6 +483,11 @@
 
     function go(item) {
       hide();
+      /* 実践は1本ずつのページ。新しいタブで開く */
+      if (item.guide) {
+        window.open(item.href, "_blank", "noopener");
+        return;
+      }
       if (data.tabs && item.tab) {
         if (window.location.hash !== "#" + item.tab) {
           window.location.hash = "#" + item.tab;
@@ -495,14 +500,6 @@
                                       block: "start" });
             }
           }, 60);
-        }
-        /* 手順は、タブを開くだけでなくその手順そのものを開く。
-           一覧から探し直させない */
-        if (item.guide) {
-          setTimeout(function () {
-            var card = document.querySelector('[data-guide="' + item.guide + '"]');
-            if (card) { card.click(); }
-          }, 80);
         }
         return;
       }

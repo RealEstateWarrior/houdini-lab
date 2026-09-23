@@ -221,9 +221,19 @@ def panel_url(urls, panel):
     return f'{urls[page]}#{panel}'
 
 
+def guide_page(guide_id):
+    """実践（と制作）1本ずつのページの名前。ポップアップをやめて独立させた（2026-09-23）。"""
+    return f"guide_{guide_id}.html"
+
+
 def guide_url(urls, guide_id):
-    """実践ひとつを開く住所。実践は guides のページが持っている。"""
-    return f'{urls[PANEL_PAGE["guides"]]}#guide-{guide_id}'
+    """実践ひとつを開く住所。実践一覧のページと同じ場所に、1本ずつのページを置く。"""
+    base = urls[PANEL_PAGE["guides"]]
+    if base.startswith("http"):
+        # Claude 版（Artifact）は出し直しをやめたので、古い形のまま
+        return f'{base}#guide-{guide_id}'
+    folder = base.rsplit("/", 1)[0] + "/" if "/" in base else ""
+    return folder + guide_page(guide_id)
 
 
 DONE = [
@@ -1579,7 +1589,7 @@ def render_sp_guides(guides, urls, count=3):
     out = ['      <div class="tiles">']
     for guide in list(reversed(guides["guides"]))[:count]:
         out.append('        <a class="tile" href="'
-                   + panel_url(urls, "guides") + '">')
+                   + guide_url(urls, guide["id"]) + '" target="_blank" rel="noopener">')
         out.append(f'          <img src="{guide["hero"]}" loading="lazy"'
                    f' decoding="async" alt="{html.escape(guide["title"])}の完成図">')
         out.append('          <span class="tile-body">')
@@ -1837,6 +1847,46 @@ def link_terms_in(markup):
     return linked
 
 
+def node_index(nodes):
+    """ノード名 → (種類, 一言, 解説での番号)。番号は解説ページの id="node-N" と同じ数え方。"""
+    table = {}
+    index = -1
+    for group in nodes["groups"]:
+        for node in group["nodes"]:
+            index += 1
+            table.setdefault(node["name"], (node["kind"], node["one"], index))
+    return table
+
+
+def render_node_data(nodes, urls):
+    """ノード名のポップアップが読む表。解説ページの住所も一緒に渡す。"""
+    ref = panel_url(urls, "nodes").split("#")[0]
+    body = json.dumps({"ref": ref,
+                       "nodes": {name: list(v) for name, v in node_index(nodes).items()}},
+                      ensure_ascii=False).replace("</", "<\\/")
+    return f'<script type="application/json" id="node-data">{body}</script>'
+
+
+NODE_CODE = re.compile(r"<code>([A-Za-z][\w]*(?:::[\d.]+)?)</code>")
+
+
+def link_nodes_in(markup, table):
+    """本文の <code>ノード名</code> を、押すと説明が出る札にする（2026-09-23）。
+
+    名前がノード解説にあるものだけ。<script> の中（検索用の JSON など）は触らない。
+    """
+    def fix(match):
+        name = match.group(1).split("::")[0]
+        if name not in table:
+            return match.group(0)
+        return (f'<code class="node-ref" data-node="{name}" tabindex="0"'
+                f' role="button">{match.group(1)}</code>')
+
+    parts = re.split(r"(<script\b.*?</script>)", markup, flags=re.S)
+    return "".join(part if part.startswith("<script") else NODE_CODE.sub(fix, part)
+                   for part in parts)
+
+
 def render_guide_cards(guides):
     """手順の一覧。カードを押すとポップアップで開く。
 
@@ -1945,7 +1995,8 @@ def render_strip(guides, urls):
     for pass_no in (1, 2):
         hidden = ' aria-hidden="true" tabindex="-1"' if pass_no == 2 else ""
         for guide in items:
-            out.append(f'          <a class="chip-card" href="{guide_url(urls, guide["id"])}"{hidden}>')
+            out.append(f'          <a class="chip-card" href="{guide_url(urls, guide["id"])}"'
+                       f' target="_blank" rel="noopener"{hidden}>')
             out.append(f'            <img src="{guide["hero"]}" alt=""'
                        ' loading="lazy" decoding="async">')
             out.append(f'            <span>{html.escape(guide["title"])}</span>')
@@ -1972,7 +2023,7 @@ def render_menu_cards(guides, urls, data, nodes):
            f'<a href="{panel_url(urls, "guides")}">すべて見る（{len(guides["guides"])}本）</a></div>',
            '      <div class="menu-rail">']
     for g in picks:
-        out.append(f'        <a class="menu-card" href="{guide_url(urls, g["id"])}">'
+        out.append(f'        <a class="menu-card" href="{guide_url(urls, g["id"])}" target="_blank" rel="noopener">'
                    f'<img src="{g["hero"]}" alt="" loading="lazy" decoding="async">'
                    f'<span>{html.escape(g["title"])}</span></a>')
     out.append("      </div>")
@@ -2020,14 +2071,20 @@ def render_work_cards(works):
 
 
 def render_guides(guides, works, urls):
-    """実践と制作の中身。ふだんは隠しておき、カードを押したらポップアップへ移す。
+    """実践一覧のページには、もう中身を置かない（1本ずつのページへ移した。2026-09-23）。"""
+    return ""
+
+
+def render_guide_sections(guides, works, urls):
+    """実践と制作の中身を1本ずつ作る。{id: (見出し, HTML, 実践か制作か, 元のデータ)}
 
     1段ごとに図を置く。最後に完成図と、組み上がったノードグラフを出して、
     詳しく知りたい人だけが実験ログへ行けるようにする。
     """
     anchors = {item["no"]: (item["anchor"], item.get("log", "log_pm"))
                for item in DONE}
-    out = ['      <div id="guide-store" hidden>']
+    sections = {}
+    out = []
     # 実践（guides.json）と制作（works.json）は同じ形で出す。
     # 画像の名前だけが guide_… / work_… で分かれるので、頭を付け替えて回す。
     items = ([(item, "guide") for item in guides["guides"]]
@@ -2164,17 +2221,10 @@ def render_guides(guides, works, urls):
         out.append("          </p>")
         out.append("        </div>")
         out.append("      </section>")
-        out[section_start:] = [link_terms_in("\n".join(out[section_start:]))]
-    out.append("      </div>")
-    out.append("")
-    out.append('      <div class="modal modal--wide" id="guide-modal" hidden>')
-    out.append('        <div class="modal-card">')
-    out.append('          <button type="button" class="modal-close"'
-               ' id="guide-close" aria-label="閉じる">&#10005;</button>')
-    out.append('          <div class="modal-body" id="guide-modal-body"></div>')
-    out.append("        </div>")
-    out.append("      </div>")
-    return "\n".join(out)
+        sections[guide["id"]] = (guide["title"],
+                                 link_terms_in("\n".join(out[section_start:])),
+                                 prefix, guide)
+    return sections
 
 
 def render_exp_data(urls):
@@ -2513,9 +2563,12 @@ def strip_panels(page, keep):
 
 def render(template_name, out_dir, out_name, active, tabs, urls,
            data, nodes, guides, works, requests, css, links_body,
-           popover, chrome, bundle=None):
+           popover, chrome, bundle=None, extra=None):
     with open(os.path.join(SITE, template_name), encoding="utf-8") as fp:
         page = fp.read()
+    # 1本ずつのページ（実践）の差し込み。共通の差し込みより先に埋める
+    for needle, value in (extra or {}).items():
+        page = page.replace(needle, value)
 
     panels = PAGE_PANELS.get(bundle) if bundle else None
     if panels:
@@ -2546,7 +2599,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_SECTION-->", render_section(data)),
         ("<!--GLOSSARY_NAV-->", render_gloss_nav(data)),
         ("<!--GLOSSARY_DATA-->", render_data(data)),
-        ("<!--POPOVER-->", popover),
+        ("<!--POPOVER-->", render_node_data(nodes, urls) + "\n" + popover),
         ("<!--CHROME-->", chrome),
         ("<!--MENU_CARDS-->", render_menu_cards(guides, urls, data, nodes)),
         ("<!--SEARCH_DATA-->",
@@ -2590,6 +2643,11 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         page = inject_experiment_links(page, urls, nodes)
         page = retarget_exp_anchors(page)
 
+    # ノード名のポップアップ。ノード解説そのもの（ref）は、つまみ名の <code> と
+    # ノード名がぶつかるので付けない
+    if bundle != "ref":
+        page = link_nodes_in(page, node_index(nodes))
+
     if out_dir in (DOCS, ROOT):
         page = as_document(page, out_name if out_dir == DOCS else None)
 
@@ -2602,6 +2660,59 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     with open(out_path, "w", encoding="utf-8") as fp:
         fp.write(page)
     return out_path
+
+
+# 1本ずつの実践ページの説明文とカード画像（page_meta と sitemap が読む）
+GUIDE_META = {}
+
+
+def write_guide_pages(out_dir, urls, data, nodes, guides, works, requests, css,
+                      links_body, popover, chrome):
+    """実践と制作を1本ずつのページにする（2026-09-23。ポップアップは見づらかった）。
+
+    頭に「いまどこにいるか」（ホーム › 実践 › 題）を出し、終わりに前後の実践への送りを置く。
+    """
+    sections = render_guide_sections(guides, works, urls)
+    order = {"guide": [g["id"] for g in guides["guides"]],
+             "work": [w["id"] for w in works["works"]]}
+    written = 0
+    for gid, (title, body, prefix, guide) in sections.items():
+        kind_label, kind_panel = ("実践", "guides") if prefix == "guide" else ("制作", "works")
+        crumbs = "\n".join([
+            f'      <a href="{urls["home"]}">{DEPT}</a>',
+            '      <span aria-hidden="true">›</span>',
+            f'      <a href="{panel_url(urls, kind_panel)}">{kind_label}</a>',
+            '      <span aria-hidden="true">›</span>',
+            f'      <span aria-current="page">{html.escape(title)}</span>',
+        ])
+        # ページの主題なので、見出しは h1 にする（ポップアップのときは h3 だった）
+        body = body.replace(f'          <h3>{html.escape(title)}</h3>',
+                            f'          <h1>{html.escape(title)}</h1>', 1)
+        ids = order[prefix]
+        at = ids.index(gid)
+        by_id = {g["id"]: g for g in guides["guides"] + works["works"]}
+        pager = []
+        if at > 0:
+            prev = by_id[ids[at - 1]]
+            pager.append(f'      <a class="prev" href="{guide_page(prev["id"])}">'
+                         f'<small>← 前の{kind_label}</small>{html.escape(prev["title"])}</a>')
+        if at + 1 < len(ids):
+            nxt = by_id[ids[at + 1]]
+            pager.append(f'      <a class="next" href="{guide_page(nxt["id"])}">'
+                         f'<small>次の{kind_label} →</small>{html.escape(nxt["title"])}</a>')
+        pager_html = ('    <nav class="guide-pager" aria-label="前後の' + kind_label + '">\n'
+                      + "\n".join(pager) + "\n    </nav>") if pager else ""
+        name = guide_page(gid)
+        lede = re.sub(r"<[^>]+>", "", guide.get("lede", ""))
+        GUIDE_META[name] = (lede[:120], guide.get("hero", OG_IMAGE))
+        render("guide_template.html", out_dir, name, "guides", False, urls,
+               data, nodes, guides, works, requests, css, links_body, popover, chrome,
+               None, extra={"<!--GUIDE_TITLE-->": html.escape(title),
+                            "<!--CRUMBS-->": crumbs,
+                            "<!--GUIDE_BODY-->": body,
+                            "<!--GUIDE_PAGER-->": pager_html})
+        written += 1
+    return written
 
 
 def retarget_exp_anchors(page):
@@ -2651,7 +2762,12 @@ def page_meta(head, out_name):
     title = found.group(1).strip() if found else DEPT
     if "<!--" in title:
         title = DEPT
-    desc = html.escape(PAGE_DESCRIPTION.get(out_name, PAGE_DESCRIPTION["index.html"]))
+    image = OG_IMAGE
+    if out_name in GUIDE_META:
+        desc, image = GUIDE_META[out_name]
+        desc = html.escape(desc)
+    else:
+        desc = html.escape(PAGE_DESCRIPTION.get(out_name, PAGE_DESCRIPTION["index.html"]))
     url = PAGES_BASE + ("" if out_name == "index.html" else out_name)
     return "\n".join([
         f'<meta name="description" content="{desc}">',
@@ -2661,7 +2777,7 @@ def page_meta(head, out_name):
         f'<meta property="og:title" content="{title}">',
         f'<meta property="og:description" content="{desc}">',
         f'<meta property="og:url" content="{url}">',
-        f'<meta property="og:image" content="{PAGES_BASE}{OG_IMAGE}">',
+        f'<meta property="og:image" content="{PAGES_BASE}{image}">',
         '<meta name="twitter:card" content="summary_large_image">',
         favicon_link(),
     ])
@@ -2669,7 +2785,7 @@ def page_meta(head, out_name):
 
 def write_sitemap():
     """docs/ に sitemap.xml と robots.txt を置く。"""
-    pages = [spec[2] for spec in PAGES if spec[2]]
+    pages = [spec[2] for spec in PAGES if spec[2]] + sorted(GUIDE_META)
     today = datetime.date.today().isoformat()
     rows = "".join(
         f"  <url><loc>{PAGES_BASE}{'' if name == 'index.html' else name}</loc>"
@@ -2766,6 +2882,12 @@ def main():
                    PAGES_URLS, data, nodes, guides, works, requests, css,
                    links_body, popover, chrome, bundle)
 
+    # 実践と制作を1本ずつのページに（site/ と docs/ の両方）
+    guide_pages = 0
+    for out_dir, urls in ((SITE, ARTIFACT_URLS), (DOCS, PAGES_URLS)):
+        guide_pages = write_guide_pages(out_dir, urls, data, nodes, guides, works, requests,
+                                        css, links_body, popover, chrome)
+
     # 親ページ。クローンが置いてあるときだけ書き出す。
     root_note = "置き場が無いので飛ばした"
     if os.path.isdir(ROOT):
@@ -2782,7 +2904,7 @@ def main():
 
     total, copied = copy_images()
     docs_count = sum(1 for spec in PAGES if spec[2])
-    print(f"site/ に {len(PAGES)} ページ、docs/ に {docs_count} ページ生成")
+    print(f"site/ に {len(PAGES)} ページ、docs/ に {docs_count} ページ生成（ほかに実践・制作 {guide_pages} ページずつ）")
     print(f"親ページ: {root_note}")
     print(f"ノード {count_nodes(nodes)} 件 / 用語 {count_terms(data)} 件")
     print(f"画像 {total} 件（うち {copied} 件をコピー）")

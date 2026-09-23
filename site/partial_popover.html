@@ -5,6 +5,8 @@
   (function () {
     var dataEl = document.getElementById("glossary-data");
     var terms = dataEl ? JSON.parse(dataEl.textContent) : {};
+    var nodeEl = document.getElementById("node-data");
+    var nodeData = nodeEl ? JSON.parse(nodeEl.textContent) : { ref: "", nodes: {} };
     var pop = document.getElementById("popover");
     var active = null;
 
@@ -13,7 +15,41 @@
       if (active) { active.removeAttribute("aria-expanded"); active = null; }
     }
 
+    /* ノード名のポップアップ。種類と一言、ノード解説へのリンク */
+    function fillNode(name) {
+      var entry = nodeData.nodes[name];
+      if (!entry) { return false; }
+      pop.textContent = "";
+      var head = document.createElement("div");
+      head.className = "pop-term pop-term--node";
+      head.textContent = name;
+      pop.appendChild(head);
+      var m = document.createElement("div");
+      m.className = "pop-meta";
+      m.textContent = entry[0] + " ノード";
+      pop.appendChild(m);
+      var body = document.createElement("p");
+      body.className = "pop-def";
+      body.textContent = entry[1];
+      pop.appendChild(body);
+      if (nodeData.ref) {
+        var link = document.createElement("a");
+        link.className = "pop-link";
+        link.href = nodeData.ref + "#node-" + entry[2];
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = "ノード解説で詳しく読む";
+        pop.appendChild(link);
+      }
+      return true;
+    }
+
     function open(button) {
+      if (button.dataset.node) {
+        if (!fillNode(button.dataset.node)) { return; }
+        place(button);
+        return;
+      }
       var entry = terms[button.dataset.term];
       if (!entry) { return; }
 
@@ -46,6 +82,10 @@
         body.appendChild(rel);
       }
 
+      place(button);
+    }
+
+    function place(button) {
       pop.hidden = false;
 
       var rect = button.getBoundingClientRect();
@@ -69,7 +109,7 @@
     }
 
     document.addEventListener("click", function (event) {
-      var button = event.target.closest(".term");
+      var button = event.target.closest(".term, .node-ref");
       if (button) {
         event.preventDefault();
         if (active === button) { close(); } else { open(button); }
@@ -79,7 +119,13 @@
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") { close(); }
+      if (event.key === "Escape") { close(); return; }
+      /* ノード名は <code> なので、Enter とスペースでも開けるようにする */
+      var node = event.target.closest && event.target.closest(".node-ref");
+      if (node && (event.key === "Enter" || event.key === " ")) {
+        event.preventDefault();
+        if (active === node) { close(); } else { open(node); }
+      }
     });
 
     window.addEventListener("resize", close);
