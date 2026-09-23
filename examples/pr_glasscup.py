@@ -55,8 +55,9 @@ def main():
         "foreach (vector p; pts) addvertex(0, prim, addpoint(0, p));"))
     water_prof.parm("class").set(0)
     water = g.node("revolve::2.0", "water", [water_prof], divs=96)
-    liquid_ml = g.node("measure::2.0", "water_volume", [water], measure="volume")
-    vol_ml = sum(p.attribValue("volume") for p in liquid_ml.geometry().prims()) * 1e6 \
+    liquid_ml = g.node("measure::2.0", "water_volume", [water], measure="volume", attribname="volume")
+    # 断面をたどる向きで面が内向きになり、体積が負で出る。大きさだけ使う
+    vol_ml = abs(sum(p.attribValue("volume") for p in liquid_ml.geometry().prims())) * 1e6 \
         if liquid_ml.geometry().findPrimAttrib("volume") else 0
     g.step(water, "水を入れる",
            f"内側の壁に沿った断面を、もう1つの Detail の <code>attribwrangle</code> で描き、同じく <code>revolve</code> で回す。水面は高さ {WATER_TOP * 100:.0f} cm。"
@@ -93,13 +94,13 @@ def main():
            "透明な物は、後ろの明るい所と暗い所の境目が曲がって見えることで形が分かる。撮るときは、背景に明暗の差を作る。",
            cap="材質を当てた状態（ビューポートでは透けない）。", shot=False)
     g.hero(final, "Karma で撮った仕上がり。ガラス・水・氷の屈折の違いで、それぞれの形が見える。",
-           direction=(1.0, 0.25, 1.2), key=2.5, rim=10.0, dome=0.4, spp=48, margin=1.15, denoise=True,
-           backdrop=(0.35, 0.36, 0.38), bbox=hou.BoundingBox(-0.04, 0, -0.04, 0.04, 0.105, 0.04))
+           direction=(1.0, 0.25, 1.2), key=0.08, rim=0.5, dome=0.015, spp=16, margin=1.15, denoise=True,
+           backdrop=(0.12, 0.125, 0.13), bbox=hou.BoundingBox(-0.04, 0, -0.04, 0.04, 0.105, 0.04))
 
     # ---- 落とし穴を測る ----
     def ml(divs):
         water.parm("divs").set(divs)
-        return sum(p.attribValue("volume") for p in liquid_ml.geometry().prims()) * 1e6
+        return abs(sum(p.attribValue("volume") for p in liquid_ml.geometry().prims())) * 1e6
 
     v8 = ml(8)
     v24 = ml(24)
@@ -108,6 +109,14 @@ def main():
         {"title": "Divisions が少ないと、水の量まで減る",
          "body": f"水の revolve の Divisions を 8 にすると {v8:.0f} ml、24 で {v24:.0f} ml、96 で {vol_ml:.0f} ml。"
                  "少ない分割では、円が内側の多角形になるので、見た目が角ばるだけでなく体積も小さく出る（実験118）。",
+         "img": "", "cap": ""},
+        {"title": "小さな物は、明かりを弱くする",
+         "body": "このグラスは高さ 10 cm。ほかの実践と同じ明かり（キー 2.5・リム 10）で撮ると、画面が真っ白に飛んだ。"
+                 "撮影用の明かりは物の大きさに合わせて近くに置かれるので、小さな物ほど強く当たる。キー 0.08・リム 0.5 まで下げて撮った。",
+         "img": "", "cap": ""},
+        {"title": "透明な物は、サンプル数を上げると時間が大きく延びる",
+         "body": "はじめ 96 サンプルで撮ろうとしたら、25 分たっても終わらなかった。測ると、サンプルを 1 増やすごとに延びる時間が、"
+                 "不透明な物の 6 倍だった（実験203）。16 サンプルにして、ざらつきはノイズ除去（OIDN）で消す。",
          "img": "", "cap": ""},
     ]
     g.save(facts=[["足すノード", "15個（材質3つ）"], ["水の量", f"{vol_ml:.0f} ml"]], traps=traps)
