@@ -1,0 +1,66 @@
+{
+ "id": "gears",
+ "title": "歯車をかみ合わせて回す",
+ "lede": "円の縁を歯の数だけ出っぱらせて歯車にする。歯の大きさ（モジュール）をそろえた歯車どうしは、中心の距離を「2つの半径の和」にするとかみ合う。回す速さは歯の数の比で決まり、式で回すのでシミュレーションは要らない。",
+ "hero": "pr_gears_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。歯の数の違う3つの真ちゅうの歯車。",
+ "facts": [
+  [
+   "足すノード",
+   "18個（材質1つ）"
+  ],
+  [
+   "歯の数",
+   "24・12・36"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "64.6秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_gears.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "アニメーション",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "歯車を1つ作る",
+   "node": "merge",
+   "ui_node": "gear_with_axle",
+   "body": "<code>circle</code>（720 分割）の縁の点を、<code>attribwrangle</code> で角度に合わせて外へ出し入れして歯にする。<strong>cos(角度 × 歯の数)</strong> は歯1つぶんで1回、山と谷をくり返す。これを 2.2 倍して ±1 で切ると、山と谷が平らな台形の歯になる。歯の大きさ <strong>module = 0.01</strong>（1 cm）のとき、半径は module × 歯の数 ÷ 2（24 枚なら 12 cm）。<code>polyextrude</code> で厚さ 1.2 cm にし、真ん中に軸の <code>tube</code> を通す。",
+   "img": "pr_gears_1.png",
+   "cap": "24 枚歯の歯車。",
+   "ui_parm": "teeth"
+  },
+  {
+   "title": "かみ合う位置に置き、歯の数の比で回す",
+   "node": "merge",
+   "ui_node": "gear_train",
+   "body": "同じ作り方で、歯の数 24・12・36 の歯車を作る（歯の大きさはそろえる）。中心の距離を「2つの半径の和」にすると歯がかみ合う。<code>xform</code> の Rotate Y に式を入れて回す。24 枚を <strong>$T * 45</strong>（1 秒に 45度）にしたら、かみ合う歯車は <strong>逆向きに 24 ÷ 歯の数 倍</strong>（12 枚は −90度、36 枚は −30度）で回す。はじめの角度を半歯ぶんずらしておくと、歯が相手のすき間にはまる。",
+   "img": "pr_gears_2.png",
+   "cap": "3つの歯車。",
+   "ui_parm": "ry"
+  },
+  {
+   "title": "真ちゅうの材質",
+   "node": "material",
+   "ui_node": "assign_brass",
+   "body": "<code>principledshader</code> で <strong>Metallic 1・Roughness 0.3</strong>、色を真ちゅうの黄色にする。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "直径は、歯の数に比例する",
+   "body": "歯 24・12・36 枚の歯車の、歯先までの直径は 26.0・14.0・38.0 cm。歯の大きさ（module）をそろえると、直径は歯の数に比例する（歯先は module 1 つ分さらに外）。だから、中心の距離は module × (歯の数1 + 歯の数2) ÷ 2 で決まる。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "3つの歯車がかみ合って回る（96 フレーム＝4 秒）。"
+}

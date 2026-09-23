@@ -1,0 +1,453 @@
+[
+ {
+  "spec": "dop/popwrangle",
+  "ok": true,
+  "category": "DOP",
+  "name": "popwrangle",
+  "label": "POP Wrangle",
+  "parms": [
+   {
+    "name": "activate",
+    "label": "Activation",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usegroup",
+    "label": "Label",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "partgroup",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "folder1",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "snippet",
+    "label": "VEXpression",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "exportlist",
+    "label": "Attributes to Create",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_strict",
+    "label": "Enforce Prototypes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "autobind",
+    "label": "Autobind by Name",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindings",
+    "label": "Attribute Bindings",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "bindfield_num",
+    "label": "Field Bindings",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "groupautobind",
+    "label": "Autobind Groups by Name",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "groupbindings",
+    "label": "Group Bindings",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "vex_updatenmls",
+    "label": "Update Normals If Displaced",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vex_precision",
+    "label": "VEX Precision",
+    "default": [
+     "auto"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "auto",
+      "Auto"
+     ],
+     [
+      "32",
+      "32-bit"
+     ],
+     [
+      "64",
+      "64-bit"
+     ]
+    ]
+   },
+   {
+    "name": "bindinputmenu1",
+    "label": "Input 1",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput1",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput1",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself1",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindinputmenu2",
+    "label": "Input 2",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput2",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput2",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself2",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindinputmenu3",
+    "label": "Input 3",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput3",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput3",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself3",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindinputmenu4",
+    "label": "Input 4",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "sop",
+      "SOP"
+     ],
+     [
+      "dopdata",
+      "DOP Data"
+     ],
+     [
+      "self",
+      "Myself"
+     ],
+     [
+      "first",
+      "First Context Geometry"
+     ],
+     [
+      "second",
+      "Second Context Geometry"
+     ],
+     [
+      "third",
+      "Third Context Geometry"
+     ],
+     [
+      "fourth",
+      "Fourth Context Geometry"
+     ],
+     [
+      "selfraw",
+      "Myself (No Reads of Outputs)"
+     ]
+    ]
+   },
+   {
+    "name": "bindgeoinput4",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopinput4",
+    "label": "DOP Data",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "binddopuseself4",
+    "label": "Use This Object's Data",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "bindgeo",
+    "label": "Geometry",
+    "default": [
+     "Geometry"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_cwdpath",
+    "label": "Evaluation Node Path",
+    "default": [
+     "."
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_outputmask",
+    "label": "Export Parameters",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "usetimestep",
+    "label": "Use Timestep",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "timescale",
+    "label": "Time Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ }
+]

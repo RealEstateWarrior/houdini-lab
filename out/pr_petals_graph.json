@@ -1,0 +1,136 @@
+{
+  "title": "桜の花びらが舞い散る",
+  "network": "/obj/petals",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "petal_blank",
+      "type": "grid",
+      "pos": [
+        -1.13,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "rows": 6
+      }
+    },
+    {
+      "name": "petal_shape",
+      "type": "attribwrangle",
+      "pos": [
+        -1.13,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 桜の花びら：丸い形で、先に小さな切れ込み。少し反らす\nfloat u = @P.x + 0.5;                 // 付け根 0 → 先 1\nfloat w = sin(PI * pow(u, 0.7)) * ..."
+      }
+    },
+    {
+      "name": "blossom_area",
+      "type": "grid",
+      "pos": [
+        5.083,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 3.0,
+        "sizey": 1.2,
+        "ty": 2.4,
+        "tz": -0.3,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "fall",
+      "type": "dopnet",
+      "pos": [
+        5.083,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "in_air",
+      "type": "dopimport::2.0",
+      "pos": [
+        1.13,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/petals/fall"
+      }
+    },
+    {
+      "name": "petal_copies",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_petal",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/petal_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "petal_blank",
+      "from_output": 0,
+      "to": "petal_shape",
+      "to_input": 0
+    },
+    {
+      "from": "petal_shape",
+      "from_output": 0,
+      "to": "petal_copies",
+      "to_input": 0
+    },
+    {
+      "from": "in_air",
+      "from_output": 0,
+      "to": "petal_copies",
+      "to_input": 1
+    },
+    {
+      "from": "petal_copies",
+      "from_output": 0,
+      "to": "assign_petal",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # STATE — 新しいセッションはまずこれだけ読む
 
-最終更新: 2026-09-23 夜（実験201・実践41本・ノード375件・用語412語・効率化50項目）
+最終更新: 2026-09-24 朝（実験201・実践69本＋ドーナツ・ノード383件・用語430語・効率化50項目）
 
 ## いまの状態
 
@@ -95,6 +95,22 @@
 - 実践・制作は1本ずつのページ `guide_<id>.html`（build_site.py の write_guide_pages／site/guide_template.html）。カードは新しいタブで開く。頭に現在地（Houdini 研究部 › 実践 › 題）、終わりに前後の実践
 - 本文の `<code>ノード名</code>` は押すと種類・一言・ノード解説へのリンクが出る（link_nodes_in／render_node_data／partial_popover.html）。reference ページには付けない
 - エフェクトはフォトリアルを目指す。作る前に本物の参考写真を集める（ユーザー指示 2026-09-23）
+
+## 2026-09-24 夜の作業で分かったこと（実践 47〜70）
+
+- **動き**: practice_kit の `g.anim(node, (1, LAST), cap, bbox=…)` で pr_<id>_anim.mp4（ビューポートの連番→ffmpeg）。透明な材質は消えるので、撮る間だけ材質と幕を外している。
+  前に作ったシミュレーション24本は `hython examples/pr_anim_add.py <id> <最後のフレーム> "キャプション" [ノード]` で後付け（キャプションは out/_anim_caps.json → practice_merge.py が混ぜる）。
+  Git Bash で /obj/… を渡すときは `MSYS_NO_PATHCONV=1` を付ける（付けないとパスが化ける）
+- **難易度**は build_site の guide_level が自動で出す（シミュレーション＝応用、VEX か6段以上＝基本、ほか入門）
+- **夜（画面が消えている・ロック中）は GUI のスクショが撮れない**（真っ黒。Qt の grabWindow は前の場面が写る）。代わりに hip から描いた
+  ノードのつなぎ方の図 pr_<id>_graph.png を載せる（practice_kit の save が json を書き、`python graph_report.py out/pr_<id>_graph.json out/pr_<id>_graph.png`）。
+  **47〜70 の GUI 画面（guide_ui_capture / guide_parm_capture / crop_ui_shots）は、画面の点いているときに撮り直す**
+- **Karma が極端に遅くなるもの**: グラスの水（透明3種の重なり。25分で終わらず、pr_glasscup.py は未公開）、SSS、ドーナツ（654秒）。速く撮るなら SSS と重なった透明物を避け、spp を下げて `denoise=True`
+- **トークン**: 自分で Write/Read したファイルを python や sed で書き換えると、ファイル全体が差分として返ってくる。必ず Edit を使う
+- Notebook のソースは題材ごと14本（SOURCE_STRATEGY.md の表。作り直しは nb_sources.py）。publish.py は log_A.pdf を作らなくなった
+- 落とし穴メモ: MPM は Material Type を Sandy にしないと砂にならない／Bullet の Collision Margin 0.02 で薄い物が浮く／
+  TOP の ropgeometry は保存済みの hip を別プロセスで開くので Cook 前に保存／copytopoints の色は Karma では Points に移すと確実／
+  VEX の smooth(大, 小, x) は効かない（1 − smooth(小, 大, x) と書く）／配列の { } の中に計算は書けない（append）／lsystem の J の葉は縮む
 
 ## 実践を作る型（2026-09-23 確立。目標70本）
 

@@ -1,0 +1,233 @@
+{
+  "title": "六角形のタイルを敷く",
+  "network": "/obj/hextile",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "hex_grid",
+      "type": "attribwrangle",
+      "pos": [
+        -6.636,
+        2.41
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 六角形の中心の並び。横の間隔 √3·R、縦の間隔 1.5·R、奇数の列は横に半分ずらす\nfloat R = chf('radius');\nfloat dx = sqrt(3) * R;\nfloat dz = 1.5 * R;\nf..."
+      }
+    },
+    {
+      "name": "hexagon",
+      "type": "circle",
+      "pos": [
+        -8.896,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "radx": 0.094,
+        "rady": 0.094,
+        "ry": 30.0,
+        "divs": 6
+      }
+    },
+    {
+      "name": "tile_thickness",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -8.896,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.012,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "soft_edges",
+      "type": "polybevel::3.0",
+      "pos": [
+        -8.896,
+        2.861
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.0015,
+        "divisions": 2,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "tiles",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -7.766,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetattribs": 1,
+        "applyattribs1": "Cd"
+      }
+    },
+    {
+      "name": "grout",
+      "type": "grid",
+      "pos": [
+        -4.377,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 3.0,
+        "ty": 0.004,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "tiled_floor",
+      "type": "merge",
+      "pos": [
+        -6.072,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_tile",
+      "type": "material",
+      "pos": [
+        -1.13,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/tile_mat"
+      }
+    },
+    {
+      "name": "assign_grout",
+      "type": "material",
+      "pos": [
+        1.13,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/grout_mat"
+      }
+    },
+    {
+      "name": "floor",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "hexagon",
+      "from_output": 0,
+      "to": "tile_thickness",
+      "to_input": 0
+    },
+    {
+      "from": "tile_thickness",
+      "from_output": 0,
+      "to": "soft_edges",
+      "to_input": 0
+    },
+    {
+      "from": "soft_edges",
+      "from_output": 0,
+      "to": "tiles",
+      "to_input": 0
+    },
+    {
+      "from": "hex_grid",
+      "from_output": 0,
+      "to": "tiles",
+      "to_input": 1
+    },
+    {
+      "from": "tiles",
+      "from_output": 0,
+      "to": "tiled_floor",
+      "to_input": 0
+    },
+    {
+      "from": "grout",
+      "from_output": 0,
+      "to": "tiled_floor",
+      "to_input": 1
+    },
+    {
+      "from": "tiles",
+      "from_output": 0,
+      "to": "assign_tile",
+      "to_input": 0
+    },
+    {
+      "from": "grout",
+      "from_output": 0,
+      "to": "assign_grout",
+      "to_input": 0
+    },
+    {
+      "from": "assign_tile",
+      "from_output": 0,
+      "to": "floor",
+      "to_input": 0
+    },
+    {
+      "from": "assign_grout",
+      "from_output": 0,
+      "to": "floor",
+      "to_input": 1
+    }
+  ]
+}

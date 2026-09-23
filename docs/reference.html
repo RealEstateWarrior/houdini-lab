@@ -8986,13 +8986,28 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
+        <article class="nodecard nodecard--noimg" id="node-292">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>popwrangle</h4>
+              <span class="node-kind">DOP</span>
+            </div>
+            <p class="node-one">POP の粒に、VEX で自分の決まりを足す。</p>
+            <p class="node-what">dopnet の中で popsolver の力の入口につなぐ。毎ステップ、粒ごとに VEX が走る。@TimeInc（1ステップの秒数）を使うと、向き orient を qmultiply で少しずつ回したり、速さ v に揺れを足したりできる（実践「桜の花びらが舞い散る」）。</p>
+            <ul class="node-parms">
+              <li><code>snippet</code>VEX のコード</li>
+              <li><code>activate</code>有効にする</li>
+            </ul>
+            <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
+          </div>
+        </article>
       </div>
       <div class="stage" id="force">
         <h3>力を足す・受け止める</h3>
         <p>動いているものに外から働きかける道具。重力・抵抗・風と、ぶつかる相手。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard nodecard--noimg" id="node-292">
+        <article class="nodecard nodecard--noimg" id="node-293">
           <div class="node-main">
             <div class="node-head">
               <h4>gravity</h4>
@@ -9009,7 +9024,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-293">
+        <article class="nodecard nodecard--noimg" id="node-294">
           <div class="node-main">
             <div class="node-head">
               <h4>drag</h4>
@@ -9025,7 +9040,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-294">
+        <article class="nodecard nodecard--noimg" id="node-295">
           <div class="node-main">
             <div class="node-head">
               <h4>fan</h4>
@@ -9041,7 +9056,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-295">
+        <article class="nodecard nodecard--noimg" id="node-296">
           <div class="node-main">
             <div class="node-head">
               <h4>groundplane</h4>
@@ -9059,7 +9074,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-296">
+        <article class="nodecard nodecard--noimg" id="node-297">
           <div class="node-main">
             <div class="node-head">
               <h4>staticobject</h4>
@@ -9079,7 +9094,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-297">
+        <article class="nodecard nodecard--noimg" id="node-298">
           <div class="node-main">
             <div class="node-head">
               <h4>rbdobject</h4>
@@ -9101,7 +9116,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>高さを面ではなく数の並び（ボリューム）で持つ仕組み。専用のノードが45種あり、浸食のような計算ができる。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard" id="node-298">
+        <article class="nodecard" id="node-299">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield</h4>
@@ -9124,7 +9139,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>ノイズをかけただけの状態</span>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-299">
+        <article class="nodecard nodecard--noimg" id="node-300">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield_noise</h4>
@@ -9146,7 +9161,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard" id="node-300">
+        <article class="nodecard" id="node-301">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield_erode</h4>
@@ -9171,7 +9186,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>浸食を4回。尾根と谷ができる</span>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-301">
+        <article class="nodecard nodecard--noimg" id="node-302">
           <div class="node-main">
             <div class="node-head">
               <h4>convertheightfield</h4>
@@ -9188,7 +9203,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-302">
+        <article class="nodecard nodecard--noimg" id="node-303">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield_blur</h4>
@@ -9204,7 +9219,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-303">
+        <article class="nodecard nodecard--noimg" id="node-304">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield_slump</h4>
@@ -9220,7 +9235,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-304">
+        <article class="nodecard nodecard--noimg" id="node-305">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield_maskbyfeature</h4>
@@ -9238,7 +9253,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-305">
+        <article class="nodecard nodecard--noimg" id="node-306">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield_scatter</h4>
@@ -9254,7 +9269,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-306">
+        <article class="nodecard nodecard--noimg" id="node-307">
           <div class="node-main">
             <div class="node-head">
               <h4>heightfield_project</h4>
@@ -9275,7 +9290,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>KineFX の骨は「点と線」でできている。点1つが関節1つ、線が親子のつながり。普通の SOP でそのまま加工できる。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard" id="node-307">
+        <article class="nodecard" id="node-308">
           <div class="node-main">
             <div class="node-head">
               <h4>kinefx::rigdoctor</h4>
@@ -9298,7 +9313,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>関節3つを一直線に並べたところ</span>
           </div>
         </article>
-        <article class="nodecard" id="node-308">
+        <article class="nodecard" id="node-309">
           <div class="node-main">
             <div class="node-head">
               <h4>kinefx::rigattribwrangle</h4>
@@ -9320,7 +9335,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>真ん中を60度。根元と真ん中は動いていない</span>
           </div>
         </article>
-        <article class="nodecard" id="node-309">
+        <article class="nodecard" id="node-310">
           <div class="node-main">
             <div class="node-head">
               <h4>kinefx::jointcaptureproximity</h4>
@@ -9343,7 +9358,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>骨1本だけに従わせた場合。鋭く折れる</span>
           </div>
         </article>
-        <article class="nodecard" id="node-310">
+        <article class="nodecard" id="node-311">
           <div class="node-main">
             <div class="node-head">
               <h4>kinefx::jointdeform</h4>
@@ -9366,7 +9381,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>Dual Quaternion。太さが保たれている</span>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-311">
+        <article class="nodecard nodecard--noimg" id="node-312">
           <div class="node-main">
             <div class="node-head">
               <h4>kinefx::rigpose</h4>
@@ -9383,7 +9398,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-312">
+        <article class="nodecard nodecard--noimg" id="node-313">
           <div class="node-main">
             <div class="node-head">
               <h4>kinefx::skeleton</h4>
@@ -9400,7 +9415,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-313">
+        <article class="nodecard nodecard--noimg" id="node-314">
           <div class="node-main">
             <div class="node-head">
               <h4>bonedeform</h4>
@@ -9419,7 +9434,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-314">
+        <article class="nodecard nodecard--noimg" id="node-315">
           <div class="node-main">
             <div class="node-head">
               <h4>blendshapes::2.0</h4>
@@ -9440,7 +9455,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>毛（グルーム）は2段構え。ガイド（案内役、数百本）で形を決め、そこから毛（数万本）に増やす。guide で始まるノードだけで26種ある。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard" id="node-315">
+        <article class="nodecard" id="node-316">
           <div class="node-main">
             <div class="node-head">
               <h4>fur</h4>
@@ -9463,7 +9478,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>density 600。土台は同じ球</span>
           </div>
         </article>
-        <article class="nodecard" id="node-316">
+        <article class="nodecard" id="node-317">
           <div class="node-main">
             <div class="node-head">
               <h4>hairgen::2.0</h4>
@@ -9493,7 +9508,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>ガイド300本から12,516本</span>
           </div>
         </article>
-        <article class="nodecard" id="node-317">
+        <article class="nodecard" id="node-318">
           <div class="node-main">
             <div class="node-head">
               <h4>hairclump::2.0</h4>
@@ -9516,7 +9531,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>clumpsize 0.4。144個の房になる</span>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-318">
+        <article class="nodecard nodecard--noimg" id="node-319">
           <div class="node-main">
             <div class="node-head">
               <h4>rest</h4>
@@ -9533,7 +9548,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-319">
+        <article class="nodecard nodecard--noimg" id="node-320">
           <div class="node-main">
             <div class="node-head">
               <h4>guidedeform</h4>
@@ -9556,7 +9571,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>Houdini 21 から入ったソルバ。物を粒の集まりとして持ち、計算のときだけ格子に移して解く。mpm で始まる SOP が8種、DOP が2種ある。組むのは4ノードだけだが、黙って無視されるパラメータが多い。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard" id="node-320">
+        <article class="nodecard" id="node-321">
           <div class="node-main">
             <div class="node-head">
               <h4>mpmcontainer</h4>
@@ -9584,7 +9599,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>間隔 0.12 で 1辺 1.0 の箱が 577粒</span>
           </div>
         </article>
-        <article class="nodecard" id="node-321">
+        <article class="nodecard" id="node-322">
           <div class="node-main">
             <div class="node-head">
               <h4>mpmsource</h4>
@@ -9612,7 +9627,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>materialtype = Sandy。3.44 × 0.23 × 3.51 まで広がる</span>
           </div>
         </article>
-        <article class="nodecard" id="node-322">
+        <article class="nodecard" id="node-323">
           <div class="node-main">
             <div class="node-head">
               <h4>mpmsolver</h4>
@@ -9643,7 +9658,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>30フレーム目。1.0902 × 0.6070 × 1.0817 に潰れている</span>
           </div>
         </article>
-        <article class="nodecard" id="node-323">
+        <article class="nodecard" id="node-324">
           <div class="node-main">
             <div class="node-head">
               <h4>mpmcollider</h4>
@@ -9671,7 +9686,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <span>コライダの摩擦 0.25 で 3.250318 滑る</span>
           </div>
         </article>
-        <article class="nodecard" id="node-324">
+        <article class="nodecard" id="node-325">
           <div class="node-main">
             <div class="node-head">
               <h4>mpmsurface</h4>
@@ -9700,7 +9715,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>形・カメラ・光を、場面の中のどこに置くかを決める階層。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard nodecard--noimg" id="node-325">
+        <article class="nodecard nodecard--noimg" id="node-326">
           <div class="node-main">
             <div class="node-head">
               <h4>geo</h4>
@@ -9716,7 +9731,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-326">
+        <article class="nodecard nodecard--noimg" id="node-327">
           <div class="node-main">
             <div class="node-head">
               <h4>cam</h4>
@@ -9735,7 +9750,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-327">
+        <article class="nodecard nodecard--noimg" id="node-328">
           <div class="node-main">
             <div class="node-head">
               <h4>hlight</h4>
@@ -9753,7 +9768,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-328">
+        <article class="nodecard nodecard--noimg" id="node-329">
           <div class="node-main">
             <div class="node-head">
               <h4>null</h4>
@@ -9768,7 +9783,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-329">
+        <article class="nodecard nodecard--noimg" id="node-330">
           <div class="node-main">
             <div class="node-head">
               <h4>subnet</h4>
@@ -9783,7 +9798,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-330">
+        <article class="nodecard nodecard--noimg" id="node-331">
           <div class="node-main">
             <div class="node-head">
               <h4>ambient</h4>
@@ -9804,7 +9819,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>絵やファイルとして書き出す道具。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard nodecard--noimg" id="node-331">
+        <article class="nodecard nodecard--noimg" id="node-332">
           <div class="node-main">
             <div class="node-head">
               <h4>opengl</h4>
@@ -9822,7 +9837,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-332">
+        <article class="nodecard nodecard--noimg" id="node-333">
           <div class="node-main">
             <div class="node-head">
               <h4>geometry</h4>
@@ -9839,7 +9854,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-333">
+        <article class="nodecard nodecard--noimg" id="node-334">
           <div class="node-main">
             <div class="node-head">
               <h4>alembic</h4>
@@ -9857,7 +9872,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-334">
+        <article class="nodecard nodecard--noimg" id="node-335">
           <div class="node-main">
             <div class="node-head">
               <h4>filmboxfbx</h4>
@@ -9872,7 +9887,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-335">
+        <article class="nodecard nodecard--noimg" id="node-336">
           <div class="node-main">
             <div class="node-head">
               <h4>karma</h4>
@@ -9891,7 +9906,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-336">
+        <article class="nodecard nodecard--noimg" id="node-337">
           <div class="node-main">
             <div class="node-head">
               <h4>comp</h4>
@@ -9912,7 +9927,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>番号や値を変えながら、同じ処理を何回も回して結果を書き出す道具。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard nodecard--noimg" id="node-337">
+        <article class="nodecard nodecard--noimg" id="node-338">
           <div class="node-main">
             <div class="node-head">
               <h4>topnet</h4>
@@ -9926,7 +9941,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-338">
+        <article class="nodecard nodecard--noimg" id="node-339">
           <div class="node-main">
             <div class="node-head">
               <h4>wedge</h4>
@@ -9941,7 +9956,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-339">
+        <article class="nodecard nodecard--noimg" id="node-340">
           <div class="node-main">
             <div class="node-head">
               <h4>ropgeometry</h4>
@@ -9962,7 +9977,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>見た目を作る道具。色と粗さを決める材質と、模様の元になるノイズ。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard nodecard--noimg" id="node-340">
+        <article class="nodecard nodecard--noimg" id="node-341">
           <div class="node-main">
             <div class="node-head">
               <h4>principledshader::2.0</h4>
@@ -9982,7 +9997,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-341">
+        <article class="nodecard nodecard--noimg" id="node-342">
           <div class="node-main">
             <div class="node-head">
               <h4>texture::2.0</h4>
@@ -9998,7 +10013,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-342">
+        <article class="nodecard nodecard--noimg" id="node-343">
           <div class="node-main">
             <div class="node-head">
               <h4>rampparm</h4>
@@ -10015,7 +10030,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-343">
+        <article class="nodecard nodecard--noimg" id="node-344">
           <div class="node-main">
             <div class="node-head">
               <h4>aanoise</h4>
@@ -10034,7 +10049,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-344">
+        <article class="nodecard nodecard--noimg" id="node-345">
           <div class="node-main">
             <div class="node-head">
               <h4>curlnoise</h4>
@@ -10050,7 +10065,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-345">
+        <article class="nodecard nodecard--noimg" id="node-346">
           <div class="node-main">
             <div class="node-head">
               <h4>cellnoise</h4>
@@ -10066,7 +10081,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-346">
+        <article class="nodecard nodecard--noimg" id="node-347">
           <div class="node-main">
             <div class="node-head">
               <h4>bind</h4>
@@ -10082,7 +10097,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-347">
+        <article class="nodecard nodecard--noimg" id="node-348">
           <div class="node-main">
             <div class="node-head">
               <h4>constant</h4>
@@ -10098,7 +10113,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-348">
+        <article class="nodecard nodecard--noimg" id="node-349">
           <div class="node-main">
             <div class="node-head">
               <h4>parameter</h4>
@@ -10114,7 +10129,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-349">
+        <article class="nodecard nodecard--noimg" id="node-350">
           <div class="node-main">
             <div class="node-head">
               <h4>add</h4>
@@ -10125,7 +10140,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-350">
+        <article class="nodecard nodecard--noimg" id="node-351">
           <div class="node-main">
             <div class="node-head">
               <h4>subtract</h4>
@@ -10136,7 +10151,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-351">
+        <article class="nodecard nodecard--noimg" id="node-352">
           <div class="node-main">
             <div class="node-head">
               <h4>multiply</h4>
@@ -10147,7 +10162,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-352">
+        <article class="nodecard nodecard--noimg" id="node-353">
           <div class="node-main">
             <div class="node-head">
               <h4>divide</h4>
@@ -10162,7 +10177,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-353">
+        <article class="nodecard nodecard--noimg" id="node-354">
           <div class="node-main">
             <div class="node-head">
               <h4>fit</h4>
@@ -10179,7 +10194,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-354">
+        <article class="nodecard nodecard--noimg" id="node-355">
           <div class="node-main">
             <div class="node-head">
               <h4>clamp</h4>
@@ -10194,7 +10209,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-355">
+        <article class="nodecard nodecard--noimg" id="node-356">
           <div class="node-main">
             <div class="node-head">
               <h4>mix</h4>
@@ -10210,7 +10225,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-356">
+        <article class="nodecard nodecard--noimg" id="node-357">
           <div class="node-main">
             <div class="node-head">
               <h4>colormix</h4>
@@ -10227,7 +10242,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-357">
+        <article class="nodecard nodecard--noimg" id="node-358">
           <div class="node-main">
             <div class="node-head">
               <h4>length</h4>
@@ -10241,7 +10256,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-358">
+        <article class="nodecard nodecard--noimg" id="node-359">
           <div class="node-main">
             <div class="node-head">
               <h4>normalize</h4>
@@ -10255,7 +10270,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-359">
+        <article class="nodecard nodecard--noimg" id="node-360">
           <div class="node-main">
             <div class="node-head">
               <h4>dot</h4>
@@ -10270,7 +10285,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-360">
+        <article class="nodecard nodecard--noimg" id="node-361">
           <div class="node-main">
             <div class="node-head">
               <h4>cross</h4>
@@ -10285,7 +10300,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-361">
+        <article class="nodecard nodecard--noimg" id="node-362">
           <div class="node-main">
             <div class="node-head">
               <h4>distance</h4>
@@ -10300,7 +10315,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-362">
+        <article class="nodecard nodecard--noimg" id="node-363">
           <div class="node-main">
             <div class="node-head">
               <h4>compare</h4>
@@ -10315,7 +10330,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-363">
+        <article class="nodecard nodecard--noimg" id="node-364">
           <div class="node-main">
             <div class="node-head">
               <h4>twoway</h4>
@@ -10330,7 +10345,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-364">
+        <article class="nodecard nodecard--noimg" id="node-365">
           <div class="node-main">
             <div class="node-head">
               <h4>switch</h4>
@@ -10345,7 +10360,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-365">
+        <article class="nodecard nodecard--noimg" id="node-366">
           <div class="node-main">
             <div class="node-head">
               <h4>pow</h4>
@@ -10359,7 +10374,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-366">
+        <article class="nodecard nodecard--noimg" id="node-367">
           <div class="node-main">
             <div class="node-head">
               <h4>abs</h4>
@@ -10373,7 +10388,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-367">
+        <article class="nodecard nodecard--noimg" id="node-368">
           <div class="node-main">
             <div class="node-head">
               <h4>floor</h4>
@@ -10387,7 +10402,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-368">
+        <article class="nodecard nodecard--noimg" id="node-369">
           <div class="node-main">
             <div class="node-head">
               <h4>frac</h4>
@@ -10401,7 +10416,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-369">
+        <article class="nodecard nodecard--noimg" id="node-370">
           <div class="node-main">
             <div class="node-head">
               <h4>random</h4>
@@ -10415,7 +10430,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-370">
+        <article class="nodecard nodecard--noimg" id="node-371">
           <div class="node-main">
             <div class="node-head">
               <h4>unifiednoise::3.0</h4>
@@ -10432,7 +10447,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-371">
+        <article class="nodecard nodecard--noimg" id="node-372">
           <div class="node-main">
             <div class="node-head">
               <h4>turbnoise</h4>
@@ -10449,7 +10464,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-372">
+        <article class="nodecard nodecard--noimg" id="node-373">
           <div class="node-main">
             <div class="node-head">
               <h4>getattrib::2.0</h4>
@@ -10466,7 +10481,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-373">
+        <article class="nodecard nodecard--noimg" id="node-374">
           <div class="node-main">
             <div class="node-head">
               <h4>setattrib</h4>
@@ -10483,7 +10498,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-374">
+        <article class="nodecard nodecard--noimg" id="node-375">
           <div class="node-main">
             <div class="node-head">
               <h4>importpoint</h4>
@@ -10498,7 +10513,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-375">
+        <article class="nodecard nodecard--noimg" id="node-376">
           <div class="node-main">
             <div class="node-head">
               <h4>pcopen</h4>
@@ -10514,7 +10529,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-376">
+        <article class="nodecard nodecard--noimg" id="node-377">
           <div class="node-main">
             <div class="node-head">
               <h4>pcfilter</h4>
@@ -10528,7 +10543,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-377">
+        <article class="nodecard nodecard--noimg" id="node-378">
           <div class="node-main">
             <div class="node-head">
               <h4>nearpoint</h4>
@@ -10542,7 +10557,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-378">
+        <article class="nodecard nodecard--noimg" id="node-379">
           <div class="node-main">
             <div class="node-head">
               <h4>xyzdist</h4>
@@ -10558,7 +10573,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-379">
+        <article class="nodecard nodecard--noimg" id="node-380">
           <div class="node-main">
             <div class="node-head">
               <h4>primuv</h4>
@@ -10574,7 +10589,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-380">
+        <article class="nodecard nodecard--noimg" id="node-381">
           <div class="node-main">
             <div class="node-head">
               <h4>vectofloat</h4>
@@ -10588,7 +10603,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-381">
+        <article class="nodecard nodecard--noimg" id="node-382">
           <div class="node-main">
             <div class="node-head">
               <h4>floattovec</h4>
@@ -10604,7 +10619,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-382">
+        <article class="nodecard nodecard--noimg" id="node-383">
           <div class="node-main">
             <div class="node-head">
               <h4>kma_pyroshader</h4>
@@ -11488,267 +11503,275 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
           <dt>orient 属性<span class="gloss-meta">オリエントぞくせい</span></dt>
           <dd>点ごとの向きを表す値（クォータニオン、4つの数）。copytopoints は、点に orient があるとコピーをその向きに回す。quaternion(maketransform(前, 上)) で作れる（実践「鎖を垂らす」）。</dd>
         </div>
+        <div class="gloss-item" id="gloss-205">
+          <dt>qmultiply()<span class="gloss-meta">キューマルチプライ</span></dt>
+          <dd>2つの回転（クォータニオン）を掛け合わせて、続けて回した向きにする関数。POP で毎ステップ p@orient = qmultiply(p@orient, quaternion(回す軸と角度)) とすると、粒が少しずつ回り続ける（実践「桜の花びらが舞い散る」）。</dd>
+        </div>
       </dl>
     </section>
     <section class="gloss-cat" id="math">
       <h3>数と向き</h3>
       <p class="gloss-note">位置・向き・回転・ノイズを支える言葉。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-205">
+        <div class="gloss-item" id="gloss-206">
           <dt>ベクトル / Vector<span class="gloss-meta">ベクトル</span></dt>
           <dd>向きと大きさをまとめて持つ数の組。位置・法線・速度はすべてこれ。3つの成分で表す。</dd>
         </div>
-        <div class="gloss-item" id="gloss-206">
+        <div class="gloss-item" id="gloss-207">
           <dt>正規化 / Normalize<span class="gloss-meta">せいきか</span></dt>
           <dd>ベクトルの長さを1に揃えること。向きだけを使いたいときに通す。法線は正規化してあるのが前提の場面が多い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-207">
+        <div class="gloss-item" id="gloss-208">
           <dt>内積 / Dot Product<span class="gloss-meta">ないせき</span></dt>
           <dd>2つの向きがどれくらい同じ方を向いているかを表す数。同じ向きで1、直角で0、逆で-1。上を向いている面だけ選ぶ、といった判定に使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-208">
+        <div class="gloss-item" id="gloss-209">
           <dt>外積 / Cross Product<span class="gloss-meta">がいせき</span></dt>
           <dd>2つの向きの両方に直角な向きを求める計算。面の法線を自分で作るときに使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-209">
+        <div class="gloss-item" id="gloss-210">
           <dt>クォータニオン / Quaternion<span class="gloss-meta">クォータニオン</span></dt>
           <dd>回転を4つの数で表すやり方。角度で表すより、混ぜたときに素直に補間できる。実験053・054で、皮の変形の違いに関わった。<span class="gloss-rel">関連: オイラー角</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-210">
+        <div class="gloss-item" id="gloss-211">
           <dt>回転順序 / Rotate Order<span class="gloss-meta">かいてんじゅんじょ</span></dt>
           <dd>3つの角度をどの軸から掛けるかの並び。Houdini の xyz は「x を先、次に y、最後に z」で、行列では Rz·Ry·Rx になる。同じ角度でも並びが違えば行き先が変わる（実験103で最大 約42.5°）。角度が1つだけなら関係ない。<span class="gloss-rel">関連: オイラー角, 行列</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-211">
+        <div class="gloss-item" id="gloss-212">
           <dt>オイラー角 / Euler Angle<span class="gloss-meta">オイラーかく</span></dt>
           <dd>回転を3つの角度で表すやり方。人には分かりやすいが、順番によって結果が変わり、特定の姿勢で破綻する。<span class="gloss-rel">関連: クォータニオン</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-212">
+        <div class="gloss-item" id="gloss-213">
           <dt>行列 / Matrix<span class="gloss-meta">ぎょうれつ</span></dt>
           <dd>移動・回転・拡大をまとめて表す数の並び。パックした形やインスタンスは、この形で置き場所を持つ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-213">
+        <div class="gloss-item" id="gloss-214">
           <dt>線形補間 / Lerp<span class="gloss-meta">せんけいほかん</span></dt>
           <dd>2つの値のあいだを、まっすぐな割合で混ぜること。0 で片方、1 でもう片方になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-214">
+        <div class="gloss-item" id="gloss-215">
           <dt>スムーズステップ / Smoothstep<span class="gloss-meta">スムーズステップ</span></dt>
           <dd>端で緩やかに始まり、緩やかに終わる混ぜ方。まっすぐな補間より、見た目が自然になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-215">
+        <div class="gloss-item" id="gloss-216">
           <dt>ランプ / Ramp<span class="gloss-meta">ランプ</span></dt>
           <dd>0から1の入力を、好きな色や数に置き換える変換表。温度から炎の色を作るときなどに使う。<span class="gloss-rel">関連: rampparm</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-216">
+        <div class="gloss-item" id="gloss-217">
           <dt>乱数の種 / Seed<span class="gloss-meta">らんすうのたね</span></dt>
           <dd>でたらめな値の出し方を決める数。同じ種なら毎回同じ結果になる。比べる実験では、ここを固定する。</dd>
         </div>
-        <div class="gloss-item" id="gloss-217">
+        <div class="gloss-item" id="gloss-218">
           <dt>オクターブ / Octave<span class="gloss-meta">オクターブ</span></dt>
           <dd>ノイズを重ねる回数。粗い揺れの上に細かい揺れを重ねていく。増やすほど細部が出るが、計算も増える。実験004で、数と見た目の関係を測った。<span class="gloss-rel">関連: フラクタル, ラキュナリティ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-218">
+        <div class="gloss-item" id="gloss-219">
           <dt>ラキュナリティ / Lacunarity<span class="gloss-meta">ラキュナリティ</span></dt>
           <dd>ノイズを重ねるとき、1段ごとに何倍細かくするか。既定は2前後。大きくすると、粗さと細かさの差が開く。<span class="gloss-rel">関連: オクターブ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-219">
+        <div class="gloss-item" id="gloss-220">
           <dt>パーリンノイズ / Perlin Noise<span class="gloss-meta">パーリンノイズ</span></dt>
           <dd>なめらかに変わる定番のノイズ。地形や雲の下地に使う。格子に沿った癖が少し出る。<span class="gloss-rel">関連: ワーリーノイズ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-220">
+        <div class="gloss-item" id="gloss-221">
           <dt>ワーリーノイズ / Worley Noise<span class="gloss-meta">ワーリーノイズ</span></dt>
           <dd>点をばらまいて、最も近い点までの距離から作るノイズ。細胞やひび割れのような模様になる。実験005で並べて比べた。<span class="gloss-rel">関連: パーリンノイズ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-221">
+        <div class="gloss-item" id="gloss-222">
           <dt>フレームレート / FPS<span class="gloss-meta">エフピーエス · Frames Per Second</span></dt>
           <dd>1秒を何枚の絵で表すか。既定は24。同じフレーム数でも、これが違えば実時間は変わるので、速さを測るときは押さえておく。</dd>
         </div>
-        <div class="gloss-item" id="gloss-222">
+        <div class="gloss-item" id="gloss-223">
           <dt>一様分布 / Uniform Distribution<span class="gloss-meta">いちようぶんぷ</span></dt>
           <dd>範囲の中のどの値も、同じ出やすさで出る乱数の出方。0〜1 の一様分布なら、平均は 0.5、分散は 1/12。</dd>
         </div>
-        <div class="gloss-item" id="gloss-223">
+        <div class="gloss-item" id="gloss-224">
           <dt>正規分布 / Normal Distribution<span class="gloss-meta">せいきぶんぷ</span></dt>
           <dd>平均のまわりに多く集まり、離れるほど出にくくなる釣り鐘形の出方。平均と標準偏差の2つで形が決まる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-224">
+        <div class="gloss-item" id="gloss-225">
           <dt>平均 / Mean<span class="gloss-meta">へいきん</span></dt>
           <dd>値を全部足して、個数で割ったもの。実験では、ずれや距離の代表値としてよく使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-225">
+        <div class="gloss-item" id="gloss-226">
           <dt>分散 / Variance<span class="gloss-meta">ぶんさん</span></dt>
           <dd>値が平均からどれだけ散らばっているか。平均との差を2乗して平均したもの。</dd>
         </div>
-        <div class="gloss-item" id="gloss-226">
+        <div class="gloss-item" id="gloss-227">
           <dt>標準偏差 / Standard Deviation<span class="gloss-meta">ひょうじゅんへんさ</span></dt>
           <dd>分散の平方根。元の値と同じ単位で、散らばりの大きさを表す。</dd>
         </div>
-        <div class="gloss-item" id="gloss-227">
+        <div class="gloss-item" id="gloss-228">
           <dt>弧長 / Arc Length<span class="gloss-meta">こちょう</span></dt>
           <dd>曲線に沿って測った長さ。細かく折れ線で近づけるほど、本当の長さに近づく。</dd>
         </div>
-        <div class="gloss-item" id="gloss-228">
+        <div class="gloss-item" id="gloss-229">
           <dt>らせん / Helix<span class="gloss-meta">らせん</span></dt>
           <dd>円を回りながら一定の割合で上がっていく線。1巻きの長さは、円周と上がる高さを2辺とする直角三角形の斜辺になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-229">
+        <div class="gloss-item" id="gloss-230">
           <dt>ピッチ / Pitch<span class="gloss-meta">ピッチ</span></dt>
           <dd>らせんやねじが、1巻きで進む距離。</dd>
         </div>
-        <div class="gloss-item" id="gloss-230">
+        <div class="gloss-item" id="gloss-231">
           <dt>収束 / Convergence<span class="gloss-meta">しゅうそく</span></dt>
           <dd>細かくしたり回数を増やしたりしたとき、結果がある値に落ち着いていくこと。どこで落ち着くかを見れば、必要な細かさが分かる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-231">
+        <div class="gloss-item" id="gloss-232">
           <dt>外挿 / Extrapolation<span class="gloss-meta">がいそう</span></dt>
           <dd>測った範囲の外を、傾向から推し量ること。範囲の中を埋める補間より当たりにくい。</dd>
         </div>
-        <div class="gloss-item" id="gloss-232">
+        <div class="gloss-item" id="gloss-233">
           <dt>相対誤差 / Relative Error<span class="gloss-meta">そうたいごさ</span></dt>
           <dd>ずれの大きさを、正しい値に対する割合で表したもの。大きさの違うものどうしの精度を比べられる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-233">
+        <div class="gloss-item" id="gloss-234">
           <dt>オイラーの多面体定理 / Euler&#x27;s Formula<span class="gloss-meta">オイラーのためんたいていり</span></dt>
           <dd>穴の無い閉じた多面体では、点の数 − 辺の数 + 面の数 = 2 になる。三角形分割の面の数を先に計算するのに使える。</dd>
         </div>
-        <div class="gloss-item" id="gloss-234">
+        <div class="gloss-item" id="gloss-235">
           <dt>ユークリッド距離 / Euclidean Distance<span class="gloss-meta">ユークリッドきょり</span></dt>
           <dd>2点を結ぶまっすぐな線の長さ。√(x²+y²+z²)。ふつう「距離」と言えばこれ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-235">
+        <div class="gloss-item" id="gloss-236">
           <dt>マンハッタン距離 / Manhattan Distance<span class="gloss-meta">マンハッタンきょり</span></dt>
           <dd>縦と横にしか進めないときの道のり。|x|+|y|。碁盤の目の街を歩く距離にたとえた名前。斜め45°の向きでは、まっすぐの距離の約1.41倍になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-236">
+        <div class="gloss-item" id="gloss-237">
           <dt>測地線距離 / Geodesic Distance<span class="gloss-meta">そくちせんきょり</span></dt>
           <dd>面の上から離れずに進んだときの最短距離。球の上なら大円に沿った弧の長さ。<span class="gloss-rel">関連: ユークリッド距離</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-237">
+        <div class="gloss-item" id="gloss-238">
           <dt>最短経路 / Shortest Path<span class="gloss-meta">さいたんけいろ</span></dt>
           <dd>網の辺をたどって2点を結ぶ道のうち、いちばん短いもの。辺の向きに縛られるので、面の上のまっすぐな距離より長くなることがある。</dd>
         </div>
-        <div class="gloss-item" id="gloss-238">
+        <div class="gloss-item" id="gloss-239">
           <dt>ダイクストラ法 / Dijkstra&#x27;s Algorithm<span class="gloss-meta">ダイクストラほう</span></dt>
           <dd>網の辺をたどって、ある点から他の全部の点までの最短経路を求めるやり方。近い点から順に確定していく。</dd>
         </div>
-        <div class="gloss-item" id="gloss-239">
+        <div class="gloss-item" id="gloss-240">
           <dt>熱測地線法 / Heat Method<span class="gloss-meta">ねつそくちせんほう</span></dt>
           <dd>始まりの点から熱が広がる様子を計算し、その向きから面の上の距離を求めるやり方。網の向きに左右されにくい。</dd>
         </div>
-        <div class="gloss-item" id="gloss-240">
+        <div class="gloss-item" id="gloss-241">
           <dt>エルミート補間 / Hermite Interpolation<span class="gloss-meta">エルミートほかん</span></dt>
           <dd>両端の値だけでなく、両端の傾き（速度）も使ってつなぐ補間。位置と速度が分かっていれば、2次の動きは誤差0でつながる。<span class="gloss-rel">関連: 補間, 線形補間</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-241">
+        <div class="gloss-item" id="gloss-242">
           <dt>標準誤差 / Standard Error<span class="gloss-meta">ひょうじゅんごさ</span></dt>
           <dd>たくさんの値の平均が、偶然でどれくらいぶれるかの目安。標準偏差 ÷ √（個数）。10万個なら、標準偏差の約1/316。<span class="gloss-rel">関連: 標準偏差</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-242">
+        <div class="gloss-item" id="gloss-243">
           <dt>指数分布 / Exponential Distribution<span class="gloss-meta">しすうぶんぷ</span></dt>
           <dd>0 に近い値がいちばん出やすく、大きい値ほど出にくくなる乱数の出方。待ち時間や寿命のばらつきに使われる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-243">
+        <div class="gloss-item" id="gloss-244">
           <dt>ベルヌーイ分布 / Bernoulli Distribution<span class="gloss-meta">ベルヌーイぶんぷ</span></dt>
           <dd>2つの値のどちらかが、決めた確率で出る乱数の出方。attribrandomize の Two Values がこれ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-244">
+        <div class="gloss-item" id="gloss-245">
           <dt>パップス・ギュルダンの定理 / Pappus&#x27;s Theorem<span class="gloss-meta">パップスギュルダンのていり</span></dt>
           <dd>断面を軸のまわりに回してできる形の体積は、断面の面積 × 断面の重心が回る長さ、になるという定理。ドーナツの体積がすぐ出せる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-245">
+        <div class="gloss-item" id="gloss-246">
           <dt>弦 / Chord<span class="gloss-meta">げん</span></dt>
           <dd>曲線の上の2点を結ぶまっすぐな線。細かく割った折れ線は、弦をつないだものなので、元の曲線より少し短い。<span class="gloss-rel">関連: 弧長</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-246">
+        <div class="gloss-item" id="gloss-247">
           <dt>等脚台形 / Isosceles Trapezoid<span class="gloss-meta">とうきゃくだいけい</span></dt>
           <dd>平行な2辺を持ち、残りの2辺の長さが等しい四角形。円錐台を多角形で近似したときの側面の1枚がこれになる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-247">
+        <div class="gloss-item" id="gloss-248">
           <dt>k 角形の面積 / Area of a Regular Polygon<span class="gloss-meta">けいかくけいのめんせき</span></dt>
           <dd>半径 r の円に内接する正 k 角形の面積は (k/2)·r²·sin(2π/k)。円の面積 πr² より少し小さく、k を増やすと近づく。</dd>
         </div>
-        <div class="gloss-item" id="gloss-248">
+        <div class="gloss-item" id="gloss-249">
           <dt>外接球 / 外接半径 / Circumradius<span class="gloss-meta">がいせつきゅう</span></dt>
           <dd>多面体のすべての頂点を通る球と、その半径。platonic の Radius は、四面体・八面体・二十面体ではこの半径だった（実験142）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-249">
+        <div class="gloss-item" id="gloss-250">
           <dt>正多面体 / Platonic Solid<span class="gloss-meta">せいためんたい</span></dt>
           <dd>すべての面が同じ正多角形で、どの頂点にも同じ数の面が集まる立体。四面体・立方体・八面体・十二面体・二十面体の5つだけ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-250">
+        <div class="gloss-item" id="gloss-251">
           <dt>内接多角形 / Inscribed Polygon<span class="gloss-meta">ないせつたかくけい</span></dt>
           <dd>頂点がすべて円の上にある多角形。辺は円の内側を通るので、面積も周も円より少し小さい。円や円柱の Polygon はこの形（実験143・148）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-251">
+        <div class="gloss-item" id="gloss-252">
           <dt>球帯の面積 / Archimedes&#x27; Hat-Box Theorem<span class="gloss-meta">きゅうたいのめんせき</span></dt>
           <dd>球を平行な2つの面で切った帯の面積は、高さ h だけで決まり 2πRh になる。clip で切った球で確かめた（実験146）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-252">
+        <div class="gloss-item" id="gloss-253">
           <dt>せん断 / Shear<span class="gloss-meta">せんだん</span></dt>
           <dd>層をずらすように、位置に比例して横へ動かす変形。体積は変わらない（実験147）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-253">
+        <div class="gloss-item" id="gloss-254">
           <dt>テーパー / Taper<span class="gloss-meta">テーパー</span></dt>
           <dd>片側へ行くほど細く（または太く）する変形。twist SOP の Taper と Linear Taper は、Strength = 1 で何もしない（実験147）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-254">
+        <div class="gloss-item" id="gloss-255">
           <dt>トーラス / Torus<span class="gloss-meta">トーラス</span></dt>
           <dd>ドーナツの形。面積 4π²Rr、体積 2π²Rr²（R は輪の半径、r は管の半径）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-255">
+        <div class="gloss-item" id="gloss-256">
           <dt>後退差分・中心差分・前進差分<span class="gloss-meta">こうたいさぶん</span></dt>
           <dd>となりの時刻との差で速さを見積もる方法。後退は今と1つ前、前進は今と1つ後、中心は前後の平均。動きが加速しているとき、中心差分だけが半フレームずれない（実験159）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-256">
+        <div class="gloss-item" id="gloss-257">
           <dt>変動係数 / Coefficient of Variation<span class="gloss-meta">へんどうけいすう</span></dt>
           <dd>標準偏差 ÷ 平均。大きさの違うもの同士のばらつきを比べるのに使う。0 なら全部同じ大きさ（実験158）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-257">
+        <div class="gloss-item" id="gloss-258">
           <dt>二項分布 / Binomial Distribution<span class="gloss-meta">にこうぶんぷ</span></dt>
           <dd>確率 p で当たるくじを N 回引いたときの当たりの数の分布。平均 Np、ばらつきの幅（標準偏差）は √(Np(1−p))。scatter の点の割り振りのばらつきがこの幅くらいだった（実験155）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-258">
+        <div class="gloss-item" id="gloss-259">
           <dt>発散 / Divergence<span class="gloss-meta">はっさん</span></dt>
           <dd>流れがその場所から湧き出しているか（プラス）、吸い込まれているか（マイナス）を表す量。∂vx/∂x + ∂vy/∂y + ∂vz/∂z。curlnoise はほぼ 0 だった（実験171）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-259">
+        <div class="gloss-item" id="gloss-260">
           <dt>湧き出しのない流れ / Divergence-Free<span class="gloss-meta">わきだしのないながれ</span></dt>
           <dd>発散がどこでも 0 の流れ。流されたものは詰まりも薄まりもしない。curlnoise で流した粒は、まわりの粒の数がほぼ保たれた（実験172）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-260">
+        <div class="gloss-item" id="gloss-261">
           <dt>半陰的オイラー法 / Semi-Implicit Euler<span class="gloss-meta">はんいんてきオイラーほう</span></dt>
           <dd>1ステップで、先に速さを足し、その新しい速さで位置を進めるやり方。POP の粒の落下がこの形に合った（実験165）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-261">
+        <div class="gloss-item" id="gloss-262">
           <dt>終端速度 / Terminal Velocity<span class="gloss-meta">しゅうたんそくど</span></dt>
           <dd>重力と空気の抵抗が釣り合って、それ以上速くならない落ちる速さ。POP の抵抗では √(g/k) に近づいた（実験166）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-262">
+        <div class="gloss-item" id="gloss-263">
           <dt>速さの2乗に比例する抵抗 / Quadratic Drag<span class="gloss-meta">はやさのにじょうにひれいするていこう</span></dt>
           <dd>速さ（風との差）の2乗に比例する抵抗。差が半分になるまでの時間が、だんだん延びる。popwind の粒の近づき方がこの形だった（実験175）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-263">
+        <div class="gloss-item" id="gloss-264">
           <dt>円の当てはめ / Circle Fit<span class="gloss-meta">えんのあてはめ</span></dt>
           <dd>散らばった点にいちばん合う円を、最小二乗で求めること。x² + y² を x・y・1 の組み合わせで表す Kasa 法がいちばん簡単。Open で丸めた辺の断面の半径を、これで測った（実験198）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-264">
+        <div class="gloss-item" id="gloss-265">
           <dt>角錐台 / Frustum of Pyramid<span class="gloss-meta">かくすいだい</span></dt>
           <dd>角錐の上を平らに切り落とした形。体積は h/3 × (下の面積 + 上の面積 + √(下 × 上))。polyextrude の Inset で押し出した形がこれだった（実験192）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-265">
+        <div class="gloss-item" id="gloss-266">
           <dt>ラプラシアン平滑化 / Laplacian Smoothing<span class="gloss-meta">ラプラシアンへいかつか</span></dt>
           <dd>点を、となりの点の平均へ少しずつ寄せてならす処理。形全体も縮む。smooth の縮み方は 1/(1 + Strength·…) の形で、ゼロまでは縮まなかった（実験185〜187）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-266">
+        <div class="gloss-item" id="gloss-267">
           <dt>懸垂線 / Catenary<span class="gloss-meta">けんすいせん</span></dt>
           <dd>鎖やロープの両端を持ったとき、自分の重さで垂れてできる曲線。高さは a · cosh(x / a) の形で、a が小さいほど深くたるむ。a = 0.9 で幅 2 m の真ん中が 0.62 m、a = 0.5 で 1.38 m 下がった（実践「鎖を垂らす」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-267">
+        <div class="gloss-item" id="gloss-268">
           <dt>波長 / Wavelength<span class="gloss-meta">はちょう</span></dt>
           <dd>波の山から次の山までの長さ。sin で波を作るときは sin(2π × 距離 / 波長) と書く。網の升が波長に比べて大きいと、点が山と谷を飛び越えて波が描けない。</dd>
         </div>
-        <div class="gloss-item" id="gloss-268">
+        <div class="gloss-item" id="gloss-269">
           <dt>黄金角 / Golden Angle（葉序）<span class="gloss-meta">おうごんかく（ようじょ）</span></dt>
           <dd>約 137.5度。1つずつこの角度だけ回して、中心からの距離を √番号 に比例させて並べると、ひまわりの種のようにすき間なく詰まる。140度にするだけで、となりの粒までの平均距離が 5.80 mm から 1.59 mm に縮み、粒が線の上に固まった（実践「ひまわりを咲かせる」）。</dd>
+        </div>
+        <div class="gloss-item" id="gloss-270">
+          <dt>モジュール（歯車）/ Module<span class="gloss-meta">モジュール</span></dt>
+          <dd>歯車の歯の大きさを表す数。直径 = モジュール × 歯の数。モジュールがそろった歯車どうしはかみ合い、中心の距離は モジュール × (歯の数1 + 歯の数2) ÷ 2 になる（実践「歯車をかみ合わせて回す」）。</dd>
         </div>
       </dl>
     </section>
@@ -11756,287 +11779,287 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <h3>シミュレーション</h3>
       <p class="gloss-note">時間を進めながら計算するもの。1フレーム目の結果を使って2フレーム目を計算するため、途中から飛ばして見ることができない。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-269">
+        <div class="gloss-item" id="gloss-271">
           <dt>シミュレーション / Simulation<span class="gloss-meta">シミュレーション</span></dt>
           <dd>物理法則にもとづいて動きを計算させること。手で動きを付けるのではなく、条件を与えて結果を計算させる。略してsimとも書く。</dd>
         </div>
-        <div class="gloss-item" id="gloss-270">
+        <div class="gloss-item" id="gloss-272">
           <dt>ソルバ / Solver<span class="gloss-meta">ソルバ</span></dt>
           <dd>シミュレーションの計算を担当するノード。剛体用、布用、煙用など対象ごとに専用のソルバがある。</dd>
         </div>
-        <div class="gloss-item" id="gloss-271">
+        <div class="gloss-item" id="gloss-273">
           <dt>RBD<span class="gloss-meta">アールビーディー · Rigid Body Dynamics</span></dt>
           <dd>変形しない硬い物体の物理計算。積み木が崩れる、壁が砕けて飛び散る、といった動きを担当する。<span class="gloss-rel">関連: voronoi fracture</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-272">
+        <div class="gloss-item" id="gloss-274">
           <dt>Vellum<span class="gloss-meta">ベラム</span></dt>
           <dd>布、ゴム、髪のような柔らかいものを扱うソルバ。比較的軽く扱いやすいため、柔らかいものを試すならまずここから。</dd>
         </div>
-        <div class="gloss-item" id="gloss-273">
+        <div class="gloss-item" id="gloss-275">
           <dt>Pyro<span class="gloss-meta">パイロ</span></dt>
           <dd>煙と炎を扱うソルバ。ボリュームとして計算するため、面のモデリングとは考え方がかなり違う。<span class="gloss-rel">関連: ボリューム</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-274">
+        <div class="gloss-item" id="gloss-276">
           <dt>FLIP<span class="gloss-meta">フリップ · Fluid-Implicit-Particle</span></dt>
           <dd>液体を扱うソルバ。液体をパーティクルとして計算し、最後に表面を張って水面にする。</dd>
         </div>
-        <div class="gloss-item" id="gloss-275">
+        <div class="gloss-item" id="gloss-277">
           <dt>サブステップ / Substeps<span class="gloss-meta">サブステップ</span></dt>
           <dd>1フレームの中を何回に分けて計算するかの設定。動きが速すぎて突き抜けてしまうときに増やす。増やすと正確になるが時間もかかる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-276">
+        <div class="gloss-item" id="gloss-278">
           <dt>キャッシュ / Cache<span class="gloss-meta">キャッシュ</span></dt>
           <dd>計算結果をファイルに保存しておくこと。シミュレーションは重いため、一度計算したら保存して使い回すのが前提。file cache ノードで行う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-277">
+        <div class="gloss-item" id="gloss-279">
           <dt>フレーム / Frame<span class="gloss-meta">フレーム</span></dt>
           <dd>アニメーションの1コマ。24フレームで1秒が一般的。シミュレーションはフレームを順に進めながら計算する。</dd>
         </div>
-        <div class="gloss-item" id="gloss-278">
+        <div class="gloss-item" id="gloss-280">
           <dt>フラクチャ / Fracture<span class="gloss-meta">フラクチャ</span></dt>
           <dd>ひとつの形を破片に割ること。割った時点ではまだ動かない。動かすのはソルバの仕事で、割る工程と動かす工程は分かれている。<span class="gloss-rel">関連: RBD / voronoi fracture</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-279">
+        <div class="gloss-item" id="gloss-281">
           <dt>コンストレイント / Constraint<span class="gloss-meta">コンストレイント</span></dt>
           <dd>点と点のつながり方の規則。布なら「この点とこの点は離れすぎない」という条件にあたる。Vellum では規則を作るノードと、それを解くソルバが別になっている。<span class="gloss-rel">関連: Vellum</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-280">
+        <div class="gloss-item" id="gloss-282">
           <dt>スティフネス / Stiffness<span class="gloss-meta">スティフネス</span></dt>
           <dd>伸びにくさ・曲がりにくさ。Vellum では「値 × 10の指数乗」で決まるため、見えている値より指数のほうが効く。実験015で、値と指数を入れ替えた組み合わせが同じ結果になることを確かめた。<span class="gloss-rel">関連: コンストレイント</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-281">
+        <div class="gloss-item" id="gloss-283">
           <dt>ピン / Pin<span class="gloss-meta">ピン</span></dt>
           <dd>シミュレーション中も動かさないよう固定した点。布の上端を留めて垂らす、といった使い方をする。対象の指定を空にすると「全部が対象」と解釈され、何も動かなくなる。<span class="gloss-rel">関連: コンストレイント</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-282">
+        <div class="gloss-item" id="gloss-284">
           <dt>密度 / Density<span class="gloss-meta">みつど</span></dt>
           <dd>煙の濃さを表す値。ボリュームのマス目ひとつひとつに入っている数値で、全部足したものが煙の総量にあたる。煙のシミュレーションで保存量として測れるのはこれ。<span class="gloss-rel">関連: ボリューム / ボクセル</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-283">
+        <div class="gloss-item" id="gloss-285">
           <dt>散逸 / Dissipation<span class="gloss-meta">さんいつ</span></dt>
           <dd>煙を毎フレーム減らす設定。値を d とすると、毎フレーム (1−d) 倍になる。発生源が供給し続ける場合は減り続けるのではなく、やがて 1/d のところで釣り合う。<span class="gloss-rel">関連: Pyro / 密度</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-284">
+        <div class="gloss-item" id="gloss-286">
           <dt>発生源 / Source<span class="gloss-meta">はっせいげん</span></dt>
           <dd>煙や液体が湧き出してくる場所。ソルバは毎フレーム、ここから新しい分の供給を受け取る。供給が続く限り総量は増え続ける。<span class="gloss-rel">関連: Pyro / FLIP</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-285">
+        <div class="gloss-item" id="gloss-287">
           <dt>パーティクル / Particle<span class="gloss-meta">パーティクル</span></dt>
           <dd>位置と速度を持つだけの点。面を持たないので軽く、大量に扱える。火花・雨・砂・群衆のように「小さなものがたくさん動く」表現に使う。液体も内部では粒として計算される。<span class="gloss-rel">関連: POP / FLIP</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-286">
+        <div class="gloss-item" id="gloss-288">
           <dt>narrow band / ナローバンド<span class="gloss-meta">ナローバンド</span></dt>
           <dd>液体の計算を軽くする仕組み。水面の近くだけを粒で表し、深いところはボリュームで扱う。既定で有効なので、水を深くしても粒の数はほとんど増えない。粒の数を水の量の目安に使いたいときは切る必要がある。<span class="gloss-rel">関連: FLIP</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-287">
+        <div class="gloss-item" id="gloss-289">
           <dt>reseeding / リシード<span class="gloss-meta">リシード</span></dt>
           <dd>粒を足したり間引いたりして数を一定に保つ仕組み。名前から「増やすもの」と思いがちだが、実測では切ると40フレームで36%増えた。減らす側も担っている。<span class="gloss-rel">関連: FLIP / パーティクル</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-288">
+        <div class="gloss-item" id="gloss-290">
           <dt>空気抵抗 / Air resistance<span class="gloss-meta">くうきていこう</span></dt>
           <dd>物が空気の中を進むときに受ける、進む向きと逆の力。速さに比例する形（線形抵抗）と、速さの2乗に比例する形（二乗抵抗）がある。Houdini はどちらのソルバでも二乗抵抗だった。POP の popwind の airresist（実験029）も、MPM の mpmsolver の Air Drag（実験066）も、速さの2乗に比例している。MPM のほうは3次元の相対速度の大きさで決まるので、横風が落ちる速さまで変える。</dd>
         </div>
-        <div class="gloss-item" id="gloss-289">
+        <div class="gloss-item" id="gloss-291">
           <dt>加速度 / Acceleration<span class="gloss-meta">かそくど</span></dt>
           <dd>速さが1秒あたりどれだけ増えるか。popforce に 3 と入れると加速度が 3 になり、1秒で速さ3、2秒で速さ6と伸び続ける。上限は無い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-290">
+        <div class="gloss-item" id="gloss-292">
           <dt>glue / 接着<span class="gloss-meta">グルー</span></dt>
           <dd>離れたピースどうしを、近さを頼りにくっつける拘束。Houdini の Vellum では stitch という型の拘束が作られる。力がかかると外れる設定（breaking）が使えるので、「狙った線で破れる」を作るときはここを使う（実験031）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-291">
+        <div class="gloss-item" id="gloss-293">
           <dt>応力 / Stress<span class="gloss-meta">おうりょく</span></dt>
           <dd>拘束1本にどれだけの力がかかっているか。Vellum では拘束のプリミティブに stress として書かれる。ただし solver の normalizestress を切ると値が 566分の1 になるので、数字だけを見るときは設定も一緒に記録する（実験031）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-292">
+        <div class="gloss-item" id="gloss-294">
           <dt>終端速度 / Terminal velocity<span class="gloss-meta">しゅうたんそくど</span></dt>
           <dd>落ちる物が、重力と空気抵抗がつり合って、それ以上速くならなくなる速さ。二乗抵抗なら √(重力 ÷ 抵抗の係数)。MPM の Air Drag を 4.0 にすると式は 1.566046、実測は 1.607434 だった（実験066）。<span class="gloss-rel">関連: 空気抵抗 / Air resistance</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-293">
+        <div class="gloss-item" id="gloss-295">
           <dt>Ground Plane（MPM）<span class="gloss-meta">グラウンドプレーン</span></dt>
           <dd>mpmsolver が最初から持っている地面。groundactive が既定で 1 なので、コライダを一つも置かなくても粒は y = 0 で止まる。自由落下を測りたいときは切る（実験066）。<span class="gloss-rel">関連: MPM / コライダ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-294">
+        <div class="gloss-item" id="gloss-296">
           <dt>Wind Velocity（MPM）<span class="gloss-meta">ウィンドベロシティ</span></dt>
           <dd>mpmsolver の風速。ただし風は空気抵抗を通してしか効かないので、Air Drag が既定の 0 のままだと、風速をいくら上げても位置も速度も9桁まで変わらない（実験066）。<span class="gloss-rel">関連: 空気抵抗 / Air resistance / MPM</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-295">
+        <div class="gloss-item" id="gloss-297">
           <dt>クーロン摩擦 / Coulomb friction<span class="gloss-meta">クーロンまさつ</span></dt>
           <dd>「摩擦力は押しつける力に比例し、速さには関係しない」という一番よく使われる摩擦の見立て。止まるまでの距離は 初速² ÷ (2 × μ × 重力)。MPM の Ground Friction はこの μ そのもので、摩擦 0.25 のとき式 3.261978 に対し実測 3.260808 だった（実験067）。ただし摩擦が強いと塊が潰れて、式から外れていく。<span class="gloss-rel">関連: 摩擦 / MPM</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-296">
+        <div class="gloss-item" id="gloss-298">
           <dt>Sticky（MPM）<span class="gloss-meta">スティッキー</span></dt>
           <dd>mpmsolver やコライダの粘着。横に滑るぶんにはほとんど効かず（0.5 と 1.0 が6桁まで同じ値）、落として跳ねさせると効く。跳ね返る高さが 0.026922 から 0.013617 へ半分になる。「押しつけている間」ではなく「離れようとした瞬間」に働く数字（実験067）。<span class="gloss-rel">関連: Ground Plane（MPM） / MPM</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-297">
+        <div class="gloss-item" id="gloss-299">
           <dt>サブステップ / Substep<span class="gloss-meta">サブステップ</span></dt>
           <dd>1フレームを内部で何回に刻んで計算するか。増やすと細かい動きやぶつかりを拾えるが、そのぶん時間もかかる。実験064では、刻みを増やすと結果が変わることを測った。<span class="gloss-rel">関連: CFL条件</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-298">
+        <div class="gloss-item" id="gloss-300">
           <dt>CFL条件 / CFL Condition<span class="gloss-meta">シーエフエルじょうけん</span></dt>
           <dd>1回の刻みで、ものが升目1つ以上を飛び越えないようにする決まり。速く動くものがあるほど、刻みを細かくする必要が出る。<span class="gloss-rel">関連: サブステップ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-299">
+        <div class="gloss-item" id="gloss-301">
           <dt>減衰 / Damping<span class="gloss-meta">げんすい</span></dt>
           <dd>動きを少しずつ弱める働き。入れないと、揺れがいつまでも続いて止まらない。</dd>
         </div>
-        <div class="gloss-item" id="gloss-300">
+        <div class="gloss-item" id="gloss-302">
           <dt>剛性 / Stiffness<span class="gloss-meta">ごうせい</span></dt>
           <dd>形を保とうとする強さ。高いと硬く、低いとふにゃふにゃになる。布や柔らかい物で最初に触るつまみ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-301">
+        <div class="gloss-item" id="gloss-303">
           <dt>静止摩擦 / Static Friction<span class="gloss-meta">せいしまさつ</span></dt>
           <dd>止まっているものが滑り出すまでの抵抗。坂の傾きが摩擦の値を超えると滑り出す。実験067では、その境目が理屈通りに出るかを測った。<span class="gloss-rel">関連: 動摩擦</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-302">
+        <div class="gloss-item" id="gloss-304">
           <dt>動摩擦 / Dynamic Friction<span class="gloss-meta">どうまさつ</span></dt>
           <dd>滑っている間にかかる抵抗。静止摩擦より小さいことが多い。滑り出したあとの減り方を決める。<span class="gloss-rel">関連: 静止摩擦</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-303">
+        <div class="gloss-item" id="gloss-305">
           <dt>反発係数 / Bounce<span class="gloss-meta">はんぱつけいすう</span></dt>
           <dd>ぶつかったあとにどれくらい速度が残るか。1 で跳ね返り続け、0 で止まる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-304">
+        <div class="gloss-item" id="gloss-306">
           <dt>粘性 / Viscosity<span class="gloss-meta">ねんせい</span></dt>
           <dd>液体の流れにくさ。高いと蜜のように、低いと水のように動く。実験068で、見た目がどこで切り替わるかを測った。</dd>
         </div>
-        <div class="gloss-item" id="gloss-305">
+        <div class="gloss-item" id="gloss-307">
           <dt>表面張力 / Surface Tension<span class="gloss-meta">ひょうめんちょうりょく</span></dt>
           <dd>液体が表面を小さくまとめようとする働き。粒が玉になったり、糸を引いたりする見た目をつくる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-306">
+        <div class="gloss-item" id="gloss-308">
           <dt>質量 / Mass<span class="gloss-meta">しつりょう</span></dt>
           <dd>動かしにくさ。同じ力をかけても、重いほど加速しない。粒には pscale や density から自動で決まることもある。</dd>
         </div>
-        <div class="gloss-item" id="gloss-307">
+        <div class="gloss-item" id="gloss-309">
           <dt>慣性 / Inertia<span class="gloss-meta">かんせい</span></dt>
           <dd>いまの動きを続けようとする性質。回転では、重さの散らばり方（慣性モーメント）で回りにくさが変わる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-308">
+        <div class="gloss-item" id="gloss-310">
           <dt>角速度 / Angular Velocity<span class="gloss-meta">かくそくど</span></dt>
           <dd>1秒あたりにどれだけ回るか。実験071では、この値がある大きさを超えると物が飛び出すことを測った。</dd>
         </div>
-        <div class="gloss-item" id="gloss-309">
+        <div class="gloss-item" id="gloss-311">
           <dt>拘束 / Constraint<span class="gloss-meta">こうそく</span></dt>
           <dd>2つの物のあいだの決まり。離れないようにしたり、角度を保ったり、ある力を超えたら外れたりする。破壊の見た目はここで決まる。<span class="gloss-rel">関連: グルー</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-310">
+        <div class="gloss-item" id="gloss-312">
           <dt>グルー / Glue<span class="gloss-meta">グルー</span></dt>
           <dd>破片どうしをくっつけておく拘束。決めた強さを超える力がかかると外れる。強すぎると壊れず、弱すぎると自分の重さで崩れる。<span class="gloss-rel">関連: 拘束</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-311">
+        <div class="gloss-item" id="gloss-313">
           <dt>剛体 / Rigid Body<span class="gloss-meta">ごうたい</span></dt>
           <dd>形が変わらない硬い物。位置と向きだけを持つので、計算は軽い。<span class="gloss-rel">関連: RBD</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-312">
+        <div class="gloss-item" id="gloss-314">
           <dt>ソフトボディ / Soft Body<span class="gloss-meta">ソフトボディ</span></dt>
           <dd>押すと形が変わる柔らかい物。中身まで持つので、剛体より重い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-313">
+        <div class="gloss-item" id="gloss-315">
           <dt>粒子分離 / Particle Separation<span class="gloss-meta">りゅうしぶんり</span></dt>
           <dd>粒と粒のあいだの間隔。小さくすると細かく見えるが、粒の数は3乗で増える。実験078で、間隔と時間の関係を測った。<span class="gloss-rel">関連: ボクセルサイズ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-314">
+        <div class="gloss-item" id="gloss-316">
           <dt>グリッドスケール / Grid Scale<span class="gloss-meta">グリッドスケール</span></dt>
           <dd>粒の間隔に対して、計算に使う升目を何倍にするか。粒より升目が粗いと、細かい動きが丸められる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-315">
+        <div class="gloss-item" id="gloss-317">
           <dt>発散 / Divergence<span class="gloss-meta">はっさん</span></dt>
           <dd>ある場所から湧き出している量。液体では、これを0に保つことで体積が変わらないようにしている。</dd>
         </div>
-        <div class="gloss-item" id="gloss-316">
+        <div class="gloss-item" id="gloss-318">
           <dt>初期状態 / Initial State<span class="gloss-meta">しょきじょうたい</span></dt>
           <dd>計算を始めるときの形と速度。ここが違うと、あとの結果もすべて変わる。比べる実験では、まずここを揃える。</dd>
         </div>
-        <div class="gloss-item" id="gloss-317">
+        <div class="gloss-item" id="gloss-319">
           <dt>安息角 / Angle of Repose<span class="gloss-meta">あんそくかく</span></dt>
           <dd>砂や土が崩れずに保てる一番急な傾き。これより急にすると崩れて落ちる。地形の slump で使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-318">
+        <div class="gloss-item" id="gloss-320">
           <dt>弾性 / Elasticity<span class="gloss-meta">だんせい</span></dt>
           <dd>力を抜くと元の形に戻る性質。実験062では、この強さを変えると跳ね方が変わることを見た。</dd>
         </div>
-        <div class="gloss-item" id="gloss-319">
+        <div class="gloss-item" id="gloss-321">
           <dt>塑性 / Plasticity<span class="gloss-meta">そせい</span></dt>
           <dd>力を抜いても形が戻らない性質。粘土や雪のように、へこんだままになるものはこれを持つ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-320">
+        <div class="gloss-item" id="gloss-322">
           <dt>ヤング率 / Young&#x27;s Modulus<span class="gloss-meta">ヤングりつ</span></dt>
           <dd>引っぱったときの伸びにくさ。大きいほど硬い。MPM で材質を決めるときに出てくる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-321">
+        <div class="gloss-item" id="gloss-323">
           <dt>ポアソン比 / Poisson Ratio<span class="gloss-meta">ポアソンひ</span></dt>
           <dd>引っぱったときに、横がどれくらい細くなるか。0.5 に近いと体積を保ち、0 に近いと細らない。</dd>
         </div>
-        <div class="gloss-item" id="gloss-322">
+        <div class="gloss-item" id="gloss-324">
           <dt>マイクロソルバ / Microsolver<span class="gloss-meta">マイクロソルバ</span></dt>
           <dd>1つの仕事だけをする小さな解き手（運ぶ・減らす・ぼかす・浮かせる など）。Pyro や FLIP の中身は、これらの組み合わせでできている。</dd>
         </div>
-        <div class="gloss-item" id="gloss-323">
+        <div class="gloss-item" id="gloss-325">
           <dt>移流 / Advection<span class="gloss-meta">いりゅう</span></dt>
           <dd>流れに乗って、濃さや温度が運ばれること。煙のシミュレーションで毎ステップ行う、いちばん基本の計算。</dd>
         </div>
-        <div class="gloss-item" id="gloss-324">
+        <div class="gloss-item" id="gloss-326">
           <dt>浮力 / Buoyancy<span class="gloss-meta">ふりょく</span></dt>
           <dd>まわりより軽い（熱い）ものが浮き上がる力。煙の計算では、温度の高い所に上向きの速度を足して表す。</dd>
         </div>
-        <div class="gloss-item" id="gloss-325">
+        <div class="gloss-item" id="gloss-327">
           <dt>渦度の閉じ込め / Vortex Confinement<span class="gloss-meta">うずどのとじこめ</span></dt>
           <dd>計算の途中でなまって消えてしまう小さな渦を、回転を強めて取り戻す工夫。煙の細かさを保つ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-326">
+        <div class="gloss-item" id="gloss-328">
           <dt>燃焼 / Combustion<span class="gloss-meta">ねんしょう</span></dt>
           <dd>燃料が燃えて、熱と煙と気体を出すこと。Pyro では、発火温度を超えた所で燃料を減らし、温度を上げて表す。</dd>
         </div>
-        <div class="gloss-item" id="gloss-327">
+        <div class="gloss-item" id="gloss-329">
           <dt>発火温度 / Ignition Temperature<span class="gloss-meta">はっかおんど</span></dt>
           <dd>燃料が燃え始める温度。これより低い所では、燃料があっても燃えない。</dd>
         </div>
-        <div class="gloss-item" id="gloss-328">
+        <div class="gloss-item" id="gloss-330">
           <dt>スート / Soot<span class="gloss-meta">スート</span></dt>
           <dd>燃えたあとに出る煤（すす）の煙。Pyro では density とは別に、黒い煙として扱うことがある。</dd>
         </div>
-        <div class="gloss-item" id="gloss-329">
+        <div class="gloss-item" id="gloss-331">
           <dt>温度場 / Temperature Field<span class="gloss-meta">おんどば</span></dt>
           <dd>場所ごとの温度を持つボリューム。浮力の強さや、炎の色（黒体放射）を決める。</dd>
         </div>
-        <div class="gloss-item" id="gloss-330">
+        <div class="gloss-item" id="gloss-332">
           <dt>速度場 / Velocity Field<span class="gloss-meta">そくどば</span></dt>
           <dd>場所ごとの流れの向きと速さを持つボリューム（vel）。これに乗って、煙の濃さや温度が運ばれる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-331">
+        <div class="gloss-item" id="gloss-333">
           <dt>圧力投影 / Pressure Projection<span class="gloss-meta">あつりょくとうえい</span></dt>
           <dd>流れが「どこでも湧き出さない・吸い込まない（発散0）」ようにする計算。煙や水が縮んだり増えたりしないようにする要。<span class="gloss-rel">関連: 発散</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-332">
+        <div class="gloss-item" id="gloss-334">
           <dt>拘束の反復回数 / Constraint Iterations<span class="gloss-meta">こうそくのはんぷくかいすう</span></dt>
           <dd>Vellum で、1ステップの中で拘束（伸び・曲げなど）を直す回数。増やすと布が伸びにくくなる。Substeps を増やすより安く伸びを抑えられた（実験177）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-333">
+        <div class="gloss-item" id="gloss-335">
           <dt>めり込み / Penetration<span class="gloss-meta">めりこみ</span></dt>
           <dd>ぶつかった物どうしが、止まる前に互いの中へ入り込むこと。Bullet では Substeps が少ないほど深く、1 で 0.38 めり込んだ（実験183）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-334">
+        <div class="gloss-item" id="gloss-336">
           <dt>生まれる割合 / Birth Rate<span class="gloss-meta">うまれるわりあい</span></dt>
           <dd>粒を1秒あたりに生む数。1フレームに割り切れない端数は、フレームごとに運で決まる（実験193）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-335">
+        <div class="gloss-item" id="gloss-337">
           <dt>粒の寿命 / Life<span class="gloss-meta">つぶのじゅみょう</span></dt>
           <dd>粒が生まれてから消えるまでの秒数。数えられるフレームは Life × fps − 1/Substeps で、Substeps 1 では 1 フレーム短い（実験193・194）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-336">
+        <div class="gloss-item" id="gloss-338">
           <dt>active 属性<span class="gloss-meta">アクティブぞくせい</span></dt>
           <dd>RBD（Bullet）で、その塊を動かすかどうかを決める点の値。0 にすると、ぶつかられても動かない壁のようになる。窓枠にはまったガラスの縁の破片を止めるのに使った（実践「窓ガラスを割る」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-337">
+        <div class="gloss-item" id="gloss-339">
           <dt>拘束の強さ / Strength<span class="gloss-meta">こうそくのつよさ</span></dt>
           <dd>破片どうしをくっつけておくつながり（Glue）が、どれだけの衝撃で切れるか。小さいほど広く割れる。同じ場面で 0.8 なら 41 個、5 以上なら 0 個の破片が動いた（実践「窓ガラスを割る」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-338">
+        <div class="gloss-item" id="gloss-340">
           <dt>インパルス発生 / Impulse Activation<span class="gloss-meta">インパルスはっせい</span></dt>
           <dd>popsource で、決めたフレームに一度にまとめて粒を生む仕組み。Emission Type が All Points のときは、Activation が 1 のフレームごとに全部の点から生まれるので、1 フレーム目だけ生むなら式 $FF == 1 を入れる（実践「花火を打ち上げる」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-339">
+        <div class="gloss-item" id="gloss-341">
           <dt>当たりの余白 / Collision Margin<span class="gloss-meta">あたりのよはく</span></dt>
           <dd>Bullet（RBD）が、形のまわりに付ける当たり判定の余白。既定の 0.02 のままだと、厚さ 1.8 mm のコインが床から 2 cm 近く浮いて止まった。0.0005 にすると床に寝た。薄い物・小さな物では小さくする（実践「コインをばらまく」）。</dd>
         </div>
@@ -12046,177 +12069,181 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <h3>表示とレンダリング</h3>
       <p class="gloss-note">画面で確認するための表示と、画像として書き出すレンダリングは別物。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-340">
+        <div class="gloss-item" id="gloss-342">
           <dt>レンダリング / Render<span class="gloss-meta">レンダリング</span></dt>
           <dd>3Dのシーンから画像を計算して作ること。光の反射や影を計算するため時間がかかる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-341">
+        <div class="gloss-item" id="gloss-343">
           <dt>Karma<span class="gloss-meta">カルマ</span></dt>
           <dd>Houdiniに付属する現行のレンダラー。品質が高いが計算に時間がかかる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-342">
+        <div class="gloss-item" id="gloss-344">
           <dt>Mantra<span class="gloss-meta">マントラ</span></dt>
           <dd>Houdiniの旧世代レンダラー。現在はKarmaに置き換わりつつある。</dd>
         </div>
-        <div class="gloss-item" id="gloss-343">
+        <div class="gloss-item" id="gloss-345">
           <dt>OpenGL ROP<span class="gloss-meta">オープンジーエル・ロップ</span></dt>
           <dd>ビューポートの表示をそのまま画像に書き出すノード。光の計算をしないため一瞬で終わる。「何ができたか確認する」用途に向く。<span class="gloss-rel">関連: ROP, ビューポート</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-344">
+        <div class="gloss-item" id="gloss-346">
           <dt>ビューポート / Viewport<span class="gloss-meta">ビューポート</span></dt>
           <dd>3Dの形を表示している画面。ここで見えているものは簡易表示で、レンダリング結果とは異なる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-345">
+        <div class="gloss-item" id="gloss-347">
           <dt>Smooth Wire Shaded<span class="gloss-meta">スムース・ワイヤー・シェーデッド</span></dt>
           <dd>表示モードの一種。面に色を付けたうえで、面の境界線（ワイヤーフレーム）も重ねて描く。分割数やトポロジを確認したいときに有効。<span class="gloss-rel">関連: トポロジ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-346">
+        <div class="gloss-item" id="gloss-348">
           <dt>ワイヤーフレーム / Wireframe<span class="gloss-meta">ワイヤーフレーム</span></dt>
           <dd>面を塗らず、辺だけを線で表示すること。形の内部構造や分割数を見るのに使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-347">
+        <div class="gloss-item" id="gloss-349">
           <dt>フリップブック / Flipbook<span class="gloss-meta">フリップブック</span></dt>
           <dd>ビューポートの表示を連続して画像に書き出し、動きを確認すること。レンダリングせずにアニメーションを見たいときに使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-348">
+        <div class="gloss-item" id="gloss-350">
           <dt>距離減衰 / Falloff<span class="gloss-meta">きょりげんすい</span></dt>
           <dd>光が遠くなるほど弱くなる性質。ポイントライトは距離の2乗で暗くなるため、遠くに置くと強度を大きく上げないと真っ暗になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-349">
+        <div class="gloss-item" id="gloss-351">
           <dt>distant light<span class="gloss-meta">ディスタント・ライト</span></dt>
           <dd>太陽のように平行な光を当てるライト。距離による減衰がないため、どこに置いても明るさが変わらない。<span class="gloss-rel">関連: 距離減衰</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-350">
+        <div class="gloss-item" id="gloss-352">
           <dt>dome light / envlight<span class="gloss-meta">ドーム・ライト</span></dt>
           <dd>シーン全体を包む球から光を当てるライト。全方向から柔らかく照らせるので、形を確認したいときに扱いやすい。</dd>
         </div>
-        <div class="gloss-item" id="gloss-351">
+        <div class="gloss-item" id="gloss-353">
           <dt>サンプル / Sample<span class="gloss-meta">サンプル</span></dt>
           <dd>1ピクセルの色を決めるために飛ばす光線の本数。多いほどザラつきが減るが時間がかかる。ただし Karma では「ここまで使ってよい」という上限であって、実際に使われる数は収束具合で決まる。<span class="gloss-rel">関連: Karma / レンダリング</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-352">
+        <div class="gloss-item" id="gloss-354">
           <dt>ハードウェアレンダラー / Hardware renderer<span class="gloss-meta">ハードウェアレンダラー</span></dt>
           <dd>画面表示と同じ仕組みで絵を作る速いレンダラー。OpenGL ROP がこれ。光が物の中を通る計算はしないので、煙のようなものは濃淡だけになり陰影が出ない。<span class="gloss-rel">関連: OpenGL ROP / Karma</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-353">
+        <div class="gloss-item" id="gloss-355">
           <dt>コンタクトシート / Contact sheet<span class="gloss-meta">コンタクトシート</span></dt>
           <dd>連続したコマを1枚に並べた画像。動きの全体を一目で見るために使う。動画と違って、止まったまま前後を見比べられる。<span class="gloss-rel">関連: フリップブック</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-354">
+        <div class="gloss-item" id="gloss-356">
           <dt>フラクタル / Fractal<span class="gloss-meta">フラクタル</span></dt>
           <dd>大きな模様の中に同じ形の小さな模様が入れ子になっている性質。ノイズを何枚も重ねて自然な凹凸を作るときの重ね方を指す。<span class="gloss-rel">関連: ノイズ / mountain</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-355">
+        <div class="gloss-item" id="gloss-357">
           <dt>黒体放射 / Blackbody radiation<span class="gloss-meta">こくたいほうしゃ</span></dt>
           <dd>熱を持ったものが、その温度に応じた色で光る現象。低いと赤、上がるにつれて橙・黄・白へ変わる。焚き火が赤く、溶けた鉄が白っぽいのはこれ。VEXの blackbody(温度, 白とみなす温度) が温度から色を返す。</dd>
         </div>
-        <div class="gloss-item" id="gloss-356">
+        <div class="gloss-item" id="gloss-358">
           <dt>色温度 / Color temperature<span class="gloss-meta">いろおんど</span></dt>
           <dd>光の色をケルビン（K）という温度の単位で表したもの。ろうそくが約1900K、白熱電球が約2800K、昼光が約6500K。数字が小さいほど赤く、大きいほど青い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-357">
+        <div class="gloss-item" id="gloss-359">
           <dt>ホワイトバランス / White balance<span class="gloss-meta">ホワイトバランス</span></dt>
           <dd>「何色を白とみなすか」の設定。blackbody() の2つ目の引数がこれで、6500 を渡すと 6500K が白になり、それより低い温度は赤寄り、高い温度は青寄りに出る。</dd>
         </div>
-        <div class="gloss-item" id="gloss-358">
+        <div class="gloss-item" id="gloss-360">
           <dt>アルファ / Alpha<span class="gloss-meta">アルファ</span></dt>
           <dd>不透明度。1で完全に不透明、0で完全に透明。Houdiniではポイントの @Alpha に入れる。薄い煙や炎のふちを表すのに使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-359">
+        <div class="gloss-item" id="gloss-361">
           <dt>パストレーシング / Path Tracing<span class="gloss-meta">パストレーシング</span></dt>
           <dd>光の通り道をでたらめに辿って色を決めるやり方。回数を増やすほど、ざらつきが減って本物に近づく。<span class="gloss-rel">関連: サンプル, Karma</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-360">
+        <div class="gloss-item" id="gloss-362">
           <dt>AOV<span class="gloss-meta">エーオーブイ · Arbitrary Output Variable</span></dt>
           <dd>色以外の情報を、絵と一緒に別の層として書き出すもの。深さ・法線・部位ごとの色など。あとで合成するときに使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-361">
+        <div class="gloss-item" id="gloss-363">
           <dt>リニア空間 / Linear Space<span class="gloss-meta">リニアくうかん</span></dt>
           <dd>明るさをそのまま数で表す扱い方。計算はここで行い、画面に出すときに sRGB へ変える。混ぜると色が濁る原因になる。<span class="gloss-rel">関連: sRGB, ガンマ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-362">
+        <div class="gloss-item" id="gloss-364">
           <dt>sRGB<span class="gloss-meta">エスアールジービー</span></dt>
           <dd>画面に出すための明るさの表し方。人の目の感じ方に合わせて曲げてある。計算用のリニアとは別物。<span class="gloss-rel">関連: リニア空間</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-363">
+        <div class="gloss-item" id="gloss-365">
           <dt>ガンマ / Gamma<span class="gloss-meta">ガンマ</span></dt>
           <dd>明るさの曲げ方を表す数。これが合っていないと、全体が白っぽく、または黒っぽく見える。</dd>
         </div>
-        <div class="gloss-item" id="gloss-364">
+        <div class="gloss-item" id="gloss-366">
           <dt>露出 / Exposure<span class="gloss-meta">ろしゅつ</span></dt>
           <dd>全体の明るさを、絞りの段数で上げ下げする指定。1 上げると倍の明るさになる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-365">
+        <div class="gloss-item" id="gloss-367">
           <dt>アルベド / Albedo<span class="gloss-meta">アルベド</span></dt>
           <dd>その物が光をどれくらい返すか。色そのものというより、明るさの返し方を指す。</dd>
         </div>
-        <div class="gloss-item" id="gloss-366">
+        <div class="gloss-item" id="gloss-368">
           <dt>粗さ / Roughness<span class="gloss-meta">あらさ</span></dt>
           <dd>表面のざらつき。0 に近いと鏡のように映り、大きくすると反射がぼける。実験039で、粗さと見た目の関係を並べて見た。</dd>
         </div>
-        <div class="gloss-item" id="gloss-367">
+        <div class="gloss-item" id="gloss-369">
           <dt>金属度 / Metallic<span class="gloss-meta">きんぞくど</span></dt>
           <dd>金属らしさ。1 に近づけると、地の色が反射の色として出て、白いハイライトが消える。</dd>
         </div>
-        <div class="gloss-item" id="gloss-368">
+        <div class="gloss-item" id="gloss-370">
           <dt>屈折率 / IOR<span class="gloss-meta">くっせつりつ · Index of Refraction</span></dt>
           <dd>光がその物に入るときの曲がり方。ガラスは約1.5、水は約1.33。反射の強さもこの値で決まる。<span class="gloss-rel">関連: フレネル</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-369">
+        <div class="gloss-item" id="gloss-371">
           <dt>フレネル / Fresnel<span class="gloss-meta">フレネル</span></dt>
           <dd>浅い角度から見ると反射が強くなる現象。水面を遠くから見ると空が映るのがこれ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-370">
+        <div class="gloss-item" id="gloss-372">
           <dt>サブサーフェス / Subsurface<span class="gloss-meta">サブサーフェス</span></dt>
           <dd>光が中に入って散らばってから出てくる様子。肌・牛乳・大理石のような、内側が少し光る見た目を作る。</dd>
         </div>
-        <div class="gloss-item" id="gloss-371">
+        <div class="gloss-item" id="gloss-373">
           <dt>法線マップ / Normal Map<span class="gloss-meta">ほうせんマップ</span></dt>
           <dd>面の向きを画像で細かく置き換えるやり方。形は変えずに、凹凸があるように見せる。<span class="gloss-rel">関連: バンプ, ディスプレイスメント</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-372">
+        <div class="gloss-item" id="gloss-374">
           <dt>バンプ / Bump<span class="gloss-meta">バンプ</span></dt>
           <dd>明るさの画像から、凹凸があるように見せるやり方。輪郭は変わらないので、真横から見ると平らだと分かる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-373">
+        <div class="gloss-item" id="gloss-375">
           <dt>ディスプレイスメント / Displacement<span class="gloss-meta">ディスプレイスメント</span></dt>
           <dd>画像に従って、面そのものを動かすやり方。輪郭も変わるので本物の凹凸になるが、計算は重い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-374">
+        <div class="gloss-item" id="gloss-376">
           <dt>HDRI<span class="gloss-meta">エイチディーアールアイ · High Dynamic Range Image</span></dt>
           <dd>明るさの幅を広く持った画像。これで周りを囲むと、写真の中にあるような光り方になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-375">
+        <div class="gloss-item" id="gloss-377">
           <dt>被写界深度 / Depth of Field<span class="gloss-meta">ひしゃかいしんど</span></dt>
           <dd>ピントが合う奥行きの幅。絞りを開くと狭くなり、前後がぼける。</dd>
         </div>
-        <div class="gloss-item" id="gloss-376">
+        <div class="gloss-item" id="gloss-378">
           <dt>モーションブラー / Motion Blur<span class="gloss-meta">モーションブラー</span></dt>
           <dd>シャッターが開いている間の動きが、ぶれとして写ること。速いものが自然に見える。計算は重くなる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-377">
+        <div class="gloss-item" id="gloss-379">
           <dt>シーン / Sheen<span class="gloss-meta">シーン</span></dt>
           <dd>布や苔のような細かい毛のある表面が、斜めから見たときにふわっと明るく光る見え方。principledshader の Sheen を上げると足せる（実践「苔むした石を作る」「テーブルクロスを掛ける」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-378">
+        <div class="gloss-item" id="gloss-380">
           <dt>発光 / Emission<span class="gloss-meta">はっこう</span></dt>
           <dd>表面そのものが光を出すこと。principledshader の Emission Intensity で強さ、Emission Color で色を決める。Use Point Color を入れると点の色 Cd がそのまま光の色になる（実践「花火を打ち上げる」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-379">
+        <div class="gloss-item" id="gloss-381">
           <dt>透過色 / Transmission Color<span class="gloss-meta">とうかしょく</span></dt>
           <dd>透ける材質の中を光が通るときに付く色。Transmission Distance の長さを進むと、その色になる。厚い所ほど濃く色づく（ゼリーの赤、板ガラスの縁の緑）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-380">
+        <div class="gloss-item" id="gloss-382">
           <dt>光の筋 / 薄明光線（God Rays）<span class="gloss-meta">ひかりのすじ / はくめいこうせん</span></dt>
           <dd>霧やほこりで満ちた空気に、すき間から日が差したときに見える光の帯。霧が光を横へ散らすので見える。霧を 0 にすると空中の筋は消えた（実践「霧の森に光の筋を差す」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-381">
+        <div class="gloss-item" id="gloss-383">
           <dt>ノイズ除去 / Denoiser<span class="gloss-meta">ノイズじょきょ</span></dt>
           <dd>レンダリングの細かいざらつきを、あとから画像処理で消す仕組み。Karma では Denoiser を OIDN にする。霧のようなボリュームはサンプルを増やしてもざらつきが残りやすいので、そういう絵で使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-382">
+        <div class="gloss-item" id="gloss-384">
           <dt>ポイントライト / Point Light<span class="gloss-meta">ポイントライト</span></dt>
           <dd>1点から全方向に光を出す明かり。hlight の Light Type を Point にする。電球やろうそくの光に使う。近い物ほど強く照らすので、ろうそくのすぐ上に置くときは Intensity を 0.01 ほどに小さくする（実践「ろうそくの炎をともす」）。</dd>
+        </div>
+        <div class="gloss-item" id="gloss-385">
+          <dt>コート / Coat<span class="gloss-meta">コート</span></dt>
+          <dd>表面の上にもう1枚、透明なつやの層を重ねる設定（principledshader の Coat）。車の塗装・うわぐすり・アイシングのように、下の色の上につやが乗った見え方になる（実践「ドーナツを飾る」「六角形のタイルを敷く」）。</dd>
         </div>
       </dl>
     </section>
@@ -12224,67 +12251,67 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <h3>USD と Solaris</h3>
       <p class="gloss-note">Solaris（LOP）で出てくる、USD の舞台の言葉。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-383">
+        <div class="gloss-item" id="gloss-386">
           <dt>USD ステージ / Stage<span class="gloss-meta">ユーエスディーステージ</span></dt>
           <dd>USD の舞台全体。いくつものレイヤーを重ねた結果として見えている、1つのシーン。Solaris の箱は、このステージを少しずつ書き換えていく。<span class="gloss-rel">関連: USD, レイヤー（USD）</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-384">
+        <div class="gloss-item" id="gloss-387">
           <dt>プリム / Prim<span class="gloss-meta">プリム</span></dt>
           <dd>USD のステージに置かれる1つ1つの要素。形・光・カメラ・材質・入れ物（Xform）など。/world/geo/box のようなパスで場所を表す。SOP のプリミティブとは別物。</dd>
         </div>
-        <div class="gloss-item" id="gloss-385">
+        <div class="gloss-item" id="gloss-388">
           <dt>レイヤー（USD） / Layer<span class="gloss-meta">レイヤー</span></dt>
           <dd>USD の編集を書き込んだ1枚の紙。何枚も重ねて1つのステージになる。上の紙の書き込みが、下の紙より強い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-386">
+        <div class="gloss-item" id="gloss-389">
           <dt>オピニオン / Opinion<span class="gloss-meta">オピニオン</span></dt>
           <dd>あるレイヤーが、ある属性に対して書いた値。同じ属性に複数のオピニオンがあると、強い方が勝つ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-387">
+        <div class="gloss-item" id="gloss-390">
           <dt>コンポジション / Composition<span class="gloss-meta">コンポジション</span></dt>
           <dd>レイヤー・参照・バリアントなどを組み合わせて、最終的なステージを作る仕組み。強さの順番（LIVRPS）が決まっている。</dd>
         </div>
-        <div class="gloss-item" id="gloss-388">
+        <div class="gloss-item" id="gloss-391">
           <dt>LIVRPS<span class="gloss-meta">リブアールピーエス</span></dt>
           <dd>USD で、どの書き込みが勝つかの強さの順番。Local・Inherits・VariantSets・References・Payloads・Specializes の頭文字。左ほど強い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-389">
+        <div class="gloss-item" id="gloss-392">
           <dt>参照（USD） / Reference<span class="gloss-meta">さんしょう</span></dt>
           <dd>別の USD ファイルの中身を、コピーせずに指し示して読み込むこと。元のファイルを直すと、参照している所すべてに反映される。</dd>
         </div>
-        <div class="gloss-item" id="gloss-390">
+        <div class="gloss-item" id="gloss-393">
           <dt>ペイロード / Payload<span class="gloss-meta">ペイロード</span></dt>
           <dd>あとから読み込むことにできる参照。重い部品を、必要になるまで読み込まずに置いておける。</dd>
         </div>
-        <div class="gloss-item" id="gloss-391">
+        <div class="gloss-item" id="gloss-394">
           <dt>バリアント / Variant<span class="gloss-meta">バリアント</span></dt>
           <dd>1つの物の中に持たせた、切り替えられる別案。色違い・形違い・細かさ違いなどを1つにまとめる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-392">
+        <div class="gloss-item" id="gloss-395">
           <dt>Kind<span class="gloss-meta">カインド</span></dt>
           <dd>プリムの役割の札。component（部品）・assembly（組み立て）・group などがあり、選択や整理の単位になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-393">
+        <div class="gloss-item" id="gloss-396">
           <dt>Purpose<span class="gloss-meta">パーパス</span></dt>
           <dd>プリムの用途の札。render（本番の描画）・proxy（軽い代わり）・guide（目印）など。ビューポートとレンダーで出し分けられる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-394">
+        <div class="gloss-item" id="gloss-397">
           <dt>インスタンサブル / Instanceable<span class="gloss-meta">インスタンサブル</span></dt>
           <dd>同じ参照を持つプリムの中身を共有させる印。大量に置いても、メモリが増えにくい。</dd>
         </div>
-        <div class="gloss-item" id="gloss-395">
+        <div class="gloss-item" id="gloss-398">
           <dt>Hydra<span class="gloss-meta">ハイドラ</span></dt>
           <dd>USD のステージを描くための共通の仕組み。ビューポートや Karma は、Hydra を通してステージを描く。</dd>
         </div>
-        <div class="gloss-item" id="gloss-396">
+        <div class="gloss-item" id="gloss-399">
           <dt>Render Settings / Product / Var<span class="gloss-meta">レンダーセッティング</span></dt>
           <dd>USD でレンダリングの設定を表す3つのプリム。Settings が全体（カメラ・解像度）、Product が書き出す画像1枚、Var がその中の AOV 1つ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-397">
+        <div class="gloss-item" id="gloss-400">
           <dt>Cryptomatte<span class="gloss-meta">クリプトマット</span></dt>
           <dd>物や材質ごとに色分けされた ID の画像。合成のときに、あとから好きな物だけを切り抜ける。</dd>
         </div>
-        <div class="gloss-item" id="gloss-398">
+        <div class="gloss-item" id="gloss-401">
           <dt>ポイントインスタンサー / Point Instancer<span class="gloss-meta">ポイントインスタンサー</span></dt>
           <dd>同じ形を、位置・向きの表だけで大量に並べる USD のプリム。箱 1 万個で 0.32 MB と、1 個ずつプリムにするより何倍も小さかった（実験189・190）。</dd>
         </div>
@@ -12294,27 +12321,27 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <h3>ファイルの受け渡し</h3>
       <p class="gloss-note">外へ出す、外から入れるときの形式の言葉。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-399">
+        <div class="gloss-item" id="gloss-402">
           <dt>Alembic<span class="gloss-meta">アレンビック</span></dt>
           <dd>形と動きを他のソフトへ渡すための形式。焼き付いた結果を運ぶので軽いが、材質や仕掛けは持っていかない。実験058で書き出しを比べた。<span class="gloss-rel">関連: USD, FBX</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-400">
+        <div class="gloss-item" id="gloss-403">
           <dt>USD<span class="gloss-meta">ユーエスディー · Universal Scene Description</span></dt>
           <dd>シーン全体を層に分けて記述する形式。あとから上書きの層を重ねられるのが特徴。Houdini では /stage で扱う。<span class="gloss-rel">関連: Solaris</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-401">
+        <div class="gloss-item" id="gloss-404">
           <dt>FBX<span class="gloss-meta">エフビーエックス</span></dt>
           <dd>形・骨・動きをまとめて運べる形式。ゲームエンジンへ渡すときによく使う。<span class="gloss-rel">関連: Alembic</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-402">
+        <div class="gloss-item" id="gloss-405">
           <dt>OBJ<span class="gloss-meta">オービージェー</span></dt>
           <dd>点と面と UV だけを持つ、古くて単純な形式。アニメーションは持てない。素の形をやり取りするには確実。<span class="gloss-rel">関連: bgeo</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-403">
+        <div class="gloss-item" id="gloss-406">
           <dt>連番 / Sequence<span class="gloss-meta">れんばん</span></dt>
           <dd>1フレームごとに別のファイルとして書き出す並び。name.0001.bgeo のように番号が入る。$F4 で桁を揃える。<span class="gloss-rel">関連: $F</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-404">
+        <div class="gloss-item" id="gloss-407">
           <dt>パディング / Padding<span class="gloss-meta">パディング</span></dt>
           <dd>番号の桁を0で埋めて揃えること。1 を 0001 と書くと、並べ替えたときに順番が崩れない。<span class="gloss-rel">関連: 連番</span></dd>
         </div>
@@ -12324,103 +12351,103 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <h3>Houdini そのものに関する語</h3>
       <p class="gloss-note">ファイル形式やツール名など、操作の周辺で出てくる語。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-405">
+        <div class="gloss-item" id="gloss-408">
           <dt>パラメータ / Parameter<span class="gloss-meta">パラメータ</span></dt>
           <dd>ノードの設定値。高さ、回数、サイズなど。parm と略される。Houdiniではこの値に数式を入れて他のノードと連動させられる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-406">
+        <div class="gloss-item" id="gloss-409">
           <dt>クック / Cook<span class="gloss-meta">クック</span></dt>
           <dd>ノードが実際に計算を行うこと。パラメータや入力が変わると、そのノードと下流が再クックされる。重いノードを触ると待たされるのはこれが走っているため。</dd>
         </div>
-        <div class="gloss-item" id="gloss-407">
+        <div class="gloss-item" id="gloss-410">
           <dt>表示フラグ / Display flag<span class="gloss-meta">ディスプレイ・フラグ</span></dt>
           <dd>どのノードの結果を画面に表示するかの指定。ノードの端に付く点で示される。「途中のノードを見る」ができるのはこの仕組みのおかげ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-408">
+        <div class="gloss-item" id="gloss-411">
           <dt>バイパス / Bypass<span class="gloss-meta">バイパス</span></dt>
           <dd>ノードを一時的に無効にして、入力をそのまま下流に流すこと。そのノードの効果を消して比較したいときに使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-409">
+        <div class="gloss-item" id="gloss-412">
           <dt>HDA<span class="gloss-meta">エイチディーエー · Houdini Digital Asset</span></dt>
           <dd>作ったネットワークを1つのノードとしてまとめ、部品として再利用できるようにしたもの。中身を隠して必要なパラメータだけ外に出せる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-410">
+        <div class="gloss-item" id="gloss-413">
           <dt>.hip / .hipnc<span class="gloss-meta">ヒップ / ヒップエヌシー</span></dt>
           <dd>Houdiniのシーンファイル。.hip が通常版で、.hipnc は非商用（Apprentice）版が保存する形式。.hipnc は商用版で開けない。</dd>
         </div>
-        <div class="gloss-item" id="gloss-411">
+        <div class="gloss-item" id="gloss-414">
           <dt>hython<span class="gloss-meta">ハイソン</span></dt>
           <dd>Houdiniの機能を使えるPython。GUIを開かずにノードを組んだりレンダリングしたりできるため、自動化の中心になる。<span class="gloss-rel">関連: HOM</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-412">
+        <div class="gloss-item" id="gloss-415">
           <dt>HOM<span class="gloss-meta">ホム · Houdini Object Model</span></dt>
           <dd>PythonからHoudiniを操作するためのAPI。`hou` という名前のモジュールとして提供される。<span class="gloss-rel">関連: hython</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-413">
+        <div class="gloss-item" id="gloss-416">
           <dt>Apprentice<span class="gloss-meta">アプレンティス</span></dt>
           <dd>無料で使える非商用ライセンス。出力にウォーターマークが入り、解像度は1920x1080まで、保存は .hipnc のみという制限がある。学習用途としては十分。</dd>
         </div>
-        <div class="gloss-item" id="gloss-414">
+        <div class="gloss-item" id="gloss-417">
           <dt>ハッシュ / Hash<span class="gloss-meta">ハッシュ</span></dt>
           <dd>どんな長さのデータからでも、決まった長さの短い文字列を作る計算。元が1文字でも違えば結果は別物になる。実験027では、上流のネットワークからSHA-1 のハッシュを取り、キャッシュが古くなっていないかの判定に使った。</dd>
         </div>
-        <div class="gloss-item" id="gloss-415">
+        <div class="gloss-item" id="gloss-418">
           <dt>.hipnc<span class="gloss-meta">ヒップエヌシー</span></dt>
           <dd>Apprentice 版で保存したシーンのファイル。商用版の .hip とは別の拡張子で、商用版では開けない決まりになっている。<span class="gloss-rel">関連: Apprentice</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-416">
+        <div class="gloss-item" id="gloss-419">
           <dt>bgeo<span class="gloss-meta">ビージオ</span></dt>
           <dd>Houdini が形を保存する独自の形式。アトリビュートもグループもそのまま残る。.bgeo.sc は圧縮されたもの。<span class="gloss-rel">関連: ディスクキャッシュ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-417">
+        <div class="gloss-item" id="gloss-420">
           <dt>$HIP<span class="gloss-meta">ドルヒップ</span></dt>
           <dd>いま開いているシーンのファイルがある場所を指す。ファイルの場所をこれで書くと、フォルダごと移しても壊れない。<span class="gloss-rel">関連: 式</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-418">
+        <div class="gloss-item" id="gloss-421">
           <dt>$F<span class="gloss-meta">ドルエフ</span></dt>
           <dd>いまのフレーム番号。$F4 と書くと 0001 のように4桁に揃う。連番のファイル名に使う。<span class="gloss-rel">関連: 式, 連番</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-419">
+        <div class="gloss-item" id="gloss-422">
           <dt>Solaris<span class="gloss-meta">ソラリス</span></dt>
           <dd>USD でシーンを組み立てるための仕組み。/stage の中で動く。ライトや材質の割り当てをここでまとめる。<span class="gloss-rel">関連: /stage, USD</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-420">
+        <div class="gloss-item" id="gloss-423">
           <dt>Karma XPU<span class="gloss-meta">カルマエックスピーユー</span></dt>
           <dd>Karma のうち、GPU も使って速く描く方式。使える機能に制限があるため、CPU 版と結果が違うことがある。<span class="gloss-rel">関連: Karma</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-421">
+        <div class="gloss-item" id="gloss-424">
           <dt>MPM<span class="gloss-meta">エムピーエム · Material Point Method</span></dt>
           <dd>粒と升目を行き来させて、砂・雪・泥のような材質を解くやり方。固体と液体の中間のものを扱える。実験061〜076で測った。</dd>
         </div>
-        <div class="gloss-item" id="gloss-422">
+        <div class="gloss-item" id="gloss-425">
           <dt>つまみの式 / Parameter Expression<span class="gloss-meta">つまみのしき</span></dt>
           <dd>つまみに値ではなく式（$F や ch() や @N など）が入っている状態。SOP では488個のつまみに最初から式が入っていた（実験134）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-423">
+        <div class="gloss-item" id="gloss-426">
           <dt>deleteAllKeyframes()<span class="gloss-meta">デリートオールキーフレームズ</span></dt>
           <dd>Python でつまみの式やキーを全部消す命令。式が入ったつまみは、これで消してから set しないと値が変わらない（実験133・134）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-424">
+        <div class="gloss-item" id="gloss-427">
           <dt>$FSTART / $FEND<span class="gloss-meta">エフスタート</span></dt>
           <dd>シーンの最初と最後のフレーム番号。キャッシュや読み込みの範囲に、最初から式として入っていることが多い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-425">
+        <div class="gloss-item" id="gloss-428">
           <dt>intrinsic（内在属性）<span class="gloss-meta">イントリンシック</span></dt>
           <dd>形が最初から持っている読み取り用の値（pointcount・primitivecount など）。点を1つずつ数えるより速い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-426">
+        <div class="gloss-item" id="gloss-429">
           <dt>振り返り点検（Audit）<span class="gloss-meta">ふりかえりてんけん</span></dt>
           <dd>このサイトで30件ごとに行う見直し。台本を全部流し直し、記録の数字と1つずつ比べる。150 では 122〜149 の28本がすべて一致した。</dd>
         </div>
-        <div class="gloss-item" id="gloss-427">
+        <div class="gloss-item" id="gloss-430">
           <dt>埋め込み HDA / Embedded<span class="gloss-meta">うめこみエイチディーエー</span></dt>
           <dd>HDA（自作ノード）の定義を、別の .hda ファイルではなく hip の中にしまうこと。hip 1つを渡すだけで相手も使える。台本では createDigitalAsset(save_as_embedded=True)（実践「レンガ塀を HDA にする」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-428">
+        <div class="gloss-item" id="gloss-431">
           <dt>PDG / TOPs<span class="gloss-meta">ピーディージー / トップス</span></dt>
           <dd>「番号や値を変えながら、同じ処理を何回も回し、結果をファイルに書き出す」仕組み。topnet の中に TOP ノード（wedge・ropgeometry など）を並べて組む。5つの石を1回の実行で書き出した（実践「PDG で形違いを一度に書き出す」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-429">
+        <div class="gloss-item" id="gloss-432">
           <dt>@wedgeindex<span class="gloss-meta">アットウェッジインデックス</span></dt>
           <dd>wedge が作った作業ごとに付く番号（0, 1, 2, …）。SOP のつまみの式やファイル名に `@wedgeindex` と書くと、作業ごとに違う値になる。PDG の外で見ると 0。</dd>
         </div>
@@ -12627,8 +12654,8 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
 </div>
 
 <script src="data/experiment-data-bf21a9e8fb.js"></script>
-<script src="data/glossary-data-d6f055f117.js"></script>
-<script src="data/node-data-f0f64a7213.js"></script>
+<script src="data/glossary-data-c9c546f0c0.js"></script>
+<script src="data/node-data-123d142505.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
   /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
@@ -12807,9 +12834,9 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
         <div><dt>実験</dt><dd>201</dd></div>
-        <div><dt>実践</dt><dd>65</dd></div>
-        <div><dt>ノード</dt><dd>383</dd></div>
-        <div><dt>用語</dt><dd>430</dd></div>
+        <div><dt>実践</dt><dd>70</dd></div>
+        <div><dt>ノード</dt><dd>384</dd></div>
+        <div><dt>用語</dt><dd>433</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -12868,7 +12895,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
   <div class="sheet-body">
     <div class="menu-cards">
-      <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（65本）</a></div>
+      <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（70本）</a></div>
       <div class="menu-rail">
         <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
         <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
@@ -12881,8 +12908,8 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       </div>
       <div class="menu-doors">
         <a class="menu-door" href="log.html"><img src="thumb_201.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>201本の実験。最新は実験201</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>383件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>430語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>384件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>433語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -12985,7 +13012,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
 </div>
 
-<script src="data/search-data-61838a968d.js"></script>
+<script src="data/search-data-abcffd2a55.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

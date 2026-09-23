@@ -1,0 +1,65 @@
+{
+ "id": "petals",
+ "title": "桜の花びらが舞い散る",
+ "lede": "上の広い範囲から花びらの粒を少しずつ生み、重力・空気抵抗・横風で、ゆっくり斜めに落とす。popwrangle で粒ごとの向き orient を毎ステップ少しずつ回すと、ひらひら回って見える。最後に花びらの形を粒にコピーする。",
+ "hero": "pr_petals_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム 110）。風に流されて舞い散る桜の花びら。",
+ "facts": [
+  [
+   "足すノード",
+   "14個（dopnet の中に6個・材質2つ）"
+  ],
+  [
+   "120 フレームの計算",
+   "0.9秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "297.4秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_petals.hipnc",
+ "tags": [
+  "シミュレーション",
+  "POP",
+  "パーティクル",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "花びらを1枚作る",
+   "node": "attribwrangle",
+   "ui_node": "petal_shape",
+   "body": "<code>grid</code> を <code>attribwrangle</code> で丸い花びらにする。付け根から先への位置 u で幅を sin の形にし、先に小さな切れ込みを入れ、少し反らせる。長さ 3 cm（本物より少し大きめにして、画面で見えるようにする）。色は付け根が濃いピンク、先が白に近いピンク。",
+   "img": "pr_petals_1.png",
+   "cap": "桜の花びら1枚（拡大）。"
+  },
+  {
+   "title": "粒を生んで、ゆっくり落とす",
+   "node": "dopimport",
+   "ui_node": "in_air",
+   "body": "高さ 2.4 m に広い板（3 × 1.2 m）を置き、<code>dopnet</code> の中の <code>popsource</code> で、その面から <strong>1 秒に 90 個</strong>の粒を生む（Emission Type は Surface）。はじめの速さは横 0.3・下 0.2 m/秒に、ばらつきを付ける。<code>popforce</code> で重力、<code>popdrag</code> で <strong>Air Resistance 6</strong>（とても強い空気抵抗＝軽い花びら）と、風 (0.5, 0, 0.1) m/秒。<code>popwrangle</code> で粒ごとに回る軸と速さ spin を決め、毎ステップ orient を <code>qmultiply</code> で少しずつ回す。外の <code>dopimport</code> で取り出す。フレーム 110 で 414 枚が舞っている。120 フレームの計算は 0.9 秒。",
+   "img": "pr_petals_2.png",
+   "cap": "フレーム 110。斜めに流れて落ちる粒。",
+   "ui_parm": "airresist"
+  },
+  {
+   "title": "花びらをコピーして、材質を当てる",
+   "node": "material",
+   "ui_node": "assign_petal",
+   "body": "<code>copytopoints</code> で花びらを粒にコピーする。粒の orient がそのまま花びらの向きになり、1枚ずつ違う向きで回る。花びらは Base Color を白にして Cd を使い、Sheen 0.4 で薄い花びらのやわらかさを出す。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "空気抵抗が弱いと、石のように落ちる",
+   "body": "Air Resistance 6 では、フレーム 110 で舞っている粒の落ちる速さは平均 1.07 m/秒。0.5 にすると 3.95 m/秒。花びらのように軽い物は、空気抵抗をとても強くする。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "花びらがひらひら回りながら、斜めに流れて落ちる（120 フレーム＝5 秒）。"
+}

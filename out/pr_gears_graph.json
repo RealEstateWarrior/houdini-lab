@@ -1,0 +1,514 @@
+{
+  "title": "歯車をかみ合わせて回す",
+  "network": "/obj/gears",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "blank",
+      "type": "circle",
+      "pos": [
+        -11.72,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "divs": 720
+      }
+    },
+    {
+      "name": "cut_teeth",
+      "type": "attribwrangle",
+      "pos": [
+        -11.72,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 縁の点を、角度に合わせて外へ出し入れして歯にする。歯の数 n、半径 = モジュール × n / 2\nint n = chi('teeth');\nfloat m = chf('module');\nfloat r = m * n /..."
+      }
+    },
+    {
+      "name": "gear_thickness",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -11.72,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.012,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "axle",
+      "type": "tube",
+      "pos": [
+        -9.46,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.012,
+        "rad2": 0.012,
+        "height": 0.03,
+        "cols": 24
+      }
+    },
+    {
+      "name": "gear_with_axle",
+      "type": "merge",
+      "pos": [
+        -10.59,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "teeth_24",
+      "type": "attribwrangle",
+      "pos": [
+        -6.213,
+        6.702
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 縁の点を、角度に合わせて外へ出し入れして歯にする。歯の数 n、半径 = モジュール × n / 2\nint n = chi('teeth');\nfloat m = chf('module');\nfloat r = m * n /..."
+      }
+    },
+    {
+      "name": "thick_24",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -6.213,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.012,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "axle_24",
+      "type": "tube",
+      "pos": [
+        -3.954,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.012,
+        "rad2": 0.012,
+        "height": 0.03,
+        "cols": 24
+      }
+    },
+    {
+      "name": "gear_24",
+      "type": "merge",
+      "pos": [
+        -5.083,
+        4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "spin_24",
+      "type": "xform",
+      "pos": [
+        -5.083,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ry": 178.125
+      }
+    },
+    {
+      "name": "teeth_12",
+      "type": "attribwrangle",
+      "pos": [
+        -1.13,
+        6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 縁の点を、角度に合わせて外へ出し入れして歯にする。歯の数 n、半径 = モジュール × n / 2\nint n = chi('teeth');\nfloat m = chf('module');\nfloat r = m * n /..."
+      }
+    },
+    {
+      "name": "thick_12",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -1.13,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.012,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "axle_12",
+      "type": "tube",
+      "pos": [
+        1.13,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.012,
+        "rad2": 0.012,
+        "height": 0.03,
+        "cols": 24
+      }
+    },
+    {
+      "name": "gear_12",
+      "type": "merge",
+      "pos": [
+        0.0,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "spin_12",
+      "type": "xform",
+      "pos": [
+        0.0,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.18,
+        "ry": -521.25
+      }
+    },
+    {
+      "name": "teeth_36",
+      "type": "attribwrangle",
+      "pos": [
+        3.954,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 縁の点を、角度に合わせて外へ出し入れして歯にする。歯の数 n、半径 = モジュール × n / 2\nint n = chi('teeth');\nfloat m = chf('module');\nfloat r = m * n /..."
+      }
+    },
+    {
+      "name": "thick_36",
+      "type": "polyextrude::2.0",
+      "pos": [
+        3.954,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.012,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "axle_36",
+      "type": "tube",
+      "pos": [
+        6.213,
+        4.217
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.012,
+        "rad2": 0.012,
+        "height": 0.03,
+        "cols": 24
+      }
+    },
+    {
+      "name": "gear_36",
+      "type": "merge",
+      "pos": [
+        5.083,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "spin_36",
+      "type": "xform",
+      "pos": [
+        5.083,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": -0.14999999999999994,
+        "tz": -0.2598076211353316,
+        "ry": -253.75
+      }
+    },
+    {
+      "name": "gear_train",
+      "type": "merge",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_brass",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/gear_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "blank",
+      "from_output": 0,
+      "to": "cut_teeth",
+      "to_input": 0
+    },
+    {
+      "from": "cut_teeth",
+      "from_output": 0,
+      "to": "gear_thickness",
+      "to_input": 0
+    },
+    {
+      "from": "gear_thickness",
+      "from_output": 0,
+      "to": "gear_with_axle",
+      "to_input": 0
+    },
+    {
+      "from": "axle",
+      "from_output": 0,
+      "to": "gear_with_axle",
+      "to_input": 1
+    },
+    {
+      "from": "blank",
+      "from_output": 0,
+      "to": "teeth_24",
+      "to_input": 0
+    },
+    {
+      "from": "teeth_24",
+      "from_output": 0,
+      "to": "thick_24",
+      "to_input": 0
+    },
+    {
+      "from": "thick_24",
+      "from_output": 0,
+      "to": "gear_24",
+      "to_input": 0
+    },
+    {
+      "from": "axle_24",
+      "from_output": 0,
+      "to": "gear_24",
+      "to_input": 1
+    },
+    {
+      "from": "gear_24",
+      "from_output": 0,
+      "to": "spin_24",
+      "to_input": 0
+    },
+    {
+      "from": "blank",
+      "from_output": 0,
+      "to": "teeth_12",
+      "to_input": 0
+    },
+    {
+      "from": "teeth_12",
+      "from_output": 0,
+      "to": "thick_12",
+      "to_input": 0
+    },
+    {
+      "from": "thick_12",
+      "from_output": 0,
+      "to": "gear_12",
+      "to_input": 0
+    },
+    {
+      "from": "axle_12",
+      "from_output": 0,
+      "to": "gear_12",
+      "to_input": 1
+    },
+    {
+      "from": "gear_12",
+      "from_output": 0,
+      "to": "spin_12",
+      "to_input": 0
+    },
+    {
+      "from": "blank",
+      "from_output": 0,
+      "to": "teeth_36",
+      "to_input": 0
+    },
+    {
+      "from": "teeth_36",
+      "from_output": 0,
+      "to": "thick_36",
+      "to_input": 0
+    },
+    {
+      "from": "thick_36",
+      "from_output": 0,
+      "to": "gear_36",
+      "to_input": 0
+    },
+    {
+      "from": "axle_36",
+      "from_output": 0,
+      "to": "gear_36",
+      "to_input": 1
+    },
+    {
+      "from": "gear_36",
+      "from_output": 0,
+      "to": "spin_36",
+      "to_input": 0
+    },
+    {
+      "from": "spin_24",
+      "from_output": 0,
+      "to": "gear_train",
+      "to_input": 0
+    },
+    {
+      "from": "spin_12",
+      "from_output": 0,
+      "to": "gear_train",
+      "to_input": 1
+    },
+    {
+      "from": "spin_36",
+      "from_output": 0,
+      "to": "gear_train",
+      "to_input": 2
+    },
+    {
+      "from": "gear_train",
+      "from_output": 0,
+      "to": "assign_brass",
+      "to_input": 0
+    }
+  ]
+}

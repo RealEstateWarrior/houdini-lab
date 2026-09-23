@@ -1,0 +1,72 @@
+{
+ "id": "stairs",
+ "title": "らせん階段を組む",
+ "lede": "扇形の段の板を1枚作り、1段ごとに 22度回して 18 cm 上げた位置へ並べる。真ん中に柱を立て、段の外の端を結んだらせんの線に太さを付けて手すりにする。並べ方は VEX の数行で決まる。",
+ "hero": "pr_stairs_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。木の段と黒い鉄の手すりのらせん階段。",
+ "facts": [
+  [
+   "足すノード",
+   "17個（材質2つ）"
+  ],
+  [
+   "段",
+   "22段・高さ 3.96 m"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "148.0秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_stairs.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "複製",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "段の板を1枚作る",
+   "node": "attribwrangle",
+   "ui_node": "fan_shape",
+   "body": "<code>box</code>（長さ 1 m・厚さ 4 cm・奥行き 34 cm）を、柱から外へ向けて置く（中心を x = 0.62 へずらす）。<code>attribwrangle</code> で、柱に近い側ほど奥行きを狭くし（0.35 倍）、扇形の段にする。",
+   "img": "pr_stairs_1.png",
+   "cap": "扇形の段の板。"
+  },
+  {
+   "title": "少しずつ回して積み上げる",
+   "node": "copytopoints",
+   "ui_node": "all_treads",
+   "body": "Detail の <code>attribwrangle</code> で、<strong>22 段</strong>ぶんの点を、真ん中の軸の上に高さ <strong>0.18 m</strong> ずつ置く。点ごとの向き orient を、1段ごとに <strong>22度</strong>ずつ回す（y 軸まわり）。<code>copytopoints</code> で段を並べると、段は軸のまわりを回りながら上がっていく。22 段で 484度（1周と少し）、高さ 3.96 m。",
+   "img": "pr_stairs_2.png",
+   "cap": "22 段のらせん。",
+   "ui_parm": "turn"
+  },
+  {
+   "title": "柱と手すりを付ける",
+   "node": "merge",
+   "ui_node": "railing",
+   "body": "真ん中に <code>tube</code> の柱を立てる。手すりは、Detail の <code>attribwrangle</code> で段の外の端の 90 cm 上を細かく（1段を8つに分けて）たどるらせんの線を描き、<code>polywire</code>（Radius 2.5 cm）で太さを付ける。段の点を外の端へずらして、細い <code>tube</code>（手すり子）を <code>copytopoints</code> で並べる。",
+   "img": "pr_stairs_3.png",
+   "cap": "柱・手すり・手すり子。"
+  },
+  {
+   "title": "材質を当てる",
+   "node": "merge",
+   "ui_node": "staircase",
+   "body": "段は明るい木（Roughness 0.45）、柱と手すりは黒い鉄（Metallic 1・Roughness 0.35）。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "回す角度で、階段の広がりと急さが変わる",
+   "body": "1段 22度では、階段全体は横 2.26 × 奥行き 2.26 m。44度にすると 2.26 × 2.26 m で、同じ 22 段が 968度（2.7 周）回る。1周で上がる高さが半分になり、上の段と頭がぶつかりやすくなる。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

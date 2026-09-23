@@ -1,0 +1,313 @@
+{
+  "title": "らせん階段を組む",
+  "network": "/obj/stairs",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "tread",
+      "type": "box",
+      "pos": [
+        -4.165,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizey": 0.04,
+        "sizez": 0.34,
+        "tx": 0.62
+      }
+    },
+    {
+      "name": "fan_shape",
+      "type": "attribwrangle",
+      "pos": [
+        -4.165,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 板を扇形にする。柱に近い側（x が小さい）ほど奥行きを狭くする\n@P.z *= fit(@P.x, 0.12, 1.12, 0.35, 1.0);"
+      }
+    },
+    {
+      "name": "helix_spots",
+      "type": "attribwrangle",
+      "pos": [
+        -1.906,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 1段ごとに、角度 turn 度・高さ rise ずつずらした点を置く。点の orient で段の向きを回す\nint n = chi('steps');\nfor (int i = 0; i < n; i++) {\n    floa..."
+      }
+    },
+    {
+      "name": "all_treads",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -3.036,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "center_pole",
+      "type": "tube",
+      "pos": [
+        0.918,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "ty": 2.48,
+        "rad1": 0.1,
+        "rad2": 0.1,
+        "height": 4.96,
+        "cols": 32
+      }
+    },
+    {
+      "name": "rail_path",
+      "type": "attribwrangle",
+      "pos": [
+        3.177,
+        5.648
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 手すり：段の外の端の上 0.9 m を結ぶ、なめらかならせんの線\nint n = chi('steps');\nint prim = addprim(0, 'polyline');\nfor (int k = 0; k <= (n ..."
+      }
+    },
+    {
+      "name": "rail",
+      "type": "polywire",
+      "pos": [
+        3.177,
+        4.518
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "radius": 0.025
+      }
+    },
+    {
+      "name": "post_spots",
+      "type": "attribwrangle",
+      "pos": [
+        8.26,
+        5.045
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 手すり子：各段の外の端に1本。段と同じ角度で、軸から 1.07 m\nfloat a = radians(@ptnum * chf('../helix_spots/turn'));\n@P += set(cos(a) * 1.07,..."
+      }
+    },
+    {
+      "name": "post",
+      "type": "tube",
+      "pos": [
+        6.001,
+        5.497
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "ty": 0.45,
+        "rad1": 0.012,
+        "rad2": 0.012,
+        "height": 0.9
+      }
+    },
+    {
+      "name": "posts",
+      "type": "copytopoints::2.0",
+      "pos": [
+        7.131,
+        4.066
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "railing",
+      "type": "merge",
+      "pos": [
+        5.154,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_wood",
+      "type": "material",
+      "pos": [
+        -3.036,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/wood_mat"
+      }
+    },
+    {
+      "name": "metal_parts",
+      "type": "merge",
+      "pos": [
+        3.036,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_iron",
+      "type": "material",
+      "pos": [
+        3.036,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/iron_mat"
+      }
+    },
+    {
+      "name": "staircase",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "tread",
+      "from_output": 0,
+      "to": "fan_shape",
+      "to_input": 0
+    },
+    {
+      "from": "fan_shape",
+      "from_output": 0,
+      "to": "all_treads",
+      "to_input": 0
+    },
+    {
+      "from": "helix_spots",
+      "from_output": 0,
+      "to": "all_treads",
+      "to_input": 1
+    },
+    {
+      "from": "rail_path",
+      "from_output": 0,
+      "to": "rail",
+      "to_input": 0
+    },
+    {
+      "from": "helix_spots",
+      "from_output": 0,
+      "to": "post_spots",
+      "to_input": 0
+    },
+    {
+      "from": "post",
+      "from_output": 0,
+      "to": "posts",
+      "to_input": 0
+    },
+    {
+      "from": "post_spots",
+      "from_output": 0,
+      "to": "posts",
+      "to_input": 1
+    },
+    {
+      "from": "rail",
+      "from_output": 0,
+      "to": "railing",
+      "to_input": 0
+    },
+    {
+      "from": "posts",
+      "from_output": 0,
+      "to": "railing",
+      "to_input": 1
+    },
+    {
+      "from": "all_treads",
+      "from_output": 0,
+      "to": "assign_wood",
+      "to_input": 0
+    },
+    {
+      "from": "center_pole",
+      "from_output": 0,
+      "to": "metal_parts",
+      "to_input": 0
+    },
+    {
+      "from": "railing",
+      "from_output": 0,
+      "to": "metal_parts",
+      "to_input": 1
+    },
+    {
+      "from": "metal_parts",
+      "from_output": 0,
+      "to": "assign_iron",
+      "to_input": 0
+    },
+    {
+      "from": "assign_wood",
+      "from_output": 0,
+      "to": "staircase",
+      "to_input": 0
+    },
+    {
+      "from": "assign_iron",
+      "from_output": 0,
+      "to": "staircase",
+      "to_input": 1
+    }
+  ]
+}

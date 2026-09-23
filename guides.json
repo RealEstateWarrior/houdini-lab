@@ -6132,6 +6132,354 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "hextile",
+      "title": "六角形のタイルを敷く",
+      "lede": "六角形は、横に √3 × 半径、縦に 1.5 × 半径 の間隔で、1列おきに横へ半分ずらすと、すき間なく並ぶ。その位置に、目地のぶんだけ小さくした六角形のタイルを置き、1枚ずつ色と高さを少し変える。",
+      "hero": "pr_hextile_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。1枚ずつ焼き色の違う、六角形のテラコッタタイル。",
+      "facts": [
+        [
+          "足すノード",
+          "11個（材質2つ）"
+        ],
+        [
+          "タイル",
+          "357枚"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "155.5秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_hextile.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "複製",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "六角形の中心を並べる",
+          "node": "attribwrangle",
+          "ui_node": "hex_grid",
+          "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、タイルの中心になる点を並べる。半径 R = 0.1 m のとき、横の間隔は <strong>√3 × R</strong>（0.1732 m）、縦の間隔は <strong>1.5 × R</strong>（0.150 m）。<strong>1列おきに横へ半分ずらす</strong>と、六角形がすき間なくはまる並びになる。点ごとに焼き色 Cd と、ごくわずかな高さの差（2 mm 以内）も付ける。",
+          "img": "pr_hextile_1.png",
+          "cap": "半分ずつずれた点の並び。",
+          "ui_parm": "radius"
+        },
+        {
+          "title": "タイルを1枚作る",
+          "node": "polybevel",
+          "ui_node": "soft_edges",
+          "body": "<code>circle</code> の Divisions を <strong>6</strong> にすると六角形になる。半径は目地のぶん小さい 0.094 m、寝かせて（Orientation を ZX）、Rotate Y を 30度回して、角を横の並びに合わせる。<code>polyextrude</code> で厚さ 12 mm、<code>polybevel</code> で角を 1.5 mm 丸める。",
+          "img": "pr_hextile_2.png",
+          "cap": "六角形のタイル1枚。"
+        },
+        {
+          "title": "並べて、目地を入れる",
+          "node": "merge",
+          "ui_node": "tiled_floor",
+          "body": "<code>copytopoints</code> でタイルを点に並べる（357 枚）。色は Target Attributes の「Apply to: Points」「Cd」で移す。タイルの厚みの途中の高さ（4 mm）に灰色の <code>grid</code> を敷くと、すき間から目地のモルタルが見える。",
+          "img": "pr_hextile_3.png",
+          "cap": "357 枚の六角タイルの床。"
+        },
+        {
+          "title": "材質を当てる",
+          "node": "merge",
+          "ui_node": "floor",
+          "body": "タイルは Base Color を白にして点の色 Cd を使い、Roughness 0.35・Coat 0.3（うわぐすりのつや）。目地は灰色で Roughness 0.95。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "縦の間隔は 1.5 × 半径",
+          "body": "となり合うタイルの中心どうしの、いちばん近い距離は 0.1732 m（縦 1.5·R のとき）。六角形がぴったり接する距離 √3·R = 0.1732 m と一致する。縦を 1.3·R にすると 0.1562 m に縮み、タイルどうしが重なる。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "petals",
+      "title": "桜の花びらが舞い散る",
+      "lede": "上の広い範囲から花びらの粒を少しずつ生み、重力・空気抵抗・横風で、ゆっくり斜めに落とす。popwrangle で粒ごとの向き orient を毎ステップ少しずつ回すと、ひらひら回って見える。最後に花びらの形を粒にコピーする。",
+      "hero": "pr_petals_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 110）。風に流されて舞い散る桜の花びら。",
+      "facts": [
+        [
+          "足すノード",
+          "14個（dopnet の中に6個・材質2つ）"
+        ],
+        [
+          "120 フレームの計算",
+          "0.9秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "297.4秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_petals.hipnc",
+      "tags": [
+        "シミュレーション",
+        "POP",
+        "パーティクル",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "花びらを1枚作る",
+          "node": "attribwrangle",
+          "ui_node": "petal_shape",
+          "body": "<code>grid</code> を <code>attribwrangle</code> で丸い花びらにする。付け根から先への位置 u で幅を sin の形にし、先に小さな切れ込みを入れ、少し反らせる。長さ 3 cm（本物より少し大きめにして、画面で見えるようにする）。色は付け根が濃いピンク、先が白に近いピンク。",
+          "img": "pr_petals_1.png",
+          "cap": "桜の花びら1枚（拡大）。"
+        },
+        {
+          "title": "粒を生んで、ゆっくり落とす",
+          "node": "dopimport",
+          "ui_node": "in_air",
+          "body": "高さ 2.4 m に広い板（3 × 1.2 m）を置き、<code>dopnet</code> の中の <code>popsource</code> で、その面から <strong>1 秒に 90 個</strong>の粒を生む（Emission Type は Surface）。はじめの速さは横 0.3・下 0.2 m/秒に、ばらつきを付ける。<code>popforce</code> で重力、<code>popdrag</code> で <strong>Air Resistance 6</strong>（とても強い空気抵抗＝軽い花びら）と、風 (0.5, 0, 0.1) m/秒。<code>popwrangle</code> で粒ごとに回る軸と速さ spin を決め、毎ステップ orient を <code>qmultiply</code> で少しずつ回す。外の <code>dopimport</code> で取り出す。フレーム 110 で 414 枚が舞っている。120 フレームの計算は 0.9 秒。",
+          "img": "pr_petals_2.png",
+          "cap": "フレーム 110。斜めに流れて落ちる粒。",
+          "ui_parm": "airresist"
+        },
+        {
+          "title": "花びらをコピーして、材質を当てる",
+          "node": "material",
+          "ui_node": "assign_petal",
+          "body": "<code>copytopoints</code> で花びらを粒にコピーする。粒の orient がそのまま花びらの向きになり、1枚ずつ違う向きで回る。花びらは Base Color を白にして Cd を使い、Sheen 0.4 で薄い花びらのやわらかさを出す。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "空気抵抗が弱いと、石のように落ちる",
+          "body": "Air Resistance 6 では、フレーム 110 で舞っている粒の落ちる速さは平均 1.07 m/秒。0.5 にすると 3.95 m/秒。花びらのように軽い物は、空気抵抗をとても強くする。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "花びらがひらひら回りながら、斜めに流れて落ちる（120 フレーム＝5 秒）。"
+    },
+    {
+      "id": "gears",
+      "title": "歯車をかみ合わせて回す",
+      "lede": "円の縁を歯の数だけ出っぱらせて歯車にする。歯の大きさ（モジュール）をそろえた歯車どうしは、中心の距離を「2つの半径の和」にするとかみ合う。回す速さは歯の数の比で決まり、式で回すのでシミュレーションは要らない。",
+      "hero": "pr_gears_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。歯の数の違う3つの真ちゅうの歯車。",
+      "facts": [
+        [
+          "足すノード",
+          "18個（材質1つ）"
+        ],
+        [
+          "歯の数",
+          "24・12・36"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "64.6秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_gears.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "アニメーション",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "歯車を1つ作る",
+          "node": "merge",
+          "ui_node": "gear_with_axle",
+          "body": "<code>circle</code>（720 分割）の縁の点を、<code>attribwrangle</code> で角度に合わせて外へ出し入れして歯にする。<strong>cos(角度 × 歯の数)</strong> は歯1つぶんで1回、山と谷をくり返す。これを 2.2 倍して ±1 で切ると、山と谷が平らな台形の歯になる。歯の大きさ <strong>module = 0.01</strong>（1 cm）のとき、半径は module × 歯の数 ÷ 2（24 枚なら 12 cm）。<code>polyextrude</code> で厚さ 1.2 cm にし、真ん中に軸の <code>tube</code> を通す。",
+          "img": "pr_gears_1.png",
+          "cap": "24 枚歯の歯車。",
+          "ui_parm": "teeth"
+        },
+        {
+          "title": "かみ合う位置に置き、歯の数の比で回す",
+          "node": "merge",
+          "ui_node": "gear_train",
+          "body": "同じ作り方で、歯の数 24・12・36 の歯車を作る（歯の大きさはそろえる）。中心の距離を「2つの半径の和」にすると歯がかみ合う。<code>xform</code> の Rotate Y に式を入れて回す。24 枚を <strong>$T * 45</strong>（1 秒に 45度）にしたら、かみ合う歯車は <strong>逆向きに 24 ÷ 歯の数 倍</strong>（12 枚は −90度、36 枚は −30度）で回す。はじめの角度を半歯ぶんずらしておくと、歯が相手のすき間にはまる。",
+          "img": "pr_gears_2.png",
+          "cap": "3つの歯車。",
+          "ui_parm": "ry"
+        },
+        {
+          "title": "真ちゅうの材質",
+          "node": "material",
+          "ui_node": "assign_brass",
+          "body": "<code>principledshader</code> で <strong>Metallic 1・Roughness 0.3</strong>、色を真ちゅうの黄色にする。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "直径は、歯の数に比例する",
+          "body": "歯 24・12・36 枚の歯車の、歯先までの直径は 26.0・14.0・38.0 cm。歯の大きさ（module）をそろえると、直径は歯の数に比例する（歯先は module 1 つ分さらに外）。だから、中心の距離は module × (歯の数1 + 歯の数2) ÷ 2 で決まる。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "3つの歯車がかみ合って回る（96 フレーム＝4 秒）。"
+    },
+    {
+      "id": "stairs",
+      "title": "らせん階段を組む",
+      "lede": "扇形の段の板を1枚作り、1段ごとに 22度回して 18 cm 上げた位置へ並べる。真ん中に柱を立て、段の外の端を結んだらせんの線に太さを付けて手すりにする。並べ方は VEX の数行で決まる。",
+      "hero": "pr_stairs_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。木の段と黒い鉄の手すりのらせん階段。",
+      "facts": [
+        [
+          "足すノード",
+          "17個（材質2つ）"
+        ],
+        [
+          "段",
+          "22段・高さ 3.96 m"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "148.0秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_stairs.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "複製",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "段の板を1枚作る",
+          "node": "attribwrangle",
+          "ui_node": "fan_shape",
+          "body": "<code>box</code>（長さ 1 m・厚さ 4 cm・奥行き 34 cm）を、柱から外へ向けて置く（中心を x = 0.62 へずらす）。<code>attribwrangle</code> で、柱に近い側ほど奥行きを狭くし（0.35 倍）、扇形の段にする。",
+          "img": "pr_stairs_1.png",
+          "cap": "扇形の段の板。"
+        },
+        {
+          "title": "少しずつ回して積み上げる",
+          "node": "copytopoints",
+          "ui_node": "all_treads",
+          "body": "Detail の <code>attribwrangle</code> で、<strong>22 段</strong>ぶんの点を、真ん中の軸の上に高さ <strong>0.18 m</strong> ずつ置く。点ごとの向き orient を、1段ごとに <strong>22度</strong>ずつ回す（y 軸まわり）。<code>copytopoints</code> で段を並べると、段は軸のまわりを回りながら上がっていく。22 段で 484度（1周と少し）、高さ 3.96 m。",
+          "img": "pr_stairs_2.png",
+          "cap": "22 段のらせん。",
+          "ui_parm": "turn"
+        },
+        {
+          "title": "柱と手すりを付ける",
+          "node": "merge",
+          "ui_node": "railing",
+          "body": "真ん中に <code>tube</code> の柱を立てる。手すりは、Detail の <code>attribwrangle</code> で段の外の端の 90 cm 上を細かく（1段を8つに分けて）たどるらせんの線を描き、<code>polywire</code>（Radius 2.5 cm）で太さを付ける。段の点を外の端へずらして、細い <code>tube</code>（手すり子）を <code>copytopoints</code> で並べる。",
+          "img": "pr_stairs_3.png",
+          "cap": "柱・手すり・手すり子。"
+        },
+        {
+          "title": "材質を当てる",
+          "node": "merge",
+          "ui_node": "staircase",
+          "body": "段は明るい木（Roughness 0.45）、柱と手すりは黒い鉄（Metallic 1・Roughness 0.35）。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "回す角度で、階段の広がりと急さが変わる",
+          "body": "1段 22度では、階段全体は横 2.26 × 奥行き 2.26 m。44度にすると 2.26 × 2.26 m で、同じ 22 段が 968度（2.7 周）回る。1周で上がる高さが半分になり、上の段と頭がぶつかりやすくなる。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "donut",
+      "title": "ドーナツを飾る",
+      "lede": "トーラス（ドーナツ形）の生地を作り、上を向いた面だけを取り出してアイシングにする。縁はノイズで波打たせる。アイシングの上に点をまき、細長い粒を表面に寝かせて並べるとカラースプレーになる。",
+      "hero": "pr_donut_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。ピンクのアイシングとカラースプレーのドーナツ。",
+      "facts": [
+        [
+          "足すノード",
+          "12個（材質3つ）"
+        ],
+        [
+          "スプリンクル",
+          "260粒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "138.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_donut.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "複製",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "生地を作る",
+          "node": "normal",
+          "ui_node": "puffy_dir",
+          "body": "<code>torus</code>（半径 10 cm、太さ 4.5 cm、64 × 128 に割る）を作り、<code>attribwrangle</code> で高さを 0.82 倍につぶす。面の向き N にそってノイズでわずかに出し入れし、揚げた生地のふっくらしたむらにする。torus の出力には N が無いので、前後に <code>normal</code> を入れて向きを作る（形を変えたあとは作り直す）。",
+          "img": "pr_donut_1.png",
+          "cap": "ふっくらした生地。"
+        },
+        {
+          "title": "アイシングをかける",
+          "node": "polyextrude",
+          "ui_node": "icing_thickness",
+          "body": "生地のコピーを <code>attribwrangle</code>（Primitives）で削る。面の向きの上下成分 N.y が <strong>edge = −0.15</strong> より小さい面を消すと、上側と少し側面まで残る。edge をノイズで上下させる（wobble 0.9）と、縁が垂れたように波打つ。<code>polyextrude</code> で <strong>4 mm</strong> 押し出して厚みを付ける（Output Back で裏も閉じる）。",
+          "img": "pr_donut_2.png",
+          "cap": "上半分を覆う、縁の波打ったアイシング。",
+          "ui_parm": "edge"
+        },
+        {
+          "title": "カラースプレーを散らす",
+          "node": "copytopoints",
+          "ui_node": "sprinkles",
+          "body": "アイシングの面に <code>scatter</code> で 260 個の点をまく（Relax で間をそろえる）。<code>attribwrangle</code> で、粒の長い向きを「面にそったばらばらの向き」、上を面の向き N に合わせた <strong>orient</strong> を作り、アイシングの厚みぶん持ち上げる。色は6色から選ぶ。細長い <code>sphere</code>（長さ 9 mm）を <code>copytopoints</code> で並べ、色は Target Attributes の「Apply to: Points」「Cd」で移す。",
+          "img": "pr_donut_3.png",
+          "cap": "260 粒のカラースプレー。",
+          "ui_parm": "npts"
+        },
+        {
+          "title": "材質を当てる",
+          "node": "merge",
+          "ui_node": "donut",
+          "body": "生地は焼き色の茶色で Roughness 0.6・Sheen 0.4。アイシングはピンクで <strong>Roughness 0.15・Coat 0.6</strong>（つや）。スプリンクルは Base Color を白にして点の色 Cd を使う。Subsurface（光が中へ入って散る）も試したが、このドーナツでは Karma が 20 分たっても撮り終わらなかったので入れていない。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "アイシングの広さは edge で決まる",
+          "body": "生地の 8,192 面のうち、edge −0.15 で 4,446 面（54%）がアイシングになった。wobble を 0 にすると 4,405 面で、縁がまっすぐな線になる。本物らしい垂れは wobble で出す。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

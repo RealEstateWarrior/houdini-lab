@@ -1,0 +1,73 @@
+{
+ "id": "donut",
+ "title": "ドーナツを飾る",
+ "lede": "トーラス（ドーナツ形）の生地を作り、上を向いた面だけを取り出してアイシングにする。縁はノイズで波打たせる。アイシングの上に点をまき、細長い粒を表面に寝かせて並べるとカラースプレーになる。",
+ "hero": "pr_donut_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。ピンクのアイシングとカラースプレーのドーナツ。",
+ "facts": [
+  [
+   "足すノード",
+   "12個（材質3つ）"
+  ],
+  [
+   "スプリンクル",
+   "260粒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "138.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_donut.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "複製",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "生地を作る",
+   "node": "normal",
+   "ui_node": "puffy_dir",
+   "body": "<code>torus</code>（半径 10 cm、太さ 4.5 cm、64 × 128 に割る）を作り、<code>attribwrangle</code> で高さを 0.82 倍につぶす。面の向き N にそってノイズでわずかに出し入れし、揚げた生地のふっくらしたむらにする。torus の出力には N が無いので、前後に <code>normal</code> を入れて向きを作る（形を変えたあとは作り直す）。",
+   "img": "pr_donut_1.png",
+   "cap": "ふっくらした生地。"
+  },
+  {
+   "title": "アイシングをかける",
+   "node": "polyextrude",
+   "ui_node": "icing_thickness",
+   "body": "生地のコピーを <code>attribwrangle</code>（Primitives）で削る。面の向きの上下成分 N.y が <strong>edge = −0.15</strong> より小さい面を消すと、上側と少し側面まで残る。edge をノイズで上下させる（wobble 0.9）と、縁が垂れたように波打つ。<code>polyextrude</code> で <strong>4 mm</strong> 押し出して厚みを付ける（Output Back で裏も閉じる）。",
+   "img": "pr_donut_2.png",
+   "cap": "上半分を覆う、縁の波打ったアイシング。",
+   "ui_parm": "edge"
+  },
+  {
+   "title": "カラースプレーを散らす",
+   "node": "copytopoints",
+   "ui_node": "sprinkles",
+   "body": "アイシングの面に <code>scatter</code> で 260 個の点をまく（Relax で間をそろえる）。<code>attribwrangle</code> で、粒の長い向きを「面にそったばらばらの向き」、上を面の向き N に合わせた <strong>orient</strong> を作り、アイシングの厚みぶん持ち上げる。色は6色から選ぶ。細長い <code>sphere</code>（長さ 9 mm）を <code>copytopoints</code> で並べ、色は Target Attributes の「Apply to: Points」「Cd」で移す。",
+   "img": "pr_donut_3.png",
+   "cap": "260 粒のカラースプレー。",
+   "ui_parm": "npts"
+  },
+  {
+   "title": "材質を当てる",
+   "node": "merge",
+   "ui_node": "donut",
+   "body": "生地は焼き色の茶色で Roughness 0.6・Sheen 0.4。アイシングはピンクで <strong>Roughness 0.15・Coat 0.6</strong>（つや）。スプリンクルは Base Color を白にして点の色 Cd を使う。Subsurface（光が中へ入って散る）も試したが、このドーナツでは Karma が 20 分たっても撮り終わらなかったので入れていない。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "アイシングの広さは edge で決まる",
+   "body": "生地の 8,192 面のうち、edge −0.15 で 4,446 面（54%）がアイシングになった。wobble を 0 にすると 4,405 面で、縁がまっすぐな線になる。本物らしい垂れは wobble で出す。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

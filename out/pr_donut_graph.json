@@ -1,0 +1,311 @@
+{
+  "title": "ドーナツを飾る",
+  "network": "/obj/donut",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "dough",
+      "type": "torus",
+      "pos": [
+        -3.201,
+        6.401
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "radx": 0.1,
+        "rady": 0.045,
+        "rows": 64,
+        "cols": 128
+      }
+    },
+    {
+      "name": "dough_dir",
+      "type": "normal",
+      "pos": [
+        -3.201,
+        5.271
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "puffy",
+      "type": "attribwrangle",
+      "pos": [
+        -3.201,
+        4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 少しつぶして、ふっくらむらを付ける。\n@P.y *= 0.82;\n@P += @N * (noise(@P * 18) - 0.5) * 0.006;"
+      }
+    },
+    {
+      "name": "puffy_dir",
+      "type": "normal",
+      "pos": [
+        -3.201,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "icing_area",
+      "type": "attribwrangle",
+      "pos": [
+        -0.377,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// 上を向いた面だけ残す。縁はノイズで上下させて、垂れたように波打たせる\nvector n = prim_normal(0, @primnum, 0.5, 0.5);\nvector c = prim(0, 'P', @primnum..."
+      }
+    },
+    {
+      "name": "icing_thickness",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -0.377,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.004,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "sprinkle_spots",
+      "type": "scatter::2.0",
+      "pos": [
+        4.707,
+        4.217
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 260,
+        "seed": 4.0
+      }
+    },
+    {
+      "name": "lay_flat",
+      "type": "attribwrangle",
+      "pos": [
+        4.707,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 粒を表面に寝かせる。長い向き（z）を表面にそったばらばらの向きに、上（y）を面の向き N に合わせる\nvector n = normalize(v@N);\nvector t = normalize(cross(n, set(ra..."
+      }
+    },
+    {
+      "name": "sprinkle",
+      "type": "sphere",
+      "pos": [
+        2.447,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.0012,
+        "rady": 0.0012,
+        "radz": 0.0045,
+        "rows": 8,
+        "cols": 12
+      }
+    },
+    {
+      "name": "sprinkles",
+      "type": "copytopoints::2.0",
+      "pos": [
+        3.577,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetattribs": 1,
+        "applyattribs1": "Cd"
+      }
+    },
+    {
+      "name": "assign_dough",
+      "type": "material",
+      "pos": [
+        -3.201,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/dough_mat"
+      }
+    },
+    {
+      "name": "assign_icing",
+      "type": "material",
+      "pos": [
+        -0.377,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/icing_mat"
+      }
+    },
+    {
+      "name": "assign_sprinkles",
+      "type": "material",
+      "pos": [
+        3.577,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sprinkle_mat"
+      }
+    },
+    {
+      "name": "donut",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "dough",
+      "from_output": 0,
+      "to": "dough_dir",
+      "to_input": 0
+    },
+    {
+      "from": "dough_dir",
+      "from_output": 0,
+      "to": "puffy",
+      "to_input": 0
+    },
+    {
+      "from": "puffy",
+      "from_output": 0,
+      "to": "puffy_dir",
+      "to_input": 0
+    },
+    {
+      "from": "puffy_dir",
+      "from_output": 0,
+      "to": "icing_area",
+      "to_input": 0
+    },
+    {
+      "from": "icing_area",
+      "from_output": 0,
+      "to": "icing_thickness",
+      "to_input": 0
+    },
+    {
+      "from": "icing_area",
+      "from_output": 0,
+      "to": "sprinkle_spots",
+      "to_input": 0
+    },
+    {
+      "from": "sprinkle_spots",
+      "from_output": 0,
+      "to": "lay_flat",
+      "to_input": 0
+    },
+    {
+      "from": "sprinkle",
+      "from_output": 0,
+      "to": "sprinkles",
+      "to_input": 0
+    },
+    {
+      "from": "lay_flat",
+      "from_output": 0,
+      "to": "sprinkles",
+      "to_input": 1
+    },
+    {
+      "from": "puffy_dir",
+      "from_output": 0,
+      "to": "assign_dough",
+      "to_input": 0
+    },
+    {
+      "from": "icing_thickness",
+      "from_output": 0,
+      "to": "assign_icing",
+      "to_input": 0
+    },
+    {
+      "from": "sprinkles",
+      "from_output": 0,
+      "to": "assign_sprinkles",
+      "to_input": 0
+    },
+    {
+      "from": "assign_dough",
+      "from_output": 0,
+      "to": "donut",
+      "to_input": 0
+    },
+    {
+      "from": "assign_icing",
+      "from_output": 0,
+      "to": "donut",
+      "to_input": 1
+    },
+    {
+      "from": "assign_sprinkles",
+      "from_output": 0,
+      "to": "donut",
+      "to_input": 2
+    }
+  ]
+}

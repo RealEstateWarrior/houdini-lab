@@ -22,6 +22,13 @@ ADD = {
          "params": [["enablefire", "炎を光らせる"], ["fireintscale", "炎の明るさの倍率"], ["fireint_volumename", "明るさを読むボリューム"],
                     ["firecolor_volumename", "色を読むボリューム"], ["firecolorramp", "炎の色の並び"], ["densityscale", "煙の濃さの倍率"]]},
     ],
+    "pop": [
+        {"name": "popwrangle", "kind": "DOP",
+         "one": "POP の粒に、VEX で自分の決まりを足す。",
+         "what": "dopnet の中で popsolver の力の入口につなぐ。毎ステップ、粒ごとに VEX が走る。@TimeInc（1ステップの秒数）を使うと、"
+                 "向き orient を qmultiply で少しずつ回したり、速さ v に揺れを足したりできる（実践「桜の花びらが舞い散る」）。",
+         "params": [["snippet", "VEX のコード"], ["activate", "有効にする"]]},
+    ],
     "pdg": [
         {"name": "topnet", "kind": "OBJ",
          "one": "PDG（TOP ノード）を置くためのネットワーク。",

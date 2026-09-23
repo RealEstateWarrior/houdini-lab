@@ -1,0 +1,72 @@
+{
+ "id": "hextile",
+ "title": "六角形のタイルを敷く",
+ "lede": "六角形は、横に √3 × 半径、縦に 1.5 × 半径 の間隔で、1列おきに横へ半分ずらすと、すき間なく並ぶ。その位置に、目地のぶんだけ小さくした六角形のタイルを置き、1枚ずつ色と高さを少し変える。",
+ "hero": "pr_hextile_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。1枚ずつ焼き色の違う、六角形のテラコッタタイル。",
+ "facts": [
+  [
+   "足すノード",
+   "11個（材質2つ）"
+  ],
+  [
+   "タイル",
+   "357枚"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "155.5秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_hextile.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "複製",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "六角形の中心を並べる",
+   "node": "attribwrangle",
+   "ui_node": "hex_grid",
+   "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、タイルの中心になる点を並べる。半径 R = 0.1 m のとき、横の間隔は <strong>√3 × R</strong>（0.1732 m）、縦の間隔は <strong>1.5 × R</strong>（0.150 m）。<strong>1列おきに横へ半分ずらす</strong>と、六角形がすき間なくはまる並びになる。点ごとに焼き色 Cd と、ごくわずかな高さの差（2 mm 以内）も付ける。",
+   "img": "pr_hextile_1.png",
+   "cap": "半分ずつずれた点の並び。",
+   "ui_parm": "radius"
+  },
+  {
+   "title": "タイルを1枚作る",
+   "node": "polybevel",
+   "ui_node": "soft_edges",
+   "body": "<code>circle</code> の Divisions を <strong>6</strong> にすると六角形になる。半径は目地のぶん小さい 0.094 m、寝かせて（Orientation を ZX）、Rotate Y を 30度回して、角を横の並びに合わせる。<code>polyextrude</code> で厚さ 12 mm、<code>polybevel</code> で角を 1.5 mm 丸める。",
+   "img": "pr_hextile_2.png",
+   "cap": "六角形のタイル1枚。"
+  },
+  {
+   "title": "並べて、目地を入れる",
+   "node": "merge",
+   "ui_node": "tiled_floor",
+   "body": "<code>copytopoints</code> でタイルを点に並べる（357 枚）。色は Target Attributes の「Apply to: Points」「Cd」で移す。タイルの厚みの途中の高さ（4 mm）に灰色の <code>grid</code> を敷くと、すき間から目地のモルタルが見える。",
+   "img": "pr_hextile_3.png",
+   "cap": "357 枚の六角タイルの床。"
+  },
+  {
+   "title": "材質を当てる",
+   "node": "merge",
+   "ui_node": "floor",
+   "body": "タイルは Base Color を白にして点の色 Cd を使い、Roughness 0.35・Coat 0.3（うわぐすりのつや）。目地は灰色で Roughness 0.95。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "縦の間隔は 1.5 × 半径",
+   "body": "となり合うタイルの中心どうしの、いちばん近い距離は 0.1732 m（縦 1.5·R のとき）。六角形がぴったり接する距離 √3·R = 0.1732 m と一致する。縦を 1.3·R にすると 0.1562 m に縮み、タイルどうしが重なる。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}
