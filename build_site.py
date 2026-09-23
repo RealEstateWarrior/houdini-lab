@@ -18,11 +18,13 @@ Usage:
     python build_site.py
 """
 
+import datetime
 import html
 import json
 import os
 import re
 import shutil
+import urllib.parse
 
 import link_terms
 
@@ -1313,11 +1315,11 @@ DONE = [
      "title": "vdbreshapesdf の Dilate・Erode は、球の半径を Offset × 升の大きさだけ変える — Iterations は効かず、Open・Close は形をほぼ変えない",
      "note": "Dilate・Erode は半径を Offset×升の大きさだけ変える。Iterations は効かない"},
     {"no": "196", "anchor": "exp196",
-     "tags": ["VDB", "落とし穴", "vdbreshapesdf"],
+     "tags": ["VDB", "落とし穴", "vdbreshapesdf", "訂正"],
      "log": "log_pm", "thumb": "196_open.png",
      "shots": ["196_open.png"],
      "title": "vdbreshapesdf の Open は箱の角を r より少し大きく丸める — Close も凸な箱を少しだけ削る",
-     "note": "Open は箱の角を r より1〜3割大きく丸める。Close も凸な箱を少し削る"},
+     "note": "Open は箱の角を r より大きく丸める（約3升の足し分。実験198で訂正）。Close も凸な箱を少し削る"},
     {"no": "197", "anchor": "exp197",
      "tags": ["VDB", "SDF", "モデリング"],
      "log": "log_pm", "thumb": "197_band.png",
@@ -2524,9 +2526,10 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
 
     if "entry" in page and 'id="exp' in page:
         page = inject_experiment_links(page, urls, nodes)
+        page = retarget_exp_anchors(page)
 
     if out_dir in (DOCS, ROOT):
-        page = as_document(page)
+        page = as_document(page, out_name if out_dir == DOCS else None)
 
     if out_dir == ROOT:
         # 画像は houdini-lab 側に置いたままなので、入口から見た道に直す。
@@ -2539,7 +2542,85 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     return out_path
 
 
-def as_document(page):
+def retarget_exp_anchors(page):
+    """本文の <a href="#exp024"> のうち、この編に無い実験を正しい編へ向け直す。
+
+    実験ログをモデリング編とエフェクト編に分けたので、本文のページ内リンクが
+    もう片方の編を指していることがある。ページ内の移動では読み込み時の
+    振り分けが効かないので、書き出す時点で直す。
+    """
+    here = set(re.findall(r'id="(exp\d+)"', page))
+    where = {no: href for href, no in re.findall(r'"href":"([^"]*#exp(\d+))"', page)}
+
+    def fix(match):
+        no = match.group(1)
+        if "exp" + no in here or no not in where:
+            return match.group(0)
+        return f'href="{where[no]}"'
+
+    return re.sub(r'href="#exp(\d+)"', fix, page)
+
+
+PAGES_BASE = "https://realestatewarrior.github.io/houdini-lab/"
+
+# 検索結果や SNS のカードに出る説明。GitHub Pages 版だけに付ける。
+PAGE_DESCRIPTION = {
+    "index.html": "Houdini の機能を1つずつ動かし、結果を数値で記録する研究サイト。実験ログ、作り方の手順、ノードと用語の解説。",
+    "practice.html": "Houdini で物を作る手順。地面に物を生やす、布を垂らす、煙を出す、水を落とすなど、測って確かめた作り方。",
+    "reference.html": "Houdini のノード解説と用語集。つまみ名は実物から取り、実験で分かった落とし穴を添えている。",
+    "log.html": "Houdini 実験ログ モデリング編。形・VEX・VDB・レンダリングなどを1つずつ動かし、測った数値で記録。",
+    "log_fx.html": "Houdini 実験ログ エフェクト編。RBD・Vellum・POP・MPM・煙などのシミュレーションを測った数値で記録。",
+    "glossary.html": "Houdini の用語辞典。実験で確かめた値を添えた日本語の説明。",
+    "links.html": "Houdini を学ぶための参考リンク集。",
+}
+OG_IMAGE = "thumb_008.png"
+
+
+def favicon_link():
+    svg = LOGO_SVG.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ', 1) \
+        .replace("currentColor", "#0071e3")
+    return ('<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,'
+            + urllib.parse.quote(svg) + '">')
+
+
+def page_meta(head, out_name):
+    """説明文・SNS のカード・アイコンを <head> 用に組み立てる。"""
+    found = re.search(r"<title>(.*?)</title>", head, re.S)
+    title = found.group(1).strip() if found else DEPT
+    if "<!--" in title:
+        title = DEPT
+    desc = html.escape(PAGE_DESCRIPTION.get(out_name, PAGE_DESCRIPTION["index.html"]))
+    url = PAGES_BASE + ("" if out_name == "index.html" else out_name)
+    return "\n".join([
+        f'<meta name="description" content="{desc}">',
+        f'<link rel="canonical" href="{url}">',
+        '<meta property="og:type" content="website">',
+        f'<meta property="og:site_name" content="{DEPT}">',
+        f'<meta property="og:title" content="{title}">',
+        f'<meta property="og:description" content="{desc}">',
+        f'<meta property="og:url" content="{url}">',
+        f'<meta property="og:image" content="{PAGES_BASE}{OG_IMAGE}">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        favicon_link(),
+    ])
+
+
+def write_sitemap():
+    """docs/ に sitemap.xml と robots.txt を置く。"""
+    pages = [spec[2] for spec in PAGES if spec[2]]
+    today = datetime.date.today().isoformat()
+    rows = "".join(
+        f"  <url><loc>{PAGES_BASE}{'' if name == 'index.html' else name}</loc>"
+        f"<lastmod>{today}</lastmod></url>\n" for name in pages)
+    with open(os.path.join(DOCS, "sitemap.xml"), "w", encoding="utf-8") as fp:
+        fp.write('<?xml version="1.0" encoding="UTF-8"?>\n'
+                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                 f"{rows}</urlset>\n")
+    with open(os.path.join(DOCS, "robots.txt"), "w", encoding="utf-8") as fp:
+        fp.write(f"User-agent: *\nAllow: /\nSitemap: {PAGES_BASE}sitemap.xml\n")
+
+
+def as_document(page, out_name=None):
     """docs/ 用に完全なHTMLに包む。
 
     Artifact 側は発行時に doctype と charset を付けてくれるが、GitHub Pages は
@@ -2557,7 +2638,8 @@ def as_document(page):
         "<head>\n"
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-        f"{head}\n"
+        + (page_meta(head, out_name) + "\n" if out_name else "")
+        + f"{head}\n"
         "</head>\n"
         "<body>\n"
         f"{body}\n"
@@ -2629,6 +2711,8 @@ def main():
                ROOT_URLS, data, nodes, guides, works, requests, css,
                links_body, popover, chrome, None)
         root_note = os.path.join(ROOT, "index.html")
+
+    write_sitemap()
 
     # GitHub Pages に Jekyll 処理をさせない
     with open(os.path.join(DOCS, ".nojekyll"), "w", encoding="utf-8") as fp:

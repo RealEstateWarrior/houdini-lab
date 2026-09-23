@@ -20,7 +20,9 @@ SITE = os.path.join(HERE, "site")
 
 
 def link_exps(text):
-    """「実験070」を記事内リンクにする（すでにリンクになっているものは触らない）。"""
+    """「実験070」を記事内リンクにする（すでにリンクになっているものは触らない）。
+    レポートの **太字** もここで <strong> にする（しないと記号のまま出る）。"""
+    text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
     return re.sub(r"(?<!>)実験(\d{3})(?![^<]*</a>)",
                   lambda m: f'<a href="#exp{m.group(1)}">実験{m.group(1)}</a>', text)
 

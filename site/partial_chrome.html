@@ -150,7 +150,7 @@
         entry.target.classList.remove("reveal");
         observer.unobserve(entry.target);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.02 });
+    }, { rootMargin: "0px 0px 25% 0px", threshold: 0 });
 
     Array.prototype.forEach.call(targets, function (el, index) {
       var box = el.getBoundingClientRect();

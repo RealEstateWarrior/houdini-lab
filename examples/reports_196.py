@@ -55,7 +55,8 @@ def main():
             "**Close は、へこみの無い箱を変えないはずだが、少し削った**（"
             + "・".join(f"r = {r['r']:g} で {(r['volume'] - 1) * 100:+.2f}%" for r in closes)
             + "）。Offset が SDF の帯（既定 3 升）を超えるほど大きいと、太らせて戻す途中で角の情報が失われるとみられるが、確かめていない。\n\n"
-            "**実験195 の球では Open・Close はほぼ何もしなかった。**角のある形でだけ、この差が出る。",
+            "**実験195 の球では Open・Close はほぼ何もしなかった。**角のある形でだけ、この差が出る。\n\n"
+            "**訂正（実験198・199）: 上の「同じ体積の丸み半径」は、三つの面が集まる角の形も混ざった値だった。**辺の断面に円を当てはめると、丸みは円弧で、半径は Offset × 升 + 約 3 升（r = 0.05・0.1・0.2 で 0.075・0.130・0.232）。「Offset が小さいほど倍率が大きい」のは、この一定の足し分のため。帯の幅を変えても足し分は変わらなかった。",
         "graph": "", "graph_image": "",
         "comparisons": [{
             "label": "Operation・Offset と体積",
@@ -65,11 +66,11 @@ def main():
             "rows": [[r["operation"], r["offset"], f"{r['r']:g}", f"{r['volume']:.6f}", f"{r['want']:.6f}",
                       f"{r['r_eff']:.4f}" if "r_eff" in r else "—", f"{r['sec']:.3f}"] for r in rows]}],
         "notes": [
-            "<strong>Open で角を丸めると、Offset × 升より少し大きい丸みになる。</strong>欲しい丸みより Offset を 1〜3 割小さく（小さい丸みほど多めに）。",
+            "<strong>Open で角を丸めると、Offset × 升より少し大きい丸みになる。</strong>辺の断面を測ると、足し分は倍率ではなく約 3 升で一定だった（実験198・199）。欲しい半径 R なら Offset ≒ R ÷ 升 − 3。",
             "<strong>凸な形に Close をかけても、少し削れる。</strong>Offset が大きいほど。",
             "<strong>角を正確な半径で丸めたいなら polybevel（実験152）。</strong>",
         ],
-        "next": ["SDF の帯（Half-Band Voxels）を広げたときの Close", "Open の丸みの形（本当に円弧か）"],
+        "next": ["SDF の帯を広げたときの Close（実験197）", "Open の丸みの形（実験198）"],
     }
     with open(os.path.join(OUT, "196_report.json"), "w", encoding="utf-8") as fp:
         json.dump(payload, fp, ensure_ascii=False, indent=1)

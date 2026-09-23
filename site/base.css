@@ -2079,8 +2079,9 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
    隠す指定（.reveal）はJSが後から付ける。JSが動かない環境では最初から見えている。
    動きを減らす設定の人には、JS側でそもそも付けない。 */
 
+/* 透明にはしない。速くスクロールしても、画面が一瞬空にならないように。 */
 .reveal {
-  opacity: 0;
+  opacity: 0.4;
   transform: translateY(16px);
 }
 .stage, .tile, .pillar, .pipe, .thumb, .nodecard, .gloss-cat, .linkset, .entry {
