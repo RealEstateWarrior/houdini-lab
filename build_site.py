@@ -2141,7 +2141,9 @@ def render_exp_data(urls):
             with open(path, encoding="utf-8") as fp:
                 rep = json.load(fp)
             entry["title"] = rep.get("title", entry["title"])
-            summary = [p.strip() for p in rep.get("summary", "").split("\n\n")]
+            # レポートの **太字** は、ポップアップでも <strong> にする
+            summary = [re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", p.strip())
+                       for p in rep.get("summary", "").split("\n\n")]
             entry["summary"] = [p for p in summary if p] or entry["summary"]
             entry["points"] = rep.get("notes", [])
             entry["next"] = rep.get("next", [])
