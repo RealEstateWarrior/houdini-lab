@@ -1,0 +1,95 @@
+{
+ "id": "chain",
+ "title": "鎖を垂らす",
+ "lede": "2本の柱のあいだに、真ん中がたるんだ線を引き、その線にそって輪を並べる。輪を1つおきに90度ひねると、かみ合った鎖になる。動かすシミュレーションは使わず、線の形だけで作る。",
+ "hero": "pr_chain_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。輪が交互にひねられてかみ合い、真ん中がたるむ。",
+ "facts": [
+  [
+   "足すノード",
+   "13個（材質2つ）"
+  ],
+  [
+   "輪の数",
+   "27個"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "35.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_chain.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "複製",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "垂れた線を引く",
+   "node": "attribwrangle",
+   "ui_node": "hang",
+   "body": "<code>line</code> で x = −1 から 1 まで、長さ 2 m・200 点の線を引く。<code>attribwrangle</code> で高さを <strong>a · cosh(x / a)</strong> の形にする。これは懸垂線と呼ばれ、鎖やロープが自分の重さで垂れたときの形そのもの。<strong>a = 0.9</strong>。小さくするほど深くたるむ。両端の高さは 1.6 m にそろえる。",
+   "img": "pr_chain_1.png",
+   "cap": "両端が同じ高さで、真ん中がたるんだ線。",
+   "ui_parm": "a"
+  },
+  {
+   "title": "輪1つぶんの間隔で区切る",
+   "node": "resample",
+   "ui_node": "one_per_link",
+   "body": "<code>resample</code> の <strong>Length を 0.0961</strong>（m）にして、線を等しい間隔の点に打ち直す。間隔は、輪の <strong>内側の長さ</strong> にする。となりの輪は、この内側にちょうど通る。輪の大きさ（半径 0.04・針金の太さ 0.009・縦長 1.55 倍）から、(0.04 − 0.009) × 2 × 1.55 で出した。",
+   "img": "pr_chain_2.png",
+   "cap": "等しい間隔の点。点1つに輪が1つ乗る。",
+   "ui_parm": "length"
+  },
+  {
+   "title": "輪の向きを決め、1つおきにひねる",
+   "node": "attribwrangle",
+   "ui_node": "twist_every_other",
+   "body": "<code>attribwrangle</code> で、点ごとに <strong>orient</strong>（向き）を作る。前後の点を結んだ向きを「輪の長い向き」にし、<strong>1つおきに（@ptnum % 2 == 1）輪の面を90度回す</strong>。本物の鎖も、輪の面が交互に縦・横になってかみ合っている。",
+   "img": "pr_chain_3.png",
+   "cap": "見た目は同じ。点ごとに向きが付いた。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "輪を作って、点に並べる",
+   "node": "copytopoints",
+   "ui_node": "chain",
+   "body": "<code>torus</code>（Orientation を <strong>X Axis</strong>、半径 0.04・0.009）で輪を作り、<code>xform</code> で z 方向（長い向き）に <strong>1.55 倍</strong> して、鎖らしい縦長の輪にする。<code>copytopoints</code> の左に輪、右に向きの付いた点をつなぐと、27 個の輪が交互にひねられて並ぶ。",
+   "img": "pr_chain_4.png",
+   "cap": "27 個の輪がかみ合った鎖。",
+   "ui_parm": "rad"
+  },
+  {
+   "title": "柱を立て、材質を当てる",
+   "node": "merge",
+   "ui_node": "chain_and_posts",
+   "body": "<code>tube</code> で両端に柱を2本立て、鎖の端を柱の中へ少し入れる。鎖は <code>principledshader</code> で <strong>Metallic 1・Roughness 0.28</strong>（使い込んだ鉄）。柱は茶色の木。金属はまわりを映して見えるので、撮るときはドームの光を少し強めにして、映り込むものを作る。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "間隔を広げると、輪が離れてしまう",
+   "body": "Length を 1.5 倍（0.144）にすると、輪は 27 個から 18 個に減り、となりの輪の内側に届かなくなる。間隔は必ず、輪の内側の長さ (太さの中心までの半径 − 針金の太さ) × 2 × 縦長の倍率 にする。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "向きを付けないと、輪が全部同じ向きになる",
+   "body": "twist_every_other を外すと、copytopoints に向き（orient）が渡らず、輪はどれも元の向きのまま並ぶ。線にも沿わず、かみ合いもしない。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "a でたるみの深さが決まる",
+   "body": "a = 0.9 で真ん中は端より 0.62 m 下がり、a = 0.5 では 1.38 m 下がった。鎖の長さは変わるので、輪の数も自動で増える。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

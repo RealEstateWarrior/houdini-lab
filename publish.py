@@ -62,9 +62,7 @@ def push(where=()):
 def main():
     message =sys.argv[1] if len(sys.argv) > 1 else "実験ログとサイトを更新"
 
-    specs = report_specs()
-    print(f"レポート {len(specs)} 件を束ねる")
-    run([sys.executable, "report_pdf.py", "--bundle", BUNDLE, TITLE] + specs)
+    # Notebook 用の束（log_A.pdf、30MB）は 2026-09-24 にやめた。題材ごとのソースは nb_sources.py で作る
 
     # 本文の用語リンクを付け直してから生成する（差し込むのはタグだけ）
     print(run([sys.executable, "link_terms.py"]))

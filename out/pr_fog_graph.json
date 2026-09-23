@@ -1,0 +1,285 @@
+{
+  "title": "霧の森に光の筋を差す",
+  "network": "/obj/fog",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ground",
+      "type": "grid",
+      "pos": [
+        -3.53,
+        6.702
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 30.0,
+        "sizey": 30.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "tree_spots",
+      "type": "scatter::2.0",
+      "pos": [
+        -3.53,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 240,
+        "seed": 3.0,
+        "relaxiterations": 20
+      }
+    },
+    {
+      "name": "tree_sizes",
+      "type": "attribwrangle",
+      "pos": [
+        -3.53,
+        4.443
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// カメラの前（手前の細長い帯）には木を立てない。目の前に幹があると何も見えない\nif (@P.z > -4 && abs(@P.x - 0.25 * (@P.z + 4)) < 1.3) removepoint(0, @ptnum..."
+      }
+    },
+    {
+      "name": "trunk",
+      "type": "tube",
+      "pos": [
+        -5.789,
+        4.895
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "ty": 8.0,
+        "rad1": 0.11,
+        "rad2": 0.15,
+        "height": 16.0,
+        "cols": 20
+      }
+    },
+    {
+      "name": "trees",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -4.66,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "canopy",
+      "type": "grid",
+      "pos": [
+        1.553,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 44.0,
+        "sizey": 44.0,
+        "ty": 11.0,
+        "rows": 200,
+        "cols": 200
+      }
+    },
+    {
+      "name": "leaf_gaps",
+      "type": "attribwrangle",
+      "pos": [
+        1.553,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// 葉の層にすき間をあける。ノイズが大きい所の面を消す（ここを光が通る）\nif (noise(@P * chf('gap_size') + 1.3) > chf('open')) removeprim(0, @primnum, 1);"
+      }
+    },
+    {
+      "name": "fog",
+      "type": "volume",
+      "pos": [
+        4.377,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "density",
+        "sizex": 30.0,
+        "sizey": 11.0,
+        "sizez": 30.0,
+        "ty": 5.5,
+        "samplediv": 110
+      }
+    },
+    {
+      "name": "fog_density",
+      "type": "volumewrangle",
+      "pos": [
+        4.377,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 霧の濃さ。下ほど濃く、ノイズでむらを付ける\nfloat low = exp(-@P.y / chf('height'));\nfloat lumps = fit(noise(@P * 0.35), 0.3, 0.7, 0.5, 1..."
+      }
+    },
+    {
+      "name": "assign_bark",
+      "type": "material",
+      "pos": [
+        -4.66,
+        2.334
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/bark_mat"
+      }
+    },
+    {
+      "name": "assign_floor",
+      "type": "material",
+      "pos": [
+        -1.271,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/floor_mat"
+      }
+    },
+    {
+      "name": "assign_canopy",
+      "type": "material",
+      "pos": [
+        1.553,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/canopy_mat"
+      }
+    },
+    {
+      "name": "forest",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "tree_spots",
+      "to_input": 0
+    },
+    {
+      "from": "tree_spots",
+      "from_output": 0,
+      "to": "tree_sizes",
+      "to_input": 0
+    },
+    {
+      "from": "trunk",
+      "from_output": 0,
+      "to": "trees",
+      "to_input": 0
+    },
+    {
+      "from": "tree_sizes",
+      "from_output": 0,
+      "to": "trees",
+      "to_input": 1
+    },
+    {
+      "from": "canopy",
+      "from_output": 0,
+      "to": "leaf_gaps",
+      "to_input": 0
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "fog_density",
+      "to_input": 0
+    },
+    {
+      "from": "trees",
+      "from_output": 0,
+      "to": "assign_bark",
+      "to_input": 0
+    },
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "assign_floor",
+      "to_input": 0
+    },
+    {
+      "from": "leaf_gaps",
+      "from_output": 0,
+      "to": "assign_canopy",
+      "to_input": 0
+    },
+    {
+      "from": "assign_bark",
+      "from_output": 0,
+      "to": "forest",
+      "to_input": 0
+    },
+    {
+      "from": "assign_floor",
+      "from_output": 0,
+      "to": "forest",
+      "to_input": 1
+    },
+    {
+      "from": "assign_canopy",
+      "from_output": 0,
+      "to": "forest",
+      "to_input": 2
+    },
+    {
+      "from": "fog_density",
+      "from_output": 0,
+      "to": "forest",
+      "to_input": 3
+    }
+  ]
+}

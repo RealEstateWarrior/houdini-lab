@@ -1,0 +1,87 @@
+{
+  "title": "水たまりに雨の波紋",
+  "network": "/obj/ripple",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "puddle",
+      "type": "grid",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 1.4,
+        "rows": 280,
+        "cols": 400
+      }
+    },
+    {
+      "name": "rain_rings",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "snippet": "// 雨粒1つ1つについて、落ちた時刻と場所を乱数で決め、そこから広がる輪の高さを足す\nint drops = chi('drops');\nfloat speed = chf('speed');        // 輪が広がる速さ（m..."
+      }
+    },
+    {
+      "name": "puddle_shape",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// 水たまりの縁を不規則にする。中心からの距離をノイズでゆがめ、外側の面を消す\nvector c = getbbox_center(0);\nvector q = (@P - c) * {1.0, 0, 1.4};\nfloat edg..."
+      }
+    },
+    {
+      "name": "assign_water",
+      "type": "material",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/water_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "puddle",
+      "from_output": 0,
+      "to": "rain_rings",
+      "to_input": 0
+    },
+    {
+      "from": "rain_rings",
+      "from_output": 0,
+      "to": "puddle_shape",
+      "to_input": 0
+    },
+    {
+      "from": "puddle_shape",
+      "from_output": 0,
+      "to": "assign_water",
+      "to_input": 0
+    }
+  ]
+}

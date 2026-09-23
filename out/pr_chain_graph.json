@@ -1,0 +1,279 @@
+{
+  "title": "鎖を垂らす",
+  "network": "/obj/chain",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "span",
+      "type": "line",
+      "pos": [
+        -1.271,
+        6.928
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "originx": -1.0,
+        "dirx": 1.0,
+        "diry": 0.0,
+        "dist": 2.0,
+        "points": 200
+      }
+    },
+    {
+      "name": "hang",
+      "type": "attribwrangle",
+      "pos": [
+        -1.271,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 懸垂線（鎖やロープが自分の重さで垂れた形）。a が小さいほど深くたるむ\nfloat a = chf('a');\n@P.y = a * cosh(@P.x / a) - a * cosh(1.0 / a) + 1.6;   // ..."
+      }
+    },
+    {
+      "name": "one_per_link",
+      "type": "resample",
+      "pos": [
+        -1.271,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 0.0961
+      }
+    },
+    {
+      "name": "twist_every_other",
+      "type": "attribwrangle",
+      "pos": [
+        -1.271,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 線の向き（となりの点へ向かう向き）を求め、輪の長い向きをそれに合わせる\nvector next = point(0, 'P', min(@ptnum + 1, @numpt - 1));\nvector prev = point(..."
+      }
+    },
+    {
+      "name": "link",
+      "type": "torus",
+      "pos": [
+        -4.095,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "radx": 0.04,
+        "rady": 0.009,
+        "rows": 24,
+        "cols": 12
+      }
+    },
+    {
+      "name": "make_oval",
+      "type": "xform",
+      "pos": [
+        -4.095,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sz": 1.55
+      }
+    },
+    {
+      "name": "chain",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -2.683,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "post0",
+      "type": "tube",
+      "pos": [
+        1.553,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "tx": -1.04,
+        "ty": 0.875,
+        "rad1": 0.035,
+        "rad2": 0.035,
+        "height": 1.75,
+        "cols": 24
+      }
+    },
+    {
+      "name": "post1",
+      "type": "tube",
+      "pos": [
+        3.812,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "tx": 1.04,
+        "ty": 0.875,
+        "rad1": 0.035,
+        "rad2": 0.035,
+        "height": 1.75,
+        "cols": 24
+      }
+    },
+    {
+      "name": "assign_steel",
+      "type": "material",
+      "pos": [
+        -2.683,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/steel_mat"
+      }
+    },
+    {
+      "name": "posts",
+      "type": "merge",
+      "pos": [
+        2.683,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_posts",
+      "type": "material",
+      "pos": [
+        2.683,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/post_mat"
+      }
+    },
+    {
+      "name": "chain_and_posts",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "span",
+      "from_output": 0,
+      "to": "hang",
+      "to_input": 0
+    },
+    {
+      "from": "hang",
+      "from_output": 0,
+      "to": "one_per_link",
+      "to_input": 0
+    },
+    {
+      "from": "one_per_link",
+      "from_output": 0,
+      "to": "twist_every_other",
+      "to_input": 0
+    },
+    {
+      "from": "link",
+      "from_output": 0,
+      "to": "make_oval",
+      "to_input": 0
+    },
+    {
+      "from": "make_oval",
+      "from_output": 0,
+      "to": "chain",
+      "to_input": 0
+    },
+    {
+      "from": "twist_every_other",
+      "from_output": 0,
+      "to": "chain",
+      "to_input": 1
+    },
+    {
+      "from": "chain",
+      "from_output": 0,
+      "to": "assign_steel",
+      "to_input": 0
+    },
+    {
+      "from": "post0",
+      "from_output": 0,
+      "to": "posts",
+      "to_input": 0
+    },
+    {
+      "from": "post1",
+      "from_output": 0,
+      "to": "posts",
+      "to_input": 1
+    },
+    {
+      "from": "posts",
+      "from_output": 0,
+      "to": "assign_posts",
+      "to_input": 0
+    },
+    {
+      "from": "assign_steel",
+      "from_output": 0,
+      "to": "chain_and_posts",
+      "to_input": 0
+    },
+    {
+      "from": "assign_posts",
+      "from_output": 0,
+      "to": "chain_and_posts",
+      "to_input": 1
+    }
+  ]
+}

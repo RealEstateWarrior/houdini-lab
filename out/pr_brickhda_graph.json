@@ -1,0 +1,83 @@
+{
+  "title": "レンガ塀を HDA にする",
+  "network": "/obj/brickhda",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "brick_wall",
+      "type": "sp_brick_wall",
+      "pos": [
+        -1.13,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "garden_wall",
+      "type": "sp_brick_wall",
+      "pos": [
+        1.13,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 1.6,
+        "height": 0.7,
+        "seed": 7
+      }
+    },
+    {
+      "name": "set_front",
+      "type": "xform",
+      "pos": [
+        1.13,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 1.2,
+        "tz": 1.1,
+        "ry": -35.0
+      }
+    },
+    {
+      "name": "both_walls",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "garden_wall",
+      "from_output": 0,
+      "to": "set_front",
+      "to_input": 0
+    },
+    {
+      "from": "brick_wall",
+      "from_output": 0,
+      "to": "both_walls",
+      "to_input": 0
+    },
+    {
+      "from": "set_front",
+      "from_output": 0,
+      "to": "both_walls",
+      "to_input": 1
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+ "id": "brickhda",
+ "title": "レンガ塀を HDA にする",
+ "lede": "レンガを1枚作り、段ごとに半枚ずつずらした位置へ並べて塀にする。組んだノードを1つのサブネットにまとめ、「長さ」「高さ」のつまみを外に出して HDA（自作ノード）にする。次からは、つまみを変えるだけで別の塀になる。",
+ "hero": "pr_brickhda_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。同じ HDA から、つまみだけ変えた2つの塀。",
+ "facts": [
+  [
+   "足すノード",
+   "HDA の中に8個＋外に4個"
+  ],
+  [
+   "レンガ",
+   "238枚＋75枚"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "53.9秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_brickhda.hipnc",
+ "tags": [
+  "モデリング",
+  "HDA",
+  "VEX",
+  "複製",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "レンガを1枚作る",
+   "node": "polybevel",
+   "ui_node": "soft_edges",
+   "body": "まずサブネット（<code>subnet</code>）を1つ置き、その中で作業する。あとでこのサブネットごと HDA にする。<code>box</code> で 21 × 6 × 10 cm（よくあるレンガの大きさ）の箱を作り、<code>polybevel</code> で角を 6 mm 丸める。角が立ったままだと、光が当たったときに作り物に見える。",
+   "img": "pr_brickhda_1.png",
+   "cap": "角を丸めたレンガ1枚。"
+  },
+  {
+   "title": "レンガを置く場所を決める",
+   "node": "attribwrangle",
+   "ui_node": "bond_pattern",
+   "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、レンガの中心になる点を並べる。長さと高さは <strong>ch('../length')・ch('../height')</strong> で、外側のサブネットのつまみから読む。段の高さはレンガ 6 cm ＋ 目地 1 cm。<strong>1段おきに半枚（11 cm）ずらす</strong>と、上下の継ぎ目が重ならない長手積みになる。点ごとに色 Cd を 0.7〜1.25 倍に変え、向き orient もごくわずかに（1度以下）傾ける。",
+   "img": "pr_brickhda_2.png",
+   "cap": "段ごとに半分ずれた点の並び。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "レンガを積み、目地を入れる",
+   "node": "merge",
+   "ui_node": "wall",
+   "body": "<code>copytopoints</code> でレンガを点に並べる（238 枚）。向き orient は自動で効くが、<strong>色 Cd は Target Attributes に1行足して「Apply to: Primitives」「Attributes: Cd」と書かないと移らない</strong>。レンガの後ろに、少し薄い <code>box</code>（厚さ 7 cm）を目地（モルタル）として置く。大きさは Size に <strong>ch(\"../length\")・ch(\"../height\")</strong> の式を入れ、塀の大きさに合わせて伸び縮みさせる。最後に <code>output</code> につなぐ（サブネットの出口）。",
+   "img": "pr_brickhda_3.png",
+   "cap": "238 枚のレンガと目地。"
+  },
+  {
+   "title": "HDA（自作ノード）にする",
+   "node": "sp_brick_wall",
+   "ui_node": "brick_wall",
+   "body": "サブネットを右クリックして <strong>Create Digital Asset</strong>。名前 <strong>sp_brick_wall</strong>、保存先は <strong>Embedded</strong>（この hip の中にしまう。別のファイルが要らない）。サブネットに足しておいた Length・Height・Seed の3つのつまみが、そのまま HDA のつまみになる。Tab キーのメニューに「Brick Wall」が出て、ほかのノードと同じように置けるようになる。",
+   "img": "pr_brickhda_4.png",
+   "cap": "見た目は同じ。中身がまとまり、つまみ3つのノードになった。",
+   "ui_parm": "length"
+  },
+  {
+   "title": "つまみを変えて、2つ目の塀を置く",
+   "node": "xform",
+   "ui_node": "set_front",
+   "body": "Tab メニューから Brick Wall をもう1つ置き、<strong>Length 1.6・Height 0.7・Seed 7</strong> にする。中のノードには触れずに、75 枚の低い塀ができる。<code>xform</code> で右手前へずらして少し回す。",
+   "img": "pr_brickhda_5.png",
+   "cap": "つまみだけで作った2つ目の塀（75 枚）。"
+  },
+  {
+   "title": "材質を当てる",
+   "node": "merge",
+   "ui_node": "both_walls",
+   "body": "HDA の中に入り（右クリック → Allow Editing of Contents）、レンガと目地にそれぞれ <code>material</code> を当てる。レンガの材質は Base Color を白にして、点の色 Cd をそのまま使う（Roughness 0.82）。目地は明るい灰色。最後に HDA を保存（Save Node Type）すると、置いてある2つの塀の両方に反映される。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "中のノードは ch('../…') で外のつまみを読む",
+   "body": "中の wrangle と箱は、HDA のつまみを <strong>ch('../length')</strong> のように1つ上を指して読む。Length を 3 から 6 にすると、レンガは 238 枚から 468 枚になった（中のノードは触っていない）。数字を中に直接書くと、つまみを動かしても塀は変わらない。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "中を直したら、定義を保存する",
+   "body": "HDA の中身を変えたあとは Save Node Type（台本では definition().updateFromNode()）で定義を保存する。材質のノードを足した直後、2つ目の塀の中にはまだ無かった。保存したあとは入った。同じ HDA のほかのノードに届くのは、保存したとき。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

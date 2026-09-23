@@ -1,0 +1,484 @@
+[
+ {
+  "spec": "sop/volume",
+  "ok": true,
+  "category": "SOP",
+  "name": "volume",
+  "label": "Volume",
+  "parms": [
+   {
+    "name": "type",
+    "label": "Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "float",
+      "Float"
+     ],
+     [
+      "int",
+      "Integer"
+     ]
+    ]
+   },
+   {
+    "name": "components",
+    "label": "Components",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "rank",
+    "label": "Collated Rank",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "scalar",
+      "Scalar"
+     ],
+     [
+      "vector",
+      "Vector"
+     ],
+     [
+      "matrix",
+      "Matrix"
+     ]
+    ]
+   },
+   {
+    "name": "name",
+    "label": "Name",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "initialval",
+    "label": "Initial Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "initialalpha",
+    "label": "Initial Alpha",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "stdswitcher",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "dimensionsource",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "size",
+    "label": "Size",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "t",
+    "label": "Center",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "taper",
+    "label": "Taper",
+    "default": [
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "camera",
+    "label": "Camera",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "zmin",
+    "label": "Z Near",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "zmax",
+    "label": "Z Far",
+    "default": [
+     2.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usecamwindow",
+    "label": "Use Camera's Window",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "winx",
+    "label": "Window X",
+    "default": [
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "winy",
+    "label": "Window Y",
+    "default": [
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "uniformsamples",
+    "label": "Uniform Sampling",
+    "default": 4,
+    "kind": "Menu",
+    "menu": [
+     [
+      "nonsquare",
+      "Non Square"
+     ],
+     [
+      "x",
+      "X Axis"
+     ],
+     [
+      "y",
+      "Y Axis"
+     ],
+     [
+      "z",
+      "Z Axis"
+     ],
+     [
+      "max",
+      "Max Axis"
+     ],
+     [
+      "size",
+      "By Size"
+     ]
+    ]
+   },
+   {
+    "name": "samplediv",
+    "label": "Uniform Sampling Divs",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "divs",
+    "label": "Sampling Divs",
+    "default": [
+     10,
+     10,
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "divsize",
+    "label": "Div Size",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "zscale",
+    "label": "Z Resolution Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "twod",
+    "label": "Two Dimensional",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "voxelplane",
+    "label": "Plane",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "xy",
+      "XY Plane"
+     ],
+     [
+      "yz",
+      "YZ Plane"
+     ],
+     [
+      "zx",
+      "ZX Plane"
+     ]
+    ]
+   },
+   {
+    "name": "volborder",
+    "label": "Border Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "repeat",
+      "Repeat"
+     ],
+     [
+      "streak",
+      "Streak"
+     ],
+     [
+      "sdf",
+      "SDF"
+     ],
+     [
+      "mirror",
+      "Mirror"
+     ]
+    ]
+   },
+   {
+    "name": "volborderval",
+    "label": "Border Value",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "volborderalpha",
+    "label": "Border Alpha",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "voltol",
+    "label": "Constant Tol",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "quantizetol",
+    "label": "Quantization Tol",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "dither",
+    "label": "Dithering",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "ordered",
+      "Ordered"
+     ]
+    ]
+   },
+   {
+    "name": "usefp16",
+    "label": "Use 16bit Float",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "volvis",
+    "label": "Display Mode",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "smoke",
+      "Smoke"
+     ],
+     [
+      "rainbow",
+      "Rainbow"
+     ],
+     [
+      "iso",
+      "Isosurface"
+     ],
+     [
+      "invisible",
+      "Invisible"
+     ],
+     [
+      "heightfield",
+      "Height Field"
+     ],
+     [
+      "image",
+      "Image"
+     ]
+    ]
+   },
+   {
+    "name": "volvisiso",
+    "label": "Display Isocontour",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "volvisdensity",
+    "label": "Display Density",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "voltypeinfo",
+    "label": "Volume Type Info",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "color",
+      "Color"
+     ],
+     [
+      "position",
+      "Position"
+     ],
+     [
+      "vector",
+      "Vector"
+     ],
+     [
+      "normal",
+      "Signed Normal"
+     ],
+     [
+      "offsetnormal",
+      "Offset Normal"
+     ],
+     [
+      "texturecoord",
+      "Texture Coordinate"
+     ],
+     [
+      "id",
+      "ID"
+     ],
+     [
+      "mask",
+      "Mask"
+     ],
+     [
+      "sdf",
+      "SDF"
+     ],
+     [
+      "height",
+      "Height"
+     ]
+    ]
+   },
+   {
+    "name": "volvistiles",
+    "label": "Visualize Tiling",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ }
+]

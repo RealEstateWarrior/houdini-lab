@@ -1,0 +1,79 @@
+{
+ "id": "fog",
+ "title": "霧の森に光の筋を差す",
+ "lede": "森の中を霧（ボリューム）で満たし、上に穴だらけの葉の層を置いて、斜め上から強い日を当てる。霧が光を散らすので、葉のすき間を通った光だけが筋になって見える。幹は円柱を並べるだけで足りる。",
+ "hero": "pr_fog_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。葉のすき間を通った日が、霧の中で筋になる。",
+ "facts": [
+  [
+   "足すノード",
+   "17個（材質3つ・光1つ）"
+  ],
+  [
+   "木",
+   "240本"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "259.9秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_fog.hipnc",
+ "tags": [
+  "レンダリング",
+  "ボリューム",
+  "Karma",
+  "散布"
+ ],
+ "steps": [
+  {
+   "title": "幹を並べる",
+   "node": "copytopoints",
+   "ui_node": "trees",
+   "body": "30 m 四方の <code>grid</code> に、<code>scatter</code> で <strong>240 本</strong>ぶんの点をまく（Relax を入れて、木どうしが重ならないようにする）。カメラは森の中に置くので、森は画面より広く作る（端が写ると作り物に見える）。<code>attribwrangle</code> で、カメラの前の細長い帯にある点を消して空き地をつくり、木ごとに太さ <strong>pscale</strong> を 0.6〜1.4 倍に変え、<strong>orient</strong> で少しだけ傾ける。<code>tube</code>（高さ 16 m、根元が少し太い）を <code>copytopoints</code> で並べる。葉は画面の外（上）にあるので、幹だけで森に見える。",
+   "img": "pr_fog_1.png",
+   "cap": "240 本の幹。"
+  },
+  {
+   "title": "穴だらけの葉の層を置く",
+   "node": "attribwrangle",
+   "ui_node": "leaf_gaps",
+   "body": "44 m 四方の <code>grid</code>（200 × 200 に割る）を高さ 11 m に置く。<code>attribwrangle</code> を Primitives で回し、<strong>ノイズが 0.62 より大きい所の面を消す</strong>。消えた所が葉のすき間になり、ここを通った光だけが筋になる。この層は画面の上の外にあるので、カメラには写らない。",
+   "img": "pr_fog_2.png",
+   "cap": "ところどころに穴のあいた葉の層。",
+   "ui_parm": "open"
+  },
+  {
+   "title": "霧で満たす",
+   "node": "volumewrangle",
+   "ui_node": "fog_density",
+   "body": "<code>volume</code> で、名前 <strong>density</strong> の箱（30 × 11 × 30 m、森と同じ広さ）を作る。Uniform Sampling Divs 110 で、升は約 0.27 m。霧のむらはゆるやかなので、升は粗くてよい。<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.025</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、ノイズで 0.5〜1.3 倍のむらを付ける。霧はうすいほうが筋がはっきりする。",
+   "img": "pr_fog_3.png",
+   "cap": "下ほど濃い霧（ビューポートでは箱の影で見える）。",
+   "ui_parm": "amount"
+  },
+  {
+   "title": "日を斜め上から当てる",
+   "node": "merge",
+   "ui_node": "forest",
+   "body": "幹・地面・葉の層に暗い材質を当て、霧とまとめる。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、Intensity 2・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。ほかの明かりはごく弱くする。",
+   "img": "",
+   "cap": "材質と光を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "霧が無いと、光の筋は見えない",
+   "body": "fog_density の amount を 0 にして同じカメラで撮ると、光は地面と幹に当たった所だけが明るくなり、空中の筋は消えた。光の筋は、空気中の霧が光を横へ散らして見えるもの。",
+   "img": "pr_fog_nofog.png",
+   "cap": "霧を 0 にしたとき。空中に光が見えない。"
+  },
+  {
+   "title": "すき間の量",
+   "body": "葉の層は 39,601 面のうち、open 0.62 で 35,141 面が残った（11% が穴）。open を 0.5 にすると 19,844 面（50% が穴）。open で光の入る量を決める。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

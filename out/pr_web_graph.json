@@ -1,0 +1,209 @@
+{
+  "title": "朝露の蜘蛛の巣",
+  "network": "/obj/web",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "spokes",
+      "type": "attribwrangle",
+      "pos": [
+        -1.977,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 中心から放射状に縦糸を張る。本数・長さは少しずつばらつかせる\nint n = chi('count');\nfloat angs[];\nfloat rads[];\nint center = addpoint(0, {0, 0, 0..."
+      }
+    },
+    {
+      "name": "spiral",
+      "type": "attribwrangle",
+      "pos": [
+        -1.977,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 外へ向かうらせんで横糸を掛ける。縦糸と交わる所に点を置き、その間は中心へ少したるませる\nfloat angs[] = detail(0, 'angs');\nfloat rads[] = detail(0, 'rads');\nin..."
+      }
+    },
+    {
+      "name": "silk_width",
+      "type": "attribwrangle",
+      "pos": [
+        -1.977,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@width = chf('width');   // Karma で撮る糸の太さ"
+      }
+    },
+    {
+      "name": "along_silk",
+      "type": "resample",
+      "pos": [
+        3.106,
+        4.217
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 0.0025
+      }
+    },
+    {
+      "name": "pick_drops",
+      "type": "attribwrangle",
+      "pos": [
+        3.106,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 糸の上の点から、ところどころを露の粒にする。大きさもばらつかせる\nif (rand(@ptnum * 1.7 + 3) > chf('keep')) removepoint(0, @ptnum);\nf@pscale = fit0..."
+      }
+    },
+    {
+      "name": "drop",
+      "type": "sphere",
+      "pos": [
+        0.847,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 10,
+        "cols": 16
+      }
+    },
+    {
+      "name": "drops",
+      "type": "copytopoints::2.0",
+      "pos": [
+        1.977,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_silk",
+      "type": "material",
+      "pos": [
+        -1.977,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/silk_mat"
+      }
+    },
+    {
+      "name": "assign_dew",
+      "type": "material",
+      "pos": [
+        1.977,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/dew_mat"
+      }
+    },
+    {
+      "name": "web",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "spokes",
+      "from_output": 0,
+      "to": "spiral",
+      "to_input": 0
+    },
+    {
+      "from": "spiral",
+      "from_output": 0,
+      "to": "silk_width",
+      "to_input": 0
+    },
+    {
+      "from": "silk_width",
+      "from_output": 0,
+      "to": "along_silk",
+      "to_input": 0
+    },
+    {
+      "from": "along_silk",
+      "from_output": 0,
+      "to": "pick_drops",
+      "to_input": 0
+    },
+    {
+      "from": "drop",
+      "from_output": 0,
+      "to": "drops",
+      "to_input": 0
+    },
+    {
+      "from": "pick_drops",
+      "from_output": 0,
+      "to": "drops",
+      "to_input": 1
+    },
+    {
+      "from": "silk_width",
+      "from_output": 0,
+      "to": "assign_silk",
+      "to_input": 0
+    },
+    {
+      "from": "drops",
+      "from_output": 0,
+      "to": "assign_dew",
+      "to_input": 0
+    },
+    {
+      "from": "assign_silk",
+      "from_output": 0,
+      "to": "web",
+      "to_input": 0
+    },
+    {
+      "from": "assign_dew",
+      "from_output": 0,
+      "to": "web",
+      "to_input": 1
+    }
+  ]
+}

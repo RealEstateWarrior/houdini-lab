@@ -4892,6 +4892,451 @@
         }
       ],
       "anim_cap": "机の上に落ちて、角が垂れて落ち着くまで（72 フレーム＝3 秒）。"
+    },
+    {
+      "id": "chain",
+      "title": "鎖を垂らす",
+      "lede": "2本の柱のあいだに、真ん中がたるんだ線を引き、その線にそって輪を並べる。輪を1つおきに90度ひねると、かみ合った鎖になる。動かすシミュレーションは使わず、線の形だけで作る。",
+      "hero": "pr_chain_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。輪が交互にひねられてかみ合い、真ん中がたるむ。",
+      "facts": [
+        [
+          "足すノード",
+          "13個（材質2つ）"
+        ],
+        [
+          "輪の数",
+          "27個"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "35.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_chain.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "複製",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "垂れた線を引く",
+          "node": "attribwrangle",
+          "ui_node": "hang",
+          "body": "<code>line</code> で x = −1 から 1 まで、長さ 2 m・200 点の線を引く。<code>attribwrangle</code> で高さを <strong>a · cosh(x / a)</strong> の形にする。これは懸垂線と呼ばれ、鎖やロープが自分の重さで垂れたときの形そのもの。<strong>a = 0.9</strong>。小さくするほど深くたるむ。両端の高さは 1.6 m にそろえる。",
+          "img": "pr_chain_1.png",
+          "cap": "両端が同じ高さで、真ん中がたるんだ線。",
+          "ui_parm": "a"
+        },
+        {
+          "title": "輪1つぶんの間隔で区切る",
+          "node": "resample",
+          "ui_node": "one_per_link",
+          "body": "<code>resample</code> の <strong>Length を 0.0961</strong>（m）にして、線を等しい間隔の点に打ち直す。間隔は、輪の <strong>内側の長さ</strong> にする。となりの輪は、この内側にちょうど通る。輪の大きさ（半径 0.04・針金の太さ 0.009・縦長 1.55 倍）から、(0.04 − 0.009) × 2 × 1.55 で出した。",
+          "img": "pr_chain_2.png",
+          "cap": "等しい間隔の点。点1つに輪が1つ乗る。",
+          "ui_parm": "length"
+        },
+        {
+          "title": "輪の向きを決め、1つおきにひねる",
+          "node": "attribwrangle",
+          "ui_node": "twist_every_other",
+          "body": "<code>attribwrangle</code> で、点ごとに <strong>orient</strong>（向き）を作る。前後の点を結んだ向きを「輪の長い向き」にし、<strong>1つおきに（@ptnum % 2 == 1）輪の面を90度回す</strong>。本物の鎖も、輪の面が交互に縦・横になってかみ合っている。",
+          "img": "pr_chain_3.png",
+          "cap": "見た目は同じ。点ごとに向きが付いた。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "輪を作って、点に並べる",
+          "node": "copytopoints",
+          "ui_node": "chain",
+          "body": "<code>torus</code>（Orientation を <strong>X Axis</strong>、半径 0.04・0.009）で輪を作り、<code>xform</code> で z 方向（長い向き）に <strong>1.55 倍</strong> して、鎖らしい縦長の輪にする。<code>copytopoints</code> の左に輪、右に向きの付いた点をつなぐと、27 個の輪が交互にひねられて並ぶ。",
+          "img": "pr_chain_4.png",
+          "cap": "27 個の輪がかみ合った鎖。",
+          "ui_parm": "rad"
+        },
+        {
+          "title": "柱を立て、材質を当てる",
+          "node": "merge",
+          "ui_node": "chain_and_posts",
+          "body": "<code>tube</code> で両端に柱を2本立て、鎖の端を柱の中へ少し入れる。鎖は <code>principledshader</code> で <strong>Metallic 1・Roughness 0.28</strong>（使い込んだ鉄）。柱は茶色の木。金属はまわりを映して見えるので、撮るときはドームの光を少し強めにして、映り込むものを作る。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "間隔を広げると、輪が離れてしまう",
+          "body": "Length を 1.5 倍（0.144）にすると、輪は 27 個から 18 個に減り、となりの輪の内側に届かなくなる。間隔は必ず、輪の内側の長さ (太さの中心までの半径 − 針金の太さ) × 2 × 縦長の倍率 にする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "向きを付けないと、輪が全部同じ向きになる",
+          "body": "twist_every_other を外すと、copytopoints に向き（orient）が渡らず、輪はどれも元の向きのまま並ぶ。線にも沿わず、かみ合いもしない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "a でたるみの深さが決まる",
+          "body": "a = 0.9 で真ん中は端より 0.62 m 下がり、a = 0.5 では 1.38 m 下がった。鎖の長さは変わるので、輪の数も自動で増える。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "web",
+      "title": "朝露の蜘蛛の巣",
+      "lede": "中心から放射状に縦糸を張り、外へ向かうらせんで横糸を掛ける。横糸は縦糸の間で少したるませ、最後に糸の上へ小さな水の粒を並べる。後ろから光を当てると、露がきらきら光る。",
+      "hero": "pr_web_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。後ろからの光で、露の粒と糸が光る。",
+      "facts": [
+        [
+          "足すノード",
+          "11個（材質2つ）"
+        ],
+        [
+          "露の粒",
+          "1,839個"
+        ],
+        [
+          "糸の長さ",
+          "22.2 m"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "33.9秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_web.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "カーブ",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "縦糸を放射状に張る",
+          "node": "attribwrangle",
+          "ui_node": "spokes",
+          "body": "何もつながない <code>attribwrangle</code> を置き、Run Over を <strong>Detail</strong>（全体で1回だけ）にする。中心に点を1つ置き、<strong>count = 28</strong> 本の縦糸を放射状に伸ばす。角度と長さ（radius = 0.25 m）は1本ごとに少しずつずらす。縦糸の先どうしをつないだ外枠の糸も作る。最後に、角度と長さを <strong>setdetailattrib</strong> で覚えておく（次のノードで使う）。",
+          "img": "pr_web_1.png",
+          "cap": "28 本の縦糸と外枠。",
+          "ui_parm": "count"
+        },
+        {
+          "title": "らせんの横糸を掛ける",
+          "node": "attribwrangle",
+          "ui_node": "spiral",
+          "body": "もう1つの Detail の <code>attribwrangle</code> で、覚えておいた縦糸の角度を1本ずつ回りながら、半径を少しずつ大きくして点を置く。1周で <strong>gap = 0.011</strong> m 外へ進む。縦糸と縦糸の間には4点を足し、まん中ほど中心へ寄せる（<strong>sag = 0.12</strong>）。本物の横糸も、縦糸の間で内側へ少したるむ。いちばん短い縦糸の手前で止める。",
+          "img": "pr_web_2.png",
+          "cap": "らせんの横糸。縦糸の間で少したるむ。",
+          "ui_parm": "gap"
+        },
+        {
+          "title": "露の粒を置く場所を決める",
+          "node": "attribwrangle",
+          "ui_node": "pick_drops",
+          "body": "<code>attribwrangle</code> で糸に太さ <strong>width = 0.0005</strong>（0.5 mm）を付ける。<code>resample</code> で糸を 2.5 mm ごとの点に打ち直し、次の <code>attribwrangle</code> で <strong>2 割</strong>だけ残す（keep = 0.2）。残った点の大きさ <strong>pscale</strong> は 0.6〜2.2 mm。乱数を3乗して、小さい粒を多く、大きい粒を少しにする。水は重さで糸の下に付くので、粒の大きさに合わせて少し下げる。",
+          "img": "pr_web_3.png",
+          "cap": "糸の上に散らばった露の場所。",
+          "ui_parm": "keep"
+        },
+        {
+          "title": "粒をコピーする",
+          "node": "copytopoints",
+          "ui_node": "drops",
+          "body": "<code>sphere</code>（半径 1）を <code>copytopoints</code> で露の点に並べる。点の pscale が大きさになり、1,839 粒になる。",
+          "img": "pr_web_4.png",
+          "cap": "1,839 粒の露。"
+        },
+        {
+          "title": "材質を当てる",
+          "node": "merge",
+          "ui_node": "web",
+          "body": "糸は白く Roughness 0.35、<strong>Sheen 0.5</strong>。露は <code>principledshader</code> で <strong>Transparency 1・IOR 1.33</strong>（水）、Roughness 0。撮るときは後ろからの光（リム）を強くすると、粒の縁が光る。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "gap で横糸の本数が決まる",
+          "body": "gap 0.011 で、縦糸と横糸を合わせた点は 2,415 個。gap を 2 倍の 0.022 にすると 1,205 個。横糸を細かくするほど、露の粒も増える。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "露の数は、糸の長さ × 割合で決まる",
+          "body": "糸の長さは合わせて 22.2 m。2.5 mm ごとに点を打ち、2 割を残したので 1,839 粒になった。粒が多すぎると、糸が見えなくなる。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "fog",
+      "title": "霧の森に光の筋を差す",
+      "lede": "森の中を霧（ボリューム）で満たし、上に穴だらけの葉の層を置いて、斜め上から強い日を当てる。霧が光を散らすので、葉のすき間を通った光だけが筋になって見える。幹は円柱を並べるだけで足りる。",
+      "hero": "pr_fog_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。葉のすき間を通った日が、霧の中で筋になる。",
+      "facts": [
+        [
+          "足すノード",
+          "17個（材質3つ・光1つ）"
+        ],
+        [
+          "木",
+          "240本"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "259.9秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_fog.hipnc",
+      "tags": [
+        "レンダリング",
+        "ボリューム",
+        "Karma",
+        "散布"
+      ],
+      "steps": [
+        {
+          "title": "幹を並べる",
+          "node": "copytopoints",
+          "ui_node": "trees",
+          "body": "30 m 四方の <code>grid</code> に、<code>scatter</code> で <strong>240 本</strong>ぶんの点をまく（Relax を入れて、木どうしが重ならないようにする）。カメラは森の中に置くので、森は画面より広く作る（端が写ると作り物に見える）。<code>attribwrangle</code> で、カメラの前の細長い帯にある点を消して空き地をつくり、木ごとに太さ <strong>pscale</strong> を 0.6〜1.4 倍に変え、<strong>orient</strong> で少しだけ傾ける。<code>tube</code>（高さ 16 m、根元が少し太い）を <code>copytopoints</code> で並べる。葉は画面の外（上）にあるので、幹だけで森に見える。",
+          "img": "pr_fog_1.png",
+          "cap": "240 本の幹。"
+        },
+        {
+          "title": "穴だらけの葉の層を置く",
+          "node": "attribwrangle",
+          "ui_node": "leaf_gaps",
+          "body": "44 m 四方の <code>grid</code>（200 × 200 に割る）を高さ 11 m に置く。<code>attribwrangle</code> を Primitives で回し、<strong>ノイズが 0.62 より大きい所の面を消す</strong>。消えた所が葉のすき間になり、ここを通った光だけが筋になる。この層は画面の上の外にあるので、カメラには写らない。",
+          "img": "pr_fog_2.png",
+          "cap": "ところどころに穴のあいた葉の層。",
+          "ui_parm": "open"
+        },
+        {
+          "title": "霧で満たす",
+          "node": "volumewrangle",
+          "ui_node": "fog_density",
+          "body": "<code>volume</code> で、名前 <strong>density</strong> の箱（30 × 11 × 30 m、森と同じ広さ）を作る。Uniform Sampling Divs 110 で、升は約 0.27 m。霧のむらはゆるやかなので、升は粗くてよい。<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.025</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、ノイズで 0.5〜1.3 倍のむらを付ける。霧はうすいほうが筋がはっきりする。",
+          "img": "pr_fog_3.png",
+          "cap": "下ほど濃い霧（ビューポートでは箱の影で見える）。",
+          "ui_parm": "amount"
+        },
+        {
+          "title": "日を斜め上から当てる",
+          "node": "merge",
+          "ui_node": "forest",
+          "body": "幹・地面・葉の層に暗い材質を当て、霧とまとめる。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、Intensity 2・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。ほかの明かりはごく弱くする。",
+          "img": "",
+          "cap": "材質と光を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "霧が無いと、光の筋は見えない",
+          "body": "fog_density の amount を 0 にして同じカメラで撮ると、光は地面と幹に当たった所だけが明るくなり、空中の筋は消えた。光の筋は、空気中の霧が光を横へ散らして見えるもの。",
+          "img": "pr_fog_nofog.png",
+          "cap": "霧を 0 にしたとき。空中に光が見えない。"
+        },
+        {
+          "title": "すき間の量",
+          "body": "葉の層は 39,601 面のうち、open 0.62 で 35,141 面が残った（11% が穴）。open を 0.5 にすると 19,844 面（50% が穴）。open で光の入る量を決める。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "brickhda",
+      "title": "レンガ塀を HDA にする",
+      "lede": "レンガを1枚作り、段ごとに半枚ずつずらした位置へ並べて塀にする。組んだノードを1つのサブネットにまとめ、「長さ」「高さ」のつまみを外に出して HDA（自作ノード）にする。次からは、つまみを変えるだけで別の塀になる。",
+      "hero": "pr_brickhda_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。同じ HDA から、つまみだけ変えた2つの塀。",
+      "facts": [
+        [
+          "足すノード",
+          "HDA の中に8個＋外に4個"
+        ],
+        [
+          "レンガ",
+          "238枚＋75枚"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "53.9秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_brickhda.hipnc",
+      "tags": [
+        "モデリング",
+        "HDA",
+        "VEX",
+        "複製",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "レンガを1枚作る",
+          "node": "polybevel",
+          "ui_node": "soft_edges",
+          "body": "まずサブネット（<code>subnet</code>）を1つ置き、その中で作業する。あとでこのサブネットごと HDA にする。<code>box</code> で 21 × 6 × 10 cm（よくあるレンガの大きさ）の箱を作り、<code>polybevel</code> で角を 6 mm 丸める。角が立ったままだと、光が当たったときに作り物に見える。",
+          "img": "pr_brickhda_1.png",
+          "cap": "角を丸めたレンガ1枚。"
+        },
+        {
+          "title": "レンガを置く場所を決める",
+          "node": "attribwrangle",
+          "ui_node": "bond_pattern",
+          "body": "何もつながない <code>attribwrangle</code>（Run Over は Detail）で、レンガの中心になる点を並べる。長さと高さは <strong>ch('../length')・ch('../height')</strong> で、外側のサブネットのつまみから読む。段の高さはレンガ 6 cm ＋ 目地 1 cm。<strong>1段おきに半枚（11 cm）ずらす</strong>と、上下の継ぎ目が重ならない長手積みになる。点ごとに色 Cd を 0.7〜1.25 倍に変え、向き orient もごくわずかに（1度以下）傾ける。",
+          "img": "pr_brickhda_2.png",
+          "cap": "段ごとに半分ずれた点の並び。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "レンガを積み、目地を入れる",
+          "node": "merge",
+          "ui_node": "wall",
+          "body": "<code>copytopoints</code> でレンガを点に並べる（238 枚）。向き orient は自動で効くが、<strong>色 Cd は Target Attributes に1行足して「Apply to: Primitives」「Attributes: Cd」と書かないと移らない</strong>。レンガの後ろに、少し薄い <code>box</code>（厚さ 7 cm）を目地（モルタル）として置く。大きさは Size に <strong>ch(\"../length\")・ch(\"../height\")</strong> の式を入れ、塀の大きさに合わせて伸び縮みさせる。最後に <code>output</code> につなぐ（サブネットの出口）。",
+          "img": "pr_brickhda_3.png",
+          "cap": "238 枚のレンガと目地。"
+        },
+        {
+          "title": "HDA（自作ノード）にする",
+          "node": "sp_brick_wall",
+          "ui_node": "brick_wall",
+          "body": "サブネットを右クリックして <strong>Create Digital Asset</strong>。名前 <strong>sp_brick_wall</strong>、保存先は <strong>Embedded</strong>（この hip の中にしまう。別のファイルが要らない）。サブネットに足しておいた Length・Height・Seed の3つのつまみが、そのまま HDA のつまみになる。Tab キーのメニューに「Brick Wall」が出て、ほかのノードと同じように置けるようになる。",
+          "img": "pr_brickhda_4.png",
+          "cap": "見た目は同じ。中身がまとまり、つまみ3つのノードになった。",
+          "ui_parm": "length"
+        },
+        {
+          "title": "つまみを変えて、2つ目の塀を置く",
+          "node": "xform",
+          "ui_node": "set_front",
+          "body": "Tab メニューから Brick Wall をもう1つ置き、<strong>Length 1.6・Height 0.7・Seed 7</strong> にする。中のノードには触れずに、75 枚の低い塀ができる。<code>xform</code> で右手前へずらして少し回す。",
+          "img": "pr_brickhda_5.png",
+          "cap": "つまみだけで作った2つ目の塀（75 枚）。"
+        },
+        {
+          "title": "材質を当てる",
+          "node": "merge",
+          "ui_node": "both_walls",
+          "body": "HDA の中に入り（右クリック → Allow Editing of Contents）、レンガと目地にそれぞれ <code>material</code> を当てる。レンガの材質は Base Color を白にして、点の色 Cd をそのまま使う（Roughness 0.82）。目地は明るい灰色。最後に HDA を保存（Save Node Type）すると、置いてある2つの塀の両方に反映される。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "中のノードは ch('../…') で外のつまみを読む",
+          "body": "中の wrangle と箱は、HDA のつまみを <strong>ch('../length')</strong> のように1つ上を指して読む。Length を 3 から 6 にすると、レンガは 238 枚から 468 枚になった（中のノードは触っていない）。数字を中に直接書くと、つまみを動かしても塀は変わらない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "中を直したら、定義を保存する",
+          "body": "HDA の中身を変えたあとは Save Node Type（台本では definition().updateFromNode()）で定義を保存する。材質のノードを足した直後、2つ目の塀の中にはまだ無かった。保存したあとは入った。同じ HDA のほかのノードに届くのは、保存したとき。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "ripple",
+      "title": "水たまりに雨の波紋",
+      "lede": "雨粒が落ちた所から輪が広がり、弱まって消える。これを「広がる輪の式」を雨粒の数だけ足して作る。時間 @Time を使うので、再生すると勝手に動く。シミュレーションは使わない。",
+      "hero": "pr_ripple_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 60）。明かりが映った水面に、重なる波紋。",
+      "facts": [
+        [
+          "足すノード",
+          "6個（材質2つ）"
+        ],
+        [
+          "雨粒",
+          "160個（4秒）"
+        ],
+        [
+          "1フレームの計算",
+          "0.02秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "35.1秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_ripple.hipnc",
+      "tags": [
+        "エフェクト",
+        "VEX",
+        "水",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "水面を細かい網にする",
+          "node": "grid",
+          "ui_node": "puddle",
+          "body": "<code>grid</code>（2 × 1.4 m）を <strong>Rows 280・Columns 400</strong> に割る。波紋の山と谷は数 mm しか離れていないので、網が粗いと輪が描けない（升は約 5 mm）。",
+          "img": "pr_ripple_1.png",
+          "cap": "細かく割った水面。"
+        },
+        {
+          "title": "雨粒ごとに、広がる輪を足す",
+          "node": "attribwrangle",
+          "ui_node": "rain_rings",
+          "body": "<code>attribwrangle</code> で、点ごとに <strong>drops = 160</strong> 個の雨粒を順に見る。雨粒 i の落ちた時刻と場所は <code>rand(i …)</code> で決める（同じ i なら毎回同じ値になるので、フレームが進んでも同じ雨粒のまま）。落ちてからの時間 age が分かれば、いちばん外の輪は <strong>speed × age</strong>（speed = 0.22 m/秒）の所にある。その内側を <strong>sin</strong> で波打たせ（wavelength = 2.4 cm、高さ amp = 3 mm）、時間がたつほど、輪の後ろほど弱くする。全部の雨粒の高さを足して、点を上下に動かす。時間は <strong>@Time</strong>（秒）なので、再生すると動く。",
+          "img": "pr_ripple_2.png",
+          "cap": "フレーム 60。いくつもの輪が重なる。",
+          "ui_parm": "drops"
+        },
+        {
+          "title": "水たまりの形に切る",
+          "node": "attribwrangle",
+          "ui_node": "puddle_shape",
+          "body": "<code>attribwrangle</code> を Primitives で回し、中心からの距離が「ノイズでゆがめた半径」より遠い面を消す。四角い板が、縁のでこぼこした水たまりの形になる。",
+          "img": "pr_ripple_3.png",
+          "cap": "縁が不規則な水たまり。"
+        },
+        {
+          "title": "水の材質を当てる",
+          "node": "material",
+          "ui_node": "assign_water",
+          "body": "水面は <code>principledshader</code> で <strong>Transparency 1・IOR 1.33</strong>（水）・Roughness 0.02。下の地面は撮影用の幕を暗いアスファルト色にして使う。水たまりの見え方は、ほとんど「上にある空や明かりの映り込み」で決まる。撮るときは、低い角度から、明るい光（キーとリム）を水面に映す。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "雨粒の数だけ計算が重くなる",
+          "body": "点 112,681 個 × 雨粒 160 個で、1フレームの計算は 0.02 秒。雨粒を 320 個にすると 0.01 秒。どの点も全部の雨粒を見るので、雨粒の数に比例して重くなる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "網が粗いと、輪が描けない",
+          "body": "Rows 70・Columns 100（升 2 cm）にすると、いちばん高い波は 2.83 mm、細かい網では 2.78 mm。波長 2.4 cm に対して升が大きいと、点が山と谷を飛び越えてしまい、輪の形にならない。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "雨粒が落ちて、輪が広がって消える（96 フレーム＝4 秒）。"
     }
   ]
 }

@@ -1,0 +1,92 @@
+{
+ "id": "web",
+ "title": "朝露の蜘蛛の巣",
+ "lede": "中心から放射状に縦糸を張り、外へ向かうらせんで横糸を掛ける。横糸は縦糸の間で少したるませ、最後に糸の上へ小さな水の粒を並べる。後ろから光を当てると、露がきらきら光る。",
+ "hero": "pr_web_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。後ろからの光で、露の粒と糸が光る。",
+ "facts": [
+  [
+   "足すノード",
+   "11個（材質2つ）"
+  ],
+  [
+   "露の粒",
+   "1,839個"
+  ],
+  [
+   "糸の長さ",
+   "22.2 m"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "33.9秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_web.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "カーブ",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "縦糸を放射状に張る",
+   "node": "attribwrangle",
+   "ui_node": "spokes",
+   "body": "何もつながない <code>attribwrangle</code> を置き、Run Over を <strong>Detail</strong>（全体で1回だけ）にする。中心に点を1つ置き、<strong>count = 28</strong> 本の縦糸を放射状に伸ばす。角度と長さ（radius = 0.25 m）は1本ごとに少しずつずらす。縦糸の先どうしをつないだ外枠の糸も作る。最後に、角度と長さを <strong>setdetailattrib</strong> で覚えておく（次のノードで使う）。",
+   "img": "pr_web_1.png",
+   "cap": "28 本の縦糸と外枠。",
+   "ui_parm": "count"
+  },
+  {
+   "title": "らせんの横糸を掛ける",
+   "node": "attribwrangle",
+   "ui_node": "spiral",
+   "body": "もう1つの Detail の <code>attribwrangle</code> で、覚えておいた縦糸の角度を1本ずつ回りながら、半径を少しずつ大きくして点を置く。1周で <strong>gap = 0.011</strong> m 外へ進む。縦糸と縦糸の間には4点を足し、まん中ほど中心へ寄せる（<strong>sag = 0.12</strong>）。本物の横糸も、縦糸の間で内側へ少したるむ。いちばん短い縦糸の手前で止める。",
+   "img": "pr_web_2.png",
+   "cap": "らせんの横糸。縦糸の間で少したるむ。",
+   "ui_parm": "gap"
+  },
+  {
+   "title": "露の粒を置く場所を決める",
+   "node": "attribwrangle",
+   "ui_node": "pick_drops",
+   "body": "<code>attribwrangle</code> で糸に太さ <strong>width = 0.0005</strong>（0.5 mm）を付ける。<code>resample</code> で糸を 2.5 mm ごとの点に打ち直し、次の <code>attribwrangle</code> で <strong>2 割</strong>だけ残す（keep = 0.2）。残った点の大きさ <strong>pscale</strong> は 0.6〜2.2 mm。乱数を3乗して、小さい粒を多く、大きい粒を少しにする。水は重さで糸の下に付くので、粒の大きさに合わせて少し下げる。",
+   "img": "pr_web_3.png",
+   "cap": "糸の上に散らばった露の場所。",
+   "ui_parm": "keep"
+  },
+  {
+   "title": "粒をコピーする",
+   "node": "copytopoints",
+   "ui_node": "drops",
+   "body": "<code>sphere</code>（半径 1）を <code>copytopoints</code> で露の点に並べる。点の pscale が大きさになり、1,839 粒になる。",
+   "img": "pr_web_4.png",
+   "cap": "1,839 粒の露。"
+  },
+  {
+   "title": "材質を当てる",
+   "node": "merge",
+   "ui_node": "web",
+   "body": "糸は白く Roughness 0.35、<strong>Sheen 0.5</strong>。露は <code>principledshader</code> で <strong>Transparency 1・IOR 1.33</strong>（水）、Roughness 0。撮るときは後ろからの光（リム）を強くすると、粒の縁が光る。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "gap で横糸の本数が決まる",
+   "body": "gap 0.011 で、縦糸と横糸を合わせた点は 2,415 個。gap を 2 倍の 0.022 にすると 1,205 個。横糸を細かくするほど、露の粒も増える。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "露の数は、糸の長さ × 割合で決まる",
+   "body": "糸の長さは合わせて 22.2 m。2.5 mm ごとに点を打ち、2 割を残したので 1,839 粒になった。粒が多すぎると、糸が見えなくなる。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

@@ -12,11 +12,26 @@
 
 | ソース | 中身 | 現在 |
 |---|---|---|
-| 実験ログ A: プロシージャルモデリング 基礎 | 実験 001〜004 | 001のみ収録 |
-| 実験ログ B: プロシージャルモデリング 応用 | 実験 005〜009 | 未作成 |
-| 実験ログ C: エフェクト | 実験 010〜014 | 未作成 |
-| 参考資料まとめ | `REFERENCES.md` の内容 | 未投入 |
-| Houdiniヘルプ抜粋 | 実験で扱ったノードの公式解説のみ | 未作成 |
+| 実験ログ: プロシージャルモデリング（001〜120） | out/nb/exp_model1.pdf | 51f4ce89-91c4-455f-a30c-fa1f1a8e9ff2 |
+| 実験ログ: プロシージャルモデリング（121〜） | out/nb/exp_model2.pdf | c5044614-bfab-475c-92ac-5282cce42a10 |
+| 実験ログ: 地形（HeightField） | out/nb/exp_terrain.pdf | f4fca645-ed59-4af3-a82f-7ed36c563cb1 |
+| 実験ログ: VEX・道具・速さ | out/nb/exp_tools.pdf | 8c6592c8-fb89-4259-85e7-5853abc14105 |
+| 実験ログ: 剛体と破壊（RBD） | out/nb/exp_rbd.pdf | fd1be2a5-7c57-455d-9c59-d22b95f27e66 |
+| 実験ログ: 布とやわらかい物（Vellum） | out/nb/exp_vellum.pdf | d76d1347-50aa-43bd-a30f-6cbe7276e5db |
+| 実験ログ: 煙と炎（Pyro・ボリューム） | out/nb/exp_pyro.pdf | db4b664f-b240-4831-bed8-40664646fd36 |
+| 実験ログ: 液体と MPM（FLIP・砂・雪） | out/nb/exp_fluid.pdf | 7a7a9c51-8e5e-4c83-9419-f1ff1c35e812 |
+| 実験ログ: 見た目（Karma・材質・テクスチャ） | out/nb/exp_look.pdf | 29943822-bf4d-4ae8-bf8b-3f2927e4c4ad |
+| 実験ログ: 粒（POP） | out/nb/exp_pop.pdf | 049721b3-7dc6-452f-a837-c378c7947c89 |
+| 実験ログ: 毛とリグ（グルーム・APEX） | out/nb/exp_groom.pdf | b68bdae5-af17-41e0-903e-325d3787b7c7 |
+| 実践: Houdini で作る手順 | out/nb/practice.md | 16db60df-7d7e-4771-a00a-257e7e6784b7 |
+| ノード解説 | out/nb/nodes.md | 81acf710-b838-4070-b7dc-407eb3c2d616 |
+| 用語集: Houdini 初心者向け | out/nb/glossary.pdf | f47d1bd1-bf8a-4cac-9e31-218137976af3 |
+
+2026-09-24 に作り直した（右の列はソースの ID）。それまでは全実験が「実験ログ A」1つ（30MB）に入っていて、
+方針の「テーマ単位で約10本」が 001 の段階で止まったままだった（ユーザーの指摘）。
+作るのは `python nb_sources.py`（題材の振り分けは THEMES。どれにも当たらないモデリングは 120 で2つに分ける）、
+用語集は `python glossary_pdf.py glossary.json out/nb/glossary.pdf`。
+**実践・実験が5本ほど増えたら、変わったものだけ削除→追加→名前を戻す**（ID は上の表を書き換える）。
 
 これで全カリキュラムを通しても **+5件程度**に収まる。
 

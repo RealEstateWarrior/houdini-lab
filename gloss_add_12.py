@@ -9,6 +9,31 @@ ADD = {
          "def": "表面そのものが光を出すこと。principledshader の Emission Intensity で強さ、Emission Color で色を決める。Use Point Color を入れると点の色 Cd がそのまま光の色になる（実践「花火を打ち上げる」）。"},
         {"term": "透過色 / Transmission Color", "reading": "とうかしょく",
          "def": "透ける材質の中を光が通るときに付く色。Transmission Distance の長さを進むと、その色になる。厚い所ほど濃く色づく（ゼリーの赤、板ガラスの縁の緑）。"},
+        {"term": "光の筋 / 薄明光線（God Rays）", "reading": "ひかりのすじ / はくめいこうせん",
+         "def": "霧やほこりで満ちた空気に、すき間から日が差したときに見える光の帯。霧が光を横へ散らすので見える。"
+                "霧を 0 にすると空中の筋は消えた（実践「霧の森に光の筋を差す」）。"},
+        {"term": "ノイズ除去 / Denoiser", "reading": "ノイズじょきょ",
+         "def": "レンダリングの細かいざらつきを、あとから画像処理で消す仕組み。Karma では Denoiser を OIDN にする。"
+                "霧のようなボリュームはサンプルを増やしてもざらつきが残りやすいので、そういう絵で使う。"},
+    ],
+    "houdini": [
+        {"term": "埋め込み HDA / Embedded", "reading": "うめこみエイチディーエー",
+         "def": "HDA（自作ノード）の定義を、別の .hda ファイルではなく hip の中にしまうこと。hip 1つを渡すだけで相手も使える。"
+                "台本では createDigitalAsset(save_as_embedded=True)（実践「レンガ塀を HDA にする」）。"},
+    ],
+    "vex": [
+        {"term": "@Time", "reading": "アットタイム",
+         "def": "wrangle の中で使える、いまの時刻（秒）。@Frame はフレーム番号。@Time を式に入れると、再生するだけで形が動く（実践「水たまりに雨の波紋」）。"},
+        {"term": "orient 属性", "reading": "オリエントぞくせい",
+         "def": "点ごとの向きを表す値（クォータニオン、4つの数）。copytopoints は、点に orient があるとコピーをその向きに回す。"
+                "quaternion(maketransform(前, 上)) で作れる（実践「鎖を垂らす」）。"},
+    ],
+    "math": [
+        {"term": "懸垂線 / Catenary", "reading": "けんすいせん",
+         "def": "鎖やロープの両端を持ったとき、自分の重さで垂れてできる曲線。高さは a · cosh(x / a) の形で、a が小さいほど深くたるむ。"
+                "a = 0.9 で幅 2 m の真ん中が 0.62 m、a = 0.5 で 1.38 m 下がった（実践「鎖を垂らす」）。"},
+        {"term": "波長 / Wavelength", "reading": "はちょう",
+         "def": "波の山から次の山までの長さ。sin で波を作るときは sin(2π × 距離 / 波長) と書く。網の升が波長に比べて大きいと、点が山と谷を飛び越えて波が描けない。"},
     ],
     "simulation": [
         {"term": "active 属性", "reading": "アクティブぞくせい",

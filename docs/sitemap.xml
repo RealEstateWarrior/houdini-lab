@@ -8,9 +8,11 @@
   <url><loc>https://realestatewarrior.github.io/houdini-lab/glossary.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/links.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_balloon.html</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_brickhda.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_cache.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_campfire.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_carry.html</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_chain.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_cloth.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_curtain.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_domino.html</loc><lastmod>2026-09-24</lastmod></url>
@@ -19,6 +21,7 @@
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_fire.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_fireworks.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_flag.html</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_fog.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_foreach.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_gems.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_glass.html</loc><lastmod>2026-09-24</lastmod></url>
@@ -43,6 +46,7 @@
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_rain.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_rbd.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_rig.html</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_ripple.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_rock.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_sign.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_smoke.html</loc><lastmod>2026-09-24</lastmod></url>
@@ -56,5 +60,6 @@
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_turntable.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_vex.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_wall.html</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_web.html</loc><lastmod>2026-09-24</lastmod></url>
   <url><loc>https://realestatewarrior.github.io/houdini-lab/guide_wind.html</loc><lastmod>2026-09-24</lastmod></url>
 </urlset>

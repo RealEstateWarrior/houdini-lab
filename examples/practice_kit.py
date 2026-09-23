@@ -92,7 +92,7 @@ class Guide:
 
     def hero(self, node, cap, direction=(0.9, 0.45, 1.2), backdrop=(0.045, 0.047, 0.055), key=3.2, rim=4.0,
              dome=0.25, spp=48, margin=1.18, floor=True, bbox=None, dome_color=(1, 1, 1), key_color=(1.0, 0.96, 0.9),
-             rim_color=(0.75, 0.85, 1.0), res=HERO_RES, frame=None):
+             rim_color=(0.75, 0.85, 1.0), res=HERO_RES, frame=None, backdrop_reflect=0.2, denoise=False):
         """Karma で仕上がりを撮る。暗い幕（曲げた床）・キー・リム・弱いドームの3灯で、どの実践も同じ撮り方にする。"""
         if frame is not None:
             hou.setFrame(frame)
@@ -123,7 +123,7 @@ class Guide:
             bm = matnet.node("backdrop_mat") or matnet.createNode("principledshader::2.0", "backdrop_mat")
             bm.parmTuple("basecolor").set(backdrop)
             bm.parm("rough").set(0.75)
-            bm.parm("reflect").set(0.2)
+            bm.parm("reflect").set(backdrop_reflect)   # 後ろから強い光を当てる場面では照り返しで幕が白っぽくなるので下げる
             asg = studio.createNode("material", "assign")
             asg.setFirstInput(place)
             asg.parm("shop_materialpath1").set(bm.path())
@@ -158,7 +158,8 @@ class Guide:
         hou_tools._frame_camera(cam, box, res, direction, margin=margin)
         karma = hou.node("/out").node("hero_karma") or hou.node("/out").createNode("karma", "hero_karma")
         karma.parm("camera").set(cam.path())
-        karma.parm("denoiser").set("off")
+        # 霧のようなボリュームはサンプルを増やしてもざらつきが残るので、そのときだけノイズ除去（OIDN）を入れる
+        karma.parm("denoiser").set("oidn" if denoise else "off")
         karma.parm("resolutionx").set(res[0])
         karma.parm("resolutiony").set(res[1])
         karma.parm("samplesperpixel").set(spp)
