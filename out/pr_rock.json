@@ -1,0 +1,122 @@
+{
+ "id": "rock",
+ "title": "岩を作る",
+ "lede": "球を割ったかけらに、うねりと細かいでこぼこを重ねると岩になる。割れた平らな面が岩らしさの元。でこぼこを乗せる前に、網を細かく均等にしておく。",
+ "hero": "pr_rock_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。球を1つ割るところから作れる。",
+ "facts": [
+  [
+   "足すノード",
+   "10個"
+  ],
+  [
+   "点の数",
+   "7,321"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "11.4秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_rock.hipnc",
+ "tags": [
+  "モデリング",
+  "ノイズ",
+  "岩",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "もとの形を置く",
+   "node": "sphere",
+   "ui_node": "base",
+   "body": "<code>sphere</code> を置き、Primitive Type を Polygon Mesh、半径を 0.9 × 0.6 × 0.75 にする。これを割って、その1かけらを岩にする。",
+   "img": "pr_rock_1.png",
+   "cap": "少しつぶれた球。"
+  },
+  {
+   "title": "割る位置を散らす",
+   "node": "scatter",
+   "ui_node": "cut_points",
+   "body": "<code>scatter</code> で表面に9個の点をばらまく。点の1つ1つが、割れたかけらの中心になる。点を増やすほど、かけらは小さく、面の数は多くなる。",
+   "img": "pr_rock_2.png",
+   "cap": "9個の点。",
+   "ui_parm": "npts"
+  },
+  {
+   "title": "球を割る",
+   "node": "voronoifracture",
+   "ui_node": "split",
+   "body": "<code>voronoifracture</code> の左に球、右に点をつなぐ。球が点の数だけのかけらに割れ、<strong>割れ目は平らな面になる</strong>。この平らな面と角が、岩らしさの元になる。",
+   "img": "pr_rock_3.png",
+   "cap": "9 個のかけら。"
+  },
+  {
+   "title": "かけらを1つ取り出す",
+   "node": "matchsize",
+   "ui_node": "sit_on_floor",
+   "body": "<code>blast</code> の Group に <code>@name=piece4</code> と書き、<strong>Delete Non Selected</strong> を入れると、そのかけらだけが残る。<code>matchsize</code> で真ん中に寄せ、底を床の高さにそろえる。",
+   "img": "pr_rock_4.png",
+   "cap": "平らな割れ面と、丸い外側が混ざった形。"
+  },
+  {
+   "title": "網を細かく均等にする",
+   "node": "remesh",
+   "ui_node": "even_mesh",
+   "body": "<code>remesh</code> で三角形の網に作り直す。<strong>Target Size を 0.02</strong> にすると、どこも同じくらいの大きさの三角形で埋まる。このあと乗せるでこぼこは、点を動かして作るので、点が少ない所は細かく動けない。",
+   "img": "pr_rock_5.png",
+   "cap": "どこも同じ大きさの三角形になる。",
+   "ui_parm": "targetsize"
+  },
+  {
+   "title": "大きなうねりを乗せる",
+   "node": "mountain",
+   "ui_node": "big_lumps",
+   "body": "<code>mountain</code> で面を法線の向きに押し出す。<strong>Height 0.12・Element Size 0.6</strong>。割れ面の平らさを残したいので、うねりは控えめにする。Height を上げすぎると、割れ面が溶けて芋のようになる。",
+   "img": "pr_rock_6.png",
+   "cap": "割れ面にゆるいうねりが乗る。",
+   "ui_parm": "height"
+  },
+  {
+   "title": "細かいでこぼこを重ねる",
+   "node": "mountain",
+   "ui_node": "fine_detail",
+   "body": "もう1つ <code>mountain</code> をつなぎ、<strong>Height 0.035・Element Size 0.1</strong> にする。大きさの違うノイズを2段に分けると、遠目の形と近くで見た肌理を別々に調整できる。",
+   "img": "pr_rock_7.png",
+   "cap": "表面に岩肌の肌理が出る。",
+   "ui_parm": "elementsize"
+  },
+  {
+   "title": "色のむらを付ける",
+   "node": "attribwrangle",
+   "ui_node": "color_speckle",
+   "body": "<code>attribwrangle</code> に2行だけ書き、色（Cd）の明るさを 0.35〜1.0 でばらつかせる。大きな模様（×9）と細かい模様（×38）を混ぜると、同じ灰色でも汚れや風化のようなむらになり、作り物っぽさが消える。<br><code>float n = noise(@P * 9.0) * 0.6 + noise(@P * 38.0) * 0.4;</code><br><code>@Cd = fit(n, 0.25, 0.75, 0.35, 1.0);</code>",
+   "img": "pr_rock_8.png",
+   "cap": "明るいところと暗いところのまだら。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "岩の材質を当てる",
+   "node": "material",
+   "ui_node": "assign_rock",
+   "body": "<code>/mat</code> に <code>principledshader</code> を作り、Base Color を少し茶色がかった灰色、<strong>Roughness 0.82</strong> にする。<strong>Use Point Color を入れる</strong>と、前の段の色のむらが材質に乗る。<code>material</code> ノードで割り当てる。",
+   "img": "",
+   "cap": "材質を当てた状態（ビューポート）。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "remesh を省くと、でこぼこが乗らない",
+   "body": "かけらのままでは 264 点しかなく、mountain は点を動かすだけなので、細かい肌理が乗らない。remesh の Target Size を 0.08・0.04・0.02 にすると点は 452・1,804・7,321 個。細かいでこぼこ（Element Size 0.1）をはっきり出すには、その 1/5 くらいの 0.02 が目安。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "網を細かくすると、そのぶん重くなる",
+   "body": "mountain 2つまで計算し直す時間は、0.08 で 0.01 秒、0.02 で 0.12 秒。岩をたくさん並べるなら、1つを細かく作ってから複製する（手順「地面に物を生やす」）。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

@@ -50,9 +50,14 @@ _done.wait({timeout})
 """
 
 
+_state = {}
+
+
 def connect(host="127.0.0.1", port=PORT):
     conn = rpyc.classic.connect(host, port)
     conn._config["sync_request_timeout"] = None
+    # 受け口を開いている Houdini のプロセス番号。Houdini が2つ起動していても、この窓だけを撮る
+    _state["pid"] = conn.modules.os.getpid()
     return conn
 
 
@@ -70,7 +75,7 @@ def run_in_houdini(conn, code, timeout=120):
 def capture(out_png):
     result = subprocess.run(
         ["powershell", "-ExecutionPolicy", "Bypass", "-File", CAPTURE,
-         "-Out", out_png],
+         "-Out", out_png] + (["-ProcessId", str(_state["pid"])] if _state.get("pid") else []),
         cwd=HERE, capture_output=True, text=True)
     if result.returncode != 0:
         raise RuntimeError(f"キャプチャ失敗:\n{result.stdout}\n{result.stderr}")

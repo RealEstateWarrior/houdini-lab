@@ -3412,6 +3412,536 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "rock",
+      "title": "岩を作る",
+      "lede": "球を割ったかけらに、うねりと細かいでこぼこを重ねると岩になる。割れた平らな面が岩らしさの元。でこぼこを乗せる前に、網を細かく均等にしておく。",
+      "hero": "pr_rock_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。球を1つ割るところから作れる。",
+      "facts": [
+        [
+          "足すノード",
+          "10個"
+        ],
+        [
+          "点の数",
+          "7,321"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "11.4秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_rock.hipnc",
+      "tags": [
+        "モデリング",
+        "ノイズ",
+        "岩",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "もとの形を置く",
+          "node": "sphere",
+          "ui_node": "base",
+          "body": "<code>sphere</code> を置き、Primitive Type を Polygon Mesh、半径を 0.9 × 0.6 × 0.75 にする。これを割って、その1かけらを岩にする。",
+          "img": "pr_rock_1.png",
+          "cap": "少しつぶれた球。"
+        },
+        {
+          "title": "割る位置を散らす",
+          "node": "scatter",
+          "ui_node": "cut_points",
+          "body": "<code>scatter</code> で表面に9個の点をばらまく。点の1つ1つが、割れたかけらの中心になる。点を増やすほど、かけらは小さく、面の数は多くなる。",
+          "img": "pr_rock_2.png",
+          "cap": "9個の点。",
+          "ui_parm": "npts"
+        },
+        {
+          "title": "球を割る",
+          "node": "voronoifracture",
+          "ui_node": "split",
+          "body": "<code>voronoifracture</code> の左に球、右に点をつなぐ。球が点の数だけのかけらに割れ、<strong>割れ目は平らな面になる</strong>。この平らな面と角が、岩らしさの元になる。",
+          "img": "pr_rock_3.png",
+          "cap": "9 個のかけら。"
+        },
+        {
+          "title": "かけらを1つ取り出す",
+          "node": "matchsize",
+          "ui_node": "sit_on_floor",
+          "body": "<code>blast</code> の Group に <code>@name=piece4</code> と書き、<strong>Delete Non Selected</strong> を入れると、そのかけらだけが残る。<code>matchsize</code> で真ん中に寄せ、底を床の高さにそろえる。",
+          "img": "pr_rock_4.png",
+          "cap": "平らな割れ面と、丸い外側が混ざった形。"
+        },
+        {
+          "title": "網を細かく均等にする",
+          "node": "remesh",
+          "ui_node": "even_mesh",
+          "body": "<code>remesh</code> で三角形の網に作り直す。<strong>Target Size を 0.02</strong> にすると、どこも同じくらいの大きさの三角形で埋まる。このあと乗せるでこぼこは、点を動かして作るので、点が少ない所は細かく動けない。",
+          "img": "pr_rock_5.png",
+          "cap": "どこも同じ大きさの三角形になる。",
+          "ui_parm": "targetsize"
+        },
+        {
+          "title": "大きなうねりを乗せる",
+          "node": "mountain",
+          "ui_node": "big_lumps",
+          "body": "<code>mountain</code> で面を法線の向きに押し出す。<strong>Height 0.12・Element Size 0.6</strong>。割れ面の平らさを残したいので、うねりは控えめにする。Height を上げすぎると、割れ面が溶けて芋のようになる。",
+          "img": "pr_rock_6.png",
+          "cap": "割れ面にゆるいうねりが乗る。",
+          "ui_parm": "height"
+        },
+        {
+          "title": "細かいでこぼこを重ねる",
+          "node": "mountain",
+          "ui_node": "fine_detail",
+          "body": "もう1つ <code>mountain</code> をつなぎ、<strong>Height 0.035・Element Size 0.1</strong> にする。大きさの違うノイズを2段に分けると、遠目の形と近くで見た肌理を別々に調整できる。",
+          "img": "pr_rock_7.png",
+          "cap": "表面に岩肌の肌理が出る。",
+          "ui_parm": "elementsize"
+        },
+        {
+          "title": "色のむらを付ける",
+          "node": "attribwrangle",
+          "ui_node": "color_speckle",
+          "body": "<code>attribwrangle</code> に2行だけ書き、色（Cd）の明るさを 0.35〜1.0 でばらつかせる。大きな模様（×9）と細かい模様（×38）を混ぜると、同じ灰色でも汚れや風化のようなむらになり、作り物っぽさが消える。<br><code>float n = noise(@P * 9.0) * 0.6 + noise(@P * 38.0) * 0.4;</code><br><code>@Cd = fit(n, 0.25, 0.75, 0.35, 1.0);</code>",
+          "img": "pr_rock_8.png",
+          "cap": "明るいところと暗いところのまだら。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "岩の材質を当てる",
+          "node": "material",
+          "ui_node": "assign_rock",
+          "body": "<code>/mat</code> に <code>principledshader</code> を作り、Base Color を少し茶色がかった灰色、<strong>Roughness 0.82</strong> にする。<strong>Use Point Color を入れる</strong>と、前の段の色のむらが材質に乗る。<code>material</code> ノードで割り当てる。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポート）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "remesh を省くと、でこぼこが乗らない",
+          "body": "かけらのままでは 264 点しかなく、mountain は点を動かすだけなので、細かい肌理が乗らない。remesh の Target Size を 0.08・0.04・0.02 にすると点は 452・1,804・7,321 個。細かいでこぼこ（Element Size 0.1）をはっきり出すには、その 1/5 くらいの 0.02 が目安。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "網を細かくすると、そのぶん重くなる",
+          "body": "mountain 2つまで計算し直す時間は、0.08 で 0.01 秒、0.02 で 0.12 秒。岩をたくさん並べるなら、1つを細かく作ってから複製する（手順「地面に物を生やす」）。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "neon",
+      "title": "ネオン管の看板を作る",
+      "lede": "文字の輪郭を1本の線として取り出し、その線に沿って細い管を通す。光る材質を当てるだけで、夜の看板になる。形は2ノード、光は材質1つ。",
+      "hero": "pr_neon_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。明かりは管の発光がほとんど。",
+      "facts": [
+        [
+          "足すノード",
+          "6個（形は2個）"
+        ],
+        [
+          "管の面の数",
+          "11,376"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "97.9秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_neon.hipnc",
+      "tags": [
+        "モデリング",
+        "レンダリング",
+        "Karma",
+        "材質",
+        "看板"
+      ],
+      "steps": [
+        {
+          "title": "文字を置く",
+          "node": "font",
+          "ui_node": "letters",
+          "body": "<code>font</code> に文字を打ち、Type を <strong>Polygons Only</strong>、<strong>Hole Faces を切る</strong>。入れたままだと O の内側と外側が1本の線でつながり、管にその線が出る。文字は面（塗りつぶした形）として出てくるが、ほしいのはその輪郭の線。",
+          "img": "pr_neon_1.png",
+          "cap": "「NEON」の4文字。"
+        },
+        {
+          "title": "線に沿って管を通す",
+          "node": "sweep",
+          "ui_node": "tube",
+          "body": "<code>sweep</code> の Surface Shape を <strong>Round Tube</strong>、Radius を 0.018 にする。文字の面をそのままつなぐと、面の縁（輪郭）に沿って細い筒ができる。曲がったところには font がもともと細かく点を置いているので、並べ直しは要らない。<strong>Columns</strong> は筒の周りの分割数で、12 あれば丸く見える。",
+          "img": "pr_neon_2.png",
+          "cap": "輪郭がそのまま細い管になる。",
+          "ui_parm": "radius"
+        },
+        {
+          "title": "取り付ける板を置く",
+          "node": "box",
+          "ui_node": "back_plate",
+          "body": "管の後ろに <code>box</code> で薄い板を置く（文字より上下左右に少し大きく、厚み 0.04）。光が板に広がるので、看板らしく見える。",
+          "img": "pr_neon_3.png",
+          "cap": "文字の後ろの黒い板。"
+        },
+        {
+          "title": "光る材質を当てる",
+          "node": "merge",
+          "ui_node": "sign",
+          "body": "<code>principledshader</code> を2つ作る。管には <strong>Emission Color をピンク、Emission Intensity を 9</strong>。板は Base Color をほぼ黒、Reflectivity 0.5 にして、光が映り込むようにする。<code>material</code> で割り当て、<code>merge</code> でまとめる。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポートでは光らない）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "Hole Faces を入れたままだと、O に余計な線が出る",
+          "body": "font の Hole Faces（既定で入）は、O や A の穴を外側の輪郭と1本の線でつないで1つの面にする。その面の縁に管を通すと、つないだ線にも管ができ、O の上に縦の線が1本見えた。切ると外側と内側が別々の輪郭になり、線は消える。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Columns を増やしても、見た目はほとんど変わらない",
+          "body": "管の周りの分割（Columns）を 4・12・32 にすると、面の数は 3,792・11,376・30,336。管が細いので、12 を超えると画ではほぼ見分けられない。重くしたくなければ 8〜12。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "ビューポートでは光らない",
+          "body": "発光はレンダラー（Karma）が計算するもので、ビューポートでは色が付くだけ。光り具合は Karma で撮って確かめる。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "gems",
+      "title": "宝石を散らす",
+      "lede": "分割の少ない球を平らな面に分けるだけで、宝石のカットになる。色と大きさを1つずつ変えて散らし、光を通す材質を当てれば、光が中で屈折してきらめく。",
+      "hero": "pr_gems_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。宝石の中で光が曲がり、床に色が落ちる。",
+      "facts": [
+        [
+          "足すノード",
+          "7個"
+        ],
+        [
+          "宝石1つの面",
+          "40枚"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "72.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_gems.hipnc",
+      "tags": [
+        "モデリング",
+        "複製",
+        "レンダリング",
+        "Karma",
+        "材質",
+        "ガラス"
+      ],
+      "steps": [
+        {
+          "title": "分割の少ない球を置く",
+          "node": "sphere",
+          "ui_node": "cut",
+          "body": "<code>sphere</code> の Primitive Type を Polygon Mesh にし、<strong>Rows 5・Columns 10</strong> と少なくする。縦を 0.36 に縮めると、上下がとがった宝石の形になる。",
+          "img": "pr_gems_1.png",
+          "cap": "縦5・周り10の、角ばった球。",
+          "ui_parm": "rows"
+        },
+        {
+          "title": "面を平らに見せる",
+          "node": "facet",
+          "ui_node": "flat_faces",
+          "body": "<code>facet</code> で <strong>Unique Points</strong> と <strong>Post-Compute Normals</strong> を入れる。面ごとに点を分けて向きを付け直すので、なめらかな球ではなく、平らなカット面として光を返す。",
+          "img": "pr_gems_2.png",
+          "cap": "面の1枚1枚がはっきりする。",
+          "ui_parm": "unique"
+        },
+        {
+          "title": "置く場所を決め、1つずつ変える",
+          "node": "attribwrangle",
+          "ui_node": "vary",
+          "body": "<code>grid</code> の上に <code>scatter</code> で7点ばらまき（Relax を入れると重なりにくい）、<code>attribwrangle</code> で点ごとに大きさ（pscale）・向き（orient）・色（Cd）を決める。色は5色の表から順に選ぶ。最後の行で、宝石が床に埋まらないよう少し持ち上げる。",
+          "img": "pr_gems_3.png",
+          "cap": "7つの点。色の付いた点が置き場所。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "宝石を点に並べる",
+          "node": "copytopoints",
+          "ui_node": "place_gems",
+          "body": "<code>copytopoints</code> の左に宝石、右に点をつなぐ。点の pscale・orient で、大きさと向きの違う7つになる。<strong>色は、Target Attributes に1行足して「Apply to: Primitives」「Attributes: Cd」と書かないと移らない</strong>（既定では何も移さない）。",
+          "img": "pr_gems_4.png",
+          "cap": "色も大きさも違う7つの宝石。",
+          "ui_parm": "targetattribs"
+        },
+        {
+          "title": "光を通す材質を当てる",
+          "node": "material",
+          "ui_node": "assign_gem",
+          "body": "<code>principledshader</code> で <strong>Transparency 1</strong>（光を通す）、<strong>IOR 2.2</strong>（曲がり方。ダイヤは約2.4、ガラスは1.5）、Roughness 0 にする。<strong>Transmission Color の Use Point Color</strong> を入れると、面に移した色（Cd）が宝石の色になる。<strong>Dispersion 0.4</strong> で、光が虹色に分かれる。材質は1つで7色すべてに使える。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポートでは透けない）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "facet を省くと、カット面にならない",
+          "body": "球のままだと点は 32 個で、となりの面と点を共有しているので、Karma は面の境目をなめらかにつないで描く。facet で Unique Points を入れると点は 140 個に増え、面ごとに向きが切れる。これが宝石のきらめきの元。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "copytopoints は、既定では色を移さない",
+          "body": "Target Attributes を空のまま複製すると、できた宝石に残る属性は P と N だけで、Cd が無かった。そのまま撮ると、7つとも無色のガラスになる。移したい属性は自分で書き足す。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "透ける材質は撮るのが重い",
+          "body": "この絵は Karma 1280×720・128 サンプルで 73 秒。サンプルを下げると、宝石の中がざらつく。まず小さい解像度で色と形を決めてから、最後に大きく撮る。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "campfire",
+      "title": "焚き火を燃やす",
+      "lede": "薪と石を並べ、その真ん中から炎を出す。Pyro は既定のままだと炎が柱になって伸び続けるので、炎の寿命・浮き上がる力・冷め方の3つを下げて、焚き火の大きさにする（実験201）。",
+      "hero": "pr_campfire_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム60）。明かりは炎だけに近い。",
+      "facts": [
+        [
+          "足すノード",
+          "15個（材質3つ）"
+        ],
+        [
+          "60 フレームの計算",
+          "2.6秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "20.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "201",
+      "hip": "pr_campfire.hipnc",
+      "tags": [
+        "シミュレーション",
+        "Pyro",
+        "炎",
+        "Karma",
+        "制作"
+      ],
+      "steps": [
+        {
+          "title": "薪を組む",
+          "node": "copyxform",
+          "ui_node": "three_logs",
+          "body": "<code>tube</code> で半径 0.07・長さ 0.9 の丸太を作り（Orientation を X 軸）、<code>copyxform</code> で <strong>60度ずつ回し、0.06 ずつ持ち上げて3本</strong>にする。真上から見ると、真ん中で交わる星の形になり、上の薪が下の薪に乗る。",
+          "img": "pr_campfire_1.png",
+          "cap": "3本の薪。",
+          "ui_parm": "ncy"
+        },
+        {
+          "title": "石で囲む",
+          "node": "copytopoints",
+          "ui_node": "stones",
+          "body": "<code>circle</code>（半径 0.55・12分割）の点に、<code>mountain</code> で少しでこぼこにした小さな球を <code>copytopoints</code> で並べる。炎の大きさの目安にもなる。",
+          "img": "pr_campfire_2.png",
+          "cap": "12個の石の輪。"
+        },
+        {
+          "title": "炎の出どころを作る",
+          "node": "pyrosource",
+          "ui_node": "src",
+          "body": "薪の交わるところに、平たい球（半径 0.22・厚み 0.08）を置き、<code>pyrosource</code> の <strong>Initialize を Source Burn</strong> にする。球の中に点が詰まり、燃やすための値（burn・temperature）が付く。",
+          "img": "pr_campfire_3.png",
+          "cap": "発生源の点。",
+          "ui_parm": "initialize"
+        },
+        {
+          "title": "点を升目にする",
+          "node": "volumerasterizeattributes",
+          "ui_node": "to_voxels",
+          "body": "<code>volumerasterizeattributes</code> で点の値を升目（ボリューム）に移す。Attributes に burn temperature、<strong>Voxel Size は 0.03</strong>。Pyro は升目の上で計算する。",
+          "img": "pr_campfire_4.png",
+          "cap": "発生源のボリューム。",
+          "ui_parm": "voxelsize"
+        },
+        {
+          "title": "焚き火の大きさにして燃やす",
+          "node": "pyrosolver",
+          "ui_node": "burn",
+          "body": "<code>pyrosolver</code> で燃やす。既定のままだと炎が 1 秒に約 6 m 伸び続けるので、実験201 で決めた値に変える。<strong>Flame Lifespan 0.25・Buoyancy Scale 0.25・Cooling Rate 1</strong>。炎を揺らすのは <strong>Turbulence 3</strong>で、<strong>Use Control Field を切る</strong>（切らないと何も変わらない）。Create Flame Field と Flame Density（1）を入れて、炎から煙も出す。",
+          "img": "",
+          "cap": "フレーム60の炎（ビューポートの表示）。",
+          "ui_parm": "flames_lifespan"
+        },
+        {
+          "title": "炎の材質を当てて撮る",
+          "node": "merge",
+          "ui_node": "campfire",
+          "body": "<code>/mat</code> に <code>kma_pyroshader</code>（Karma の炎用の材質）を作り、<strong>Enable Fire</strong> を入れて Intensity Scale を 1.5 にする（上げすぎると根元が白く飛ぶ）。<strong>Intensity Volume と Color Volume を flame</strong> に変え、Fire Color Ramp を黒→赤→橙→黄白にする。薪と石には <code>principledshader</code>。<code>merge</code> でまとめ、<strong>フレーム 60</strong>（2.5 秒）で撮る。炎の光で薪と石が照らされる。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "既定の Pyro では焚き火にならない",
+          "body": "pyrosolver を既定のまま（Flame Lifespan 2 秒など）にすると、炎は 1 秒に約 6 m 伸び、3 秒たっても 14 m 近い柱のまま（実験201）。焚き火のような小さな炎は、寿命・浮き上がる力・冷め方の3つを下げて作る。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Turbulence は Use Control Field を切らないと効かない",
+          "body": "既定では Turbulence は煙（density）の濃い所にだけ効く。炎の近くは煙が薄いので、強さを 1 にしても形は小数3桁まで同じだった（実験201）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "炎の材質は、既定では温度で光る",
+          "body": "kma_pyroshader の明るさ（Intensity Volume）と色（Color Volume）は、既定で temperature を見る。Cooling Rate 1 だと温度は発生源のすぐ上で下がるので、既定のまま撮ると、根元の平たい円盤だけが光って炎が写らなかった。flame に変える。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "炎は升目の細かさで重さが決まる",
+          "body": "Voxel Size 0.03 で 60 フレーム回すのに 2.6 秒、炎の升目は 80 × 96 × 112。升を半分にすると升の数は 8 倍になる。形を決めるまでは粗く回す。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "nightcity",
+      "title": "夜の街を並べる",
+      "lede": "格子の点にビルの箱を1つずつ置き、高さを中心ほど高く、少しずつばらつかせる。壁を窓の升目に割って、ところどころを光らせれば夜景になる。街全体を手で作らず、ルールで作る（プロシージャル）入り口。",
+      "hero": "pr_nightcity_hero.png",
+      "hero_cap": "Karma で撮った夜景。明かりは窓と、弱い青い空の光だけ。",
+      "facts": [
+        [
+          "足すノード",
+          "11個（材質3つ）"
+        ],
+        [
+          "建物",
+          "149棟"
+        ],
+        [
+          "面の数",
+          "175,730"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "33.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_nightcity.hipnc",
+      "tags": [
+        "モデリング",
+        "複製",
+        "プロシージャル",
+        "街",
+        "Karma",
+        "制作"
+      ],
+      "steps": [
+        {
+          "title": "区画の点を用意する",
+          "node": "grid",
+          "ui_node": "lots",
+          "body": "<code>grid</code> を 12 × 12、<strong>Rows・Columns を 13</strong> にすると、1 おきに 169 個の点が並ぶ。1つの点に1棟を建てる。",
+          "img": "pr_nightcity_1.png",
+          "cap": "169 個の点。"
+        },
+        {
+          "title": "高さと幅を決める",
+          "node": "attribwrangle",
+          "ui_node": "zoning",
+          "body": "<code>attribwrangle</code> で、点ごとに建物の大きさ（<code>scale</code>、幅・高さ・奥行き）を決める。中心からの距離 d が小さいほど高く（5.0 → 0.4）、<code>rand</code> で 0.4〜1.3 倍にばらつかせる。12% の点は <code>removepoint</code> で消して空き地にする。<strong><code>p@orient = {0,0,0,1}</code> で向きを固定する</strong>（理由は落とし穴に）。",
+          "img": "pr_nightcity_2.png",
+          "cap": "点ごとに高さが決まる（まだ点のまま）。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "1棟ぶんの箱を作る",
+          "node": "box",
+          "ui_node": "building",
+          "body": "<code>box</code> を大きさ 1 のまま、<strong>Center の Y を 0.5</strong> にする。底が地面（y=0）に乗るので、高さを伸ばしても地面に埋まらない。",
+          "img": "pr_nightcity_3.png",
+          "cap": "底が地面にある箱。"
+        },
+        {
+          "title": "点に箱を並べる",
+          "node": "copytopoints",
+          "ui_node": "city",
+          "body": "<code>copytopoints</code> で、左に箱、右に点。点の <code>scale</code> で箱が伸び縮みして、高さの違うビルが建つ。",
+          "img": "pr_nightcity_4.png",
+          "cap": "148 棟の街。"
+        },
+        {
+          "title": "壁を窓の升目に割る",
+          "node": "divide",
+          "ui_node": "window_grid",
+          "body": "<code>divide</code> の <strong>Bricker Polygons</strong> を入れ、Size を 0.05 × 0.07 × 0.05 にする。壁も屋上も、窓くらいの大きさの升目に切れる。",
+          "img": "pr_nightcity_5.png",
+          "cap": "壁が細かい升目になる。",
+          "ui_parm": "brick"
+        },
+        {
+          "title": "窓を点ける",
+          "node": "attribwrangle",
+          "ui_node": "lights_on",
+          "body": "<code>attribwrangle</code> の Run Over を <strong>Primitives</strong> にし、壁向き（法線の Y が小さい）の升目のうち 16% を <code>lit</code> = 1 にする。点いた窓には暖かい色（7割）か白っぽい青（3割）を、明るさもばらつかせて入れる。",
+          "img": "pr_nightcity_6.png",
+          "cap": "点いた窓が色で分かる（ビューポート）。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "壁・窓・道の材質を当てる",
+          "node": "merge",
+          "ui_node": "night_city",
+          "body": "<code>principledshader</code> を3つ。壁は暗い青みの灰色で少し映り込み、窓は <strong>Emission Intensity 3・Use Point Color</strong>（前の段の色で光る）、道はほぼ黒で映り込みを強く（濡れた路面）。<code>material</code> の Group に <code>@lit=0</code> と <code>@lit=1</code> を書き分けて当てる。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "Center の Y を 0.5 にしないと、ビルが地面に埋まる",
+          "body": "box は中心が原点にあるので、そのまま高さを伸ばすと、上と下に同じだけ伸びて半分が地面の下に入る。底を y=0 に置くには Center の Y を 0.5（大きさの半分）にしてから並べる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "grid の点に並べると、ビルが横倒しになる",
+          "body": "grid の点には上向きの法線 N が付いていて、copytopoints は箱の Z（奥行き）を N にそろえる。向きを決めずに並べると、高さが横に倒れ、街全体の高さが 0.60 しかなかった（orient を固定すると 5.57）。高さを持つ物を並べるときは orient を入れておく。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "窓の升目を細かくすると、面の数が一気に増える",
+          "body": "149 棟を 0.05 × 0.07 の升目に割ると 175,730 面（うち点いた窓 22,630）。升目を半分（0.025 × 0.035）にすると 656,522 面で、割り直すだけで 12.3 秒かかった。遠景の街なら粗い升目で足りる。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

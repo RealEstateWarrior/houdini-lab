@@ -1,4 +1,4 @@
-# Capture the window of a running application (e.g. the Houdini GUI) to a PNG.
+﻿# Capture the window of a running application (e.g. the Houdini GUI) to a PNG.
 #
 # NOTE: comments here are ASCII on purpose. Windows PowerShell 5.1 reads a .ps1
 # without a BOM as ANSI, so non-ASCII characters corrupt the parse and produce
@@ -11,7 +11,8 @@
 
 param(
     [string]$ProcessName = "houdini",
-    [string]$Out = "out\houdini_window.png"
+    [string]$Out = "out\houdini_window.png",
+    [int]$ProcessId = 0
 )
 
 Add-Type -AssemblyName System.Drawing
@@ -68,6 +69,8 @@ if ($procs.Count -eq 0) {
     exit 1
 }
 $pids = [uint32[]]($procs | ForEach-Object { [uint32]$_.Id })
+# Houdini が2つ起動していると、大きいほうの窓（受け口の無いほう）を撮ってしまう。番号が分かればそれだけに絞る
+if ($ProcessId -gt 0) { $pids = [uint32[]]@([uint32]$ProcessId) }
 $handle = [WinCap]::FindMain($pids)
 if ($handle -eq [IntPtr]::Zero) {
     Write-Output "no visible main window found for process: $ProcessName"

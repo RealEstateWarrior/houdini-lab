@@ -969,5 +969,170 @@
       "wanted": "copytopoints",
       "png": "guide_fallen_p5.png"
     }
+  },
+  "rock": {
+    "1": {
+      "node": "/obj/rock/base",
+      "wanted": "sphere",
+      "png": "guide_rock_p1.png"
+    },
+    "2": {
+      "node": "/obj/rock/cut_points",
+      "wanted": "scatter",
+      "png": "guide_rock_p2.png"
+    },
+    "3": {
+      "node": "/obj/rock/split",
+      "wanted": "voronoifracture",
+      "png": "guide_rock_p3.png"
+    },
+    "4": {
+      "node": "/obj/rock/sit_on_floor",
+      "wanted": "matchsize",
+      "png": "guide_rock_p4.png"
+    },
+    "5": {
+      "node": "/obj/rock/even_mesh",
+      "wanted": "remesh",
+      "png": "guide_rock_p5.png"
+    },
+    "6": {
+      "node": "/obj/rock/big_lumps",
+      "wanted": "mountain",
+      "png": "guide_rock_p6.png"
+    },
+    "7": {
+      "node": "/obj/rock/fine_detail",
+      "wanted": "mountain",
+      "png": "guide_rock_p7.png"
+    },
+    "8": {
+      "node": "/obj/rock/color_speckle",
+      "wanted": "attribwrangle",
+      "png": "guide_rock_p8.png"
+    },
+    "9": {
+      "node": "/obj/rock/assign_rock",
+      "wanted": "material",
+      "png": "guide_rock_p9.png"
+    }
+  },
+  "neon": {
+    "1": {
+      "node": "/obj/neon/letters",
+      "wanted": "font",
+      "png": "guide_neon_p1.png"
+    },
+    "2": {
+      "node": "/obj/neon/tube",
+      "wanted": "sweep",
+      "png": "guide_neon_p2.png"
+    },
+    "3": {
+      "node": "/obj/neon/back_plate",
+      "wanted": "box",
+      "png": "guide_neon_p3.png"
+    },
+    "4": {
+      "node": "/obj/neon/sign",
+      "wanted": "merge",
+      "png": "guide_neon_p4.png"
+    }
+  },
+  "gems": {
+    "1": {
+      "node": "/obj/gems/cut",
+      "wanted": "sphere",
+      "png": "guide_gems_p1.png"
+    },
+    "2": {
+      "node": "/obj/gems/flat_faces",
+      "wanted": "facet",
+      "png": "guide_gems_p2.png"
+    },
+    "3": {
+      "node": "/obj/gems/vary",
+      "wanted": "attribwrangle",
+      "png": "guide_gems_p3.png"
+    },
+    "4": {
+      "node": "/obj/gems/place_gems",
+      "wanted": "copytopoints",
+      "png": "guide_gems_p4.png"
+    },
+    "5": {
+      "node": "/obj/gems/assign_gem",
+      "wanted": "material",
+      "png": "guide_gems_p5.png"
+    }
+  },
+  "campfire": {
+    "1": {
+      "node": "/obj/campfire/three_logs",
+      "wanted": "copyxform",
+      "png": "guide_campfire_p1.png"
+    },
+    "2": {
+      "node": "/obj/campfire/stones",
+      "wanted": "copytopoints",
+      "png": "guide_campfire_p2.png"
+    },
+    "3": {
+      "node": "/obj/campfire/src",
+      "wanted": "pyrosource",
+      "png": "guide_campfire_p3.png"
+    },
+    "4": {
+      "node": "/obj/campfire/to_voxels",
+      "wanted": "volumerasterizeattributes",
+      "png": "guide_campfire_p4.png"
+    },
+    "5": {
+      "node": "/obj/campfire/burn",
+      "wanted": "pyrosolver",
+      "png": "guide_campfire_p5.png"
+    },
+    "6": {
+      "node": "/obj/campfire/campfire",
+      "wanted": "merge",
+      "png": "guide_campfire_p6.png"
+    }
+  },
+  "nightcity": {
+    "1": {
+      "node": "/obj/nightcity/lots",
+      "wanted": "grid",
+      "png": "guide_nightcity_p1.png"
+    },
+    "2": {
+      "node": "/obj/nightcity/zoning",
+      "wanted": "attribwrangle",
+      "png": "guide_nightcity_p2.png"
+    },
+    "3": {
+      "node": "/obj/nightcity/building",
+      "wanted": "box",
+      "png": "guide_nightcity_p3.png"
+    },
+    "4": {
+      "node": "/obj/nightcity/city",
+      "wanted": "copytopoints",
+      "png": "guide_nightcity_p4.png"
+    },
+    "5": {
+      "node": "/obj/nightcity/window_grid",
+      "wanted": "divide",
+      "png": "guide_nightcity_p5.png"
+    },
+    "6": {
+      "node": "/obj/nightcity/lights_on",
+      "wanted": "attribwrangle",
+      "png": "guide_nightcity_p6.png"
+    },
+    "7": {
+      "node": "/obj/nightcity/night_city",
+      "wanted": "merge",
+      "png": "guide_nightcity_p7.png"
+    }
   }
 }

@@ -1,0 +1,110 @@
+{
+ "id": "campfire",
+ "title": "焚き火を燃やす",
+ "lede": "薪と石を並べ、その真ん中から炎を出す。Pyro は既定のままだと炎が柱になって伸び続けるので、炎の寿命・浮き上がる力・冷め方の3つを下げて、焚き火の大きさにする（実験201）。",
+ "hero": "pr_campfire_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム60）。明かりは炎だけに近い。",
+ "facts": [
+  [
+   "足すノード",
+   "15個（材質3つ）"
+  ],
+  [
+   "60 フレームの計算",
+   "2.6秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "20.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "201",
+ "hip": "pr_campfire.hipnc",
+ "tags": [
+  "シミュレーション",
+  "Pyro",
+  "炎",
+  "Karma",
+  "制作"
+ ],
+ "steps": [
+  {
+   "title": "薪を組む",
+   "node": "copyxform",
+   "ui_node": "three_logs",
+   "body": "<code>tube</code> で半径 0.07・長さ 0.9 の丸太を作り（Orientation を X 軸）、<code>copyxform</code> で <strong>60度ずつ回し、0.06 ずつ持ち上げて3本</strong>にする。真上から見ると、真ん中で交わる星の形になり、上の薪が下の薪に乗る。",
+   "img": "pr_campfire_1.png",
+   "cap": "3本の薪。",
+   "ui_parm": "ncy"
+  },
+  {
+   "title": "石で囲む",
+   "node": "copytopoints",
+   "ui_node": "stones",
+   "body": "<code>circle</code>（半径 0.55・12分割）の点に、<code>mountain</code> で少しでこぼこにした小さな球を <code>copytopoints</code> で並べる。炎の大きさの目安にもなる。",
+   "img": "pr_campfire_2.png",
+   "cap": "12個の石の輪。"
+  },
+  {
+   "title": "炎の出どころを作る",
+   "node": "pyrosource",
+   "ui_node": "src",
+   "body": "薪の交わるところに、平たい球（半径 0.22・厚み 0.08）を置き、<code>pyrosource</code> の <strong>Initialize を Source Burn</strong> にする。球の中に点が詰まり、燃やすための値（burn・temperature）が付く。",
+   "img": "pr_campfire_3.png",
+   "cap": "発生源の点。",
+   "ui_parm": "initialize"
+  },
+  {
+   "title": "点を升目にする",
+   "node": "volumerasterizeattributes",
+   "ui_node": "to_voxels",
+   "body": "<code>volumerasterizeattributes</code> で点の値を升目（ボリューム）に移す。Attributes に burn temperature、<strong>Voxel Size は 0.03</strong>。Pyro は升目の上で計算する。",
+   "img": "pr_campfire_4.png",
+   "cap": "発生源のボリューム。",
+   "ui_parm": "voxelsize"
+  },
+  {
+   "title": "焚き火の大きさにして燃やす",
+   "node": "pyrosolver",
+   "ui_node": "burn",
+   "body": "<code>pyrosolver</code> で燃やす。既定のままだと炎が 1 秒に約 6 m 伸び続けるので、実験201 で決めた値に変える。<strong>Flame Lifespan 0.25・Buoyancy Scale 0.25・Cooling Rate 1</strong>。炎を揺らすのは <strong>Turbulence 3</strong>で、<strong>Use Control Field を切る</strong>（切らないと何も変わらない）。Create Flame Field と Flame Density（1）を入れて、炎から煙も出す。",
+   "img": "",
+   "cap": "フレーム60の炎（ビューポートの表示）。",
+   "ui_parm": "flames_lifespan"
+  },
+  {
+   "title": "炎の材質を当てて撮る",
+   "node": "merge",
+   "ui_node": "campfire",
+   "body": "<code>/mat</code> に <code>kma_pyroshader</code>（Karma の炎用の材質）を作り、<strong>Enable Fire</strong> を入れて Intensity Scale を 1.5 にする（上げすぎると根元が白く飛ぶ）。<strong>Intensity Volume と Color Volume を flame</strong> に変え、Fire Color Ramp を黒→赤→橙→黄白にする。薪と石には <code>principledshader</code>。<code>merge</code> でまとめ、<strong>フレーム 60</strong>（2.5 秒）で撮る。炎の光で薪と石が照らされる。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "既定の Pyro では焚き火にならない",
+   "body": "pyrosolver を既定のまま（Flame Lifespan 2 秒など）にすると、炎は 1 秒に約 6 m 伸び、3 秒たっても 14 m 近い柱のまま（実験201）。焚き火のような小さな炎は、寿命・浮き上がる力・冷め方の3つを下げて作る。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "Turbulence は Use Control Field を切らないと効かない",
+   "body": "既定では Turbulence は煙（density）の濃い所にだけ効く。炎の近くは煙が薄いので、強さを 1 にしても形は小数3桁まで同じだった（実験201）。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "炎の材質は、既定では温度で光る",
+   "body": "kma_pyroshader の明るさ（Intensity Volume）と色（Color Volume）は、既定で temperature を見る。Cooling Rate 1 だと温度は発生源のすぐ上で下がるので、既定のまま撮ると、根元の平たい円盤だけが光って炎が写らなかった。flame に変える。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "炎は升目の細かさで重さが決まる",
+   "body": "Voxel Size 0.03 で 60 フレーム回すのに 2.6 秒、炎の升目は 80 × 96 × 112。升を半分にすると升の数は 8 倍になる。形を決めるまでは粗く回す。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}
