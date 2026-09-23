@@ -87,6 +87,8 @@
 - 難易度は build_site.py の guide_level（シミュレーション=応用、VEX か6段以上=基本、ほか=入門）
 - docs/ では検索・用語・ノード・実験のデータを docs/data/*.js に出す（ページが約1.2MB→約0.2MB）
 - ページ確認は headless Chrome（スクラッチの shot.sh）。ブラウザの枠は PC 幅が小さく写る
+- 上バーのロゴは2つのリンク: SP マーク＝親（Saito Production）、「Houdini 研究部」＝この部のホーム。現在地の先頭も Saito Production
+- 親ページ（D:\Claude\sp → RealEstateWarrior.github.io）も同じ形（バー・題の板・リンク集）。**publish.py が親のリポジトリも一緒に送る**（それまで一度も送っていなかった）
 - 要望のメール転送は未（ユーザーの判断待ち）
 - これからの実践: エフェクトは映像か GIF を付ける
 
