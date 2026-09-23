@@ -27,7 +27,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # ページに出す順
 ORDER = ["make", "shape", "deform", "measure", "vdb", "scatter", "attrib", "group", "flow", "pack",
          "uv", "program", "sim", "gas", "lop", "pop", "force", "terrain", "rig", "groom",
-         "mpm", "obj", "rop", "vop"]
+         "mpm", "obj", "rop", "pdg", "vop"]
 
 LABELS = {
     "make": "形を作る",

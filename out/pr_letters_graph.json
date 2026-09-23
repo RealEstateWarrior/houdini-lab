@@ -1,0 +1,207 @@
+{
+  "title": "文字を落として割る",
+  "network": "/obj/letters",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "word",
+      "type": "font",
+      "pos": [
+        -1.13,
+        7.078
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "text": "HOUDINI",
+        "valign": 0,
+        "fontsize": 0.5
+      }
+    },
+    {
+      "name": "thick",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -1.13,
+        5.949
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.12,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "letter_colors",
+      "type": "attribwrangle",
+      "pos": [
+        -1.13,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// 文字ごとに色を変える。左から右へ、色相を少しずつ回す\nvector c = getbbox_center(0);\nvector s = getbbox_size(0);\nfloat u = (@P.x - (c.x - s.x ..."
+      }
+    },
+    {
+      "name": "crack",
+      "type": "rbdmaterialfracture::3.0",
+      "pos": [
+        -1.13,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "weak_glue",
+      "type": "attribwrangle",
+      "pos": [
+        1.13,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "f@strength = chf('strength');   // かけらどうしのつながりの強さ"
+      }
+    },
+    {
+      "name": "hold_up",
+      "type": "xform",
+      "pos": [
+        -1.13,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ty": 1.3,
+        "rx": -25.0,
+        "rz": 8.0
+      }
+    },
+    {
+      "name": "drop",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "margin": 0.002,
+        "folder4": 1,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "assign_letters",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/letter_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "word",
+      "from_output": 0,
+      "to": "thick",
+      "to_input": 0
+    },
+    {
+      "from": "thick",
+      "from_output": 0,
+      "to": "letter_colors",
+      "to_input": 0
+    },
+    {
+      "from": "letter_colors",
+      "from_output": 0,
+      "to": "crack",
+      "to_input": 0
+    },
+    {
+      "from": "crack",
+      "from_output": 1,
+      "to": "weak_glue",
+      "to_input": 0
+    },
+    {
+      "from": "crack",
+      "from_output": 0,
+      "to": "hold_up",
+      "to_input": 0
+    },
+    {
+      "from": "hold_up",
+      "from_output": 0,
+      "to": "drop",
+      "to_input": 0
+    },
+    {
+      "from": "weak_glue",
+      "from_output": 0,
+      "to": "drop",
+      "to_input": 1
+    },
+    {
+      "from": "drop",
+      "from_output": 0,
+      "to": "assign_letters",
+      "to_input": 0
+    }
+  ]
+}

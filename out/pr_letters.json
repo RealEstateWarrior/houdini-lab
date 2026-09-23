@@ -1,0 +1,78 @@
+{
+ "id": "letters",
+ "title": "文字を落として割る",
+ "lede": "font で文字を作って押し出し、厚みのある文字にする。rbdmaterialfracture で割っておき、かけらどうしを弱くくっつけて床へ落とすと、当たった所から砕ける。文字ごとに色を変えておくと、どのかけらがどの文字か分かる。",
+ "hero": "pr_letters_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム 60）。床に落ちて砕けた文字。",
+ "facts": [
+  [
+   "足すノード",
+   "9個（材質1つ）"
+  ],
+  [
+   "かけら",
+   "69個"
+  ],
+  [
+   "60 フレームの計算",
+   "1.7秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "106.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_letters.hipnc",
+ "tags": [
+  "シミュレーション",
+  "RBD",
+  "破壊",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "文字を作って、厚みを付ける",
+   "node": "attribwrangle",
+   "ui_node": "letter_colors",
+   "body": "<code>font</code> で「HOUDINI」と書き、Font Size 0.5、中央そろえにする。<code>polyextrude</code> で <strong>Distance 0.12</strong> 押し出し、<strong>Output Back</strong> を入れて裏も閉じる（中の詰まった文字になる）。<code>attribwrangle</code>（Primitives）で、左から右へ色相を回して、文字ごとに色を変える。",
+   "img": "pr_letters_1.png",
+   "cap": "厚みのある7文字。"
+  },
+  {
+   "title": "コンクリートのように割っておく",
+   "node": "rbdmaterialfracture",
+   "ui_node": "crack",
+   "body": "<code>rbdmaterialfracture</code> の Material Type を <strong>Concrete</strong> にする。文字の中に点が散らばり、ごつごつした 69 個のかけらに割れる。右の出口のつながり（Glue）には <code>attribwrangle</code>（Primitives）をつなぎ、<strong>strength</strong> を 4 に弱めておく。強いままだと、落ちても割れずに文字の形のまま転がる。",
+   "img": "pr_letters_2.png",
+   "cap": "69 個のかけら（見た目はまだ1つ）。",
+   "ui_parm": "materialtype"
+  },
+  {
+   "title": "床へ落とす",
+   "node": "rbdbulletsolver",
+   "ui_node": "drop",
+   "body": "<code>xform</code> で文字を 1.3 m 持ち上げ、少し傾ける。<code>rbdbulletsolver</code> の左にかけら、真ん中に弱めたつながりをつなぎ、Ground Plane を入れる。<strong>Collision Margin は 0.002</strong>（小さなかけらが浮かないように）。再生すると、斜めに落ちた文字の、先に当たった角から砕ける。60 フレームの計算は 1.7 秒。",
+   "img": "pr_letters_3.png",
+   "cap": "フレーム 60。砕けて散らばった文字。",
+   "ui_parm": "margin"
+  },
+  {
+   "title": "材質を当てる",
+   "node": "material",
+   "ui_node": "assign_letters",
+   "body": "<code>principledshader</code> の Base Color を白にして、面の色 Cd（文字ごとの色）を使う。割れた断面も同じ色になる。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "つながりが強いと、割れずに転がる",
+   "body": "strength 4 では、止まったかけらの散らばりは 横 3.11 m・奥行き 2.34 m。1000 にすると 横 2.43 m・奥行き 0.88 m。つながりが強いと、文字は形を保ったまま倒れるだけになる。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "文字が落ちて、床に当たって砕けるまで（60 フレーム）。"
+}

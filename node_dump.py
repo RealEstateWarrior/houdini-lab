@@ -34,6 +34,8 @@ def holder(category):
         node = hou.node("/mat") or hou.node("/shop")
     elif category == "lop":
         node = hou.node("/stage")
+    elif category == "top":
+        node = hou.node("/obj").createNode("topnet", "dump_top")
     else:
         node = None
     HOLDERS[category] = node

@@ -1,0 +1,376 @@
+{
+  "title": "雪だるまを作る",
+  "network": "/obj/snowman",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ball0",
+      "type": "sphere",
+      "pos": [
+        -7.766,
+        6.476
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.34,
+        "rady": 0.31620000000000004,
+        "radz": 0.34,
+        "ty": 0.3,
+        "rows": 48,
+        "cols": 96
+      }
+    },
+    {
+      "name": "ball1",
+      "type": "sphere",
+      "pos": [
+        -5.507,
+        6.024
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.25,
+        "rady": 0.2325,
+        "radz": 0.25,
+        "ty": 0.8,
+        "rows": 48,
+        "cols": 96
+      }
+    },
+    {
+      "name": "ball2",
+      "type": "sphere",
+      "pos": [
+        -3.248,
+        5.572
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.17,
+        "rady": 0.15810000000000002,
+        "radz": 0.17,
+        "ty": 1.16,
+        "rows": 48,
+        "cols": 96
+      }
+    },
+    {
+      "name": "three_balls",
+      "type": "merge",
+      "pos": [
+        -5.507,
+        4.593
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "hand_packed",
+      "type": "mountain::2.0",
+      "pos": [
+        -5.507,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.018,
+        "elementsize": 0.12,
+        "oct": 5,
+        "rough": 0.55
+      }
+    },
+    {
+      "name": "twig_arms",
+      "type": "attribwrangle",
+      "pos": [
+        -0.424,
+        4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 左右の腕の枝。付け根から外へ、少し上へ曲がりながら伸ばす。先は2つに分かれる\nfor (int side = -1; side <= 1; side += 2) {\n    int prim = addprim(0, 'poly..."
+      }
+    },
+    {
+      "name": "twig_thickness",
+      "type": "polywire",
+      "pos": [
+        -0.424,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "radius": 0.012
+      }
+    },
+    {
+      "name": "coal_spots",
+      "type": "attribwrangle",
+      "pos": [
+        -13.273,
+        2.41
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 目2つとボタン3つ。雪玉の表面に置くため、玉の中心から前（+z）へ半径ぶん出す\nvector c1 = {0, 1.16, 0}; float r1 = 0.165;\nfloat xs[] = {-0.055, 0.055};\n..."
+      }
+    },
+    {
+      "name": "coal_piece",
+      "type": "sphere",
+      "pos": [
+        -15.532,
+        2.861
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.02,
+        "rady": 0.018,
+        "radz": 0.016,
+        "rows": 8,
+        "cols": 12
+      }
+    },
+    {
+      "name": "coal",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -14.402,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "carrot",
+      "type": "tube",
+      "pos": [
+        -11.014,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "ty": 1.15,
+        "tz": 0.225,
+        "rad1": 0.018,
+        "rad2": 0.0,
+        "height": 0.14,
+        "cols": 16
+      }
+    },
+    {
+      "name": "face",
+      "type": "merge",
+      "pos": [
+        -12.708,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_snow",
+      "type": "material",
+      "pos": [
+        -5.507,
+        2.334
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/snow_mat"
+      }
+    },
+    {
+      "name": "assign_twig",
+      "type": "material",
+      "pos": [
+        -0.424,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/twig_mat"
+      }
+    },
+    {
+      "name": "assign_coal",
+      "type": "material",
+      "pos": [
+        1.836,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/coal_mat"
+      }
+    },
+    {
+      "name": "assign_carrot",
+      "type": "material",
+      "pos": [
+        4.095,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/carrot_mat"
+      }
+    },
+    {
+      "name": "snowman",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "ball0",
+      "from_output": 0,
+      "to": "three_balls",
+      "to_input": 0
+    },
+    {
+      "from": "ball1",
+      "from_output": 0,
+      "to": "three_balls",
+      "to_input": 1
+    },
+    {
+      "from": "ball2",
+      "from_output": 0,
+      "to": "three_balls",
+      "to_input": 2
+    },
+    {
+      "from": "three_balls",
+      "from_output": 0,
+      "to": "hand_packed",
+      "to_input": 0
+    },
+    {
+      "from": "twig_arms",
+      "from_output": 0,
+      "to": "twig_thickness",
+      "to_input": 0
+    },
+    {
+      "from": "coal_piece",
+      "from_output": 0,
+      "to": "coal",
+      "to_input": 0
+    },
+    {
+      "from": "coal_spots",
+      "from_output": 0,
+      "to": "coal",
+      "to_input": 1
+    },
+    {
+      "from": "coal",
+      "from_output": 0,
+      "to": "face",
+      "to_input": 0
+    },
+    {
+      "from": "carrot",
+      "from_output": 0,
+      "to": "face",
+      "to_input": 1
+    },
+    {
+      "from": "hand_packed",
+      "from_output": 0,
+      "to": "assign_snow",
+      "to_input": 0
+    },
+    {
+      "from": "twig_thickness",
+      "from_output": 0,
+      "to": "assign_twig",
+      "to_input": 0
+    },
+    {
+      "from": "coal",
+      "from_output": 0,
+      "to": "assign_coal",
+      "to_input": 0
+    },
+    {
+      "from": "carrot",
+      "from_output": 0,
+      "to": "assign_carrot",
+      "to_input": 0
+    },
+    {
+      "from": "assign_snow",
+      "from_output": 0,
+      "to": "snowman",
+      "to_input": 0
+    },
+    {
+      "from": "assign_twig",
+      "from_output": 0,
+      "to": "snowman",
+      "to_input": 1
+    },
+    {
+      "from": "assign_coal",
+      "from_output": 0,
+      "to": "snowman",
+      "to_input": 2
+    },
+    {
+      "from": "assign_carrot",
+      "from_output": 0,
+      "to": "snowman",
+      "to_input": 3
+    }
+  ]
+}

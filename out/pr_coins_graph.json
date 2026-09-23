@@ -1,0 +1,265 @@
+{
+  "title": "コインをばらまく",
+  "network": "/obj/coins",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "coin",
+      "type": "tube",
+      "pos": [
+        -3.53,
+        6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.013,
+        "rad2": 0.013,
+        "height": 0.0018,
+        "cols": 40
+      }
+    },
+    {
+      "name": "soft_rim",
+      "type": "polybevel::3.0",
+      "pos": [
+        -3.53,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.0004,
+        "divisions": 2,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "drop_zone",
+      "type": "box",
+      "pos": [
+        -0.706,
+        6.928
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.25,
+        "sizey": 0.3,
+        "sizez": 0.25,
+        "ty": 0.3
+      }
+    },
+    {
+      "name": "coin_spots",
+      "type": "scatter::2.0",
+      "pos": [
+        -0.706,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 240,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "random_coins",
+      "type": "attribwrangle",
+      "pos": [
+        -0.706,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 1枚ずつ向きをばらばらにし、金・銀・銅のどれかの色を付ける\np@orient = quaternion(radians(set(rand(@ptnum) * 360, rand(@ptnum + 1) * 360, rand(@..."
+      }
+    },
+    {
+      "name": "coins",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -2.118,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "pack": 1,
+        "targetattribs": 1,
+        "applyattribs1": "Cd v"
+      }
+    },
+    {
+      "name": "drop",
+      "type": "rbdbulletsolver",
+      "pos": [
+        -2.118,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "margin": 0.0005,
+        "folder4": 1,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "collision_margin": 0.0005,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "table",
+      "type": "grid",
+      "pos": [
+        2.118,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.5,
+        "sizey": 1.5,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "assign_coin",
+      "type": "material",
+      "pos": [
+        -2.118,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/coin_mat"
+      }
+    },
+    {
+      "name": "assign_table",
+      "type": "material",
+      "pos": [
+        2.118,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/table_mat"
+      }
+    },
+    {
+      "name": "coins_on_table",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "coin",
+      "from_output": 0,
+      "to": "soft_rim",
+      "to_input": 0
+    },
+    {
+      "from": "drop_zone",
+      "from_output": 0,
+      "to": "coin_spots",
+      "to_input": 0
+    },
+    {
+      "from": "coin_spots",
+      "from_output": 0,
+      "to": "random_coins",
+      "to_input": 0
+    },
+    {
+      "from": "soft_rim",
+      "from_output": 0,
+      "to": "coins",
+      "to_input": 0
+    },
+    {
+      "from": "random_coins",
+      "from_output": 0,
+      "to": "coins",
+      "to_input": 1
+    },
+    {
+      "from": "coins",
+      "from_output": 0,
+      "to": "drop",
+      "to_input": 0
+    },
+    {
+      "from": "drop",
+      "from_output": 0,
+      "to": "assign_coin",
+      "to_input": 0
+    },
+    {
+      "from": "table",
+      "from_output": 0,
+      "to": "assign_table",
+      "to_input": 0
+    },
+    {
+      "from": "assign_coin",
+      "from_output": 0,
+      "to": "coins_on_table",
+      "to_input": 0
+    },
+    {
+      "from": "assign_table",
+      "from_output": 0,
+      "to": "coins_on_table",
+      "to_input": 1
+    }
+  ]
+}

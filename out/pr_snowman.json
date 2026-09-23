@@ -1,0 +1,70 @@
+{
+ "id": "snowman",
+ "title": "雪だるまを作る",
+ "lede": "大・中・小の3つの雪玉を少しめり込ませて重ね、mountain で手で固めたようなでこぼこを付ける。腕は曲がった線に太さを付けた枝、目とボタンは炭、鼻はにんじん。雪の材質は Subsurface（光が中で散る）を入れると雪らしくなる。",
+ "hero": "pr_snowman_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。やわらかく光る雪の玉と、枝の腕。",
+ "facts": [
+  [
+   "足すノード",
+   "19個（材質4つ）"
+  ],
+  [
+   "高さ",
+   "1.32 m"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "384.1秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_snowman.hipnc",
+ "tags": [
+  "モデリング",
+  "材質",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "雪玉を3つ重ねる",
+   "node": "mountain",
+   "ui_node": "hand_packed",
+   "body": "<code>sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。<code>merge</code> でまとめ、<code>mountain</code> で <strong>Height 0.018・Element Size 0.12</strong> の浅いでこぼこを付ける。手で固めた雪玉の、ゆるいでこぼこになる。",
+   "img": "pr_snowman_1.png",
+   "cap": "でこぼこの付いた3つの雪玉。"
+  },
+  {
+   "title": "枝の腕を付ける",
+   "node": "polywire",
+   "ui_node": "twig_thickness",
+   "body": "Detail の <code>attribwrangle</code> で、左右の腕を折れ線で描く。付け根から外へ伸ばしながら少し上げ、<code>sin</code> で小さく曲げ、先の手前から小枝を1本分ける。<code>polywire</code>（Radius 0.012）で線に太さを付けると枝になる。",
+   "img": "pr_snowman_2.png",
+   "cap": "左右の枝の腕。"
+  },
+  {
+   "title": "炭の目とボタン、にんじんの鼻",
+   "node": "merge",
+   "ui_node": "face",
+   "body": "Detail の <code>attribwrangle</code> で、目2つとボタン3つの位置を、雪玉の中心から前へ半径ぶん出した所に置く。小さくつぶした <code>sphere</code> を <code>copytopoints</code> で並べて炭にする。鼻は <code>tube</code> の片方の半径を 0 にした円すい（長さ 14 cm）を前へ向けて刺す。",
+   "img": "pr_snowman_3.png",
+   "cap": "顔と、胸のボタン。"
+  },
+  {
+   "title": "雪の材質（Subsurface）",
+   "node": "merge",
+   "ui_node": "snowman",
+   "body": "雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。枝・炭・にんじんは普通の材質。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "でこぼこは浅く",
+   "body": "mountain の Height を 0.018 から 0.08 にすると、いちばん上の高さが 1.321 m から 1.336 m に変わり、0.08 は、いちばん小さな玉（半径 0.17 m）の半分近い深さ。でこぼこの深さは、玉の大きさと比べて決める。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

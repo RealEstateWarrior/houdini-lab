@@ -1,0 +1,80 @@
+{
+ "id": "cloud",
+ "title": "もくもくの雲を浮かべる",
+ "lede": "大きさの違う球を寄せ集めて雲の大まかな形を作り、底を平らに切る。cloud ノードでボリューム（濃さの升目）にし、cloudnoise で縁を削ると、ふわふわの積雲になる。明かりは強い日差しと青い空の2つ。",
+ "hero": "pr_cloud_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。上は日差しで白く、底は影で灰色の積雲。",
+ "facts": [
+  [
+   "足すノード",
+   "9個（明かり1つ）"
+  ],
+  [
+   "升の分け方",
+   "長い辺を160"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "78.3秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_cloud.hipnc",
+ "tags": [
+  "モデリング",
+  "ボリューム",
+  "雲",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "球を集めて、底を平らにする",
+   "node": "clip",
+   "ui_node": "flat_bottom",
+   "body": "横長の <code>sphere</code>（8 × 3.2 × 5.2）の表面に <code>scatter</code> で 26 個の点をまき、<code>attribwrangle</code> で <strong>上の点ほど大きな pscale</strong> にする。小さな球を <code>copytopoints</code> で並べると、上がもくもくした塊になる。<code>clip</code> の Direction を (0, 1, 0)、Distance を −0.6 にして、高さ −0.6 より下を切り、底を平らにする（本物の積雲も底が平ら）。Direction の向いている側が残る。(0, −1, 0) にすると上が消えて、下のお椀だけが残った。",
+   "img": "pr_cloud_1.png",
+   "cap": "球を寄せ集めた雲の形。",
+   "ui_parm": "dist"
+  },
+  {
+   "title": "ボリュームにする",
+   "node": "cloud",
+   "ui_node": "to_cloud",
+   "body": "<code>cloud</code> ノードにつなぐと、面の内側が濃さ（density）の升目で満たされたボリュームになる。<strong>Uniform Sampling Divs 160</strong>（長い辺を160に割る）、Density Multiplier 3。",
+   "img": "pr_cloud_2.png",
+   "cap": "ボリュームになった雲（まだ縁がのっぺり）。",
+   "ui_parm": "samplediv"
+  },
+  {
+   "title": "ノイズで縁を削る",
+   "node": "cloudnoise",
+   "ui_node": "fluffy_edges",
+   "body": "<code>cloudnoise</code> で、縁の濃さをノイズで削る。<strong>Amplitude 0.45・Element Size 1.2・Octaves 5</strong>。大きな渦から細かい渦まで重なって、縁がふわふわになる。Amplitude を上げるほど、深く削れる。",
+   "img": "pr_cloud_3.png",
+   "cap": "縁がふわふわになった雲。",
+   "ui_parm": "noiseamount"
+  },
+  {
+   "title": "日差しと空の明かり",
+   "node": "cloudnoise",
+   "ui_node": "fluffy_edges",
+   "body": "<code>hlight</code> を Distant（太陽）にして、斜め上から Intensity 4 で当てる。空の青い明かりは弱いドーム光で足す。雲は光を中で何度も散らすので、日の当たる上は白く、底は自分の影で灰色になる。",
+   "img": "",
+   "cap": "明かりを置いた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "底は clip で平らにそろえる",
+   "body": "clip を外すと、いちばん下は高さ -2.63（球が下へ出っぱる）。入れると -0.60 でそろった。積雲らしさは平らな底で決まるので、底の高さは clip の Distance で決める。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "cloudnoise のあとの升の数",
+   "body": "cloud の出口で値の入った升は 568,638 個、cloudnoise のあとは 701,185 個（増えた）。雲の大きさを変えたいときは、cloudnoise ではなく元の球の大きさで決める。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

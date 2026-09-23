@@ -2613,6 +2613,42 @@
        "はじめの値"
       ]
      ]
+    },
+    {
+     "name": "cloud::2.0",
+     "kind": "SOP",
+     "one": "面で囲んだ形を、雲のボリューム（濃さの升目）にする。",
+     "what": "中まで density で満たしたボリュームになる。升の細かさは Uniform Sampling Divs（長い辺をいくつに割るか）、濃さは Density Multiplier。縁のふわふわは後ろの cloudnoise で付ける（実践「もくもくの雲を浮かべる」）。",
+     "params": [
+      [
+       "samplediv",
+       "長い辺の分割数"
+      ],
+      [
+       "densitymultiplier",
+       "濃さの倍率"
+      ]
+     ]
+    },
+    {
+     "name": "cloudnoise",
+     "kind": "SOP",
+     "one": "雲のボリュームの縁を、ノイズで削ってふわふわにする。",
+     "what": "Amplitude で削る深さ、Element Size で渦の大きさ、Octaves で重ねる細かさを決める。中の濃さを削るもので、雲の大きさを変えたいときは元の形を変える。",
+     "params": [
+      [
+       "noiseamount",
+       "削る深さ"
+      ],
+      [
+       "noiseelementsize",
+       "渦の大きさ"
+      ],
+      [
+       "noiseoctaves",
+       "重ねる細かさ"
+      ]
+     ]
     }
    ]
   },
@@ -7580,6 +7616,57 @@
       [
        "copoutput",
        "出力先"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pdg",
+   "label": "PDG（TOPs）で作業を回す",
+   "note": "番号や値を変えながら、同じ処理を何回も回して結果を書き出す道具。",
+   "nodes": [
+    {
+     "name": "topnet",
+     "kind": "OBJ",
+     "one": "PDG（TOP ノード）を置くためのネットワーク。",
+     "what": "中に wedge や ropgeometry などの TOP ノードを並べ、「番号を変えて同じ処理を何回も回す」作業を組む。作ると localscheduler（手元のパソコンで順に処理する係）が1つ入っている。",
+     "params": [
+      [
+       "topscheduler",
+       "既定の係（スケジューラー）"
+      ]
+     ]
+    },
+    {
+     "name": "wedge",
+     "kind": "TOP",
+     "one": "番号や値を少しずつ変えた「作業」を、決めた数だけ作る。",
+     "what": "Wedge Count の数だけ作業ができ、それぞれに番号 @wedgeindex（0, 1, 2, …）が付く。SOP のつまみに @wedgeindex を使う式を入れておくと、作業ごとに違う形になる。値の並びを属性として足すこともできる（実践「PDG で形違いを一度に書き出す」）。",
+     "params": [
+      [
+       "wedgecount",
+       "作業の数"
+      ],
+      [
+       "wedgeattributes",
+       "変える属性の数"
+      ]
+     ]
+    },
+    {
+     "name": "ropgeometry",
+     "kind": "TOP",
+     "one": "作業ごとに、SOP の形をファイルに書き出す。",
+     "what": "SOP Path に書き出すノード、Output File に名前を入れる。名前に `@wedgeindex` を入れないと、全部の作業が同じファイルに上書きして1つしか残らなかった。作業は別の Houdini が保存済みの hip を開いて行うので、Cook の前に保存する。",
+     "params": [
+      [
+       "soppath",
+       "書き出す SOP"
+      ],
+      [
+       "sopoutput",
+       "書き出すファイル名"
       ]
      ]
     }

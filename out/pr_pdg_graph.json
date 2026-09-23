@@ -1,0 +1,325 @@
+{
+  "title": "PDG で形違いを一度に書き出す",
+  "network": "/obj/pdg",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "base",
+      "type": "sphere",
+      "pos": [
+        -8.896,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.5,
+        "rady": 0.35,
+        "radz": 0.42,
+        "rows": 40,
+        "cols": 80
+      }
+    },
+    {
+      "name": "big_lumps",
+      "type": "mountain::2.0",
+      "pos": [
+        -8.896,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.22,
+        "elementsize": 0.55,
+        "offsetx": 0.0,
+        "offsety": 0.0,
+        "rough": 0.45
+      }
+    },
+    {
+      "name": "fine_detail",
+      "type": "mountain::2.0",
+      "pos": [
+        -8.896,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.03,
+        "elementsize": 0.08,
+        "oct": 6,
+        "rough": 0.6
+      }
+    },
+    {
+      "name": "rock_out",
+      "type": "normal",
+      "pos": [
+        -8.896,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rock_0",
+      "type": "file",
+      "pos": [
+        -5.648,
+        5.045
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "file": "D:/Claude/houdini/out/pr_pdg_geo/rock_0.bgeo.sc"
+      }
+    },
+    {
+      "name": "place_0",
+      "type": "xform",
+      "pos": [
+        -5.648,
+        3.916
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": -2.3
+      }
+    },
+    {
+      "name": "rock_1",
+      "type": "file",
+      "pos": [
+        -2.824,
+        4.593
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "file": "D:/Claude/houdini/out/pr_pdg_geo/rock_1.bgeo.sc"
+      }
+    },
+    {
+      "name": "place_1",
+      "type": "xform",
+      "pos": [
+        -2.824,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": -1.15,
+        "tz": 0.35
+      }
+    },
+    {
+      "name": "rock_2",
+      "type": "file",
+      "pos": [
+        0.0,
+        4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "file": "D:/Claude/houdini/out/pr_pdg_geo/rock_2.bgeo.sc"
+      }
+    },
+    {
+      "name": "place_2",
+      "type": "xform",
+      "pos": [
+        0.0,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rock_3",
+      "type": "file",
+      "pos": [
+        2.824,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "file": "D:/Claude/houdini/out/pr_pdg_geo/rock_3.bgeo.sc"
+      }
+    },
+    {
+      "name": "place_3",
+      "type": "xform",
+      "pos": [
+        2.824,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 1.15,
+        "tz": 0.35
+      }
+    },
+    {
+      "name": "rock_4",
+      "type": "file",
+      "pos": [
+        5.648,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "file": "D:/Claude/houdini/out/pr_pdg_geo/rock_4.bgeo.sc"
+      }
+    },
+    {
+      "name": "place_4",
+      "type": "xform",
+      "pos": [
+        5.648,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 2.3
+      }
+    },
+    {
+      "name": "row_of_rocks",
+      "type": "merge",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_rock",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/rock_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "base",
+      "from_output": 0,
+      "to": "big_lumps",
+      "to_input": 0
+    },
+    {
+      "from": "big_lumps",
+      "from_output": 0,
+      "to": "fine_detail",
+      "to_input": 0
+    },
+    {
+      "from": "fine_detail",
+      "from_output": 0,
+      "to": "rock_out",
+      "to_input": 0
+    },
+    {
+      "from": "rock_0",
+      "from_output": 0,
+      "to": "place_0",
+      "to_input": 0
+    },
+    {
+      "from": "rock_1",
+      "from_output": 0,
+      "to": "place_1",
+      "to_input": 0
+    },
+    {
+      "from": "rock_2",
+      "from_output": 0,
+      "to": "place_2",
+      "to_input": 0
+    },
+    {
+      "from": "rock_3",
+      "from_output": 0,
+      "to": "place_3",
+      "to_input": 0
+    },
+    {
+      "from": "rock_4",
+      "from_output": 0,
+      "to": "place_4",
+      "to_input": 0
+    },
+    {
+      "from": "place_0",
+      "from_output": 0,
+      "to": "row_of_rocks",
+      "to_input": 0
+    },
+    {
+      "from": "place_1",
+      "from_output": 0,
+      "to": "row_of_rocks",
+      "to_input": 1
+    },
+    {
+      "from": "place_2",
+      "from_output": 0,
+      "to": "row_of_rocks",
+      "to_input": 2
+    },
+    {
+      "from": "place_3",
+      "from_output": 0,
+      "to": "row_of_rocks",
+      "to_input": 3
+    },
+    {
+      "from": "place_4",
+      "from_output": 0,
+      "to": "row_of_rocks",
+      "to_input": 4
+    },
+    {
+      "from": "row_of_rocks",
+      "from_output": 0,
+      "to": "assign_rock",
+      "to_input": 0
+    }
+  ]
+}

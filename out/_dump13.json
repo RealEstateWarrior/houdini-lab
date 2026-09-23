@@ -1,0 +1,2378 @@
+[
+ {
+  "spec": "sop/cloud",
+  "ok": true,
+  "category": "SOP",
+  "name": "cloud::2.0",
+  "label": "Cloud",
+  "parms": [
+   {
+    "name": "vdb",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "input",
+    "label": "Source",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Polygon Model"
+     ],
+     [
+      "1",
+      "Point Cloud Model"
+     ]
+    ]
+   },
+   {
+    "name": "radiusscale",
+    "label": "Point Radius Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "uniformsamples",
+    "label": "Uniform Sampling",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "max",
+      "Max Axis"
+     ],
+     [
+      "size",
+      "By Size"
+     ]
+    ]
+   },
+   {
+    "name": "samplediv",
+    "label": "Uniform Sampling Divs",
+    "default": [
+     50
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "divsize",
+    "label": "Div Size",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "useworldspaceunits",
+    "label": "Use World Space for Band",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "exteriorband",
+    "label": "Exterior Band",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "interiorband",
+    "label": "Interior Band",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "exteriorbandvoxels",
+    "label": "Exterior Band Voxels",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "interiorbandvoxels",
+    "label": "Interior Band Voxels",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "bandwidth",
+    "label": "Half-Band",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bandwidthvoxels",
+    "label": "Half-Band Voxels",
+    "default": [
+     2.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maxwidth",
+    "label": "Max Half-Width",
+    "default": [
+     100.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "densitymultiplier",
+    "label": "Density Multiplier",
+    "default": [
+     10.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "densityrempa",
+    "label": "Density Remap",
+    "default": 2,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "spatialscale",
+    "label": "Spatial Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "visshapes",
+    "label": "Visualize As Polygons",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "smoothiterations",
+    "label": "Smoothing",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "smoothingvoxelradius",
+    "label": "Voxel Radius",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "fillsourcegeo",
+    "label": "Fill Source",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "sourcerandomseed",
+    "label": "Random Seed",
+    "default": [
+     0.456
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "sourceshapesize",
+    "label": "Shape Size",
+    "default": [
+     0.2
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "sourcescattermultiplier",
+    "label": "Scatter Multiplier",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "sourcenoisemin",
+    "label": "Noise Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "sourcenoisemax",
+    "label": "Noise Max",
+    "default": [
+     3.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "sourcenoisefreq",
+    "label": "Noise Frequency",
+    "default": [
+     6.0,
+     6.0,
+     6.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "sourcenoiseoffset",
+    "label": "Noise Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "addsecondary",
+    "label": "Secondary Shapes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "usescatterattrib",
+    "label": "Use Painted Attrib",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "scatterattrib",
+    "label": "Scatter Attrib",
+    "default": [
+     "scatter"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "secondaryrandomseed",
+    "label": "Random Seed",
+    "default": [
+     0.123
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondaryiterations",
+    "label": "Iterations",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "scatterpoints",
+    "label": "Scatter Points",
+    "default": [
+     150.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondaryshapesize",
+    "label": "Shape Size",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondaryscalemultiplier",
+    "label": "Scale Multiplier",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondarynoisemin",
+    "label": "Noise Min",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondarynoisemax",
+    "label": "Noise Max",
+    "default": [
+     2.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondarynoisefreq",
+    "label": "Noise Frequency",
+    "default": [
+     3.0,
+     3.0,
+     3.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondarynoiseoffset",
+    "label": "Noise Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "secondaryupvectorfalloff",
+    "label": "Up Vector Falloff",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "secondaryupvector",
+    "label": "Up Vector",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "angle",
+    "label": "Angle",
+    "default": [
+     90.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "bias2",
+    "label": "Bias",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "billow",
+    "label": "Billow Offset",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "offset",
+    "label": "Density Offset",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "xaxisprofile",
+    "label": "X Axis Profile",
+    "default": 1,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "yaxisprofile",
+    "label": "Y Axis Profile",
+    "default": 1,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "zaxisprofile",
+    "label": "Z Axis Profile",
+    "default": 1,
+    "kind": "Ramp",
+    "menu": []
+   },
+   {
+    "name": "flatten",
+    "label": "Flatten",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "flattenorigin",
+    "label": "Flatten Origin",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "flattenupvector",
+    "label": "Flatten Up Vector",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "flattentop",
+    "label": "Top Scale",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "flattenbottom",
+    "label": "Bottom Scale",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "flattenoriginhandletop",
+    "label": "Flatten Origin Handle Top",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "flattenoriginhandlebottom",
+    "label": "Flatten Origin Handle Bottom",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "densityrempa1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "densityrempa1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "densityrempa1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "densityrempa2pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "densityrempa2value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "densityrempa2interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "xaxisprofile1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "xaxisprofile1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "xaxisprofile1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "yaxisprofile1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "yaxisprofile1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "yaxisprofile1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   },
+   {
+    "name": "zaxisprofile1pos",
+    "label": "Position",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "zaxisprofile1value",
+    "label": "Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "zaxisprofile1interp",
+    "label": "Interpolation",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "constant",
+      "Constant"
+     ],
+     [
+      "linear",
+      "Linear"
+     ],
+     [
+      "catmull-rom",
+      "Catmull-Rom"
+     ],
+     [
+      "monotonecubic",
+      "Monotone Cubic"
+     ],
+     [
+      "bezier",
+      "Bezier"
+     ],
+     [
+      "bspline",
+      "B-Spline"
+     ],
+     [
+      "hermite",
+      "Hermite"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ },
+ {
+  "spec": "sop/cloudnoise",
+  "ok": true,
+  "category": "SOP",
+  "name": "cloudnoise",
+  "label": "Cloud Noise",
+  "parms": [
+   {
+    "name": "spatialscale",
+    "label": "Spatial Scale",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "folder0",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "noiseamount",
+    "label": "Amplitude",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "noisetype",
+    "label": "Type",
+    "default": [
+     "snoise"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "onoise",
+      "Original Perlin Noise"
+     ],
+     [
+      "snoise",
+      "Sparse Convolution Noise"
+     ],
+     [
+      "anoise",
+      "Alligator Noise"
+     ],
+     [
+      "xnoise",
+      "Simplex Noise"
+     ],
+     [
+      "correctnoise",
+      "Zero Centered Perlin Noise"
+     ]
+    ]
+   },
+   {
+    "name": "noiseoctaves",
+    "label": "Octaves",
+    "default": [
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "noiseelementsize",
+    "label": "Element Size",
+    "default": [
+     0.6
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "noiseelementscale",
+    "label": "Element Scale",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "noiseoffset",
+    "label": "Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "noiserough",
+    "label": "Roughness",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "smoothvalleys",
+    "label": "Smooth Valleys",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "absnoise",
+    "label": "Abs Noise",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "upvectorfalloff",
+    "label": "Up Vector Falloff",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "upvector",
+    "label": "Up Vector",
+    "default": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "upvectorbias",
+    "label": "Up Vector Bias",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "advectnoise",
+    "label": "Advect Noise",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "advectamp",
+    "label": "Amplitude",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "advectelemsize",
+    "label": "Element Size",
+    "default": [
+     0.1
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "advectelemscale",
+    "label": "Element Scale",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "advectoffset",
+    "label": "Offset",
+    "default": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "advectrough",
+    "label": "Roughness",
+    "default": [
+     0.5
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "advectpulselength",
+    "label": "Pulse Length",
+    "default": [
+     0.6
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "time",
+    "label": "Time",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "usenoisemask",
+    "label": "Noise Mask",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "noisemaskmultiplier",
+    "label": "Mask Multiplier",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "noiseattrib",
+    "label": "Noise Attribute",
+    "default": [
+     "noise"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "maskradius",
+    "label": "Point Cloud Radius",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "maskmaxpoints",
+    "label": "Point Cloud Points",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 2
+ },
+ {
+  "spec": "obj/topnet",
+  "ok": true,
+  "category": "OBJ",
+  "name": "topnet",
+  "label": "TOP Network",
+  "parms": [
+   {
+    "name": "cookcontrolssection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "generatestatic",
+    "label": "Generate Static Work Items",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "cookbutton",
+    "label": "Cook Output Node",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "dirtybutton",
+    "label": "Dirty All",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "cancelbutton",
+    "label": "Cancel Cook",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "taskgraphsection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "checkpointformat",
+    "label": "Checkpoint Format",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Python (Deprecated)"
+     ],
+     [
+      "1",
+      "JSON"
+     ]
+    ]
+   },
+   {
+    "name": "taskgraphfile",
+    "label": "Checkpoint File",
+    "default": [
+     "$HIP/$HIPNAME.taskgraph.$F.py"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "savetaskgraph",
+    "label": "Save Checkpoint",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "loadtaskgraph",
+    "label": "Load Checkpoint",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "taskgraphautosave",
+    "label": "Auto-Save",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "taskgraphsaverate",
+    "label": "Checkpoint Rate",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "checkpointfile",
+    "label": "Checkpoint File",
+    "default": [
+     "$HIP/$HIPNAME.checkpoint.json"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "loadcheckpoint",
+    "label": "Load Checkpoint",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "checkpointload",
+    "label": "Load Checkpoint",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Never"
+     ],
+     [
+      "1",
+      "On Scene Load"
+     ]
+    ]
+   },
+   {
+    "name": "checkpointenabled",
+    "label": "Checkpoint Enabled",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "checkpointrate",
+    "label": "Checkpoint Rate",
+    "default": [
+     10
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "savegraphattribs",
+    "label": "Save Graph Attributes to .hip",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "schedulersection",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "topscheduler",
+    "label": "Default Scheduler",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "usedefaultlabel",
+    "label": "Use Default Label",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "defaultlabel",
+    "label": "Default Item Label",
+    "default": [
+     "$OS.`@pdg_index`"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "regenerationtype",
+    "label": "On Node Recook",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Update Work Items and Invalidate Caches"
+     ],
+     [
+      "1",
+      "Update Work Items Only"
+     ],
+     [
+      "2",
+      "Ignore Changes"
+     ]
+    ]
+   },
+   {
+    "name": "evaluationtime",
+    "label": "Evaluation Time",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Network Cook Time"
+     ],
+     [
+      "1",
+      "Global Start Time"
+     ],
+     [
+      "2",
+      "Custom"
+     ]
+    ]
+   },
+   {
+    "name": "customtime",
+    "label": "Custom Time",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "savescenefile",
+    "label": "Save Scene File if Required",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 0
+ },
+ {
+  "spec": "top/wedge",
+  "ok": true,
+  "category": "TOP",
+  "name": "wedge",
+  "label": "Wedge",
+  "parms": [
+   {
+    "name": "workitemorder",
+    "label": "Work Item Order",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "groupbyinput",
+      "Group By Input"
+     ],
+     [
+      "groupbywedge",
+      "Group By Wedge"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_workitemgeneration",
+    "label": "Generate When",
+    "default": 2,
+    "kind": "Menu",
+    "menu": []
+   },
+   {
+    "name": "wedgecount",
+    "label": "Wedge Count",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "seed",
+    "label": "Random Seed",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "preservenum",
+    "label": "Preserve Wedge Numbers",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "exportenvironment",
+    "label": "Export To Environment",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "previewselection",
+    "label": "Overwrite Target Parameter on Work Item Selection",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "captureall",
+    "label": "Capture All",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "restoreall",
+    "label": "Restore All",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "wedgeattributes",
+    "label": "Wedge Attributes",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "createmetadataattributes",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "createwedgecount",
+    "label": "createwedgecount",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "wedgecountattrname",
+    "label": "Wedge Count",
+    "default": [
+     "wedgecount"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "createwedgeindex",
+    "label": "createwedgeindex",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "wedgeindexattrname",
+    "label": "Wedge Index",
+    "default": [
+     "wedgeindex"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "createwedgenum",
+    "label": "createwedgenum",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "wedgenumattrname",
+    "label": "Wedge Num",
+    "default": [
+     "wedgenum"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "createwedgetotal",
+    "label": "createwedgetotal",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "wedgetotalattrname",
+    "label": "Wedge Total",
+    "default": [
+     "wedgetotal"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ },
+ {
+  "spec": "top/ropgeometry",
+  "ok": true,
+  "category": "TOP",
+  "name": "ropgeometry",
+  "label": "ROP Geometry Output",
+  "parms": [
+   {
+    "name": "rop",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "framegeneration",
+    "label": "Evaluate Using",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Single Frame"
+     ],
+     [
+      "1",
+      "Frame Range"
+     ],
+     [
+      "2",
+      "Automatic"
+     ],
+     [
+      "3",
+      "ROP Node Configuration"
+     ]
+    ]
+   },
+   {
+    "name": "useframeoverride",
+    "label": "Override Frame",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "frameoverride",
+    "label": "Override Frame",
+    "default": [
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "f",
+    "label": "Frame Range",
+    "default": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "singletask",
+    "label": "Cook Frames as Single Work Item",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "expandinputs",
+    "label": "Expand Input Files Across Frame Range",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "take",
+    "label": "Render with Take",
+    "default": [
+     "_current_"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "usesoppath",
+    "label": "Use External SOP",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "soppath",
+    "label": "SOP Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "sopoutput",
+    "label": "Output File",
+    "default": [
+     "$HIP/geo/$HIPNAME.$OS.$F.bgeo.sc"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "usefiletag",
+    "label": "Use File Tag",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "filetag",
+    "label": "Output File Tag",
+    "default": [
+     "file/geo"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "xformtype",
+    "label": "Transform",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "none",
+      "None"
+     ],
+     [
+      "world",
+      "Into World Space"
+     ]
+    ]
+   },
+   {
+    "name": "mkpath",
+    "label": "Create Intermediate Directories",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "initsim",
+    "label": "Initialize Simulation OPs",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "alfprogress",
+    "label": "Alfred Style Progress",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "reportnetwork",
+    "label": "Report Network Use",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "saveretry",
+    "label": "Save Retries",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "savebackground",
+    "label": "Save in Background",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_workitemgeneration",
+    "label": "Generate When",
+    "default": 2,
+    "kind": "Menu",
+    "menu": []
+   },
+   {
+    "name": "pdg_cachemode",
+    "label": "Cache Mode",
+    "default": 0,
+    "kind": "Menu",
+    "menu": []
+   },
+   {
+    "name": "pdg_cooktype",
+    "label": "Cook Type",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "1",
+      "In-Process"
+     ],
+     [
+      "2",
+      "Out-of-Process"
+     ],
+     [
+      "3",
+      "Service"
+     ]
+    ]
+   },
+   {
+    "name": "enablepdgservice",
+    "label": "Use ROP Fetch Service",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdgservicename",
+    "label": "Service Name",
+    "default": [
+     "ropfetch"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pdg_servicename",
+    "label": "Service Name",
+    "default": [
+     "ropfetch"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "manageservices",
+    "label": "Manage Services...",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "usereloadpath",
+    "label": "Use Reload Path",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "reloadpath",
+    "label": "Reload Parm Path",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "sethip",
+    "label": "Reset $HIP On Cook",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "ignoreerrors",
+    "label": "Ignore Scene Load Errors",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "unlocktargetrop",
+    "label": "Unlock Target ROP Node",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "folder",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "batchall",
+    "label": "All Frames in One Batch",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "framesperbatch",
+    "label": "Frames per Batch",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "cookwhen",
+    "label": "Cook Batch When",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "All Frames are Ready"
+     ],
+     [
+      "1",
+      "First Frame is Ready"
+     ],
+     [
+      "2",
+      "Fixed Number of Frames are Ready"
+     ],
+     [
+      "3",
+      "Percentage of Frames are Ready"
+     ]
+    ]
+   },
+   {
+    "name": "fixedframecount",
+    "label": "Number of Frames",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "percentframes",
+    "label": "Percentage of Frames",
+    "default": [
+     100.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "setframes",
+    "label": "Automatically Set Missing Frames",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "resumebatch",
+    "label": "Resume Partially Cached Batches",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "logoutput",
+    "label": "Output Log Parsing",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "None"
+     ],
+     [
+      "1",
+      "If Supported by ROP Node"
+     ],
+     [
+      "2",
+      "Always"
+     ]
+    ]
+   },
+   {
+    "name": "uselogformat",
+    "label": "Use Log Format",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "logformat",
+    "label": "Custom Log Format",
+    "default": [
+     "OUTPUT_FILE:(.*);(.*)"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "distribute",
+    "label": "Distributed Sim",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "control",
+    "label": "Control DOP",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "hostname",
+    "label": "Specify Host Using",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Hostname"
+     ],
+     [
+      "1",
+      "IP Address"
+     ]
+    ]
+   },
+   {
+    "name": "usetrackerport",
+    "label": "Custom Tracker Port",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "trackerport",
+    "label": "Custom Tracker Port",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "usewebport",
+    "label": "Custom Web Port",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "webport",
+    "label": "Custom Web Port",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "verbosetracker",
+    "label": "Verbose Tracker Logging",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "slicetype",
+    "label": "Slice Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Particles"
+     ],
+     [
+      "1",
+      "Volumes"
+     ]
+    ]
+   },
+   {
+    "name": "slicecount",
+    "label": "Slice Count",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "slicedivs",
+    "label": "Slice Divisions",
+    "default": [
+     0,
+     0,
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "enableperfmon",
+    "label": "Enable Performance Monitor Logging",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "saveperffile",
+    "label": "Performance File",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "perffile",
+    "label": "Performance File",
+    "default": [
+     "$HIP/$OS.performance.$F.hperf"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "savedebughip",
+    "label": "Save Debug .hip File",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "debughip",
+    "label": "Save Debug .hip File",
+    "default": [
+     "$HIP/$OS.debug.$F.hip"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "debugoutputs",
+    "label": "Report Debug Files as Outputs",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "tprerender",
+    "label": "Pre-Render Script",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "prerender",
+    "label": "Pre-Render Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "lprerender",
+    "label": "Pre-Render Script Language",
+    "default": [
+     "hscript"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "hscript",
+      "Hscript"
+     ],
+     [
+      "python",
+      "Python"
+     ]
+    ]
+   },
+   {
+    "name": "tpreframe",
+    "label": "Pre-Frame Script",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "preframe",
+    "label": "Pre-Frame Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "lpreframe",
+    "label": "Pre-Frame Script Language",
+    "default": [
+     "hscript"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "hscript",
+      "Hscript"
+     ],
+     [
+      "python",
+      "Python"
+     ]
+    ]
+   },
+   {
+    "name": "tpostframe",
+    "label": "Post-Frame Script",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "postframe",
+    "label": "Post-Frame Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "lpostframe",
+    "label": "Post-Frame Script Language",
+    "default": [
+     "hscript"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "hscript",
+      "Hscript"
+     ],
+     [
+      "python",
+      "Python"
+     ]
+    ]
+   },
+   {
+    "name": "tpostwrite",
+    "label": "Post-Write Script",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "postwrite",
+    "label": "Post-Write Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "lpostwrite",
+    "label": "Post-Write Script Language",
+    "default": [
+     "hscript"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "hscript",
+      "Hscript"
+     ],
+     [
+      "python",
+      "Python"
+     ]
+    ]
+   },
+   {
+    "name": "tpostrender",
+    "label": "Post-Render Script",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "postrender",
+    "label": "Post-Render Script",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "lpostrender",
+    "label": "Post-Render Script Language",
+    "default": [
+     "hscript"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "hscript",
+      "Hscript"
+     ],
+     [
+      "python",
+      "Python"
+     ]
+    ]
+   },
+   {
+    "name": "execute",
+    "label": "Save to Disk",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "executebackground",
+    "label": "Save to Disk in Background",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "renderdialog",
+    "label": "Controls...",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "trange",
+    "label": "Valid Frame Range",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "off",
+      "Render Current Frame"
+     ],
+     [
+      "normal",
+      "Render Frame Range"
+     ],
+     [
+      "on",
+      "Render Frame Range Only (Strict)"
+     ]
+    ]
+   },
+   {
+    "name": "topscheduler",
+    "label": "TOP Scheduler Override",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "addjobparms",
+    "label": "Add Job Parms",
+    "default": 0,
+    "kind": "Menu",
+    "menu": []
+   },
+   {
+    "name": "pdg_useschedulewhen",
+    "label": "Use Schedule When",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_schedulewhen",
+    "label": "Schedule When",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pdg_workitemlabel",
+    "label": "Work Item Label",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Use Default"
+     ],
+     [
+      "1",
+      "Inherit from Upstream Item"
+     ],
+     [
+      "2",
+      "Custom Expression"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_workitemlabelexpr",
+    "label": "Label Expression",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pdg_workitempriority",
+    "label": "Work Item Priority",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Inherit from Upstream Item"
+     ],
+     [
+      "1",
+      "Custom Expression"
+     ],
+     [
+      "2",
+      "Node Defines Priority"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_workitempriorityexpr",
+    "label": "Priority Expression",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pdg_commandtype",
+    "label": "Work Item Command",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Use Default"
+     ],
+     [
+      "1",
+      "Custom Script"
+     ],
+     [
+      "2",
+      "Custom Command"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_command",
+    "label": "Custom Command",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 1
+ }
+]

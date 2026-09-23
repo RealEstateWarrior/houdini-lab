@@ -5743,6 +5743,395 @@
         }
       ],
       "anim_cap": "炎の先が、ゆっくり左右に揺れる（48 フレーム＝2 秒）。"
+    },
+    {
+      "id": "cloud",
+      "title": "もくもくの雲を浮かべる",
+      "lede": "大きさの違う球を寄せ集めて雲の大まかな形を作り、底を平らに切る。cloud ノードでボリューム（濃さの升目）にし、cloudnoise で縁を削ると、ふわふわの積雲になる。明かりは強い日差しと青い空の2つ。",
+      "hero": "pr_cloud_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。上は日差しで白く、底は影で灰色の積雲。",
+      "facts": [
+        [
+          "足すノード",
+          "9個（明かり1つ）"
+        ],
+        [
+          "升の分け方",
+          "長い辺を160"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "78.3秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_cloud.hipnc",
+      "tags": [
+        "モデリング",
+        "ボリューム",
+        "雲",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "球を集めて、底を平らにする",
+          "node": "clip",
+          "ui_node": "flat_bottom",
+          "body": "横長の <code>sphere</code>（8 × 3.2 × 5.2）の表面に <code>scatter</code> で 26 個の点をまき、<code>attribwrangle</code> で <strong>上の点ほど大きな pscale</strong> にする。小さな球を <code>copytopoints</code> で並べると、上がもくもくした塊になる。<code>clip</code> の Direction を (0, 1, 0)、Distance を −0.6 にして、高さ −0.6 より下を切り、底を平らにする（本物の積雲も底が平ら）。Direction の向いている側が残る。(0, −1, 0) にすると上が消えて、下のお椀だけが残った。",
+          "img": "pr_cloud_1.png",
+          "cap": "球を寄せ集めた雲の形。",
+          "ui_parm": "dist"
+        },
+        {
+          "title": "ボリュームにする",
+          "node": "cloud",
+          "ui_node": "to_cloud",
+          "body": "<code>cloud</code> ノードにつなぐと、面の内側が濃さ（density）の升目で満たされたボリュームになる。<strong>Uniform Sampling Divs 160</strong>（長い辺を160に割る）、Density Multiplier 3。",
+          "img": "pr_cloud_2.png",
+          "cap": "ボリュームになった雲（まだ縁がのっぺり）。",
+          "ui_parm": "samplediv"
+        },
+        {
+          "title": "ノイズで縁を削る",
+          "node": "cloudnoise",
+          "ui_node": "fluffy_edges",
+          "body": "<code>cloudnoise</code> で、縁の濃さをノイズで削る。<strong>Amplitude 0.45・Element Size 1.2・Octaves 5</strong>。大きな渦から細かい渦まで重なって、縁がふわふわになる。Amplitude を上げるほど、深く削れる。",
+          "img": "pr_cloud_3.png",
+          "cap": "縁がふわふわになった雲。",
+          "ui_parm": "noiseamount"
+        },
+        {
+          "title": "日差しと空の明かり",
+          "node": "cloudnoise",
+          "ui_node": "fluffy_edges",
+          "body": "<code>hlight</code> を Distant（太陽）にして、斜め上から Intensity 4 で当てる。空の青い明かりは弱いドーム光で足す。雲は光を中で何度も散らすので、日の当たる上は白く、底は自分の影で灰色になる。",
+          "img": "",
+          "cap": "明かりを置いた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "底は clip で平らにそろえる",
+          "body": "clip を外すと、いちばん下は高さ -2.63（球が下へ出っぱる）。入れると -0.60 でそろった。積雲らしさは平らな底で決まるので、底の高さは clip の Distance で決める。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "cloudnoise のあとの升の数",
+          "body": "cloud の出口で値の入った升は 568,638 個、cloudnoise のあとは 701,185 個（増えた）。雲の大きさを変えたいときは、cloudnoise ではなく元の球の大きさで決める。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "coins",
+      "title": "コインをばらまく",
+      "lede": "コインを1枚作り、空中にばらばらの向きで何百枚も並べて、RBD（Bullet）で床へ落とす。1枚ずつを packed（まとめた塊）にしておくと、計算がとても軽い。色は金・銀・銅の3つから選ぶ。",
+      "hero": "pr_coins_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 72）。金・銀・銅のコインが散らばる。",
+      "facts": [
+        [
+          "足すノード",
+          "10個（材質2つ）"
+        ],
+        [
+          "コイン",
+          "240枚"
+        ],
+        [
+          "72 フレームの計算",
+          "6.8秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "274.4秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_coins.hipnc",
+      "tags": [
+        "シミュレーション",
+        "RBD",
+        "複製",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "コインを1枚作る",
+          "node": "polybevel",
+          "ui_node": "soft_rim",
+          "body": "<code>tube</code> で半径 1.3 cm・厚さ 1.8 mm の円盤を作り（Columns 40 で縁をなめらかに）、<code>polybevel</code> で縁の角を 0.4 mm 丸める。角が立っていると、光ったときに作り物に見える。",
+          "img": "pr_coins_1.png",
+          "cap": "縁を丸めたコイン1枚。"
+        },
+        {
+          "title": "空中にばらまいて並べる",
+          "node": "copytopoints",
+          "ui_node": "coins",
+          "body": "<code>box</code>（25 × 30 × 25 cm）の表面に、<code>scatter</code> で <strong>240 個</strong>の点をまく。<code>attribwrangle</code> で点ごとに、ばらばらの向き <strong>orient</strong>、金・銀・銅のどれかの色 Cd、横向きの小さな速さ v を付ける。<code>copytopoints</code> でコインを並べ、<strong>Pack and Instance</strong> を入れて1枚ずつを packed の塊にする。Target Attributes に「Apply to: Points」「Attributes: Cd v」を足して、色と速さも移す。",
+          "img": "pr_coins_2.png",
+          "cap": "空中に並んだ 240 枚。",
+          "ui_parm": "pack"
+        },
+        {
+          "title": "床へ落とす",
+          "node": "rbdbulletsolver",
+          "ui_node": "drop",
+          "body": "<code>rbdbulletsolver</code> に packed のコインをつなぎ、<strong>Ground Plane</strong> を入れる。コインは薄いので、<strong>Collision Margin を 0.0005</strong>（0.5 mm）に下げる（床の側の Collision Margin も同じ）。再生すると、コインは落ちて跳ね、転がって止まる。72 フレーム（3 秒）の計算は 6.8 秒。止まった 240 枚のうち 205 枚が平らに寝ていた（面の向きが真上・真下から約25度以内）。",
+          "img": "pr_coins_3.png",
+          "cap": "フレーム 72。床に散らばったコイン。",
+          "ui_parm": "useground"
+        },
+        {
+          "title": "金属の材質を当てる",
+          "node": "merge",
+          "ui_node": "coins_on_table",
+          "body": "コインは <code>principledshader</code> で <strong>Metallic 1・Roughness 0.22</strong>、Base Color を白にして点の色 Cd を使う（金属は Base Color がそのまま映り込みの色になる）。床は濃い木の色。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "薄い物は、Collision Margin で浮く",
+          "body": "Collision Margin が既定の 0.02 のままだと、止まったコインの中心の高さ（真ん中の値）は 28.9 mm。厚さ 1.8 mm のコインが、床から 2 cm 近く浮いて止まった。0.0005 にすると 2.5 mm で、床に寝た。Bullet は形のまわりに余白を付けて当たりを取るので、余白が形より大きいと浮く（大きな箱では目立たない。実験167）。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Pack and Instance を切ると",
+          "body": "切ると、出てくる面は 125,280 枚になり、72 フレームの計算は 10.4 秒だった（packed では 6.8 秒）。packed なら 1 枚のコインが 1 つの塊で、形の数は 240 のまま扱える。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "コインが落ちて跳ね、散らばって止まるまで（72 フレーム＝3 秒）。"
+    },
+    {
+      "id": "letters",
+      "title": "文字を落として割る",
+      "lede": "font で文字を作って押し出し、厚みのある文字にする。rbdmaterialfracture で割っておき、かけらどうしを弱くくっつけて床へ落とすと、当たった所から砕ける。文字ごとに色を変えておくと、どのかけらがどの文字か分かる。",
+      "hero": "pr_letters_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 60）。床に落ちて砕けた文字。",
+      "facts": [
+        [
+          "足すノード",
+          "9個（材質1つ）"
+        ],
+        [
+          "かけら",
+          "69個"
+        ],
+        [
+          "60 フレームの計算",
+          "1.7秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "106.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_letters.hipnc",
+      "tags": [
+        "シミュレーション",
+        "RBD",
+        "破壊",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "文字を作って、厚みを付ける",
+          "node": "attribwrangle",
+          "ui_node": "letter_colors",
+          "body": "<code>font</code> で「HOUDINI」と書き、Font Size 0.5、中央そろえにする。<code>polyextrude</code> で <strong>Distance 0.12</strong> 押し出し、<strong>Output Back</strong> を入れて裏も閉じる（中の詰まった文字になる）。<code>attribwrangle</code>（Primitives）で、左から右へ色相を回して、文字ごとに色を変える。",
+          "img": "pr_letters_1.png",
+          "cap": "厚みのある7文字。"
+        },
+        {
+          "title": "コンクリートのように割っておく",
+          "node": "rbdmaterialfracture",
+          "ui_node": "crack",
+          "body": "<code>rbdmaterialfracture</code> の Material Type を <strong>Concrete</strong> にする。文字の中に点が散らばり、ごつごつした 69 個のかけらに割れる。右の出口のつながり（Glue）には <code>attribwrangle</code>（Primitives）をつなぎ、<strong>strength</strong> を 4 に弱めておく。強いままだと、落ちても割れずに文字の形のまま転がる。",
+          "img": "pr_letters_2.png",
+          "cap": "69 個のかけら（見た目はまだ1つ）。",
+          "ui_parm": "materialtype"
+        },
+        {
+          "title": "床へ落とす",
+          "node": "rbdbulletsolver",
+          "ui_node": "drop",
+          "body": "<code>xform</code> で文字を 1.3 m 持ち上げ、少し傾ける。<code>rbdbulletsolver</code> の左にかけら、真ん中に弱めたつながりをつなぎ、Ground Plane を入れる。<strong>Collision Margin は 0.002</strong>（小さなかけらが浮かないように）。再生すると、斜めに落ちた文字の、先に当たった角から砕ける。60 フレームの計算は 1.7 秒。",
+          "img": "pr_letters_3.png",
+          "cap": "フレーム 60。砕けて散らばった文字。",
+          "ui_parm": "margin"
+        },
+        {
+          "title": "材質を当てる",
+          "node": "material",
+          "ui_node": "assign_letters",
+          "body": "<code>principledshader</code> の Base Color を白にして、面の色 Cd（文字ごとの色）を使う。割れた断面も同じ色になる。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "つながりが強いと、割れずに転がる",
+          "body": "strength 4 では、止まったかけらの散らばりは 横 3.11 m・奥行き 2.34 m。1000 にすると 横 2.43 m・奥行き 0.88 m。つながりが強いと、文字は形を保ったまま倒れるだけになる。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "文字が落ちて、床に当たって砕けるまで（60 フレーム）。"
+    },
+    {
+      "id": "pdg",
+      "title": "PDG で形違いを一度に書き出す",
+      "lede": "石の作り方を1つ組み、乱数のずらしを「wedge の番号」で変える式にしておく。TOP ネットワークの wedge で番号 0〜4 の5つの作業を作り、ropgeometry で1つずつファイルに書き出す。手で5回やり直す代わりに、1回の実行で5個の石ができる。",
+      "hero": "pr_pdg_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。1回の実行で書き出した、形の違う5つの石。",
+      "facts": [
+        [
+          "足すノード",
+          "石4個・TOP 2個・読み込み10個"
+        ],
+        [
+          "書き出し",
+          "5個・2.5秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "82.0秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_pdg.hipnc",
+      "tags": [
+        "PDG",
+        "TOPs",
+        "ツール",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "石の作り方を組み、ずらしを番号の式にする",
+          "node": "normal",
+          "ui_node": "rock_out",
+          "body": "つぶれた <code>sphere</code> に <code>mountain</code> を2つ重ねて石にする（実践「岩を作る」と同じ考え方）。1つ目の mountain の <strong>Offset</strong>（ノイズをずらす量）に、式 <strong>@wedgeindex * 7.31</strong> を入れる。@wedgeindex は、あとで PDG が作る作業の番号（0, 1, 2, …）。番号が変わるとノイズの場所がずれて、別の形の石になる。PDG の外で見ると番号は 0 なので、今は0番の石が見えている。",
+          "img": "pr_pdg_1.png",
+          "cap": "0番の石。",
+          "ui_parm": "offset"
+        },
+        {
+          "title": "wedge で番号を作り、1つずつ書き出す",
+          "node": "ropgeometry",
+          "ui_node": "write_rock",
+          "body": "<code>topnet</code>（TOP ネットワーク）の中に <code>wedge</code> を置き、<strong>Wedge Count を 5</strong> にする。番号 0〜4 の5つの「作業」ができる（属性は足さなくてよい。番号 @wedgeindex は自動で付く）。後ろに <code>ropgeometry</code> をつなぎ、SOP Path に石の最後のノード、Output File に <strong>$HIP/pr_pdg_geo/rock_`@wedgeindex`.bgeo.sc</strong> と書く（番号がファイル名に入る）。ropgeometry を右クリック → Cook Node で実行すると、5 個のファイルが 2.5 秒で書き出された。",
+          "img": "",
+          "cap": "",
+          "ui_parm": "sopoutput"
+        },
+        {
+          "title": "書き出した石を並べて読み込む",
+          "node": "merge",
+          "ui_node": "row_of_rocks",
+          "body": "<code>file</code> を 5 個置いて、書き出した bgeo.sc をそれぞれ読み込み、<code>xform</code> で横に並べる。同じ作り方から、形の違う石が並ぶ。",
+          "img": "pr_pdg_3.png",
+          "cap": "5 個の違う石。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "ファイル名に番号を入れないと、上書きされる",
+          "body": "Output File を番号なしの rock.bgeo.sc にして実行すると、5つの作業が同じ名前に書き、残ったファイルは 1 個だった。<code>`@wedgeindex`</code> を名前に入れて、作業ごとに別のファイルにする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "実行する前に hip を保存する",
+          "body": "ropgeometry の作業は、裏で別の Houdini が起動し、ディスクに保存された hip を開いて行う。hip を一度も保存しないまま Cook すると、エラーも出ずに1つも書き出されなかった。変えたら保存してから Cook する。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "書き出したファイルの大きさ",
+          "body": "5つの bgeo.sc は 157・157・158・158・157 KB。形が違っても、点と面の数は同じなので大きさはほぼそろう。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "snowman",
+      "title": "雪だるまを作る",
+      "lede": "大・中・小の3つの雪玉を少しめり込ませて重ね、mountain で手で固めたようなでこぼこを付ける。腕は曲がった線に太さを付けた枝、目とボタンは炭、鼻はにんじん。雪の材質は Subsurface（光が中で散る）を入れると雪らしくなる。",
+      "hero": "pr_snowman_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。やわらかく光る雪の玉と、枝の腕。",
+      "facts": [
+        [
+          "足すノード",
+          "19個（材質4つ）"
+        ],
+        [
+          "高さ",
+          "1.32 m"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "384.1秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_snowman.hipnc",
+      "tags": [
+        "モデリング",
+        "材質",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "雪玉を3つ重ねる",
+          "node": "mountain",
+          "ui_node": "hand_packed",
+          "body": "<code>sphere</code> を3つ（半径 34・25・17 cm、少しつぶす）作り、上の玉が下の玉に少しめり込む高さに置く。<code>merge</code> でまとめ、<code>mountain</code> で <strong>Height 0.018・Element Size 0.12</strong> の浅いでこぼこを付ける。手で固めた雪玉の、ゆるいでこぼこになる。",
+          "img": "pr_snowman_1.png",
+          "cap": "でこぼこの付いた3つの雪玉。"
+        },
+        {
+          "title": "枝の腕を付ける",
+          "node": "polywire",
+          "ui_node": "twig_thickness",
+          "body": "Detail の <code>attribwrangle</code> で、左右の腕を折れ線で描く。付け根から外へ伸ばしながら少し上げ、<code>sin</code> で小さく曲げ、先の手前から小枝を1本分ける。<code>polywire</code>（Radius 0.012）で線に太さを付けると枝になる。",
+          "img": "pr_snowman_2.png",
+          "cap": "左右の枝の腕。"
+        },
+        {
+          "title": "炭の目とボタン、にんじんの鼻",
+          "node": "merge",
+          "ui_node": "face",
+          "body": "Detail の <code>attribwrangle</code> で、目2つとボタン3つの位置を、雪玉の中心から前へ半径ぶん出した所に置く。小さくつぶした <code>sphere</code> を <code>copytopoints</code> で並べて炭にする。鼻は <code>tube</code> の片方の半径を 0 にした円すい（長さ 14 cm）を前へ向けて刺す。",
+          "img": "pr_snowman_3.png",
+          "cap": "顔と、胸のボタン。"
+        },
+        {
+          "title": "雪の材質（Subsurface）",
+          "node": "merge",
+          "ui_node": "snowman",
+          "body": "雪は <code>principledshader</code> で白く、<strong>Subsurface 0.6・Subsurface Color を青白く・Subsurface Distance 0.05</strong>。光が表面の下へ入って散るので、影の縁がやわらかく青白くなり、石膏のような硬さが消える。枝・炭・にんじんは普通の材質。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "でこぼこは浅く",
+          "body": "mountain の Height を 0.018 から 0.08 にすると、いちばん上の高さが 1.321 m から 1.336 m に変わり、0.08 は、いちばん小さな玉（半径 0.17 m）の半分近い深さ。でこぼこの深さは、玉の大きさと比べて決める。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }
