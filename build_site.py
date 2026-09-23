@@ -1318,6 +1318,12 @@ DONE = [
      "shots": ["196_open.png"],
      "title": "vdbreshapesdf の Open は箱の角を r より少し大きく丸める — Close も凸な箱を少しだけ削る",
      "note": "Open は箱の角を r より1〜3割大きく丸める。Close も凸な箱を少し削る"},
+    {"no": "197", "anchor": "exp197",
+     "tags": ["VDB", "SDF", "モデリング"],
+     "log": "log_pm", "thumb": "197_band.png",
+     "shots": ["197_band.png"],
+     "title": "SDF の帯を 25 升に広げると、vdbreshapesdf の Close は箱をほとんど削らなくなる — Open の丸みはかえって大きくなる",
+     "note": "帯を25升に広げるとCloseはほぼ削らない。Openの丸みは逆に大きく"},
 ]
 
 PLANNED = []

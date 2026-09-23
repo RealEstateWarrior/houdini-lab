@@ -9551,6 +9551,58 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 197 ===================== -->
+    <article class="entry entry--current" id="exp197">
+      <div class="badge">197</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>SDF の帯を 25 升に広げると、vdbreshapesdf の Close は箱をほとんど削らなくなる — Open の丸みはかえって大きくなる</h2>
+        <p class="path">examples/197_vdb_band.py &nbsp;·&nbsp; 帯を25升に広げるとCloseはほぼ削らない。Openの丸みは逆に大きく</p>
+
+        <div class="prose">
+          <p><a href="#exp196">実験196</a> と同じ 1 × 1 × 1 の箱（Voxel Size 0.01）で、vdbfrompolygons の Exterior Band Voxels・Interior Band Voxels を既定の 3 から 25 に広げ、vdbreshapesdf の Open・Close を Offset 5・10・20 升でかけ直した。</p>
+          <p>**Close の削れは小さくなった。**帯 3 升では -0.37%・-0.75%・-1.16%、帯 25 升では -0.18%・-0.27%・-0.40%（Offset 5・10・20 の順）。0 にはならず、Offset が大きいほど少し削れる。</p>
+          <p>**Open は、帯を広げるとかえって多く削れた。**体積は帯 3 升で 0.9890・0.9666・0.8872、帯 25 升で 0.9870・0.9619・0.8802（式 0.9937・0.9756・0.9077）。同じ体積になる丸みの半径は帯 25 升で 0.072・0.126・0.230（r の 1.45〜1.15 倍）。帯が狭いときは、帯の外の情報が無いことで削りが途中で止まっていたとみられるが、確かめていない。</p>
+          <p>**時間は帯 25 升のほうがかかった**（1 回 1.0〜2.8 秒。帯 3 升では 0.7〜1.1 秒）。</p>
+        </div>
+
+        <p class="label">帯の幅・Operation・Offset と体積</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="197_band.png" alt="Close は帯 25 升（青）で 1 に近づく。Open は帯 25 升（緑）" loading="lazy" decoding="async"></div>
+            <figcaption>Close は帯 25 升（青）で 1 に近づく。Open は帯 25 升（緑）のほうが式（点線）から遠い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>帯（升）</th><th>Operation</th><th>Offset（升）</th><th>r</th><th>体積</th><th>式</th><th>同じ体積の丸み半径</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td>open</td><td class="num">5</td><td class="num">0.05</td><td class="num">0.988964</td><td class="num">0.993729</td><td class="num">0.0666</td><td class="num">0.732</td></tr>
+              <tr><td class="num">3</td><td>open</td><td class="num">10</td><td class="num">0.1</td><td class="num">0.966629</td><td class="num">0.975587</td><td class="num">0.1175</td><td class="num">0.805</td></tr>
+              <tr><td class="num">3</td><td>open</td><td class="num">20</td><td class="num">0.2</td><td class="num">0.887152</td><td class="num">0.907705</td><td class="num">0.2226</td><td class="num">0.887</td></tr>
+              <tr><td class="num">3</td><td>close</td><td class="num">5</td><td class="num">0.05</td><td class="num">0.996274</td><td class="num">1.000000</td><td class="num muted">—</td><td class="num">0.727</td></tr>
+              <tr><td class="num">3</td><td>close</td><td class="num">10</td><td class="num">0.1</td><td class="num">0.992465</td><td class="num">1.000000</td><td class="num muted">—</td><td class="num">0.829</td></tr>
+              <tr><td class="num">3</td><td>close</td><td class="num">20</td><td class="num">0.2</td><td class="num">0.988423</td><td class="num">1.000000</td><td class="num muted">—</td><td class="num">1.095</td></tr>
+              <tr><td class="num">25</td><td>open</td><td class="num">5</td><td class="num">0.05</td><td class="num">0.987034</td><td class="num">0.993729</td><td class="num">0.0723</td><td class="num">1.031</td></tr>
+              <tr><td class="num">25</td><td>open</td><td class="num">10</td><td class="num">0.1</td><td class="num">0.961931</td><td class="num">0.975587</td><td class="num">0.1258</td><td class="num">1.346</td></tr>
+              <tr><td class="num">25</td><td>open</td><td class="num">20</td><td class="num">0.2</td><td class="num">0.880163</td><td class="num">0.907705</td><td class="num">0.2299</td><td class="num">1.749</td></tr>
+              <tr><td class="num">25</td><td>close</td><td class="num">5</td><td class="num">0.05</td><td class="num">0.998184</td><td class="num">1.000000</td><td class="num muted">—</td><td class="num">1.108</td></tr>
+              <tr><td class="num">25</td><td>close</td><td class="num">10</td><td class="num">0.1</td><td class="num">0.997333</td><td class="num">1.000000</td><td class="num muted">—</td><td class="num">1.589</td></tr>
+              <tr><td class="num">25</td><td>close</td><td class="num">20</td><td class="num">0.2</td><td class="num">0.996029</td><td class="num">1.000000</td><td class="num muted">—</td><td class="num">2.833</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Close で凸な形を削りたくないなら、SDF の帯を Offset より広く。</strong>それでも 0.2〜0.4% は削れる。</li>
+          <li><strong>Open の丸みは、帯を広げると r の 1.15〜1.45 倍になる（小さい丸みほど倍率が大きい）。</strong>狙いの半径が要るなら polybevel（<a href="#exp152">実験152</a>）。</li>
+          <li><strong>帯を広げると時間が増える。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
