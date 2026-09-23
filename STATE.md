@@ -1,15 +1,21 @@
 # STATE — 新しいセッションはまずこれだけ読む
 
-最終更新: 2026-09-22 18:30（実験180・実践36本・ノード375件・用語403語・効率化48項目）
+最終更新: 2026-09-23（実験199・実践36本・ノード375件・用語412語・効率化50項目）
 
 ## いまの状態
 
-- 実験 001〜180 完了。振り返り点検は 180（151〜179 を全部流し直し、時間以外は全部一致。examples/180_audit.py）まで済み、次は 210
-  （点検の番号は 030・060・090・121・150・180）。Artifact は 150 時点のまま（今日の作業の最後にまとめて出し直す）
+- 実験 001〜199 完了。振り返り点検は 180（151〜179 を全部流し直し、時間以外は全部一致。examples/180_audit.py）まで済み、次は 210
+  （点検の番号は 030・060・090・121・150・180）。Artifact は 150 時点のまま（刷新と 151〜199 は未反映。出し直しはユーザーの確認を取ってから）
 - **2026-09-22 見た目の刷新をサイトに当てた（17a74ea）**: tools_redesign_2026_09_22.py。白黒＋青（--flag）とコーラル（--coral、AI だけ）、
   ライト/ダーク（右上の自動・明・暗）、フォントは Schibsted Grotesk + Zen Kaku Gothic New、上のバーは4つの見出し＋区分のタブの列（.subnav。
   降りてくるパネルは display:none）、ホーム冒頭は動く灰色の帯（.band。検索窓・AI・新着の実験8件の重なったカード）、
   区画の題は英語＋日本語、バージョンと件数はホームの最後（.site-facts）。参考は Apple・Superlist・landsolution・チケプラTrade
+- 181〜199 の要点: pcfind＝nearpoints、pcfilter は重み付き平均（重みの式は不明）/ Bullet Substeps で沈み込みが決まる /
+  mpmsource の粒数＝体積÷Separation³ / smooth の縮み 1/(1+S·L^q/C(2q,q))（間隔が不ぞろいだと粗い側が縮む）/ hairgen＝Density×面積 /
+  USD：Point Instancer がいちばん小さい / 球のへこみ sin²(Δ/2) / polyextrude の Inset と角錐台 / popsource の Rate と Life×fps−1/Substeps /
+  vdbreshapesdf：Dilate・Erode は Offset×升、Open は辺を円弧で丸め半径は Offset×升＋約3升（帯によらない）、Close は帯を広げると削りが減る
+  - ノードは nodes_notes.py の MORE、用語は gloss_add_11.py
+  - 光線で断面を測る型: hou.Geometry.intersect で点を取り、numpy で円を当てはめる（examples/198_vdb_open_arc.py）
 - 151〜179 の要点: sphere の測地球 / polybevel / neighbourcount とオイラー標数 / polyfill は奇数の穴を四角で塞がない / scatter density /
   polywire / voronoifracture（relax で種が壁へ）/ trail / uvlayout / attribtransfer の (1−t²)² / subdivide の crease = 回数 /
   vellumconstraints の本数 / vdbfromparticles / POP 落下（生まれたフレームで1ステップ）/ popdrag は √(g/k) / RBD の Padding /

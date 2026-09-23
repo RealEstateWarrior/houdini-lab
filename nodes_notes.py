@@ -66,6 +66,27 @@ NOTES = {
 }
 
 
+# 実験181〜199 の分。すでにある名前には後ろへ足す。
+MORE = {
+    "attribwrangle": ("近くの点を探すなら pcfind と nearpoints は同じ結果・同じ速さ。pcopen + pcfilter は約1.6倍遅く、距離で重みを付けた平均になる（重みの形は点の並びしだいで、式は分からなかった）（実験181・182）。", ["181", "182"]),
+    "rbdbulletsolver": ("沈み込みは Bullet Substeps で決まる。1 だと 0.38 めり込んで 0.06 沈んだまま、既定 10 でも当たった瞬間 0.005 沈み、50 でほぼ 0。時間はほぼ変わらない（実験183）。", ["183"]),
+    "mpmsource": ("箱に詰める粒は 体積 ÷ Particle Separation³ 個。pscale には Separation そのものが入る（球で見せると隣と重なる）。Jitter 0 では面の上にも並び (1/s + 1)³ 個（実験184）。", ["184"]),
+    "smooth": ("縮み方は r = 1/(1 + Strength·L^q/C(2q, q))（L = 2(1 − cos(2π/点の数))、q は Filter Quality）で、36 通り6桁一致。Strength をいくら上げてもゼロまでは縮まず、Filter Quality を上げるほど形を保つ。点が等間隔なら3つの Method は同じで、開いた線の端は Constrained Boundary（既定）で止まる。点の間隔がそろわないと粗い側を大きく縮め、Method を変えても直らない（実験185〜187）。", ["185", "186", "187"]),
+    "hairgen::2.0": ("毛の本数は Density × 面積。1本は Segments + 1 点で、長さは Length ちょうど（実験188）。", ["188"]),
+    "pack": ("箱 100 個を USD にすると、パックしなければメッシュ 1 つ、Point Instancer で 6 プリム、Xforms で 202 プリム。1 万個では Point Instancer 0.32 MB に対し Native Instances 4.6 倍、Unpack 7.4 倍の大きさ（実験189・190）。", ["189", "190"]),
+    "sphere": ("Polygon Mesh の球のいちばん深いへこみは sin²(Δ/2)（Δ は隣の行の角度）。分割を倍にするたび 1/4 になり、平均はその 0.56 倍（実験191）。", ["191"]),
+    "polyextrude": ("Inset は上の面を縁から i だけ内側へ寄せ、上の面の辺は 1 − 2i。体積は角錐台の式どおり。i ≥ 0.5 で四角錐になり、それ以上は裏返らず上の点が重なる（実験192）。", ["192"]),
+    "popsource": ("Constant Birth Rate は1秒あたり。端数の粒はフレームごとに運で決まる（Rate 10 で 2 秒 27 粒）。数えられるフレームは Life × fps − 1/Substeps で、0.5 秒の粒は Substeps 1 で 11 フレーム（実験193・194）。", ["193", "194"]),
+    "vdbreshapesdf": ("Dilate・Erode は面を Offset × 升の大きさだけ押し出す（引っ込める）。Iterations は効かない。Open・Close は球をほぼ変えない。箱の角では、Open は辺を円弧で丸め、半径は Offset × 升より約 3 升大きい（帯の幅によらない）。Close は凸な箱も少し削り、帯を 25 升に広げると削れは 0.2〜0.4% まで減る（実験195〜199）。", ["195", "196", "197", "198", "199"]),
+    "vdbfrompolygons": ("箱を Open で丸めたときの体積は、帯 3 升と 6 升で違い、6 升以上では同じだった。広げるほど時間は増える（実験197・199）。", ["197", "199"]),
+}
+for _k, (_t, _e) in MORE.items():
+    if _k in NOTES:
+        NOTES[_k] = (NOTES[_k][0] + " " + _t, sorted(set(NOTES[_k][1]) | set(_e)))
+    else:
+        NOTES[_k] = (_t, _e)
+
+
 def apply(groups):
     by_name = {}
     for g in groups:
