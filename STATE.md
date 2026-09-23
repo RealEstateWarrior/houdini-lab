@@ -12,7 +12,7 @@
   区画の題は英語＋日本語、バージョンと件数はホームの最後（.site-facts）。参考は Apple・Superlist・landsolution・チケプラTrade
 - **2026-09-23 hip**: 091〜201 に out/NNN_scene.hipnc とノードの画 NNN_graph.png を付けた（examples/hip_export.py。台本を流し直し、out/ への書き込みは逃がす）。記事には build_site が自動で「シーンファイル」と「ノードのつなぎ方を見る」を差し込む。**実践・実験には必ず hip とノードの画を付け、初心者向けに書く**
 - **2026-09-23 メニュー**: ハンバーガーに実践のサムネイル8枚（MENU_GUIDES）と入口カード
-- 202（焚き火を速く回す設定）は台本 examples/202_pyro_campfire_cost.py だけある。制作1回目は MetaHuman の Groom（ユーザーの指示待ち）
+- 202（焚き火を速く回す設定）は 2026-09-24 に公開済み（Voxel 0.02→0.04 で5.1倍速く高さの差3%。reports_202.py）。制作1回目は MetaHuman の Groom（ユーザーの指示待ち）
 - **2026-09-23 不具合直し**: 本文の別編への実験リンクはビルド時に向け直す（retarget_exp_anchors）。make_entry.py がレポートの `**太字**` を <strong> にする（093〜199 の107本が記号のまま出ていた）。GitHub 版に description・OGP・アイコン・sitemap.xml・robots.txt。実験196 に訂正
 - 181〜199 の要点: pcfind＝nearpoints、pcfilter は重み付き平均（重みの式は不明）/ Bullet Substeps で沈み込みが決まる /
   mpmsource の粒数＝体積÷Separation³ / smooth の縮み 1/(1+S·L^q/C(2q,q))（間隔が不ぞろいだと粗い側が縮む）/ hairgen＝Density×面積 /

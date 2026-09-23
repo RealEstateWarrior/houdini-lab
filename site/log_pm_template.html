@@ -9691,6 +9691,72 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 203 ===================== -->
+    <article class="entry entry--current" id="exp203">
+      <div class="badge">203</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>氷の入ったグラスを Karma で撮ると、サンプル1つあたり不透明の 6 倍の時間がかかる — 重ねた水と氷は +27% だけ。16 サンプル＋ノイズ除去なら約 3 分</h2>
+        <p class="path">examples/203_karma_glass_cost.py &nbsp;·&nbsp; 透明な物はサンプル1つあたり6倍。16サンプル＋ノイズ除去で</p>
+
+        <div class="prose">
+          <p><strong>課題: 実践「氷の入ったグラスの水」を 1280×720・96 <button class="term" data-term="サンプル">サンプル</button>で撮ろうとしたら、25 分たっても終わらなかった。何が時間を食っているのか。どうすれば短くなるか。</strong></p>
+          <p>グラス（厚い底の断面を revolve）・水（内側に 0.2 mm すき間）・氷3つを、実践と同じ撮り方（暗い幕・キー・リム・ドーム）で、480×270・最大 16 サンプルに下げて1枚ずつ撮り、時間を測った（1 枚目は起動の分を捨てた）。<button class="term" data-term="Karma">Karma</button> の既定の決め方は Convergence Mode = Variance（画素ごとに、ざらつきが 0.01 より小さくなったらサンプルを打ち切る。最小 1・最大はサンプル数）。</p>
+          <p><strong>効いているのは、サンプル数を増やしたときの伸び方。</strong>不透明にした場面は 16 サンプルで 26.6 秒・64 サンプルで 66.3 秒、透明な場面は 38.4 秒・278.8 秒。サンプルを 1 増やすごとに、不透明は 0.83 秒、透明は 5.01 秒（6.1 倍）増えた。不透明な所は途中でざらつきが下がって打ち切られ、屈折した所は最大まで回っていると考えられるが、画素ごとのサンプル数は確かめていない。</p>
+          <p><strong>1 枚ごとの準備の時間は約 13 秒。</strong>不透明の 2 点を結んだ線の、サンプル 0 の所の値。小さな画で試すときは、この分が大半になる。</p>
+          <p><strong>重ねた物の数は、あまり効かない。</strong>16 サンプルで、ガラスだけ 30.2 秒、＋水 35.2 秒、＋氷 38.4 秒（ガラスだけの 1.27 倍）。氷だけ不透明にすると 36.6 秒、水とガラスのすき間を 0 にしても 36.3 秒で、ほとんど変わらない。</p>
+          <p><strong>屈折の回数の上限（Refraction Limit、既定 4）は少し効く。</strong>2 で 30.8 秒（20% 短い）、8 で 38.5 秒。明かりを 1/4 に弱めても 30.9 秒で、19% しか縮まない。</p>
+          <p><strong>画素の数には比例する。</strong>960×540（4 倍の画素）・16 サンプルは 119.5 秒で、準備の時間を除くと 480×270 の 4.2 倍。</p>
+          <p><strong>見積もり: 1280×720・96 サンプルは約 57 分。</strong>（5.01 秒 × 96 × 画素 7.1 倍 ＋ 準備）。25 分で終わらなかったのと合う。16 サンプルならおよそ 3 分で、ざらつきは<button class="term" data-term="ノイズ">ノイズ</button>除去（OIDN）で消す。</p>
+        </div>
+
+        <p class="label">480×270・16 サンプルで撮った画</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="203_compare.png" alt="左から 透明・不透明・Refraction Limit 2。かっこは撮るのにかか" loading="lazy" decoding="async"></div>
+            <figcaption>左から 透明・不透明・Refraction Limit 2。かっこは撮るのにかかった秒。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">サンプル数と時間</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="203_spp.png" alt="透明な場面は、サンプルを増やすと不透明の6倍の割合で時間が延びる。" loading="lazy" decoding="async"></div>
+            <figcaption>透明な場面は、サンプルを増やすと不透明の6倍の割合で時間が延びる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>3つとも不透明</td><td class="num">26.6</td></tr>
+              <tr><td>ガラスだけ</td><td class="num">30.2</td></tr>
+              <tr><td>ガラス＋水</td><td class="num">35.2</td></tr>
+              <tr><td>ガラス＋水＋氷</td><td class="num">38.4</td></tr>
+              <tr><td>↑ Refraction Limit 2</td><td class="num">30.8</td></tr>
+              <tr><td>↑ Refraction Limit 8</td><td class="num">38.5</td></tr>
+              <tr><td>↑ 氷だけ不透明</td><td class="num">36.6</td></tr>
+              <tr><td>↑ 水とガラスのすき間 0</td><td class="num">36.3</td></tr>
+              <tr><td>↑ 明かりを 1/4</td><td class="num">30.9</td></tr>
+              <tr><td>不透明＋明かり 1/4</td><td class="num">21.7</td></tr>
+              <tr><td>不透明・64 サンプル</td><td class="num">66.3</td></tr>
+              <tr><td>透明・64 サンプル</td><td class="num">278.8</td></tr>
+              <tr><td>透明・960×540</td><td class="num">119.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>透明な物を撮るときは、サンプル数を上げない。</strong>サンプル1つあたり、不透明の 6 倍の時間がかかった。16 サンプルにしてノイズ除去で仕上げる。</li>
+          <li><strong>透明な物を重ねたこと（水・氷）は、時間をあまり増やさない（+27%）。</strong>すき間の有無も時間には効かなかった。</li>
+          <li><strong>Refraction Limit を 4 → 2 にすると 20% 短い。</strong>それ以上減らしたいときの手。</li>
+          <li><strong>試し撮りの小さな画では、1 枚あたり約 13 秒の準備が大半になる。</strong>比べるときは、サンプル数を2通り撮って差を見る。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

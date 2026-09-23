@@ -1,0 +1,61 @@
+{
+ "res": [
+  480,
+  270
+ ],
+ "spp": 16,
+ "rows": [
+  {
+   "case": "glass",
+   "sec": 30.2
+  },
+  {
+   "case": "glass_water",
+   "sec": 35.2
+  },
+  {
+   "case": "full",
+   "sec": 38.39
+  },
+  {
+   "case": "refr2",
+   "sec": 30.75
+  },
+  {
+   "case": "refr8",
+   "sec": 38.48
+  },
+  {
+   "case": "opaque_ice",
+   "sec": 36.56
+  },
+  {
+   "case": "nogap",
+   "sec": 36.3
+  },
+  {
+   "case": "opaque_all",
+   "sec": 26.6
+  },
+  {
+   "case": "opaque_dim",
+   "sec": 21.71
+  },
+  {
+   "case": "full_dim",
+   "sec": 30.94
+  },
+  {
+   "case": "opaque_spp64",
+   "sec": 66.29
+  },
+  {
+   "case": "full_spp64",
+   "sec": 278.8
+  },
+  {
+   "case": "full_960_spp16",
+   "sec": 119.55
+  }
+ ]
+}
