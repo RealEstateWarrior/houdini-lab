@@ -9511,7 +9511,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <div class="body">
         <span class="chip chip--pm">モデリング</span>
         <h2>vdbreshapesdf の Open は箱の角を r より少し大きく丸める — Close も凸な箱を少しだけ削る</h2>
-        <p class="path">examples/196_vdb_open_box.py &nbsp;·&nbsp; Open は箱の角を r より1〜3割大きく丸める。Close も凸な箱を少し削る</p>
+        <p class="path">examples/196_vdb_open_box.py &nbsp;·&nbsp; Open は箱の角を r より大きく丸める（約3升の足し分。実験198で訂正）。Close も凸な箱を少し削る</p>
 
         <div class="prose">
           <p>1 × 1 × 1 の箱を vdbfrompolygons（Voxel Size 0.01）で SDF にし、vdbreshapesdf の Open・Close を Offset 5・10・20 升（r = 0.05・0.1・0.2）でかけた。面に戻す前の元の体積は 1.000000。</p>
