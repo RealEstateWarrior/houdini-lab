@@ -1,0 +1,100 @@
+{
+ "id": "glass",
+ "title": "窓ガラスを割る",
+ "lede": "板ガラスに球をぶつけて割る。rbdmaterialfracture を Glass にして当たる点を渡すと、そこから放射状と同心円のひびが入る。枠に触れている破片だけ動かないようにしておくと、真ん中が砕けて飛び、外側の破片が枠に残る。",
+ "hero": "pr_glass_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム 9）。当たった所から放射状に砕けた破片が飛ぶ。",
+ "facts": [
+  [
+   "足すノード",
+   "18個（材質2つ）"
+  ],
+  [
+   "破片",
+   "119個"
+  ],
+  [
+   "48 フレームの計算",
+   "0.8秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "68.8秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_glass.hipnc",
+ "tags": [
+  "シミュレーション",
+  "RBD",
+  "破壊",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "ガラス板と、当たる点を置く",
+   "node": "merge",
+   "ui_node": "preview_pane",
+   "body": "<code>box</code> で 1 × 1.4 m、厚さ 8 mm の板を立てる（窓1枚ぶん）。<code>add</code> で点を1つだけ作り、球が当たる所（0.12, 0.9, 0）に置く。ひびはこの点から広がる。",
+   "img": "pr_glass_1.png",
+   "cap": "立てたガラス板と、当たる点。",
+   "ui_parm": "pt0"
+  },
+  {
+   "title": "ガラスの割れ方で割る",
+   "node": "rbdmaterialfracture",
+   "ui_node": "crack",
+   "body": "<code>rbdmaterialfracture</code> の Material Type を <strong>Glass</strong> にし、4番目の入口（Impact Points）に当たる点をつなぐ。<strong>Use Input Points</strong> を入れると、その点を中心に <strong>放射状のひび</strong>（既定 20 本）と、それをつなぐ同心円のひびが入る。破片は 119 個になった。右の出口には、破片どうしをくっつけておく「つながり」が出る。",
+   "img": "pr_glass_2.png",
+   "cap": "119 個の破片。中心ほど細かい。",
+   "ui_parm": "glass_radialcracknum"
+  },
+  {
+   "title": "球を用意し、枠に触れる破片を止める",
+   "node": "attribwrangle",
+   "ui_node": "hold_edges",
+   "body": "<code>sphere</code>（半径 6 cm）を当たる点の 70 cm 手前に置き、<code>attribwrangle</code> で名前 <strong>ball</strong> と速さ <strong>v = (0, 0, −14)</strong>（ガラスへ向かって秒速 14 m）を付ける。<code>merge</code> でガラスとまとめ、<code>pack</code> の <strong>Pack By Name</strong> を入れて、同じ name の面を1つの塊（破片1つ）にまとめる。最後の <code>attribwrangle</code> で、塊の外枠が板の縁から 3 cm 以内に入るものを <strong>active = 0</strong>（動かない）にする。21 個が止まった。",
+   "img": "pr_glass_3.png",
+   "cap": "見た目は同じ。縁の破片が「動かない」印を持った。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "ぶつけて割る",
+   "node": "rbdbulletsolver",
+   "ui_node": "shatter",
+   "body": "rbdmaterialfracture の右の出口（つながり）に <code>attribwrangle</code> をつなぎ、Run Over を Primitives にして <strong>strength を 0.8</strong> に下げる。既定のままだと強すぎて、球が跳ね返るだけで1枚も割れなかった。<code>rbdbulletsolver</code> の左に塊、<strong>真ん中に弱めたつながり</strong>をつなぎ、Ground Plane を入れる。球が当たると、そのまわりのつながりが切れて破片が飛び、遠くの破片はつながったまま枠に残る。48 フレームで、119 個のうち 41 個が動いた。",
+   "img": "pr_glass_4.png",
+   "cap": "フレーム 9。当たった所から砕けて飛び散る。",
+   "ui_parm": "useground"
+  },
+  {
+   "title": "枠を付けて、ガラスの材質を当てる",
+   "node": "merge",
+   "ui_node": "window",
+   "body": "細い <code>box</code> 4本で木の窓枠を作る。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。<code>unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code>material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。",
+   "img": "",
+   "cap": "材質を当てた状態（ビューポートでは透けない）。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "枠で止めないと、板ごと倒れる",
+   "body": "hold_edges を外すと、48 フレームで 119 個のうち 119 個が動いた。ガラス板はただ床に立っているだけなので、つながったまま倒れる。縁の破片を active = 0 にして、枠にはまっている状態を作る。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "つなぐ力（strength）で、割れる広さが決まる",
+   "body": "strength 0.8 で 41 個が動いた。同じ場面で測ると、1.5 で 7 個、2.5 で 1 個、5 以上では 0 個（球が跳ね返るだけ）。小さいほど広く割れる。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "放射状のひびの数で、破片の数が決まる",
+   "body": "Radial Crack Number 20（既定）で 119 個、8 にすると 37 個。放射状のひびの間を同心円のひびが切るので、本数を減らすと大きな三角の破片になる。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "球が当たって、破片が飛び散り、床に落ちるまで（48 フレーム＝2 秒）。"
+}

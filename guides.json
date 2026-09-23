@@ -510,7 +510,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "箱が割れて、かけらが床に落ちるまで。"
     },
     {
       "id": "cloth",
@@ -594,7 +595,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "布が垂れて、揺れがおさまるまで。"
     },
     {
       "id": "smoke",
@@ -678,7 +680,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "煙が立ちのぼるようす（60フレーム）。"
     },
     {
       "id": "liquid",
@@ -768,7 +771,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "水が落ちて、広がるまで。"
     },
     {
       "id": "pop",
@@ -846,7 +850,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "粒が生まれて降るようす。"
     },
     {
       "id": "groom",
@@ -1437,7 +1442,8 @@
           "img": "guide_mpm_4_sandy.png",
           "cap": "Sandy。他の材質より大きく広がるので、この1枚だけ枠を合わせ直している。"
         }
-      ]
+      ],
+      "anim_cap": "塊がぶつかって潰れるまで。"
     },
     {
       "id": "cache",
@@ -1530,7 +1536,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "キャッシュした計算を再生したところ。"
     },
     {
       "id": "wind",
@@ -1628,7 +1635,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "風に流される粒（72フレーム）。"
     },
     {
       "id": "tear",
@@ -1743,7 +1751,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "狙った線で布が破れるまで。"
     },
     {
       "id": "fire",
@@ -1848,7 +1857,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "炎が立ち上がるようす（30フレーム）。"
     },
     {
       "id": "hair",
@@ -1951,7 +1961,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "風で毛が揺れるようす。"
     },
     {
       "id": "grass",
@@ -2133,7 +2144,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "動く板が塊を運ぶようす。"
     },
     {
       "id": "karma",
@@ -2511,7 +2523,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "火花が散るようす（18フレーム）。"
     },
     {
       "id": "rain",
@@ -2610,7 +2623,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "雨が降って地面で跳ねるようす。"
     },
     {
       "id": "flag",
@@ -2710,7 +2724,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "旗が風になびくようす。"
     },
     {
       "id": "path",
@@ -2973,7 +2988,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "ドミノが順に倒れていく（160フレームを2フレームおき）。"
     },
     {
       "id": "wall",
@@ -3064,7 +3080,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "壁が崩れるようす。"
     },
     {
       "id": "leaves",
@@ -3155,7 +3172,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "葉が風で舞うようす。"
     },
     {
       "id": "turntable",
@@ -3411,7 +3429,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "落ち葉が降って積もるまで（144フレームを2フレームおき）。"
     },
     {
       "id": "rock",
@@ -3825,7 +3844,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "焚き火の燃え方（60フレーム）。"
     },
     {
       "id": "nightcity",
@@ -4042,7 +4062,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "カーテンが風でなびくようす。"
     },
     {
       "id": "balloon",
@@ -4151,7 +4172,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "風船がふくらむまで。"
     },
     {
       "id": "jelly",
@@ -4259,7 +4281,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "皿に落ちて、つぶれて戻るまで（36フレーム）。"
     },
     {
       "id": "ocean",
@@ -4362,7 +4385,8 @@
           "img": "",
           "cap": ""
         }
-      ]
+      ],
+      "anim_cap": "波の動き（72フレーム）。"
     },
     {
       "id": "snow",
@@ -4471,6 +4495,403 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "fireworks",
+      "title": "花火を打ち上げる",
+      "lede": "夜空で丸く開く「菊」の花火を作る。球の表面に並べた点を一斉に外へ飛ばし、重力と空気抵抗で垂れさせ、通った跡を線にすると尾ができる。1発できたら、時間と場所をずらして3発に増やす。",
+      "hero": "pr_fireworks_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 22）。3発の菊が、時間差で開いている。",
+      "facts": [
+        [
+          "足すノード",
+          "15個（dopnet の中に5個）"
+        ],
+        [
+          "星の数",
+          "320個 × 3発"
+        ],
+        [
+          "60 フレームの計算",
+          "0.3秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "3.2秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_fireworks.hipnc",
+      "tags": [
+        "シミュレーション",
+        "エフェクト",
+        "POP",
+        "パーティクル",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "玉の中の「星」を並べる",
+          "node": "scatter",
+          "ui_node": "stars",
+          "body": "<code>sphere</code>（半径 1 m）の表面に、<code>scatter</code> で <strong>320 個</strong>の点をまく。1つ1つが、花火の玉に詰まった「星」（燃えながら飛ぶ火薬の粒）になる。<strong>Relax Iterations</strong> を入れておくと、点どうしが離れて、開いたときに穴や固まりができにくい。",
+          "img": "pr_fireworks_1.png",
+          "cap": "球の表面に並んだ 320 個の星。",
+          "ui_parm": "npts"
+        },
+        {
+          "title": "外向きの速さと色を付ける",
+          "node": "attribwrangle",
+          "ui_node": "push_out",
+          "body": "<code>attribwrangle</code> で、点ごとに <strong>v</strong>（速さと向き）を付ける。向きは球の中心から外、速さは <strong>speed = 34</strong>（m/秒）を星ごとに 88〜100% の範囲でばらつかせる。全部同じ速さだと、コンパスで描いたような不自然な球になる。色 <strong>Cd</strong> は金色（1, 0.72, 0.32）。",
+          "img": "pr_fireworks_2.png",
+          "cap": "見た目は同じ。点ごとに「外向きの速さ」が入った。",
+          "ui_parm": "speed"
+        },
+        {
+          "title": "重力と空気抵抗で飛ばす",
+          "node": "dopimport",
+          "ui_node": "fly",
+          "body": "<code>dopnet</code> の中に POP を組む。<code>popsource</code> は Emission Type を <strong>All Points</strong>、<strong>Impulse Activation</strong> に式 <strong>$FF == 1</strong> を入れて、1 フレーム目だけ 320 個を一度に生む。Initial Velocity は <strong>Use Inherited Velocity</strong>（前の段で付けた v をそのまま使う）。寿命 <strong>Life Expectancy 2.2 秒・Life Variance 0.5</strong> で、消える時間をばらけさせる。<code>popforce</code> で下向き 9.81 の重力、<code>popdrag</code> の <strong>Air Resistance 0.45</strong> で空気抵抗を入れる。空気抵抗があると最初だけ速く広がり、すぐ減速して垂れる。花火らしさはここで出る。0.9 秒後の広がりは約 13 m。外の <code>dopimport</code> で結果を取り出す。",
+          "img": "pr_fireworks_3.png",
+          "cap": "フレーム 22。開いて、垂れはじめた星。",
+          "ui_parm": "airresist"
+        },
+        {
+          "title": "通った跡を線にして、尾を付ける",
+          "node": "attribwrangle",
+          "ui_node": "hot_head",
+          "body": "<code>trail</code> の Result Type を <strong>Connect as Polygons</strong>、Trail Length を <strong>18</strong> にすると、星ごとに「今までの 18 フレーム分の位置」をつないだ線ができる。これが火の粉の尾になる。次の <code>attribwrangle</code> で、線の先頭ほど白く太く、うしろほど赤く細くする（width 0.01 → 0.00 m）。さらに寿命の終わりに向けて全体を暗くすると、燃え尽きて消えていく。",
+          "img": "pr_fireworks_4.png",
+          "cap": "尾を引いて垂れる金色の菊。",
+          "ui_parm": "length"
+        },
+        {
+          "title": "時間と場所をずらして3発にする",
+          "node": "merge",
+          "ui_node": "three_shells",
+          "body": "<code>timeshift</code> の Frame に <strong>$F - 7</strong> のような式を入れると、同じ花火を 7 フレーム遅れて再生できる。<code>xform</code> で場所をずらし、もう1本の <code>attribwrangle</code> で色を赤・水色に置き換える。計算（POP）は1回だけで、3発とも同じ結果を使い回すので軽い。最後に <code>merge</code> でまとめる。",
+          "img": "pr_fireworks_5.png",
+          "cap": "フレーム 22。3発が少しずつ遅れて開いている。",
+          "ui_parm": "frame"
+        },
+        {
+          "title": "光る材質を当てる",
+          "node": "material",
+          "ui_node": "assign_fire",
+          "body": "<code>principledshader</code> の <strong>Emission Intensity を 0.9</strong>、<strong>Emission Color の Use Point Color</strong> を入れる。線の色（Cd）がそのまま光の色になる。Base Color は黒にして、光以外の見え方を消す。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポートでは光らない）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "空気抵抗を入れないと、花火に見えない",
+          "body": "Air Resistance を 0 にすると、フレーム 22 の広がりは約 13 m（0.45 のときは約 13 m）。減速しないので星がまっすぐ飛び続け、ただ大きくなる球になる。本物は最初に勢いよく開き、すぐ止まって垂れる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "寿命をばらけさせないと、一斉に消える",
+          "body": "Life Variance 0 では、フレーム 40 に 320 個あった星が、フレーム 60 には 69 個。0.5 では 40 で 320 個、60 で 69 個。ばらつきがあると、少しずつ消えていく。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "尾の点数は、星の数 × Trail Length",
+          "body": "320 個の星に Trail Length 18 で、尾の線の点はフレーム 22 で 5,760 個。尾を長くすると点が同じ割合で増える。3発にしても計算は1回で済むのは、timeshift で使い回しているから。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "打ち上がって開き、垂れて消えるまで（60 フレーム＝2.5 秒）。"
+    },
+    {
+      "id": "moss",
+      "title": "苔むした石を作る",
+      "lede": "石の上を向いた面にだけ、まだらに苔を生やす。「上を向いている度合い」と「まだらのノイズ」を掛け合わせて生える場所を決め、そこに短い毛を密に立てる。色だけで塗るより、毛を立てたほうが苔のふかふかした感じが出る。",
+      "hero": "pr_moss_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。上の面だけが苔に覆われ、縁はまだらに石がのぞく。",
+      "facts": [
+        [
+          "足すノード",
+          "12個（材質2つ）"
+        ],
+        [
+          "毛の数",
+          "90,000本"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "39.3秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_moss.hipnc",
+      "tags": [
+        "モデリング",
+        "VEX",
+        "散布",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "石の形を作る",
+          "node": "normal",
+          "ui_node": "face_dir",
+          "body": "<code>sphere</code>（Polygon Mesh、半径 0.55 × 0.32 × 0.45、Rows 80・Columns 160）をつぶれた丸石にする。<code>mountain</code> を2つ重ね、1つ目（<strong>Height 0.16・Element Size 0.45</strong>）で大きなうねり、2つ目（<strong>Height 0.04・Element Size 0.07</strong>）で細かいでこぼこを付ける。最後の <code>normal</code> で面の向き（N）を計算し直す。次の段で「上を向いているか」を見るのに使う。",
+          "img": "pr_moss_1.png",
+          "cap": "川原にありそうな、平たい丸石。",
+          "ui_parm": "height"
+        },
+        {
+          "title": "苔の生える場所を決める",
+          "node": "attribwrangle",
+          "ui_node": "where_moss",
+          "body": "<code>attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石の灰色には別のノイズで濃淡を付け、のっぺりした粘土に見えないようにする。",
+          "img": "pr_moss_2.png",
+          "cap": "上の面が緑、縁はまだら。",
+          "ui_parm": "patch_size"
+        },
+        {
+          "title": "苔の毛の根元をまく",
+          "node": "scatter",
+          "ui_node": "roots",
+          "body": "<code>scatter</code> で <strong>90,000 個</strong>の点をまく。<strong>Use Density Attribute</strong> を入れて <strong>Density Attribute を moss</strong> にすると、moss の大きい所ほど点が多く、0 の所には1つも出ない。点は、面の N などの属性を引き継ぐ。",
+          "img": "pr_moss_3.png",
+          "cap": "苔の場所にだけ点が集まる。",
+          "ui_parm": "densityattrib"
+        },
+        {
+          "title": "短い毛を立てる",
+          "node": "attribwrangle",
+          "ui_node": "grow_strands",
+          "body": "もう1つの <code>attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.014</strong>（1.4 cm）を 50〜130% にばらつかせ、先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.6 mm から先へ細くする。最後に元の点を消す。",
+          "img": "pr_moss_4.png",
+          "cap": "石の上に、短い毛がびっしり立つ。",
+          "ui_parm": "length"
+        },
+        {
+          "title": "材質を当てて合わせる",
+          "node": "merge",
+          "ui_node": "mossy_stone",
+          "body": "石と苔に別々の <code>principledshader</code> を当てる。どちらも Base Color を白にしておくと、点の色 Cd がそのまま色になる（Use Point Color が既定で入っている）。石は Roughness 0.85 でつやを消し、苔は <strong>Sheen 0.6</strong> で、毛の表面がふわっと明るく光る感じを足す。<code>merge</code> で石と苔を1つにする。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "形を変えたら、N を作り直す",
+          "body": "<code>normal</code> を外すと、mountain の出力には N が無い（測った）。wrangle の v@N は 0 になり、N.y で決める苔の場所が1つも出ない。形を変えたあとは、N を作り直してから向きを読む。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Force Total Count は「苔のある所にだけ」まかれる",
+          "body": "Density Attribute を使っても、点の総数は Force Total Count のまま（90,000 本）。苔の場所が狭いと、同じ数が狭い所に詰まって濃くなる。広く生やすなら数も増やす。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "毛の数が重さを決める",
+          "body": "90,000 本の毛は、点にすると 270,000 個。Karma で 1280×720 を撮るのにかかった時間は上の表のとおり。試すうちは STRANDS を減らして速く回し、最後に戻す。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "glass",
+      "title": "窓ガラスを割る",
+      "lede": "板ガラスに球をぶつけて割る。rbdmaterialfracture を Glass にして当たる点を渡すと、そこから放射状と同心円のひびが入る。枠に触れている破片だけ動かないようにしておくと、真ん中が砕けて飛び、外側の破片が枠に残る。",
+      "hero": "pr_glass_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 9）。当たった所から放射状に砕けた破片が飛ぶ。",
+      "facts": [
+        [
+          "足すノード",
+          "18個（材質2つ）"
+        ],
+        [
+          "破片",
+          "119個"
+        ],
+        [
+          "48 フレームの計算",
+          "0.8秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "68.8秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_glass.hipnc",
+      "tags": [
+        "シミュレーション",
+        "RBD",
+        "破壊",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "ガラス板と、当たる点を置く",
+          "node": "merge",
+          "ui_node": "preview_pane",
+          "body": "<code>box</code> で 1 × 1.4 m、厚さ 8 mm の板を立てる（窓1枚ぶん）。<code>add</code> で点を1つだけ作り、球が当たる所（0.12, 0.9, 0）に置く。ひびはこの点から広がる。",
+          "img": "pr_glass_1.png",
+          "cap": "立てたガラス板と、当たる点。",
+          "ui_parm": "pt0"
+        },
+        {
+          "title": "ガラスの割れ方で割る",
+          "node": "rbdmaterialfracture",
+          "ui_node": "crack",
+          "body": "<code>rbdmaterialfracture</code> の Material Type を <strong>Glass</strong> にし、4番目の入口（Impact Points）に当たる点をつなぐ。<strong>Use Input Points</strong> を入れると、その点を中心に <strong>放射状のひび</strong>（既定 20 本）と、それをつなぐ同心円のひびが入る。破片は 119 個になった。右の出口には、破片どうしをくっつけておく「つながり」が出る。",
+          "img": "pr_glass_2.png",
+          "cap": "119 個の破片。中心ほど細かい。",
+          "ui_parm": "glass_radialcracknum"
+        },
+        {
+          "title": "球を用意し、枠に触れる破片を止める",
+          "node": "attribwrangle",
+          "ui_node": "hold_edges",
+          "body": "<code>sphere</code>（半径 6 cm）を当たる点の 70 cm 手前に置き、<code>attribwrangle</code> で名前 <strong>ball</strong> と速さ <strong>v = (0, 0, −14)</strong>（ガラスへ向かって秒速 14 m）を付ける。<code>merge</code> でガラスとまとめ、<code>pack</code> の <strong>Pack By Name</strong> を入れて、同じ name の面を1つの塊（破片1つ）にまとめる。最後の <code>attribwrangle</code> で、塊の外枠が板の縁から 3 cm 以内に入るものを <strong>active = 0</strong>（動かない）にする。21 個が止まった。",
+          "img": "pr_glass_3.png",
+          "cap": "見た目は同じ。縁の破片が「動かない」印を持った。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "ぶつけて割る",
+          "node": "rbdbulletsolver",
+          "ui_node": "shatter",
+          "body": "rbdmaterialfracture の右の出口（つながり）に <code>attribwrangle</code> をつなぎ、Run Over を Primitives にして <strong>strength を 0.8</strong> に下げる。既定のままだと強すぎて、球が跳ね返るだけで1枚も割れなかった。<code>rbdbulletsolver</code> の左に塊、<strong>真ん中に弱めたつながり</strong>をつなぎ、Ground Plane を入れる。球が当たると、そのまわりのつながりが切れて破片が飛び、遠くの破片はつながったまま枠に残る。48 フレームで、119 個のうち 41 個が動いた。",
+          "img": "pr_glass_4.png",
+          "cap": "フレーム 9。当たった所から砕けて飛び散る。",
+          "ui_parm": "useground"
+        },
+        {
+          "title": "枠を付けて、ガラスの材質を当てる",
+          "node": "merge",
+          "ui_node": "window",
+          "body": "細い <code>box</code> 4本で木の窓枠を作る。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。<code>unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code>material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポートでは透けない）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "枠で止めないと、板ごと倒れる",
+          "body": "hold_edges を外すと、48 フレームで 119 個のうち 119 個が動いた。ガラス板はただ床に立っているだけなので、つながったまま倒れる。縁の破片を active = 0 にして、枠にはまっている状態を作る。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "つなぐ力（strength）で、割れる広さが決まる",
+          "body": "strength 0.8 で 41 個が動いた。同じ場面で測ると、1.5 で 7 個、2.5 で 1 個、5 以上では 0 個（球が跳ね返るだけ）。小さいほど広く割れる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "放射状のひびの数で、破片の数が決まる",
+          "body": "Radial Crack Number 20（既定）で 119 個、8 にすると 37 個。放射状のひびの間を同心円のひびが切るので、本数を減らすと大きな三角の破片になる。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "球が当たって、破片が飛び散り、床に落ちるまで（48 フレーム＝2 秒）。"
+    },
+    {
+      "id": "tablecloth",
+      "title": "テーブルクロスを掛ける",
+      "lede": "平らな布（Vellum の cloth）を机の少し上に置いて落とす。机を「ぶつかる物」として渡すだけで、天板の上は平らに、縁からはまっすぐ垂れ、四隅には大きなひだができる。布を細かく割るほど、ひだは細かくなる。",
+      "hero": "pr_tablecloth_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 72）。四隅のひだと、縁からまっすぐ垂れる布。",
+      "facts": [
+        [
+          "足すノード",
+          "13個（材質2つ）"
+        ],
+        [
+          "布の点",
+          "15,651個"
+        ],
+        [
+          "72 フレームの計算",
+          "72.6秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "51.9秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_tablecloth.hipnc",
+      "tags": [
+        "シミュレーション",
+        "Vellum",
+        "布",
+        "Karma"
+      ],
+      "steps": [
+        {
+          "title": "机を作る",
+          "node": "merge",
+          "ui_node": "table",
+          "body": "<code>box</code> で天板（1.2 × 0.04 × 0.8 m、高さ 0.74 m）と、細い脚を4本作り、<code>merge</code> でまとめる。この机は、あとで布が「ぶつかる物」になる。",
+          "img": "pr_tablecloth_1.png",
+          "cap": "天板と4本の脚。"
+        },
+        {
+          "title": "布を机の上に置く",
+          "node": "grid",
+          "ui_node": "cloth",
+          "body": "<code>grid</code>（1.9 × 1.45 m）を天板より 12 cm 上に置く。天板より縁ごとに 33〜35 cm 大きいので、そのぶんが垂れる。<strong>Rows 110・Columns 140</strong> と細かく割る。布は網の線でしか曲がれないので、粗いとひだが角ばる。Rotate Y を 4 度だけ回して、机とぴったり揃えない（揃いすぎると作り物に見える）。",
+          "img": "pr_tablecloth_2.png",
+          "cap": "机の上に浮かせた平らな布。",
+          "ui_parm": "rows"
+        },
+        {
+          "title": "机にぶつけて落とす",
+          "node": "vellumsolver",
+          "ui_node": "drop",
+          "body": "<code>vellumconstraints</code> の Constraint Type を <strong>Cloth</strong> にする（布として引っぱり合うつながりが付く）。<code>vellumsolver</code> には3本つなぐ。左に布、真ん中に vellumconstraints の右の出口（つながり）、<strong>右に机</strong>。右の入口は「ぶつかる物」で、布は机を通り抜けずに乗る。Ground Plane も入れ、Substeps 5。72 フレーム（3 秒）で落ち着き、布の角は天板から 0.49 m 下まで垂れた。",
+          "img": "pr_tablecloth_3.png",
+          "cap": "フレーム 72。天板の上は平ら、四隅に大きなひだ。",
+          "ui_parm": "substeps"
+        },
+        {
+          "title": "なめらかにして、厚みを付ける",
+          "node": "polyextrude",
+          "ui_node": "thickness",
+          "body": "<code>subdivide</code>（1回）で網をさらに細かく割り、ひだの折れ目の角を消す。<code>polyextrude</code> で <strong>Distance 0.002</strong>（2 mm）押し出し、<strong>Output Back</strong> を入れて裏面も残す。厚みのない布は、縁が紙のように薄く見える。",
+          "img": "pr_tablecloth_4.png",
+          "cap": "なめらかで、少し厚みのある布。"
+        },
+        {
+          "title": "材質を当てる",
+          "node": "merge",
+          "ui_node": "dining",
+          "body": "布は <code>principledshader</code> で生成りの白（0.86, 0.84, 0.79）、Roughness 0.8、<strong>Sheen 0.5</strong>（布の毛羽が光をふわっと返す）。机は濃い茶色で Roughness 0.45。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "机を右の入口につながないと、布は床まで落ちる",
+          "body": "vellumsolver の右の入口を空にすると、72 フレームで布のいちばん高い所は 0.01 m（床の上に重なった）。机は見えているだけでは布に当たらない。ぶつかる物は、必ず右の入口に渡す。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "細かさと重さ",
+          "body": "Rows 110・Columns 140（点 15,651 個）で 72 フレームの計算は 72.6 秒。Rows 44・Columns 56（点 2,565 個）では 26.9 秒。粗いうちに落ち方を決めて、最後に細かくする。",
+          "img": "",
+          "cap": ""
+        }
+      ],
+      "anim_cap": "机の上に落ちて、角が垂れて落ち着くまで（72 フレーム＝3 秒）。"
     }
   ]
 }

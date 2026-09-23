@@ -1,0 +1,92 @@
+{
+ "id": "tablecloth",
+ "title": "テーブルクロスを掛ける",
+ "lede": "平らな布（Vellum の cloth）を机の少し上に置いて落とす。机を「ぶつかる物」として渡すだけで、天板の上は平らに、縁からはまっすぐ垂れ、四隅には大きなひだができる。布を細かく割るほど、ひだは細かくなる。",
+ "hero": "pr_tablecloth_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム 72）。四隅のひだと、縁からまっすぐ垂れる布。",
+ "facts": [
+  [
+   "足すノード",
+   "13個（材質2つ）"
+  ],
+  [
+   "布の点",
+   "15,651個"
+  ],
+  [
+   "72 フレームの計算",
+   "72.6秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "51.9秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_tablecloth.hipnc",
+ "tags": [
+  "シミュレーション",
+  "Vellum",
+  "布",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "机を作る",
+   "node": "merge",
+   "ui_node": "table",
+   "body": "<code>box</code> で天板（1.2 × 0.04 × 0.8 m、高さ 0.74 m）と、細い脚を4本作り、<code>merge</code> でまとめる。この机は、あとで布が「ぶつかる物」になる。",
+   "img": "pr_tablecloth_1.png",
+   "cap": "天板と4本の脚。"
+  },
+  {
+   "title": "布を机の上に置く",
+   "node": "grid",
+   "ui_node": "cloth",
+   "body": "<code>grid</code>（1.9 × 1.45 m）を天板より 12 cm 上に置く。天板より縁ごとに 33〜35 cm 大きいので、そのぶんが垂れる。<strong>Rows 110・Columns 140</strong> と細かく割る。布は網の線でしか曲がれないので、粗いとひだが角ばる。Rotate Y を 4 度だけ回して、机とぴったり揃えない（揃いすぎると作り物に見える）。",
+   "img": "pr_tablecloth_2.png",
+   "cap": "机の上に浮かせた平らな布。",
+   "ui_parm": "rows"
+  },
+  {
+   "title": "机にぶつけて落とす",
+   "node": "vellumsolver",
+   "ui_node": "drop",
+   "body": "<code>vellumconstraints</code> の Constraint Type を <strong>Cloth</strong> にする（布として引っぱり合うつながりが付く）。<code>vellumsolver</code> には3本つなぐ。左に布、真ん中に vellumconstraints の右の出口（つながり）、<strong>右に机</strong>。右の入口は「ぶつかる物」で、布は机を通り抜けずに乗る。Ground Plane も入れ、Substeps 5。72 フレーム（3 秒）で落ち着き、布の角は天板から 0.49 m 下まで垂れた。",
+   "img": "pr_tablecloth_3.png",
+   "cap": "フレーム 72。天板の上は平ら、四隅に大きなひだ。",
+   "ui_parm": "substeps"
+  },
+  {
+   "title": "なめらかにして、厚みを付ける",
+   "node": "polyextrude",
+   "ui_node": "thickness",
+   "body": "<code>subdivide</code>（1回）で網をさらに細かく割り、ひだの折れ目の角を消す。<code>polyextrude</code> で <strong>Distance 0.002</strong>（2 mm）押し出し、<strong>Output Back</strong> を入れて裏面も残す。厚みのない布は、縁が紙のように薄く見える。",
+   "img": "pr_tablecloth_4.png",
+   "cap": "なめらかで、少し厚みのある布。"
+  },
+  {
+   "title": "材質を当てる",
+   "node": "merge",
+   "ui_node": "dining",
+   "body": "布は <code>principledshader</code> で生成りの白（0.86, 0.84, 0.79）、Roughness 0.8、<strong>Sheen 0.5</strong>（布の毛羽が光をふわっと返す）。机は濃い茶色で Roughness 0.45。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "机を右の入口につながないと、布は床まで落ちる",
+   "body": "vellumsolver の右の入口を空にすると、72 フレームで布のいちばん高い所は 0.01 m（床の上に重なった）。机は見えているだけでは布に当たらない。ぶつかる物は、必ず右の入口に渡す。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "細かさと重さ",
+   "body": "Rows 110・Columns 140（点 15,651 個）で 72 フレームの計算は 72.6 秒。Rows 44・Columns 56（点 2,565 個）では 26.9 秒。粗いうちに落ち方を決めて、最後に細かくする。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "机の上に落ちて、角が垂れて落ち着くまで（72 フレーム＝3 秒）。"
+}

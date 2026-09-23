@@ -1,0 +1,346 @@
+{
+  "title": "花火を打ち上げる",
+  "network": "/obj/fireworks",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "shell",
+      "type": "sphere",
+      "pos": [
+        -6.072,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "freq": 6
+      }
+    },
+    {
+      "name": "stars",
+      "type": "scatter::2.0",
+      "pos": [
+        -6.072,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 320
+      }
+    },
+    {
+      "name": "push_out",
+      "type": "attribwrangle",
+      "pos": [
+        -6.072,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 中心から外向きに飛ばす。速さは星ごとに少しだけ変える（全部同じだと、きれいすぎる球になる）\nfloat speed = chf('speed') * fit01(rand(@ptnum + 3), 0.88, 1.0);\nv@v..."
+      }
+    },
+    {
+      "name": "burst",
+      "type": "dopnet",
+      "pos": [
+        6.778,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "fly",
+      "type": "dopimport::2.0",
+      "pos": [
+        -2.824,
+        7.53
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/fireworks/burst"
+      }
+    },
+    {
+      "name": "tail",
+      "type": "trail",
+      "pos": [
+        -2.824,
+        6.401
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 2,
+        "length": 18,
+        "close": 0
+      }
+    },
+    {
+      "name": "hot_head",
+      "type": "attribwrangle",
+      "pos": [
+        -2.824,
+        5.271
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 尾の先頭（いちばん新しい位置）ほど白く熱く、うしろほど赤く暗くする。\n// trail の線は、同じ星の数フレーム前の位置をつないだもの。age が小さいほど古い位置\nint prim = @primnum;\nint pts[]..."
+      }
+    },
+    {
+      "name": "later0",
+      "type": "timeshift",
+      "pos": [
+        -2.824,
+        4.141
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "frame": 22.0
+      }
+    },
+    {
+      "name": "place0",
+      "type": "xform",
+      "pos": [
+        -2.824,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "tint1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 金色（元の色）を、この玉の色に置き換える。明るさは元のまま\nfloat lum = max(v@Cd.r, max(v@Cd.g, v@Cd.b));\nvector c = chv('tint');\nv@Cd = lerp(c ..."
+      }
+    },
+    {
+      "name": "later1",
+      "type": "timeshift",
+      "pos": [
+        0.0,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "frame": 15.0
+      }
+    },
+    {
+      "name": "place1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": -11.258905696868895,
+        "ty": -3.3114428520202637,
+        "tz": -7.947462844848633
+      }
+    },
+    {
+      "name": "tint2",
+      "type": "attribwrangle",
+      "pos": [
+        2.824,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 金色（元の色）を、この玉の色に置き換える。明るさは元のまま\nfloat lum = max(v@Cd.r, max(v@Cd.g, v@Cd.b));\nvector c = chv('tint');\nv@Cd = lerp(c ..."
+      }
+    },
+    {
+      "name": "later2",
+      "type": "timeshift",
+      "pos": [
+        2.824,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "frame": 9.0
+      }
+    },
+    {
+      "name": "place2",
+      "type": "xform",
+      "pos": [
+        2.824,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 10.596617126464844,
+        "ty": -1.6557214260101318,
+        "tz": -10.596617126464844
+      }
+    },
+    {
+      "name": "three_shells",
+      "type": "merge",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_fire",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/fireworks_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "shell",
+      "from_output": 0,
+      "to": "stars",
+      "to_input": 0
+    },
+    {
+      "from": "stars",
+      "from_output": 0,
+      "to": "push_out",
+      "to_input": 0
+    },
+    {
+      "from": "fly",
+      "from_output": 0,
+      "to": "tail",
+      "to_input": 0
+    },
+    {
+      "from": "tail",
+      "from_output": 0,
+      "to": "hot_head",
+      "to_input": 0
+    },
+    {
+      "from": "hot_head",
+      "from_output": 0,
+      "to": "later0",
+      "to_input": 0
+    },
+    {
+      "from": "later0",
+      "from_output": 0,
+      "to": "place0",
+      "to_input": 0
+    },
+    {
+      "from": "hot_head",
+      "from_output": 0,
+      "to": "tint1",
+      "to_input": 0
+    },
+    {
+      "from": "tint1",
+      "from_output": 0,
+      "to": "later1",
+      "to_input": 0
+    },
+    {
+      "from": "later1",
+      "from_output": 0,
+      "to": "place1",
+      "to_input": 0
+    },
+    {
+      "from": "hot_head",
+      "from_output": 0,
+      "to": "tint2",
+      "to_input": 0
+    },
+    {
+      "from": "tint2",
+      "from_output": 0,
+      "to": "later2",
+      "to_input": 0
+    },
+    {
+      "from": "later2",
+      "from_output": 0,
+      "to": "place2",
+      "to_input": 0
+    },
+    {
+      "from": "place0",
+      "from_output": 0,
+      "to": "three_shells",
+      "to_input": 0
+    },
+    {
+      "from": "place1",
+      "from_output": 0,
+      "to": "three_shells",
+      "to_input": 1
+    },
+    {
+      "from": "place2",
+      "from_output": 0,
+      "to": "three_shells",
+      "to_input": 2
+    },
+    {
+      "from": "three_shells",
+      "from_output": 0,
+      "to": "assign_fire",
+      "to_input": 0
+    }
+  ]
+}

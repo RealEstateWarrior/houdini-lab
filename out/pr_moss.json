@@ -1,0 +1,95 @@
+{
+ "id": "moss",
+ "title": "苔むした石を作る",
+ "lede": "石の上を向いた面にだけ、まだらに苔を生やす。「上を向いている度合い」と「まだらのノイズ」を掛け合わせて生える場所を決め、そこに短い毛を密に立てる。色だけで塗るより、毛を立てたほうが苔のふかふかした感じが出る。",
+ "hero": "pr_moss_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。上の面だけが苔に覆われ、縁はまだらに石がのぞく。",
+ "facts": [
+  [
+   "足すノード",
+   "12個（材質2つ）"
+  ],
+  [
+   "毛の数",
+   "90,000本"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "39.3秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_moss.hipnc",
+ "tags": [
+  "モデリング",
+  "VEX",
+  "散布",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "石の形を作る",
+   "node": "normal",
+   "ui_node": "face_dir",
+   "body": "<code>sphere</code>（Polygon Mesh、半径 0.55 × 0.32 × 0.45、Rows 80・Columns 160）をつぶれた丸石にする。<code>mountain</code> を2つ重ね、1つ目（<strong>Height 0.16・Element Size 0.45</strong>）で大きなうねり、2つ目（<strong>Height 0.04・Element Size 0.07</strong>）で細かいでこぼこを付ける。最後の <code>normal</code> で面の向き（N）を計算し直す。次の段で「上を向いているか」を見るのに使う。",
+   "img": "pr_moss_1.png",
+   "cap": "川原にありそうな、平たい丸石。",
+   "ui_parm": "height"
+  },
+  {
+   "title": "苔の生える場所を決める",
+   "node": "attribwrangle",
+   "ui_node": "where_moss",
+   "body": "<code>attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石の灰色には別のノイズで濃淡を付け、のっぺりした粘土に見えないようにする。",
+   "img": "pr_moss_2.png",
+   "cap": "上の面が緑、縁はまだら。",
+   "ui_parm": "patch_size"
+  },
+  {
+   "title": "苔の毛の根元をまく",
+   "node": "scatter",
+   "ui_node": "roots",
+   "body": "<code>scatter</code> で <strong>90,000 個</strong>の点をまく。<strong>Use Density Attribute</strong> を入れて <strong>Density Attribute を moss</strong> にすると、moss の大きい所ほど点が多く、0 の所には1つも出ない。点は、面の N などの属性を引き継ぐ。",
+   "img": "pr_moss_3.png",
+   "cap": "苔の場所にだけ点が集まる。",
+   "ui_parm": "densityattrib"
+  },
+  {
+   "title": "短い毛を立てる",
+   "node": "attribwrangle",
+   "ui_node": "grow_strands",
+   "body": "もう1つの <code>attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.014</strong>（1.4 cm）を 50〜130% にばらつかせ、先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.6 mm から先へ細くする。最後に元の点を消す。",
+   "img": "pr_moss_4.png",
+   "cap": "石の上に、短い毛がびっしり立つ。",
+   "ui_parm": "length"
+  },
+  {
+   "title": "材質を当てて合わせる",
+   "node": "merge",
+   "ui_node": "mossy_stone",
+   "body": "石と苔に別々の <code>principledshader</code> を当てる。どちらも Base Color を白にしておくと、点の色 Cd がそのまま色になる（Use Point Color が既定で入っている）。石は Roughness 0.85 でつやを消し、苔は <strong>Sheen 0.6</strong> で、毛の表面がふわっと明るく光る感じを足す。<code>merge</code> で石と苔を1つにする。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "形を変えたら、N を作り直す",
+   "body": "<code>normal</code> を外すと、mountain の出力には N が無い（測った）。wrangle の v@N は 0 になり、N.y で決める苔の場所が1つも出ない。形を変えたあとは、N を作り直してから向きを読む。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "Force Total Count は「苔のある所にだけ」まかれる",
+   "body": "Density Attribute を使っても、点の総数は Force Total Count のまま（90,000 本）。苔の場所が狭いと、同じ数が狭い所に詰まって濃くなる。広く生やすなら数も増やす。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "毛の数が重さを決める",
+   "body": "90,000 本の毛は、点にすると 270,000 個。Karma で 1280×720 を撮るのにかかった時間は上の表のとおり。試すうちは STRANDS を減らして速く回し、最後に戻す。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

@@ -171,18 +171,77 @@ class Guide:
         self.hero_cap = cap
         return path
 
+    def anim(self, node, frames, cap, bbox=None, direction=None, shading="smooth", res=(960, 540), fps=24,
+             every=1, keep_color=True):
+        """動きを撮る（2026-09-23）。frames のフレームを1から順に進めて（シミュレーションは飛ばすと崩れる）、
+        every ごとにビューポートで撮り、pr_<id>_anim.mp4 にする。カメラは全フレームで同じ（bbox で決める）。"""
+        import subprocess
+        import tempfile
+        tmp = tempfile.mkdtemp(prefix=f"anim_{self.id}_")
+        first, last = frames
+        box = bbox or node.geometry().boundingBox()
+        # 透ける材質（ゼリー・ガラス・水）はビューポートで消えるので、撮るときだけ材質を外す。
+        # Karma 用の幕（studio）も隠す。撮り終えたら元に戻す
+        bare = node.parent().createNode("attribdelete", "anim_no_material")
+        bare.setFirstInput(node)
+        bare.parm("primdel").set("shop_materialpath material_override")
+        bare.parm("ptdel").set("shop_materialpath" + ("" if keep_color else " Cd"))
+        if not keep_color:  # 海のように、点の色が暗い（泡の印など）ものは色も外して形だけ見せる
+            bare.parm("primdel").set("shop_materialpath material_override Cd")
+            bare.parm("vtxdel").set("Cd")
+        studio = hou.node("/obj/studio")
+        if studio is not None:
+            studio.setDisplayFlag(False)
+        # hero() は手順用の明かりを 0 にし、Karma 用の強い明かりを置く。撮る間だけ手順用に戻す
+        hou_tools._ensure_lights()
+        saved = {}
+        for name, value in (("report_dome", 0.55), ("report_key", 1.6), ("hero_key", 0), ("hero_rim", 0),
+                            ("hero_dome", 0)):
+            lt = hou.node("/obj/" + name)
+            if lt is not None:
+                saved[name] = lt.parm("light_intensity").eval()
+                lt.parm("light_intensity").set(value)
+        t0 = time.perf_counter()
+        n = 0
+        for f in range(1, last + 1):
+            hou.setFrame(f)
+            if f < first or (f - first) % every:
+                bare.geometry()  # 飛ばすフレームも計算だけはする
+                continue
+            hou_tools.render_preview(bare.path(), os.path.join(tmp, f"f{n:04d}.png"), res=res,
+                                     direction=direction or self.shot_dir, shading=shading, frame_bbox=box)
+            n += 1
+        bare.destroy()
+        node.setDisplayFlag(True)
+        node.setRenderFlag(True)
+        if studio is not None:
+            studio.setDisplayFlag(True)
+        for name, value in saved.items():
+            hou.node("/obj/" + name).parm("light_intensity").set(value)
+        path = os.path.join(OUT, f"pr_{self.id}_anim.mp4")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps), "-i",
+                        os.path.join(tmp, "f%04d.png"), "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                        "-crf", "26", "-movflags", "+faststart", path], check=True)
+        self.anim_cap = cap
+        print(f"動き: {n}枚 {time.perf_counter() - t0:.1f}秒 → {os.path.getsize(path) // 1024}KB")
+        return path
+
     # ---------- しまう ----------
     def save(self, facts, traps, exp=""):
         hou.node("/obj").layoutChildren()
         self.geo.layoutChildren()
         hip = f"pr_{self.id}.hipnc"
         hou.hipFile.save(os.path.join(OUT, hip))
+        # ノードのつなぎ方の図（GUI で撮れないとき＝画面が消えている夜の間の代わり）。画は graph_report.py が描く
+        hou_tools.write_graph(self.geo.path(), os.path.join(OUT, f"pr_{self.id}_graph.json"), title=self.title)
         entry = {
             "id": self.id, "title": self.title, "lede": self.lede,
             "hero": f"pr_{self.id}_hero.png", "hero_cap": self.hero_cap,
             "facts": facts + [["仕上がりを撮る時間", f"{self.hero_sec:.1f}秒（Karma 1280×720）"]],
             "exp": exp, "hip": hip, "tags": self.tags, "steps": self.steps, "traps": traps,
         }
+        if getattr(self, "anim_cap", ""):
+            entry["anim_cap"] = self.anim_cap
         with open(os.path.join(OUT, f"pr_{self.id}.json"), "w", encoding="utf-8") as fp:
             json.dump(entry, fp, ensure_ascii=False, indent=1)
         print(f"保存: {hip}  手順 {len(self.steps)}  Karma {self.hero_sec:.1f}秒  全体 {time.perf_counter() - self.t0:.1f}秒")

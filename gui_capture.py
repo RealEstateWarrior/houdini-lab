@@ -73,6 +73,11 @@ def run_in_houdini(conn, code, timeout=120):
 
 
 def capture(out_png):
+    """Houdini の窓を撮る（画面から写す）。
+
+    2026-09-23: 画面が消えている・ロックされている夜の間は撮れない（真っ黒になる）。
+    Qt の grabWindow も試したが、描き直しが止まっていて前の場面が写った（別の hip の画面が残る）ので使わない。
+    真っ黒な画像は crop_ui_shots.py が捨てる。"""
     result = subprocess.run(
         ["powershell", "-ExecutionPolicy", "Bypass", "-File", CAPTURE,
          "-Out", out_png] + (["-ProcessId", str(_state["pid"])] if _state.get("pid") else []),

@@ -25,6 +25,14 @@ PARM_BOX = (0.678, 0.106, 0.998, 0.503)
 MAX_W = 1400
 
 
+def is_black(im):
+    """画面が消えている・ロックされているときに撮ると真っ黒になる（2026-09-23）。そういう画像は使わない。"""
+    if np.asarray(im).max() < 8:
+        print("真っ黒なので使わない:", os.path.basename(getattr(im, "filename", "") or ""))
+        return True
+    return False
+
+
 def shrink(im, max_w=MAX_W):
     if im.width <= max_w:
         return im
@@ -35,6 +43,8 @@ def shrink(im, max_w=MAX_W):
 def crop_network(src, dst):
     """最大化したネットワークエディタから、ノードがある範囲だけを切り出す。"""
     im = Image.open(src).convert("RGB")
+    if is_black(im):
+        return False
     W, H = im.size
     a = np.asarray(im).astype(int)
     # 見出し（ツールバー）とタイムラインを除いた、網の描かれている帯
@@ -54,6 +64,8 @@ def crop_network(src, dst):
 
 def crop_parm(src, dst):
     im = Image.open(src).convert("RGB")
+    if is_black(im):
+        return False
     W, H = im.size
     box = (int(W * PARM_BOX[0]), int(H * PARM_BOX[1]),
            int(W * PARM_BOX[2]), int(H * PARM_BOX[3]))

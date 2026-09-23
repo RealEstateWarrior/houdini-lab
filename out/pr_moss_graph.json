@@ -1,0 +1,217 @@
+{
+  "title": "苔むした石を作る",
+  "network": "/obj/moss",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "base",
+      "type": "sphere",
+      "pos": [
+        -1.412,
+        7.078
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.55,
+        "rady": 0.32,
+        "radz": 0.45,
+        "rows": 80,
+        "cols": 160
+      }
+    },
+    {
+      "name": "big_lumps",
+      "type": "mountain::2.0",
+      "pos": [
+        -1.412,
+        5.949
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.16,
+        "elementsize": 0.45,
+        "rough": 0.4
+      }
+    },
+    {
+      "name": "fine_detail",
+      "type": "mountain::2.0",
+      "pos": [
+        -1.412,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.04,
+        "elementsize": 0.07,
+        "oct": 6,
+        "rough": 0.6
+      }
+    },
+    {
+      "name": "face_dir",
+      "type": "normal",
+      "pos": [
+        -1.412,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "where_moss",
+      "type": "attribwrangle",
+      "pos": [
+        -1.412,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 上を向いている度合い。真上（N.y = 1）で 1、横向き（N.y = 0.2 以下）で 0\nfloat up = smooth(chf('side'), chf('top'), v@N.y);\n// まだらにするノイズ。0.4..."
+      }
+    },
+    {
+      "name": "roots",
+      "type": "scatter::2.0",
+      "pos": [
+        1.412,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 90000,
+        "usedensityattrib": 1,
+        "densityattrib": "moss"
+      }
+    },
+    {
+      "name": "grow_strands",
+      "type": "attribwrangle",
+      "pos": [
+        1.412,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 点ごとに、面の向き（N）へ短い毛を1本立てる。少しずつ傾きと長さを変えて、揃いすぎないようにする\nvector tilt = (vector(rand(@ptnum * 3.1 + 1)) - 0.5) * 0.9;\nvecto..."
+      }
+    },
+    {
+      "name": "assign_stone",
+      "type": "material",
+      "pos": [
+        -1.412,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/stone_mat"
+      }
+    },
+    {
+      "name": "assign_moss",
+      "type": "material",
+      "pos": [
+        1.412,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/moss_mat"
+      }
+    },
+    {
+      "name": "mossy_stone",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "base",
+      "from_output": 0,
+      "to": "big_lumps",
+      "to_input": 0
+    },
+    {
+      "from": "big_lumps",
+      "from_output": 0,
+      "to": "fine_detail",
+      "to_input": 0
+    },
+    {
+      "from": "fine_detail",
+      "from_output": 0,
+      "to": "face_dir",
+      "to_input": 0
+    },
+    {
+      "from": "face_dir",
+      "from_output": 0,
+      "to": "where_moss",
+      "to_input": 0
+    },
+    {
+      "from": "where_moss",
+      "from_output": 0,
+      "to": "roots",
+      "to_input": 0
+    },
+    {
+      "from": "roots",
+      "from_output": 0,
+      "to": "grow_strands",
+      "to_input": 0
+    },
+    {
+      "from": "where_moss",
+      "from_output": 0,
+      "to": "assign_stone",
+      "to_input": 0
+    },
+    {
+      "from": "grow_strands",
+      "from_output": 0,
+      "to": "assign_moss",
+      "to_input": 0
+    },
+    {
+      "from": "assign_stone",
+      "from_output": 0,
+      "to": "mossy_stone",
+      "to_input": 0
+    },
+    {
+      "from": "assign_moss",
+      "from_output": 0,
+      "to": "mossy_stone",
+      "to_input": 1
+    }
+  ]
+}

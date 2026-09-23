@@ -1289,5 +1289,37 @@
       "wanted": "merge",
       "png": "guide_snow_p6.png"
     }
+  },
+  "fireworks": {
+    "1": {
+      "node": "/obj/fireworks/stars",
+      "wanted": "scatter",
+      "png": "guide_fireworks_p1.png"
+    },
+    "2": {
+      "node": "/obj/fireworks/push_out",
+      "wanted": "attribwrangle",
+      "png": "guide_fireworks_p2.png"
+    },
+    "3": {
+      "node": "/obj/fireworks/fly",
+      "wanted": "dopimport",
+      "png": "guide_fireworks_p3.png"
+    },
+    "4": {
+      "node": "/obj/fireworks/hot_head",
+      "wanted": "attribwrangle",
+      "png": "guide_fireworks_p4.png"
+    },
+    "5": {
+      "node": "/obj/fireworks/three_shells",
+      "wanted": "merge",
+      "png": "guide_fireworks_p5.png"
+    },
+    "6": {
+      "node": "/obj/fireworks/assign_fire",
+      "wanted": "material",
+      "png": "guide_fireworks_p6.png"
+    }
   }
 }

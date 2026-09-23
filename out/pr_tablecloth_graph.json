@@ -1,0 +1,332 @@
+{
+  "title": "テーブルクロスを掛ける",
+  "network": "/obj/tablecloth",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "table_top",
+      "type": "box",
+      "pos": [
+        -6.072,
+        8.584
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.2,
+        "sizey": 0.04,
+        "sizez": 0.8,
+        "ty": 0.74
+      }
+    },
+    {
+      "name": "leg0",
+      "type": "box",
+      "pos": [
+        -3.812,
+        8.132
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.05,
+        "sizey": 0.72,
+        "sizez": 0.05,
+        "tx": -0.54,
+        "ty": 0.36,
+        "tz": -0.34
+      }
+    },
+    {
+      "name": "leg1",
+      "type": "box",
+      "pos": [
+        -1.553,
+        7.681
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.05,
+        "sizey": 0.72,
+        "sizez": 0.05,
+        "tx": 0.54,
+        "ty": 0.36,
+        "tz": -0.34
+      }
+    },
+    {
+      "name": "leg2",
+      "type": "box",
+      "pos": [
+        0.706,
+        7.229
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.05,
+        "sizey": 0.72,
+        "sizez": 0.05,
+        "tx": -0.54,
+        "ty": 0.36,
+        "tz": 0.34
+      }
+    },
+    {
+      "name": "leg3",
+      "type": "box",
+      "pos": [
+        2.965,
+        6.777
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.05,
+        "sizey": 0.72,
+        "sizez": 0.05,
+        "tx": 0.54,
+        "ty": 0.36,
+        "tz": 0.34
+      }
+    },
+    {
+      "name": "table",
+      "type": "merge",
+      "pos": [
+        -1.553,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cloth",
+      "type": "grid",
+      "pos": [
+        -8.896,
+        7.379
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.9,
+        "sizey": 1.45,
+        "ty": 0.86,
+        "ry": 4.0,
+        "rows": 110,
+        "cols": 140
+      }
+    },
+    {
+      "name": "cloth_setup",
+      "type": "vellumconstraints",
+      "pos": [
+        -8.896,
+        6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "drop",
+      "type": "vellumsolver",
+      "pos": [
+        -5.224,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "useground": 1,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "soft_folds",
+      "type": "subdivide",
+      "pos": [
+        -5.224,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "thickness",
+      "type": "polyextrude::2.0",
+      "pos": [
+        -5.224,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.002,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "assign_linen",
+      "type": "material",
+      "pos": [
+        -5.224,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/linen_mat"
+      }
+    },
+    {
+      "name": "assign_wood",
+      "type": "material",
+      "pos": [
+        5.224,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/wood_mat"
+      }
+    },
+    {
+      "name": "dining",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "table_top",
+      "from_output": 0,
+      "to": "table",
+      "to_input": 0
+    },
+    {
+      "from": "leg0",
+      "from_output": 0,
+      "to": "table",
+      "to_input": 1
+    },
+    {
+      "from": "leg1",
+      "from_output": 0,
+      "to": "table",
+      "to_input": 2
+    },
+    {
+      "from": "leg2",
+      "from_output": 0,
+      "to": "table",
+      "to_input": 3
+    },
+    {
+      "from": "leg3",
+      "from_output": 0,
+      "to": "table",
+      "to_input": 4
+    },
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "cloth_setup",
+      "to_input": 0
+    },
+    {
+      "from": "cloth_setup",
+      "from_output": 0,
+      "to": "drop",
+      "to_input": 0
+    },
+    {
+      "from": "cloth_setup",
+      "from_output": 1,
+      "to": "drop",
+      "to_input": 1
+    },
+    {
+      "from": "table",
+      "from_output": 0,
+      "to": "drop",
+      "to_input": 2
+    },
+    {
+      "from": "drop",
+      "from_output": 0,
+      "to": "soft_folds",
+      "to_input": 0
+    },
+    {
+      "from": "soft_folds",
+      "from_output": 0,
+      "to": "thickness",
+      "to_input": 0
+    },
+    {
+      "from": "thickness",
+      "from_output": 0,
+      "to": "assign_linen",
+      "to_input": 0
+    },
+    {
+      "from": "table",
+      "from_output": 0,
+      "to": "assign_wood",
+      "to_input": 0
+    },
+    {
+      "from": "assign_linen",
+      "from_output": 0,
+      "to": "dining",
+      "to_input": 0
+    },
+    {
+      "from": "assign_wood",
+      "from_output": 0,
+      "to": "dining",
+      "to_input": 1
+    }
+  ]
+}

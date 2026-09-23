@@ -2555,6 +2555,17 @@ def render_guide_sections(guides, works, urls):
         out.append("          </nav>")
         out.append("        </div>")
 
+        # 動き（2026-09-23）。静止画だけでは揺れ・流れ・燃え方が伝わらないので、
+        # practice_kit の anim() で撮った短い映像を、音なしで繰り返し流す
+        anim = f'pr_{guide["id"]}_anim.mp4'
+        if prefix == "guide" and os.path.exists(os.path.join(OUT, anim)):
+            out.append('        <figure class="guide-anim">')
+            out.append(f'          <video src="{anim}" autoplay muted loop playsinline preload="metadata"'
+                       f' poster="{guide["hero"]}"></video>')
+            out.append(f'          <figcaption>{html.escape(guide.get("anim_cap") or "動き。ビューポートでフレームを順に撮ったもの。")}'
+                       "</figcaption>")
+            out.append("        </figure>")
+
         # 本物の Houdini で撮ったネットワーク全体（guide_ui_capture.py）
         net = f'{prefix}_{guide["id"]}_net.png'
         if os.path.exists(os.path.join(OUT, net)):
@@ -2564,6 +2575,13 @@ def render_guide_sections(guides, works, urls):
                        '（Houdini の画面）">')
             out.append("          <figcaption>組み上がったネットワーク。"
                        "Houdini の画面をそのまま撮ったもの。</figcaption>")
+            out.append("        </figure>")
+        elif os.path.exists(os.path.join(OUT, f'pr_{guide["id"]}_graph.png')):
+            # Houdini の画面が撮れていないときは、hip から描いたつなぎ方の図を出す
+            out.append('        <figure class="guide-net">')
+            out.append(f'          <img src="pr_{guide["id"]}_graph.png" loading="lazy" decoding="async"'
+                       f' alt="{html.escape(guide["title"])}のノードのつなぎ方">')
+            out.append("          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>")
             out.append("        </figure>")
 
         out.append('        <ol class="steps">')
@@ -3338,7 +3356,7 @@ def copy_images():
         if not page_html.endswith(".html"):
             continue
         with open(os.path.join(SITE, page_html), encoding="utf-8") as fp:
-            names |= set(re.findall(r'"([\w.\-]+\.(?:png|gif))"', fp.read()))
+            names |= set(re.findall(r'"([\w.\-]+\.(?:png|gif|mp4))"', fp.read()))
 
     os.makedirs(DOCS, exist_ok=True)
     copied = 0

@@ -1,0 +1,476 @@
+{
+  "title": "窓ガラスを割る",
+  "network": "/obj/glass",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "pane",
+      "type": "box",
+      "pos": [
+        -12.284,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizey": 1.4,
+        "sizez": 0.008,
+        "ty": 0.75
+      }
+    },
+    {
+      "name": "hit_point",
+      "type": "add",
+      "pos": [
+        -10.025,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1,
+        "pt0x": 0.12,
+        "pt0y": 0.9
+      }
+    },
+    {
+      "name": "preview_pane",
+      "type": "merge",
+      "pos": [
+        -11.155,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "crack",
+      "type": "rbdmaterialfracture::3.0",
+      "pos": [
+        -6.778,
+        9.94
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "materialtype": 1,
+        "glass_useinput": 1
+      }
+    },
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        -4.518,
+        10.617
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.06,
+        "rady": 0.06,
+        "radz": 0.06,
+        "tx": 0.12,
+        "ty": 0.9,
+        "tz": 0.7,
+        "rows": 16
+      }
+    },
+    {
+      "name": "throw",
+      "type": "attribwrangle",
+      "pos": [
+        -4.518,
+        9.488
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 球に名前と速さを付ける。-z 向き（ガラスへ）に 14 m/秒\ns@name = 'ball';\nv@v = {0, 0, -14};"
+      }
+    },
+    {
+      "name": "glass_and_ball",
+      "type": "merge",
+      "pos": [
+        -5.648,
+        8.509
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "one_per_piece",
+      "type": "pack",
+      "pos": [
+        -5.648,
+        7.379
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "packbyname": 1,
+        "transfer_attributes": "name v"
+      }
+    },
+    {
+      "name": "hold_edges",
+      "type": "attribwrangle",
+      "pos": [
+        -5.648,
+        6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 破片ごとの外枠（bounds = xmin, xmax, ymin, ymax, zmin, zmax）。枠（板の縁から 3 cm）に触れる破片は動かさない\nfloat b[] = primintrinsic(0, 'bound..."
+      }
+    },
+    {
+      "name": "weak_glue",
+      "type": "attribwrangle",
+      "pos": [
+        -2.259,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// 破片どうしをくっつける力。既定のままだと強すぎて、球が跳ね返るだけで割れない\nf@strength = chf('strength');"
+      }
+    },
+    {
+      "name": "shatter",
+      "type": "rbdbulletsolver",
+      "pos": [
+        -3.954,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "frame0",
+      "type": "box",
+      "pos": [
+        0.565,
+        4.443
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.12,
+        "sizey": 0.06,
+        "sizez": 0.06,
+        "ty": 0.02
+      }
+    },
+    {
+      "name": "frame1",
+      "type": "box",
+      "pos": [
+        2.824,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.12,
+        "sizey": 0.06,
+        "sizez": 0.06,
+        "ty": 1.48
+      }
+    },
+    {
+      "name": "frame2",
+      "type": "box",
+      "pos": [
+        5.083,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.06,
+        "sizey": 1.52,
+        "sizez": 0.06,
+        "tx": -0.53,
+        "ty": 0.75
+      }
+    },
+    {
+      "name": "frame3",
+      "type": "box",
+      "pos": [
+        7.342,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.06,
+        "sizey": 1.52,
+        "sizez": 0.06,
+        "tx": 0.53,
+        "ty": 0.75
+      }
+    },
+    {
+      "name": "window_frame",
+      "type": "merge",
+      "pos": [
+        3.954,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "shards",
+      "type": "unpack",
+      "pos": [
+        -3.954,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_glass",
+      "type": "material",
+      "pos": [
+        -3.954,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/glass_mat"
+      }
+    },
+    {
+      "name": "assign_ball",
+      "type": "material",
+      "pos": [
+        -3.954,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group1": "@name=ball",
+        "shop_materialpath1": "/mat/steel_mat"
+      }
+    },
+    {
+      "name": "assign_frame",
+      "type": "material",
+      "pos": [
+        3.954,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/frame_mat"
+      }
+    },
+    {
+      "name": "window",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "pane",
+      "from_output": 0,
+      "to": "preview_pane",
+      "to_input": 0
+    },
+    {
+      "from": "hit_point",
+      "from_output": 0,
+      "to": "preview_pane",
+      "to_input": 1
+    },
+    {
+      "from": "pane",
+      "from_output": 0,
+      "to": "crack",
+      "to_input": 0
+    },
+    {
+      "from": "hit_point",
+      "from_output": 0,
+      "to": "crack",
+      "to_input": 3
+    },
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "throw",
+      "to_input": 0
+    },
+    {
+      "from": "crack",
+      "from_output": 0,
+      "to": "glass_and_ball",
+      "to_input": 0
+    },
+    {
+      "from": "throw",
+      "from_output": 0,
+      "to": "glass_and_ball",
+      "to_input": 1
+    },
+    {
+      "from": "glass_and_ball",
+      "from_output": 0,
+      "to": "one_per_piece",
+      "to_input": 0
+    },
+    {
+      "from": "one_per_piece",
+      "from_output": 0,
+      "to": "hold_edges",
+      "to_input": 0
+    },
+    {
+      "from": "crack",
+      "from_output": 1,
+      "to": "weak_glue",
+      "to_input": 0
+    },
+    {
+      "from": "hold_edges",
+      "from_output": 0,
+      "to": "shatter",
+      "to_input": 0
+    },
+    {
+      "from": "weak_glue",
+      "from_output": 0,
+      "to": "shatter",
+      "to_input": 1
+    },
+    {
+      "from": "frame0",
+      "from_output": 0,
+      "to": "window_frame",
+      "to_input": 0
+    },
+    {
+      "from": "frame1",
+      "from_output": 0,
+      "to": "window_frame",
+      "to_input": 1
+    },
+    {
+      "from": "frame2",
+      "from_output": 0,
+      "to": "window_frame",
+      "to_input": 2
+    },
+    {
+      "from": "frame3",
+      "from_output": 0,
+      "to": "window_frame",
+      "to_input": 3
+    },
+    {
+      "from": "shatter",
+      "from_output": 0,
+      "to": "shards",
+      "to_input": 0
+    },
+    {
+      "from": "shards",
+      "from_output": 0,
+      "to": "assign_glass",
+      "to_input": 0
+    },
+    {
+      "from": "assign_glass",
+      "from_output": 0,
+      "to": "assign_ball",
+      "to_input": 0
+    },
+    {
+      "from": "window_frame",
+      "from_output": 0,
+      "to": "assign_frame",
+      "to_input": 0
+    },
+    {
+      "from": "assign_ball",
+      "from_output": 0,
+      "to": "window",
+      "to_input": 0
+    },
+    {
+      "from": "assign_frame",
+      "from_output": 0,
+      "to": "window",
+      "to_input": 1
+    }
+  ]
+}

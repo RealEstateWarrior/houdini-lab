@@ -1,0 +1,111 @@
+[
+ {
+  "spec": "sop/material",
+  "ok": true,
+  "category": "SOP",
+  "name": "material",
+  "label": "Material",
+  "parms": [
+   {
+    "name": "style",
+    "label": "Attributes",
+    "default": [
+     "primitive"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "point",
+      "Point Attributes"
+     ],
+     [
+      "primitive",
+      "Primitive Attributes"
+     ],
+     [
+      "detail",
+      "Detail Attribute"
+     ]
+    ]
+   },
+   {
+    "name": "uselabels",
+    "label": "Override Menu",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "uselabels",
+      "Use Parameter Labels For Override Menu"
+     ],
+     [
+      "usenames",
+      "Use Parameter Names For Override Menu"
+     ]
+    ]
+   },
+   {
+    "name": "createstylesheets",
+    "label": "Create style sheet attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "fullpath",
+    "label": "Use full paths to materials",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "num_materials",
+    "label": "Number of Materials",
+    "default": 1,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "group1",
+    "label": "Group",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "shop_materialpath1",
+    "label": "Material",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "localvar1",
+    "label": "Overrides use local variables",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "mergeoverride1",
+    "label": "Merge Overrides",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "num_local1",
+    "label": "Local Overrides",
+    "default": 0,
+    "kind": "Folder",
+    "menu": []
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 1
+ }
+]

@@ -28,6 +28,14 @@ def main():
             data["guides"].append(entry)
             by_id[gid] = len(data["guides"]) - 1
             print("足した:", gid)
+    # 後から撮った動き（pr_anim_add.py）のキャプションも、ここでまとめて混ぜる
+    caps_path = os.path.join(OUT, "_anim_caps.json")
+    if os.path.exists(caps_path):
+        with open(caps_path, encoding="utf-8") as fp:
+            caps = json.load(fp)
+        for g in data["guides"]:
+            if g["id"] in caps:
+                g["anim_cap"] = caps[g["id"]]
     with open(GUIDES, "w", encoding="utf-8", newline="") as fp:
         fp.write(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
     print("実践", len(data["guides"]), "本")

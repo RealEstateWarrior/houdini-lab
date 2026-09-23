@@ -2470,6 +2470,18 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 }
 .guide-net figcaption { margin-top: 8px; }
 
+/* 動き（シミュレーションの実践）。ビューポートの連番を mp4 にしたもの */
+.guide-anim { margin: 28px 0 0; }
+.guide-anim video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: #303030;
+}
+.guide-anim figcaption { margin-top: 8px; }
+
 /* 段ごとのパラメータ画面。閉じておき、見たい人だけ開く */
 .step-ui { margin-top: 12px; }
 .step-ui summary {

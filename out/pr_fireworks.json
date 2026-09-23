@@ -1,0 +1,110 @@
+{
+ "id": "fireworks",
+ "title": "花火を打ち上げる",
+ "lede": "夜空で丸く開く「菊」の花火を作る。球の表面に並べた点を一斉に外へ飛ばし、重力と空気抵抗で垂れさせ、通った跡を線にすると尾ができる。1発できたら、時間と場所をずらして3発に増やす。",
+ "hero": "pr_fireworks_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム 22）。3発の菊が、時間差で開いている。",
+ "facts": [
+  [
+   "足すノード",
+   "15個（dopnet の中に5個）"
+  ],
+  [
+   "星の数",
+   "320個 × 3発"
+  ],
+  [
+   "60 フレームの計算",
+   "0.3秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "3.2秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_fireworks.hipnc",
+ "tags": [
+  "シミュレーション",
+  "エフェクト",
+  "POP",
+  "パーティクル",
+  "Karma"
+ ],
+ "steps": [
+  {
+   "title": "玉の中の「星」を並べる",
+   "node": "scatter",
+   "ui_node": "stars",
+   "body": "<code>sphere</code>（半径 1 m）の表面に、<code>scatter</code> で <strong>320 個</strong>の点をまく。1つ1つが、花火の玉に詰まった「星」（燃えながら飛ぶ火薬の粒）になる。<strong>Relax Iterations</strong> を入れておくと、点どうしが離れて、開いたときに穴や固まりができにくい。",
+   "img": "pr_fireworks_1.png",
+   "cap": "球の表面に並んだ 320 個の星。",
+   "ui_parm": "npts"
+  },
+  {
+   "title": "外向きの速さと色を付ける",
+   "node": "attribwrangle",
+   "ui_node": "push_out",
+   "body": "<code>attribwrangle</code> で、点ごとに <strong>v</strong>（速さと向き）を付ける。向きは球の中心から外、速さは <strong>speed = 34</strong>（m/秒）を星ごとに 88〜100% の範囲でばらつかせる。全部同じ速さだと、コンパスで描いたような不自然な球になる。色 <strong>Cd</strong> は金色（1, 0.72, 0.32）。",
+   "img": "pr_fireworks_2.png",
+   "cap": "見た目は同じ。点ごとに「外向きの速さ」が入った。",
+   "ui_parm": "speed"
+  },
+  {
+   "title": "重力と空気抵抗で飛ばす",
+   "node": "dopimport",
+   "ui_node": "fly",
+   "body": "<code>dopnet</code> の中に POP を組む。<code>popsource</code> は Emission Type を <strong>All Points</strong>、<strong>Impulse Activation</strong> に式 <strong>$FF == 1</strong> を入れて、1 フレーム目だけ 320 個を一度に生む。Initial Velocity は <strong>Use Inherited Velocity</strong>（前の段で付けた v をそのまま使う）。寿命 <strong>Life Expectancy 2.2 秒・Life Variance 0.5</strong> で、消える時間をばらけさせる。<code>popforce</code> で下向き 9.81 の重力、<code>popdrag</code> の <strong>Air Resistance 0.45</strong> で空気抵抗を入れる。空気抵抗があると最初だけ速く広がり、すぐ減速して垂れる。花火らしさはここで出る。0.9 秒後の広がりは約 13 m。外の <code>dopimport</code> で結果を取り出す。",
+   "img": "pr_fireworks_3.png",
+   "cap": "フレーム 22。開いて、垂れはじめた星。",
+   "ui_parm": "airresist"
+  },
+  {
+   "title": "通った跡を線にして、尾を付ける",
+   "node": "attribwrangle",
+   "ui_node": "hot_head",
+   "body": "<code>trail</code> の Result Type を <strong>Connect as Polygons</strong>、Trail Length を <strong>18</strong> にすると、星ごとに「今までの 18 フレーム分の位置」をつないだ線ができる。これが火の粉の尾になる。次の <code>attribwrangle</code> で、線の先頭ほど白く太く、うしろほど赤く細くする（width 0.01 → 0.00 m）。さらに寿命の終わりに向けて全体を暗くすると、燃え尽きて消えていく。",
+   "img": "pr_fireworks_4.png",
+   "cap": "尾を引いて垂れる金色の菊。",
+   "ui_parm": "length"
+  },
+  {
+   "title": "時間と場所をずらして3発にする",
+   "node": "merge",
+   "ui_node": "three_shells",
+   "body": "<code>timeshift</code> の Frame に <strong>$F - 7</strong> のような式を入れると、同じ花火を 7 フレーム遅れて再生できる。<code>xform</code> で場所をずらし、もう1本の <code>attribwrangle</code> で色を赤・水色に置き換える。計算（POP）は1回だけで、3発とも同じ結果を使い回すので軽い。最後に <code>merge</code> でまとめる。",
+   "img": "pr_fireworks_5.png",
+   "cap": "フレーム 22。3発が少しずつ遅れて開いている。",
+   "ui_parm": "frame"
+  },
+  {
+   "title": "光る材質を当てる",
+   "node": "material",
+   "ui_node": "assign_fire",
+   "body": "<code>principledshader</code> の <strong>Emission Intensity を 0.9</strong>、<strong>Emission Color の Use Point Color</strong> を入れる。線の色（Cd）がそのまま光の色になる。Base Color は黒にして、光以外の見え方を消す。",
+   "img": "",
+   "cap": "材質を当てた状態（ビューポートでは光らない）。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "空気抵抗を入れないと、花火に見えない",
+   "body": "Air Resistance を 0 にすると、フレーム 22 の広がりは約 13 m（0.45 のときは約 13 m）。減速しないので星がまっすぐ飛び続け、ただ大きくなる球になる。本物は最初に勢いよく開き、すぐ止まって垂れる。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "寿命をばらけさせないと、一斉に消える",
+   "body": "Life Variance 0 では、フレーム 40 に 320 個あった星が、フレーム 60 には 69 個。0.5 では 40 で 320 個、60 で 69 個。ばらつきがあると、少しずつ消えていく。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "尾の点数は、星の数 × Trail Length",
+   "body": "320 個の星に Trail Length 18 で、尾の線の点はフレーム 22 で 5,760 個。尾を長くすると点が同じ割合で増える。3発にしても計算は1回で済むのは、timeshift で使い回しているから。",
+   "img": "",
+   "cap": ""
+  }
+ ],
+ "anim_cap": "打ち上がって開き、垂れて消えるまで（60 フレーム＝2.5 秒）。"
+}
