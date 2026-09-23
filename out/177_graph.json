@@ -1,0 +1,451 @@
+{
+  "title": "実験177",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cloth",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "rows": 21,
+        "cols": 21
+      }
+    },
+    {
+      "name": "top",
+      "type": "groupexpression",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 1,
+        "groupname1": "top",
+        "snippet1": "@P.y > 0.49"
+      }
+    },
+    {
+      "name": "vc25_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs25_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "niter": 25,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc25_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs25_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "niter": 25,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc100_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs100_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc100_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs100_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc400_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs400_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "niter": 400,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc400_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs400_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "niter": 400,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc1600_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs1600_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "niter": 1600,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc1600_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs1600_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "niter": 1600,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "top",
+      "to_input": 0
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc25_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc25_1",
+      "from_output": 0,
+      "to": "vs25_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc25_1",
+      "from_output": 1,
+      "to": "vs25_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc25_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc25_5",
+      "from_output": 0,
+      "to": "vs25_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc25_5",
+      "from_output": 1,
+      "to": "vs25_5",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc100_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc100_1",
+      "from_output": 0,
+      "to": "vs100_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc100_1",
+      "from_output": 1,
+      "to": "vs100_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc100_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc100_5",
+      "from_output": 0,
+      "to": "vs100_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc100_5",
+      "from_output": 1,
+      "to": "vs100_5",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc400_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc400_1",
+      "from_output": 0,
+      "to": "vs400_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc400_1",
+      "from_output": 1,
+      "to": "vs400_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc400_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc400_5",
+      "from_output": 0,
+      "to": "vs400_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc400_5",
+      "from_output": 1,
+      "to": "vs400_5",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc1600_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc1600_1",
+      "from_output": 0,
+      "to": "vs1600_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc1600_1",
+      "from_output": 1,
+      "to": "vs1600_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc1600_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc1600_5",
+      "from_output": 0,
+      "to": "vs1600_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc1600_5",
+      "from_output": 1,
+      "to": "vs1600_5",
+      "to_input": 1
+    }
+  ]
+}

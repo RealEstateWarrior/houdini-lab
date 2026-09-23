@@ -1,0 +1,157 @@
+{
+  "title": "実験187",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "uneven",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int pts[]; append(pts, addpoint(0, set(0.000000000, 1.000000000, 0))); append(pts, addpoint(0, set(-0.087155743, 0.99..."
+      }
+    },
+    {
+      "name": "s_uniform_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_uniform_10",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_scaledominant_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 1,
+        "strength": 1.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_scaledominant_10",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 1,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_curvaturedominant_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 2,
+        "strength": 1.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_curvaturedominant_10",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 2,
+        "filterquality": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "uneven",
+      "from_output": 0,
+      "to": "s_uniform_1",
+      "to_input": 0
+    },
+    {
+      "from": "uneven",
+      "from_output": 0,
+      "to": "s_uniform_10",
+      "to_input": 0
+    },
+    {
+      "from": "uneven",
+      "from_output": 0,
+      "to": "s_scaledominant_1",
+      "to_input": 0
+    },
+    {
+      "from": "uneven",
+      "from_output": 0,
+      "to": "s_scaledominant_10",
+      "to_input": 0
+    },
+    {
+      "from": "uneven",
+      "from_output": 0,
+      "to": "s_curvaturedominant_1",
+      "to_input": 0
+    },
+    {
+      "from": "uneven",
+      "from_output": 0,
+      "to": "s_curvaturedominant_10",
+      "to_input": 0
+    }
+  ]
+}

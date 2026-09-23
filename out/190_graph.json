@@ -1,0 +1,90 @@
+{
+  "title": "実験190",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "scale": 0.3
+      }
+    },
+    {
+      "name": "grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 100.0,
+        "sizey": 100.0,
+        "rows": 100,
+        "cols": 100
+      }
+    },
+    {
+      "name": "packed",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "pack": 1
+      }
+    },
+    {
+      "name": "plain",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "packed",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "packed",
+      "to_input": 1
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "plain",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "plain",
+      "to_input": 1
+    }
+  ]
+}

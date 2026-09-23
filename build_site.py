@@ -1338,7 +1338,7 @@ DONE = [
      "shots": ["199_band.png"],
      "title": "Open で丸めた辺の半径が約 3 升大きいのは、SDF の帯のせいではない — 帯 3〜25 升で足し分は変わらない",
      "note": "Openの辺の半径の足し分(約3升)は帯の幅によらない"},
-    {"no": "200", "anchor": "exp200",
+    {"no": "200", "anchor": "exp200", "hip": "200_flip.hipnc",
      "tags": ["シミュレーション", "FLIP", "液体", "制作", "効率化", "落とし穴", "訂正"],
      "log": "log_fx", "thumb": "200_grid.png",
      "shots": ["200_grid.png", "200_cost.png", "200_volume.png"],
@@ -1797,12 +1797,18 @@ def inject_experiment_links(page, urls, nodes):
             rows.append('        <p class="usedby">'
                         '<span class="usedby-tag">使ったノード</span>'
                         + "".join(chips) + "</p>")
-        if hips.get(no):
+        # 091 以降は hip_export.py で後から作った NNN_scene.hipnc を使う（DONE に書いていなくても出す）
+        hip = hips.get(no) or (f"{no}_scene.hipnc"
+                               if os.path.exists(os.path.join(OUT, f"{no}_scene.hipnc")) else None)
+        if hip:
             rows.append('        <p class="usedby">'
                         '<span class="usedby-tag">シーンファイル</span>'
-                        f'<a href="{GITHUB_RAW}{hips[no]}"'
+                        f'<a href="{GITHUB_RAW}{hip}"'
                         ' target="_blank" rel="noopener noreferrer">'
-                        f'{hips[no]}</a></p>')
+                        f'{hip}</a></p>')
+        if os.path.exists(os.path.join(OUT, f"{no}_graph.png")) and f"{no}_graph.png" not in whole:
+            rows.append('        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary>'
+                        f'<img src="{no}_graph.png" alt="実験{no} のノードのつなぎ方" loading="lazy" decoding="async"></details>')
         if not rows:
             return whole
         return whole + "\n" + "\n".join(rows)

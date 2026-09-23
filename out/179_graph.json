@@ -1,0 +1,304 @@
+{
+  "title": "実験179",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ptg1_1",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "dopg1_1",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "impg1_1",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dopg1_1"
+      }
+    },
+    {
+      "name": "ptg1_8",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "dopg1_8",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 8,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "impg1_8",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dopg1_8"
+      }
+    },
+    {
+      "name": "ptg4_1",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "dopg4_1",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "impg4_1",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dopg4_1"
+      }
+    },
+    {
+      "name": "ptg4_8",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "dopg4_8",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 8,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "impg4_8",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dopg4_8"
+      }
+    },
+    {
+      "name": "pts5",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "dops5",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imps5",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dops5"
+      }
+    },
+    {
+      "name": "pts10",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "dops10",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imps10",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dops10"
+      }
+    },
+    {
+      "name": "pts20",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "dops20",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imps20",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dops20"
+      }
+    }
+  ],
+  "edges": []
+}

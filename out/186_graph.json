@@ -1,0 +1,208 @@
+{
+  "title": "実験186",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "c24",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1,
+        "divs": 24
+      }
+    },
+    {
+      "name": "s_uniform_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_uniform_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0
+      }
+    },
+    {
+      "name": "s_scaledominant_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 1,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_scaledominant_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 1
+      }
+    },
+    {
+      "name": "s_curvaturedominant_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 2,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s_curvaturedominant_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "method": 2
+      }
+    },
+    {
+      "name": "wave",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int pts[]; for (int i = 0; i <= 40; i++) { float x = i / 40.0; append(pts, addpoint(0, set(x, 0.1 * sin(4 * PI * x), ..."
+      }
+    },
+    {
+      "name": "w_none",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "w_unsharededges",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 1,
+        "filterquality": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s_uniform_1",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s_uniform_2",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s_scaledominant_1",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s_scaledominant_2",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s_curvaturedominant_1",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s_curvaturedominant_2",
+      "to_input": 0
+    },
+    {
+      "from": "wave",
+      "from_output": 0,
+      "to": "w_none",
+      "to_input": 0
+    },
+    {
+      "from": "wave",
+      "from_output": 0,
+      "to": "w_unsharededges",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,350 @@
+{
+  "title": "実験183",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "ty": 2.0
+      }
+    },
+    {
+      "name": "name",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "s@name = \"box\";"
+      }
+    },
+    {
+      "name": "rbd_0_10",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "bounce": 0.0,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "ground_bounce": 0.0,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "rbd_25_10",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "ground_bounce": 0.25,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "rbd_50_10",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "bounce": 0.5,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "rbd_75_10",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "bounce": 0.75,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "ground_bounce": 0.75,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "rbd_100_10",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "bounce": 1.0,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "ground_bounce": 1.0,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "rbd_50_1",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "substeps": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "bounce": 0.5,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    },
+    {
+      "name": "rbd_50_50",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "substeps": 50,
+        "folder6": 1,
+        "folder4": 1,
+        "bounce": 0.5,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "name",
+      "to_input": 0
+    },
+    {
+      "from": "name",
+      "from_output": 0,
+      "to": "rbd_0_10",
+      "to_input": 0
+    },
+    {
+      "from": "name",
+      "from_output": 0,
+      "to": "rbd_25_10",
+      "to_input": 0
+    },
+    {
+      "from": "name",
+      "from_output": 0,
+      "to": "rbd_50_10",
+      "to_input": 0
+    },
+    {
+      "from": "name",
+      "from_output": 0,
+      "to": "rbd_75_10",
+      "to_input": 0
+    },
+    {
+      "from": "name",
+      "from_output": 0,
+      "to": "rbd_100_10",
+      "to_input": 0
+    },
+    {
+      "from": "name",
+      "from_output": 0,
+      "to": "rbd_50_1",
+      "to_input": 0
+    },
+    {
+      "from": "name",
+      "from_output": 0,
+      "to": "rbd_50_50",
+      "to_input": 0
+    }
+  ]
+}

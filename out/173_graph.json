@@ -1,0 +1,277 @@
+{
+  "title": "実験173",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g100",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 100,
+        "cols": 100
+      }
+    },
+    {
+      "name": "pts100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "@P.y = sin(@P.x * 10) * cos(@P.z * 10) * 0.1 * ch('k');"
+      }
+    },
+    {
+      "name": "det100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "for (int i = 0; i < npoints(0); i++) { vector p = point(0, 'P', i); p.y = sin(p.x * 10) * cos(p.z * 10) * 0.1 * ch('k..."
+      }
+    },
+    {
+      "name": "py100",
+      "type": "python",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "python": "\nimport math\nnode = hou.pwd()\ngeo = node.geometry()\nk = node.evalParm(\"k\")\nP = geo.pointFloatAttribValues(\"P\")\nout = ..."
+      }
+    },
+    {
+      "name": "pe100",
+      "type": "python",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "python": "\nimport math\nnode = hou.pwd()\ngeo = node.geometry()\nk = node.evalParm(\"k\")\nfor pt in geo.points():\n    p = pt.positio..."
+      }
+    },
+    {
+      "name": "g316",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 316,
+        "cols": 316
+      }
+    },
+    {
+      "name": "pts316",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "@P.y = sin(@P.x * 10) * cos(@P.z * 10) * 0.1 * ch('k');"
+      }
+    },
+    {
+      "name": "det316",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "for (int i = 0; i < npoints(0); i++) { vector p = point(0, 'P', i); p.y = sin(p.x * 10) * cos(p.z * 10) * 0.1 * ch('k..."
+      }
+    },
+    {
+      "name": "py316",
+      "type": "python",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "python": "\nimport math\nnode = hou.pwd()\ngeo = node.geometry()\nk = node.evalParm(\"k\")\nP = geo.pointFloatAttribValues(\"P\")\nout = ..."
+      }
+    },
+    {
+      "name": "pe316",
+      "type": "python",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "python": "\nimport math\nnode = hou.pwd()\ngeo = node.geometry()\nk = node.evalParm(\"k\")\nfor pt in geo.points():\n    p = pt.positio..."
+      }
+    },
+    {
+      "name": "g1000",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 1000,
+        "cols": 1000
+      }
+    },
+    {
+      "name": "pts1000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "@P.y = sin(@P.x * 10) * cos(@P.z * 10) * 0.1 * ch('k');"
+      }
+    },
+    {
+      "name": "det1000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "for (int i = 0; i < npoints(0); i++) { vector p = point(0, 'P', i); p.y = sin(p.x * 10) * cos(p.z * 10) * 0.1 * ch('k..."
+      }
+    },
+    {
+      "name": "py1000",
+      "type": "python",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "python": "\nimport math\nnode = hou.pwd()\ngeo = node.geometry()\nk = node.evalParm(\"k\")\nP = geo.pointFloatAttribValues(\"P\")\nout = ..."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g100",
+      "from_output": 0,
+      "to": "pts100",
+      "to_input": 0
+    },
+    {
+      "from": "g100",
+      "from_output": 0,
+      "to": "det100",
+      "to_input": 0
+    },
+    {
+      "from": "g100",
+      "from_output": 0,
+      "to": "py100",
+      "to_input": 0
+    },
+    {
+      "from": "g100",
+      "from_output": 0,
+      "to": "pe100",
+      "to_input": 0
+    },
+    {
+      "from": "g316",
+      "from_output": 0,
+      "to": "pts316",
+      "to_input": 0
+    },
+    {
+      "from": "g316",
+      "from_output": 0,
+      "to": "det316",
+      "to_input": 0
+    },
+    {
+      "from": "g316",
+      "from_output": 0,
+      "to": "py316",
+      "to_input": 0
+    },
+    {
+      "from": "g316",
+      "from_output": 0,
+      "to": "pe316",
+      "to_input": 0
+    },
+    {
+      "from": "g1000",
+      "from_output": 0,
+      "to": "pts1000",
+      "to_input": 0
+    },
+    {
+      "from": "g1000",
+      "from_output": 0,
+      "to": "det1000",
+      "to_input": 0
+    },
+    {
+      "from": "g1000",
+      "from_output": 0,
+      "to": "py1000",
+      "to_input": 0
+    }
+  ]
+}

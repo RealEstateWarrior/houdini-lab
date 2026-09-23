@@ -1,0 +1,801 @@
+{
+  "title": "実験182",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "k1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.05, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "f1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k2",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.1, 0, 0)); setpointa..."
+      }
+    },
+    {
+      "name": "f2",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.15000000000000002, 0..."
+      }
+    },
+    {
+      "name": "f3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k4",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.2, 0, 0)); setpointa..."
+      }
+    },
+    {
+      "name": "f4",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k5",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.25, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "f5",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k6",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.30000000000000004, 0..."
+      }
+    },
+    {
+      "name": "f6",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k7",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.35000000000000003, 0..."
+      }
+    },
+    {
+      "name": "f7",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k8",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.4, 0, 0)); setpointa..."
+      }
+    },
+    {
+      "name": "f8",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k9",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.45, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "f9",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k10",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.5, 0, 0)); setpointa..."
+      }
+    },
+    {
+      "name": "f10",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k11",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.55, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "f11",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k12",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.6000000000000001, 0,..."
+      }
+    },
+    {
+      "name": "f12",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k13",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.65, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "f13",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k14",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.7000000000000001, 0,..."
+      }
+    },
+    {
+      "name": "f14",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k15",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.75, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "f15",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k16",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.8, 0, 0)); setpointa..."
+      }
+    },
+    {
+      "name": "f16",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k17",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.8500000000000001, 0,..."
+      }
+    },
+    {
+      "name": "f17",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k18",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.9, 0, 0)); setpointa..."
+      }
+    },
+    {
+      "name": "f18",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "k19",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0.5, 0)); setpointattrib(0, 'val', a, 0.0); int b = addpoint(0, set(0.9500000000000001, 0,..."
+      }
+    },
+    {
+      "name": "f19",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); i@n = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "m0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p0 = addpoint(0, set(0.2, 0, 0)); setpointattrib(0, 'val', p0, 1); int p1 = addpoint(0, set(0.5, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "mf0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); pcclose(h);"
+      }
+    },
+    {
+      "name": "m1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p0 = addpoint(0, set(0.3, 0, 0)); setpointattrib(0, 'val', p0, 1); int p1 = addpoint(0, set(0.6, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "mf1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); pcclose(h);"
+      }
+    },
+    {
+      "name": "m2",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p0 = addpoint(0, set(0.1, 0, 0)); setpointattrib(0, 'val', p0, 0); int p1 = addpoint(0, set(0.4, 0, 0)); setpoint..."
+      }
+    },
+    {
+      "name": "mf2",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int h = pcopen(0, 'P', {0,0,0}, 1.0, 10); f@a = pcfilter(h, 'val'); pcclose(h);"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "k1",
+      "from_output": 0,
+      "to": "f1",
+      "to_input": 0
+    },
+    {
+      "from": "k2",
+      "from_output": 0,
+      "to": "f2",
+      "to_input": 0
+    },
+    {
+      "from": "k3",
+      "from_output": 0,
+      "to": "f3",
+      "to_input": 0
+    },
+    {
+      "from": "k4",
+      "from_output": 0,
+      "to": "f4",
+      "to_input": 0
+    },
+    {
+      "from": "k5",
+      "from_output": 0,
+      "to": "f5",
+      "to_input": 0
+    },
+    {
+      "from": "k6",
+      "from_output": 0,
+      "to": "f6",
+      "to_input": 0
+    },
+    {
+      "from": "k7",
+      "from_output": 0,
+      "to": "f7",
+      "to_input": 0
+    },
+    {
+      "from": "k8",
+      "from_output": 0,
+      "to": "f8",
+      "to_input": 0
+    },
+    {
+      "from": "k9",
+      "from_output": 0,
+      "to": "f9",
+      "to_input": 0
+    },
+    {
+      "from": "k10",
+      "from_output": 0,
+      "to": "f10",
+      "to_input": 0
+    },
+    {
+      "from": "k11",
+      "from_output": 0,
+      "to": "f11",
+      "to_input": 0
+    },
+    {
+      "from": "k12",
+      "from_output": 0,
+      "to": "f12",
+      "to_input": 0
+    },
+    {
+      "from": "k13",
+      "from_output": 0,
+      "to": "f13",
+      "to_input": 0
+    },
+    {
+      "from": "k14",
+      "from_output": 0,
+      "to": "f14",
+      "to_input": 0
+    },
+    {
+      "from": "k15",
+      "from_output": 0,
+      "to": "f15",
+      "to_input": 0
+    },
+    {
+      "from": "k16",
+      "from_output": 0,
+      "to": "f16",
+      "to_input": 0
+    },
+    {
+      "from": "k17",
+      "from_output": 0,
+      "to": "f17",
+      "to_input": 0
+    },
+    {
+      "from": "k18",
+      "from_output": 0,
+      "to": "f18",
+      "to_input": 0
+    },
+    {
+      "from": "k19",
+      "from_output": 0,
+      "to": "f19",
+      "to_input": 0
+    },
+    {
+      "from": "m0",
+      "from_output": 0,
+      "to": "mf0",
+      "to_input": 0
+    },
+    {
+      "from": "m1",
+      "from_output": 0,
+      "to": "mf1",
+      "to_input": 0
+    },
+    {
+      "from": "m2",
+      "from_output": 0,
+      "to": "mf2",
+      "to_input": 0
+    }
+  ]
+}

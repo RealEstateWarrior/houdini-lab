@@ -1,0 +1,451 @@
+{
+  "title": "実験170",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cloth",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "rows": 21,
+        "cols": 21
+      }
+    },
+    {
+      "name": "top",
+      "type": "groupexpression",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 1,
+        "groupname1": "top",
+        "snippet1": "@P.y > 0.49"
+      }
+    },
+    {
+      "name": "vc10_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs10_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc10_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top"
+      }
+    },
+    {
+      "name": "vs10_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc4_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top",
+        "stretchstiffnessexp": 4
+      }
+    },
+    {
+      "name": "vs4_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc4_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top",
+        "stretchstiffnessexp": 4
+      }
+    },
+    {
+      "name": "vs4_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc3_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top",
+        "stretchstiffnessexp": 3
+      }
+    },
+    {
+      "name": "vs3_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc3_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top",
+        "stretchstiffnessexp": 3
+      }
+    },
+    {
+      "name": "vs3_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc2_1",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top",
+        "stretchstiffnessexp": 2
+      }
+    },
+    {
+      "name": "vs2_1",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "vc2_5",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "top",
+        "stretchstiffnessexp": 2
+      }
+    },
+    {
+      "name": "vs2_5",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cloth",
+      "from_output": 0,
+      "to": "top",
+      "to_input": 0
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc10_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc10_1",
+      "from_output": 0,
+      "to": "vs10_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc10_1",
+      "from_output": 1,
+      "to": "vs10_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc10_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc10_5",
+      "from_output": 0,
+      "to": "vs10_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc10_5",
+      "from_output": 1,
+      "to": "vs10_5",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc4_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc4_1",
+      "from_output": 0,
+      "to": "vs4_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc4_1",
+      "from_output": 1,
+      "to": "vs4_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc4_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc4_5",
+      "from_output": 0,
+      "to": "vs4_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc4_5",
+      "from_output": 1,
+      "to": "vs4_5",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc3_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc3_1",
+      "from_output": 0,
+      "to": "vs3_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc3_1",
+      "from_output": 1,
+      "to": "vs3_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc3_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc3_5",
+      "from_output": 0,
+      "to": "vs3_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc3_5",
+      "from_output": 1,
+      "to": "vs3_5",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc2_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc2_1",
+      "from_output": 0,
+      "to": "vs2_1",
+      "to_input": 0
+    },
+    {
+      "from": "vc2_1",
+      "from_output": 1,
+      "to": "vs2_1",
+      "to_input": 1
+    },
+    {
+      "from": "top",
+      "from_output": 0,
+      "to": "vc2_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc2_5",
+      "from_output": 0,
+      "to": "vs2_5",
+      "to_input": 0
+    },
+    {
+      "from": "vc2_5",
+      "from_output": 1,
+      "to": "vs2_5",
+      "to_input": 1
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+  "title": "実験188",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g1",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0
+      }
+    },
+    {
+      "name": "g2",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 2.0
+      }
+    },
+    {
+      "name": "sp",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 48,
+        "cols": 96
+      }
+    },
+    {
+      "name": "h_g1_100_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "density": 100.0,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_g1_1000_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_g1_5000_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "density": 5000.0,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_g1_1000_1",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "forcecount": 1,
+        "count": 2500,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_g2_100_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "density": 100.0,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_g2_1000_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_g2_5000_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "density": 5000.0,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_g2_1000_1",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "forcecount": 1,
+        "count": 2500,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_sp_100_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "density": 100.0,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_sp_1000_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_sp_5000_0",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "count": 2500,
+        "density": 5000.0,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    },
+    {
+      "name": "h_sp_1000_1",
+      "type": "hairgen::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "forcecount": 1,
+        "count": 2500,
+        "hairprofile1pos": 0.17753121256828308,
+        "hairprofile1value": 1.0,
+        "hairprofile1interp": 5,
+        "hairprofile2pos": 0.8523035049438477,
+        "hairprofile2value": 1.0,
+        "hairprofile2interp": 5,
+        "hairprofile3pos": 1.0,
+        "hairprofile3interp": 5
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g1",
+      "from_output": 0,
+      "to": "h_g1_100_0",
+      "to_input": 0
+    },
+    {
+      "from": "g1",
+      "from_output": 0,
+      "to": "h_g1_1000_0",
+      "to_input": 0
+    },
+    {
+      "from": "g1",
+      "from_output": 0,
+      "to": "h_g1_5000_0",
+      "to_input": 0
+    },
+    {
+      "from": "g1",
+      "from_output": 0,
+      "to": "h_g1_1000_1",
+      "to_input": 0
+    },
+    {
+      "from": "g2",
+      "from_output": 0,
+      "to": "h_g2_100_0",
+      "to_input": 0
+    },
+    {
+      "from": "g2",
+      "from_output": 0,
+      "to": "h_g2_1000_0",
+      "to_input": 0
+    },
+    {
+      "from": "g2",
+      "from_output": 0,
+      "to": "h_g2_5000_0",
+      "to_input": 0
+    },
+    {
+      "from": "g2",
+      "from_output": 0,
+      "to": "h_g2_1000_1",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "h_sp_100_0",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "h_sp_1000_0",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "h_sp_5000_0",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "h_sp_1000_1",
+      "to_input": 0
+    }
+  ]
+}

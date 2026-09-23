@@ -1,0 +1,96 @@
+{
+  "title": "実験087",
+  "network": "/obj/spun",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "letters",
+      "type": "font",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "text": "SP"
+      }
+    },
+    {
+      "name": "thickness",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.15,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "center",
+      "type": "xform",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": -2.9802322387695312e-08,
+        "ty": 0.003999993205070496,
+        "tz": -0.07500000298023224
+      }
+    },
+    {
+      "name": "spin",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "ry": 270.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "letters",
+      "from_output": 0,
+      "to": "thickness",
+      "to_input": 0
+    },
+    {
+      "from": "thickness",
+      "from_output": 0,
+      "to": "center",
+      "to_input": 0
+    },
+    {
+      "from": "center",
+      "from_output": 0,
+      "to": "spin",
+      "to_input": 0
+    }
+  ]
+}

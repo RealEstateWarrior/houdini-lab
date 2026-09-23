@@ -1,0 +1,309 @@
+{
+  "title": "実験197",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "sdf",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.01,
+        "exteriorbandvoxels": 25,
+        "interiorbandvoxels": 25
+      }
+    },
+    {
+      "name": "base",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "open5",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 5.0
+      }
+    },
+    {
+      "name": "copen5",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "open10",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 10.0
+      }
+    },
+    {
+      "name": "copen10",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "open20",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 20.0
+      }
+    },
+    {
+      "name": "copen20",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "close5",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "close",
+        "voxeloffset": 5.0
+      }
+    },
+    {
+      "name": "cclose5",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "close10",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "close",
+        "voxeloffset": 10.0
+      }
+    },
+    {
+      "name": "cclose10",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "close20",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "close",
+        "voxeloffset": 20.0
+      }
+    },
+    {
+      "name": "cclose20",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "sdf",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "base",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "open5",
+      "to_input": 0
+    },
+    {
+      "from": "open5",
+      "from_output": 0,
+      "to": "copen5",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "open10",
+      "to_input": 0
+    },
+    {
+      "from": "open10",
+      "from_output": 0,
+      "to": "copen10",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "open20",
+      "to_input": 0
+    },
+    {
+      "from": "open20",
+      "from_output": 0,
+      "to": "copen20",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "close5",
+      "to_input": 0
+    },
+    {
+      "from": "close5",
+      "from_output": 0,
+      "to": "cclose5",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "close10",
+      "to_input": 0
+    },
+    {
+      "from": "close10",
+      "from_output": 0,
+      "to": "cclose10",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "close20",
+      "to_input": 0
+    },
+    {
+      "from": "close20",
+      "from_output": 0,
+      "to": "cclose20",
+      "to_input": 0
+    }
+  ]
+}

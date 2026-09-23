@@ -1,0 +1,160 @@
+{
+  "title": "実験172",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "fog",
+      "type": "isooffset",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pts",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 20000,
+        "relaxpoints": 0
+      }
+    },
+    {
+      "name": "count0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nint near[] = pcfind(0, \"P\", @P, 0.05, 200);\ni@nb = len(near) - 1;\n"
+      }
+    },
+    {
+      "name": "adv_curl",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "for (int i = 0; i < 60; i++) { vector v = curlnoise(@P * 2); @P += v * 0.02; }"
+      }
+    },
+    {
+      "name": "count_adv_curl",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nint near[] = pcfind(0, \"P\", @P, 0.05, 200);\ni@nb = len(near) - 1;\n"
+      }
+    },
+    {
+      "name": "adv_noise",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "for (int i = 0; i < 60; i++) { vector v = vector(noise(@P * 2)) - 0.5; @P += v * 0.02; }"
+      }
+    },
+    {
+      "name": "count_adv_noise",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nint near[] = pcfind(0, \"P\", @P, 0.05, 200);\ni@nb = len(near) - 1;\n"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "fog",
+      "to_input": 0
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "count0",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "adv_curl",
+      "to_input": 0
+    },
+    {
+      "from": "adv_curl",
+      "from_output": 0,
+      "to": "count_adv_curl",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "adv_noise",
+      "to_input": 0
+    },
+    {
+      "from": "adv_noise",
+      "from_output": 0,
+      "to": "count_adv_noise",
+      "to_input": 0
+    }
+  ]
+}

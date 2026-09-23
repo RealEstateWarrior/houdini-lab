@@ -1,0 +1,154 @@
+{
+  "title": "実験171",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "pts",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "for (int i = 0; i < 20; i++) for (int j = 0; j < 20; j++) for (int k = 0; k < 20; k++) addpoint(0, set(i, j, k) / 19...."
+      }
+    },
+    {
+      "name": "w0_1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nfloat h = 0.001;\nfloat f = chf(\"freq\");\nfunction vector F(vector p; float f; int kind) {\n    if (kind == 0) return c...",
+        "freq": 1.0
+      }
+    },
+    {
+      "name": "w0_4",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nfloat h = 0.001;\nfloat f = chf(\"freq\");\nfunction vector F(vector p; float f; int kind) {\n    if (kind == 0) return c...",
+        "freq": 4.0
+      }
+    },
+    {
+      "name": "w2_1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nfloat h = 0.001;\nfloat f = chf(\"freq\");\nfunction vector F(vector p; float f; int kind) {\n    if (kind == 0) return c...",
+        "freq": 1.0,
+        "kind": 2
+      }
+    },
+    {
+      "name": "w2_4",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nfloat h = 0.001;\nfloat f = chf(\"freq\");\nfunction vector F(vector p; float f; int kind) {\n    if (kind == 0) return c...",
+        "freq": 4.0,
+        "kind": 2
+      }
+    },
+    {
+      "name": "w1_1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nfloat h = 0.001;\nfloat f = chf(\"freq\");\nfunction vector F(vector p; float f; int kind) {\n    if (kind == 0) return c...",
+        "freq": 1.0,
+        "kind": 1
+      }
+    },
+    {
+      "name": "w1_4",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "\nfloat h = 0.001;\nfloat f = chf(\"freq\");\nfunction vector F(vector p; float f; int kind) {\n    if (kind == 0) return c...",
+        "freq": 4.0,
+        "kind": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w0_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w0_4",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w2_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w2_4",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w1_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w1_4",
+      "to_input": 0
+    }
+  ]
+}

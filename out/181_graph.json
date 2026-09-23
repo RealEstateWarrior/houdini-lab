@@ -1,0 +1,140 @@
+{
+  "title": "実験181",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "fog",
+      "type": "isooffset",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pts",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000,
+        "relaxpoints": 0
+      }
+    },
+    {
+      "name": "w0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.05 * ch('k'), 50); vector s = 0; foreach (int i; n) s += point(0, 'P', i); v@avg = s /..."
+      }
+    },
+    {
+      "name": "w1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = nearpoints(0, @P, 0.05 * ch('k'), 50); vector s = 0; foreach (int i; n) s += point(0, 'P', i); v@avg = s / ..."
+      }
+    },
+    {
+      "name": "w2",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int h = pcopen(0, 'P', @P, 0.05 * ch('k'), 50); v@avg = pcfilter(h, 'P'); i@cnt = pcnumfound(h); pcclose(h);"
+      }
+    },
+    {
+      "name": "w3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.05 * ch('k'), 50); i@cnt = len(n); v@avg = @P;"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "fog",
+      "to_input": 0
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w0",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w1",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w2",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "w3",
+      "to_input": 0
+    }
+  ]
+}

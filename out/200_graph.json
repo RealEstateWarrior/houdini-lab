@@ -1,0 +1,360 @@
+{
+  "title": "実験200",
+  "network": "/obj/flip",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "container",
+      "type": "flipcontainer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.02,
+        "sizex": 3.4,
+        "sizey": 2.5,
+        "sizez": 1.4,
+        "ty": 0.30000000000000004
+      }
+    },
+    {
+      "name": "water",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.0001,
+        "sizey": 0.0001,
+        "sizez": 0.0001,
+        "tx": -1.2,
+        "ty": -0.3
+      }
+    },
+    {
+      "name": "src",
+      "type": "flipsource",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "volumename": "source",
+        "particlesep": 0.02,
+        "addpscale": 1
+      }
+    },
+    {
+      "name": "sources",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "solver",
+      "type": "flipsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder2": 1,
+        "particlesep": 0.02,
+        "folder3": 1,
+        "waterlinesettings": 1,
+        "folder5": 1,
+        "folder6": 1,
+        "folder14": 1,
+        "folder15": 1,
+        "donarrowband": 0,
+        "vis_ramp1cb": 1.0,
+        "vis_ramp2pos": 0.4993646740913391,
+        "vis_ramp2cg": 0.5,
+        "vis_ramp2cb": 1.0,
+        "vis_ramp3pos": 1.0,
+        "vis_ramp3cr": 1.0,
+        "vis_ramp3cg": 1.0,
+        "vis_ramp3cb": 1.0
+      }
+    },
+    {
+      "name": "walls",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "wall0",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 3.4,
+        "sizey": 0.2,
+        "sizez": 1.4,
+        "ty": -0.85
+      }
+    },
+    {
+      "name": "wall1",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.2,
+        "sizey": 2.4,
+        "sizez": 1.4,
+        "tx": -1.6,
+        "ty": 0.25
+      }
+    },
+    {
+      "name": "wall2",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.2,
+        "sizey": 2.4,
+        "sizez": 1.4,
+        "tx": 1.6,
+        "ty": 0.25
+      }
+    },
+    {
+      "name": "wall3",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 3.4,
+        "sizey": 2.4,
+        "sizez": 0.2,
+        "ty": 0.25,
+        "tz": -0.6
+      }
+    },
+    {
+      "name": "wall4",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 3.4,
+        "sizey": 2.4,
+        "sizez": 0.2,
+        "ty": 0.25,
+        "tz": 0.6
+      }
+    },
+    {
+      "name": "tank",
+      "type": "flipcollide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "surface",
+      "type": "particlefluidsurface::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "particlesep": 0.02,
+        "conversion": 4,
+        "folder7": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "folder5": 1,
+        "velvisramp1cb": 0.8999999761581421,
+        "velvisramp2pos": 0.5057914853096008,
+        "velvisramp2cg": 0.9,
+        "velvisramp2cb": 0.9,
+        "velvisramp3pos": 1.0,
+        "velvisramp3cr": 1.0,
+        "velvisramp3cg": 1.0,
+        "velvisramp3cb": 1.0,
+        "vorticityvisramp1cb": 0.8999999761581421,
+        "vorticityvisramp2pos": 0.5,
+        "vorticityvisramp2cg": 0.8999999761581421,
+        "vorticityvisramp2cb": 0.8999999761581421,
+        "vorticityvisramp3pos": 1.0,
+        "vorticityvisramp3cr": 1.0,
+        "vorticityvisramp3cg": 1.0,
+        "vorticityvisramp3cb": 1.0,
+        "maskvisramp1cr": 0.2,
+        "maskvisramp1cb": 1.0,
+        "maskvisramp2pos": 0.25,
+        "maskvisramp2cg": 0.85,
+        "maskvisramp2cb": 1.0,
+        "maskvisramp3pos": 0.5,
+        "maskvisramp3cg": 1.0,
+        "maskvisramp3cb": 0.10000000149011612,
+        "maskvisramp4pos": 0.75,
+        "maskvisramp4cr": 0.95,
+        "maskvisramp4cg": 1.0,
+        "maskvisramp5pos": 1.0,
+        "maskvisramp5cr": 1.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "water",
+      "from_output": 0,
+      "to": "src",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 0,
+      "to": "sources",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "sources",
+      "to_input": 1
+    },
+    {
+      "from": "tank",
+      "from_output": 0,
+      "to": "solver",
+      "to_input": 0
+    },
+    {
+      "from": "tank",
+      "from_output": 1,
+      "to": "solver",
+      "to_input": 1
+    },
+    {
+      "from": "tank",
+      "from_output": 2,
+      "to": "solver",
+      "to_input": 2
+    },
+    {
+      "from": "wall0",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 0
+    },
+    {
+      "from": "wall1",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 1
+    },
+    {
+      "from": "wall2",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 2
+    },
+    {
+      "from": "wall3",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 3
+    },
+    {
+      "from": "wall4",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 4
+    },
+    {
+      "from": "sources",
+      "from_output": 0,
+      "to": "tank",
+      "to_input": 0
+    },
+    {
+      "from": "container",
+      "from_output": 1,
+      "to": "tank",
+      "to_input": 1
+    },
+    {
+      "from": "container",
+      "from_output": 2,
+      "to": "tank",
+      "to_input": 2
+    },
+    {
+      "from": "walls",
+      "from_output": 0,
+      "to": "tank",
+      "to_input": 3
+    },
+    {
+      "from": "solver",
+      "from_output": 0,
+      "to": "surface",
+      "to_input": 0
+    }
+  ]
+}

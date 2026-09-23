@@ -1,0 +1,251 @@
+{
+  "title": "実験184",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "c100_1",
+      "type": "mpmcontainer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.1
+      }
+    },
+    {
+      "name": "s100_1",
+      "type": "mpmsource",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c100_0",
+      "type": "mpmcontainer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.1
+      }
+    },
+    {
+      "name": "s100_0",
+      "type": "mpmsource",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "jitterscale": 0.0
+      }
+    },
+    {
+      "name": "c50_1",
+      "type": "mpmcontainer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.05
+      }
+    },
+    {
+      "name": "s50_1",
+      "type": "mpmsource",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c50_0",
+      "type": "mpmcontainer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.05
+      }
+    },
+    {
+      "name": "s50_0",
+      "type": "mpmsource",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "jitterscale": 0.0
+      }
+    },
+    {
+      "name": "c25_1",
+      "type": "mpmcontainer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "s25_1",
+      "type": "mpmsource",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c25_0",
+      "type": "mpmcontainer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "s25_0",
+      "type": "mpmsource",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "jitterscale": 0.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "s100_1",
+      "to_input": 0
+    },
+    {
+      "from": "c100_1",
+      "from_output": 0,
+      "to": "s100_1",
+      "to_input": 1
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "s100_0",
+      "to_input": 0
+    },
+    {
+      "from": "c100_0",
+      "from_output": 0,
+      "to": "s100_0",
+      "to_input": 1
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "s50_1",
+      "to_input": 0
+    },
+    {
+      "from": "c50_1",
+      "from_output": 0,
+      "to": "s50_1",
+      "to_input": 1
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "s50_0",
+      "to_input": 0
+    },
+    {
+      "from": "c50_0",
+      "from_output": 0,
+      "to": "s50_0",
+      "to_input": 1
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "s25_1",
+      "to_input": 0
+    },
+    {
+      "from": "c25_1",
+      "from_output": 0,
+      "to": "s25_1",
+      "to_input": 1
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "s25_0",
+      "to_input": 0
+    },
+    {
+      "from": "c25_0",
+      "from_output": 0,
+      "to": "s25_0",
+      "to_input": 1
+    }
+  ]
+}

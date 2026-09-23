@@ -1,0 +1,836 @@
+{
+  "title": "実験185",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "c12",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1
+      }
+    },
+    {
+      "name": "s12_1_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s12_1_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0
+      }
+    },
+    {
+      "name": "s12_1_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s12_10_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s12_10_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0
+      }
+    },
+    {
+      "name": "s12_10_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s12_100_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s12_100_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0
+      }
+    },
+    {
+      "name": "s12_100_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "c24",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 24
+      }
+    },
+    {
+      "name": "s24_1_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s24_1_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0
+      }
+    },
+    {
+      "name": "s24_1_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s24_10_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s24_10_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0
+      }
+    },
+    {
+      "name": "s24_10_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s24_100_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s24_100_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0
+      }
+    },
+    {
+      "name": "s24_100_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "c48",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 48
+      }
+    },
+    {
+      "name": "s48_1_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s48_1_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0
+      }
+    },
+    {
+      "name": "s48_1_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s48_10_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s48_10_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0
+      }
+    },
+    {
+      "name": "s48_10_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s48_100_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s48_100_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0
+      }
+    },
+    {
+      "name": "s48_100_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "c96",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 96
+      }
+    },
+    {
+      "name": "s96_1_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s96_1_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0
+      }
+    },
+    {
+      "name": "s96_1_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 1.0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s96_10_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s96_10_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0
+      }
+    },
+    {
+      "name": "s96_10_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "filterquality": 3
+      }
+    },
+    {
+      "name": "s96_100_1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 1
+      }
+    },
+    {
+      "name": "s96_100_2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0
+      }
+    },
+    {
+      "name": "s96_100_3",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "contrainedboundary": 0,
+        "strength": 100.0,
+        "filterquality": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_1_2",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_1_3",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_10_1",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_10_2",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_10_3",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_100_1",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_100_2",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "s12_100_3",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_1_2",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_1_3",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_10_1",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_10_2",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_10_3",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_100_1",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_100_2",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "s24_100_3",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_1_2",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_1_3",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_10_1",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_10_2",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_10_3",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_100_1",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_100_2",
+      "to_input": 0
+    },
+    {
+      "from": "c48",
+      "from_output": 0,
+      "to": "s48_100_3",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_1_2",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_1_3",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_10_1",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_10_2",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_10_3",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_100_1",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_100_2",
+      "to_input": 0
+    },
+    {
+      "from": "c96",
+      "from_output": 0,
+      "to": "s96_100_3",
+      "to_input": 0
+    }
+  ]
+}

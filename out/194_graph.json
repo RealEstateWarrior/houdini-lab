@@ -1,0 +1,374 @@
+{
+  "title": "実験194",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g50_1",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "dop50_1",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp50_1",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop50_1"
+      }
+    },
+    {
+      "name": "g50_2",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop50_2",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 2,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp50_2",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop50_2"
+      }
+    },
+    {
+      "name": "g50_4",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop50_4",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 4,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp50_4",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop50_4"
+      }
+    },
+    {
+      "name": "g52_1",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop52_1",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp52_1",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop52_1"
+      }
+    },
+    {
+      "name": "g52_2",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop52_2",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 2,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp52_2",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop52_2"
+      }
+    },
+    {
+      "name": "g52_4",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop52_4",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 4,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp52_4",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop52_4"
+      }
+    },
+    {
+      "name": "g54_1",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop54_1",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp54_1",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop54_1"
+      }
+    },
+    {
+      "name": "g54_2",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop54_2",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 2,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp54_2",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop54_2"
+      }
+    },
+    {
+      "name": "g54_4",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dop54_4",
+      "type": "dopnet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substep": 4,
+        "objname1": "*"
+      }
+    },
+    {
+      "name": "imp54_4",
+      "type": "dopimport::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "doppath": "/obj/bench/dop54_4"
+      }
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,312 @@
+{
+  "title": "実験178",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "fog",
+      "type": "isooffset",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pts",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000,
+        "relaxpoints": 0
+      }
+    },
+    {
+      "name": "pc_10_10",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.01 * ch('k'), 10); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_10_100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.01 * ch('k'), 100); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_10_1000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.01 * ch('k'), 1000); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_20_10",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.02 * ch('k'), 10); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_20_100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.02 * ch('k'), 100); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_20_1000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.02 * ch('k'), 1000); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_50_10",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.05 * ch('k'), 10); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_50_100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.05 * ch('k'), 100); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_50_1000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.05 * ch('k'), 1000); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_100_10",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.1 * ch('k'), 10); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_100_100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.1 * ch('k'), 100); i@found = len(n);",
+        "k": 1.0000002
+      }
+    },
+    {
+      "name": "pc_100_1000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int n[] = pcfind(0, 'P', @P, 0.1 * ch('k'), 1000); i@found = len(n);",
+        "k": 1.0000002
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "fog",
+      "to_input": 0
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_10_10",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_10_100",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_10_1000",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_20_10",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_20_100",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_20_1000",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_50_10",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_50_100",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_50_1000",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_100_10",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_100_100",
+      "to_input": 0
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "pc_100_1000",
+      "to_input": 0
+    }
+  ]
+}

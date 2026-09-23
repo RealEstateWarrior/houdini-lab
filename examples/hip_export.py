@@ -41,6 +41,7 @@ def main():
     hou_tools.render_preview = lambda *a, **k: None
     hou_tools.render_sequence = lambda *a, **k: []
     hou_tools.save_hip = lambda path: path
+    hou.RopNode.render = lambda *a, **k: None   # Karma などのレンダも止める（画は前の実行のものを使う）
     real_save = hou.hipFile.save
     hou.hipFile.save = lambda *a, **k: None
     sys.argv = [script] + sys.argv[2:]

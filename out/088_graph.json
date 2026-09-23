@@ -1,0 +1,777 @@
+{
+  "title": "実験088",
+  "network": "/obj/report_key",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "point_light1",
+      "type": "file",
+      "pos": [
+        -12.658,
+        8.256
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "file": "pointlight.bgeo",
+        "packexpanded": 0,
+        "mkpath": 0,
+        "index": 0.0
+      }
+    },
+    {
+      "name": "tube2",
+      "type": "tube",
+      "pos": [
+        -10.821,
+        12.095
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 2,
+        "consolidatepts": 0,
+        "tz": -0.9238795325112867,
+        "rad1": 0.0,
+        "rad2": 0.7653668647301796,
+        "height": 1.8477590650225735,
+        "cols": 10,
+        "orderu": 3,
+        "imperfect": 0
+      }
+    },
+    {
+      "name": "grid2",
+      "type": "grid",
+      "pos": [
+        -11.045,
+        10.851
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 0.0299999993,
+        "sizey": 0.3826834323650898,
+        "ty": 0.1913417161825449,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "cone_light1",
+      "type": "merge",
+      "pos": [
+        -9.473,
+        9.126
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "circle2",
+      "type": "circle",
+      "pos": [
+        -8.639,
+        12.165
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 3,
+        "orient": 1,
+        "reverse": 0,
+        "radx": 2.0,
+        "rady": 2.0,
+        "divs": 7,
+        "arc": 1,
+        "beginangle": -22.5,
+        "endangle": 22.5
+      }
+    },
+    {
+      "name": "xform3",
+      "type": "xform",
+      "pos": [
+        -7.988,
+        10.885
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rz": 90.0,
+        "updatenmls": 1,
+        "updateaffectednmls": 0
+      }
+    },
+    {
+      "name": "grid4",
+      "type": "grid",
+      "pos": [
+        3.506,
+        8.387
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 3,
+        "cols": 3
+      }
+    },
+    {
+      "name": "line5",
+      "type": "line",
+      "pos": [
+        1.648,
+        8.337
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "diry": 0.0,
+        "dirz": -1.0,
+        "dist": 2.0
+      }
+    },
+    {
+      "name": "copy1",
+      "type": "copy",
+      "pos": [
+        2.131,
+        6.822
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "nml": 0,
+        "cum": 0,
+        "copyg": "copyGroup0",
+        "setpt": "*",
+        "mulpt": "",
+        "addpt": ""
+      }
+    },
+    {
+      "name": "merge3",
+      "type": "merge",
+      "pos": [
+        2.864,
+        5.594
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "xform4",
+      "type": "xform",
+      "pos": [
+        -12.658,
+        6.209
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sx": 0.5,
+        "sy": 0.5,
+        "sz": 0.5,
+        "scale": 1.0,
+        "updatenmls": 1,
+        "updateaffectednmls": 0
+      }
+    },
+    {
+      "name": "xform5",
+      "type": "xform",
+      "pos": [
+        -9.496,
+        8.011
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "scale": 1.0,
+        "updatenmls": 1,
+        "updateaffectednmls": 0
+      }
+    },
+    {
+      "name": "xform6",
+      "type": "xform",
+      "pos": [
+        2.864,
+        4.148
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "scale": 1.0,
+        "updatenmls": 1,
+        "updateaffectednmls": 0
+      }
+    },
+    {
+      "name": "switch3",
+      "type": "switch",
+      "pos": [
+        -3.481,
+        -1.539
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "input": 7
+      }
+    },
+    {
+      "name": "areashape1",
+      "type": "switch",
+      "pos": [
+        -3.481,
+        7.823
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "input": 4
+      }
+    },
+    {
+      "name": "line6",
+      "type": "line",
+      "pos": [
+        -4.952,
+        9.074
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "originx": -0.5,
+        "dirx": 1.0,
+        "diry": 0.0
+      }
+    },
+    {
+      "name": "grid5",
+      "type": "grid",
+      "pos": [
+        -4.511,
+        10.361
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "circle4",
+      "type": "circle",
+      "pos": [
+        -3.481,
+        11.588
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "reverse": 0,
+        "radx": 0.5,
+        "rady": 0.5,
+        "divs": 10
+      }
+    },
+    {
+      "name": "xform7",
+      "type": "xform",
+      "pos": [
+        -3.481,
+        6.881
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sx": 1.0,
+        "sy": 1.0,
+        "sz": 1.0,
+        "updatenmls": 1,
+        "updateaffectednmls": 0
+      }
+    },
+    {
+      "name": "sphere1",
+      "type": "sphere",
+      "pos": [
+        -2.11,
+        10.63
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "radx": 0.5,
+        "rady": 0.5,
+        "radz": 0.5,
+        "rows": 10,
+        "cols": 10,
+        "triangularpoles": 0
+      }
+    },
+    {
+      "name": "object_merge1",
+      "type": "object_merge",
+      "pos": [
+        -1.548,
+        9.467
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "xformtype": 0,
+        "objpath1": ""
+      }
+    },
+    {
+      "name": "switch1",
+      "type": "switch",
+      "pos": [
+        -10.089,
+        5.154
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "input": 0
+      }
+    },
+    {
+      "name": "sphere2",
+      "type": "sphere",
+      "pos": [
+        10.026,
+        9.776
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 4,
+        "ty": -1.0,
+        "rows": 4,
+        "cols": 10,
+        "triangularpoles": 0
+      }
+    },
+    {
+      "name": "carve1",
+      "type": "carve",
+      "pos": [
+        10.026,
+        8.412
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "firstu": 0,
+        "secondv": 1,
+        "domainv2": 0.027777777777777776
+      }
+    },
+    {
+      "name": "convert1",
+      "type": "convert",
+      "pos": [
+        10.026,
+        6.894
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "stdswitcher1": 1,
+        "lodu": 0.001,
+        "divu": 1
+      }
+    },
+    {
+      "name": "xform1",
+      "type": "xform",
+      "pos": [
+        10.026,
+        4.413
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rx": 90.0,
+        "scale": 11.473713245669856,
+        "updatenmls": 1,
+        "updateaffectednmls": 0
+      }
+    },
+    {
+      "name": "copy2",
+      "type": "copy",
+      "pos": [
+        9.023,
+        1.942
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "copyg": "copyGroup0",
+        "setpt": "*",
+        "mulpt": "",
+        "addpt": ""
+      }
+    },
+    {
+      "name": "line7",
+      "type": "line",
+      "pos": [
+        7.823,
+        3.628
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "diry": 0.0,
+        "dirz": -1.0,
+        "dist": 0.5
+      }
+    },
+    {
+      "name": "merge1",
+      "type": "merge",
+      "pos": [
+        10.831,
+        0.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "facet1",
+      "type": "facet",
+      "pos": [
+        9.449,
+        3.242
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "cons": 2,
+        "dist": 0.00100000005,
+        "inlinedist": 0.00100000005
+      }
+    },
+    {
+      "name": "Origin",
+      "type": "add",
+      "pos": [
+        -7.281,
+        -1.237
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1
+      }
+    },
+    {
+      "name": "tube1",
+      "type": "tube",
+      "pos": [
+        -0.964,
+        5.221
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "cap": 1,
+        "rad1": 0.075,
+        "rad2": 0.075,
+        "radscale": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "name": "constraints",
+      "type": "chopnet",
+      "pos": [
+        2.341,
+        -2.054
+      ],
+      "flags": {},
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "grid2",
+      "from_output": 0,
+      "to": "cone_light1",
+      "to_input": 0
+    },
+    {
+      "from": "tube2",
+      "from_output": 0,
+      "to": "cone_light1",
+      "to_input": 1
+    },
+    {
+      "from": "circle2",
+      "from_output": 0,
+      "to": "cone_light1",
+      "to_input": 2
+    },
+    {
+      "from": "xform3",
+      "from_output": 0,
+      "to": "cone_light1",
+      "to_input": 3
+    },
+    {
+      "from": "circle2",
+      "from_output": 0,
+      "to": "xform3",
+      "to_input": 0
+    },
+    {
+      "from": "line5",
+      "from_output": 0,
+      "to": "copy1",
+      "to_input": 0
+    },
+    {
+      "from": "grid4",
+      "from_output": 0,
+      "to": "copy1",
+      "to_input": 1
+    },
+    {
+      "from": "copy1",
+      "from_output": 0,
+      "to": "merge3",
+      "to_input": 0
+    },
+    {
+      "from": "grid4",
+      "from_output": 0,
+      "to": "merge3",
+      "to_input": 1
+    },
+    {
+      "from": "point_light1",
+      "from_output": 0,
+      "to": "xform4",
+      "to_input": 0
+    },
+    {
+      "from": "cone_light1",
+      "from_output": 0,
+      "to": "xform5",
+      "to_input": 0
+    },
+    {
+      "from": "merge3",
+      "from_output": 0,
+      "to": "xform6",
+      "to_input": 0
+    },
+    {
+      "from": "switch1",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 0
+    },
+    {
+      "from": "xform7",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 1
+    },
+    {
+      "from": "xform7",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 2
+    },
+    {
+      "from": "xform7",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 3
+    },
+    {
+      "from": "xform7",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 4
+    },
+    {
+      "from": "tube1",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 5
+    },
+    {
+      "from": "xform7",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 6
+    },
+    {
+      "from": "xform6",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 7
+    },
+    {
+      "from": "merge1",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 8
+    },
+    {
+      "from": "xform7",
+      "from_output": 0,
+      "to": "switch3",
+      "to_input": 9
+    },
+    {
+      "from": "line6",
+      "from_output": 0,
+      "to": "areashape1",
+      "to_input": 0
+    },
+    {
+      "from": "grid5",
+      "from_output": 0,
+      "to": "areashape1",
+      "to_input": 1
+    },
+    {
+      "from": "circle4",
+      "from_output": 0,
+      "to": "areashape1",
+      "to_input": 2
+    },
+    {
+      "from": "sphere1",
+      "from_output": 0,
+      "to": "areashape1",
+      "to_input": 3
+    },
+    {
+      "from": "object_merge1",
+      "from_output": 0,
+      "to": "areashape1",
+      "to_input": 4
+    },
+    {
+      "from": "areashape1",
+      "from_output": 0,
+      "to": "xform7",
+      "to_input": 0
+    },
+    {
+      "from": "xform4",
+      "from_output": 0,
+      "to": "switch1",
+      "to_input": 0
+    },
+    {
+      "from": "xform5",
+      "from_output": 0,
+      "to": "switch1",
+      "to_input": 1
+    },
+    {
+      "from": "sphere2",
+      "from_output": 0,
+      "to": "carve1",
+      "to_input": 0
+    },
+    {
+      "from": "carve1",
+      "from_output": 0,
+      "to": "convert1",
+      "to_input": 0
+    },
+    {
+      "from": "convert1",
+      "from_output": 0,
+      "to": "xform1",
+      "to_input": 0
+    },
+    {
+      "from": "line7",
+      "from_output": 0,
+      "to": "copy2",
+      "to_input": 0
+    },
+    {
+      "from": "facet1",
+      "from_output": 0,
+      "to": "copy2",
+      "to_input": 1
+    },
+    {
+      "from": "xform1",
+      "from_output": 0,
+      "to": "merge1",
+      "to_input": 0
+    },
+    {
+      "from": "copy2",
+      "from_output": 0,
+      "to": "merge1",
+      "to_input": 1
+    },
+    {
+      "from": "xform1",
+      "from_output": 0,
+      "to": "facet1",
+      "to_input": 0
+    }
+  ]
+}

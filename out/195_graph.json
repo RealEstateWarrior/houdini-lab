@@ -1,0 +1,634 @@
+{
+  "title": "実験195",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sp",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "sdf",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.02
+      }
+    },
+    {
+      "name": "base",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_dilate_1_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c_dilate_1_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_dilate_1_1",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 1
+      }
+    },
+    {
+      "name": "c_dilate_1_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_dilate_2_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxeloffset": 2.0
+      }
+    },
+    {
+      "name": "c_dilate_2_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_dilate_2_1",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 1,
+        "voxeloffset": 2.0
+      }
+    },
+    {
+      "name": "c_dilate_2_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_dilate_5_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxeloffset": 5.0
+      }
+    },
+    {
+      "name": "c_dilate_5_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_dilate_5_1",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 1,
+        "voxeloffset": 5.0
+      }
+    },
+    {
+      "name": "c_dilate_5_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_erode_1_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "erode"
+      }
+    },
+    {
+      "name": "c_erode_1_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_erode_1_1",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "erode",
+        "iterations": 1
+      }
+    },
+    {
+      "name": "c_erode_1_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_erode_2_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "erode",
+        "voxeloffset": 2.0
+      }
+    },
+    {
+      "name": "c_erode_2_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_erode_2_1",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "erode",
+        "iterations": 1,
+        "voxeloffset": 2.0
+      }
+    },
+    {
+      "name": "c_erode_2_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_erode_5_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "erode",
+        "voxeloffset": 5.0
+      }
+    },
+    {
+      "name": "c_erode_5_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_erode_5_1",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "erode",
+        "iterations": 1,
+        "voxeloffset": 5.0
+      }
+    },
+    {
+      "name": "c_erode_5_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_open_2_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 2.0
+      }
+    },
+    {
+      "name": "c_open_2_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "r_close_2_4",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "close",
+        "voxeloffset": 2.0
+      }
+    },
+    {
+      "name": "c_close_2_4",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "sdf",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "base",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_dilate_1_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_dilate_1_4",
+      "from_output": 0,
+      "to": "c_dilate_1_4",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_dilate_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "r_dilate_1_1",
+      "from_output": 0,
+      "to": "c_dilate_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_dilate_2_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_dilate_2_4",
+      "from_output": 0,
+      "to": "c_dilate_2_4",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_dilate_2_1",
+      "to_input": 0
+    },
+    {
+      "from": "r_dilate_2_1",
+      "from_output": 0,
+      "to": "c_dilate_2_1",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_dilate_5_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_dilate_5_4",
+      "from_output": 0,
+      "to": "c_dilate_5_4",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_dilate_5_1",
+      "to_input": 0
+    },
+    {
+      "from": "r_dilate_5_1",
+      "from_output": 0,
+      "to": "c_dilate_5_1",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_erode_1_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_erode_1_4",
+      "from_output": 0,
+      "to": "c_erode_1_4",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_erode_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "r_erode_1_1",
+      "from_output": 0,
+      "to": "c_erode_1_1",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_erode_2_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_erode_2_4",
+      "from_output": 0,
+      "to": "c_erode_2_4",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_erode_2_1",
+      "to_input": 0
+    },
+    {
+      "from": "r_erode_2_1",
+      "from_output": 0,
+      "to": "c_erode_2_1",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_erode_5_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_erode_5_4",
+      "from_output": 0,
+      "to": "c_erode_5_4",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_erode_5_1",
+      "to_input": 0
+    },
+    {
+      "from": "r_erode_5_1",
+      "from_output": 0,
+      "to": "c_erode_5_1",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_open_2_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_open_2_4",
+      "from_output": 0,
+      "to": "c_open_2_4",
+      "to_input": 0
+    },
+    {
+      "from": "sdf",
+      "from_output": 0,
+      "to": "r_close_2_4",
+      "to_input": 0
+    },
+    {
+      "from": "r_close_2_4",
+      "from_output": 0,
+      "to": "c_close_2_4",
+      "to_input": 0
+    }
+  ]
+}

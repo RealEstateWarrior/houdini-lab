@@ -6,3 +6,5 @@ out/*_perf_*.csv
 
 # シミュレーションのキャッシュ。中身は再生成できるうえ大きい
 out/*_cache/
+out/_hip_*.log
+out/_hip_export.log

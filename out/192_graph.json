@@ -1,0 +1,408 @@
+{
+  "title": "実験192",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sq",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "e5_0",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e5_10",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5,
+        "inset": 0.1,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e5_25",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5,
+        "inset": 0.25,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e5_40",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5,
+        "inset": 0.4,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e5_50",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5,
+        "inset": 0.5,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e5_60",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5,
+        "inset": 0.6,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e10_0",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e10_10",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0,
+        "inset": 0.1,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e10_25",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0,
+        "inset": 0.25,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e10_40",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0,
+        "inset": 0.4,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e10_50",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0,
+        "inset": 0.5,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    },
+    {
+      "name": "e10_60",
+      "type": "polyextrude::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0,
+        "inset": 0.6,
+        "outputback": 1,
+        "thicknessramp1value": 1.0,
+        "thicknessramp1interp": 2,
+        "thicknessramp2pos": 1.0,
+        "thicknessramp2value": 1.0,
+        "thicknessramp2interp": 2,
+        "twistramp1value": 0.5,
+        "twistramp1interp": 2,
+        "twistramp2pos": 1.0,
+        "twistramp2value": 0.5,
+        "twistramp2interp": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e5_0",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e5_10",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e5_25",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e5_40",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e5_50",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e5_60",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e10_0",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e10_10",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e10_25",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e10_40",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e10_50",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "e10_60",
+      "to_input": 0
+    }
+  ]
+}

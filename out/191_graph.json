@@ -1,0 +1,232 @@
+{
+  "title": "実験191",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "pts",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "for (int i = 0; i < 20000; i++) { float u = rand(i * 1.37 + 0.1) * 2 - 1; float t = rand(i * 2.71 + 0.3) * 2 * PI; fl..."
+      }
+    },
+    {
+      "name": "sp7",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 7,
+        "cols": 12
+      }
+    },
+    {
+      "name": "d7",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@d = xyzdist(1, @P);"
+      }
+    },
+    {
+      "name": "sp13",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2
+      }
+    },
+    {
+      "name": "d13",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@d = xyzdist(1, @P);"
+      }
+    },
+    {
+      "name": "sp25",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 25,
+        "cols": 48
+      }
+    },
+    {
+      "name": "d25",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@d = xyzdist(1, @P);"
+      }
+    },
+    {
+      "name": "sp49",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 49,
+        "cols": 96
+      }
+    },
+    {
+      "name": "d49",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@d = xyzdist(1, @P);"
+      }
+    },
+    {
+      "name": "sp97",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 97,
+        "cols": 192
+      }
+    },
+    {
+      "name": "d97",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@d = xyzdist(1, @P);"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "d7",
+      "to_input": 0
+    },
+    {
+      "from": "sp7",
+      "from_output": 0,
+      "to": "d7",
+      "to_input": 1
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "d13",
+      "to_input": 0
+    },
+    {
+      "from": "sp13",
+      "from_output": 0,
+      "to": "d13",
+      "to_input": 1
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "d25",
+      "to_input": 0
+    },
+    {
+      "from": "sp25",
+      "from_output": 0,
+      "to": "d25",
+      "to_input": 1
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "d49",
+      "to_input": 0
+    },
+    {
+      "from": "sp49",
+      "from_output": 0,
+      "to": "d49",
+      "to_input": 1
+    },
+    {
+      "from": "pts",
+      "from_output": 0,
+      "to": "d97",
+      "to_input": 0
+    },
+    {
+      "from": "sp97",
+      "from_output": 0,
+      "to": "d97",
+      "to_input": 1
+    }
+  ]
+}
