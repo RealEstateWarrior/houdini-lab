@@ -1330,6 +1330,12 @@ DONE = [
      "shots": ["198_arc.png"],
      "title": "vdbreshapesdf の Open で丸めた辺の断面は円弧 — 半径は Offset × 升より 2.5〜3.2 升大きい",
      "note": "Openの断面は円弧。半径はOffset×升より約3升大きい"},
+    {"no": "199", "anchor": "exp199",
+     "tags": ["VDB", "SDF", "モデリング"],
+     "log": "log_pm", "thumb": "199_band.png",
+     "shots": ["199_band.png"],
+     "title": "Open で丸めた辺の半径が約 3 升大きいのは、SDF の帯のせいではない — 帯 3〜25 升で足し分は変わらない",
+     "note": "Openの辺の半径の足し分(約3升)は帯の幅によらない"},
 ]
 
 PLANNED = []

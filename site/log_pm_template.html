@@ -9647,6 +9647,49 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 199 ===================== -->
+    <article class="entry entry--current" id="exp199">
+      <div class="badge">199</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Open で丸めた辺の半径が約 3 升大きいのは、SDF の帯のせいではない — 帯 3〜25 升で足し分は変わらない</h2>
+        <p class="path">examples/199_vdb_open_band_arc.py &nbsp;·&nbsp; Openの辺の半径の足し分(約3升)は帯の幅によらない</p>
+
+        <div class="prose">
+          <p><a href="#exp198">実験198</a> で、vdbreshapesdf の Open で丸めた辺の半径は Offset × 升より約 3 升大きかった。帯の既定値（3 升）と近いので、vdbfrompolygons の Exterior / Interior Band Voxels を 3・6・12・25 升に変え、Open（Offset 10 升・Voxel Size 0.01・1 × 1 × 1 の箱）の辺の断面を<a href="#exp198">実験198</a> と同じやり方で測った。</p>
+          <p>**足し分 R − r は、帯の幅によらず 3.02〜3.03 升だった。**R = 0.13025・0.13028・0.13029・0.13029。帯のせいではない。何が 3 升を足しているかは確かめていない。</p>
+          <p>**体積は帯 3 升と 6 升で違い、6 升以上は同じだった**（0.966629・0.961948・0.961931・0.961931）。辺の半径は変わらないので、<a href="#exp197">実験197</a> で見た帯による体積の違いは、辺以外（三つの面が集まる角など）から来ているとみられる。確かめていない。</p>
+          <p>**時間は帯が広いほどかかった**（0.21 秒 → 0.77 秒）。</p>
+        </div>
+
+        <p class="label">帯の幅と、辺の断面の円</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="199_band.png" alt="足し分（青）は帯の幅（点線）と関係なく 3 升で平ら。" loading="lazy" decoding="async"></div>
+            <figcaption>足し分（青）は帯の幅（点線）と関係なく 3 升で平ら。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>帯（升）</th><th>Offset（升）</th><th>当てはめた点</th><th>R</th><th>R − r（升）</th><th>中心 x</th><th>接するなら 0.5 − R</th><th>残差 RMS</th><th>体積</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td class="num">3</td><td class="num">10</td><td class="num">103</td><td class="num">0.13025</td><td class="num">3.025</td><td class="num">0.37147</td><td class="num">0.36975</td><td>3.4e-05</td><td class="num">0.966629</td><td class="num">0.210</td></tr>
+              <tr><td class="num">6</td><td class="num">10</td><td class="num">109</td><td class="num">0.13028</td><td class="num">3.028</td><td class="num">0.37079</td><td class="num">0.36972</td><td>8.9e-05</td><td class="num">0.961948</td><td class="num">0.272</td></tr>
+              <tr><td class="num">12</td><td class="num">10</td><td class="num">109</td><td class="num">0.13029</td><td class="num">3.029</td><td class="num">0.37078</td><td class="num">0.36971</td><td>8.9e-05</td><td class="num">0.961931</td><td class="num">0.430</td></tr>
+              <tr><td class="num">25</td><td class="num">10</td><td class="num">109</td><td class="num">0.13029</td><td class="num">3.029</td><td class="num">0.37078</td><td class="num">0.36971</td><td>8.9e-05</td><td class="num">0.961931</td><td class="num">0.768</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Open の辺の半径は、帯を広げても変わらない。</strong>Offset ≒ R ÷ 升 − 3 は帯によらず使える（升 0.01 の箱で）。</li>
+          <li><strong>帯は 6 升あれば体積も変わらなくなった。</strong>それ以上広げると時間だけ増える。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

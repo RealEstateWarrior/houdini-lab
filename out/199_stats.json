@@ -1,0 +1,61 @@
+{
+  "rows": [
+    {
+      "band": 3,
+      "offset": 10,
+      "r": 0.1,
+      "points": 103,
+      "R": 0.13025,
+      "extra_in_voxels": 3.025,
+      "cx": 0.37147,
+      "center_if_tangent": 0.36975,
+      "rms": 3.4e-05,
+      "max_dev": 7.6e-05,
+      "volume": 0.966629,
+      "sec": 0.21
+    },
+    {
+      "band": 6,
+      "offset": 10,
+      "r": 0.1,
+      "points": 109,
+      "R": 0.13028,
+      "extra_in_voxels": 3.028,
+      "cx": 0.37079,
+      "center_if_tangent": 0.36972,
+      "rms": 8.9e-05,
+      "max_dev": 0.000215,
+      "volume": 0.961948,
+      "sec": 0.272
+    },
+    {
+      "band": 12,
+      "offset": 10,
+      "r": 0.1,
+      "points": 109,
+      "R": 0.13029,
+      "extra_in_voxels": 3.029,
+      "cx": 0.37078,
+      "center_if_tangent": 0.36971,
+      "rms": 8.9e-05,
+      "max_dev": 0.000215,
+      "volume": 0.961931,
+      "sec": 0.43
+    },
+    {
+      "band": 25,
+      "offset": 10,
+      "r": 0.1,
+      "points": 109,
+      "R": 0.13029,
+      "extra_in_voxels": 3.029,
+      "cx": 0.37078,
+      "center_if_tangent": 0.36971,
+      "rms": 8.9e-05,
+      "max_dev": 0.000215,
+      "volume": 0.961931,
+      "sec": 0.768
+    }
+  ],
+  "voxel": 0.01
+}
