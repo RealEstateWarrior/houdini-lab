@@ -1501,6 +1501,9 @@ def render_nav(active, tabs, urls, panels=None):
         out.append("          </div>")
         out.append("        </li>")
 
+    # メニュー（左の一覧）の最後に親ページを置く（2026-09-23 ユーザー指示）
+    out.append(f'        <li class="nav-parent"><a href="{urls.get("parent") or PARENT_URLS["pages"]}">'
+               f'{BRAND}（親のページ）</a></li>')
     out.append("      </ul>")
     out.append('      <div class="nav-side nav-side--right">')
     out.append(AI_BUTTON.replace('<span class="nav-beta">Beta</span>',
@@ -1678,11 +1681,8 @@ def render_crumbs(active, tabs, urls, panels, doc=False):
 
     def row(key, extra=""):
         if key == "overview":
-            # ホームでは「Saito Production › Houdini 研究部」まで
-            sep = '<span class="crumb-sep" aria-hidden="true">›</span>'
-            return (f'      <nav class="crumbs" aria-label="現在地"{extra}>'
-                    f'<a href="{urls.get("parent") or PARENT_URLS["pages"]}">{BRAND}</a>{sep}'
-                    f'<span aria-current="page">{DEPT}</span></nav>')
+            # 研究部のホームでは現在地を出さない（2026-09-23 ユーザー指示）
+            return f'      <nav class="crumbs crumbs--home" aria-hidden="true"{extra}></nav>'
         head, head_target, label = table.get(key, (None, None, None))
         parts = [f'<a href="{urls.get("parent") or PARENT_URLS["pages"]}">{BRAND}</a>',
                  f'<a href="{urls["home"]}">{DEPT}</a>']
@@ -1798,6 +1798,19 @@ def render_parent_nav(urls):
             out.append(f'          <a href="{urls["home"]}">{html.escape(label)}</a>')
         else:
             out.append(f'          <span class="soon">{html.escape(label)}<small>準備中</small></span>')
+    kids = [(urls["home"], "ホーム"), (urls["guides"], "実践"), (urls["log_pm"], "実験ログ モデリング編"),
+            (urls["log_fx"], "実験ログ エフェクト編"), (urls["ref"], "ノード解説と用語集")]
+    menu = ['        <ul class="nav-menu" aria-hidden="true">']
+    for dept_id, label, ready in DEPARTMENTS:
+        if ready:
+            menu.append(f'          <li class="nav-drop"><a href="{urls["home"]}">{html.escape(label)}</a>'
+                        '<div class="mega"><div class="mega-col"><ul>'
+                        + "".join(f'<li><a href="{h}">{html.escape(l)}</a></li>' for h, l in kids)
+                        + "</ul></div></div></li>")
+        else:
+            menu.append(f'          <li><span class="sheet-soon">{html.escape(label)}（準備中）</span></li>')
+    menu.append("        </ul>")
+    out += menu
     out += [
         "        </div>",
         "      </div>",
@@ -2886,7 +2899,7 @@ def render_search_data(data, nodes, guides, urls, tabs):
                        "expand": g["expand"]} for g in synonyms["groups"]],
            "fillers": synonyms["fillers"]}
 
-    body = json.dumps({"tabs": bool(tabs), "items": items, "syn": syn},
+    body = json.dumps({"tabs": False, "items": items, "syn": syn},
                       ensure_ascii=False, separators=(",", ":"))
     body = body.replace("</", "<\\/")
     return f'<script type="application/json" id="search-data">{body}</script>'

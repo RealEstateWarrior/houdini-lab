@@ -3578,6 +3578,20 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
 .foot-link--soon small { font-size: 0.74rem; font-weight: 500; }
 .sp-masthead { margin-top: 18px; }
 
+/* ---------- ホームの重さ対策（2026-09-23） ----------
+   帯の霞は、大きな板に blur(70px) をかけて動かしていた。ぼかしを毎コマ計算し直すので重い。
+   最初からぼけた色（放射グラデーション）にして、動かすのは位置だけにする。
+   帯が見えていないとき・タブを見ていないときは止める（band--idle は JS が付ける）。 */
+.band-fog i { filter: none !important; background: none; }
+.band-fog i:nth-child(1) { background: radial-gradient(closest-side, var(--band-1), transparent); }
+.band-fog i:nth-child(2) { background: radial-gradient(closest-side, var(--band-2), transparent); }
+.band-fog i:nth-child(3) { background: radial-gradient(closest-side, var(--band-3), transparent); }
+.band-fog i:nth-child(4) { background: radial-gradient(closest-side, var(--band-blue), transparent); }
+.band-fog i:nth-child(5) { background: radial-gradient(closest-side, var(--band-coral), transparent); }
+.band--idle .band-fog i { animation-play-state: paused; }
+/* メニューを開いたとき、背後のページ全体を blur(18px) でぼかすのをやめ、薄くするだけにする */
+.layout.dimmed { filter: none; opacity: 0.25; }
+
 </style>
 </head>
 <body>
@@ -3665,6 +3679,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </div>
           </div>
         </li>
+        <li class="nav-parent"><a href="../">Saito Production（親のページ）</a></li>
       </ul>
       <div class="nav-side nav-side--right">
       <button type="button" class="nav-icon nav-ai" id="ask-open" hidden aria-label="AI に聞く（Beta 版）" title="AI に聞く（Beta 版）"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor"/></svg><span class="nav-beta">Beta</span><span class="nav-label">AI</span></button>
@@ -3810,7 +3825,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-2dacb7cda2.js"></script>
+<script src="data/glossary-data-6f856c706d.js"></script>
 <script src="data/node-data-908d8e0db5.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4232,6 +4247,9 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     if (!menuSheet || !searchSheet || !dataEl) { return; }
 
     var data = JSON.parse(dataEl.textContent);
+    /* タブのあるページかどうかは、ページを見て決める。データに入れると、ページの種類ごとに
+       中身の違う検索データができて、ブラウザに残った分を使い回せなかった（2026-09-23） */
+    data.tabs = !!document.querySelector('.panel[role="tabpanel"]');
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var open = null;
     var lastFocus = null;
@@ -4542,7 +4560,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         window.open(item.href, "_blank", "noopener");
         return;
       }
-      if (data.tabs && item.tab) {
+      if (data.tabs && item.tab && document.getElementById("panel-" + item.tab)) {
         if (window.location.hash !== "#" + item.tab) {
           window.location.hash = "#" + item.tab;
         }
@@ -5354,7 +5372,24 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       var playing = !reduce, timer = null, play = document.getElementById("deck-play");
       var PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="6" width="3.2" height="12" rx="1" fill="currentColor"/><rect x="13.8" y="6" width="3.2" height="12" rx="1" fill="currentColor"/></svg>';
       var PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
-      function restart() { clearInterval(timer); if (playing) { timer = setInterval(function () { to(cur + 1); }, 5000); } }
+      /* 帯が見えていて、タブを見ているときだけ送る（見ていないのに動き続けて重くなっていた。2026-09-23） */
+      var inView = true;
+      function restart() {
+        clearInterval(timer);
+        if (playing && inView && !document.hidden) { timer = setInterval(function () { to(cur + 1); }, 5000); }
+      }
+      var band = deck.closest(".band");
+      if (band && window.IntersectionObserver) {
+        new IntersectionObserver(function (es) {
+          inView = es[0].isIntersecting;
+          band.classList.toggle("band--idle", !inView);
+          restart();
+        }).observe(band);
+      }
+      document.addEventListener("visibilitychange", function () {
+        if (band) { band.classList.toggle("band--idle", document.hidden || !inView); }
+        restart();
+      });
       function setPlay(on) {
         playing = on;
         play.innerHTML = on ? PAUSE : PLAY;

@@ -3558,3 +3558,17 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
 .foot-link--soon { color: var(--ink-dim); cursor: default; }
 .foot-link--soon small { font-size: 0.74rem; font-weight: 500; }
 .sp-masthead { margin-top: 18px; }
+
+/* ---------- ホームの重さ対策（2026-09-23） ----------
+   帯の霞は、大きな板に blur(70px) をかけて動かしていた。ぼかしを毎コマ計算し直すので重い。
+   最初からぼけた色（放射グラデーション）にして、動かすのは位置だけにする。
+   帯が見えていないとき・タブを見ていないときは止める（band--idle は JS が付ける）。 */
+.band-fog i { filter: none !important; background: none; }
+.band-fog i:nth-child(1) { background: radial-gradient(closest-side, var(--band-1), transparent); }
+.band-fog i:nth-child(2) { background: radial-gradient(closest-side, var(--band-2), transparent); }
+.band-fog i:nth-child(3) { background: radial-gradient(closest-side, var(--band-3), transparent); }
+.band-fog i:nth-child(4) { background: radial-gradient(closest-side, var(--band-blue), transparent); }
+.band-fog i:nth-child(5) { background: radial-gradient(closest-side, var(--band-coral), transparent); }
+.band--idle .band-fog i { animation-play-state: paused; }
+/* メニューを開いたとき、背後のページ全体を blur(18px) でぼかすのをやめ、薄くするだけにする */
+.layout.dimmed { filter: none; opacity: 0.25; }
