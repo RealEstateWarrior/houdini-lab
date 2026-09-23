@@ -3521,6 +3521,48 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   .sidenav.subnav-tucked .subnav--row { transform: none; filter: none; }
 }
 
+/* ---------- ロゴを2つのリンクに（2026-09-23）: SP のマーク＝親、名前＝この部のホーム ---------- */
+.sidenav .brand { display: inline-flex; align-items: center; gap: 4px; padding: 0; }
+.sidenav .brand:hover { opacity: 1; }
+.sidenav .brand a {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: none;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.sidenav .brand a:hover { background: var(--glass-edge); color: var(--ink); }
+.sidenav .brand .brand-logo svg { width: 26px; height: 26px; display: block; }
+.sidenav .brand .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; white-space: nowrap; }
+@media (max-width: 720px) {
+  .sidenav .brand a { padding: 5px 5px; }
+  .sidenav .brand .brand-name { font-size: 0.9rem; }
+}
+
+/* 親ページ: 部の切り替え（バーの左） */
+.dept-switch { display: flex; align-items: center; gap: 2px; padding: 3px; border-radius: 980px; background: var(--glass-edge); min-width: 0; }
+.sidenav .dept-switch a,
+.sidenav .dept-switch .soon {
+  display: block;
+  padding: 7px 12px;
+  border-radius: 980px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.sidenav .dept-switch a { background: var(--ink); color: var(--on-ink); }
+.sidenav .dept-switch .soon { color: var(--ink-dim); }
+.sidenav .dept-switch .soon small { margin-left: 5px; font-size: 0.86em; font-weight: 500; }
+@media (max-width: 900px) { .dept-switch { display: none; } }
+.foot-link--soon { color: var(--ink-dim); cursor: default; }
+.foot-link--soon small { font-size: 0.74rem; font-weight: 500; }
+.sp-masthead { margin-top: 18px; }
+
 
 /* ---------- 親ページ（部の入口） ---------- */
 
@@ -3599,39 +3641,37 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
 <div class="layout" id="top">
   <nav class="sidenav" aria-label="サイト内の移動">
     <div class="nav-inner">
-      <a class="logo" href="#top" aria-label="Saito Production">
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg>
-      </a>
-      <ul class="nav-depts">
-        <li><a href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu">Houdini 研究部</a></li>
-        <li><span class="soon">映像制作部<small>準備中</small></span></li>
-      </ul>
-      <button type="button" class="nav-icon nav-ai" id="ask-open" hidden aria-label="AI に聞く（Beta 版）" title="AI に聞く（Beta 版）"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor"/></svg><span class="nav-beta">Beta</span></button>
-      <button type="button" class="nav-icon" id="search-open" aria-label="Saito Production 全体を検索"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      <div class="nav-side nav-side--left">
+        <button type="button" class="nav-icon nav-burger" id="menu-open" aria-label="メニューを開く" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="nav-label">メニュー</span></button>
+        <div class="dept-switch" aria-label="部">
+          <a href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu">Houdini 研究部</a>
+          <span class="soon">映像制作部<small>準備中</small></span>
+        </div>
+      </div>
+      <div class="brand">
+        <a class="brand-logo" href="#top" aria-label="Saito Production（このページの頭へ）"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg></a>
+        <a class="brand-name" href="#top">Saito Production</a>
+      </div>
+      <div class="nav-side nav-side--right">
+      <button type="button" class="nav-icon nav-ai" id="ask-open" hidden aria-label="AI に聞く（Beta 版）" title="AI に聞く（Beta 版）"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9L12 17.1l-1.9-4.9-4.9-1.9 4.9-1.9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" fill="currentColor"/></svg><span class="nav-beta">Beta</span><span class="nav-label">AI</span></button>
+      <button type="button" class="nav-icon" id="search-open" aria-label="Saito Production 全体を検索"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="nav-label">検索</span></button>
+      </div>
     </div>
   </nav>
   <div class="shell">
 
-    <header class="sp-hero">
-      <div class="sp-mark">
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)"
-             stroke="currentColor" stroke-width="2.1" stroke-linecap="round">
-            <path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/>
-            <path d="M22.6 22.3v16.6"/>
-          </g>
-        </svg>
-      </div>
-      <h1>Saito Production</h1>
+    <header class="masthead sp-masthead">
+      <p class="eyebrow">Saito Production</p>
+      <h1>作ったもの・作り方・確かめた数字の置き場</h1>
       <p class="lede">
-        作ったものと、作り方と、確かめた数字を置いておく場所。
-        部ごとに分けています。
+        作ったものと、作り方と、確かめた数字を置いておく場所。部ごとに分けています。
+        いまは Houdini 研究部が動いています。
       </p>
     </header>
 
     <div class="stage">
-      <h3>部</h3>
-      <p>いまは Houdini 研究部だけが動いています。</p>
+      <h3><span class="en">Departments</span>部</h3>
+      <p>部を押すと、その部のホームへ移ります。</p>
     </div>
       <div class="depts">
         <a class="dept" href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu">
@@ -3652,7 +3692,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
 
     <div class="stage">
-      <h3>最近やったこと</h3>
+      <h3><span class="en">Latest</span>最近やったこと</h3>
       <p>直近の実験6件。押すとその記録へ飛びます。</p>
     </div>
       <div class="thumbs">
@@ -3708,7 +3748,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <p class="sp-more"><a href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu#experiments">実験を全部見る（201 件）</a></p>
 
     <div class="stage">
-      <h3>新しい実践</h3>
+      <h3><span class="en">Practice</span>新しい実践</h3>
       <p>同じものを自分で組むための手順書。1段ごとに図が付いています。</p>
     </div>
       <div class="tiles">
@@ -3736,62 +3776,39 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
     <p class="sp-more"><a href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu#guides">実践を全部見る（46 本）</a></p>
 
-    <footer>
-      <p>
-        このページは <code>build_site.py</code> が生成しています。
-        中身は実験の記録から自動で流れてくるので、手で書き足すところはありません。
-      </p>
-    </footer>
   </div>
 </div>
 
 <footer class="sitefoot" id="sitemap">
   <div class="sitefoot-inner">
     <div class="foot-brand">
-      <a class="foot-logo" href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
-      <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
+      <a class="foot-logo" href="#top"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Saito Production</strong><small>部の入口</small></span></a>
+      <p class="foot-lede">作ったものと、作り方と、確かめた数字を置いておく場所。部ごとに分けている。</p>
       <dl class="foot-stats">
         <div><dt>実験</dt><dd>201</dd></div>
         <div><dt>実践</dt><dd>46</dd></div>
         <div><dt>ノード</dt><dd>375</dd></div>
         <div><dt>用語</dt><dd>412</dd></div>
       </dl>
-      <div class="foot-ext">
-        <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
-        <a href="https://github.com/RealEstateWarrior/houdini-lab" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 17l-5-5 5-5M16 7l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>GitHub<small>台本と hip の置き場</small></span></a>
-      </div>
     </div>
     <div class="foot-cols">
       <ul class="foot-list">
-          <li class="foot-group"><a class="foot-link" href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu#overview"><span>ホーム</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </li>
-          <li class="foot-group"><a class="foot-link" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guides"><span>実践</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <li class="foot-group"><a class="foot-link" href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu"><span>Houdini 研究部</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <ul class="foot-kids">
-              <li><a href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#works"><span>制作</span></a></li>
-              <li><a href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#requests"><span>要望</span></a></li>
-            </ul>
-          </li>
-          <li class="foot-group"><a class="foot-link" href="https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7#nodes"><span>解説</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <ul class="foot-kids">
-              <li><a href="https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7#glossary"><span>用語集</span></a></li>
+              <li><a href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs"><span>実践</span></a></li>
+              <li><a href="https://claude.ai/artifact/XqNSd943n6cguxcULeHxBz"><span>実験ログ モデリング編</span></a></li>
+              <li><a href="https://claude.ai/artifact/23aXF1hG3G5oCZaaeZ5BAT"><span>実験ログ エフェクト編</span></a></li>
+              <li><a href="https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7"><span>ノード解説と用語集</span></a></li>
             </ul>
           </li>
       </ul>
       <ul class="foot-list">
-          <li class="foot-group"><a class="foot-link" href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu#experiments"><span>実験</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <ul class="foot-kids">
-              <li><a href="https://claude.ai/artifact/XqNSd943n6cguxcULeHxBz"><span>実験ログ モデリング編</span></a></li>
-              <li><a href="https://claude.ai/artifact/23aXF1hG3G5oCZaaeZ5BAT"><span>実験ログ エフェクト編</span></a></li>
-              <li><a href="https://claude.ai/artifact/VXGxKiAvNg9hcq3kFM99pu#speed"><span>効率化</span></a></li>
-              <li><a href="https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7#links"><span>参考リンク</span></a></li>
-            </ul>
-          </li>
+          <li class="foot-group"><span class="foot-link foot-link--soon"><span>映像制作部</span><small>準備中</small></span></li>
       </ul>
     </div>
   </div>
   <div class="sitefoot-bottom">
 <div class="theme-switch" role="group" aria-label="表示の明るさ"><button type="button" data-theme-set="system" aria-pressed="true">自動</button><button type="button" data-theme-set="light" aria-pressed="false">明</button><button type="button" data-theme-set="dark" aria-pressed="false">暗</button></div>
-    <p class="foot-small"><a href="https://claude.ai/artifact/1ayTdyUEY1avfBfUARaiLo">Saito Production</a><span>確かめた版: Houdini 21.0.700</span></p>
     <p class="foot-copy">&copy; 2026 Saito Production</p>
   </div>
 </footer>

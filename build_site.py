@@ -1440,10 +1440,12 @@ def render_nav(active, tabs, urls, panels=None):
         ' aria-label="メニューを開く" aria-expanded="false">'
         + BURGER_SVG + '<span class="nav-label">メニュー</span></button>',
         "      </div>",
-        f'      <a class="brand" href="{urls["home"]}" aria-label="{DEPT}（ホーム）">',
-        f"        {LOGO_SVG}",
-        f'        <span class="brand-name">{DEPT}</span>',
-        "      </a>",
+        # SP のマークは親（Saito Production）へ、部の名前はこの部のホームへ（2026-09-23 ユーザー指示）
+        '      <div class="brand">',
+        f'        <a class="brand-logo" href="{urls.get("parent") or PARENT_URLS["pages"]}"'
+        f' aria-label="{BRAND}（親のページへ）" title="{BRAND}へ">{LOGO_SVG}</a>',
+        f'        <a class="brand-name" href="{urls["home"]}" title="{DEPT}のホームへ">{DEPT}</a>',
+        "      </div>",
         '      <ul class="nav-menu" aria-hidden="true">',
     ]
 
@@ -1676,10 +1678,14 @@ def render_crumbs(active, tabs, urls, panels, doc=False):
 
     def row(key, extra=""):
         if key == "overview":
-            # ホームそのものでは、現在地は「Houdini 研究部」だけになるので出さない
-            return f'      <nav class="crumbs crumbs--home" aria-hidden="true"{extra}></nav>'
+            # ホームでは「Saito Production › Houdini 研究部」まで
+            sep = '<span class="crumb-sep" aria-hidden="true">›</span>'
+            return (f'      <nav class="crumbs" aria-label="現在地"{extra}>'
+                    f'<a href="{urls.get("parent") or PARENT_URLS["pages"]}">{BRAND}</a>{sep}'
+                    f'<span aria-current="page">{DEPT}</span></nav>')
         head, head_target, label = table.get(key, (None, None, None))
-        parts = [f'<a href="{urls["home"]}">{DEPT}</a>']
+        parts = [f'<a href="{urls.get("parent") or PARENT_URLS["pages"]}">{BRAND}</a>',
+                 f'<a href="{urls["home"]}">{DEPT}</a>']
         if head and label:
             if head_target and head_target != key:
                 parts.append(f'<a href="{crumb_href(urls, head_target)}">{html.escape(head)}</a>')
@@ -1774,27 +1780,83 @@ def render_footer(urls, guides, data, nodes):
 
 
 def render_parent_nav(urls):
-    """親（Saito Production）のバー。ロゴと部だけの1段。"""
+    """親（Saito Production）のバー。部の中と同じ形にする（2026-09-23）。
+
+    左にメニューと部の切り替え、真ん中に SP のマークと名前、右に AI と検索。
+    """
     out = [
         '  <nav class="sidenav" aria-label="サイト内の移動">',
         '    <div class="nav-inner">',
-        f'      <a class="logo" href="#top" aria-label="{BRAND}">',
-        f"        {LOGO_SVG}",
-        "      </a>",
-        '      <ul class="nav-depts">',
+        '      <div class="nav-side nav-side--left">',
+        '        <button type="button" class="nav-icon nav-burger" id="menu-open"'
+        ' aria-label="メニューを開く" aria-expanded="false">'
+        + BURGER_SVG + '<span class="nav-label">メニュー</span></button>',
+        '        <div class="dept-switch" aria-label="部">',
     ]
     for dept_id, label, ready in DEPARTMENTS:
         if ready:
-            out.append(f'        <li><a href="{urls["home"]}">'
-                       f"{html.escape(label)}</a></li>")
+            out.append(f'          <a href="{urls["home"]}">{html.escape(label)}</a>')
         else:
-            out.append(f'        <li><span class="soon">{html.escape(label)}'
-                       "<small>準備中</small></span></li>")
-    out.append("      </ul>")
-    out.append(AI_BUTTON)
-    out.append('      <button type="button" class="nav-icon" id="search-open"'
-               ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + "</button>")
-    out += ["    </div>", "  </nav>"]
+            out.append(f'          <span class="soon">{html.escape(label)}<small>準備中</small></span>')
+    out += [
+        "        </div>",
+        "      </div>",
+        '      <div class="brand">',
+        f'        <a class="brand-logo" href="#top" aria-label="{BRAND}（このページの頭へ）">{LOGO_SVG}</a>',
+        f'        <a class="brand-name" href="#top">{BRAND}</a>',
+        "      </div>",
+        '      <div class="nav-side nav-side--right">',
+        AI_BUTTON.replace('<span class="nav-beta">Beta</span>',
+                          '<span class="nav-beta">Beta</span><span class="nav-label">AI</span>'),
+        '      <button type="button" class="nav-icon" id="search-open"'
+        ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + '<span class="nav-label">検索</span></button>',
+        "      </div>",
+        "    </div>",
+        "  </nav>",
+    ]
+    return "\n".join(out)
+
+
+def render_parent_footer(urls, guides, data, nodes):
+    """親ページのリンク集。部ごとに、その中の行き先を並べる。"""
+    year = datetime.date.today().year
+    kids = [(urls["guides"], "実践"), (urls["log_pm"], "実験ログ モデリング編"),
+            (urls["log_fx"], "実験ログ エフェクト編"), (urls["ref"], "ノード解説と用語集")]
+    out = [
+        '<footer class="sitefoot" id="sitemap">',
+        '  <div class="sitefoot-inner">',
+        '    <div class="foot-brand">',
+        f'      <a class="foot-logo" href="#top">{LOGO_SVG}<span><strong>{BRAND}</strong>'
+        '<small>部の入口</small></span></a>',
+        '      <p class="foot-lede">作ったものと、作り方と、確かめた数字を置いておく場所。部ごとに分けている。</p>',
+        '      <dl class="foot-stats">',
+        f'        <div><dt>実験</dt><dd>{len(DONE)}</dd></div>',
+        f'        <div><dt>実践</dt><dd>{len(guides["guides"])}</dd></div>',
+        f'        <div><dt>ノード</dt><dd>{count_nodes(nodes)}</dd></div>',
+        f'        <div><dt>用語</dt><dd>{count_terms(data)}</dd></div>',
+        "      </dl>",
+        "    </div>",
+        '    <div class="foot-cols">',
+        '      <ul class="foot-list">',
+        f'          <li class="foot-group"><a class="foot-link" href="{urls["home"]}"><span>{DEPT}</span>{FOOT_ARROW}</a>',
+        '            <ul class="foot-kids">',
+    ]
+    out += [f'              <li><a href="{h}"><span>{html.escape(l)}</span></a></li>' for h, l in kids]
+    out += [
+        "            </ul>",
+        "          </li>",
+        "      </ul>",
+        '      <ul class="foot-list">',
+        '          <li class="foot-group"><span class="foot-link foot-link--soon"><span>映像制作部</span><small>準備中</small></span></li>',
+        "      </ul>",
+        "    </div>",
+        "  </div>",
+        '  <div class="sitefoot-bottom">',
+        THEME_SWITCH.strip(),
+        f'    <p class="foot-copy">&copy; {year} {BRAND}</p>',
+        "  </div>",
+        "</footer>",
+    ]
     return "\n".join(out)
 
 
@@ -3020,7 +3082,9 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_NAV-->", render_gloss_nav(data)),
         ("<!--GLOSSARY_DATA-->", render_data(data)),
         ("<!--POPOVER-->", render_node_data(nodes, urls) + "\n" + popover),
-        ("<!--CHROME-->", render_footer(urls, guides, data, nodes) + "\n" + chrome),
+        ("<!--CHROME-->", (render_parent_footer(urls, guides, data, nodes)
+                           if template_name == "sp_template.html"
+                           else render_footer(urls, guides, data, nodes)) + "\n" + chrome),
         ("<!--MENU_CARDS-->", render_menu_cards(guides, urls, data, nodes)),
         ("<!--SEARCH_DATA-->",
          render_search_data(data, nodes, guides, urls, tabs)),
@@ -3102,6 +3166,8 @@ def write_guide_pages(out_dir, urls, data, nodes, guides, works, requests, css,
     for gid, (title, body, prefix, guide) in sections.items():
         kind_label, kind_panel = ("実践", "guides") if prefix == "guide" else ("制作", "works")
         crumbs = "\n".join([
+            f'      <a href="{urls.get("parent") or PARENT_URLS["pages"]}">{BRAND}</a>',
+            '      <span aria-hidden="true">›</span>',
             f'      <a href="{urls["home"]}">{DEPT}</a>',
             '      <span aria-hidden="true">›</span>',
             f'      <a href="{panel_url(urls, kind_panel)}">{kind_label}</a>',

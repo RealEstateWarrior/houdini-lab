@@ -61,12 +61,22 @@ def main():
     status = run(["git", "status", "--porcelain"])
     if not status:
         print("変更なし")
-        return 0
+    else:
+        run(["git", "-c", "user.name=comeb", "-c", "user.email=fko2547009@gmail.com",
+             "commit", "-q", "-m", message])
+        run(["git", "push", "-q", "origin", "main"])
+        print("プッシュ完了:", run(["git", "log", "--oneline", "-1"]))
 
-    run(["git", "-c", "user.name=comeb", "-c", "user.email=fko2547009@gmail.com",
-         "commit", "-q", "-m", message])
-    run(["git", "push", "-q", "origin", "main"])
-    print("プッシュ完了:", run(["git", "log", "--oneline", "-1"]))
+    # 親ページ（Saito Production）は別のリポジトリ。build_site.py が ../sp/index.html を
+    # 書き直すので、変わっていれば一緒に送る（2026-09-23 まで送り忘れていた）
+    parent = os.path.join(os.path.dirname(HERE), "sp")
+    if os.path.isdir(os.path.join(parent, ".git")):
+        run(["git", "-C", parent, "add", "-A"])
+        if run(["git", "-C", parent, "status", "--porcelain"]):
+            run(["git", "-C", parent, "-c", "user.name=comeb", "-c", "user.email=fko2547009@gmail.com",
+                 "commit", "-q", "-m", message])
+            run(["git", "-C", parent, "push", "-q", "origin", "main"])
+            print("親ページもプッシュ:", run(["git", "-C", parent, "log", "--oneline", "-1"]))
     return 0
 
 

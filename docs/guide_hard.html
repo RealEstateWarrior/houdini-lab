@@ -3536,6 +3536,48 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   .sidenav.subnav-tucked .subnav--row { transform: none; filter: none; }
 }
 
+/* ---------- ロゴを2つのリンクに（2026-09-23）: SP のマーク＝親、名前＝この部のホーム ---------- */
+.sidenav .brand { display: inline-flex; align-items: center; gap: 4px; padding: 0; }
+.sidenav .brand:hover { opacity: 1; }
+.sidenav .brand a {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: none;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.sidenav .brand a:hover { background: var(--glass-edge); color: var(--ink); }
+.sidenav .brand .brand-logo svg { width: 26px; height: 26px; display: block; }
+.sidenav .brand .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; white-space: nowrap; }
+@media (max-width: 720px) {
+  .sidenav .brand a { padding: 5px 5px; }
+  .sidenav .brand .brand-name { font-size: 0.9rem; }
+}
+
+/* 親ページ: 部の切り替え（バーの左） */
+.dept-switch { display: flex; align-items: center; gap: 2px; padding: 3px; border-radius: 980px; background: var(--glass-edge); min-width: 0; }
+.sidenav .dept-switch a,
+.sidenav .dept-switch .soon {
+  display: block;
+  padding: 7px 12px;
+  border-radius: 980px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.sidenav .dept-switch a { background: var(--ink); color: var(--on-ink); }
+.sidenav .dept-switch .soon { color: var(--ink-dim); }
+.sidenav .dept-switch .soon small { margin-left: 5px; font-size: 0.86em; font-weight: 500; }
+@media (max-width: 900px) { .dept-switch { display: none; } }
+.foot-link--soon { color: var(--ink-dim); cursor: default; }
+.foot-link--soon small { font-size: 0.74rem; font-weight: 500; }
+.sp-masthead { margin-top: 18px; }
+
 </style>
 </head>
 <body>
@@ -3548,10 +3590,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <div class="subnav subnav--bar" data-g="2" hidden><a href="index.html#experiments" title="1件ずつ。押すと中身が開く">実験集</a><a href="log.html" title="形を作る側">モデリング編</a><a href="log_fx.html" title="動かす側">エフェクト編</a><a href="index.html#speed" title="速さについて分かったこと">効率化</a><a href="reference.html#links" title="外の資料">参考リンク</a></div>
         <div class="subnav subnav--bar" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a></div>
       </div>
-      <a class="brand" href="index.html" aria-label="Houdini 研究部（ホーム）">
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg>
-        <span class="brand-name">Houdini 研究部</span>
-      </a>
+      <div class="brand">
+        <a class="brand-logo" href="../" aria-label="Saito Production（親のページへ）" title="Saito Productionへ"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg></a>
+        <a class="brand-name" href="index.html" title="Houdini 研究部のホームへ">Houdini 研究部</a>
+      </div>
       <ul class="nav-menu" aria-hidden="true">
         <li data-g="0">
           <a href="index.html#overview">ホーム</a>
@@ -3637,6 +3679,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <div class="shell guide-page">
 
     <nav class="crumbs" aria-label="現在地">
+      <a href="../">Saito Production</a>
+      <span aria-hidden="true">›</span>
       <a href="index.html">Houdini 研究部</a>
       <span aria-hidden="true">›</span>
       <a href="practice.html#guides">実践</a>
@@ -3766,7 +3810,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-6ee2d6f3c9.js"></script>
+<script src="data/glossary-data-2dacb7cda2.js"></script>
 <script src="data/node-data-908d8e0db5.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
