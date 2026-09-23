@@ -1125,6 +1125,65 @@
       b.addEventListener("click", function () { setTheme(b.dataset.themeSet); });
     });
 
+    /* 実験カードや検索から #expNNN で来たら、その記事の全文を開いておく */
+    function openTargetEntry() {
+      var id = (window.location.hash || "").slice(1);
+      if (!/^exp\d+$/.test(id)) { return; }
+      var entry = document.getElementById(id);
+      var full = entry && entry.querySelector("details.colfull");
+      if (full) { full.open = true; }
+    }
+    openTargetEntry();
+    window.addEventListener("hashchange", openTargetEntry);
+
+    /* 実践のパラメータ画面は、PC では最初から開いておく（手順どおりに真似しやすい） */
+    if (window.matchMedia && window.matchMedia("(min-width: 900px)").matches) {
+      Array.prototype.forEach.call(document.querySelectorAll("details.step-ui"), function (d) {
+        d.open = true;
+      });
+    }
+
+    /* 実験ログの左の目次: 題で絞り込む・いま読んでいる実験に印を付ける */
+    (function () {
+      var list = document.getElementById("doc-toc-list");
+      if (!list) { return; }
+      var links = Array.prototype.slice.call(list.querySelectorAll("a[data-anchor]"));
+      var filter = document.getElementById("doc-filter");
+      if (filter) {
+        filter.addEventListener("input", function () {
+          var q = filter.value.trim().toLowerCase();
+          links.forEach(function (a) {
+            a.parentNode.hidden = q && a.textContent.toLowerCase().indexOf(q) === -1;
+          });
+          Array.prototype.forEach.call(list.querySelectorAll(".doc-toc-sep"), function (sep) {
+            sep.hidden = !!q;
+          });
+        });
+      }
+      if (!window.IntersectionObserver) { return; }
+      var byId = {};
+      links.forEach(function (a) { byId[a.dataset.anchor] = a; });
+      var current = null;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) { return; }
+          var a = byId[e.target.id];
+          if (!a || a === current) { return; }
+          if (current) { current.removeAttribute("aria-current"); }
+          current = a;
+          a.setAttribute("aria-current", "true");
+          /* 目次の中だけを動かして、印の付いた行を見える所に置く */
+          var box = list.getBoundingClientRect(), r = a.getBoundingClientRect();
+          if (r.top < box.top || r.bottom > box.bottom) {
+            list.scrollTop += r.top - box.top - box.height / 3;
+          }
+        });
+      }, { rootMargin: "-90px 0px -65% 0px" });
+      Array.prototype.forEach.call(document.querySelectorAll(".entry[id^=exp]"), function (el) {
+        io.observe(el);
+      });
+    }());
+
     /* いま居る区分のタブの列だけを出し、上の見出しに印を付ける */
     function syncNav() {
       var on = null;
@@ -1138,6 +1197,12 @@
         var self = c && (c.getAttribute("aria-selected") === "true" || c.getAttribute("aria-current") === "page");
         li.classList.toggle("is-on", on !== null ? li.dataset.g === on : !!self);
       });
+      /* 現在地: タブのあるページは、選んでいるタブの行だけを出す */
+      var sel = document.querySelector('.nav-tab[aria-selected="true"]');
+      var rows = document.querySelectorAll(".crumbrow [data-crumb]");
+      Array.prototype.forEach.call(rows, function (row, i) {
+        row.hidden = sel ? row.dataset.crumb !== sel.dataset.panel : i !== 0;
+      });
     }
     if (window.MutationObserver) {
       var mo = new MutationObserver(syncNav);
@@ -1146,6 +1211,21 @@
       });
     }
     syncNav();
+
+    /* バーは、ページの頭では背景になじませ、読み進めたらガラスの板にする */
+    (function () {
+      var bar = document.querySelector(".sidenav");
+      if (!bar) { return; }
+      var ticking = false;
+      function update() {
+        bar.classList.toggle("is-scrolled", window.scrollY > 12);
+        ticking = false;
+      }
+      window.addEventListener("scroll", function () {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    }());
 
     /* 冒頭の帯の検索窓: 「探す」は検索の画面、「AI に聞く」はチャットの画面へ、打った言葉ごと渡す */
     var bq = document.getElementById("band-q");

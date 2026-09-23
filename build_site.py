@@ -19,6 +19,7 @@ Usage:
 """
 
 import datetime
+import hashlib
 import html
 import json
 import os
@@ -133,6 +134,13 @@ AI_SVG = (
 AI_BUTTON = ('      <button type="button" class="nav-icon nav-ai" id="ask-open" hidden'
              ' aria-label="AI に聞く（Beta 版）" title="AI に聞く（Beta 版）">'
              + AI_SVG + '<span class="nav-beta">Beta</span></button>')
+NOTEBOOK_SVG = (
+    '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+    '<path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor"'
+    ' stroke-width="1.6" stroke-linejoin="round"/>'
+    '<path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6"'
+    ' stroke-linecap="round"/></svg>'
+)
 BURGER_SVG = (
     '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
     '<path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.8"'
@@ -1422,15 +1430,21 @@ def render_nav(active, tabs, urls, panels=None):
     続くのは4つの見出しで、乗せると下にパネルが降りる。
     1列目は大きく、2列目から先は小さく出す。
     """
-    parent = urls.get("parent") or PARENT_URLS["pages"]
+    # 2026-09-23 整え直し: 左にメニュー（2本線）、真ん中にロゴ、右にアイコン。
+    # 上に並べていた見出し（nav-menu）は画面には出さず、メニューの一覧の元としてだけ残す
     out = [
         '  <nav class="sidenav" aria-label="サイト内の移動">',
         '    <div class="nav-inner">',
-        f'      <a class="logo" href="{parent}"'
-        f' aria-label="{BRAND}（親のページへ）">',
+        '      <div class="nav-side nav-side--left">',
+        '        <button type="button" class="nav-icon nav-burger" id="menu-open"'
+        ' aria-label="メニューを開く" aria-expanded="false">'
+        + BURGER_SVG + '<span class="nav-label">メニュー</span></button>',
+        "      </div>",
+        f'      <a class="brand" href="{urls["home"]}" aria-label="{DEPT}（ホーム）">',
         f"        {LOGO_SVG}",
+        f'        <span class="brand-name">{DEPT}</span>',
         "      </a>",
-        '      <ul class="nav-menu">',
+        '      <ul class="nav-menu" aria-hidden="true">',
     ]
 
     def control(target, label, extra="", ident=True):
@@ -1486,26 +1500,276 @@ def render_nav(active, tabs, urls, panels=None):
         out.append("        </li>")
 
     out.append("      </ul>")
-    out.append(THEME_SWITCH)
-    out.append(AI_BUTTON)
+    out.append('      <div class="nav-side nav-side--right">')
+    out.append(AI_BUTTON.replace('<span class="nav-beta">Beta</span>',
+                                 '<span class="nav-beta">Beta</span><span class="nav-label">AI</span>'))
     out.append('      <button type="button" class="nav-icon" id="search-open"'
-               ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG + "</button>")
-    out.append('      <button type="button" class="nav-icon nav-burger" id="menu-open"'
-               ' aria-label="メニューを開く" aria-expanded="false">'
-               + BURGER_SVG + "</button>")
+               ' aria-label="Saito Production 全体を検索">' + SEARCH_SVG
+               + '<span class="nav-label">検索</span></button>')
+    out.append(f'      <a class="nav-icon nav-notebook" href="{NOTEBOOK_URL}" target="_blank"'
+               ' rel="noopener" aria-label="Gemini Notebook（資料に質問できるノート）を開く">'
+               + NOTEBOOK_SVG + '<span class="nav-label">Notebook</span></a>')
+    out.append("      </div>")
     out.append("    </div>")
     # その区分のタブの列。いま居る区分の列だけを出す（どれを出すかは partial_chrome の JS）。
     # 降りてくるパネルの代わり。行き先は MENU の束をそのまま横に並べたもの（2026-09-22）
+    # 2026-09-23: PC ではバーの左（メニューの隣）に入れ、スマホではバーの下に左寄せで出す
+    rows = []
     for index, (head, target, columns) in enumerate(MENU):
         if not columns:
             continue
-        out.append(f'    <div class="subnav" data-g="{index}" hidden>')
-        for _col_head, links in columns:
-            for child_target, child_label, note in links:
-                out.append("      " + control(child_target, child_label,
-                                              f' title="{html.escape(note)}"', ident=False))
-        out.append("    </div>")
+        links_html = "".join(
+            control(child_target, child_label, f' title="{html.escape(note)}"', ident=False)
+            for _col_head, links in columns for child_target, child_label, note in links)
+        rows.append((index, links_html))
+    left_close = out.index("      </div>")          # 左の箱の閉じ
+    out[left_close:left_close] = [
+        f'        <div class="subnav subnav--bar" data-g="{i}" hidden>{h.replace("実験ログ ", "")}</div>'
+        for i, h in rows]
+    for i, h in rows:
+        out.append(f'    <div class="subnav subnav--row" data-g="{i}" hidden>{h}</div>')
     out.append("  </nav>")
+    return "\n".join(out)
+
+
+# 実験ログは、左に目次・右に本文の「文書の形」にする（2026-09-23。Google Cloud の文書を参考に）
+DOC_TEMPLATES = {"log_pm_template.html": "log_pm", "log_fx_template.html": "log_fx"}
+DOC_TITLE = {"log_pm": "実験ログ モデリング編", "log_fx": "実験ログ エフェクト編"}
+
+
+def render_doc_toc(log_key, urls):
+    """その編の実験の目次。30本ずつに区切り、いま読んでいる実験に印を付ける（印は JS）。"""
+    items = [d for d in DONE if d.get("log", "log_pm") == log_key]
+    other = "log_fx" if log_key == "log_pm" else "log_pm"
+    out = [
+        '  <aside class="doc-toc" aria-label="この編の実験">',
+        '    <div class="doc-toc-inner">',
+        '      <label class="doc-filter">' + SEARCH_SVG
+        + '<input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off"'
+        ' aria-label="この編の実験を題で絞り込む"></label>',
+        f'      <p class="doc-toc-head">{DOC_TITLE[log_key]}<small>{len(items)}本</small></p>',
+        '      <ol class="doc-toc-list" id="doc-toc-list">',
+    ]
+    block = None
+    for item in items:
+        no = int(item["no"])
+        start = (no - 1) // 30 * 30 + 1
+        if start != block:
+            block = start
+            out.append(f'        <li class="doc-toc-sep" aria-hidden="true">'
+                       f'{start:03d}–{start + 29:03d}</li>')
+        out.append(f'        <li><a href="#{item["anchor"]}" data-anchor="{item["anchor"]}">'
+                   f'<span class="doc-no">{item["no"]}</span>'
+                   f'<span class="doc-t">{html.escape(item["title"])}</span></a></li>')
+    out += [
+        "      </ol>",
+        f'      <a class="doc-other" href="{urls[other]}">{DOC_TITLE[other]}へ →</a>',
+        "    </div>",
+        "  </aside>",
+    ]
+    return "\n".join(out)
+
+
+DATES = os.path.join(OUT, "dates.json")
+_DATES_CACHE = {}
+
+
+def pub_date(kind, key):
+    """公開日（examples/dates_index.py が git の履歴から取ったもの）。無ければ空。"""
+    if "d" not in _DATES_CACHE:
+        _DATES_CACHE["d"] = {}
+        if os.path.exists(DATES):
+            with open(DATES, encoding="utf-8") as fp:
+                _DATES_CACHE["d"] = json.load(fp)
+    return _DATES_CACHE["d"].get(kind, {}).get(key, "")
+
+
+def date_ja(day):
+    y, m, d = day.split("-")
+    return f"{int(y)}年{int(m)}月{int(d)}日"
+
+
+def read_minutes(markup):
+    """読む時間のめやす。日本語で1分に約600字として数える。"""
+    text = re.sub(r"<[^>]+>|\s+", "", markup)
+    return max(1, round(len(text) / 600))
+
+
+def columnize(page):
+    """実験ログの記事を、さっと読める形にする（2026-09-23）。
+
+    題の下に「公開日・読む時間・タグ」と、要点（その記事の「わかったこと」の頭3つ）を出し、
+    本文は「全文を読む」の中に畳む。本文そのものは変えない。
+    """
+    tags_of = {d["no"]: d.get("tags", []) for d in DONE}
+
+    def fix(match):
+        head, no, inner = match.group(1), match.group(2), match.group(3)
+        cut = re.search(r'(<p class="path">.*?</p>|</h2>)', inner, re.S)
+        close = inner.rfind("</div>")
+        if not cut or close == -1:
+            return match.group(0)
+        top, rest, tail = inner[:cut.end()], inner[cut.end():close], inner[close:]
+        points = re.findall(r"<li>(.*?)</li>",
+                            (re.search(r'<ul class="findings">(.*?)</ul>', rest, re.S) or
+                             re.search(r"()", "")).group(1), re.S)[:3]
+        day = pub_date("exp", no)
+        meta = []
+        if day:
+            meta.append(f'<time datetime="{day}">{date_ja(day)} 公開</time>')
+        meta.append(f"<span>読む時間 約{read_minutes(rest)}分</span>")
+        chips = "".join(f"<span class=\"coltag\">{html.escape(t)}</span>" for t in tags_of.get(no, [])[:4])
+        block = ['\n        <div class="colhead">',
+                 f'          <p class="colmeta">{"".join(meta)}{chips}</p>']
+        thumb = f"thumb_{no}.png"
+        has_thumb = os.path.exists(os.path.join(OUT, thumb))
+        if points or has_thumb:
+            block.append('          <div class="colbody">')
+            if points:
+                block.append('          <div class="colgist"><p class="colgist-label">要点</p><ul>')
+                block += [f"            <li>{p.strip()}</li>" for p in points]
+                block.append("          </ul></div>")
+            if has_thumb:
+                block.append(f'          <img class="colthumb" src="{thumb}" alt="" loading="lazy" decoding="async">')
+            block.append("          </div>")
+        block.append("        </div>")
+        block.append('        <details class="colfull">'
+                     f'<summary><span>全文を読む</span><small>約{read_minutes(rest)}分</small></summary>')
+        return (head + top + "\n".join(block) + rest + "        </details>\n      " + tail
+                + "</article>")
+
+    return re.sub(r'(<article class="entry[^"]*" id="exp(\d{3})">)(.*?)</article>', fix, page,
+                  flags=re.S)
+
+
+def as_doc_layout(page, log_key, urls):
+    """ひな形の本文（.shell）を、左の目次と並べる箱に入れる。"""
+    page = page.replace('  <div class="shell">',
+                        '  <div class="docwrap">\n' + render_doc_toc(log_key, urls)
+                        + '\n  <div class="shell doc-main">', 1)
+    mark = page.index("<!--GLOSSARY_DATA-->")
+    close = page.rindex("</div>", 0, mark)      # .layout の閉じ
+    return page[:close] + "</div>\n" + page[close:]
+
+
+def crumb_table():
+    """行き先（パネル名か "@ページ"）→ (区分の見出し, 区分の先頭の行き先, 名前)。MENU から作る。"""
+    table = {"overview": (None, None, "ホーム")}
+    for head, target, columns in MENU:
+        for _col, links in columns:
+            for child, label, _note in links:
+                table.setdefault(child.lstrip("@"), (head, target, label))
+    return table
+
+
+def crumb_href(urls, target):
+    return urls[target[1:]] if target.startswith("@") else panel_url(urls, target)
+
+
+def render_crumbs(active, tabs, urls, panels, doc=False):
+    """いまどこにいるか（Houdini 研究部 › 実験 › 実験ログ モデリング編）。どの段も押せる。
+
+    タブのあるページでは、パネルごとに1行ずつ作っておき、選んだタブの行だけを出す
+    （切り替えは partial_chrome の JS）。
+    """
+    table = crumb_table()
+
+    def row(key, extra=""):
+        if key == "overview":
+            # ホームそのものでは、現在地は「Houdini 研究部」だけになるので出さない
+            return f'      <nav class="crumbs crumbs--home" aria-hidden="true"{extra}></nav>'
+        head, head_target, label = table.get(key, (None, None, None))
+        parts = [f'<a href="{urls["home"]}">{DEPT}</a>']
+        if head and label:
+            if head_target and head_target != key:
+                parts.append(f'<a href="{crumb_href(urls, head_target)}">{html.escape(head)}</a>')
+            parts.append(f'<span aria-current="page">{html.escape(label)}</span>')
+        sep = '<span class="crumb-sep" aria-hidden="true">›</span>'
+        return f'      <nav class="crumbs" aria-label="現在地"{extra}>' + sep.join(parts) + "</nav>"
+
+    out = ['  <div class="crumbrow crumbrow--doc">' if doc else '  <div class="crumbrow">']
+    if tabs and panels:
+        for panel in panels:
+            out.append(row(panel, f' data-crumb="{panel}" hidden'))
+    else:
+        out.append(row(active))
+    out.append("  </div>")
+    return "\n".join(out)
+
+
+FOOT_ARROW = ('<svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">'
+              '<path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4"'
+              ' stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
+
+def render_footer(urls, guides, data, nodes):
+    """全ページの最後に置くリンク集（2026-09-23）。
+
+    左にサイトの名前と一言・数、右に行き先。見出しの行は大きく、その下に中の行き先を小さく並べる。
+    """
+    def href(target):
+        return crumb_href(urls, target)
+
+    def group(head, target, columns):
+        rows = [f'          <li class="foot-group">'
+                f'<a class="foot-link" href="{href(target)}"><span>{html.escape(head)}</span>{FOOT_ARROW}</a>']
+        kids = [(t, label) for _c, links in columns for t, label, _n in links if t != target]
+        if kids:
+            rows.append('            <ul class="foot-kids">')
+            for t, label in kids:
+                rows.append(f'              <li><a href="{href(t)}"><span>{html.escape(label)}</span></a></li>')
+            rows.append("            </ul>")
+        rows.append("          </li>")
+        return rows
+
+    by_head = {head: (head, target, cols) for head, target, cols in MENU}
+    left = [by_head["ホーム"], by_head["実践"], by_head["解説"]]
+    right = [by_head["実験"]]
+    parent = urls.get("parent") or PARENT_URLS["pages"]
+    year = datetime.date.today().year
+    out = [
+        '<footer class="sitefoot" id="sitemap">',
+        '  <div class="sitefoot-inner">',
+        '    <div class="foot-brand">',
+        f'      <a class="foot-logo" href="{urls["home"]}">{LOGO_SVG}'
+        f'<span><strong>{DEPT}</strong><small>{BRAND}</small></span></a>',
+        '      <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。'
+        '作り方の手順と、ノード・用語の解説もある。</p>',
+        '      <dl class="foot-stats">',
+        f'        <div><dt>実験</dt><dd>{len(DONE)}</dd></div>',
+        f'        <div><dt>実践</dt><dd>{len(guides["guides"])}</dd></div>',
+        f'        <div><dt>ノード</dt><dd>{count_nodes(nodes)}</dd></div>',
+        f'        <div><dt>用語</dt><dd>{count_terms(data)}</dd></div>',
+        "      </dl>",
+        '      <div class="foot-ext">',
+        f'        <a href="{NOTEBOOK_URL}" target="_blank" rel="noopener">{NOTEBOOK_SVG}'
+        '<span>Gemini Notebook<small>資料に質問できるノート</small></span></a>',
+        '        <a href="https://github.com/RealEstateWarrior/houdini-lab" target="_blank"'
+        ' rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+        '<path d="M8 17l-5-5 5-5M16 7l5 5-5 5" stroke="currentColor" stroke-width="1.6"'
+        ' stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        '<span>GitHub<small>台本と hip の置き場</small></span></a>',
+        "      </div>",
+        "    </div>",
+        '    <div class="foot-cols">',
+    ]
+    for col in (left, right):
+        out.append('      <ul class="foot-list">')
+        for head, target, columns in col:
+            out += group(head, target, columns)
+        out.append("      </ul>")
+    out += [
+        "    </div>",
+        "  </div>",
+        '  <div class="sitefoot-bottom">',
+        THEME_SWITCH.strip(),
+        '    <p class="foot-small">'
+        f'<a href="{parent}">{BRAND}</a>'
+        f'<span>確かめた版: {HOU_VERSION}</span></p>',
+        f'    <p class="foot-copy">&copy; {year} {BRAND}</p>',
+        "  </div>",
+        "</footer>",
+    ]
     return "\n".join(out)
 
 
@@ -1717,7 +1981,7 @@ def all_tags():
 def render_thumbs(urls):
     """実験の一覧。カードはリンクではなくボタンで、押すとポップアップが開く。"""
     out = ['      <div class="stage"><h3>完了した実験</h3>'
-           "<p>カードを押すと要点が開く。タグで絞り込める。</p></div>"]
+           "<p>カードを押すと、実験ログの記事が新しいタブで開く。タグで絞り込める。</p></div>"]
     out.append('      <div class="tagbar" id="tagbar">')
     out.append('        <button type="button" class="tagchip is-on" data-tag="">'
                f"すべて <span>{len(DONE)}</span></button>")
@@ -1887,6 +2151,77 @@ def link_nodes_in(markup, table):
                    for part in parts)
 
 
+PARM_INDEX = os.path.join(OUT, "parm_index.json")
+_PARM_CACHE = {}
+
+
+def parm_table():
+    if "t" not in _PARM_CACHE:
+        _PARM_CACHE["t"] = {}
+        if os.path.exists(PARM_INDEX):
+            with open(PARM_INDEX, encoding="utf-8") as fp:
+                _PARM_CACHE["t"] = json.load(fp)
+    return _PARM_CACHE["t"]
+
+
+def link_parms_in(body, guide_id, step_no):
+    """段の本文の太字に、つまみの置き場所を出す札を付ける（2026-09-23）。
+
+    表は examples/parm_index.py が hip から取ったもの。その段のノードのつまみだけと突き合わせる。
+    """
+    step = parm_table().get(guide_id, {}).get(str(step_no))
+    if not step:
+        return body
+    labels = sorted(step["parms"], key=len, reverse=True)
+
+    def fix(match):
+        text = re.sub(r"<[^>]+>", "", match.group(2))
+        found, taken = [], []
+        for label in labels:
+            at = text.find(label)
+            while at != -1:
+                span = (at, at + len(label))
+                if not any(a < span[1] and span[0] < b for a, b in taken):
+                    taken.append(span)
+                    found.append(label)
+                    break
+                at = text.find(label, at + 1)
+        if not found:
+            return match.group(0)
+        rows = [[label] + step["parms"][label][:4] for label in found]
+        payload = html.escape(json.dumps({"node": step["node"], "name": step["name"], "rows": rows},
+                                         ensure_ascii=False), quote=True)
+        return (f'<strong{match.group(1)} class="parm-ref" data-parm="{payload}" tabindex="0"'
+                f' role="button">{match.group(2)}</strong>')
+
+    return re.sub(r"<strong([^>]*)>(.*?)</strong>", fix, body, flags=re.S)
+
+
+SIM_MARKS = ("シミュレーション", "エフェクト", "Vellum", "Pyro", "FLIP", "RBD", "MPM", "POP")
+SIM_NODES = ("vellumsolver", "pyrosolver", "flipsolver", "rbdbulletsolver", "popnet",
+             "mpmsolver", "dopnet", "flipcontainer")
+
+
+def guide_level(guide):
+    """難易度（2026-09-23）。決め方は決まりで出す（感覚で付けない）:
+    シミュレーションを回すものは「応用」、VEX（wrangle）を書くか6段以上のものは「基本」、それ以外は「入門」。"""
+    nodes = {step.get("node", "") for step in guide.get("steps", [])}
+    tags = set(guide.get("tags", []))
+    if tags & set(SIM_MARKS) or nodes & set(SIM_NODES):
+        return 3, "応用"
+    if "attribwrangle" in nodes or "VEX" in tags or len(guide.get("steps", [])) >= 6:
+        return 2, "基本"
+    return 1, "入門"
+
+
+def level_badge(guide):
+    level, name = guide_level(guide)
+    dots = "".join('<i class="on"></i>' if n <= level else "<i></i>" for n in (1, 2, 3))
+    return (f'<span class="level level--{level}" title="難易度: {name}'
+            f'（シミュレーションは応用、VEX か6段以上は基本、ほかは入門）">'
+            f'<span class="level-dots" aria-hidden="true">{dots}</span>難易度 {name}</span>')
+
+
 def render_guide_cards(guides):
     """手順の一覧。カードを押すとポップアップで開く。
 
@@ -1896,7 +2231,7 @@ def render_guide_cards(guides):
     out = ['      <div class="thumbs" id="guide-cards">']
     for index, guide in enumerate(guides["guides"], start=1):
         facts = dict(guide.get("facts") or [])
-        chips = [f'{len(guide["steps"])}ステップ']
+        chips = [level_badge(guide), f'{len(guide["steps"])}ステップ']
         if facts.get("ノードの数"):
             chips.append(facts["ノードの数"])
         if facts.get("かかる時間"):
@@ -1912,7 +2247,8 @@ def render_guide_cards(guides):
         out.append(f'            <h4>{html.escape(guide["title"])}</h4>')
         out.append(f'            <p>{html.escape(guide["lede"])}</p>')
         out.append('            <span class="thumb-tags">'
-                   + "".join(f"<span>{html.escape(c)}</span>" for c in chips)
+                   + "".join(c if c.startswith("<span class=\"level") else f"<span>{html.escape(c)}</span>"
+                             for c in chips)
                    + "</span>")
         out.append("          </span>")
         out.append("        </button>")
@@ -2099,6 +2435,10 @@ def render_guide_sections(guides, works, urls):
         out.append("        </div>")
         out.append('        <div class="guide-head">')
         out.append(f'          <h3>{html.escape(guide["title"])}</h3>')
+        day = pub_date("guide", guide["id"]) if prefix == "guide" else ""
+        if day:
+            out.append(f'          <p class="guide-date"><time datetime="{day}">{date_ja(day)} 公開</time>'
+                       f'<span>{len(guide["steps"])}ステップ</span>{level_badge(guide)}</p>')
         out.append(f'          <p class="guide-lede">{guide["lede"]}</p>')
         if guide.get("facts"):
             out.append('          <dl class="guide-facts">')
@@ -2112,6 +2452,25 @@ def render_guide_sections(guides, works, urls):
             out.append(f'            <p>{html.escape(guide["order"])}</p>')
             out.append("            <cite>依頼</cite>")
             out.append("          </blockquote>")
+        # 2026-09-23: hip と手順の目次を頭に置く（hip が最後にしか無く、探しにくかった）
+        out.append('          <div class="guide-actions">')
+        if guide.get("hip"):
+            out.append(f'            <a class="guide-hip" href="{GITHUB_RAW}{guide["hip"]}"'
+                       ' target="_blank" rel="noopener noreferrer">'
+                       '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+                       f'<span>hip を開く<small>{html.escape(guide["hip"])}</small></span></a>')
+        if guide.get("exp") in anchors:
+            anchor, log_key = anchors[guide["exp"]]
+            out.append(f'            <a class="guide-exp" href="{urls[log_key]}#{anchor}">'
+                       f'実験{guide["exp"]} の全文</a>')
+        out.append("          </div>")
+        out.append('          <nav class="guide-toc" aria-label="手順の目次">')
+        out.append('            <p class="label">手順</p>')
+        out.append("            <ol>")
+        for index, step in enumerate(guide["steps"], start=1):
+            out.append(f'              <li><a href="#step-{index}">{html.escape(step["title"])}</a></li>')
+        out.append("            </ol>")
+        out.append("          </nav>")
         out.append("        </div>")
 
         # 本物の Houdini で撮ったネットワーク全体（guide_ui_capture.py）
@@ -2127,11 +2486,11 @@ def render_guide_sections(guides, works, urls):
 
         out.append('        <ol class="steps">')
         for index, step in enumerate(guide["steps"], start=1):
-            out.append('          <li class="step">')
+            out.append(f'          <li class="step" id="step-{index}">')
             out.append('            <div class="step-body">')
             out.append(f'              <h4>{html.escape(step["title"])}'
                        f'<code>{html.escape(step["node"])}</code></h4>')
-            out.append(f'              <p>{step["body"]}</p>')
+            out.append(f'              <p>{link_parms_in(step["body"], guide["id"], index) if prefix == "guide" else step["body"]}</p>')
             # その段のノードを選んだときのパラメータ欄（guide_parm_capture.py）。
             # 開いたときだけ読み込むよう details に入れる。ポップアップが重くならない
             parm = f'{prefix}_{guide["id"]}_p{index}_parm.png'
@@ -2233,6 +2592,12 @@ def render_exp_data(urls):
     Claude 版（Artifacts）は1つの版に置けるファイルが 512 までなので、
     ポップアップの図は1枚だけにする。GitHub Pages 版は全部載せる。
     """
+    # 2026-09-23: カードは実験ログの記事を開くだけになったので、渡すのは行き先と題だけ
+    payload = {item["no"]: {"title": item["title"],
+                            "href": f'{urls[item.get("log", "log_pm")]}#{item["anchor"]}'}
+               for item in DONE}
+    body = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    return f'<script type="application/json" id="experiment-data">{body}</script>'
     slim = str(urls.get("home", "")).startswith("http")
     payload = {}
     for item in DONE:
@@ -2561,6 +2926,47 @@ def strip_panels(page, keep):
         page = page[:start] + page[close:]
 
 
+# GitHub Pages 版では、どのページにも入る大きなデータ（検索・用語・ノード・実験）を
+# 別のファイルに出し、ページからは読み込むだけにする。同じ中身は同じファイル名になるので、
+# 2ページ目からはブラウザに残った分が使われる（1ページ約1MB → 軽く。2026-09-23）
+SHARED_DATA_IDS = ("glossary-data", "search-data", "node-data", "experiment-data")
+SHARED_WRITTEN = set()
+
+
+def externalize_data(page, out_dir):
+    folder = os.path.join(out_dir, "data")
+    os.makedirs(folder, exist_ok=True)
+
+    def swap(match):
+        ident, body = match.group(1), match.group(2)
+        digest = hashlib.sha1(body.encode("utf-8")).hexdigest()[:10]
+        name = f"{ident}-{digest}.js"
+        path = os.path.join(folder, name)
+        if name not in SHARED_WRITTEN:
+            code = ("(function(){var s=document.currentScript,e=document.createElement('script');"
+                    f"e.type='application/json';e.id={json.dumps(ident)};e.textContent="
+                    + json.dumps(body, ensure_ascii=False)
+                    + ";s.parentNode.insertBefore(e,s);})();\n")
+            with open(path, "w", encoding="utf-8") as fp:
+                fp.write(code)
+            SHARED_WRITTEN.add(name)
+        return f'<script src="data/{name}"></script>'
+
+    pattern = re.compile(r'<script type="application/json" id="(' + "|".join(SHARED_DATA_IDS)
+                         + r')">(.*?)</script>', re.S)
+    return pattern.sub(swap, page)
+
+
+def clean_shared_data(out_dir):
+    """前の版で書いたデータのうち、今回どのページも使わなかったものを消す。"""
+    folder = os.path.join(out_dir, "data")
+    if not os.path.isdir(folder):
+        return
+    for name in os.listdir(folder):
+        if name.endswith(".js") and name not in SHARED_WRITTEN:
+            os.remove(os.path.join(folder, name))
+
+
 def render(template_name, out_dir, out_name, active, tabs, urls,
            data, nodes, guides, works, requests, css, links_body,
            popover, chrome, bundle=None, extra=None):
@@ -2573,6 +2979,9 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     panels = PAGE_PANELS.get(bundle) if bundle else None
     if panels:
         page = strip_panels(page, set(panels))
+    if template_name in DOC_TEMPLATES:
+        page = as_doc_layout(page, DOC_TEMPLATES[template_name], urls)
+        page = columnize(page)
 
     # 実験ポップアップの中身はパネルの外にあるので、実験を持つページだけに入れる
     exp_data = render_exp_data(urls) if (not panels or "experiments" in panels) \
@@ -2580,7 +2989,11 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
 
     for needle, value in (
         ("<!--CSS-->", css),
-        ("<!--NAV-->", render_nav(active, tabs, urls, panels)),
+        ("<!--NAV-->", render_nav(active, tabs, urls, panels)
+         # 実践の1本ずつのページは、題まで入った自分の現在地を本文の頭に持っている
+         + ("" if template_name == "guide_template.html"
+            else "\n" + render_crumbs(active, tabs, urls, panels,
+                                       doc=template_name in DOC_TEMPLATES))),
         ("<!--THUMBS-->", render_thumbs(urls)),
         ("<!--EXP_DATA-->", exp_data),
         ("<!--NODES-->", render_nodes(nodes, urls)),
@@ -2600,7 +3013,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_NAV-->", render_gloss_nav(data)),
         ("<!--GLOSSARY_DATA-->", render_data(data)),
         ("<!--POPOVER-->", render_node_data(nodes, urls) + "\n" + popover),
-        ("<!--CHROME-->", chrome),
+        ("<!--CHROME-->", render_footer(urls, guides, data, nodes) + "\n" + chrome),
         ("<!--MENU_CARDS-->", render_menu_cards(guides, urls, data, nodes)),
         ("<!--SEARCH_DATA-->",
          render_search_data(data, nodes, guides, urls, tabs)),
@@ -2647,6 +3060,9 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     # ノード名がぶつかるので付けない
     if bundle != "ref":
         page = link_nodes_in(page, node_index(nodes))
+
+    if out_dir == DOCS:
+        page = externalize_data(page, DOCS)
 
     if out_dir in (DOCS, ROOT):
         page = as_document(page, out_name if out_dir == DOCS else None)
@@ -2897,6 +3313,7 @@ def main():
         root_note = os.path.join(ROOT, "index.html")
 
     write_sitemap()
+    clean_shared_data(DOCS)
 
     # GitHub Pages に Jekyll 処理をさせない
     with open(os.path.join(DOCS, ".nojekyll"), "w", encoding="utf-8") as fp:

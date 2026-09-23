@@ -49,7 +49,7 @@
           <span class="route-text">
             <strong>実験を読む</strong>
             なぜそうなるのかを測って確かめた記録です。
-            カードを押すと要点が開きます。
+            カードを押すと、記事が新しいタブで開きます。
           </span>
         </a>
         <a class="route-step" href="<!--URL_GLOSSARY-->">
@@ -162,7 +162,7 @@
         <p class="eyebrow">Practice</p>
         <h1>実践</h1>
         <p class="lede">
-          作り方だけを順番に並べたもの。カードを押すと中身が開く。
+          作り方だけを順番に並べたもの。カードを押すと、その実践のページが新しいタブで開く。
           1段ごとに図があり、最後に完成図と組み上がったノードグラフが出る。
           なぜそうなるのかまで知りたくなったら、そこから実験ログへ進める。
         </p>
@@ -234,7 +234,7 @@
         <p class="eyebrow">Experiments</p>
         <h1>実験</h1>
         <p class="lede">
-          カードを押すと要点が開く。そこから全文のログへ進める。
+          カードを押すと、その実験の記事が新しいタブで開く。
         </p>
         <p class="thread">
           <strong>001〜007</strong> は形を作る側の話。分割とノイズがそれぞれ何を決めているかを切り分けた。
@@ -370,7 +370,11 @@
 
     /* ハブは3ページに分かれている。既定で開くのは、このページが持つ最初のパネル */
     if (!openFromHash(window.location.hash, false)) {
-      show(tabs.length ? tabs[0].dataset.panel : "overview", false);
+      /* 既定は、このページが持つパネルのうち最初のもの（並びは build_site の PAGE_PANELS）。
+         バーの左にもタブを置いたので、DOM の最初のタブでは決めない */
+      var order = ["overview", "guides", "nodes", "experiments", "speed", "works", "requests", "glossary", "links"];
+      var first = order.filter(function (p) { return panels[p]; })[0];
+      show(first || (tabs.length ? tabs[0].dataset.panel : "overview"), false);
     }
 
     window.addEventListener("hashchange", function () {
@@ -497,7 +501,9 @@
       var card = event.target.closest("[data-exp]");
       if (card) {
         event.preventDefault();
-        open(card.dataset.exp, card);
+        /* 2026-09-23: ポップアップをやめ、実験ログの記事を新しいタブで開く */
+        var hit = data[card.dataset.exp];
+        if (hit) { window.open(hit.href, "_blank", "noopener"); }
         return;
       }
       if (event.target.closest("#m-close")) { close(); return; }
