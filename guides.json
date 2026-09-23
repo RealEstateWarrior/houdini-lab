@@ -3942,6 +3942,535 @@
           "cap": ""
         }
       ]
+    },
+    {
+      "id": "curtain",
+      "title": "カーテンを風になびかせる",
+      "lede": "布（Vellum の cloth）を1枚、上の端だけ留めて吊るし、窓の外から風を当てる。ひだを最初に付けておくと、風を受けたときにカーテンらしくふくらむ。ノードは布の3つ（形・性質・計算）が中心。",
+      "hero": "pr_curtain_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム48）。明かりは窓の光と弱いキー。",
+      "facts": [
+        [
+          "足すノード",
+          "5個（布の部分）"
+        ],
+        [
+          "48 フレームの計算",
+          "11.1秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "49.7秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_curtain.hipnc",
+      "tags": [
+        "シミュレーション",
+        "Vellum",
+        "布",
+        "Karma",
+        "制作"
+      ],
+      "steps": [
+        {
+          "title": "布の板を立てる",
+          "node": "copyxform",
+          "ui_node": "two_panels",
+          "body": "<code>grid</code> の Orientation を <strong>XY Plane</strong>（縦に立てる）、大きさ 0.85 × 2.2、<strong>Rows 56・Columns 24</strong> にする。升目が細かいほど布はなめらかに曲がるが、計算は重くなる。<code>copyxform</code> で右へ 0.86 ずらした2枚目を作り、左右1組のカーテンにする。",
+          "img": "pr_curtain_1.png",
+          "cap": "縦に立てた2枚の板。"
+        },
+        {
+          "title": "ひだを付け、留める所を決める",
+          "node": "attribwrangle",
+          "ui_node": "pleats_and_top",
+          "body": "<code>attribwrangle</code> で、横方向に <code>sin</code> の波を付けてひだにする。もう1行で、いちばん上の列の点を <strong>top</strong> というグループにまとめる。あとでここを留める。",
+          "img": "pr_curtain_2.png",
+          "cap": "波打ったひだ。上の列が top。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "布の性質を付けて、上を留める",
+          "node": "vellumconstraints",
+          "ui_node": "cloth_setup",
+          "body": "<code>vellumconstraints</code> の Constraint Type を <strong>Cloth</strong> にし、<strong>Pin Points に top</strong> と書く。これで上の列は動かず、ほかの点は布として引っぱり合う。出口は2つあり、左が布、右が「つながり（拘束）」。",
+          "img": "pr_curtain_3.png",
+          "cap": "見た目は同じ。点どうしのつながりが付いた。",
+          "ui_parm": "pingroup"
+        },
+        {
+          "title": "風を当てて計算する",
+          "node": "vellumsolver",
+          "ui_node": "wind_sim",
+          "body": "<code>vellumsolver</code> の左に布、<strong>真ん中に vellumconstraints の右の出口</strong>をつなぐ。<strong>Built-in Wind</strong> を入れて向きを (0.15, 0, 1)（窓から部屋の中へ）、Built-in Wind Speed 1.8、Built-in Wind Drag 0.3。Substeps は 5 にする（布が伸びすぎない）。再生すると布がふくらむ。フレーム 48（2 秒）で止めて撮る。",
+          "img": "pr_curtain_4.png",
+          "cap": "フレーム 48。上が留まったまま、下がふくらむ。",
+          "ui_parm": "dowind"
+        },
+        {
+          "title": "窓辺を組んで、材質を当てる",
+          "node": "merge",
+          "ui_node": "window_scene",
+          "body": "後ろに壁（<code>grid</code>）と、窓の形の光る板（Emission Intensity 1.4）、窓の桟（細い <code>box</code> 2本）を置き、上にカーテンレール（細い <code>tube</code>）を渡す。カーテンの材質は <strong>Transparency 0.45・IOR 1</strong>（光を通すが曲げない＝薄い布）、Sheen 0.5。窓の光を強くしすぎると、布を通した光まで白く飛んで布が消えるので、1.4 程度に抑える。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポートでは透けない）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "上を留めないと、布はそのまま落ちる",
+          "body": "Pin Points を空にすると、48 フレームで布のいちばん高い所が 2.25 m から 0.27 m まで下がった。Vellum の布は、留めた点がなければ全部が重力で落ちる。吊るす物は、まず留める所をグループにする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "風は Built-in Wind を入れないと吹かない",
+          "body": "Built-in Wind を切ると、布のいちばん手前は z = 0.03 m（ひだの厚みだけ）。入れると 1.02 m までふくらんだ。Built-in Wind Speed だけ上げても、Built-in Wind のチェックが切れていれば何も起きない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Substeps 1 だと布が伸びる",
+          "body": "風を切って吊るすだけにすると、長さ 2.2 m の布が Substeps 5 では 2.205 m、Substeps 1 では 2.240 m になった。1回の計算で動く量が大きいと、つながりを保ちきれず、布が自分の重さで伸びる。布は Substeps を上げて固さを保つ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "布の計算時間",
+          "body": "点 2,688 個の布を Substeps 5 で 48 フレーム回すのに 11.1 秒。升目を倍にすると点は4倍になる。動きを決めるまでは粗い布で回す。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "balloon",
+      "title": "風船をふくらませる",
+      "lede": "しぼんだ風船を布（Vellum の cloth）で作り、内側から圧力（pressure）をかけてふくらませる。どこまでふくらむかは、圧力と、ゴムの伸びにくさの綱引きで決まる。色違いを束ねて、パーティーの風船にする。",
+      "hero": "pr_balloon_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム24）。",
+      "facts": [
+        [
+          "足すノード",
+          "13個（材質3つ）"
+        ],
+        [
+          "24 フレームの計算",
+          "22.7秒"
+        ],
+        [
+          "ふくらみ",
+          "3.0倍"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "219.4秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_balloon.hipnc",
+      "tags": [
+        "シミュレーション",
+        "Vellum",
+        "複製",
+        "Karma",
+        "制作"
+      ],
+      "steps": [
+        {
+          "title": "しぼんだ風船の形を作る",
+          "node": "attribwrangle",
+          "ui_node": "teardrop",
+          "body": "<code>sphere</code> を Polygon Mesh・Rows 24・Columns 32 で置き、<code>attribwrangle</code> で下半分を細くしてしずく形にする。大きさはふくらんだ後の6割ほど（しぼんだ状態）。いちばん下の点は <strong>knot</strong>（結び目）というグループにする。",
+          "img": "pr_balloon_1.png",
+          "cap": "しぼんだ小さい風船。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "ゴムの膜にする",
+          "node": "vellumconstraints",
+          "ui_node": "rubber_skin",
+          "body": "<code>vellumconstraints</code> を <strong>Cloth</strong> にして、表面を伸び縮みする膜にする。<strong>Stretch の Stiffness を 1 × 10³</strong>（既定は 1 × 10¹⁰ でほとんど伸びない布）に下げて、ゴムのように伸びるようにする。Pin Points に knot と書いて、結び目を留める。",
+          "img": "pr_balloon_2.png",
+          "cap": "見た目は同じ。膜のつながりが付いた。",
+          "ui_parm": "stretchstiffnessexp"
+        },
+        {
+          "title": "中に空気を入れる",
+          "node": "vellumconstraints",
+          "ui_node": "air_pressure",
+          "body": "もう1つ <code>vellumconstraints</code> をつなぎ（<strong>左右の出口を両方</strong>）、Type を <strong>Pressure</strong> にする。閉じた袋の体積を保とうとする拘束で、<strong>Rest Length Scale を 3</strong> にすると「今の3倍の体積が本来の大きさ」と思って、ふくらもうとする。",
+          "img": "pr_balloon_3.png",
+          "cap": "見た目は同じ。圧力のつながりが足された。",
+          "ui_parm": "stretchrestscale"
+        },
+        {
+          "title": "ふくらませる",
+          "node": "vellumsolver",
+          "ui_node": "inflate",
+          "body": "<code>vellumsolver</code> に左右の出口をつなぎ、<strong>Gravity を 0</strong>（ヘリウム風船なので下に落とさない）、Substeps 5。再生すると、数フレームでふくらむ。体積は 5.1 L から 15.3 L（3.0 倍）になった。",
+          "img": "pr_balloon_4.png",
+          "cap": "フレーム 24。ふくらんだ風船。",
+          "ui_parm": "gravity"
+        },
+        {
+          "title": "色違いを5つ束ねる",
+          "node": "copytopoints",
+          "ui_node": "five_balloons",
+          "body": "<code>circle</code> の5点に、<code>attribwrangle</code> で高さ・大きさ・傾き・色を付け、<code>copytopoints</code> でふくらんだ風船を並べる。色は Target Attributes で <strong>Points に Cd</strong> を移す（宝石の実践と同じく、既定では色は移らない）。",
+          "img": "pr_balloon_5.png",
+          "cap": "高さと傾きの違う5つ。",
+          "ui_parm": "targetattribs"
+        },
+        {
+          "title": "糸と重りを足して、材質を当てる",
+          "node": "merge",
+          "ui_node": "party",
+          "body": "<code>attribwrangle</code> で、各風船の結び目から下の重りまで <code>addprim</code> で線を1本ずつ引く。並べるのに使った円の面は要らないので <code>removeprim</code> で消す。線の点に <strong>width</strong>（太さ 0.006）を付けると、Karma は線を糸として描く。風船の材質は <strong>Use Point Color</strong> で色を点から取り、Coat 1（表面のつや）でゴムらしい光り方にする。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "Rest Length Scale が 1 のままだと、ふくらまない",
+          "body": "Pressure の Rest Length Scale を 1 にすると、24 フレーム後の体積は 5.1 L で、はじめ（5.1 L）のまま。圧力は「今の体積を保つ」力なので、ふくらませたいときは 1 より大きくする。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "既定の布は、3倍にしても3倍にならない",
+          "body": "Rest Length Scale 3 でも、膜の Stiffness が既定（× 10¹⁰）だと体積は 2.13 倍にとどまった。× 10³ に下げると 3.00 倍。ふくらむ大きさは、圧力と膜の伸びにくさの綱引きで決まる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "結び目を留めないと、束ねる位置がずれる",
+          "body": "結び目を留めると、ふくらんだあとも結び目は y = -0.130 m のまま。留めないと -0.076 m に動いた（細いしずくの下側が丸くふくらむので、結び目が 5 cm 上へ引き込まれる）。糸をつなぐ点は先に留めておくと、あとで糸を引く位置が合う。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "jelly",
+      "title": "ゼリーをぷるんと揺らす",
+      "lede": "ゼリーは表面だけでなく中まで詰まっているので、形を小さな四面体で埋めてから Vellum で揺らす。少し上から皿に落とすと、つぶれて戻る「ぷるん」が出る。撮るときは、四面体ではなく元のきれいな表面を動きに合わせて曲げる。",
+      "hero": "pr_jelly_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム8、いちばんつぶれた瞬間）。",
+      "facts": [
+        [
+          "足すノード",
+          "12個（材質2つ）"
+        ],
+        [
+          "四面体",
+          "6,991個"
+        ],
+        [
+          "36 フレームの計算",
+          "56.4秒"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "443.6秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_jelly.hipnc",
+      "tags": [
+        "シミュレーション",
+        "Vellum",
+        "ソフトボディ",
+        "Karma",
+        "制作"
+      ],
+      "steps": [
+        {
+          "title": "ゼリーの形を作る",
+          "node": "remesh",
+          "ui_node": "even_skin",
+          "body": "<code>tube</code> で下が広く上が狭い円柱（半径 0.3 → 0.22、高さ 0.28）を作り、皿の 0.2 m 上に置く。<code>remesh</code> の <strong>Target Size を 0.03</strong> にして、表面をそろった三角形にする。細長い面が残っていると、次の四面体づくりがゆがむ。",
+          "img": "pr_jelly_1.png",
+          "cap": "そろった三角形の表面。",
+          "ui_parm": "targetsize"
+        },
+        {
+          "title": "中を四面体で埋める",
+          "node": "tetrahedralize",
+          "ui_node": "fill_inside",
+          "body": "<code>tetrahedralize</code> を既定のまま（Mode は Conform to Surface）つなぐ。表面の三角形をそのまま外側に使って、中を小さな四面体（三角すい）で埋める。ゼリーの「中身」がここでできる。",
+          "img": "pr_jelly_2.png",
+          "cap": "中まで四面体で埋まった形（見た目は外側だけ）。",
+          "ui_parm": "mode"
+        },
+        {
+          "title": "柔らかさと、体積を保つ力を付ける",
+          "node": "vellumconstraints",
+          "ui_node": "keep_volume",
+          "body": "<code>vellumconstraints</code> を2つ重ねる。1つ目は <strong>Tet Stretch</strong>（四面体の辺が伸び縮みする）で、<strong>Stiffness を 1 × 10⁴</strong> と柔らかくする。2つ目は <strong>Tet Volume</strong>（四面体ごとの体積を保つ）で既定のまま。つぶれても体積が減らないので、横にふくらんで戻る。",
+          "img": "pr_jelly_3.png",
+          "cap": "見た目は同じ。中身のつながりが付いた。",
+          "ui_parm": "stretchstiffnessexp"
+        },
+        {
+          "title": "皿に落として揺らす",
+          "node": "vellumsolver",
+          "ui_node": "drop",
+          "body": "<code>vellumsolver</code> に左右の出口をつなぎ、<strong>Ground Plane</strong> を入れて y = 0 に床を作る。Substeps 5。再生すると、落ちて床に当たり、ぷるんとつぶれて戻る。高さ 0.280 m のゼリーが、フレーム 8 でいちばんつぶれて 0.196 m になった。",
+          "img": "pr_jelly_4.png",
+          "cap": "フレーム 8。いちばんつぶれた瞬間。",
+          "ui_parm": "useground"
+        },
+        {
+          "title": "きれいな表面を、動きに合わせて曲げる",
+          "node": "subdivide",
+          "ui_node": "smooth_skin",
+          "body": "四面体は中身の計算用で、そのまま撮ると面がでこぼこに見える。<code>pointdeform</code> の左に元の表面（remesh の出力）、真ん中に <strong>動く前の四面体</strong>（<code>tetrahedralize</code> の出力）、右に計算中の形をつなぐ。表面が、四面体の動きにそって曲がる。最後に <code>subdivide</code>（1回）で面を細かく割って、角ばりを消す。",
+          "img": "pr_jelly_5.png",
+          "cap": "表面だけが、つぶれた形についてくる。"
+        },
+        {
+          "title": "ゼリーと皿の材質を当てる",
+          "node": "merge",
+          "ui_node": "dessert",
+          "body": "ゼリーは <code>principledshader</code> で <strong>Transparency 1・IOR 1.35</strong>（水に近い）、Roughness 0.03。<strong>Transmission Color を赤、Transmission Distance を 0.12</strong> にすると、厚い所ほど濃い赤になる。皿は白く、Coat 1 でつやを出す。",
+          "img": "",
+          "cap": "材質を当てた状態（ビューポートでは透けない）。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "硬すぎると、ぷるんとしない",
+          "body": "Tet Stretch の Stiffness を既定の × 10¹⁰ にすると、いちばんつぶれても高さ 0.280 m（はじめ 0.280 m）で、ほとんど形が変わらない。× 10⁴ では 0.196 m までつぶれた。ゼリーの柔らかさはここで決まる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Tet Volume がないと、深くつぶれて戻りきらない",
+          "body": "2つ目の Tet Volume を外すと、いちばんつぶれた高さは 0.146 m、36 フレーム後も 0.244 m。付けたときは 36 フレーム後に 0.263 m まで戻った。体積を保つ力がないと、深くつぶれ、戻りも足りない。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "四面体の数が重さを決める",
+          "body": "remesh 0.03 の表面から、四面体は 6,991 個できた。36 フレームの計算は 56.4 秒。Target Size を半分の 0.015 にすると 30,420 個（4.4 倍）。揺れを決めるまでは粗くする。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "ocean",
+      "title": "夕暮れの海の波を作る",
+      "lede": "海はシミュレーションしなくても作れる。風の強さから波の混ざり方（スペクトル）を決め、平らな板の点をその通りに動かすだけ。波のとがった所に白い泡の色を付け、低い夕日を逆光にすると、水面がきらめく。",
+      "hero": "pr_ocean_hero.png",
+      "hero_cap": "Karma で撮った仕上がり（フレーム24）。夕日を逆光にして、水面のきらめきを出す。",
+      "facts": [
+        [
+          "足すノード",
+          "10個（材質3つ）"
+        ],
+        [
+          "波の高低差",
+          "3.52 m"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "75.8秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_ocean.hipnc",
+      "tags": [
+        "エフェクト",
+        "海",
+        "水",
+        "Karma",
+        "制作"
+      ],
+      "steps": [
+        {
+          "title": "平らな板を敷く",
+          "node": "grid",
+          "ui_node": "sea",
+          "body": "<code>grid</code> を 60 × 60 m、<strong>Rows・Columns 500</strong>（升目 12 cm）にする。波は点を動かして作るので、升目が粗いと細かい波が出ない。",
+          "img": "pr_ocean_1.png",
+          "cap": "60 m 四方の平らな板（手前の 20 m を表示）。"
+        },
+        {
+          "title": "風から波の設計図を作る",
+          "node": "oceanspectrum",
+          "ui_node": "wind_waves",
+          "body": "<code>oceanspectrum</code> は、風の強さと向きから「どの大きさの波がどれだけ混ざるか」を作る。<strong>Wind の Speed を 9</strong>（m/秒、やや強い風）、<strong>Chop を 0.9</strong>（波の頭をとがらせる）にする。Grid Size 50 は、この設計図が何 m ごとにくり返すか。",
+          "img": "",
+          "cap": "スペクトル（波の設計図）自体は板に見える。",
+          "ui_parm": "windspeed"
+        },
+        {
+          "title": "設計図どおりに点を動かす",
+          "node": "oceanevaluate",
+          "ui_node": "move_points",
+          "body": "<code>oceanevaluate</code> の左に板、右に <code>oceanspectrum</code> をつなぐ。<strong>Time に <code>$T</code></strong>（今の秒数）を書くと、再生に合わせて波が進む。<strong>Cusp Attribute</strong> を入れると、波の頭がとがって折れそうな所に <code>cusp</code> という値が付く。泡の目印に使う。",
+          "img": "pr_ocean_3.png",
+          "cap": "フレーム 24（1 秒）の波。",
+          "ui_parm": "time"
+        },
+        {
+          "title": "波の頭を白くする",
+          "node": "attribwrangle",
+          "ui_node": "foam_color",
+          "body": "<code>attribwrangle</code> で、<code>cusp</code> が小さい所は深い青緑、大きい所ほど白に近づける。<code>smooth(0.4, 0.7, …)</code> は、0.4 より下は 0、0.7 より上は 1 に、間をなめらかにつなぐ（しきい値は落とし穴を参照）。",
+          "img": "pr_ocean_4.png",
+          "cap": "とがった波の頭に白が乗る。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "空を置く",
+          "node": "attribwrangle",
+          "ui_node": "sky_color",
+          "body": "海は空を映して色が決まるので、先に空を作る。半径 400 m の <code>sphere</code> で全体を包み、<code>attribwrangle</code> で高さに合わせて色を付ける。水平線の近くは橙、上ほど夜の青。奥の低い所に、小さな球を夕日として置く。",
+          "img": "",
+          "cap": "空の球（内側から見る）。"
+        },
+        {
+          "title": "水の材質を当てる",
+          "node": "merge",
+          "ui_node": "sea_and_sky",
+          "body": "<code>principledshader</code> で <strong>Use Point Color</strong>（前の段の色を使う）、<strong>Roughness 0.02・Reflectivity 1・IOR 1.33</strong>（水）。水面は空と夕日を映して色が決まるので、材質の色は暗くしておく。空の球には光る材質（Use Point Color で色を点から取る）、夕日の球には強い光（Emission Intensity 25）。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "Time に $T を書かないと、波が止まる",
+          "body": "Time を 0 のままにすると、フレーム 1 と 24 で点の位置の差は最大 0.0000 m（まったく同じ）。oceanevaluate は「何秒目の波か」を Time で受け取るので、$T を書いて再生とつなぐ。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "海は Grid Size ごとに同じ模様をくり返す",
+          "body": "50 m 離れた2点で波の高さをくらべると、差は 0.000000 m（高さ -0.154 m）で同じだった。Grid Size 50 の設計図は 50 m ごとにくり返すので、50 m より広く写すと、同じ波の並びが2回出てくる。撮る範囲が Grid Size を超えるときは、Grid Size を大きくしておく。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "泡のしきい値を低くすると、海が白っぽくなる",
+          "body": "風 9 m/秒・Chop 0.9 で、いちばん高い所と低い所の差は 3.52 m、cusp が 0.15 を超えた点は全体の 46.3% もあった。はじめ smooth(0.15, …) にしたら、海の半分近くに泡の白が混ざった。0.4 を超える点は 6.3% で、泡らしい量になる。25 万点の板を動かすのに 0.19 秒。",
+          "img": "",
+          "cap": ""
+        }
+      ]
+    },
+    {
+      "id": "snow",
+      "title": "石灯籠に雪を積もらせる",
+      "lede": "雪は上から降るので、積もるのは「上を向いていて、上に何もない面」だけ。その面に粒をまき、粒をまとめて1つの塊（VDB）にすると、角の丸い、ぽってりした雪になる。形を選ばず、どんなモデルにも使える。",
+      "hero": "pr_snow_hero.png",
+      "hero_cap": "Karma で撮った仕上がり。青い夜の光と、火袋の暖かい光。",
+      "facts": [
+        [
+          "足すノード",
+          "18個（材質3つ）"
+        ],
+        [
+          "雪の粒",
+          "20,644個"
+        ],
+        [
+          "雪の面",
+          "80,230枚"
+        ],
+        [
+          "仕上がりを撮る時間",
+          "476.8秒（Karma 1280×720）"
+        ]
+      ],
+      "exp": "",
+      "hip": "pr_snow.hipnc",
+      "tags": [
+        "モデリング",
+        "VDB",
+        "雪",
+        "Karma",
+        "制作"
+      ],
+      "steps": [
+        {
+          "title": "石灯籠を組む",
+          "node": "merge",
+          "ui_node": "lantern_all",
+          "body": "<code>box</code>・<code>tube</code>・<code>sphere</code> を積んで灯籠にする。屋根は <code>tube</code> の <strong>Columns を 4</strong>、上の半径を小さく（0.03）すると四角すいになる。45 度回して箱と向きをそろえる。火袋（明かりの箱）だけは、あとで光る材質を当てるので別にしておく。",
+          "img": "pr_snow_1.png",
+          "cap": "台・竿・中台・火袋・屋根・宝珠。"
+        },
+        {
+          "title": "上を向いた面だけ残す",
+          "node": "attribwrangle",
+          "ui_node": "keep_up_faces",
+          "body": "<code>attribwrangle</code> の Run Over を <strong>Primitives</strong> にして、面の向き（<code>prim_normal</code>）の上向きの成分 <strong>y が 0.5 より小さい面を消す</strong>。壁や下向きの面が消え、屋根や台の上だけが残る。",
+          "img": "pr_snow_2.png",
+          "cap": "上向きの面だけが残る。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "雪の粒をまく",
+          "node": "scatter",
+          "ui_node": "flakes",
+          "body": "<code>scatter</code> で、残った面に <strong>4 万個</strong>の点をまく。1つの点が1粒の雪になる。",
+          "img": "pr_snow_3.png",
+          "cap": "上向きの面にまいた点。",
+          "ui_parm": "npts"
+        },
+        {
+          "title": "屋根の下の粒を消す",
+          "node": "attribwrangle",
+          "ui_node": "under_roof",
+          "body": "<code>attribwrangle</code> の2つ目の入力に灯籠全体をつなぎ、各点から<strong>真上へ光線を飛ばす</strong>（<code>intersect</code>）。何かに当たれば、その点は屋根の下なので消す。残った点には粒の大きさ <code>pscale</code>（約 2.8 cm）を付ける。",
+          "img": "pr_snow_4.png",
+          "cap": "中台と火袋の上の点が消えた。",
+          "ui_parm": "snippet"
+        },
+        {
+          "title": "粒をつないで雪の塊にする",
+          "node": "convertvdb",
+          "ui_node": "snow_mesh",
+          "body": "<code>vdbfromparticles</code> で粒を1つの形（VDB）にまとめる。<strong>Voxel Size は 0.006</strong>（粒の半径の 1/5 くらい）。<code>vdbsmoothsdf</code> で角を丸め（Iterations 6）、<code>convertvdb</code> の Convert To を <strong>Polygons</strong> にして面に戻す。",
+          "img": "pr_snow_5.png",
+          "cap": "ぽってり積もった雪。",
+          "ui_parm": "voxelsize"
+        },
+        {
+          "title": "雪の地面を敷き、材質を当てる",
+          "node": "merge",
+          "ui_node": "snowy_lantern",
+          "body": "<code>grid</code> を少し持ち上げ（起伏で床の下にもぐらないように）、<code>mountain</code> で起伏を付けて雪の地面にする。雪の材質は白く、<strong>Subsurface 0.6</strong>（光が少し中に入る）で青みを足す。火袋には Emission Intensity 2 の暖かい光（強くすると白く飛ぶ）。石は暗い灰色。",
+          "img": "",
+          "cap": "材質を当てた状態。"
+        }
+      ],
+      "traps": [
+        {
+          "title": "屋根の下にも雪が積もってしまう",
+          "body": "上向きの面は、屋根に隠れた中台や火袋の上にもある。真上への光線で調べると、まいた 40,000 点のうち 19,356 点が屋根などの下にあった。消さないと、屋根の下に雪の塊ができる。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "向きのしきい値で、雪の付く面が変わる",
+          "body": "N.y < 0.5 で消すと、残る面は 105 枚。0 にする（下向きだけ消す）と 189 枚が残り、壁のような縦の面にまで粒がまかれる。急な面に雪は残らないので、0.5 前後から始める。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "Voxel Size で、雪の細かさと重さが決まる",
+          "body": "Voxel Size 0.006 で雪の面は 80,230 枚（0.8 秒）。倍の 0.012 にすると 17,680 枚（0.1 秒）。形を決めるまでは粗くして、最後に細かくする。",
+          "img": "",
+          "cap": ""
+        }
+      ]
     }
   ]
 }

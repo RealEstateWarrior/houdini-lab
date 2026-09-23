@@ -1,0 +1,109 @@
+{
+ "id": "balloon",
+ "title": "風船をふくらませる",
+ "lede": "しぼんだ風船を布（Vellum の cloth）で作り、内側から圧力（pressure）をかけてふくらませる。どこまでふくらむかは、圧力と、ゴムの伸びにくさの綱引きで決まる。色違いを束ねて、パーティーの風船にする。",
+ "hero": "pr_balloon_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム24）。",
+ "facts": [
+  [
+   "足すノード",
+   "13個（材質3つ）"
+  ],
+  [
+   "24 フレームの計算",
+   "22.7秒"
+  ],
+  [
+   "ふくらみ",
+   "3.0倍"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "219.4秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_balloon.hipnc",
+ "tags": [
+  "シミュレーション",
+  "Vellum",
+  "複製",
+  "Karma",
+  "制作"
+ ],
+ "steps": [
+  {
+   "title": "しぼんだ風船の形を作る",
+   "node": "attribwrangle",
+   "ui_node": "teardrop",
+   "body": "<code>sphere</code> を Polygon Mesh・Rows 24・Columns 32 で置き、<code>attribwrangle</code> で下半分を細くしてしずく形にする。大きさはふくらんだ後の6割ほど（しぼんだ状態）。いちばん下の点は <strong>knot</strong>（結び目）というグループにする。",
+   "img": "pr_balloon_1.png",
+   "cap": "しぼんだ小さい風船。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "ゴムの膜にする",
+   "node": "vellumconstraints",
+   "ui_node": "rubber_skin",
+   "body": "<code>vellumconstraints</code> を <strong>Cloth</strong> にして、表面を伸び縮みする膜にする。<strong>Stretch の Stiffness を 1 × 10³</strong>（既定は 1 × 10¹⁰ でほとんど伸びない布）に下げて、ゴムのように伸びるようにする。Pin Points に knot と書いて、結び目を留める。",
+   "img": "pr_balloon_2.png",
+   "cap": "見た目は同じ。膜のつながりが付いた。",
+   "ui_parm": "stretchstiffnessexp"
+  },
+  {
+   "title": "中に空気を入れる",
+   "node": "vellumconstraints",
+   "ui_node": "air_pressure",
+   "body": "もう1つ <code>vellumconstraints</code> をつなぎ（<strong>左右の出口を両方</strong>）、Type を <strong>Pressure</strong> にする。閉じた袋の体積を保とうとする拘束で、<strong>Rest Length Scale を 3</strong> にすると「今の3倍の体積が本来の大きさ」と思って、ふくらもうとする。",
+   "img": "pr_balloon_3.png",
+   "cap": "見た目は同じ。圧力のつながりが足された。",
+   "ui_parm": "stretchrestscale"
+  },
+  {
+   "title": "ふくらませる",
+   "node": "vellumsolver",
+   "ui_node": "inflate",
+   "body": "<code>vellumsolver</code> に左右の出口をつなぎ、<strong>Gravity を 0</strong>（ヘリウム風船なので下に落とさない）、Substeps 5。再生すると、数フレームでふくらむ。体積は 5.1 L から 15.3 L（3.0 倍）になった。",
+   "img": "pr_balloon_4.png",
+   "cap": "フレーム 24。ふくらんだ風船。",
+   "ui_parm": "gravity"
+  },
+  {
+   "title": "色違いを5つ束ねる",
+   "node": "copytopoints",
+   "ui_node": "five_balloons",
+   "body": "<code>circle</code> の5点に、<code>attribwrangle</code> で高さ・大きさ・傾き・色を付け、<code>copytopoints</code> でふくらんだ風船を並べる。色は Target Attributes で <strong>Points に Cd</strong> を移す（宝石の実践と同じく、既定では色は移らない）。",
+   "img": "pr_balloon_5.png",
+   "cap": "高さと傾きの違う5つ。",
+   "ui_parm": "targetattribs"
+  },
+  {
+   "title": "糸と重りを足して、材質を当てる",
+   "node": "merge",
+   "ui_node": "party",
+   "body": "<code>attribwrangle</code> で、各風船の結び目から下の重りまで <code>addprim</code> で線を1本ずつ引く。並べるのに使った円の面は要らないので <code>removeprim</code> で消す。線の点に <strong>width</strong>（太さ 0.006）を付けると、Karma は線を糸として描く。風船の材質は <strong>Use Point Color</strong> で色を点から取り、Coat 1（表面のつや）でゴムらしい光り方にする。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "Rest Length Scale が 1 のままだと、ふくらまない",
+   "body": "Pressure の Rest Length Scale を 1 にすると、24 フレーム後の体積は 5.1 L で、はじめ（5.1 L）のまま。圧力は「今の体積を保つ」力なので、ふくらませたいときは 1 より大きくする。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "既定の布は、3倍にしても3倍にならない",
+   "body": "Rest Length Scale 3 でも、膜の Stiffness が既定（× 10¹⁰）だと体積は 2.13 倍にとどまった。× 10³ に下げると 3.00 倍。ふくらむ大きさは、圧力と膜の伸びにくさの綱引きで決まる。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "結び目を留めないと、束ねる位置がずれる",
+   "body": "結び目を留めると、ふくらんだあとも結び目は y = -0.130 m のまま。留めないと -0.076 m に動いた（細いしずくの下側が丸くふくらむので、結び目が 5 cm 上へ引き込まれる）。糸をつなぐ点は先に留めておくと、あとで糸を引く位置が合う。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "id": "snow",
+ "title": "石灯籠に雪を積もらせる",
+ "lede": "雪は上から降るので、積もるのは「上を向いていて、上に何もない面」だけ。その面に粒をまき、粒をまとめて1つの塊（VDB）にすると、角の丸い、ぽってりした雪になる。形を選ばず、どんなモデルにも使える。",
+ "hero": "pr_snow_hero.png",
+ "hero_cap": "Karma で撮った仕上がり。青い夜の光と、火袋の暖かい光。",
+ "facts": [
+  [
+   "足すノード",
+   "18個（材質3つ）"
+  ],
+  [
+   "雪の粒",
+   "20,644個"
+  ],
+  [
+   "雪の面",
+   "80,230枚"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "476.8秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_snow.hipnc",
+ "tags": [
+  "モデリング",
+  "VDB",
+  "雪",
+  "Karma",
+  "制作"
+ ],
+ "steps": [
+  {
+   "title": "石灯籠を組む",
+   "node": "merge",
+   "ui_node": "lantern_all",
+   "body": "<code>box</code>・<code>tube</code>・<code>sphere</code> を積んで灯籠にする。屋根は <code>tube</code> の <strong>Columns を 4</strong>、上の半径を小さく（0.03）すると四角すいになる。45 度回して箱と向きをそろえる。火袋（明かりの箱）だけは、あとで光る材質を当てるので別にしておく。",
+   "img": "pr_snow_1.png",
+   "cap": "台・竿・中台・火袋・屋根・宝珠。"
+  },
+  {
+   "title": "上を向いた面だけ残す",
+   "node": "attribwrangle",
+   "ui_node": "keep_up_faces",
+   "body": "<code>attribwrangle</code> の Run Over を <strong>Primitives</strong> にして、面の向き（<code>prim_normal</code>）の上向きの成分 <strong>y が 0.5 より小さい面を消す</strong>。壁や下向きの面が消え、屋根や台の上だけが残る。",
+   "img": "pr_snow_2.png",
+   "cap": "上向きの面だけが残る。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "雪の粒をまく",
+   "node": "scatter",
+   "ui_node": "flakes",
+   "body": "<code>scatter</code> で、残った面に <strong>4 万個</strong>の点をまく。1つの点が1粒の雪になる。",
+   "img": "pr_snow_3.png",
+   "cap": "上向きの面にまいた点。",
+   "ui_parm": "npts"
+  },
+  {
+   "title": "屋根の下の粒を消す",
+   "node": "attribwrangle",
+   "ui_node": "under_roof",
+   "body": "<code>attribwrangle</code> の2つ目の入力に灯籠全体をつなぎ、各点から<strong>真上へ光線を飛ばす</strong>（<code>intersect</code>）。何かに当たれば、その点は屋根の下なので消す。残った点には粒の大きさ <code>pscale</code>（約 2.8 cm）を付ける。",
+   "img": "pr_snow_4.png",
+   "cap": "中台と火袋の上の点が消えた。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "粒をつないで雪の塊にする",
+   "node": "convertvdb",
+   "ui_node": "snow_mesh",
+   "body": "<code>vdbfromparticles</code> で粒を1つの形（VDB）にまとめる。<strong>Voxel Size は 0.006</strong>（粒の半径の 1/5 くらい）。<code>vdbsmoothsdf</code> で角を丸め（Iterations 6）、<code>convertvdb</code> の Convert To を <strong>Polygons</strong> にして面に戻す。",
+   "img": "pr_snow_5.png",
+   "cap": "ぽってり積もった雪。",
+   "ui_parm": "voxelsize"
+  },
+  {
+   "title": "雪の地面を敷き、材質を当てる",
+   "node": "merge",
+   "ui_node": "snowy_lantern",
+   "body": "<code>grid</code> を少し持ち上げ（起伏で床の下にもぐらないように）、<code>mountain</code> で起伏を付けて雪の地面にする。雪の材質は白く、<strong>Subsurface 0.6</strong>（光が少し中に入る）で青みを足す。火袋には Emission Intensity 2 の暖かい光（強くすると白く飛ぶ）。石は暗い灰色。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "屋根の下にも雪が積もってしまう",
+   "body": "上向きの面は、屋根に隠れた中台や火袋の上にもある。真上への光線で調べると、まいた 40,000 点のうち 19,356 点が屋根などの下にあった。消さないと、屋根の下に雪の塊ができる。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "向きのしきい値で、雪の付く面が変わる",
+   "body": "N.y < 0.5 で消すと、残る面は 105 枚。0 にする（下向きだけ消す）と 189 枚が残り、壁のような縦の面にまで粒がまかれる。急な面に雪は残らないので、0.5 前後から始める。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "Voxel Size で、雪の細かさと重さが決まる",
+   "body": "Voxel Size 0.006 で雪の面は 80,230 枚（0.8 秒）。倍の 0.012 にすると 17,680 枚（0.1 秒）。形を決めるまでは粗くして、最後に細かくする。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

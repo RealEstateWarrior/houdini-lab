@@ -1,0 +1,103 @@
+{
+ "id": "ocean",
+ "title": "夕暮れの海の波を作る",
+ "lede": "海はシミュレーションしなくても作れる。風の強さから波の混ざり方（スペクトル）を決め、平らな板の点をその通りに動かすだけ。波のとがった所に白い泡の色を付け、低い夕日を逆光にすると、水面がきらめく。",
+ "hero": "pr_ocean_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム24）。夕日を逆光にして、水面のきらめきを出す。",
+ "facts": [
+  [
+   "足すノード",
+   "10個（材質3つ）"
+  ],
+  [
+   "波の高低差",
+   "3.52 m"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "75.8秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_ocean.hipnc",
+ "tags": [
+  "エフェクト",
+  "海",
+  "水",
+  "Karma",
+  "制作"
+ ],
+ "steps": [
+  {
+   "title": "平らな板を敷く",
+   "node": "grid",
+   "ui_node": "sea",
+   "body": "<code>grid</code> を 60 × 60 m、<strong>Rows・Columns 500</strong>（升目 12 cm）にする。波は点を動かして作るので、升目が粗いと細かい波が出ない。",
+   "img": "pr_ocean_1.png",
+   "cap": "60 m 四方の平らな板（手前の 20 m を表示）。"
+  },
+  {
+   "title": "風から波の設計図を作る",
+   "node": "oceanspectrum",
+   "ui_node": "wind_waves",
+   "body": "<code>oceanspectrum</code> は、風の強さと向きから「どの大きさの波がどれだけ混ざるか」を作る。<strong>Wind の Speed を 9</strong>（m/秒、やや強い風）、<strong>Chop を 0.9</strong>（波の頭をとがらせる）にする。Grid Size 50 は、この設計図が何 m ごとにくり返すか。",
+   "img": "",
+   "cap": "スペクトル（波の設計図）自体は板に見える。",
+   "ui_parm": "windspeed"
+  },
+  {
+   "title": "設計図どおりに点を動かす",
+   "node": "oceanevaluate",
+   "ui_node": "move_points",
+   "body": "<code>oceanevaluate</code> の左に板、右に <code>oceanspectrum</code> をつなぐ。<strong>Time に <code>$T</code></strong>（今の秒数）を書くと、再生に合わせて波が進む。<strong>Cusp Attribute</strong> を入れると、波の頭がとがって折れそうな所に <code>cusp</code> という値が付く。泡の目印に使う。",
+   "img": "pr_ocean_3.png",
+   "cap": "フレーム 24（1 秒）の波。",
+   "ui_parm": "time"
+  },
+  {
+   "title": "波の頭を白くする",
+   "node": "attribwrangle",
+   "ui_node": "foam_color",
+   "body": "<code>attribwrangle</code> で、<code>cusp</code> が小さい所は深い青緑、大きい所ほど白に近づける。<code>smooth(0.4, 0.7, …)</code> は、0.4 より下は 0、0.7 より上は 1 に、間をなめらかにつなぐ（しきい値は落とし穴を参照）。",
+   "img": "pr_ocean_4.png",
+   "cap": "とがった波の頭に白が乗る。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "空を置く",
+   "node": "attribwrangle",
+   "ui_node": "sky_color",
+   "body": "海は空を映して色が決まるので、先に空を作る。半径 400 m の <code>sphere</code> で全体を包み、<code>attribwrangle</code> で高さに合わせて色を付ける。水平線の近くは橙、上ほど夜の青。奥の低い所に、小さな球を夕日として置く。",
+   "img": "",
+   "cap": "空の球（内側から見る）。"
+  },
+  {
+   "title": "水の材質を当てる",
+   "node": "merge",
+   "ui_node": "sea_and_sky",
+   "body": "<code>principledshader</code> で <strong>Use Point Color</strong>（前の段の色を使う）、<strong>Roughness 0.02・Reflectivity 1・IOR 1.33</strong>（水）。水面は空と夕日を映して色が決まるので、材質の色は暗くしておく。空の球には光る材質（Use Point Color で色を点から取る）、夕日の球には強い光（Emission Intensity 25）。",
+   "img": "",
+   "cap": "材質を当てた状態。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "Time に $T を書かないと、波が止まる",
+   "body": "Time を 0 のままにすると、フレーム 1 と 24 で点の位置の差は最大 0.0000 m（まったく同じ）。oceanevaluate は「何秒目の波か」を Time で受け取るので、$T を書いて再生とつなぐ。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "海は Grid Size ごとに同じ模様をくり返す",
+   "body": "50 m 離れた2点で波の高さをくらべると、差は 0.000000 m（高さ -0.154 m）で同じだった。Grid Size 50 の設計図は 50 m ごとにくり返すので、50 m より広く写すと、同じ波の並びが2回出てくる。撮る範囲が Grid Size を超えるときは、Grid Size を大きくしておく。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "泡のしきい値を低くすると、海が白っぽくなる",
+   "body": "風 9 m/秒・Chop 0.9 で、いちばん高い所と低い所の差は 3.52 m、cusp が 0.15 を超えた点は全体の 46.3% もあった。はじめ smooth(0.15, …) にしたら、海の半分近くに泡の白が混ざった。0.4 を超える点は 6.3% で、泡らしい量になる。25 万点の板を動かすのに 0.19 秒。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

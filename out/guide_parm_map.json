@@ -1134,5 +1134,160 @@
       "wanted": "merge",
       "png": "guide_nightcity_p7.png"
     }
+  },
+  "curtain": {
+    "1": {
+      "node": "/obj/curtain/two_panels",
+      "wanted": "copyxform",
+      "png": "guide_curtain_p1.png"
+    },
+    "2": {
+      "node": "/obj/curtain/pleats_and_top",
+      "wanted": "attribwrangle",
+      "png": "guide_curtain_p2.png"
+    },
+    "3": {
+      "node": "/obj/curtain/cloth_setup",
+      "wanted": "vellumconstraints",
+      "png": "guide_curtain_p3.png"
+    },
+    "4": {
+      "node": "/obj/curtain/wind_sim",
+      "wanted": "vellumsolver",
+      "png": "guide_curtain_p4.png"
+    },
+    "5": {
+      "node": "/obj/curtain/window_scene",
+      "wanted": "merge",
+      "png": "guide_curtain_p5.png"
+    }
+  },
+  "balloon": {
+    "1": {
+      "node": "/obj/balloon/teardrop",
+      "wanted": "attribwrangle",
+      "png": "guide_balloon_p1.png"
+    },
+    "2": {
+      "node": "/obj/balloon/rubber_skin",
+      "wanted": "vellumconstraints",
+      "png": "guide_balloon_p2.png"
+    },
+    "3": {
+      "node": "/obj/balloon/air_pressure",
+      "wanted": "vellumconstraints",
+      "png": "guide_balloon_p3.png"
+    },
+    "4": {
+      "node": "/obj/balloon/inflate",
+      "wanted": "vellumsolver",
+      "png": "guide_balloon_p4.png"
+    },
+    "5": {
+      "node": "/obj/balloon/five_balloons",
+      "wanted": "copytopoints",
+      "png": "guide_balloon_p5.png"
+    },
+    "6": {
+      "node": "/obj/balloon/party",
+      "wanted": "merge",
+      "png": "guide_balloon_p6.png"
+    }
+  },
+  "jelly": {
+    "1": {
+      "node": "/obj/jelly/even_skin",
+      "wanted": "remesh",
+      "png": "guide_jelly_p1.png"
+    },
+    "2": {
+      "node": "/obj/jelly/fill_inside",
+      "wanted": "tetrahedralize",
+      "png": "guide_jelly_p2.png"
+    },
+    "3": {
+      "node": "/obj/jelly/keep_volume",
+      "wanted": "vellumconstraints",
+      "png": "guide_jelly_p3.png"
+    },
+    "4": {
+      "node": "/obj/jelly/drop",
+      "wanted": "vellumsolver",
+      "png": "guide_jelly_p4.png"
+    },
+    "5": {
+      "node": "/obj/jelly/smooth_skin",
+      "wanted": "subdivide",
+      "png": "guide_jelly_p5.png"
+    },
+    "6": {
+      "node": "/obj/jelly/dessert",
+      "wanted": "merge",
+      "png": "guide_jelly_p6.png"
+    }
+  },
+  "ocean": {
+    "1": {
+      "node": "/obj/ocean/sea",
+      "wanted": "grid",
+      "png": "guide_ocean_p1.png"
+    },
+    "2": {
+      "node": "/obj/ocean/wind_waves",
+      "wanted": "oceanspectrum",
+      "png": "guide_ocean_p2.png"
+    },
+    "3": {
+      "node": "/obj/ocean/move_points",
+      "wanted": "oceanevaluate",
+      "png": "guide_ocean_p3.png"
+    },
+    "4": {
+      "node": "/obj/ocean/foam_color",
+      "wanted": "attribwrangle",
+      "png": "guide_ocean_p4.png"
+    },
+    "5": {
+      "node": "/obj/ocean/sky_color",
+      "wanted": "attribwrangle",
+      "png": "guide_ocean_p5.png"
+    },
+    "6": {
+      "node": "/obj/ocean/sea_and_sky",
+      "wanted": "merge",
+      "png": "guide_ocean_p6.png"
+    }
+  },
+  "snow": {
+    "1": {
+      "node": "/obj/snow/lantern_all",
+      "wanted": "merge",
+      "png": "guide_snow_p1.png"
+    },
+    "2": {
+      "node": "/obj/snow/keep_up_faces",
+      "wanted": "attribwrangle",
+      "png": "guide_snow_p2.png"
+    },
+    "3": {
+      "node": "/obj/snow/flakes",
+      "wanted": "scatter",
+      "png": "guide_snow_p3.png"
+    },
+    "4": {
+      "node": "/obj/snow/under_roof",
+      "wanted": "attribwrangle",
+      "png": "guide_snow_p4.png"
+    },
+    "5": {
+      "node": "/obj/snow/snow_mesh",
+      "wanted": "convertvdb",
+      "png": "guide_snow_p5.png"
+    },
+    "6": {
+      "node": "/obj/snow/snowy_lantern",
+      "wanted": "merge",
+      "png": "guide_snow_p6.png"
+    }
   }
 }

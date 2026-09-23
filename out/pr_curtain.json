@@ -1,0 +1,101 @@
+{
+ "id": "curtain",
+ "title": "カーテンを風になびかせる",
+ "lede": "布（Vellum の cloth）を1枚、上の端だけ留めて吊るし、窓の外から風を当てる。ひだを最初に付けておくと、風を受けたときにカーテンらしくふくらむ。ノードは布の3つ（形・性質・計算）が中心。",
+ "hero": "pr_curtain_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム48）。明かりは窓の光と弱いキー。",
+ "facts": [
+  [
+   "足すノード",
+   "5個（布の部分）"
+  ],
+  [
+   "48 フレームの計算",
+   "11.1秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "49.7秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_curtain.hipnc",
+ "tags": [
+  "シミュレーション",
+  "Vellum",
+  "布",
+  "Karma",
+  "制作"
+ ],
+ "steps": [
+  {
+   "title": "布の板を立てる",
+   "node": "copyxform",
+   "ui_node": "two_panels",
+   "body": "<code>grid</code> の Orientation を <strong>XY Plane</strong>（縦に立てる）、大きさ 0.85 × 2.2、<strong>Rows 56・Columns 24</strong> にする。升目が細かいほど布はなめらかに曲がるが、計算は重くなる。<code>copyxform</code> で右へ 0.86 ずらした2枚目を作り、左右1組のカーテンにする。",
+   "img": "pr_curtain_1.png",
+   "cap": "縦に立てた2枚の板。"
+  },
+  {
+   "title": "ひだを付け、留める所を決める",
+   "node": "attribwrangle",
+   "ui_node": "pleats_and_top",
+   "body": "<code>attribwrangle</code> で、横方向に <code>sin</code> の波を付けてひだにする。もう1行で、いちばん上の列の点を <strong>top</strong> というグループにまとめる。あとでここを留める。",
+   "img": "pr_curtain_2.png",
+   "cap": "波打ったひだ。上の列が top。",
+   "ui_parm": "snippet"
+  },
+  {
+   "title": "布の性質を付けて、上を留める",
+   "node": "vellumconstraints",
+   "ui_node": "cloth_setup",
+   "body": "<code>vellumconstraints</code> の Constraint Type を <strong>Cloth</strong> にし、<strong>Pin Points に top</strong> と書く。これで上の列は動かず、ほかの点は布として引っぱり合う。出口は2つあり、左が布、右が「つながり（拘束）」。",
+   "img": "pr_curtain_3.png",
+   "cap": "見た目は同じ。点どうしのつながりが付いた。",
+   "ui_parm": "pingroup"
+  },
+  {
+   "title": "風を当てて計算する",
+   "node": "vellumsolver",
+   "ui_node": "wind_sim",
+   "body": "<code>vellumsolver</code> の左に布、<strong>真ん中に vellumconstraints の右の出口</strong>をつなぐ。<strong>Built-in Wind</strong> を入れて向きを (0.15, 0, 1)（窓から部屋の中へ）、Built-in Wind Speed 1.8、Built-in Wind Drag 0.3。Substeps は 5 にする（布が伸びすぎない）。再生すると布がふくらむ。フレーム 48（2 秒）で止めて撮る。",
+   "img": "pr_curtain_4.png",
+   "cap": "フレーム 48。上が留まったまま、下がふくらむ。",
+   "ui_parm": "dowind"
+  },
+  {
+   "title": "窓辺を組んで、材質を当てる",
+   "node": "merge",
+   "ui_node": "window_scene",
+   "body": "後ろに壁（<code>grid</code>）と、窓の形の光る板（Emission Intensity 1.4）、窓の桟（細い <code>box</code> 2本）を置き、上にカーテンレール（細い <code>tube</code>）を渡す。カーテンの材質は <strong>Transparency 0.45・IOR 1</strong>（光を通すが曲げない＝薄い布）、Sheen 0.5。窓の光を強くしすぎると、布を通した光まで白く飛んで布が消えるので、1.4 程度に抑える。",
+   "img": "",
+   "cap": "材質を当てた状態（ビューポートでは透けない）。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "上を留めないと、布はそのまま落ちる",
+   "body": "Pin Points を空にすると、48 フレームで布のいちばん高い所が 2.25 m から 0.27 m まで下がった。Vellum の布は、留めた点がなければ全部が重力で落ちる。吊るす物は、まず留める所をグループにする。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "風は Built-in Wind を入れないと吹かない",
+   "body": "Built-in Wind を切ると、布のいちばん手前は z = 0.03 m（ひだの厚みだけ）。入れると 1.02 m までふくらんだ。Built-in Wind Speed だけ上げても、Built-in Wind のチェックが切れていれば何も起きない。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "Substeps 1 だと布が伸びる",
+   "body": "風を切って吊るすだけにすると、長さ 2.2 m の布が Substeps 5 では 2.205 m、Substeps 1 では 2.240 m になった。1回の計算で動く量が大きいと、つながりを保ちきれず、布が自分の重さで伸びる。布は Substeps を上げて固さを保つ。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "布の計算時間",
+   "body": "点 2,688 個の布を Substeps 5 で 48 フレーム回すのに 11.1 秒。升目を倍にすると点は4倍になる。動きを決めるまでは粗い布で回す。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}

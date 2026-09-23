@@ -1,0 +1,108 @@
+{
+ "id": "jelly",
+ "title": "ゼリーをぷるんと揺らす",
+ "lede": "ゼリーは表面だけでなく中まで詰まっているので、形を小さな四面体で埋めてから Vellum で揺らす。少し上から皿に落とすと、つぶれて戻る「ぷるん」が出る。撮るときは、四面体ではなく元のきれいな表面を動きに合わせて曲げる。",
+ "hero": "pr_jelly_hero.png",
+ "hero_cap": "Karma で撮った仕上がり（フレーム8、いちばんつぶれた瞬間）。",
+ "facts": [
+  [
+   "足すノード",
+   "12個（材質2つ）"
+  ],
+  [
+   "四面体",
+   "6,991個"
+  ],
+  [
+   "36 フレームの計算",
+   "56.4秒"
+  ],
+  [
+   "仕上がりを撮る時間",
+   "443.6秒（Karma 1280×720）"
+  ]
+ ],
+ "exp": "",
+ "hip": "pr_jelly.hipnc",
+ "tags": [
+  "シミュレーション",
+  "Vellum",
+  "ソフトボディ",
+  "Karma",
+  "制作"
+ ],
+ "steps": [
+  {
+   "title": "ゼリーの形を作る",
+   "node": "remesh",
+   "ui_node": "even_skin",
+   "body": "<code>tube</code> で下が広く上が狭い円柱（半径 0.3 → 0.22、高さ 0.28）を作り、皿の 0.2 m 上に置く。<code>remesh</code> の <strong>Target Size を 0.03</strong> にして、表面をそろった三角形にする。細長い面が残っていると、次の四面体づくりがゆがむ。",
+   "img": "pr_jelly_1.png",
+   "cap": "そろった三角形の表面。",
+   "ui_parm": "targetsize"
+  },
+  {
+   "title": "中を四面体で埋める",
+   "node": "tetrahedralize",
+   "ui_node": "fill_inside",
+   "body": "<code>tetrahedralize</code> を既定のまま（Mode は Conform to Surface）つなぐ。表面の三角形をそのまま外側に使って、中を小さな四面体（三角すい）で埋める。ゼリーの「中身」がここでできる。",
+   "img": "pr_jelly_2.png",
+   "cap": "中まで四面体で埋まった形（見た目は外側だけ）。",
+   "ui_parm": "mode"
+  },
+  {
+   "title": "柔らかさと、体積を保つ力を付ける",
+   "node": "vellumconstraints",
+   "ui_node": "keep_volume",
+   "body": "<code>vellumconstraints</code> を2つ重ねる。1つ目は <strong>Tet Stretch</strong>（四面体の辺が伸び縮みする）で、<strong>Stiffness を 1 × 10⁴</strong> と柔らかくする。2つ目は <strong>Tet Volume</strong>（四面体ごとの体積を保つ）で既定のまま。つぶれても体積が減らないので、横にふくらんで戻る。",
+   "img": "pr_jelly_3.png",
+   "cap": "見た目は同じ。中身のつながりが付いた。",
+   "ui_parm": "stretchstiffnessexp"
+  },
+  {
+   "title": "皿に落として揺らす",
+   "node": "vellumsolver",
+   "ui_node": "drop",
+   "body": "<code>vellumsolver</code> に左右の出口をつなぎ、<strong>Ground Plane</strong> を入れて y = 0 に床を作る。Substeps 5。再生すると、落ちて床に当たり、ぷるんとつぶれて戻る。高さ 0.280 m のゼリーが、フレーム 8 でいちばんつぶれて 0.196 m になった。",
+   "img": "pr_jelly_4.png",
+   "cap": "フレーム 8。いちばんつぶれた瞬間。",
+   "ui_parm": "useground"
+  },
+  {
+   "title": "きれいな表面を、動きに合わせて曲げる",
+   "node": "subdivide",
+   "ui_node": "smooth_skin",
+   "body": "四面体は中身の計算用で、そのまま撮ると面がでこぼこに見える。<code>pointdeform</code> の左に元の表面（remesh の出力）、真ん中に <strong>動く前の四面体</strong>（<code>tetrahedralize</code> の出力）、右に計算中の形をつなぐ。表面が、四面体の動きにそって曲がる。最後に <code>subdivide</code>（1回）で面を細かく割って、角ばりを消す。",
+   "img": "pr_jelly_5.png",
+   "cap": "表面だけが、つぶれた形についてくる。"
+  },
+  {
+   "title": "ゼリーと皿の材質を当てる",
+   "node": "merge",
+   "ui_node": "dessert",
+   "body": "ゼリーは <code>principledshader</code> で <strong>Transparency 1・IOR 1.35</strong>（水に近い）、Roughness 0.03。<strong>Transmission Color を赤、Transmission Distance を 0.12</strong> にすると、厚い所ほど濃い赤になる。皿は白く、Coat 1 でつやを出す。",
+   "img": "",
+   "cap": "材質を当てた状態（ビューポートでは透けない）。"
+  }
+ ],
+ "traps": [
+  {
+   "title": "硬すぎると、ぷるんとしない",
+   "body": "Tet Stretch の Stiffness を既定の × 10¹⁰ にすると、いちばんつぶれても高さ 0.280 m（はじめ 0.280 m）で、ほとんど形が変わらない。× 10⁴ では 0.196 m までつぶれた。ゼリーの柔らかさはここで決まる。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "Tet Volume がないと、深くつぶれて戻りきらない",
+   "body": "2つ目の Tet Volume を外すと、いちばんつぶれた高さは 0.146 m、36 フレーム後も 0.244 m。付けたときは 36 フレーム後に 0.263 m まで戻った。体積を保つ力がないと、深くつぶれ、戻りも足りない。",
+   "img": "",
+   "cap": ""
+  },
+  {
+   "title": "四面体の数が重さを決める",
+   "body": "remesh 0.03 の表面から、四面体は 6,991 個できた。36 フレームの計算は 56.4 秒。Target Size を半分の 0.015 にすると 30,420 個（4.4 倍）。揺れを決めるまでは粗くする。",
+   "img": "",
+   "cap": ""
+  }
+ ]
+}
