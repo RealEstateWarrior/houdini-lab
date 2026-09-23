@@ -2227,7 +2227,7 @@ def report_summary(no, limit=240):
     if not os.path.exists(path):
         return ""
     with open(path, encoding="utf-8") as fp:
-        text = json.load(fp).get("summary", "")
+        text = json.load(fp).get("summary", "").replace("**", "")
     return re.sub(r"\s+", " ", text)[:limit]
 
 
