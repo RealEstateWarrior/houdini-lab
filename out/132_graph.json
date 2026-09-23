@@ -1,0 +1,368 @@
+{
+  "title": "実験132",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 4,
+        "cols": 4
+      }
+    },
+    {
+      "name": "val",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@v = (@ptnum * 7) % 10;"
+      }
+    },
+    {
+      "name": "p_max",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 0
+      }
+    },
+    {
+      "name": "p_min",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 1
+      }
+    },
+    {
+      "name": "p_mean",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0
+      }
+    },
+    {
+      "name": "p_mode",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 3
+      }
+    },
+    {
+      "name": "p_median",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 4
+      }
+    },
+    {
+      "name": "p_sum",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 5
+      }
+    },
+    {
+      "name": "p_sumsquare",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 6
+      }
+    },
+    {
+      "name": "p_rms",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 7
+      }
+    },
+    {
+      "name": "p_first",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 8
+      }
+    },
+    {
+      "name": "p_last",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 9
+      }
+    },
+    {
+      "name": "p_prim",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 1
+      }
+    },
+    {
+      "name": "attribwrangle1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@v = (@ptnum * 7 + 3) % 10;"
+      }
+    },
+    {
+      "name": "attribpromote1",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 3
+      }
+    },
+    {
+      "name": "attribwrangle2",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@v = 9 - (@ptnum * 7) % 10;"
+      }
+    },
+    {
+      "name": "attribpromote2",
+      "type": "attribpromote",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inname": "v",
+        "outclass": 0,
+        "method": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "val",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_max",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_min",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_mean",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_mode",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_median",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_sum",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_sumsquare",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_rms",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_first",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_last",
+      "to_input": 0
+    },
+    {
+      "from": "val",
+      "from_output": 0,
+      "to": "p_prim",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "attribwrangle1",
+      "to_input": 0
+    },
+    {
+      "from": "attribwrangle1",
+      "from_output": 0,
+      "to": "attribpromote1",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "attribwrangle2",
+      "to_input": 0
+    },
+    {
+      "from": "attribwrangle2",
+      "from_output": 0,
+      "to": "attribpromote2",
+      "to_input": 0
+    }
+  ]
+}

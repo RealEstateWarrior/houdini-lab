@@ -1,0 +1,1138 @@
+{
+  "title": "実験145",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 1.0,
+        "sizey": 1.0
+      }
+    },
+    {
+      "name": "x_0.0_0.0001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5
+      }
+    },
+    {
+      "name": "m_0.0_0.0001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "x_0.0_0.0001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5
+      }
+    },
+    {
+      "name": "m_0.0_0.0001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0
+      }
+    },
+    {
+      "name": "x_0.0_0.001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5
+      }
+    },
+    {
+      "name": "m_0.0_0.001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_0.0_0.001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5
+      }
+    },
+    {
+      "name": "m_0.0_0.001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0,
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_2e-05_0.0001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50002
+      }
+    },
+    {
+      "name": "m_2e-05_0.0001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "x_2e-05_0.0001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50002
+      }
+    },
+    {
+      "name": "m_2e-05_0.0001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0
+      }
+    },
+    {
+      "name": "x_2e-05_0.001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50002
+      }
+    },
+    {
+      "name": "m_2e-05_0.001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_2e-05_0.001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50002
+      }
+    },
+    {
+      "name": "m_2e-05_0.001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0,
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_4e-05_0.0001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50004
+      }
+    },
+    {
+      "name": "m_4e-05_0.0001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "x_4e-05_0.0001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50004
+      }
+    },
+    {
+      "name": "m_4e-05_0.0001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0
+      }
+    },
+    {
+      "name": "x_4e-05_0.001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50004
+      }
+    },
+    {
+      "name": "m_4e-05_0.001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_4e-05_0.001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50004
+      }
+    },
+    {
+      "name": "m_4e-05_0.001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0,
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_5e-05_0.0001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50005
+      }
+    },
+    {
+      "name": "m_5e-05_0.0001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "x_5e-05_0.0001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50005
+      }
+    },
+    {
+      "name": "m_5e-05_0.0001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0
+      }
+    },
+    {
+      "name": "x_5e-05_0.001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50005
+      }
+    },
+    {
+      "name": "m_5e-05_0.001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_5e-05_0.001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50005
+      }
+    },
+    {
+      "name": "m_5e-05_0.001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0,
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_6e-05_0.0001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50006
+      }
+    },
+    {
+      "name": "m_6e-05_0.0001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "x_6e-05_0.0001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50006
+      }
+    },
+    {
+      "name": "m_6e-05_0.0001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0
+      }
+    },
+    {
+      "name": "x_6e-05_0.001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50006
+      }
+    },
+    {
+      "name": "m_6e-05_0.001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_6e-05_0.001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.50006
+      }
+    },
+    {
+      "name": "m_6e-05_0.001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0,
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_0.0001_0.0001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5001
+      }
+    },
+    {
+      "name": "m_0.0001_0.0001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "x_0.0001_0.0001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5001
+      }
+    },
+    {
+      "name": "m_0.0001_0.0001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0
+      }
+    },
+    {
+      "name": "x_0.0001_0.001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5001
+      }
+    },
+    {
+      "name": "m_0.0001_0.001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_0.0001_0.001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.5001
+      }
+    },
+    {
+      "name": "m_0.0001_0.001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0,
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_0.001_0.0001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.501
+      }
+    },
+    {
+      "name": "m_0.001_0.0001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "x_0.001_0.0001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.501
+      }
+    },
+    {
+      "name": "m_0.001_0.0001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0
+      }
+    },
+    {
+      "name": "x_0.001_0.001_1",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.501
+      }
+    },
+    {
+      "name": "m_0.001_0.001_1",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatetol": 0.001
+      }
+    },
+    {
+      "name": "x_0.001_0.001_0",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 0.501
+      }
+    },
+    {
+      "name": "m_0.001_0.001_0",
+      "type": "mirror",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "consolidatepts": 0,
+        "consolidatetol": 0.001
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0_0.0001_1",
+      "from_output": 0,
+      "to": "m_0.0_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0_0.0001_0",
+      "from_output": 0,
+      "to": "m_0.0_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0_0.001_1",
+      "from_output": 0,
+      "to": "m_0.0_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0_0.001_0",
+      "from_output": 0,
+      "to": "m_0.0_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_2e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_2e-05_0.0001_1",
+      "from_output": 0,
+      "to": "m_2e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_2e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_2e-05_0.0001_0",
+      "from_output": 0,
+      "to": "m_2e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_2e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_2e-05_0.001_1",
+      "from_output": 0,
+      "to": "m_2e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_2e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_2e-05_0.001_0",
+      "from_output": 0,
+      "to": "m_2e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_4e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_4e-05_0.0001_1",
+      "from_output": 0,
+      "to": "m_4e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_4e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_4e-05_0.0001_0",
+      "from_output": 0,
+      "to": "m_4e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_4e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_4e-05_0.001_1",
+      "from_output": 0,
+      "to": "m_4e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_4e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_4e-05_0.001_0",
+      "from_output": 0,
+      "to": "m_4e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_5e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_5e-05_0.0001_1",
+      "from_output": 0,
+      "to": "m_5e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_5e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_5e-05_0.0001_0",
+      "from_output": 0,
+      "to": "m_5e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_5e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_5e-05_0.001_1",
+      "from_output": 0,
+      "to": "m_5e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_5e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_5e-05_0.001_0",
+      "from_output": 0,
+      "to": "m_5e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_6e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_6e-05_0.0001_1",
+      "from_output": 0,
+      "to": "m_6e-05_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_6e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_6e-05_0.0001_0",
+      "from_output": 0,
+      "to": "m_6e-05_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_6e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_6e-05_0.001_1",
+      "from_output": 0,
+      "to": "m_6e-05_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_6e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_6e-05_0.001_0",
+      "from_output": 0,
+      "to": "m_6e-05_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0001_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0001_0.0001_1",
+      "from_output": 0,
+      "to": "m_0.0001_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0001_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0001_0.0001_0",
+      "from_output": 0,
+      "to": "m_0.0001_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0001_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0001_0.001_1",
+      "from_output": 0,
+      "to": "m_0.0001_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.0001_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.0001_0.001_0",
+      "from_output": 0,
+      "to": "m_0.0001_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.001_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.001_0.0001_1",
+      "from_output": 0,
+      "to": "m_0.001_0.0001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.001_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.001_0.0001_0",
+      "from_output": 0,
+      "to": "m_0.001_0.0001_0",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.001_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.001_0.001_1",
+      "from_output": 0,
+      "to": "m_0.001_0.001_1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "x_0.001_0.001_0",
+      "to_input": 0
+    },
+    {
+      "from": "x_0.001_0.001_0",
+      "from_output": 0,
+      "to": "m_0.001_0.001_0",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "title": "実験126",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "b_2_0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector cs[] = {{-2,0,-2},{2,0,-2},{-2,0,2},{2,0,2}};\nfloat sd = 0.2;\nfor (int b = 0; b < 4; b++) for (int i = 0; i < ..."
+      }
+    },
+    {
+      "name": "cl_2_0",
+      "type": "cluster",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "num_clusters": 4
+      }
+    },
+    {
+      "name": "b_1_0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector cs[] = {{-1,0,-1},{1,0,-1},{-1,0,1},{1,0,1}};\nfloat sd = 0.3;\nfor (int b = 0; b < 4; b++) for (int i = 0; i < ..."
+      }
+    },
+    {
+      "name": "cl_1_0",
+      "type": "cluster",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "num_clusters": 4
+      }
+    },
+    {
+      "name": "b_0_5",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector cs[] = {{-0.5,0,-0.5},{0.5,0,-0.5},{-0.5,0,0.5},{0.5,0,0.5}};\nfloat sd = 0.3;\nfor (int b = 0; b < 4; b++) for ..."
+      }
+    },
+    {
+      "name": "cl_0_5",
+      "type": "cluster",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "num_clusters": 4
+      }
+    },
+    {
+      "name": "b_0_3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector cs[] = {{-0.3,0,-0.3},{0.3,0,-0.3},{-0.3,0,0.3},{0.3,0,0.3}};\nfloat sd = 0.3;\nfor (int b = 0; b < 4; b++) for ..."
+      }
+    },
+    {
+      "name": "cl_0_3",
+      "type": "cluster",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "num_clusters": 4
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "b_2_0",
+      "from_output": 0,
+      "to": "cl_2_0",
+      "to_input": 0
+    },
+    {
+      "from": "b_1_0",
+      "from_output": 0,
+      "to": "cl_1_0",
+      "to_input": 0
+    },
+    {
+      "from": "b_0_5",
+      "from_output": 0,
+      "to": "cl_0_5",
+      "to_input": 0
+    },
+    {
+      "from": "b_0_3",
+      "from_output": 0,
+      "to": "cl_0_3",
+      "to_input": 0
+    }
+  ]
+}

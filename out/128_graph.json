@@ -1,0 +1,223 @@
+{
+  "title": "実験128",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "src",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "tx": 0.3,
+        "ty": 0.1,
+        "tz": -0.2
+      }
+    },
+    {
+      "name": "xf_move",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 1.0,
+        "ty": 2.0,
+        "tz": 3.0
+      }
+    },
+    {
+      "name": "ex_move",
+      "type": "extracttransform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "computedistortion": 1
+      }
+    },
+    {
+      "name": "xf_turn",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rx": 10.0,
+        "ry": 20.0,
+        "rz": 30.0
+      }
+    },
+    {
+      "name": "ex_turn",
+      "type": "extracttransform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "computedistortion": 1
+      }
+    },
+    {
+      "name": "xf_all",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": 1.0,
+        "ty": -0.5,
+        "tz": 2.0,
+        "rx": 10.0,
+        "ry": 20.0,
+        "rz": 30.0,
+        "sx": 1.5,
+        "sy": 1.5,
+        "sz": 1.5
+      }
+    },
+    {
+      "name": "ex_all",
+      "type": "extracttransform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "computedistortion": 1
+      }
+    },
+    {
+      "name": "xf_stretch",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ry": 30.0,
+        "sx": 2.0
+      }
+    },
+    {
+      "name": "ex_stretch",
+      "type": "extracttransform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "computedistortion": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "xf_move",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "ex_move",
+      "to_input": 0
+    },
+    {
+      "from": "xf_move",
+      "from_output": 0,
+      "to": "ex_move",
+      "to_input": 1
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "xf_turn",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "ex_turn",
+      "to_input": 0
+    },
+    {
+      "from": "xf_turn",
+      "from_output": 0,
+      "to": "ex_turn",
+      "to_input": 1
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "xf_all",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "ex_all",
+      "to_input": 0
+    },
+    {
+      "from": "xf_all",
+      "from_output": 0,
+      "to": "ex_all",
+      "to_input": 1
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "xf_stretch",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "ex_stretch",
+      "to_input": 0
+    },
+    {
+      "from": "xf_stretch",
+      "from_output": 0,
+      "to": "ex_stretch",
+      "to_input": 1
+    }
+  ]
+}

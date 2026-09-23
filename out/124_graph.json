@@ -1,0 +1,160 @@
+{
+  "title": "実験124",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "koch_0",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "generations": 0.0,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    },
+    {
+      "name": "koch_1",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "generations": 1.0,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    },
+    {
+      "name": "koch_2",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "generations": 2.0,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    },
+    {
+      "name": "koch_3",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "generations": 3.0,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    },
+    {
+      "name": "koch_4",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "generations": 4.0,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    },
+    {
+      "name": "koch_5",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "generations": 5.0,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    },
+    {
+      "name": "koch_6",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "generations": 6.0,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    },
+    {
+      "name": "koch_2_5",
+      "type": "lsystem",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "generations": 2.5,
+        "stepinit": 1.0,
+        "angleinit": 60.0,
+        "premise": "F",
+        "rule1": "F=F+F--F+F",
+        "rule2": ""
+      }
+    }
+  ],
+  "edges": []
+}

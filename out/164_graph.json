@@ -1,0 +1,549 @@
+{
+  "title": "実験164",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "p0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(-0.0, 0, 0)); int b = addpoint(0, set(0.0, 0, 0)); setpointattrib(0, 'pscale', a, 0.5); setpo..."
+      }
+    },
+    {
+      "name": "v0_500",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "c0_500",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v0_250",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.025
+      }
+    },
+    {
+      "name": "c0_250",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v0_125",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.0125
+      }
+    },
+    {
+      "name": "c0_125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "p5",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(-0.25, 0, 0)); int b = addpoint(0, set(0.25, 0, 0)); setpointattrib(0, 'pscale', a, 0.5); set..."
+      }
+    },
+    {
+      "name": "v5_500",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "c5_500",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v5_250",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.025
+      }
+    },
+    {
+      "name": "c5_250",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v5_125",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.0125
+      }
+    },
+    {
+      "name": "c5_125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "p8",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(-0.4, 0, 0)); int b = addpoint(0, set(0.4, 0, 0)); setpointattrib(0, 'pscale', a, 0.5); setpo..."
+      }
+    },
+    {
+      "name": "v8_500",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "c8_500",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v8_250",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.025
+      }
+    },
+    {
+      "name": "c8_250",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v8_125",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.0125
+      }
+    },
+    {
+      "name": "c8_125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "p12",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(-0.6, 0, 0)); int b = addpoint(0, set(0.6, 0, 0)); setpointattrib(0, 'pscale', a, 0.5); setpo..."
+      }
+    },
+    {
+      "name": "v12_500",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "c12_500",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v12_250",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.025
+      }
+    },
+    {
+      "name": "c12_250",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v12_125",
+      "type": "vdbfromparticles",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.0125
+      }
+    },
+    {
+      "name": "c12_125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "p0",
+      "from_output": 0,
+      "to": "v0_500",
+      "to_input": 0
+    },
+    {
+      "from": "v0_500",
+      "from_output": 0,
+      "to": "c0_500",
+      "to_input": 0
+    },
+    {
+      "from": "p0",
+      "from_output": 0,
+      "to": "v0_250",
+      "to_input": 0
+    },
+    {
+      "from": "v0_250",
+      "from_output": 0,
+      "to": "c0_250",
+      "to_input": 0
+    },
+    {
+      "from": "p0",
+      "from_output": 0,
+      "to": "v0_125",
+      "to_input": 0
+    },
+    {
+      "from": "v0_125",
+      "from_output": 0,
+      "to": "c0_125",
+      "to_input": 0
+    },
+    {
+      "from": "p5",
+      "from_output": 0,
+      "to": "v5_500",
+      "to_input": 0
+    },
+    {
+      "from": "v5_500",
+      "from_output": 0,
+      "to": "c5_500",
+      "to_input": 0
+    },
+    {
+      "from": "p5",
+      "from_output": 0,
+      "to": "v5_250",
+      "to_input": 0
+    },
+    {
+      "from": "v5_250",
+      "from_output": 0,
+      "to": "c5_250",
+      "to_input": 0
+    },
+    {
+      "from": "p5",
+      "from_output": 0,
+      "to": "v5_125",
+      "to_input": 0
+    },
+    {
+      "from": "v5_125",
+      "from_output": 0,
+      "to": "c5_125",
+      "to_input": 0
+    },
+    {
+      "from": "p8",
+      "from_output": 0,
+      "to": "v8_500",
+      "to_input": 0
+    },
+    {
+      "from": "v8_500",
+      "from_output": 0,
+      "to": "c8_500",
+      "to_input": 0
+    },
+    {
+      "from": "p8",
+      "from_output": 0,
+      "to": "v8_250",
+      "to_input": 0
+    },
+    {
+      "from": "v8_250",
+      "from_output": 0,
+      "to": "c8_250",
+      "to_input": 0
+    },
+    {
+      "from": "p8",
+      "from_output": 0,
+      "to": "v8_125",
+      "to_input": 0
+    },
+    {
+      "from": "v8_125",
+      "from_output": 0,
+      "to": "c8_125",
+      "to_input": 0
+    },
+    {
+      "from": "p12",
+      "from_output": 0,
+      "to": "v12_500",
+      "to_input": 0
+    },
+    {
+      "from": "v12_500",
+      "from_output": 0,
+      "to": "c12_500",
+      "to_input": 0
+    },
+    {
+      "from": "p12",
+      "from_output": 0,
+      "to": "v12_250",
+      "to_input": 0
+    },
+    {
+      "from": "v12_250",
+      "from_output": 0,
+      "to": "c12_250",
+      "to_input": 0
+    },
+    {
+      "from": "p12",
+      "from_output": 0,
+      "to": "v12_125",
+      "to_input": 0
+    },
+    {
+      "from": "v12_125",
+      "from_output": 0,
+      "to": "c12_125",
+      "to_input": 0
+    }
+  ]
+}

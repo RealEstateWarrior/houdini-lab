@@ -1,0 +1,595 @@
+{
+  "title": "実験119",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "quad",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 41,
+        "cols": 41
+      }
+    },
+    {
+      "name": "tri",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "surftype": 3,
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 41,
+        "cols": 41
+      }
+    },
+    {
+      "name": "rm",
+      "type": "remesh::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetsize": 0.05
+      }
+    },
+    {
+      "name": "start_quad",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = nearpoint(0, {0,0,0});\nsetpointgroup(0, \"start\", p, 1);\nvector q = point(0, \"P\", p); setdetailattrib(0, \"offs..."
+      }
+    },
+    {
+      "name": "shift_quad",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int p = nearpoint(0, {0,0,0}); @P -= point(0, \"P\", p);"
+      }
+    },
+    {
+      "name": "dag_quad_edge",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "distmetric": 0,
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "dag_quad_surface",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "dag_quad_heat",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "distmetric": 2,
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "hg_quad",
+      "type": "heatgeodesic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "srcpoints": "start"
+      }
+    },
+    {
+      "name": "zero_quad",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;"
+      }
+    },
+    {
+      "name": "af_quad",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "start"
+      }
+    },
+    {
+      "name": "start_tri",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = nearpoint(0, {0,0,0});\nsetpointgroup(0, \"start\", p, 1);\nvector q = point(0, \"P\", p); setdetailattrib(0, \"offs..."
+      }
+    },
+    {
+      "name": "shift_tri",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int p = nearpoint(0, {0,0,0}); @P -= point(0, \"P\", p);"
+      }
+    },
+    {
+      "name": "dag_tri_edge",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "distmetric": 0,
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "dag_tri_surface",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "dag_tri_heat",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "distmetric": 2,
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "hg_tri",
+      "type": "heatgeodesic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "srcpoints": "start"
+      }
+    },
+    {
+      "name": "zero_tri",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;"
+      }
+    },
+    {
+      "name": "af_tri",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "start"
+      }
+    },
+    {
+      "name": "start_remesh",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = nearpoint(0, {0,0,0});\nsetpointgroup(0, \"start\", p, 1);\nvector q = point(0, \"P\", p); setdetailattrib(0, \"offs..."
+      }
+    },
+    {
+      "name": "shift_remesh",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int p = nearpoint(0, {0,0,0}); @P -= point(0, \"P\", p);"
+      }
+    },
+    {
+      "name": "dag_remesh_edge",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "distmetric": 0,
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "dag_remesh_surface",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "dag_remesh_heat",
+      "type": "distancealonggeometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "startpts": "start",
+        "distmetric": 2,
+        "remap1value": 1.0,
+        "remap1interp": 3,
+        "remap2pos": 1.0,
+        "remap2interp": 3
+      }
+    },
+    {
+      "name": "hg_remesh",
+      "type": "heatgeodesic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "srcpoints": "start"
+      }
+    },
+    {
+      "name": "zero_remesh",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;"
+      }
+    },
+    {
+      "name": "af_remesh",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "start"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "quad",
+      "from_output": 0,
+      "to": "rm",
+      "to_input": 0
+    },
+    {
+      "from": "quad",
+      "from_output": 0,
+      "to": "start_quad",
+      "to_input": 0
+    },
+    {
+      "from": "start_quad",
+      "from_output": 0,
+      "to": "shift_quad",
+      "to_input": 0
+    },
+    {
+      "from": "shift_quad",
+      "from_output": 0,
+      "to": "dag_quad_edge",
+      "to_input": 0
+    },
+    {
+      "from": "shift_quad",
+      "from_output": 0,
+      "to": "dag_quad_surface",
+      "to_input": 0
+    },
+    {
+      "from": "shift_quad",
+      "from_output": 0,
+      "to": "dag_quad_heat",
+      "to_input": 0
+    },
+    {
+      "from": "shift_quad",
+      "from_output": 0,
+      "to": "hg_quad",
+      "to_input": 0
+    },
+    {
+      "from": "shift_quad",
+      "from_output": 0,
+      "to": "zero_quad",
+      "to_input": 0
+    },
+    {
+      "from": "zero_quad",
+      "from_output": 0,
+      "to": "af_quad",
+      "to_input": 0
+    },
+    {
+      "from": "tri",
+      "from_output": 0,
+      "to": "start_tri",
+      "to_input": 0
+    },
+    {
+      "from": "start_tri",
+      "from_output": 0,
+      "to": "shift_tri",
+      "to_input": 0
+    },
+    {
+      "from": "shift_tri",
+      "from_output": 0,
+      "to": "dag_tri_edge",
+      "to_input": 0
+    },
+    {
+      "from": "shift_tri",
+      "from_output": 0,
+      "to": "dag_tri_surface",
+      "to_input": 0
+    },
+    {
+      "from": "shift_tri",
+      "from_output": 0,
+      "to": "dag_tri_heat",
+      "to_input": 0
+    },
+    {
+      "from": "shift_tri",
+      "from_output": 0,
+      "to": "hg_tri",
+      "to_input": 0
+    },
+    {
+      "from": "shift_tri",
+      "from_output": 0,
+      "to": "zero_tri",
+      "to_input": 0
+    },
+    {
+      "from": "zero_tri",
+      "from_output": 0,
+      "to": "af_tri",
+      "to_input": 0
+    },
+    {
+      "from": "rm",
+      "from_output": 0,
+      "to": "start_remesh",
+      "to_input": 0
+    },
+    {
+      "from": "start_remesh",
+      "from_output": 0,
+      "to": "shift_remesh",
+      "to_input": 0
+    },
+    {
+      "from": "shift_remesh",
+      "from_output": 0,
+      "to": "dag_remesh_edge",
+      "to_input": 0
+    },
+    {
+      "from": "shift_remesh",
+      "from_output": 0,
+      "to": "dag_remesh_surface",
+      "to_input": 0
+    },
+    {
+      "from": "shift_remesh",
+      "from_output": 0,
+      "to": "dag_remesh_heat",
+      "to_input": 0
+    },
+    {
+      "from": "shift_remesh",
+      "from_output": 0,
+      "to": "hg_remesh",
+      "to_input": 0
+    },
+    {
+      "from": "shift_remesh",
+      "from_output": 0,
+      "to": "zero_remesh",
+      "to_input": 0
+    },
+    {
+      "from": "zero_remesh",
+      "from_output": 0,
+      "to": "af_remesh",
+      "to_input": 0
+    }
+  ]
+}

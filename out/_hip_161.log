@@ -1,0 +1,8 @@
+{'threshold': 0.5, 'blend': 0.0, 'full_until': 0.5, 'reach_until': 0.5, 'mid_points': 0, 'val_at_d': 1.0, 'lin_err': None, 'sec': 0.0724}
+{'threshold': 0.5, 'blend': 0.25, 'full_until': 0.5, 'reach_until': 0.74, 'mid_points': 24, 'val_at_d': 1.0, 'lin_err': 0.1293, 'sec': 0.0001}
+{'threshold': 0.5, 'blend': 0.5, 'full_until': 0.5, 'reach_until': 0.99, 'mid_points': 49, 'val_at_d': 1.0, 'lin_err': 0.1294, 'sec': 0.0001}
+{'threshold': 1.0, 'blend': 0.0, 'full_until': 1.0, 'reach_until': 1.0, 'mid_points': 0, 'val_at_d': 1.0, 'lin_err': None, 'sec': 0.0001}
+{'threshold': 1.0, 'blend': 0.25, 'full_until': 1.0, 'reach_until': 1.24, 'mid_points': 24, 'val_at_d': 1.0, 'lin_err': 0.1293, 'sec': 0.0001}
+{'threshold': 1.0, 'blend': 0.5, 'full_until': 1.0, 'reach_until': 1.49, 'mid_points': 49, 'val_at_d': 1.0, 'lin_err': 0.1294, 'sec': 0.0001}
+保存: D:\Claude\houdini\out\161_stats.json
+HIP 161 D:\Claude\houdini\out\161_scene.hipnc 56734

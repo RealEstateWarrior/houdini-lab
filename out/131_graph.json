@@ -1,0 +1,272 @@
+{
+  "title": "実験131",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "line1",
+      "type": "line",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "diry": 0.0,
+        "dirz": 1.0,
+        "points": 101
+      }
+    },
+    {
+      "name": "bd_1_45",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 45.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_1_90",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 90.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_1_180",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 180.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_1_270",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 270.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_1_360",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 360.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "line2",
+      "type": "line",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "diry": 0.0,
+        "dirz": 1.0,
+        "dist": 2.0,
+        "points": 201
+      }
+    },
+    {
+      "name": "bd_2_45",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 45.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_2_90",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 90.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_2_180",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 180.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_2_270",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 270.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    },
+    {
+      "name": "bd_2_360",
+      "type": "bend",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "bendfolder": 1,
+        "bend": 360.0,
+        "folder0": 1,
+        "taperprofile1value": 1.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "line1",
+      "from_output": 0,
+      "to": "bd_1_45",
+      "to_input": 0
+    },
+    {
+      "from": "line1",
+      "from_output": 0,
+      "to": "bd_1_90",
+      "to_input": 0
+    },
+    {
+      "from": "line1",
+      "from_output": 0,
+      "to": "bd_1_180",
+      "to_input": 0
+    },
+    {
+      "from": "line1",
+      "from_output": 0,
+      "to": "bd_1_270",
+      "to_input": 0
+    },
+    {
+      "from": "line1",
+      "from_output": 0,
+      "to": "bd_1_360",
+      "to_input": 0
+    },
+    {
+      "from": "line2",
+      "from_output": 0,
+      "to": "bd_2_45",
+      "to_input": 0
+    },
+    {
+      "from": "line2",
+      "from_output": 0,
+      "to": "bd_2_90",
+      "to_input": 0
+    },
+    {
+      "from": "line2",
+      "from_output": 0,
+      "to": "bd_2_180",
+      "to_input": 0
+    },
+    {
+      "from": "line2",
+      "from_output": 0,
+      "to": "bd_2_270",
+      "to_input": 0
+    },
+    {
+      "from": "line2",
+      "from_output": 0,
+      "to": "bd_2_360",
+      "to_input": 0
+    }
+  ]
+}

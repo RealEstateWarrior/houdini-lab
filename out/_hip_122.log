@@ -1,0 +1,12 @@
+{'d': 0.1, 'side': 'outside', 'perimeters': [8.8], 'points': 4, 'mitre': 8.8, 'round': 8.628319, 'sec': 0.0709}
+{'d': 0.1, 'side': 'inside', 'perimeters': [7.2], 'points': 4, 'mitre': 7.2, 'round': None, 'sec': 0.0013}
+{'d': 0.25, 'side': 'outside', 'perimeters': [10.0], 'points': 4, 'mitre': 10.0, 'round': 9.570796, 'sec': 0.0012}
+{'d': 0.25, 'side': 'inside', 'perimeters': [6.0], 'points': 4, 'mitre': 6.0, 'round': None, 'sec': 0.0011}
+{'d': 0.5, 'side': 'outside', 'perimeters': [12.0], 'points': 4, 'mitre': 12.0, 'round': 11.141593, 'sec': 0.0011}
+{'d': 0.5, 'side': 'inside', 'perimeters': [4.0], 'points': 4, 'mitre': 4.0, 'round': None, 'sec': 0.0011}
+{'offset': 0.2, 'divs': 4, 'perimeters': [6.400001, 6.800001, 7.2, 7.6, 8.4, 8.8, 9.2, 9.6], 'points': 32}
+{'d': 0.05, 'perimeters': [5.572494], 'points': 3, 'per0': 4.767014, 'mitre': 5.572493, 'round': 5.081174}
+{'d': 0.1, 'perimeters': [6.377973], 'points': 3, 'per0': 4.767014, 'mitre': 6.377972, 'round': 5.395333}
+{'d': 0.2, 'perimeters': [7.988931], 'points': 3, 'per0': 4.767014, 'mitre': 7.98893, 'round': 6.023651}
+書いた: D:\Claude\houdini\out\122_stats.json
+HIP 122 D:\Claude\houdini\out\122_scene.hipnc 70178

@@ -1,0 +1,544 @@
+{
+  "title": "実験125",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "c3",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1,
+        "divs": 3
+      }
+    },
+    {
+      "name": "dv3",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c4",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 4
+      }
+    },
+    {
+      "name": "dv4",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c5",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 5
+      }
+    },
+    {
+      "name": "dv5",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c8",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 8
+      }
+    },
+    {
+      "name": "dv8",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c24",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 24
+      }
+    },
+    {
+      "name": "dv24",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c100",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 100
+      }
+    },
+    {
+      "name": "dv100",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 5,
+        "cols": 5
+      }
+    },
+    {
+      "name": "sphere",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 12
+      }
+    },
+    {
+      "name": "fc_box",
+      "type": "facet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "unique": 1
+      }
+    },
+    {
+      "name": "cl_box",
+      "type": "convertline",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "ps_box",
+      "type": "polysoup",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "fc_grid",
+      "type": "facet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "unique": 1
+      }
+    },
+    {
+      "name": "cl_grid",
+      "type": "convertline",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "ps_grid",
+      "type": "polysoup",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "fc_sphere",
+      "type": "facet",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "unique": 1
+      }
+    },
+    {
+      "name": "cl_sphere",
+      "type": "convertline",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "ps_sphere",
+      "type": "polysoup",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "ed2",
+      "type": "edgedivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "*"
+      }
+    },
+    {
+      "name": "eds2",
+      "type": "edgedivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "*",
+        "sharedpoints": 1
+      }
+    },
+    {
+      "name": "ed3",
+      "type": "edgedivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "*",
+        "numdivs": 3
+      }
+    },
+    {
+      "name": "eds3",
+      "type": "edgedivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "*",
+        "numdivs": 3,
+        "sharedpoints": 1
+      }
+    },
+    {
+      "name": "ed5",
+      "type": "edgedivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "*",
+        "numdivs": 5
+      }
+    },
+    {
+      "name": "eds5",
+      "type": "edgedivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group": "*",
+        "numdivs": 5,
+        "sharedpoints": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "c3",
+      "from_output": 0,
+      "to": "dv3",
+      "to_input": 0
+    },
+    {
+      "from": "c4",
+      "from_output": 0,
+      "to": "dv4",
+      "to_input": 0
+    },
+    {
+      "from": "c5",
+      "from_output": 0,
+      "to": "dv5",
+      "to_input": 0
+    },
+    {
+      "from": "c8",
+      "from_output": 0,
+      "to": "dv8",
+      "to_input": 0
+    },
+    {
+      "from": "c24",
+      "from_output": 0,
+      "to": "dv24",
+      "to_input": 0
+    },
+    {
+      "from": "c100",
+      "from_output": 0,
+      "to": "dv100",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "fc_box",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "cl_box",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "ps_box",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "fc_grid",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "cl_grid",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "ps_grid",
+      "to_input": 0
+    },
+    {
+      "from": "sphere",
+      "from_output": 0,
+      "to": "fc_sphere",
+      "to_input": 0
+    },
+    {
+      "from": "sphere",
+      "from_output": 0,
+      "to": "cl_sphere",
+      "to_input": 0
+    },
+    {
+      "from": "sphere",
+      "from_output": 0,
+      "to": "ps_sphere",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "ed2",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "eds2",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "ed3",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "eds3",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "ed5",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "eds5",
+      "to_input": 0
+    }
+  ]
+}

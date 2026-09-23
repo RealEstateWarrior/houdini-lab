@@ -1,0 +1,211 @@
+{
+  "title": "実験143",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "c3",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1,
+        "divs": 3
+      }
+    },
+    {
+      "name": "c4",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 4
+      }
+    },
+    {
+      "name": "c6",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 6
+      }
+    },
+    {
+      "name": "c12",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1
+      }
+    },
+    {
+      "name": "c48",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 48
+      }
+    },
+    {
+      "name": "c192",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 192
+      }
+    },
+    {
+      "name": "c768",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 768
+      }
+    },
+    {
+      "name": "a_openarc_4",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 4,
+        "arc": 1,
+        "endangle": 90.0
+      }
+    },
+    {
+      "name": "a_openarc_12",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "arc": 1,
+        "endangle": 90.0
+      }
+    },
+    {
+      "name": "a_closedarc_4",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 4,
+        "arc": 2,
+        "endangle": 90.0
+      }
+    },
+    {
+      "name": "a_closedarc_12",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "arc": 2,
+        "endangle": 90.0
+      }
+    },
+    {
+      "name": "a_slicedarc_4",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 4,
+        "arc": 3,
+        "endangle": 90.0
+      }
+    },
+    {
+      "name": "a_slicedarc_12",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "arc": 3,
+        "endangle": 90.0
+      }
+    }
+  ],
+  "edges": []
+}

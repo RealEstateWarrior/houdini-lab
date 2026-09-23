@@ -1,0 +1,27 @@
+{'case': 'points', 'steps': 0, 'count': 1, 'diamond': 1, 'square': 1, 'sec': 0.0711}
+{'case': 'points', 'steps': 1, 'count': 5, 'diamond': 5, 'square': 9, 'sec': 0.0001}
+{'case': 'points', 'steps': 2, 'count': 13, 'diamond': 13, 'square': 25, 'sec': 0.0001}
+{'case': 'points', 'steps': 3, 'count': 25, 'diamond': 25, 'square': 49, 'sec': 0.0001}
+{'case': 'points', 'steps': 4, 'count': 41, 'diamond': 41, 'square': 81, 'sec': 0.0001}
+{'case': 'points', 'steps': 6, 'count': 85, 'diamond': 85, 'square': 169, 'sec': 0.0001}
+{'case': 'points', 'steps': 8, 'count': 145, 'diamond': 145, 'square': 289, 'sec': 0.0001}
+{'case': 'prims_edge', 'steps': 0, 'count': 1, 'diamond': 1, 'square': 1, 'sec': 0.006}
+{'case': 'prims_edge', 'steps': 1, 'count': 5, 'diamond': 5, 'square': 9, 'sec': 0.0001}
+{'case': 'prims_edge', 'steps': 2, 'count': 13, 'diamond': 13, 'square': 25, 'sec': 0.0001}
+{'case': 'prims_edge', 'steps': 3, 'count': 25, 'diamond': 25, 'square': 49, 'sec': 0.0001}
+{'case': 'prims_edge', 'steps': 4, 'count': 41, 'diamond': 41, 'square': 81, 'sec': 0.0001}
+{'case': 'prims_edge', 'steps': 6, 'count': 85, 'diamond': 85, 'square': 169, 'sec': 0.0002}
+{'case': 'prims_edge', 'steps': 8, 'count': 145, 'diamond': 145, 'square': 289, 'sec': 0.0002}
+{'case': 'prims_point', 'steps': 0, 'count': 1, 'diamond': 1, 'square': 1, 'sec': 0.0001}
+{'case': 'prims_point', 'steps': 1, 'count': 9, 'diamond': 5, 'square': 9, 'sec': 0.0001}
+{'case': 'prims_point', 'steps': 2, 'count': 25, 'diamond': 13, 'square': 25, 'sec': 0.0001}
+{'case': 'prims_point', 'steps': 3, 'count': 49, 'diamond': 25, 'square': 49, 'sec': 0.0001}
+{'case': 'prims_point', 'steps': 4, 'count': 81, 'diamond': 41, 'square': 81, 'sec': 0.0002}
+{'case': 'prims_point', 'steps': 6, 'count': 169, 'diamond': 85, 'square': 169, 'sec': 0.0002}
+{'case': 'prims_point', 'steps': 8, 'count': 289, 'diamond': 145, 'square': 289, 'sec': 0.0002}
+{'steps': 0, 'count': 81, 'square': 81}
+{'steps': -1, 'count': 49, 'square': 49}
+{'steps': -2, 'count': 25, 'square': 25}
+{'steps': -4, 'count': 1, 'square': 1}
+書いた: D:\Claude\houdini\out\109_stats.json
+HIP 109 D:\Claude\houdini\out\109_scene.hipnc 91565

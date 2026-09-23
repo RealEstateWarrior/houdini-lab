@@ -1,0 +1,123 @@
+{
+  "title": "実験111",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 316,
+        "cols": 316
+      }
+    },
+    {
+      "name": "s1",
+      "type": "pointjitter",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "s0_1",
+      "type": "pointjitter",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "scale": 0.1
+      }
+    },
+    {
+      "name": "s2",
+      "type": "pointjitter",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "scale": 2.0
+      }
+    },
+    {
+      "name": "axis_1_0_0_5",
+      "type": "pointjitter",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "axisscaley": 0.0,
+        "axisscalez": 0.5
+      }
+    },
+    {
+      "name": "seed2",
+      "type": "pointjitter",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 2.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "s1",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "s0_1",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "s2",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "axis_1_0_0_5",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "seed2",
+      "to_input": 0
+    }
+  ]
+}

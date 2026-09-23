@@ -1,0 +1,17 @@
+{'mesh': 'quad', 'method': 'distancealonggeometry_edge', 'n': 1681, 'mean_abs': 0.240251, 'max_abs': 0.585786, 'mean': 0.240251, 'sec': 0.0197, 'start_offset': 0.0}
+{'mesh': 'quad', 'method': 'distancealonggeometry_surface', 'n': 1681, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': -0.0, 'sec': 0.0038, 'start_offset': 0.0}
+{'mesh': 'quad', 'method': 'distancealonggeometry_heat', 'n': 1681, 'mean_abs': 0.008959, 'max_abs': 0.04604, 'mean': -0.008959, 'sec': 0.1227, 'start_offset': 0.0}
+{'mesh': 'quad', 'method': 'heatgeodesic', 'n': 1681, 'mean_abs': 0.01246, 'max_abs': 0.058876, 'mean': -0.012452, 'sec': 0.0158, 'start_offset': 0.0}
+{'mesh': 'quad', 'method': 'attribfill_eikonal', 'n': 1681, 'mean_abs': 0.240251, 'max_abs': 0.585786, 'mean': 0.240251, 'sec': 0.0103, 'start_offset': 0.0}
+{'mesh': 'tri', 'method': 'distancealonggeometry_edge', 'n': 1681, 'mean_abs': 0.140238, 'max_abs': 0.585786, 'mean': 0.140238, 'sec': 0.0069, 'start_offset': 0.0}
+{'mesh': 'tri', 'method': 'distancealonggeometry_surface', 'n': 1681, 'mean_abs': 5e-06, 'max_abs': 0.000269, 'mean': 5e-06, 'sec': 0.0043, 'start_offset': 0.0}
+{'mesh': 'tri', 'method': 'distancealonggeometry_heat', 'n': 1681, 'mean_abs': 0.008959, 'max_abs': 0.04604, 'mean': -0.008959, 'sec': 0.0165, 'start_offset': 0.0}
+{'mesh': 'tri', 'method': 'heatgeodesic', 'n': 1681, 'mean_abs': 0.01246, 'max_abs': 0.058876, 'mean': -0.012452, 'sec': 0.0144, 'start_offset': 0.0}
+{'mesh': 'tri', 'method': 'attribfill_eikonal', 'n': 1681, 'mean_abs': 0.140238, 'max_abs': 0.585786, 'mean': 0.140238, 'sec': 0.0019, 'start_offset': 0.0}
+{'mesh': 'remesh', 'method': 'distancealonggeometry_edge', 'n': 1928, 'mean_abs': 0.038608, 'max_abs': 0.08072, 'mean': 0.038608, 'sec': 0.0077, 'start_offset': 0.022131}
+{'mesh': 'remesh', 'method': 'distancealonggeometry_surface', 'n': 1928, 'mean_abs': 1.8e-05, 'max_abs': 0.000235, 'mean': 1.8e-05, 'sec': 0.005, 'start_offset': 0.022131}
+{'mesh': 'remesh', 'method': 'distancealonggeometry_heat', 'n': 1928, 'mean_abs': 0.005626, 'max_abs': 0.017211, 'mean': -0.005625, 'sec': 0.0224, 'start_offset': 0.022131}
+{'mesh': 'remesh', 'method': 'heatgeodesic', 'n': 1928, 'mean_abs': 0.007247, 'max_abs': 0.021913, 'mean': -0.007245, 'sec': 0.0195, 'start_offset': 0.022131}
+{'mesh': 'remesh', 'method': 'attribfill_eikonal', 'n': 1928, 'mean_abs': 0.038607, 'max_abs': 0.08072, 'mean': 0.038607, 'sec': 0.0022, 'start_offset': 0.022131}
+書いた: D:\Claude\houdini\out\119_stats.json
+HIP 119 D:\Claude\houdini\out\119_scene.hipnc 96376

@@ -1,0 +1,6 @@
+{'shape': 'cylinder', 'method': 'scp', 'ratio_mean': 0.159252, 'spread': 1e-06, 'uv_w': 0.999893, 'uv_h': 0.318503, 'aspect': 3.139349, 'sec': 0.1809}
+{'shape': 'cylinder', 'method': 'abf', 'ratio_mean': 0.159252, 'spread': 2.1e-05, 'uv_w': 0.999893, 'uv_h': 0.318504, 'aspect': 3.13934, 'sec': 0.0164}
+{'shape': 'hemisphere', 'method': 'scp', 'ratio_mean': 0.304534, 'spread': 0.134943, 'uv_w': 0.999893, 'uv_h': 0.770752, 'aspect': 1.297295, 'sec': 0.0167}
+{'shape': 'hemisphere', 'method': 'abf', 'ratio_mean': 0.316704, 'spread': 0.104452, 'uv_w': 0.999893, 'uv_h': 0.889094, 'aspect': 1.12462, 'sec': 0.0158}
+書いた: D:\Claude\houdini\out\116_stats.json 式の縦横比 3.1393502030468667
+HIP 116 D:\Claude\houdini\out\116_scene.hipnc 57081

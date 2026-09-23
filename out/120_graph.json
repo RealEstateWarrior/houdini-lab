@@ -1,0 +1,466 @@
+{
+  "title": "実験120",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "slab_polymesh",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1,
+        "sizex": 4.0,
+        "sizey": 0.3,
+        "sizez": 4.0,
+        "divrate1": 21,
+        "divrate2": 2,
+        "divrate3": 21,
+        "divsx": 21,
+        "divsy": 2,
+        "divsz": 21
+      }
+    },
+    {
+      "name": "t_slab_polymesh",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0
+      }
+    },
+    {
+      "name": "t_nofilter_slab_polymesh",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0,
+        "medianofneighbors": 0,
+        "useblur": 0
+      }
+    },
+    {
+      "name": "slab_poly_usedivisions",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 0.3,
+        "sizez": 4.0,
+        "divrate1": 21,
+        "divrate2": 2,
+        "divrate3": 21,
+        "dodivs": 1,
+        "divsx": 21,
+        "divsy": 2,
+        "divsz": 21
+      }
+    },
+    {
+      "name": "t_slab_poly_usedivisions",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0
+      }
+    },
+    {
+      "name": "t_nofilter_slab_poly_usedivisions",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0,
+        "medianofneighbors": 0,
+        "useblur": 0
+      }
+    },
+    {
+      "name": "outer_0.5",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "inner_0.5",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.5,
+        "rady": 0.5,
+        "radz": 0.5,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "rev_0.5",
+      "type": "reverse",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "shell_0.5",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "t_shell_0.5",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0
+      }
+    },
+    {
+      "name": "outer_0.8",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "inner_0.8",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.8,
+        "rady": 0.8,
+        "radz": 0.8,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "rev_0.8",
+      "type": "reverse",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "shell_0.8",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "t_shell_0.8",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0
+      }
+    },
+    {
+      "name": "outer_0.95",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "inner_0.95",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.95,
+        "rady": 0.95,
+        "radz": 0.95,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "rev_0.95",
+      "type": "reverse",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "shell_0.95",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "t_shell_0.95",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0
+      }
+    },
+    {
+      "name": "solid",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "t_solid",
+      "type": "measurethickness",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxthickness": 10.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "slab_polymesh",
+      "from_output": 0,
+      "to": "t_slab_polymesh",
+      "to_input": 0
+    },
+    {
+      "from": "slab_polymesh",
+      "from_output": 0,
+      "to": "t_nofilter_slab_polymesh",
+      "to_input": 0
+    },
+    {
+      "from": "slab_poly_usedivisions",
+      "from_output": 0,
+      "to": "t_slab_poly_usedivisions",
+      "to_input": 0
+    },
+    {
+      "from": "slab_poly_usedivisions",
+      "from_output": 0,
+      "to": "t_nofilter_slab_poly_usedivisions",
+      "to_input": 0
+    },
+    {
+      "from": "inner_0.5",
+      "from_output": 0,
+      "to": "rev_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "outer_0.5",
+      "from_output": 0,
+      "to": "shell_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "rev_0.5",
+      "from_output": 0,
+      "to": "shell_0.5",
+      "to_input": 1
+    },
+    {
+      "from": "shell_0.5",
+      "from_output": 0,
+      "to": "t_shell_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "inner_0.8",
+      "from_output": 0,
+      "to": "rev_0.8",
+      "to_input": 0
+    },
+    {
+      "from": "outer_0.8",
+      "from_output": 0,
+      "to": "shell_0.8",
+      "to_input": 0
+    },
+    {
+      "from": "rev_0.8",
+      "from_output": 0,
+      "to": "shell_0.8",
+      "to_input": 1
+    },
+    {
+      "from": "shell_0.8",
+      "from_output": 0,
+      "to": "t_shell_0.8",
+      "to_input": 0
+    },
+    {
+      "from": "inner_0.95",
+      "from_output": 0,
+      "to": "rev_0.95",
+      "to_input": 0
+    },
+    {
+      "from": "outer_0.95",
+      "from_output": 0,
+      "to": "shell_0.95",
+      "to_input": 0
+    },
+    {
+      "from": "rev_0.95",
+      "from_output": 0,
+      "to": "shell_0.95",
+      "to_input": 1
+    },
+    {
+      "from": "shell_0.95",
+      "from_output": 0,
+      "to": "t_shell_0.95",
+      "to_input": 0
+    },
+    {
+      "from": "solid",
+      "from_output": 0,
+      "to": "t_solid",
+      "to_input": 0
+    }
+  ]
+}

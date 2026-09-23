@@ -1,0 +1,283 @@
+{
+  "title": "実験168",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "hf",
+      "type": "heightfield",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "gridspacing": 4.0
+      }
+    },
+    {
+      "name": "n_none_1_100",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "amp": 100.0,
+        "fractal": "none"
+      }
+    },
+    {
+      "name": "n_none_1_500",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "fractal": "none"
+      }
+    },
+    {
+      "name": "n_none_1_1000",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "amp": 1000.0,
+        "fractal": "none"
+      }
+    },
+    {
+      "name": "n_none_0_100",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "centernoise": 0,
+        "amp": 100.0,
+        "fractal": "none"
+      }
+    },
+    {
+      "name": "n_none_0_500",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "centernoise": 0,
+        "fractal": "none"
+      }
+    },
+    {
+      "name": "n_none_0_1000",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "centernoise": 0,
+        "amp": 1000.0,
+        "fractal": "none"
+      }
+    },
+    {
+      "name": "n_hmfT_1_100",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "amp": 100.0
+      }
+    },
+    {
+      "name": "n_hmfT_1_500",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0
+      }
+    },
+    {
+      "name": "n_hmfT_1_1000",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "amp": 1000.0
+      }
+    },
+    {
+      "name": "n_hmfT_0_100",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "centernoise": 0,
+        "amp": 100.0
+      }
+    },
+    {
+      "name": "n_hmfT_0_500",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "centernoise": 0
+      }
+    },
+    {
+      "name": "n_hmfT_0_1000",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0,
+        "centernoise": 0,
+        "amp": 1000.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_none_1_100",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_none_1_500",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_none_1_1000",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_none_0_100",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_none_0_500",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_none_0_1000",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_hmfT_1_100",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_hmfT_1_500",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_hmfT_1_1000",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_hmfT_0_100",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_hmfT_0_500",
+      "to_input": 0
+    },
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "n_hmfT_0_1000",
+      "to_input": 0
+    }
+  ]
+}

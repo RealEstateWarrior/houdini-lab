@@ -1,0 +1,6 @@
+{'voxel': 0.05, 'half': 3, 'band': 0.15, 'err_in_band': 0.000708, 'n_in_band': 40, 'outside_values': [-0.15, 0.15], 'sec': 0.047}
+{'voxel': 0.05, 'half': 6, 'band': 0.3, 'err_in_band': 0.000809, 'n_in_band': 101, 'outside_values': [-0.3, 0.3], 'sec': 0.033}
+{'voxel': 0.02, 'half': 3, 'band': 0.06, 'err_in_band': 0.000201, 'n_in_band': 16, 'outside_values': [-0.06, 0.06], 'sec': 0.048}
+{'voxel': 0.02, 'half': 6, 'band': 0.12, 'err_in_band': 0.000201, 'n_in_band': 40, 'outside_values': [-0.12, 0.12], 'sec': 0.085}
+書いた: D:\Claude\houdini\out\138_stats.json
+HIP 138 D:\Claude\houdini\out\138_scene.hipnc 57742

@@ -1,0 +1,142 @@
+{
+  "title": "実験116",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "plate",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "rows": 17,
+        "cols": 49
+      }
+    },
+    {
+      "name": "make_cylinder",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "float a = (@P.x + 0.5) * 2 * PI; float h = (@P.z + 0.5) * 2;\n@P = set(cos(a), h, sin(a));"
+      }
+    },
+    {
+      "name": "cylinder_scp",
+      "type": "uvflatten::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cylinder_abf",
+      "type": "uvflatten::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 1
+      }
+    },
+    {
+      "name": "make_hemisphere",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "float a = (@P.x + 0.5) * 2 * PI; float t = (@P.z + 0.5) * 0.49 * PI;\n@P = set(cos(a) * cos(t), sin(t), sin(a) * cos(t));"
+      }
+    },
+    {
+      "name": "hemisphere_scp",
+      "type": "uvflatten::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "hemisphere_abf",
+      "type": "uvflatten::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "make_cylinder",
+      "to_input": 0
+    },
+    {
+      "from": "make_cylinder",
+      "from_output": 0,
+      "to": "cylinder_scp",
+      "to_input": 0
+    },
+    {
+      "from": "make_cylinder",
+      "from_output": 0,
+      "to": "cylinder_abf",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "make_hemisphere",
+      "to_input": 0
+    },
+    {
+      "from": "make_hemisphere",
+      "from_output": 0,
+      "to": "hemisphere_scp",
+      "to_input": 0
+    },
+    {
+      "from": "make_hemisphere",
+      "from_output": 0,
+      "to": "hemisphere_abf",
+      "to_input": 0
+    }
+  ]
+}

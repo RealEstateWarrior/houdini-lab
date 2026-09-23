@@ -1,0 +1,57 @@
+{
+  "title": "実験114",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "path",
+      "type": "spiral",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "height": 3.0,
+        "radiusmode": 1,
+        "startradius": 1.0,
+        "divsperturn": 12.0,
+        "heightprofile1value": 1.0,
+        "heightprofile2pos": 1.0,
+        "heightprofile2value": 1.0,
+        "radiusprofile1value": 1.0,
+        "radiusprofile2pos": 1.0,
+        "radiusprofile2value": 1.0
+      }
+    },
+    {
+      "name": "sw",
+      "type": "sweep::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "surfaceshape": 1,
+        "cols": 32,
+        "endcaptype": 1,
+        "scaleramp1value": 1.0,
+        "scaleramp2pos": 1.0,
+        "scaleramp2value": 1.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "path",
+      "from_output": 0,
+      "to": "sw",
+      "to_input": 0
+    }
+  ]
+}

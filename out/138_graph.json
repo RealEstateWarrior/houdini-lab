@@ -1,0 +1,231 @@
+{
+  "title": "実験138",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sp",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 200,
+        "cols": 200
+      }
+    },
+    {
+      "name": "probe",
+      "type": "line",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 1.0,
+        "diry": 0.3,
+        "dirz": 0.2,
+        "dist": 2.0,
+        "points": 401
+      }
+    },
+    {
+      "name": "v_50_3",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "s_50_3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@sdf = volumesample(1, 0, @P); f@want = length(@P) - 1;"
+      }
+    },
+    {
+      "name": "v_50_6",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05,
+        "exteriorbandvoxels": 6,
+        "interiorbandvoxels": 6
+      }
+    },
+    {
+      "name": "s_50_6",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@sdf = volumesample(1, 0, @P); f@want = length(@P) - 1;"
+      }
+    },
+    {
+      "name": "v_20_3",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.02
+      }
+    },
+    {
+      "name": "s_20_3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@sdf = volumesample(1, 0, @P); f@want = length(@P) - 1;"
+      }
+    },
+    {
+      "name": "v_20_6",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.02,
+        "exteriorbandvoxels": 6,
+        "interiorbandvoxels": 6
+      }
+    },
+    {
+      "name": "s_20_6",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@sdf = volumesample(1, 0, @P); f@want = length(@P) - 1;"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "v_50_3",
+      "to_input": 0
+    },
+    {
+      "from": "probe",
+      "from_output": 0,
+      "to": "s_50_3",
+      "to_input": 0
+    },
+    {
+      "from": "v_50_3",
+      "from_output": 0,
+      "to": "s_50_3",
+      "to_input": 1
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "v_50_6",
+      "to_input": 0
+    },
+    {
+      "from": "probe",
+      "from_output": 0,
+      "to": "s_50_6",
+      "to_input": 0
+    },
+    {
+      "from": "v_50_6",
+      "from_output": 0,
+      "to": "s_50_6",
+      "to_input": 1
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "v_20_3",
+      "to_input": 0
+    },
+    {
+      "from": "probe",
+      "from_output": 0,
+      "to": "s_20_3",
+      "to_input": 0
+    },
+    {
+      "from": "v_20_3",
+      "from_output": 0,
+      "to": "s_20_3",
+      "to_input": 1
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "v_20_6",
+      "to_input": 0
+    },
+    {
+      "from": "probe",
+      "from_output": 0,
+      "to": "s_20_6",
+      "to_input": 0
+    },
+    {
+      "from": "v_20_6",
+      "from_output": 0,
+      "to": "s_20_6",
+      "to_input": 1
+    }
+  ]
+}

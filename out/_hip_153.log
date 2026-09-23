@@ -1,0 +1,7 @@
+{'shape': 'grid 6×9', 'V': 54, 'F': 40, 'sum_nb': 186, 'E_from_nb': 93.0, 'E_from_prims': 93, 'euler': 1.0, 'want': 1, 'hist': {2: 4, 3: 22, 4: 28}, 'sec': 0.0698}
+{'shape': 'box 4×4×4', 'V': 56, 'F': 54, 'sum_nb': 216, 'E_from_nb': 108.0, 'E_from_prims': 108, 'euler': 2.0, 'want': 2, 'hist': {3: 8, 4: 48}, 'sec': 0.0012}
+{'shape': 'sphere 9×16', 'V': 114, 'F': 128, 'sum_nb': 480, 'E_from_nb': 240.0, 'E_from_prims': 240, 'euler': 2.0, 'want': 2, 'hist': {4: 112, 16: 2}, 'sec': 0.0011}
+{'shape': 'torus 8×12', 'V': 96, 'F': 96, 'sum_nb': 384, 'E_from_nb': 192.0, 'E_from_prims': 192, 'euler': 0.0, 'want': 0, 'hist': {4: 96}, 'sec': 0.0014}
+{'shape': 'tube 5×10（蓋なし）', 'V': 50, 'F': 40, 'sum_nb': 180, 'E_from_nb': 90.0, 'E_from_prims': 90, 'euler': 0.0, 'want': 0, 'hist': {3: 20, 4: 30}, 'sec': 0.0011}
+保存: D:\Claude\houdini\out\153_stats.json
+HIP 153 D:\Claude\houdini\out\153_scene.hipnc 57558

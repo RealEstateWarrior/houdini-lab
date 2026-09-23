@@ -1,0 +1,267 @@
+{
+  "title": "実験093",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "src_sphere",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 60,
+        "cols": 60
+      }
+    },
+    {
+      "name": "src_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.2,
+        "elementsize": 0.7,
+        "offsetx": 5.0
+      }
+    },
+    {
+      "name": "sm_0.0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 0.0
+      }
+    },
+    {
+      "name": "sm_2.5",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 2.5
+      }
+    },
+    {
+      "name": "sm_5.0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 5.0
+      }
+    },
+    {
+      "name": "sm_10.0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "sm_20.0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 20.0
+      }
+    },
+    {
+      "name": "sm_40.0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 40.0
+      }
+    },
+    {
+      "name": "sm_80.0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 80.0
+      }
+    },
+    {
+      "name": "sm_160.0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 160.0
+      }
+    },
+    {
+      "name": "sm_m0",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 160.0
+      }
+    },
+    {
+      "name": "sm_m1",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 1,
+        "strength": 160.0
+      }
+    },
+    {
+      "name": "sm_m2",
+      "type": "smooth::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "method": 2,
+        "strength": 160.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "src_sphere",
+      "from_output": 0,
+      "to": "src_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_0.0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_2.5",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_5.0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_10.0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_20.0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_40.0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_80.0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_160.0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_m0",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_m1",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "sm_m2",
+      "to_input": 0
+    }
+  ]
+}

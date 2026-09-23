@@ -1,0 +1,441 @@
+{
+  "title": "実験149",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sq",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "b50_0",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.5,
+        "sizey": 0.5,
+        "sizez": 0.5
+      }
+    },
+    {
+      "name": "b50_5",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.5,
+        "sizey": 0.5,
+        "sizez": 0.5,
+        "offsetx": 0.05,
+        "offsety": 0.05,
+        "offsetz": 0.05
+      }
+    },
+    {
+      "name": "b25_0",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.25,
+        "sizey": 0.25,
+        "sizez": 0.25
+      }
+    },
+    {
+      "name": "b25_5",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.25,
+        "sizey": 0.25,
+        "sizez": 0.25,
+        "offsetx": 0.05,
+        "offsety": 0.05,
+        "offsetz": 0.05
+      }
+    },
+    {
+      "name": "b30_0",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.3,
+        "sizey": 0.3,
+        "sizez": 0.3
+      }
+    },
+    {
+      "name": "b30_5",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.3,
+        "sizey": 0.3,
+        "sizez": 0.3,
+        "offsetx": 0.05,
+        "offsety": 0.05,
+        "offsetz": 0.05
+      }
+    },
+    {
+      "name": "b10_0",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.1,
+        "sizey": 0.1,
+        "sizez": 0.1
+      }
+    },
+    {
+      "name": "b10_5",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "convex": 0,
+        "brick": 1,
+        "sizex": 0.1,
+        "sizey": 0.1,
+        "sizez": 0.1,
+        "offsetx": 0.05,
+        "offsety": 0.05,
+        "offsetz": 0.05
+      }
+    },
+    {
+      "name": "c5",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 5
+      }
+    },
+    {
+      "name": "cv5_3",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cv5_4",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "numsides": 4
+      }
+    },
+    {
+      "name": "c8",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 8
+      }
+    },
+    {
+      "name": "cv8_3",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cv8_4",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "numsides": 4
+      }
+    },
+    {
+      "name": "c12",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1
+      }
+    },
+    {
+      "name": "cv12_3",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cv12_4",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "numsides": 4
+      }
+    },
+    {
+      "name": "c13",
+      "type": "circle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "divs": 13
+      }
+    },
+    {
+      "name": "cv13_3",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cv13_4",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "numsides": 4
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b50_0",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b50_5",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b25_0",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b25_5",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b30_0",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b30_5",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b10_0",
+      "to_input": 0
+    },
+    {
+      "from": "sq",
+      "from_output": 0,
+      "to": "b10_5",
+      "to_input": 0
+    },
+    {
+      "from": "c5",
+      "from_output": 0,
+      "to": "cv5_3",
+      "to_input": 0
+    },
+    {
+      "from": "c5",
+      "from_output": 0,
+      "to": "cv5_4",
+      "to_input": 0
+    },
+    {
+      "from": "c8",
+      "from_output": 0,
+      "to": "cv8_3",
+      "to_input": 0
+    },
+    {
+      "from": "c8",
+      "from_output": 0,
+      "to": "cv8_4",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "cv12_3",
+      "to_input": 0
+    },
+    {
+      "from": "c12",
+      "from_output": 0,
+      "to": "cv12_4",
+      "to_input": 0
+    },
+    {
+      "from": "c13",
+      "from_output": 0,
+      "to": "cv13_3",
+      "to_input": 0
+    },
+    {
+      "from": "c13",
+      "from_output": 0,
+      "to": "cv13_4",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,784 @@
+{
+  "title": "実験147",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box1",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1,
+        "tx": 0.5,
+        "dodivs": 1,
+        "divsx": 24,
+        "divsy": 24,
+        "divsz": 24
+      }
+    },
+    {
+      "name": "tw_twist_0.5_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_twist_1.0_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "tw_bend_0.5_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_bend_1.0_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1
+      }
+    },
+    {
+      "name": "tw_shear_0.5_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 2,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_shear_1.0_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 2
+      }
+    },
+    {
+      "name": "tw_taper_0.5_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 3,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_taper_1.0_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 3
+      }
+    },
+    {
+      "name": "tw_ltaper_0.5_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 4,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_ltaper_1.0_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 4
+      }
+    },
+    {
+      "name": "tw_squash_0.5_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 5,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_squash_1.0_1",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 5
+      }
+    },
+    {
+      "name": "box2",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "sizex": 2.0,
+        "tx": 1.0,
+        "dodivs": 1,
+        "divsx": 24,
+        "divsy": 24,
+        "divsz": 24
+      }
+    },
+    {
+      "name": "tw_twist_0.5_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_twist_1.0_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "tw_bend_0.5_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_bend_1.0_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1
+      }
+    },
+    {
+      "name": "tw_shear_0.5_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 2,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_shear_1.0_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 2
+      }
+    },
+    {
+      "name": "tw_taper_0.5_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 3,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_taper_1.0_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 3
+      }
+    },
+    {
+      "name": "tw_ltaper_0.5_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 4,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_ltaper_1.0_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 4
+      }
+    },
+    {
+      "name": "tw_squash_0.5_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 5,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "tw_squash_1.0_2",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 5
+      }
+    },
+    {
+      "name": "pf_twist_0.5",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "pf_twist_2.0",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "strength": 2.0
+      }
+    },
+    {
+      "name": "pf_bend_0.5",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "pf_bend_2.0",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "strength": 2.0
+      }
+    },
+    {
+      "name": "pf_shear_0.5",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 2,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "pf_shear_2.0",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 2,
+        "strength": 2.0
+      }
+    },
+    {
+      "name": "pf_taper_0.5",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 3,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "pf_taper_2.0",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 3,
+        "strength": 2.0
+      }
+    },
+    {
+      "name": "pf_ltaper_0.5",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 4,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "pf_ltaper_2.0",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 4,
+        "strength": 2.0
+      }
+    },
+    {
+      "name": "pf_squash_0.5",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 5,
+        "strength": 0.5
+      }
+    },
+    {
+      "name": "pf_squash_2.0",
+      "type": "twist",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 5,
+        "strength": 2.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_twist_0.5_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_twist_1.0_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_bend_0.5_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_bend_1.0_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_shear_0.5_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_shear_1.0_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_taper_0.5_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_taper_1.0_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_ltaper_0.5_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_ltaper_1.0_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_squash_0.5_1",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "tw_squash_1.0_1",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_twist_0.5_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_twist_1.0_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_bend_0.5_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_bend_1.0_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_shear_0.5_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_shear_1.0_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_taper_0.5_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_taper_1.0_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_ltaper_0.5_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_ltaper_1.0_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_squash_0.5_2",
+      "to_input": 0
+    },
+    {
+      "from": "box2",
+      "from_output": 0,
+      "to": "tw_squash_1.0_2",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_twist_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_twist_2.0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_bend_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_bend_2.0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_shear_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_shear_2.0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_taper_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_taper_2.0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_ltaper_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_ltaper_2.0",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_squash_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "box1",
+      "from_output": 0,
+      "to": "pf_squash_2.0",
+      "to_input": 0
+    }
+  ]
+}

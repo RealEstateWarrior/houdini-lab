@@ -1,0 +1,16 @@
+{'points': 12, 'prims': 20, 'sides': [3], 'rmin': 1.0, 'rmax': 1.0, 'area': 9.574541, 'volume': 2.536151, 'sec': 0.0002, 'freq': 1, 'want_points': 12, 'want_prims': 20}
+{'points': 42, 'prims': 80, 'sides': [3], 'rmin': 1.0, 'rmax': 1.0, 'area': 11.665931, 'volume': 3.658712, 'sec': 0.0001, 'freq': 2, 'want_points': 42, 'want_prims': 80}
+{'points': 92, 'prims': 180, 'sides': [3], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.152844, 'volume': 3.942285, 'sec': 0.0001, 'freq': 3, 'want_points': 92, 'want_prims': 180}
+{'points': 162, 'prims': 320, 'sides': [3], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.330941, 'volume': 4.047813, 'sec': 0.0001, 'freq': 4, 'want_points': 162, 'want_prims': 320}
+{'points': 362, 'prims': 720, 'sides': [3], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.460796, 'volume': 4.125362, 'sec': 0.0002, 'freq': 6, 'want_points': 362, 'want_prims': 720}
+{'points': 642, 'prims': 1280, 'sides': [3], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.506794, 'volume': 4.152956, 'sec': 0.0002, 'freq': 8, 'want_points': 642, 'want_prims': 1280}
+{'points': 1442, 'prims': 2880, 'sides': [3], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.539831, 'volume': 4.172813, 'sec': 0.0004, 'freq': 12, 'want_points': 1442, 'want_prims': 2880}
+{'points': 26, 'prims': 32, 'sides': [3, 4], 'rmin': 1.0, 'rmax': 1.0, 'area': 11.013439, 'volume': 3.218951, 'sec': 0.0002, 'rows': 5, 'cols': 8}
+{'points': 62, 'prims': 72, 'sides': [3, 4], 'rmin': 1.0, 'rmax': 1.0, 'area': 11.861288, 'volume': 3.732051, 'sec': 0.0001, 'rows': 7, 'cols': 12}
+{'points': 114, 'prims': 128, 'sides': [3, 4], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.166689, 'volume': 3.926596, 'sec': 0.0001, 'rows': 9, 'cols': 16}
+{'points': 266, 'prims': 288, 'sides': [3, 4], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.387741, 'volume': 4.070552, 'sec': 0.0002, 'rows': 13, 'cols': 24}
+{'points': 482, 'prims': 512, 'sides': [3, 4], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.465694, 'volume': 4.121942, 'sec': 0.0002, 'rows': 17, 'cols': 32}
+{'points': 1106, 'prims': 1152, 'sides': [3, 4], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.521563, 'volume': 4.158971, 'sec': 0.0006, 'rows': 25, 'cols': 48}
+{'points': 1986, 'prims': 2048, 'sides': [3, 4], 'rmin': 1.0, 'rmax': 1.0, 'area': 12.541153, 'volume': 4.171996, 'sec': 0.0008, 'rows': 33, 'cols': 64}
+保存: D:\Claude\houdini\out\151_stats.json
+HIP 151 D:\Claude\houdini\out\151_scene.hipnc 51734

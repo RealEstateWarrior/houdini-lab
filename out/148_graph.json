@@ -1,0 +1,158 @@
+{
+  "title": "実験148",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "t10_0_12",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad2": 0.0
+      }
+    },
+    {
+      "name": "t10_0_48",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad2": 0.0,
+        "cols": 48
+      }
+    },
+    {
+      "name": "t10_0_384",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad2": 0.0,
+        "cols": 384
+      }
+    },
+    {
+      "name": "t10_5_12",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad2": 0.5
+      }
+    },
+    {
+      "name": "t10_5_48",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad2": 0.5,
+        "cols": 48
+      }
+    },
+    {
+      "name": "t10_5_384",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad2": 0.5,
+        "cols": 384
+      }
+    },
+    {
+      "name": "t5_10_12",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.5
+      }
+    },
+    {
+      "name": "t5_10_48",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.5,
+        "cols": 48
+      }
+    },
+    {
+      "name": "t5_10_384",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cap": 1,
+        "rad1": 0.5,
+        "cols": 384
+      }
+    }
+  ],
+  "edges": []
+}

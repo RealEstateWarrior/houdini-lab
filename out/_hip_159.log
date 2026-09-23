@@ -1,0 +1,26 @@
+{'fps': 24, 'mode': 'Backward Difference', 'scale': 1.0, 'frame': 10, 'x': 10.0, 'v': 45.599991, 'want_v': 45.6, 'exact_v': 48.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 0.00022}
+{'fps': 24, 'mode': 'Backward Difference', 'scale': 1.0, 'frame': 20, 'x': 40.0, 'v': 93.600037, 'want_v': 93.6, 'exact_v': 96.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 7e-05}
+{'fps': 24, 'mode': 'Backward Difference', 'scale': 0.5, 'frame': 10, 'x': 10.0, 'v': 22.799995, 'want_v': 22.8, 'exact_v': 48.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 7e-05}
+{'fps': 24, 'mode': 'Backward Difference', 'scale': 0.5, 'frame': 20, 'x': 40.0, 'v': 46.800018, 'want_v': 46.8, 'exact_v': 96.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 5e-05}
+{'fps': 24, 'mode': 'Central Difference', 'scale': 1.0, 'frame': 10, 'x': 10.0, 'v': 48.0, 'want_v': 48.0, 'exact_v': 48.0, 'accel': 115.200439, 'exact_accel': 115.2, 'sec': 0.00011}
+{'fps': 24, 'mode': 'Central Difference', 'scale': 1.0, 'frame': 20, 'x': 40.0, 'v': 96.0, 'want_v': 96.0, 'exact_v': 96.0, 'accel': 115.198242, 'exact_accel': 115.2, 'sec': 7e-05}
+{'fps': 24, 'mode': 'Central Difference', 'scale': 0.5, 'frame': 10, 'x': 10.0, 'v': 24.0, 'want_v': 24.0, 'exact_v': 48.0, 'accel': 28.80011, 'exact_accel': 115.2, 'sec': 7e-05}
+{'fps': 24, 'mode': 'Central Difference', 'scale': 0.5, 'frame': 20, 'x': 40.0, 'v': 48.0, 'want_v': 48.0, 'exact_v': 96.0, 'accel': 28.799561, 'exact_accel': 115.2, 'sec': 7e-05}
+{'fps': 24, 'mode': 'Forward Difference', 'scale': 1.0, 'frame': 10, 'x': 10.0, 'v': 50.400009, 'want_v': 50.4, 'exact_v': 48.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 7e-05}
+{'fps': 24, 'mode': 'Forward Difference', 'scale': 1.0, 'frame': 20, 'x': 40.0, 'v': 98.399963, 'want_v': 98.4, 'exact_v': 96.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 6e-05}
+{'fps': 24, 'mode': 'Forward Difference', 'scale': 0.5, 'frame': 10, 'x': 10.0, 'v': 25.200005, 'want_v': 25.2, 'exact_v': 48.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 0.00013}
+{'fps': 24, 'mode': 'Forward Difference', 'scale': 0.5, 'frame': 20, 'x': 40.0, 'v': 49.199982, 'want_v': 49.2, 'exact_v': 96.0, 'accel': 0.0, 'exact_accel': 115.2, 'sec': 7e-05}
+{'fps': 30, 'mode': 'Backward Difference', 'scale': 1.0, 'frame': 10, 'x': 10.0, 'v': 56.999989, 'want_v': 57.0, 'exact_v': 60.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 7e-05}
+{'fps': 30, 'mode': 'Backward Difference', 'scale': 1.0, 'frame': 20, 'x': 40.0, 'v': 117.000046, 'want_v': 117.0, 'exact_v': 120.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 5e-05}
+{'fps': 30, 'mode': 'Backward Difference', 'scale': 0.5, 'frame': 10, 'x': 10.0, 'v': 28.499994, 'want_v': 28.5, 'exact_v': 60.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 6e-05}
+{'fps': 30, 'mode': 'Backward Difference', 'scale': 0.5, 'frame': 20, 'x': 40.0, 'v': 58.500023, 'want_v': 58.5, 'exact_v': 120.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 4e-05}
+{'fps': 30, 'mode': 'Central Difference', 'scale': 1.0, 'frame': 10, 'x': 10.0, 'v': 60.0, 'want_v': 60.0, 'exact_v': 60.0, 'accel': 180.000687, 'exact_accel': 180.0, 'sec': 8e-05}
+{'fps': 30, 'mode': 'Central Difference', 'scale': 1.0, 'frame': 20, 'x': 40.0, 'v': 120.0, 'want_v': 120.0, 'exact_v': 120.0, 'accel': 179.997253, 'exact_accel': 180.0, 'sec': 5e-05}
+{'fps': 30, 'mode': 'Central Difference', 'scale': 0.5, 'frame': 10, 'x': 10.0, 'v': 30.0, 'want_v': 30.0, 'exact_v': 60.0, 'accel': 45.000172, 'exact_accel': 180.0, 'sec': 7e-05}
+{'fps': 30, 'mode': 'Central Difference', 'scale': 0.5, 'frame': 20, 'x': 40.0, 'v': 60.0, 'want_v': 60.0, 'exact_v': 120.0, 'accel': 44.999313, 'exact_accel': 180.0, 'sec': 7e-05}
+{'fps': 30, 'mode': 'Forward Difference', 'scale': 1.0, 'frame': 10, 'x': 10.0, 'v': 63.000011, 'want_v': 63.0, 'exact_v': 60.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 6e-05}
+{'fps': 30, 'mode': 'Forward Difference', 'scale': 1.0, 'frame': 20, 'x': 40.0, 'v': 122.999954, 'want_v': 123.0, 'exact_v': 120.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 4e-05}
+{'fps': 30, 'mode': 'Forward Difference', 'scale': 0.5, 'frame': 10, 'x': 10.0, 'v': 31.500006, 'want_v': 31.5, 'exact_v': 60.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 6e-05}
+{'fps': 30, 'mode': 'Forward Difference', 'scale': 0.5, 'frame': 20, 'x': 40.0, 'v': 61.499977, 'want_v': 61.5, 'exact_v': 120.0, 'accel': 0.0, 'exact_accel': 180.0, 'sec': 5e-05}
+保存: D:\Claude\houdini\out\159_stats.json
+HIP 159 D:\Claude\houdini\out\159_scene.hipnc 52005

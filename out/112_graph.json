@@ -1,0 +1,762 @@
+{
+  "title": "実験112",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sp_a",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 200,
+        "cols": 200
+      }
+    },
+    {
+      "name": "sp_b",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "tx": 1.0,
+        "rows": 200,
+        "cols": 200
+      }
+    },
+    {
+      "name": "probe",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "v_sp_a_0_1",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "v_sp_b_0_1",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "c_sdfunion_0_1",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 11
+      }
+    },
+    {
+      "name": "b_sdfunion_0_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfintersect_0_1",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 12
+      }
+    },
+    {
+      "name": "b_sdfintersect_0_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfdifference_0_1",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 13
+      }
+    },
+    {
+      "name": "b_sdfdifference_0_1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v_sp_a_0_05",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "v_sp_b_0_05",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "c_sdfunion_0_05",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 11
+      }
+    },
+    {
+      "name": "b_sdfunion_0_05",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfintersect_0_05",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 12
+      }
+    },
+    {
+      "name": "b_sdfintersect_0_05",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfdifference_0_05",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 13
+      }
+    },
+    {
+      "name": "b_sdfdifference_0_05",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v_sp_a_0_025",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.025
+      }
+    },
+    {
+      "name": "v_sp_b_0_025",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.025
+      }
+    },
+    {
+      "name": "c_sdfunion_0_025",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 11
+      }
+    },
+    {
+      "name": "b_sdfunion_0_025",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfintersect_0_025",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 12
+      }
+    },
+    {
+      "name": "b_sdfintersect_0_025",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfdifference_0_025",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 13
+      }
+    },
+    {
+      "name": "b_sdfdifference_0_025",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "v_sp_a_0_0125",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.0125
+      }
+    },
+    {
+      "name": "v_sp_b_0_0125",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.0125
+      }
+    },
+    {
+      "name": "c_sdfunion_0_0125",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 11
+      }
+    },
+    {
+      "name": "b_sdfunion_0_0125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfintersect_0_0125",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 12
+      }
+    },
+    {
+      "name": "b_sdfintersect_0_0125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "c_sdfdifference_0_0125",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 13
+      }
+    },
+    {
+      "name": "b_sdfdifference_0_0125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sp_a",
+      "from_output": 0,
+      "to": "v_sp_a_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "sp_b",
+      "from_output": 0,
+      "to": "v_sp_b_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_1",
+      "from_output": 0,
+      "to": "c_sdfunion_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_1",
+      "from_output": 0,
+      "to": "c_sdfunion_0_1",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfunion_0_1",
+      "from_output": 0,
+      "to": "b_sdfunion_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_1",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_1",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_1",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfintersect_0_1",
+      "from_output": 0,
+      "to": "b_sdfintersect_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_1",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_1",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_1",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfdifference_0_1",
+      "from_output": 0,
+      "to": "b_sdfdifference_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "sp_a",
+      "from_output": 0,
+      "to": "v_sp_a_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "sp_b",
+      "from_output": 0,
+      "to": "v_sp_b_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_05",
+      "from_output": 0,
+      "to": "c_sdfunion_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_05",
+      "from_output": 0,
+      "to": "c_sdfunion_0_05",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfunion_0_05",
+      "from_output": 0,
+      "to": "b_sdfunion_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_05",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_05",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_05",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfintersect_0_05",
+      "from_output": 0,
+      "to": "b_sdfintersect_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_05",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_05",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_05",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfdifference_0_05",
+      "from_output": 0,
+      "to": "b_sdfdifference_0_05",
+      "to_input": 0
+    },
+    {
+      "from": "sp_a",
+      "from_output": 0,
+      "to": "v_sp_a_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "sp_b",
+      "from_output": 0,
+      "to": "v_sp_b_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_025",
+      "from_output": 0,
+      "to": "c_sdfunion_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_025",
+      "from_output": 0,
+      "to": "c_sdfunion_0_025",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfunion_0_025",
+      "from_output": 0,
+      "to": "b_sdfunion_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_025",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_025",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_025",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfintersect_0_025",
+      "from_output": 0,
+      "to": "b_sdfintersect_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_025",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_025",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_025",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfdifference_0_025",
+      "from_output": 0,
+      "to": "b_sdfdifference_0_025",
+      "to_input": 0
+    },
+    {
+      "from": "sp_a",
+      "from_output": 0,
+      "to": "v_sp_a_0_0125",
+      "to_input": 0
+    },
+    {
+      "from": "sp_b",
+      "from_output": 0,
+      "to": "v_sp_b_0_0125",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_0125",
+      "from_output": 0,
+      "to": "c_sdfunion_0_0125",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_0125",
+      "from_output": 0,
+      "to": "c_sdfunion_0_0125",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfunion_0_0125",
+      "from_output": 0,
+      "to": "b_sdfunion_0_0125",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_0125",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_0125",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_0125",
+      "from_output": 0,
+      "to": "c_sdfintersect_0_0125",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfintersect_0_0125",
+      "from_output": 0,
+      "to": "b_sdfintersect_0_0125",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_a_0_0125",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_0125",
+      "to_input": 0
+    },
+    {
+      "from": "v_sp_b_0_0125",
+      "from_output": 0,
+      "to": "c_sdfdifference_0_0125",
+      "to_input": 1
+    },
+    {
+      "from": "c_sdfdifference_0_0125",
+      "from_output": 0,
+      "to": "b_sdfdifference_0_0125",
+      "to_input": 0
+    }
+  ]
+}

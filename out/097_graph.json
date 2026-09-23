@@ -1,0 +1,363 @@
+{
+  "title": "実験097",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "unit",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.05,
+        "rady": 0.05,
+        "radz": 0.05,
+        "rows": 20,
+        "cols": 20
+      }
+    },
+    {
+      "name": "field",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "pts_100",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "cp_100_0",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rop_100_0",
+      "type": "rop_geometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {},
+      "params": {
+        "sopoutput": "D:\\Claude\\houdini\\out\\097_100_raw.bgeo.sc"
+      }
+    },
+    {
+      "name": "cp_100_1",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "pack": 1
+      }
+    },
+    {
+      "name": "rop_100_1",
+      "type": "rop_geometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {},
+      "params": {
+        "sopoutput": "D:\\Claude\\houdini\\out\\097_100_pack.bgeo.sc"
+      }
+    },
+    {
+      "name": "pts_1000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "cp_1000_0",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rop_1000_0",
+      "type": "rop_geometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {},
+      "params": {
+        "sopoutput": "D:\\Claude\\houdini\\out\\097_1000_raw.bgeo.sc"
+      }
+    },
+    {
+      "name": "cp_1000_1",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "pack": 1
+      }
+    },
+    {
+      "name": "rop_1000_1",
+      "type": "rop_geometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {},
+      "params": {
+        "sopoutput": "D:\\Claude\\houdini\\out\\097_1000_pack.bgeo.sc"
+      }
+    },
+    {
+      "name": "pts_10000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "cp_10000_0",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rop_10000_0",
+      "type": "rop_geometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {},
+      "params": {
+        "sopoutput": "D:\\Claude\\houdini\\out\\097_10000_raw.bgeo.sc"
+      }
+    },
+    {
+      "name": "cp_10000_1",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "pack": 1
+      }
+    },
+    {
+      "name": "rop_10000_1",
+      "type": "rop_geometry",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {},
+      "params": {
+        "sopoutput": "D:\\Claude\\houdini\\out\\097_10000_pack.bgeo.sc"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "field",
+      "from_output": 0,
+      "to": "pts_100",
+      "to_input": 0
+    },
+    {
+      "from": "unit",
+      "from_output": 0,
+      "to": "cp_100_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts_100",
+      "from_output": 0,
+      "to": "cp_100_0",
+      "to_input": 1
+    },
+    {
+      "from": "cp_100_0",
+      "from_output": 0,
+      "to": "rop_100_0",
+      "to_input": 0
+    },
+    {
+      "from": "unit",
+      "from_output": 0,
+      "to": "cp_100_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts_100",
+      "from_output": 0,
+      "to": "cp_100_1",
+      "to_input": 1
+    },
+    {
+      "from": "cp_100_1",
+      "from_output": 0,
+      "to": "rop_100_1",
+      "to_input": 0
+    },
+    {
+      "from": "field",
+      "from_output": 0,
+      "to": "pts_1000",
+      "to_input": 0
+    },
+    {
+      "from": "unit",
+      "from_output": 0,
+      "to": "cp_1000_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts_1000",
+      "from_output": 0,
+      "to": "cp_1000_0",
+      "to_input": 1
+    },
+    {
+      "from": "cp_1000_0",
+      "from_output": 0,
+      "to": "rop_1000_0",
+      "to_input": 0
+    },
+    {
+      "from": "unit",
+      "from_output": 0,
+      "to": "cp_1000_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts_1000",
+      "from_output": 0,
+      "to": "cp_1000_1",
+      "to_input": 1
+    },
+    {
+      "from": "cp_1000_1",
+      "from_output": 0,
+      "to": "rop_1000_1",
+      "to_input": 0
+    },
+    {
+      "from": "field",
+      "from_output": 0,
+      "to": "pts_10000",
+      "to_input": 0
+    },
+    {
+      "from": "unit",
+      "from_output": 0,
+      "to": "cp_10000_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts_10000",
+      "from_output": 0,
+      "to": "cp_10000_0",
+      "to_input": 1
+    },
+    {
+      "from": "cp_10000_0",
+      "from_output": 0,
+      "to": "rop_10000_0",
+      "to_input": 0
+    },
+    {
+      "from": "unit",
+      "from_output": 0,
+      "to": "cp_10000_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts_10000",
+      "from_output": 0,
+      "to": "cp_10000_1",
+      "to_input": 1
+    },
+    {
+      "from": "cp_10000_1",
+      "from_output": 0,
+      "to": "rop_10000_1",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "title": "実験113",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "mover",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "float f = @Frame;\nint p = addpoint(0, set(0, f * f, 0));\nsetpointattrib(0, \"v\", p, set(0, 2 * f * 24, 0));\nsetpointat..."
+      }
+    },
+    {
+      "name": "blend",
+      "type": "timeblend::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "holdfirst": 0
+      }
+    },
+    {
+      "name": "blend_v",
+      "type": "timeblend::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "holdfirst": 0,
+        "usevforpinterp": 1
+      }
+    },
+    {
+      "name": "mover_perframe",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "float f = @Frame;\nint p = addpoint(0, set(0, f * f, 0));\nsetpointattrib(0, \"v\", p, set(0, 2 * f, 0));\nsetpointattrib(..."
+      }
+    },
+    {
+      "name": "blend_wrongv",
+      "type": "timeblend::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "holdfirst": 0,
+        "usevforpinterp": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "mover",
+      "from_output": 0,
+      "to": "blend",
+      "to_input": 0
+    },
+    {
+      "from": "mover",
+      "from_output": 0,
+      "to": "blend_v",
+      "to_input": 0
+    },
+    {
+      "from": "mover_perframe",
+      "from_output": 0,
+      "to": "blend_wrongv",
+      "to_input": 0
+    }
+  ]
+}

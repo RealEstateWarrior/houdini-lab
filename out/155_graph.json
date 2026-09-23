@@ -1,0 +1,154 @@
+{
+  "title": "実験155",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 1.0,
+        "rows": 2,
+        "cols": 3
+      }
+    },
+    {
+      "name": "dens1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "f@density = @P.x > 0 ? 1.0 : 1.0;"
+      }
+    },
+    {
+      "name": "dens3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "f@density = @P.x > 0 ? 3.0 : 1.0;"
+      }
+    },
+    {
+      "name": "dens9",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "f@density = @P.x > 0 ? 9.0 : 1.0;"
+      }
+    },
+    {
+      "name": "free10",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "forcetotal": 0,
+        "relaxpoints": 0
+      }
+    },
+    {
+      "name": "free100",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "forcetotal": 0,
+        "densityscale": 100.0,
+        "relaxpoints": 0
+      }
+    },
+    {
+      "name": "free1000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "forcetotal": 0,
+        "densityscale": 1000.0,
+        "relaxpoints": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "dens1",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "dens3",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "dens9",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "free10",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "free100",
+      "to_input": 0
+    },
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "free1000",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+Error running event handler:
+Traceback (most recent call last):
+  File "apex::Sop/autorigbuilder, PythonModule", line 6, in <module>
+  File "C:\PROGRA~1/SIDEEF~1/HOUDIN~1.700/packages/apex/python3.11libs\apex\autorigtool.py", line 13, in <module>
+    import apex.taggadget as tg
+  File "C:\PROGRA~1/SIDEEF~1/HOUDIN~1.700/packages/apex/python3.11libs\apex\taggadget.py", line 8, in <module>
+    import statehud.window as shud
+  File "C:\PROGRA~1/SIDEEF~1/HOUDIN~1.700/houdini/python3.11libs\statehud\window.py", line 7, in <module>
+    import hdefereval
+  File "C:\PROGRA~1/SIDEEF~1/HOUDIN~1.700/houdini/python3.11libs\hdefereval.py", line 241, in <module>
+    raise ImportError("%s is only available in a graphical Houdini" % __name__)
+ImportError: hdefereval is only available in a graphical Houdini
+
+Error running event handler:
+Traceback (most recent call last):
+  File "Sop/rbdpaint, opdef:/Sop/rbdpaint?OnCreated, node /obj/bench/rbdpaint1", line 1, in <module>
+  File "Sop/rbdpaint, PythonModule", line 14, in updateViz
+  File "C:\PROGRA~1/SIDEEF~1/HOUDIN~1.700/houdini/python3.11libs\toolutils.py", line 107, in sceneViewer
+    primarypane = hou.ui.paneTabOfType(hou.paneTabType.SceneViewer, index)
+                  ^^^^^^
+AttributeError: module 'hou' has no attribute 'ui'
+
+C:/PROGRA~1/SIDEEF~1/HOUDIN~1.700/houdini/scripts/sop/rop_alembic.cmd (7): events: No parameters match prerender
+C:/PROGRA~1/SIDEEF~1/HOUDIN~1.700/houdini/scripts/sop/rop_alembic.cmd (8): events: No parameters match preframe
+C:/PROGRA~1/SIDEEF~1/HOUDIN~1.700/houdini/scripts/sop/rop_alembic.cmd (9): events: No parameters match postframe
+C:/PROGRA~1/SIDEEF~1/HOUDIN~1.700/houdini/scripts/sop/rop_alembic.cmd (10): events: No parameters match postrender
+opdef:/Sop/verify_bsdf?CreateScript (452): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (453): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (454): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (455): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (456): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (457): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (458): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (459): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (460): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (463): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (464): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (465): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (466): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (467): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (468): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (469): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (470): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (471): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (474): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (475): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (476): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (477): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (478): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (479): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (480): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (481): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+opdef:/Sop/verify_bsdf?CreateScript (482): Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hou' is not defined
+
+{'nodes_made': 1031, 'failed': 7, 'sec': 8.4, 'parms_with_expr': 488, 'nodes_with_expr': 176, 'top_nodes': [('remeshtocamera', 14), ('primitive', 13), ('heightfield_output', 10), ('kinefx::configureclipinfo', 10), ('usdconfigureprimsfrompoints', 10), ('kinefx::mocapimport', 9), ('kinefx::scenecharacterimport', 9), ('rbdio', 9), ('rbdio::2.0', 9), ('vellumio', 9), ('vellumio::2.0', 9), ('filecache', 8), ('filecache::2.0', 8), ('kinefx::agentanimationunpack', 8), ('kinefx::agentcharacterunpack', 8)], 'top_exprs': [('$FSTART', 84), ('$FEND', 62), ('$T', 28), ('$TSTART', 23), ('$FF', 21), ('ch("concrete_edgedetail")', 15), ('$FPS', 14), ('$TEND', 13), ('$F', 12), ('1/$FPS', 9), ("{\n    if(ch('filemethod'))\n    {\n        return chs('file');\n    }\n    else\n    ", 8), ('$FF-1', 7), ('ch("f1")', 6), ('ch("f2")', 6), ('ifs(ch("filemethod"),chsraw("file"),strreplace(strreplace(chs("cachename"),chs("', 6)], 'set_probe': {'before': ('@N.y', 0.0), 'after_set': ('@N.y', 0.0), 'after_delete': (None, -1.0)}}
+書いた: D:\Claude\houdini\out\134_stats.json
+HIP 134 D:\Claude\houdini\out\134_scene.hipnc 37295

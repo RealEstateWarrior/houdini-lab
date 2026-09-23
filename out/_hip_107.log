@@ -1,0 +1,26 @@
+{'shape': 'L', 'method': 'com', 'class': 'prim', 'got': (0.833333, 0.0, 0.833333), 'points_out': 1, 'match': ['area']}
+{'shape': 'L', 'method': 'com', 'class': 'point', 'got': (0.833333, 0.0, 0.833333), 'points_out': 1, 'match': ['area']}
+{'shape': 'L', 'method': 'bbox', 'class': 'prim', 'got': (1.0, 0.0, 1.0), 'points_out': 1, 'match': ['point_avg', 'bbox']}
+{'shape': 'L', 'method': 'bbox', 'class': 'point', 'got': (1.0, 0.0, 1.0), 'points_out': 1, 'match': ['point_avg', 'bbox']}
+{'shape': 'L', 'method': 'convexhull', 'class': 'prim', 'got': (1.0, 0.0, 1.0), 'points_out': 1, 'match': ['point_avg', 'bbox']}
+{'shape': 'L', 'method': 'convexhull', 'class': 'point', 'got': (1.0, 0.0, 1.0), 'points_out': 1, 'match': ['point_avg', 'bbox']}
+{'shape': 'pyramid', 'method': 'com', 'class': 'prim', 'got': (-0.0, 0.75, 0.0), 'points_out': 1, 'match': ['volume']}
+{'shape': 'pyramid', 'method': 'com', 'class': 'point', 'got': (-0.0, 0.75, 0.0), 'points_out': 1, 'match': ['volume']}
+{'shape': 'pyramid', 'method': 'bbox', 'class': 'prim', 'got': (0.0, 1.5, 0.0), 'points_out': 1, 'match': ['bbox']}
+{'shape': 'pyramid', 'method': 'bbox', 'class': 'point', 'got': (0.0, 1.5, 0.0), 'points_out': 1, 'match': ['bbox']}
+{'shape': 'pyramid', 'method': 'convexhull', 'class': 'prim', 'got': (0.0, 0.75, -0.0), 'points_out': 1, 'match': ['volume']}
+{'shape': 'pyramid', 'method': 'convexhull', 'class': 'point', 'got': (0.0, 0.75, -0.0), 'points_out': 1, 'match': ['volume']}
+{'shape': 'open_pyramid', 'method': 'com', 'class': 'prim', 'got': (0.0, 1.0, -0.0), 'points_out': 1, 'match': ['area']}
+{'shape': 'open_pyramid', 'method': 'com', 'class': 'point', 'got': (0.0, 1.0, -0.0), 'points_out': 1, 'match': ['area']}
+{'shape': 'open_pyramid', 'method': 'bbox', 'class': 'prim', 'got': (0.0, 1.5, 0.0), 'points_out': 1, 'match': ['bbox']}
+{'shape': 'open_pyramid', 'method': 'bbox', 'class': 'point', 'got': (0.0, 1.5, 0.0), 'points_out': 1, 'match': ['bbox']}
+{'shape': 'open_pyramid', 'method': 'convexhull', 'class': 'prim', 'got': (0.0, 0.75, -0.0), 'points_out': 1, 'match': ['hull_volume']}
+{'shape': 'open_pyramid', 'method': 'convexhull', 'class': 'point', 'got': (0.0, 0.75, -0.0), 'points_out': 1, 'match': ['hull_volume']}
+{'shape': 'L_prism', 'method': 'com', 'class': 'prim', 'got': (0.833333, 0.5, 0.833333), 'points_out': 1, 'match': ['volume']}
+{'shape': 'L_prism', 'method': 'com', 'class': 'point', 'got': (0.833333, 0.5, 0.833333), 'points_out': 1, 'match': ['volume']}
+{'shape': 'L_prism', 'method': 'bbox', 'class': 'prim', 'got': (1.0, 0.5, 1.0), 'points_out': 1, 'match': ['point_avg', 'bbox']}
+{'shape': 'L_prism', 'method': 'bbox', 'class': 'point', 'got': (1.0, 0.5, 1.0), 'points_out': 1, 'match': ['point_avg', 'bbox']}
+{'shape': 'L_prism', 'method': 'convexhull', 'class': 'prim', 'got': (0.904762, 0.5, 0.904762), 'points_out': 1, 'match': ['hull_volume']}
+{'shape': 'L_prism', 'method': 'convexhull', 'class': 'point', 'got': (0.904762, 0.5, 0.904762), 'points_out': 1, 'match': ['hull_volume']}
+書いた: D:\Claude\houdini\out\107_stats.json
+HIP 107 D:\Claude\houdini\out\107_scene.hipnc 52499

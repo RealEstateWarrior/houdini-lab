@@ -1,0 +1,150 @@
+{
+  "title": "実験144",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "t6_96",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 6,
+        "cols": 96
+      }
+    },
+    {
+      "name": "t12_96",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "cols": 96
+      }
+    },
+    {
+      "name": "t24_96",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 24,
+        "cols": 96
+      }
+    },
+    {
+      "name": "t48_96",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 48,
+        "cols": 96
+      }
+    },
+    {
+      "name": "t96_96",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 96,
+        "cols": 96
+      }
+    },
+    {
+      "name": "t96_6",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 96,
+        "cols": 6
+      }
+    },
+    {
+      "name": "t96_12",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 96,
+        "cols": 12
+      }
+    },
+    {
+      "name": "t96_24",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 96
+      }
+    },
+    {
+      "name": "t96_48",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rady": 0.25,
+        "rows": 96,
+        "cols": 48
+      }
+    }
+  ],
+  "edges": []
+}

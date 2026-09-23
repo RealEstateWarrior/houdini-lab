@@ -1,0 +1,534 @@
+{
+  "title": "実験157",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "fog",
+      "type": "isooffset",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pts2",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 2,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "vf2_1",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "m2",
+      "type": "measure::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "measure": 2,
+        "attribname": "vol",
+        "colorramp1cb": 1.0,
+        "colorramp2pos": 0.5,
+        "colorramp2cr": 1.0,
+        "colorramp2cg": 1.0,
+        "colorramp2cb": 1.0,
+        "colorramp3pos": 1.0,
+        "colorramp3cr": 1.0
+      }
+    },
+    {
+      "name": "vf2_0",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "createinteriorsurfaces": 0
+      }
+    },
+    {
+      "name": "pts5",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 5,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "vf5_1",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "m5",
+      "type": "measure::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "measure": 2,
+        "attribname": "vol",
+        "colorramp1cb": 1.0,
+        "colorramp2pos": 0.5,
+        "colorramp2cr": 1.0,
+        "colorramp2cg": 1.0,
+        "colorramp2cb": 1.0,
+        "colorramp3pos": 1.0,
+        "colorramp3cr": 1.0
+      }
+    },
+    {
+      "name": "vf5_0",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "createinteriorsurfaces": 0
+      }
+    },
+    {
+      "name": "pts10",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "vf10_1",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "m10",
+      "type": "measure::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "measure": 2,
+        "attribname": "vol",
+        "colorramp1cb": 1.0,
+        "colorramp2pos": 0.5,
+        "colorramp2cr": 1.0,
+        "colorramp2cg": 1.0,
+        "colorramp2cb": 1.0,
+        "colorramp3pos": 1.0,
+        "colorramp3cr": 1.0
+      }
+    },
+    {
+      "name": "vf10_0",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "createinteriorsurfaces": 0
+      }
+    },
+    {
+      "name": "pts50",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 50,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "vf50_1",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "m50",
+      "type": "measure::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "measure": 2,
+        "attribname": "vol",
+        "colorramp1cb": 1.0,
+        "colorramp2pos": 0.5,
+        "colorramp2cr": 1.0,
+        "colorramp2cg": 1.0,
+        "colorramp2cb": 1.0,
+        "colorramp3pos": 1.0,
+        "colorramp3cr": 1.0
+      }
+    },
+    {
+      "name": "vf50_0",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "createinteriorsurfaces": 0
+      }
+    },
+    {
+      "name": "pts200",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 200,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "vf200_1",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "m200",
+      "type": "measure::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "measure": 2,
+        "attribname": "vol",
+        "colorramp1cb": 1.0,
+        "colorramp2pos": 0.5,
+        "colorramp2cr": 1.0,
+        "colorramp2cg": 1.0,
+        "colorramp2cb": 1.0,
+        "colorramp3pos": 1.0,
+        "colorramp3cr": 1.0
+      }
+    },
+    {
+      "name": "vf200_0",
+      "type": "voronoifracture::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "createinteriorsurfaces": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "fog",
+      "to_input": 0
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts2",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf2_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts2",
+      "from_output": 0,
+      "to": "vf2_1",
+      "to_input": 1
+    },
+    {
+      "from": "vf2_1",
+      "from_output": 0,
+      "to": "m2",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf2_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts2",
+      "from_output": 0,
+      "to": "vf2_0",
+      "to_input": 1
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts5",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf5_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts5",
+      "from_output": 0,
+      "to": "vf5_1",
+      "to_input": 1
+    },
+    {
+      "from": "vf5_1",
+      "from_output": 0,
+      "to": "m5",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf5_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts5",
+      "from_output": 0,
+      "to": "vf5_0",
+      "to_input": 1
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts10",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf10_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts10",
+      "from_output": 0,
+      "to": "vf10_1",
+      "to_input": 1
+    },
+    {
+      "from": "vf10_1",
+      "from_output": 0,
+      "to": "m10",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf10_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts10",
+      "from_output": 0,
+      "to": "vf10_0",
+      "to_input": 1
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts50",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf50_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts50",
+      "from_output": 0,
+      "to": "vf50_1",
+      "to_input": 1
+    },
+    {
+      "from": "vf50_1",
+      "from_output": 0,
+      "to": "m50",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf50_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts50",
+      "from_output": 0,
+      "to": "vf50_0",
+      "to_input": 1
+    },
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "pts200",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf200_1",
+      "to_input": 0
+    },
+    {
+      "from": "pts200",
+      "from_output": 0,
+      "to": "vf200_1",
+      "to_input": 1
+    },
+    {
+      "from": "vf200_1",
+      "from_output": 0,
+      "to": "m200",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "vf200_0",
+      "to_input": 0
+    },
+    {
+      "from": "pts200",
+      "from_output": 0,
+      "to": "vf200_0",
+      "to_input": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{'gap': 0.0, 'voxel': 0.05, 'volume': 0.517568, 'want': 0.523599, 'ratio': 0.98848, 'size_x': 0.995, 'want_x': 1.0, 'size_y': 0.995, 'prims': 1830, 'sec': 0.074}
+{'gap': 0.0, 'voxel': 0.025, 'volume': 0.522098, 'want': 0.523599, 'ratio': 0.99713, 'size_x': 0.9987, 'want_x': 1.0, 'size_y': 0.9987, 'prims': 7470, 'sec': 0.004}
+{'gap': 0.0, 'voxel': 0.0125, 'volume': 0.523224, 'want': 0.523599, 'ratio': 0.99928, 'size_x': 0.9997, 'want_x': 1.0, 'size_y': 0.9997, 'prims': 30078, 'sec': 0.009}
+{'gap': 0.5, 'voxel': 0.05, 'volume': 0.875323, 'want': 0.883573, 'ratio': 0.99066, 'size_x': 1.495, 'want_x': 1.5, 'size_y': 0.995, 'prims': 2710, 'sec': 0.012}
+{'gap': 0.5, 'voxel': 0.025, 'volume': 0.88149, 'want': 0.883573, 'ratio': 0.99764, 'size_x': 1.4987, 'want_x': 1.5, 'size_y': 0.9987, 'prims': 11102, 'sec': 0.004}
+{'gap': 0.5, 'voxel': 0.0125, 'volume': 0.883046, 'want': 0.883573, 'ratio': 0.9994, 'size_x': 1.4997, 'want_x': 1.5, 'size_y': 0.9997, 'prims': 44798, 'sec': 0.01}
+{'gap': 0.8, 'voxel': 0.05, 'volume': 1.00735, 'want': 1.017876, 'ratio': 0.98966, 'size_x': 1.795, 'want_x': 1.8, 'size_y': 0.995, 'prims': 3326, 'sec': 0.008}
+{'gap': 0.8, 'voxel': 0.025, 'volume': 1.015214, 'want': 1.017876, 'ratio': 0.99738, 'size_x': 1.7987, 'want_x': 1.8, 'size_y': 0.9987, 'prims': 13566, 'sec': 0.004}
+{'gap': 0.8, 'voxel': 0.0125, 'volume': 1.017214, 'want': 1.017876, 'ratio': 0.99935, 'size_x': 1.7997, 'want_x': 1.8, 'size_y': 0.9997, 'prims': 54510, 'sec': 0.011}
+{'gap': 1.2, 'voxel': 0.05, 'volume': 1.035145, 'want': 1.047198, 'ratio': 0.98849, 'size_x': 2.2, 'want_x': 2.2, 'size_y': 0.995, 'prims': 3700, 'sec': 0.007}
+{'gap': 1.2, 'voxel': 0.025, 'volume': 1.044196, 'want': 1.047198, 'ratio': 0.99713, 'size_x': 2.2, 'want_x': 2.2, 'size_y': 0.9987, 'prims': 14980, 'sec': 0.004}
+{'gap': 1.2, 'voxel': 0.0125, 'volume': 1.046448, 'want': 1.047198, 'ratio': 0.99928, 'size_x': 2.2, 'want_x': 2.2, 'size_y': 0.9997, 'prims': 60196, 'sec': 0.01}
+保存: D:\Claude\houdini\out\164_stats.json
+HIP 164 D:\Claude\houdini\out\164_scene.hipnc 90160

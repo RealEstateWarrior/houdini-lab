@@ -1,0 +1,18 @@
+{'path': 'line', 'cols': 8, 'stretch': False, 'length': 5.0, 'section': 0.02828427, 'volume': 0.141421, 'want': 0.141421, 'rel': 0.0, 'sec': 0.0024}
+{'path': 'line', 'cols': 8, 'stretch': True, 'length': 5.0, 'section': 0.02828427, 'volume': 0.141421, 'want': 0.141421, 'rel': 0.0, 'sec': 0.0012}
+{'path': 'line', 'cols': 32, 'stretch': False, 'length': 5.0, 'section': 0.03121445, 'volume': 0.156072, 'want': 0.156072, 'rel': -0.0, 'sec': 0.0016}
+{'path': 'line', 'cols': 32, 'stretch': True, 'length': 5.0, 'section': 0.03121445, 'volume': 0.156072, 'want': 0.156072, 'rel': -0.0, 'sec': 0.0016}
+{'path': 'helix_50', 'cols': 8, 'stretch': False, 'length': 19.074549, 'section': 0.02828427, 'volume': 0.538476, 'want': 0.53951, 'rel': -0.001917, 'sec': 0.1129}
+{'path': 'helix_50', 'cols': 8, 'stretch': True, 'length': 19.074549, 'section': 0.02828427, 'volume': 0.539507, 'want': 0.53951, 'rel': -5e-06, 'sec': 0.018}
+{'path': 'helix_50', 'cols': 32, 'stretch': False, 'length': 19.074549, 'section': 0.03121445, 'volume': 0.594263, 'want': 0.595402, 'rel': -0.001913, 'sec': 0.0623}
+{'path': 'helix_50', 'cols': 32, 'stretch': True, 'length': 19.074549, 'section': 0.03121445, 'volume': 0.595401, 'want': 0.595402, 'rel': -1e-06, 'sec': 0.0619}
+{'path': 'helix_200', 'cols': 8, 'stretch': False, 'length': 19.086029, 'section': 0.02828427, 'volume': 0.53977, 'want': 0.539834, 'rel': -0.00012, 'sec': 0.0629}
+{'path': 'helix_200', 'cols': 8, 'stretch': True, 'length': 19.086029, 'section': 0.02828427, 'volume': 0.539834, 'want': 0.539834, 'rel': -0.0, 'sec': 0.0621}
+{'path': 'helix_200', 'cols': 32, 'stretch': False, 'length': 19.086029, 'section': 0.03121445, 'volume': 0.595688, 'want': 0.59576, 'rel': -0.00012, 'sec': 0.2006}
+{'path': 'helix_200', 'cols': 32, 'stretch': True, 'length': 19.086029, 'section': 0.03121445, 'volume': 0.59576, 'want': 0.59576, 'rel': 0.0, 'sec': 0.2002}
+{'path': 'helix_12', 'cols': 8, 'stretch': False, 'length': 18.874908, 'section': 0.02828427, 'volume': 0.516439, 'want': 0.533863, 'rel': -0.032638, 'sec': 0.0086}
+{'path': 'helix_12', 'cols': 8, 'stretch': True, 'length': 18.874908, 'section': 0.02828427, 'volume': 0.533659, 'want': 0.533863, 'rel': -0.000382, 'sec': 0.0093}
+{'path': 'helix_12', 'cols': 32, 'stretch': False, 'length': 18.874908, 'section': 0.03121445, 'volume': 0.570103, 'want': 0.58917, 'rel': -0.032363, 'sec': 0.0176}
+{'path': 'helix_12', 'cols': 32, 'stretch': True, 'length': 18.874908, 'section': 0.03121445, 'volume': 0.589116, 'want': 0.58917, 'rel': -9.2e-05, 'sec': 0.0177}
+書いた: D:\Claude\houdini\out\114_stats.json
+HIP 114 D:\Claude\houdini\out\114_scene.hipnc 65747

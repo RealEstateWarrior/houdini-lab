@@ -1,0 +1,32 @@
+{
+  "title": "実験105",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sp",
+      "type": "spiral",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "height": 5.0,
+        "turns": 10.0,
+        "radiusmode": 1,
+        "startradius": 0.25,
+        "endradius": 0.25,
+        "heightprofile1value": 1.0,
+        "heightprofile2pos": 1.0,
+        "heightprofile2value": 1.0,
+        "radiusprofile1value": 1.0,
+        "radiusprofile2pos": 1.0,
+        "radiusprofile2value": 1.0
+      }
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,151 @@
+{
+  "title": "実験107",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "make",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "\nvector pts[] = {{0,0,0},{2,0,0},{2,0,1},{1,0,1},{1,0,2},{0,0,2}};\nint lo[], hi[];\nforeach (vector q; pts) { append(l..."
+      }
+    },
+    {
+      "name": "c_com_prim",
+      "type": "extractcentroid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "partitiontype": 2
+      }
+    },
+    {
+      "name": "c_com_point",
+      "type": "extractcentroid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "partitiontype": 2,
+        "class": 1
+      }
+    },
+    {
+      "name": "c_bbox_prim",
+      "type": "extractcentroid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "partitiontype": 2,
+        "method": 1
+      }
+    },
+    {
+      "name": "c_bbox_point",
+      "type": "extractcentroid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "partitiontype": 2,
+        "class": 1,
+        "method": 1
+      }
+    },
+    {
+      "name": "c_convexhull_prim",
+      "type": "extractcentroid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "partitiontype": 2,
+        "method": 2
+      }
+    },
+    {
+      "name": "c_convexhull_point",
+      "type": "extractcentroid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "partitiontype": 2,
+        "class": 1,
+        "method": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "make",
+      "from_output": 0,
+      "to": "c_com_prim",
+      "to_input": 0
+    },
+    {
+      "from": "make",
+      "from_output": 0,
+      "to": "c_com_point",
+      "to_input": 0
+    },
+    {
+      "from": "make",
+      "from_output": 0,
+      "to": "c_bbox_prim",
+      "to_input": 0
+    },
+    {
+      "from": "make",
+      "from_output": 0,
+      "to": "c_bbox_point",
+      "to_input": 0
+    },
+    {
+      "from": "make",
+      "from_output": 0,
+      "to": "c_convexhull_prim",
+      "to_input": 0
+    },
+    {
+      "from": "make",
+      "from_output": 0,
+      "to": "c_convexhull_point",
+      "to_input": 0
+    }
+  ]
+}

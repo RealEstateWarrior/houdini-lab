@@ -1,0 +1,432 @@
+{
+  "title": "実験108",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "plane",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 3.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "sc10",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "tri_scatter_10",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "sc100",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100,
+        "seed": 2.0
+      }
+    },
+    {
+      "name": "tri_scatter_100",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "sc1000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "tri_scatter_1000",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "sc10000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000,
+        "seed": 4.0
+      }
+    },
+    {
+      "name": "tri_scatter_10000",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "sc100000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000,
+        "seed": 5.0
+      }
+    },
+    {
+      "name": "tri_scatter_100000",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "g3",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 3,
+        "cols": 3
+      }
+    },
+    {
+      "name": "pts3",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "remove": 1
+      }
+    },
+    {
+      "name": "tri_grid_3x3",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "g5",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 5,
+        "cols": 5
+      }
+    },
+    {
+      "name": "pts5",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "remove": 1
+      }
+    },
+    {
+      "name": "tri_grid_5x5",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "g11",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 11,
+        "cols": 11
+      }
+    },
+    {
+      "name": "pts11",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "remove": 1
+      }
+    },
+    {
+      "name": "tri_grid_11x11",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "g51",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 51,
+        "cols": 51
+      }
+    },
+    {
+      "name": "pts51",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "remove": 1
+      }
+    },
+    {
+      "name": "tri_grid_51x51",
+      "type": "triangulate2d::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "plane",
+      "from_output": 0,
+      "to": "sc10",
+      "to_input": 0
+    },
+    {
+      "from": "sc10",
+      "from_output": 0,
+      "to": "tri_scatter_10",
+      "to_input": 0
+    },
+    {
+      "from": "plane",
+      "from_output": 0,
+      "to": "sc100",
+      "to_input": 0
+    },
+    {
+      "from": "sc100",
+      "from_output": 0,
+      "to": "tri_scatter_100",
+      "to_input": 0
+    },
+    {
+      "from": "plane",
+      "from_output": 0,
+      "to": "sc1000",
+      "to_input": 0
+    },
+    {
+      "from": "sc1000",
+      "from_output": 0,
+      "to": "tri_scatter_1000",
+      "to_input": 0
+    },
+    {
+      "from": "plane",
+      "from_output": 0,
+      "to": "sc10000",
+      "to_input": 0
+    },
+    {
+      "from": "sc10000",
+      "from_output": 0,
+      "to": "tri_scatter_10000",
+      "to_input": 0
+    },
+    {
+      "from": "plane",
+      "from_output": 0,
+      "to": "sc100000",
+      "to_input": 0
+    },
+    {
+      "from": "sc100000",
+      "from_output": 0,
+      "to": "tri_scatter_100000",
+      "to_input": 0
+    },
+    {
+      "from": "g3",
+      "from_output": 0,
+      "to": "pts3",
+      "to_input": 0
+    },
+    {
+      "from": "pts3",
+      "from_output": 0,
+      "to": "tri_grid_3x3",
+      "to_input": 0
+    },
+    {
+      "from": "g5",
+      "from_output": 0,
+      "to": "pts5",
+      "to_input": 0
+    },
+    {
+      "from": "pts5",
+      "from_output": 0,
+      "to": "tri_grid_5x5",
+      "to_input": 0
+    },
+    {
+      "from": "g11",
+      "from_output": 0,
+      "to": "pts11",
+      "to_input": 0
+    },
+    {
+      "from": "pts11",
+      "from_output": 0,
+      "to": "tri_grid_11x11",
+      "to_input": 0
+    },
+    {
+      "from": "g51",
+      "from_output": 0,
+      "to": "pts51",
+      "to_input": 0
+    },
+    {
+      "from": "pts51",
+      "from_output": 0,
+      "to": "tri_grid_51x51",
+      "to_input": 0
+    }
+  ]
+}

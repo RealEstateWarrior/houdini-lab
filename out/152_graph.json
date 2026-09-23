@@ -1,0 +1,504 @@
+{
+  "title": "実験152",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "b_5_solid_1",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.05,
+        "filletshape": 1,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_5_round_1",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.05,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_5_round_2",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.05,
+        "divisions": 2,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_5_round_4",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.05,
+        "divisions": 4,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_5_round_8",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.05,
+        "divisions": 8,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_5_round_16",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.05,
+        "divisions": 16,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_10_solid_1",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.1,
+        "filletshape": 1,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_10_round_1",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.1,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_10_round_2",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.1,
+        "divisions": 2,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_10_round_4",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.1,
+        "divisions": 4,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_10_round_8",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.1,
+        "divisions": 8,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_10_round_16",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.1,
+        "divisions": 16,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_20_solid_1",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.2,
+        "filletshape": 1,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_20_round_1",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.2,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_20_round_2",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.2,
+        "divisions": 2,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_20_round_4",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.2,
+        "divisions": 4,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_20_round_8",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.2,
+        "divisions": 8,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "b_20_round_16",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "grouptype": 2,
+        "offset": 0.2,
+        "divisions": 16,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_5_solid_1",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_5_round_1",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_5_round_2",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_5_round_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_5_round_8",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_5_round_16",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_10_solid_1",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_10_round_1",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_10_round_2",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_10_round_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_10_round_8",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_10_round_16",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_20_solid_1",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_20_round_1",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_20_round_2",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_20_round_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_20_round_8",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "b_20_round_16",
+      "to_input": 0
+    }
+  ]
+}

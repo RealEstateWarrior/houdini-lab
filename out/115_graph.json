@@ -1,0 +1,789 @@
+{
+  "title": "実験115",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g21",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 2.0,
+        "rows": 11,
+        "cols": 21
+      }
+    },
+    {
+      "name": "edges21",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = @P.x > 0 ? 1 : 0;\ni@group_fixed = abs(abs(@P.x) - 2) < 1e-5;"
+      }
+    },
+    {
+      "name": "pois21",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "left21",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = abs(@P.x + 2) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik21",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "c21",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = length(@P) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik1_21",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "t21",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "surftype": 3,
+        "sizex": 4.0,
+        "sizey": 2.0,
+        "rows": 11,
+        "cols": 21
+      }
+    },
+    {
+      "name": "ct21",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0; i@group_fixed = length(@P) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik3_21",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "g41",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 2.0,
+        "rows": 21,
+        "cols": 41
+      }
+    },
+    {
+      "name": "edges41",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = @P.x > 0 ? 1 : 0;\ni@group_fixed = abs(abs(@P.x) - 2) < 1e-5;"
+      }
+    },
+    {
+      "name": "pois41",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "left41",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = abs(@P.x + 2) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik41",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "c41",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = length(@P) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik1_41",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "t41",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "surftype": 3,
+        "sizex": 4.0,
+        "sizey": 2.0,
+        "rows": 21,
+        "cols": 41
+      }
+    },
+    {
+      "name": "ct41",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0; i@group_fixed = length(@P) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik3_41",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "g81",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 2.0,
+        "rows": 41,
+        "cols": 81
+      }
+    },
+    {
+      "name": "edges81",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = @P.x > 0 ? 1 : 0;\ni@group_fixed = abs(abs(@P.x) - 2) < 1e-5;"
+      }
+    },
+    {
+      "name": "pois81",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "left81",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = abs(@P.x + 2) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik81",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "c81",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = length(@P) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik1_81",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "t81",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "surftype": 3,
+        "sizex": 4.0,
+        "sizey": 2.0,
+        "rows": 41,
+        "cols": 81
+      }
+    },
+    {
+      "name": "ct81",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0; i@group_fixed = length(@P) < 1e-5;"
+      }
+    },
+    {
+      "name": "eik3_81",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "sp24",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 24,
+        "cols": 48
+      }
+    },
+    {
+      "name": "pole24",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = @P.y > 0.99999;"
+      }
+    },
+    {
+      "name": "eiks24",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "sp48",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 48,
+        "cols": 96
+      }
+    },
+    {
+      "name": "pole48",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = @P.y > 0.99999;"
+      }
+    },
+    {
+      "name": "eiks48",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    },
+    {
+      "name": "sp96",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "pole96",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@val = 0;\ni@group_fixed = @P.y > 0.99999;"
+      }
+    },
+    {
+      "name": "eiks96",
+      "type": "attribfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "mode": 0,
+        "attrib": "val",
+        "boundary": "fixed"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g21",
+      "from_output": 0,
+      "to": "edges21",
+      "to_input": 0
+    },
+    {
+      "from": "edges21",
+      "from_output": 0,
+      "to": "pois21",
+      "to_input": 0
+    },
+    {
+      "from": "g21",
+      "from_output": 0,
+      "to": "left21",
+      "to_input": 0
+    },
+    {
+      "from": "left21",
+      "from_output": 0,
+      "to": "eik21",
+      "to_input": 0
+    },
+    {
+      "from": "g21",
+      "from_output": 0,
+      "to": "c21",
+      "to_input": 0
+    },
+    {
+      "from": "c21",
+      "from_output": 0,
+      "to": "eik1_21",
+      "to_input": 0
+    },
+    {
+      "from": "t21",
+      "from_output": 0,
+      "to": "ct21",
+      "to_input": 0
+    },
+    {
+      "from": "ct21",
+      "from_output": 0,
+      "to": "eik3_21",
+      "to_input": 0
+    },
+    {
+      "from": "g41",
+      "from_output": 0,
+      "to": "edges41",
+      "to_input": 0
+    },
+    {
+      "from": "edges41",
+      "from_output": 0,
+      "to": "pois41",
+      "to_input": 0
+    },
+    {
+      "from": "g41",
+      "from_output": 0,
+      "to": "left41",
+      "to_input": 0
+    },
+    {
+      "from": "left41",
+      "from_output": 0,
+      "to": "eik41",
+      "to_input": 0
+    },
+    {
+      "from": "g41",
+      "from_output": 0,
+      "to": "c41",
+      "to_input": 0
+    },
+    {
+      "from": "c41",
+      "from_output": 0,
+      "to": "eik1_41",
+      "to_input": 0
+    },
+    {
+      "from": "t41",
+      "from_output": 0,
+      "to": "ct41",
+      "to_input": 0
+    },
+    {
+      "from": "ct41",
+      "from_output": 0,
+      "to": "eik3_41",
+      "to_input": 0
+    },
+    {
+      "from": "g81",
+      "from_output": 0,
+      "to": "edges81",
+      "to_input": 0
+    },
+    {
+      "from": "edges81",
+      "from_output": 0,
+      "to": "pois81",
+      "to_input": 0
+    },
+    {
+      "from": "g81",
+      "from_output": 0,
+      "to": "left81",
+      "to_input": 0
+    },
+    {
+      "from": "left81",
+      "from_output": 0,
+      "to": "eik81",
+      "to_input": 0
+    },
+    {
+      "from": "g81",
+      "from_output": 0,
+      "to": "c81",
+      "to_input": 0
+    },
+    {
+      "from": "c81",
+      "from_output": 0,
+      "to": "eik1_81",
+      "to_input": 0
+    },
+    {
+      "from": "t81",
+      "from_output": 0,
+      "to": "ct81",
+      "to_input": 0
+    },
+    {
+      "from": "ct81",
+      "from_output": 0,
+      "to": "eik3_81",
+      "to_input": 0
+    },
+    {
+      "from": "sp24",
+      "from_output": 0,
+      "to": "pole24",
+      "to_input": 0
+    },
+    {
+      "from": "pole24",
+      "from_output": 0,
+      "to": "eiks24",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "pole48",
+      "to_input": 0
+    },
+    {
+      "from": "pole48",
+      "from_output": 0,
+      "to": "eiks48",
+      "to_input": 0
+    },
+    {
+      "from": "sp96",
+      "from_output": 0,
+      "to": "pole96",
+      "to_input": 0
+    },
+    {
+      "from": "pole96",
+      "from_output": 0,
+      "to": "eiks96",
+      "to_input": 0
+    }
+  ]
+}

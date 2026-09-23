@@ -1,0 +1,679 @@
+{
+  "title": "実験109",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "gp",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 21,
+        "cols": 21
+      }
+    },
+    {
+      "name": "seed_2",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "i@group_start = (@ptnum == 220);"
+      }
+    },
+    {
+      "name": "gq",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 22,
+        "cols": 22
+      }
+    },
+    {
+      "name": "seed_1",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "i@group_start = (@primnum == 220);"
+      }
+    },
+    {
+      "name": "points_0",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": 0
+      }
+    },
+    {
+      "name": "points_1",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3
+      }
+    },
+    {
+      "name": "points_2",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": 2
+      }
+    },
+    {
+      "name": "points_3",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": 3
+      }
+    },
+    {
+      "name": "points_4",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": 4
+      }
+    },
+    {
+      "name": "points_6",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": 6
+      }
+    },
+    {
+      "name": "points_8",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": 8
+      }
+    },
+    {
+      "name": "prims_edge_0",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "primshareedge": 1,
+        "numsteps": 0
+      }
+    },
+    {
+      "name": "prims_edge_1",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "primshareedge": 1
+      }
+    },
+    {
+      "name": "prims_edge_2",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "primshareedge": 1,
+        "numsteps": 2
+      }
+    },
+    {
+      "name": "prims_edge_3",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "primshareedge": 1,
+        "numsteps": 3
+      }
+    },
+    {
+      "name": "prims_edge_4",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "primshareedge": 1,
+        "numsteps": 4
+      }
+    },
+    {
+      "name": "prims_edge_6",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "primshareedge": 1,
+        "numsteps": 6
+      }
+    },
+    {
+      "name": "prims_edge_8",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "primshareedge": 1,
+        "numsteps": 8
+      }
+    },
+    {
+      "name": "prims_point_0",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "numsteps": 0
+      }
+    },
+    {
+      "name": "prims_point_1",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4
+      }
+    },
+    {
+      "name": "prims_point_2",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "numsteps": 2
+      }
+    },
+    {
+      "name": "prims_point_3",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "numsteps": 3
+      }
+    },
+    {
+      "name": "prims_point_4",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "numsteps": 4
+      }
+    },
+    {
+      "name": "prims_point_6",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "numsteps": 6
+      }
+    },
+    {
+      "name": "prims_point_8",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 4,
+        "numsteps": 8
+      }
+    },
+    {
+      "name": "seed_3",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "int r = @ptnum / 21, c = @ptnum % 21; i@group_start = abs(r - 10) <= 4 && abs(c - 10) <= 4;"
+      }
+    },
+    {
+      "name": "shrink_0",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": 0
+      }
+    },
+    {
+      "name": "shrink_1",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": -1
+      }
+    },
+    {
+      "name": "shrink_2",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": -2
+      }
+    },
+    {
+      "name": "shrink_4",
+      "type": "groupexpand",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputgroup": "grown",
+        "group": "start",
+        "grouptype": 3,
+        "numsteps": -4
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "gp",
+      "from_output": 0,
+      "to": "seed_2",
+      "to_input": 0
+    },
+    {
+      "from": "gq",
+      "from_output": 0,
+      "to": "seed_1",
+      "to_input": 0
+    },
+    {
+      "from": "seed_2",
+      "from_output": 0,
+      "to": "points_0",
+      "to_input": 0
+    },
+    {
+      "from": "seed_2",
+      "from_output": 0,
+      "to": "points_1",
+      "to_input": 0
+    },
+    {
+      "from": "seed_2",
+      "from_output": 0,
+      "to": "points_2",
+      "to_input": 0
+    },
+    {
+      "from": "seed_2",
+      "from_output": 0,
+      "to": "points_3",
+      "to_input": 0
+    },
+    {
+      "from": "seed_2",
+      "from_output": 0,
+      "to": "points_4",
+      "to_input": 0
+    },
+    {
+      "from": "seed_2",
+      "from_output": 0,
+      "to": "points_6",
+      "to_input": 0
+    },
+    {
+      "from": "seed_2",
+      "from_output": 0,
+      "to": "points_8",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_edge_0",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_edge_1",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_edge_2",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_edge_3",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_edge_4",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_edge_6",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_edge_8",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_point_0",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_point_1",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_point_2",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_point_3",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_point_4",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_point_6",
+      "to_input": 0
+    },
+    {
+      "from": "seed_1",
+      "from_output": 0,
+      "to": "prims_point_8",
+      "to_input": 0
+    },
+    {
+      "from": "gp",
+      "from_output": 0,
+      "to": "seed_3",
+      "to_input": 0
+    },
+    {
+      "from": "seed_3",
+      "from_output": 0,
+      "to": "shrink_0",
+      "to_input": 0
+    },
+    {
+      "from": "seed_3",
+      "from_output": 0,
+      "to": "shrink_1",
+      "to_input": 0
+    },
+    {
+      "from": "seed_3",
+      "from_output": 0,
+      "to": "shrink_2",
+      "to_input": 0
+    },
+    {
+      "from": "seed_3",
+      "from_output": 0,
+      "to": "shrink_4",
+      "to_input": 0
+    }
+  ]
+}

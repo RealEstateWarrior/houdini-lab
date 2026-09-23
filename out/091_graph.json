@@ -1,0 +1,167 @@
+{
+  "title": "実験091",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "src_sphere",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 60,
+        "cols": 60
+      }
+    },
+    {
+      "name": "src_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.18,
+        "elementsize": 0.9,
+        "offsetx": 3.0
+      }
+    },
+    {
+      "name": "red_80",
+      "type": "polyreduce::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "percentage": 80.0
+      }
+    },
+    {
+      "name": "red_50",
+      "type": "polyreduce::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "percentage": 50.0
+      }
+    },
+    {
+      "name": "red_25",
+      "type": "polyreduce::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "percentage": 25.0
+      }
+    },
+    {
+      "name": "red_10",
+      "type": "polyreduce::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "percentage": 10.0
+      }
+    },
+    {
+      "name": "red_5",
+      "type": "polyreduce::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "percentage": 5.0
+      }
+    },
+    {
+      "name": "red_2",
+      "type": "polyreduce::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "percentage": 2.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "src_sphere",
+      "from_output": 0,
+      "to": "src_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "red_80",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "red_50",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "red_25",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "red_10",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "red_5",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "red_2",
+      "to_input": 0
+    }
+  ]
+}

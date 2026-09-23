@@ -1,0 +1,613 @@
+{
+  "title": "実験100",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sph_20",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 20,
+        "cols": 20
+      }
+    },
+    {
+      "name": "nml_20",
+      "type": "normal",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_s20_0.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_s20_0.05",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.05
+      }
+    },
+    {
+      "name": "peak_s20_0.1",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.1
+      }
+    },
+    {
+      "name": "peak_s20_0.2",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.2
+      }
+    },
+    {
+      "name": "peak_s20_0.5",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5
+      }
+    },
+    {
+      "name": "peak_s20_1.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0
+      }
+    },
+    {
+      "name": "sph_60",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 60,
+        "cols": 60
+      }
+    },
+    {
+      "name": "nml_60",
+      "type": "normal",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_s60_0.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_s60_0.05",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.05
+      }
+    },
+    {
+      "name": "peak_s60_0.1",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.1
+      }
+    },
+    {
+      "name": "peak_s60_0.2",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.2
+      }
+    },
+    {
+      "name": "peak_s60_0.5",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5
+      }
+    },
+    {
+      "name": "peak_s60_1.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0
+      }
+    },
+    {
+      "name": "sph_120",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 120,
+        "cols": 120
+      }
+    },
+    {
+      "name": "nml_120",
+      "type": "normal",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_s120_0.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_s120_0.05",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.05
+      }
+    },
+    {
+      "name": "peak_s120_0.1",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.1
+      }
+    },
+    {
+      "name": "peak_s120_0.2",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.2
+      }
+    },
+    {
+      "name": "peak_s120_0.5",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5
+      }
+    },
+    {
+      "name": "peak_s120_1.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0
+      }
+    },
+    {
+      "name": "the_box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "box_nml",
+      "type": "normal",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_b_0.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "peak_b_0.05",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.05
+      }
+    },
+    {
+      "name": "peak_b_0.1",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.1
+      }
+    },
+    {
+      "name": "peak_b_0.2",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.2
+      }
+    },
+    {
+      "name": "peak_b_0.5",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 0.5
+      }
+    },
+    {
+      "name": "peak_b_1.0",
+      "type": "peak",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dist": 1.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sph_20",
+      "from_output": 0,
+      "to": "nml_20",
+      "to_input": 0
+    },
+    {
+      "from": "nml_20",
+      "from_output": 0,
+      "to": "peak_s20_0.0",
+      "to_input": 0
+    },
+    {
+      "from": "nml_20",
+      "from_output": 0,
+      "to": "peak_s20_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "nml_20",
+      "from_output": 0,
+      "to": "peak_s20_0.1",
+      "to_input": 0
+    },
+    {
+      "from": "nml_20",
+      "from_output": 0,
+      "to": "peak_s20_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "nml_20",
+      "from_output": 0,
+      "to": "peak_s20_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "nml_20",
+      "from_output": 0,
+      "to": "peak_s20_1.0",
+      "to_input": 0
+    },
+    {
+      "from": "sph_60",
+      "from_output": 0,
+      "to": "nml_60",
+      "to_input": 0
+    },
+    {
+      "from": "nml_60",
+      "from_output": 0,
+      "to": "peak_s60_0.0",
+      "to_input": 0
+    },
+    {
+      "from": "nml_60",
+      "from_output": 0,
+      "to": "peak_s60_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "nml_60",
+      "from_output": 0,
+      "to": "peak_s60_0.1",
+      "to_input": 0
+    },
+    {
+      "from": "nml_60",
+      "from_output": 0,
+      "to": "peak_s60_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "nml_60",
+      "from_output": 0,
+      "to": "peak_s60_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "nml_60",
+      "from_output": 0,
+      "to": "peak_s60_1.0",
+      "to_input": 0
+    },
+    {
+      "from": "sph_120",
+      "from_output": 0,
+      "to": "nml_120",
+      "to_input": 0
+    },
+    {
+      "from": "nml_120",
+      "from_output": 0,
+      "to": "peak_s120_0.0",
+      "to_input": 0
+    },
+    {
+      "from": "nml_120",
+      "from_output": 0,
+      "to": "peak_s120_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "nml_120",
+      "from_output": 0,
+      "to": "peak_s120_0.1",
+      "to_input": 0
+    },
+    {
+      "from": "nml_120",
+      "from_output": 0,
+      "to": "peak_s120_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "nml_120",
+      "from_output": 0,
+      "to": "peak_s120_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "nml_120",
+      "from_output": 0,
+      "to": "peak_s120_1.0",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "box_nml",
+      "to_input": 0
+    },
+    {
+      "from": "box_nml",
+      "from_output": 0,
+      "to": "peak_b_0.0",
+      "to_input": 0
+    },
+    {
+      "from": "box_nml",
+      "from_output": 0,
+      "to": "peak_b_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "box_nml",
+      "from_output": 0,
+      "to": "peak_b_0.1",
+      "to_input": 0
+    },
+    {
+      "from": "box_nml",
+      "from_output": 0,
+      "to": "peak_b_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "box_nml",
+      "from_output": 0,
+      "to": "peak_b_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "box_nml",
+      "from_output": 0,
+      "to": "peak_b_1.0",
+      "to_input": 0
+    }
+  ]
+}

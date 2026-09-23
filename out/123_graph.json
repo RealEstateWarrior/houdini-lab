@@ -1,0 +1,346 @@
+{
+  "title": "実験123",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cube_0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector c[] = {{-0.5,-0.5,-0.5},{0.5,-0.5,-0.5},{0.5,0.5,-0.5},{-0.5,0.5,-0.5},{-0.5,-0.5,0.5},{0.5,-0.5,0.5},{0.5,0.5..."
+      }
+    },
+    {
+      "name": "sw_cube_0",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cube_100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector c[] = {{-0.5,-0.5,-0.5},{0.5,-0.5,-0.5},{0.5,0.5,-0.5},{-0.5,0.5,-0.5},{-0.5,-0.5,0.5},{0.5,-0.5,0.5},{0.5,0.5..."
+      }
+    },
+    {
+      "name": "sw_cube_100",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cube_10000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector c[] = {{-0.5,-0.5,-0.5},{0.5,-0.5,-0.5},{0.5,0.5,-0.5},{-0.5,0.5,-0.5},{-0.5,-0.5,0.5},{0.5,-0.5,0.5},{0.5,0.5..."
+      }
+    },
+    {
+      "name": "sw_cube_10000",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "octahedron_0",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector c[] = {{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};\nforeach (vector q; c) addpoint(0, q);\nfor (int i =..."
+      }
+    },
+    {
+      "name": "sw_octahedron_0",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "octahedron_100",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector c[] = {{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};\nforeach (vector q; c) addpoint(0, q);\nfor (int i =..."
+      }
+    },
+    {
+      "name": "sw_octahedron_100",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "octahedron_10000",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "vector c[] = {{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}};\nforeach (vector q; c) addpoint(0, q);\nfor (int i =..."
+      }
+    },
+    {
+      "name": "sw_octahedron_10000",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "plate",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 4.0,
+        "sizey": 3.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "sc20",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 20,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "sw2d_20",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1
+      }
+    },
+    {
+      "name": "sc1000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "sw2d_1000",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1
+      }
+    },
+    {
+      "name": "sc100000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000,
+        "seed": 3.0
+      }
+    },
+    {
+      "name": "sw2d_100000",
+      "type": "shrinkwrap::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cube_0",
+      "from_output": 0,
+      "to": "sw_cube_0",
+      "to_input": 0
+    },
+    {
+      "from": "cube_100",
+      "from_output": 0,
+      "to": "sw_cube_100",
+      "to_input": 0
+    },
+    {
+      "from": "cube_10000",
+      "from_output": 0,
+      "to": "sw_cube_10000",
+      "to_input": 0
+    },
+    {
+      "from": "octahedron_0",
+      "from_output": 0,
+      "to": "sw_octahedron_0",
+      "to_input": 0
+    },
+    {
+      "from": "octahedron_100",
+      "from_output": 0,
+      "to": "sw_octahedron_100",
+      "to_input": 0
+    },
+    {
+      "from": "octahedron_10000",
+      "from_output": 0,
+      "to": "sw_octahedron_10000",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "sc20",
+      "to_input": 0
+    },
+    {
+      "from": "sc20",
+      "from_output": 0,
+      "to": "sw2d_20",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "sc1000",
+      "to_input": 0
+    },
+    {
+      "from": "sc1000",
+      "from_output": 0,
+      "to": "sw2d_1000",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "sc100000",
+      "to_input": 0
+    },
+    {
+      "from": "sc100000",
+      "from_output": 0,
+      "to": "sw2d_100000",
+      "to_input": 0
+    }
+  ]
+}

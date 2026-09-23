@@ -1,0 +1,286 @@
+{
+  "title": "実験103",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "one_point",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "points": 1,
+        "pt0x": 1.0
+      }
+    },
+    {
+      "name": "r_xyz",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rx": 30.0,
+        "ry": 40.0,
+        "rz": 50.0
+      }
+    },
+    {
+      "name": "r_xzy",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 1,
+        "rx": 30.0,
+        "ry": 40.0,
+        "rz": 50.0
+      }
+    },
+    {
+      "name": "r_yxz",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 2,
+        "rx": 30.0,
+        "ry": 40.0,
+        "rz": 50.0
+      }
+    },
+    {
+      "name": "r_yzx",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 3,
+        "rx": 30.0,
+        "ry": 40.0,
+        "rz": 50.0
+      }
+    },
+    {
+      "name": "r_zxy",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 4,
+        "rx": 30.0,
+        "ry": 40.0,
+        "rz": 50.0
+      }
+    },
+    {
+      "name": "r_zyx",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 5,
+        "rx": 30.0,
+        "ry": 40.0,
+        "rz": 50.0
+      }
+    },
+    {
+      "name": "s_xyz",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ry": 40.0
+      }
+    },
+    {
+      "name": "s_xzy",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 1,
+        "ry": 40.0
+      }
+    },
+    {
+      "name": "s_yxz",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 2,
+        "ry": 40.0
+      }
+    },
+    {
+      "name": "s_yzx",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 3,
+        "ry": 40.0
+      }
+    },
+    {
+      "name": "s_zxy",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 4,
+        "ry": 40.0
+      }
+    },
+    {
+      "name": "s_zyx",
+      "type": "xform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rOrd": 5,
+        "ry": 40.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "r_xyz",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "r_xzy",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "r_yxz",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "r_yzx",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "r_zxy",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "r_zyx",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "s_xyz",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "s_xzy",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "s_yxz",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "s_yzx",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "s_zxy",
+      "to_input": 0
+    },
+    {
+      "from": "one_point",
+      "from_output": 0,
+      "to": "s_zyx",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,486 @@
+{
+  "title": "実験117",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "plate",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0
+      }
+    },
+    {
+      "name": "sc500",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 500,
+        "relaxpoints": 0
+      }
+    },
+    {
+      "name": "ps500_25",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 0.012014057070673772;"
+      }
+    },
+    {
+      "name": "rl500_25_10",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rl500_25_50",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxiterations": 50
+      }
+    },
+    {
+      "name": "ps500_40",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 0.019222491313078037;"
+      }
+    },
+    {
+      "name": "rl500_40_10",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rl500_40_50",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxiterations": 50
+      }
+    },
+    {
+      "name": "ps500_50",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 0.024028114141347545;"
+      }
+    },
+    {
+      "name": "rl500_50_10",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rl500_50_50",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxiterations": 50
+      }
+    },
+    {
+      "name": "sc2000",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 2000,
+        "relaxpoints": 0
+      }
+    },
+    {
+      "name": "ps2000_25",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 0.006007028535336886;"
+      }
+    },
+    {
+      "name": "rl2000_25_10",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rl2000_25_50",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxiterations": 50
+      }
+    },
+    {
+      "name": "ps2000_40",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 0.009611245656539018;"
+      }
+    },
+    {
+      "name": "rl2000_40_10",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rl2000_40_50",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxiterations": 50
+      }
+    },
+    {
+      "name": "ps2000_50",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 0.012014057070673772;"
+      }
+    },
+    {
+      "name": "rl2000_50_10",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rl2000_50_50",
+      "type": "relax",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxiterations": 50
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "sc500",
+      "to_input": 0
+    },
+    {
+      "from": "sc500",
+      "from_output": 0,
+      "to": "ps500_25",
+      "to_input": 0
+    },
+    {
+      "from": "ps500_25",
+      "from_output": 0,
+      "to": "rl500_25_10",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl500_25_10",
+      "to_input": 1
+    },
+    {
+      "from": "ps500_25",
+      "from_output": 0,
+      "to": "rl500_25_50",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl500_25_50",
+      "to_input": 1
+    },
+    {
+      "from": "sc500",
+      "from_output": 0,
+      "to": "ps500_40",
+      "to_input": 0
+    },
+    {
+      "from": "ps500_40",
+      "from_output": 0,
+      "to": "rl500_40_10",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl500_40_10",
+      "to_input": 1
+    },
+    {
+      "from": "ps500_40",
+      "from_output": 0,
+      "to": "rl500_40_50",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl500_40_50",
+      "to_input": 1
+    },
+    {
+      "from": "sc500",
+      "from_output": 0,
+      "to": "ps500_50",
+      "to_input": 0
+    },
+    {
+      "from": "ps500_50",
+      "from_output": 0,
+      "to": "rl500_50_10",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl500_50_10",
+      "to_input": 1
+    },
+    {
+      "from": "ps500_50",
+      "from_output": 0,
+      "to": "rl500_50_50",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl500_50_50",
+      "to_input": 1
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "sc2000",
+      "to_input": 0
+    },
+    {
+      "from": "sc2000",
+      "from_output": 0,
+      "to": "ps2000_25",
+      "to_input": 0
+    },
+    {
+      "from": "ps2000_25",
+      "from_output": 0,
+      "to": "rl2000_25_10",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl2000_25_10",
+      "to_input": 1
+    },
+    {
+      "from": "ps2000_25",
+      "from_output": 0,
+      "to": "rl2000_25_50",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl2000_25_50",
+      "to_input": 1
+    },
+    {
+      "from": "sc2000",
+      "from_output": 0,
+      "to": "ps2000_40",
+      "to_input": 0
+    },
+    {
+      "from": "ps2000_40",
+      "from_output": 0,
+      "to": "rl2000_40_10",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl2000_40_10",
+      "to_input": 1
+    },
+    {
+      "from": "ps2000_40",
+      "from_output": 0,
+      "to": "rl2000_40_50",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl2000_40_50",
+      "to_input": 1
+    },
+    {
+      "from": "sc2000",
+      "from_output": 0,
+      "to": "ps2000_50",
+      "to_input": 0
+    },
+    {
+      "from": "ps2000_50",
+      "from_output": 0,
+      "to": "rl2000_50_10",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl2000_50_10",
+      "to_input": 1
+    },
+    {
+      "from": "ps2000_50",
+      "from_output": 0,
+      "to": "rl2000_50_50",
+      "to_input": 0
+    },
+    {
+      "from": "plate",
+      "from_output": 0,
+      "to": "rl2000_50_50",
+      "to_input": 1
+    }
+  ]
+}

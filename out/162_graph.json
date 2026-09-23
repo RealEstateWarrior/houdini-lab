@@ -1,0 +1,508 @@
+{
+  "title": "実験162",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "c0",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 0.0
+      }
+    },
+    {
+      "name": "s0_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s0_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "c5",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 0.5
+      }
+    },
+    {
+      "name": "s5_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s5_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "c10",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1
+      }
+    },
+    {
+      "name": "s10_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s10_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "c15",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 1.5
+      }
+    },
+    {
+      "name": "s15_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s15_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "c20",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 2.0
+      }
+    },
+    {
+      "name": "s20_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s20_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "c30",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 3.0
+      }
+    },
+    {
+      "name": "s30_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s30_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "c40",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 4.0
+      }
+    },
+    {
+      "name": "s40_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s40_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "c100",
+      "type": "crease",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "op": 1,
+        "crease": 10.0
+      }
+    },
+    {
+      "name": "s100_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "s100_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c0",
+      "to_input": 0
+    },
+    {
+      "from": "c0",
+      "from_output": 0,
+      "to": "s0_2",
+      "to_input": 0
+    },
+    {
+      "from": "c0",
+      "from_output": 0,
+      "to": "s0_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c5",
+      "to_input": 0
+    },
+    {
+      "from": "c5",
+      "from_output": 0,
+      "to": "s5_2",
+      "to_input": 0
+    },
+    {
+      "from": "c5",
+      "from_output": 0,
+      "to": "s5_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c10",
+      "to_input": 0
+    },
+    {
+      "from": "c10",
+      "from_output": 0,
+      "to": "s10_2",
+      "to_input": 0
+    },
+    {
+      "from": "c10",
+      "from_output": 0,
+      "to": "s10_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c15",
+      "to_input": 0
+    },
+    {
+      "from": "c15",
+      "from_output": 0,
+      "to": "s15_2",
+      "to_input": 0
+    },
+    {
+      "from": "c15",
+      "from_output": 0,
+      "to": "s15_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c20",
+      "to_input": 0
+    },
+    {
+      "from": "c20",
+      "from_output": 0,
+      "to": "s20_2",
+      "to_input": 0
+    },
+    {
+      "from": "c20",
+      "from_output": 0,
+      "to": "s20_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c30",
+      "to_input": 0
+    },
+    {
+      "from": "c30",
+      "from_output": 0,
+      "to": "s30_2",
+      "to_input": 0
+    },
+    {
+      "from": "c30",
+      "from_output": 0,
+      "to": "s30_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c40",
+      "to_input": 0
+    },
+    {
+      "from": "c40",
+      "from_output": 0,
+      "to": "s40_2",
+      "to_input": 0
+    },
+    {
+      "from": "c40",
+      "from_output": 0,
+      "to": "s40_4",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "c100",
+      "to_input": 0
+    },
+    {
+      "from": "c100",
+      "from_output": 0,
+      "to": "s100_2",
+      "to_input": 0
+    },
+    {
+      "from": "c100",
+      "from_output": 0,
+      "to": "s100_4",
+      "to_input": 0
+    }
+  ]
+}

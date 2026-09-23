@@ -1,0 +1,26 @@
+{'res': 48, 'c': -0.5, 'op': 'above', 'points': 3073, 'prims': 3072, 'ymin': -0.5, 'ymax': 1.0, 'on_plane': 96, 'area': 9.418171, 'full': 12.55487, 'want_above': 9.424778, 'want_below': 3.141593, 'sec': 0.0025}
+{'res': 48, 'c': -0.5, 'op': 'below', 'points': 1537, 'prims': 1536, 'ymin': -1.0, 'ymax': -0.5, 'on_plane': 96, 'area': 3.136699, 'full': 12.55487, 'want_above': 9.424778, 'want_below': 3.141593, 'sec': 0.0015}
+{'res': 48, 'c': -0.5, 'op': 'both', 'points': 4514, 'prims': 4608, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 96, 'area': 12.55487, 'full': 12.55487, 'want_above': 9.424778, 'want_below': 3.141593, 'sec': 0.0007}
+{'res': 48, 'c': 0.0, 'op': 'above', 'points': 2305, 'prims': 2304, 'ymin': 0.0, 'ymax': 1.0, 'on_plane': 96, 'area': 6.277435, 'full': 12.55487, 'want_above': 6.283185, 'want_below': 6.283185, 'sec': 0.0015}
+{'res': 48, 'c': 0.0, 'op': 'below', 'points': 2305, 'prims': 2304, 'ymin': -1.0, 'ymax': 0.0, 'on_plane': 96, 'area': 6.277435, 'full': 12.55487, 'want_above': 6.283185, 'want_below': 6.283185, 'sec': 0.0012}
+{'res': 48, 'c': 0.0, 'op': 'both', 'points': 4514, 'prims': 4608, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 96, 'area': 12.55487, 'full': 12.55487, 'want_above': 6.283185, 'want_below': 6.283185, 'sec': 0.0008}
+{'res': 48, 'c': 0.3, 'op': 'above', 'points': 1825, 'prims': 1824, 'ymin': 0.3, 'ymax': 1.0, 'on_plane': 96, 'area': 4.393643, 'full': 12.55487, 'want_above': 4.39823, 'want_below': 8.168141, 'sec': 0.0018}
+{'res': 48, 'c': 0.3, 'op': 'below', 'points': 2785, 'prims': 2784, 'ymin': -1.0, 'ymax': 0.3, 'on_plane': 96, 'area': 8.161227, 'full': 12.55487, 'want_above': 4.39823, 'want_below': 8.168141, 'sec': 0.0013}
+{'res': 48, 'c': 0.3, 'op': 'both', 'points': 4514, 'prims': 4608, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 96, 'area': 12.55487, 'full': 12.55487, 'want_above': 4.39823, 'want_below': 8.168141, 'sec': 0.0007}
+{'res': 48, 'c': 0.7, 'op': 'above', 'points': 1153, 'prims': 1152, 'ymin': 0.7, 'ymax': 1.0, 'on_plane': 96, 'area': 1.881895, 'full': 12.55487, 'want_above': 1.884956, 'want_below': 10.681415, 'sec': 0.0015}
+{'res': 48, 'c': 0.7, 'op': 'below', 'points': 3457, 'prims': 3456, 'ymin': -1.0, 'ymax': 0.7, 'on_plane': 96, 'area': 10.672975, 'full': 12.55487, 'want_above': 1.884956, 'want_below': 10.681415, 'sec': 0.0025}
+{'res': 48, 'c': 0.7, 'op': 'both', 'points': 4514, 'prims': 4608, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 96, 'area': 12.55487, 'full': 12.55487, 'want_above': 1.884956, 'want_below': 10.681415, 'sec': 0.0009}
+{'res': 192, 'c': -0.5, 'op': 'above', 'points': 49153, 'prims': 49152, 'ymin': -0.5, 'ymax': 1.0, 'on_plane': 384, 'area': 9.42437, 'full': 12.565665, 'want_above': 9.424778, 'want_below': 3.141593, 'sec': 0.0105}
+{'res': 192, 'c': -0.5, 'op': 'below', 'points': 24577, 'prims': 24576, 'ymin': -1.0, 'ymax': -0.5, 'on_plane': 384, 'area': 3.141295, 'full': 12.565665, 'want_above': 9.424778, 'want_below': 3.141593, 'sec': 0.0157}
+{'res': 192, 'c': -0.5, 'op': 'both', 'points': 73346, 'prims': 73728, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 384, 'area': 12.565665, 'full': 12.565665, 'want_above': 9.424778, 'want_below': 3.141593, 'sec': 0.0061}
+{'res': 192, 'c': 0.0, 'op': 'above', 'points': 36865, 'prims': 36864, 'ymin': 0.0, 'ymax': 1.0, 'on_plane': 384, 'area': 6.282833, 'full': 12.565665, 'want_above': 6.283185, 'want_below': 6.283185, 'sec': 0.0116}
+{'res': 192, 'c': 0.0, 'op': 'below', 'points': 36865, 'prims': 36864, 'ymin': -1.0, 'ymax': 0.0, 'on_plane': 384, 'area': 6.282833, 'full': 12.565665, 'want_above': 6.283185, 'want_below': 6.283185, 'sec': 0.0134}
+{'res': 192, 'c': 0.0, 'op': 'both', 'points': 73346, 'prims': 73728, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 384, 'area': 12.565665, 'full': 12.565665, 'want_above': 6.283185, 'want_below': 6.283185, 'sec': 0.0058}
+{'res': 192, 'c': 0.3, 'op': 'above', 'points': 29569, 'prims': 29568, 'ymin': 0.3, 'ymax': 1.0, 'on_plane': 384, 'area': 4.397957, 'full': 12.565665, 'want_above': 4.39823, 'want_below': 8.168141, 'sec': 0.0132}
+{'res': 192, 'c': 0.3, 'op': 'below', 'points': 44161, 'prims': 44160, 'ymin': -1.0, 'ymax': 0.3, 'on_plane': 384, 'area': 8.167708, 'full': 12.565665, 'want_above': 4.39823, 'want_below': 8.168141, 'sec': 0.0127}
+{'res': 192, 'c': 0.3, 'op': 'both', 'points': 73346, 'prims': 73728, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 384, 'area': 12.565665, 'full': 12.565665, 'want_above': 4.39823, 'want_below': 8.168141, 'sec': 0.0066}
+{'res': 192, 'c': 0.7, 'op': 'above', 'points': 18817, 'prims': 18816, 'ymin': 0.7, 'ymax': 1.0, 'on_plane': 384, 'area': 1.884689, 'full': 12.565665, 'want_above': 1.884956, 'want_below': 10.681415, 'sec': 0.014}
+{'res': 192, 'c': 0.7, 'op': 'below', 'points': 54913, 'prims': 54912, 'ymin': -1.0, 'ymax': 0.7, 'on_plane': 384, 'area': 10.680977, 'full': 12.565665, 'want_above': 1.884956, 'want_below': 10.681415, 'sec': 0.0103}
+{'res': 192, 'c': 0.7, 'op': 'both', 'points': 73346, 'prims': 73728, 'ymin': -1.0, 'ymax': 1.0, 'on_plane': 384, 'area': 12.565665, 'full': 12.565665, 'want_above': 1.884956, 'want_below': 10.681415, 'sec': 0.0063}
+保存: D:\Claude\houdini\out\146_stats.json
+HIP 146 D:\Claude\houdini\out\146_scene.hipnc 75745

@@ -1,0 +1,11 @@
+{'k': 1.0, 'N': 1000, 'want': 0.5, 'mean': 0.49915, 'sd_count': 15.216, 'binom_sd': 15.811, 'min': 0.477, 'max': 0.523, 'sec': 0.0035}
+{'k': 1.0, 'N': 10000, 'want': 0.5, 'mean': 0.49852, 'sd_count': 44.839, 'binom_sd': 50.0, 'min': 0.4913, 'max': 0.5101, 'sec': 0.0003}
+{'k': 3.0, 'N': 1000, 'want': 0.75, 'mean': 0.75005, 'sd_count': 13.804, 'binom_sd': 13.693, 'min': 0.723, 'max': 0.776, 'sec': 0.0005}
+{'k': 3.0, 'N': 10000, 'want': 0.75, 'mean': 0.749345, 'sd_count': 39.708, 'binom_sd': 43.301, 'min': 0.7431, 'max': 0.7561, 'sec': 0.0003}
+{'k': 9.0, 'N': 1000, 'want': 0.9, 'mean': 0.8976, 'sd_count': 8.668, 'binom_sd': 9.487, 'min': 0.877, 'max': 0.914, 'sec': 0.0004}
+{'k': 9.0, 'N': 10000, 'want': 0.9, 'mean': 0.898975, 'sd_count': 20.489, 'binom_sd': 30.0, 'min': 0.8956, 'max': 0.9043, 'sec': 0.0003}
+{'densityscale': 10.0, 'area': 2.0, 'points': 14, 'want': 20.0}
+{'densityscale': 100.0, 'area': 2.0, 'points': 193, 'want': 200.0}
+{'densityscale': 1000.0, 'area': 2.0, 'points': 1976, 'want': 2000.0}
+保存: D:\Claude\houdini\out\155_stats.json
+HIP 155 D:\Claude\houdini\out\155_scene.hipnc 57043

@@ -1,0 +1,23 @@
+{
+  "title": "実験135",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "pts",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "for (int i = 0; i < 100; i++) for (int j = 0; j < 100; j++) for (int k = 0; k < 100; k++)\n  addpoint(0, set(i, j, k) ..."
+      }
+    }
+  ],
+  "edges": []
+}

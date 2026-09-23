@@ -1,0 +1,188 @@
+{
+  "title": "実験129",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sp_0_5_24",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.5,
+        "rady": 0.5,
+        "radz": 0.5,
+        "rows": 24,
+        "cols": 48
+      }
+    },
+    {
+      "name": "sp_0_5_96",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.5,
+        "rady": 0.5,
+        "radz": 0.5,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "sp_1_0_24",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 24,
+        "cols": 48
+      }
+    },
+    {
+      "name": "sp_1_0_96",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "sp_2_0_24",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 2.0,
+        "rady": 2.0,
+        "radz": 2.0,
+        "rows": 24,
+        "cols": 48
+      }
+    },
+    {
+      "name": "sp_2_0_96",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 2.0,
+        "rady": 2.0,
+        "radz": 2.0,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "tb_0_5_24",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "rad1": 0.5,
+        "rad2": 0.5,
+        "height": 4.0,
+        "rows": 17,
+        "cols": 24
+      }
+    },
+    {
+      "name": "tb_0_5_96",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "rad1": 0.5,
+        "rad2": 0.5,
+        "height": 4.0,
+        "rows": 17,
+        "cols": 96
+      }
+    },
+    {
+      "name": "tb_1_0_24",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "height": 4.0,
+        "rows": 17,
+        "cols": 24
+      }
+    },
+    {
+      "name": "tb_1_0_96",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "height": 4.0,
+        "rows": 17,
+        "cols": 96
+      }
+    }
+  ],
+  "edges": []
+}

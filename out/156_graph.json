@@ -1,0 +1,204 @@
+{
+  "title": "実験156",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "straight",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "stdswitcher1": 1,
+        "points": 2,
+        "prim0": "0 1",
+        "pt1x": 2.0
+      }
+    },
+    {
+      "name": "w3",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "div": 3
+      }
+    },
+    {
+      "name": "w4",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "w6",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "div": 6
+      }
+    },
+    {
+      "name": "w8",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "div": 8
+      }
+    },
+    {
+      "name": "w16",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "div": 16
+      }
+    },
+    {
+      "name": "w32",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "div": 32
+      }
+    },
+    {
+      "name": "bent",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "stdswitcher1": 1,
+        "points": 3,
+        "prim0": "0 1 2",
+        "pt1x": 1.0,
+        "pt2x": 1.0,
+        "pt2y": 1.0
+      }
+    },
+    {
+      "name": "bend1",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "div": 16
+      }
+    },
+    {
+      "name": "bend0",
+      "type": "polywire",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "jointcorrect": 0,
+        "div": 16
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "straight",
+      "from_output": 0,
+      "to": "w3",
+      "to_input": 0
+    },
+    {
+      "from": "straight",
+      "from_output": 0,
+      "to": "w4",
+      "to_input": 0
+    },
+    {
+      "from": "straight",
+      "from_output": 0,
+      "to": "w6",
+      "to_input": 0
+    },
+    {
+      "from": "straight",
+      "from_output": 0,
+      "to": "w8",
+      "to_input": 0
+    },
+    {
+      "from": "straight",
+      "from_output": 0,
+      "to": "w16",
+      "to_input": 0
+    },
+    {
+      "from": "straight",
+      "from_output": 0,
+      "to": "w32",
+      "to_input": 0
+    },
+    {
+      "from": "bent",
+      "from_output": 0,
+      "to": "bend1",
+      "to_input": 0
+    },
+    {
+      "from": "bent",
+      "from_output": 0,
+      "to": "bend0",
+      "to_input": 0
+    }
+  ]
+}

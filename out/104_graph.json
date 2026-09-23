@@ -1,0 +1,313 @@
+{
+  "title": "実験104",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "the_line",
+      "type": "line",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "dirx": 1.0,
+        "diry": 0.0,
+        "dist": 7.0
+      }
+    },
+    {
+      "name": "rs_1.0",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 1.0
+      }
+    },
+    {
+      "name": "rs_0.7",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 0.7
+      }
+    },
+    {
+      "name": "rs_0.5",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 0.5
+      }
+    },
+    {
+      "name": "rs_0.3",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 0.3
+      }
+    },
+    {
+      "name": "rs_0.25",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 0.25
+      }
+    },
+    {
+      "name": "rs_0.2",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 0.2
+      }
+    },
+    {
+      "name": "rs_1.5",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 1.5
+      }
+    },
+    {
+      "name": "rs_2.0",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 2.0
+      }
+    },
+    {
+      "name": "rs_3.0",
+      "type": "resample",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "length": 3.0
+      }
+    },
+    {
+      "name": "cv_0.0_1.0",
+      "type": "carve",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "domainu1": 0.0,
+        "secondu": 1,
+        "domainu2": 1.0
+      }
+    },
+    {
+      "name": "cv_0.0_0.5",
+      "type": "carve",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "domainu1": 0.0,
+        "secondu": 1,
+        "domainu2": 0.5
+      }
+    },
+    {
+      "name": "cv_0.25_0.75",
+      "type": "carve",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "secondu": 1
+      }
+    },
+    {
+      "name": "cv_0.1_0.9",
+      "type": "carve",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "domainu1": 0.1,
+        "secondu": 1,
+        "domainu2": 0.9
+      }
+    },
+    {
+      "name": "cv_0.5_0.5",
+      "type": "carve",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "domainu1": 0.5,
+        "secondu": 1,
+        "domainu2": 0.5
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_1.0",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_0.7",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_0.3",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_0.25",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_1.5",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_2.0",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "rs_3.0",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "cv_0.0_1.0",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "cv_0.0_0.5",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "cv_0.25_0.75",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "cv_0.1_0.9",
+      "to_input": 0
+    },
+    {
+      "from": "the_line",
+      "from_output": 0,
+      "to": "cv_0.5_0.5",
+      "to_input": 0
+    }
+  ]
+}

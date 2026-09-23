@@ -1,0 +1,290 @@
+{
+  "title": "実験159",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "pt",
+      "type": "add",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "points": 1,
+        "pt0x": 25.6
+      }
+    },
+    {
+      "name": "t24_0_10",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t24_0_5",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velscale": 0.5,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t24_1_10",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velapproximation": 1,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t24_1_5",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velscale": 0.5,
+        "velapproximation": 1,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t24_2_10",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velapproximation": 2,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t24_2_5",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velscale": 0.5,
+        "velapproximation": 2,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t30_0_10",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t30_0_5",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velscale": 0.5,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t30_1_10",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velapproximation": 1,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t30_1_5",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velscale": 0.5,
+        "velapproximation": 1,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t30_2_10",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velapproximation": 2,
+        "computeaccel": 1
+      }
+    },
+    {
+      "name": "t30_2_5",
+      "type": "trail",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "result": 3,
+        "velscale": 0.5,
+        "velapproximation": 2,
+        "computeaccel": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t24_0_10",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t24_0_5",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t24_1_10",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t24_1_5",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t24_2_10",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t24_2_5",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t30_0_10",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t30_0_5",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t30_1_10",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t30_1_5",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t30_2_10",
+      "to_input": 0
+    },
+    {
+      "from": "pt",
+      "from_output": 0,
+      "to": "t30_2_5",
+      "to_input": 0
+    }
+  ]
+}

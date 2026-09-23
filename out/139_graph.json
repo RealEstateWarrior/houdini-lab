@@ -1,0 +1,155 @@
+{
+  "title": "実験139",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "l",
+      "type": "line",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "originx": -2.0,
+        "dirx": 1.0,
+        "diry": 0.0,
+        "dist": 4.0,
+        "points": 401
+      }
+    },
+    {
+      "name": "step",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@v = @P.x >= -1e-6 ? 1.0 : 0.0;"
+      }
+    },
+    {
+      "name": "pinned",
+      "type": "attribblur",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attributes": "v",
+        "iterations": 100
+      }
+    },
+    {
+      "name": "b1",
+      "type": "attribblur",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attributes": "v",
+        "pinborder": 0
+      }
+    },
+    {
+      "name": "b10",
+      "type": "attribblur",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attributes": "v",
+        "iterations": 10,
+        "pinborder": 0
+      }
+    },
+    {
+      "name": "b100",
+      "type": "attribblur",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attributes": "v",
+        "iterations": 100,
+        "pinborder": 0
+      }
+    },
+    {
+      "name": "b1000",
+      "type": "attribblur",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attributes": "v",
+        "iterations": 1000,
+        "pinborder": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "l",
+      "from_output": 0,
+      "to": "step",
+      "to_input": 0
+    },
+    {
+      "from": "step",
+      "from_output": 0,
+      "to": "pinned",
+      "to_input": 0
+    },
+    {
+      "from": "step",
+      "from_output": 0,
+      "to": "b1",
+      "to_input": 0
+    },
+    {
+      "from": "step",
+      "from_output": 0,
+      "to": "b10",
+      "to_input": 0
+    },
+    {
+      "from": "step",
+      "from_output": 0,
+      "to": "b100",
+      "to_input": 0
+    },
+    {
+      "from": "step",
+      "from_output": 0,
+      "to": "b1000",
+      "to_input": 0
+    }
+  ]
+}

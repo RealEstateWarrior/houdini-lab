@@ -1890,6 +1890,56 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 }
 .sheet-body { padding: 6px 26px 48px; }
 
+/* ハンバーガーの上半分: 実践のサムネイルと、実験・解説への入口（2026-09-23） */
+.menu-cards { display: grid; gap: 18px; margin: 4px 0 8px; }
+.menu-cards-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  margin: 0; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim);
+}
+.menu-cards-head a { color: var(--flag); text-decoration: none; letter-spacing: 0; text-transform: none; font-size: 0.9rem; }
+.menu-cards-head--list { margin-top: 10px; }
+.menu-rail {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(168px, 22%);
+  gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px;
+  margin: 0 -26px; padding-left: 26px; padding-right: 26px; scroll-padding: 0 26px;
+  scrollbar-width: none;
+}
+.menu-rail::-webkit-scrollbar { display: none; }
+.menu-card {
+  display: grid; gap: 8px; scroll-snap-align: start; text-decoration: none; color: var(--ink);
+}
+.menu-card img {
+  width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 12px;
+  background: #0b0b0c; transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.menu-card span { font-size: 0.92rem; font-weight: 600; line-height: 1.35; }
+.menu-card:hover img, .menu-card:focus-visible img { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.menu-doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.menu-door {
+  display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 12px;
+  padding: 10px; border-radius: 14px; background: var(--panel-hi); color: var(--ink); text-decoration: none;
+}
+.menu-door img, .menu-door-mark {
+  width: 64px; height: 48px; border-radius: 8px; object-fit: cover; background: #0b0b0c;
+}
+.menu-door-mark {
+  display: grid; place-items: center; font-family: var(--font-display); font-weight: 700;
+  font-size: 1.2rem; color: var(--on-flag); background: var(--flag);
+}
+.menu-door-text { display: grid; gap: 2px; min-width: 0; }
+.menu-door-text strong { font-size: 1rem; }
+.menu-door-text small { font-size: 0.8rem; color: var(--ink-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.menu-door:hover { background: var(--wire-dim); }
+@media (min-width: 900px) {
+  .menu-cards { max-width: 1120px; }
+  .menu-rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; margin: 0; padding: 0; }
+}
+@media (max-width: 720px) {
+  .menu-rail { grid-auto-columns: 62%; }
+  .menu-doors { grid-template-columns: 1fr; }
+}
+
 .sheet-list { list-style: none; margin: 0; padding: 0; }
 .sheet-list li { border: none; }
 .sheet-list a,
@@ -2970,6 +3020,25 @@ body { overflow-x: clip; }
     </button>
   </div>
   <div class="sheet-body">
+    <div class="menu-cards">
+      <div class="menu-cards-head"><span>実践</span><a href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guides">すべて見る（36本）</a></div>
+      <div class="menu-rail">
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-glow"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-karma"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-vex"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-groom"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-sparks"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-sign"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-path"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
+        <a class="menu-card" href="https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs#guide-terrain"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+      </div>
+      <div class="menu-doors">
+        <a class="menu-door" href="https://claude.ai/artifact/XqNSd943n6cguxcULeHxBz"><img src="thumb_201.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>201本の実験。最新は実験201</small></span></a>
+        <a class="menu-door" href="https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>375件</small></span></a>
+        <a class="menu-door" href="https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>412語</small></span></a>
+      </div>
+      <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
+    </div>
     <ul class="sheet-list" id="menu-list"></ul>
   </div>
 </div>

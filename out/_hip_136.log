@@ -1,0 +1,20 @@
+{'fn': 'nearpoints', 'radius': 0.5, 'max': 100, 'count': 1, 'self_first': True, 'sorted': True, 'dist': [0.0]}
+{'fn': 'pcfind', 'radius': 0.5, 'max': 100, 'count': 1, 'self_first': True, 'sorted': True, 'dist': [0.0]}
+{'fn': 'nearpoints', 'radius': 0.999, 'max': 100, 'count': 1, 'self_first': True, 'sorted': True, 'dist': [0.0]}
+{'fn': 'pcfind', 'radius': 0.999, 'max': 100, 'count': 1, 'self_first': True, 'sorted': True, 'dist': [0.0]}
+{'fn': 'nearpoints', 'radius': 1.0, 'max': 100, 'count': 5, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0]}
+{'fn': 'pcfind', 'radius': 1.0, 'max': 100, 'count': 5, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0]}
+{'fn': 'nearpoints', 'radius': 1.001, 'max': 100, 'count': 5, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0]}
+{'fn': 'pcfind', 'radius': 1.001, 'max': 100, 'count': 5, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0]}
+{'fn': 'nearpoints', 'radius': 1.414214, 'max': 100, 'count': 5, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0]}
+{'fn': 'pcfind', 'radius': 1.414214, 'max': 100, 'count': 5, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0]}
+{'fn': 'nearpoints', 'radius': 1.414314, 'max': 100, 'count': 9, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0, 1.414214, 1.414214, 1.414214, 1.414214]}
+{'fn': 'pcfind', 'radius': 1.414314, 'max': 100, 'count': 9, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0, 1.414214, 1.414214, 1.414214, 1.414214]}
+{'fn': 'nearpoints', 'radius': 2.0, 'max': 100, 'count': 13, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0, 1.414214, 1.414214, 1.414214, 1.414214, 2.0, 2.0, 2.0, 2.0]}
+{'fn': 'pcfind', 'radius': 2.0, 'max': 100, 'count': 13, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0, 1.0, 1.0, 1.414214, 1.414214, 1.414214, 1.414214, 2.0, 2.0, 2.0, 2.0]}
+{'fn': 'nearpoints', 'radius': 2.0, 'max': 3, 'count': 3, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0]}
+{'fn': 'pcfind', 'radius': 2.0, 'max': 3, 'count': 3, 'self_first': True, 'sorted': True, 'dist': [0.0, 1.0, 1.0]}
+{'fn': 'nearpoints', 'radius': 2.0, 'max': 1, 'count': 1, 'self_first': True, 'sorted': True, 'dist': [0.0]}
+{'fn': 'pcfind', 'radius': 2.0, 'max': 1, 'count': 1, 'self_first': True, 'sorted': True, 'dist': [0.0]}
+書いた: D:\Claude\houdini\out\136_stats.json
+HIP 136 D:\Claude\houdini\out\136_scene.hipnc 35813

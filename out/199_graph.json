@@ -1,0 +1,271 @@
+{
+  "title": "実験199",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "sdf3",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.01
+      }
+    },
+    {
+      "name": "open3",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 10.0
+      }
+    },
+    {
+      "name": "c3",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "sdf6",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.01,
+        "exteriorbandvoxels": 6,
+        "interiorbandvoxels": 6
+      }
+    },
+    {
+      "name": "open6",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 10.0
+      }
+    },
+    {
+      "name": "c6",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "sdf12",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.01,
+        "exteriorbandvoxels": 12,
+        "interiorbandvoxels": 12
+      }
+    },
+    {
+      "name": "open12",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 10.0
+      }
+    },
+    {
+      "name": "c12",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "sdf25",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.01,
+        "exteriorbandvoxels": 25,
+        "interiorbandvoxels": 25
+      }
+    },
+    {
+      "name": "open25",
+      "type": "vdbreshapesdf",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": "open",
+        "voxeloffset": 10.0
+      }
+    },
+    {
+      "name": "c25",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "sdf3",
+      "to_input": 0
+    },
+    {
+      "from": "sdf3",
+      "from_output": 0,
+      "to": "open3",
+      "to_input": 0
+    },
+    {
+      "from": "open3",
+      "from_output": 0,
+      "to": "c3",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "sdf6",
+      "to_input": 0
+    },
+    {
+      "from": "sdf6",
+      "from_output": 0,
+      "to": "open6",
+      "to_input": 0
+    },
+    {
+      "from": "open6",
+      "from_output": 0,
+      "to": "c6",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "sdf12",
+      "to_input": 0
+    },
+    {
+      "from": "sdf12",
+      "from_output": 0,
+      "to": "open12",
+      "to_input": 0
+    },
+    {
+      "from": "open12",
+      "from_output": 0,
+      "to": "c12",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "sdf25",
+      "to_input": 0
+    },
+    {
+      "from": "sdf25",
+      "from_output": 0,
+      "to": "open25",
+      "to_input": 0
+    },
+    {
+      "from": "open25",
+      "from_output": 0,
+      "to": "c25",
+      "to_input": 0
+    }
+  ]
+}

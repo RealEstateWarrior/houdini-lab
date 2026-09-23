@@ -1,0 +1,189 @@
+{
+  "title": "実験153",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grid",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 6,
+        "cols": 9
+      }
+    },
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "dodivs": 1,
+        "divsx": 4,
+        "divsy": 4,
+        "divsz": 4
+      }
+    },
+    {
+      "name": "sph",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 9,
+        "cols": 16
+      }
+    },
+    {
+      "name": "tor",
+      "type": "torus",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 8,
+        "cols": 12
+      }
+    },
+    {
+      "name": "tube",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "rows": 5,
+        "cols": 10
+      }
+    },
+    {
+      "name": "w_grid",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "i@nb = neighbourcount(0, @ptnum);"
+      }
+    },
+    {
+      "name": "w_box",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "i@nb = neighbourcount(0, @ptnum);"
+      }
+    },
+    {
+      "name": "w_sph",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "i@nb = neighbourcount(0, @ptnum);"
+      }
+    },
+    {
+      "name": "w_tor",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "i@nb = neighbourcount(0, @ptnum);"
+      }
+    },
+    {
+      "name": "w_tube",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "i@nb = neighbourcount(0, @ptnum);"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "grid",
+      "from_output": 0,
+      "to": "w_grid",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "w_box",
+      "to_input": 0
+    },
+    {
+      "from": "sph",
+      "from_output": 0,
+      "to": "w_sph",
+      "to_input": 0
+    },
+    {
+      "from": "tor",
+      "from_output": 0,
+      "to": "w_tor",
+      "to_input": 0
+    },
+    {
+      "from": "tube",
+      "from_output": 0,
+      "to": "w_tube",
+      "to_input": 0
+    }
+  ]
+}

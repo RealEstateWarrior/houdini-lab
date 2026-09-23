@@ -1886,6 +1886,56 @@ footer code { color: var(--ink-mid); background: none; padding: 0; }
 }
 .sheet-body { padding: 6px 26px 48px; }
 
+/* ハンバーガーの上半分: 実践のサムネイルと、実験・解説への入口（2026-09-23） */
+.menu-cards { display: grid; gap: 18px; margin: 4px 0 8px; }
+.menu-cards-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  margin: 0; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim);
+}
+.menu-cards-head a { color: var(--flag); text-decoration: none; letter-spacing: 0; text-transform: none; font-size: 0.9rem; }
+.menu-cards-head--list { margin-top: 10px; }
+.menu-rail {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(168px, 22%);
+  gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px;
+  margin: 0 -26px; padding-left: 26px; padding-right: 26px; scroll-padding: 0 26px;
+  scrollbar-width: none;
+}
+.menu-rail::-webkit-scrollbar { display: none; }
+.menu-card {
+  display: grid; gap: 8px; scroll-snap-align: start; text-decoration: none; color: var(--ink);
+}
+.menu-card img {
+  width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 12px;
+  background: #0b0b0c; transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.menu-card span { font-size: 0.92rem; font-weight: 600; line-height: 1.35; }
+.menu-card:hover img, .menu-card:focus-visible img { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.menu-doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.menu-door {
+  display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 12px;
+  padding: 10px; border-radius: 14px; background: var(--panel-hi); color: var(--ink); text-decoration: none;
+}
+.menu-door img, .menu-door-mark {
+  width: 64px; height: 48px; border-radius: 8px; object-fit: cover; background: #0b0b0c;
+}
+.menu-door-mark {
+  display: grid; place-items: center; font-family: var(--font-display); font-weight: 700;
+  font-size: 1.2rem; color: var(--on-flag); background: var(--flag);
+}
+.menu-door-text { display: grid; gap: 2px; min-width: 0; }
+.menu-door-text strong { font-size: 1rem; }
+.menu-door-text small { font-size: 0.8rem; color: var(--ink-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.menu-door:hover { background: var(--wire-dim); }
+@media (min-width: 900px) {
+  .menu-cards { max-width: 1120px; }
+  .menu-rail { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; margin: 0; padding: 0; }
+}
+@media (max-width: 720px) {
+  .menu-rail { grid-auto-columns: 62%; }
+  .menu-doors { grid-template-columns: 1fr; }
+}
+
 .sheet-list { list-style: none; margin: 0; padding: 0; }
 .sheet-list li { border: none; }
 .sheet-list a,

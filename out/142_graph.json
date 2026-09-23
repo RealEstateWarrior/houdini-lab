@@ -1,0 +1,76 @@
+{
+  "title": "実験142",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "p0",
+      "type": "platonic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "p1",
+      "type": "platonic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1
+      }
+    },
+    {
+      "name": "p2",
+      "type": "platonic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2
+      }
+    },
+    {
+      "name": "p3",
+      "type": "platonic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 3
+      }
+    },
+    {
+      "name": "p4",
+      "type": "platonic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 4
+      }
+    }
+  ],
+  "edges": []
+}

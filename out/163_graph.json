@@ -1,0 +1,225 @@
+{
+  "title": "実験163",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g3_3",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 3,
+        "cols": 3
+      }
+    },
+    {
+      "name": "t3_3",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "vc_quads_3_3",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "vc_triangles_3_3",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "g5_8",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 5,
+        "cols": 8
+      }
+    },
+    {
+      "name": "t5_8",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "vc_quads_5_8",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "vc_triangles_5_8",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "g10_10",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "t10_10",
+      "type": "divide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "vc_quads_10_10",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    },
+    {
+      "name": "vc_triangles_10_10",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g3_3",
+      "from_output": 0,
+      "to": "t3_3",
+      "to_input": 0
+    },
+    {
+      "from": "g3_3",
+      "from_output": 0,
+      "to": "vc_quads_3_3",
+      "to_input": 0
+    },
+    {
+      "from": "t3_3",
+      "from_output": 0,
+      "to": "vc_triangles_3_3",
+      "to_input": 0
+    },
+    {
+      "from": "g5_8",
+      "from_output": 0,
+      "to": "t5_8",
+      "to_input": 0
+    },
+    {
+      "from": "g5_8",
+      "from_output": 0,
+      "to": "vc_quads_5_8",
+      "to_input": 0
+    },
+    {
+      "from": "t5_8",
+      "from_output": 0,
+      "to": "vc_triangles_5_8",
+      "to_input": 0
+    },
+    {
+      "from": "g10_10",
+      "from_output": 0,
+      "to": "t10_10",
+      "to_input": 0
+    },
+    {
+      "from": "g10_10",
+      "from_output": 0,
+      "to": "vc_quads_10_10",
+      "to_input": 0
+    },
+    {
+      "from": "t10_10",
+      "from_output": 0,
+      "to": "vc_triangles_10_10",
+      "to_input": 0
+    }
+  ]
+}

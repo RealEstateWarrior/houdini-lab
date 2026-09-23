@@ -1,0 +1,15 @@
+operation の選択肢: ['copya', 'copyb', 'inverta', 'add', 'subtract', 'multiply', 'divide', 'maximum', 'minimum', 'compatimesb', 'apluscompatimesb', 'sdfunion', 'sdfintersect', 'sdfdifference', 'replacewithactive', 'topounion', 'topointersect', 'topodifference']
+{'voxel': 0.1, 'op': 'sdfunion', 'volume': 7.001569, 'want': 7.068583, 'rel': -0.009481, 'sec': 0.094}
+{'voxel': 0.1, 'op': 'sdfintersect', 'volume': 1.280965, 'want': 1.308997, 'rel': -0.021415, 'sec': 0.014}
+{'voxel': 0.1, 'op': 'sdfdifference', 'volume': 2.832658, 'want': 2.879793, 'rel': -0.016368, 'sec': 0.023}
+{'voxel': 0.05, 'op': 'sdfunion', 'volume': 7.050587, 'want': 7.068583, 'rel': -0.002546, 'sec': 0.163}
+{'voxel': 0.05, 'op': 'sdfintersect', 'volume': 1.301543, 'want': 1.308997, 'rel': -0.005695, 'sec': 0.044}
+{'voxel': 0.05, 'op': 'sdfdifference', 'volume': 2.867955, 'want': 2.879793, 'rel': -0.004111, 'sec': 0.083}
+{'voxel': 0.025, 'op': 'sdfunion', 'volume': 7.063037, 'want': 7.068583, 'rel': -0.000785, 'sec': 0.542}
+{'voxel': 0.025, 'op': 'sdfintersect', 'volume': 1.306632, 'want': 1.308997, 'rel': -0.001807, 'sec': 0.163}
+{'voxel': 0.025, 'op': 'sdfdifference', 'volume': 2.876511, 'want': 2.879793, 'rel': -0.00114, 'sec': 0.312}
+{'voxel': 0.0125, 'op': 'sdfunion', 'volume': 7.066169, 'want': 7.068583, 'rel': -0.000342, 'sec': 1.999}
+{'voxel': 0.0125, 'op': 'sdfintersect', 'volume': 1.308006, 'want': 1.308997, 'rel': -0.000757, 'sec': 0.654}
+{'voxel': 0.0125, 'op': 'sdfdifference', 'volume': 2.878679, 'want': 2.879793, 'rel': -0.000387, 'sec': 1.289}
+書いた: D:\Claude\houdini\out\112_stats.json
+HIP 112 D:\Claude\houdini\out\112_scene.hipnc 89044

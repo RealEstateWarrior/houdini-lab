@@ -1946,6 +1946,44 @@ def render_strip(guides, urls):
     return "\n".join(out)
 
 
+# ハンバーガーを開いたときに並べる実践。絵として見栄えのするものを選んでいる（2026-09-23）
+MENU_GUIDES = ["glow", "karma", "vex", "groom", "sparks", "sign", "path", "terrain"]
+
+
+def render_menu_cards(guides, urls, data, nodes):
+    """ハンバーガーの中身の上半分。実践のサムネイルと、実験・解説への入口。
+
+    下半分の文字の一覧は、これまでどおり JS が上のバーから写して作る。
+    """
+    by_id = {g["id"]: g for g in guides["guides"]}
+    picks = [by_id[i] for i in MENU_GUIDES if i in by_id]
+    last = DONE[-1]
+    out = ['    <div class="menu-cards">',
+           '      <div class="menu-cards-head"><span>実践</span>'
+           f'<a href="{panel_url(urls, "guides")}">すべて見る（{len(guides["guides"])}本）</a></div>',
+           '      <div class="menu-rail">']
+    for g in picks:
+        out.append(f'        <a class="menu-card" href="{guide_url(urls, g["id"])}">'
+                   f'<img src="{g["hero"]}" alt="" loading="lazy" decoding="async">'
+                   f'<span>{html.escape(g["title"])}</span></a>')
+    out.append("      </div>")
+    out.append('      <div class="menu-doors">')
+    doors = (
+        (urls["log_pm"], f"thumb_{last['no']}.png", "実験ログ", f"{len(DONE)}本の実験。最新は実験{last['no']}"),
+        (panel_url(urls, "nodes"), "019_graph.png", "ノード解説", f"{count_nodes(nodes)}件"),
+        (panel_url(urls, "glossary"), None, "用語集", f"{count_terms(data)}語"),
+    )
+    for href, img, label, sub in doors:
+        pic = (f'<img src="{img}" alt="" loading="lazy" decoding="async">' if img
+               else '<span class="menu-door-mark" aria-hidden="true">Aa</span>')
+        out.append(f'        <a class="menu-door" href="{href}">{pic}'
+                   f'<span class="menu-door-text"><strong>{label}</strong><small>{html.escape(sub)}</small></span></a>')
+    out.append("      </div>")
+    out.append('      <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>')
+    out.append("    </div>")
+    return "\n".join(out)
+
+
 def render_work_cards(works):
     """制作の一覧。まだ1本も無いときは、そう書いておく。"""
     if not works["works"]:
@@ -2501,6 +2539,7 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--GLOSSARY_DATA-->", render_data(data)),
         ("<!--POPOVER-->", popover),
         ("<!--CHROME-->", chrome),
+        ("<!--MENU_CARDS-->", render_menu_cards(guides, urls, data, nodes)),
         ("<!--SEARCH_DATA-->",
          render_search_data(data, nodes, guides, urls, tabs)),
         ("<!--EXP_COUNT-->", str(len(DONE))),

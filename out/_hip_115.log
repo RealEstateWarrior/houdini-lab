@@ -1,0 +1,20 @@
+{'case': 'poisson_edges', 'res': 21, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': 0.0, 'n': 231, 'sec': 0.1779}
+{'case': 'eikonal_edge', 'res': 21, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': 0.0, 'n': 231, 'sec': 0.0072}
+{'case': 'eikonal_point', 'res': 21, 'mean_abs': 0.334572, 'max_abs': 0.763932, 'mean': 0.334572, 'n': 231, 'sec': 0.0074}
+{'case': 'eikonal_point_vs_manhattan', 'res': 21, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': -0.0, 'n': 231}
+{'case': 'eikonal_point_tris', 'res': 21, 'mean_abs': 0.202707, 'max_abs': 0.763932, 'mean': 0.202707, 'n': 231}
+{'case': 'poisson_edges', 'res': 41, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': 0.0, 'n': 861, 'sec': 0.0028}
+{'case': 'eikonal_edge', 'res': 41, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': 0.0, 'n': 861, 'sec': 0.0017}
+{'case': 'eikonal_point', 'res': 41, 'mean_abs': 0.325229, 'max_abs': 0.763932, 'mean': 0.325229, 'n': 861, 'sec': 0.0017}
+{'case': 'eikonal_point_vs_manhattan', 'res': 41, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': -0.0, 'n': 861}
+{'case': 'eikonal_point_tris', 'res': 41, 'mean_abs': 0.198002, 'max_abs': 0.763932, 'mean': 0.198002, 'n': 861}
+{'case': 'poisson_edges', 'res': 81, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': 0.0, 'n': 3321, 'sec': 0.0067}
+{'case': 'eikonal_edge', 'res': 81, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': 0.0, 'n': 3321, 'sec': 0.0033}
+{'case': 'eikonal_point', 'res': 81, 'mean_abs': 0.319703, 'max_abs': 0.763932, 'mean': 0.319703, 'n': 3321, 'sec': 0.0033}
+{'case': 'eikonal_point_vs_manhattan', 'res': 81, 'mean_abs': 0.0, 'max_abs': 0.0, 'mean': -0.0, 'n': 3321}
+{'case': 'eikonal_point_tris', 'res': 81, 'mean_abs': 0.194997, 'max_abs': 0.763932, 'mean': 0.194997, 'n': 3321}
+{'case': 'eikonal_sphere', 'res': 24, 'mean_abs': 0.001221, 'max_abs': 0.002442, 'mean': -0.001221, 'n': 1058, 'sec': 0.0083}
+{'case': 'eikonal_sphere', 'res': 48, 'mean_abs': 0.000292, 'max_abs': 0.000585, 'mean': -0.000292, 'n': 4418, 'sec': 0.0068}
+{'case': 'eikonal_sphere', 'res': 96, 'mean_abs': 7.2e-05, 'max_abs': 0.000143, 'mean': -7.2e-05, 'n': 18050, 'sec': 0.0248}
+書いた: D:\Claude\houdini\out\115_stats.json
+HIP 115 D:\Claude\houdini\out\115_scene.hipnc 95781

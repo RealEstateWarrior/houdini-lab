@@ -1,0 +1,113 @@
+{
+  "title": "実験110",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "b",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 0.2,
+        "sizey": 0.2,
+        "sizez": 0.2,
+        "tx": 0.5
+      }
+    },
+    {
+      "name": "move",
+      "type": "copyxform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ncy": 5,
+        "tx": 1.0
+      }
+    },
+    {
+      "name": "scale",
+      "type": "copyxform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ncy": 5,
+        "scale": 0.8
+      }
+    },
+    {
+      "name": "turn",
+      "type": "copyxform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ncy": 6,
+        "tx": 2.0,
+        "ry": 72.0
+      }
+    },
+    {
+      "name": "turn_trs",
+      "type": "copyxform",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ncy": 6,
+        "xOrd": 5,
+        "tx": 2.0,
+        "ry": 72.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "b",
+      "from_output": 0,
+      "to": "move",
+      "to_input": 0
+    },
+    {
+      "from": "b",
+      "from_output": 0,
+      "to": "scale",
+      "to_input": 0
+    },
+    {
+      "from": "b",
+      "from_output": 0,
+      "to": "turn",
+      "to_input": 0
+    },
+    {
+      "from": "b",
+      "from_output": 0,
+      "to": "turn_trs",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{'margin': 0.0, 'bounce': 0.25, 'bottom_rest': -9.2e-05, 'center_rest': 0.49995, 'lowest': -0.006908, 'first_hit_frame': 15, 'rebound': 0.0091, 'sec_97f': 0.68}
+{'margin': 0.0, 'bounce': 0.8, 'bottom_rest': -7e-06, 'center_rest': 0.499996, 'lowest': -0.008162, 'first_hit_frame': 15, 'rebound': 0.2286, 'sec_97f': 0.357}
+{'margin': 0.02, 'bounce': 0.25, 'bottom_rest': -9.2e-05, 'center_rest': 0.49995, 'lowest': -0.006908, 'first_hit_frame': 15, 'rebound': 0.0091, 'sec_97f': 0.355}
+{'margin': 0.02, 'bounce': 0.8, 'bottom_rest': -7e-06, 'center_rest': 0.499996, 'lowest': -0.008162, 'first_hit_frame': 15, 'rebound': 0.2286, 'sec_97f': 0.353}
+{'margin': 0.05, 'bounce': 0.25, 'bottom_rest': -9.2e-05, 'center_rest': 0.49995, 'lowest': -0.006908, 'first_hit_frame': 15, 'rebound': 0.0091, 'sec_97f': 0.356}
+{'margin': 0.05, 'bounce': 0.8, 'bottom_rest': -7e-06, 'center_rest': 0.499996, 'lowest': -0.008162, 'first_hit_frame': 15, 'rebound': 0.2286, 'sec_97f': 0.387}
+保存: D:\Claude\houdini\out\167_stats.json
+HIP 167 D:\Claude\houdini\out\167_scene.hipnc 612287

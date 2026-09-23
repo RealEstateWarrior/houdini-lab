@@ -1,0 +1,405 @@
+{
+  "title": "実験095",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "plate_left",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "tx": -0.505,
+        "rows": 11,
+        "cols": 11
+      }
+    },
+    {
+      "name": "plate_right",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "tx": 0.505,
+        "rows": 11,
+        "cols": 11
+      }
+    },
+    {
+      "name": "plates",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "gap_0.0",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.0
+      }
+    },
+    {
+      "name": "gap_0.001",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "gap_0.005",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.005
+      }
+    },
+    {
+      "name": "gap_0.009",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.009
+      }
+    },
+    {
+      "name": "gap_0.0095",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.0095
+      }
+    },
+    {
+      "name": "gap_0.01",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.01
+      }
+    },
+    {
+      "name": "gap_0.011",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.011
+      }
+    },
+    {
+      "name": "gap_0.02",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.02
+      }
+    },
+    {
+      "name": "gap_0.05",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.05
+      }
+    },
+    {
+      "name": "mesh_sphere",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 50,
+        "cols": 50
+      }
+    },
+    {
+      "name": "mesh_0.0",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.0
+      }
+    },
+    {
+      "name": "mesh_0.005",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.005
+      }
+    },
+    {
+      "name": "mesh_0.01",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.01
+      }
+    },
+    {
+      "name": "mesh_0.02",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.02
+      }
+    },
+    {
+      "name": "mesh_0.04",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.04
+      }
+    },
+    {
+      "name": "mesh_0.08",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.08
+      }
+    },
+    {
+      "name": "mesh_0.16",
+      "type": "fuse::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tol3d": 0.16
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "plate_left",
+      "from_output": 0,
+      "to": "plates",
+      "to_input": 0
+    },
+    {
+      "from": "plate_right",
+      "from_output": 0,
+      "to": "plates",
+      "to_input": 1
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.0",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.001",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.005",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.009",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.0095",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.01",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.011",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.02",
+      "to_input": 0
+    },
+    {
+      "from": "plates",
+      "from_output": 0,
+      "to": "gap_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "mesh_sphere",
+      "from_output": 0,
+      "to": "mesh_0.0",
+      "to_input": 0
+    },
+    {
+      "from": "mesh_sphere",
+      "from_output": 0,
+      "to": "mesh_0.005",
+      "to_input": 0
+    },
+    {
+      "from": "mesh_sphere",
+      "from_output": 0,
+      "to": "mesh_0.01",
+      "to_input": 0
+    },
+    {
+      "from": "mesh_sphere",
+      "from_output": 0,
+      "to": "mesh_0.02",
+      "to_input": 0
+    },
+    {
+      "from": "mesh_sphere",
+      "from_output": 0,
+      "to": "mesh_0.04",
+      "to_input": 0
+    },
+    {
+      "from": "mesh_sphere",
+      "from_output": 0,
+      "to": "mesh_0.08",
+      "to_input": 0
+    },
+    {
+      "from": "mesh_sphere",
+      "from_output": 0,
+      "to": "mesh_0.16",
+      "to_input": 0
+    }
+  ]
+}

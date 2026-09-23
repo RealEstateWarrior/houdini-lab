@@ -1,0 +1,68 @@
+{'k': 4, 'turn': 90.0, 'cusp': 10, 'split_ratio': 1.0, 'points': 12, 'expect_split': True}
+{'k': 4, 'turn': 90.0, 'cusp': 20, 'split_ratio': 1.0, 'points': 12, 'expect_split': True}
+{'k': 4, 'turn': 90.0, 'cusp': 30, 'split_ratio': 1.0, 'points': 12, 'expect_split': True}
+{'k': 4, 'turn': 90.0, 'cusp': 45, 'split_ratio': 1.0, 'points': 12, 'expect_split': True}
+{'k': 4, 'turn': 90.0, 'cusp': 60, 'split_ratio': 1.0, 'points': 12, 'expect_split': True}
+{'k': 4, 'turn': 90.0, 'cusp': 90, 'split_ratio': 0.0, 'points': 12, 'expect_split': False}
+{'k': 4, 'turn': 90.0, 'cusp': 90.0, 'split_ratio': 0.0, 'points': 12, 'expect_split': False}
+{'k': 4, 'turn': 90.0, 'cusp': 89.99, 'split_ratio': 0.0, 'points': 12, 'expect_split': True}
+{'k': 4, 'turn': 90.0, 'cusp': 90.01, 'split_ratio': 0.0, 'points': 12, 'expect_split': False}
+{'k': 6, 'turn': 60.0, 'cusp': 10, 'split_ratio': 1.0, 'points': 18, 'expect_split': True}
+{'k': 6, 'turn': 60.0, 'cusp': 20, 'split_ratio': 1.0, 'points': 18, 'expect_split': True}
+{'k': 6, 'turn': 60.0, 'cusp': 30, 'split_ratio': 1.0, 'points': 18, 'expect_split': True}
+{'k': 6, 'turn': 60.0, 'cusp': 45, 'split_ratio': 1.0, 'points': 18, 'expect_split': True}
+{'k': 6, 'turn': 60.0, 'cusp': 60, 'split_ratio': 0.0, 'points': 18, 'expect_split': False}
+{'k': 6, 'turn': 60.0, 'cusp': 90, 'split_ratio': 0.0, 'points': 18, 'expect_split': False}
+{'k': 6, 'turn': 60.0, 'cusp': 60.0, 'split_ratio': 0.0, 'points': 18, 'expect_split': False}
+{'k': 6, 'turn': 60.0, 'cusp': 59.99, 'split_ratio': 0.0, 'points': 18, 'expect_split': True}
+{'k': 6, 'turn': 60.0, 'cusp': 60.01, 'split_ratio': 0.0, 'points': 18, 'expect_split': False}
+{'k': 8, 'turn': 45.0, 'cusp': 10, 'split_ratio': 1.0, 'points': 24, 'expect_split': True}
+{'k': 8, 'turn': 45.0, 'cusp': 20, 'split_ratio': 1.0, 'points': 24, 'expect_split': True}
+{'k': 8, 'turn': 45.0, 'cusp': 30, 'split_ratio': 1.0, 'points': 24, 'expect_split': True}
+{'k': 8, 'turn': 45.0, 'cusp': 45, 'split_ratio': 0.0, 'points': 24, 'expect_split': False}
+{'k': 8, 'turn': 45.0, 'cusp': 60, 'split_ratio': 0.0, 'points': 24, 'expect_split': False}
+{'k': 8, 'turn': 45.0, 'cusp': 90, 'split_ratio': 0.0, 'points': 24, 'expect_split': False}
+{'k': 8, 'turn': 45.0, 'cusp': 45.0, 'split_ratio': 0.0, 'points': 24, 'expect_split': False}
+{'k': 8, 'turn': 45.0, 'cusp': 44.99, 'split_ratio': 0.0, 'points': 24, 'expect_split': True}
+{'k': 8, 'turn': 45.0, 'cusp': 45.01, 'split_ratio': 0.0, 'points': 24, 'expect_split': False}
+{'k': 12, 'turn': 30.0, 'cusp': 10, 'split_ratio': 1.0, 'points': 36, 'expect_split': True}
+{'k': 12, 'turn': 30.0, 'cusp': 20, 'split_ratio': 1.0, 'points': 36, 'expect_split': True}
+{'k': 12, 'turn': 30.0, 'cusp': 30, 'split_ratio': 0.0, 'points': 36, 'expect_split': False}
+{'k': 12, 'turn': 30.0, 'cusp': 45, 'split_ratio': 0.0, 'points': 36, 'expect_split': False}
+{'k': 12, 'turn': 30.0, 'cusp': 60, 'split_ratio': 0.0, 'points': 36, 'expect_split': False}
+{'k': 12, 'turn': 30.0, 'cusp': 90, 'split_ratio': 0.0, 'points': 36, 'expect_split': False}
+{'k': 12, 'turn': 30.0, 'cusp': 30.0, 'split_ratio': 0.0, 'points': 36, 'expect_split': False}
+{'k': 12, 'turn': 30.0, 'cusp': 29.99, 'split_ratio': 0.0, 'points': 36, 'expect_split': True}
+{'k': 12, 'turn': 30.0, 'cusp': 30.01, 'split_ratio': 0.0, 'points': 36, 'expect_split': False}
+{'k': 24, 'turn': 15.0, 'cusp': 10, 'split_ratio': 1.0, 'points': 72, 'expect_split': True}
+{'k': 24, 'turn': 15.0, 'cusp': 20, 'split_ratio': 0.0, 'points': 72, 'expect_split': False}
+{'k': 24, 'turn': 15.0, 'cusp': 30, 'split_ratio': 0.0, 'points': 72, 'expect_split': False}
+{'k': 24, 'turn': 15.0, 'cusp': 45, 'split_ratio': 0.0, 'points': 72, 'expect_split': False}
+{'k': 24, 'turn': 15.0, 'cusp': 60, 'split_ratio': 0.0, 'points': 72, 'expect_split': False}
+{'k': 24, 'turn': 15.0, 'cusp': 90, 'split_ratio': 0.0, 'points': 72, 'expect_split': False}
+{'k': 24, 'turn': 15.0, 'cusp': 15.0, 'split_ratio': 0.0, 'points': 72, 'expect_split': False}
+{'k': 24, 'turn': 15.0, 'cusp': 14.99, 'split_ratio': 0.0, 'points': 72, 'expect_split': True}
+{'k': 24, 'turn': 15.0, 'cusp': 15.01, 'split_ratio': 0.0, 'points': 72, 'expect_split': False}
+{'k': 4, 'turn': 90.0, 'delta': 0.01, 'split_ratio': 0.0}
+{'k': 4, 'turn': 90.0, 'delta': 0.03, 'split_ratio': 0.0}
+{'k': 4, 'turn': 90.0, 'delta': 0.05, 'split_ratio': 0.0}
+{'k': 4, 'turn': 90.0, 'delta': 0.1, 'split_ratio': 1.0}
+{'k': 4, 'turn': 90.0, 'delta': 0.2, 'split_ratio': 1.0}
+{'k': 4, 'turn': 90.0, 'delta': 0.5, 'split_ratio': 1.0}
+{'k': 4, 'turn': 90.0, 'delta': 1.0, 'split_ratio': 1.0}
+{'k': 8, 'turn': 45.0, 'delta': 0.01, 'split_ratio': 0.0}
+{'k': 8, 'turn': 45.0, 'delta': 0.03, 'split_ratio': 0.0}
+{'k': 8, 'turn': 45.0, 'delta': 0.05, 'split_ratio': 1.0}
+{'k': 8, 'turn': 45.0, 'delta': 0.1, 'split_ratio': 1.0}
+{'k': 8, 'turn': 45.0, 'delta': 0.2, 'split_ratio': 1.0}
+{'k': 8, 'turn': 45.0, 'delta': 0.5, 'split_ratio': 1.0}
+{'k': 8, 'turn': 45.0, 'delta': 1.0, 'split_ratio': 1.0}
+{'k': 24, 'turn': 15.0, 'delta': 0.01, 'split_ratio': 0.0}
+{'k': 24, 'turn': 15.0, 'delta': 0.03, 'split_ratio': 1.0}
+{'k': 24, 'turn': 15.0, 'delta': 0.05, 'split_ratio': 1.0}
+{'k': 24, 'turn': 15.0, 'delta': 0.1, 'split_ratio': 1.0}
+{'k': 24, 'turn': 15.0, 'delta': 0.2, 'split_ratio': 1.0}
+{'k': 24, 'turn': 15.0, 'delta': 0.5, 'split_ratio': 1.0}
+{'k': 24, 'turn': 15.0, 'delta': 1.0, 'split_ratio': 1.0}
+書いた: D:\Claude\houdini\out\130_stats.json
+HIP 130 D:\Claude\houdini\out\130_scene.hipnc 120776

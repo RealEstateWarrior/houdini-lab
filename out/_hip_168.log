@@ -1,0 +1,14 @@
+{'fractal': 'none', 'center': 1, 'amp': 100.0, 'cells': 62500, 'min': -12.378, 'max': 10.783, 'range': 23.161, 'range_over_amp': 0.2316, 'mean': -0.634, 'sd_over_amp': 0.0494, 'sec': 0.194}
+{'fractal': 'none', 'center': 1, 'amp': 500.0, 'cells': 62500, 'min': -61.891, 'max': 53.914, 'range': 115.805, 'range_over_amp': 0.2316, 'mean': -3.172, 'sd_over_amp': 0.0494, 'sec': 0.031}
+{'fractal': 'none', 'center': 1, 'amp': 1000.0, 'cells': 62500, 'min': -123.781, 'max': 107.828, 'range': 231.61, 'range_over_amp': 0.2316, 'mean': -6.344, 'sd_over_amp': 0.0494, 'sec': 0.03}
+{'fractal': 'none', 'center': 0, 'amp': 100.0, 'cells': 62500, 'min': 37.622, 'max': 60.783, 'range': 23.161, 'range_over_amp': 0.2316, 'mean': 49.366, 'sd_over_amp': 0.0494, 'sec': 0.031}
+{'fractal': 'none', 'center': 0, 'amp': 500.0, 'cells': 62500, 'min': 188.109, 'max': 303.914, 'range': 115.805, 'range_over_amp': 0.2316, 'mean': 246.828, 'sd_over_amp': 0.0494, 'sec': 0.03}
+{'fractal': 'none', 'center': 0, 'amp': 1000.0, 'cells': 62500, 'min': 376.219, 'max': 607.828, 'range': 231.61, 'range_over_amp': 0.2316, 'mean': 493.656, 'sd_over_amp': 0.0494, 'sec': 0.03}
+{'fractal': 'hmfT', 'center': 1, 'amp': 100.0, 'cells': 62500, 'min': -12.577, 'max': 16.813, 'range': 29.39, 'range_over_amp': 0.2939, 'mean': 0.583, 'sd_over_amp': 0.0536, 'sec': 0.043}
+{'fractal': 'hmfT', 'center': 1, 'amp': 500.0, 'cells': 62500, 'min': -62.884, 'max': 84.067, 'range': 146.95, 'range_over_amp': 0.2939, 'mean': 2.916, 'sd_over_amp': 0.0536, 'sec': 0.042}
+{'fractal': 'hmfT', 'center': 1, 'amp': 1000.0, 'cells': 62500, 'min': -125.767, 'max': 168.134, 'range': 293.901, 'range_over_amp': 0.2939, 'mean': 5.831, 'sd_over_amp': 0.0536, 'sec': 0.042}
+{'fractal': 'hmfT', 'center': 0, 'amp': 100.0, 'cells': 62500, 'min': 37.423, 'max': 66.813, 'range': 29.39, 'range_over_amp': 0.2939, 'mean': 50.583, 'sd_over_amp': 0.0536, 'sec': 0.04}
+{'fractal': 'hmfT', 'center': 0, 'amp': 500.0, 'cells': 62500, 'min': 187.116, 'max': 334.067, 'range': 146.95, 'range_over_amp': 0.2939, 'mean': 252.916, 'sd_over_amp': 0.0536, 'sec': 0.041}
+{'fractal': 'hmfT', 'center': 0, 'amp': 1000.0, 'cells': 62500, 'min': 374.233, 'max': 668.134, 'range': 293.901, 'range_over_amp': 0.2939, 'mean': 505.831, 'sd_over_amp': 0.0536, 'sec': 0.042}
+保存: D:\Claude\houdini\out\168_stats.json
+HIP 168 D:\Claude\houdini\out\168_scene.hipnc 127325

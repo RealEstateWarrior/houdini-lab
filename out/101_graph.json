@@ -1,0 +1,189 @@
+{
+  "title": "実験101",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grid_2",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "grid_5",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 5,
+        "cols": 5
+      }
+    },
+    {
+      "name": "grid_11",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 11,
+        "cols": 11
+      }
+    },
+    {
+      "name": "grid_51",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 51,
+        "cols": 51
+      }
+    },
+    {
+      "name": "grid_201",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.0,
+        "sizey": 2.0,
+        "rows": 201,
+        "cols": 201
+      }
+    },
+    {
+      "name": "sph_8",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 8,
+        "cols": 8
+      }
+    },
+    {
+      "name": "sph_16",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 16,
+        "cols": 16
+      }
+    },
+    {
+      "name": "sph_30",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 30,
+        "cols": 30
+      }
+    },
+    {
+      "name": "sph_60",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 60,
+        "cols": 60
+      }
+    },
+    {
+      "name": "sph_120",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 120,
+        "cols": 120
+      }
+    },
+    {
+      "name": "sph_240",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 240,
+        "cols": 240
+      }
+    }
+  ],
+  "edges": []
+}

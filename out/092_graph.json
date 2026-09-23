@@ -1,0 +1,103 @@
+{
+  "title": "実験092",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "src_sphere",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 40,
+        "cols": 40
+      }
+    },
+    {
+      "name": "rem_0.2",
+      "type": "remesh::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "rem_0.1",
+      "type": "remesh::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetsize": 0.1
+      }
+    },
+    {
+      "name": "rem_0.05",
+      "type": "remesh::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetsize": 0.05
+      }
+    },
+    {
+      "name": "rem_0.025",
+      "type": "remesh::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetsize": 0.025
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "src_sphere",
+      "from_output": 0,
+      "to": "rem_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "src_sphere",
+      "from_output": 0,
+      "to": "rem_0.1",
+      "to_input": 0
+    },
+    {
+      "from": "src_sphere",
+      "from_output": 0,
+      "to": "rem_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "src_sphere",
+      "from_output": 0,
+      "to": "rem_0.025",
+      "to_input": 0
+    }
+  ]
+}

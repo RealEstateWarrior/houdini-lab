@@ -1,0 +1,245 @@
+{
+  "title": "実験094",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "src_sphere",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 50,
+        "cols": 50
+      }
+    },
+    {
+      "name": "src_mountain",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.15,
+        "elementsize": 0.6,
+        "offsetx": 11.0
+      }
+    },
+    {
+      "name": "vdb_0.2",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.2
+      }
+    },
+    {
+      "name": "back_0.2",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "vdb_0.1",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "back_0.1",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "vdb_0.05",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.05
+      }
+    },
+    {
+      "name": "back_0.05",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "vdb_0.025",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.025
+      }
+    },
+    {
+      "name": "back_0.025",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "vdb_0.0125",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.0125
+      }
+    },
+    {
+      "name": "back_0.0125",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "src_sphere",
+      "from_output": 0,
+      "to": "src_mountain",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "vdb_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_0.2",
+      "from_output": 0,
+      "to": "back_0.2",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "vdb_0.1",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_0.1",
+      "from_output": 0,
+      "to": "back_0.1",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "vdb_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_0.05",
+      "from_output": 0,
+      "to": "back_0.05",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "vdb_0.025",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_0.025",
+      "from_output": 0,
+      "to": "back_0.025",
+      "to_input": 0
+    },
+    {
+      "from": "src_mountain",
+      "from_output": 0,
+      "to": "vdb_0.0125",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_0.0125",
+      "from_output": 0,
+      "to": "back_0.0125",
+      "to_input": 0
+    }
+  ]
+}

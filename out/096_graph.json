@@ -1,0 +1,333 @@
+{
+  "title": "実験096",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "flat",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "bumpy_sphere",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 60,
+        "cols": 60
+      }
+    },
+    {
+      "name": "bumpy",
+      "type": "mountain::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.4,
+        "elementsize": 0.5,
+        "offsetx": 21.0
+      }
+    },
+    {
+      "name": "sc_100_1",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_1000_1",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_10000_1",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_100000_1",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_1000000_1",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 1000000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_100_2",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_1000_2",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_10000_2",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_100000_2",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_1000000_2",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 1000000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_10000_3",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000,
+        "seed": 1.0
+      }
+    },
+    {
+      "name": "sc_10000_4",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000,
+        "seed": 2.0
+      }
+    },
+    {
+      "name": "sc_10000_5",
+      "type": "scatter::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000,
+        "seed": 3.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "bumpy_sphere",
+      "from_output": 0,
+      "to": "bumpy",
+      "to_input": 0
+    },
+    {
+      "from": "flat",
+      "from_output": 0,
+      "to": "sc_100_1",
+      "to_input": 0
+    },
+    {
+      "from": "flat",
+      "from_output": 0,
+      "to": "sc_1000_1",
+      "to_input": 0
+    },
+    {
+      "from": "flat",
+      "from_output": 0,
+      "to": "sc_10000_1",
+      "to_input": 0
+    },
+    {
+      "from": "flat",
+      "from_output": 0,
+      "to": "sc_100000_1",
+      "to_input": 0
+    },
+    {
+      "from": "flat",
+      "from_output": 0,
+      "to": "sc_1000000_1",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_100_2",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_1000_2",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_10000_2",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_100000_2",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_1000000_2",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_10000_3",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_10000_4",
+      "to_input": 0
+    },
+    {
+      "from": "bumpy",
+      "from_output": 0,
+      "to": "sc_10000_5",
+      "to_input": 0
+    }
+  ]
+}

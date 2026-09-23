@@ -1,0 +1,279 @@
+{
+  "title": "実験141",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 2.0
+      }
+    },
+    {
+      "name": "sp",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "pv_box_grid_100",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pv_box_grid_50",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.05
+      }
+    },
+    {
+      "name": "pv_box_grid_25",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.025
+      }
+    },
+    {
+      "name": "pv_box_tetrahedral_100",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inittype": 1
+      }
+    },
+    {
+      "name": "pv_box_tetrahedral_50",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inittype": 1,
+        "particlesep": 0.05
+      }
+    },
+    {
+      "name": "pv_box_tetrahedral_25",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inittype": 1,
+        "particlesep": 0.025
+      }
+    },
+    {
+      "name": "pv_sphere_grid_100",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pv_sphere_grid_50",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.05
+      }
+    },
+    {
+      "name": "pv_sphere_grid_25",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "particlesep": 0.025
+      }
+    },
+    {
+      "name": "pv_sphere_tetrahedral_100",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inittype": 1
+      }
+    },
+    {
+      "name": "pv_sphere_tetrahedral_50",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inittype": 1,
+        "particlesep": 0.05
+      }
+    },
+    {
+      "name": "pv_sphere_tetrahedral_25",
+      "type": "pointsfromvolume",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "inittype": 1,
+        "particlesep": 0.025
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "pv_box_grid_100",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "pv_box_grid_50",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "pv_box_grid_25",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "pv_box_tetrahedral_100",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "pv_box_tetrahedral_50",
+      "to_input": 0
+    },
+    {
+      "from": "box",
+      "from_output": 0,
+      "to": "pv_box_tetrahedral_25",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "pv_sphere_grid_100",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "pv_sphere_grid_50",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "pv_sphere_grid_25",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "pv_sphere_tetrahedral_100",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "pv_sphere_tetrahedral_50",
+      "to_input": 0
+    },
+    {
+      "from": "sp",
+      "from_output": 0,
+      "to": "pv_sphere_tetrahedral_25",
+      "to_input": 0
+    }
+  ]
+}

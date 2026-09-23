@@ -1,0 +1,18 @@
+{'weight': 0.0, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 0.350192, 'corner_gap': 0.424994, 'max_extent': 0.439236, 'sec': 0.0006}
+{'weight': 0.0, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 0.328926, 'corner_gap': 0.43279, 'max_extent': 0.420959, 'sec': 0.0012}
+{'weight': 0.5, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 0.561682, 'corner_gap': 0.308722, 'max_extent': 0.469618, 'sec': 0.0003}
+{'weight': 0.5, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 0.529197, 'corner_gap': 0.324314, 'max_extent': 0.46048, 'sec': 0.0009}
+{'weight': 1.0, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 0.834635, 'corner_gap': 0.19245, 'max_extent': 0.5, 'sec': 0.0003}
+{'weight': 1.0, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 0.789774, 'corner_gap': 0.215838, 'max_extent': 0.5, 'sec': 0.0008}
+{'weight': 1.5, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 0.913194, 'corner_gap': 0.096225, 'max_extent': 0.5, 'sec': 0.0003}
+{'weight': 1.5, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 0.86463, 'corner_gap': 0.161043, 'max_extent': 0.5, 'sec': 0.0008}
+{'weight': 2.0, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 1.0, 'corner_gap': 0.0, 'max_extent': 0.5, 'sec': 0.0003}
+{'weight': 2.0, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 0.945526, 'corner_gap': 0.106248, 'max_extent': 0.5, 'sec': 0.0008}
+{'weight': 3.0, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 1.0, 'corner_gap': 0.0, 'max_extent': 0.5, 'sec': 0.0003}
+{'weight': 3.0, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 0.988627, 'corner_gap': 0.048113, 'max_extent': 0.5, 'sec': 0.001}
+{'weight': 4.0, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 1.0, 'corner_gap': 0.0, 'max_extent': 0.5, 'sec': 0.0003}
+{'weight': 4.0, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 1.0, 'corner_gap': 0.0, 'max_extent': 0.5, 'sec': 0.0009}
+{'weight': 10.0, 'iterations': 2, 'points': 98, 'prims': 96, 'volume': 1.0, 'corner_gap': 0.0, 'max_extent': 0.5, 'sec': 0.0003}
+{'weight': 10.0, 'iterations': 4, 'points': 1538, 'prims': 1536, 'volume': 1.0, 'corner_gap': 0.0, 'max_extent': 0.5, 'sec': 0.0009}
+保存: D:\Claude\houdini\out\162_stats.json
+HIP 162 D:\Claude\houdini\out\162_scene.hipnc 68816

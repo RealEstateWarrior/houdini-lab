@@ -1,0 +1,20 @@
+{'offset': 0.05, 'shape': 'solid', 'divisions': 1, 'points': 24, 'prims': 26, 'size': [1.0, 1.0, 1.0], 'volume': 0.985667, 'want_round': 0.993729, 'sec': 0.0007}
+{'offset': 0.05, 'shape': 'round', 'divisions': 1, 'points': 24, 'prims': 26, 'size': [1.0, 1.0, 1.0], 'volume': 0.985667, 'want_round': 0.993729, 'sec': 0.0002}
+{'offset': 0.05, 'shape': 'round', 'divisions': 2, 'points': 56, 'prims': 54, 'size': [1.0, 1.0, 1.0], 'volume': 0.991514, 'want_round': 0.993729, 'sec': 0.0007}
+{'offset': 0.05, 'shape': 'round', 'divisions': 4, 'points': 152, 'prims': 150, 'size': [1.0, 1.0, 1.0], 'volume': 0.993193, 'want_round': 0.993729, 'sec': 0.0004}
+{'offset': 0.05, 'shape': 'round', 'divisions': 8, 'points': 488, 'prims': 486, 'size': [1.0, 1.0, 1.0], 'volume': 0.993602, 'want_round': 0.993729, 'sec': 0.0006}
+{'offset': 0.05, 'shape': 'round', 'divisions': 16, 'points': 1736, 'prims': 1734, 'size': [1.0, 1.0, 1.0], 'volume': 0.993702, 'want_round': 0.993729, 'sec': 0.0009}
+{'offset': 0.1, 'shape': 'solid', 'divisions': 1, 'points': 24, 'prims': 26, 'size': [1.0, 1.0, 1.0], 'volume': 0.945333, 'want_round': 0.975587, 'sec': 0.0003}
+{'offset': 0.1, 'shape': 'round', 'divisions': 1, 'points': 24, 'prims': 26, 'size': [1.0, 1.0, 1.0], 'volume': 0.945333, 'want_round': 0.975587, 'sec': 0.0002}
+{'offset': 0.1, 'shape': 'round', 'divisions': 2, 'points': 56, 'prims': 54, 'size': [1.0, 1.0, 1.0], 'volume': 0.96726, 'want_round': 0.975587, 'sec': 0.0003}
+{'offset': 0.1, 'shape': 'round', 'divisions': 4, 'points': 152, 'prims': 150, 'size': [1.0, 1.0, 1.0], 'volume': 0.973708, 'want_round': 0.975587, 'sec': 0.0005}
+{'offset': 0.1, 'shape': 'round', 'divisions': 8, 'points': 488, 'prims': 486, 'size': [1.0, 1.0, 1.0], 'volume': 0.975176, 'want_round': 0.975587, 'sec': 0.0005}
+{'offset': 0.1, 'shape': 'round', 'divisions': 16, 'points': 1736, 'prims': 1734, 'size': [1.0, 1.0, 1.0], 'volume': 0.975521, 'want_round': 0.975587, 'sec': 0.0008}
+{'offset': 0.2, 'shape': 'solid', 'divisions': 1, 'points': 24, 'prims': 26, 'size': [1.0, 1.0, 1.0], 'volume': 0.802667, 'want_round': 0.907705, 'sec': 0.0003}
+{'offset': 0.2, 'shape': 'round', 'divisions': 1, 'points': 24, 'prims': 26, 'size': [1.0, 1.0, 1.0], 'volume': 0.802667, 'want_round': 0.907705, 'sec': 0.0002}
+{'offset': 0.2, 'shape': 'round', 'divisions': 2, 'points': 56, 'prims': 54, 'size': [1.0, 1.0, 1.0], 'volume': 0.87867, 'want_round': 0.907705, 'sec': 0.0003}
+{'offset': 0.2, 'shape': 'round', 'divisions': 4, 'points': 152, 'prims': 150, 'size': [1.0, 1.0, 1.0], 'volume': 0.902333, 'want_round': 0.907705, 'sec': 0.0003}
+{'offset': 0.2, 'shape': 'round', 'divisions': 8, 'points': 488, 'prims': 486, 'size': [1.0, 1.0, 1.0], 'volume': 0.906848, 'want_round': 0.907705, 'sec': 0.0009}
+{'offset': 0.2, 'shape': 'round', 'divisions': 16, 'points': 1736, 'prims': 1734, 'size': [1.0, 1.0, 1.0], 'volume': 0.907782, 'want_round': 0.907705, 'sec': 0.0009}
+保存: D:\Claude\houdini\out\152_stats.json
+HIP 152 D:\Claude\houdini\out\152_scene.hipnc 89698

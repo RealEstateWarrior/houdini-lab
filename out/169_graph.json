@@ -1,0 +1,66 @@
+{
+  "title": "実験169",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "hf",
+      "type": "heightfield",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "gridspacing": 8.0
+      }
+    },
+    {
+      "name": "noise",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "combine": 0
+      }
+    },
+    {
+      "name": "erode",
+      "type": "heightfield_erode::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dofreeze": 0,
+        "seed": 0.2140711545944214,
+        "folder0": 1,
+        "folder1": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "hf",
+      "from_output": 0,
+      "to": "noise",
+      "to_input": 0
+    },
+    {
+      "from": "noise",
+      "from_output": 0,
+      "to": "erode",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,579 @@
+{
+  "title": "実験146",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sp48",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 2,
+        "rows": 48,
+        "cols": 96
+      }
+    },
+    {
+      "name": "c48_-5_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": -0.5
+      }
+    },
+    {
+      "name": "c48_-5_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": -0.5
+      }
+    },
+    {
+      "name": "c48_-5_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": -0.5
+      }
+    },
+    {
+      "name": "c48_0_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0
+      }
+    },
+    {
+      "name": "c48_0_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0
+      }
+    },
+    {
+      "name": "c48_0_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0
+      }
+    },
+    {
+      "name": "c48_3_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.3
+      }
+    },
+    {
+      "name": "c48_3_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.3
+      }
+    },
+    {
+      "name": "c48_3_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.3
+      }
+    },
+    {
+      "name": "c48_7_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.7
+      }
+    },
+    {
+      "name": "c48_7_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.7
+      }
+    },
+    {
+      "name": "c48_7_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.7
+      }
+    },
+    {
+      "name": "sp192",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 192,
+        "cols": 384
+      }
+    },
+    {
+      "name": "c192_-5_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": -0.5
+      }
+    },
+    {
+      "name": "c192_-5_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": -0.5
+      }
+    },
+    {
+      "name": "c192_-5_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": -0.5
+      }
+    },
+    {
+      "name": "c192_0_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0
+      }
+    },
+    {
+      "name": "c192_0_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0
+      }
+    },
+    {
+      "name": "c192_0_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0
+      }
+    },
+    {
+      "name": "c192_3_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.3
+      }
+    },
+    {
+      "name": "c192_3_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.3
+      }
+    },
+    {
+      "name": "c192_3_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.3
+      }
+    },
+    {
+      "name": "c192_7_above",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.7
+      }
+    },
+    {
+      "name": "c192_7_below",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 1,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.7
+      }
+    },
+    {
+      "name": "c192_7_both",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "clipop": 2,
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": 0.7
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_-5_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_-5_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_-5_both",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_0_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_0_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_0_both",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_3_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_3_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_3_both",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_7_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_7_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp48",
+      "from_output": 0,
+      "to": "c48_7_both",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_-5_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_-5_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_-5_both",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_0_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_0_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_0_both",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_3_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_3_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_3_both",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_7_above",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_7_below",
+      "to_input": 0
+    },
+    {
+      "from": "sp192",
+      "from_output": 0,
+      "to": "c192_7_both",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "title": "実験122",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "square",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, {-1,0,-1}); int b = addpoint(0, {1,0,-1});\nint c = addpoint(0, {1,0,1}); int d = addpoint(0, {-1,..."
+      }
+    },
+    {
+      "name": "pe_outside_10",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputinside": 0
+      }
+    },
+    {
+      "name": "pe_inside_10",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputoutside": 0
+      }
+    },
+    {
+      "name": "pe_outside_25",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.25,
+        "outputinside": 0
+      }
+    },
+    {
+      "name": "pe_inside_25",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.25,
+        "outputoutside": 0
+      }
+    },
+    {
+      "name": "pe_outside_50",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.5,
+        "outputinside": 0
+      }
+    },
+    {
+      "name": "pe_inside_50",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.5,
+        "outputoutside": 0
+      }
+    },
+    {
+      "name": "pe_multi",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.2,
+        "divs": 4
+      }
+    },
+    {
+      "name": "tri_5",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0, 2.0)); int b = addpoint(0, set(0.35265396141692995, 0, 0));\nint c = addpoint(0, set(-0...."
+      }
+    },
+    {
+      "name": "pe_tri_5",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.05,
+        "outputinside": 0
+      }
+    },
+    {
+      "name": "tri_10",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0, 2.0)); int b = addpoint(0, set(0.35265396141692995, 0, 0));\nint c = addpoint(0, set(-0...."
+      }
+    },
+    {
+      "name": "pe_tri_10",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "outputinside": 0
+      }
+    },
+    {
+      "name": "tri_20",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, set(0, 0, 2.0)); int b = addpoint(0, set(0.35265396141692995, 0, 0));\nint c = addpoint(0, set(-0...."
+      }
+    },
+    {
+      "name": "pe_tri_20",
+      "type": "polyexpand2d",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.2,
+        "outputinside": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "pe_outside_10",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "pe_inside_10",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "pe_outside_25",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "pe_inside_25",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "pe_outside_50",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "pe_inside_50",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "pe_multi",
+      "to_input": 0
+    },
+    {
+      "from": "tri_5",
+      "from_output": 0,
+      "to": "pe_tri_5",
+      "to_input": 0
+    },
+    {
+      "from": "tri_10",
+      "from_output": 0,
+      "to": "pe_tri_10",
+      "to_input": 0
+    },
+    {
+      "from": "tri_20",
+      "from_output": 0,
+      "to": "pe_tri_20",
+      "to_input": 0
+    }
+  ]
+}

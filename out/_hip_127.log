@@ -1,0 +1,5 @@
+{'target': [0.5, 0.25], 'points_on_path': 16, 'path_length': 0.75, 'cost': 0.75, 'manhattan': 0.75, 'edge_dist': 0.75}
+{'target': [-0.8, 0.6], 'points_on_path': 29, 'path_length': 1.4, 'cost': 1.4, 'manhattan': 1.4, 'edge_dist': 1.4}
+{'target': [1.0, 1.0], 'points_on_path': 41, 'path_length': 2.0, 'cost': 2.0, 'manhattan': 2.0, 'edge_dist': 2.0}
+書いた: D:\Claude\houdini\out\127_stats.json 秒 0.08102970000072673
+HIP 127 D:\Claude\houdini\out\127_scene.hipnc 66852

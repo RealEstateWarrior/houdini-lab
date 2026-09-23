@@ -1,0 +1,360 @@
+{
+  "title": "実験106",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "rows": 316,
+        "cols": 316
+      }
+    },
+    {
+      "name": "uniform_0_1",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "dimensions": 1,
+        "seed": 8215.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "uniform_2_5",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "dimensions": 1,
+        "minx": 2.0,
+        "miny": 2.0,
+        "minz": 2.0,
+        "minw": 2.0,
+        "maxx": 5.0,
+        "maxy": 5.0,
+        "maxz": 5.0,
+        "maxw": 5.0,
+        "seed": 3772.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "normal_s1",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "distribution": "normal",
+        "dimensions": 1,
+        "seed": 9329.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "normal_s2",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "distribution": "normal",
+        "dimensions": 1,
+        "stddevx": 2.0,
+        "stddevy": 2.0,
+        "stddevz": 2.0,
+        "stddevw": 2.0,
+        "seed": 4886.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "normal_m3_s05",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "distribution": "normal",
+        "dimensions": 1,
+        "medianx": 3.0,
+        "mediany": 3.0,
+        "medianz": 3.0,
+        "medianw": 3.0,
+        "stddevx": 0.5,
+        "stddevy": 0.5,
+        "stddevz": 0.5,
+        "stddevw": 0.5,
+        "seed": 443.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "discrete",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "distribution": "uniformdiscrete",
+        "dimensions": 1,
+        "seed": 6000.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "bern",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "distribution": "bernoulli",
+        "dimensions": 1,
+        "probvalueb": 0.3,
+        "seed": 1557.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "ball",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "distribution": "uniformball",
+        "seed": 7114.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "orient",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "distribution": "uniformorient",
+        "seed": 2671.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "seed_a",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "dimensions": 1,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "seed_b",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "dimensions": 1,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    },
+    {
+      "name": "seed_c",
+      "type": "attribrandomize",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "val",
+        "dimensions": 1,
+        "seed": 1.0,
+        "ramp2pos": 0.5,
+        "ramp2value": 0.5,
+        "ramp3pos": 1.0,
+        "ramp3value": 1.0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "uniform_0_1",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "uniform_2_5",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "normal_s1",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "normal_s2",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "normal_m3_s05",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "discrete",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "bern",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "ball",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "orient",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "seed_a",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "seed_b",
+      "to_input": 0
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "seed_c",
+      "to_input": 0
+    }
+  ]
+}

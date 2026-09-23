@@ -1,0 +1,26 @@
+{'rotstep': 'none', 'padding': 0, 'resolution': 'res1', 'fill': 0.7863, 'scale_spread': 1.0, 'u_range': [0.0, 0.9699], 'v_range': [0.0, 0.9902], 'sec': 0.002}
+{'rotstep': 'none', 'padding': 0, 'resolution': 'res2', 'fill': 0.8089, 'scale_spread': 1.0, 'u_range': [0.0, 0.9829], 'v_range': [0.0, 0.9998], 'sec': 0.003}
+{'rotstep': 'none', 'padding': 0, 'resolution': 'res3', 'fill': 0.8107, 'scale_spread': 1.0, 'u_range': [0.0, 0.9851], 'v_range': [0.0, 1.0], 'sec': 0.005}
+{'rotstep': 'none', 'padding': 1, 'resolution': 'res1', 'fill': 0.7453, 'scale_spread': 1.0, 'u_range': [0.0, 0.999], 'v_range': [0.0, 0.9842], 'sec': 0.002}
+{'rotstep': 'none', 'padding': 1, 'resolution': 'res2', 'fill': 0.7967, 'scale_spread': 1.0, 'u_range': [0.0, 0.9792], 'v_range': [0.0, 0.9988], 'sec': 0.003}
+{'rotstep': 'none', 'padding': 1, 'resolution': 'res3', 'fill': 0.8002, 'scale_spread': 1.0, 'u_range': [0.0, 0.9797], 'v_range': [0.0, 0.9972], 'sec': 0.005}
+{'rotstep': 'none', 'padding': 4, 'resolution': 'res1', 'fill': 0.7053, 'scale_spread': 1.000001, 'u_range': [0.0, 0.9991], 'v_range': [0.0, 0.9999], 'sec': 0.002}
+{'rotstep': 'none', 'padding': 4, 'resolution': 'res2', 'fill': 0.7387, 'scale_spread': 1.0, 'u_range': [0.0, 1.0], 'v_range': [0.0, 0.9934], 'sec': 0.004}
+{'rotstep': 'none', 'padding': 4, 'resolution': 'res3', 'fill': 0.7828, 'scale_spread': 1.0, 'u_range': [0.0, 0.9743], 'v_range': [0.0, 0.9968], 'sec': 0.006}
+{'rotstep': 'none', 'padding': 16, 'resolution': 'res1', 'fill': 0.4784, 'scale_spread': 1.000001, 'u_range': [0.0, 1.0], 'v_range': [0.0, 0.9712], 'sec': 0.003}
+{'rotstep': 'none', 'padding': 16, 'resolution': 'res2', 'fill': 0.6413, 'scale_spread': 1.000001, 'u_range': [0.0, 0.9676], 'v_range': [0.0, 0.9953], 'sec': 0.003}
+{'rotstep': 'none', 'padding': 16, 'resolution': 'res3', 'fill': 0.7152, 'scale_spread': 1.0, 'u_range': [0.0, 0.9999], 'v_range': [0.0, 0.9999], 'sec': 0.007}
+{'rotstep': 'PI2', 'padding': 0, 'resolution': 'res1', 'fill': 0.8284, 'scale_spread': 1.000001, 'u_range': [0.0, 0.9954], 'v_range': [0.0, 0.9921], 'sec': 0.003}
+{'rotstep': 'PI2', 'padding': 0, 'resolution': 'res2', 'fill': 0.8284, 'scale_spread': 1.000001, 'u_range': [0.0, 0.9954], 'v_range': [0.0, 0.9862], 'sec': 0.006}
+{'rotstep': 'PI2', 'padding': 0, 'resolution': 'res3', 'fill': 0.8373, 'scale_spread': 1.0, 'u_range': [0.0, 0.9996], 'v_range': [0.0, 0.9908], 'sec': 0.018}
+{'rotstep': 'PI2', 'padding': 1, 'resolution': 'res1', 'fill': 0.7863, 'scale_spread': 1.0, 'u_range': [0.0, 0.9573], 'v_range': [0.0, 0.9999], 'sec': 0.003}
+{'rotstep': 'PI2', 'padding': 1, 'resolution': 'res2', 'fill': 0.7967, 'scale_spread': 1.0, 'u_range': [0.0, 0.9792], 'v_range': [0.0, 0.9988], 'sec': 0.006}
+{'rotstep': 'PI2', 'padding': 1, 'resolution': 'res3', 'fill': 0.8107, 'scale_spread': 1.0, 'u_range': [0.0, 0.9871], 'v_range': [0.0, 0.9791], 'sec': 0.017}
+{'rotstep': 'PI2', 'padding': 4, 'resolution': 'res1', 'fill': 0.7053, 'scale_spread': 1.000001, 'u_range': [0.0, 0.9991], 'v_range': [0.0, 0.9999], 'sec': 0.004}
+{'rotstep': 'PI2', 'padding': 4, 'resolution': 'res2', 'fill': 0.7453, 'scale_spread': 1.0, 'u_range': [0.0, 0.9828], 'v_range': [0.0, 0.996], 'sec': 0.007}
+{'rotstep': 'PI2', 'padding': 4, 'resolution': 'res3', 'fill': 0.7936, 'scale_spread': 1.000001, 'u_range': [0.0, 0.9611], 'v_range': [0.0, 0.9986], 'sec': 0.023}
+{'rotstep': 'PI2', 'padding': 16, 'resolution': 'res1', 'fill': 0.5422, 'scale_spread': 1.0, 'u_range': [0.0, 0.9883], 'v_range': [0.0, 0.9921], 'sec': 0.004}
+{'rotstep': 'PI2', 'padding': 16, 'resolution': 'res2', 'fill': 0.6413, 'scale_spread': 1.0, 'u_range': [0.0, 0.9969], 'v_range': [0.0, 0.8956], 'sec': 0.006}
+{'rotstep': 'PI2', 'padding': 16, 'resolution': 'res3', 'fill': 0.7152, 'scale_spread': 1.0, 'u_range': [0.0, 0.9999], 'v_range': [0.0, 0.9999], 'sec': 0.018}
+保存: D:\Claude\houdini\out\160_stats.json
+HIP 160 D:\Claude\houdini\out\160_scene.hipnc 149334

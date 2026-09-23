@@ -1,0 +1,189 @@
+{
+  "title": "実験133",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "g",
+      "type": "grid",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "sizex": 1.6,
+        "sizey": 1.6,
+        "ty": 2.0,
+        "rows": 31,
+        "cols": 31
+      }
+    },
+    {
+      "name": "sp24",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 24,
+        "cols": 48
+      }
+    },
+    {
+      "name": "ray_project_24",
+      "type": "ray",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "entity": 1,
+        "dirmethod": 0,
+        "dirx": 0.0,
+        "diry": -1.0,
+        "dirz": 0.0,
+        "folder0": 1,
+        "folder1": 1
+      }
+    },
+    {
+      "name": "ray_minimum_24",
+      "type": "ray",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "entity": 1,
+        "method": 0,
+        "dirmethod": 0,
+        "dirx": 0.0,
+        "diry": -1.0,
+        "dirz": 0.0,
+        "folder0": 1,
+        "folder1": 1
+      }
+    },
+    {
+      "name": "sp96",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 96,
+        "cols": 192
+      }
+    },
+    {
+      "name": "ray_project_96",
+      "type": "ray",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "entity": 1,
+        "dirmethod": 0,
+        "dirx": 0.0,
+        "diry": -1.0,
+        "dirz": 0.0,
+        "folder0": 1,
+        "folder1": 1
+      }
+    },
+    {
+      "name": "ray_minimum_96",
+      "type": "ray",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "entity": 1,
+        "method": 0,
+        "dirmethod": 0,
+        "dirx": 0.0,
+        "diry": -1.0,
+        "dirz": 0.0,
+        "folder0": 1,
+        "folder1": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "ray_project_24",
+      "to_input": 0
+    },
+    {
+      "from": "sp24",
+      "from_output": 0,
+      "to": "ray_project_24",
+      "to_input": 1
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "ray_minimum_24",
+      "to_input": 0
+    },
+    {
+      "from": "sp24",
+      "from_output": 0,
+      "to": "ray_minimum_24",
+      "to_input": 1
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "ray_project_96",
+      "to_input": 0
+    },
+    {
+      "from": "sp96",
+      "from_output": 0,
+      "to": "ray_project_96",
+      "to_input": 1
+    },
+    {
+      "from": "g",
+      "from_output": 0,
+      "to": "ray_minimum_96",
+      "to_input": 0
+    },
+    {
+      "from": "sp96",
+      "from_output": 0,
+      "to": "ray_minimum_96",
+      "to_input": 1
+    }
+  ]
+}

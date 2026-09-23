@@ -1,0 +1,315 @@
+{
+  "title": "実験154",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "t12",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "type": 1
+      }
+    },
+    {
+      "name": "f12_none",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 0
+      }
+    },
+    {
+      "name": "f12_tris",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 1
+      }
+    },
+    {
+      "name": "f12_trifan",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 2
+      }
+    },
+    {
+      "name": "f12_quadfan",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 3
+      }
+    },
+    {
+      "name": "f12_quads",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "f12_gridquads",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 5
+      }
+    },
+    {
+      "name": "t13",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "cols": 13
+      }
+    },
+    {
+      "name": "f13_none",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 0
+      }
+    },
+    {
+      "name": "f13_tris",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 1
+      }
+    },
+    {
+      "name": "f13_trifan",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 2
+      }
+    },
+    {
+      "name": "f13_quadfan",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 3
+      }
+    },
+    {
+      "name": "f13_quads",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "f13_gridquads",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 5
+      }
+    },
+    {
+      "name": "gq_s1",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 5
+      }
+    },
+    {
+      "name": "gq_s0",
+      "type": "polyfill",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "fillmode": 5,
+        "smoothtoggle": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "f12_none",
+      "to_input": 0
+    },
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "f12_tris",
+      "to_input": 0
+    },
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "f12_trifan",
+      "to_input": 0
+    },
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "f12_quadfan",
+      "to_input": 0
+    },
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "f12_quads",
+      "to_input": 0
+    },
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "f12_gridquads",
+      "to_input": 0
+    },
+    {
+      "from": "t13",
+      "from_output": 0,
+      "to": "f13_none",
+      "to_input": 0
+    },
+    {
+      "from": "t13",
+      "from_output": 0,
+      "to": "f13_tris",
+      "to_input": 0
+    },
+    {
+      "from": "t13",
+      "from_output": 0,
+      "to": "f13_trifan",
+      "to_input": 0
+    },
+    {
+      "from": "t13",
+      "from_output": 0,
+      "to": "f13_quadfan",
+      "to_input": 0
+    },
+    {
+      "from": "t13",
+      "from_output": 0,
+      "to": "f13_quads",
+      "to_input": 0
+    },
+    {
+      "from": "t13",
+      "from_output": 0,
+      "to": "f13_gridquads",
+      "to_input": 0
+    },
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "gq_s1",
+      "to_input": 0
+    },
+    {
+      "from": "t12",
+      "from_output": 0,
+      "to": "gq_s0",
+      "to_input": 0
+    }
+  ]
+}

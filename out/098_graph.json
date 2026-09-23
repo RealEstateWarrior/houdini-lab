@@ -1,0 +1,534 @@
+{
+  "title": "実験098",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "the_box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "the_tube_main",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "cap": 1,
+        "rad1": 0.25,
+        "rad2": 0.25,
+        "height": 2.0,
+        "cols": 80
+      }
+    },
+    {
+      "name": "by_boolean",
+      "type": "boolean::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 2
+      }
+    },
+    {
+      "name": "by_cookie",
+      "type": "cookie",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "boolop": 2
+      }
+    },
+    {
+      "name": "vdb_a_0.02",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.02
+      }
+    },
+    {
+      "name": "vdb_b_0.02",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.02
+      }
+    },
+    {
+      "name": "vdb_sub_0.02",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 13
+      }
+    },
+    {
+      "name": "vdb_back_0.02",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "vdb_a_0.01",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.01
+      }
+    },
+    {
+      "name": "vdb_b_0.01",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.01
+      }
+    },
+    {
+      "name": "vdb_sub_0.01",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 13
+      }
+    },
+    {
+      "name": "vdb_back_0.01",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "vdb_a_0.005",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.005
+      }
+    },
+    {
+      "name": "vdb_b_0.005",
+      "type": "vdbfrompolygons",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "voxelsize": 0.005
+      }
+    },
+    {
+      "name": "vdb_sub_0.005",
+      "type": "vdbcombine",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "operation": 13
+      }
+    },
+    {
+      "name": "vdb_back_0.005",
+      "type": "convertvdb",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "conversion": 2
+      }
+    },
+    {
+      "name": "the_tube_c12",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "cap": 1,
+        "rad1": 0.25,
+        "rad2": 0.25,
+        "height": 2.0
+      }
+    },
+    {
+      "name": "bool_c12",
+      "type": "boolean::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 2
+      }
+    },
+    {
+      "name": "the_tube_c40",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "cap": 1,
+        "rad1": 0.25,
+        "rad2": 0.25,
+        "height": 2.0,
+        "cols": 40
+      }
+    },
+    {
+      "name": "bool_c40",
+      "type": "boolean::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 2
+      }
+    },
+    {
+      "name": "the_tube_c80",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "cap": 1,
+        "rad1": 0.25,
+        "rad2": 0.25,
+        "height": 2.0,
+        "cols": 80
+      }
+    },
+    {
+      "name": "bool_c80",
+      "type": "boolean::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 2
+      }
+    },
+    {
+      "name": "the_tube_c200",
+      "type": "tube",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "cap": 1,
+        "rad1": 0.25,
+        "rad2": 0.25,
+        "height": 2.0,
+        "cols": 200
+      }
+    },
+    {
+      "name": "bool_c200",
+      "type": "boolean::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "booleanop": 2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "by_boolean",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_main",
+      "from_output": 0,
+      "to": "by_boolean",
+      "to_input": 1
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "by_cookie",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_main",
+      "from_output": 0,
+      "to": "by_cookie",
+      "to_input": 1
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "vdb_a_0.02",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_main",
+      "from_output": 0,
+      "to": "vdb_b_0.02",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_a_0.02",
+      "from_output": 0,
+      "to": "vdb_sub_0.02",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_b_0.02",
+      "from_output": 0,
+      "to": "vdb_sub_0.02",
+      "to_input": 1
+    },
+    {
+      "from": "vdb_sub_0.02",
+      "from_output": 0,
+      "to": "vdb_back_0.02",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "vdb_a_0.01",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_main",
+      "from_output": 0,
+      "to": "vdb_b_0.01",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_a_0.01",
+      "from_output": 0,
+      "to": "vdb_sub_0.01",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_b_0.01",
+      "from_output": 0,
+      "to": "vdb_sub_0.01",
+      "to_input": 1
+    },
+    {
+      "from": "vdb_sub_0.01",
+      "from_output": 0,
+      "to": "vdb_back_0.01",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "vdb_a_0.005",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_main",
+      "from_output": 0,
+      "to": "vdb_b_0.005",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_a_0.005",
+      "from_output": 0,
+      "to": "vdb_sub_0.005",
+      "to_input": 0
+    },
+    {
+      "from": "vdb_b_0.005",
+      "from_output": 0,
+      "to": "vdb_sub_0.005",
+      "to_input": 1
+    },
+    {
+      "from": "vdb_sub_0.005",
+      "from_output": 0,
+      "to": "vdb_back_0.005",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "bool_c12",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_c12",
+      "from_output": 0,
+      "to": "bool_c12",
+      "to_input": 1
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "bool_c40",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_c40",
+      "from_output": 0,
+      "to": "bool_c40",
+      "to_input": 1
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "bool_c80",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_c80",
+      "from_output": 0,
+      "to": "bool_c80",
+      "to_input": 1
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "bool_c200",
+      "to_input": 0
+    },
+    {
+      "from": "the_tube_c200",
+      "from_output": 0,
+      "to": "bool_c200",
+      "to_input": 1
+    }
+  ]
+}

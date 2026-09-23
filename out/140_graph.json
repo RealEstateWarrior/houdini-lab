@@ -1,0 +1,435 @@
+{
+  "title": "実験140",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "arrow",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, {0,0,0}); int b = addpoint(0, {0,0,1}); int c = addpoint(0, {0,1,0});\naddprim(0, \"poly\", a, b, c);"
+      }
+    },
+    {
+      "name": "pt_none",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {5, 0, 0});"
+      }
+    },
+    {
+      "name": "per_none",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "cp_none",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pt_N",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {5, 0, 0});"
+      }
+    },
+    {
+      "name": "per_N",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "v@N = {1, 0, 0};"
+      }
+    },
+    {
+      "name": "cp_N",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pt_N_up",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {5, 0, 0});"
+      }
+    },
+    {
+      "name": "per_N_up",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "v@N = {1, 0, 0}; v@up = {0, 0, 1};"
+      }
+    },
+    {
+      "name": "cp_N_up",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pt_orient_and_N",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {5, 0, 0});"
+      }
+    },
+    {
+      "name": "per_orient_and_N",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "v@N = {1, 0, 0}; p@orient = quaternion(radians(90), {1, 0, 0});"
+      }
+    },
+    {
+      "name": "cp_orient_and_N",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pt_orient_only",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {5, 0, 0});"
+      }
+    },
+    {
+      "name": "per_orient_only",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "p@orient = quaternion(radians(90), {1, 0, 0});"
+      }
+    },
+    {
+      "name": "cp_orient_only",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pt_pscale",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {5, 0, 0});"
+      }
+    },
+    {
+      "name": "per_pscale",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 2;"
+      }
+    },
+    {
+      "name": "cp_pscale",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "pt_scale_pscale",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {5, 0, 0});"
+      }
+    },
+    {
+      "name": "per_scale_pscale",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@pscale = 2; v@scale = {1, 2, 3};"
+      }
+    },
+    {
+      "name": "cp_scale_pscale",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "pt_none",
+      "from_output": 0,
+      "to": "per_none",
+      "to_input": 0
+    },
+    {
+      "from": "arrow",
+      "from_output": 0,
+      "to": "cp_none",
+      "to_input": 0
+    },
+    {
+      "from": "per_none",
+      "from_output": 0,
+      "to": "cp_none",
+      "to_input": 1
+    },
+    {
+      "from": "pt_N",
+      "from_output": 0,
+      "to": "per_N",
+      "to_input": 0
+    },
+    {
+      "from": "arrow",
+      "from_output": 0,
+      "to": "cp_N",
+      "to_input": 0
+    },
+    {
+      "from": "per_N",
+      "from_output": 0,
+      "to": "cp_N",
+      "to_input": 1
+    },
+    {
+      "from": "pt_N_up",
+      "from_output": 0,
+      "to": "per_N_up",
+      "to_input": 0
+    },
+    {
+      "from": "arrow",
+      "from_output": 0,
+      "to": "cp_N_up",
+      "to_input": 0
+    },
+    {
+      "from": "per_N_up",
+      "from_output": 0,
+      "to": "cp_N_up",
+      "to_input": 1
+    },
+    {
+      "from": "pt_orient_and_N",
+      "from_output": 0,
+      "to": "per_orient_and_N",
+      "to_input": 0
+    },
+    {
+      "from": "arrow",
+      "from_output": 0,
+      "to": "cp_orient_and_N",
+      "to_input": 0
+    },
+    {
+      "from": "per_orient_and_N",
+      "from_output": 0,
+      "to": "cp_orient_and_N",
+      "to_input": 1
+    },
+    {
+      "from": "pt_orient_only",
+      "from_output": 0,
+      "to": "per_orient_only",
+      "to_input": 0
+    },
+    {
+      "from": "arrow",
+      "from_output": 0,
+      "to": "cp_orient_only",
+      "to_input": 0
+    },
+    {
+      "from": "per_orient_only",
+      "from_output": 0,
+      "to": "cp_orient_only",
+      "to_input": 1
+    },
+    {
+      "from": "pt_pscale",
+      "from_output": 0,
+      "to": "per_pscale",
+      "to_input": 0
+    },
+    {
+      "from": "arrow",
+      "from_output": 0,
+      "to": "cp_pscale",
+      "to_input": 0
+    },
+    {
+      "from": "per_pscale",
+      "from_output": 0,
+      "to": "cp_pscale",
+      "to_input": 1
+    },
+    {
+      "from": "pt_scale_pscale",
+      "from_output": 0,
+      "to": "per_scale_pscale",
+      "to_input": 0
+    },
+    {
+      "from": "arrow",
+      "from_output": 0,
+      "to": "cp_scale_pscale",
+      "to_input": 0
+    },
+    {
+      "from": "per_scale_pscale",
+      "from_output": 0,
+      "to": "cp_scale_pscale",
+      "to_input": 1
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "title": "実験118",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "seg",
+      "type": "line",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "originx": 1.0,
+        "dirx": -0.6,
+        "diry": 1.5,
+        "dist": 1.6155494421403511
+      }
+    },
+    {
+      "name": "rv4",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 4,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "rv8",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 8,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "rv16",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 16,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "rv64",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 64,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "rv256",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 256,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "square",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int a = addpoint(0, {1.0, 0, 0}); int b = addpoint(0, {1.5, 0, 0});\nint c = addpoint(0, {1.5, 0.5, 0}); int d = addpo..."
+      }
+    },
+    {
+      "name": "sq4",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 4,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "sq8",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 8,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "sq16",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 16,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "sq64",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 64,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "sq256",
+      "type": "revolve::2.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 256,
+        "uv_folder": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "seg",
+      "from_output": 0,
+      "to": "rv4",
+      "to_input": 0
+    },
+    {
+      "from": "seg",
+      "from_output": 0,
+      "to": "rv8",
+      "to_input": 0
+    },
+    {
+      "from": "seg",
+      "from_output": 0,
+      "to": "rv16",
+      "to_input": 0
+    },
+    {
+      "from": "seg",
+      "from_output": 0,
+      "to": "rv64",
+      "to_input": 0
+    },
+    {
+      "from": "seg",
+      "from_output": 0,
+      "to": "rv256",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "sq4",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "sq8",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "sq16",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "sq64",
+      "to_input": 0
+    },
+    {
+      "from": "square",
+      "from_output": 0,
+      "to": "sq256",
+      "to_input": 0
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "title": "実験161",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "dst",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "class": 0,
+        "snippet": "for (int i = 0; i <= 200; i++) { int p = addpoint(0, set(i * 0.01, 0, 0)); setpointattrib(0, 'val', p, 0.0); }"
+      }
+    },
+    {
+      "name": "src",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "int p = addpoint(0, {0,0,0}); setpointattrib(0, 'val', p, 1.0);"
+      }
+    },
+    {
+      "name": "at_50_0",
+      "type": "attribtransfer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "primitiveattribs": 0,
+        "pointattriblist": "val",
+        "thresholddist": 0.5
+      }
+    },
+    {
+      "name": "at_50_25",
+      "type": "attribtransfer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "primitiveattribs": 0,
+        "pointattriblist": "val",
+        "thresholddist": 0.5,
+        "blendwidth": 0.25
+      }
+    },
+    {
+      "name": "at_50_50",
+      "type": "attribtransfer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "primitiveattribs": 0,
+        "pointattriblist": "val",
+        "thresholddist": 0.5,
+        "blendwidth": 0.5
+      }
+    },
+    {
+      "name": "at_100_0",
+      "type": "attribtransfer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "primitiveattribs": 0,
+        "pointattriblist": "val",
+        "thresholddist": 1.0
+      }
+    },
+    {
+      "name": "at_100_25",
+      "type": "attribtransfer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "primitiveattribs": 0,
+        "pointattriblist": "val",
+        "thresholddist": 1.0,
+        "blendwidth": 0.25
+      }
+    },
+    {
+      "name": "at_100_50",
+      "type": "attribtransfer",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "primitiveattribs": 0,
+        "pointattriblist": "val",
+        "thresholddist": 1.0,
+        "blendwidth": 0.5
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "dst",
+      "from_output": 0,
+      "to": "at_50_0",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "at_50_0",
+      "to_input": 1
+    },
+    {
+      "from": "dst",
+      "from_output": 0,
+      "to": "at_50_25",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "at_50_25",
+      "to_input": 1
+    },
+    {
+      "from": "dst",
+      "from_output": 0,
+      "to": "at_50_50",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "at_50_50",
+      "to_input": 1
+    },
+    {
+      "from": "dst",
+      "from_output": 0,
+      "to": "at_100_0",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "at_100_0",
+      "to_input": 1
+    },
+    {
+      "from": "dst",
+      "from_output": 0,
+      "to": "at_100_25",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "at_100_25",
+      "to_input": 1
+    },
+    {
+      "from": "dst",
+      "from_output": 0,
+      "to": "at_100_50",
+      "to_input": 0
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "at_100_50",
+      "to_input": 1
+    }
+  ]
+}

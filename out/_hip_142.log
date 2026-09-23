@@ -1,0 +1,7 @@
+{'type': 0, 'label': 'Tetrahedron', 'points': 4, 'prims': 4, 'rmin': 0.999997, 'rmax': 1.000001, 'edge_min': 1.632991, 'edge_max': 1.632995, 'area': 4.618802, 'volume': 0.5132, 'sec': 0.007}
+{'type': 1, 'label': 'Cube', 'points': 8, 'prims': 6, 'rmin': 0.866025, 'rmax': 0.866025, 'edge_min': 1.0, 'edge_max': 1.0, 'area': 6.0, 'volume': 1.0, 'sec': 0.0049}
+{'type': 2, 'label': 'Octahedron', 'points': 6, 'prims': 8, 'rmin': 1.0, 'rmax': 1.0, 'edge_min': 1.414214, 'edge_max': 1.414214, 'area': 6.928203, 'volume': 1.333333, 'sec': 0.0051}
+{'type': 3, 'label': 'Icosahedron', 'points': 12, 'prims': 20, 'rmin': 1.0, 'rmax': 1.0, 'edge_min': 1.051461, 'edge_max': 1.051463, 'area': 9.574541, 'volume': 2.536151, 'sec': 0.0055}
+{'type': 4, 'label': 'Dodecahedron', 'points': 20, 'prims': 12, 'rmin': 0.993318, 'rmax': 0.993318, 'edge_min': 0.708876, 'edge_max': 0.708876, 'area': 10.374577, 'volume': 2.729706, 'sec': 0.0052}
+保存: D:\Claude\houdini\out\142_stats.json
+HIP 142 D:\Claude\houdini\out\142_scene.hipnc 43053

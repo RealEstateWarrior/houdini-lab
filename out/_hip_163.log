@@ -1,0 +1,8 @@
+{'grid': '3×3', 'mesh': 'quads', 'points': 9, 'faces': 4, 'edges': 12, 'inner_edges': 4, 'constraints': {'distance': 16, 'bend': 8}, 'total': 24, 'sec': 0.2238}
+{'grid': '3×3', 'mesh': 'triangles', 'points': 9, 'faces': 8, 'edges': 16, 'inner_edges': 8, 'constraints': {'distance': 16, 'bend': 8}, 'total': 24, 'sec': 0.1013}
+{'grid': '5×8', 'mesh': 'quads', 'points': 40, 'faces': 28, 'edges': 67, 'inner_edges': 45, 'constraints': {'distance': 95, 'bend': 73}, 'total': 168, 'sec': 0.1024}
+{'grid': '5×8', 'mesh': 'triangles', 'points': 40, 'faces': 56, 'edges': 95, 'inner_edges': 73, 'constraints': {'distance': 95, 'bend': 73}, 'total': 168, 'sec': 0.1035}
+{'grid': '10×10', 'mesh': 'quads', 'points': 100, 'faces': 81, 'edges': 180, 'inner_edges': 144, 'constraints': {'distance': 261, 'bend': 225}, 'total': 486, 'sec': 0.0999}
+{'grid': '10×10', 'mesh': 'triangles', 'points': 100, 'faces': 162, 'edges': 261, 'inner_edges': 225, 'constraints': {'distance': 261, 'bend': 225}, 'total': 486, 'sec': 0.1014}
+保存: D:\Claude\houdini\out\163_stats.json
+HIP 163 D:\Claude\houdini\out\163_scene.hipnc 189828

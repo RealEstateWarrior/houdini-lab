@@ -1,0 +1,263 @@
+{
+  "title": "実験099",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "the_box",
+      "type": "box",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "sd_0",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 0
+      }
+    },
+    {
+      "name": "sd_1",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "sd_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 2
+      }
+    },
+    {
+      "name": "sd_3",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "sd_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 4
+      }
+    },
+    {
+      "name": "sd_5",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 5
+      }
+    },
+    {
+      "name": "sd_6",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 6
+      }
+    },
+    {
+      "name": "al_0",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "algorithm": 0,
+        "iterations": 3
+      }
+    },
+    {
+      "name": "al_1",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "algorithm": 1,
+        "iterations": 3
+      }
+    },
+    {
+      "name": "al_2",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "iterations": 3
+      }
+    },
+    {
+      "name": "al_3",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "algorithm": 3,
+        "iterations": 3
+      }
+    },
+    {
+      "name": "al_4",
+      "type": "subdivide",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "algorithm": 4,
+        "iterations": 3
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "sd_0",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "sd_1",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "sd_2",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "sd_3",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "sd_4",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "sd_5",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "sd_6",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "al_0",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "al_1",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "al_2",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "al_3",
+      "to_input": 0
+    },
+    {
+      "from": "the_box",
+      "from_output": 0,
+      "to": "al_4",
+      "to_input": 0
+    }
+  ]
+}
