@@ -76,6 +76,12 @@
 - **Houdini 22.0.368 はライセンスが無く hython が起動しない**（21 のライセンスでは動かない）
 - 残りの宿題: 実践「テクスチャを貼る」「ターンテーブル」「文字を光らせる」の Houdini 画面（GUI が要るので自動では撮れない）。要望ページ（#requests）で追う
 
+## サイトの形（2026-09-23 変更）
+
+- 実践・制作は1本ずつのページ `guide_<id>.html`（build_site.py の write_guide_pages／site/guide_template.html）。カードは新しいタブで開く。頭に現在地（Houdini 研究部 › 実践 › 題）、終わりに前後の実践
+- 本文の `<code>ノード名</code>` は押すと種類・一言・ノード解説へのリンクが出る（link_nodes_in／render_node_data／partial_popover.html）。reference ページには付けない
+- エフェクトはフォトリアルを目指す。作る前に本物の参考写真を集める（ユーザー指示 2026-09-23）
+
 ## 実践を作る型（2026-09-23 確立。目標70本）
 
 1. `examples/pr_<id>.py` を書く（`examples/practice_kit.py` の Guide を使う: node / step / mat / assign / hero / save）。
