@@ -12,6 +12,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
@@ -46,8 +47,20 @@ def run(command, **kwargs):
     return result.stdout.strip()
 
 
+def push(where=()):
+    """GitHub が一時的に Internal Server Error を返すことがある（2026-09-24、2回目で通った）。3回まで送り直す。"""
+    for attempt in range(3):
+        try:
+            return run(["git", *where, "push", "-q", "origin", "main"])
+        except SystemExit:
+            if attempt == 2:
+                raise
+            print("push に失敗。送り直す")
+            time.sleep(10)
+
+
 def main():
-    message = sys.argv[1] if len(sys.argv) > 1 else "実験ログとサイトを更新"
+    message =sys.argv[1] if len(sys.argv) > 1 else "実験ログとサイトを更新"
 
     specs = report_specs()
     print(f"レポート {len(specs)} 件を束ねる")
@@ -64,7 +77,7 @@ def main():
     else:
         run(["git", "-c", "user.name=comeb", "-c", "user.email=fko2547009@gmail.com",
              "commit", "-q", "-m", message])
-        run(["git", "push", "-q", "origin", "main"])
+        push()
         print("プッシュ完了:", run(["git", "log", "--oneline", "-1"]))
 
     # 親ページ（Saito Production）は別のリポジトリ。build_site.py が ../sp/index.html を
@@ -75,7 +88,7 @@ def main():
         if run(["git", "-C", parent, "status", "--porcelain"]):
             run(["git", "-C", parent, "-c", "user.name=comeb", "-c", "user.email=fko2547009@gmail.com",
                  "commit", "-q", "-m", message])
-            run(["git", "-C", parent, "push", "-q", "origin", "main"])
+            push(["-C", parent])
             print("親ページもプッシュ:", run(["git", "-C", parent, "log", "--oneline", "-1"]))
     return 0
 
