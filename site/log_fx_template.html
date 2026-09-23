@@ -5524,6 +5524,82 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 201 ===================== -->
+    <article class="entry entry--current" id="exp201">
+      <div class="badge">201</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Pyro で焚き火の炎（高さ 1.2 m）を作るなら Flame Lifespan 0.25・Buoyancy 0.25・Cooling Rate 1 — 揺らすのは Turbulence で、Use Control Field を切る</h2>
+        <p class="path">examples/201_pyro_flame_height.py &nbsp;·&nbsp; 焚き火はLifespan 0.25・Buoyancy 0.25・Cooling 1で1.2m。揺らすのはTurbulence</p>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火くらいの炎（高さ 1 m 前後で揺れる）にするには、<button class="term" data-term="Pyro">Pyro</button> のどのつまみを動かすか。</strong></p>
+          <p>幅 0.6・厚み 0.18 の薪（平たい球）を pyrosource の Initialize = Source Burn で燃やし、pyrosolver（<button class="term" data-term="SOP">SOP</button>、Voxel Size 0.04）で 72 フレーム（3 秒）回した。炎（flame &gt; 0.1）の上から 1% の点の高さを毎フレーム測り、フレーム 36〜72 の平均を「落ち着いた高さ」とした。炎を正面に投影した画から、輪郭の入り組み具合（縁の長さ ÷ 面積の平方根）と、フレーム 48 と 72 の形の重なり（IoU、低いほどよく動く）も出した。</p>
+          <p><strong>既定のままでは焚き火にならない。</strong>炎は 1 秒に約 6 m で伸び、3 秒たっても平均 13.8 m の柱のまま。</p>
+          <p><strong>高さは3つのつまみで決まる。1つずつ変えた結果:</strong> Flame Lifespan（既定 2 秒）を 1・0.5・0.25 にすると 12.3・9.8・4.1 m。 Lifespan 0.5 のまま Buoyancy Scale を 0.5・0.25 にすると 6.4・4.0 m。 Cooling Rate を 0.75・1 にすると 9.1・3.82 m で、1.5・2 も 3.82・3.82 m と 1 と同じ（1 以上は効かない）。</p>
+          <p><strong>組み合わせると 1 m 前後になる。</strong>Lifespan 0.25・Buoyancy 0.25・Cooling 1 で 1.21 m、Buoyancy を 0.1 にすると 0.90 m。</p>
+          <p><strong>ただしそのままでは炎が止まって見える。</strong>形の重なり（IoU）は 0.978（既定の柱でも 0.862）。揺らす仕組みを入れて比べた: Disturbance（既定の強さ・5）で 0.976・0.925、Shredding 2 で 0.939、Turbulence 1・3（Use Control Field を切る）で 0.805・0.795。輪郭の入り組み具合も Turbulence 3 が 5.89 と一番大きい（揺らす前は 4.27）。Turbulence 3 を入れても高さは 1.37 m にとどまった。</p>
+          <p><strong>Turbulence を入れても効かなかったのは、Use Control Field のせい。</strong>既定（Use Control Field 入、制御する場は density）のまま Turbulence を 1 にしても、高さ 1.214 m・IoU 0.978 と、入れる前と小数 3 桁まで同じ。切ると 1.310 m・IoU 0.805 に変わった。</p>
+          <p><strong>時間は炎が小さいほど短い。</strong>既定 16.6 秒に対し、焚き火の設定は 2.5 秒、Turbulence 3 を足して 4.3 秒（72 フレーム）。</p>
+        </div>
+
+        <p class="label">炎を正面に投影した画（上がフレーム48、下がフレーム72）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="201_grid.png" alt="左から 既定・Lifespan 0.25・焚き火の設定・＋Disturbance" loading="lazy" decoding="async"></div>
+            <figcaption>左から 既定・Lifespan 0.25・焚き火の設定・＋Disturbance 5・＋Turbulence 3・＋3つとも。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">条件と、炎の高さ・動き</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="201_height.png" alt="既定は伸び続ける。Lifespan と Buoyancy・Cooling で 1" loading="lazy" decoding="async"></div>
+            <figcaption>既定は伸び続ける。Lifespan と Buoyancy・Cooling で 1 m 台に収まる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>落ち着いた高さ（m）</th><th>高さの揺らぎ（m）</th><th>伸びる速さ（m/秒）</th><th>形の重なり F48–72</th><th>輪郭の入り組み</th><th>秒</th></tr></thead>
+            <tbody>
+              <tr><td>life2</td><td class="num">13.76</td><td class="num">2.201</td><td class="num">6.0</td><td class="num">0.862</td><td class="num">5.37</td><td class="num">16.6</td></tr>
+              <tr><td>life1</td><td class="num">12.29</td><td class="num">1.894</td><td class="num">6.0</td><td class="num">0.884</td><td class="num">5.46</td><td class="num">14.7</td></tr>
+              <tr><td>life05</td><td class="num">9.76</td><td class="num">0.700</td><td class="num">6.0</td><td class="num">0.894</td><td class="num">4.86</td><td class="num">8.6</td></tr>
+              <tr><td>life025</td><td class="num">4.06</td><td class="num">0.020</td><td class="num">6.0</td><td class="num">0.982</td><td class="num">5.04</td><td class="num">3.8</td></tr>
+              <tr><td>buoy05</td><td class="num">6.40</td><td class="num">0.151</td><td class="num">3.6</td><td class="num">0.937</td><td class="num">5.09</td><td class="num">5.0</td></tr>
+              <tr><td>buoy025</td><td class="num">4.00</td><td class="num">0.115</td><td class="num">2.0</td><td class="num">0.948</td><td class="num">4.82</td><td class="num">3.8</td></tr>
+              <tr><td>cool1</td><td class="num">3.82</td><td class="num">0.037</td><td class="num">3.2</td><td class="num">0.919</td><td class="num">3.77</td><td class="num">4.9</td></tr>
+              <tr><td>cool2</td><td class="num">3.82</td><td class="num">0.037</td><td class="num">3.2</td><td class="num">0.919</td><td class="num">3.77</td><td class="num">4.9</td></tr>
+              <tr><td>cool075</td><td class="num">9.10</td><td class="num">0.723</td><td class="num">6.0</td><td class="num">0.933</td><td class="num">5.05</td><td class="num">6.8</td></tr>
+              <tr><td>cool15</td><td class="num">3.82</td><td class="num">0.037</td><td class="num">3.2</td><td class="num">0.919</td><td class="num">3.77</td><td class="num">4.2</td></tr>
+              <tr><td>l025b025</td><td class="num">1.75</td><td class="num">0.062</td><td class="num">1.9</td><td class="num">0.974</td><td class="num">4.73</td><td class="num">2.4</td></tr>
+              <tr><td>l025c1</td><td class="num">2.06</td><td class="num">0.027</td><td class="num">2.9</td><td class="num">0.968</td><td class="num">4.53</td><td class="num">2.9</td></tr>
+              <tr><td>l025b025c1</td><td class="num">1.21</td><td class="num">0.033</td><td class="num">1.1</td><td class="num">0.978</td><td class="num">4.27</td><td class="num">2.5</td></tr>
+              <tr><td>l025b01c1</td><td class="num">0.90</td><td class="num">0.029</td><td class="num">0.6</td><td class="num">0.976</td><td class="num">4.19</td><td class="num">2.3</td></tr>
+              <tr><td>l025b025c1_dist</td><td class="num">1.22</td><td class="num">0.032</td><td class="num">1.1</td><td class="num">0.976</td><td class="num">4.30</td><td class="num">2.8</td></tr>
+              <tr><td>l025b025c1_turb</td><td class="num">1.21</td><td class="num">0.033</td><td class="num">1.1</td><td class="num">0.978</td><td class="num">4.27</td><td class="num">2.7</td></tr>
+              <tr><td>fire_dist2</td><td class="num">1.23</td><td class="num">0.025</td><td class="num">1.1</td><td class="num">0.950</td><td class="num">4.56</td><td class="num">2.5</td></tr>
+              <tr><td>fire_dist5</td><td class="num">1.21</td><td class="num">0.030</td><td class="num">1.2</td><td class="num">0.925</td><td class="num">4.88</td><td class="num">2.5</td></tr>
+              <tr><td>fire_turb1</td><td class="num">1.31</td><td class="num">0.075</td><td class="num">2.1</td><td class="num">0.805</td><td class="num">5.33</td><td class="num">3.1</td></tr>
+              <tr><td>fire_turb1_ctrl</td><td class="num">1.21</td><td class="num">0.033</td><td class="num">1.1</td><td class="num">0.978</td><td class="num">4.27</td><td class="num">2.4</td></tr>
+              <tr><td>fire_turb3</td><td class="num">1.37</td><td class="num">0.136</td><td class="num">2.7</td><td class="num">0.795</td><td class="num">5.89</td><td class="num">4.3</td></tr>
+              <tr><td>fire_shred2</td><td class="num">1.22</td><td class="num">0.027</td><td class="num">1.1</td><td class="num">0.939</td><td class="num">4.52</td><td class="num">2.9</td></tr>
+              <tr><td>fire_mix</td><td class="num">1.30</td><td class="num">0.065</td><td class="num">2.1</td><td class="num">0.789</td><td class="num">5.34</td><td class="num">4.1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>焚き火の高さ（1 m 台）は Flame Lifespan 0.25・Buoyancy Scale 0.25・Cooling Rate 1。</strong>既定の Lifespan 2 秒では、炎が柱になって伸び続ける。</li>
+          <li><strong>Cooling Rate は 1 より上げても変わらない。</strong></li>
+          <li><strong>炎を揺らすのは Turbulence（1〜3）。</strong>Disturbance と Shredding は輪郭を少し乱すだけで、炎全体はあまり動かない。</li>
+          <li><strong>Turbulence が効かないときは Use Control Field を切る。</strong>既定のまま（制御する場 density）だと、強さを上げても何も変わらなかった。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

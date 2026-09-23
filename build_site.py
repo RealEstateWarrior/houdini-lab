@@ -1344,6 +1344,12 @@ DONE = [
      "shots": ["200_grid.png", "200_cost.png", "200_volume.png"],
      "title": "FLIP のダムブレイクは Particle Separation 0.04 で足りる — 0.06 より粗いと壁ぎわの数粒が大きな塊に見え、水も 1〜2 割増える",
      "note": "ダムブレイクは粒の間隔0.04で足りる。粗いと壁ぎわの数粒が塊に見える"},
+    {"no": "201", "anchor": "exp201",
+     "tags": ["シミュレーション", "Pyro", "炎", "制作", "落とし穴"],
+     "log": "log_fx", "thumb": "201_grid.png",
+     "shots": ["201_grid.png", "201_height.png"],
+     "title": "Pyro で焚き火の炎（高さ 1.2 m）を作るなら Flame Lifespan 0.25・Buoyancy 0.25・Cooling Rate 1 — 揺らすのは Turbulence で、Use Control Field を切る",
+     "note": "焚き火はLifespan 0.25・Buoyancy 0.25・Cooling 1で1.2m。揺らすのはTurbulence"},
 ]
 
 PLANNED = []
