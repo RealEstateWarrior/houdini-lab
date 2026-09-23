@@ -78,6 +78,18 @@
 
 ## サイトの形（2026-09-23 変更）
 
+- 上のバー: 左にメニュー（2本線）と区分のタブ、真ん中にロゴ、右に AI・検索・Notebook。頭では背景になじみ、読み進めるとガラスになる（is-scrolled）。スマホは区分のタブをバーの下に左寄せ
+- 全ページ: バーの下に現在地（render_crumbs）、最後にリンク集（render_footer, id=sitemap）
+- 実験ログ: 左に目次（絞り込み・いま読んでいる所に印）、記事はコラムの形（公開日・読む時間・タグ・要点3つ・サムネイル、本文は「全文を読む」に畳む）。1000px 未満は目次なし
+- 実験カードは実験ログの記事を新しいタブで開く（ポップアップはやめた）
+- 公開日は `python examples/dates_index.py`（git の履歴から。out/dates.json）。**実践・実験を足したら回す**
+- つまみのポップアップは `hython examples/parm_index.py`（hip から。out/parm_index.json）。**実践を足したら回す**
+- 難易度は build_site.py の guide_level（シミュレーション=応用、VEX か6段以上=基本、ほか=入門）
+- docs/ では検索・用語・ノード・実験のデータを docs/data/*.js に出す（ページが約1.2MB→約0.2MB）
+- ページ確認は headless Chrome（スクラッチの shot.sh）。ブラウザの枠は PC 幅が小さく写る
+- 要望のメール転送は未（ユーザーの判断待ち）
+- これからの実践: エフェクトは映像か GIF を付ける
+
 - 実践・制作は1本ずつのページ `guide_<id>.html`（build_site.py の write_guide_pages／site/guide_template.html）。カードは新しいタブで開く。頭に現在地（Houdini 研究部 › 実践 › 題）、終わりに前後の実践
 - 本文の `<code>ノード名</code>` は押すと種類・一言・ノード解説へのリンクが出る（link_nodes_in／render_node_data／partial_popover.html）。reference ページには付けない
 - エフェクトはフォトリアルを目指す。作る前に本物の参考写真を集める（ユーザー指示 2026-09-23）
