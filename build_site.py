@@ -1784,6 +1784,9 @@ def inject_experiment_links(page, urls, nodes):
     """
     table = nodes_by_experiment(nodes)
     hips = {item["no"]: item.get("hip") for item in DONE}
+    # 本文にもうノードの画がある記事には、折りたたみを足さない
+    has_graph = {m.group(1) for m in re.finditer(
+        r'<article class="entry[^"]*" id="exp(\d+)">(?:(?!</article>).)*?\1_graph\.png', page, re.S)}
     pattern = re.compile(
         r'(<article class="entry[^"]*" id="exp(\d+)">.*?<p class="path">.*?</p>)',
         re.S)
@@ -1806,7 +1809,7 @@ def inject_experiment_links(page, urls, nodes):
                         f'<a href="{GITHUB_RAW}{hip}"'
                         ' target="_blank" rel="noopener noreferrer">'
                         f'{hip}</a></p>')
-        if os.path.exists(os.path.join(OUT, f"{no}_graph.png")) and f"{no}_graph.png" not in whole:
+        if os.path.exists(os.path.join(OUT, f"{no}_graph.png")) and no not in has_graph:
             rows.append('        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary>'
                         f'<img src="{no}_graph.png" alt="実験{no} のノードのつなぎ方" loading="lazy" decoding="async"></details>')
         if not rows:
