@@ -1368,6 +1368,12 @@ DONE = [
      "shots": ["201_grid.png", "201_height.png"],
      "title": "Pyro で焚き火の炎（高さ 1.2 m）を作るなら Flame Lifespan 0.25・Buoyancy 0.25・Cooling Rate 1 — 揺らすのは Turbulence で、Use Control Field を切る",
      "note": "焚き火はLifespan 0.25・Buoyancy 0.25・Cooling 1で1.2m。揺らすのはTurbulence"},
+    {"no": "202", "anchor": "exp202",
+     "tags": ["エフェクト", "Pyro", "炎", "速度"],
+     "log": "log_fx", "thumb": "202_grid.png",
+     "shots": ["202_grid.png", "202_height.png"],
+     "title": "焚き火の Pyro を速く回すなら Voxel Size を 0.02 → 0.04 に — 5.1 倍速く、炎の高さの差は 3%。速度の升だけ粗くするのと Substeps 2 は、かえって遅い",
+     "note": "焚き火は Voxel 0.04 で5倍速く、高さの差は3%"},
 ]
 
 PLANNED = []

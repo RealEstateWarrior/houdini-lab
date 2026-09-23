@@ -5600,6 +5600,63 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 202 ===================== -->
+    <article class="entry entry--current" id="exp202">
+      <div class="badge">202</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>焚き火の Pyro を速く回すなら Voxel Size を 0.02 → 0.04 に — 5.1 倍速く、炎の高さの差は 3%。速度の升だけ粗くするのと Substeps 2 は、かえって遅い</h2>
+        <p class="path">examples/202_pyro_campfire_cost.py &nbsp;·&nbsp; 焚き火は Voxel 0.04 で5倍速く、高さの差は3%</p>
+
+        <div class="prose">
+          <p><strong>課題: <button class="term" data-term="Pyro">Pyro</button> の焚き火（高さ 1.5 m 前後、<a href="#exp201">実験201</a> の設定）を短い時間で回したい。どのつまみを下げればよく、見た目はどれだけ変わるか。</strong></p>
+          <p>平たい球（半径 0.3・厚み 0.18）を pyrosource の Source Burn で燃やし、pyrosolver（<button class="term" data-term="SOP">SOP</button>）に<a href="#exp201">実験201</a> の焚き火の設定（Flame Lifespan 0.25・Buoyancy 0.25・Cooling 1・Turbulence 3・Use Control Field 切）を入れて 48 フレーム（2 秒）回した。Voxel Size を 0.02（基準）・0.03・0.04・0.06 に変えたもの、0.02 のまま Velocity Voxel Scale を 2 にしたもの、Max Substeps を 2 にしたものを、1 プロセスずつ測った。毎フレーム、炎（flame &gt; 0.1）の上から 1% の点の高さを出し、フレーム 24〜48 の平均を「炎の高さ」とした。フレーム 24・36・48 の炎を正面に投影し、基準との重なり（IoU）も出した。</p>
+          <p><strong>Voxel Size がいちばん効く。</strong>0.02 の 26.0 秒に対し、0.03 で 9.1 秒（2.8 倍速い）、0.04 で 5.1 秒（5.1 倍）、0.06 で 2.3 秒（11.4 倍）。炎の高さは 1.47・1.48・1.42・1.35 m で、0.04 までは 3% 以内、0.06 で 8% 低くなった。</p>
+          <p><strong>速度の升だけ粗くする（Velocity Voxel Scale 2）は速くならなかった。</strong>33.9 秒で、基準より遅い。最後のフレームの升の数は [160, 192, 192]（基準は [128, 160, 176]）と、計算する範囲のほうが広がっていた。</p>
+          <p><strong>Max Substeps 2 も遅い（32.8 秒）。</strong>高さは 1.41 m で、揺らぎ（高さの標準偏差）は 0.164 m と、基準の 0.127 m より大きい。速くするための設定ではない。</p>
+          <p><strong>形の重なり（IoU）は、どの条件も 0.72〜0.89。</strong>高さがほぼ同じ Voxel 0.03 でも 0.75〜0.89、速度の升 2倍でも 0.77〜0.87。炎の細かい形はどの変更でもずれるので、形を1画素ずつ合わせる比べ方では差が出すぎる。ここでは高さで判断した。</p>
+        </div>
+
+        <p class="label">炎と煙を正面に投影した画（上がフレーム36、下がフレーム48）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="202_grid.png" alt="左から Voxel 0.02・0.03・0.04・0.06・速度の升 2倍・Su" loading="lazy" decoding="async"></div>
+            <figcaption>左から Voxel 0.02・0.03・0.04・0.06・速度の升 2倍・Substeps 2。炎は橙、煙は灰色。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">条件ごとの時間と炎</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="202_height.png" alt="炎の高さの移り変わり。0.06 だけが目に見えて低い。" loading="lazy" decoding="async"></div>
+            <figcaption>炎の高さの移り変わり。0.06 だけが目に見えて低い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>48 フレームの計算（秒）</th><th>基準より何倍速い</th><th>炎の高さ（m）</th><th>高さの揺らぎ（m）</th><th>形の重なり（IoU）</th></tr></thead>
+            <tbody>
+              <tr><td>0.02（基準）</td><td class="num">26.0</td><td class="num">1.0</td><td class="num">1.47</td><td class="num">0.127</td><td class="num">1.00〜1.00</td></tr>
+              <tr><td>Voxel 0.03</td><td class="num">9.1</td><td class="num">2.8</td><td class="num">1.48</td><td class="num">0.116</td><td class="num">0.75〜0.89</td></tr>
+              <tr><td>Voxel 0.04</td><td class="num">5.1</td><td class="num">5.1</td><td class="num">1.42</td><td class="num">0.119</td><td class="num">0.74〜0.86</td></tr>
+              <tr><td>Voxel 0.06</td><td class="num">2.3</td><td class="num">11.4</td><td class="num">1.35</td><td class="num">0.106</td><td class="num">0.71〜0.77</td></tr>
+              <tr><td>速度の升 2倍</td><td class="num">33.9</td><td class="num">0.8</td><td class="num">1.48</td><td class="num">0.113</td><td class="num">0.77〜0.87</td></tr>
+              <tr><td>Substeps 2</td><td class="num">32.8</td><td class="num">0.8</td><td class="num">1.41</td><td class="num">0.164</td><td class="num">0.72〜0.80</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>焚き火を速く回すなら Voxel Size を上げる。</strong>0.02 → 0.04 で 5.1 倍速く、炎の高さの差は 3% 以内。形を決めるうちは 0.04、仕上げで 0.02 に戻す。</li>
+          <li><strong>0.06 まで上げると炎が 8% 低くなる。</strong>速さは 11 倍だが、高さを合わせたい段階では使わない。</li>
+          <li><strong>Velocity Voxel Scale 2 と Max Substeps 2 は、この焚き火では遅くなった。</strong>速くする目的で触るつまみではない。</li>
+          <li><strong>炎の細かい形は、どの設定を変えてもずれる（重なり 0.72〜0.89）。</strong>速さの設定を選ぶときは、形の重なりより高さを見る。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

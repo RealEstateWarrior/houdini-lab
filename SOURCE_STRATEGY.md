@@ -23,9 +23,9 @@
 | 実験ログ: 見た目（Karma・材質・テクスチャ） | out/nb/exp_look.pdf | 29943822-bf4d-4ae8-bf8b-3f2927e4c4ad |
 | 実験ログ: 粒（POP） | out/nb/exp_pop.pdf | 049721b3-7dc6-452f-a837-c378c7947c89 |
 | 実験ログ: 毛とリグ（グルーム・APEX） | out/nb/exp_groom.pdf | b68bdae5-af17-41e0-903e-325d3787b7c7 |
-| 実践: Houdini で作る手順 | out/nb/practice.md | 16db60df-7d7e-4771-a00a-257e7e6784b7 |
-| ノード解説 | out/nb/nodes.md | 81acf710-b838-4070-b7dc-407eb3c2d616 |
-| 用語集: Houdini 初心者向け | out/nb/glossary.pdf | f47d1bd1-bf8a-4cac-9e31-218137976af3 |
+| 実践: Houdini で作る手順（70本） | out/nb/practice.md | fee1e0c9-bb70-4f65-9f55-b6a074a654ed |
+| ノード解説（384件） | out/nb/nodes.md | 24965f13-8df0-405e-8d60-127339679bc9 |
+| 用語集: Houdini 初心者向け（433語） | out/nb/glossary.pdf | d114f525-3be0-4356-a082-db452c220203 |
 
 2026-09-24 に作り直した（右の列はソースの ID）。それまでは全実験が「実験ログ A」1つ（30MB）に入っていて、
 方針の「テーマ単位で約10本」が 001 の段階で止まったままだった（ユーザーの指摘）。

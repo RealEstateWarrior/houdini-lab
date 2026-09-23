@@ -66,6 +66,13 @@ def build(vox, veldiv=1.0, substeps=None):
     solver.parm("addflamefield").set(True)
     solver.parm("doflamedensity").set(True)
     solver.parm("flamedensity").set(1.0)    # 既定 0.0001 では煙がほとんど出ない（実験023）
+    # 焚き火の設定（実験201）。これが無いと炎が柱になって 14 m まで伸びた（1 回目の測定で気づいた）
+    solver.parm("flames_lifespan").set(0.25)
+    solver.parm("buoyancylift").set(0.25)
+    solver.parm("tempcooling").set(1.0)
+    solver.parm("enable_turbulence").set(1)
+    solver.parm("turbulence").set(3.0)
+    solver.parm("turbulence_usecontrol").set(0)
     solver.parm("veldivscale").set(veldiv)
     if substeps:
         solver.parm("substeps").set(substeps)

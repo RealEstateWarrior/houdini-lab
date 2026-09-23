@@ -1,0 +1,4806 @@
+{
+  "rows": [
+    {
+      "case": "vox020",
+      "vox": 0.02,
+      "attributes": [
+        "burn",
+        "temperature"
+      ],
+      "per_frame": [
+        {
+          "f": 1,
+          "flame": {
+            "height": 0.37,
+            "amount": 0.52601
+          },
+          "smoke": {
+            "height": 0.37,
+            "amount": 0.52601
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 2,
+          "flame": {
+            "height": 0.37,
+            "amount": 0.54012
+          },
+          "smoke": {
+            "height": 0.37,
+            "amount": 0.54018
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 3,
+          "flame": {
+            "height": 0.41,
+            "amount": 0.59063
+          },
+          "smoke": {
+            "height": 0.41,
+            "amount": 0.59641
+          },
+          "res": [
+            96,
+            80,
+            112
+          ]
+        },
+        {
+          "f": 4,
+          "flame": {
+            "height": 0.51,
+            "amount": 0.68739
+          },
+          "smoke": {
+            "height": 0.51,
+            "amount": 0.69398
+          },
+          "res": [
+            96,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 5,
+          "flame": {
+            "height": 0.61,
+            "amount": 0.81754
+          },
+          "smoke": {
+            "height": 0.61,
+            "amount": 0.82526
+          },
+          "res": [
+            96,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 6,
+          "flame": {
+            "height": 0.71,
+            "amount": 0.96566
+          },
+          "smoke": {
+            "height": 0.73,
+            "amount": 0.97497
+          },
+          "res": [
+            128,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 7,
+          "flame": {
+            "height": 0.83,
+            "amount": 1.10837
+          },
+          "smoke": {
+            "height": 0.83,
+            "amount": 1.12272
+          },
+          "res": [
+            128,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 8,
+          "flame": {
+            "height": 0.95,
+            "amount": 1.23342
+          },
+          "smoke": {
+            "height": 0.95,
+            "amount": 1.25691
+          },
+          "res": [
+            112,
+            112,
+            128
+          ]
+        },
+        {
+          "f": 9,
+          "flame": {
+            "height": 1.07,
+            "amount": 1.3233
+          },
+          "smoke": {
+            "height": 1.07,
+            "amount": 1.36065
+          },
+          "res": [
+            128,
+            112,
+            128
+          ]
+        },
+        {
+          "f": 10,
+          "flame": {
+            "height": 1.17,
+            "amount": 1.35414
+          },
+          "smoke": {
+            "height": 1.17,
+            "amount": 1.40708
+          },
+          "res": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "f": 11,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.33818
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.39984
+          },
+          "res": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "f": 12,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.29514
+          },
+          "smoke": {
+            "height": 1.43,
+            "amount": 1.35757
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 13,
+          "flame": {
+            "height": 1.55,
+            "amount": 1.24876
+          },
+          "smoke": {
+            "height": 1.55,
+            "amount": 1.30962
+          },
+          "res": [
+            144,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 14,
+          "flame": {
+            "height": 1.67,
+            "amount": 1.20815
+          },
+          "smoke": {
+            "height": 1.67,
+            "amount": 1.2678
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 15,
+          "flame": {
+            "height": 1.79,
+            "amount": 1.1738
+          },
+          "smoke": {
+            "height": 1.79,
+            "amount": 1.23044
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 16,
+          "flame": {
+            "height": 1.83,
+            "amount": 1.14548
+          },
+          "smoke": {
+            "height": 1.87,
+            "amount": 1.20249
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 17,
+          "flame": {
+            "height": 1.79,
+            "amount": 1.12066
+          },
+          "smoke": {
+            "height": 1.85,
+            "amount": 1.1824
+          },
+          "res": [
+            144,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 18,
+          "flame": {
+            "height": 1.57,
+            "amount": 1.10772
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.16369
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 19,
+          "flame": {
+            "height": 1.45,
+            "amount": 1.09866
+          },
+          "smoke": {
+            "height": 1.55,
+            "amount": 1.15312
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 20,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.08723
+          },
+          "smoke": {
+            "height": 1.37,
+            "amount": 1.14136
+          },
+          "res": [
+            144,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 21,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.08434
+          },
+          "smoke": {
+            "height": 1.37,
+            "amount": 1.13428
+          },
+          "res": [
+            160,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 22,
+          "flame": {
+            "height": 1.43,
+            "amount": 1.08721
+          },
+          "smoke": {
+            "height": 1.43,
+            "amount": 1.13708
+          },
+          "res": [
+            160,
+            144,
+            112
+          ]
+        },
+        {
+          "f": 23,
+          "flame": {
+            "height": 1.49,
+            "amount": 1.09731
+          },
+          "smoke": {
+            "height": 1.51,
+            "amount": 1.1482
+          },
+          "res": [
+            128,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 24,
+          "flame": {
+            "height": 1.53,
+            "amount": 1.11783
+          },
+          "smoke": {
+            "height": 1.55,
+            "amount": 1.17165
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 25,
+          "flame": {
+            "height": 1.45,
+            "amount": 1.12851
+          },
+          "smoke": {
+            "height": 1.55,
+            "amount": 1.18964
+          },
+          "res": [
+            160,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 26,
+          "flame": {
+            "height": 1.37,
+            "amount": 1.15132
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.21136
+          },
+          "res": [
+            160,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 27,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.18548
+          },
+          "smoke": {
+            "height": 1.43,
+            "amount": 1.24296
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 28,
+          "flame": {
+            "height": 1.39,
+            "amount": 1.21404
+          },
+          "smoke": {
+            "height": 1.45,
+            "amount": 1.27335
+          },
+          "res": [
+            144,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 29,
+          "flame": {
+            "height": 1.43,
+            "amount": 1.24409
+          },
+          "smoke": {
+            "height": 1.49,
+            "amount": 1.30276
+          },
+          "res": [
+            144,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 30,
+          "flame": {
+            "height": 1.45,
+            "amount": 1.26586
+          },
+          "smoke": {
+            "height": 1.51,
+            "amount": 1.32704
+          },
+          "res": [
+            144,
+            160,
+            112
+          ]
+        },
+        {
+          "f": 31,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.27597
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.34095
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 32,
+          "flame": {
+            "height": 1.55,
+            "amount": 1.27848
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.34428
+          },
+          "res": [
+            160,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 33,
+          "flame": {
+            "height": 1.61,
+            "amount": 1.26448
+          },
+          "smoke": {
+            "height": 1.67,
+            "amount": 1.33169
+          },
+          "res": [
+            160,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 34,
+          "flame": {
+            "height": 1.57,
+            "amount": 1.24404
+          },
+          "smoke": {
+            "height": 1.65,
+            "amount": 1.31223
+          },
+          "res": [
+            160,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 35,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.21874
+          },
+          "smoke": {
+            "height": 1.49,
+            "amount": 1.28777
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 36,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.21086
+          },
+          "smoke": {
+            "height": 1.25,
+            "amount": 1.27068
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 37,
+          "flame": {
+            "height": 1.27,
+            "amount": 1.20462
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.26568
+          },
+          "res": [
+            160,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 38,
+          "flame": {
+            "height": 1.33,
+            "amount": 1.19817
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.25849
+          },
+          "res": [
+            160,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 39,
+          "flame": {
+            "height": 1.37,
+            "amount": 1.19301
+          },
+          "smoke": {
+            "height": 1.39,
+            "amount": 1.25576
+          },
+          "res": [
+            160,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 40,
+          "flame": {
+            "height": 1.43,
+            "amount": 1.19611
+          },
+          "smoke": {
+            "height": 1.45,
+            "amount": 1.25572
+          },
+          "res": [
+            144,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 41,
+          "flame": {
+            "height": 1.43,
+            "amount": 1.19105
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.25308
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 42,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.18495
+          },
+          "smoke": {
+            "height": 1.49,
+            "amount": 1.24654
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 43,
+          "flame": {
+            "height": 1.51,
+            "amount": 1.17588
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.23679
+          },
+          "res": [
+            144,
+            144,
+            160
+          ]
+        },
+        {
+          "f": 44,
+          "flame": {
+            "height": 1.57,
+            "amount": 1.15485
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.21574
+          },
+          "res": [
+            144,
+            144,
+            160
+          ]
+        },
+        {
+          "f": 45,
+          "flame": {
+            "height": 1.63,
+            "amount": 1.13756
+          },
+          "smoke": {
+            "height": 1.65,
+            "amount": 1.19681
+          },
+          "res": [
+            144,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 46,
+          "flame": {
+            "height": 1.67,
+            "amount": 1.1192
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.17809
+          },
+          "res": [
+            128,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 47,
+          "flame": {
+            "height": 1.69,
+            "amount": 1.1109
+          },
+          "smoke": {
+            "height": 1.73,
+            "amount": 1.16563
+          },
+          "res": [
+            128,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 48,
+          "flame": {
+            "height": 1.67,
+            "amount": 1.09724
+          },
+          "smoke": {
+            "height": 1.73,
+            "amount": 1.15362
+          },
+          "res": [
+            128,
+            160,
+            176
+          ]
+        }
+      ],
+      "shots": {},
+      "sec": 26.03,
+      "image_diff": {
+        "24": {
+          "flame_iou": 1.0,
+          "smoke_iou": 1.0
+        },
+        "36": {
+          "flame_iou": 1.0,
+          "smoke_iou": 1.0
+        },
+        "48": {
+          "flame_iou": 1.0,
+          "smoke_iou": 1.0
+        }
+      },
+      "flame_height_mean": 1.4692,
+      "flame_height_std": 0.1267,
+      "flame_amount_mean": 1.19053,
+      "smoke_amount_48": 1.15362
+    },
+    {
+      "case": "vox030",
+      "vox": 0.03,
+      "attributes": [
+        "burn",
+        "temperature"
+      ],
+      "per_frame": [
+        {
+          "f": 1,
+          "flame": {
+            "height": 0.405,
+            "amount": 0.56911
+          },
+          "smoke": {
+            "height": 0.405,
+            "amount": 0.56911
+          },
+          "res": [
+            80,
+            48,
+            80
+          ]
+        },
+        {
+          "f": 2,
+          "flame": {
+            "height": 0.405,
+            "amount": 0.56568
+          },
+          "smoke": {
+            "height": 0.405,
+            "amount": 0.56881
+          },
+          "res": [
+            80,
+            48,
+            80
+          ]
+        },
+        {
+          "f": 3,
+          "flame": {
+            "height": 0.435,
+            "amount": 0.61104
+          },
+          "smoke": {
+            "height": 0.435,
+            "amount": 0.62095
+          },
+          "res": [
+            80,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 4,
+          "flame": {
+            "height": 0.495,
+            "amount": 0.67503
+          },
+          "smoke": {
+            "height": 0.495,
+            "amount": 0.68605
+          },
+          "res": [
+            80,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 5,
+          "flame": {
+            "height": 0.615,
+            "amount": 0.79246
+          },
+          "smoke": {
+            "height": 0.615,
+            "amount": 0.80285
+          },
+          "res": [
+            80,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 6,
+          "flame": {
+            "height": 0.705,
+            "amount": 0.93137
+          },
+          "smoke": {
+            "height": 0.705,
+            "amount": 0.94452
+          },
+          "res": [
+            80,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 7,
+          "flame": {
+            "height": 0.825,
+            "amount": 1.07095
+          },
+          "smoke": {
+            "height": 0.825,
+            "amount": 1.0882
+          },
+          "res": [
+            96,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 8,
+          "flame": {
+            "height": 0.945,
+            "amount": 1.19809
+          },
+          "smoke": {
+            "height": 0.945,
+            "amount": 1.22326
+          },
+          "res": [
+            96,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 9,
+          "flame": {
+            "height": 1.035,
+            "amount": 1.30053
+          },
+          "smoke": {
+            "height": 1.035,
+            "amount": 1.33901
+          },
+          "res": [
+            96,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 10,
+          "flame": {
+            "height": 1.155,
+            "amount": 1.34538
+          },
+          "smoke": {
+            "height": 1.155,
+            "amount": 1.39957
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 11,
+          "flame": {
+            "height": 1.245,
+            "amount": 1.34406
+          },
+          "smoke": {
+            "height": 1.275,
+            "amount": 1.41266
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 12,
+          "flame": {
+            "height": 1.395,
+            "amount": 1.31536
+          },
+          "smoke": {
+            "height": 1.395,
+            "amount": 1.39355
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 13,
+          "flame": {
+            "height": 1.515,
+            "amount": 1.27629
+          },
+          "smoke": {
+            "height": 1.515,
+            "amount": 1.35121
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 14,
+          "flame": {
+            "height": 1.635,
+            "amount": 1.23176
+          },
+          "smoke": {
+            "height": 1.635,
+            "amount": 1.30569
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 15,
+          "flame": {
+            "height": 1.755,
+            "amount": 1.19183
+          },
+          "smoke": {
+            "height": 1.755,
+            "amount": 1.26335
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 16,
+          "flame": {
+            "height": 1.815,
+            "amount": 1.15498
+          },
+          "smoke": {
+            "height": 1.845,
+            "amount": 1.22296
+          },
+          "res": [
+            112,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 17,
+          "flame": {
+            "height": 1.815,
+            "amount": 1.10154
+          },
+          "smoke": {
+            "height": 1.875,
+            "amount": 1.17377
+          },
+          "res": [
+            112,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 18,
+          "flame": {
+            "height": 1.665,
+            "amount": 1.06844
+          },
+          "smoke": {
+            "height": 1.815,
+            "amount": 1.13632
+          },
+          "res": [
+            96,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 19,
+          "flame": {
+            "height": 1.515,
+            "amount": 1.06212
+          },
+          "smoke": {
+            "height": 1.605,
+            "amount": 1.12212
+          },
+          "res": [
+            96,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 20,
+          "flame": {
+            "height": 1.365,
+            "amount": 1.05381
+          },
+          "smoke": {
+            "height": 1.485,
+            "amount": 1.11172
+          },
+          "res": [
+            96,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 21,
+          "flame": {
+            "height": 1.305,
+            "amount": 1.05408
+          },
+          "smoke": {
+            "height": 1.335,
+            "amount": 1.10959
+          },
+          "res": [
+            96,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 22,
+          "flame": {
+            "height": 1.395,
+            "amount": 1.07965
+          },
+          "smoke": {
+            "height": 1.395,
+            "amount": 1.13278
+          },
+          "res": [
+            96,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 23,
+          "flame": {
+            "height": 1.455,
+            "amount": 1.08955
+          },
+          "smoke": {
+            "height": 1.455,
+            "amount": 1.14607
+          },
+          "res": [
+            96,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 24,
+          "flame": {
+            "height": 1.485,
+            "amount": 1.10584
+          },
+          "smoke": {
+            "height": 1.515,
+            "amount": 1.16259
+          },
+          "res": [
+            96,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 25,
+          "flame": {
+            "height": 1.455,
+            "amount": 1.12749
+          },
+          "smoke": {
+            "height": 1.545,
+            "amount": 1.1881
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 26,
+          "flame": {
+            "height": 1.365,
+            "amount": 1.14674
+          },
+          "smoke": {
+            "height": 1.455,
+            "amount": 1.21281
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 27,
+          "flame": {
+            "height": 1.365,
+            "amount": 1.17822
+          },
+          "smoke": {
+            "height": 1.425,
+            "amount": 1.24111
+          },
+          "res": [
+            96,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 28,
+          "flame": {
+            "height": 1.425,
+            "amount": 1.22071
+          },
+          "smoke": {
+            "height": 1.485,
+            "amount": 1.28672
+          },
+          "res": [
+            80,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 29,
+          "flame": {
+            "height": 1.485,
+            "amount": 1.24973
+          },
+          "smoke": {
+            "height": 1.545,
+            "amount": 1.31424
+          },
+          "res": [
+            112,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 30,
+          "flame": {
+            "height": 1.455,
+            "amount": 1.26358
+          },
+          "smoke": {
+            "height": 1.545,
+            "amount": 1.33165
+          },
+          "res": [
+            112,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 31,
+          "flame": {
+            "height": 1.455,
+            "amount": 1.27625
+          },
+          "smoke": {
+            "height": 1.545,
+            "amount": 1.34669
+          },
+          "res": [
+            112,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 32,
+          "flame": {
+            "height": 1.515,
+            "amount": 1.28386
+          },
+          "smoke": {
+            "height": 1.575,
+            "amount": 1.35582
+          },
+          "res": [
+            112,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 33,
+          "flame": {
+            "height": 1.605,
+            "amount": 1.28248
+          },
+          "smoke": {
+            "height": 1.635,
+            "amount": 1.35857
+          },
+          "res": [
+            112,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 34,
+          "flame": {
+            "height": 1.575,
+            "amount": 1.26645
+          },
+          "smoke": {
+            "height": 1.665,
+            "amount": 1.34885
+          },
+          "res": [
+            112,
+            112,
+            96
+          ]
+        },
+        {
+          "f": 35,
+          "flame": {
+            "height": 1.485,
+            "amount": 1.23964
+          },
+          "smoke": {
+            "height": 1.605,
+            "amount": 1.32474
+          },
+          "res": [
+            112,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 36,
+          "flame": {
+            "height": 1.305,
+            "amount": 1.21416
+          },
+          "smoke": {
+            "height": 1.4742,
+            "amount": 1.2943
+          },
+          "res": [
+            128,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 37,
+          "flame": {
+            "height": 1.275,
+            "amount": 1.19722
+          },
+          "smoke": {
+            "height": 1.305,
+            "amount": 1.2712
+          },
+          "res": [
+            112,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 38,
+          "flame": {
+            "height": 1.335,
+            "amount": 1.21693
+          },
+          "smoke": {
+            "height": 1.335,
+            "amount": 1.28821
+          },
+          "res": [
+            112,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 39,
+          "flame": {
+            "height": 1.365,
+            "amount": 1.20829
+          },
+          "smoke": {
+            "height": 1.395,
+            "amount": 1.28216
+          },
+          "res": [
+            112,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 40,
+          "flame": {
+            "height": 1.395,
+            "amount": 1.20456
+          },
+          "smoke": {
+            "height": 1.455,
+            "amount": 1.27865
+          },
+          "res": [
+            112,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 41,
+          "flame": {
+            "height": 1.425,
+            "amount": 1.1885
+          },
+          "smoke": {
+            "height": 1.485,
+            "amount": 1.26269
+          },
+          "res": [
+            112,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 42,
+          "flame": {
+            "height": 1.485,
+            "amount": 1.18609
+          },
+          "smoke": {
+            "height": 1.515,
+            "amount": 1.25546
+          },
+          "res": [
+            112,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 43,
+          "flame": {
+            "height": 1.545,
+            "amount": 1.18754
+          },
+          "smoke": {
+            "height": 1.545,
+            "amount": 1.2559
+          },
+          "res": [
+            96,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 44,
+          "flame": {
+            "height": 1.575,
+            "amount": 1.18153
+          },
+          "smoke": {
+            "height": 1.605,
+            "amount": 1.24909
+          },
+          "res": [
+            112,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 45,
+          "flame": {
+            "height": 1.635,
+            "amount": 1.18013
+          },
+          "smoke": {
+            "height": 1.665,
+            "amount": 1.24676
+          },
+          "res": [
+            112,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 46,
+          "flame": {
+            "height": 1.695,
+            "amount": 1.17458
+          },
+          "smoke": {
+            "height": 1.725,
+            "amount": 1.23724
+          },
+          "res": [
+            96,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 47,
+          "flame": {
+            "height": 1.695,
+            "amount": 1.14161
+          },
+          "smoke": {
+            "height": 1.725,
+            "amount": 1.20717
+          },
+          "res": [
+            96,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 48,
+          "flame": {
+            "height": 1.665,
+            "amount": 1.12303
+          },
+          "smoke": {
+            "height": 1.725,
+            "amount": 1.19121
+          },
+          "res": [
+            96,
+            112,
+            128
+          ]
+        }
+      ],
+      "shots": {},
+      "sec": 9.14,
+      "image_diff": {
+        "24": {
+          "flame_iou": 0.89,
+          "smoke_iou": 0.895
+        },
+        "36": {
+          "flame_iou": 0.754,
+          "smoke_iou": 0.722
+        },
+        "48": {
+          "flame_iou": 0.849,
+          "smoke_iou": 0.847
+        }
+      },
+      "flame_height_mean": 1.4826,
+      "flame_height_std": 0.1163,
+      "flame_amount_mean": 1.20181,
+      "smoke_amount_48": 1.19121
+    },
+    {
+      "case": "vox040",
+      "vox": 0.04,
+      "attributes": [
+        "burn",
+        "temperature"
+      ],
+      "per_frame": [
+        {
+          "f": 1,
+          "flame": {
+            "height": 0.34,
+            "amount": 0.53395
+          },
+          "smoke": {
+            "height": 0.34,
+            "amount": 0.53395
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 2,
+          "flame": {
+            "height": 0.34,
+            "amount": 0.53171
+          },
+          "smoke": {
+            "height": 0.34,
+            "amount": 0.53376
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 3,
+          "flame": {
+            "height": 0.38,
+            "amount": 0.5767
+          },
+          "smoke": {
+            "height": 0.38,
+            "amount": 0.58771
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 4,
+          "flame": {
+            "height": 0.46,
+            "amount": 0.65299
+          },
+          "smoke": {
+            "height": 0.46,
+            "amount": 0.66592
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 5,
+          "flame": {
+            "height": 0.58,
+            "amount": 0.76384
+          },
+          "smoke": {
+            "height": 0.58,
+            "amount": 0.77875
+          },
+          "res": [
+            64,
+            48,
+            64
+          ]
+        },
+        {
+          "f": 6,
+          "flame": {
+            "height": 0.7,
+            "amount": 0.92915
+          },
+          "smoke": {
+            "height": 0.7,
+            "amount": 0.94278
+          },
+          "res": [
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 7,
+          "flame": {
+            "height": 0.78,
+            "amount": 1.05932
+          },
+          "smoke": {
+            "height": 0.78,
+            "amount": 1.07852
+          },
+          "res": [
+            64,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 8,
+          "flame": {
+            "height": 0.9,
+            "amount": 1.16358
+          },
+          "smoke": {
+            "height": 0.9,
+            "amount": 1.19308
+          },
+          "res": [
+            64,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 9,
+          "flame": {
+            "height": 0.98,
+            "amount": 1.24569
+          },
+          "smoke": {
+            "height": 0.98,
+            "amount": 1.2864
+          },
+          "res": [
+            64,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 10,
+          "flame": {
+            "height": 1.1,
+            "amount": 1.2919
+          },
+          "smoke": {
+            "height": 1.1,
+            "amount": 1.34528
+          },
+          "res": [
+            64,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 11,
+          "flame": {
+            "height": 1.18,
+            "amount": 1.3024
+          },
+          "smoke": {
+            "height": 1.22,
+            "amount": 1.3712
+          },
+          "res": [
+            64,
+            64,
+            80
+          ]
+        },
+        {
+          "f": 12,
+          "flame": {
+            "height": 1.34,
+            "amount": 1.29327
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.36968
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 13,
+          "flame": {
+            "height": 1.46,
+            "amount": 1.24757
+          },
+          "smoke": {
+            "height": 1.46,
+            "amount": 1.32629
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 14,
+          "flame": {
+            "height": 1.58,
+            "amount": 1.20347
+          },
+          "smoke": {
+            "height": 1.58,
+            "amount": 1.28565
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 15,
+          "flame": {
+            "height": 1.66,
+            "amount": 1.16008
+          },
+          "smoke": {
+            "height": 1.7,
+            "amount": 1.24091
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 16,
+          "flame": {
+            "height": 1.78,
+            "amount": 1.11874
+          },
+          "smoke": {
+            "height": 1.78,
+            "amount": 1.19797
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 17,
+          "flame": {
+            "height": 1.78,
+            "amount": 1.08595
+          },
+          "smoke": {
+            "height": 1.86,
+            "amount": 1.16332
+          },
+          "res": [
+            96,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 18,
+          "flame": {
+            "height": 1.66,
+            "amount": 1.05793
+          },
+          "smoke": {
+            "height": 1.82,
+            "amount": 1.13229
+          },
+          "res": [
+            80,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 19,
+          "flame": {
+            "height": 1.46,
+            "amount": 1.04282
+          },
+          "smoke": {
+            "height": 1.62,
+            "amount": 1.10682
+          },
+          "res": [
+            80,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 20,
+          "flame": {
+            "height": 1.3,
+            "amount": 1.03629
+          },
+          "smoke": {
+            "height": 1.46,
+            "amount": 1.09735
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 21,
+          "flame": {
+            "height": 1.3,
+            "amount": 1.0306
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.09172
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 22,
+          "flame": {
+            "height": 1.38,
+            "amount": 1.03482
+          },
+          "smoke": {
+            "height": 1.38,
+            "amount": 1.09434
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 23,
+          "flame": {
+            "height": 1.46,
+            "amount": 1.04429
+          },
+          "smoke": {
+            "height": 1.46,
+            "amount": 1.101
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 24,
+          "flame": {
+            "height": 1.46,
+            "amount": 1.06106
+          },
+          "smoke": {
+            "height": 1.5,
+            "amount": 1.11962
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 25,
+          "flame": {
+            "height": 1.34,
+            "amount": 1.07636
+          },
+          "smoke": {
+            "height": 1.5,
+            "amount": 1.141
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 26,
+          "flame": {
+            "height": 1.26,
+            "amount": 1.09812
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.16423
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 27,
+          "flame": {
+            "height": 1.3,
+            "amount": 1.13274
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.19591
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 28,
+          "flame": {
+            "height": 1.38,
+            "amount": 1.17146
+          },
+          "smoke": {
+            "height": 1.42,
+            "amount": 1.23444
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 29,
+          "flame": {
+            "height": 1.46,
+            "amount": 1.20916
+          },
+          "smoke": {
+            "height": 1.5,
+            "amount": 1.27412
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 30,
+          "flame": {
+            "height": 1.5,
+            "amount": 1.23534
+          },
+          "smoke": {
+            "height": 1.58,
+            "amount": 1.30804
+          },
+          "res": [
+            80,
+            80,
+            64
+          ]
+        },
+        {
+          "f": 31,
+          "flame": {
+            "height": 1.5,
+            "amount": 1.26407
+          },
+          "smoke": {
+            "height": 1.58,
+            "amount": 1.33889
+          },
+          "res": [
+            80,
+            96,
+            64
+          ]
+        },
+        {
+          "f": 32,
+          "flame": {
+            "height": 1.54,
+            "amount": 1.27041
+          },
+          "smoke": {
+            "height": 1.58,
+            "amount": 1.34727
+          },
+          "res": [
+            80,
+            80,
+            64
+          ]
+        },
+        {
+          "f": 33,
+          "flame": {
+            "height": 1.54,
+            "amount": 1.2706
+          },
+          "smoke": {
+            "height": 1.66,
+            "amount": 1.35598
+          },
+          "res": [
+            80,
+            96,
+            64
+          ]
+        },
+        {
+          "f": 34,
+          "flame": {
+            "height": 1.46,
+            "amount": 1.26618
+          },
+          "smoke": {
+            "height": 1.58,
+            "amount": 1.35022
+          },
+          "res": [
+            80,
+            96,
+            64
+          ]
+        },
+        {
+          "f": 35,
+          "flame": {
+            "height": 1.34,
+            "amount": 1.25516
+          },
+          "smoke": {
+            "height": 1.46,
+            "amount": 1.34003
+          },
+          "res": [
+            96,
+            96,
+            80
+          ]
+        },
+        {
+          "f": 36,
+          "flame": {
+            "height": 1.26,
+            "amount": 1.22163
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.31027
+          },
+          "res": [
+            96,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 37,
+          "flame": {
+            "height": 1.26,
+            "amount": 1.20454
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.29241
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 38,
+          "flame": {
+            "height": 1.3,
+            "amount": 1.18892
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.27027
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 39,
+          "flame": {
+            "height": 1.3,
+            "amount": 1.1815
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.2592
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 40,
+          "flame": {
+            "height": 1.3,
+            "amount": 1.16832
+          },
+          "smoke": {
+            "height": 1.34,
+            "amount": 1.24985
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 41,
+          "flame": {
+            "height": 1.34,
+            "amount": 1.15745
+          },
+          "smoke": {
+            "height": 1.38,
+            "amount": 1.2393
+          },
+          "res": [
+            80,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 42,
+          "flame": {
+            "height": 1.38,
+            "amount": 1.14503
+          },
+          "smoke": {
+            "height": 1.42,
+            "amount": 1.22503
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 43,
+          "flame": {
+            "height": 1.42,
+            "amount": 1.14477
+          },
+          "smoke": {
+            "height": 1.46,
+            "amount": 1.21658
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 44,
+          "flame": {
+            "height": 1.5,
+            "amount": 1.14714
+          },
+          "smoke": {
+            "height": 1.54,
+            "amount": 1.21953
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 45,
+          "flame": {
+            "height": 1.58,
+            "amount": 1.14305
+          },
+          "smoke": {
+            "height": 1.58,
+            "amount": 1.21652
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 46,
+          "flame": {
+            "height": 1.62,
+            "amount": 1.12391
+          },
+          "smoke": {
+            "height": 1.66,
+            "amount": 1.19943
+          },
+          "res": [
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 47,
+          "flame": {
+            "height": 1.62,
+            "amount": 1.11206
+          },
+          "smoke": {
+            "height": 1.66,
+            "amount": 1.1776
+          },
+          "res": [
+            64,
+            80,
+            80
+          ]
+        },
+        {
+          "f": 48,
+          "flame": {
+            "height": 1.62,
+            "amount": 1.09708
+          },
+          "smoke": {
+            "height": 1.66,
+            "amount": 1.1632
+          },
+          "res": [
+            64,
+            80,
+            96
+          ]
+        }
+      ],
+      "shots": {},
+      "sec": 5.06,
+      "image_diff": {
+        "24": {
+          "flame_iou": 0.861,
+          "smoke_iou": 0.872
+        },
+        "36": {
+          "flame_iou": 0.742,
+          "smoke_iou": 0.723
+        },
+        "48": {
+          "flame_iou": 0.818,
+          "smoke_iou": 0.819
+        }
+      },
+      "flame_height_mean": 1.4232,
+      "flame_height_std": 0.1192,
+      "flame_amount_mean": 1.17384,
+      "smoke_amount_48": 1.1632
+    },
+    {
+      "case": "vox060",
+      "vox": 0.06,
+      "attributes": [
+        "burn",
+        "temperature"
+      ],
+      "per_frame": [
+        {
+          "f": 1,
+          "flame": {
+            "height": 0.33,
+            "amount": 0.58968
+          },
+          "smoke": {
+            "height": 0.33,
+            "amount": 0.58968
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 2,
+          "flame": {
+            "height": 0.33,
+            "amount": 0.58968
+          },
+          "smoke": {
+            "height": 0.33,
+            "amount": 0.58968
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 3,
+          "flame": {
+            "height": 0.39,
+            "amount": 0.62986
+          },
+          "smoke": {
+            "height": 0.39,
+            "amount": 0.64606
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 4,
+          "flame": {
+            "height": 0.45,
+            "amount": 0.70632
+          },
+          "smoke": {
+            "height": 0.45,
+            "amount": 0.72123
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 5,
+          "flame": {
+            "height": 0.57,
+            "amount": 0.80352
+          },
+          "smoke": {
+            "height": 0.57,
+            "amount": 0.8208
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 6,
+          "flame": {
+            "height": 0.63,
+            "amount": 0.92254
+          },
+          "smoke": {
+            "height": 0.63,
+            "amount": 0.93744
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 7,
+          "flame": {
+            "height": 0.75,
+            "amount": 1.04912
+          },
+          "smoke": {
+            "height": 0.75,
+            "amount": 1.07417
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 8,
+          "flame": {
+            "height": 0.87,
+            "amount": 1.16252
+          },
+          "smoke": {
+            "height": 0.87,
+            "amount": 1.19708
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 9,
+          "flame": {
+            "height": 0.93,
+            "amount": 1.25453
+          },
+          "smoke": {
+            "height": 0.93,
+            "amount": 1.29471
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 10,
+          "flame": {
+            "height": 1.05,
+            "amount": 1.31416
+          },
+          "smoke": {
+            "height": 1.05,
+            "amount": 1.37442
+          },
+          "res": [
+            64,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 11,
+          "flame": {
+            "height": 1.17,
+            "amount": 1.35412
+          },
+          "smoke": {
+            "height": 1.17,
+            "amount": 1.42237
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 12,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.30724
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.38457
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 13,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.27528
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.36664
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 14,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.24072
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.32949
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 15,
+          "flame": {
+            "height": 1.53,
+            "amount": 1.20788
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.29169
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 16,
+          "flame": {
+            "height": 1.65,
+            "amount": 1.16511
+          },
+          "smoke": {
+            "height": 1.65,
+            "amount": 1.24957
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 17,
+          "flame": {
+            "height": 1.71,
+            "amount": 1.12472
+          },
+          "smoke": {
+            "height": 1.77,
+            "amount": 1.21047
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 18,
+          "flame": {
+            "height": 1.65,
+            "amount": 1.07202
+          },
+          "smoke": {
+            "height": 1.77,
+            "amount": 1.15777
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 19,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.04113
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.11565
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 20,
+          "flame": {
+            "height": 1.17,
+            "amount": 1.0327
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.10484
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 21,
+          "flame": {
+            "height": 1.17,
+            "amount": 1.03529
+          },
+          "smoke": {
+            "height": 1.23,
+            "amount": 1.09858
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 22,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.0448
+          },
+          "smoke": {
+            "height": 1.23,
+            "amount": 1.10571
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 23,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.05689
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.12364
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 24,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.07936
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.14567
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 25,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.09858
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.17202
+          },
+          "res": [
+            48,
+            48,
+            48
+          ]
+        },
+        {
+          "f": 26,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.11586
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.19448
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 27,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.14351
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.21155
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 28,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.17072
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.24049
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 29,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.20572
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.2744
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 30,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.22256
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.30227
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 31,
+          "flame": {
+            "height": 1.53,
+            "amount": 1.23898
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.31955
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 32,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.25216
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.33013
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 33,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.24784
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.33748
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 34,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.24244
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.33575
+          },
+          "res": [
+            64,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 35,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.22883
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.32473
+          },
+          "res": [
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 36,
+          "flame": {
+            "height": 1.17,
+            "amount": 1.22386
+          },
+          "smoke": {
+            "height": 1.23,
+            "amount": 1.32192
+          },
+          "res": [
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 37,
+          "flame": {
+            "height": 1.17,
+            "amount": 1.21328
+          },
+          "smoke": {
+            "height": 1.23,
+            "amount": 1.30097
+          },
+          "res": [
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 38,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.17677
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.27181
+          },
+          "res": [
+            64,
+            48,
+            64
+          ]
+        },
+        {
+          "f": 39,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.16338
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.24676
+          },
+          "res": [
+            64,
+            48,
+            64
+          ]
+        },
+        {
+          "f": 40,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.14826
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.23358
+          },
+          "res": [
+            64,
+            48,
+            64
+          ]
+        },
+        {
+          "f": 41,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.12148
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.21025
+          },
+          "res": [
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 42,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.10852
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.18714
+          },
+          "res": [
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 43,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.0921
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.17288
+          },
+          "res": [
+            48,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 44,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.09102
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.16554
+          },
+          "res": [
+            48,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 45,
+          "flame": {
+            "height": 1.53,
+            "amount": 1.07979
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.15798
+          },
+          "res": [
+            48,
+            64,
+            64
+          ]
+        },
+        {
+          "f": 46,
+          "flame": {
+            "height": 1.53,
+            "amount": 1.08692
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.15409
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 47,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.08411
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.1582
+          },
+          "res": [
+            48,
+            64,
+            48
+          ]
+        },
+        {
+          "f": 48,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.0772
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.15128
+          },
+          "res": [
+            48,
+            64,
+            64
+          ]
+        }
+      ],
+      "shots": {},
+      "sec": 2.28,
+      "image_diff": {
+        "24": {
+          "flame_iou": 0.767,
+          "smoke_iou": 0.775
+        },
+        "36": {
+          "flame_iou": 0.732,
+          "smoke_iou": 0.722
+        },
+        "48": {
+          "flame_iou": 0.713,
+          "smoke_iou": 0.727
+        }
+      },
+      "flame_height_mean": 1.35,
+      "flame_height_std": 0.106,
+      "flame_amount_mean": 1.15653,
+      "smoke_amount_48": 1.15128
+    },
+    {
+      "case": "veldiv2",
+      "vox": 0.02,
+      "veldiv": 2.0,
+      "attributes": [
+        "burn",
+        "temperature"
+      ],
+      "per_frame": [
+        {
+          "f": 1,
+          "flame": {
+            "height": 0.37,
+            "amount": 0.5283
+          },
+          "smoke": {
+            "height": 0.37,
+            "amount": 0.5283
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 2,
+          "flame": {
+            "height": 0.37,
+            "amount": 0.53732
+          },
+          "smoke": {
+            "height": 0.37,
+            "amount": 0.53886
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 3,
+          "flame": {
+            "height": 0.41,
+            "amount": 0.58466
+          },
+          "smoke": {
+            "height": 0.41,
+            "amount": 0.58984
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 4,
+          "flame": {
+            "height": 0.49,
+            "amount": 0.67012
+          },
+          "smoke": {
+            "height": 0.49,
+            "amount": 0.67598
+          },
+          "res": [
+            96,
+            96,
+            96
+          ]
+        },
+        {
+          "f": 5,
+          "flame": {
+            "height": 0.59,
+            "amount": 0.78712
+          },
+          "smoke": {
+            "height": 0.61,
+            "amount": 0.79383
+          },
+          "res": [
+            128,
+            96,
+            128
+          ]
+        },
+        {
+          "f": 6,
+          "flame": {
+            "height": 0.71,
+            "amount": 0.9263
+          },
+          "smoke": {
+            "height": 0.73,
+            "amount": 0.93517
+          },
+          "res": [
+            128,
+            128,
+            160
+          ]
+        },
+        {
+          "f": 7,
+          "flame": {
+            "height": 0.83,
+            "amount": 1.05288
+          },
+          "smoke": {
+            "height": 0.83,
+            "amount": 1.06567
+          },
+          "res": [
+            128,
+            128,
+            160
+          ]
+        },
+        {
+          "f": 8,
+          "flame": {
+            "height": 0.93,
+            "amount": 1.17074
+          },
+          "smoke": {
+            "height": 0.93,
+            "amount": 1.19041
+          },
+          "res": [
+            128,
+            128,
+            160
+          ]
+        },
+        {
+          "f": 9,
+          "flame": {
+            "height": 1.03,
+            "amount": 1.26284
+          },
+          "smoke": {
+            "height": 1.03,
+            "amount": 1.2924
+          },
+          "res": [
+            128,
+            128,
+            160
+          ]
+        },
+        {
+          "f": 10,
+          "flame": {
+            "height": 1.11,
+            "amount": 1.3141
+          },
+          "smoke": {
+            "height": 1.13,
+            "amount": 1.35725
+          },
+          "res": [
+            128,
+            128,
+            160
+          ]
+        },
+        {
+          "f": 11,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.31884
+          },
+          "smoke": {
+            "height": 1.23,
+            "amount": 1.37016
+          },
+          "res": [
+            128,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 12,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.30333
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.36073
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 13,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.261
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.31886
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 14,
+          "flame": {
+            "height": 1.57,
+            "amount": 1.22171
+          },
+          "smoke": {
+            "height": 1.59,
+            "amount": 1.27783
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 15,
+          "flame": {
+            "height": 1.69,
+            "amount": 1.18616
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.24136
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 16,
+          "flame": {
+            "height": 1.79,
+            "amount": 1.1545
+          },
+          "smoke": {
+            "height": 1.79,
+            "amount": 1.20846
+          },
+          "res": [
+            192,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 17,
+          "flame": {
+            "height": 1.83,
+            "amount": 1.12696
+          },
+          "smoke": {
+            "height": 1.87,
+            "amount": 1.18152
+          },
+          "res": [
+            192,
+            192,
+            160
+          ]
+        },
+        {
+          "f": 18,
+          "flame": {
+            "height": 1.77,
+            "amount": 1.09328
+          },
+          "smoke": {
+            "height": 1.83,
+            "amount": 1.1504
+          },
+          "res": [
+            192,
+            192,
+            160
+          ]
+        },
+        {
+          "f": 19,
+          "flame": {
+            "height": 1.61,
+            "amount": 1.0772
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.13037
+          },
+          "res": [
+            160,
+            192,
+            128
+          ]
+        },
+        {
+          "f": 20,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.07175
+          },
+          "smoke": {
+            "height": 1.57,
+            "amount": 1.12165
+          },
+          "res": [
+            160,
+            192,
+            128
+          ]
+        },
+        {
+          "f": 21,
+          "flame": {
+            "height": 1.29,
+            "amount": 1.05958
+          },
+          "smoke": {
+            "height": 1.37,
+            "amount": 1.10941
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 22,
+          "flame": {
+            "height": 1.31,
+            "amount": 1.05719
+          },
+          "smoke": {
+            "height": 1.31,
+            "amount": 1.10366
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 23,
+          "flame": {
+            "height": 1.37,
+            "amount": 1.06823
+          },
+          "smoke": {
+            "height": 1.39,
+            "amount": 1.11426
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 24,
+          "flame": {
+            "height": 1.43,
+            "amount": 1.08387
+          },
+          "smoke": {
+            "height": 1.45,
+            "amount": 1.13095
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 25,
+          "flame": {
+            "height": 1.45,
+            "amount": 1.10651
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.15668
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 26,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.12965
+          },
+          "smoke": {
+            "height": 1.45,
+            "amount": 1.1839
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 27,
+          "flame": {
+            "height": 1.43,
+            "amount": 1.15972
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.21396
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 28,
+          "flame": {
+            "height": 1.51,
+            "amount": 1.1991
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.25029
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 29,
+          "flame": {
+            "height": 1.59,
+            "amount": 1.23972
+          },
+          "smoke": {
+            "height": 1.63,
+            "amount": 1.29148
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 30,
+          "flame": {
+            "height": 1.65,
+            "amount": 1.26653
+          },
+          "smoke": {
+            "height": 1.71,
+            "amount": 1.32226
+          },
+          "res": [
+            160,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 31,
+          "flame": {
+            "height": 1.59,
+            "amount": 1.29169
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.35096
+          },
+          "res": [
+            160,
+            192,
+            128
+          ]
+        },
+        {
+          "f": 32,
+          "flame": {
+            "height": 1.51,
+            "amount": 1.29918
+          },
+          "smoke": {
+            "height": 1.61,
+            "amount": 1.36301
+          },
+          "res": [
+            160,
+            192,
+            128
+          ]
+        },
+        {
+          "f": 33,
+          "flame": {
+            "height": 1.47,
+            "amount": 1.29607
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.36134
+          },
+          "res": [
+            160,
+            192,
+            160
+          ]
+        },
+        {
+          "f": 34,
+          "flame": {
+            "height": 1.45,
+            "amount": 1.27964
+          },
+          "smoke": {
+            "height": 1.51,
+            "amount": 1.34542
+          },
+          "res": [
+            192,
+            192,
+            160
+          ]
+        },
+        {
+          "f": 35,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.26892
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.33488
+          },
+          "res": [
+            192,
+            160,
+            192
+          ]
+        },
+        {
+          "f": 36,
+          "flame": {
+            "height": 1.31,
+            "amount": 1.25942
+          },
+          "smoke": {
+            "height": 1.37,
+            "amount": 1.3246
+          },
+          "res": [
+            192,
+            160,
+            192
+          ]
+        },
+        {
+          "f": 37,
+          "flame": {
+            "height": 1.33,
+            "amount": 1.24701
+          },
+          "smoke": {
+            "height": 1.35,
+            "amount": 1.3122
+          },
+          "res": [
+            192,
+            160,
+            192
+          ]
+        },
+        {
+          "f": 38,
+          "flame": {
+            "height": 1.33,
+            "amount": 1.23188
+          },
+          "smoke": {
+            "height": 1.37,
+            "amount": 1.29676
+          },
+          "res": [
+            192,
+            160,
+            192
+          ]
+        },
+        {
+          "f": 39,
+          "flame": {
+            "height": 1.33,
+            "amount": 1.2176
+          },
+          "smoke": {
+            "height": 1.37,
+            "amount": 1.28254
+          },
+          "res": [
+            192,
+            160,
+            192
+          ]
+        },
+        {
+          "f": 40,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.20778
+          },
+          "smoke": {
+            "height": 1.37,
+            "amount": 1.27054
+          },
+          "res": [
+            192,
+            160,
+            192
+          ]
+        },
+        {
+          "f": 41,
+          "flame": {
+            "height": 1.39,
+            "amount": 1.19923
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.26146
+          },
+          "res": [
+            192,
+            160,
+            192
+          ]
+        },
+        {
+          "f": 42,
+          "flame": {
+            "height": 1.43,
+            "amount": 1.19784
+          },
+          "smoke": {
+            "height": 1.45,
+            "amount": 1.25642
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 43,
+          "flame": {
+            "height": 1.49,
+            "amount": 1.19054
+          },
+          "smoke": {
+            "height": 1.51,
+            "amount": 1.24879
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 44,
+          "flame": {
+            "height": 1.57,
+            "amount": 1.18307
+          },
+          "smoke": {
+            "height": 1.57,
+            "amount": 1.24125
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 45,
+          "flame": {
+            "height": 1.63,
+            "amount": 1.17557
+          },
+          "smoke": {
+            "height": 1.65,
+            "amount": 1.23003
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 46,
+          "flame": {
+            "height": 1.67,
+            "amount": 1.1644
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.21887
+          },
+          "res": [
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 47,
+          "flame": {
+            "height": 1.67,
+            "amount": 1.15173
+          },
+          "smoke": {
+            "height": 1.71,
+            "amount": 1.20289
+          },
+          "res": [
+            160,
+            192,
+            192
+          ]
+        },
+        {
+          "f": 48,
+          "flame": {
+            "height": 1.63,
+            "amount": 1.14092
+          },
+          "smoke": {
+            "height": 1.67,
+            "amount": 1.19333
+          },
+          "res": [
+            160,
+            192,
+            192
+          ]
+        }
+      ],
+      "shots": {},
+      "sec": 33.9,
+      "image_diff": {
+        "24": {
+          "flame_iou": 0.864,
+          "smoke_iou": 0.866
+        },
+        "36": {
+          "flame_iou": 0.773,
+          "smoke_iou": 0.748
+        },
+        "48": {
+          "flame_iou": 0.871,
+          "smoke_iou": 0.867
+        }
+      },
+      "flame_height_mean": 1.4812,
+      "flame_height_std": 0.1133,
+      "flame_amount_mean": 1.2075,
+      "smoke_amount_48": 1.19333
+    },
+    {
+      "case": "sub2",
+      "vox": 0.02,
+      "substeps": 2,
+      "attributes": [
+        "burn",
+        "temperature"
+      ],
+      "per_frame": [
+        {
+          "f": 1,
+          "flame": {
+            "height": 0.37,
+            "amount": 0.52601
+          },
+          "smoke": {
+            "height": 0.37,
+            "amount": 0.52601
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 2,
+          "flame": {
+            "height": 0.37,
+            "amount": 0.54012
+          },
+          "smoke": {
+            "height": 0.37,
+            "amount": 0.54018
+          },
+          "res": [
+            96,
+            80,
+            96
+          ]
+        },
+        {
+          "f": 3,
+          "flame": {
+            "height": 0.43,
+            "amount": 0.605
+          },
+          "smoke": {
+            "height": 0.43,
+            "amount": 0.61397
+          },
+          "res": [
+            96,
+            80,
+            112
+          ]
+        },
+        {
+          "f": 4,
+          "flame": {
+            "height": 0.53,
+            "amount": 0.70572
+          },
+          "smoke": {
+            "height": 0.53,
+            "amount": 0.71573
+          },
+          "res": [
+            96,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 5,
+          "flame": {
+            "height": 0.65,
+            "amount": 0.83509
+          },
+          "smoke": {
+            "height": 0.67,
+            "amount": 0.84653
+          },
+          "res": [
+            96,
+            96,
+            112
+          ]
+        },
+        {
+          "f": 6,
+          "flame": {
+            "height": 0.79,
+            "amount": 0.96788
+          },
+          "smoke": {
+            "height": 0.79,
+            "amount": 0.98443
+          },
+          "res": [
+            112,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 7,
+          "flame": {
+            "height": 0.93,
+            "amount": 1.09078
+          },
+          "smoke": {
+            "height": 0.93,
+            "amount": 1.11399
+          },
+          "res": [
+            112,
+            112,
+            112
+          ]
+        },
+        {
+          "f": 8,
+          "flame": {
+            "height": 1.07,
+            "amount": 1.18664
+          },
+          "smoke": {
+            "height": 1.07,
+            "amount": 1.21991
+          },
+          "res": [
+            128,
+            128,
+            112
+          ]
+        },
+        {
+          "f": 9,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.24775
+          },
+          "smoke": {
+            "height": 1.23,
+            "amount": 1.29992
+          },
+          "res": [
+            128,
+            128,
+            128
+          ]
+        },
+        {
+          "f": 10,
+          "flame": {
+            "height": 1.39,
+            "amount": 1.25083
+          },
+          "smoke": {
+            "height": 1.39,
+            "amount": 1.33508
+          },
+          "res": [
+            128,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 11,
+          "flame": {
+            "height": 1.55,
+            "amount": 1.21167
+          },
+          "smoke": {
+            "height": 1.55,
+            "amount": 1.30932
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 12,
+          "flame": {
+            "height": 1.71,
+            "amount": 1.17472
+          },
+          "smoke": {
+            "height": 1.71,
+            "amount": 1.27033
+          },
+          "res": [
+            160,
+            176,
+            128
+          ]
+        },
+        {
+          "f": 13,
+          "flame": {
+            "height": 1.85,
+            "amount": 1.13338
+          },
+          "smoke": {
+            "height": 1.85,
+            "amount": 1.22854
+          },
+          "res": [
+            160,
+            176,
+            128
+          ]
+        },
+        {
+          "f": 14,
+          "flame": {
+            "height": 1.87,
+            "amount": 1.10252
+          },
+          "smoke": {
+            "height": 1.95,
+            "amount": 1.1886
+          },
+          "res": [
+            160,
+            176,
+            128
+          ]
+        },
+        {
+          "f": 15,
+          "flame": {
+            "height": 1.83,
+            "amount": 1.08104
+          },
+          "smoke": {
+            "height": 1.97,
+            "amount": 1.1677
+          },
+          "res": [
+            160,
+            192,
+            128
+          ]
+        },
+        {
+          "f": 16,
+          "flame": {
+            "height": 1.63,
+            "amount": 1.05475
+          },
+          "smoke": {
+            "height": 1.81,
+            "amount": 1.14312
+          },
+          "res": [
+            160,
+            192,
+            144
+          ]
+        },
+        {
+          "f": 17,
+          "flame": {
+            "height": 1.57,
+            "amount": 1.03178
+          },
+          "smoke": {
+            "height": 1.65,
+            "amount": 1.1136
+          },
+          "res": [
+            160,
+            192,
+            144
+          ]
+        },
+        {
+          "f": 18,
+          "flame": {
+            "height": 1.57,
+            "amount": 1.01477
+          },
+          "smoke": {
+            "height": 1.63,
+            "amount": 1.09778
+          },
+          "res": [
+            160,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 19,
+          "flame": {
+            "height": 1.37,
+            "amount": 1.00013
+          },
+          "smoke": {
+            "height": 1.57,
+            "amount": 1.07465
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 20,
+          "flame": {
+            "height": 1.17,
+            "amount": 0.99977
+          },
+          "smoke": {
+            "height": 1.27,
+            "amount": 1.06134
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 21,
+          "flame": {
+            "height": 1.21,
+            "amount": 1.00558
+          },
+          "smoke": {
+            "height": 1.23,
+            "amount": 1.06768
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 22,
+          "flame": {
+            "height": 1.27,
+            "amount": 1.01533
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.0782
+          },
+          "res": [
+            144,
+            128,
+            144
+          ]
+        },
+        {
+          "f": 23,
+          "flame": {
+            "height": 1.25,
+            "amount": 1.02468
+          },
+          "smoke": {
+            "height": 1.31,
+            "amount": 1.09693
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 24,
+          "flame": {
+            "height": 1.11,
+            "amount": 1.03556
+          },
+          "smoke": {
+            "height": 1.19,
+            "amount": 1.10625
+          },
+          "res": [
+            160,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 25,
+          "flame": {
+            "height": 1.13,
+            "amount": 1.0673
+          },
+          "smoke": {
+            "height": 1.17,
+            "amount": 1.13342
+          },
+          "res": [
+            160,
+            128,
+            144
+          ]
+        },
+        {
+          "f": 26,
+          "flame": {
+            "height": 1.15,
+            "amount": 1.10604
+          },
+          "smoke": {
+            "height": 1.21,
+            "amount": 1.1713
+          },
+          "res": [
+            160,
+            128,
+            144
+          ]
+        },
+        {
+          "f": 27,
+          "flame": {
+            "height": 1.27,
+            "amount": 1.14131
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.20784
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 28,
+          "flame": {
+            "height": 1.39,
+            "amount": 1.16861
+          },
+          "smoke": {
+            "height": 1.41,
+            "amount": 1.24084
+          },
+          "res": [
+            144,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 29,
+          "flame": {
+            "height": 1.55,
+            "amount": 1.18393
+          },
+          "smoke": {
+            "height": 1.55,
+            "amount": 1.26724
+          },
+          "res": [
+            160,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 30,
+          "flame": {
+            "height": 1.61,
+            "amount": 1.1761
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.26599
+          },
+          "res": [
+            144,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 31,
+          "flame": {
+            "height": 1.55,
+            "amount": 1.16715
+          },
+          "smoke": {
+            "height": 1.63,
+            "amount": 1.25731
+          },
+          "res": [
+            160,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 32,
+          "flame": {
+            "height": 1.53,
+            "amount": 1.1588
+          },
+          "smoke": {
+            "height": 1.61,
+            "amount": 1.25509
+          },
+          "res": [
+            160,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 33,
+          "flame": {
+            "height": 1.51,
+            "amount": 1.143
+          },
+          "smoke": {
+            "height": 1.61,
+            "amount": 1.23375
+          },
+          "res": [
+            160,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 34,
+          "flame": {
+            "height": 1.31,
+            "amount": 1.13759
+          },
+          "smoke": {
+            "height": 1.45,
+            "amount": 1.22351
+          },
+          "res": [
+            144,
+            160,
+            144
+          ]
+        },
+        {
+          "f": 35,
+          "flame": {
+            "height": 1.25,
+            "amount": 1.1488
+          },
+          "smoke": {
+            "height": 1.33,
+            "amount": 1.22556
+          },
+          "res": [
+            160,
+            160,
+            128
+          ]
+        },
+        {
+          "f": 36,
+          "flame": {
+            "height": 1.23,
+            "amount": 1.16431
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.24344
+          },
+          "res": [
+            160,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 37,
+          "flame": {
+            "height": 1.25,
+            "amount": 1.1829
+          },
+          "smoke": {
+            "height": 1.29,
+            "amount": 1.26502
+          },
+          "res": [
+            144,
+            144,
+            128
+          ]
+        },
+        {
+          "f": 38,
+          "flame": {
+            "height": 1.31,
+            "amount": 1.19528
+          },
+          "smoke": {
+            "height": 1.33,
+            "amount": 1.28437
+          },
+          "res": [
+            144,
+            144,
+            160
+          ]
+        },
+        {
+          "f": 39,
+          "flame": {
+            "height": 1.35,
+            "amount": 1.19614
+          },
+          "smoke": {
+            "height": 1.39,
+            "amount": 1.29535
+          },
+          "res": [
+            128,
+            144,
+            144
+          ]
+        },
+        {
+          "f": 40,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.19038
+          },
+          "smoke": {
+            "height": 1.45,
+            "amount": 1.28648
+          },
+          "res": [
+            128,
+            144,
+            160
+          ]
+        },
+        {
+          "f": 41,
+          "flame": {
+            "height": 1.49,
+            "amount": 1.18568
+          },
+          "smoke": {
+            "height": 1.53,
+            "amount": 1.27396
+          },
+          "res": [
+            128,
+            160,
+            160
+          ]
+        },
+        {
+          "f": 42,
+          "flame": {
+            "height": 1.55,
+            "amount": 1.17261
+          },
+          "smoke": {
+            "height": 1.61,
+            "amount": 1.26441
+          },
+          "res": [
+            128,
+            176,
+            160
+          ]
+        },
+        {
+          "f": 43,
+          "flame": {
+            "height": 1.63,
+            "amount": 1.15083
+          },
+          "smoke": {
+            "height": 1.67,
+            "amount": 1.24448
+          },
+          "res": [
+            144,
+            176,
+            160
+          ]
+        },
+        {
+          "f": 44,
+          "flame": {
+            "height": 1.61,
+            "amount": 1.1256
+          },
+          "smoke": {
+            "height": 1.69,
+            "amount": 1.22401
+          },
+          "res": [
+            144,
+            176,
+            160
+          ]
+        },
+        {
+          "f": 45,
+          "flame": {
+            "height": 1.63,
+            "amount": 1.08968
+          },
+          "smoke": {
+            "height": 1.71,
+            "amount": 1.18232
+          },
+          "res": [
+            144,
+            176,
+            160
+          ]
+        },
+        {
+          "f": 46,
+          "flame": {
+            "height": 1.61,
+            "amount": 1.07622
+          },
+          "smoke": {
+            "height": 1.71,
+            "amount": 1.15543
+          },
+          "res": [
+            144,
+            176,
+            176
+          ]
+        },
+        {
+          "f": 47,
+          "flame": {
+            "height": 1.49,
+            "amount": 1.06744
+          },
+          "smoke": {
+            "height": 1.63,
+            "amount": 1.14981
+          },
+          "res": [
+            128,
+            176,
+            176
+          ]
+        },
+        {
+          "f": 48,
+          "flame": {
+            "height": 1.41,
+            "amount": 1.0445
+          },
+          "smoke": {
+            "height": 1.47,
+            "amount": 1.12559
+          },
+          "res": [
+            160,
+            176,
+            192
+          ]
+        }
+      ],
+      "shots": {},
+      "sec": 32.82,
+      "image_diff": {
+        "24": {
+          "flame_iou": 0.784,
+          "smoke_iou": 0.816
+        },
+        "36": {
+          "flame_iou": 0.723,
+          "smoke_iou": 0.727
+        },
+        "48": {
+          "flame_iou": 0.799,
+          "smoke_iou": 0.806
+        }
+      },
+      "flame_height_mean": 1.4132,
+      "flame_height_std": 0.1644,
+      "flame_amount_mean": 1.13903,
+      "smoke_amount_48": 1.12559
+    }
+  ],
+  "frames": 48,
+  "shots": [
+    24,
+    36,
+    48
+  ],
+  "canvas": [
+    -1.0,
+    1.0,
+    0.0,
+    3.0
+  ]
+}
