@@ -89,7 +89,11 @@
 - 落とし穴は測った値で書く。思い込みを書かない（resample・透ける色の件で2回まちがえて直した）
 - H21 の copytopoints は既定で属性（Cd など）を移さない。grid の点に並べると N に合わせて倒れる（orient を入れる）
 - Karma の炎は kma_pyroshader。明るさ・色は既定で temperature を見るので flame に変える
-- 済み: rock neon gems campfire nightcity
+- 済み: rock neon gems campfire nightcity ／ curtain balloon jelly ocean snow（46本、50768be）
+- 次の候補: ほかの分野から5本（例: 木と葉・霧のかかった森・溶ける氷・ロープの吊り橋・花火）
+- Vellum の注意: vellumsolver・2つ目の vellumconstraints は左右の出口を両方つなぐ（setInput(1, n, 1)）。timeshift の Frame は式が入っているので set() では止まらない（pointdeform の元の形は tetrahedralize の出力をそのまま使う）
+- attribwrangle の class: 0=Detail 1=Primitives 2=Points。copytopoints の Cd は Vellum を通した形には Points に移すと効いた
+- heredoc の中の \n は改行に化ける。コード内の \n を含む置き換えは Edit ツールで
 
 ## ノードと用語を増やすときの型（091〜098 で確立）
 
