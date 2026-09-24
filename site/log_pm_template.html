@@ -9829,6 +9829,60 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
     <!-- ===================== 204 ===================== -->
 
+
+    <!-- ===================== 207 ===================== -->
+    <article class="entry entry--current" id="exp207">
+      <div class="badge">207</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</h2>
+        <p class="path">examples/207_karma_fire_steprate.py &nbsp;·&nbsp; Volume Step Rate を粗くしても速くならない（1080p で 1 の方が 23% 遅い）。炎は1枚の約6割</p>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火を何百フレームも撮るなら、1 枚を短くしたい。<button class="term" data-term="Karma">Karma</button> の Volume Step Rate（<button class="term" data-term="ボリューム">ボリューム</button>の中を進む歩幅の細かさ。既定 0.25）を粗くすると、どれだけ速くなり、見た目はどれだけ変わるか。<button class="term" data-term="Pyro">Pyro</button> を粗い升で回した炎は、撮っても見劣りしないか。</strong></p>
+          <p>実践「焚き火を燃やす」のシーン（Voxel Size 0.03）を開き、フレーム 60 まで燃やして、960×540・16 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去（<a href="#exp205">実験205</a> で決めた撮り方）で撮った。Volume Step Rate を 1・0.5・0.25・0.125、Voxel Size を 0.03 と 0.06（升の数が約 8 分の 1）にした。見た目の差は、Voxel 0.03・Step Rate 0.125 の画との差（画素の値 0〜255 の差の平均）を、炎のまわりで測った。</p>
+          <p><strong>Step Rate を粗くしても、速くならない。</strong>960×540 で 1・0.5・0.25・0.125 は 13.1・11.4・10.7・11.0 秒。1920×1080 にすると、1 が 44.8 秒、0.125 が 36.4 秒で、粗い方が 23% 遅かった。粗く進むとざらつきが増え、ざらつきを見てサンプルを足す決め方（<a href="#exp205">実験205</a>）が長く回るためと考えられるが、画素ごとのサンプル数は確かめていない。</p>
+          <p><strong>見た目の差も小さい。</strong>炎のまわりの差は、Step Rate 1 で 0.90、0.5 で 0.78、0.25 で 0.53（0〜255 のうち）。並べても見分けられない。</p>
+          <p><strong>炎は 1 枚の時間の約 6 割。</strong>炎を外して撮ると 4.6 秒（炎ありは 10.7 秒）。</p>
+          <p><strong>Pyro の升を粗くしても、撮る時間は変わらない。</strong>Voxel Size 0.06（升 48×48×48）は 0.03（80×96×112）と同じく 10.8 秒。60 フレームの計算は 3.4 秒 → 1.4 秒と短くなるが、炎の形そのものが変わり、炎のまわりの差は 6.5 になった（ぼけた柔らかい炎になる）。</p>
+          <p><strong>決め方: Volume Step Rate は既定の 0.25 のまま。</strong>撮る時間を縮めたいなら、サンプル数とノイズ除去（<a href="#exp205">実験205</a>）や画の大きさで決める。Voxel Size は、撮る時間ではなく炎の形で決める。</p>
+        </div>
+
+        <p class="label">炎のまわり（960×540・16 サンプル＋ノイズ除去）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="207_compare.png" alt="左と中（Step Rate 0.25 と 1）は見分けられない。右（Voxel " loading="lazy" decoding="async"></div>
+            <figcaption>左と中（Step Rate 0.25 と 1）は見分けられない。右（Voxel 0.06）は炎の形が変わる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>画の大きさ</th><th>秒</th><th>炎のまわりの差（0〜255）</th></tr></thead>
+            <tbody>
+              <tr><td>Voxel 0.03・Step Rate 1.0</td><td>960×540</td><td class="num">13.1</td><td class="num">0.90</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.5</td><td>960×540</td><td class="num">11.4</td><td class="num">0.78</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.25</td><td>960×540</td><td class="num">10.7</td><td class="num">0.53</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.125</td><td>960×540</td><td class="num">11.0</td><td class="num">0.00</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 1.0</td><td>960×540</td><td class="num">11.5</td><td class="num">6.75</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 0.5</td><td>960×540</td><td class="num">10.4</td><td class="num">6.65</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 0.25</td><td>960×540</td><td class="num">10.8</td><td class="num">6.52</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 0.125</td><td>960×540</td><td class="num">10.5</td><td class="num">6.65</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 1.0</td><td>1920×1080</td><td class="num">44.8</td><td class="num">0.90</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.125</td><td>1920×1080</td><td class="num">36.4</td><td class="num muted">—</td></tr>
+              <tr><td>炎を外す</td><td>960×540</td><td class="num">4.6</td><td class="num muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Volume Step Rate は既定の 0.25 のままでよい。</strong>1 に粗くしても速くならず、1920×1080 ではかえって 23% 遅かった。</li>
+          <li><strong>焚き火の炎は、1 枚の時間の約 6 割。</strong>炎を外すと 10.7 秒 → 4.6 秒。</li>
+          <li><strong>Pyro の Voxel Size は撮る時間に効かない。</strong>形で決める。0.06 にすると炎がぼけて柔らかくなった。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

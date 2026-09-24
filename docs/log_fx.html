@@ -3736,7 +3736,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ エフェクト編<small>67本</small></p>
+      <p class="doc-toc-head">実験ログ エフェクト編<small>68本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp013" data-anchor="exp013"><span class="doc-no">013</span><span class="doc-t">時間軸への対応 — フレームを進めて記録する</span></a></li>
@@ -3810,6 +3810,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp202" data-anchor="exp202"><span class="doc-no">202</span><span class="doc-t">焚き火の Pyro を速く回すなら Voxel Size を 0.02 → 0.04 に — 5.1 倍速く、炎の高さの差は 3%。速度の升だけ粗くするのと Substeps 2 は、かえって遅い</span></a></li>
         <li><a href="#exp204" data-anchor="exp204"><span class="doc-no">204</span><span class="doc-t">焚き火の Pyro のキャッシュは、9 割以上が速度（vel）— vel を煙のある所だけに残して VDB・16 bit にすると 16 分の 1、描画に使う値のずれは 0.00025</span></a></li>
         <li><a href="#exp206" data-anchor="exp206"><span class="doc-no">206</span><span class="doc-t">テーブルクロスを粗い布で試すなら 44×56 まで — 落ち方の差は平均 1.9 cm で、計算は 39 秒（実践の細かさの 39%）。ただし粗いほど角の垂れが短く、22×28 では 17 cm 高い</span></a></li>
+        <li><a href="#exp208" data-anchor="exp208"><span class="doc-no">208</span><span class="doc-t">FLIP の水を面にするとき、形を決めるのは Influence Scale と Method — Spherical はつぶつぶ、Influence 5 は体積 87%。なめらかにするなら Filtering（既定の 1.3 倍の時間）</span></a></li>
       </ol>
       <a class="doc-other" href="log.html">実験ログ モデリング編へ →</a>
     </div>
@@ -3821,7 +3822,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — エフェクト編</h1>
     <p class="lede">時間を進めて物理を解く側の記録。剛体・布・煙・液体・パーティクル、そしてレンダリング。実験013から。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>206 / 206</dd></div>
+      <div><dt>実験</dt><dd>208 / 208</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -10457,7 +10458,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <span class="chip chip--fx">エフェクト</span>
         <h2>焚き火の Pyro のキャッシュは、9 割以上が速度（vel）— vel を煙のある所だけに残して VDB・16 bit にすると 16 分の 1、描画に使う値のずれは 0.00025</h2>
         <div class="colhead">
-          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">エフェクト</span><span class="coltag">Pyro</span><span class="coltag">キャッシュ</span><span class="coltag">容量</span></p>
+          <p class="colmeta"><time datetime="2026-09-24">2026年9月24日 公開</time><span>読む時間 約3分</span><span class="coltag">エフェクト</span><span class="coltag">Pyro</span><span class="coltag">キャッシュ</span><span class="coltag">容量</span></p>
           <div class="colbody">
           <div class="colgist"><p class="colgist-label">要点</p><ul>
             <li><strong>Pyro のキャッシュの大半は vel。</strong>煙のある升は 4% なのに、vel は 6 割以上の升で 0 でない。描画に要らなければ blast で捨てる（24 分の 1）。</li>
@@ -10527,7 +10528,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <span class="chip chip--fx">エフェクト</span>
         <h2>テーブルクロスを粗い布で試すなら 44×56 まで — 落ち方の差は平均 1.9 cm で、計算は 39 秒（実践の細かさの 39%）。ただし粗いほど角の垂れが短く、22×28 では 17 cm 高い</h2>
         <div class="colhead">
-          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">エフェクト</span><span class="coltag">Vellum</span><span class="coltag">布</span><span class="coltag">速度</span></p>
+          <p class="colmeta"><time datetime="2026-09-24">2026年9月24日 公開</time><span>読む時間 約2分</span><span class="coltag">エフェクト</span><span class="coltag">Vellum</span><span class="coltag">布</span><span class="coltag">速度</span></p>
           <div class="colbody">
           <div class="colgist"><p class="colgist-label">要点</p><ul>
             <li><strong>落ち方の試しは 44×56 で足りる。</strong>いちばん細かい布との差は平均 1.9 cm、時間は実践の細かさの 39%（39 秒）。</li>
@@ -10591,6 +10592,79 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 208 ===================== -->
+    <article class="entry entry--current" id="exp208">
+      <div class="badge">208</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>FLIP の水を面にするとき、形を決めるのは Influence Scale と Method — Spherical はつぶつぶ、Influence 5 は体積 87%。なめらかにするなら Filtering（既定の 1.3 倍の時間）</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">エフェクト</span><span class="coltag">FLIP</span><span class="coltag">液体</span><span class="coltag">面にする</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>しぶきの細かさは Influence Scale で決める。</strong>2 で細かく残り（体積 104%）、5 で丸まって痩せる（87%）。</li>
+            <li><strong>さざ波やつぶつぶを消すなら Filtering を入れる。</strong>時間は 0.39 秒（既定の 1.3 倍）。</li>
+            <li><strong>Method = Spherical はつぶつぶが残る。</strong>水の面には既定の Average Position の方が向く。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_208.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/208_flip_surface_settings.py &nbsp;·&nbsp; 水の面の形は Influence Scale と Method で決まる。なめらかにするなら Filtering（1.3 倍の時間）</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">particlefluidsurface</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/208_scene.hipnc" target="_blank" rel="noopener noreferrer">208_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="208_graph.png" alt="実験208 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: <button class="term" data-term="FLIP">FLIP</button> を回したあと、粒を水の面にする（particlefluidsurface）。粒のつぶつぶが残る・しぶきが消える・水が増える、といった見た目の問題が出たとき、どのつまみを触ればよいか。重くなるのはどれか。</strong></p>
+          <p><a href="#exp200">実験200</a> と同じダムブレイク（0.6 × 0.9 × 1 m の水、体積 0.54 m³、Particle Separation 0.02）を 60 フレーム回し（23 秒）、右の壁にぶつかって跳ね上がるフレーム 36 と、落ち着いてきたフレーム 60 で、particlefluidsurface の設定を 8 通りにして面にした。面にかかる時間（1 つ前のフレームを作ってから戻して 4 回作り、1 回目を除いたいちばん短い回）・面の数・体積（最初の水と比べる）・表面積（でこぼこが多いほど大きい）を測った。</p>
+          <p><strong>既定（Average Position・Voxel Scale 0.75・Influence Scale 3）は、体積 100% で 0.31 秒。</strong>壁ぎわのしぶきは、粒の先が丸くつながった形になる。</p>
+          <p><strong>Voxel Scale は、細かさと重さだけを変える。</strong>0.5 で面の数 64,527（既定の 1.9 倍）・0.71 秒、1.5 で 8,132・0.10 秒。体積は 100%・96% で、形の大きさはあまり変わらない。1.5 はしぶきの先が丸く太る。</p>
+          <p><strong>Influence Scale は、水の太り方を変える。</strong>2 で体積 104%・表面積 9.85（しぶきが細かく残る）、5 で 87%・8.72（しぶきが丸まって水が痩せる）。既定の 3 は 100%・9.58。</p>
+          <p><strong>Method = Spherical は、粒 1 つずつの球が残ってつぶつぶになる。</strong>表面積 10.44 で、8 通りの中でいちばん大きい。時間は 0.11 秒と短い。</p>
+          <p><strong>なめらかにするなら Filtering。</strong>Dilate・Smooth・Erode を入れる（値は既定のまま）と、表面積 9.32・体積 99%・0.39 秒（既定の 1.3 倍）。しぶきの形を残したまま、平らな所のさざ波が消えた。</p>
+          <p><strong>Neural Point Surface（H21 の新しい方式）は、既定の 1.6 倍の時間。</strong>0.50 秒で、形は既定とフィルタの間くらい、体積 99%。最初に使うときだけ、読み込みで数秒余分にかかった（はじめの測り方で、1 回目が平均を大きく引き上げた）。</p>
+          <p><strong>面にする時間は、粒の計算の 1 フレーム分と同じくらい。</strong>60 フレームの計算は 1 フレーム平均 0.39 秒、面にするのは既定で 0.31 秒。Voxel Scale 0.5 では 0.71 秒で、粒の計算の約 2 倍になる。</p>
+          <p><strong>フレーム 60 では、どの設定でも体積が減った</strong>（既定 87%）。<a href="#exp200">実験200</a> と同じく、粒が減っているため（面の作り方ではない）。</p>
+        </div>
+
+        <p class="label">フレーム 36（右の壁で跳ね上がる所）を面にした形</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="208_grid.png" alt="同じ粒から作った 8 通りの面。かっこは面にかかった時間と、最初の水に対する体積" loading="lazy" decoding="async"></div>
+            <figcaption>同じ粒から作った 8 通りの面。かっこは面にかかった時間と、最初の水に対する体積。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>設定</th><th>秒（36）</th><th>面の数（36）</th><th>体積（36）</th><th>表面積 m²（36）</th><th>体積（60）</th></tr></thead>
+            <tbody>
+              <tr><td>既定</td><td class="num">0.31</td><td class="num">33,494</td><td>99.5%</td><td class="num">9.58</td><td>87.4%</td></tr>
+              <tr><td>Voxel Scale 0.5</td><td class="num">0.71</td><td class="num">64,527</td><td>100.1%</td><td class="num">9.61</td><td>87.8%</td></tr>
+              <tr><td>Voxel Scale 1.5</td><td class="num">0.10</td><td class="num">8,132</td><td>96.3%</td><td class="num">9.26</td><td>85.7%</td></tr>
+              <tr><td>Influence Scale 2</td><td class="num">0.27</td><td class="num">43,172</td><td>104.4%</td><td class="num">9.85</td><td>92.2%</td></tr>
+              <tr><td>Influence Scale 5</td><td class="num">0.49</td><td class="num">23,776</td><td>86.7%</td><td class="num">8.72</td><td>71.7%</td></tr>
+              <tr><td>Method = Spherical</td><td class="num">0.11</td><td class="num">63,224</td><td>102.5%</td><td class="num">10.44</td><td>90.6%</td></tr>
+              <tr><td>Filtering（Dilate・Smooth・Erode）</td><td class="num">0.39</td><td class="num">28,023</td><td>98.8%</td><td class="num">9.32</td><td>86.9%</td></tr>
+              <tr><td>Method = Neural Point Surface</td><td class="num">0.50</td><td class="num">26,921</td><td>99.0%</td><td class="num">9.79</td><td>87.1%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>しぶきの細かさは Influence Scale で決める。</strong>2 で細かく残り（体積 104%）、5 で丸まって痩せる（87%）。</li>
+          <li><strong>さざ波やつぶつぶを消すなら Filtering を入れる。</strong>時間は 0.39 秒（既定の 1.3 倍）。</li>
+          <li><strong>Method = Spherical はつぶつぶが残る。</strong>水の面には既定の Average Position の方が向く。</li>
+          <li><strong>Voxel Scale は細かさと重さ。</strong>0.5 で面が 1.9 倍・時間 2.3 倍。形の大きさはほとんど変わらない。</li>
+          <li><strong>Neural Point Surface は既定の 1.6 倍の時間。</strong>この場面では、フィルタを入れた既定と見た目の差は小さかった。</li>
+          <li><strong>面にする時間を測るときは、1 つ前のフレームから戻して作り直させる。</strong>つまみをごくわずかに動かすだけでは作り直さず、0.01 秒台と出た。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -10606,7 +10680,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 </div>
 </div>
 
-<script src="data/glossary-data-5fdcba2d4d.js"></script>
+<script src="data/glossary-data-f8d8ed8d88.js"></script>
 <script src="data/node-data-1c484f0f3d.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -10785,10 +10859,10 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>206</dd></div>
+        <div><dt>実験</dt><dd>208</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>387</dd></div>
-        <div><dt>用語</dt><dd>443</dd></div>
+        <div><dt>用語</dt><dd>446</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -10860,9 +10934,9 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_206.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>206本の実験。最新は実験206</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_208.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>208本の実験。最新は実験208</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>387件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>443語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>446語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -10965,7 +11039,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
   </div>
 </div>
 
-<script src="data/search-data-6820650c63.js"></script>
+<script src="data/search-data-92bc28bcd2.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

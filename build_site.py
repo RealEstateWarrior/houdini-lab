@@ -1403,6 +1403,18 @@ DONE = [
      "shots": ["206_grid.png", "206_anim.gif", "206_graph.png"],
      "title": "テーブルクロスを粗い布で試すなら 44×56 まで — 落ち方の差は平均 1.9 cm で、計算は 39 秒（実践の細かさの 39%）。ただし粗いほど角の垂れが短く、22×28 では 17 cm 高い",
      "note": "粗い布での試しは 44×56 まで。差は平均 1.9 cm、時間は 39%。角の垂れだけ短い"},
+    {"no": "207", "anchor": "exp207",
+     "tags": ["レンダリング", "Karma", "速度", "Pyro", "炎"],
+     "log": "log_pm", "thumb": "207_compare.png",
+     "shots": ["207_compare.png", "207_graph.png"],
+     "title": "焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる",
+     "note": "Volume Step Rate を粗くしても速くならない（1080p で 1 の方が 23% 遅い）。炎は1枚の約6割"},
+    {"no": "208", "anchor": "exp208",
+     "tags": ["エフェクト", "FLIP", "液体", "面にする", "速度"],
+     "log": "log_fx", "thumb": "208_grid.png",
+     "shots": ["208_grid.png", "208_graph.png"],
+     "title": "FLIP の水を面にするとき、形を決めるのは Influence Scale と Method — Spherical はつぶつぶ、Influence 5 は体積 87%。なめらかにするなら Filtering（既定の 1.3 倍の時間）",
+     "note": "水の面の形は Influence Scale と Method で決まる。なめらかにするなら Filtering（1.3 倍の時間）"},
 ]
 
 PLANNED = []

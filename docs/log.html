@@ -3736,7 +3736,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>139本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>140本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3884,6 +3884,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp199" data-anchor="exp199"><span class="doc-no">199</span><span class="doc-t">Open で丸めた辺の半径が約 3 升大きいのは、SDF の帯のせいではない — 帯 3〜25 升で足し分は変わらない</span></a></li>
         <li><a href="#exp203" data-anchor="exp203"><span class="doc-no">203</span><span class="doc-t">氷の入ったグラスを Karma で撮ると、サンプル1つあたり不透明の 6 倍の時間がかかる — 重ねた水と氷は +27% だけ。16 サンプル＋ノイズ除去なら約 3 分</span></a></li>
         <li><a href="#exp205" data-anchor="exp205"><span class="doc-no">205</span><span class="doc-t">Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない — ざらつきを消すのはサンプル数ではなくノイズ除去。16 サンプル＋OIDN で 27 秒</span></a></li>
+        <li><a href="#exp207" data-anchor="exp207"><span class="doc-no">207</span><span class="doc-t">焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3895,7 +3896,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>206 / 206</dd></div>
+      <div><dt>実験</dt><dd>208 / 208</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -15799,7 +15800,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <span class="chip chip--pm">モデリング</span>
         <h2>Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない — ざらつきを消すのはサンプル数ではなくノイズ除去。16 サンプル＋OIDN で 27 秒</h2>
         <div class="colhead">
-          <p class="colmeta"><span>読む時間 約4分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">速度</span><span class="coltag">被写界深度</span></p>
+          <p class="colmeta"><time datetime="2026-09-24">2026年9月24日 公開</time><span>読む時間 約4分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">速度</span><span class="coltag">被写界深度</span></p>
           <div class="colbody">
           <div class="colgist"><p class="colgist-label">要点</p><ul>
             <li><strong>ぼけ・ぶれは遠慮なく入れてよい。</strong>時間は +5%〜9% しか増えなかった。</li>
@@ -15879,6 +15880,76 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
     <!-- ===================== 204 ===================== -->
 
+
+    <!-- ===================== 207 ===================== -->
+    <article class="entry entry--current" id="exp207">
+      <div class="badge">207</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">速度</span><span class="coltag">Pyro</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>Volume Step Rate は既定の 0.25 のままでよい。</strong>1 に粗くしても速くならず、1920×1080 ではかえって 23% 遅かった。</li>
+            <li><strong>焚き火の炎は、1 枚の時間の約 6 割。</strong>炎を外すと 10.7 秒 → 4.6 秒。</li>
+            <li><strong>Pyro の Voxel Size は撮る時間に効かない。</strong>形で決める。0.06 にすると炎がぼけて柔らかくなった。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_207.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/207_karma_fire_steprate.py &nbsp;·&nbsp; Volume Step Rate を粗くしても速くならない（1080p で 1 の方が 23% 遅い）。炎は1枚の約6割</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">karma</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/207_scene.hipnc" target="_blank" rel="noopener noreferrer">207_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="207_graph.png" alt="実験207 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火を何百フレームも撮るなら、1 枚を短くしたい。<button class="term" data-term="Karma">Karma</button> の Volume Step Rate（<button class="term" data-term="ボリューム">ボリューム</button>の中を進む歩幅の細かさ。既定 0.25）を粗くすると、どれだけ速くなり、見た目はどれだけ変わるか。<button class="term" data-term="Pyro">Pyro</button> を粗い升で回した炎は、撮っても見劣りしないか。</strong></p>
+          <p>実践「焚き火を燃やす」のシーン（Voxel Size 0.03）を開き、フレーム 60 まで燃やして、960×540・16 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去（<a href="#exp205">実験205</a> で決めた撮り方）で撮った。Volume Step Rate を 1・0.5・0.25・0.125、Voxel Size を 0.03 と 0.06（升の数が約 8 分の 1）にした。見た目の差は、Voxel 0.03・Step Rate 0.125 の画との差（画素の値 0〜255 の差の平均）を、炎のまわりで測った。</p>
+          <p><strong>Step Rate を粗くしても、速くならない。</strong>960×540 で 1・0.5・0.25・0.125 は 13.1・11.4・10.7・11.0 秒。1920×1080 にすると、1 が 44.8 秒、0.125 が 36.4 秒で、粗い方が 23% 遅かった。粗く進むとざらつきが増え、ざらつきを見てサンプルを足す決め方（<a href="#exp205">実験205</a>）が長く回るためと考えられるが、画素ごとのサンプル数は確かめていない。</p>
+          <p><strong>見た目の差も小さい。</strong>炎のまわりの差は、Step Rate 1 で 0.90、0.5 で 0.78、0.25 で 0.53（0〜255 のうち）。並べても見分けられない。</p>
+          <p><strong>炎は 1 枚の時間の約 6 割。</strong>炎を外して撮ると 4.6 秒（炎ありは 10.7 秒）。</p>
+          <p><strong>Pyro の升を粗くしても、撮る時間は変わらない。</strong>Voxel Size 0.06（升 48×48×48）は 0.03（80×96×112）と同じく 10.8 秒。60 フレームの計算は 3.4 秒 → 1.4 秒と短くなるが、炎の形そのものが変わり、炎のまわりの差は 6.5 になった（ぼけた柔らかい炎になる）。</p>
+          <p><strong>決め方: Volume Step Rate は既定の 0.25 のまま。</strong>撮る時間を縮めたいなら、サンプル数とノイズ除去（<a href="#exp205">実験205</a>）や画の大きさで決める。Voxel Size は、撮る時間ではなく炎の形で決める。</p>
+        </div>
+
+        <p class="label">炎のまわり（960×540・16 サンプル＋ノイズ除去）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="207_compare.png" alt="左と中（Step Rate 0.25 と 1）は見分けられない。右（Voxel " loading="lazy" decoding="async"></div>
+            <figcaption>左と中（Step Rate 0.25 と 1）は見分けられない。右（Voxel 0.06）は炎の形が変わる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>画の大きさ</th><th>秒</th><th>炎のまわりの差（0〜255）</th></tr></thead>
+            <tbody>
+              <tr><td>Voxel 0.03・Step Rate 1.0</td><td>960×540</td><td class="num">13.1</td><td class="num">0.90</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.5</td><td>960×540</td><td class="num">11.4</td><td class="num">0.78</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.25</td><td>960×540</td><td class="num">10.7</td><td class="num">0.53</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.125</td><td>960×540</td><td class="num">11.0</td><td class="num">0.00</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 1.0</td><td>960×540</td><td class="num">11.5</td><td class="num">6.75</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 0.5</td><td>960×540</td><td class="num">10.4</td><td class="num">6.65</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 0.25</td><td>960×540</td><td class="num">10.8</td><td class="num">6.52</td></tr>
+              <tr><td>Voxel 0.06・Step Rate 0.125</td><td>960×540</td><td class="num">10.5</td><td class="num">6.65</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 1.0</td><td>1920×1080</td><td class="num">44.8</td><td class="num">0.90</td></tr>
+              <tr><td>Voxel 0.03・Step Rate 0.125</td><td>1920×1080</td><td class="num">36.4</td><td class="num muted">—</td></tr>
+              <tr><td>炎を外す</td><td>960×540</td><td class="num">4.6</td><td class="num muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Volume Step Rate は既定の 0.25 のままでよい。</strong>1 に粗くしても速くならず、1920×1080 ではかえって 23% 遅かった。</li>
+          <li><strong>焚き火の炎は、1 枚の時間の約 6 割。</strong>炎を外すと 10.7 秒 → 4.6 秒。</li>
+          <li><strong>Pyro の Voxel Size は撮る時間に効かない。</strong>形で決める。0.06 にすると炎がぼけて柔らかくなった。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -15894,7 +15965,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-5fdcba2d4d.js"></script>
+<script src="data/glossary-data-f8d8ed8d88.js"></script>
 <script src="data/node-data-1c484f0f3d.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -16073,10 +16144,10 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>206</dd></div>
+        <div><dt>実験</dt><dd>208</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>387</dd></div>
-        <div><dt>用語</dt><dd>443</dd></div>
+        <div><dt>用語</dt><dd>446</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -16148,9 +16219,9 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_206.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>206本の実験。最新は実験206</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_208.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>208本の実験。最新は実験208</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>387件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>443語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>446語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -16253,7 +16324,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-6820650c63.js"></script>
+<script src="data/search-data-92bc28bcd2.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

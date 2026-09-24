@@ -3755,14 +3755,14 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </button>
           </form>
           <div class="deck" id="deck" aria-roledescription="カルーセル" aria-label="新着の実験">
+            <a class="deck-card" href="log_fx.html#exp208"><img src="208_grid.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験208 · エフェクト編</span><span class="deck-t">FLIP の水を面にするとき、形を決めるのは Influence Scale と Method</span><span class="deck-d">水の面の形は Influence Scale と Method で決まる。なめらかにするなら Filtering（1.3 倍の時間）</span></a>
+            <a class="deck-card" href="log.html#exp207"><img src="207_compare.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験207 · モデリング編</span><span class="deck-t">焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない</span><span class="deck-d">Volume Step Rate を粗くしても速くならない（1080p で 1 の方が 23% 遅い）。炎は1枚の約6割</span></a>
             <a class="deck-card" href="log_fx.html#exp206"><img src="thumb_206.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験206 · エフェクト編</span><span class="deck-t">テーブルクロスを粗い布で試すなら 44×56 まで</span><span class="deck-d">粗い布での試しは 44×56 まで。差は平均 1.9 cm、時間は 39%。角の垂れだけ短い</span></a>
             <a class="deck-card" href="log.html#exp205"><img src="thumb_205.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験205 · モデリング編</span><span class="deck-t">Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない</span><span class="deck-d">ぼけ・ぶれは +5〜9% だけ。ざらつきはサンプル数では消えず、16＋ノイズ除去で 27 秒</span></a>
             <a class="deck-card" href="log_fx.html#exp204"><img src="thumb_204.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験204 · エフェクト編</span><span class="deck-t">焚き火の Pyro のキャッシュは、9 割以上が速度（vel）— vel を煙のある所だけに残して VDB・16 bit にすると 16 分の 1、描画に使う値のずれは 0.00025</span><span class="deck-d">焚き火のキャッシュの9割は vel。煙のある所だけに残して VDB・16 bit で 16 分の 1</span></a>
             <a class="deck-card" href="log.html#exp203"><img src="thumb_203.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験203 · モデリング編</span><span class="deck-t">氷の入ったグラスを Karma で撮ると、サンプル1つあたり不透明の 6 倍の時間がかかる</span><span class="deck-d">透明な物はサンプル1つあたり6倍。16サンプル＋ノイズ除去で</span></a>
             <a class="deck-card" href="log_fx.html#exp202"><img src="thumb_202.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験202 · エフェクト編</span><span class="deck-t">焚き火の Pyro を速く回すなら Voxel Size を 0.02 → 0.04 に</span><span class="deck-d">焚き火は Voxel 0.04 で5倍速く、高さの差は3%</span></a>
             <a class="deck-card" href="log_fx.html#exp201"><img src="thumb_201.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験201 · エフェクト編</span><span class="deck-t">Pyro で焚き火の炎（高さ 1.2 m）を作るなら Flame Lifespan 0.25・Buoyancy 0.25・Cooling Rate 1</span><span class="deck-d">焚き火はLifespan 0.25・Buoyancy 0.25・Cooling 1で1.2m。揺らすのはTurbulence</span></a>
-            <a class="deck-card" href="log_fx.html#exp200"><img src="thumb_200.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験200 · エフェクト編</span><span class="deck-t">FLIP のダムブレイクは Particle Separation 0.04 で足りる</span><span class="deck-d">ダムブレイクは粒の間隔0.04で足りる。粗いと壁ぎわの数粒が塊に見える</span></a>
-            <a class="deck-card" href="log.html#exp199"><img src="thumb_199.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験199 · モデリング編</span><span class="deck-t">Open で丸めた辺の半径が約 3 升大きいのは、SDF の帯のせいではない</span><span class="deck-d">Openの辺の半径の足し分(約3升)は帯の幅によらない</span></a>
           </div>
           <div class="deck-ctrl"><button type="button" class="deck-play" id="deck-play" aria-label="自動の切り替えを止める"></button><button type="button" class="deck-arrow" id="deck-prev" aria-label="前の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="deck-dots" id="deck-dots"></div><button type="button" class="deck-arrow" id="deck-next" aria-label="次の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         </div>
@@ -4005,10 +4005,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
 
       <nav class="site-facts" aria-label="この場所の数字">
-        <a href="index.html#experiments"><b>206</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
+        <a href="index.html#experiments"><b>208</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
         <a href="practice.html#guides"><b>71</b><span>実践ガイド<em>PRACTICE</em></span></a>
         <a href="reference.html#nodes"><b>387</b><span>ノード解説<em>NODES</em></span></a>
-        <a href="reference.html#glossary"><b>443</b><span>用語集<em>GLOSSARY</em></span></a>
+        <a href="reference.html#glossary"><b>446</b><span>用語集<em>GLOSSARY</em></span></a>
       </nav>
       <p class="site-env">Houdini 21.0.700（Apprentice）· hython で実行 · Gemini Notebook のソース 41 / 300</p>
     </section>
@@ -4033,47 +4033,47 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </header>
       <div class="stage"><h3>完了した実験</h3><p>カードを押すと、実験ログの記事が新しいタブで開く。タグで絞り込める。</p></div>
       <div class="tagbar" id="tagbar">
-        <button type="button" class="tagchip is-on" data-tag="">すべて <span>206</span></button>
+        <button type="button" class="tagchip is-on" data-tag="">すべて <span>208</span></button>
         <button type="button" class="tagchip" data-tag="検算">検算 <span>110</span></button>
         <button type="button" class="tagchip" data-tag="モデリング">モデリング <span>82</span></button>
         <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>32</span></button>
         <button type="button" class="tagchip" data-tag="落とし穴">落とし穴 <span>25</span></button>
-        <button type="button" class="tagchip" data-tag="エフェクト">エフェクト <span>23</span></button>
+        <button type="button" class="tagchip" data-tag="エフェクト">エフェクト <span>24</span></button>
         <button type="button" class="tagchip" data-tag="効率化">効率化 <span>19</span></button>
         <button type="button" class="tagchip" data-tag="MPM">MPM <span>18</span></button>
         <button type="button" class="tagchip" data-tag="VEX">VEX <span>15</span></button>
-        <button type="button" class="tagchip" data-tag="レンダリング">レンダリング <span>14</span></button>
+        <button type="button" class="tagchip" data-tag="レンダリング">レンダリング <span>15</span></button>
         <button type="button" class="tagchip" data-tag="パーティクル">パーティクル <span>13</span></button>
         <button type="button" class="tagchip" data-tag="VDB">VDB <span>11</span></button>
         <button type="button" class="tagchip" data-tag="Vellum">Vellum <span>11</span></button>
         <button type="button" class="tagchip" data-tag="地形">地形 <span>11</span></button>
         <button type="button" class="tagchip" data-tag="実践">実践 <span>11</span></button>
+        <button type="button" class="tagchip" data-tag="速度">速度 <span>11</span></button>
         <button type="button" class="tagchip" data-tag="体積">体積 <span>10</span></button>
         <button type="button" class="tagchip" data-tag="グルーム">グルーム <span>9</span></button>
         <button type="button" class="tagchip" data-tag="ノイズ">ノイズ <span>9</span></button>
         <button type="button" class="tagchip" data-tag="毛">毛 <span>9</span></button>
         <button type="button" class="tagchip" data-tag="訂正">訂正 <span>9</span></button>
-        <button type="button" class="tagchip" data-tag="速度">速度 <span>9</span></button>
         <button type="button" class="tagchip" data-tag="APEX">APEX <span>8</span></button>
+        <button type="button" class="tagchip" data-tag="Karma">Karma <span>8</span></button>
         <button type="button" class="tagchip" data-tag="リグ">リグ <span>8</span></button>
         <button type="button" class="tagchip" data-tag="布">布 <span>8</span></button>
-        <button type="button" class="tagchip" data-tag="Karma">Karma <span>7</span></button>
         <button type="button" class="tagchip" data-tag="ツール">ツール <span>7</span></button>
         <button type="button" class="tagchip" data-tag="摩擦">摩擦 <span>7</span></button>
-        <button type="button" class="tagchip" data-tag="液体">液体 <span>6</span></button>
+        <button type="button" class="tagchip" data-tag="液体">液体 <span>7</span></button>
         <button type="button" class="tagchip" data-tag="点検">点検 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="複製">複製 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="POP">POP <span>5</span></button>
         <button type="button" class="tagchip" data-tag="比較">比較 <span>5</span></button>
+        <button type="button" class="tagchip" data-tag="炎">炎 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="HeightField">HeightField <span>4</span></button>
         <button type="button" class="tagchip" data-tag="KineFX">KineFX <span>4</span></button>
+        <button type="button" class="tagchip" data-tag="Pyro">Pyro <span>4</span></button>
         <button type="button" class="tagchip" data-tag="RBD">RBD <span>4</span></button>
         <button type="button" class="tagchip" data-tag="SDF">SDF <span>4</span></button>
         <button type="button" class="tagchip" data-tag="smooth">smooth <span>4</span></button>
         <button type="button" class="tagchip" data-tag="属性">属性 <span>4</span></button>
-        <button type="button" class="tagchip" data-tag="炎">炎 <span>4</span></button>
         <button type="button" class="tagchip" data-tag="煙">煙 <span>4</span></button>
-        <button type="button" class="tagchip" data-tag="Pyro">Pyro <span>3</span></button>
         <button type="button" class="tagchip" data-tag="heightfield">heightfield <span>3</span></button>
         <button type="button" class="tagchip" data-tag="scatter">scatter <span>3</span></button>
         <button type="button" class="tagchip" data-tag="テクスチャ">テクスチャ <span>3</span></button>
@@ -4088,6 +4088,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="風">風 <span>3</span></button>
         <button type="button" class="tagchip" data-tag="Bullet">Bullet <span>2</span></button>
         <button type="button" class="tagchip" data-tag="COP">COP <span>2</span></button>
+        <button type="button" class="tagchip" data-tag="FLIP">FLIP <span>2</span></button>
         <button type="button" class="tagchip" data-tag="IK">IK <span>2</span></button>
         <button type="button" class="tagchip" data-tag="Python">Python <span>2</span></button>
         <button type="button" class="tagchip" data-tag="USD">USD <span>2</span></button>
@@ -4114,7 +4115,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="衝突">衝突 <span>2</span></button>
         <button type="button" class="tagchip" data-tag="軽くする">軽くする <span>2</span></button>
         <button type="button" class="tagchip" data-tag="Apprentice">Apprentice <span>1</span></button>
-        <button type="button" class="tagchip" data-tag="FLIP">FLIP <span>1</span></button>
         <button type="button" class="tagchip" data-tag="Solaris">Solaris <span>1</span></button>
         <button type="button" class="tagchip" data-tag="attribblur">attribblur <span>1</span></button>
         <button type="button" class="tagchip" data-tag="attribfill">attribfill <span>1</span></button>
@@ -4218,6 +4218,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="重心">重心 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="長さ">長さ <span>1</span></button>
         <button type="button" class="tagchip" data-tag="雨">雨 <span>1</span></button>
+        <button type="button" class="tagchip" data-tag="面にする">面にする <span>1</span></button>
         <button type="button" class="tagchip" data-tag="面積">面積 <span>1</span></button>
       </div>
       <div class="thumbs" id="thumbs">
@@ -6075,6 +6076,24 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <span class="thumb-tags"><span>エフェクト</span><span>Vellum</span><span>布</span><span>速度</span><span>解像度</span></span>
           </span>
         </button>
+        <button type="button" class="thumb" data-exp="207" data-tags="レンダリング Karma 速度 Pyro 炎">
+          <span class="thumb-img"><img src="thumb_207.png" loading="lazy" decoding="async" alt="実験207の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 207</span>
+            <h4>焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</h4>
+            <p>Volume Step Rate を粗くしても速くならない（1080p で 1 の方が 23% 遅い）。炎は1枚の約6割</p>
+            <span class="thumb-tags"><span>レンダリング</span><span>Karma</span><span>速度</span><span>Pyro</span><span>炎</span></span>
+          </span>
+        </button>
+        <button type="button" class="thumb" data-exp="208" data-tags="エフェクト FLIP 液体 面にする 速度">
+          <span class="thumb-img"><img src="thumb_208.png" loading="lazy" decoding="async" alt="実験208の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 208</span>
+            <h4>FLIP の水を面にするとき、形を決めるのは Influence Scale と Method — Spherical はつぶつぶ、Influence 5 は体積 87%。なめらかにするなら Filtering（既定の 1.3 倍の時間）</h4>
+            <p>水の面の形は Influence Scale と Method で決まる。なめらかにするなら Filtering（1.3 倍の時間）</p>
+            <span class="thumb-tags"><span>エフェクト</span><span>FLIP</span><span>液体</span><span>面にする</span><span>速度</span></span>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -6530,8 +6549,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/experiment-data-d35cf98bf7.js"></script>
-<script src="data/glossary-data-5fdcba2d4d.js"></script>
+<script src="data/experiment-data-f4e777014e.js"></script>
+<script src="data/glossary-data-f8d8ed8d88.js"></script>
 <script src="data/node-data-1c484f0f3d.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -6710,10 +6729,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>206</dd></div>
+        <div><dt>実験</dt><dd>208</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>387</dd></div>
-        <div><dt>用語</dt><dd>443</dd></div>
+        <div><dt>用語</dt><dd>446</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -6785,9 +6804,9 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_206.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>206本の実験。最新は実験206</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_208.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>208本の実験。最新は実験208</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>387件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>443語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>446語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -6890,7 +6909,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-6820650c63.js"></script>
+<script src="data/search-data-92bc28bcd2.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

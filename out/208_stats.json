@@ -1,0 +1,289 @@
+{
+  "rows": [
+    {
+      "case": "default",
+      "parms": {},
+      "f36": {
+        "sec": 0.308,
+        "secs": [
+          0.308,
+          0.335,
+          0.308
+        ],
+        "first": 0.324,
+        "polys": 33494,
+        "points": 30539,
+        "volume": 0.53753,
+        "area": 9.5811,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.21,
+        "secs": [
+          0.212,
+          0.21,
+          0.214
+        ],
+        "first": 0.21,
+        "polys": 30592,
+        "points": 27920,
+        "volume": 0.47207,
+        "area": 7.4152,
+        "particles": 67801
+      }
+    },
+    {
+      "case": "vox050",
+      "parms": {
+        "voxelsize": 0.5
+      },
+      "f36": {
+        "sec": 0.712,
+        "secs": [
+          0.752,
+          0.816,
+          0.712
+        ],
+        "first": 0.779,
+        "polys": 64527,
+        "points": 58276,
+        "volume": 0.54045,
+        "area": 9.6111,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.514,
+        "secs": [
+          0.514,
+          0.605,
+          0.603
+        ],
+        "first": 0.513,
+        "polys": 57152,
+        "points": 51252,
+        "volume": 0.47386,
+        "area": 7.4362,
+        "particles": 67801
+      }
+    },
+    {
+      "case": "vox150",
+      "parms": {
+        "voxelsize": 1.5
+      },
+      "f36": {
+        "sec": 0.098,
+        "secs": [
+          0.098,
+          0.099,
+          0.111
+        ],
+        "first": 0.098,
+        "polys": 8132,
+        "points": 7383,
+        "volume": 0.52007,
+        "area": 9.2616,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.097,
+        "secs": [
+          0.104,
+          0.098,
+          0.097
+        ],
+        "first": 0.088,
+        "polys": 8325,
+        "points": 7685,
+        "volume": 0.46273,
+        "area": 7.2105,
+        "particles": 67801
+      }
+    },
+    {
+      "case": "infl2",
+      "parms": {
+        "influenceradius": 2.0
+      },
+      "f36": {
+        "sec": 0.269,
+        "secs": [
+          0.273,
+          0.287,
+          0.269
+        ],
+        "first": 0.273,
+        "polys": 43172,
+        "points": 39987,
+        "volume": 0.56358,
+        "area": 9.8548,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.225,
+        "secs": [
+          0.234,
+          0.225,
+          0.234
+        ],
+        "first": 0.198,
+        "polys": 37356,
+        "points": 34753,
+        "volume": 0.49779,
+        "area": 7.6503,
+        "particles": 67801
+      }
+    },
+    {
+      "case": "infl5",
+      "parms": {
+        "influenceradius": 5.0
+      },
+      "f36": {
+        "sec": 0.493,
+        "secs": [
+          0.526,
+          0.54,
+          0.493
+        ],
+        "first": 0.521,
+        "polys": 23776,
+        "points": 21656,
+        "volume": 0.46827,
+        "area": 8.7196,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.361,
+        "secs": [
+          0.391,
+          0.361,
+          0.421
+        ],
+        "first": 0.379,
+        "polys": 21714,
+        "points": 19671,
+        "volume": 0.387,
+        "area": 6.925,
+        "particles": 67801
+      }
+    },
+    {
+      "case": "spherical",
+      "parms": {
+        "surfmethod": 1
+      },
+      "f36": {
+        "sec": 0.11,
+        "secs": [
+          0.111,
+          0.112,
+          0.11
+        ],
+        "first": 0.097,
+        "polys": 63224,
+        "points": 62927,
+        "volume": 0.55349,
+        "area": 10.4431,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.084,
+        "secs": [
+          0.084,
+          0.107,
+          0.108
+        ],
+        "first": 0.094,
+        "polys": 52274,
+        "points": 52019,
+        "volume": 0.48925,
+        "area": 8.182,
+        "particles": 67801
+      }
+    },
+    {
+      "case": "filter",
+      "parms": {
+        "dodilate": 1,
+        "dosmooth": 1,
+        "doerode": 1
+      },
+      "f36": {
+        "sec": 0.391,
+        "secs": [
+          0.391,
+          0.398,
+          0.457
+        ],
+        "first": 0.409,
+        "polys": 28023,
+        "points": 25416,
+        "volume": 0.53362,
+        "area": 9.3159,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.313,
+        "secs": [
+          0.317,
+          0.333,
+          0.313
+        ],
+        "first": 0.316,
+        "polys": 25464,
+        "points": 23121,
+        "volume": 0.46913,
+        "area": 7.2202,
+        "particles": 67801
+      }
+    },
+    {
+      "case": "neural",
+      "parms": {
+        "surfmethod": 2,
+        "model": 0
+      },
+      "f36": {
+        "sec": 0.5,
+        "secs": [
+          0.5,
+          0.522,
+          0.513
+        ],
+        "first": 0.514,
+        "polys": 26921,
+        "points": 25012,
+        "volume": 0.53483,
+        "area": 9.7884,
+        "particles": 74245
+      },
+      "f60": {
+        "sec": 0.438,
+        "secs": [
+          0.477,
+          0.444,
+          0.438
+        ],
+        "first": 0.472,
+        "polys": 23005,
+        "points": 20885,
+        "volume": 0.47027,
+        "area": 7.4958,
+        "particles": 67801
+      }
+    }
+  ],
+  "sep": 0.02,
+  "sim_sec": 23.13,
+  "water_volume": 0.54,
+  "base": {
+    "surfmethod": 0,
+    "model": 2,
+    "voxelsize": 0.75,
+    "influenceradius": 3.0,
+    "dodilate": 0,
+    "dosmooth": 0,
+    "doerode": 0
+  }
+}
