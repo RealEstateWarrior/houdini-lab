@@ -1,0 +1,447 @@
+{
+  "title": "実験244",
+  "network": "/obj/campfire",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "log",
+      "type": "tube",
+      "pos": [
+        -3.954,
+        4.141
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 0,
+        "cap": 1,
+        "ty": 0.07,
+        "rad1": 0.07,
+        "rad2": 0.07,
+        "height": 0.9,
+        "cols": 16
+      }
+    },
+    {
+      "name": "three_logs",
+      "type": "copyxform",
+      "pos": [
+        -3.954,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "ncy": 3,
+        "ty": 0.06,
+        "ry": 60.0
+      }
+    },
+    {
+      "name": "stone_ring",
+      "type": "circle",
+      "pos": [
+        1.13,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 1,
+        "orient": 2,
+        "radx": 0.55,
+        "rady": 0.55
+      }
+    },
+    {
+      "name": "stone",
+      "type": "sphere",
+      "pos": [
+        -1.13,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.11,
+        "rady": 0.07,
+        "radz": 0.09,
+        "ty": 0.05,
+        "rows": 8,
+        "cols": 12
+      }
+    },
+    {
+      "name": "stone_bumps",
+      "type": "mountain::2.0",
+      "pos": [
+        -1.13,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.03,
+        "elementsize": 0.12
+      }
+    },
+    {
+      "name": "stones",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "fire_source",
+      "type": "sphere",
+      "pos": [
+        3.954,
+        5.497
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.22,
+        "rady": 0.08,
+        "radz": 0.22,
+        "ty": 0.12,
+        "rows": 16
+      }
+    },
+    {
+      "name": "src",
+      "type": "pyrosource",
+      "pos": [
+        3.954,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attributes": 2,
+        "attribute1": 2,
+        "name1": "burn",
+        "attribute2": 1,
+        "name2": "temperature"
+      }
+    },
+    {
+      "name": "to_voxels",
+      "type": "volumerasterizeattributes",
+      "pos": [
+        3.954,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "attributes": "burn temperature density",
+        "folder1": 1,
+        "voxelsize": 0.03,
+        "folder3": 1
+      }
+    },
+    {
+      "name": "burn",
+      "type": "pyrosolver",
+      "pos": [
+        3.954,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "folder26": 1,
+        "divsize": 0.03,
+        "folder2": 1,
+        "folder25": 1,
+        "folder0": 1,
+        "folder4": 1,
+        "numsources": 4,
+        "folder32": 1,
+        "dissipation_remapcontrol": 1,
+        "_folder32_1": 1,
+        "tempcooling": 1.0,
+        "flames_lifespan": 0.25,
+        "buoyancylift": 0.25,
+        "folder31": 1,
+        "enable_turbulence": 1,
+        "turbulence": 3.0,
+        "folder5": 1,
+        "firelookcollapsible": 1,
+        "minimalsolve": 0,
+        "sparse_dosolve": 1,
+        "folder23_1_2": 1,
+        "folder23_1_3": 1,
+        "folder36": 1,
+        "numfields": 5,
+        "folder37": 1,
+        "doflamedensity": 1,
+        "flamedensity": 1.0,
+        "fieldguidevismode1cr": 0.20000000298023224,
+        "fieldguidevismode1cb": 1.0,
+        "fieldguidevismode2pos": 0.25,
+        "fieldguidevismode2cg": 0.8500000238418579,
+        "fieldguidevismode2cb": 1.0,
+        "fieldguidevismode3pos": 0.5,
+        "fieldguidevismode3cg": 1.0,
+        "fieldguidevismode3cb": 0.10000000149011612,
+        "fieldguidevismode4pos": 0.75,
+        "fieldguidevismode4cr": 0.949999988079071,
+        "fieldguidevismode4cg": 1.0,
+        "fieldguidevismode5pos": 1.0,
+        "fieldguidevismode5cr": 1.0,
+        "dissipation_controlramp2pos": 1.0,
+        "dissipation_controlramp2value": 1.0,
+        "soot_controlramp2pos": 0.5,
+        "soot_controlramp2value": 1.0,
+        "soot_controlramp3pos": 1.0,
+        "soot_controlfieldramp2pos": 1.0,
+        "soot_controlfieldramp2value": 1.0,
+        "temperature_controlramp2pos": 1.0,
+        "temperature_controlramp2value": 1.0,
+        "temperature_controlfieldramp2pos": 1.0,
+        "temperature_controlfieldramp2value": 1.0,
+        "color_diss_controlramp1interp": 3,
+        "color_diss_controlramp2pos": 1.0,
+        "color_diss_controlramp2value": 1.0,
+        "color_diss_controlramp2interp": 3,
+        "shapeguidevismode1cr": 0.20000000298023224,
+        "shapeguidevismode1cb": 1.0,
+        "shapeguidevismode2pos": 0.25,
+        "shapeguidevismode2cg": 0.8500000238418579,
+        "shapeguidevismode2cb": 1.0,
+        "shapeguidevismode3pos": 0.5,
+        "shapeguidevismode3cg": 1.0,
+        "shapeguidevismode3cb": 0.10000000149011612,
+        "shapeguidevismode4pos": 0.75,
+        "shapeguidevismode4cr": 0.949999988079071,
+        "shapeguidevismode4cg": 1.0,
+        "shapeguidevismode5pos": 1.0,
+        "shapeguidevismode5cr": 1.0,
+        "density_ramp2pos": 1.0,
+        "density_ramp2value": 1.0,
+        "disturbance_controlramp2pos": 1.0,
+        "disturbance_controlramp2value": 1.0,
+        "turbulence_controlramp2pos": 1.0,
+        "turbulence_controlramp2value": 1.0,
+        "shredding_controlramp2pos": 1.0,
+        "shredding_controlramp2value": 1.0,
+        "div_controlramp2pos": 1.0,
+        "div_controlramp2value": 1.0,
+        "div_controlfieldramp2pos": 1.0,
+        "div_controlfieldramp2value": 1.0,
+        "smokecolorramp1cr": 0.2,
+        "smokecolorramp1cg": 0.2,
+        "smokecolorramp1cb": 0.2,
+        "smokecolorramp2pos": 1.0,
+        "smokecolorramp2cr": 0.10000000149011612,
+        "smokecolorramp2cg": 0.10000000149011612,
+        "smokecolorramp2cb": 0.10000000149011612,
+        "fi_ramp2pos": 1.0,
+        "fi_ramp2value": 1.0,
+        "fc_colorramp2pos": 1.0,
+        "fc_colorramp2cr": 1.0,
+        "fc_colorramp2cg": 0.325,
+        "fc_colorramp2cb": 0.1,
+        "folder17_1": 1,
+        "source_volume1": "density",
+        "source_vfield1": "density",
+        "folder17_2": 1,
+        "source_voperator2": 8,
+        "source_volume2": "temperature",
+        "source_vfield2": "temperature",
+        "source_accguidestr2": 50.0,
+        "source_decguidestr2": 0.0,
+        "folder17_3": 1,
+        "source_voperator3": 5,
+        "source_volume3": "burn",
+        "source_vfield3": "flame",
+        "folder17_4": 1,
+        "source_rank4": 1,
+        "source_volume4": "v",
+        "source_vfield4": "vel",
+        "export_fieldname1": "density",
+        "export_fieldname2": "temperature",
+        "export_visible2": 3,
+        "export_fieldname3": "flame",
+        "export_fieldname4": "vel",
+        "export_visible4": 3,
+        "export_fieldname5": "Cd",
+        "export_visible5": 3
+      }
+    },
+    {
+      "name": "assign_fire",
+      "type": "material",
+      "pos": [
+        3.954,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/fire_mat"
+      }
+    },
+    {
+      "name": "assign_wood",
+      "type": "material",
+      "pos": [
+        -3.954,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/wood_mat"
+      }
+    },
+    {
+      "name": "assign_stone",
+      "type": "material",
+      "pos": [
+        0.0,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/stone_mat"
+      }
+    },
+    {
+      "name": "campfire",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "add_smoke",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "f@density = 1;"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "log",
+      "from_output": 0,
+      "to": "three_logs",
+      "to_input": 0
+    },
+    {
+      "from": "stone",
+      "from_output": 0,
+      "to": "stone_bumps",
+      "to_input": 0
+    },
+    {
+      "from": "stone_bumps",
+      "from_output": 0,
+      "to": "stones",
+      "to_input": 0
+    },
+    {
+      "from": "stone_ring",
+      "from_output": 0,
+      "to": "stones",
+      "to_input": 1
+    },
+    {
+      "from": "fire_source",
+      "from_output": 0,
+      "to": "src",
+      "to_input": 0
+    },
+    {
+      "from": "add_smoke",
+      "from_output": 0,
+      "to": "to_voxels",
+      "to_input": 0
+    },
+    {
+      "from": "to_voxels",
+      "from_output": 0,
+      "to": "burn",
+      "to_input": 0
+    },
+    {
+      "from": "burn",
+      "from_output": 0,
+      "to": "assign_fire",
+      "to_input": 0
+    },
+    {
+      "from": "three_logs",
+      "from_output": 0,
+      "to": "assign_wood",
+      "to_input": 0
+    },
+    {
+      "from": "stones",
+      "from_output": 0,
+      "to": "assign_stone",
+      "to_input": 0
+    },
+    {
+      "from": "assign_wood",
+      "from_output": 0,
+      "to": "campfire",
+      "to_input": 0
+    },
+    {
+      "from": "assign_stone",
+      "from_output": 0,
+      "to": "campfire",
+      "to_input": 1
+    },
+    {
+      "from": "assign_fire",
+      "from_output": 0,
+      "to": "campfire",
+      "to_input": 2
+    },
+    {
+      "from": "src",
+      "from_output": 0,
+      "to": "add_smoke",
+      "to_input": 0
+    }
+  ]
+}

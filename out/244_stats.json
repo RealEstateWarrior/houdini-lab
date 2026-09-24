@@ -1,0 +1,215 @@
+{
+  "rows": [
+    {
+      "case": "d0",
+      "dissipation": 0.0,
+      "sim_sec": 4.11,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 34043,
+      "top": 1.395,
+      "density_sum": 0.612
+    },
+    {
+      "case": "d0.05",
+      "dissipation": 0.05,
+      "sim_sec": 4.09,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 34043,
+      "top": 1.395,
+      "density_sum": 0.612
+    },
+    {
+      "case": "d0.1",
+      "dissipation": 0.1,
+      "sim_sec": 4.9,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 34043,
+      "top": 1.395,
+      "density_sum": 0.612
+    },
+    {
+      "case": "d0.2",
+      "dissipation": 0.2,
+      "sim_sec": 4.94,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 34043,
+      "top": 1.395,
+      "density_sum": 0.612
+    },
+    {
+      "case": "d0.4",
+      "dissipation": 0.4,
+      "sim_sec": 4.92,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 34043,
+      "top": 1.395,
+      "density_sum": 0.612
+    },
+    {
+      "case": "d0_free",
+      "dissipation": 0.0,
+      "set_flame_density": 0,
+      "sim_sec": 4.03,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 0,
+      "top": 0.0,
+      "density_sum": 0.0
+    },
+    {
+      "case": "d0.05_free",
+      "dissipation": 0.05,
+      "set_flame_density": 0,
+      "sim_sec": 4.04,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 0,
+      "top": 0.0,
+      "density_sum": 0.0
+    },
+    {
+      "case": "d0.1_free",
+      "dissipation": 0.1,
+      "set_flame_density": 0,
+      "sim_sec": 4.47,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 0,
+      "top": 0.0,
+      "density_sum": 0.0
+    },
+    {
+      "case": "d0.2_free",
+      "dissipation": 0.2,
+      "set_flame_density": 0,
+      "sim_sec": 4.9,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 0,
+      "top": 0.0,
+      "density_sum": 0.0
+    },
+    {
+      "case": "d0.4_free",
+      "dissipation": 0.4,
+      "set_flame_density": 0,
+      "sim_sec": 4.92,
+      "res": [
+        96,
+        96,
+        96
+      ],
+      "smoke_voxels": 0,
+      "top": 0.0,
+      "density_sum": 0.0
+    },
+    {
+      "case": "d0_smoke",
+      "dissipation": 0.0,
+      "set_flame_density": 1,
+      "source_smoke": 1,
+      "sim_sec": 15.78,
+      "res": [
+        272,
+        208,
+        224
+      ],
+      "smoke_voxels": 1859462,
+      "top": 5.205,
+      "density_sum": 339.8054
+    },
+    {
+      "case": "d0.05_smoke",
+      "dissipation": 0.05,
+      "set_flame_density": 1,
+      "source_smoke": 1,
+      "sim_sec": 17.29,
+      "res": [
+        272,
+        208,
+        224
+      ],
+      "smoke_voxels": 1512439,
+      "top": 5.175,
+      "density_sum": 62.3429
+    },
+    {
+      "case": "d0.1_smoke",
+      "dissipation": 0.1,
+      "set_flame_density": 1,
+      "source_smoke": 1,
+      "sim_sec": 16.21,
+      "res": [
+        240,
+        192,
+        208
+      ],
+      "smoke_voxels": 679053,
+      "top": 4.635,
+      "density_sum": 30.0096
+    },
+    {
+      "case": "d0.2_smoke",
+      "dissipation": 0.2,
+      "set_flame_density": 1,
+      "source_smoke": 1,
+      "sim_sec": 12.11,
+      "res": [
+        160,
+        192,
+        160
+      ],
+      "smoke_voxels": 254998,
+      "top": 4.335,
+      "density_sum": 14.3984
+    },
+    {
+      "case": "d0.4_smoke",
+      "dissipation": 0.4,
+      "set_flame_density": 1,
+      "source_smoke": 1,
+      "sim_sec": 8.19,
+      "res": [
+        128,
+        128,
+        128
+      ],
+      "smoke_voxels": 72715,
+      "top": 1.605,
+      "density_sum": 7.0098
+    }
+  ],
+  "last": 96
+}

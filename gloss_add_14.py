@@ -90,3 +90,8 @@ ADD["render"].append(
     {"term": "MaterialX（mtlxstandard_surface）", "reading": "マテリアルエックス",
      "def": "いろいろなソフトやレンダラーで共通に使える材質の書き方。Houdini では /mat に mtlxstandard_surface などの箱を置いて作る。"
             "Karma XPU では、形に点の色 Cd があると principledshader の色が Cd に置き換わったが、MaterialX の材質は CPU と同じ色で写った（実験243）。"})
+
+ADD["simulation"].append(
+    {"term": "Dissipation（Pyro）", "reading": "ディシペーション",
+     "def": "pyrosolver で、煙の濃さ（density）が時間とともに薄れて消える速さ。既定 0.1。出る量と釣り合うと、煙の量は Dissipation にほぼ反比例した（倍にすると半分）。"
+            "火元が density を出していない（Source Burn だけの）焚き火では、変えても何も変わらなかった（実験244）。"})

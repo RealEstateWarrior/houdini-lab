@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ エフェクト編<small>80本</small></p>
+      <p class="doc-toc-head">実験ログ エフェクト編<small>81本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp013" data-anchor="exp013"><span class="doc-no">013</span><span class="doc-t">時間軸への対応 — フレームを進めて記録する</span></a></li>
@@ -3830,6 +3830,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp231" data-anchor="exp231"><span class="doc-no">231</span><span class="doc-t">焚き火の炎のボリュームで周りを照らしても、ざらつきは 3.7%（16 サンプル）で、ライト（4.6%）と同じくらい。ライトを足すと炎まで照らされて白く飛ぶ</span></a></li>
         <li><a href="#exp233" data-anchor="exp233"><span class="doc-no">233</span><span class="doc-t">焚き火の Pyro は、Voxel Size を 0.08 → 0.02 に細かくして升目が 28 倍になっても、撮る時間は 4.7 → 5.8 秒（25% 増）。増えるのは計算（1.3 → 5.5 秒）で、画は細かいほど炎の縁が裂ける</span></a></li>
         <li><a href="#exp237" data-anchor="exp237"><span class="doc-no">237</span><span class="doc-t">Vellum の風船の体積は、Pressure の Rest Length Scale の倍率ちょうどになる（3 なら 3.00 倍）。2 フレームで落ち着く。ただし 2 倍を超えるとしずく形が消えて球になり、膜が柔らかい（10²）と横につぶれる</span></a></li>
+        <li class="doc-toc-sep" aria-hidden="true">241–270</li>
+        <li><a href="#exp244" data-anchor="exp244"><span class="doc-no">244</span><span class="doc-t">焚き火の煙の量は Dissipation にほぼ反比例する（0.05・0.1・0.2・0.4 で 62・30・14・7）。ただし実践の焚き火は火元から煙を出しておらず、Dissipation はまったく効かなかった</span></a></li>
       </ol>
       <a class="doc-other" href="log.html">実験ログ モデリング編へ →</a>
     </div>
@@ -3841,7 +3843,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — エフェクト編</h1>
     <p class="lede">時間を進めて物理を解く側の記録。剛体・布・煙・液体・パーティクル、そしてレンダリング。実験013から。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>243 / 243</dd></div>
+      <div><dt>実験</dt><dd>244 / 244</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -11475,6 +11477,80 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 244 ===================== -->
+    <article class="entry entry--current" id="exp244">
+      <div class="badge">244</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>焚き火の煙の量は Dissipation にほぼ反比例する（0.05・0.1・0.2・0.4 で 62・30・14・7）。ただし実践の焚き火は火元から煙を出しておらず、Dissipation はまったく効かなかった</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">エフェクト</span><span class="coltag">Pyro</span><span class="coltag">煙</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>実践の焚き火は、火元から煙（density）を出していなかった。</strong>Dissipation を変えても何も変わらない。</li>
+            <li><strong>火元から煙を出すと、煙の量は Dissipation にほぼ反比例する（値 × 量 ≈ 3.0）。</strong></li>
+            <li><strong>煙が多いほど計算も重い。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_244.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/244_pyro_smoke_dissipation.py &nbsp;·&nbsp; 焚き火の煙は火元に density が要る。量は Dissipation に反比例</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">pyrosolver</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/244_scene.hipnc" target="_blank" rel="noopener noreferrer">244_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="244_graph.png" alt="実験244 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火や煙突の煙を、すぐ消える薄い煙にしたい・高くまで残る煙にしたい。pyrosolver の Dissipation（煙が薄れて消える速さ、既定 0.1）を変えると、煙の高さと量はどう変わるのか。</strong></p>
+          <p>実践「焚き火」の場面で、Dissipation を 0・0.05・0.1・0.2・0.4 にして 96 フレーム（4 秒）回した。煙の濃さ（density）が 0.02 を超える升の数と、そのいちばん高い所、濃さの合計（升の体積 × 濃さの和）を測り、実践と同じカメラと明かりで <button class="term" data-term="Karma">Karma</button> で撮った。</p>
+          <p><strong>実践のままでは、Dissipation はまったく効かなかった。</strong>5 つの値で、煙の升の数・高さ・合計がすべて同じ（34,043 升、高さ 1.40 m）。Set Flame Density を切ると、濃さはどこにも無くなった。実践の火元（pyrosource の Source Burn）が付ける値は burn・temperature だけで、煙の濃さ（density）を出していない。画に写っていた濃さは、Set Flame Density で炎から作られたものだけと考えられる。</p>
+          <p><strong>火元から煙を出すと、Dissipation がはっきり効く。</strong>火元の点に density = 1 を足して升目に移すと（add_smoke）、Dissipation 0・0.05・0.1・0.2・0.4 で、煙の濃さの合計は 340・62・30・14.4・7.0、いちばん高い所は 5.2・5.2・4.6・4.3・1.6 m。</p>
+          <p><strong>煙の量は Dissipation にほぼ反比例する。</strong>出る量と消える量が釣り合うと、煙の量は「出る速さ ÷ 消える速さ」になるはず。Dissipation × 合計は 0.05・0.1・0.2・0.4 で 3.12・3.00・2.88・2.80 と、ほぼ一定だった。0 では消えないので、4 秒たってもたまり続けた（340）。</p>
+          <p><strong>煙が多いほど、計算も重い。</strong>96 フレームで 15.8・17.3・16.2・12.1・8.2 秒（煙のある所だけ計算するので、煙が広がるほど升目が大きくなる）。</p>
+          <p><strong>決め方: 煙を出すなら、まず火元に density を入れる。</strong>そのうえで、煙の量を半分にしたければ Dissipation を倍にする。炎を見せたい焚き火なら 0.2〜0.4、煙を立ちのぼらせたいなら 0.05〜0.1。</p>
+        </div>
+
+        <p class="label">Dissipation と煙（96 フレーム目）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="244_grid.png" alt="左: 実践のまま（煙は出ない）。右 3 つ: 火元から煙を出して Dissipa" loading="lazy" decoding="async"></div>
+            <figcaption>左: 実践のまま（煙は出ない）。右 3 つ: 火元から煙を出して Dissipation 0・0.1・0.4。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>火元</th><th>Dissipation</th><th>煙の升（濃さ 0.02 超）</th><th>いちばん高い所（m）</th><th>濃さの合計</th><th>計算 96 フレーム（秒）</th></tr></thead>
+            <tbody>
+              <tr><td>実践のまま</td><td class="num">0</td><td class="num">34,043</td><td class="num">1.40</td><td class="num">0.6</td><td class="num">4.1</td></tr>
+              <tr><td>実践のまま</td><td class="num">0.05</td><td class="num">34,043</td><td class="num">1.40</td><td class="num">0.6</td><td class="num">4.1</td></tr>
+              <tr><td>実践のまま</td><td class="num">0.1</td><td class="num">34,043</td><td class="num">1.40</td><td class="num">0.6</td><td class="num">4.9</td></tr>
+              <tr><td>実践のまま</td><td class="num">0.2</td><td class="num">34,043</td><td class="num">1.40</td><td class="num">0.6</td><td class="num">4.9</td></tr>
+              <tr><td>実践のまま</td><td class="num">0.4</td><td class="num">34,043</td><td class="num">1.40</td><td class="num">0.6</td><td class="num">4.9</td></tr>
+              <tr><td>Set Flame Density 切り</td><td class="num">0</td><td class="num">0</td><td class="num">0.00</td><td class="num">0.0</td><td class="num">4.0</td></tr>
+              <tr><td>Set Flame Density 切り</td><td class="num">0.05</td><td class="num">0</td><td class="num">0.00</td><td class="num">0.0</td><td class="num">4.0</td></tr>
+              <tr><td>Set Flame Density 切り</td><td class="num">0.1</td><td class="num">0</td><td class="num">0.00</td><td class="num">0.0</td><td class="num">4.5</td></tr>
+              <tr><td>Set Flame Density 切り</td><td class="num">0.2</td><td class="num">0</td><td class="num">0.00</td><td class="num">0.0</td><td class="num">4.9</td></tr>
+              <tr><td>Set Flame Density 切り</td><td class="num">0.4</td><td class="num">0</td><td class="num">0.00</td><td class="num">0.0</td><td class="num">4.9</td></tr>
+              <tr><td>火元から煙を出す</td><td class="num">0</td><td class="num">1,859,462</td><td class="num">5.21</td><td class="num">339.8</td><td class="num">15.8</td></tr>
+              <tr><td>火元から煙を出す</td><td class="num">0.05</td><td class="num">1,512,439</td><td class="num">5.17</td><td class="num">62.3</td><td class="num">17.3</td></tr>
+              <tr><td>火元から煙を出す</td><td class="num">0.1</td><td class="num">679,053</td><td class="num">4.63</td><td class="num">30.0</td><td class="num">16.2</td></tr>
+              <tr><td>火元から煙を出す</td><td class="num">0.2</td><td class="num">254,998</td><td class="num">4.33</td><td class="num">14.4</td><td class="num">12.1</td></tr>
+              <tr><td>火元から煙を出す</td><td class="num">0.4</td><td class="num">72,715</td><td class="num">1.60</td><td class="num">7.0</td><td class="num">8.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>実践の焚き火は、火元から煙（density）を出していなかった。</strong>Dissipation を変えても何も変わらない。</li>
+          <li><strong>火元から煙を出すと、煙の量は Dissipation にほぼ反比例する（値 × 量 ≈ 3.0）。</strong></li>
+          <li><strong>煙が多いほど計算も重い。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -11490,7 +11566,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 </div>
 </div>
 
-<script src="data/glossary-data-8c50aeb527.js"></script>
+<script src="data/glossary-data-0e357d78c5.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -11669,10 +11745,10 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>243</dd></div>
+        <div><dt>実験</dt><dd>244</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
-        <div><dt>用語</dt><dd>470</dd></div>
+        <div><dt>用語</dt><dd>471</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -11749,7 +11825,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
       <div class="menu-doors">
         <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>393件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>470語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>471語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -11852,7 +11928,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
   </div>
 </div>
 
-<script src="data/search-data-8b4e1937e1.js"></script>
+<script src="data/search-data-aa3778a465.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

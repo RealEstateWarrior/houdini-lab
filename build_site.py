@@ -1625,6 +1625,12 @@ DONE = [
      "shots": ["243_grid.png", "243_graph.png"],
      "title": "Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色",
      "note": "XPU は Cd があると principledshader の色が Cd に。MaterialX なら同じ色"},
+    {"no": "244", "anchor": "exp244",
+     "tags": ["エフェクト", "Pyro", "煙", "制作"],
+     "log": "log_fx", "thumb": "244_grid.png",
+     "shots": ["244_grid.png", "244_graph.png"],
+     "title": "焚き火の煙の量は Dissipation にほぼ反比例する（0.05・0.1・0.2・0.4 で 62・30・14・7）。ただし実践の焚き火は火元から煙を出しておらず、Dissipation はまったく効かなかった",
+     "note": "焚き火の煙は火元に density が要る。量は Dissipation に反比例"},
 ]
 
 PLANNED = []
