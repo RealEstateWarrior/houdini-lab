@@ -1,0 +1,392 @@
+{
+  "title": "実験242",
+  "network": "/obj/balls",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "floor",
+      "type": "grid",
+      "pos": [
+        -8.472,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 14.0,
+        "sizey": 6.0
+      }
+    },
+    {
+      "name": "assign_floor",
+      "type": "material",
+      "pos": [
+        -8.472,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/floor_white"
+      }
+    },
+    {
+      "name": "all",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    },
+    {
+      "name": "ball_A",
+      "type": "sphere",
+      "pos": [
+        -5.648,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.9,
+        "rady": 0.9,
+        "radz": 0.9,
+        "tx": -5.5,
+        "ty": 0.9
+      }
+    },
+    {
+      "name": "assign_A",
+      "type": "material",
+      "pos": [
+        -5.648,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/mat_A"
+      }
+    },
+    {
+      "name": "ball_B",
+      "type": "sphere",
+      "pos": [
+        -2.824,
+        3.916
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.9,
+        "rady": 0.9,
+        "radz": 0.9,
+        "tx": -3.3,
+        "ty": 0.9
+      }
+    },
+    {
+      "name": "assign_B",
+      "type": "material",
+      "pos": [
+        -2.824,
+        2.786
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/mat_B"
+      }
+    },
+    {
+      "name": "ball_C",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        4.593
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.9,
+        "rady": 0.9,
+        "radz": 0.9,
+        "tx": -1.0999999999999996,
+        "ty": 0.9
+      }
+    },
+    {
+      "name": "color_C",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "v@Cd = {0.95, 0.45, 0.66};"
+      }
+    },
+    {
+      "name": "assign_C",
+      "type": "material",
+      "pos": [
+        0.0,
+        2.334
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/mat_C"
+      }
+    },
+    {
+      "name": "ball_D",
+      "type": "sphere",
+      "pos": [
+        2.824,
+        4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.9,
+        "rady": 0.9,
+        "radz": 0.9,
+        "tx": 1.1000000000000005,
+        "ty": 0.9
+      }
+    },
+    {
+      "name": "color_D",
+      "type": "attribwrangle",
+      "pos": [
+        2.824,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "v@Cd = {1, 1, 1};"
+      }
+    },
+    {
+      "name": "assign_D",
+      "type": "material",
+      "pos": [
+        2.824,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/mat_D"
+      }
+    },
+    {
+      "name": "ball_E",
+      "type": "sphere",
+      "pos": [
+        5.648,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.9,
+        "rady": 0.9,
+        "radz": 0.9,
+        "tx": 3.3000000000000007,
+        "ty": 0.9
+      }
+    },
+    {
+      "name": "color_E",
+      "type": "attribwrangle",
+      "pos": [
+        5.648,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "v@Cd = {0.95, 0.45, 0.66};"
+      }
+    },
+    {
+      "name": "assign_E",
+      "type": "material",
+      "pos": [
+        5.648,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/mat_E"
+      }
+    },
+    {
+      "name": "ball_F",
+      "type": "sphere",
+      "pos": [
+        8.472,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.9,
+        "rady": 0.9,
+        "radz": 0.9,
+        "tx": 5.5,
+        "ty": 0.9
+      }
+    },
+    {
+      "name": "assign_F",
+      "type": "material",
+      "pos": [
+        8.472,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/mat_F"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "floor",
+      "from_output": 0,
+      "to": "assign_floor",
+      "to_input": 0
+    },
+    {
+      "from": "assign_floor",
+      "from_output": 0,
+      "to": "all",
+      "to_input": 0
+    },
+    {
+      "from": "assign_A",
+      "from_output": 0,
+      "to": "all",
+      "to_input": 1
+    },
+    {
+      "from": "assign_B",
+      "from_output": 0,
+      "to": "all",
+      "to_input": 2
+    },
+    {
+      "from": "assign_C",
+      "from_output": 0,
+      "to": "all",
+      "to_input": 3
+    },
+    {
+      "from": "assign_D",
+      "from_output": 0,
+      "to": "all",
+      "to_input": 4
+    },
+    {
+      "from": "assign_E",
+      "from_output": 0,
+      "to": "all",
+      "to_input": 5
+    },
+    {
+      "from": "assign_F",
+      "from_output": 0,
+      "to": "all",
+      "to_input": 6
+    },
+    {
+      "from": "ball_A",
+      "from_output": 0,
+      "to": "assign_A",
+      "to_input": 0
+    },
+    {
+      "from": "ball_B",
+      "from_output": 0,
+      "to": "assign_B",
+      "to_input": 0
+    },
+    {
+      "from": "ball_C",
+      "from_output": 0,
+      "to": "color_C",
+      "to_input": 0
+    },
+    {
+      "from": "color_C",
+      "from_output": 0,
+      "to": "assign_C",
+      "to_input": 0
+    },
+    {
+      "from": "ball_D",
+      "from_output": 0,
+      "to": "color_D",
+      "to_input": 0
+    },
+    {
+      "from": "color_D",
+      "from_output": 0,
+      "to": "assign_D",
+      "to_input": 0
+    },
+    {
+      "from": "ball_E",
+      "from_output": 0,
+      "to": "color_E",
+      "to_input": 0
+    },
+    {
+      "from": "color_E",
+      "from_output": 0,
+      "to": "assign_E",
+      "to_input": 0
+    },
+    {
+      "from": "ball_F",
+      "from_output": 0,
+      "to": "assign_F",
+      "to_input": 0
+    }
+  ]
+}

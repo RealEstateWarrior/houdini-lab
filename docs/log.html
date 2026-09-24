@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>161本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>162本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3916,6 +3916,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp240" data-anchor="exp240"><span class="doc-no">240</span><span class="doc-t">211〜239 の点検 — 28 本を流し直して 4,526 個の値を突き合わせた。26 本は一致（時間・足した項目を除く）。値が違ったのは 218・226</span></a></li>
         <li class="doc-toc-sep" aria-hidden="true">241–270</li>
         <li><a href="#exp241" data-anchor="exp241"><span class="doc-no">241</span><span class="doc-t">Karma のノイズ除去は、4 サンプルでも 32 サンプル（なし）と同じくらい基準に近い（ドーナツ 差 1.88 と 1.75）。時間は 1/5。OptiX と OIDN はほぼ同じで、OptiX がわずかに近い</span></a></li>
+        <li><a href="#exp242" data-anchor="exp242"><span class="doc-no">242</span><span class="doc-t">Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。実験232 でアイシングが白くなったのはこのため</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3927,7 +3928,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>241 / 241</dd></div>
+      <div><dt>実験</dt><dd>242 / 242</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16884,7 +16885,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           </div>
         </div>
         <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
-        <p class="path">examples/232_karma_xpu_scenes.py &nbsp;·&nbsp; XPU は数倍〜十数倍速いが、色が出ない所があった</p>
+        <p class="path">examples/232_karma_xpu_scenes.py &nbsp;·&nbsp; XPU は数倍〜十数倍速いが、色が出ない所があった（原因は実験242）</p>
         <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">karma</a></p>
         <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/232_scene.hipnc" target="_blank" rel="noopener noreferrer">232_scene.hipnc</a></p>
         <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="232_graph.png" alt="実験232 のノードのつなぎ方" loading="lazy" decoding="async"></details>
@@ -16897,6 +16898,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <p><strong>ガラスの場面は、全体が明るく飛んだ。</strong>グラスの水は背景の幕が白く飛び、ガラスの輪郭が見えにくくなった（差 28、明るさ 195 → 222）。原因は確かめていない。</p>
           <p><strong>雪（SSS）と炎（<button class="term" data-term="Pyro">Pyro</button>）は、ほぼ同じ絵。</strong>差は雪だるま 13、焚き火 6、ネオン管 7。どれも XPU の方が少し明るかった。</p>
           <p><strong>決め方: 試し撮りは XPU で速く回し、仕上げの前に必ず CPU の画と並べて確かめる。</strong>色が変わる所（この実験ではアイシング・光る空）があれば、その場面は CPU で撮る。</p>
+          <p><strong>追記（<a href="#exp242">実験242</a>）: 色が白くなった原因が分かった。</strong>XPU では principledshader の色（Base Color）が効かずに白くなり、点の色（Cd）だけが効いた。アイシングは材質の色でピンクにしていたので白くなり、生地は Cd で揚げ色を付けていたので揚げ色のままだった。</p>
         </div>
 
         <p class="label">CPU と XPU（640×360・32 サンプル、ノイズ除去なし）</p>
@@ -17414,6 +17416,71 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 242 ===================== -->
+    <article class="entry entry--current" id="exp242">
+      <div class="badge">242</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。実験232 でアイシングが白くなったのはこのため</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">XPU</span><span class="coltag">材質</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong><button class="term" data-term="Karma">Karma</button> XPU では、principledshader の Base Color が効かずに白くなった。</strong></li>
+            <li><strong>点の色（Cd）は XPU でも効く。</strong>XPU で撮るなら色は Cd で付ける。</li>
+            <li><strong>光る材質は、XPU では白い面の上に光が乗ったように明るくなった。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_242.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/242_karma_xpu_point_color.py &nbsp;·&nbsp; XPU では principledshader の色が効かず白くなる。Cd は効く</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">karma</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/242_scene.hipnc" target="_blank" rel="noopener noreferrer">242_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="242_graph.png" alt="実験242 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp232">実験232</a> で、XPU で撮るとドーナツのアイシングと海の空が白くなった。アイシングの材質は「色<button class="term" data-term="ピン">ピン</button>ク・Use Point Color 入り・点の色 Cd なし」、海の空は「光る色を Use Point Color で点の色から取る」だった。どの組み合わせで XPU の色が CPU と変わるのか。</strong></p>
+          <p>球を 6 つ並べ、principledshader の組み合わせを変えて、白いドームの明かりで CPU と XPU で撮った（640×200・32 <button class="term" data-term="サンプル">サンプル</button>、別の <button class="term" data-term="hython">hython</button>）。球の真ん中の色（RGB）の平均を比べた。</p>
+          <p><strong>XPU では、材質の色（Base Color）が効かない。</strong>色ピンクの A（Use Point Color 切り）・B（入り・Cd なし）・D（入り・Cd 白）は、CPU ではピンク （0.65・0.33・0.46）、XPU では白 （0.94・0.94・0.94）・（0.93・0.93・0.93）・（0.92・0.92・0.92） になった。</p>
+          <p><strong>点の色（Cd）は、XPU でも効く。</strong>色を白にして Cd をピンクにした C は、XPU でもピンク （0.88・0.44・0.62）（CPU （0.63・0.32・0.45））。ドーナツの生地（色は白、揚げ色は Cd）が XPU でも揚げ色だったのと合う。</p>
+          <p><strong>光る材質は、XPU では白い面の上に光が乗ったように明るくなった。</strong>E（光る色を Cd から）（1.88・1.44・1.63）、F（光る色ピンク）（1.89・1.39・1.60）。CPU ではどちらも （0.95・0.45・0.66）。色（Base Color）が黒でも効かずに白い面になり、そこに明かりが当たった分が足されていると考えられる（海の空が白く飛んだのと合う）。</p>
+          <p>時間は CPU 4.7 秒、XPU 2.3 秒。</p>
+          <p><strong>決め方: XPU で撮るなら、色は点の色（Cd）で付ける（材質の色は白、Use Point Color 入り）。</strong>光る物は、XPU では明るさが変わるので CPU で撮る。XPU で材質の色を効かせる方法（MaterialX の材質など）は、まだ試していない。</p>
+        </div>
+
+        <p class="label">材質の組み合わせと、CPU・XPU の色</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="242_grid.png" alt="上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い。" loading="lazy" decoding="async"></div>
+            <figcaption>上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>球</th><th>材質</th><th>CPU の色（RGB）</th><th>XPU の色（RGB）</th></tr></thead>
+            <tbody>
+              <tr><td>A</td><td>色ピンク・Use Point Color 切り・Cd なし</td><td>（0.65・0.33・0.46）</td><td>（0.94・0.94・0.94）</td></tr>
+              <tr><td>B</td><td>色ピンク・Use Point Color 入り・Cd なし（アイシング）</td><td>（0.63・0.32・0.45）</td><td>（0.93・0.93・0.93）</td></tr>
+              <tr><td>C</td><td>色 白・Use Point Color 入り・Cd ピンク（生地）</td><td>（0.63・0.32・0.45）</td><td>（0.88・0.44・0.62）</td></tr>
+              <tr><td>D</td><td>色ピンク・Use Point Color 入り・Cd 白</td><td>（0.63・0.32・0.45）</td><td>（0.92・0.92・0.92）</td></tr>
+              <tr><td>E</td><td>光る色 白・Use Point Color 入り・Cd ピンク（海の空）</td><td>（0.95・0.45・0.66）</td><td>（1.88・1.44・1.63）</td></tr>
+              <tr><td>F</td><td>光る色ピンク・Use Point Color 切り</td><td>（0.95・0.45・0.66）</td><td>（1.89・1.39・1.60）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong><button class="term" data-term="Karma">Karma</button> XPU では、principledshader の Base Color が効かずに白くなった。</strong></li>
+          <li><strong>点の色（Cd）は XPU でも効く。</strong>XPU で撮るなら色は Cd で付ける。</li>
+          <li><strong>光る材質は、XPU では白い面の上に光が乗ったように明るくなった。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -17429,7 +17496,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-e3903249ad.js"></script>
+<script src="data/glossary-data-6f8e6b0ceb.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -17608,7 +17675,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>241</dd></div>
+        <div><dt>実験</dt><dd>242</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>469</dd></div>
@@ -17791,7 +17858,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-9bd6b10aeb.js"></script>
+<script src="data/search-data-0296fb2142.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

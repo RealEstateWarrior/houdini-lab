@@ -3761,6 +3761,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </button>
           </form>
           <div class="deck" id="deck" aria-roledescription="カルーセル" aria-label="新着の実験">
+            <a class="deck-card" href="log.html#exp242"><img src="thumb_242.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験242 · モデリング編</span><span class="deck-t">Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。実験232 でアイシングが白くなったのはこのため</span><span class="deck-d">XPU では principledshader の色が効かず白くなる。Cd は効く</span></a>
             <a class="deck-card" href="log.html#exp241"><img src="thumb_241.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験241 · モデリング編</span><span class="deck-t">Karma のノイズ除去は、4 サンプルでも 32 サンプル（なし）と同じくらい基準に近い（ドーナツ 差 1.88 と 1.75）。時間は 1/5。OptiX と OIDN はほぼ同じで、OptiX がわずかに近い</span><span class="deck-d">4サンプル＋ノイズ除去で32サンプル並み。OptiX と OIDN はほぼ同じ</span></a>
             <a class="deck-card" href="log.html#exp240"><img src="thumb_240.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験240 · モデリング編</span><span class="deck-t">211〜239 の点検</span><span class="deck-d">211〜239 を流し直し：26 本一致。218・219 は hip の版、226 は割れ方の揺れ</span></a>
             <a class="deck-card" href="log.html#exp239"><img src="thumb_239.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験239 · モデリング編</span><span class="deck-t">画を 640×360 → 1920×1080（画素 9 倍）にすると、ドーナツは撮る時間が 7.9 倍、海は 2.1 倍。海は 1 枚あたり 9 秒が画の大きさによらない分</span><span class="deck-d">解像度9倍で時間はドーナツ7.9倍・海2.1倍</span></a>
@@ -3768,7 +3769,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <a class="deck-card" href="log_fx.html#exp237"><img src="thumb_237.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験237 · エフェクト編</span><span class="deck-t">Vellum の風船の体積は、Pressure の Rest Length Scale の倍率ちょうどになる（3 なら 3.00 倍）。2 フレームで落ち着く。ただし 2 倍を超えるとしずく形が消えて球になり、膜が柔らかい（10²）と横につぶれる</span><span class="deck-d">風船の体積は Rest Length Scale の倍率ちょうどに。2倍を超えると球に</span></a>
             <a class="deck-card" href="log.html#exp236"><img src="thumb_236.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験236 · モデリング編</span><span class="deck-t">氷の入ったグラスの水は、Karma の Refraction Limit 既定 4 では氷がまだ黒く残る。8 で透明になり（暗い所 7% → 4%）、時間は 81 → 92 秒。16 は 8 と同じ</span><span class="deck-d">グラスの水と氷は Refraction Limit 8 で透明に</span></a>
             <a class="deck-card" href="log.html#exp235"><img src="thumb_235.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験235 · モデリング編</span><span class="deck-t">雲は、Karma の Volume Limit を上げるほど明るくなる（底の明るさ 0 → 16 で 0.45 → 0.93）。16 でもまだ明るくなり続け、時間は 13 → 378 秒。上げたら日差しを弱めないと白く飛ぶ</span><span class="deck-d">雲は Volume Limit を上げるほど明るく、16でも落ち着かない</span></a>
-            <a class="deck-card" href="log.html#exp234"><img src="thumb_234.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験234 · モデリング編</span><span class="deck-t">窓の光で照らす部屋は、Karma の Diffuse Limit 既定 1 では明るさが 72% しか出ない。4 で 91%、8 で 98%。時間は 1 → 4 で 2.0 倍</span><span class="deck-d">窓の光の部屋は Diffuse Limit 4 以上に</span></a>
           </div>
           <div class="deck-ctrl"><button type="button" class="deck-play" id="deck-play" aria-label="自動の切り替えを止める"></button><button type="button" class="deck-arrow" id="deck-prev" aria-label="前の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="deck-dots" id="deck-dots"></div><button type="button" class="deck-arrow" id="deck-next" aria-label="次の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         </div>
@@ -4011,7 +4011,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
 
       <nav class="site-facts" aria-label="この場所の数字">
-        <a href="index.html#experiments"><b>241</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
+        <a href="index.html#experiments"><b>242</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
         <a href="practice.html#guides"><b>71</b><span>実践ガイド<em>PRACTICE</em></span></a>
         <a href="reference.html#nodes"><b>393</b><span>ノード解説<em>NODES</em></span></a>
         <a href="reference.html#glossary"><b>469</b><span>用語集<em>GLOSSARY</em></span></a>
@@ -4039,14 +4039,14 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </header>
       <div class="stage"><h3>完了した実験</h3><p>カードを押すと、実験ログの記事が新しいタブで開く。タグで絞り込める。</p></div>
       <div class="tagbar" id="tagbar">
-        <button type="button" class="tagchip is-on" data-tag="">すべて <span>241</span></button>
+        <button type="button" class="tagchip is-on" data-tag="">すべて <span>242</span></button>
         <button type="button" class="tagchip" data-tag="検算">検算 <span>112</span></button>
         <button type="button" class="tagchip" data-tag="モデリング">モデリング <span>82</span></button>
         <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>36</span></button>
         <button type="button" class="tagchip" data-tag="エフェクト">エフェクト <span>32</span></button>
-        <button type="button" class="tagchip" data-tag="Karma">Karma <span>30</span></button>
+        <button type="button" class="tagchip" data-tag="Karma">Karma <span>31</span></button>
         <button type="button" class="tagchip" data-tag="落とし穴">落とし穴 <span>26</span></button>
-        <button type="button" class="tagchip" data-tag="制作">制作 <span>21</span></button>
+        <button type="button" class="tagchip" data-tag="制作">制作 <span>22</span></button>
         <button type="button" class="tagchip" data-tag="レンダリング">レンダリング <span>19</span></button>
         <button type="button" class="tagchip" data-tag="効率化">効率化 <span>19</span></button>
         <button type="button" class="tagchip" data-tag="MPM">MPM <span>18</span></button>
@@ -4075,6 +4075,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="複製">複製 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="POP">POP <span>5</span></button>
         <button type="button" class="tagchip" data-tag="RBD">RBD <span>5</span></button>
+        <button type="button" class="tagchip" data-tag="材質">材質 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="比較">比較 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="海">海 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="煙">煙 <span>5</span></button>
@@ -4083,7 +4084,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="SDF">SDF <span>4</span></button>
         <button type="button" class="tagchip" data-tag="smooth">smooth <span>4</span></button>
         <button type="button" class="tagchip" data-tag="属性">属性 <span>4</span></button>
-        <button type="button" class="tagchip" data-tag="材質">材質 <span>4</span></button>
         <button type="button" class="tagchip" data-tag="破壊">破壊 <span>4</span></button>
         <button type="button" class="tagchip" data-tag="heightfield">heightfield <span>3</span></button>
         <button type="button" class="tagchip" data-tag="scatter">scatter <span>3</span></button>
@@ -4106,6 +4106,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="Solaris">Solaris <span>2</span></button>
         <button type="button" class="tagchip" data-tag="USD">USD <span>2</span></button>
         <button type="button" class="tagchip" data-tag="UV">UV <span>2</span></button>
+        <button type="button" class="tagchip" data-tag="XPU">XPU <span>2</span></button>
         <button type="button" class="tagchip" data-tag="divide">divide <span>2</span></button>
         <button type="button" class="tagchip" data-tag="measure">measure <span>2</span></button>
         <button type="button" class="tagchip" data-tag="pcfind">pcfind <span>2</span></button>
@@ -4133,7 +4134,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="Heightfield">Heightfield <span>1</span></button>
         <button type="button" class="tagchip" data-tag="PDG">PDG <span>1</span></button>
         <button type="button" class="tagchip" data-tag="SSS">SSS <span>1</span></button>
-        <button type="button" class="tagchip" data-tag="XPU">XPU <span>1</span></button>
         <button type="button" class="tagchip" data-tag="attribblur">attribblur <span>1</span></button>
         <button type="button" class="tagchip" data-tag="attribfill">attribfill <span>1</span></button>
         <button type="button" class="tagchip" data-tag="attribpromote">attribpromote <span>1</span></button>
@@ -6415,6 +6415,15 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <span class="thumb-tags"><span>Karma</span><span>ノイズ除去</span><span>速さ</span><span>制作</span></span>
           </span>
         </button>
+        <button type="button" class="thumb" data-exp="242" data-tags="Karma XPU 材質 制作">
+          <span class="thumb-img"><img src="thumb_242.png" loading="lazy" decoding="async" alt="実験242の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 242</span>
+            <h4>Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。実験232 でアイシングが白くなったのはこのため</h4>
+            <p>XPU では principledshader の色が効かず白くなる。Cd は効く</p>
+            <span class="thumb-tags"><span>Karma</span><span>XPU</span><span>材質</span><span>制作</span></span>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -6870,8 +6879,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/experiment-data-8631ea4691.js"></script>
-<script src="data/glossary-data-e3903249ad.js"></script>
+<script src="data/experiment-data-4f8e877faf.js"></script>
+<script src="data/glossary-data-6f8e6b0ceb.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -7050,7 +7059,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>241</dd></div>
+        <div><dt>実験</dt><dd>242</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>469</dd></div>
@@ -7233,7 +7242,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-9bd6b10aeb.js"></script>
+<script src="data/search-data-0296fb2142.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

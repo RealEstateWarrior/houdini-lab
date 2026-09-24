@@ -1613,6 +1613,12 @@ DONE = [
      "shots": ["241_grid.png", "241_curve.png", "241_graph.png"],
      "title": "Karma のノイズ除去は、4 サンプルでも 32 サンプル（なし）と同じくらい基準に近い（ドーナツ 差 1.88 と 1.75）。時間は 1/5。OptiX と OIDN はほぼ同じで、OptiX がわずかに近い",
      "note": "4サンプル＋ノイズ除去で32サンプル並み。OptiX と OIDN はほぼ同じ"},
+    {"no": "242", "anchor": "exp242",
+     "tags": ["Karma", "XPU", "材質", "制作"],
+     "log": "log_pm", "thumb": "242_grid.png",
+     "shots": ["242_grid.png", "242_graph.png"],
+     "title": "Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。実験232 でアイシングが白くなったのはこのため",
+     "note": "XPU では principledshader の色が効かず白くなる。Cd は効く"},
 ]
 
 PLANNED = []
