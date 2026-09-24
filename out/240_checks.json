@@ -1,0 +1,936 @@
+[
+ {
+  "no": "211",
+  "commands": 1,
+  "records": [
+   "211_section.json",
+   "211_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 987,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 120.8,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "212",
+  "commands": 1,
+  "records": [
+   "212_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 42,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 49.1,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "213",
+  "commands": 1,
+  "records": [
+   "213_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 64,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 157.5,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "214",
+  "commands": 1,
+  "records": [
+   "214_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 71,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 15.9,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "216",
+  "commands": 1,
+  "records": [
+   "216_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 83,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 28.5,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "217",
+  "commands": 1,
+  "records": [
+   "217_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 73,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 147.4,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "218",
+  "commands": 1,
+  "records": [
+   "218_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 141,
+  "diffs": [
+   [
+    "218_stats.json",
+    ".note",
+    "rows は同じ実行のログ（out/_218.log）から戻した（保存の名前がぶつかったため）",
+    null
+   ],
+   [
+    "218_stats.json",
+    ".rows[7].energy",
+    0.045,
+    0.0449
+   ]
+  ],
+  "n_diffs": 2,
+  "sec": 105.1,
+  "kinds": {
+   "time": 0,
+   "add": 1,
+   "value": 1
+  },
+  "worst": {
+   "value": 0.0022222222222221255
+  }
+ },
+ {
+  "no": "219",
+  "commands": 1,
+  "records": [
+   "219_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 37,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 45.4,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "220",
+  "commands": 10,
+  "records": [
+   "220_density.json",
+   "220_part_base_1.json",
+   "220_part_base_2.json",
+   "220_part_ctrl_1.json",
+   "220_part_ctrl_2.json",
+   "220_part_ctrl_on_1.json",
+   "220_part_ctrl_on_2.json",
+   "220_part_free_1.json",
+   "220_part_free_2.json",
+   "220_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 1720,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 44.1,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "221",
+  "commands": 1,
+  "records": [
+   "221_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 40,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 52.7,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "222",
+  "commands": 2,
+  "records": [
+   "222_lop.json",
+   "222_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 70,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 731.1,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "223",
+  "commands": 1,
+  "records": [
+   "223_sens.json",
+   "223_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 68,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 6.7,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "224",
+  "commands": 1,
+  "records": [
+   "224_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 91,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 401.2,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "225",
+  "commands": 1,
+  "records": [
+   "225_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 36,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 325.7,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "226",
+  "commands": 1,
+  "records": [
+   "226_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 78,
+  "diffs": [
+   [
+    "226_stats.json",
+    ".rows[3].moved",
+    23,
+    22
+   ],
+   [
+    "226_stats.json",
+    ".rows[6].moved",
+    88,
+    54
+   ]
+  ],
+  "n_diffs": 2,
+  "sec": 30.4,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 2
+  },
+  "worst": {
+   "value": 0.38636363636363635
+  }
+ },
+ {
+  "no": "227",
+  "commands": 1,
+  "records": [
+   "227_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 36,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 9.0,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "228",
+  "commands": 1,
+  "records": [
+   "228_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 25,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 160.6,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "229",
+  "commands": 1,
+  "records": [
+   "229_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 25,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 102.0,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "230",
+  "commands": 1,
+  "records": [
+   "230_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 66,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 18.3,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "231",
+  "commands": 6,
+  "records": [
+   "231_part_fire_0.json",
+   "231_part_fire_light_12.07.json",
+   "231_part_light_1.json",
+   "231_part_light_12.07.json",
+   "231_part_light_4.json",
+   "231_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 63,
+  "diffs": [
+   [
+    "231_part_fire_0.json",
+    ".sec128",
+    8.73,
+    12.01
+   ],
+   [
+    "231_part_fire_0.json",
+    ".sec16",
+    4.5,
+    5.71
+   ],
+   [
+    "231_part_fire_light_12.07.json",
+    ".sec128",
+    13.96,
+    15.36
+   ],
+   [
+    "231_part_fire_light_12.07.json",
+    ".sec16",
+    6.12,
+    7.8
+   ],
+   [
+    "231_part_light_1.json",
+    ".sec128",
+    3.56,
+    5.78
+   ],
+   [
+    "231_part_light_1.json",
+    ".sec16",
+    2.99,
+    4.54
+   ],
+   [
+    "231_part_light_12.07.json",
+    ".sec128",
+    4.8,
+    6.23
+   ],
+   [
+    "231_part_light_12.07.json",
+    ".sec16",
+    3.16,
+    4.47
+   ],
+   [
+    "231_part_light_4.json",
+    ".sec128",
+    3.81,
+    5.04
+   ],
+   [
+    "231_part_light_4.json",
+    ".sec16",
+    2.85,
+    4.11
+   ],
+   [
+    "231_stats.json",
+    ".rows[0].sec128",
+    8.73,
+    12.01
+   ],
+   [
+    "231_stats.json",
+    ".rows[0].sec16",
+    4.5,
+    5.71
+   ],
+   [
+    "231_stats.json",
+    ".rows[1].sec128",
+    4.8,
+    6.23
+   ],
+   [
+    "231_stats.json",
+    ".rows[1].sec16",
+    3.16,
+    4.47
+   ],
+   [
+    "231_stats.json",
+    ".rows[2].sec128",
+    13.96,
+    15.36
+   ],
+   [
+    "231_stats.json",
+    ".rows[2].sec16",
+    6.12,
+    7.8
+   ],
+   [
+    "231_stats.json",
+    ".rows[3].sec128",
+    3.56,
+    5.78
+   ],
+   [
+    "231_stats.json",
+    ".rows[3].sec16",
+    2.99,
+    4.54
+   ],
+   [
+    "231_stats.json",
+    ".rows[4].sec128",
+    3.81,
+    5.04
+   ],
+   [
+    "231_stats.json",
+    ".rows[4].sec16",
+    2.85,
+    4.11
+   ]
+  ],
+  "n_diffs": 20,
+  "sec": 105.0,
+  "kinds": {
+   "time": 20,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "232",
+  "commands": 7,
+  "records": [
+   "232_part_campfire.json",
+   "232_part_donut.json",
+   "232_part_glasscup.json",
+   "232_part_neon.json",
+   "232_part_ocean_winter.json",
+   "232_part_snowman.json",
+   "232_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 63,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 464.9,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "233",
+  "commands": 6,
+  "records": [
+   "233_part_0.02.json",
+   "233_part_0.03.json",
+   "233_part_0.04.json",
+   "233_part_0.06.json",
+   "233_part_0.08.json",
+   "233_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 69,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 82.4,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "234",
+  "commands": 1,
+  "records": [
+   "234_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 36,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1479.2,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "235",
+  "commands": 1,
+  "records": [
+   "235_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 42,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1070.5,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "236",
+  "commands": 1,
+  "records": [
+   "236_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 28,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 351.0,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "237",
+  "commands": 1,
+  "records": [
+   "237_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 409,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 203.0,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "238",
+  "commands": 1,
+  "records": [
+   "238_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 38,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 183.4,
+  "kinds": {
+   "time": 0,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ },
+ {
+  "no": "239",
+  "commands": 3,
+  "records": [
+   "239_part_donut.json",
+   "239_part_ocean_winter.json",
+   "239_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 25,
+  "diffs": [
+   [
+    "239_part_donut.json",
+    ".times.1280x720",
+    75.28,
+    75.56
+   ],
+   [
+    "239_part_donut.json",
+    ".times.1920x1080",
+    159.22,
+    159.31
+   ],
+   [
+    "239_part_donut.json",
+    ".times.640x360",
+    20.12,
+    22.89
+   ],
+   [
+    "239_part_ocean_winter.json",
+    ".times.1280x720",
+    14.59,
+    14.55
+   ],
+   [
+    "239_part_ocean_winter.json",
+    ".times.1920x1080",
+    21.55,
+    21.38
+   ],
+   [
+    "239_part_ocean_winter.json",
+    ".times.640x360",
+    10.37,
+    10.09
+   ],
+   [
+    "239_stats.json",
+    ".rows[0].ratio_1080_to_360",
+    7.91,
+    6.96
+   ],
+   [
+    "239_stats.json",
+    ".rows[0].times.1280x720",
+    75.28,
+    75.56
+   ],
+   [
+    "239_stats.json",
+    ".rows[0].times.1920x1080",
+    159.22,
+    159.31
+   ],
+   [
+    "239_stats.json",
+    ".rows[0].times.640x360",
+    20.12,
+    22.89
+   ],
+   [
+    "239_stats.json",
+    ".rows[1].ratio_1080_to_360",
+    2.08,
+    2.12
+   ],
+   [
+    "239_stats.json",
+    ".rows[1].times.1280x720",
+    14.59,
+    14.55
+   ],
+   [
+    "239_stats.json",
+    ".rows[1].times.1920x1080",
+    21.55,
+    21.38
+   ],
+   [
+    "239_stats.json",
+    ".rows[1].times.640x360",
+    10.37,
+    10.09
+   ]
+  ],
+  "n_diffs": 14,
+  "sec": 322.1,
+  "kinds": {
+   "time": 14,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "value": 0.0
+  }
+ }
+]

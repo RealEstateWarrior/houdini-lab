@@ -2,7 +2,7 @@
 """実験218 — 海のきらめき（太陽の下の光の道）の幅と細かさは、水の Roughness とさざ波の高さのどちらで決まるか。
 
 制作の問い: 海の画で「光の道をもっと広く」「もっと細かくきらめかせたい」とき、どのつまみを動かせばよいか。
-実践「冬の朝の七里ヶ浜」（pr_ocean_winter.hipnc）の場面を使う。太陽は高さ 15°・左へ 12°、カメラは砂浜の目の高さ 1.5 m。
+実践「冬の朝の七里ヶ浜」を作り直す前の場面（pr_ocean_winter_v1.hipnc）を使う。太陽は高さ 15°・左へ 12°、カメラは砂浜の目の高さ 1.5 m。
 
   水の材質（sea_mat）の Roughness: 0.005・0.02・0.04（実践の値）・0.08・0.15
   さざ波（ripples、Grid Size 1.3 m）の Amplitude の Scale: 0.4・1.6（実践の値）・3.2
@@ -36,7 +36,8 @@ def main():
     import OpenImageIO as oiio
     import hou_tools
     import sop_bench
-    hou.hipFile.load(os.path.join(OUT, "pr_ocean_winter.hipnc"), suppress_save_prompt=True)
+    # 測ったのは、冬の海を作り直す前（2026-09-24 21時）の場面。作り直した後の hip では値が変わるので、前の版を読む（点検 240 で分かった）
+    hou.hipFile.load(os.path.join(OUT, "pr_ocean_winter_v1.hipnc"), suppress_save_prompt=True)
     hou.setFrame(FRAME)
     karma = hou.node("/out/hero_karma")
     cam = hou.node(karma.parm("camera").eval())

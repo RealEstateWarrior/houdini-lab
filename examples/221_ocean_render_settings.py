@@ -33,7 +33,8 @@ def main():
     from PIL import Image
     import hou_tools
     import sop_bench
-    hou.hipFile.load(os.path.join(OUT, "pr_ocean_winter.hipnc"), suppress_save_prompt=True)
+    # 測ったのは、冬の海を作り直す前（2026-09-24 21時）の場面。作り直した後の hip では値が変わるので、前の版を読む（点検 240 で分かった）
+    hou.hipFile.load(os.path.join(OUT, "pr_ocean_winter_v1.hipnc"), suppress_save_prompt=True)
     hou.setFrame(FRAME)
     karma = hou.node("/out/hero_karma")
     cam = hou.node(karma.parm("camera").eval())

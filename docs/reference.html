@@ -7663,7 +7663,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
               <li><code>materialtype</code>素材。割れ方の性質が変わる</li>
               <li><code>Scatter Points</code>破片の数のもとになる点の数</li>
             </ul>
-            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>Glass の Radial Crack Number（放射状のひび、既定 20）を 80 に上げると、破片は 119 → 474 個。同じつながりの強さ 0.8 では割れにくくなり（動いた破片 17% → 5%）、強さを 0.6 に下げると同じくらい割れた。計算は割る・Bullet とも 3 秒以内（実験226）。</div>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>Glass の Radial Crack Number（放射状のひび、既定 20）を 80 に上げると、破片は 119 → 474 個。同じつながりの強さ 0.8 では割れにくくなり（動いた破片 17% → 5%）、強さを 0.6 に下げると同じくらい割れた。計算は割る・Bullet とも 3 秒以内（実験226）。 Glass の Radial Crack Number（放射状のひび、既定 20）を 80 に上げると、破片は 119 → 474 個。同じつながりの強さ 0.8 では割れにくくなり（動いた破片 17% → 5%）、強さを 0.6 前後に下げると同じくらい割れた。ただし割れるか割れないかの境目の強さでは、同じ設定でも回すたびに割れ方が揺れた（0.6 で動いた破片 54〜116 個）。計算は割る・Bullet とも 3 秒以内（実験226）。</div>
             <div class="node-exps">
               <a href="log.html#exp014">実験 014</a>
               <a href="log.html#exp226">実験 226</a>
@@ -10069,12 +10069,18 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
               <li><code>picture</code>出力先</li>
               <li><code>samplesperpixel</code>1画素あたりの試行回数</li>
             </ul>
-            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。 被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。Volume Step Rate は大きいほど細かい。焚き火では既定 0.25 のままでよい（0.125 に下げても速くならず、1 に上げると 1920×1080 で 23% 遅い。実験207）。濃い煙を正しい濃さで撮るなら上げる（一様な煙の箱で、1 は光の吸収の式とぴったり、0.25 は Density Scale 4 で 12% 明るい。実験216）。</div>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。 被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。Volume Step Rate は大きいほど細かい。焚き火では既定 0.25 のままでよい（0.125 に下げても速くならず、1 に上げると 1920×1080 で 23% 遅い。実験207）。濃い煙を正しい濃さで撮るなら上げる（一様な煙の箱で、1 は光の吸収の式とぴったり、0.25 は Density Scale 4 で 12% 明るい。実験216）。 被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。Volume Step Rate は大きいほど細かい。焚き火では既定 0.25 のままでよい（0.125 に下げても速くならず、1 に上げると 1920×1080 で 23% 遅い。実験207）。濃い煙を正しい濃さで撮るなら上げる（一様な煙の箱で、1 は光の吸収の式とぴったり、0.25 は Density Scale 4 で 12% 明るい。実験216）。光を追う回数の目安（実験234〜236・238）: 窓の光の部屋は Diffuse Limit を既定 1 → 4 以上（明るさ 72% → 91%）。雲は Volume Limit を上げるほど明るく、16 でも落ち着かない（時間 13 → 378 秒）。氷の入ったグラスは Refraction Limit を既定 4 → 8 で氷が透明に。Color Limit（既定 10）は太陽の映り込みを切り詰めていて、上げるとざらつきが増える。速く回る物を SOP で動かすなら Geometry Time Samples を 8 に（実験230）。Rendering Engine を XPU にすると 7〜14 倍速いが、色が出ない所があった（実験232）。</div>
             <div class="node-exps">
               <a href="log.html#exp018">実験 018</a>
               <a href="log.html#exp038">実験 038</a>
               <a href="log.html#exp205">実験 205</a>
               <a href="log.html#exp207">実験 207</a>
+              <a href="log.html#exp230">実験 230</a>
+              <a href="log.html#exp232">実験 232</a>
+              <a href="log.html#exp234">実験 234</a>
+              <a href="log.html#exp235">実験 235</a>
+              <a href="log.html#exp236">実験 236</a>
+              <a href="log.html#exp238">実験 238</a>
             </div>
           </div>
         </article>
@@ -13007,7 +13013,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
 </div>
 
 <script src="data/experiment-data-bf21a9e8fb.js"></script>
-<script src="data/glossary-data-4a9b3148ca.js"></script>
+<script src="data/glossary-data-d837146123.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -13186,7 +13192,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>239</dd></div>
+        <div><dt>実験</dt><dd>240</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>468</dd></div>
@@ -13369,7 +13375,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
 </div>
 
-<script src="data/search-data-ce38f17a62.js"></script>
+<script src="data/search-data-a10dfb0c0b.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

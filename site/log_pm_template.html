@@ -10858,6 +10858,72 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 240 ===================== -->
+    <article class="entry entry--current" id="exp240">
+      <div class="badge">240</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>211〜239 の点検 — 28 本を流し直して 4,526 個の値を突き合わせた。26 本は一致（時間・足した項目を除く）。値が違ったのは 218・226</h2>
+        <p class="path">examples/240_audit.py &nbsp;·&nbsp; 211〜239 を流し直し：26 本一致。218・219 は hip の版、226 は割れ方の揺れ</p>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp211">実験211</a>〜239 の台本を今のまま流し直すと、記事に書いた値が同じように出るか。</strong></p>
+          <p>30 件ごとの点検（030・060・090・121・150・180・210 に続いて 8 回目）。記録（out/NNN_*.json）を控えに退避し、台本を流し直して、数字を 1 つずつ比べた。時間の項目と、時間から出した値（倍率・百万画素あたりの秒など）は「時間」として分けた。比べたあと記録は元に戻した（examples/240_audit.py）。215（草の本数と <button class="term" data-term="Karma">Karma</button>）は、1 条件で 13 分かかる条件を含むので流し直さなかった。</p>
+          <p><strong>ずれは 3 本だけで、どれも原因が分かった。</strong></p>
+          <p><strong>218・219: 台本が、作り直したあとの実践の hip を読んでいた。</strong>218（光の道）と 219（海の板の点の数）は、実践「冬の朝の七里ヶ浜」の hip を読んで測る。記録を取ったあとで、その実践を作り直した（泡・さざ波・材質を変えた）ので、流し直すと別の場面を測っていた。公開の履歴（git）から作り直す前の hip を取り出し、pr_ocean_winter_v1.hipnc として台本が読むように直すと、219 は一致、218 は 141 個のうち 1 個だけ小数 4 けた目が違った。221 も同じ hip を読むが、こちらは点検の順番が来る前に直したので、はじめから一致した。232・238・239 は作り直したあとに測ったので、今の hip のままで一致した。</p>
+          <p><strong>226: Bullet の割れ方が、回ごとに揺れる条件があった。</strong>ガラスのつながりの強さを弱めた条件で、動いた破片の数が記録と違った（強さ 0.6 で 88 個 → 54 個）。同じ設定で 5 回流すと、強さ 0.8 の条件は毎回ほぼ同じだったが、0.6 は 54〜116 個、0.5 は 100〜240 個と大きく揺れた。記事に揺れの幅を書き足し、結論を「0.6 前後、決めたら<button class="term" data-term="キャッシュ">キャッシュ</button>で固定」に直した。</p>
+          <p><strong>学んだこと: 実験の台本が実践の hip を読むときは、測ったときの hip を別の名前で残す。</strong>実践を作り直すと、黙って結果が変わる（点検210 の 201 と同じ形）。もう 1 つ、割れるか割れないかの境目の条件は、1 回の結果で言い切らず、何回か回して幅を書く。</p>
+        </div>
+
+        <p class="label">1 本ずつの結果</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>実験</th><th>比べた値</th><th>ずれた値</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td class="num">211</td><td class="num">987</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">212</td><td class="num">42</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">213</td><td class="num">64</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">214</td><td class="num">71</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">216</td><td class="num">83</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">217</td><td class="num">73</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">218</td><td class="num">141</td><td class="num">2</td><td>値が 1 か所違う（最大 0.2%）。はじめは 93 か所違った。記録を取ったあとに冬の海の実践を作り直していて、台本が新しい場面を読んでいたため。前の版の hip を公開の履歴から戻して（pr_ocean_winter_v1.hipnc）読むよう直すと、残りは 1 か所（0.045 → 0.0449）</td></tr>
+              <tr><td class="num">219</td><td class="num">37</td><td class="num">0</td><td>一致。はじめは 6 か所違った（218 と同じ理由）。前の版の hip を読むよう直すと一致</td></tr>
+              <tr><td class="num">220</td><td class="num">1720</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">221</td><td class="num">40</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">222</td><td class="num">70</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">223</td><td class="num">68</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">224</td><td class="num">91</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">225</td><td class="num">36</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">226</td><td class="num">78</td><td class="num">2</td><td>値が 2 か所違う（最大 38.6%）。つながりを弱めた条件で、動いた破片の数が回ごとに揺れた（強さ 0.6 で記録 88 個 → 54 個）。5 回流して揺れの幅を測り、記事を直した</td></tr>
+              <tr><td class="num">227</td><td class="num">36</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">228</td><td class="num">25</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">229</td><td class="num">25</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">230</td><td class="num">66</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">231</td><td class="num">63</td><td class="num">20</td><td>時間だけ違う。時間の項目だけ</td></tr>
+              <tr><td class="num">232</td><td class="num">63</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">233</td><td class="num">69</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">234</td><td class="num">36</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">235</td><td class="num">42</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">236</td><td class="num">28</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">237</td><td class="num">409</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">238</td><td class="num">38</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">239</td><td class="num">25</td><td class="num">14</td><td>時間だけ違う。時間の項目（と、時間から出した倍率）だけ</td></tr>
+              <tr><td class="num">215</td><td class="num muted">—</td><td class="num muted">—</td><td>流し直さなかった（1 条件で 13 分かかる条件を含む）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>28 本のうち 26 本は、時間以外の値がすべて一致（時間だけ違うものを含む）。</strong></li>
+          <li><strong>218・219 は、作り直したあとの実践の hip を読んでいた。</strong>前の版の hip を残して読むよう直すと一致した。</li>
+          <li><strong>226 は、つながりを弱めた条件で割れ方が回ごとに揺れた。</strong>揺れの幅を記事に書き足した。</li>
+          <li><strong>215 は、1 条件 13 分かかるので流し直さなかった。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

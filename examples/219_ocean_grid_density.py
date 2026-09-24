@@ -4,7 +4,7 @@
 制作の問い: 実践「冬の朝の七里ヶ浜」の映像は、1 枚 11.8 秒（960×540・16 サンプル）かかった。板は 1400 × 1600（224 万点）。
 点を減らせば速くなるのか。どこから見た目が崩れるのか。
 
-  pr_ocean_winter.hipnc の板（grid sea）の Rows・Columns を、1400×1600・990×1131（1/2 の点）・700×800（1/4）・
+  pr_ocean_winter_v1.hipnc（冬の海を作り直す前の版）の板（grid sea）の Rows・Columns を、1400×1600・990×1131（1/2 の点）・700×800（1/4）・
   350×400（1/16）にし、フレーム 30 を映像と同じ設定（960×540・16 サンプル）で撮る。1 通りずつ、ほかの処理は回さない。
   測るもの:
     計算の時間 … 板から泡までを作り直す時間（breaking_waves を強制で作り直す）
@@ -33,7 +33,8 @@ def main():
     from PIL import Image
     import hou_tools
     import sop_bench
-    hou.hipFile.load(os.path.join(OUT, "pr_ocean_winter.hipnc"), suppress_save_prompt=True)
+    # 測ったのは、冬の海を作り直す前（2026-09-24 21時）の場面。作り直した後の hip では値が変わるので、前の版を読む（点検 240 で分かった）
+    hou.hipFile.load(os.path.join(OUT, "pr_ocean_winter_v1.hipnc"), suppress_save_prompt=True)
     hou.setFrame(FRAME)
     karma = hou.node("/out/hero_karma")
     cam = hou.node(karma.parm("camera").eval())

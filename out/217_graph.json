@@ -431,7 +431,7 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 00000001C89FF900 read-only>"
+        "stash": "<hou.Geometry frozen at 00000001C072B900 read-only>"
       }
     },
     {
@@ -445,7 +445,7 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 000000000FDCF900 read-only>"
+        "stash": "<hou.Geometry frozen at 00000001E906E400 read-only>"
       }
     },
     {
@@ -459,7 +459,7 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 00000001BD0C3900 read-only>"
+        "stash": "<hou.Geometry frozen at 000000000815E400 read-only>"
       }
     },
     {
@@ -473,7 +473,7 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 000000170AE1AB00 read-only>"
+        "stash": "<hou.Geometry frozen at 000000170F1AF900 read-only>"
       }
     },
     {
@@ -487,7 +487,7 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 000000172499E400 read-only>"
+        "stash": "<hou.Geometry frozen at 0000001726A6A400 read-only>"
       }
     },
     {
@@ -501,7 +501,7 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 000000173BBFB900 read-only>"
+        "stash": "<hou.Geometry frozen at 00000001DABCE400 read-only>"
       }
     },
     {
