@@ -10217,6 +10217,55 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 215 ===================== -->
+    <article class="entry entry--current" id="exp215">
+      <div class="badge">215</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>草を Karma で撮るならパックしたまま（1 万本 17 秒、解くと 128 秒）。ただし 10 万本は、ポイントインスタンサーにしても、地面を広げて混み具合を 1 万本と同じにしても 13 分かかった</h2>
+        <p class="path">examples/215_karma_grass_instances.py &nbsp;·&nbsp; 草はパックしたまま（1万本17秒、解くと128秒）。10万本は13分</p>
+
+        <div class="prose">
+          <p><strong>課題: 草原を作ると、同じ草を何万本も並べる。<button class="term" data-term="Karma">Karma</button> で何本まで撮れるか。copytopoints の Pack and Instance は入れたままがよいのか。</strong></p>
+          <p>草 1 本は細い三角の葉 3 枚（面 15 枚）。地面に <button class="term" data-term="scatter">scatter</button> で点をまき、copytopoints で並べて、向き・大きさ・色を <button class="term" data-term="VEX">VEX</button> でばらつかせた。同じカメラで 640×360・8 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で撮り、時間を測った。並べ方は 3 つ: パックしたまま・パックを解く・パックして &lt;code&gt;usdinstancerpath&lt;/code&gt; を付ける（Karma へは「形 1 つ＋置く点の並び」の<button class="term" data-term="ポイント">ポイント</button>インスタンサーとして渡る）。昼の 1 回目（960×540・16 サンプル）では、パックしたまま 10 万本が 10 分を超えても終わらず、止めていた。</p>
+          <p><strong>パックは入れたままにする。</strong>1 万本で、パックしたまま 16.9 秒、パックを解くと 127.6 秒（7.6 倍）。解くと面が 150,000 枚になる。</p>
+          <p><strong>ポイントインスタンサーにしても、速くならなかった。</strong>1 万本で 18.2 秒（パックしたまま 16.9 秒）。</p>
+          <p><strong>本数が 1 万本を超えると、時間が急に延びる。</strong>1,000 本 5.2 秒、1 万本 16.9 秒、10 万本（ポイントインスタンサー）793 秒。本数 10 倍で時間は 44 倍。</p>
+          <p><strong>混み具合のせいではなかった。</strong>10 万本を 31.6 m 四方（1 m² あたりの本数が 1 万本のときと同じ）にまいても 768 秒で、10 m 四方（793 秒）とほとんど変わらなかった。なぜ本数でこれほど延びるのかは、確かめきれなかった（撮るたびに「vblur はインスタンスごとに指定できない」という注意が出ていた）。100 万本と、パックを解いた 10 万本は、時間がかかるので撮らなかった。</p>
+          <p><strong>決め方: この組み方（<button class="term" data-term="SOP">SOP</button> の copytopoints を /out の Karma で撮る）では、1 万本前後までにする。</strong>それより多い草原は、Solaris（LOP）で並べるなど、別の撮り方を試す必要がある（まだ測っていない）。</p>
+        </div>
+
+        <p class="label">本数と並べ方を変えた草（640×360・8 サンプル）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="215_grid.png" alt="上: 1 万本（パックしたまま・解く）。下: 10 万本（ポイントインスタンサー" loading="lazy" decoding="async"></div>
+            <figcaption>上: 1 万本（パックしたまま・解く）。下: 10 万本（ポイントインスタンサー、10 m 四方・31.6 m 四方）。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>本数</th><th>並べ方</th><th>地面（m 四方）</th><th>面（またはパック）の数</th><th>撮る時間（秒）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1,000</td><td>パックしたまま</td><td class="num">10</td><td class="num">1,000</td><td class="num">5.2</td></tr>
+              <tr><td class="num">10,000</td><td>パックしたまま</td><td class="num">10</td><td class="num">10,000</td><td class="num">16.9</td></tr>
+              <tr><td class="num">10,000</td><td>ポイントインスタンサー</td><td class="num">10</td><td class="num">10,000</td><td class="num">18.2</td></tr>
+              <tr><td class="num">100,000</td><td>ポイントインスタンサー</td><td class="num">10</td><td class="num">100,000</td><td class="num">793.4</td></tr>
+              <tr><td class="num">100,000</td><td>ポイントインスタンサー</td><td class="num">31.6</td><td class="num">100,000</td><td class="num">767.5</td></tr>
+              <tr><td class="num">10,000</td><td>パックを解く</td><td class="num">10</td><td class="num">150,000</td><td class="num">127.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>パックは入れたままにする。</strong>1 万本で 17 秒、解くと 128 秒。</li>
+          <li><strong>ポイントインスタンサー（usdinstancerpath）にしても速くならなかった。</strong></li>
+          <li><strong>10 万本は 13 分かかった。</strong>地面を広げて混み具合を下げても同じ。原因は確かめきれていない。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

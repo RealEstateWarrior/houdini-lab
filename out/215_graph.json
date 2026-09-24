@@ -1,0 +1,252 @@
+{
+  "title": "実験215",
+  "network": "/obj/exp215",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "grass_blade",
+      "type": "attribwrangle",
+      "pos": [
+        -0.659,
+        5.422
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 細い三角の葉を 3 枚、根元で 120° ずつ回して立てる。1 枚は 5 段の帯（面 5 枚）\nfor (int k = 0; k < 3; k++) {\n    float a = radians(k * 120.0 + 15..."
+      }
+    },
+    {
+      "name": "ground",
+      "type": "grid",
+      "pos": [
+        -3.483,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "spots",
+      "type": "scatter::2.0",
+      "pos": [
+        1.6,
+        6.099
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 10000
+      }
+    },
+    {
+      "name": "vary",
+      "type": "attribwrangle",
+      "pos": [
+        1.6,
+        4.97
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 草ごとに向き・大きさ・色をばらつかせる\n@orient = quaternion(radians(rand(@ptnum) * 360), {0, 1, 0});\n@pscale = fit01(rand(@ptnum + 3)..."
+      }
+    },
+    {
+      "name": "grass_packed",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.471,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "pack": 1,
+        "targetattribs": 1,
+        "applyattribs1": "Cd"
+      }
+    },
+    {
+      "name": "grass_flat",
+      "type": "copytopoints::2.0",
+      "pos": [
+        3.859,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetattribs": 1,
+        "applyto1": 2,
+        "applyattribs1": "Cd"
+      }
+    },
+    {
+      "name": "as_instancer",
+      "type": "attribwrangle",
+      "pos": [
+        6.119,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// この文字の属性があると、Karma（USD）へは 1 本ずつではなく、ポイントインスタンサーとしてまとめて渡る\ns@usdinstancerpath = '/grass_instancer';"
+      }
+    },
+    {
+      "name": "packed_or_flat",
+      "type": "switch",
+      "pos": [
+        3.483,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "input": 2
+      }
+    },
+    {
+      "name": "assign_soil",
+      "type": "material",
+      "pos": [
+        -3.483,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/soil_mat"
+      }
+    },
+    {
+      "name": "assign_grass",
+      "type": "material",
+      "pos": [
+        3.483,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/grass_mat"
+      }
+    },
+    {
+      "name": "field",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "spots",
+      "to_input": 0
+    },
+    {
+      "from": "spots",
+      "from_output": 0,
+      "to": "vary",
+      "to_input": 0
+    },
+    {
+      "from": "grass_blade",
+      "from_output": 0,
+      "to": "grass_packed",
+      "to_input": 0
+    },
+    {
+      "from": "vary",
+      "from_output": 0,
+      "to": "grass_packed",
+      "to_input": 1
+    },
+    {
+      "from": "grass_blade",
+      "from_output": 0,
+      "to": "grass_flat",
+      "to_input": 0
+    },
+    {
+      "from": "vary",
+      "from_output": 0,
+      "to": "grass_flat",
+      "to_input": 1
+    },
+    {
+      "from": "grass_packed",
+      "from_output": 0,
+      "to": "as_instancer",
+      "to_input": 0
+    },
+    {
+      "from": "grass_packed",
+      "from_output": 0,
+      "to": "packed_or_flat",
+      "to_input": 0
+    },
+    {
+      "from": "grass_flat",
+      "from_output": 0,
+      "to": "packed_or_flat",
+      "to_input": 1
+    },
+    {
+      "from": "as_instancer",
+      "from_output": 0,
+      "to": "packed_or_flat",
+      "to_input": 2
+    },
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "assign_soil",
+      "to_input": 0
+    },
+    {
+      "from": "packed_or_flat",
+      "from_output": 0,
+      "to": "assign_grass",
+      "to_input": 0
+    },
+    {
+      "from": "assign_soil",
+      "from_output": 0,
+      "to": "field",
+      "to_input": 0
+    },
+    {
+      "from": "assign_grass",
+      "from_output": 0,
+      "to": "field",
+      "to_input": 1
+    }
+  ]
+}

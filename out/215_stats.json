@@ -1,0 +1,77 @@
+{
+ "rows": [
+  {
+   "case": "packed_1e3",
+   "count": 1000,
+   "mode": 0,
+   "cook_sec": 0.01,
+   "prims": 1000,
+   "points": 1000,
+   "sec": 5.16,
+   "ground": 10.0,
+   "run": "2"
+  },
+  {
+   "case": "packed_1e4",
+   "count": 10000,
+   "mode": 0,
+   "cook_sec": 0.02,
+   "prims": 10000,
+   "points": 10000,
+   "sec": 16.86,
+   "ground": 10.0,
+   "run": "2"
+  },
+  {
+   "case": "inst_1e4",
+   "count": 10000,
+   "mode": 2,
+   "cook_sec": 0.01,
+   "prims": 10000,
+   "points": 10000,
+   "sec": 18.23,
+   "ground": 10.0,
+   "run": "2"
+  },
+  {
+   "case": "inst_1e5",
+   "count": 100000,
+   "mode": 2,
+   "cook_sec": 0.11,
+   "prims": 100000,
+   "points": 100000,
+   "sec": 793.36,
+   "ground": 10.0,
+   "run": "2"
+  },
+  {
+   "case": "inst_1e5_wide",
+   "count": 100000,
+   "mode": 2,
+   "ground": 31.6,
+   "cook_sec": 0.11,
+   "prims": 100000,
+   "points": 100000,
+   "sec": 767.52,
+   "run": "3"
+  },
+  {
+   "case": "flat_1e4",
+   "count": 10000,
+   "mode": 1,
+   "ground": 10.0,
+   "cook_sec": 0.03,
+   "prims": 150000,
+   "points": 360000,
+   "sec": 127.56,
+   "run": "3"
+  }
+ ],
+ "res": [
+  640,
+  360
+ ],
+ "spp": 8,
+ "blade_prims": 15,
+ "note": "2 回目（run 2）と 3 回目（run 3）のログから。inst_1e6・flat_1e5・packed_1e5_wide は時間がかかるので撮る前に止めた"
+}

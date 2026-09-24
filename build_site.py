@@ -1481,6 +1481,12 @@ DONE = [
      "shots": ["220_heights.png", "220_graph.png"],
      "title": "焚き火の Turbulence は、Use Control Field を入れると効かない（揺らぎなしと全フレーム同じ）。切ると炎の高さ 1.31 m（なし 1.21 m）。実験201 の結論は正しく、点検で合わなかったのは revertToDefaults が Use Control Field を「切り」に戻したため",
      "note": "焚き火の Turbulence は Use Control Field 入りだと効かない。201 の点検のずれの原因"},
+    {"no": "215", "anchor": "exp215",
+     "tags": ["Karma", "草", "速さ", "制作"],
+     "log": "log_pm", "thumb": "215_grid.png",
+     "shots": ["215_grid.png", "215_graph.png"],
+     "title": "草を Karma で撮るならパックしたまま（1 万本 17 秒、解くと 128 秒）。ただし 10 万本は、ポイントインスタンサーにしても、地面を広げて混み具合を 1 万本と同じにしても 13 分かかった",
+     "note": "草はパックしたまま（1万本17秒、解くと128秒）。10万本は13分"},
 ]
 
 PLANNED = []

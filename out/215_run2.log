@@ -1,0 +1,14 @@
+[21:25:43] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+[21:25:47] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'packed_1e3', 'count': 1000, 'mode': 0, 'cook_sec': 0.01, 'prims': 1000, 'points': 1000, 'sec': 5.16}
+[21:26:02] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'packed_1e4', 'count': 10000, 'mode': 0, 'cook_sec': 0.02, 'prims': 10000, 'points': 10000, 'sec': 16.86}
+[21:26:19] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'inst_1e4', 'count': 10000, 'mode': 2, 'cook_sec': 0.01, 'prims': 10000, 'points': 10000, 'sec': 18.23}
+[21:39:26] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'inst_1e5', 'count': 100000, 'mode': 2, 'cook_sec': 0.11, 'prims': 100000, 'points': 100000, 'sec': 793.36}

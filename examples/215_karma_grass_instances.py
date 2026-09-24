@@ -21,9 +21,16 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "examples"))
 OUT = os.path.join(HERE, "out")
-RES = (960, 540)
-CASES = [("packed_1e4", 10000, True), ("packed_1e5", 100000, True), ("packed_1e6", 1000000, True),
-         ("flat_1e4", 10000, False), ("flat_1e5", 100000, False)]
+RES = (640, 360)
+# 並べ方: 0 = パックしたまま（Karma へは 1 本ずつ別の物として渡る）、1 = パックを解く、
+#         2 = パックして usdinstancerpath を付ける（Karma へは「形 1 つ＋置く点の並び」のポイントインスタンサーとして渡る）
+# 1 回目（2026-09-24 昼）は 960×540・16 サンプルで、パック 1 万本 43.8 秒、10 万本は 10 分を超えても終わらず止めた。
+# 2 回目（同じ日の夜）は 640×360・8 サンプルにし、並べ方 2 を足した
+CASES = [("packed_1e3", 1000, 0), ("packed_1e4", 10000, 0),
+         ("inst_1e4", 10000, 2), ("inst_1e5", 100000, 2), ("inst_1e6", 1000000, 2),
+         ("flat_1e4", 10000, 1), ("flat_1e5", 100000, 1)]
+# 3 回目: 10 万本は並べ方 2 でも 793 秒かかった。草の混み具合のせいかを見るため、地面を広げて 1 m² あたりの本数を 1 万本のときと同じにする
+CASES2 = [("inst_1e5_wide", 100000, 2, 31.6), ("flat_1e4", 10000, 1, 10.0), ("packed_1e5_wide", 100000, 0, 31.6)]
 
 
 def main():
@@ -63,16 +70,20 @@ def main():
     flat = g.node("copytopoints::2.0", "grass_flat", [blade, vary], pack=0, targetattribs=1)
     flat.parm("applyattribs1").set("Cd")
     flat.parm("applyto1").set("prims")
-    pick = g.node("switch", "packed_or_flat", [packed, flat])
+    inst = g.node("attribwrangle", "as_instancer", [packed], snippet=(
+        "// この文字の属性があると、Karma（USD）へは 1 本ずつではなく、ポイントインスタンサーとしてまとめて渡る\n"
+        "s@usdinstancerpath = '/grass_instancer';"))
+    inst.parm("class").set(1)
+    pick = g.node("switch", "packed_or_flat", [packed, flat, inst])
     grass_m = g.mat("grass_mat", basecolor=(1, 1, 1), rough=0.6)
     grass_m.parm("basecolor_usePointColor").set(1)
     soil_m = g.mat("soil_mat", basecolor=(0.12, 0.09, 0.06), rough=0.9)
     final = g.node("merge", "field", [g.assign(ground, soil_m, "assign_soil"), g.assign(pick, grass_m, "assign_grass")])
     bbox = hou.BoundingBox(-5, 0, -5, 5, 0.4, 5)
     if os.environ.get("DRY"):
-        for tag, n, is_packed in CASES[:1] + CASES[3:4]:
+        for tag, n, mode in CASES[:1] + CASES[2:3]:
             pts.parm("npts").set(n)
-            pick.parm("input").set(0 if is_packed else 1)
+            pick.parm("input").set(mode)
             geo = pick.geometry()
             for nd in g.geo.children():
                 if nd.errors():
@@ -88,17 +99,21 @@ def main():
         cam.parm(p).set(v)
     karma.parm("resolutionx").set(RES[0])
     karma.parm("resolutiony").set(RES[1])
-    karma.parm("samplesperpixel").set(16)
-    karma.parm("varianceaa_maxsamples").set(16)
+    karma.parm("samplesperpixel").set(8)
+    karma.parm("varianceaa_maxsamples").set(8)
     karma.parm("denoiser").set("oidn")
     rows = []
-    for tag, n, is_packed in CASES:
+    todo = [c + (10.0,) for c in CASES] if not os.environ.get("SET2") else CASES2
+    if os.environ.get("SAVEONLY"):   # 撮らずに hip とつなぎ方の図だけ残す（途中で止めたとき用）
+        todo = []
+    for tag, n, mode, size in todo:
+        ground.parmTuple("size").set((size, size))
         pts.parm("npts").set(n)
-        pick.parm("input").set(0 if is_packed else 1)
+        pick.parm("input").set(mode)
         t0 = time.perf_counter()
         geo = pick.geometry()
         cook = time.perf_counter() - t0
-        info = {"case": tag, "count": n, "packed": is_packed, "cook_sec": round(cook, 2),
+        info = {"case": tag, "count": n, "mode": mode, "ground": size, "cook_sec": round(cook, 2),
                 "prims": geo.intrinsicValue("primitivecount"), "points": geo.intrinsicValue("pointcount")}
         path = os.path.join(OUT, f"215_{tag}.png")
         karma.parm("picture").set(path.replace("\\", "/"))
@@ -108,12 +123,14 @@ def main():
         rows.append(info)
         print(info, flush=True)
     import hou_tools
+    ground.parmTuple("size").set((10, 10))
     pts.parm("npts").set(10000)
-    pick.parm("input").set(0)
+    pick.parm("input").set(2)
     g.geo.layoutChildren()
     hou_tools.save_hip(os.path.join(OUT, "215_scene.hipnc"))
     hou_tools.write_graph(g.geo.path(), os.path.join(OUT, "215_graph.json"), title="実験215")
-    sop_bench.save(215, rows, {"res": RES, "spp": 16, "blade_prims": len(blade.geometry().prims())})
+    if rows:
+        sop_bench.save(215, rows, {"res": RES, "spp": 8, "blade_prims": len(blade.geometry().prims())})
 
 
 if __name__ == "__main__":

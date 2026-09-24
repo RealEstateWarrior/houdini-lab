@@ -1,0 +1,6 @@
+[21:40:36] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+[21:53:16] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'inst_1e5_wide', 'count': 100000, 'mode': 2, 'ground': 31.6, 'cook_sec': 0.11, 'prims': 100000, 'points': 100000, 'sec': 767.52}
+{'case': 'flat_1e4', 'count': 10000, 'mode': 1, 'ground': 10.0, 'cook_sec': 0.03, 'prims': 150000, 'points': 360000, 'sec': 127.56}
