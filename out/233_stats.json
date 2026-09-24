@@ -1,0 +1,75 @@
+{
+  "rows": [
+    {
+      "case": "v0.08",
+      "voxel": 0.08,
+      "sim_sec": 1.29,
+      "res": [
+        48,
+        32,
+        48
+      ],
+      "voxels": 73728,
+      "render_sec": 4.65,
+      "diff_to_002": 4.0
+    },
+    {
+      "case": "v0.06",
+      "voxel": 0.06,
+      "sim_sec": 1.43,
+      "res": [
+        48,
+        48,
+        48
+      ],
+      "voxels": 110592,
+      "render_sec": 4.78,
+      "diff_to_002": 3.65
+    },
+    {
+      "case": "v0.04",
+      "voxel": 0.04,
+      "sim_sec": 2.27,
+      "res": [
+        80,
+        80,
+        80
+      ],
+      "voxels": 512000,
+      "render_sec": 5.65,
+      "diff_to_002": 2.52
+    },
+    {
+      "case": "v0.03",
+      "voxel": 0.03,
+      "sim_sec": 3.04,
+      "res": [
+        80,
+        96,
+        112
+      ],
+      "voxels": 860160,
+      "render_sec": 5.61,
+      "diff_to_002": 2.27
+    },
+    {
+      "case": "v0.02",
+      "voxel": 0.02,
+      "sim_sec": 5.54,
+      "res": [
+        128,
+        112,
+        144
+      ],
+      "voxels": 2064384,
+      "render_sec": 5.83,
+      "diff_to_002": 0.0
+    }
+  ],
+  "frame": 60,
+  "res": [
+    640,
+    360
+  ],
+  "spp": 16
+}
