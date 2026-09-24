@@ -11428,6 +11428,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         </div>
         <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
         <p class="path">examples/237_vellum_balloon_pressure.py &nbsp;·&nbsp; 風船の体積は Rest Length Scale の倍率ちょうどに。2倍を超えると球に</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">vellumconstraints</a></p>
         <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/237_scene.hipnc" target="_blank" rel="noopener noreferrer">237_scene.hipnc</a></p>
         <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="237_graph.png" alt="実験237 のノードのつなぎ方" loading="lazy" decoding="async"></details>
 
@@ -11435,8 +11436,8 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
           <p><strong>課題: 実践「風船をふくらませる」では、Pressure の Rest Length Scale を 3 にした（「今の 3 倍の体積が本来の大きさ」）。体積は本当に 3 倍になるのか。ゴムの膜の硬さで、ふくらみ方は変わるのか。何フレームで落ち着くのか。</strong></p>
           <p>実践と同じ、しぼんだしずく形の風船（体積 5.11 L、縦 ÷ 横 1.18）に、Cloth（Stretch Stiffness 1 × 10³）と Pressure をかけ、重力 0・Substeps 5 で 48 フレーム回した。Rest Length Scale を 1.5・2・3・4・6 にし、3 では膜の硬さを 10²・10⁴ にしたものも回した。体積は閉じた面の体積（三角形ごとの符号付き体積の和）で、はじめとの比を取った。</p>
           <p><strong>体積は、Rest Length Scale の倍率ちょうどになる。</strong>48 フレーム目の体積は 1.5・2・3・4・6 で 1.500・2.000・3.000・4.001・6.003 倍。膜の硬さを 10²・10⁴ にしても 3.002・2.998 倍。どれも 2 フレーム目で最後の 95% に届き、あとはほとんど動かなかった。</p>
-          <p><strong>2 倍を超えると、しずく形が消えて球になる。</strong>縦 ÷ 横は、はじめ 1.18、1.5・2・3・4・6 で 1.12・1.06・1.00・1.02・0.93。6 では結び目を留めた下側が引っぱられ、横長になった。</p>
-          <p><strong>膜が柔らかいと、横につぶれる。</strong>Rest Length Scale 3 で、膜の硬さ 10²・10³・10⁴ の縦 ÷ 横は 0.79・1.00・1.00。体積は同じでも、柔らかい膜は伸びやすい向きへふくらんで、形が崩れた。</p>
+          <p><strong>2 倍を超えると、しずく形が消えて球になる。</strong>縦 ÷ 横は、はじめ 1.18、1.5・2・3・4・6 で 1.12・1.06・1.00・1.02・0.93。6 では横長になった。</p>
+          <p><strong>膜が柔らかいと、横につぶれる。</strong>Rest Length Scale 3 で、膜の硬さ 10²・10³・10⁴ の縦 ÷ 横は 0.79・1.00・1.00。体積は同じでも、柔らかい膜では形が崩れた。</p>
           <p><strong>決め方: ふくらませたい体積の倍率を、そのまま Rest Length Scale に入れる。</strong>しずく形を残したいなら 2 倍までにして、しぼんだ形をはじめから大きめに作る。膜の硬さは 10³ 以上にする。</p>
         </div>
 
@@ -11487,7 +11488,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 </div>
 </div>
 
-<script src="data/glossary-data-73fd1bf2da.js"></script>
+<script src="data/glossary-data-1130d68c18.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -11849,7 +11850,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
   </div>
 </div>
 
-<script src="data/search-data-84a8da562d.js"></script>
+<script src="data/search-data-38bd9db8a9.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

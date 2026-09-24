@@ -7712,13 +7712,14 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </ul>
             <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>かたさは「値 × 10の指数乗」で決まる。既定の指数が10なので、見えている値をいくら触ってもほとんど変わらない。(値1.0, 指数6) と (値1000000, 指数0) は伸び 1.00843 で完全に一致した。またピン留めは grouptype を points にしないと効かず、group を空にすると「全部が対象」と解釈されて布全体が固定される。
 
-breaking（dobreaking）は効く種類が決まっている。glue が作る stitch 拘束はしきい値どおりに破れるが、cloth が作る distance / bend 拘束は同じ場面・同じしきい値でも1本も破れない（実験028・031で確認）。破れた拘束は broken グループに入るのではなく取り除かれるので、破れたかどうかは拘束の本数で数える。 Cloth は網を三角形にしてから、辺ごとに伸び（distance）、内側の辺ごとに曲げ（bend）の拘束を作る。四角形で渡しても三角形で渡しても本数は同じ（実験163）。 Cloth は網を三角形にしてから、辺ごとに伸び（distance）、内側の辺ごとに曲げ（bend）の拘束を作る。四角形で渡しても三角形で渡しても本数は同じ（実験163）。 Cloth の曲げの硬さ（Bend の Stiffness、既定 1 × 10⁻¹）は、テーブルクロス（1.9 × 1.45 m、66×84）では下げても形がほぼ同じ（0.001 で差 1.1 cm）。10 以上にすると布が張り、机の縁から 15 cm 張り出して裾が 4 cm 上がった（実験217）。</div>
+breaking（dobreaking）は効く種類が決まっている。glue が作る stitch 拘束はしきい値どおりに破れるが、cloth が作る distance / bend 拘束は同じ場面・同じしきい値でも1本も破れない（実験028・031で確認）。破れた拘束は broken グループに入るのではなく取り除かれるので、破れたかどうかは拘束の本数で数える。 Cloth は網を三角形にしてから、辺ごとに伸び（distance）、内側の辺ごとに曲げ（bend）の拘束を作る。四角形で渡しても三角形で渡しても本数は同じ（実験163）。 Cloth は網を三角形にしてから、辺ごとに伸び（distance）、内側の辺ごとに曲げ（bend）の拘束を作る。四角形で渡しても三角形で渡しても本数は同じ（実験163）。 Cloth の曲げの硬さ（Bend の Stiffness、既定 1 × 10⁻¹）は、テーブルクロス（1.9 × 1.45 m、66×84）では下げても形がほぼ同じ（0.001 で差 1.1 cm）。10 以上にすると布が張り、机の縁から 15 cm 張り出して裾が 4 cm 上がった（実験217）。 Cloth は網を三角形にしてから、辺ごとに伸び（distance）、内側の辺ごとに曲げ（bend）の拘束を作る。四角形で渡しても三角形で渡しても本数は同じ（実験163）。Pressure の Rest Length Scale は、ふくらんだ体積の倍率そのもの。しずく形の風船で 1.5・2・3・4・6 にすると体積は 1.50・2.00・3.00・4.00・6.00 倍になり、2 フレームで落ち着いた。2 倍を超えるとしずく形が消えて球になった（実験237）。 Cloth の曲げの硬さ（Bend の Stiffness、既定 1 × 10⁻¹）は、テーブルクロス（1.9 × 1.45 m、66×84）では下げても形がほぼ同じ（0.001 で差 1.1 cm）。10 以上にすると布が張り、机の縁から 15 cm 張り出して裾が 4 cm 上がった（実験217）。</div>
             <div class="node-exps">
               <a href="log.html#exp015">実験 015</a>
               <a href="log.html#exp028">実験 028</a>
               <a href="log.html#exp031">実験 031</a>
               <a href="log.html#exp163">実験 163</a>
               <a href="log.html#exp217">実験 217</a>
+              <a href="log.html#exp237">実験 237</a>
             </div>
           </div>
           <div class="node-shot">
@@ -12998,7 +12999,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
 </div>
 
 <script src="data/experiment-data-bf21a9e8fb.js"></script>
-<script src="data/glossary-data-73fd1bf2da.js"></script>
+<script src="data/glossary-data-1130d68c18.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -13360,7 +13361,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
 </div>
 
-<script src="data/search-data-84a8da562d.js"></script>
+<script src="data/search-data-38bd9db8a9.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */
