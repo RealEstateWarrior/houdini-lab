@@ -87,7 +87,7 @@ def main():
         nofire.setRenderFlag(not show_fire)
         lamp.parm("light_enable").set(0 if tag == "fire" else 1)
 
-    # 条件ごとに別の hython で撮る（同じ hython で続けて撮ると、ライトの強さや入り切りを変えても、Karma が前の場面を使い回した）
+    # 条件ごとに別の hython で撮る
     tag, intensity = sys.argv[1], float(sys.argv[2])
     setup(tag)
     lamp.parm("light_intensity").set(intensity)
