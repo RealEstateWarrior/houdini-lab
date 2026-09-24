@@ -1,0 +1,51 @@
+{
+  "rows": [
+    {
+      "case": "rl1",
+      "refraction_limit": 1,
+      "sec": 22.99,
+      "glass_mean": 0.2171,
+      "dark_share": 0.4994
+    },
+    {
+      "case": "rl2",
+      "refraction_limit": 2,
+      "sec": 52.5,
+      "glass_mean": 0.3422,
+      "dark_share": 0.2792
+    },
+    {
+      "case": "rl4",
+      "refraction_limit": 4,
+      "sec": 81.3,
+      "glass_mean": 0.7344,
+      "dark_share": 0.066
+    },
+    {
+      "case": "rl8",
+      "refraction_limit": 8,
+      "sec": 92.18,
+      "glass_mean": 0.771,
+      "dark_share": 0.0385
+    },
+    {
+      "case": "rl16",
+      "refraction_limit": 16,
+      "sec": 92.64,
+      "glass_mean": 0.772,
+      "dark_share": 0.0385
+    }
+  ],
+  "res": [
+    640,
+    360
+  ],
+  "spp": 32,
+  "default_refractionlimit": 4.0,
+  "window": [
+    60,
+    330,
+    250,
+    390
+  ]
+}

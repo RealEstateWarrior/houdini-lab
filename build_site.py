@@ -1577,6 +1577,12 @@ DONE = [
      "shots": ["235_grid.png", "235_curve.png", "235_graph.png"],
      "title": "雲は、Karma の Volume Limit を上げるほど明るくなる（底の明るさ 0 → 16 で 0.45 → 0.93）。16 でもまだ明るくなり続け、時間は 13 → 378 秒。上げたら日差しを弱めないと白く飛ぶ",
      "note": "雲は Volume Limit を上げるほど明るく、16でも落ち着かない"},
+    {"no": "236", "anchor": "exp236",
+     "tags": ["Karma", "ガラス", "透明", "制作"],
+     "log": "log_pm", "thumb": "236_grid.png",
+     "shots": ["236_grid.png", "236_graph.png"],
+     "title": "氷の入ったグラスの水は、Karma の Refraction Limit 既定 4 では氷がまだ黒く残る。8 で透明になり（暗い所 7% → 4%）、時間は 81 → 92 秒。16 は 8 と同じ",
+     "note": "グラスの水と氷は Refraction Limit 8 で透明に"},
 ]
 
 PLANNED = []
