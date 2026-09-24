@@ -1,0 +1,40 @@
+{
+  "rows": [
+    {
+      "case": "s4_optix",
+      "spp": 4,
+      "denoiser": "optix",
+      "sec12": 99.82,
+      "sky_flicker": 0.00204
+    },
+    {
+      "case": "s4_off",
+      "spp": 4,
+      "denoiser": "off",
+      "sec12": 97.97,
+      "sky_flicker": 0.00474
+    },
+    {
+      "case": "s16_off",
+      "spp": 16,
+      "denoiser": "off",
+      "sec12": 117.53,
+      "sky_flicker": 0.00179
+    },
+    {
+      "case": "s16_optix",
+      "spp": 16,
+      "denoiser": "optix",
+      "sec12": 121.18,
+      "sky_flicker": 0.00124
+    }
+  ],
+  "frames": [
+    20,
+    31
+  ],
+  "res": [
+    640,
+    360
+  ]
+}

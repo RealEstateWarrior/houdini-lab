@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>164本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>165本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3919,6 +3919,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp242" data-anchor="exp242"><span class="doc-no">242</span><span class="doc-t">Karma XPU で、6 つの球のうち点の色 Cd をピンクにした 1 つ以外が白くなった。（訂正: 原因は「材質の色が効かない」ではなく「形に Cd があると材質の色が Cd に置き換わる」だった。実験243）</span></a></li>
         <li><a href="#exp243" data-anchor="exp243"><span class="doc-no">243</span><span class="doc-t">Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色</span></a></li>
         <li><a href="#exp245" data-anchor="exp245"><span class="doc-no">245</span><span class="doc-t">地形を削る heightfield_erode は、升を細かくしても谷の細かさは変わらない（升 2 m と 1 m でほぼ同じ絵、時間もほぼ同じ）。谷の細かさを決めるのは Erosion Feature Size（既定 10 m）で、2.5 m にすると細かい谷が刻まれ、時間は 1.4 → 2.4 秒</span></a></li>
+        <li><a href="#exp247" data-anchor="exp247"><span class="doc-no">247</span><span class="doc-t">映像にノイズ除去（OptiX）を使っても、動かない空のちらつきは増えなかった（4 サンプルで 0.47% → 0.20%）。4 サンプル＋OptiX は 16 サンプル（なし）と同じくらいで、時間は 12 枚 100 秒と 118 秒</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3930,7 +3931,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>246 / 246</dd></div>
+      <div><dt>実験</dt><dd>247 / 247</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -17613,6 +17614,67 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 247 ===================== -->
+    <article class="entry entry--current" id="exp247">
+      <div class="badge">247</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>映像にノイズ除去（OptiX）を使っても、動かない空のちらつきは増えなかった（4 サンプルで 0.47% → 0.20%）。4 サンプル＋OptiX は 16 サンプル（なし）と同じくらいで、時間は 12 枚 100 秒と 118 秒</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">ノイズ除去</span><span class="coltag">映像</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>ノイズ除去（OptiX）で、動かない空のちらつきは増えず、むしろ減った。</strong></li>
+            <li><strong>4 サンプル＋OptiX は、16 サンプル（なし）と同じくらいのちらつき。</strong></li>
+            <li><strong>水面など動く所のちらつきは、この方法では測れていない。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_247.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/247_karma_denoise_flicker.py &nbsp;·&nbsp; 映像にノイズ除去を使っても、空のちらつきは増えなかった</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/247_scene.hipnc" target="_blank" rel="noopener noreferrer">247_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="247_graph.png" alt="実験247 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp241">実験241</a> で、静止画なら 4 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で 32 サンプル（なし）並みになった。映像では、ノイズ除去はフレームごとに別々にかかるので、動かない所までちらつくことがある。どれだけちらつくのか。</strong></p>
+          <p>実践「冬の朝の七里ヶ浜」を、フレーム 20〜31 の 12 枚、640×360 で撮った（4・16 サンプル × ノイズ除去なし・OptiX）。動かない所（空＝画の上 35%）で、画素ごとに 12 枚の明るさの標準偏差を取り、明るさの平均で割って平均した（ちらつき）。条件ごとに別の <button class="term" data-term="hython">hython</button>。</p>
+          <p><strong>ノイズ除去で、ちらつきはむしろ減った。</strong>4 サンプル: なし 0.47%、OptiX 0.20%。16 サンプル: なし 0.18%、OptiX 0.12%。4 サンプル＋OptiX は、16 サンプル（なし）と同じくらいだった。</p>
+          <p><strong>時間は、この海の場面ではサンプル数ほどは変わらない。</strong>12 枚で、4 サンプル 98・100 秒、16 サンプル 118・121 秒（海の場面は 1 枚ごとに画の大きさによらない時間が大きい。<a href="#exp239">実験239</a>）。</p>
+          <p><strong>測った範囲の注意:</strong> ちらつきは空だけで測った。空はもともとざらつきが少ない（0.5% 以下）。水面・砂は波とともに動くので、この方法ではちらつきと動きを分けられず、測っていない。</p>
+          <p><strong>決め方: 映像でも、ノイズ除去は入れてよい。</strong>空のような動かない所のちらつきは増えなかった。水面などの細かい所は、映像を見て確かめる。</p>
+        </div>
+
+        <p class="label">サンプル数とノイズ除去（フレーム 26）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="247_grid.png" alt="4 サンプル＋OptiX・4 サンプル・16 サンプル・16 サンプル＋Opti" loading="lazy" decoding="async"></div>
+            <figcaption>4 サンプル＋OptiX・4 サンプル・16 サンプル・16 サンプル＋OptiX。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>設定</th><th>12 枚を撮る時間（秒）</th><th>空のちらつき（%）</th></tr></thead>
+            <tbody>
+              <tr><td>4 サンプル＋OptiX</td><td class="num">99.8</td><td class="num">0.20</td></tr>
+              <tr><td>4 サンプル・なし</td><td class="num">98.0</td><td class="num">0.47</td></tr>
+              <tr><td>16 サンプル・なし</td><td class="num">117.5</td><td class="num">0.18</td></tr>
+              <tr><td>16 サンプル＋OptiX</td><td class="num">121.2</td><td class="num">0.12</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ノイズ除去（OptiX）で、動かない空のちらつきは増えず、むしろ減った。</strong></li>
+          <li><strong>4 サンプル＋OptiX は、16 サンプル（なし）と同じくらいのちらつき。</strong></li>
+          <li><strong>水面など動く所のちらつきは、この方法では測れていない。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -17628,7 +17690,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-d70a8ea28d.js"></script>
+<script src="data/glossary-data-9ab8eebf30.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -17807,7 +17869,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>246</dd></div>
+        <div><dt>実験</dt><dd>247</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>472</dd></div>
@@ -17990,7 +18052,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-b4e3edcb47.js"></script>
+<script src="data/search-data-f2d57e32ef.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

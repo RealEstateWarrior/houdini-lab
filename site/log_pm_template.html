@@ -11142,6 +11142,52 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 247 ===================== -->
+    <article class="entry entry--current" id="exp247">
+      <div class="badge">247</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>映像にノイズ除去（OptiX）を使っても、動かない空のちらつきは増えなかった（4 サンプルで 0.47% → 0.20%）。4 サンプル＋OptiX は 16 サンプル（なし）と同じくらいで、時間は 12 枚 100 秒と 118 秒</h2>
+        <p class="path">examples/247_karma_denoise_flicker.py &nbsp;·&nbsp; 映像にノイズ除去を使っても、空のちらつきは増えなかった</p>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp241">実験241</a> で、静止画なら 4 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で 32 サンプル（なし）並みになった。映像では、ノイズ除去はフレームごとに別々にかかるので、動かない所までちらつくことがある。どれだけちらつくのか。</strong></p>
+          <p>実践「冬の朝の七里ヶ浜」を、フレーム 20〜31 の 12 枚、640×360 で撮った（4・16 サンプル × ノイズ除去なし・OptiX）。動かない所（空＝画の上 35%）で、画素ごとに 12 枚の明るさの標準偏差を取り、明るさの平均で割って平均した（ちらつき）。条件ごとに別の <button class="term" data-term="hython">hython</button>。</p>
+          <p><strong>ノイズ除去で、ちらつきはむしろ減った。</strong>4 サンプル: なし 0.47%、OptiX 0.20%。16 サンプル: なし 0.18%、OptiX 0.12%。4 サンプル＋OptiX は、16 サンプル（なし）と同じくらいだった。</p>
+          <p><strong>時間は、この海の場面ではサンプル数ほどは変わらない。</strong>12 枚で、4 サンプル 98・100 秒、16 サンプル 118・121 秒（海の場面は 1 枚ごとに画の大きさによらない時間が大きい。<a href="#exp239">実験239</a>）。</p>
+          <p><strong>測った範囲の注意:</strong> ちらつきは空だけで測った。空はもともとざらつきが少ない（0.5% 以下）。水面・砂は波とともに動くので、この方法ではちらつきと動きを分けられず、測っていない。</p>
+          <p><strong>決め方: 映像でも、ノイズ除去は入れてよい。</strong>空のような動かない所のちらつきは増えなかった。水面などの細かい所は、映像を見て確かめる。</p>
+        </div>
+
+        <p class="label">サンプル数とノイズ除去（フレーム 26）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="247_grid.png" alt="4 サンプル＋OptiX・4 サンプル・16 サンプル・16 サンプル＋Opti" loading="lazy" decoding="async"></div>
+            <figcaption>4 サンプル＋OptiX・4 サンプル・16 サンプル・16 サンプル＋OptiX。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>設定</th><th>12 枚を撮る時間（秒）</th><th>空のちらつき（%）</th></tr></thead>
+            <tbody>
+              <tr><td>4 サンプル＋OptiX</td><td class="num">99.8</td><td class="num">0.20</td></tr>
+              <tr><td>4 サンプル・なし</td><td class="num">98.0</td><td class="num">0.47</td></tr>
+              <tr><td>16 サンプル・なし</td><td class="num">117.5</td><td class="num">0.18</td></tr>
+              <tr><td>16 サンプル＋OptiX</td><td class="num">121.2</td><td class="num">0.12</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ノイズ除去（OptiX）で、動かない空のちらつきは増えず、むしろ減った。</strong></li>
+          <li><strong>4 サンプル＋OptiX は、16 サンプル（なし）と同じくらいのちらつき。</strong></li>
+          <li><strong>水面など動く所のちらつきは、この方法では測れていない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
