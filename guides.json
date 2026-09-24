@@ -4287,21 +4287,33 @@
     {
       "id": "ocean",
       "title": "夕暮れの海の波を作る",
-      "lede": "海はシミュレーションしなくても作れる。風の強さから波の混ざり方（スペクトル）を決め、平らな板の点をその通りに動かすだけ。波のとがった所に白い泡の色を付け、低い夕日を逆光にすると、水面がきらめく。",
+      "lede": "海はシミュレーションしなくても作れる。風の強さから波の混ざり方（設計図）を決め、平らな板の点をその通りに動かすだけ。板をカメラから水平線まで広げ、大きなうねり・風の波・さざ波の 3 枚の設計図を重ね、夕日を正面に置くと、水面に夕日の光の道ができる。映像も Karma で撮る。",
       "hero": "pr_ocean_hero.png",
-      "hero_cap": "Karma で撮った仕上がり（フレーム24）。夕日を逆光にして、水面のきらめきを出す。",
+      "hero_cap": "Karma で撮った仕上がり（フレーム24）。高さ 2.5 m から、水平線の夕日に向かって撮る。",
       "facts": [
         [
           "足すノード",
-          "10個（材質3つ）"
+          "16個（ほかに材質3つ・夕日の光・カメラ）"
         ],
         [
-          "波の高低差",
-          "3.52 m"
+          "海の点の数",
+          "2,240,000"
+        ],
+        [
+          "足もと（40 m 以内）の波の高さのばらつき",
+          "0.25 m"
+        ],
+        [
+          "白波が立った点",
+          "0.00%"
+        ],
+        [
+          "映像を撮る時間",
+          "33.2分（Karma 960×540、120 枚）"
         ],
         [
           "仕上がりを撮る時間",
-          "75.8秒（Karma 1280×720）"
+          "35.8秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -4315,78 +4327,108 @@
       ],
       "steps": [
         {
-          "title": "平らな板を敷く",
+          "title": "細かい板を敷く",
           "node": "grid",
           "ui_node": "sea",
-          "body": "<code>grid</code> を 60 × 60 m、<strong>Rows・Columns 500</strong>（升目 12 cm）にする。波は点を動かして作るので、升目が粗いと細かい波が出ない。",
+          "body": "<code>grid</code> を <strong>Size 1 × 1</strong>、<strong>Rows 1400・Columns 1600</strong> にし、<strong>Center を 0.5・0・0.5</strong> にずらす。板の点は x も z も 0〜1 に並ぶ。この 0〜1 を、次の段で「横の位置」と「カメラからの距離」に読み替える。",
           "img": "pr_ocean_1.png",
-          "cap": "60 m 四方の平らな板（手前の 20 m を表示）。"
+          "cap": "1 m 四方に 224 万点の板（まだ海の大きさではない）。"
         },
         {
-          "title": "風から波の設計図を作る",
-          "node": "oceanspectrum",
-          "ui_node": "wind_waves",
-          "body": "<code>oceanspectrum</code> は、風の強さと向きから「どの大きさの波がどれだけ混ざるか」を作る。<strong>Wind の Speed を 9</strong>（m/秒、やや強い風）、<strong>Chop を 0.9</strong>（波の頭をとがらせる）にする。Grid Size 50 は、この設計図が何 m ごとにくり返すか。",
+          "title": "板をカメラから水平線まで広げる",
+          "node": "attribwrangle",
+          "ui_node": "spread_to_horizon",
+          "body": "<code>attribwrangle</code> で、点を「カメラの前の扇形」に並べ直す。カメラは原点の上、−z の向きに置く。z の 0〜1 を <strong>距離 3 m〜8 km</strong> に、<code>pow</code> で<strong>近くほど細かく</strong>割り振る。となりの行との間は、足もとで約 1.7 cm、水平線の近くで約 45 m。どちらも画面の上ではほぼ同じ細かさになる。同じ 224 万点を 8 km 四方に均等に並べると、升目は 5.7 m になり、足もとの波が出ない。",
+          "img": "pr_ocean_2.png",
+          "cap": "上から見た板。カメラ（下の頂点）から 8 km 先まで扇形に広がる。"
+        },
+        {
+          "title": "波の設計図を 3 枚重ねる",
+          "node": "merge",
+          "ui_node": "three_spectra",
+          "body": "<code>oceanspectrum</code> は、風の強さと向きから「どの大きさの波がどれだけ混ざるか」（設計図）を作る。本物の沖の海は、遠くから来る大きなうねりの上に、その場の風の波と、さざ波が乗っている。そこで 3 つ作って <code>merge</code> でまとめる。<br><strong>swell</strong>（うねり）: Grid Size 300・Wind の Speed 7・Chop 0.6・Amplitude の Scale 0.48<br><strong>wind_chop</strong>（風の波）: Grid Size 37・Speed 6・Chop 1.1・Direction −25°・Scale 0.5<br><strong>ripples</strong>（さざ波）: Grid Size 4.3・Speed 3・Chop 0.8・Scale 0.33<br>Grid Size は設計図がくり返す間隔。300・37・4.3 のように割り切れない数にすると、くり返しの継ぎ目が重ならない。Amplitude の Scale（波の高さの倍率）は既定の 3 から大きく下げる（落とし穴を参照）。",
           "img": "",
-          "cap": "スペクトル（波の設計図）自体は板に見える。",
-          "ui_parm": "windspeed"
+          "cap": "",
+          "ui_parm": "ampscale"
         },
         {
           "title": "設計図どおりに点を動かす",
           "node": "oceanevaluate",
           "ui_node": "move_points",
-          "body": "<code>oceanevaluate</code> の左に板、右に <code>oceanspectrum</code> をつなぐ。<strong>Time に <code>$T</code></strong>（今の秒数）を書くと、再生に合わせて波が進む。<strong>Cusp Attribute</strong> を入れると、波の頭がとがって折れそうな所に <code>cusp</code> という値が付く。泡の目印に使う。",
-          "img": "pr_ocean_3.png",
-          "cap": "フレーム 24（1 秒）の波。",
+          "body": "<code>oceanevaluate</code> の左に扇形の板、右に 3 枚の設計図をつなぐ。<strong>Time に <code>$T</code></strong>（今の秒数）を書くと、再生に合わせて波が進む。<strong>Cusp Attribute</strong> を入れると、波の頭がとがった所に <code>cusp</code> という値が付く。泡の目印に使う。",
+          "img": "pr_ocean_4.png",
+          "cap": "カメラの足もと（3〜30 m）を低い角度から見た波。フレーム 24（1 秒）。ビューポートでも夕日の光を映してきらめく。",
           "ui_parm": "time"
         },
         {
-          "title": "波の頭を白くする",
+          "title": "水の色と泡を付ける",
           "node": "attribwrangle",
           "ui_node": "foam_color",
-          "body": "<code>attribwrangle</code> で、<code>cusp</code> が小さい所は深い青緑、大きい所ほど白に近づける。<code>smooth(0.4, 0.7, …)</code> は、0.4 より下は 0、0.7 より上は 1 に、間をなめらかにつなぐ（しきい値は落とし穴を参照）。",
-          "img": "pr_ocean_4.png",
-          "cap": "とがった波の頭に白が乗る。",
+          "body": "<code>attribwrangle</code> で、ふだんはほとんど黒に近い深い青緑にする。海の色は、水そのものより空の映り込みで決まるので、水の色は暗くてよい。<code>cusp</code> が 0.55 を超えた所から白に寄せる。この風の強さ（6〜7 m/秒）では 0.55 を超えた点は無く、白波は立たなかった。夕凪の写真の海にも白波はほとんど無い。風を強めると、この白が出てくる。",
+          "img": "",
+          "cap": "",
           "ui_parm": "snippet"
         },
         {
-          "title": "空を置く",
+          "title": "夕焼けの空と夕日を置く",
           "node": "attribwrangle",
           "ui_node": "sky_color",
-          "body": "海は空を映して色が決まるので、先に空を作る。半径 400 m の <code>sphere</code> で全体を包み、<code>attribwrangle</code> で高さに合わせて色を付ける。水平線の近くは橙、上ほど夜の青。奥の低い所に、小さな球を夕日として置く。",
+          "body": "海の色の大半は空の映り込みなので、空を作り込む。半径 20 km の <code>sphere</code> で全体を包み、<code>attribwrangle</code> で点に色を付ける。水平線は橙、上ほど夜の青。太陽のまわりを明るくし、横に長い薄い雲を <code>onoise</code> で描く。太陽と反対側の空は暗くする。こうすると、海の左右が暗く、夕日の下だけが光る。夕日は、15 km 先・高さ 3° に置いた半径 71 m の球（見かけの大きさ 0.54°。本物の太陽は 0.53°）。",
           "img": "",
-          "cap": "空の球（内側から見る）。"
+          "cap": "",
+          "ui_parm": "snippet"
         },
         {
           "title": "水の材質を当てる",
           "node": "merge",
           "ui_node": "sea_and_sky",
-          "body": "<code>principledshader</code> で <strong>Use Point Color</strong>（前の段の色を使う）、<strong>Roughness 0.02・Reflectivity 1・IOR 1.33</strong>（水）。水面は空と夕日を映して色が決まるので、材質の色は暗くしておく。空の球には光る材質（Use Point Color で色を点から取る）、夕日の球には強い光（Emission Intensity 25）。",
+          "body": "<code>normal</code> で面の向きをなめらかにしてから、<code>principledshader</code> を当てる。<strong>Use Point Color</strong>（前の段の色を使う）、<strong>Roughness 0.015・Reflectivity 1・IOR 1.33</strong>（水）。Roughness をほぼ 0 にすると、さざ波の 1 つ 1 つが夕日を映して、光の道がきらめく。空の球は、点の色で光る材質（Emission 1、Use Point Color）。夕日の球は強く光らせる（Emission Intensity 40）。",
           "img": "",
-          "cap": "材質を当てた状態。"
+          "cap": ""
         }
       ],
       "traps": [
         {
-          "title": "Time に $T を書かないと、波が止まる",
-          "body": "Time を 0 のままにすると、フレーム 1 と 24 で点の位置の差は最大 0.0000 m（まったく同じ）。oceanevaluate は「何秒目の波か」を Time で受け取るので、$T を書いて再生とつなぐ。",
+          "title": "Amplitude の Scale を既定の 3 のままにすると、カメラが水に沈む",
+          "body": "設計図を 1 枚ずつ測ると、既定の 3 では高さのばらつき（標準偏差）がうねり 1.92 m・風の波 0.67 m・さざ波 0.088 m だった。3 枚とも 3 のまま重ねると、いちばん高い所と低い所の差は 15.5 m、カメラから 40 m 以内でも山の高さが 4.0 m になり、高さ 2.5 m のカメラより高い波が手前に立った。下げた値では 0.31 m・0.11 m・0.010 m。夕凪の沖の海らしい高さになる。",
           "img": "",
           "cap": ""
         },
         {
-          "title": "海は Grid Size ごとに同じ模様をくり返す",
-          "body": "50 m 離れた2点で波の高さをくらべると、差は 0.000000 m（高さ -0.154 m）で同じだった。Grid Size 50 の設計図は 50 m ごとにくり返すので、50 m より広く写すと、同じ波の並びが2回出てくる。撮る範囲が Grid Size を超えるときは、Grid Size を大きくしておく。",
+          "title": "左右を入れ替えずに並べると、面が下を向く",
+          "body": "<code>(@P.x - 0.5)</code> のまま z を −距離にすると、面の表と裏が入れ替わり、面の向きの上下の成分が -1.0 になった（入れ替えると +1.0）。裏向きの水面は、光を正しく映さない。",
           "img": "",
           "cap": ""
         },
         {
-          "title": "泡のしきい値を低くすると、海が白っぽくなる",
-          "body": "風 9 m/秒・Chop 0.9 で、いちばん高い所と低い所の差は 3.52 m、cusp が 0.15 を超えた点は全体の 46.3% もあった。はじめ smooth(0.15, …) にしたら、海の半分近くに泡の白が混ざった。0.4 を超える点は 6.3% で、泡らしい量になる。25 万点の板を動かすのに 0.19 秒。",
+          "title": "カメラの Far Clipping のままだと、空が写らない",
+          "body": "cam の Far Clipping は既定 10000 m。半径 20 km の空はその外なので、写らずに透明になる。1,000,000 にしておく。",
+          "img": "",
+          "cap": ""
+        },
+        {
+          "title": "GPU の Karma XPU では、空が白く飛んだ",
+          "body": "Karma の Rendering Engine を XPU にして同じ絵を撮ると、13.5 秒（CPU は 35.8 秒）。速いが、空の左上の明るさは CPU 0.497 に対して XPU 1.000 で、白く飛んだ。空は点の色で光らせる材質（Use Point Color）で、XPU ではこの色が使われていないように見える（原因は確かめていない）。この場面は CPU で撮る。",
           "img": "",
           "cap": ""
         }
       ],
-      "anim_cap": "波の動き（72フレーム）。"
+      "anim_cap": "Karma で撮った波の動き（5 秒、120 フレーム、960×540）。カメラは止めたまま、波だけが進む。",
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "「もっと写実的に。波の動きを映像で見たい」という声を受けて、本物の夕暮れの海の写真（沖の海・夕日の下の光の道）と並べて見比べた。前の版は、24 m 四方の板を斜め上から撮っていたので、海がそこで終わり、水平線の代わりに波の山が並んで砂丘のように見えた。水面も一様に紫がかって、夕日の下の光の道が無かった。",
+          "changes": [
+            "<strong>板をカメラから水平線（8 km 先）まで扇形に広げた。</strong>近くほど細かく並べるので、足もとのさざ波と遠くの水平線が 1 枚の板で出る。",
+            "<strong>波の設計図を 3 枚にした。</strong>うねり（Grid Size 300 m）・風の波（37 m）・さざ波（4.3 m）。本物の沖の海は、大きなうねりの上に小さな波が乗っている。高さは既定の 3 から大きく下げた。",
+            "<strong>カメラを水面から 2.5 m の高さに下げ、夕日に向けた。</strong>写真の多くは、岸や船から水平線の夕日に向かって撮っている。",
+            "<strong>空を作り込み、水の Roughness を 0.02 → 0.015 にした。</strong>水平線は橙、上ほど夜の青、横に長い薄い雲。太陽と反対の空を暗くしたので、海の左右が暗く、夕日の下だけ光の道が光る。",
+            "<strong>動きを Karma で撮った映像にした。</strong>前の版はビューポートで撮った形だけの動きだった。"
+          ],
+          "before": "pr_ocean_hero_v1.png",
+          "reference": "Wikimedia Commons の夕暮れの海の写真（「Sunset, Kuta, Bali」「Zoutelande, Blick auf die Nordsee」「Fata Morgana of sea surface and sun glitter」など。水平線がまっすぐ遠く、夕日の下に細かなきらめきの帯、手前の水面は暗い）"
+        }
+      ]
     },
     {
       "id": "snow",

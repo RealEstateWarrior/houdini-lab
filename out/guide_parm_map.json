@@ -1233,29 +1233,34 @@
       "png": "guide_ocean_p1.png"
     },
     "2": {
-      "node": "/obj/ocean/wind_waves",
-      "wanted": "oceanspectrum",
+      "node": "/obj/ocean/spread_to_horizon",
+      "wanted": "attribwrangle",
       "png": "guide_ocean_p2.png"
     },
     "3": {
-      "node": "/obj/ocean/move_points",
-      "wanted": "oceanevaluate",
+      "node": "/obj/ocean/three_spectra",
+      "wanted": "merge",
       "png": "guide_ocean_p3.png"
     },
     "4": {
-      "node": "/obj/ocean/foam_color",
-      "wanted": "attribwrangle",
+      "node": "/obj/ocean/move_points",
+      "wanted": "oceanevaluate",
       "png": "guide_ocean_p4.png"
     },
     "5": {
-      "node": "/obj/ocean/sky_color",
+      "node": "/obj/ocean/foam_color",
       "wanted": "attribwrangle",
       "png": "guide_ocean_p5.png"
     },
     "6": {
+      "node": "/obj/ocean/sky_color",
+      "wanted": "attribwrangle",
+      "png": "guide_ocean_p6.png"
+    },
+    "7": {
       "node": "/obj/ocean/sea_and_sky",
       "wanted": "merge",
-      "png": "guide_ocean_p6.png"
+      "png": "guide_ocean_p7.png"
     }
   },
   "snow": {

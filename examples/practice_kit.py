@@ -92,8 +92,9 @@ class Guide:
 
     def hero(self, node, cap, direction=(0.9, 0.45, 1.2), backdrop=(0.045, 0.047, 0.055), key=3.2, rim=4.0,
              dome=0.25, spp=48, margin=1.18, floor=True, bbox=None, dome_color=(1, 1, 1), key_color=(1.0, 0.96, 0.9),
-             rim_color=(0.75, 0.85, 1.0), res=HERO_RES, frame=None, backdrop_reflect=0.2, denoise=False):
-        """Karma で仕上がりを撮る。暗い幕（曲げた床）・キー・リム・弱いドームの3灯で、どの実践も同じ撮り方にする。"""
+             rim_color=(0.75, 0.85, 1.0), res=HERO_RES, frame=None, backdrop_reflect=0.2, denoise=False, camera=None):
+        """Karma で仕上がりを撮る。暗い幕（曲げた床）・キー・リム・弱いドームの3灯で、どの実践も同じ撮り方にする。
+        camera を渡すと、そのカメラのまま撮る（海のように、景色として構図を決めるもの。2026-09-24）。"""
         if frame is not None:
             hou.setFrame(frame)
         node.setDisplayFlag(True)
@@ -152,10 +153,13 @@ class Guide:
         for old in ("report_dome", "report_key"):
             if obj.node(old) is not None:
                 obj.node(old).parm("light_intensity").set(0)
-        cam = obj.node("hero_cam") or obj.createNode("cam", "hero_cam")
+        if camera is not None:
+            cam = camera
+        else:
+            cam = obj.node("hero_cam") or obj.createNode("cam", "hero_cam")
+            hou_tools._frame_camera(cam, box, res, direction, margin=margin)
         cam.parm("resx").set(res[0])
         cam.parm("resy").set(res[1])
-        hou_tools._frame_camera(cam, box, res, direction, margin=margin)
         karma = hou.node("/out").node("hero_karma") or hou.node("/out").createNode("karma", "hero_karma")
         karma.parm("camera").set(cam.path())
         # 霧のようなボリュームはサンプルを増やしてもざらつきが残るので、そのときだけノイズ除去（OIDN）を入れる
@@ -225,6 +229,40 @@ class Guide:
                         "-crf", "26", "-movflags", "+faststart", path], check=True)
         self.anim_cap = cap
         print(f"動き: {n}枚 {time.perf_counter() - t0:.1f}秒 → {os.path.getsize(path) // 1024}KB")
+        return path
+
+    def karma_anim(self, frames, cap, res=(960, 540), spp=16, fps=24):
+        """動きを Karma で撮る（2026-09-24）。hero() で作った Karma とカメラのまま、frames の範囲を連番で撮り、
+        pr_<id>_anim.mp4 にする。ビューポートの anim() より重いが、仕上がりと同じ見た目で動く。"""
+        import subprocess
+        import tempfile
+        tmp = tempfile.mkdtemp(prefix=f"kanim_{self.id}_")
+        karma = hou.node("/out/hero_karma")
+        cam = hou.node(karma.parm("camera").eval())
+        keep = {k: karma.parm(k).eval() for k in ("resolutionx", "resolutiony", "samplesperpixel",
+                                                  "varianceaa_maxsamples", "picture")}
+        keep_cam = (cam.parm("resx").eval(), cam.parm("resy").eval())
+        karma.parm("resolutionx").set(res[0])
+        karma.parm("resolutiony").set(res[1])
+        cam.parm("resx").set(res[0])
+        cam.parm("resy").set(res[1])
+        karma.parm("samplesperpixel").set(spp)
+        karma.parm("varianceaa_maxsamples").set(spp)
+        karma.parm("picture").set(os.path.join(tmp, "f$F4.png").replace("\\", "/"))
+        t0 = time.perf_counter()
+        karma.render(frame_range=(frames[0], frames[1], 1), verbose=False)
+        self.anim_sec = time.perf_counter() - t0
+        for k, v in keep.items():
+            karma.parm(k).set(v)
+        cam.parm("resx").set(keep_cam[0])
+        cam.parm("resy").set(keep_cam[1])
+        path = os.path.join(OUT, f"pr_{self.id}_anim.mp4")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps), "-start_number", str(frames[0]),
+                        "-i", os.path.join(tmp, "f%04d.png"), "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                        "-crf", "22", "-movflags", "+faststart", path], check=True)
+        self.anim_cap = cap
+        n = frames[1] - frames[0] + 1
+        print(f"動き（Karma）: {n}枚 {self.anim_sec:.1f}秒（1枚 {self.anim_sec / n:.1f}秒） → {os.path.getsize(path) // 1024}KB")
         return path
 
     # ---------- しまう ----------

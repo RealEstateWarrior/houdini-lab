@@ -206,8 +206,11 @@ def render_preview(sop_path, out_png, res=(960, 540), direction=(1.0, 0.62, 1.15
     cam = obj.node("report_cam") or obj.createNode("cam", "report_cam")
     cam.parm("resx").set(res[0])
     cam.parm("resy").set(res[1])
-    _frame_camera(cam, frame_bbox or node.geometry().boundingBox(), res, direction,
-                  margin=margin)
+    box = frame_bbox or node.geometry().boundingBox()
+    _frame_camera(cam, box, res, direction, margin=margin)
+    # 何 km もある物（海など）を引いて撮ると、既定の Far Clipping 10000 の外に出て何も写らない（2026-09-24）
+    reach = (hou.Vector3(cam.parmTuple("t").eval()) - box.center()).length() + box.sizevec().length()
+    cam.parm("far").set(max(10000.0, reach * 1.5))
 
     out = hou.node("/out")
     rop = out.node("report_opengl") or out.createNode("opengl", "report_opengl")

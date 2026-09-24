@@ -1,0 +1,364 @@
+{
+  "title": "夕暮れの海の波を作る",
+  "network": "/obj/ocean",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sea",
+      "type": "grid",
+      "pos": [
+        -8.566,
+        7.831
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "tx": 0.5,
+        "tz": 0.5,
+        "rows": 1400,
+        "cols": 1600
+      }
+    },
+    {
+      "name": "spread_to_horizon",
+      "type": "attribwrangle",
+      "pos": [
+        -8.566,
+        6.702
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// z（0〜1）をカメラからの距離 3 m〜8000 m に。近くは細かく、遠くは粗く並べる\nfloat d = 3 * pow(2666.67, @P.z);\n// 横幅は距離に合わせて広げる（カメラに写る幅より少し広く）\nflo..."
+      }
+    },
+    {
+      "name": "swell",
+      "type": "oceanspectrum",
+      "pos": [
+        -5.742,
+        8.132
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "res": 9,
+        "gridsize": 300.0,
+        "seed": 1,
+        "winddir": 20.0,
+        "windspeed": 7.0,
+        "chopscale": 0.6,
+        "ampscale": 0.48,
+        "amplituderamp1value": 1.0,
+        "amplituderamp2pos": 1.0,
+        "amplituderamp2value": 1.0
+      }
+    },
+    {
+      "name": "wind_chop",
+      "type": "oceanspectrum",
+      "pos": [
+        -3.483,
+        7.681
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "res": 9,
+        "gridsize": 37.0,
+        "seed": 2,
+        "winddir": -25.0,
+        "windspeed": 6.0,
+        "chopscale": 1.1,
+        "ampscale": 0.5,
+        "amplituderamp1value": 1.0,
+        "amplituderamp2pos": 1.0,
+        "amplituderamp2value": 1.0
+      }
+    },
+    {
+      "name": "ripples",
+      "type": "oceanspectrum",
+      "pos": [
+        -1.224,
+        7.229
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "res": 8,
+        "gridsize": 4.3,
+        "seed": 3,
+        "windspeed": 3.0,
+        "chopscale": 0.8,
+        "ampscale": 0.33,
+        "amplituderamp1value": 1.0,
+        "amplituderamp2pos": 1.0,
+        "amplituderamp2value": 1.0
+      }
+    },
+    {
+      "name": "three_spectra",
+      "type": "merge",
+      "pos": [
+        -3.483,
+        6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "move_points",
+      "type": "oceanevaluate::2.0",
+      "pos": [
+        -6.025,
+        5.271
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "cusp": 1,
+        "cuspramp1cg": 0.2199999988079071,
+        "cuspramp1cb": 0.44999998807907104,
+        "cuspramp2pos": 1.0,
+        "cuspramp2cr": 1.0,
+        "cuspramp2cg": 1.0,
+        "cuspramp2cb": 1.0
+      }
+    },
+    {
+      "name": "foam_color",
+      "type": "attribwrangle",
+      "pos": [
+        -6.025,
+        4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 深い海の色から、波の頭（cusp）が強くとがった所だけ白い泡の色へ\nvector deep = {0.004, 0.011, 0.014};\nfloat f = smooth(0.55, 0.85, f@cusp);\nv@Cd ..."
+      }
+    },
+    {
+      "name": "smooth_normals",
+      "type": "normal",
+      "pos": [
+        -6.025,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "sky",
+      "type": "sphere",
+      "pos": [
+        1.6,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 20000.0,
+        "rady": 20000.0,
+        "radz": 20000.0,
+        "rows": 300,
+        "cols": 600
+      }
+    },
+    {
+      "name": "sky_color",
+      "type": "attribwrangle",
+      "pos": [
+        1.6,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 向き d と太陽の向き s から、空の色を決める\nvector d = normalize(@P);\nvector s = normalize({0.0000, 0.0523, -0.9986});\nfloat h = max(..."
+      }
+    },
+    {
+      "name": "sun_disk",
+      "type": "sphere",
+      "pos": [
+        4.424,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 70.68635794133704,
+        "rady": 70.68635794133704,
+        "radz": 70.68635794133704,
+        "ty": 785.0393436441575,
+        "tz": -14979.443021318608
+      }
+    },
+    {
+      "name": "assign_sea",
+      "type": "material",
+      "pos": [
+        -6.025,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sea_mat"
+      }
+    },
+    {
+      "name": "assign_sky",
+      "type": "material",
+      "pos": [
+        1.6,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sky_mat"
+      }
+    },
+    {
+      "name": "assign_sun",
+      "type": "material",
+      "pos": [
+        4.424,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sun_mat"
+      }
+    },
+    {
+      "name": "sea_and_sky",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "sea",
+      "from_output": 0,
+      "to": "spread_to_horizon",
+      "to_input": 0
+    },
+    {
+      "from": "swell",
+      "from_output": 0,
+      "to": "three_spectra",
+      "to_input": 0
+    },
+    {
+      "from": "wind_chop",
+      "from_output": 0,
+      "to": "three_spectra",
+      "to_input": 1
+    },
+    {
+      "from": "ripples",
+      "from_output": 0,
+      "to": "three_spectra",
+      "to_input": 2
+    },
+    {
+      "from": "spread_to_horizon",
+      "from_output": 0,
+      "to": "move_points",
+      "to_input": 0
+    },
+    {
+      "from": "three_spectra",
+      "from_output": 0,
+      "to": "move_points",
+      "to_input": 1
+    },
+    {
+      "from": "move_points",
+      "from_output": 0,
+      "to": "foam_color",
+      "to_input": 0
+    },
+    {
+      "from": "foam_color",
+      "from_output": 0,
+      "to": "smooth_normals",
+      "to_input": 0
+    },
+    {
+      "from": "sky",
+      "from_output": 0,
+      "to": "sky_color",
+      "to_input": 0
+    },
+    {
+      "from": "smooth_normals",
+      "from_output": 0,
+      "to": "assign_sea",
+      "to_input": 0
+    },
+    {
+      "from": "sky_color",
+      "from_output": 0,
+      "to": "assign_sky",
+      "to_input": 0
+    },
+    {
+      "from": "sun_disk",
+      "from_output": 0,
+      "to": "assign_sun",
+      "to_input": 0
+    },
+    {
+      "from": "assign_sea",
+      "from_output": 0,
+      "to": "sea_and_sky",
+      "to_input": 0
+    },
+    {
+      "from": "assign_sky",
+      "from_output": 0,
+      "to": "sea_and_sky",
+      "to_input": 1
+    },
+    {
+      "from": "assign_sun",
+      "from_output": 0,
+      "to": "sea_and_sky",
+      "to_input": 2
+    }
+  ]
+}
