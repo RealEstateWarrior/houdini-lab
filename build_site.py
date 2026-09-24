@@ -1631,6 +1631,12 @@ DONE = [
      "shots": ["244_grid.png", "244_graph.png"],
      "title": "焚き火の煙の量は Dissipation にほぼ反比例する（0.05・0.1・0.2・0.4 で 62・30・14・7）。ただし実践の焚き火は火元から煙を出しておらず、Dissipation はまったく効かなかった",
      "note": "焚き火の煙は火元に density が要る。量は Dissipation に反比例"},
+    {"no": "245", "anchor": "exp245",
+     "tags": ["地形", "Heightfield", "制作"],
+     "log": "log_pm", "thumb": "245_grid.png",
+     "shots": ["245_grid.png", "245_graph.png"],
+     "title": "地形を削る heightfield_erode は、升を細かくしても谷の細かさは変わらない（升 2 m と 1 m でほぼ同じ絵、時間もほぼ同じ）。谷の細かさを決めるのは Erosion Feature Size（既定 10 m）で、2.5 m にすると細かい谷が刻まれ、時間は 1.4 → 2.4 秒",
+     "note": "地形の谷の細かさは升でなく Erosion Feature Size で決まる"},
 ]
 
 PLANNED = []
