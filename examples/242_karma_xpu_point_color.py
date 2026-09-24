@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""実験242 — Karma XPU で色が白くなったのはなぜか。材質の Use Point Color と、点の色（Cd）の有る無しで切り分ける。
+"""実験242（と 243）— Karma XPU で色が白くなったのはなぜか。材質の Use Point Color と、点の色（Cd）の有る無しで切り分ける。
 
 制作の問い: 実験232 で、XPU で撮るとドーナツのアイシングと海の空が白くなった。アイシングの材質は「色ピンク・Use Point Color 入り・点の色 Cd なし」、
 海の空は「光る色（Emission）を Use Point Color で点の色から取る」だった。どの組み合わせで XPU の色が CPU と変わるのか。

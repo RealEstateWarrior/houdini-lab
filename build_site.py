@@ -1558,7 +1558,7 @@ DONE = [
      "log": "log_pm", "thumb": "232_grid.png",
      "shots": ["232_grid.png", "232_graph.png"],
      "title": "Karma XPU は、ガラス・雪・ドーナツで CPU の 8〜14 倍速い（グラスの水 82 秒 → 6 秒）。ただしドーナツのアイシングと海の空は色が出ずに白くなり、ガラスの場面は明るく飛んだ。雪と炎はほぼ同じ絵",
-     "note": "XPU は数倍〜十数倍速いが、色が出ない所があった"},
+     "note": "XPU は数倍〜十数倍速いが、色が出ない所があった（原因は実験243）"},
     {"no": "233", "anchor": "exp233",
      "tags": ["エフェクト", "Pyro", "炎", "Karma", "速さ"],
      "log": "log_fx", "thumb": "233_grid.png",
@@ -1617,8 +1617,14 @@ DONE = [
      "tags": ["Karma", "XPU", "材質", "制作"],
      "log": "log_pm", "thumb": "242_grid.png",
      "shots": ["242_grid.png", "242_graph.png"],
-     "title": "Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。実験232 でアイシングが白くなったのはこのため",
-     "note": "XPU では principledshader の色が効かず白くなる。Cd は効く"},
+     "title": "Karma XPU で、6 つの球のうち点の色 Cd をピンクにした 1 つ以外が白くなった。（訂正: 原因は「材質の色が効かない」ではなく「形に Cd があると材質の色が Cd に置き換わる」だった。実験243）",
+     "note": "XPU で Cd のある形は白くなった（訂正: 原因は実験243）"},
+    {"no": "243", "anchor": "exp243",
+     "tags": ["Karma", "XPU", "材質", "MaterialX", "制作"],
+     "log": "log_pm", "thumb": "243_grid.png",
+     "shots": ["243_grid.png", "243_graph.png"],
+     "title": "Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色",
+     "note": "XPU は Cd があると principledshader の色が Cd に。MaterialX なら同じ色"},
 ]
 
 PLANNED = []

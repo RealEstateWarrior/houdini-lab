@@ -1,0 +1,80 @@
+{
+ "title": "Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色",
+ "summary": "**課題: 実験242 で、XPU では principledshader の色が白くなった。XPU で材質の色を効かせるにはどうすればよいか。MaterialX の材質（mtlxstandard_surface）なら出るか。**\n\n球を並べ、principledshader と MaterialX の材質を当てて、CPU と XPU で撮った（640×200・32 サンプル、別の hython）。はじめは Cd の無い球 4 つだけで撮り、次に Cd を白・黒にした球を足して、同じ形（1 つの merge）にまとめて撮った。\n\n**Cd の無い形なら、XPU でも principledshader の色が出た。**1 回目、色ピンクの P は XPU で （0.95・0.47・0.67）（CPU （0.86・0.43・0.61））。実験242 の A と同じ材質なのに、ピンクに写った。\n\n**形に Cd があると、XPU では principledshader の色が Cd に置き換わる。**2 回目、Cd を白にした Pw は （1.00・1.00・1.00）、黒にした Pk は （0.04・0.04・0.04）。Cd を付けていない P も、Cd のある球と merge したので Cd（既定の白）が付き、（1.00・1.00・1.00） と白くなった。材質の Use Point Color は切ってある。CPU では、どれも材質の色（ピンク）だった。実験242 で球がすべて白くなったのは、Cd を付けた球と同じ形にまとめていたため。\n\n**MaterialX の材質は、Cd があっても CPU と同じ色。**M （0.95・0.47・0.67）、Cd 白の Mw （0.95・0.47・0.67）、赤の MR （1.00・0.14・0.14）、光る ME （0.99・0.49・0.70）。CPU との差は、どれも 0.001 以下。\n\n**ドーナツのアイシングが白くなったのも同じ理由と考えられる。**アイシングは Cd を消していたが、揚げ色の Cd を持つ生地と同じ形にまとめていたので、merge で既定の白の Cd が付いた（ドーナツの最終の形には Cd がある）。\n\n**決め方: XPU で撮るなら、材質は MaterialX（mtlxstandard_surface）で作る。**principledshader のまま XPU で撮るなら、色は Cd で付ける（Cd のある形では材質の色は使われない）。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "Cd のある形での、材質ごとの色（CPU と XPU）",
+   "images": [
+    {
+     "path": "243_grid.png",
+     "caption": "上が CPU、下が XPU。principledshader の 3 つ（左）は XPU で Cd の色になり、MaterialX の 4 つ（右）は CPU と同じ。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "球",
+    "材質",
+    "CPU の色（RGB）",
+    "XPU の色（RGB）"
+   ],
+   "rows": [
+    [
+     "P",
+     "principledshader・色ピンク（Cd は merge で付いた既定の白）",
+     "（0.86・0.43・0.61）",
+     "（1.00・1.00・1.00）"
+    ],
+    [
+     "Pw",
+     "principledshader・色ピンク・Cd 白",
+     "（0.86・0.43・0.61）",
+     "（1.00・1.00・1.00）"
+    ],
+    [
+     "Pk",
+     "principledshader・色ピンク・Cd 黒",
+     "（0.86・0.43・0.61）",
+     "（0.04・0.04・0.04）"
+    ],
+    [
+     "M",
+     "MaterialX・色ピンク",
+     "（0.95・0.47・0.67）",
+     "（0.95・0.47・0.67）"
+    ],
+    [
+     "Mw",
+     "MaterialX・色ピンク・Cd 白",
+     "（0.95・0.47・0.67）",
+     "（0.95・0.47・0.67）"
+    ],
+    [
+     "MR",
+     "MaterialX・色 赤",
+     "（1.00・0.14・0.14）",
+     "（1.00・0.14・0.14）"
+    ],
+    [
+     "ME",
+     "MaterialX・光る色ピンク",
+     "（0.99・0.49・0.70）",
+     "（0.99・0.49・0.70）"
+    ],
+    [
+     "P（Cd の無い形）",
+     "principledshader・色ピンク。形のどこにも Cd が無い",
+     "（0.86・0.43・0.61）",
+     "（0.95・0.47・0.67）"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>XPU では、形に Cd があると、principledshader の色が Cd に置き換わる。</strong>Use Point Color を切っていても同じ。",
+  "<strong>Cd の無い形なら、XPU でも principledshader の色が出る。</strong>",
+  "<strong>MaterialX の材質は、Cd があっても CPU と同じ色。</strong>XPU で撮るなら MaterialX で作る。"
+ ],
+ "next": []
+}

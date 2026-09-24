@@ -10573,7 +10573,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <div class="body">
         <span class="chip chip--pm">モデリング</span>
         <h2>Karma XPU は、ガラス・雪・ドーナツで CPU の 7〜14 倍速い（グラスの水 82 秒 → 6 秒）。ただしドーナツのアイシングと海の空は色が出ずに白くなり、ガラスの場面は明るく飛んだ。雪と炎はほぼ同じ絵</h2>
-        <p class="path">examples/232_karma_xpu_scenes.py &nbsp;·&nbsp; XPU は数倍〜十数倍速いが、色が出ない所があった（原因は実験242）</p>
+        <p class="path">examples/232_karma_xpu_scenes.py &nbsp;·&nbsp; XPU は数倍〜十数倍速いが、色が出ない所があった（原因は実験243）</p>
 
         <div class="prose">
           <p><strong>課題: 実践「夕暮れの海」では、XPU（GPU で撮る <button class="term" data-term="Karma">Karma</button>）は速かったが、点の色で光らせた空が白く飛んだ。どの場面なら XPU に任せてよいのか。どれだけ速いのか。</strong></p>
@@ -10583,7 +10583,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <p><strong>ガラスの場面は、全体が明るく飛んだ。</strong>グラスの水は背景の幕が白く飛び、ガラスの輪郭が見えにくくなった（差 28、明るさ 195 → 222）。原因は確かめていない。</p>
           <p><strong>雪（SSS）と炎（<button class="term" data-term="Pyro">Pyro</button>）は、ほぼ同じ絵。</strong>差は雪だるま 13、焚き火 6、ネオン管 7。どれも XPU の方が少し明るかった。</p>
           <p><strong>決め方: 試し撮りは XPU で速く回し、仕上げの前に必ず CPU の画と並べて確かめる。</strong>色が変わる所（この実験ではアイシング・光る空）があれば、その場面は CPU で撮る。</p>
-          <p><strong>追記（<a href="#exp242">実験242</a>）: 色が白くなった原因が分かった。</strong>XPU では principledshader の色（Base Color）が効かずに白くなり、点の色（Cd）だけが効いた。アイシングは材質の色でピンクにしていたので白くなり、生地は Cd で揚げ色を付けていたので揚げ色のままだった。</p>
+          <p><strong>追記（<a href="#exp242">実験242</a>・243）: 色が白くなった原因が分かった。</strong>XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。ドーナツは揚げ色の Cd を持つ生地とアイシングを 1 つの形にまとめていたので、アイシングにも白の Cd が付いて白くなった。MaterialX の材質（mtlxstandard_surface）なら、Cd があっても CPU と同じ色になった。</p>
         </div>
 
         <p class="label">CPU と XPU（640×360・32 サンプル、ノイズ除去なし）</p>
@@ -11001,24 +11001,25 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <div class="badge">242</div>
       <div class="body">
         <span class="chip chip--pm">モデリング</span>
-        <h2>Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。実験232 でアイシングが白くなったのはこのため</h2>
-        <p class="path">examples/242_karma_xpu_point_color.py &nbsp;·&nbsp; XPU では principledshader の色が効かず白くなる。Cd は効く</p>
+        <h2>Karma XPU で、6 つの球のうち点の色 Cd をピンクにした 1 つ以外が白くなった。（訂正: 原因は「材質の色が効かない」ではなく「形に Cd があると材質の色が Cd に置き換わる」だった。実験243）</h2>
+        <p class="path">examples/242_karma_xpu_point_color.py &nbsp;·&nbsp; XPU で Cd のある形は白くなった（訂正: 原因は実験243）</p>
 
         <div class="prose">
+          <p><strong>訂正（2026-09-25、<a href="#exp243">実験243</a>）: はじめはこの結果から「XPU では principledshader の色が効かない」と書いたが、誤りだった。</strong>6 つの球を 1 つの形（merge）にまとめていたので、Cd を付けていない球にも既定の白の Cd が付いていた。<a href="#exp243">実験243</a> で、Cd の無い形なら XPU でも principledshader の色が出ること、Cd があると材質の色が Cd に置き換わること（Use Point Color を切っていても）を確かめた。</p>
           <p><strong>課題: <a href="#exp232">実験232</a> で、XPU で撮るとドーナツのアイシングと海の空が白くなった。アイシングの材質は「色<button class="term" data-term="ピン">ピン</button>ク・Use Point Color 入り・点の色 Cd なし」、海の空は「光る色を Use Point Color で点の色から取る」だった。どの組み合わせで XPU の色が CPU と変わるのか。</strong></p>
-          <p>球を 6 つ並べ、principledshader の組み合わせを変えて、白いドームの明かりで CPU と XPU で撮った（640×200・32 <button class="term" data-term="サンプル">サンプル</button>、別の <button class="term" data-term="hython">hython</button>）。球の真ん中の色（RGB）の平均を比べた。</p>
-          <p><strong>XPU では、材質の色（Base Color）が効かない。</strong>色ピンクの A（Use Point Color 切り）・B（入り・Cd なし）・D（入り・Cd 白）は、CPU ではピンク （0.65・0.33・0.46）、XPU では白 （0.94・0.94・0.94）・（0.93・0.93・0.93）・（0.92・0.92・0.92） になった。</p>
-          <p><strong>点の色（Cd）は、XPU でも効く。</strong>色を白にして Cd をピンクにした C は、XPU でもピンク （0.88・0.44・0.62）（CPU （0.63・0.32・0.45））。ドーナツの生地（色は白、揚げ色は Cd）が XPU でも揚げ色だったのと合う。</p>
-          <p><strong>光る材質は、XPU では白い面の上に光が乗ったように明るくなった。</strong>E（光る色を Cd から）（1.88・1.44・1.63）、F（光る色ピンク）（1.89・1.39・1.60）。CPU ではどちらも （0.95・0.45・0.66）。色（Base Color）が黒でも効かずに白い面になり、そこに明かりが当たった分が足されていると考えられる（海の空が白く飛んだのと合う）。</p>
+          <p>球を 6 つ並べ（1 つの merge にまとめた）、principledshader の組み合わせを変えて、白いドームの明かりで CPU と XPU で撮った（640×200・32 <button class="term" data-term="サンプル">サンプル</button>、別の <button class="term" data-term="hython">hython</button>）。球の真ん中の色（RGB）の平均を比べた。</p>
+          <p><strong>色ピンクの球は、XPU では白くなった。</strong>A（Use Point Color 切り）・B（入り・Cd なし）・D（入り・Cd 白）は、CPU ではピンク （0.65・0.33・0.46）、XPU では白 （0.94・0.94・0.94）・（0.93・0.93・0.93）・（0.92・0.92・0.92）。（A・B も merge で白の Cd が付いていた。）</p>
+          <p><strong>Cd をピンクにした球は、XPU でもピンク。</strong>色を白にして Cd をピンクにした C は （0.88・0.44・0.62）（CPU （0.63・0.32・0.45））。</p>
+          <p><strong>光る材質は、XPU では明るくなった。</strong>E（光る色を Cd から）（1.88・1.44・1.63）、F（光る色ピンク）（1.89・1.39・1.60）。CPU ではどちらも （0.95・0.45・0.66）。色（Base Color）が黒でも Cd（白）に置き換わって白い面になり、そこに明かりが当たった分が足されていると考えられる。</p>
           <p>時間は CPU 4.7 秒、XPU 2.3 秒。</p>
-          <p><strong>決め方: XPU で撮るなら、色は点の色（Cd）で付ける（材質の色は白、Use Point Color 入り）。</strong>光る物は、XPU では明るさが変わるので CPU で撮る。XPU で材質の色を効かせる方法（MaterialX の材質など）は、まだ試していない。</p>
+          <p><strong>決め方（<a href="#exp243">実験243</a> のあと）: XPU で撮るなら、材質は MaterialX（mtlxstandard_surface）で作る。</strong>principledshader のままなら、色は Cd で付ける。</p>
         </div>
 
         <p class="label">材質の組み合わせと、CPU・XPU の色</p>
         <div class="figs figs--wide">
           <figure>
-            <div class="frame-light"><img src="242_grid.png" alt="上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い。" loading="lazy" decoding="async"></div>
-            <figcaption>上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い。</figcaption>
+            <div class="frame-light"><img src="242_grid.png" alt="上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い（6" loading="lazy" decoding="async"></div>
+            <figcaption>上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い（6 つとも 1 つの形にまとめてあり、どの球にも Cd がある）。</figcaption>
           </figure>
         </div>
         <div class="scroll">
@@ -11037,9 +11038,60 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li><strong><button class="term" data-term="Karma">Karma</button> XPU では、principledshader の Base Color が効かずに白くなった。</strong></li>
-          <li><strong>点の色（Cd）は XPU でも効く。</strong>XPU で撮るなら色は Cd で付ける。</li>
+          <li><strong>訂正: XPU で白くなったのは、形に Cd があると principledshader の色が Cd に置き換わるため（<a href="#exp243">実験243</a>）。</strong></li>
+          <li><strong>Cd をピンクにした球は XPU でもピンク。</strong></li>
           <li><strong>光る材質は、XPU では白い面の上に光が乗ったように明るくなった。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 243 ===================== -->
+    <article class="entry entry--current" id="exp243">
+      <div class="badge">243</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色</h2>
+        <p class="path">examples/243_karma_xpu_materialx.py &nbsp;·&nbsp; XPU は Cd があると principledshader の色が Cd に。MaterialX なら同じ色</p>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp242">実験242</a> で、XPU では principledshader の色が白くなった。XPU で材質の色を効かせるにはどうすればよいか。MaterialX の材質（mtlxstandard_surface）なら出るか。</strong></p>
+          <p>球を並べ、principledshader と MaterialX の材質を当てて、CPU と XPU で撮った（640×200・32 <button class="term" data-term="サンプル">サンプル</button>、別の <button class="term" data-term="hython">hython</button>）。はじめは Cd の無い球 4 つだけで撮り、次に Cd を白・黒にした球を足して、同じ形（1 つの merge）にまとめて撮った。</p>
+          <p><strong>Cd の無い形なら、XPU でも principledshader の色が出た。</strong>1 回目、色<button class="term" data-term="ピン">ピン</button>クの P は XPU で （0.95・0.47・0.67）（CPU （0.86・0.43・0.61））。<a href="#exp242">実験242</a> の A と同じ材質なのに、ピンクに写った。</p>
+          <p><strong>形に Cd があると、XPU では principledshader の色が Cd に置き換わる。</strong>2 回目、Cd を白にした Pw は （1.00・1.00・1.00）、黒にした Pk は （0.04・0.04・0.04）。Cd を付けていない P も、Cd のある球と merge したので Cd（既定の白）が付き、（1.00・1.00・1.00） と白くなった。材質の Use Point Color は切ってある。CPU では、どれも材質の色（ピンク）だった。<a href="#exp242">実験242</a> で球がすべて白くなったのは、Cd を付けた球と同じ形にまとめていたため。</p>
+          <p><strong>MaterialX の材質は、Cd があっても CPU と同じ色。</strong>M （0.95・0.47・0.67）、Cd 白の Mw （0.95・0.47・0.67）、赤の MR （1.00・0.14・0.14）、光る ME （0.99・0.49・0.70）。CPU との差は、どれも 0.001 以下。</p>
+          <p><strong>ドーナツのアイシングが白くなったのも同じ理由と考えられる。</strong>アイシングは Cd を消していたが、揚げ色の Cd を持つ生地と同じ形にまとめていたので、merge で既定の白の Cd が付いた（ドーナツの最終の形には Cd がある）。</p>
+          <p><strong>決め方: XPU で撮るなら、材質は MaterialX（mtlxstandard_surface）で作る。</strong>principledshader のまま XPU で撮るなら、色は Cd で付ける（Cd のある形では材質の色は使われない）。</p>
+        </div>
+
+        <p class="label">Cd のある形での、材質ごとの色（CPU と XPU）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="243_grid.png" alt="上が CPU、下が XPU。principledshader の 3 つ（左）は" loading="lazy" decoding="async"></div>
+            <figcaption>上が CPU、下が XPU。principledshader の 3 つ（左）は XPU で Cd の色になり、MaterialX の 4 つ（右）は CPU と同じ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>球</th><th>材質</th><th>CPU の色（RGB）</th><th>XPU の色（RGB）</th></tr></thead>
+            <tbody>
+              <tr><td>P</td><td>principledshader・色ピンク（Cd は merge で付いた既定の白）</td><td>（0.86・0.43・0.61）</td><td>（1.00・1.00・1.00）</td></tr>
+              <tr><td>Pw</td><td>principledshader・色ピンク・Cd 白</td><td>（0.86・0.43・0.61）</td><td>（1.00・1.00・1.00）</td></tr>
+              <tr><td>Pk</td><td>principledshader・色ピンク・Cd 黒</td><td>（0.86・0.43・0.61）</td><td>（0.04・0.04・0.04）</td></tr>
+              <tr><td>M</td><td>MaterialX・色ピンク</td><td>（0.95・0.47・0.67）</td><td>（0.95・0.47・0.67）</td></tr>
+              <tr><td>Mw</td><td>MaterialX・色ピンク・Cd 白</td><td>（0.95・0.47・0.67）</td><td>（0.95・0.47・0.67）</td></tr>
+              <tr><td>MR</td><td>MaterialX・色 赤</td><td>（1.00・0.14・0.14）</td><td>（1.00・0.14・0.14）</td></tr>
+              <tr><td>ME</td><td>MaterialX・光る色ピンク</td><td>（0.99・0.49・0.70）</td><td>（0.99・0.49・0.70）</td></tr>
+              <tr><td>P（Cd の無い形）</td><td>principledshader・色ピンク。形のどこにも Cd が無い</td><td>（0.86・0.43・0.61）</td><td>（0.95・0.47・0.67）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>XPU では、形に Cd があると、principledshader の色が Cd に置き換わる。</strong>Use Point Color を切っていても同じ。</li>
+          <li><strong>Cd の無い形なら、XPU でも principledshader の色が出る。</strong></li>
+          <li><strong>MaterialX の材質は、Cd があっても CPU と同じ色。</strong>XPU で撮るなら MaterialX で作る。</li>
         </ul>
       </div>
     </article>

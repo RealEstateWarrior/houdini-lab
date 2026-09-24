@@ -85,3 +85,8 @@ ADD["render"].append(
      "def": "少ないサンプルで撮ったざらざらの画を、なめらかに整える仕上げ。Karma の Denoiser で Intel OIDN か NVIDIA OptiX を選ぶ。"
             "ドーナツ・雪だるまでは、4 サンプル＋ノイズ除去で 32 サンプル（なし）と同じくらい 512 サンプルの画に近く、OptiX がわずかに近かった。"
             "かかる時間は 1 秒未満（実験241）。"})
+
+ADD["render"].append(
+    {"term": "MaterialX（mtlxstandard_surface）", "reading": "マテリアルエックス",
+     "def": "いろいろなソフトやレンダラーで共通に使える材質の書き方。Houdini では /mat に mtlxstandard_surface などの箱を置いて作る。"
+            "Karma XPU では、形に点の色 Cd があると principledshader の色が Cd に置き換わったが、MaterialX の材質は CPU と同じ色で写った（実験243）。"})

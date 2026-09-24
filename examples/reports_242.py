@@ -31,32 +31,35 @@ def main():
     f = lambda c: "（" + "・".join(f"{v:.2f}" for v in c) + "）"  # noqa: E731
     table = [[k, LAB[k], f(t[k]["cpu"]), f(t[k]["xpu"])] for k in LAB]
     payload = {
-        "title": "Karma XPU では、principledshader の色（Base Color）が効かずに白くなる。点の色（Cd）は効く。"
-                 "実験232 でアイシングが白くなったのはこのため",
+        "title": "Karma XPU で、6 つの球のうち点の色 Cd をピンクにした 1 つ以外が白くなった。"
+                 "（訂正: 原因は「材質の色が効かない」ではなく「形に Cd があると材質の色が Cd に置き換わる」だった。実験243）",
         "summary":
+            "**訂正（2026-09-25、実験243）: はじめはこの結果から「XPU では principledshader の色が効かない」と書いたが、誤りだった。**"
+            "6 つの球を 1 つの形（merge）にまとめていたので、Cd を付けていない球にも既定の白の Cd が付いていた。"
+            "実験243 で、Cd の無い形なら XPU でも principledshader の色が出ること、Cd があると材質の色が Cd に置き換わること"
+            "（Use Point Color を切っていても）を確かめた。\n\n"
             "**課題: 実験232 で、XPU で撮るとドーナツのアイシングと海の空が白くなった。アイシングの材質は「色ピンク・Use Point Color 入り・点の色 Cd なし」、"
             "海の空は「光る色を Use Point Color で点の色から取る」だった。どの組み合わせで XPU の色が CPU と変わるのか。**\n\n"
-            "球を 6 つ並べ、principledshader の組み合わせを変えて、白いドームの明かりで CPU と XPU で撮った（640×200・32 サンプル、別の hython）。"
-            "球の真ん中の色（RGB）の平均を比べた。\n\n"
-            f"**XPU では、材質の色（Base Color）が効かない。**色ピンクの A（Use Point Color 切り）・B（入り・Cd なし）・D（入り・Cd 白）は、"
-            f"CPU ではピンク {f(t['A']['cpu'])}、XPU では白 {f(t['A']['xpu'])}・{f(t['B']['xpu'])}・{f(t['D']['xpu'])} になった。\n\n"
-            f"**点の色（Cd）は、XPU でも効く。**色を白にして Cd をピンクにした C は、XPU でもピンク {f(t['C']['xpu'])}（CPU {f(t['C']['cpu'])}）。"
-            "ドーナツの生地（色は白、揚げ色は Cd）が XPU でも揚げ色だったのと合う。\n\n"
-            f"**光る材質は、XPU では白い面の上に光が乗ったように明るくなった。**E（光る色を Cd から）{f(t['E']['xpu'])}、F（光る色ピンク）{f(t['F']['xpu'])}。"
-            f"CPU ではどちらも {f(t['E']['cpu'])}。色（Base Color）が黒でも効かずに白い面になり、そこに明かりが当たった分が足されていると考えられる"
-            "（海の空が白く飛んだのと合う）。\n\n"
+            "球を 6 つ並べ（1 つの merge にまとめた）、principledshader の組み合わせを変えて、白いドームの明かりで CPU と XPU で撮った"
+            "（640×200・32 サンプル、別の hython）。球の真ん中の色（RGB）の平均を比べた。\n\n"
+            f"**色ピンクの球は、XPU では白くなった。**A（Use Point Color 切り）・B（入り・Cd なし）・D（入り・Cd 白）は、"
+            f"CPU ではピンク {f(t['A']['cpu'])}、XPU では白 {f(t['A']['xpu'])}・{f(t['B']['xpu'])}・{f(t['D']['xpu'])}。"
+            "（A・B も merge で白の Cd が付いていた。）\n\n"
+            f"**Cd をピンクにした球は、XPU でもピンク。**色を白にして Cd をピンクにした C は {f(t['C']['xpu'])}（CPU {f(t['C']['cpu'])}）。\n\n"
+            f"**光る材質は、XPU では明るくなった。**E（光る色を Cd から）{f(t['E']['xpu'])}、F（光る色ピンク）{f(t['F']['xpu'])}。"
+            f"CPU ではどちらも {f(t['E']['cpu'])}。色（Base Color）が黒でも Cd（白）に置き換わって白い面になり、"
+            "そこに明かりが当たった分が足されていると考えられる。\n\n"
             f"時間は CPU {d['cpu_sec']:.1f} 秒、XPU {d['xpu_sec']:.1f} 秒。\n\n"
-            "**決め方: XPU で撮るなら、色は点の色（Cd）で付ける（材質の色は白、Use Point Color 入り）。**光る物は、XPU では明るさが変わるので CPU で撮る。"
-            "XPU で材質の色を効かせる方法（MaterialX の材質など）は、まだ試していない。",
+            "**決め方（実験243 のあと）: XPU で撮るなら、材質は MaterialX（mtlxstandard_surface）で作る。**principledshader のままなら、色は Cd で付ける。",
         "graph": "", "graph_image": "",
         "comparisons": [
             {"label": "材質の組み合わせと、CPU・XPU の色",
-             "images": [{"path": "242_grid.png", "caption": "上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い。"}],
+             "images": [{"path": "242_grid.png", "caption": "上が CPU、下が XPU。XPU は Cd をピンクにした C 以外が白い（6 つとも 1 つの形にまとめてあり、どの球にも Cd がある）。"}],
              "per_row": 1, "columns": ["球", "材質", "CPU の色（RGB）", "XPU の色（RGB）"], "rows": table},
         ],
         "notes": [
-            "<strong>Karma XPU では、principledshader の Base Color が効かずに白くなった。</strong>",
-            "<strong>点の色（Cd）は XPU でも効く。</strong>XPU で撮るなら色は Cd で付ける。",
+            "<strong>訂正: XPU で白くなったのは、形に Cd があると principledshader の色が Cd に置き換わるため（実験243）。</strong>",
+            "<strong>Cd をピンクにした球は XPU でもピンク。</strong>",
             "<strong>光る材質は、XPU では白い面の上に光が乗ったように明るくなった。</strong>",
         ],
         "next": [],
