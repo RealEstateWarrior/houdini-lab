@@ -11110,7 +11110,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <p>heightfield（1000 m 四方）の Grid Spacing を 4・2・1 m にし、heightfield_noise（Element Size 300）で山を作って、heightfield_erode（::3.0）で 20 フレーム削った。升を細かくしても時間が変わらなかったので、升 1 m で Erosion Feature Size（既定 10 m）を 5・2.5 m にしたものも回した。谷の多さは、高さの 2 階微分（くぼみの強さ）が大きい升の割合で数え、陰影図（真ん中の 250 m 四方）で見比べた。</p>
           <p><strong>升を細かくしても、時間も谷の細かさもほとんど変わらない。</strong>升 4・2・1 m（升の数 16 倍）で、削る時間は 1.55・1.31・1.38 秒、谷の多さは 27・32・32%。陰影図でも、升 2 m と 1 m はほぼ同じ絵だった（4 m は少しぼやける）。</p>
           <p><strong>谷の細かさは Erosion Feature Size で決まる。</strong>升 1 m のまま Feature Size を 10・5・2.5 m にすると、谷の多さは 32・40・44%、斜面の傾きの平均は 23.0・26.0・26.7°。陰影図でも、細かい谷が尾根いっぱいに刻まれた。時間は 1.38・1.54・2.39 秒。升の数によらず時間がほぼ同じなのは、削る計算を Feature Size に合わせた粗さで行っているためと考えられる（確かめてはいない）。</p>
-          <p><strong>決め方: 谷を細かくしたいときは、升ではなく Erosion Feature Size を小さくする。</strong>升は、Feature Size の半分くらいまで細かければ足りる（この実験では、Feature Size 10 m に升 2 m と 1 m で同じ絵）。</p>
+          <p><strong>決め方: 谷を細かくしたいときは、升ではなく Erosion Feature Size を小さくする。</strong>この実験では、Feature Size 10 m に升 2 m と 1 m で同じ絵、4 m では少しぼやけた。升は Feature Size の 1/5 くらいあれば足りる。</p>
         </div>
 
         <p class="label">升の細かさ・Erosion Feature Size と地形（陰影図、真ん中の 250 m 四方）</p>

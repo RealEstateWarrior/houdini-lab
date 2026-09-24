@@ -57,8 +57,8 @@ def main():
             f"斜面の傾きの平均は {g(1, 10, 'slope_mean'):.1f}・{g(1, 5, 'slope_mean'):.1f}・{g(1, 2.5, 'slope_mean'):.1f}°。陰影図でも、細かい谷が尾根いっぱいに刻まれた。"
             f"時間は {g(1, 10, 'sec'):.2f}・{g(1, 5, 'sec'):.2f}・{g(1, 2.5, 'sec'):.2f} 秒。"
             "升の数によらず時間がほぼ同じなのは、削る計算を Feature Size に合わせた粗さで行っているためと考えられる（確かめてはいない）。\n\n"
-            "**決め方: 谷を細かくしたいときは、升ではなく Erosion Feature Size を小さくする。**升は、Feature Size の半分くらいまで細かければ足りる"
-            "（この実験では、Feature Size 10 m に升 2 m と 1 m で同じ絵）。",
+            "**決め方: 谷を細かくしたいときは、升ではなく Erosion Feature Size を小さくする。**この実験では、Feature Size 10 m に升 2 m と 1 m で同じ絵、"
+            "4 m では少しぼやけた。升は Feature Size の 1/5 くらいあれば足りる。",
         "graph": "", "graph_image": "",
         "comparisons": [
             {"label": "升の細かさ・Erosion Feature Size と地形（陰影図、真ん中の 250 m 四方）",
