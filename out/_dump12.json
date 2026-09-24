@@ -1,426 +1,16 @@
 [
  {
-  "spec": "vop/kma_pyroshader",
+  "spec": "top/localscheduler",
   "ok": true,
-  "category": "VOP",
-  "name": "kma_pyroshader",
-  "label": "Karma Pyro Shader ",
+  "category": "TOP",
+  "name": "localscheduler",
+  "label": "Local Scheduler",
   "parms": [
-   {
-    "name": "folder10",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "tabmenumask",
-    "label": "Tab Menu Mask",
-    "default": [
-     "karma USD MaterialX parameter constant collect null genericshader subnet subnetconnector suboutput subinput rampparm"
-    ],
-    "kind": "String",
-    "menu": []
-   },
-   {
-    "name": "shader_rendermask",
-    "label": "Render Context Name",
-    "default": [
-     "karma"
-    ],
-    "kind": "String",
-    "menu": []
-   },
-   {
-    "name": "folder25",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "enablesmoke",
-    "label": "Enable Smoke",
-    "default": true,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "folder1",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "densityscale",
-    "label": "Density Scale",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_remapmode",
-    "label": "Remap Mode",
-    "default": [
-     0
-    ],
-    "kind": "Int",
-    "menu": [
-     [
-      "0",
-      "Constant"
-     ],
-     [
-      "1",
-      "Use Ramp"
-     ]
-    ]
-   },
-   {
-    "name": "density_sourcerange",
-    "label": "Density Range",
-    "default": [
-     0.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "densityramp",
-    "label": "Density Ramp",
-    "default": 2,
-    "kind": "Ramp",
-    "menu": []
-   },
-   {
-    "name": "density_enablecontrolscale",
-    "label": "Scale by Control Volume",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "density_controlrange",
-    "label": "Control Range",
-    "default": [
-     0.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_controlscale",
-    "label": "Scale Range",
-    "default": [
-     0.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_controlrangemode",
-    "label": "Control Range Mode",
-    "default": [
-     0
-    ],
-    "kind": "Int",
-    "menu": [
-     [
-      "0",
-      "Constant"
-     ],
-     [
-      "1",
-      "Use Ramp"
-     ]
-    ]
-   },
-   {
-    "name": "density_controlrangeramp",
-    "label": "Control Ramp",
-    "default": 2,
-    "kind": "Ramp",
-    "menu": []
-   },
    {
     "name": "folder0",
     "label": "",
     "default": null,
     "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "smokecolor",
-    "label": "Smoke Color",
-    "default": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokecolor_remapmode",
-    "label": "Remap Mode",
-    "default": [
-     0
-    ],
-    "kind": "Int",
-    "menu": [
-     [
-      "0",
-      "Constant"
-     ],
-     [
-      "1",
-      "Use Ramp"
-     ]
-    ]
-   },
-   {
-    "name": "smokecolor_sourcerange",
-    "label": "Source Range",
-    "default": [
-     0.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokecolorramp",
-    "label": "Smoke Color Ramp",
-    "default": 2,
-    "kind": "Ramp",
-    "menu": []
-   },
-   {
-    "name": "absorpcolor",
-    "label": "Absorption Color",
-    "default": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "absorpcolor_remapmode",
-    "label": "Remap Mode",
-    "default": [
-     0
-    ],
-    "kind": "Int",
-    "menu": [
-     [
-      "0",
-      "Constant"
-     ],
-     [
-      "1",
-      "Use Ramp"
-     ]
-    ]
-   },
-   {
-    "name": "absorpcolor_sourcerange",
-    "label": "Source Range",
-    "default": [
-     0.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "absorpcolorramp",
-    "label": "Absorption Color Ramp",
-    "default": 2,
-    "kind": "Ramp",
-    "menu": []
-   },
-   {
-    "name": "shadowcolor",
-    "label": "Shadow Color",
-    "default": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "shadowcolor_remapmode",
-    "label": "Remap Mode",
-    "default": [
-     0
-    ],
-    "kind": "Int",
-    "menu": [
-     [
-      "0",
-      "Constant"
-     ],
-     [
-      "1",
-      "Use Ramp"
-     ]
-    ]
-   },
-   {
-    "name": "shadowcolor_sourcerange",
-    "label": "Source Range",
-    "default": [
-     0.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "shadowcolorramp",
-    "label": "Shadow Color Ramp",
-    "default": 2,
-    "kind": "Ramp",
-    "menu": []
-   },
-   {
-    "name": "shadowint",
-    "label": "Shadow Density",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokeint",
-    "label": "Smoke Brightness",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "tintwithcd",
-    "label": "Tint Smoke Color with Cd",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "mixusingalpha",
-    "label": "Mix Smoke Color with Cd using Alpha",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "folder2",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "anisotropy",
-    "label": "Anisotropy",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "useanisotropyroughness",
-    "label": "Roughness",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "anisotropyroughness",
-    "label": "Roughness",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "usesecondaryanisotropy",
-    "label": "Use Secondary Anisotropy",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "secondarymix",
-    "label": "Secondary Mix",
-    "default": [
-     0.5
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "secondaryanisotropy",
-    "label": "Secondary Anisotropy",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "folder6",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "extinctionfalloff",
-    "label": "Extinction Falloff",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "albedocontribution",
-    "label": "Albedo Contribution",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "startlevel",
-    "label": "Start Level",
-    "default": [
-     0
-    ],
-    "kind": "Int",
-    "menu": []
-   },
-   {
-    "name": "enablescatter",
-    "label": "Enable Scatter",
-    "default": false,
-    "kind": "Toggle",
     "menu": []
    },
    {
@@ -431,241 +21,62 @@
     "menu": []
    },
    {
-    "name": "scatterint",
-    "label": "Intensity Scale",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "hotcoreint",
-    "label": "Hot Core Scale",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "folder7",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "scattersignature",
-    "label": "Signature",
-    "default": 1,
+    "name": "maxprocsmenu",
+    "label": "Total Slots",
+    "default": 0,
     "kind": "Menu",
     "menu": [
      [
       "0",
-      "Float"
+      "Equal to 1/4 of Total CPU Count"
+     ],
+     [
+      "-1",
+      "Equal to CPU Count Less One"
      ],
      [
       "1",
-      "Color"
+      "Custom Slot Count"
      ]
     ]
    },
    {
-    "name": "scattercolormode",
-    "label": "Color Mode",
-    "default": [
-     0
-    ],
-    "kind": "Int",
-    "menu": [
-     [
-      "0",
-      "Color Ramp"
-     ],
-     [
-      "1",
-      "Blackbody"
-     ]
-    ]
-   },
-   {
-    "name": "scattercolor",
-    "label": "Scatter Color Ramp",
-    "default": 2,
-    "kind": "Ramp",
-    "menu": []
-   },
-   {
-    "name": "scattertempscale",
-    "label": "Temperature Scale",
-    "default": [
-     2500.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "folder8",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "scattertint",
-    "label": "Tint with Smoke Color",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "scattertintstrength",
-    "label": "Tint Strength",
-    "default": [
-     0.5
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "docc",
-    "label": "Color Correct",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "hue",
-    "label": "Hue",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "saturation",
-    "label": "Saturation",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "folder34",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "scatterenablemask",
-    "label": "Enable Mask",
-    "default": true,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "scattermaskcenter",
-    "label": "Mask Center",
-    "default": [
-     0.2
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattermaskwidth",
-    "label": "Mask Width",
-    "default": [
-     0.1
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scatterusemaskramp",
-    "label": "Use Mask Ramp",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "scattermaskramp",
-    "label": "Mask Ramp",
-    "default": 2,
-    "kind": "Ramp",
-    "menu": []
-   },
-   {
-    "name": "scattervolumemask",
-    "label": "scattervolumemask",
-    "default": [
-     0,
-     0,
-     0
-    ],
-    "kind": "Int",
-    "menu": []
-   },
-   {
-    "name": "enablefire",
-    "label": "Enable Fire",
-    "default": false,
-    "kind": "Toggle",
-    "menu": []
-   },
-   {
-    "name": "folder3",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "fireintscale",
-    "label": "Intensity Scale",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireintmode",
-    "label": "Fire Scale Mode",
+    "name": "maxprocs",
+    "label": "maxprocs",
     "default": [
      1
     ],
     "kind": "Int",
-    "menu": [
-     [
-      "0",
-      "Constant"
-     ],
-     [
-      "1",
-      "Use Ramp"
-     ]
-    ]
-   },
-   {
-    "name": "fireintrange",
-    "label": "Source Range",
-    "default": [
-     0.0,
-     1.0
-    ],
-    "kind": "Float",
     "menu": []
    },
    {
-    "name": "fireintramp",
-    "label": "Fire Intensity Ramp",
-    "default": 2,
-    "kind": "Ramp",
+    "name": "pdg_usemaxtasks",
+    "label": "Enable Limit Jobs",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_maxtasks",
+    "label": "Limit Jobs",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "verbose",
+    "label": "Verbose Logging",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_waitforfailures",
+    "label": "Block on Failed Work Items",
+    "default": false,
+    "kind": "Toggle",
     "menu": []
    },
    {
@@ -676,1809 +87,577 @@
     "menu": []
    },
    {
-    "name": "firecolormode",
-    "label": "Color Mode",
+    "name": "pdg_workingdir",
+    "label": "Working Directory",
     "default": [
-     0
+     "$HIP"
     ],
-    "kind": "Int",
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "uselogfilename",
+    "label": "Use Log File Name",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "logfilename",
+    "label": "Log File Name",
+    "default": [
+     "`@pdg_name`.log"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "hythonbin",
+    "label": "Hython",
+    "default": 0,
+    "kind": "Menu",
     "menu": [
      [
       "0",
-      "Color Ramp"
+      "Default"
      ],
      [
       "1",
-      "Blackbody"
+      "Custom"
      ]
     ]
    },
    {
-    "name": "firecolorrange",
-    "label": "Source Range",
+    "name": "hythonbincustomuniversal",
+    "label": "Hython Executable",
     "default": [
-     0.0,
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pdg_workitemdatasource",
+    "label": "Load Item Data From",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Temporary JSON File"
+     ],
+     [
+      "1",
+      "RPC Message"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_compressworkitemdata",
+    "label": "Compress Work Item Data",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_validateoutputs",
+    "label": "Validate Outputs When Recooking",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_checkexpectedoutputs",
+    "label": "Check Expected Outputs on Disk",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_mapmode",
+    "label": "Path Mapping",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Global"
+     ],
+     [
+      "1",
+      "None"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_usemapzone",
+    "label": "Use Path Map Zone",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "pdg_mapzone",
+    "label": "Path Map Zone",
+    "default": [
+     "$PDG_PATHMAP_ZONE"
+    ],
+    "kind": "String",
+    "menu": [
+     [
+      "POSIX",
+      "POSIX"
+     ],
+     [
+      "WIN",
+      "WIN"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_transfertype",
+    "label": "File Transfer Type",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Flat Copy"
+     ],
+     [
+      "1",
+      "Relative to Root"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_transferroot",
+    "label": "Transfer Root Directory",
+    "default": [
+     "$HIP"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "folder1",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "tempdirmenu",
+    "label": "Location",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Working Directory"
+     ],
+     [
+      "1",
+      "Houdini Temp"
+     ],
+     [
+      "2",
+      "Custom"
+     ]
+    ]
+   },
+   {
+    "name": "tempdirappendpid",
+    "label": "Append PID",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "tempdircustom",
+    "label": "Custom",
+    "default": [
+     "$HOUDINI_TEMP_DIR/$HIPNAME/pdgtemp"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "pdg_deletetempdir",
+    "label": "Delete Temp Dir",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Never"
+     ],
+     [
+      "1",
+      "When Scheduler is Deleted"
+     ],
+     [
+      "2",
+      "When Cook Completes"
+     ]
+    ]
+   },
+   {
+    "name": "socketcallbacks",
+    "label": "Use Socket callbacks instead of stdout tokens",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pdg_rpcignoreerrors",
+    "label": "Ignore RPC Errors",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Never"
+     ],
+     [
+      "1",
+      "When Cooking Batches"
+     ],
+     [
+      "2",
+      "Always"
+     ]
+    ]
+   },
+   {
+    "name": "pdg_rpcmaxerrors",
+    "label": "Max RPC Errors",
+    "default": [
+     5
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pdg_rpctimeout",
+    "label": "Connection Timeout",
+    "default": [
+     4
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pdg_rpcretries",
+    "label": "Connection Retries",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pdg_rpcbackoff",
+    "label": "Retry Backoff",
+    "default": [
+     2
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "pdg_rpcbatch",
+    "label": "Batch Poll Rate",
+    "default": [
      1.0
     ],
     "kind": "Float",
     "menu": []
    },
    {
-    "name": "firecolorramp",
-    "label": "Fire Color Ramp",
-    "default": 2,
-    "kind": "Ramp",
+    "name": "pdg_rpcrelease",
+    "label": "Release Job Slot When Polling",
+    "default": true,
+    "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "firetempscale",
-    "label": "Temperature Scale",
-    "default": [
-     2500.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "folder36",
+    "name": "folder0_3",
     "label": "",
     "default": null,
     "kind": "FolderSet",
     "menu": []
    },
    {
-    "name": "fireenablemask",
-    "label": "Enable Mask",
+    "name": "local_single",
+    "label": "Single",
     "default": false,
     "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "firemaskcenter",
-    "label": "Mask Center",
-    "default": [
-     0.2
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firemaskwidth",
-    "label": "Mask Width",
-    "default": [
-     0.1
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireusemaskramp",
-    "label": "Use Mask Ramp",
+    "name": "local_is_CPU_number_set",
+    "label": "local_is_CPU_number_set",
     "default": false,
     "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "firemaskramp",
-    "label": "Mask Ramp",
-    "default": 2,
-    "kind": "Ramp",
+    "name": "local_CPUs_to_use",
+    "label": "Slots Per Work Item",
+    "default": [
+     1
+    ],
+    "kind": "Int",
     "menu": []
    },
    {
-    "name": "firevolumemask",
-    "label": "firevolumemask",
+    "name": "folder6",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "local_useminfreemem",
+    "label": "Rule",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "No Minimum"
+     ],
+     [
+      "1",
+      "MB Available"
+     ],
+     [
+      "2",
+      "Percent Available"
+     ]
+    ]
+   },
+   {
+    "name": "local_minfreemem",
+    "label": "Minimum MB",
     "default": [
-     0,
-     0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "local_minfreemempct",
+    "label": "Minimum Percent",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "folder2",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "local_enabletimeout",
+    "label": "Enable Maximum Run Time",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "local_maxtime",
+    "label": "Maximum Run Time",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "local_handletimeout",
+    "label": "On Task Timeout",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Mark as Failed"
+     ],
+     [
+      "1",
+      "Mark as Succeeded"
+     ]
+    ]
+   },
+   {
+    "name": "local_enablemaxmemory",
+    "label": "Enable Maximum Memory",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "local_maxmemory",
+    "label": "Maximum Memory",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "local_handlememory",
+    "label": "On Memory Exceeded",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Mark as Failed"
+     ],
+     [
+      "1",
+      "Mark as Succeeded"
+     ]
+    ]
+   },
+   {
+    "name": "local_echandleby",
+    "label": "On Task Failure",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "0",
+      "Report Error"
+     ],
+     [
+      "1",
+      "Report Warning"
+     ],
+     [
+      "2",
+      "Retry Task"
+     ],
+     [
+      "3",
+      "Ignore"
+     ]
+    ]
+   },
+   {
+    "name": "local_echandleall",
+    "label": "Handle All Non Zero",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "local_eccustomcode",
+    "label": "Exit Code",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "local_maximumretries",
+    "label": "Max Retries",
+    "default": [
+     3
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "local_addfailcountattr",
+    "label": "Retry Count Attribute",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "local_failcountattr",
+    "label": "Retry Count Attrib",
+    "default": [
+     "failurecount"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "folder3",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "local_usehoudinimaxthreads",
+    "label": "local_usehoudinimaxthreads",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "local_houdinimaxthreads",
+    "label": "Houdini Max Threads",
+    "default": [
      0
     ],
     "kind": "Int",
     "menu": []
    },
    {
-    "name": "emission",
-    "label": "Emission",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
+    "name": "local_requireswindow",
+    "label": "Requires GUI Window",
+    "default": false,
+    "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "folder41",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
+    "name": "local_skippackages",
+    "label": "Skip Loading Packages",
+    "default": true,
+    "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "density",
-    "label": "Density",
+    "name": "local_envunset",
+    "label": "Unset Variables",
     "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "densitycontrol",
-    "label": "Density Control",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokecolorsource",
-    "label": "Smoke Color Source",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "absorpcolorsource",
-    "label": "Absorption Color Source",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "shadowcolorsource",
-    "label": "Shadow Color Source",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "Cd",
-    "label": "Cd",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "Alpha",
-    "label": "Alpha",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_volumename",
-    "label": "Density Volume",
-    "default": [
-     "density"
+     ""
     ],
     "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
+    "menu": []
    },
    {
-    "name": "densitycontrol_volumename",
-    "label": "Density Control Volume",
+    "name": "local_env_file",
+    "label": "Environment File",
     "default": [
-     "temperature"
+     ""
     ],
     "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "smokecolorsource_volume",
-    "label": "Smoke Color Source Volume",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "0",
-      "Smoke Density"
-     ],
-     [
-      "1",
-      "Geometry Volume"
-     ]
-    ]
-   },
-   {
-    "name": "smokecolorsource_volumename",
-    "label": "Custom Volume",
-    "default": [
-     "density"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "absorpcolorsource_volume",
-    "label": "Absorption Color Source Volume",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "0",
-      "Smoke Density"
-     ],
-     [
-      "1",
-      "Geometry Volume"
-     ]
-    ]
-   },
-   {
-    "name": "absorpcolorsource_volumename",
-    "label": "Custom Volume",
-    "default": [
-     "density"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "shadowcolorsource_volume",
-    "label": "Shadow Color Source Volume",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "0",
-      "Smoke Density"
-     ],
-     [
-      "1",
-      "Geometry Volume"
-     ]
-    ]
-   },
-   {
-    "name": "shadowcolorsource_volumename",
-    "label": "Custom Volume",
-    "default": [
-     "density"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "cd_volumename",
-    "label": "Cd Volume",
-    "default": [
-     "Cd"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "",
-      "Cd"
-     ]
-    ]
-   },
-   {
-    "name": "alpha_volumename",
-    "label": "Alpha Volume",
-    "default": [
-     "Alpha"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ],
-     [
-      "Alpha",
-      "Alpha"
-     ]
-    ]
-   },
-   {
-    "name": "anisotropycontrol_volumename",
-    "label": "Anisotropy Control Volume",
-    "default": [
-     "temperature"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "folder42",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
     "menu": []
    },
    {
-    "name": "scattermask",
-    "label": "Scatter Mask",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
+    "name": "local_envmulti",
+    "label": "Environment Variables",
+    "default": 0,
+    "kind": "Folder",
     "menu": []
-   },
-   {
-    "name": "scatterAlpha",
-    "label": "Scatter Alpha",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scatter_volumename",
-    "label": "Scatter Volume",
-    "default": [
-     "scatter"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ],
-     [
-      "scatter",
-      "scatter"
-     ]
-    ]
-   },
-   {
-    "name": "scattermask_volume",
-    "label": "Mask Volume",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "0",
-      "Smoke Density"
-     ],
-     [
-      "1",
-      "Geometry Volume"
-     ]
-    ]
-   },
-   {
-    "name": "scattermask_volumename",
-    "label": "Custom Volume",
-    "default": [
-     "density"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "scatteralpha_volume",
-    "label": "Alpha Volume",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "0",
-      "Smoke Density"
-     ],
-     [
-      "1",
-      "Geometry Volume"
-     ]
-    ]
-   },
-   {
-    "name": "scatteralpha_volumename",
-    "label": "Alpha Volume",
-    "default": [
-     "density"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "folder43",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
-   },
-   {
-    "name": "fireint",
-    "label": "fireintensity",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firecolor",
-    "label": "firecolor",
-    "default": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firemask",
-    "label": "Mask",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireAlpha",
-    "label": "Alpha",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireint_volumename",
-    "label": "Intensity Volume",
-    "default": [
-     "temperature"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "firecolor_volumename",
-    "label": "Color Volume",
-    "default": [
-     "temperature"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "firemask_volume",
-    "label": "Mask Volume",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "0",
-      "Smoke Density"
-     ],
-     [
-      "1",
-      "Geometry Volume"
-     ]
-    ]
-   },
-   {
-    "name": "firemask_volumename",
-    "label": "Custom Volume",
-    "default": [
-     "density"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "firealpha_volume",
-    "label": "Alpha Volume",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "0",
-      "Smoke Density"
-     ],
-     [
-      "1",
-      "Geometry Volume"
-     ]
-    ]
-   },
-   {
-    "name": "firealpha_volumename",
-    "label": "Custom Volume",
-    "default": [
-     "density"
-    ],
-    "kind": "String",
-    "menu": [
-     [
-      "density",
-      "density"
-     ],
-     [
-      "temperature",
-      "temperature"
-     ],
-     [
-      "flame",
-      "flame"
-     ]
-    ]
-   },
-   {
-    "name": "densityramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "densityramp1value",
-    "label": "Value",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "densityramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "densityramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "densityramp2value",
-    "label": "Value",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "densityramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "density_controlrangeramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_controlrangeramp1value",
-    "label": "Value",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_controlrangeramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "density_controlrangeramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_controlrangeramp2value",
-    "label": "Value",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "density_controlrangeramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "smokecolorramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokecolorramp1c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokecolorramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "smokecolorramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokecolorramp2c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "smokecolorramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "absorpcolorramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "absorpcolorramp1c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "absorpcolorramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "absorpcolorramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "absorpcolorramp2c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "absorpcolorramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "shadowcolorramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "shadowcolorramp1c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "shadowcolorramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "shadowcolorramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "shadowcolorramp2c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "shadowcolorramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "scattercolor1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattercolor1c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattercolor1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "scattercolor2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattercolor2c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattercolor2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "scattermaskramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattermaskramp1c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattermaskramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "scattermaskramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattermaskramp2c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "scattermaskramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "fireintramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireintramp1value",
-    "label": "Value",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireintramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "fireintramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireintramp2value",
-    "label": "Value",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "fireintramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "firecolorramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firecolorramp1c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firecolorramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "firecolorramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firecolorramp2c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firecolorramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "firemaskramp1pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firemaskramp1c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firemaskramp1interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
-   },
-   {
-    "name": "firemaskramp2pos",
-    "label": "Position",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firemaskramp2c",
-    "label": "Color",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "firemaskramp2interp",
-    "label": "Interpolation",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "linear",
-      "Linear"
-     ],
-     [
-      "catmull-rom",
-      "Catmull-Rom"
-     ],
-     [
-      "monotonecubic",
-      "Monotone Cubic"
-     ],
-     [
-      "bezier",
-      "Bezier"
-     ],
-     [
-      "bspline",
-      "B-Spline"
-     ],
-     [
-      "hermite",
-      "Hermite"
-     ]
-    ]
    }
   ],
   "min_inputs": 0,
-  "max_inputs": 79
+  "max_inputs": 0
  }
 ]

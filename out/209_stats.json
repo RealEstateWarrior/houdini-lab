@@ -1,0 +1,98 @@
+{
+  "rows": [
+    {
+      "case": "inproc",
+      "slots": 0,
+      "sec": 31.4
+    },
+    {
+      "case": "pdg1",
+      "slots": 1,
+      "sec": 68.13,
+      "files": 384,
+      "sizes": [
+        234974,
+        255363,
+        277346,
+        302089,
+        319187,
+        337610,
+        361089,
+        361748
+      ]
+    },
+    {
+      "case": "pdg2",
+      "slots": 2,
+      "sec": 33.9,
+      "files": 384,
+      "sizes": [
+        234970,
+        255355,
+        277350,
+        302092,
+        319187,
+        337610,
+        361090,
+        361749
+      ]
+    },
+    {
+      "case": "pdg4",
+      "slots": 4,
+      "sec": 22.96,
+      "files": 384,
+      "sizes": [
+        234968,
+        255355,
+        277348,
+        302088,
+        319187,
+        337609,
+        361090,
+        361742
+      ]
+    },
+    {
+      "case": "pdg8",
+      "slots": 8,
+      "sec": 19.55,
+      "files": 384,
+      "sizes": [
+        234974,
+        255353,
+        277346,
+        302096,
+        319193,
+        337610,
+        361090,
+        361747
+      ]
+    }
+  ],
+  "vox": 0.03,
+  "frame": 48,
+  "count": 8,
+  "cpu": 32,
+  "inproc_sizes": [
+    234885,
+    255315,
+    277306,
+    301997,
+    319214,
+    337342,
+    361047,
+    361803
+  ],
+  "framegeneration_labels": [
+    "Single Frame",
+    "Frame Range",
+    "Automatic",
+    "ROP Node Configuration"
+  ],
+  "sched_menu": [
+    "Equal to 1/4 of Total CPU Count",
+    "Equal to CPU Count Less One",
+    "Custom Slot Count"
+  ]
+}

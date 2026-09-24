@@ -1,0 +1,64 @@
+{
+  "title": "実験209",
+  "network": "/obj/wedge_turbulence",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "localscheduler",
+      "type": "localscheduler",
+      "pos": [
+        3.954,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "maxprocsmenu": 2,
+        "maxprocs": 8
+      }
+    },
+    {
+      "name": "eight_turbulences",
+      "type": "wedge",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "wedgecount": 8,
+        "seed": 7164
+      }
+    },
+    {
+      "name": "write_fire",
+      "type": "ropgeometry",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "framegeneration": 1,
+        "f1": 1.0,
+        "f2": 48.0,
+        "soppath": "/obj/fire/drop_vel",
+        "sopoutput": "D:/Claude/houdini/out/_209_geo/fire_.0001.bgeo.sc",
+        "batchall": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "eight_turbulences",
+      "from_output": 0,
+      "to": "write_fire",
+      "to_input": 0
+    }
+  ]
+}

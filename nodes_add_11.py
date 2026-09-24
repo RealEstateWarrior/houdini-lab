@@ -5,6 +5,14 @@
 """
 
 ADD = {
+    "pdg": [
+        {"name": "localscheduler", "kind": "TOP",
+         "one": "PDG の仕事を、手元のパソコンで同時にいくつか走らせる係。",
+         "what": "topnet を作ると最初から 1 つ入っている。仕事（work item）ごとに別の Houdini を立ち上げて回す。Total Slots で同時に回す数を決め、"
+                 "既定は「CPU の 1/4」（32 スレッドなら 8）。焚き火を 8 通り回したとき、同時 8 本は 1 つの Houdini で順に回すより 1.6 倍速く、"
+                 "同時 1 本では 2.2 倍遅かった（実験209）。Custom Slot Count にすると数を直接入れられる。",
+         "params": [["maxprocsmenu", "同時に回す数の決め方"], ["maxprocs", "同時に回す数（Custom のとき）"]]},
+    ],
     "program": [
         {"name": "attribexpression", "kind": "SOP",
          "one": "よく使う属性を、1 行の VEX で書き換える。",

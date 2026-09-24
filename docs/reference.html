@@ -10055,6 +10055,24 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
               <li><code>soppath</code>書き出す SOP</li>
               <li><code>sopoutput</code>書き出すファイル名</li>
             </ul>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>TOP の ropgeometry でシミュレーションを書き出すときは、Evaluate Using を Frame Range にし、Frame Range（最初から式が入っている）を入れ、All Frames in One Batch を入れる。既定の Single Frame では仕事 1 つにつき 1 フレーム目しか書かず、焚き火が燃え始めのまま（34 KB）だった。Valid Frame Range を変えても効かない（実験209）。</div>
+            <div class="node-exps">
+              <a href="log.html#exp209">実験 209</a>
+            </div>
+          </div>
+        </article>
+        <article class="nodecard nodecard--noimg" id="node-344">
+          <div class="node-main">
+            <div class="node-head">
+              <h4>localscheduler</h4>
+              <span class="node-kind">TOP</span>
+            </div>
+            <p class="node-one">PDG の仕事を、手元のパソコンで同時にいくつか走らせる係。</p>
+            <p class="node-what">topnet を作ると最初から 1 つ入っている。仕事（work item）ごとに別の Houdini を立ち上げて回す。Total Slots で同時に回す数を決め、既定は「CPU の 1/4」（32 スレッドなら 8）。焚き火を 8 通り回したとき、同時 8 本は 1 つの Houdini で順に回すより 1.6 倍速く、同時 1 本では 2.2 倍遅かった（実験209）。Custom Slot Count にすると数を直接入れられる。</p>
+            <ul class="node-parms">
+              <li><code>maxprocsmenu</code>同時に回す数の決め方</li>
+              <li><code>maxprocs</code>同時に回す数（Custom のとき）</li>
+            </ul>
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
@@ -10064,7 +10082,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <p>見た目を作る道具。色と粗さを決める材質と、模様の元になるノイズ。</p>
       </div>
       <div class="nodegrid">
-        <article class="nodecard nodecard--noimg" id="node-344">
+        <article class="nodecard nodecard--noimg" id="node-345">
           <div class="node-main">
             <div class="node-head">
               <h4>principledshader::2.0</h4>
@@ -10084,7 +10102,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-345">
+        <article class="nodecard nodecard--noimg" id="node-346">
           <div class="node-main">
             <div class="node-head">
               <h4>texture::2.0</h4>
@@ -10100,7 +10118,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-346">
+        <article class="nodecard nodecard--noimg" id="node-347">
           <div class="node-main">
             <div class="node-head">
               <h4>rampparm</h4>
@@ -10117,7 +10135,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-347">
+        <article class="nodecard nodecard--noimg" id="node-348">
           <div class="node-main">
             <div class="node-head">
               <h4>aanoise</h4>
@@ -10136,7 +10154,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-348">
+        <article class="nodecard nodecard--noimg" id="node-349">
           <div class="node-main">
             <div class="node-head">
               <h4>curlnoise</h4>
@@ -10152,7 +10170,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-349">
+        <article class="nodecard nodecard--noimg" id="node-350">
           <div class="node-main">
             <div class="node-head">
               <h4>cellnoise</h4>
@@ -10168,7 +10186,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-350">
+        <article class="nodecard nodecard--noimg" id="node-351">
           <div class="node-main">
             <div class="node-head">
               <h4>bind</h4>
@@ -10184,7 +10202,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-351">
+        <article class="nodecard nodecard--noimg" id="node-352">
           <div class="node-main">
             <div class="node-head">
               <h4>constant</h4>
@@ -10200,7 +10218,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-352">
+        <article class="nodecard nodecard--noimg" id="node-353">
           <div class="node-main">
             <div class="node-head">
               <h4>parameter</h4>
@@ -10216,7 +10234,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-353">
+        <article class="nodecard nodecard--noimg" id="node-354">
           <div class="node-main">
             <div class="node-head">
               <h4>add</h4>
@@ -10227,7 +10245,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-354">
+        <article class="nodecard nodecard--noimg" id="node-355">
           <div class="node-main">
             <div class="node-head">
               <h4>subtract</h4>
@@ -10238,7 +10256,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-355">
+        <article class="nodecard nodecard--noimg" id="node-356">
           <div class="node-main">
             <div class="node-head">
               <h4>multiply</h4>
@@ -10249,7 +10267,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-356">
+        <article class="nodecard nodecard--noimg" id="node-357">
           <div class="node-main">
             <div class="node-head">
               <h4>divide</h4>
@@ -10264,7 +10282,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             </div>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-357">
+        <article class="nodecard nodecard--noimg" id="node-358">
           <div class="node-main">
             <div class="node-head">
               <h4>fit</h4>
@@ -10281,7 +10299,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-358">
+        <article class="nodecard nodecard--noimg" id="node-359">
           <div class="node-main">
             <div class="node-head">
               <h4>clamp</h4>
@@ -10296,7 +10314,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-359">
+        <article class="nodecard nodecard--noimg" id="node-360">
           <div class="node-main">
             <div class="node-head">
               <h4>mix</h4>
@@ -10312,7 +10330,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-360">
+        <article class="nodecard nodecard--noimg" id="node-361">
           <div class="node-main">
             <div class="node-head">
               <h4>colormix</h4>
@@ -10329,7 +10347,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-361">
+        <article class="nodecard nodecard--noimg" id="node-362">
           <div class="node-main">
             <div class="node-head">
               <h4>length</h4>
@@ -10343,7 +10361,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-362">
+        <article class="nodecard nodecard--noimg" id="node-363">
           <div class="node-main">
             <div class="node-head">
               <h4>normalize</h4>
@@ -10357,7 +10375,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-363">
+        <article class="nodecard nodecard--noimg" id="node-364">
           <div class="node-main">
             <div class="node-head">
               <h4>dot</h4>
@@ -10372,7 +10390,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-364">
+        <article class="nodecard nodecard--noimg" id="node-365">
           <div class="node-main">
             <div class="node-head">
               <h4>cross</h4>
@@ -10387,7 +10405,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-365">
+        <article class="nodecard nodecard--noimg" id="node-366">
           <div class="node-main">
             <div class="node-head">
               <h4>distance</h4>
@@ -10402,7 +10420,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-366">
+        <article class="nodecard nodecard--noimg" id="node-367">
           <div class="node-main">
             <div class="node-head">
               <h4>compare</h4>
@@ -10417,7 +10435,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-367">
+        <article class="nodecard nodecard--noimg" id="node-368">
           <div class="node-main">
             <div class="node-head">
               <h4>twoway</h4>
@@ -10432,7 +10450,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-368">
+        <article class="nodecard nodecard--noimg" id="node-369">
           <div class="node-main">
             <div class="node-head">
               <h4>switch</h4>
@@ -10447,7 +10465,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-369">
+        <article class="nodecard nodecard--noimg" id="node-370">
           <div class="node-main">
             <div class="node-head">
               <h4>pow</h4>
@@ -10461,7 +10479,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-370">
+        <article class="nodecard nodecard--noimg" id="node-371">
           <div class="node-main">
             <div class="node-head">
               <h4>abs</h4>
@@ -10475,7 +10493,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-371">
+        <article class="nodecard nodecard--noimg" id="node-372">
           <div class="node-main">
             <div class="node-head">
               <h4>floor</h4>
@@ -10489,7 +10507,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-372">
+        <article class="nodecard nodecard--noimg" id="node-373">
           <div class="node-main">
             <div class="node-head">
               <h4>frac</h4>
@@ -10503,7 +10521,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-373">
+        <article class="nodecard nodecard--noimg" id="node-374">
           <div class="node-main">
             <div class="node-head">
               <h4>random</h4>
@@ -10517,7 +10535,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-374">
+        <article class="nodecard nodecard--noimg" id="node-375">
           <div class="node-main">
             <div class="node-head">
               <h4>unifiednoise::3.0</h4>
@@ -10534,7 +10552,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-375">
+        <article class="nodecard nodecard--noimg" id="node-376">
           <div class="node-main">
             <div class="node-head">
               <h4>turbnoise</h4>
@@ -10551,7 +10569,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-376">
+        <article class="nodecard nodecard--noimg" id="node-377">
           <div class="node-main">
             <div class="node-head">
               <h4>getattrib::2.0</h4>
@@ -10568,7 +10586,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-377">
+        <article class="nodecard nodecard--noimg" id="node-378">
           <div class="node-main">
             <div class="node-head">
               <h4>setattrib</h4>
@@ -10585,7 +10603,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-378">
+        <article class="nodecard nodecard--noimg" id="node-379">
           <div class="node-main">
             <div class="node-head">
               <h4>importpoint</h4>
@@ -10600,7 +10618,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-379">
+        <article class="nodecard nodecard--noimg" id="node-380">
           <div class="node-main">
             <div class="node-head">
               <h4>pcopen</h4>
@@ -10616,7 +10634,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-380">
+        <article class="nodecard nodecard--noimg" id="node-381">
           <div class="node-main">
             <div class="node-head">
               <h4>pcfilter</h4>
@@ -10630,7 +10648,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-381">
+        <article class="nodecard nodecard--noimg" id="node-382">
           <div class="node-main">
             <div class="node-head">
               <h4>nearpoint</h4>
@@ -10644,7 +10662,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-382">
+        <article class="nodecard nodecard--noimg" id="node-383">
           <div class="node-main">
             <div class="node-head">
               <h4>xyzdist</h4>
@@ -10660,7 +10678,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-383">
+        <article class="nodecard nodecard--noimg" id="node-384">
           <div class="node-main">
             <div class="node-head">
               <h4>primuv</h4>
@@ -10676,7 +10694,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-384">
+        <article class="nodecard nodecard--noimg" id="node-385">
           <div class="node-main">
             <div class="node-head">
               <h4>vectofloat</h4>
@@ -10690,7 +10708,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-385">
+        <article class="nodecard nodecard--noimg" id="node-386">
           <div class="node-main">
             <div class="node-head">
               <h4>floattovec</h4>
@@ -10706,7 +10724,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <p class="node-unused">まだ実験では動かしていない。名前とつまみは Houdini 21.0.700 で確認した。</p>
           </div>
         </article>
-        <article class="nodecard nodecard--noimg" id="node-386">
+        <article class="nodecard nodecard--noimg" id="node-387">
           <div class="node-main">
             <div class="node-head">
               <h4>kma_pyroshader</h4>
@@ -12793,8 +12811,8 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
 </div>
 
 <script src="data/experiment-data-bf21a9e8fb.js"></script>
-<script src="data/glossary-data-f8d8ed8d88.js"></script>
-<script src="data/node-data-1c484f0f3d.js"></script>
+<script src="data/glossary-data-9d5ca2835b.js"></script>
+<script src="data/node-data-42349d3e36.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
   /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
@@ -12972,9 +12990,9 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>208</dd></div>
+        <div><dt>実験</dt><dd>209</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
-        <div><dt>ノード</dt><dd>387</dd></div>
+        <div><dt>ノード</dt><dd>388</dd></div>
         <div><dt>用語</dt><dd>446</dd></div>
       </dl>
       <div class="foot-ext">
@@ -13047,8 +13065,8 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_208.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>208本の実験。最新は実験208</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>387件</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_209.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>209本の実験。最新は実験209</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>388件</small></span></a>
         <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>446語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
@@ -13152,7 +13170,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
 </div>
 
-<script src="data/search-data-92bc28bcd2.js"></script>
+<script src="data/search-data-299ffe1474.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

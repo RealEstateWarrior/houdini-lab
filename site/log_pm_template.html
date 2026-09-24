@@ -9883,6 +9883,55 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 209 ===================== -->
+    <article class="entry entry--current" id="exp209">
+      <div class="badge">209</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>焚き火を 8 通り回すなら、PDG で同時に 8 本が 1.6 倍速い — ただし同時に 1 本だと 2.2 倍遅く、2 本でほぼ並ぶ。Evaluate Using を Frame Range にしないと 1 フレームしか回らない</h2>
+        <p class="path">examples/209_pdg_wedge_slots.py &nbsp;·&nbsp; 8 通りの焚き火は PDG で同時に 8 本が 1.6 倍速い。1 本だと 2.2 倍遅い。Evaluate Using の落とし穴</p>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火の揺れ（Turbulence）を 8 通り試して比べたい。1 つの Houdini の中で順に回すのと、PDG（TOP <button class="term" data-term="ネットワーク">ネットワーク</button>の wedge）で別々の Houdini に分けて同時に回すのとでは、どちらが速いか。同時に何本がよいか。</strong></p>
+          <p><a href="#exp202">実験202</a> の焚き火（Voxel Size 0.03）を 48 フレーム回し、毎フレーム書き出す（速度 vel を消した形。<a href="#exp204">実験204</a>）仕事を、Turbulence 1〜4.5 の 8 通り用意した。PDG は wedge（8 本）→ ropgeometry で、localscheduler の Total Slots（同時に回す数）を 1・2・4・8 にした。このパソコンは 32 スレッド（既定の Total Slots は「CPU の 1/4」なので 8）。</p>
+          <p><strong>1 つの Houdini の中で順に回すと 31.4 秒</strong>（1 通りあたり 3.9 秒）。</p>
+          <p><strong>PDG で同時に 1 本だと 68.1 秒で、2.2 倍遅い。</strong>1 通りあたり 8.5 秒で、順に回すより約 4.6 秒長い。仕事ごとに別の Houdini を起動し、保存した hip を開いてから回すためと考えられる（起動の時間だけを分けては測っていない）。</p>
+          <p><strong>同時に 2 本でほぼ並び（33.9 秒）、4 本で 23.0 秒（1.37 倍速い）、8 本で 19.6 秒（1.61 倍）。</strong>本数を倍にしても時間は半分にならない。4 → 8 本で 15% しか縮まなかった。<button class="term" data-term="Pyro">Pyro</button> の計算は 1 本でも複数のスレッドを使うので、同時に回すと取り合いになるためと考えられる。</p>
+          <p><strong>結果はどのやり方でも同じ。</strong>フレーム 48 のファイルの大きさは、順に回したものと 0.08% 以内で一致した。</p>
+          <p><strong>落とし穴: ropgeometry の Evaluate Using の既定は Single Frame。</strong>このままだと仕事 1 つにつき 1 フレーム目しか書かず、<button class="term" data-term="シミュレーション">シミュレーション</button>が進まない（燃え始めの 34 KB が書き出された）。Valid Frame Range を Render Frame Range にしても変わらなかった。Evaluate Using を Frame Range にし、Frame Range（f1・f2。最初から式が入っている）を 1〜48 にして、All Frames in One Batch を入れると、1 つの Houdini が 1〜48 を順に回した。</p>
+        </div>
+
+        <p class="label">8 通りを回して書き出す時間</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="209_time.png" alt="PDG は同時に 2 本で順に回すのと並び、8 本で 1.6 倍速い。" loading="lazy" decoding="async"></div>
+            <figcaption>PDG は同時に 2 本で順に回すのと並び、8 本で 1.6 倍速い。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>回し方</th><th>同時に回す数</th><th>秒</th><th>順に回すのと比べた速さ</th></tr></thead>
+            <tbody>
+              <tr><td>1 つの Houdini で順に</td><td class="num muted">—</td><td class="num">31.4</td><td class="num">1.00</td></tr>
+              <tr><td>PDG（Total Slots 1）</td><td class="num">1</td><td class="num">68.1</td><td class="num">0.46</td></tr>
+              <tr><td>PDG（Total Slots 2）</td><td class="num">2</td><td class="num">33.9</td><td class="num">0.93</td></tr>
+              <tr><td>PDG（Total Slots 4）</td><td class="num">4</td><td class="num">23.0</td><td class="num">1.37</td></tr>
+              <tr><td>PDG（Total Slots 8）</td><td class="num">8</td><td class="num">19.6</td><td class="num">1.61</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>何通りも試すなら PDG で同時に回す。</strong>焚き火 8 通りで、同時に 8 本（既定の Total Slots）が 1.6 倍速かった。</li>
+          <li><strong>同時に 1 本の PDG は、順に回すより遅い。</strong>1 通りあたり約 5 秒余分にかかった（別の Houdini を立ち上げる分と考えられる）。</li>
+          <li><strong>シミュレーションを書き出すときは、ropgeometry の Evaluate Using を Frame Range にし、All Frames in One Batch を入れる。</strong>既定の Single Frame では 1 フレーム目しか回らない。</li>
+          <li><strong>同時に回す数を増やしても、比例しては速くならない。</strong>4 → 8 本で 15% だけ。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

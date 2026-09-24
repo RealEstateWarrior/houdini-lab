@@ -84,6 +84,7 @@ MORE = {
     "blast": ("Group に @name=vel.* と書き、Group Type を Primitives にすると、Pyro の速度のボリューム 3 つだけを消せる。焚き火のキャッシュは 24 分の 1 になった（実験204）。", ["204"]),
     "karma": ("被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。Volume Step Rate は既定 0.25 のままでよい。焚き火で 1 に粗くしても速くならず、1920×1080 ではかえって 23% 遅かった（実験207）。", ["205", "207"]),
     "particlefluidsurface": ("形を決めるのは Influence Scale と Method。ダムブレイクの跳ね上がりで、Influence 2 は体積 104%（しぶきが細かく残る）、5 は 87%（丸まって痩せる）。Spherical は粒の球が残ってつぶつぶになる。Filtering（Dilate・Smooth・Erode）でさざ波が消え、時間は 1.3 倍。Voxel Scale 0.5 は面が 1.9 倍・時間 2.3 倍。Neural Point Surface は 1.6 倍（実験208）。", ["208"]),
+    "ropgeometry": ("TOP の ropgeometry でシミュレーションを書き出すときは、Evaluate Using を Frame Range にし、Frame Range（最初から式が入っている）を入れ、All Frames in One Batch を入れる。既定の Single Frame では仕事 1 つにつき 1 フレーム目しか書かず、焚き火が燃え始めのまま（34 KB）だった。Valid Frame Range を変えても効かない（実験209）。", ["209"]),
     "pyrosolver": ("出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。", ["204"]),
 }
 for _k, (_t, _e) in MORE.items():

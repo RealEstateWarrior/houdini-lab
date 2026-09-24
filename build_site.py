@@ -1415,6 +1415,12 @@ DONE = [
      "shots": ["208_grid.png", "208_graph.png"],
      "title": "FLIP の水を面にするとき、形を決めるのは Influence Scale と Method — Spherical はつぶつぶ、Influence 5 は体積 87%。なめらかにするなら Filtering（既定の 1.3 倍の時間）",
      "note": "水の面の形は Influence Scale と Method で決まる。なめらかにするなら Filtering（1.3 倍の時間）"},
+    {"no": "209", "anchor": "exp209",
+     "tags": ["ツール", "PDG", "速度", "Pyro"],
+     "log": "log_pm", "thumb": "209_time.png",
+     "shots": ["209_time.png", "209_graph.png"],
+     "title": "焚き火を 8 通り回すなら、PDG で同時に 8 本が 1.6 倍速い — ただし同時に 1 本だと 2.2 倍遅く、2 本でほぼ並ぶ。Evaluate Using を Frame Range にしないと 1 フレームしか回らない",
+     "note": "8 通りの焚き火は PDG で同時に 8 本が 1.6 倍速い。1 本だと 2.2 倍遅い。Evaluate Using の落とし穴"},
 ]
 
 PLANNED = []
