@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ エフェクト編<small>77本</small></p>
+      <p class="doc-toc-head">実験ログ エフェクト編<small>78本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp013" data-anchor="exp013"><span class="doc-no">013</span><span class="doc-t">時間軸への対応 — フレームを進めて記録する</span></a></li>
@@ -3827,6 +3827,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp223" data-anchor="exp223"><span class="doc-no">223</span><span class="doc-t">海の白波の cusp のしきい値は、風 5 m/秒で 0.08・10 m/秒で 0.15・15 m/秒で 0.26（波の高さを本物に合わせたとき）。0.55 では風 15 m/秒でもほぼ白波が出ない</span></a></li>
         <li><a href="#exp224" data-anchor="exp224"><span class="doc-no">224</span><span class="doc-t">Vellum の布の伸びは Substeps で決まる（1→5 で平均 2.8%→0.10%）。Constraint Iterations を 4 倍にするより Substeps を倍にする方が、短い時間でよく効く。布の目を細かくすると 4 倍伸びる</span></a></li>
         <li><a href="#exp226" data-anchor="exp226"><span class="doc-no">226</span><span class="doc-t">ガラスのひびを増やすと、同じつながりの強さでは割れにくくなる（20 本で破片の 17% が動いたのが、80 本では 5%）。80 本なら強さを 0.8 → 0.6 に下げると同じくらい割れる。計算はどれも 3 秒以内</span></a></li>
+        <li><a href="#exp231" data-anchor="exp231"><span class="doc-no">231</span><span class="doc-t">焚き火の炎のボリュームで周りを照らしても、ざらつきは 3.7%（16 サンプル）で、ライト（4.6%）と同じくらい。ライトを足すと炎まで照らされて白く飛ぶ</span></a></li>
       </ol>
       <a class="doc-other" href="log.html">実験ログ モデリング編へ →</a>
     </div>
@@ -3838,7 +3839,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — エフェクト編</h1>
     <p class="lede">時間を進めて物理を解く側の記録。剛体・布・煙・液体・パーティクル、そしてレンダリング。実験013から。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>230 / 230</dd></div>
+      <div><dt>実験</dt><dd>231 / 231</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -11281,6 +11282,69 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 231 ===================== -->
+    <article class="entry entry--current" id="exp231">
+      <div class="badge">231</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>焚き火の炎のボリュームで周りを照らしても、ざらつきは 3.7%（16 サンプル）で、ライト（4.6%）と同じくらい。ライトを足すと炎まで照らされて白く飛ぶ</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">エフェクト</span><span class="coltag">Pyro</span><span class="coltag">炎</span><span class="coltag">Karma</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>炎のボリュームで照らしても、ざらつきは 3.7%。</strong>ライトと同じくらいなめらか。</li>
+            <li><strong>ライトを炎の中に足すと、炎まで照らされて白く飛ぶ。</strong></li>
+            <li><strong>積んだ薪の内側（高さ 25 cm）に置いたライトは、薪にさえぎられて周りを照らさなかった。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_231.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/231_campfire_light.py &nbsp;·&nbsp; 焚き火の明かりは炎のボリュームで。ライトを足すと炎が白く飛ぶ</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/231_scene.hipnc" target="_blank" rel="noopener noreferrer">231_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="231_graph.png" alt="実験231 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火や松明の場面で、周りの地面や薪を炎の光で照らしたい。<a href="log.html#exp225">実験225</a> では、小さな光る球で照らすとひどくざらついた（21〜54%）。<button class="term" data-term="Pyro">Pyro</button> の炎（kma_pyroshader の光る<button class="term" data-term="ボリューム">ボリューム</button>）で照らすとどうか。炎の中にライトを足すとどうなるか。</strong></p>
+          <p>実践「焚き火」の場面（フレーム 60）を使い、実践で入れていた補助の明かり（キー・リム・ドーム）は 0 にした。640×360 を 16 <button class="term" data-term="サンプル">サンプル</button>（<button class="term" data-term="ノイズ">ノイズ</button>除去なし）で撮り、同じ条件の 128 サンプルの画との差（画の下の地面・薪・石の部分の、明るさに対する割合）をざらつきとした。ライト（橙の point）の強さは、炎を消してライトだけで照らした地面が、炎だけのときと同じ明るさになるように決めた（強さ 1 と 4 で撮って比で求めた。強さ 1 で 0.0180、4 で 0.0368 と、ライトの分は強さに比例した。炎を消しても残るライトによらない分 0.0117 を除いて 12.07）。条件ごとに別の <button class="term" data-term="hython">hython</button> で撮った（同じ hython で続けて撮ると、ライトの強さや入り切りを変えても、<button class="term" data-term="Karma">Karma</button> が前の場面を使い回した）。</p>
+          <p><strong>炎のボリュームの光だけで、なめらかに照らせる。</strong>ざらつきは炎だけ 3.7%、ライトだけ 4.6%。時間は 16 サンプルで 4.5 秒と 3.2 秒。小さな光る球（<a href="log.html#exp225">実験225</a>）とは違い、炎のボリュームはライトと同じくらいきれいに周りを照らした。</p>
+          <p><strong>見た目は炎だけがいちばん自然。</strong>炎だけでは、炎の形と揺れのとおりに、手前の薪と地面が照らされた。ライトだけでは、炎の無い所まで一様に明るくなった。</p>
+          <p><strong>炎＋ライトでは、ライトが炎のボリュームまで照らして、炎が白く飛んだ。</strong>ざらつきは 5.7%。画の下の部分の明るさは 0.276 で、炎だけ（0.087）とライトだけ（0.087）の足し算より明るかった。測った範囲に炎の下の方が入っていて、その炎がライトの光を受けて明るく写ったためと考えられる。</p>
+          <p><strong>決め方: 焚き火の明かりは、炎のボリュームの光に任せる。</strong>ライトを足すと炎が白く飛ぶので、足すなら炎の外（上や後ろ）に置く（まだ測っていない）。</p>
+        </div>
+
+        <p class="label">焚き火の照らし方（640×360・16 サンプル、ノイズ除去なし）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="231_grid.png" alt="左: 炎だけ。中: ライトだけ（炎は消した）。右: 炎＋ライト（炎が白く飛ぶ）。" loading="lazy" decoding="async"></div>
+            <figcaption>左: 炎だけ。中: ライトだけ（炎は消した）。右: 炎＋ライト（炎が白く飛ぶ）。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>照らし方</th><th>ライトの強さ</th><th>16 サンプル（秒）</th><th>128 サンプル（秒）</th><th>ざらつき（%）</th><th>画の下の明るさ</th></tr></thead>
+            <tbody>
+              <tr><td>炎のボリュームだけ</td><td class="num">0</td><td class="num">4.5</td><td class="num">8.7</td><td class="num">3.7</td><td class="num">0.087</td></tr>
+              <tr><td>ライトだけ（炎は消す）</td><td class="num">12.07</td><td class="num">3.2</td><td class="num">4.8</td><td class="num">4.6</td><td class="num">0.087</td></tr>
+              <tr><td>炎＋ライト</td><td class="num">12.07</td><td class="num">6.1</td><td class="num">14.0</td><td class="num">5.7</td><td class="num">0.276</td></tr>
+              <tr><td>ライトだけ（強さを決める）</td><td class="num">1</td><td class="num">3.0</td><td class="num">3.6</td><td class="num">2.5</td><td class="num">0.018</td></tr>
+              <tr><td>ライトだけ（強さを決める）</td><td class="num">4</td><td class="num">2.9</td><td class="num">3.8</td><td class="num">4.0</td><td class="num">0.037</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>炎のボリュームで照らしても、ざらつきは 3.7%。</strong>ライトと同じくらいなめらか。</li>
+          <li><strong>ライトを炎の中に足すと、炎まで照らされて白く飛ぶ。</strong></li>
+          <li><strong>積んだ薪の内側（高さ 25 cm）に置いたライトは、薪にさえぎられて周りを照らさなかった。</strong></li>
+          <li><strong>同じ hython で続けて撮ると、ライトの変更が画に出ないことがある。</strong>比べるときは条件ごとに起動し直す。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -11296,7 +11360,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 </div>
 </div>
 
-<script src="data/glossary-data-9073910555.js"></script>
+<script src="data/glossary-data-29417d62a7.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -11475,7 +11539,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>230</dd></div>
+        <div><dt>実験</dt><dd>231</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>463</dd></div>
@@ -11658,7 +11722,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
   </div>
 </div>
 
-<script src="data/search-data-875893eaca.js"></script>
+<script src="data/search-data-add023b7ef.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "case": "fire",
+      "lamp_intensity": 0.0,
+      "sec16": 4.5,
+      "sec128": 8.73,
+      "noise16": 0.0367,
+      "ground": 0.08736,
+      "sim_sec": 2.7
+    },
+    {
+      "case": "light",
+      "lamp_intensity": 12.07,
+      "sec16": 3.16,
+      "sec128": 4.8,
+      "noise16": 0.0463,
+      "ground": 0.08736,
+      "sim_sec": 3.1
+    },
+    {
+      "case": "fire_light",
+      "lamp_intensity": 12.07,
+      "sec16": 6.12,
+      "sec128": 13.96,
+      "noise16": 0.0574,
+      "ground": 0.27633,
+      "sim_sec": 3.1
+    },
+    {
+      "case": "light",
+      "lamp_intensity": 1.0,
+      "sec16": 2.99,
+      "sec128": 3.56,
+      "noise16": 0.0254,
+      "ground": 0.01797,
+      "sim_sec": 2.7
+    },
+    {
+      "case": "light",
+      "lamp_intensity": 4.0,
+      "sec16": 2.85,
+      "sec128": 3.81,
+      "noise16": 0.0404,
+      "ground": 0.03678,
+      "sim_sec": 2.7
+    }
+  ],
+  "frame": 60,
+  "res": [
+    640,
+    360
+  ]
+}

@@ -1547,6 +1547,12 @@ DONE = [
      "shots": ["230_grid.png", "230_graph.png"],
      "title": "速く回る物のブレは、オブジェクトごと回すなら既定（Rotation Blur・2 サンプル）で弧になる。SOP で形を回すと既定の Geometry Time Samples 2 ではまっすぐな線になり、8 で弧になる。時間はほぼ同じ",
      "note": "回る物のブレ: SOPで回すと Geometry Time Samples 8 で弧に"},
+    {"no": "231", "anchor": "exp231",
+     "tags": ["エフェクト", "Pyro", "炎", "Karma", "ライト", "制作"],
+     "log": "log_fx", "thumb": "231_grid.png",
+     "shots": ["231_grid.png", "231_graph.png"],
+     "title": "焚き火の炎のボリュームで周りを照らしても、ざらつきは 3.7%（16 サンプル）で、ライト（4.6%）と同じくらい。ライトを足すと炎まで照らされて白く飛ぶ",
+     "note": "焚き火の明かりは炎のボリュームで。ライトを足すと炎が白く飛ぶ"},
 ]
 
 PLANNED = []

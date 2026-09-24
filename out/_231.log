@@ -1,0 +1,4 @@
+{'case': 'fire', 'sec16': 4.56, 'sec128': 7.59, 'noise16': 0.0367, 'ground': 0.0874, 'lamp_intensity': 0}
+{'case': 'fire_light', 'sec16': 5.46, 'sec128': 12.85, 'noise16': 0.0368, 'ground': 0.0874, 'lamp_intensity': 7.4619}
+{'case': 'light', 'sec16': 2.96, 'sec128': 3.47, 'noise16': 0.0126, 'ground': 0.0117, 'lamp_intensity': 7.4619}
+保存: D:\Claude\houdini\out\231_stats.json
