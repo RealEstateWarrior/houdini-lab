@@ -122,7 +122,7 @@
   },
   {
    "title": "GPU の Karma XPU では、空が白く飛んだ",
-   "body": "Karma の Rendering Engine を XPU にして同じ絵を撮ると、13.5 秒（CPU は 35.8 秒）。速いが、空の左上の明るさは CPU 0.497 に対して XPU 1.000 で、白く飛んだ。空は点の色で光らせる材質（Use Point Color）で、XPU ではこの色が使われていないように見える（原因は確かめていない）。この場面は CPU で撮る。",
+   "body": "Karma の Rendering Engine を XPU にして同じ絵を撮ると、13.5 秒（CPU は 35.8 秒）。速いが、空の左上の明るさは CPU 0.497 に対して XPU 1.000 で、白く飛んだ。空は点の色で光らせる材質（Use Point Color）で、XPU ではこの色が使われていないように見えた（実験243 で分かった: XPU では、形に点の色 Cd があると principledshader の色が Cd に置き換わる。空の球は黒い Base Color が空の色に置き換わり、明かりを受けて明るくなったと考えられる。MaterialX の材質なら CPU と同じ色になる）。この場面は CPU で撮る。",
    "img": "",
    "cap": ""
   }

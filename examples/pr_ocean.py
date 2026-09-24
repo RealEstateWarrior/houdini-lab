@@ -220,7 +220,7 @@ def main():
          "img": "", "cap": ""},
         {"title": "GPU の Karma XPU では、空が白く飛んだ",
          "body": f"Karma の Rendering Engine を XPU にして同じ絵を撮ると、{xpu_sec:.1f} 秒（CPU は {cpu_sec:.1f} 秒）。速いが、"
-                 f"空の左上の明るさは CPU {sky_cpu:.3f} に対して XPU {sky_xpu:.3f} で、白く飛んだ。空は点の色で光らせる材質（Use Point Color）で、XPU ではこの色が使われていないように見える（原因は確かめていない）。"
+                 f"空の左上の明るさは CPU {sky_cpu:.3f} に対して XPU {sky_xpu:.3f} で、白く飛んだ。空は点の色で光らせる材質（Use Point Color）で、XPU ではこの色が使われていないように見えた（実験243 で分かった: XPU では、形に点の色 Cd があると principledshader の色が Cd に置き換わる。空の球は黒い Base Color が空の色に置き換わり、明かりを受けて明るくなったと考えられる。MaterialX の材質なら CPU と同じ色になる）。"
                  "この場面は CPU で撮る。",
          "img": "", "cap": ""},
     ]
