@@ -1589,6 +1589,12 @@ DONE = [
      "shots": ["237_grid.png", "237_graph.png"],
      "title": "Vellum の風船の体積は、Pressure の Rest Length Scale の倍率ちょうどになる（3 なら 3.00 倍）。2 フレームで落ち着く。ただし 2 倍を超えるとしずく形が消えて球になり、膜が柔らかい（10²）と横につぶれる",
      "note": "風船の体積は Rest Length Scale の倍率ちょうどに。2倍を超えると球に"},
+    {"no": "238", "anchor": "exp238",
+     "tags": ["Karma", "海", "制作"],
+     "log": "log_pm", "thumb": "238_grid.png",
+     "shots": ["238_grid.png", "238_curve.png", "238_graph.png"],
+     "title": "水面に映る太陽のきらめきは、Karma の Color Limit（既定 10）で明るさが切り詰められている。1000 にすると光の道は 6.8 倍明るく、16 サンプルのざらつきも 28% → 201% に増える。1 に下げるときらめきが鈍る",
+     "note": "太陽のきらめきは Color Limit 10 で切り詰められている"},
 ]
 
 PLANNED = []

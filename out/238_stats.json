@@ -1,0 +1,64 @@
+{
+  "rows": [
+    {
+      "case": "cl1",
+      "color_limit": 1,
+      "sec": 6.48,
+      "path_mean": 0.3129,
+      "hot_px": 0,
+      "noise": 0.0888
+    },
+    {
+      "case": "cl3",
+      "color_limit": 3,
+      "sec": 6.92,
+      "path_mean": 0.4621,
+      "hot_px": 0,
+      "noise": 0.1535
+    },
+    {
+      "case": "cl10",
+      "color_limit": 10,
+      "sec": 7.51,
+      "path_mean": 0.7254,
+      "hot_px": 965,
+      "noise": 0.285
+    },
+    {
+      "case": "cl30",
+      "color_limit": 30,
+      "sec": 7.91,
+      "path_mean": 1.128,
+      "hot_px": 1467,
+      "noise": 0.5007
+    },
+    {
+      "case": "cl100",
+      "color_limit": 100,
+      "sec": 7.85,
+      "path_mean": 1.8688,
+      "hot_px": 1877,
+      "noise": 0.8705
+    },
+    {
+      "case": "cl1000",
+      "color_limit": 1000,
+      "sec": 7.71,
+      "path_mean": 4.9421,
+      "hot_px": 1965,
+      "noise": 2.0136
+    }
+  ],
+  "res": [
+    640,
+    360
+  ],
+  "frame": 30,
+  "default_colorlimit": 10.0,
+  "path": [
+    200,
+    300,
+    230,
+    330
+  ]
+}
