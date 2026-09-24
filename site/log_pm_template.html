@@ -10472,6 +10472,51 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 229 ===================== -->
+    <article class="entry entry--current" id="exp229">
+      <div class="badge">229</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>毛は曲線のまま Karma に渡す。100 万本でも 12 秒（640×360・8 サンプル）。polywire で筒の面にすると 1 本あたりが重く、3 万本で 9 秒</h2>
+        <p class="path">examples/229_karma_hair_count.py &nbsp;·&nbsp; 毛は曲線のまま渡す。100万本で12秒</p>
+
+        <div class="prose">
+          <p><strong>課題: 動物の毛並みや芝生を作ると、毛が何十万本にもなる。/obj の <button class="term" data-term="Karma">Karma</button> は曲線を、太さ（width）のある毛として描ける。曲線のまま渡すのと、polywire で細い筒の面にして渡すのとで、時間はどう違うか。何本まで撮れるか。</strong></p>
+          <p>半径 0.5 m の球の表面に N 本の毛を生やした（<button class="term" data-term="VEX">VEX</button> で 1 本 8 点の曲線、長さ 8 cm、根元の太さ 1 mm → 先 0.2 mm）。640×360・8 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で、はじめに小さく 1 枚撮って捨て、同じ画を 2 回続けて撮った。</p>
+          <p><strong>曲線のままなら、100 万本でも十数秒。</strong>1 万・10 万・100 万本で 4.7・9.8・12.4 秒。2 回目も 4.8・10.8・11.8 秒で、場面を渡す時間はほとんど無い。本数が 100 倍でも時間は 3 倍に満たなかった。</p>
+          <p><strong>polywire で筒の面にすると、1 本あたりが重い。</strong>1 万・3 万本で 6.1・9.2 秒。面は 1 本 30 枚（3 万本で 900,000 枚）になり、3 万本で曲線 10 万本と同じくらいの時間がかかった。</p>
+          <p><strong>決め方: 毛・芝・髪は、曲線のまま（width で太さ）Karma に渡す。</strong>polywire は、毛を別のソフトへ書き出すなど、面が要るときだけ使う。</p>
+        </div>
+
+        <p class="label">毛の本数と撮る時間（640×360・8 サンプル＋ノイズ除去）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="229_grid.png" alt="曲線 10 万本・100 万本と、polywire 3 万本。" loading="lazy" decoding="async"></div>
+            <figcaption>曲線 10 万本・100 万本と、polywire 3 万本。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>渡し方</th><th>本数</th><th>面・曲線の数</th><th>点の数</th><th>1 回目（秒）</th><th>2 回目（秒）</th></tr></thead>
+            <tbody>
+              <tr><td>曲線のまま</td><td class="num">10,000</td><td class="num">10,000</td><td class="num">80,000</td><td class="num">4.7</td><td class="num">4.8</td></tr>
+              <tr><td>曲線のまま</td><td class="num">100,000</td><td class="num">100,000</td><td class="num">800,000</td><td class="num">9.8</td><td class="num">10.8</td></tr>
+              <tr><td>曲線のまま</td><td class="num">1,000,000</td><td class="num">1,000,000</td><td class="num">8,000,000</td><td class="num">12.4</td><td class="num">11.8</td></tr>
+              <tr><td>polywire（筒の面）</td><td class="num">10,000</td><td class="num">300,000</td><td class="num">320,000</td><td class="num">6.1</td><td class="num">6.0</td></tr>
+              <tr><td>polywire（筒の面）</td><td class="num">30,000</td><td class="num">900,000</td><td class="num">960,000</td><td class="num">9.2</td><td class="num">9.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>毛は曲線のまま渡すと、100 万本でも 12 秒。</strong></li>
+          <li><strong>polywire で筒の面にすると、3 万本で 9 秒。</strong>曲線 10 万本と同じくらい。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

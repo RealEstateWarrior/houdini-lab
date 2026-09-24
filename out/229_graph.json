@@ -1,0 +1,156 @@
+{
+  "title": "実験229",
+  "network": "/obj/fur",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "skin",
+      "type": "sphere",
+      "pos": [
+        -1.694,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.5,
+        "rady": 0.5,
+        "radz": 0.5,
+        "rows": 48,
+        "cols": 64
+      }
+    },
+    {
+      "name": "roots",
+      "type": "pointgenerate",
+      "pos": [
+        0.565,
+        4.97
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000
+      }
+    },
+    {
+      "name": "grow_hair",
+      "type": "attribwrangle",
+      "pos": [
+        0.565,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 根元: 球の表面の乱数の位置。そこから外へ 8 cm、先ほど少し横へ曲げた 8 点の曲線を作る\nvector d = normalize(set(rand(@ptnum * 3 + 0.1), rand(@ptnum * 3 +..."
+      }
+    },
+    {
+      "name": "tubes",
+      "type": "polywire",
+      "pos": [
+        2.824,
+        3.087
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "radius": 0.0005
+      }
+    },
+    {
+      "name": "curves_or_tubes",
+      "type": "switch",
+      "pos": [
+        1.694,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "skin_and_hair",
+      "type": "merge",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/hair_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "roots",
+      "from_output": 0,
+      "to": "grow_hair",
+      "to_input": 0
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "grow_hair",
+      "to_input": 1
+    },
+    {
+      "from": "grow_hair",
+      "from_output": 0,
+      "to": "tubes",
+      "to_input": 0
+    },
+    {
+      "from": "grow_hair",
+      "from_output": 0,
+      "to": "curves_or_tubes",
+      "to_input": 0
+    },
+    {
+      "from": "tubes",
+      "from_output": 0,
+      "to": "curves_or_tubes",
+      "to_input": 1
+    },
+    {
+      "from": "skin",
+      "from_output": 0,
+      "to": "skin_and_hair",
+      "to_input": 0
+    },
+    {
+      "from": "curves_or_tubes",
+      "from_output": 0,
+      "to": "skin_and_hair",
+      "to_input": 1
+    },
+    {
+      "from": "skin_and_hair",
+      "from_output": 0,
+      "to": "assign",
+      "to_input": 0
+    }
+  ]
+}

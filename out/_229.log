@@ -1,0 +1,6 @@
+{'case': 'curves_10k', 'kind': 'curves', 'count': 10000, 'prims': 10000, 'points': 80000, 'sec_first': 4.72, 'sec_again': 4.78}
+{'case': 'curves_100k', 'kind': 'curves', 'count': 100000, 'prims': 100000, 'points': 800000, 'sec_first': 9.76, 'sec_again': 10.85}
+{'case': 'curves_1000k', 'kind': 'curves', 'count': 1000000, 'prims': 1000000, 'points': 8000000, 'sec_first': 12.4, 'sec_again': 11.84}
+{'case': 'polywire_10k', 'kind': 'polywire', 'count': 10000, 'prims': 300000, 'points': 320000, 'sec_first': 6.06, 'sec_again': 6.03}
+{'case': 'polywire_30k', 'kind': 'polywire', 'count': 30000, 'prims': 900000, 'points': 960000, 'sec_first': 9.2, 'sec_again': 8.97}
+保存: D:\Claude\houdini\out\229_stats.json
