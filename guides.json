@@ -4439,15 +4439,15 @@
           "facts": [
             [
               "足すノード",
-              "19個＋空 11個（ほかに材質5つ・太陽の光・カメラ）"
+              "23個＋空 11個（ほかに材質5つ・太陽の光・カメラ）"
             ],
             [
               "泡の白い点（0.5 以上）",
-              "11.6%"
+              "14.6%"
             ],
             [
               "映像を撮る時間",
-              "23.7分（Karma 960×540、120 枚）"
+              "26.3分（Karma 960×540、120 枚）"
             ],
             [
               "仕上がりを撮る時間",
@@ -4468,15 +4468,15 @@
               "title": "板を水平線まで広げる",
               "node": "attribwrangle",
               "ui_node": "spread_to_horizon",
-              "body": "夕暮れ版の 1・2 段目と同じ。<code>grid</code>（Size 1 × 1、Rows 1400・Columns 1600、Center 0.5・0・0.5）を、<code>attribwrangle</code> でカメラの前の扇形に並べ直す。違いは 2 つ。広角（焦点距離 22 mm）で撮るので横幅を距離と同じにしたことと、動かす前の位置を <code>rest</code> に覚えておくこと。<code>rest</code> から「波打ち際から何 m 沖か」を出して、次の段の崩れる波と泡に使う。",
+              "body": "夕暮れ版の 1・2 段目と同じ。<code>grid</code>（Size 1 × 1、<strong>Rows 2200・Columns 1000</strong>、Center 0.5・0・0.5）を、<code>attribwrangle</code> でカメラの前の扇形に並べ直す。違いは 2 つ。広角（焦点距離 22 mm）で撮るので横幅を距離と同じにしたことと、動かす前の位置を <code>rest</code> に覚えておくこと。行と列の数も変えた。1400×1600 だと 55 m 先の目が横 7 cm・奥行き 31 cm と細長く、太陽の照り返しが放射状の筋になったので、行を増やして目を正方形に近づけた（点の数は 220 万でほぼ同じ）。<code>rest</code> から「波打ち際から何 m 沖か」を出して、次の段の崩れる波と泡に使う。",
               "img": "pr_ocean_winter_1.png",
               "cap": "上から見た板。カメラ（下の頂点）から 8 km 先まで扇形に広がる。"
             },
             {
-              "title": "沖の波を 3 枚の設計図で動かす",
+              "title": "沖の波とさざ波を、4 枚の設計図で動かす",
               "node": "oceanevaluate",
-              "ui_node": "move_points",
-              "body": "夕暮れ版と同じく、<code>oceanspectrum</code> 3 枚を <code>merge</code> して <code>oceanevaluate</code> に渡す（Time に <code>$T</code>）。冬の朝は風が少し強く、写真の水面は一面がきらめいていた。きらめきは、細かい波の 1 つ 1 つが太陽を映したものなので、<strong>さざ波（ripples）を Grid Size 1.3・Speed 7・Chop 1.5・Scale 1.6</strong> と、細かく急にする。うねりは Grid Size 200・Speed 5・Scale 0.5、風の波は 23・6・0.7。",
+              "ui_node": "add_ripples",
+              "body": "夕暮れ版と同じく <code>oceanspectrum</code> を <code>merge</code> して <code>oceanevaluate</code> に渡す（Time に <code>$T</code>）。今回は 2 回に分ける。<br>・1 回目（move_points）: うねり（Grid Size 200・Speed 5・Scale 0.5）と風の波（23・6・0.7）。<br>・2 回目（add_ripples）: さざ波 2 枚（<strong>Grid Size 4.7・Speed 7・Scale 2.4</strong> と <strong>1.9・5・2.4</strong>、どちらも Resolution Exponent 10）。間の <code>attribwrangle</code> で、さざ波を足す前の位置を <code>before_ripples</code> に覚えておき、次の段で遠くのさざ波を消す。<br>冬の朝の写真は、太陽の前の水面が広くきらめいている。きらめきは細かい波の 1 つ 1 つが太陽を映したもの（実験218）。本物の海面の傾きは、Cox と Munk が測った式で計算すると、風 5 m/秒で平均約 9°。この場面の水面（カメラから 15〜80 m）を測ると、さざ波 1 枚では平均 5.9° と平らすぎたので、2 枚にして強め、平均 9.0° にした。さざ波の Grid Size を 1.3 m にすると、遠くでそのくり返しが縦の縞に見えたので、4.7 m と 1.9 m にした（落とし穴を参照）。",
               "img": "pr_ocean_winter_2.png",
               "cap": "波打ち際から沖（4〜60 m）の波。フレーム 30。",
               "ui_parm": "ampscale"
@@ -4485,9 +4485,9 @@
               "title": "岸で崩れる波と泡を VEX で足す",
               "node": "attribwrangle",
               "ui_node": "breaking_waves",
-              "body": "<code>attribwrangle</code> で、岸へ進む波の列を足す。本物の砂浜の波は、沖から浅い所へ来ると高く切り立ち、崩れて白い泡になり、低くなって岸を這い上がる。これを「波打ち際から沖へ何 m か（<code>s</code>）」で書き分ける。<br>・<strong>波の列</strong>: 長さ 26 m・周期 9 秒で岸へ進む。<code>cos(ph - 0.9 * sin(ph))</code> で、岸側が切り立つ形にする。<br>・<strong>高さ</strong>: 沖 160 m で 0.12 m、崩れる所（沖 27〜41 m、横に揺らす）で 0.75 m。崩れたあとは低くする。<br>・<strong>泡</strong>: 崩れる所から岸までを泡の範囲にし、波頭の白い線と、波頭が通ったあとに薄れていくレース状の泡（<code>wnoise</code> の網目）を足す。<br>点の色 <code>Cd</code> を、深い青から泡の白へ混ぜる。",
+              "body": "<code>attribwrangle</code> で、岸へ進む波の列を足す。本物の砂浜の波は、沖から浅い所へ来ると高く切り立ち、崩れて白い泡になり、低くなって岸を這い上がる。これを「波打ち際から沖へ何 m か（<code>s</code>）」で書き分ける。<br>・<strong>遠くのさざ波を消す</strong>: カメラから 25〜90 m で、<code>before_ripples</code> との差を 0 へ近づける。遠くのさざ波は画の 1 画素より細かい。<br>・<strong>波の列</strong>: 周期 8 秒で岸へ進む。浅い所の波は遅く、間が詰まるので、長さを沖 80 m の 30 m から岸の 12 m へ縮める。<code>cos(ph - 0.9 * sin(ph))</code> で、岸側が切り立つ形にする。<br>・<strong>高さ</strong>: 沖 160 m で 0.12 m、崩れる所（沖 24〜36 m、横に揺らす）で 0.6 m。崩れたあとは低くする。<br>・<strong>泡</strong>: 本物の砂浜の動画では、崩れた波頭から岸まで、岸と平行な細い泡の筋が何本も重なっていた。そこで、横にはゆっくり・奥行きにはすばやく変わるノイズの「尾根」（<code>1 - abs(noise * 2 - 1)</code>）で筋を描き、波頭が通ったあとに薄れさせる。波頭の白い線は、2 つの大きさのノイズで不規則にちぎる。<br>・<strong>水の色</strong>: 深い青緑。波打ち際の薄い水は下の砂が透けるので、暗い茶色に寄せる。点の色 <code>Cd</code> を、水の色から泡の灰白（0.72）へ混ぜる。",
               "img": "pr_ocean_winter_3.png",
-              "cap": "泡の白い線とレース状の泡（フレーム 30）。",
+              "cap": "岸と平行な泡の筋と、波頭の白い線（フレーム 30）。",
               "ui_parm": "snippet"
             },
             {
@@ -4511,21 +4511,27 @@
               "title": "材質と太陽の光を置く",
               "node": "merge",
               "ui_node": "sea_and_beach",
-              "body": "<code>principledshader</code> を 3 つ。水は Use Point Color・<strong>Roughness 0.04</strong>・IOR 1.33。濡れた砂は Roughness 0.06 でつやを出し、乾いた砂は 0.85。空の材質は <strong>Reflectivity を 0</strong> にする（落とし穴を参照）。<br>太陽の光は <code>hlight</code> の <strong>disk</strong>（円い光）を、太陽の向きへ 5 km 先に、見かけ 0.54°（半径 23.6 m）で置き、<strong>Normalize Light Intensity to Area を切って Intensity 150,000</strong>。平行光（distant）は空の球にさえぎられて届かない（落とし穴を参照）。",
+              "body": "<code>principledshader</code> を 3 つ。水は Use Point Color・<strong>Roughness 0.07</strong>・IOR 1.33（画素より細かい波のぶんを、つやのぼけで足す。0.08 から光の道が白い帯に見え始める。実験218）。濡れた砂は Roughness 0.06 でつやを出し、乾いた砂は 0.85。空の材質は <strong>Reflectivity を 0</strong> にする（落とし穴を参照）。<br>太陽の光は <code>hlight</code> の <strong>disk</strong>（円い光）を、太陽の向きへ 5 km 先に、見かけ 0.54°（半径 23.6 m）で置き、<strong>Normalize Light Intensity to Area を切って Intensity 250,000</strong>。平行光（distant）は空の球にさえぎられて届かない（落とし穴を参照）。",
               "img": "",
               "cap": ""
             }
           ],
           "traps": [
             {
+              "title": "さざ波の Grid Size が小さいと、遠くでくり返しが縦の縞に見える",
+              "body": "さざ波を Grid Size 1.3 m で強めると、カメラから 50 m ほどの水面に、奥へ向かう縦の縞が並んだ。縞の間は画の上で約 1.3 m で、設計図がくり返す間と同じだった。遠くでは奥行きの模様は縮んで見えなくなるが、横のくり返しは残るため。Grid Size を 4.7 m・1.9 m に広げ、Resolution Exponent を 10 に上げて細かい波は残すと、縞は消えた。",
+              "img": "",
+              "cap": ""
+            },
+            {
               "title": "平行光（distant）の太陽は、空の球にさえぎられて届かない",
-              "body": "太陽の光を <code>hlight</code> の distant にすると、強さを 30 にしても 1000 にしても、海の明るさは 0.356 と 0.356 で変わらなかった（disk の太陽では 0.490）。平行光は無限の遠くから来るので、半径 20 km の空の球が影を落としてしまう。空のオブジェクトの Render Visibility を「-shadow」にしても変わらなかった。空の球の内側に、円い光（disk）を置く。",
+              "body": "太陽の光を <code>hlight</code> の distant にすると、強さを 30 にしても 1000 にしても、海の明るさは 0.294 と 0.294 で変わらなかった（disk の太陽では 0.462）。平行光は無限の遠くから来るので、半径 20 km の空の球が影を落としてしまう。空のオブジェクトの Render Visibility を「-shadow」にしても変わらなかった。空の球の内側に、円い光（disk）を置く。",
               "img": "",
               "cap": ""
             },
             {
               "title": "空の材質の Reflectivity が既定のままだと、太陽の光を映して空に大きな光の玉ができる",
-              "body": "光る材質でも、principledshader の Reflectivity は既定 1 で、つやが残る。強い太陽の光を空の球の内側が映して、太陽のまわりの空の明るさが 0.386 から 0.515 になり、濡れた砂にもその照り返しが太い帯で写った。空と太陽の円盤の Reflectivity は 0 にする。",
+              "body": "光る材質でも、principledshader の Reflectivity は既定 1 で、つやが残る。強い太陽の光を空の球の内側が映して、太陽のまわりの空の明るさが 0.386 から 0.559 になり、濡れた砂にもその照り返しが太い帯で写った。空と太陽の円盤の Reflectivity は 0 にする。",
               "img": "",
               "cap": ""
             },
@@ -4537,7 +4543,21 @@
             }
           ],
           "anim_cap": "Karma で撮った波の動き（5 秒、120 フレーム、960×540）。沖で崩れた波が泡になって岸へ寄せる。",
-          "compare": "<strong>参考の写真（七里ヶ浜の砂浜から撮った冬の朝）と並べて、まだ足りない所。</strong>写真は、太陽の下だけでなく水面の広い範囲が細かくきらめいているが、この版の光の道は細い（実験218 で、幅を決めるつまみを測った）。崩れる直前の波が緑に透ける壁も出せておらず、泡の白い線だけになっている。濡れた砂の粒のきらめきも弱い。写真の太陽の放射状の光の筋は、カメラのレンズで出るものなので入れていない。"
+          "compare": "<strong>参考の写真と動画と並べて、まだ足りない所。</strong>崩れる直前の波が緑に透ける壁（写真 2 枚目）は出せておらず、泡の筋と白い線だけになっている。泡は点の色で塗っているので、厚みや泡粒の立体感はない。写真の太陽の放射状の光の筋は、カメラのレンズで出るものなので入れていない。",
+          "revisions": [
+            {
+              "date": "2026-09-24",
+              "why": "公開したあと、「白波のない夕暮れ版より質がだいぶ落ちた」と指摘を受けた。本物の砂浜の波の動画（Wikimedia Commons の Herzliya の砂浜など）を見直すと、前の版とは 4 つ違っていた。",
+              "changes": [
+                "<strong>泡を、岸と平行な細い筋にした。</strong>前の版は太い白い帯 2 本と、蜂の巣のような網目（wnoise）だった。動画では、崩れた波頭から岸まで細い泡の筋が何本も重なる。",
+                "<strong>水面の傾きを本物に合わせた。</strong>前の版は平均 5.9° と平らで、光の道が細い棒になっていた。さざ波を 2 枚にして平均 9.0°（Cox と Munk の式で約 9°）にし、Roughness を 0.04 → 0.07 にした。",
+                "<strong>縞と放射状の筋を消した。</strong>さざ波のくり返し（1.3 m）が遠くで縦縞に、細長い板の目が照り返しの筋になっていた。設計図を 4.7 m・1.9 m に広げ、遠くのさざ波は消し、板の目を正方形に近づけた。",
+                "<strong>岸近くの波を短くし、濡れた砂に細かい凸凹を足した。</strong>浅い所の波は遅く、間が詰まる。濡れた砂の照り返しが 1 本のなめらかな柱だったので、30 cm ほどの凸凹で砕けさせた。"
+              ],
+              "before": "pr_ocean_winter_hero_v1.png",
+              "reference": "七里ヶ浜の砂浜から撮った冬の朝の写真 5 枚と、Wikimedia Commons の「Water waves in Herzliya beach」（岸の目の高さから撮った、寄せては返す波の動画）"
+            }
+          ]
         }
       ]
     },

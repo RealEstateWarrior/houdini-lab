@@ -1326,5 +1326,584 @@
       "wanted": "material",
       "png": "guide_fireworks_p6.png"
     }
+  },
+  "ocean_winter": {
+    "1": {
+      "node": "/obj/ocean_winter/spread_to_horizon",
+      "wanted": "attribwrangle",
+      "png": "guide_ocean_winter_p1.png"
+    },
+    "2": {
+      "node": "/obj/ocean_winter/move_points",
+      "wanted": "oceanevaluate",
+      "png": "guide_ocean_winter_p2.png"
+    },
+    "3": {
+      "node": "/obj/ocean_winter/breaking_waves",
+      "wanted": "attribwrangle",
+      "png": "guide_ocean_winter_p3.png"
+    },
+    "4": {
+      "node": "/obj/ocean_winter/wet_sand_n",
+      "wanted": "normal",
+      "png": "guide_ocean_winter_p4.png"
+    }
+  },
+  "texture": {
+    "1": {
+      "node": "/obj/terrain/erode/copnet1",
+      "wanted": "copnet",
+      "png": "guide_texture_p1.png"
+    }
+  },
+  "turntable": {
+    "1": {
+      "node": "/obj/spun/letters",
+      "wanted": "font",
+      "png": "guide_turntable_p1.png"
+    },
+    "2": {
+      "node": "/obj/spun/center",
+      "wanted": "xform",
+      "png": "guide_turntable_p2.png"
+    },
+    "3": {
+      "node": "/obj/spun/spin",
+      "wanted": "xform",
+      "png": "guide_turntable_p3.png"
+    },
+    "4": {
+      "node": "/obj/spun/spin",
+      "wanted": "xform",
+      "png": "guide_turntable_p4.png"
+    }
+  },
+  "glow": {
+    "1": {
+      "node": "/obj/glow/floor",
+      "wanted": "grid",
+      "png": "guide_glow_p1.png"
+    },
+    "2": {
+      "node": "/mat/glow_mat",
+      "wanted": "principledshader",
+      "png": "guide_glow_p2.png"
+    },
+    "3": {
+      "node": "/obj/glow/assign_glow",
+      "wanted": "material",
+      "png": "guide_glow_p3.png"
+    },
+    "4": {
+      "node": "/out/karma_emit4",
+      "wanted": "karma",
+      "png": "guide_glow_p4.png"
+    }
+  },
+  "moss": {
+    "1": {
+      "node": "/obj/moss/face_dir",
+      "wanted": "normal",
+      "png": "guide_moss_p1.png"
+    },
+    "2": {
+      "node": "/obj/moss/where_moss",
+      "wanted": "attribwrangle",
+      "png": "guide_moss_p2.png"
+    },
+    "3": {
+      "node": "/obj/moss/roots",
+      "wanted": "scatter",
+      "png": "guide_moss_p3.png"
+    },
+    "4": {
+      "node": "/obj/moss/grow_strands",
+      "wanted": "attribwrangle",
+      "png": "guide_moss_p4.png"
+    },
+    "5": {
+      "node": "/obj/moss/mossy_stone",
+      "wanted": "merge",
+      "png": "guide_moss_p5.png"
+    }
+  },
+  "glass": {
+    "1": {
+      "node": "/obj/glass/preview_pane",
+      "wanted": "merge",
+      "png": "guide_glass_p1.png"
+    },
+    "2": {
+      "node": "/obj/glass/crack",
+      "wanted": "rbdmaterialfracture",
+      "png": "guide_glass_p2.png"
+    },
+    "3": {
+      "node": "/obj/glass/hold_edges",
+      "wanted": "attribwrangle",
+      "png": "guide_glass_p3.png"
+    },
+    "4": {
+      "node": "/obj/glass/shatter",
+      "wanted": "rbdbulletsolver",
+      "png": "guide_glass_p4.png"
+    },
+    "5": {
+      "node": "/obj/glass/window",
+      "wanted": "merge",
+      "png": "guide_glass_p5.png"
+    }
+  },
+  "tablecloth": {
+    "1": {
+      "node": "/obj/tablecloth/table",
+      "wanted": "merge",
+      "png": "guide_tablecloth_p1.png"
+    },
+    "2": {
+      "node": "/obj/tablecloth/cloth",
+      "wanted": "grid",
+      "png": "guide_tablecloth_p2.png"
+    },
+    "3": {
+      "node": "/obj/tablecloth/drop",
+      "wanted": "vellumsolver",
+      "png": "guide_tablecloth_p3.png"
+    },
+    "4": {
+      "node": "/obj/tablecloth/thickness",
+      "wanted": "polyextrude",
+      "png": "guide_tablecloth_p4.png"
+    },
+    "5": {
+      "node": "/obj/tablecloth/dining",
+      "wanted": "merge",
+      "png": "guide_tablecloth_p5.png"
+    }
+  },
+  "chain": {
+    "1": {
+      "node": "/obj/chain/hang",
+      "wanted": "attribwrangle",
+      "png": "guide_chain_p1.png"
+    },
+    "2": {
+      "node": "/obj/chain/one_per_link",
+      "wanted": "resample",
+      "png": "guide_chain_p2.png"
+    },
+    "3": {
+      "node": "/obj/chain/twist_every_other",
+      "wanted": "attribwrangle",
+      "png": "guide_chain_p3.png"
+    },
+    "4": {
+      "node": "/obj/chain/chain",
+      "wanted": "copytopoints",
+      "png": "guide_chain_p4.png"
+    },
+    "5": {
+      "node": "/obj/chain/chain_and_posts",
+      "wanted": "merge",
+      "png": "guide_chain_p5.png"
+    }
+  },
+  "web": {
+    "1": {
+      "node": "/obj/web/spokes",
+      "wanted": "attribwrangle",
+      "png": "guide_web_p1.png"
+    },
+    "2": {
+      "node": "/obj/web/spiral",
+      "wanted": "attribwrangle",
+      "png": "guide_web_p2.png"
+    },
+    "3": {
+      "node": "/obj/web/pick_drops",
+      "wanted": "attribwrangle",
+      "png": "guide_web_p3.png"
+    },
+    "4": {
+      "node": "/obj/web/drops",
+      "wanted": "copytopoints",
+      "png": "guide_web_p4.png"
+    },
+    "5": {
+      "node": "/obj/web/web",
+      "wanted": "merge",
+      "png": "guide_web_p5.png"
+    }
+  },
+  "fog": {
+    "1": {
+      "node": "/obj/fog/trees",
+      "wanted": "copytopoints",
+      "png": "guide_fog_p1.png"
+    },
+    "2": {
+      "node": "/obj/fog/leaf_gaps",
+      "wanted": "attribwrangle",
+      "png": "guide_fog_p2.png"
+    },
+    "3": {
+      "node": "/obj/fog/fog_density",
+      "wanted": "volumewrangle",
+      "png": "guide_fog_p3.png"
+    },
+    "4": {
+      "node": "/obj/fog/forest",
+      "wanted": "merge",
+      "png": "guide_fog_p4.png"
+    }
+  },
+  "ripple": {
+    "1": {
+      "node": "/obj/ripple/puddle",
+      "wanted": "grid",
+      "png": "guide_ripple_p1.png"
+    },
+    "2": {
+      "node": "/obj/ripple/rain_rings",
+      "wanted": "attribwrangle",
+      "png": "guide_ripple_p2.png"
+    },
+    "3": {
+      "node": "/obj/ripple/puddle_shape",
+      "wanted": "attribwrangle",
+      "png": "guide_ripple_p3.png"
+    },
+    "4": {
+      "node": "/obj/ripple/rainy_street",
+      "wanted": "merge",
+      "png": "guide_ripple_p4.png"
+    }
+  },
+  "sunflower": {
+    "1": {
+      "node": "/obj/sunflower/golden_spiral",
+      "wanted": "attribwrangle",
+      "png": "guide_sunflower_p1.png"
+    },
+    "2": {
+      "node": "/obj/sunflower/seed_disk",
+      "wanted": "copytopoints",
+      "png": "guide_sunflower_p2.png"
+    },
+    "3": {
+      "node": "/obj/sunflower/petal_shape",
+      "wanted": "attribwrangle",
+      "png": "guide_sunflower_p3.png"
+    },
+    "4": {
+      "node": "/obj/sunflower/petals",
+      "wanted": "copytopoints",
+      "png": "guide_sunflower_p4.png"
+    },
+    "5": {
+      "node": "/obj/sunflower/face_camera",
+      "wanted": "xform",
+      "png": "guide_sunflower_p5.png"
+    }
+  },
+  "lava": {
+    "1": {
+      "node": "/obj/lava/ground",
+      "wanted": "grid",
+      "png": "guide_lava_p1.png"
+    },
+    "2": {
+      "node": "/obj/lava/cracked_crust",
+      "wanted": "attribwrangle",
+      "png": "guide_lava_p2.png"
+    },
+    "3": {
+      "node": "/obj/lava/hot_colors",
+      "wanted": "attribwrangle",
+      "png": "guide_lava_p3.png"
+    },
+    "4": {
+      "node": "/obj/lava/assign_lava",
+      "wanted": "material",
+      "png": "guide_lava_p4.png"
+    }
+  },
+  "tree": {
+    "1": {
+      "node": "/obj/tree/mark_leaf",
+      "wanted": "attribwrangle",
+      "png": "guide_tree_p1.png"
+    },
+    "2": {
+      "node": "/obj/tree/grow",
+      "wanted": "lsystem",
+      "png": "guide_tree_p2.png"
+    },
+    "3": {
+      "node": "/obj/tree/tree",
+      "wanted": "merge",
+      "png": "guide_tree_p3.png"
+    },
+    "4": {
+      "node": "/obj/tree/assign_leaf",
+      "wanted": "material",
+      "png": "guide_tree_p4.png"
+    }
+  },
+  "sandpile": {
+    "1": {
+      "node": "/obj/sandpile/sand",
+      "wanted": "mpmsource",
+      "png": "guide_sandpile_p1.png"
+    },
+    "2": {
+      "node": "/obj/sandpile/collapse",
+      "wanted": "mpmsolver",
+      "png": "guide_sandpile_p2.png"
+    },
+    "3": {
+      "node": "/obj/sandpile/sandbox",
+      "wanted": "merge",
+      "png": "guide_sandpile_p3.png"
+    }
+  },
+  "candle": {
+    "1": {
+      "node": "/obj/candle/candle_and_wick",
+      "wanted": "merge",
+      "png": "guide_candle_p1.png"
+    },
+    "2": {
+      "node": "/obj/candle/teardrop",
+      "wanted": "volumewrangle",
+      "png": "guide_candle_p2.png"
+    },
+    "3": {
+      "node": "/obj/candle/candle_lit",
+      "wanted": "merge",
+      "png": "guide_candle_p3.png"
+    }
+  },
+  "cloud": {
+    "1": {
+      "node": "/obj/cloud/flat_bottom",
+      "wanted": "clip",
+      "png": "guide_cloud_p1.png"
+    },
+    "2": {
+      "node": "/obj/cloud/to_cloud",
+      "wanted": "cloud",
+      "png": "guide_cloud_p2.png"
+    },
+    "3": {
+      "node": "/obj/cloud/fluffy_edges",
+      "wanted": "cloudnoise",
+      "png": "guide_cloud_p3.png"
+    },
+    "4": {
+      "node": "/obj/cloud/fluffy_edges",
+      "wanted": "cloudnoise",
+      "png": "guide_cloud_p4.png"
+    }
+  },
+  "coins": {
+    "1": {
+      "node": "/obj/coins/relief",
+      "wanted": "attribwrangle",
+      "png": "guide_coins_p1.png"
+    },
+    "2": {
+      "node": "/obj/coins/coins",
+      "wanted": "copytopoints",
+      "png": "guide_coins_p2.png"
+    },
+    "3": {
+      "node": "/obj/coins/drop",
+      "wanted": "rbdbulletsolver",
+      "png": "guide_coins_p3.png"
+    },
+    "4": {
+      "node": "/obj/coins/coins_on_table",
+      "wanted": "merge",
+      "png": "guide_coins_p4.png"
+    }
+  },
+  "letters": {
+    "1": {
+      "node": "/obj/letters/letter_colors",
+      "wanted": "attribwrangle",
+      "png": "guide_letters_p1.png"
+    },
+    "2": {
+      "node": "/obj/letters/crack",
+      "wanted": "rbdmaterialfracture",
+      "png": "guide_letters_p2.png"
+    },
+    "3": {
+      "node": "/obj/letters/drop",
+      "wanted": "rbdbulletsolver",
+      "png": "guide_letters_p3.png"
+    },
+    "4": {
+      "node": "/obj/letters/assign_letters",
+      "wanted": "material",
+      "png": "guide_letters_p4.png"
+    }
+  },
+  "pdg": {
+    "1": {
+      "node": "/obj/pdg/rock_out",
+      "wanted": "normal",
+      "png": "guide_pdg_p1.png"
+    }
+  },
+  "snowman": {
+    "1": {
+      "node": "/obj/snowman/snow_grain",
+      "wanted": "mountain",
+      "png": "guide_snowman_p1.png"
+    },
+    "2": {
+      "node": "/obj/snowman/twig_thickness",
+      "wanted": "polywire",
+      "png": "guide_snowman_p2.png"
+    },
+    "3": {
+      "node": "/obj/snowman/face",
+      "wanted": "merge",
+      "png": "guide_snowman_p3.png"
+    },
+    "4": {
+      "node": "/obj/snowman/snowman",
+      "wanted": "merge",
+      "png": "guide_snowman_p4.png"
+    }
+  },
+  "hextile": {
+    "1": {
+      "node": "/obj/hextile/hex_grid",
+      "wanted": "attribwrangle",
+      "png": "guide_hextile_p1.png"
+    },
+    "2": {
+      "node": "/obj/hextile/soft_edges",
+      "wanted": "polybevel",
+      "png": "guide_hextile_p2.png"
+    },
+    "3": {
+      "node": "/obj/hextile/tiled_floor",
+      "wanted": "merge",
+      "png": "guide_hextile_p3.png"
+    },
+    "4": {
+      "node": "/obj/hextile/floor",
+      "wanted": "merge",
+      "png": "guide_hextile_p4.png"
+    }
+  },
+  "petals": {
+    "1": {
+      "node": "/obj/petals/petal_shape",
+      "wanted": "attribwrangle",
+      "png": "guide_petals_p1.png"
+    },
+    "2": {
+      "node": "/obj/petals/in_air",
+      "wanted": "dopimport",
+      "png": "guide_petals_p2.png"
+    },
+    "3": {
+      "node": "/obj/petals/assign_petal",
+      "wanted": "material",
+      "png": "guide_petals_p3.png"
+    }
+  },
+  "gears": {
+    "1": {
+      "node": "/obj/gears/gear_with_axle",
+      "wanted": "merge",
+      "png": "guide_gears_p1.png"
+    },
+    "2": {
+      "node": "/obj/gears/gear_train",
+      "wanted": "merge",
+      "png": "guide_gears_p2.png"
+    },
+    "3": {
+      "node": "/obj/gears/assign_brass",
+      "wanted": "material",
+      "png": "guide_gears_p3.png"
+    }
+  },
+  "stairs": {
+    "1": {
+      "node": "/obj/stairs/fan_shape",
+      "wanted": "attribwrangle",
+      "png": "guide_stairs_p1.png"
+    },
+    "2": {
+      "node": "/obj/stairs/all_treads",
+      "wanted": "copytopoints",
+      "png": "guide_stairs_p2.png"
+    },
+    "3": {
+      "node": "/obj/stairs/railing",
+      "wanted": "merge",
+      "png": "guide_stairs_p3.png"
+    },
+    "4": {
+      "node": "/obj/stairs/staircase",
+      "wanted": "merge",
+      "png": "guide_stairs_p4.png"
+    }
+  },
+  "donut": {
+    "1": {
+      "node": "/obj/donut/puffy_dir",
+      "wanted": "normal",
+      "png": "guide_donut_p1.png"
+    },
+    "2": {
+      "node": "/obj/donut/drop_dough_color",
+      "wanted": "attribdelete",
+      "png": "guide_donut_p2.png"
+    },
+    "3": {
+      "node": "/obj/donut/sprinkles",
+      "wanted": "copytopoints",
+      "png": "guide_donut_p3.png"
+    },
+    "4": {
+      "node": "/obj/donut/donut",
+      "wanted": "merge",
+      "png": "guide_donut_p4.png"
+    }
+  },
+  "glasscup": {
+    "1": {
+      "node": "/obj/glasscup/glass_profile",
+      "wanted": "attribwrangle",
+      "png": "guide_glasscup_p1.png"
+    },
+    "2": {
+      "node": "/obj/glasscup/glass",
+      "wanted": "reverse",
+      "png": "guide_glasscup_p2.png"
+    },
+    "3": {
+      "node": "/obj/glasscup/water",
+      "wanted": "reverse",
+      "png": "guide_glasscup_p3.png"
+    },
+    "4": {
+      "node": "/obj/glasscup/ice",
+      "wanted": "copytopoints",
+      "png": "guide_glasscup_p4.png"
+    },
+    "5": {
+      "node": "/obj/glasscup/drink",
+      "wanted": "merge",
+      "png": "guide_glasscup_p5.png"
+    }
   }
 }

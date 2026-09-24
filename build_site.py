@@ -2543,8 +2543,10 @@ def render_strip(guides, urls):
     return "\n".join(out)
 
 
-# ハンバーガーを開いたときに並べる実践。絵として見栄えのするものを選んでいる（2026-09-23）
-MENU_GUIDES = ["glow", "karma", "vex", "groom", "sparks", "sign", "path", "terrain"]
+# ハンバーガーを開いたときに並べる実践。絵として見栄えのするものを選んでいる（2026-09-23）。
+# 2026-09-24: 「サムネイルが面白くない」とのことで、写真と見比べて作った新しい実践に差し替え、12 本に増やした。
+# 入口（ノード解説・用語集）の画も、実験のつなぎ方の図をやめて実践の仕上がりにした
+MENU_GUIDES = ["ocean", "neon", "fireworks", "donut", "lava", "sunflower", "cloud", "glasscup", "jelly", "balloon", "snow", "tree"]
 
 
 def render_menu_cards(guides, urls, data, nodes):
@@ -2554,7 +2556,6 @@ def render_menu_cards(guides, urls, data, nodes):
     """
     by_id = {g["id"]: g for g in guides["guides"]}
     picks = [by_id[i] for i in MENU_GUIDES if i in by_id]
-    last = DONE[-1]
     out = ['    <div class="menu-cards">',
            '      <div class="menu-cards-head"><span>実践</span>'
            f'<a href="{panel_url(urls, "guides")}">すべて見る（{len(guides["guides"])}本）</a></div>',
@@ -2566,9 +2567,8 @@ def render_menu_cards(guides, urls, data, nodes):
     out.append("      </div>")
     out.append('      <div class="menu-doors">')
     doors = (
-        (urls["log_pm"], f"thumb_{last['no']}.png", "実験ログ", f"{len(DONE)}本の実験。最新は実験{last['no']}"),
-        (panel_url(urls, "nodes"), "019_graph.png", "ノード解説", f"{count_nodes(nodes)}件"),
-        (panel_url(urls, "glossary"), None, "用語集", f"{count_terms(data)}語"),
+        (panel_url(urls, "nodes"), by_id["campfire"]["hero"], "ノード解説", f"{count_nodes(nodes)}件"),
+        (panel_url(urls, "glossary"), by_id["gems"]["hero"], "用語集", f"{count_terms(data)}語"),
         # 2026-09-23: メニューにも Notebook を置く（ユーザー指示）
         (NOTEBOOK_URL, "NB", "Gemini Notebook", "資料に質問できるノート"),
     )
@@ -2807,7 +2807,13 @@ def render_guide_sections(guides, works, urls):
                            f' poster="{var["hero"]}"></video>')
                 out.append(f'            <figcaption>{html.escape(var.get("anim_cap", ""))}</figcaption>')
                 out.append("          </figure>")
-            if os.path.exists(os.path.join(OUT, f"pr_{vid}_graph.png")):
+            if os.path.exists(os.path.join(OUT, f"guide_{vid}_net.png")):
+                out.append('          <figure class="guide-net">')
+                out.append(f'            <img src="guide_{vid}_net.png" loading="lazy" decoding="async"'
+                           f' alt="{html.escape(var["title"])}のネットワーク">')
+                out.append("            <figcaption>組み上がったノードのつなぎ方（Houdini の画面）</figcaption>")
+                out.append("          </figure>")
+            elif os.path.exists(os.path.join(OUT, f"pr_{vid}_graph.png")):
                 out.append('          <figure class="guide-net">')
                 out.append(f'            <img src="pr_{vid}_graph.png" loading="lazy" decoding="async"'
                            f' alt="{html.escape(var["title"])}のノードのつなぎ方">')
@@ -2819,6 +2825,12 @@ def render_guide_sections(guides, works, urls):
                 out.append('              <div class="step-body">')
                 out.append(f'                <h4>{html.escape(step["title"])}<code>{html.escape(step["node"])}</code></h4>')
                 out.append(f'                <p>{step["body"]}</p>')
+                parm = f"guide_{vid}_p{index}_parm.png"
+                if os.path.exists(os.path.join(OUT, parm)):
+                    out.append('                <details class="step-ui">')
+                    out.append("                  <summary>Houdini のパラメータ画面</summary>")
+                    out.append(f'                  <img src="{parm}" loading="lazy" decoding="async" alt="{html.escape(step["title"])}のパラメータ">')
+                    out.append("                </details>")
                 out.append("              </div>")
                 if step.get("img"):
                     out.append('              <figure class="step-figure">')
@@ -2838,6 +2850,26 @@ def render_guide_sections(guides, works, urls):
                     out.append("          </div>")
             if var.get("compare"):
                 out.append(f'          <p class="revision-ref">{var["compare"]}</p>')
+            for rev in var.get("revisions", []):
+                out.append('          <div class="revision">')
+                out.append(f'            <h4>{html.escape(date_ja(rev["date"]))} に作り直した</h4>')
+                if rev.get("why"):
+                    out.append(f'            <p>{rev["why"]}</p>')
+                out.append('            <ul>')
+                for change in rev.get("changes", []):
+                    out.append(f"              <li>{change}</li>")
+                out.append("            </ul>")
+                if rev.get("before"):
+                    out.append('            <div class="revision-compare">')
+                    for img, cap in ((rev["before"], "作り直す前"), (var["hero"], "作り直したあと")):
+                        out.append('              <figure>')
+                        out.append(f'                <img src="{img}" loading="lazy" decoding="async" alt="{cap}の仕上がり">')
+                        out.append(f"                <figcaption>{cap}</figcaption>")
+                        out.append("              </figure>")
+                    out.append("            </div>")
+                if rev.get("reference"):
+                    out.append(f'            <p class="revision-ref">見比べた本物: {rev["reference"]}</p>')
+                out.append("          </div>")
             out.append("        </section>")
 
         # 改訂の記録（2026-09-24）。作り直した実践は、前の版から何をなぜ変えたかを、前の仕上がりと並べて残す

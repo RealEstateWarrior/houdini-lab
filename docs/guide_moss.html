@@ -3776,14 +3776,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           </nav>
         </div>
         <figure class="guide-net">
-          <img src="pr_moss_graph.png" loading="lazy" decoding="async" alt="苔むした石を作るのノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_moss_net.png" loading="lazy" decoding="async" alt="苔むした石を作るのネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>石の形を作る<code class="node-ref" data-node="normal" tabindex="0" role="button">normal</code></h4>
               <p><code class="node-ref" data-node="sphere" tabindex="0" role="button">sphere</code>（Polygon Mesh、半径 0.55 × 0.32 × 0.45、Rows 80・Columns 160）をつぶれた丸石にする。<code class="node-ref" data-node="mountain" tabindex="0" role="button">mountain</code> を2つ重ね、1つ目（<strong>Height 0.16・Element Size 0.45</strong>）で大きなうねり、2つ目（<strong>Height 0.04・Element Size 0.07</strong>）で細かいでこぼこを付ける。最後の <code class="node-ref" data-node="normal" tabindex="0" role="button">normal</code> で面の向き（N）を計算し直す。次の段で「上を向いているか」を見るのに使う。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_moss_p1_parm.png" loading="lazy" decoding="async" alt="石の形を作るのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_moss_1.png" loading="lazy" decoding="async" alt="石の形を作るの結果"></div>
@@ -3794,6 +3798,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>苔の生える場所を決める<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石は濃い灰色にし、別のノイズで濃淡を付け、苔の無い所には白っぽい地衣類の斑点を足す（前の版は石が明るすぎて、白い泡のように見えた）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_moss_p2_parm.png" loading="lazy" decoding="async" alt="苔の生える場所を決めるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_moss_2.png" loading="lazy" decoding="async" alt="苔の生える場所を決めるの結果"></div>
@@ -3804,6 +3812,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>苔の毛の根元をまく<code class="node-ref" data-node="scatter" tabindex="0" role="button">scatter</code></h4>
               <p><code class="node-ref" data-node="scatter" tabindex="0" role="button">scatter</code> で <strong>160,000 個</strong>の点をまく。<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;scatter&quot;, &quot;name&quot;: &quot;roots&quot;, &quot;rows&quot;: [[&quot;Use Density Attribute&quot;, &quot;usedensityattrib&quot;, &quot;Options&quot;, &quot;on&quot;, false]]}" tabindex="0" role="button">Use Density Attribute</strong> を入れて <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;scatter&quot;, &quot;name&quot;: &quot;roots&quot;, &quot;rows&quot;: [[&quot;Density Attribute&quot;, &quot;densityattrib&quot;, &quot;Options&quot;, &quot;moss&quot;, false]]}" tabindex="0" role="button">Density Attribute を moss</strong> にすると、moss の大きい所ほど点が多く、0 の所には1つも出ない。点は、面の N などの属性を引き継ぐ。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_moss_p3_parm.png" loading="lazy" decoding="async" alt="苔の毛の根元をまくのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_moss_3.png" loading="lazy" decoding="async" alt="苔の毛の根元をまくの結果"></div>
@@ -3814,6 +3826,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>短い毛を立てる<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p>もう1つの <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;attribwrangle&quot;, &quot;name&quot;: &quot;grow_strands&quot;, &quot;rows&quot;: [[&quot;length&quot;, &quot;length&quot;, &quot;&quot;, &quot;0.008&quot;, true]]}" tabindex="0" role="button">length = 0.008</strong>（8 mm）を 50〜130% にばらつかせ、先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.2 mm から先へ細くする。写真の岩の苔は短く密なビロードのようなので、前の版（1.4 cm・9 万本）より短く多くした。最後に元の点を消す。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_moss_p4_parm.png" loading="lazy" decoding="async" alt="短い毛を立てるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_moss_4.png" loading="lazy" decoding="async" alt="短い毛を立てるの結果"></div>
@@ -3824,6 +3840,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>材質を当てて合わせる<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p>石と苔に別々の <code>principledshader</code> を当てる。どちらも Base Color を白にしておくと、点の色 Cd がそのまま色になる（Use Point Color が既定で入っている）。石は Roughness 0.85 でつやを消し、苔は <strong>Sheen 0.6</strong> で、毛の表面がふわっと明るく光る感じを足す。<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> で石と苔を1つにする。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_moss_p5_parm.png" loading="lazy" decoding="async" alt="材質を当てて合わせるのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3881,7 +3901,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4125,19 +4145,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>

@@ -185,5 +185,19 @@
       "before": "pr_ocean_hero_v1.png",
       "reference": "Wikimedia Commons の夕暮れの海の写真（「Sunset, Kuta, Bali」「Zoutelande, Blick auf die Nordsee」「Fata Morgana of sea surface and sun glitter」など。水平線がまっすぐ遠く、夕日の下に細かなきらめきの帯、手前の水面は暗い）"
     }
+  ],
+  "ocean_winter": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、「白波のない夕暮れ版より質がだいぶ落ちた」と指摘を受けた。本物の砂浜の波の動画（Wikimedia Commons の Herzliya の砂浜など）を見直すと、前の版とは 4 つ違っていた。",
+      "changes": [
+        "<strong>泡を、岸と平行な細い筋にした。</strong>前の版は太い白い帯 2 本と、蜂の巣のような網目（wnoise）だった。動画では、崩れた波頭から岸まで細い泡の筋が何本も重なる。",
+        "<strong>水面の傾きを本物に合わせた。</strong>前の版は平均 5.9° と平らで、光の道が細い棒になっていた。さざ波を 2 枚にして平均 9.0°（Cox と Munk の式で約 9°）にし、Roughness を 0.04 → 0.07 にした。",
+        "<strong>縞と放射状の筋を消した。</strong>さざ波のくり返し（1.3 m）が遠くで縦縞に、細長い板の目が照り返しの筋になっていた。設計図を 4.7 m・1.9 m に広げ、遠くのさざ波は消し、板の目を正方形に近づけた。",
+        "<strong>岸近くの波を短くし、濡れた砂に細かい凸凹を足した。</strong>浅い所の波は遅く、間が詰まる。濡れた砂の照り返しが 1 本のなめらかな柱だったので、30 cm ほどの凸凹で砕けさせた。"
+      ],
+      "before": "pr_ocean_winter_hero_v1.png",
+      "reference": "七里ヶ浜の砂浜から撮った冬の朝の写真 5 枚と、Wikimedia Commons の「Water waves in Herzliya beach」（岸の目の高さから撮った、寄せては返す波の動画）"
+    }
   ]
 }

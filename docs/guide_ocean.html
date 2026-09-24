@@ -3786,14 +3786,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <figcaption>Karma で撮った波の動き（5 秒、120 フレーム、960×540）。カメラは止めたまま、波だけが進む。</figcaption>
         </figure>
         <figure class="guide-net">
-          <img src="pr_ocean_graph.png" loading="lazy" decoding="async" alt="夕暮れの海の波を作るのノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_ocean_net.png" loading="lazy" decoding="async" alt="夕暮れの海の波を作るのネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>細かい板を敷く<code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code></h4>
               <p><code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code> を <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;grid&quot;, &quot;name&quot;: &quot;sea&quot;, &quot;rows&quot;: [[&quot;Size&quot;, &quot;size&quot;, &quot;&quot;, &quot;60, 60&quot;, false]]}" tabindex="0" role="button">Size 1 × 1</strong>、<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;grid&quot;, &quot;name&quot;: &quot;sea&quot;, &quot;rows&quot;: [[&quot;Columns&quot;, &quot;cols&quot;, &quot;&quot;, &quot;500&quot;, false], [&quot;Rows&quot;, &quot;rows&quot;, &quot;&quot;, &quot;500&quot;, false]]}" tabindex="0" role="button">Rows 1400・Columns 1600</strong> にし、<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;grid&quot;, &quot;name&quot;: &quot;sea&quot;, &quot;rows&quot;: [[&quot;Center&quot;, &quot;t&quot;, &quot;&quot;, &quot;0, 0, 0&quot;, true]]}" tabindex="0" role="button">Center を 0.5・0・0.5</strong> にずらす。板の点は x も z も 0〜1 に並ぶ。この 0〜1 を、次の段で「横の位置」と「カメラからの距離」に読み替える。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_ocean_p1_parm.png" loading="lazy" decoding="async" alt="細かい板を敷くのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_ocean_1.png" loading="lazy" decoding="async" alt="細かい板を敷くの結果"></div>
@@ -3804,6 +3808,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>板をカメラから水平線まで広げる<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、点を「カメラの前の扇形」に並べ直す。カメラは原点の上、−z の向きに置く。z の 0〜1 を <strong>距離 3 m〜8 km</strong> に、<code class="node-ref" data-node="pow" tabindex="0" role="button">pow</code> で<strong>近くほど細かく</strong>割り振る。となりの行との間は、足もとで約 1.7 cm、水平線の近くで約 45 m。どちらも画面の上ではほぼ同じ細かさになる。同じ 224 万点を 8 km 四方に均等に並べると、升目は 5.7 m になり、足もとの波が出ない。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ocean_p2_parm.png" loading="lazy" decoding="async" alt="板をカメラから水平線まで広げるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_ocean_2.png" loading="lazy" decoding="async" alt="板をカメラから水平線まで広げるの結果"></div>
@@ -3814,12 +3822,20 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>波の設計図を 3 枚重ねる<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p><code class="node-ref" data-node="oceanspectrum" tabindex="0" role="button">oceanspectrum</code> は、風の強さと向きから「どの大きさの波がどれだけ混ざるか」（設計図）を作る。本物の沖の海は、遠くから来る大きなうねりの上に、その場の風の波と、さざ波が乗っている。そこで 3 つ作って <code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> でまとめる。<br><strong>swell</strong>（うねり）: Grid Size 300・Wind の Speed 7・Chop 0.6・Amplitude の Scale 0.48<br><strong>wind_chop</strong>（風の波）: Grid Size 37・Speed 6・Chop 1.1・Direction −25°・Scale 0.5<br><strong>ripples</strong>（さざ波）: Grid Size 4.3・Speed 3・Chop 0.8・Scale 0.33<br>Grid Size は設計図がくり返す間隔。300・37・4.3 のように割り切れない数にすると、くり返しの継ぎ目が重ならない。Amplitude の Scale（波の高さの倍率）は既定の 3 から大きく下げる（落とし穴を参照）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ocean_p3_parm.png" loading="lazy" decoding="async" alt="波の設計図を 3 枚重ねるのパラメータ">
+              </details>
             </div>
           </li>
           <li class="step" id="step-4">
             <div class="step-body">
               <h4>設計図どおりに点を動かす<code class="node-ref" data-node="oceanevaluate" tabindex="0" role="button">oceanevaluate</code></h4>
               <p><code class="node-ref" data-node="oceanevaluate" tabindex="0" role="button">oceanevaluate</code> の左に扇形の板、右に 3 枚の設計図をつなぐ。<strong>Time に <code>$T</code></strong>（今の秒数）を書くと、再生に合わせて波が進む。<strong>Cusp Attribute</strong> を入れると、波の頭がとがった所に <code>cusp</code> という値が付く。泡の目印に使う。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ocean_p4_parm.png" loading="lazy" decoding="async" alt="設計図どおりに点を動かすのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_ocean_4.png" loading="lazy" decoding="async" alt="設計図どおりに点を動かすの結果"></div>
@@ -3830,18 +3846,30 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>水の色と泡を付ける<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、ふだんはほとんど黒に近い深い青緑にする。海の色は、水そのものより空の映り込みで決まるので、水の色は暗くてよい。<code>cusp</code> が 0.55 を超えた所から白に寄せる。この風の強さ（6〜7 m/秒）では 0.55 を超えた点は無く、白波は立たなかった。夕凪の写真の海にも白波はほとんど無い。風を強めると、この白が出てくる。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ocean_p5_parm.png" loading="lazy" decoding="async" alt="水の色と泡を付けるのパラメータ">
+              </details>
             </div>
           </li>
           <li class="step" id="step-6">
             <div class="step-body">
               <h4>夕焼けの空と夕日を置く<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p>海の色の大半は空の映り込みなので、空を作り込む。半径 20 km の <code class="node-ref" data-node="sphere" tabindex="0" role="button">sphere</code> で全体を包み、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で点に色を付ける。水平線は橙、上ほど夜の青。太陽のまわりを明るくし、横に長い薄い雲を <code>onoise</code> で描く。太陽と反対側の空は暗くする。こうすると、海の左右が暗く、夕日の下だけが光る。夕日は、15 km 先・高さ 3° に置いた半径 71 m の球（見かけの大きさ 0.54°。本物の太陽は 0.53°）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ocean_p6_parm.png" loading="lazy" decoding="async" alt="夕焼けの空と夕日を置くのパラメータ">
+              </details>
             </div>
           </li>
           <li class="step" id="step-7">
             <div class="step-body">
               <h4>水の材質を当てる<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p><code class="node-ref" data-node="normal" tabindex="0" role="button">normal</code> で面の向きをなめらかにしてから、<code>principledshader</code> を当てる。<strong>Use Point Color</strong>（前の段の色を使う）、<strong>Roughness 0.015・Reflectivity 1・IOR 1.33</strong>（水）。Roughness をほぼ 0 にすると、さざ波の 1 つ 1 つが夕日を映して、光の道がきらめく。空の球は、点の色で光る材質（Emission 1、Use Point Color）。夕日の球は強く光らせる（Emission Intensity 40）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ocean_p7_parm.png" loading="lazy" decoding="async" alt="水の材質を当てるのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3871,9 +3899,9 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           </div>
           <p class="guide-cap">Karma で撮った仕上がり（フレーム30）。砂浜の目の高さ 1.5 m から、太陽の方へ撮る。</p>
           <dl class="guide-facts">
-            <div><dt>足すノード</dt><dd>19個＋空 11個（ほかに材質5つ・太陽の光・カメラ）</dd></div>
-            <div><dt>泡の白い点（0.5 以上）</dt><dd>11.6%</dd></div>
-            <div><dt>映像を撮る時間</dt><dd>23.7分（Karma 960×540、120 枚）</dd></div>
+            <div><dt>足すノード</dt><dd>23個＋空 11個（ほかに材質5つ・太陽の光・カメラ）</dd></div>
+            <div><dt>泡の白い点（0.5 以上）</dt><dd>14.6%</dd></div>
+            <div><dt>映像を撮る時間</dt><dd>26.3分（Karma 960×540、120 枚）</dd></div>
             <div><dt>仕上がりを撮る時間</dt><dd>18.6秒（Karma 1280×720）</dd></div>
           </dl>
           <a class="guide-hip" href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/pr_ocean_winter.hipnc" download><span>hip を開く<small>pr_ocean_winter.hipnc</small></span></a>
@@ -3882,14 +3910,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <figcaption>Karma で撮った波の動き（5 秒、120 フレーム、960×540）。沖で崩れた波が泡になって岸へ寄せる。</figcaption>
           </figure>
           <figure class="guide-net">
-            <img src="pr_ocean_winter_graph.png" loading="lazy" decoding="async" alt="冬の朝の七里ヶ浜のノードのつなぎ方">
-            <figcaption>ノードのつなぎ方（hip から描いた図）</figcaption>
+            <img src="guide_ocean_winter_net.png" loading="lazy" decoding="async" alt="冬の朝の七里ヶ浜のネットワーク">
+            <figcaption>組み上がったノードのつなぎ方（Houdini の画面）</figcaption>
           </figure>
           <ol class="steps">
             <li class="step" id="ocean_winter-step-1">
               <div class="step-body">
                 <h4>板を水平線まで広げる<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
-                <p>夕暮れ版の 1・2 段目と同じ。<code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code>（Size 1 × 1、Rows 1400・Columns 1600、Center 0.5・0・0.5）を、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> でカメラの前の扇形に並べ直す。違いは 2 つ。広角（焦点距離 22 mm）で撮るので横幅を距離と同じにしたことと、動かす前の位置を <code class="node-ref" data-node="rest" tabindex="0" role="button">rest</code> に覚えておくこと。<code class="node-ref" data-node="rest" tabindex="0" role="button">rest</code> から「波打ち際から何 m 沖か」を出して、次の段の崩れる波と泡に使う。</p>
+                <p>夕暮れ版の 1・2 段目と同じ。<code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code>（Size 1 × 1、<strong>Rows 2200・Columns 1000</strong>、Center 0.5・0・0.5）を、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> でカメラの前の扇形に並べ直す。違いは 2 つ。広角（焦点距離 22 mm）で撮るので横幅を距離と同じにしたことと、動かす前の位置を <code class="node-ref" data-node="rest" tabindex="0" role="button">rest</code> に覚えておくこと。行と列の数も変えた。1400×1600 だと 55 m 先の目が横 7 cm・奥行き 31 cm と細長く、太陽の照り返しが放射状の筋になったので、行を増やして目を正方形に近づけた（点の数は 220 万でほぼ同じ）。<code class="node-ref" data-node="rest" tabindex="0" role="button">rest</code> から「波打ち際から何 m 沖か」を出して、次の段の崩れる波と泡に使う。</p>
+                <details class="step-ui">
+                  <summary>Houdini のパラメータ画面</summary>
+                  <img src="guide_ocean_winter_p1_parm.png" loading="lazy" decoding="async" alt="板を水平線まで広げるのパラメータ">
+                </details>
               </div>
               <figure class="step-figure">
                 <div class="frame-light"><img src="pr_ocean_winter_1.png" loading="lazy" decoding="async" alt="板を水平線まで広げるの結果"></div>
@@ -3898,28 +3930,40 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </li>
             <li class="step" id="ocean_winter-step-2">
               <div class="step-body">
-                <h4>沖の波を 3 枚の設計図で動かす<code class="node-ref" data-node="oceanevaluate" tabindex="0" role="button">oceanevaluate</code></h4>
-                <p>夕暮れ版と同じく、<code class="node-ref" data-node="oceanspectrum" tabindex="0" role="button">oceanspectrum</code> 3 枚を <code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> して <code class="node-ref" data-node="oceanevaluate" tabindex="0" role="button">oceanevaluate</code> に渡す（Time に <code>$T</code>）。冬の朝は風が少し強く、写真の水面は一面がきらめいていた。きらめきは、細かい波の 1 つ 1 つが太陽を映したものなので、<strong>さざ波（ripples）を Grid Size 1.3・Speed 7・Chop 1.5・Scale 1.6</strong> と、細かく急にする。うねりは Grid Size 200・Speed 5・Scale 0.5、風の波は 23・6・0.7。</p>
+                <h4>沖の波とさざ波を、4 枚の設計図で動かす<code class="node-ref" data-node="oceanevaluate" tabindex="0" role="button">oceanevaluate</code></h4>
+                <p>夕暮れ版と同じく <code class="node-ref" data-node="oceanspectrum" tabindex="0" role="button">oceanspectrum</code> を <code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> して <code class="node-ref" data-node="oceanevaluate" tabindex="0" role="button">oceanevaluate</code> に渡す（Time に <code>$T</code>）。今回は 2 回に分ける。<br>・1 回目（move_points）: うねり（Grid Size 200・Speed 5・Scale 0.5）と風の波（23・6・0.7）。<br>・2 回目（add_ripples）: さざ波 2 枚（<strong>Grid Size 4.7・Speed 7・Scale 2.4</strong> と <strong>1.9・5・2.4</strong>、どちらも Resolution Exponent 10）。間の <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、さざ波を足す前の位置を <code>before_ripples</code> に覚えておき、次の段で遠くのさざ波を消す。<br>冬の朝の写真は、太陽の前の水面が広くきらめいている。きらめきは細かい波の 1 つ 1 つが太陽を映したもの（実験218）。本物の海面の傾きは、Cox と Munk が測った式で計算すると、風 5 m/秒で平均約 9°。この場面の水面（カメラから 15〜80 m）を測ると、さざ波 1 枚では平均 5.9° と平らすぎたので、2 枚にして強め、平均 9.0° にした。さざ波の Grid Size を 1.3 m にすると、遠くでそのくり返しが縦の縞に見えたので、4.7 m と 1.9 m にした（落とし穴を参照）。</p>
+                <details class="step-ui">
+                  <summary>Houdini のパラメータ画面</summary>
+                  <img src="guide_ocean_winter_p2_parm.png" loading="lazy" decoding="async" alt="沖の波とさざ波を、4 枚の設計図で動かすのパラメータ">
+                </details>
               </div>
               <figure class="step-figure">
-                <div class="frame-light"><img src="pr_ocean_winter_2.png" loading="lazy" decoding="async" alt="沖の波を 3 枚の設計図で動かすの結果"></div>
+                <div class="frame-light"><img src="pr_ocean_winter_2.png" loading="lazy" decoding="async" alt="沖の波とさざ波を、4 枚の設計図で動かすの結果"></div>
                 <figcaption>波打ち際から沖（4〜60 m）の波。フレーム 30。</figcaption>
               </figure>
             </li>
             <li class="step" id="ocean_winter-step-3">
               <div class="step-body">
                 <h4>岸で崩れる波と泡を VEX で足す<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
-                <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、岸へ進む波の列を足す。本物の砂浜の波は、沖から浅い所へ来ると高く切り立ち、崩れて白い泡になり、低くなって岸を這い上がる。これを「波打ち際から沖へ何 m か（<code>s</code>）」で書き分ける。<br>・<strong>波の列</strong>: 長さ 26 m・周期 9 秒で岸へ進む。<code>cos(ph - 0.9 * sin(ph))</code> で、岸側が切り立つ形にする。<br>・<strong>高さ</strong>: 沖 160 m で 0.12 m、崩れる所（沖 27〜41 m、横に揺らす）で 0.75 m。崩れたあとは低くする。<br>・<strong>泡</strong>: 崩れる所から岸までを泡の範囲にし、波頭の白い線と、波頭が通ったあとに薄れていくレース状の泡（<code>wnoise</code> の網目）を足す。<br>点の色 <code>Cd</code> を、深い青から泡の白へ混ぜる。</p>
+                <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、岸へ進む波の列を足す。本物の砂浜の波は、沖から浅い所へ来ると高く切り立ち、崩れて白い泡になり、低くなって岸を這い上がる。これを「波打ち際から沖へ何 m か（<code>s</code>）」で書き分ける。<br>・<strong>遠くのさざ波を消す</strong>: カメラから 25〜90 m で、<code>before_ripples</code> との差を 0 へ近づける。遠くのさざ波は画の 1 画素より細かい。<br>・<strong>波の列</strong>: 周期 8 秒で岸へ進む。浅い所の波は遅く、間が詰まるので、長さを沖 80 m の 30 m から岸の 12 m へ縮める。<code>cos(ph - 0.9 * sin(ph))</code> で、岸側が切り立つ形にする。<br>・<strong>高さ</strong>: 沖 160 m で 0.12 m、崩れる所（沖 24〜36 m、横に揺らす）で 0.6 m。崩れたあとは低くする。<br>・<strong>泡</strong>: 本物の砂浜の動画では、崩れた波頭から岸まで、岸と平行な細い泡の筋が何本も重なっていた。そこで、横にはゆっくり・奥行きにはすばやく変わる<button class="term" data-term="ノイズ">ノイズ</button>の「尾根」（<code>1 - abs(noise * 2 - 1)</code>）で筋を描き、波頭が通ったあとに薄れさせる。波頭の白い線は、2 つの大きさのノイズで不規則にちぎる。<br>・<strong>水の色</strong>: 深い青緑。波打ち際の薄い水は下の砂が透けるので、暗い茶色に寄せる。点の色 <code>Cd</code> を、水の色から泡の灰白（0.72）へ混ぜる。</p>
+                <details class="step-ui">
+                  <summary>Houdini のパラメータ画面</summary>
+                  <img src="guide_ocean_winter_p3_parm.png" loading="lazy" decoding="async" alt="岸で崩れる波と泡を VEX で足すのパラメータ">
+                </details>
               </div>
               <figure class="step-figure">
                 <div class="frame-light"><img src="pr_ocean_winter_3.png" loading="lazy" decoding="async" alt="岸で崩れる波と泡を VEX で足すの結果"></div>
-                <figcaption>泡の白い線とレース状の泡（フレーム 30）。</figcaption>
+                <figcaption>岸と平行な泡の筋と、波頭の白い線（フレーム 30）。</figcaption>
               </figure>
             </li>
             <li class="step" id="ocean_winter-step-4">
               <div class="step-body">
                 <h4>砂浜を敷く<code class="node-ref" data-node="normal" tabindex="0" role="button">normal</code></h4>
                 <p><code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code> を 2 枚（濡れた所と乾いた所）置き、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で岸へ向かって下げる（傾き 0.035、10 m で 35 cm）。カメラから 7 m の所で水面の高さ 0 と交わり、そこが波打ち際になる。その先は水の下に潜る。七里ヶ浜の砂は黒っぽいので、色は 0.03 前後の暗い灰色。濡れた砂は、あとで材質をつやつやにして空と太陽を映す。</p>
+                <details class="step-ui">
+                  <summary>Houdini のパラメータ画面</summary>
+                  <img src="guide_ocean_winter_p4_parm.png" loading="lazy" decoding="async" alt="砂浜を敷くのパラメータ">
+                </details>
               </div>
             </li>
             <li class="step" id="ocean_winter-step-5">
@@ -3931,24 +3975,49 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <li class="step" id="ocean_winter-step-6">
               <div class="step-body">
                 <h4>材質と太陽の光を置く<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
-                <p><code>principledshader</code> を 3 つ。水は Use Point Color・<strong>Roughness 0.04</strong>・IOR 1.33。濡れた砂は Roughness 0.06 でつやを出し、乾いた砂は 0.85。空の材質は <strong>Reflectivity を 0</strong> にする（落とし穴を参照）。<br>太陽の光は <code class="node-ref" data-node="hlight" tabindex="0" role="button">hlight</code> の <strong>disk</strong>（円い光）を、太陽の向きへ 5 km 先に、見かけ 0.54°（半径 23.6 m）で置き、<strong>Normalize Light Intensity to Area を切って Intensity 150,000</strong>。平行光（distant）は空の球にさえぎられて届かない（落とし穴を参照）。</p>
+                <p><code>principledshader</code> を 3 つ。水は Use Point Color・<strong>Roughness 0.07</strong>・IOR 1.33（画素より細かい波のぶんを、つやのぼけで足す。0.08 から光の道が白い帯に見え始める。実験218）。濡れた砂は Roughness 0.06 でつやを出し、乾いた砂は 0.85。空の材質は <strong>Reflectivity を 0</strong> にする（落とし穴を参照）。<br>太陽の光は <code class="node-ref" data-node="hlight" tabindex="0" role="button">hlight</code> の <strong>disk</strong>（円い光）を、太陽の向きへ 5 km 先に、見かけ 0.54°（半径 23.6 m）で置き、<strong>Normalize Light Intensity to Area を切って Intensity 250,000</strong>。平行光（distant）は空の球にさえぎられて届かない（落とし穴を参照）。</p>
               </div>
             </li>
           </ol>
           <p class="label">つまずくところ</p>
           <div class="trap">
+            <h4>さざ波の Grid Size が小さいと、遠くでくり返しが縦の縞に見える</h4>
+            <p>さざ波を Grid Size 1.3 m で強めると、カメラから 50 m ほどの水面に、奥へ向かう縦の縞が並んだ。縞の間は画の上で約 1.3 m で、設計図がくり返す間と同じだった。遠くでは奥行きの模様は縮んで見えなくなるが、横のくり返しは残るため。Grid Size を 4.7 m・1.9 m に広げ、Resolution Exponent を 10 に上げて細かい波は残すと、縞は消えた。</p>
+          </div>
+          <div class="trap">
             <h4>平行光（distant）の太陽は、空の球にさえぎられて届かない</h4>
-            <p>太陽の光を <code class="node-ref" data-node="hlight" tabindex="0" role="button">hlight</code> の distant にすると、強さを 30 にしても 1000 にしても、海の明るさは 0.356 と 0.356 で変わらなかった（disk の太陽では 0.490）。平行光は無限の遠くから来るので、半径 20 km の空の球が影を落としてしまう。空のオブジェクトの Render Visibility を「-shadow」にしても変わらなかった。空の球の内側に、円い光（disk）を置く。</p>
+            <p>太陽の光を <code class="node-ref" data-node="hlight" tabindex="0" role="button">hlight</code> の distant にすると、強さを 30 にしても 1000 にしても、海の明るさは 0.294 と 0.294 で変わらなかった（disk の太陽では 0.462）。平行光は無限の遠くから来るので、半径 20 km の空の球が影を落としてしまう。空のオブジェクトの Render Visibility を「-shadow」にしても変わらなかった。空の球の内側に、円い光（disk）を置く。</p>
           </div>
           <div class="trap">
             <h4>空の材質の Reflectivity が既定のままだと、太陽の光を映して空に大きな光の玉ができる</h4>
-            <p>光る材質でも、principledshader の Reflectivity は既定 1 で、つやが残る。強い太陽の光を空の球の内側が映して、太陽のまわりの空の明るさが 0.386 から 0.515 になり、濡れた砂にもその照り返しが太い帯で写った。空と太陽の円盤の Reflectivity は 0 にする。</p>
+            <p>光る材質でも、principledshader の Reflectivity は既定 1 で、つやが残る。強い太陽の光を空の球の内側が映して、太陽のまわりの空の明るさが 0.386 から 0.559 になり、濡れた砂にもその照り返しが太い帯で写った。空と太陽の円盤の Reflectivity は 0 にする。</p>
           </div>
           <div class="trap">
             <h4>smooth() の最小と最大を逆に書くと、思った向きにならない</h4>
             <p><code>smooth(30, 40, x)</code> は x = 20・35・50 で 0.00・0.50・1.00。逆に <code>smooth(40, 30, x)</code> と書くと 0.00・0.00・1.00 になった。「遠いほど 0 にしたい」ときは、<code>1 - smooth(30, 40, x)</code> と書く。試作では、これで泡の範囲と遠くの陸が消えていた。</p>
           </div>
-          <p class="revision-ref"><strong>参考の写真（七里ヶ浜の砂浜から撮った冬の朝）と並べて、まだ足りない所。</strong>写真は、太陽の下だけでなく水面の広い範囲が細かくきらめいているが、この版の光の道は細い（実験218 で、幅を決めるつまみを測った）。崩れる直前の波が緑に透ける壁も出せておらず、泡の白い線だけになっている。濡れた砂の粒のきらめきも弱い。写真の太陽の放射状の光の筋は、カメラのレンズで出るものなので入れていない。</p>
+          <p class="revision-ref"><strong>参考の写真と動画と並べて、まだ足りない所。</strong>崩れる直前の波が緑に透ける壁（写真 2 枚目）は出せておらず、泡の筋と白い線だけになっている。泡は点の色で塗っているので、厚みや泡粒の立体感はない。写真の太陽の放射状の光の筋は、カメラのレンズで出るものなので入れていない。</p>
+          <div class="revision">
+            <h4>2026年9月24日 に作り直した</h4>
+            <p>公開したあと、「白波のない夕暮れ版より質がだいぶ落ちた」と指摘を受けた。本物の砂浜の波の動画（Wikimedia Commons の Herzliya の砂浜など）を見直すと、前の版とは 4 つ違っていた。</p>
+            <ul>
+              <li><strong>泡を、岸と平行な細い筋にした。</strong>前の版は太い白い帯 2 本と、蜂の巣のような網目（wnoise）だった。動画では、崩れた波頭から岸まで細い泡の筋が何本も重なる。</li>
+              <li><strong>水面の傾きを本物に合わせた。</strong>前の版は平均 5.9° と平らで、光の道が細い棒になっていた。さざ波を 2 枚にして平均 9.0°（Cox と Munk の式で約 9°）にし、Roughness を 0.04 → 0.07 にした。</li>
+              <li><strong>縞と放射状の筋を消した。</strong>さざ波のくり返し（1.3 m）が遠くで縦縞に、細長い板の目が照り返しの筋になっていた。設計図を 4.7 m・1.9 m に広げ、遠くのさざ波は消し、板の目を正方形に近づけた。</li>
+              <li><strong>岸近くの波を短くし、濡れた砂に細かい凸凹を足した。</strong>浅い所の波は遅く、間が詰まる。濡れた砂の照り返しが 1 本のなめらかな柱だったので、30 cm ほどの凸凹で砕けさせた。</li>
+            </ul>
+            <div class="revision-compare">
+              <figure>
+                <img src="pr_ocean_winter_hero_v1.png" loading="lazy" decoding="async" alt="作り直す前の仕上がり">
+                <figcaption>作り直す前</figcaption>
+              </figure>
+              <figure>
+                <img src="pr_ocean_winter_hero.png" loading="lazy" decoding="async" alt="作り直したあとの仕上がり">
+                <figcaption>作り直したあと</figcaption>
+              </figure>
+            </div>
+            <p class="revision-ref">見比べた本物: 七里ヶ浜の砂浜から撮った冬の朝の写真 5 枚と、Wikimedia Commons の「Water waves in Herzliya beach」（岸の目の高さから撮った、寄せては返す波の動画）</p>
+          </div>
         </section>
         <section class="revisions" id="revisions">
           <p class="label">改訂の記録</p>
@@ -3993,7 +4062,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4237,19 +4306,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>

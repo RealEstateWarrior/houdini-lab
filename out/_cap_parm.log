@@ -1,0 +1,449 @@
+接続しました
+grow: guide008.hipnc
+  1: grid                   -> /obj/grow_things/ground
+  2: mountain               -> /obj/grow_things/hills
+  3: normal                 -> /obj/grow_things/normals
+  4: scatter                -> /obj/grow_things/scatter
+  5: tube                   -> /obj/grow_things/tree
+  6: copy to points         -> /obj/grow_things/copy_right
+terrain: guide_terrain.hipnc
+  1: grid                   -> /obj/terrain/ground
+  2: mountain               -> /obj/terrain/rough_terrain
+  3: grid                   -> /obj/terrain/ground_dense
+  4: mountain               -> /obj/terrain/fine_terrain
+  5: mountain               -> /obj/terrain/detail_terrain
+hard: guide_hard.hipnc
+  1: box                    -> /obj/hard_surface/base
+  2: tube                   -> /obj/hard_surface/cutter
+  3: boolean                -> /obj/hard_surface/drill
+  4: polyextrude            -> /obj/hard_surface/panel
+smooth: guide_smooth.hipnc
+  1: box                    -> /obj/smooth_shape/base
+  2: subdivide              -> /obj/smooth_shape/divide1
+  3: subdivide              -> /obj/smooth_shape/divide3
+  4: crease                 -> /obj/smooth_shape/keep_edges
+vex: guide_vex.hipnc
+  1: grid                   -> /obj/vex_wave/sheet
+  2: attribwrangle          -> /obj/vex_wave/make_wave
+  3: attribwrangle          -> /obj/vex_wave/make_color
+  4: attribwrangle          -> /obj/vex_wave/make_wave
+rbd: guide_rbd.hipnc
+  1: box                    -> /obj/rbd/block
+  2: rbdmaterialfracture    -> /obj/rbd/fracture
+  3: rbdbulletsolver        -> /obj/rbd/solver
+  4: rbdbulletsolver        -> /obj/rbd/solver
+cloth: guide_cloth.hipnc
+  1: grid                   -> /obj/cloth/sheet
+  2: attribwrangle          -> /obj/cloth/make_pins
+  3: vellumconstraints      -> /obj/cloth/constraints
+  4: vellumsolver           -> /obj/cloth/solver
+  5: vellumsolver           -> /obj/cloth/solver
+smoke: guide_smoke.hipnc
+  1: sphere                 -> /obj/smoke/emitter
+  2: pyrosource             -> /obj/smoke/src
+  3: volumerasterizeattributes -> /obj/smoke/rasterize
+  4: pyrosolver             -> /obj/smoke/solver
+  5: pyrosolver             -> /obj/smoke/solver
+liquid: guide_liquid.hipnc
+  1: box                    -> /obj/liquid/blob
+  2: flipsource             -> /obj/liquid/src
+  3: flipcontainer          -> /obj/liquid/container
+  4: merge                  -> /obj/liquid/merge_sources
+  5: flipsolver             -> /obj/liquid/solver
+pop: guide_pop.hipnc
+  1: grid                   -> /obj/pop/emitter
+  2: dopnet                 -> /obj/pop/popnet
+  3: popsolver              -> /obj/pop/popnet/solver
+  4: dopimport              -> /obj/pop/import
+  5: dopimport              -> /obj/pop/import
+groom: guide_groom.hipnc
+  1: sphere                 -> /obj/groom/skin
+  2: normal                 -> /obj/groom/normals
+  3: rest                   -> /obj/groom/rest
+  4: scatter                -> /obj/groom/roots
+  5: attribwrangle          -> /obj/groom/make_guides
+  6: hairgen::2.0           -> /obj/groom/hairgen
+  7: hairclump::2.0         -> /obj/groom/clump
+  8: attribwrangle          -> /obj/groom/tint
+heightfield: guide_hf.hipnc
+  1: heightfield            -> /obj/terrain/field
+  2: heightfield_noise      -> /obj/terrain/noise
+  3: heightfield_erode      -> /obj/terrain/erode
+  4: convertheightfield     -> /obj/terrain/mesh
+  5: normal                 -> /obj/terrain/normals
+  6: attribwrangle          -> /obj/terrain/aim
+  7: scatter                -> /obj/terrain/scatter
+  8: copy to points         -> /obj/terrain/copies
+texture: 041_disp.hipnc
+  1: copnet                 -> /obj/terrain/erode/copnet1
+  2: fractalnoise に当たるノードが無い
+  3: rop_image に当たるノードが無い
+  4: uvunwrap に当たるノードが無い
+  5: principledshader::2.0 に当たるノードが無い
+  6: basecolor_useTexture に当たるノードが無い
+  7: baseBumpAndNormal に当たるノードが無い
+  8: dispTex に当たるノードが無い
+rig: guide_rig.hipnc
+  1: attribwrangle          -> /obj/rig/make_joints
+  2: kinefx::rigdoctor      -> /obj/rig/doctor
+  3: kinefx::rigattribwrangle -> /obj/rig/pose
+  4: tube                   -> /obj/rig/skin
+  5: kinefx::jointcaptureproximity -> /obj/rig/capture
+  6: kinefx::jointdeform    -> /obj/rig/deform_linear
+  7: method                 -> /obj/rig/deform_dq
+mpm: guide_mpm.hipnc
+  1: box                    -> /obj/mpm/box
+  2: mpmcontainer           -> /obj/mpm/container
+  3: mpmsource              -> /obj/mpm/source
+  4: mpmsolver              -> /obj/mpm/solve
+  5: materialtype           -> /obj/mpm/source
+  6: groundfriction         -> /obj/mpm/solve
+  7: particlesep            -> /obj/mpm/container
+  8: mpmsurface             -> /obj/mpm/surface
+cache: guide_cache.hipnc
+  1: pyrosolver             -> /obj/smoke/solver
+  2: filecache              -> /obj/smoke/cache
+  3: f1                     -> /obj/smoke/cache
+  4: filecache              -> /obj/smoke/cache
+  5: loadfromdisk           -> /obj/smoke/cache
+wind: guide_wind.hipnc
+  1: grid                   -> /obj/wind/emitter
+  2: popsolver              -> /obj/wind/popnet/solver
+  3: popforce               -> /obj/wind/popnet/gravity
+  4: popwind                -> /obj/wind/popnet/wind
+  5: copytopoints           -> /obj/wind/dots
+  6: dopimport              -> /obj/wind/import
+tear: guide_tear.hipnc
+  1: grid                   -> /obj/tear_line/cloth
+  2: attribwrangle          -> /obj/tear_line/mark_cut
+  3: blast                  -> /obj/tear_line/upper
+  4: attribwrangle          -> /obj/tear_line/make_pins
+  5: vellumconstraints      -> /obj/tear_line/cloth1
+  6: vellumconstraints      -> /obj/tear_line/glue
+  7: vellumconstraints      -> /obj/tear_line/pin
+  8: vellumsolver           -> /obj/tear_line/solve
+fire: guide_fire.hipnc
+  1: sphere                 -> /obj/fire/emitter
+  2: pyrosource             -> /obj/fire/src
+  3: volumerasterizeattributes -> /obj/fire/rasterize
+  4: pyrosolver             -> /obj/fire/solve
+  5: pointsfromvolume       -> /obj/fire/points
+  6: attribwrangle          -> /obj/fire/color
+hair: guide_hair.hipnc
+  1: sphere                 -> /obj/hairwind/skin
+  2: attribwrangle          -> /obj/hairwind/make_guides
+  3: hairgen                -> /obj/hairwind/hairgen
+  4: attribwrangle          -> /obj/hairwind/mark_roots
+  5: vellumconstraints      -> /obj/hairwind/hair
+  6: vellumsolver           -> /obj/hairwind/solve
+grass: guide_grass.hipnc
+  1: heightfield_erode      -> /obj/terrain/erode
+  2: convertheightfield     -> /obj/terrain/mesh
+  3: attribwrangle          -> /obj/terrain/read_layers
+  4: scatter                -> /obj/terrain/scatter
+  5: attribwrangle          -> /obj/terrain/aim
+  6: copytopoints           -> /obj/terrain/copies
+carry: guide_carry.hipnc
+  1: mpmsource              -> /obj/mpm/source
+  2: box                    -> /obj/mpm/floor
+  3: mpmcollider            -> /obj/mpm/collider
+  4: mpmsolver              -> /obj/mpm/solve
+karma: guide_karma.hipnc
+  1: attribwrangle          -> /obj/terrain/paint
+  2: material               -> /obj/terrain/assign
+  3: envlight               -> /obj/report_dome
+  4: cam                    -> /obj/report_cam
+  5: karma                  -> /out/exp038_guide
+export: guide_export.hipnc
+  1: color                  -> /obj/export/color
+  2: file                   -> /obj/export/write_obj
+  3: rop_geometry           -> /obj/export/rop_obj
+  4: file                   -> /obj/export/write_obj
+foreach: guide_foreach.hipnc
+  1: facet                  -> /obj/tiles/unique
+  2: block_begin            -> /obj/tiles/each_begin
+  3: attribwrangle          -> /obj/tiles/lift_one
+  4: attribwrangle          -> /obj/tiles/lift_all
+  5: attribwrangle          -> /obj/tiles/lift_all
+sparks: 079_sparks.hipnc
+  1: add                    -> /obj/sparks/origin
+  2: popsource              -> /obj/sparks/popnet/source
+  3: life                   -> /obj/sparks/popnet/source
+  4: velx                   -> /obj/sparks/popnet/source
+  5: popdrag                -> /obj/sparks/popnet/drag
+  6: popsolver              -> /obj/sparks/popnet/solver
+  7: attribwrangle          -> /obj/sparks/streaks
+rain: 080_rain.hipnc
+  1: grid                   -> /obj/rain/cloud
+  2: popsource              -> /obj/rain/popnet/source
+  3: popforce               -> /obj/rain/popnet/gravity
+  4: groundplane            -> /obj/rain/popnet/ground
+  5: bounce                 -> /obj/rain/popnet/ground
+  6: attribwrangle          -> /obj/rain/streaks
+flag: 081_flag.hipnc
+  1: grid                   -> /obj/flag/cloth
+  2: attribwrangle          -> /obj/flag/pole_side
+  3: vellumconstraints      -> /obj/flag/cloth_con
+  4: vellumconstraints      -> /obj/flag/pin
+  5: vellumsolver           -> /obj/flag/solve
+  6: merge                  -> /obj/flag/show
+path: 082_path.hipnc
+  1: line                   -> /obj/road/road_line
+  2: resample               -> /obj/road/spacing
+  3: attribwrangle          -> /obj/road/aim
+  4: box                    -> /obj/road/post
+  5: copytopoints           -> /obj/road/posts
+  6: sweep                  -> /obj/road/road
+sign: 083_sign.hipnc
+  1: font                   -> /obj/sign/letters
+  2: polyextrude            -> /obj/sign/thickness
+  3: polybevel              -> /obj/sign/round
+domino: 084_dominoes.hipnc
+  1: line                   -> /obj/dominoes/spots
+  2: box                    -> /obj/dominoes/tile
+  3: copytopoints           -> /obj/dominoes/tiles
+  4: attribwrangle          -> /obj/dominoes/push_first
+  5: rbdbulletsolver        -> /obj/dominoes/solve
+wall: 085_wall.hipnc
+  1: box                    -> /obj/wall/wall_box
+  2: rbdmaterialfracture    -> /obj/wall/fracture
+  3: concrete_primarystrength -> /obj/wall/fracture
+  4: attribwrangle          -> /obj/wall/name_ball
+  5: rbdbulletsolver        -> /obj/wall/solve
+leaves: 086_leaves.hipnc
+  1: grid                   -> /obj/leaves/source_area
+  2: popsource              -> /obj/leaves/popnet/source
+  3: popforce               -> /obj/leaves/popnet/gravity
+  4: popwind                -> /obj/leaves/popnet/wind
+  5: copytopoints           -> /obj/leaves/leaf_copies
+turntable: 087_scene.hipnc
+  1: font                   -> /obj/spun/letters
+  2: xform                  -> /obj/spun/center
+  3: xform                  -> /obj/spun/spin
+  4: xform                  -> /obj/spun/spin
+glow: 088_scene.hipnc
+  1: grid                   -> /obj/glow/floor
+  2: principledshader       -> /mat/glow_mat
+  3: material               -> /obj/glow/assign_glow
+  4: karma                  -> /out/karma_emit4
+fallen: 089_leaves.hipnc
+  1: popwind                -> /obj/fallen/popnet/wind
+  2: popsource              -> /obj/fallen/popnet/source
+  3: groundplane            -> /obj/fallen/popnet/ground
+  4: popsolver              -> /obj/fallen/popnet/solver
+  5: copytopoints           -> /obj/fallen/leaf_copies
+rock: pr_rock.hipnc
+  1: sphere                 -> /obj/rock/base
+  2: scatter                -> /obj/rock/cut_points
+  3: voronoifracture        -> /obj/rock/split
+  4: matchsize              -> /obj/rock/sit_on_floor
+  5: remesh                 -> /obj/rock/even_mesh
+  6: mountain               -> /obj/rock/big_lumps
+  7: mountain               -> /obj/rock/fine_detail
+  8: attribwrangle          -> /obj/rock/color_speckle
+  9: material               -> /obj/rock/assign_rock
+neon: pr_neon.hipnc
+  1: font                   -> /obj/neon/letters
+  2: sweep                  -> /obj/neon/tube
+  3: box                    -> /obj/neon/back_plate
+  4: merge                  -> /obj/neon/sign
+gems: pr_gems.hipnc
+  1: sphere                 -> /obj/gems/cut
+  2: facet                  -> /obj/gems/flat_faces
+  3: attribwrangle          -> /obj/gems/vary
+  4: copytopoints           -> /obj/gems/place_gems
+  5: material               -> /obj/gems/assign_gem
+campfire: pr_campfire.hipnc
+  1: copyxform              -> /obj/campfire/three_logs
+  2: copytopoints           -> /obj/campfire/stones
+  3: pyrosource             -> /obj/campfire/src
+  4: volumerasterizeattributes -> /obj/campfire/to_voxels
+  5: pyrosolver             -> /obj/campfire/burn
+  6: merge                  -> /obj/campfire/campfire
+nightcity: pr_nightcity.hipnc
+  1: grid                   -> /obj/nightcity/lots
+  2: attribwrangle          -> /obj/nightcity/zoning
+  3: box                    -> /obj/nightcity/building
+  4: copytopoints           -> /obj/nightcity/city
+  5: divide                 -> /obj/nightcity/window_grid
+  6: attribwrangle          -> /obj/nightcity/lights_on
+  7: merge                  -> /obj/nightcity/night_city
+curtain: pr_curtain.hipnc
+  1: copyxform              -> /obj/curtain/two_panels
+  2: attribwrangle          -> /obj/curtain/pleats_and_top
+  3: vellumconstraints      -> /obj/curtain/cloth_setup
+  4: vellumsolver           -> /obj/curtain/wind_sim
+  5: merge                  -> /obj/curtain/window_scene
+balloon: pr_balloon.hipnc
+  1: attribwrangle          -> /obj/balloon/teardrop
+  2: vellumconstraints      -> /obj/balloon/rubber_skin
+  3: vellumconstraints      -> /obj/balloon/air_pressure
+  4: vellumsolver           -> /obj/balloon/inflate
+  5: copytopoints           -> /obj/balloon/five_balloons
+  6: merge                  -> /obj/balloon/party
+jelly: pr_jelly.hipnc
+  1: remesh                 -> /obj/jelly/even_skin
+  2: tetrahedralize         -> /obj/jelly/fill_inside
+  3: vellumconstraints      -> /obj/jelly/keep_volume
+  4: vellumsolver           -> /obj/jelly/drop
+  5: subdivide              -> /obj/jelly/smooth_skin
+  6: merge                  -> /obj/jelly/dessert
+ocean: pr_ocean.hipnc
+  1: grid                   -> /obj/ocean/sea
+  2: attribwrangle          -> /obj/ocean/spread_to_horizon
+  3: merge                  -> /obj/ocean/three_spectra
+  4: oceanevaluate          -> /obj/ocean/move_points
+  5: attribwrangle          -> /obj/ocean/foam_color
+  6: attribwrangle          -> /obj/ocean/sky_color
+  7: merge                  -> /obj/ocean/sea_and_sky
+snow: pr_snow.hipnc
+  1: merge                  -> /obj/snow/lantern_all
+  2: attribwrangle          -> /obj/snow/keep_up_faces
+  3: scatter                -> /obj/snow/flakes
+  4: attribwrangle          -> /obj/snow/under_roof
+  5: convertvdb             -> /obj/snow/snow_mesh
+  6: merge                  -> /obj/snow/snowy_lantern
+fireworks: pr_fireworks.hipnc
+  1: scatter                -> /obj/fireworks/stars
+  2: attribwrangle          -> /obj/fireworks/push_out
+  3: dopimport              -> /obj/fireworks/fly
+  4: attribwrangle          -> /obj/fireworks/hot_head
+  5: merge                  -> /obj/fireworks/three_shells
+  6: material               -> /obj/fireworks/assign_fire
+moss: pr_moss.hipnc
+  1: normal                 -> /obj/moss/face_dir
+  2: attribwrangle          -> /obj/moss/where_moss
+  3: scatter                -> /obj/moss/roots
+  4: attribwrangle          -> /obj/moss/grow_strands
+  5: merge                  -> /obj/moss/mossy_stone
+glass: pr_glass.hipnc
+  1: merge                  -> /obj/glass/preview_pane
+  2: rbdmaterialfracture    -> /obj/glass/crack
+  3: attribwrangle          -> /obj/glass/hold_edges
+  4: rbdbulletsolver        -> /obj/glass/shatter
+  5: merge                  -> /obj/glass/window
+tablecloth: pr_tablecloth.hipnc
+  1: merge                  -> /obj/tablecloth/table
+  2: grid                   -> /obj/tablecloth/cloth
+  3: vellumsolver           -> /obj/tablecloth/drop
+  4: polyextrude            -> /obj/tablecloth/thickness
+  5: merge                  -> /obj/tablecloth/dining
+chain: pr_chain.hipnc
+  1: attribwrangle          -> /obj/chain/hang
+  2: resample               -> /obj/chain/one_per_link
+  3: attribwrangle          -> /obj/chain/twist_every_other
+  4: copytopoints           -> /obj/chain/chain
+  5: merge                  -> /obj/chain/chain_and_posts
+web: pr_web.hipnc
+  1: attribwrangle          -> /obj/web/spokes
+  2: attribwrangle          -> /obj/web/spiral
+  3: attribwrangle          -> /obj/web/pick_drops
+  4: copytopoints           -> /obj/web/drops
+  5: merge                  -> /obj/web/web
+fog: pr_fog.hipnc
+  1: copytopoints           -> /obj/fog/trees
+  2: attribwrangle          -> /obj/fog/leaf_gaps
+  3: volumewrangle          -> /obj/fog/fog_density
+  4: merge                  -> /obj/fog/forest
+brickhda: pr_brickhda.hipnc
+  失敗: Houdini 側でエラー:
+Traceback (most recent call last):
+  File "<string>", line 14, in _job
+AttributeError: 'NoneType' object has no attribute 'parm'
+
+ripple: pr_ripple.hipnc
+  1: grid                   -> /obj/ripple/puddle
+  2: attribwrangle          -> /obj/ripple/rain_rings
+  3: attribwrangle          -> /obj/ripple/puddle_shape
+  4: merge                  -> /obj/ripple/rainy_street
+sunflower: pr_sunflower.hipnc
+  1: attribwrangle          -> /obj/sunflower/golden_spiral
+  2: copytopoints           -> /obj/sunflower/seed_disk
+  3: attribwrangle          -> /obj/sunflower/petal_shape
+  4: copytopoints           -> /obj/sunflower/petals
+  5: xform                  -> /obj/sunflower/face_camera
+lava: pr_lava.hipnc
+  1: grid                   -> /obj/lava/ground
+  2: attribwrangle          -> /obj/lava/cracked_crust
+  3: attribwrangle          -> /obj/lava/hot_colors
+  4: material               -> /obj/lava/assign_lava
+tree: pr_tree.hipnc
+  1: attribwrangle          -> /obj/tree/mark_leaf
+  2: lsystem                -> /obj/tree/grow
+  3: merge                  -> /obj/tree/tree
+  4: material               -> /obj/tree/assign_leaf
+sandpile: pr_sandpile.hipnc
+  1: mpmsource              -> /obj/sandpile/sand
+  2: mpmsolver              -> /obj/sandpile/collapse
+  3: merge                  -> /obj/sandpile/sandbox
+candle: pr_candle.hipnc
+  1: merge                  -> /obj/candle/candle_and_wick
+  2: volumewrangle          -> /obj/candle/teardrop
+  3: merge                  -> /obj/candle/candle_lit
+cloud: pr_cloud.hipnc
+  1: clip                   -> /obj/cloud/flat_bottom
+  2: cloud                  -> /obj/cloud/to_cloud
+  3: cloudnoise             -> /obj/cloud/fluffy_edges
+  4: cloudnoise             -> /obj/cloud/fluffy_edges
+coins: pr_coins.hipnc
+  1: attribwrangle          -> /obj/coins/relief
+  2: copytopoints           -> /obj/coins/coins
+  3: rbdbulletsolver        -> /obj/coins/drop
+  4: merge                  -> /obj/coins/coins_on_table
+letters: pr_letters.hipnc
+  1: attribwrangle          -> /obj/letters/letter_colors
+  2: rbdmaterialfracture    -> /obj/letters/crack
+  3: rbdbulletsolver        -> /obj/letters/drop
+  4: material               -> /obj/letters/assign_letters
+pdg: pr_pdg.hipnc
+  1: normal                 -> /obj/pdg/rock_out
+  失敗: Houdini 側でエラー:
+Traceback (most recent call last):
+  File "<string>", line 14, in _job
+AttributeError: 'NoneType' object has no attribute 'parm'
+
+snowman: pr_snowman.hipnc
+  1: mountain               -> /obj/snowman/snow_grain
+  2: polywire               -> /obj/snowman/twig_thickness
+  3: merge                  -> /obj/snowman/face
+  4: merge                  -> /obj/snowman/snowman
+hextile: pr_hextile.hipnc
+  1: attribwrangle          -> /obj/hextile/hex_grid
+  2: polybevel              -> /obj/hextile/soft_edges
+  3: merge                  -> /obj/hextile/tiled_floor
+  4: merge                  -> /obj/hextile/floor
+petals: pr_petals.hipnc
+  1: attribwrangle          -> /obj/petals/petal_shape
+  2: dopimport              -> /obj/petals/in_air
+  3: material               -> /obj/petals/assign_petal
+gears: pr_gears.hipnc
+  1: merge                  -> /obj/gears/gear_with_axle
+  2: merge                  -> /obj/gears/gear_train
+  3: material               -> /obj/gears/assign_brass
+stairs: pr_stairs.hipnc
+  1: attribwrangle          -> /obj/stairs/fan_shape
+  2: copytopoints           -> /obj/stairs/all_treads
+  3: merge                  -> /obj/stairs/railing
+  4: merge                  -> /obj/stairs/staircase
+donut: pr_donut.hipnc
+  1: normal                 -> /obj/donut/puffy_dir
+  2: attribdelete           -> /obj/donut/drop_dough_color
+  3: copytopoints           -> /obj/donut/sprinkles
+  4: merge                  -> /obj/donut/donut
+glasscup: pr_glasscup.hipnc
+  1: attribwrangle          -> /obj/glasscup/glass_profile
+  2: reverse                -> /obj/glasscup/glass
+  3: reverse                -> /obj/glasscup/water
+  4: copytopoints           -> /obj/glasscup/ice
+  5: merge                  -> /obj/glasscup/drink
+ocean_winter: pr_ocean_winter.hipnc
+  1: attribwrangle          -> /obj/ocean_winter/spread_to_horizon
+  2: oceanevaluate          -> /obj/ocean_winter/move_points
+  3: attribwrangle          -> /obj/ocean_winter/breaking_waves
+  4: normal                 -> /obj/ocean_winter/wet_sand_n
+  失敗: Houdini 側でエラー:
+Traceback (most recent call last):
+  File "<string>", line 14, in _job
+AttributeError: 'NoneType' object has no attribute 'parm'
+
+完了: 348 枚

@@ -27,7 +27,9 @@ GUIDES = os.path.join(HERE, "guides.json")
 
 def load_guides():
     with open(GUIDES, encoding="utf-8") as fp:
-        return json.load(fp)["guides"]
+        guides = json.load(fp)["guides"]
+    # 同じページに載せた「もう一つの版」（variants）も、1 本の実践として撮る
+    return guides + [v for g in guides for v in g.get("variants", [])]
 
 
 def main_network(conn):

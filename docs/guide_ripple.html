@@ -3780,14 +3780,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <figcaption>雨粒が落ちて、輪が広がって消える（96 フレーム＝4 秒）。</figcaption>
         </figure>
         <figure class="guide-net">
-          <img src="pr_ripple_graph.png" loading="lazy" decoding="async" alt="水たまりに雨の波紋のノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_ripple_net.png" loading="lazy" decoding="async" alt="水たまりに雨の波紋のネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>水面を細かい網にする<code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code></h4>
               <p><code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code>（2 × 1.4 m）を <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;grid&quot;, &quot;name&quot;: &quot;puddle&quot;, &quot;rows&quot;: [[&quot;Columns&quot;, &quot;cols&quot;, &quot;&quot;, &quot;400&quot;, false], [&quot;Rows&quot;, &quot;rows&quot;, &quot;&quot;, &quot;280&quot;, false]]}" tabindex="0" role="button">Rows 280・Columns 400</strong> に割る。波紋の山と谷は数 mm しか離れていないので、網が粗いと輪が描けない（升は約 5 mm）。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_ripple_p1_parm.png" loading="lazy" decoding="async" alt="水面を細かい網にするのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_ripple_1.png" loading="lazy" decoding="async" alt="水面を細かい網にするの結果"></div>
@@ -3798,6 +3802,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>雨粒ごとに、広がる輪を足す<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、点ごとに <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;attribwrangle&quot;, &quot;name&quot;: &quot;rain_rings&quot;, &quot;rows&quot;: [[&quot;drops&quot;, &quot;drops&quot;, &quot;&quot;, &quot;160&quot;, true]]}" tabindex="0" role="button">drops = 160</strong> 個の雨粒を順に見る。雨粒 i の落ちた時刻と場所は <code>rand(i …)</code> で決める（同じ i なら毎回同じ値になるので、フレームが進んでも同じ雨粒のまま）。落ちてからの時間 age が分かれば、いちばん外の輪は <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;attribwrangle&quot;, &quot;name&quot;: &quot;rain_rings&quot;, &quot;rows&quot;: [[&quot;speed&quot;, &quot;speed&quot;, &quot;&quot;, &quot;0.22&quot;, true]]}" tabindex="0" role="button">speed × age</strong>（speed = 0.22 m/秒）の所にある。その内側を <strong>sin</strong> で波打たせ（wavelength = 2.4 cm、高さ amp = 3 mm）、時間がたつほど、輪の後ろほど弱くする。全部の雨粒の高さを足して、点を上下に動かす。時間は <strong>@Time</strong>（秒）なので、再生すると動く。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ripple_p2_parm.png" loading="lazy" decoding="async" alt="雨粒ごとに、広がる輪を足すのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_ripple_2.png" loading="lazy" decoding="async" alt="雨粒ごとに、広がる輪を足すの結果"></div>
@@ -3808,6 +3816,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>水たまりの形に切る<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> を Primitives で回し、中心からの距離が「<button class="term" data-term="ノイズ">ノイズ</button>でゆがめた半径」より遠い面を消す。四角い板が、縁のでこぼこした水たまりの形になる。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ripple_p3_parm.png" loading="lazy" decoding="async" alt="水たまりの形に切るのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_ripple_3.png" loading="lazy" decoding="async" alt="水たまりの形に切るの結果"></div>
@@ -3818,6 +3830,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>水・濡れた地面・空を置く<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p>水面は <code>principledshader</code> で <strong>Transparency 1・IOR 1.33</strong>（水）・Roughness 0.02。水たまりの見え方は、ほとんど「空の映り込み」で決まる。写真の雨の水たまりは明るい曇り空を映していて、波紋は映り込みのゆがみとして白い輪に見える。そこで、奥に大きな板を立てて明るい灰色に光らせ（曇り空）、低い角度から撮って水面に映す。下には 12 m 四方の <code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code> を置き、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で粒のざらつきと濡れた色のむらを付けたアスファルトにする（雨で濡れているので Roughness 0.28 で照り返す）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_ripple_p4_parm.png" loading="lazy" decoding="async" alt="水・濡れた地面・空を置くのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3871,7 +3887,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4115,19 +4131,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>

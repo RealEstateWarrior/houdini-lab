@@ -3780,14 +3780,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <figcaption>机の上に落ちて、角が垂れて落ち着くまで（72 フレーム＝3 秒）。</figcaption>
         </figure>
         <figure class="guide-net">
-          <img src="pr_tablecloth_graph.png" loading="lazy" decoding="async" alt="テーブルクロスを掛けるのノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_tablecloth_net.png" loading="lazy" decoding="async" alt="テーブルクロスを掛けるのネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>机を作る<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p><code class="node-ref" data-node="box" tabindex="0" role="button">box</code> で天板（1.2 × 0.04 × 0.8 m、高さ 0.74 m）と、細い脚を4本作り、<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> でまとめる。この机は、あとで布が「ぶつかる物」になる。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_tablecloth_p1_parm.png" loading="lazy" decoding="async" alt="机を作るのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_tablecloth_1.png" loading="lazy" decoding="async" alt="机を作るの結果"></div>
@@ -3798,6 +3802,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>布を机の上に置く<code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code></h4>
               <p><code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code>（1.9 × 1.45 m）を天板より 12 cm 上に置く。天板より縁ごとに 33〜35 cm 大きいので、そのぶんが垂れる。<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;grid&quot;, &quot;name&quot;: &quot;cloth&quot;, &quot;rows&quot;: [[&quot;Columns&quot;, &quot;cols&quot;, &quot;&quot;, &quot;140&quot;, false], [&quot;Rows&quot;, &quot;rows&quot;, &quot;&quot;, &quot;110&quot;, false]]}" tabindex="0" role="button">Rows 110・Columns 140</strong> と細かく割る。布は網の線でしか曲がれないので、粗いとひだが角ばる。Rotate Y を 4 度だけ回して、机とぴったり揃えない（揃いすぎると作り物に見える）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_tablecloth_p2_parm.png" loading="lazy" decoding="async" alt="布を机の上に置くのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_tablecloth_2.png" loading="lazy" decoding="async" alt="布を机の上に置くの結果"></div>
@@ -3808,6 +3816,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>机にぶつけて落とす<code class="node-ref" data-node="vellumsolver" tabindex="0" role="button">vellumsolver</code></h4>
               <p><code class="node-ref" data-node="vellumconstraints" tabindex="0" role="button">vellumconstraints</code> の Constraint Type を <strong>Cloth</strong> にする（布として引っぱり合うつながりが付く）。<code class="node-ref" data-node="vellumsolver" tabindex="0" role="button">vellumsolver</code> には3本つなぐ。左に布、真ん中に vellumconstraints の右の出口（つながり）、<strong>右に机</strong>。右の入口は「ぶつかる物」で、布は机を通り抜けずに乗る。Ground Plane も入れ、Substeps 5。72 フレーム（3 秒）で落ち着き、布の角は天板から 0.49 m 下まで垂れた。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_tablecloth_p3_parm.png" loading="lazy" decoding="async" alt="机にぶつけて落とすのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_tablecloth_3.png" loading="lazy" decoding="async" alt="机にぶつけて落とすの結果"></div>
@@ -3818,6 +3830,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>なめらかにして、厚みを付ける<code class="node-ref" data-node="polyextrude" tabindex="0" role="button">polyextrude</code></h4>
               <p><code class="node-ref" data-node="subdivide" tabindex="0" role="button">subdivide</code>（1回）で網をさらに細かく割り、ひだの折れ目の角を消す。<code class="node-ref" data-node="polyextrude" tabindex="0" role="button">polyextrude</code> で <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;polyextrude&quot;, &quot;name&quot;: &quot;thickness&quot;, &quot;rows&quot;: [[&quot;Distance&quot;, &quot;dist&quot;, &quot;&quot;, &quot;0.002&quot;, false]]}" tabindex="0" role="button">Distance 0.002</strong>（2 mm）押し出し、<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;polyextrude&quot;, &quot;name&quot;: &quot;thickness&quot;, &quot;rows&quot;: [[&quot;Output Back&quot;, &quot;outputback&quot;, &quot;Extrusion › Output Geometry and Groups&quot;, &quot;on&quot;, false]]}" tabindex="0" role="button">Output Back</strong> を入れて裏面も残す。厚みのない布は、縁が紙のように薄く見える。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_tablecloth_p4_parm.png" loading="lazy" decoding="async" alt="なめらかにして、厚みを付けるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_tablecloth_4.png" loading="lazy" decoding="async" alt="なめらかにして、厚みを付けるの結果"></div>
@@ -3828,6 +3844,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>材質を当てる<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p>布は <code>principledshader</code> で生成りの白（0.86, 0.84, 0.79）、Roughness 0.8、<strong>Sheen 0.5</strong>（布の毛羽が光をふわっと返す）。机は濃い茶色で Roughness 0.45。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_tablecloth_p5_parm.png" loading="lazy" decoding="async" alt="材質を当てるのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3858,7 +3878,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4102,19 +4122,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>

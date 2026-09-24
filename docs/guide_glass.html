@@ -3781,14 +3781,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <figcaption>球が当たって、破片が飛び散り、床に落ちるまで（48 フレーム＝2 秒）。</figcaption>
         </figure>
         <figure class="guide-net">
-          <img src="pr_glass_graph.png" loading="lazy" decoding="async" alt="窓ガラスを割るのノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_glass_net.png" loading="lazy" decoding="async" alt="窓ガラスを割るのネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>ガラス板と、当たる点を置く<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p><code class="node-ref" data-node="box" tabindex="0" role="button">box</code> で 1 × 1.4 m、厚さ 8 mm の板を立てる（窓1枚ぶん）。<code class="node-ref" data-node="add" tabindex="0" role="button">add</code> で点を1つだけ作り、球が当たる所（0.12, 0.9, 0）に置く。ひびはこの点から広がる。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_glass_p1_parm.png" loading="lazy" decoding="async" alt="ガラス板と、当たる点を置くのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_glass_1.png" loading="lazy" decoding="async" alt="ガラス板と、当たる点を置くの結果"></div>
@@ -3799,6 +3803,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>ガラスの割れ方で割る<code class="node-ref" data-node="rbdmaterialfracture" tabindex="0" role="button">rbdmaterialfracture</code></h4>
               <p><code class="node-ref" data-node="rbdmaterialfracture" tabindex="0" role="button">rbdmaterialfracture</code> の Material Type を <strong>Glass</strong> にし、4番目の入口（Impact Points）に当たる点をつなぐ。<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;rbdmaterialfracture&quot;, &quot;name&quot;: &quot;crack&quot;, &quot;rows&quot;: [[&quot;Use Input Points&quot;, &quot;glass_useinput&quot;, &quot;Impact Points&quot;, &quot;on&quot;, false]]}" tabindex="0" role="button">Use Input Points</strong> を入れると、その点を中心に <strong>放射状のひび</strong>（既定 20 本）と、それをつなぐ同心円のひびが入る。破片は 119 個になった。右の出口には、破片どうしをくっつけておく「つながり」が出る。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_glass_p2_parm.png" loading="lazy" decoding="async" alt="ガラスの割れ方で割るのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_glass_2.png" loading="lazy" decoding="async" alt="ガラスの割れ方で割るの結果"></div>
@@ -3809,6 +3817,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>球を用意し、枠に触れる破片を止める<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="sphere" tabindex="0" role="button">sphere</code>（半径 6 cm）を当たる点の 70 cm 手前に置き、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で名前 <strong>ball</strong> と速さ <strong>v = (0, 0, −14)</strong>（ガラスへ向かって秒速 14 m）を付ける。<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> でガラスとまとめ、<code class="node-ref" data-node="pack" tabindex="0" role="button">pack</code> の <strong>Pack By Name</strong> を入れて、同じ name の面を1つの塊（破片1つ）にまとめる。最後の <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、塊の外枠が板の縁から 3 cm 以内に入るものを <strong>active = 0</strong>（動かない）にする。21 個が止まった。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_glass_p3_parm.png" loading="lazy" decoding="async" alt="球を用意し、枠に触れる破片を止めるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_glass_3.png" loading="lazy" decoding="async" alt="球を用意し、枠に触れる破片を止めるの結果"></div>
@@ -3819,6 +3831,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>ぶつけて割る<code class="node-ref" data-node="rbdbulletsolver" tabindex="0" role="button">rbdbulletsolver</code></h4>
               <p>rbdmaterialfracture の右の出口（つながり）に <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> をつなぎ、Run Over を Primitives にして <strong>strength を 0.8</strong> に下げる。既定のままだと強すぎて、球が跳ね返るだけで1枚も割れなかった。<code class="node-ref" data-node="rbdbulletsolver" tabindex="0" role="button">rbdbulletsolver</code> の左に塊、<strong>真ん中に弱めたつながり</strong>をつなぎ、Ground Plane を入れる。球が当たると、そのまわりのつながりが切れて破片が飛び、遠くの破片はつながったまま枠に残る。48 フレームで、119 個のうち 41 個が動いた。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_glass_p4_parm.png" loading="lazy" decoding="async" alt="ぶつけて割るのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_glass_4.png" loading="lazy" decoding="async" alt="ぶつけて割るの結果"></div>
@@ -3829,6 +3845,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>枠と壁を付けて、ガラスの材質を当てる<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p>細い <code class="node-ref" data-node="box" tabindex="0" role="button">box</code> 4本で木の窓枠を作り、窓の開口を残して <code class="node-ref" data-node="box" tabindex="0" role="button">box</code> 3枚で壁を立てる（窓枠だけだと窓に見えない）。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。<code class="node-ref" data-node="unpack" tabindex="0" role="button">unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code class="node-ref" data-node="material" tabindex="0" role="button">material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_glass_p5_parm.png" loading="lazy" decoding="async" alt="枠と壁を付けて、ガラスの材質を当てるのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3885,7 +3905,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4129,19 +4149,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>

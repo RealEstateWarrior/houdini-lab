@@ -3781,14 +3781,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <figcaption>打ち上がって開き、垂れて消えるまで（60 フレーム＝2.5 秒）。</figcaption>
         </figure>
         <figure class="guide-net">
-          <img src="pr_fireworks_graph.png" loading="lazy" decoding="async" alt="花火を打ち上げるのノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_fireworks_net.png" loading="lazy" decoding="async" alt="花火を打ち上げるのネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>玉の中の「星」を並べる<code class="node-ref" data-node="scatter" tabindex="0" role="button">scatter</code></h4>
               <p><code class="node-ref" data-node="sphere" tabindex="0" role="button">sphere</code>（半径 1 m）の表面に、<code class="node-ref" data-node="scatter" tabindex="0" role="button">scatter</code> で <strong>320 個</strong>の点をまく。1つ1つが、花火の玉に詰まった「星」（燃えながら飛ぶ火薬の粒）になる。<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;scatter&quot;, &quot;name&quot;: &quot;stars&quot;, &quot;rows&quot;: [[&quot;Relax Iterations&quot;, &quot;relaxiterations&quot;, &quot;Options&quot;, &quot;10&quot;, true]]}" tabindex="0" role="button">Relax Iterations</strong> を入れておくと、点どうしが離れて、開いたときに穴や固まりができにくい。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_fireworks_p1_parm.png" loading="lazy" decoding="async" alt="玉の中の「星」を並べるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_fireworks_1.png" loading="lazy" decoding="async" alt="玉の中の「星」を並べるの結果"></div>
@@ -3799,6 +3803,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>外向きの速さと色を付ける<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、点ごとに <strong>v</strong>（速さと向き）を付ける。向きは球の中心から外、速さは <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;attribwrangle&quot;, &quot;name&quot;: &quot;push_out&quot;, &quot;rows&quot;: [[&quot;speed&quot;, &quot;speed&quot;, &quot;&quot;, &quot;34&quot;, true]]}" tabindex="0" role="button">speed = 34</strong>（m/秒）を星ごとに 88〜100% の範囲でばらつかせる。全部同じ速さだと、コンパスで描いたような不自然な球になる。色 <strong>Cd</strong> は金色（1, 0.72, 0.32）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_fireworks_p2_parm.png" loading="lazy" decoding="async" alt="外向きの速さと色を付けるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_fireworks_2.png" loading="lazy" decoding="async" alt="外向きの速さと色を付けるの結果"></div>
@@ -3809,6 +3817,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>重力と空気抵抗で飛ばす<code class="node-ref" data-node="dopimport" tabindex="0" role="button">dopimport</code></h4>
               <p><code class="node-ref" data-node="dopnet" tabindex="0" role="button">dopnet</code> の中に <button class="term" data-term="POP">POP</button> を組む。<code class="node-ref" data-node="popsource" tabindex="0" role="button">popsource</code> は Emission Type を <strong>All Points</strong>、<strong>Impulse Activation</strong> に式 <strong>$FF == 1</strong> を入れて、1 フレーム目だけ 320 個を一度に生む。Initial Velocity は <strong>Use Inherited Velocity</strong>（前の段で付けた v をそのまま使う）。寿命 <strong>Life Expectancy 2.2 秒・Life Variance 0.5</strong> で、消える時間をばらけさせる。<code class="node-ref" data-node="popforce" tabindex="0" role="button">popforce</code> で下向き 9.81 の重力、<code class="node-ref" data-node="popdrag" tabindex="0" role="button">popdrag</code> の <strong>Air Resistance 0.45</strong> で空気抵抗を入れる。空気抵抗があると最初だけ速く広がり、すぐ減速して垂れる。花火らしさはここで出る。0.9 秒後の広がりは約 13 m。外の <code class="node-ref" data-node="dopimport" tabindex="0" role="button">dopimport</code> で結果を取り出す。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_fireworks_p3_parm.png" loading="lazy" decoding="async" alt="重力と空気抵抗で飛ばすのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_fireworks_3.png" loading="lazy" decoding="async" alt="重力と空気抵抗で飛ばすの結果"></div>
@@ -3819,6 +3831,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>通った跡を線にして、尾を付ける<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="trail" tabindex="0" role="button">trail</code> の Result Type を <strong>Connect as Polygons</strong>、Trail Length を <strong>18</strong> にすると、星ごとに「今までの 18 フレーム分の位置」をつないだ線ができる。これが火の粉の尾になる。次の <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、線の先頭ほど白く太く、うしろほど赤く細くする（width 0.01 → 0.00 m）。さらに寿命の終わりに向けて全体を暗くすると、燃え尽きて消えていく。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_fireworks_p4_parm.png" loading="lazy" decoding="async" alt="通った跡を線にして、尾を付けるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_fireworks_4.png" loading="lazy" decoding="async" alt="通った跡を線にして、尾を付けるの結果"></div>
@@ -3829,6 +3845,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>時間と場所をずらして3発にする<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p><code class="node-ref" data-node="timeshift" tabindex="0" role="button">timeshift</code> の Frame に <strong>$F - 7</strong> のような式を入れると、同じ花火を 7 フレーム遅れて再生できる。<code class="node-ref" data-node="xform" tabindex="0" role="button">xform</code> で場所をずらし、もう1本の <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で色を赤・水色に置き換える。計算（POP）は1回だけで、3発とも同じ結果を使い回すので軽い。最後に <code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code> でまとめる。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_fireworks_p5_parm.png" loading="lazy" decoding="async" alt="時間と場所をずらして3発にするのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_fireworks_5.png" loading="lazy" decoding="async" alt="時間と場所をずらして3発にするの結果"></div>
@@ -3839,6 +3859,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>光る材質を当てる<code class="node-ref" data-node="material" tabindex="0" role="button">material</code></h4>
               <p><code>principledshader</code> の <strong>Emission Intensity を 0.9</strong>、<strong>Emission Color の Use Point Color</strong> を入れる。線の色（Cd）がそのまま光の色になる。Base Color は黒にして、光以外の見え方を消す。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_fireworks_p6_parm.png" loading="lazy" decoding="async" alt="光る材質を当てるのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3873,7 +3897,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4117,19 +4141,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>

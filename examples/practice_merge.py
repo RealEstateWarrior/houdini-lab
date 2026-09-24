@@ -58,6 +58,8 @@ def main():
                         v = json.load(fp)
                     if vid in caps if os.path.exists(caps_path) else False:
                         v["anim_cap"] = caps[vid]
+                    if os.path.exists(rev_path) and vid in revs:
+                        v["revisions"] = revs[vid]
                     g["variants"].append(v)
     with open(GUIDES, "w", encoding="utf-8", newline="") as fp:
         fp.write(json.dumps(data, ensure_ascii=False, indent=2) + "\n")

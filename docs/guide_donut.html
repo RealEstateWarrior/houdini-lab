@@ -3775,14 +3775,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           </nav>
         </div>
         <figure class="guide-net">
-          <img src="pr_donut_graph.png" loading="lazy" decoding="async" alt="ドーナツを飾るのノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_donut_net.png" loading="lazy" decoding="async" alt="ドーナツを飾るのネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>生地を作る<code class="node-ref" data-node="normal" tabindex="0" role="button">normal</code></h4>
               <p>本物のリングドーナツは、直径 9〜10 cm で穴は 2〜3 cm と小さい。<code class="node-ref" data-node="torus" tabindex="0" role="button">torus</code> を <strong>半径 3 cm・太さ 1.75 cm</strong>（直径 9.5 cm、穴 2.5 cm）にして 64 × 128 に割り、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で高さを 0.85 倍につぶす。面の向き N にそってノイズでわずかに出し入れし、揚げた生地のふっくらしたむらにする。色は、上下を濃いきつね色、側面の真ん中を白っぽい帯にする（揚げるときに油に浸からない所）。torus の出力には N が無いので、前後に <code class="node-ref" data-node="normal" tabindex="0" role="button">normal</code> を入れて向きを作る（形を変えたあとは作り直す）。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_donut_p1_parm.png" loading="lazy" decoding="async" alt="生地を作るのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_donut_1.png" loading="lazy" decoding="async" alt="生地を作るの結果"></div>
@@ -3793,6 +3797,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>アイシングをかける<code class="node-ref" data-node="attribdelete" tabindex="0" role="button">attribdelete</code></h4>
               <p>生地のコピーを <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code>（Primitives）で削る。面の向きの上下成分 N.y が <strong>edge = 0.15</strong> より小さい面を消すと、上の面だけが残る（本物のアイシングも、側面の真ん中までは届かない）。edge をノイズで上下させる（wobble 0.7）と、縁が垂れたように波打つ。<code class="node-ref" data-node="polyextrude" tabindex="0" role="button">polyextrude</code> で <strong>2.5 mm</strong> 押し出して厚みを付ける（Output Back で裏も閉じる）。アイシングは生地から点の色 Cd（揚げ色）を受け継いでいるので、<code class="node-ref" data-node="attribdelete" tabindex="0" role="button">attribdelete</code> で消しておく。残したままだと、材質の<button class="term" data-term="ピン">ピン</button>クに揚げ色が掛け合わされて、オレンジに写った。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_donut_p2_parm.png" loading="lazy" decoding="async" alt="アイシングをかけるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_donut_2.png" loading="lazy" decoding="async" alt="アイシングをかけるの結果"></div>
@@ -3803,6 +3811,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>カラースプレーを散らす<code>copytopoints</code></h4>
               <p>アイシングの面に <code class="node-ref" data-node="scatter" tabindex="0" role="button">scatter</code> で 420 個の点をまく（Relax で間をそろえる）。<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、粒の長い向きを「面にそったばらばらの向き」、上を面の向き N に合わせた <strong>orient</strong> を作り、アイシングの厚みぶん持ち上げる。色は6色から選ぶ。細い円柱の <code class="node-ref" data-node="tube" tabindex="0" role="button">tube</code>（長さ 5.5 mm・太さ 1.1 mm、端を閉じる）を <code>copytopoints</code> で並べ、色は Target Attributes の「Apply to: Points」「Cd」で移す。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_donut_p3_parm.png" loading="lazy" decoding="async" alt="カラースプレーを散らすのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_donut_3.png" loading="lazy" decoding="async" alt="カラースプレーを散らすの結果"></div>
@@ -3813,6 +3825,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>材質を当てる<code class="node-ref" data-node="merge" tabindex="0" role="button">merge</code></h4>
               <p>生地は Base Color を白にして点の色 Cd（揚げ色と白い帯）を使い、Roughness 0.65・Sheen 0.4。アイシングはピンクで <strong>Roughness 0.15・Coat 0.6</strong>（つや）。スプリンクルは Base Color を白にして点の色 Cd を使う。Subsurface（光が中へ入って散る）も試したが、このドーナツでは Karma が 20 分たっても撮り終わらなかったので入れていない。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_donut_p4_parm.png" loading="lazy" decoding="async" alt="材質を当てるのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3864,7 +3880,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4108,19 +4124,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>

@@ -1,0 +1,290 @@
+ê⁄ë±ÇµÇ‹ÇµÇΩ
+grow: guide008.hipnc
+  saved: D:\Claude\houdini\out\guide_grow_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide008.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+terrain: guide_terrain.hipnc
+  saved: D:\Claude\houdini\out\guide_terrain_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_terrain.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+hard: guide_hard.hipnc
+  saved: D:\Claude\houdini\out\guide_hard_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_hard.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+smooth: guide_smooth.hipnc
+  saved: D:\Claude\houdini\out\guide_smooth_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_smooth.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+vex: guide_vex.hipnc
+  saved: D:\Claude\houdini\out\guide_vex_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_vex.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+rbd: guide_rbd.hipnc
+  saved: D:\Claude\houdini\out\guide_rbd_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_rbd.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+cloth: guide_cloth.hipnc
+  saved: D:\Claude\houdini\out\guide_cloth_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_cloth.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+smoke: guide_smoke.hipnc
+  saved: D:\Claude\houdini\out\guide_smoke_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_smoke.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+liquid: guide_liquid.hipnc
+  saved: D:\Claude\houdini\out\guide_liquid_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_liquid.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+pop: guide_pop.hipnc
+  saved: D:\Claude\houdini\out\guide_pop_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_pop.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+groom: guide_groom.hipnc
+  saved: D:\Claude\houdini\out\guide_groom_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_groom.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+heightfield: guide_hf.hipnc
+  saved: D:\Claude\houdini\out\guide_heightfield_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_hf.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+texture: 041_disp.hipnc
+  saved: D:\Claude\houdini\out\guide_texture_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\041_disp.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+rig: guide_rig.hipnc
+  saved: D:\Claude\houdini\out\guide_rig_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_rig.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+mpm: guide_mpm.hipnc
+  saved: D:\Claude\houdini\out\guide_mpm_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_mpm.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+cache: guide_cache.hipnc
+  saved: D:\Claude\houdini\out\guide_cache_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_cache.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+wind: guide_wind.hipnc
+  saved: D:\Claude\houdini\out\guide_wind_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_wind.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+tear: guide_tear.hipnc
+  saved: D:\Claude\houdini\out\guide_tear_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_tear.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+fire: guide_fire.hipnc
+  saved: D:\Claude\houdini\out\guide_fire_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_fire.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+hair: guide_hair.hipnc
+  saved: D:\Claude\houdini\out\guide_hair_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_hair.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+grass: guide_grass.hipnc
+  saved: D:\Claude\houdini\out\guide_grass_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_grass.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+carry: guide_carry.hipnc
+  saved: D:\Claude\houdini\out\guide_carry_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_carry.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+karma: guide_karma.hipnc
+  saved: D:\Claude\houdini\out\guide_karma_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_karma.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+export: guide_export.hipnc
+  saved: D:\Claude\houdini\out\guide_export_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_export.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+foreach: guide_foreach.hipnc
+  saved: D:\Claude\houdini\out\guide_foreach_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\guide_foreach.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+sparks: 079_sparks.hipnc
+  saved: D:\Claude\houdini\out\guide_sparks_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\079_sparks.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+rain: 080_rain.hipnc
+  saved: D:\Claude\houdini\out\guide_rain_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\080_rain.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+flag: 081_flag.hipnc
+  saved: D:\Claude\houdini\out\guide_flag_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\081_flag.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+path: 082_path.hipnc
+  saved: D:\Claude\houdini\out\guide_path_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\082_path.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+sign: 083_sign.hipnc
+  saved: D:\Claude\houdini\out\guide_sign_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\083_sign.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+domino: 084_dominoes.hipnc
+  saved: D:\Claude\houdini\out\guide_domino_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\084_dominoes.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+wall: 085_wall.hipnc
+  saved: D:\Claude\houdini\out\guide_wall_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\085_wall.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+leaves: 086_leaves.hipnc
+  saved: D:\Claude\houdini\out\guide_leaves_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\086_leaves.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+turntable: 087_scene.hipnc
+  saved: D:\Claude\houdini\out\guide_turntable_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\087_scene.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+glow: 088_scene.hipnc
+  saved: D:\Claude\houdini\out\guide_glow_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\088_scene.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+fallen: 089_leaves.hipnc
+  saved: D:\Claude\houdini\out\guide_fallen_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\089_leaves.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+rock: pr_rock.hipnc
+  saved: D:\Claude\houdini\out\guide_rock_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_rock.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+neon: pr_neon.hipnc
+  saved: D:\Claude\houdini\out\guide_neon_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_neon.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+gems: pr_gems.hipnc
+  saved: D:\Claude\houdini\out\guide_gems_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_gems.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+campfire: pr_campfire.hipnc
+  saved: D:\Claude\houdini\out\guide_campfire_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_campfire.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+nightcity: pr_nightcity.hipnc
+  saved: D:\Claude\houdini\out\guide_nightcity_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_nightcity.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+curtain: pr_curtain.hipnc
+  saved: D:\Claude\houdini\out\guide_curtain_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_curtain.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+balloon: pr_balloon.hipnc
+  saved: D:\Claude\houdini\out\guide_balloon_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_balloon.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+jelly: pr_jelly.hipnc
+  saved: D:\Claude\houdini\out\guide_jelly_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_jelly.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+ocean: pr_ocean.hipnc
+  saved: D:\Claude\houdini\out\guide_ocean_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_ocean.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+snow: pr_snow.hipnc
+  saved: D:\Claude\houdini\out\guide_snow_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_snow.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+fireworks: pr_fireworks.hipnc
+  saved: D:\Claude\houdini\out\guide_fireworks_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_fireworks.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+moss: pr_moss.hipnc
+  saved: D:\Claude\houdini\out\guide_moss_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_moss.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+glass: pr_glass.hipnc
+  saved: D:\Claude\houdini\out\guide_glass_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_glass.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+tablecloth: pr_tablecloth.hipnc
+  saved: D:\Claude\houdini\out\guide_tablecloth_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_tablecloth.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+chain: pr_chain.hipnc
+  saved: D:\Claude\houdini\out\guide_chain_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_chain.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+web: pr_web.hipnc
+  saved: D:\Claude\houdini\out\guide_web_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_web.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+fog: pr_fog.hipnc
+  saved: D:\Claude\houdini\out\guide_fog_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_fog.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+brickhda: pr_brickhda.hipnc
+  saved: D:\Claude\houdini\out\guide_brickhda_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_brickhda.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+ripple: pr_ripple.hipnc
+  saved: D:\Claude\houdini\out\guide_ripple_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_ripple.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+sunflower: pr_sunflower.hipnc
+  saved: D:\Claude\houdini\out\guide_sunflower_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_sunflower.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+lava: pr_lava.hipnc
+  saved: D:\Claude\houdini\out\guide_lava_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_lava.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+tree: pr_tree.hipnc
+  saved: D:\Claude\houdini\out\guide_tree_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_tree.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+sandpile: pr_sandpile.hipnc
+  saved: D:\Claude\houdini\out\guide_sandpile_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_sandpile.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+candle: pr_candle.hipnc
+  saved: D:\Claude\houdini\out\guide_candle_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_candle.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+cloud: pr_cloud.hipnc
+  saved: D:\Claude\houdini\out\guide_cloud_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_cloud.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+coins: pr_coins.hipnc
+  saved: D:\Claude\houdini\out\guide_coins_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_coins.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+letters: pr_letters.hipnc
+  saved: D:\Claude\houdini\out\guide_letters_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_letters.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+pdg: pr_pdg.hipnc
+  saved: D:\Claude\houdini\out\guide_pdg_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_pdg.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+snowman: pr_snowman.hipnc
+  saved: D:\Claude\houdini\out\guide_snowman_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_snowman.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+hextile: pr_hextile.hipnc
+  saved: D:\Claude\houdini\out\guide_hextile_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_hextile.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+petals: pr_petals.hipnc
+  saved: D:\Claude\houdini\out\guide_petals_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_petals.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+gears: pr_gears.hipnc
+  saved: D:\Claude\houdini\out\guide_gears_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_gears.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+stairs: pr_stairs.hipnc
+  saved: D:\Claude\houdini\out\guide_stairs_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_stairs.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+donut: pr_donut.hipnc
+  saved: D:\Claude\houdini\out\guide_donut_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_donut.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+glasscup: pr_glasscup.hipnc
+  saved: D:\Claude\houdini\out\guide_glasscup_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_glasscup.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+ocean_winter: pr_ocean_winter.hipnc
+  saved: D:\Claude\houdini\out\guide_ocean_winter_ui.png
+size: 2578 by 1398
+title: D:\Claude\houdini\out\pr_ocean_winter.hipnc - Houdini Apprentice Non-Commercial 21.0.700 - Py3.11
+äÆóπ

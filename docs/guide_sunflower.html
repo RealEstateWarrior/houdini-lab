@@ -3777,14 +3777,18 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           </nav>
         </div>
         <figure class="guide-net">
-          <img src="pr_sunflower_graph.png" loading="lazy" decoding="async" alt="ひまわりを咲かせるのノードのつなぎ方">
-          <figcaption>組み上がったネットワーク（hip から描いた、ノードのつなぎ方の図）。</figcaption>
+          <img src="guide_sunflower_net.png" loading="lazy" decoding="async" alt="ひまわりを咲かせるのネットワーク（Houdini の画面）">
+          <figcaption>組み上がったネットワーク。Houdini の画面をそのまま撮ったもの。</figcaption>
         </figure>
         <ol class="steps">
           <li class="step" id="step-1">
             <div class="step-body">
               <h4>種を黄金角で並べる<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p>何もつながない <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code>（Run Over は Detail）で、<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;attribwrangle&quot;, &quot;name&quot;: &quot;golden_spiral&quot;, &quot;rows&quot;: [[&quot;count&quot;, &quot;count&quot;, &quot;&quot;, &quot;1400&quot;, true]]}" tabindex="0" role="button">count = 1400</strong> 粒の種の点を作る。i 番目の粒は、角度 <strong>i × 137.508度</strong>（黄金角）、中心からの距離 <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;attribwrangle&quot;, &quot;name&quot;: &quot;golden_spiral&quot;, &quot;rows&quot;: [[&quot;spacing&quot;, &quot;spacing&quot;, &quot;&quot;, &quot;0.0034&quot;, true]]}" tabindex="0" role="button">spacing × √i</strong>。こうすると粒どうしがすき間なく詰まり、右回りと左回りの渦が浮かび上がる。本物のひまわりと同じ並び方。中心を少し盛り上げ、粒の大きさ pscale と色 Cd を付ける。色は本物と同じく3つの輪にする。真ん中は黄緑のつぼみ、その外は咲いた黄金色の小花、いちばん外はこげ茶。粒の向き orient は、盛り上がった面に垂直にする。</p>
+              <details class="step-ui">
+                <summary>Houdini の<button class="term" data-term="パラメータ">パラメータ</button>画面</summary>
+                <img src="guide_sunflower_p1_parm.png" loading="lazy" decoding="async" alt="種を黄金角で並べるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_sunflower_1.png" loading="lazy" decoding="async" alt="種を黄金角で並べるの結果"></div>
@@ -3795,6 +3799,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>小さな花を並べる<code>copytopoints</code></h4>
               <p>ひまわりの中心は種ではなく、小さな筒の形の花（管状花）がびっしり詰まったもの。前の版は丸い粒を並べていたが、写真と比べると形が違った。先の細い六角の <code class="node-ref" data-node="tube" tabindex="0" role="button">tube</code>（下の半径 1・上 0.35・高さ 1.8）を <code>copytopoints</code> で点に並べる（大きさは pscale で決まる）。色を移すため、Target Attributes に「<strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;copytopoints&quot;, &quot;name&quot;: &quot;seed_disk&quot;, &quot;rows&quot;: [[&quot;Apply to&quot;, &quot;applyto1&quot;, &quot;&quot;, &quot;points&quot;, true]]}" tabindex="0" role="button">Apply to: Points</strong>」「Attributes: Cd」を足す（H21 は書かないと色が移らない）。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_sunflower_p2_parm.png" loading="lazy" decoding="async" alt="小さな花を並べるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_sunflower_2.png" loading="lazy" decoding="async" alt="小さな花を並べるの結果"></div>
@@ -3805,6 +3813,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>花びらを1枚作る<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code></h4>
               <p><code class="node-ref" data-node="grid" tabindex="0" role="button">grid</code>（12 × 24 に割る）を細長い板にし、<code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で形を作る。根元から先への位置 u を使い、幅を <strong>sin</strong> と <strong>(1 − u)</strong> の掛け算にして、先がとがった形にする（本物の花びらは先がとがる）。高さを <strong class="parm-ref" data-parm="{&quot;node&quot;: &quot;attribwrangle&quot;, &quot;name&quot;: &quot;petal_shape&quot;, &quot;rows&quot;: [[&quot;curl&quot;, &quot;curl&quot;, &quot;&quot;, &quot;0.012&quot;, true]]}" tabindex="0" role="button">curl × u²</strong> で先ほど少し反らせ、<code>sin</code> で小さく波打たせる。長さ 12 cm・幅 3 cm。色は根元が濃い黄色、先が明るい黄色で、横方向の <code>cos</code> で細い縦の筋を付ける。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_sunflower_p3_parm.png" loading="lazy" decoding="async" alt="花びらを1枚作るのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_sunflower_3.png" loading="lazy" decoding="async" alt="花びらを1枚作るの結果"></div>
@@ -3815,6 +3827,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>花びらを2重の輪に並べる<code>copytopoints</code></h4>
               <p>もう1つの Detail の <code class="node-ref" data-node="attribwrangle" tabindex="0" role="button">attribwrangle</code> で、種の円盤のまわり（半径 12.5 cm）に <strong>30 個 × 2 段</strong>の点を置く。外の段は内の段の間にくるよう半分ずらす。点ごとの向き <strong>orient</strong> は、花びらの長い向きを外へ向け、4〜18度上へ傾ける（外の段は 10度下げる）。大きさ pscale もばらつかせる。<code>copytopoints</code> で花びらを並べる。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_sunflower_p4_parm.png" loading="lazy" decoding="async" alt="花びらを2重の輪に並べるのパラメータ">
+              </details>
             </div>
             <figure class="step-figure">
               <div class="frame-light"><img src="pr_sunflower_4.png" loading="lazy" decoding="async" alt="花びらを2重の輪に並べるの結果"></div>
@@ -3825,6 +3841,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <div class="step-body">
               <h4>茎と裏を付けて、こちらへ向ける<code class="node-ref" data-node="xform" tabindex="0" role="button">xform</code></h4>
               <p>花びらの後ろに、緑の萼（がく）を同じ作り方で 26 枚、少し下へ向けて並べる。花の裏に平たい <code class="node-ref" data-node="sphere" tabindex="0" role="button">sphere</code>、下に細い <code class="node-ref" data-node="tube" tabindex="0" role="button">tube</code> の茎を付け、どちらも緑にする（本物の裏は緑）。種と花びらは Base Color を白にして点の色 Cd をそのまま使う。種は <strong>Roughness 0.95</strong> でつやを消す（つやがあると、小さな粒1つ1つが空を映して白く光る）。花びらは Sheen 0.3。最後に <code class="node-ref" data-node="xform" tabindex="0" role="button">xform</code> で 62度起こして、花をカメラのほうへ向ける。</p>
+              <details class="step-ui">
+                <summary>Houdini のパラメータ画面</summary>
+                <img src="guide_sunflower_p5_parm.png" loading="lazy" decoding="async" alt="茎と裏を付けて、こちらへ向けるのパラメータ">
+              </details>
             </div>
           </li>
         </ol>
@@ -3883,7 +3903,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-dd3197fa18.js"></script>
+<script src="data/glossary-data-183aebb567.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -4127,19 +4147,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <div class="menu-cards">
       <div class="menu-cards-head"><span>実践</span><a href="practice.html#guides">すべて見る（71本）</a></div>
       <div class="menu-rail">
-        <a class="menu-card" href="guide_glow.html" target="_blank" rel="noopener"><img src="088_emit4.png" alt="" loading="lazy" decoding="async"><span>文字を光らせる</span></a>
-        <a class="menu-card" href="guide_karma.html" target="_blank" rel="noopener"><img src="guide_karma_render.png" alt="" loading="lazy" decoding="async"><span>Karma で見せる絵を撮る</span></a>
-        <a class="menu-card" href="guide_vex.html" target="_blank" rel="noopener"><img src="guide_vex_3_color.png" alt="" loading="lazy" decoding="async"><span>VEX で点を動かす</span></a>
-        <a class="menu-card" href="guide_groom.html" target="_blank" rel="noopener"><img src="guide_groom_6_color.png" alt="" loading="lazy" decoding="async"><span>毛を生やして束ねる</span></a>
-        <a class="menu-card" href="guide_sparks.html" target="_blank" rel="noopener"><img src="079_sparks_18.png" alt="" loading="lazy" decoding="async"><span>火花を散らす</span></a>
-        <a class="menu-card" href="guide_sign.html" target="_blank" rel="noopener"><img src="083_round.png" alt="" loading="lazy" decoding="async"><span>看板の文字を立体にする</span></a>
-        <a class="menu-card" href="guide_path.html" target="_blank" rel="noopener"><img src="082_posts.png" alt="" loading="lazy" decoding="async"><span>道に沿って物を並べる</span></a>
-        <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
+        <a class="menu-card" href="guide_ocean.html" target="_blank" rel="noopener"><img src="pr_ocean_hero.png" alt="" loading="lazy" decoding="async"><span>夕暮れの海の波を作る</span></a>
+        <a class="menu-card" href="guide_neon.html" target="_blank" rel="noopener"><img src="pr_neon_hero.png" alt="" loading="lazy" decoding="async"><span>ネオン管の看板を作る</span></a>
+        <a class="menu-card" href="guide_fireworks.html" target="_blank" rel="noopener"><img src="pr_fireworks_hero.png" alt="" loading="lazy" decoding="async"><span>花火を打ち上げる</span></a>
+        <a class="menu-card" href="guide_donut.html" target="_blank" rel="noopener"><img src="pr_donut_hero.png" alt="" loading="lazy" decoding="async"><span>ドーナツを飾る</span></a>
+        <a class="menu-card" href="guide_lava.html" target="_blank" rel="noopener"><img src="pr_lava_hero.png" alt="" loading="lazy" decoding="async"><span>ひび割れから光る溶岩</span></a>
+        <a class="menu-card" href="guide_sunflower.html" target="_blank" rel="noopener"><img src="pr_sunflower_hero.png" alt="" loading="lazy" decoding="async"><span>ひまわりを咲かせる</span></a>
+        <a class="menu-card" href="guide_cloud.html" target="_blank" rel="noopener"><img src="pr_cloud_hero.png" alt="" loading="lazy" decoding="async"><span>もくもくの雲を浮かべる</span></a>
+        <a class="menu-card" href="guide_glasscup.html" target="_blank" rel="noopener"><img src="pr_glasscup_hero.png" alt="" loading="lazy" decoding="async"><span>氷の入ったグラスの水</span></a>
+        <a class="menu-card" href="guide_jelly.html" target="_blank" rel="noopener"><img src="pr_jelly_hero.png" alt="" loading="lazy" decoding="async"><span>ゼリーをぷるんと揺らす</span></a>
+        <a class="menu-card" href="guide_balloon.html" target="_blank" rel="noopener"><img src="pr_balloon_hero.png" alt="" loading="lazy" decoding="async"><span>風船をふくらませる</span></a>
+        <a class="menu-card" href="guide_snow.html" target="_blank" rel="noopener"><img src="pr_snow_hero.png" alt="" loading="lazy" decoding="async"><span>石灯籠に雪を積もらせる</span></a>
+        <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>221本の実験。最新は実験221</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
