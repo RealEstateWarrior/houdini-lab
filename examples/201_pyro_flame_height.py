@@ -79,6 +79,9 @@ def run_one(name):
     # Houdini の既定値に戻す（点検 210 で、戻さないと記録と合わないことに気づいた）
     for k in ("flames_lifespan", "buoyancylift", "tempcooling", "enable_turbulence", "turbulence", "turbulence_usecontrol"):
         solver.parm(k).revertToDefaults()
+    # Use Control Field は、つまみの既定値は「切り」だが、pyrosolver を作った直後は「入り」になっている。
+    # この実験を取ったときは作った直後の値だったので、入りに戻す（実験220 で分かった）
+    solver.parm("turbulence_usecontrol").set(1)
     defaults = {k: solver.parm(k).eval() for k in ("flames_lifespan", "buoyancylift", "tempcooling", "enable_disturbance", "disturbance", "enable_turbulence", "turbulence")}
     for k, v in CASES[name].items():
         solver.parm(k).set(v)

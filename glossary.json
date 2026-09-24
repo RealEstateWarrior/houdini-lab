@@ -2543,6 +2543,11 @@
      "term": "@wedgeindex",
      "reading": "アットウェッジインデックス",
      "def": "wedge が作った作業ごとに付く番号（0, 1, 2, …）。SOP のつまみの式やファイル名に `@wedgeindex` と書くと、作業ごとに違う値になる。PDG の外で見ると 0。"
+    },
+    {
+     "term": "revertToDefaults()",
+     "reading": "リバートトゥデフォルツ",
+     "def": "Python（hou）で、つまみを既定値に戻す関数。戻る先は「つまみの既定値」で、ノードを作った直後の値とは限らない。pyrosolver の Use Control Field は、作った直後は「入り」なのに、revertToDefaults では「切り」に戻った（実験220）。作った直後の値に戻したいときは、その値を直接 set する。"
     }
    ]
   }

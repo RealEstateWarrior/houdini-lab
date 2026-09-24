@@ -1,0 +1,57 @@
+{
+ "title": "焚き火の Turbulence は、Use Control Field を入れると効かない（揺らぎなしと全フレーム同じ）。切ると炎の高さ 1.31 m（なし 1.21 m）。実験201 の結論は正しく、点検で合わなかったのは revertToDefaults が Use Control Field を「切り」に戻したため",
+ "summary": "**課題: pyrosolver の Turbulence は、Use Control Field を入れたままでも効くのか。実験201 の結論（切らないと効かない）は正しいか。点検（実験210）で 201 の 2 条件が記録と合わなかったのはなぜか。**\n\n実験201 と同じ焚き火（実験202 の組み立て、Voxel Size 0.04、72 フレーム、寿命 0.25・浮力 0.25・冷め方 1）で、揺らぎなし・Turbulence 1 を revertToDefaults のまま・Use Control Field を切り・Use Control Field を入り、の 4 条件を、それぞれ別の Houdini で 2 回ずつ回した。36〜72 フレームの炎の高さの平均で比べた。\n\n**毎回同じに回る。**4 条件とも、1 回目と 2 回目のフレームごとの高さがすべて一致した。\n\n**Use Control Field を入れると、Turbulence は効かない。**入れた条件は、揺らぎなしとすべてのフレームで同じ値（平均 1.214 m）だった（一致）。切ると 1.310 m で、揺らぎなし（1.214 m）より高くなった。実験201 の結論は正しかった。\n\n**点検で合わなかった原因: 「既定」が 2 つあった。**pyrosolver を作った直後、Use Control Field は「入り」になっている。ところが、つまみの既定値（revertToDefaults で戻る値）は「切り」だった（hython で確かめた。作った直後の値は既定値と違う、と出る）。点検で 201 の台本を直したとき、借りた組み立ての設定を revertToDefaults で戻したので、Use Control Field も「切り」になった。そのため「入り」のつもりの 2 条件で Turbulence が効き、炎が高く出た（revertToDefaults のまま: 1.310 m。切りと全フレーム同じ）。201 の台本を「作った直後と同じく入り」に直して 2 条件を流し直すと、記録と全フレーム一致した。\n\n**なぜ入りだと効かないのかは、確かめきれなかった。**Control Field は既定で density、範囲は 0〜1。焚き火の density の最大は フレーム 24・48 とも 1.0（範囲の中）で、「煙が無いから 0 になる」わけではなかった。\n\n**決め方: 焚き火を Turbulence で揺らすなら、Use Control Field を切る。**台本で設定を戻すときは、revertToDefaults ではなく、作った直後の値で戻す。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "条件ごとの炎の高さ（36〜72 フレームの平均）",
+   "images": [
+    {
+     "path": "220_heights.png",
+     "caption": "Use Control Field 入りの線は、揺らぎなしの線と重なる。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "条件",
+    "Use Control Field",
+    "高さの平均（m）",
+    "2 回目と"
+   ],
+   "rows": [
+    [
+     "揺らぎなし",
+     "切り",
+     "1.214",
+     "同じ"
+    ],
+    [
+     "Turbulence 1（revertToDefaults のまま）",
+     "切り",
+     "1.310",
+     "同じ"
+    ],
+    [
+     "Turbulence 1・Use Control Field 切り",
+     "切り",
+     "1.310",
+     "同じ"
+    ],
+    [
+     "Turbulence 1・Use Control Field 入り",
+     "入り",
+     "1.214",
+     "同じ"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>Use Control Field を入れると、Turbulence は効かない。</strong>揺らぎなしと全フレーム同じ。実験201 の結論は正しかった。",
+  "<strong>切ると効く。</strong>炎の高さ 1.21 → 1.31 m。",
+  "<strong>pyrosolver を作った直後の Use Control Field は「入り」、revertToDefaults で戻る値は「切り」。</strong>点検で合わなかったのはこのため。",
+  "<strong>毎回同じに回る。</strong>2 回回して全フレーム一致。"
+ ],
+ "next": []
+}

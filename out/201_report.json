@@ -246,7 +246,7 @@
   }
  ],
  "notes": [
-  "<strong>点検（実験210、2026-09-24）での注意: Turbulence を Use Control Field 入り（既定）で効かせた 2 条件（fire_turb1_ctrl・l025b025c1_turb）は、台本を流し直すと炎が高く出て、記録と合わなかった。</strong>下の「Use Control Field を切らないと Turbulence は効かない」は確かめ直している途中。ほかの 21 条件は一致した。",
+  "<strong>点検（実験210）と確かめ直し（実験220、2026-09-24）: 下の結論「Use Control Field を切らないと Turbulence は効かない」は正しかった。</strong>点検で 2 条件（fire_turb1_ctrl・l025b025c1_turb）が記録と合わなかったのは、台本を直したとき revertToDefaults で Use Control Field が「切り」に戻ったため（pyrosolver を作った直後は「入り」、つまみの既定値は「切り」）。台本を「入り」に直して流し直すと、記録と全フレーム一致した。",
   "<strong>焚き火の高さ（1 m 台）は Flame Lifespan 0.25・Buoyancy Scale 0.25・Cooling Rate 1。</strong>既定の Lifespan 2 秒では、炎が柱になって伸び続ける。",
   "<strong>Cooling Rate は 1 より上げても変わらない。</strong>",
   "<strong>炎を揺らすのは Turbulence（1〜3）。</strong>Disturbance と Shredding は輪郭を少し乱すだけで、炎全体はあまり動かない。",

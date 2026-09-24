@@ -5592,7 +5592,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li><strong>点検（<a href="#exp210">実験210</a>、2026-09-24）での注意: Turbulence を Use Control Field 入り（既定）で効かせた 2 条件（fire_turb1_ctrl・l025b025c1_turb）は、台本を流し直すと炎が高く出て、記録と合わなかった。</strong>下の「Use Control Field を切らないと Turbulence は効かない」は確かめ直している途中。ほかの 21 条件は一致した。</li>
+          <li><strong>点検（<a href="#exp210">実験210</a>）と確かめ直し（<a href="#exp220">実験220</a>、2026-09-24）: 下の結論「Use Control Field を切らないと Turbulence は効かない」は正しかった。</strong>点検で 2 条件（fire_turb1_ctrl・l025b025c1_turb）が記録と合わなかったのは、台本を直したとき revertToDefaults で Use Control Field が「切り」に戻ったため（pyrosolver を作った直後は「入り」、つまみの既定値は「切り」）。台本を「入り」に直して流し直すと、記録と全フレーム一致した。</li>
           <li><strong>焚き火の高さ（1 m 台）は Flame Lifespan 0.25・Buoyancy Scale 0.25・Cooling Rate 1。</strong>既定の Lifespan 2 秒では、炎が柱になって伸び続ける。</li>
           <li><strong>Cooling Rate は 1 より上げても変わらない。</strong></li>
           <li><strong>炎を揺らすのは Turbulence（1〜3）。</strong>Disturbance と Shredding は輪郭を少し乱すだけで、炎全体はあまり動かない。</li>
@@ -5982,6 +5982,100 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
           <li><strong>さざ波を高くすると、粒のまま広がる。</strong>0.4→3.2 で幅 12→36 列（Roughness 0.04）。</li>
           <li><strong>さざ波を高くすると、光の道の外の水面は暗くなる。</strong>高すぎると、設計図のくり返しが横縞に見える。</li>
           <li><strong>細かくきらめかせるなら、Roughness は 0.02〜0.04 に抑え、さざ波で広げる。</strong></li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 219 ===================== -->
+    <article class="entry entry--current" id="exp219">
+      <div class="badge">219</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>海の板の点を半分にすると、撮る時間は 17% 減り、きらめきの粒も 15% 減る。1/4 で時間 41% 減・粒 27% 減。1/16 でも時間は 52% までしか減らない</h2>
+        <p class="path">examples/219_ocean_grid_density.py &nbsp;·&nbsp; 海の板の点を半分にすると時間17%減、粒15%減</p>
+
+        <div class="prose">
+          <p><strong>課題: 実践「冬の朝の七里ヶ浜」の映像は 1 枚 11.8 秒かかった。海の板（grid 1400 × 1600、224 万点）の点を減らすと、撮る時間と見た目はどう変わるか。どこまで減らしてよいか。</strong></p>
+          <p>板の Rows・Columns を 1400×1600・990×1131（1/2 の点）・700×800（1/4）・350×400（1/16）にし、フレーム 30 を映像と同じ 960×540・16 <button class="term" data-term="サンプル">サンプル</button>で撮った。1 通りずつ、ほかの処理は回さずに測った。画の差は、1400×1600 の画との画素ごとの差の平均（0〜255）。あわせて、水面のきらめきの粒（R・G・B すべて 240 超の画素）の数と、手前の泡の網目のくっきり具合（となりの画素との明るさの差の平均）を数えた。</p>
+          <p><strong>撮る時間は、点に比例しては減らない。</strong>224 万・112 万・56 万・14 万点で 14.5・12.0・8.5・7.6 秒。点を 1/16 にしても、時間は 52% までしか減らなかった。残りは、空・砂浜・光の計算にかかる分。板から泡までを作る時間は 0.95・0.21・0.12・0.07 秒で、撮る時間に比べて小さい。</p>
+          <p><strong>半分では、きらめきの粒が 15% 減る。</strong>1/2 の粒は 1713 個（元は 2006 個）、泡の網目のくっきり具合は 14.79（元は 15.80）。画を並べると、違いは光の道の粒の数くらいで、小さい。</p>
+          <p><strong>1/4 からは、きらめきと泡の細かさが落ちる。</strong>粒は 1/4 で 1472 個、1/16 で 1097 個。網目のくっきり具合は 13.65・10.50。画では、光の道の粒がまばらになり、泡の網目がぼやけた。元の画との差は、沖（水平線から約 30 m まで）で 6.1・9.7・16.3、手前で 1.3・2.1・4.3。点が粗くなると、さざ波（1.3 m）の細かい傾きが面に乗らなくなる。空は差 0。</p>
+          <p><strong>決め方: 仕上げは 1400×1600 のまま。動きの確かめは 990×1131 か 700×800 で撮る。</strong>990×1131 なら 1 枚 2.5 秒、120 枚で約 5 分の節約。点を減らしても時間は半分より下がらないので、もっと速くしたいときは、解像度やサンプル数を下げる方が効く。</p>
+        </div>
+
+        <p class="label">板の点の数を変えた画（フレーム 30、光の道と泡のあたりを切り出し）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="219_grid.png" alt="左上が元（224 万点）。1/2（右上）は粒が少し減る。1/4（左下）・1/16" loading="lazy" decoding="async"></div>
+            <figcaption>左上が元（224 万点）。1/2（右上）は粒が少し減る。1/4（左下）・1/16（右下）で粒が減り、網目がぼやける。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>板（Rows × Columns）</th><th>作る時間（秒）</th><th>撮る時間（秒）</th><th>きらめきの粒</th><th>網目のくっきり具合</th><th>差: 沖</th><th>差: 手前</th></tr></thead>
+            <tbody>
+              <tr><td>1400×1600（224 万点）</td><td class="num">0.95</td><td class="num">14.5</td><td class="num">2006</td><td class="num">15.80</td><td class="num">0.0</td><td class="num">0.0</td></tr>
+              <tr><td>990×1131（112 万点）</td><td class="num">0.21</td><td class="num">12.0</td><td class="num">1713</td><td class="num">14.79</td><td class="num">6.1</td><td class="num">1.3</td></tr>
+              <tr><td>700×800（56 万点）</td><td class="num">0.12</td><td class="num">8.5</td><td class="num">1472</td><td class="num">13.65</td><td class="num">9.7</td><td class="num">2.1</td></tr>
+              <tr><td>350×400（14 万点）</td><td class="num">0.07</td><td class="num">7.6</td><td class="num">1097</td><td class="num">10.50</td><td class="num">16.3</td><td class="num">4.3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>点を減らしても、撮る時間は点に比例して減らない。</strong>1/16 の点で 52% の時間。</li>
+          <li><strong>半分（112 万点）では、1 枚 2.5 秒速く、きらめきの粒が 15% 減る。</strong>違いは小さい。</li>
+          <li><strong>1/4 からは、きらめきの粒と泡の網目の細かさが落ちる。</strong>粒 2006 → 1472 個。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 220 ===================== -->
+    <article class="entry entry--current" id="exp220">
+      <div class="badge">220</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>焚き火の Turbulence は、Use Control Field を入れると効かない（揺らぎなしと全フレーム同じ）。切ると炎の高さ 1.31 m（なし 1.21 m）。実験201 の結論は正しく、点検で合わなかったのは revertToDefaults が Use Control Field を「切り」に戻したため</h2>
+        <p class="path">examples/220_pyro_turbulence_control.py &nbsp;·&nbsp; 焚き火の Turbulence は Use Control Field 入りだと効かない。201 の点検のずれの原因</p>
+
+        <div class="prose">
+          <p><strong>課題: pyrosolver の Turbulence は、Use Control Field を入れたままでも効くのか。<a href="#exp201">実験201</a> の結論（切らないと効かない）は正しいか。点検（<a href="#exp210">実験210</a>）で 201 の 2 条件が記録と合わなかったのはなぜか。</strong></p>
+          <p><a href="#exp201">実験201</a> と同じ焚き火（<a href="#exp202">実験202</a> の組み立て、Voxel Size 0.04、72 フレーム、寿命 0.25・浮力 0.25・冷め方 1）で、揺らぎなし・Turbulence 1 を revertToDefaults のまま・Use Control Field を切り・Use Control Field を入り、の 4 条件を、それぞれ別の Houdini で 2 回ずつ回した。36〜72 フレームの炎の高さの平均で比べた。</p>
+          <p><strong>毎回同じに回る。</strong>4 条件とも、1 回目と 2 回目のフレームごとの高さがすべて一致した。</p>
+          <p><strong>Use Control Field を入れると、Turbulence は効かない。</strong>入れた条件は、揺らぎなしとすべてのフレームで同じ値（平均 1.214 m）だった（一致）。切ると 1.310 m で、揺らぎなし（1.214 m）より高くなった。<a href="#exp201">実験201</a> の結論は正しかった。</p>
+          <p><strong>点検で合わなかった原因: 「既定」が 2 つあった。</strong>pyrosolver を作った直後、Use Control Field は「入り」になっている。ところが、つまみの既定値（revertToDefaults で戻る値）は「切り」だった（<button class="term" data-term="hython">hython</button> で確かめた。作った直後の値は既定値と違う、と出る）。点検で 201 の台本を直したとき、借りた組み立ての設定を revertToDefaults で戻したので、Use Control Field も「切り」になった。そのため「入り」のつもりの 2 条件で Turbulence が効き、炎が高く出た（revertToDefaults のまま: 1.310 m。切りと全フレーム同じ）。201 の台本を「作った直後と同じく入り」に直して 2 条件を流し直すと、記録と全フレーム一致した。</p>
+          <p><strong>なぜ入りだと効かないのかは、確かめきれなかった。</strong>Control Field は既定で density、範囲は 0〜1。焚き火の density の最大は フレーム 24・48 とも 1.0（範囲の中）で、「煙が無いから 0 になる」わけではなかった。</p>
+          <p><strong>決め方: 焚き火を Turbulence で揺らすなら、Use Control Field を切る。</strong>台本で設定を戻すときは、revertToDefaults ではなく、作った直後の値で戻す。</p>
+        </div>
+
+        <p class="label">条件ごとの炎の高さ（36〜72 フレームの平均）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="220_heights.png" alt="Use Control Field 入りの線は、揺らぎなしの線と重なる。" loading="lazy" decoding="async"></div>
+            <figcaption>Use Control Field 入りの線は、揺らぎなしの線と重なる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>Use Control Field</th><th>高さの平均（m）</th><th>2 回目と</th></tr></thead>
+            <tbody>
+              <tr><td>揺らぎなし</td><td>切り</td><td class="num">1.214</td><td>同じ</td></tr>
+              <tr><td>Turbulence 1（revertToDefaults のまま）</td><td>切り</td><td class="num">1.310</td><td>同じ</td></tr>
+              <tr><td>Turbulence 1・Use Control Field 切り</td><td>切り</td><td class="num">1.310</td><td>同じ</td></tr>
+              <tr><td>Turbulence 1・Use Control Field 入り</td><td>入り</td><td class="num">1.214</td><td>同じ</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Use Control Field を入れると、Turbulence は効かない。</strong>揺らぎなしと全フレーム同じ。<a href="#exp201">実験201</a> の結論は正しかった。</li>
+          <li><strong>切ると効く。</strong>炎の高さ 1.21 → 1.31 m。</li>
+          <li><strong>pyrosolver を作った直後の Use Control Field は「入り」、revertToDefaults で戻る値は「切り」。</strong>点検で合わなかったのはこのため。</li>
+          <li><strong>毎回同じに回る。</strong>2 回回して全フレーム一致。</li>
         </ul>
       </div>
     </article>

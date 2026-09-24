@@ -1469,6 +1469,18 @@ DONE = [
      "shots": ["218_grid.png", "218_graph.png"],
      "title": "海の光の道は、Roughness を上げると太い白い帯になり（0.02→0.15 で幅 15→61 列）、さざ波を高くすると粒のまま広がる（0.4→3.2 で 12→36 列）",
      "note": "海の光の道は Roughness で太い帯に、さざ波で粒のまま広がる"},
+    {"no": "219", "anchor": "exp219",
+     "tags": ["エフェクト", "Karma", "海", "速さ"],
+     "log": "log_fx", "thumb": "219_grid.png",
+     "shots": ["219_grid.png", "219_graph.png"],
+     "title": "海の板の点を半分にすると、撮る時間は 17% 減り、きらめきの粒も 15% 減る。1/4 で時間 41% 減・粒 27% 減。1/16 でも時間は 52% までしか減らない",
+     "note": "海の板の点を半分にすると時間17%減、粒15%減"},
+    {"no": "220", "anchor": "exp220",
+     "tags": ["シミュレーション", "Pyro", "炎", "落とし穴", "点検"],
+     "log": "log_fx", "thumb": "220_heights.png",
+     "shots": ["220_heights.png", "220_graph.png"],
+     "title": "焚き火の Turbulence は、Use Control Field を入れると効かない（揺らぎなしと全フレーム同じ）。切ると炎の高さ 1.31 m（なし 1.21 m）。実験201 の結論は正しく、点検で合わなかったのは revertToDefaults が Use Control Field を「切り」に戻したため",
+     "note": "焚き火の Turbulence は Use Control Field 入りだと効かない。201 の点検のずれの原因"},
 ]
 
 PLANNED = []

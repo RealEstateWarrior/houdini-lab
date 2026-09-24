@@ -7794,10 +7794,11 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
               <li><code>dissipation</code>毎フレーム減らす割合</li>
               <li><code>temp_diffusion</code>温度の広がり方</li>
             </ul>
-            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>dissipation は「毎フレーム (1−d) 倍にする」という意味だと式を立てて確かめた。発生源が毎フレーム供給し続けるので、密度は減るのではなく増えて、やがて 1/d で釣り合う。立てた式と実測は4桁一致（差 0.0006 以内）した。 出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。</div>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>dissipation は「毎フレーム (1−d) 倍にする」という意味だと式を立てて確かめた。発生源が毎フレーム供給し続けるので、密度は減るのではなく増えて、やがて 1/d で釣り合う。立てた式と実測は4桁一致（差 0.0006 以内）した。 出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。 出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。Turbulence は、Use Control Field が入っていると焚き火でまったく効かず（揺らぎなしと全フレーム同じ）、切ると炎が 1.21 → 1.31 m になった。作った直後の Use Control Field は「入り」だが、revertToDefaults で戻る値は「切り」なので、台本で戻すときは注意（実験220）。</div>
             <div class="node-exps">
               <a href="log.html#exp016">実験 016</a>
               <a href="log.html#exp204">実験 204</a>
+              <a href="log.html#exp220">実験 220</a>
             </div>
           </div>
           <div class="node-shot">
@@ -12712,6 +12713,10 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
           <dt>@wedgeindex<span class="gloss-meta">アットウェッジインデックス</span></dt>
           <dd>wedge が作った作業ごとに付く番号（0, 1, 2, …）。SOP のつまみの式やファイル名に `@wedgeindex` と書くと、作業ごとに違う値になる。PDG の外で見ると 0。</dd>
         </div>
+        <div class="gloss-item" id="gloss-459">
+          <dt>revertToDefaults()<span class="gloss-meta">リバートトゥデフォルツ</span></dt>
+          <dd>Python（hou）で、つまみを既定値に戻す関数。戻る先は「つまみの既定値」で、ノードを作った直後の値とは限らない。pyrosolver の Use Control Field は、作った直後は「入り」なのに、revertToDefaults では「切り」に戻った（実験220）。作った直後の値に戻したいときは、その値を直接 set する。</dd>
+        </div>
       </dl>
     </section>
     </section>
@@ -12915,7 +12920,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
 </div>
 
 <script src="data/experiment-data-bf21a9e8fb.js"></script>
-<script src="data/glossary-data-2168f465b3.js"></script>
+<script src="data/glossary-data-1b037c91f6.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -13094,10 +13099,10 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>217</dd></div>
+        <div><dt>実験</dt><dd>219</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>390</dd></div>
-        <div><dt>用語</dt><dd>459</dd></div>
+        <div><dt>用語</dt><dd>460</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -13169,9 +13174,9 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_218.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>217本の実験。最新は実験218</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_220.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>219本の実験。最新は実験220</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>459語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -13274,7 +13279,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
 </div>
 
-<script src="data/search-data-9f32c2c0cd.js"></script>
+<script src="data/search-data-e363093b9f.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

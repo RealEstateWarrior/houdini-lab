@@ -3910,7 +3910,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>217 / 217</dd></div>
+      <div><dt>実験</dt><dd>219 / 219</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16316,20 +16316,20 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <div class="badge">210</div>
       <div class="body">
         <span class="chip chip--pm">モデリング</span>
-        <h2>181〜209 の点検 — 29 本を流し直して 35,969 個の値を突き合わせた。22 本は完全に一致。201 は台本が 202 の変更に引きずられていたので直したが、Turbulence の 2 条件はまだ合わない</h2>
+        <h2>181〜209 の点検 — 29 本を流し直して 35,969 個の値を突き合わせた。22 本は完全に一致。201 は台本が 202 の変更に引きずられていたので直したが、Turbulence の 2 条件はまだ合わない（追記: 実験220 で原因が分かり、直すと一致した）</h2>
         <div class="colhead">
           <p class="colmeta"><time datetime="2026-09-24">2026年9月24日 公開</time><span>読む時間 約3分</span><span class="coltag">ツール</span><span class="coltag">点検</span></p>
           <div class="colbody">
           <div class="colgist"><p class="colgist-label">要点</p><ul>
             <li><strong>22 / 29 本は完全に一致。</strong></li>
             <li><strong>201 の台本が、202 で足した焚き火の設定を借りていた。</strong>借りたあと既定値に戻すよう直した。</li>
-            <li><strong>201 の 2 条件（Turbulence を Use Control Field 入りで効かせたもの）は、直しても合わなかった。</strong>記事の結論は確かめ直しが要る。</li>
+            <li><strong>201 の 2 条件（Turbulence を Use Control Field 入りで効かせたもの）は、直しても合わなかった。</strong>記事の結論は確かめ直しが要る。（<a href="log_fx.html#exp220">実験220</a> で原因が分かった: revertToDefaults で Use Control Field が「切り」に戻っていた。直すと記録と全フレーム一致。201 の結論は正しかった）</li>
           </ul></div>
           <img class="colthumb" src="thumb_210.png" alt="" loading="lazy" decoding="async">
           </div>
         </div>
         <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
-        <p class="path">examples/210_audit.py &nbsp;·&nbsp; 181〜209 を流し直し：22 本は完全一致。201 は台本を直したが Turbulence の 2 条件が合わない</p>
+        <p class="path">examples/210_audit.py &nbsp;·&nbsp; 181〜209 を流し直し：22 本は完全一致。201 の 2 条件は実験220 で原因が分かり一致</p>
 
         <div class="prose">
           <p><strong>課題: <a href="#exp181">実験181</a>〜209 の台本を今のまま流し直すと、記事に書いた値が同じように出るか。</strong></p>
@@ -16337,7 +16337,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <p><strong>22 本は、時間以外のすべての値が一致した。</strong></p>
           <p><strong>ずれの出たものは 4 種類に分けられた。</strong>時間の項目（名前に us_per などが付いていて、飛ばす一覧から漏れていたもの。点検と同時に別の実験を回していた）、書き出したファイルの大きさの揺れ（数十バイト。圧縮の結果がわずかに変わる）、あとから台本に足した項目（古い記録に無い）、そして本当に値が変わったもの。</p>
           <p><strong>本当に値が変わったのは 201 だけ。はじめの原因は台本の外にあった。</strong>201 は、火の組み立てを 202 の台本から借りている。202 を作ったときに、その組み立てに焚き火の設定（Flame Lifespan 0.25・Buoyancy 0.25・Cooling Rate 1・Turbulence 3 など）を足したため、201 を今流すと、既定値のつもりの条件がすべて焚き火の設定になっていた（23 条件でずれ 5,870 か所）。201 の台本で、借りた組み立てのあとにこの 6 つを Houdini の既定値に戻すようにして、流し直した。</p>
-          <p><strong>直したあとも、23 条件のうち 2 条件が合わなかった。</strong>fire_turb1_ctrl・l025b025c1_turb。どちらも Turbulence を Use Control Field 入り（既定）で効かせた条件で、流し直すと炎が高く出た（フレーム 10 の高さ 0.66 → 0.94 など）。201 の記事の「Use Control Field を切らないと Turbulence は効かない」は、この 2 条件の記録から出した結論なので、確かめ直しが要る。原因はまだ確かめていない（やることメモに残した）。ほかの 21 条件は、時間以外のすべての値が一致した。</p>
+          <p><strong>直したあとも、23 条件のうち 2 条件が合わなかった。</strong>fire_turb1_ctrl・l025b025c1_turb。どちらも Turbulence を Use Control Field 入り（既定）で効かせた条件で、流し直すと炎が高く出た（フレーム 10 の高さ 0.66 → 0.94 など）。201 の記事の「Use Control Field を切らないと Turbulence は効かない」は、この 2 条件の記録から出した結論なので、確かめ直しが要る。（追記: <a href="log_fx.html#exp220">実験220</a> で原因が分かった。pyrosolver を作った直後の Use Control Field は「入り」だが、revertToDefaults で戻る値は「切り」だった。201 の台本を「入り」に直すと、2 条件も記録と全フレーム一致した。201 の結論は正しかった。）ほかの 21 条件は、時間以外のすべての値が一致した。</p>
           <p><strong>学んだこと: ほかの実験の台本から組み立てを借りるときは、借りた先をあとで変えると、借りた側の結果が黙って変わる。</strong>点検で流し直すまで気づけない。</p>
         </div>
 
@@ -16383,7 +16383,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <ul class="findings">
           <li><strong>22 / 29 本は完全に一致。</strong></li>
           <li><strong>201 の台本が、202 で足した焚き火の設定を借りていた。</strong>借りたあと既定値に戻すよう直した。</li>
-          <li><strong>201 の 2 条件（Turbulence を Use Control Field 入りで効かせたもの）は、直しても合わなかった。</strong>記事の結論は確かめ直しが要る。</li>
+          <li><strong>201 の 2 条件（Turbulence を Use Control Field 入りで効かせたもの）は、直しても合わなかった。</strong>記事の結論は確かめ直しが要る。（<a href="log_fx.html#exp220">実験220</a> で原因が分かった: revertToDefaults で Use Control Field が「切り」に戻っていた。直すと記録と全フレーム一致。201 の結論は正しかった）</li>
           <li><strong>ファイルの大きさは、同じ中身でも数十バイト揺れる。</strong>容量の比べ方には影響しない大きさ（204・209）。</li>
           <li><strong>時間の項目の名前がばらばらだと、点検で飛ばしきれない。</strong>us_per_point（181）のような名前も飛ばす一覧に入れる。</li>
         </ul>
@@ -16406,7 +16406,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-2168f465b3.js"></script>
+<script src="data/glossary-data-1b037c91f6.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -16585,10 +16585,10 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>217</dd></div>
+        <div><dt>実験</dt><dd>219</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>390</dd></div>
-        <div><dt>用語</dt><dd>459</dd></div>
+        <div><dt>用語</dt><dd>460</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -16660,9 +16660,9 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_218.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>217本の実験。最新は実験218</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_220.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>219本の実験。最新は実験220</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>459語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -16765,7 +16765,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-9f32c2c0cd.js"></script>
+<script src="data/search-data-e363093b9f.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

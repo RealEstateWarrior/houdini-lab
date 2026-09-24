@@ -1,0 +1,416 @@
+{
+  "title": "実験219",
+  "network": "/obj/ocean_winter",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sea",
+      "type": "grid",
+      "pos": [
+        -8.566,
+        7.831
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.0,
+        "sizey": 1.0,
+        "tx": 0.5,
+        "tz": 0.5,
+        "rows": 1400,
+        "cols": 1600
+      }
+    },
+    {
+      "name": "spread_to_horizon",
+      "type": "attribwrangle",
+      "pos": [
+        -8.566,
+        6.702
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 夕暮れ版と同じ。z（0〜1）をカメラからの距離 3 m〜8000 m に、近くほど細かく\nfloat d = 3 * pow(2666.67, @P.z);\nfloat w = d * 1.0 + 2;      // 広角のカ..."
+      }
+    },
+    {
+      "name": "swell",
+      "type": "oceanspectrum",
+      "pos": [
+        -5.742,
+        8.132
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "res": 9,
+        "gridsize": 200.0,
+        "seed": 5,
+        "winddir": 10.0,
+        "chopscale": 0.5,
+        "ampscale": 0.5,
+        "amplituderamp1value": 1.0,
+        "amplituderamp2pos": 1.0,
+        "amplituderamp2value": 1.0
+      }
+    },
+    {
+      "name": "wind_chop",
+      "type": "oceanspectrum",
+      "pos": [
+        -3.483,
+        7.681
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "res": 9,
+        "gridsize": 23.0,
+        "seed": 6,
+        "winddir": -30.0,
+        "windspeed": 6.0,
+        "chopscale": 1.3,
+        "ampscale": 0.7,
+        "amplituderamp1value": 1.0,
+        "amplituderamp2pos": 1.0,
+        "amplituderamp2value": 1.0
+      }
+    },
+    {
+      "name": "ripples",
+      "type": "oceanspectrum",
+      "pos": [
+        -1.224,
+        7.229
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "res": 8,
+        "gridsize": 1.3,
+        "seed": 7,
+        "winddir": 20.0,
+        "windspeed": 7.0,
+        "chopscale": 1.5,
+        "ampscale": 1.6,
+        "amplituderamp1value": 1.0,
+        "amplituderamp2pos": 1.0,
+        "amplituderamp2value": 1.0
+      }
+    },
+    {
+      "name": "three_spectra",
+      "type": "merge",
+      "pos": [
+        -3.483,
+        6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "move_points",
+      "type": "oceanevaluate::2.0",
+      "pos": [
+        -6.025,
+        5.271
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "cuspramp1cg": 0.2199999988079071,
+        "cuspramp1cb": 0.44999998807907104,
+        "cuspramp2pos": 1.0,
+        "cuspramp2cr": 1.0,
+        "cuspramp2cg": 1.0,
+        "cuspramp2cb": 1.0
+      }
+    },
+    {
+      "name": "breaking_waves",
+      "type": "attribwrangle",
+      "pos": [
+        -6.025,
+        4.141
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 岸へ寄せて崩れる波の列と、泡（rest は板を広げた直後の位置）\nfloat t = @Time;\nfloat s = -v@rest.z - 7.0;                    // 波打ち際から沖へ何 m か\n/..."
+      }
+    },
+    {
+      "name": "smooth_normals",
+      "type": "normal",
+      "pos": [
+        -6.025,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "wet_sand",
+      "type": "grid",
+      "pos": [
+        1.6,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 120.0,
+        "tz": -8.0,
+        "rows": 300,
+        "cols": 600
+      }
+    },
+    {
+      "name": "wet_sand_shape",
+      "type": "attribwrangle",
+      "pos": [
+        1.6,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 岸へ向かって下がる砂浜（傾き 0.035）に、細かい凸凹\n@P.y = 0.035 * (@P.z + 7) + 0.01 * noise(@P * 3) + 0.03 * noise(@P * 0.2);\nv@Cd = {0...."
+      }
+    },
+    {
+      "name": "wet_sand_n",
+      "type": "normal",
+      "pos": [
+        1.6,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "dry_sand",
+      "type": "grid",
+      "pos": [
+        4.424,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 120.0,
+        "sizey": 9.0,
+        "tz": 1.5,
+        "rows": 200,
+        "cols": 600
+      }
+    },
+    {
+      "name": "dry_sand_shape",
+      "type": "attribwrangle",
+      "pos": [
+        4.424,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 岸へ向かって下がる砂浜（傾き 0.035）に、細かい凸凹\n@P.y = 0.035 * (@P.z + 7) + 0.01 * noise(@P * 3) + 0.03 * noise(@P * 0.2);\nv@Cd = {0...."
+      }
+    },
+    {
+      "name": "dry_sand_n",
+      "type": "normal",
+      "pos": [
+        4.424,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_sea",
+      "type": "material",
+      "pos": [
+        -6.025,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sea_mat"
+      }
+    },
+    {
+      "name": "assign_wet",
+      "type": "material",
+      "pos": [
+        1.6,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/wet_sand_mat"
+      }
+    },
+    {
+      "name": "assign_dry",
+      "type": "material",
+      "pos": [
+        4.424,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/dry_sand_mat"
+      }
+    },
+    {
+      "name": "sea_and_beach",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "sea",
+      "from_output": 0,
+      "to": "spread_to_horizon",
+      "to_input": 0
+    },
+    {
+      "from": "swell",
+      "from_output": 0,
+      "to": "three_spectra",
+      "to_input": 0
+    },
+    {
+      "from": "wind_chop",
+      "from_output": 0,
+      "to": "three_spectra",
+      "to_input": 1
+    },
+    {
+      "from": "ripples",
+      "from_output": 0,
+      "to": "three_spectra",
+      "to_input": 2
+    },
+    {
+      "from": "spread_to_horizon",
+      "from_output": 0,
+      "to": "move_points",
+      "to_input": 0
+    },
+    {
+      "from": "three_spectra",
+      "from_output": 0,
+      "to": "move_points",
+      "to_input": 1
+    },
+    {
+      "from": "move_points",
+      "from_output": 0,
+      "to": "breaking_waves",
+      "to_input": 0
+    },
+    {
+      "from": "breaking_waves",
+      "from_output": 0,
+      "to": "smooth_normals",
+      "to_input": 0
+    },
+    {
+      "from": "wet_sand",
+      "from_output": 0,
+      "to": "wet_sand_shape",
+      "to_input": 0
+    },
+    {
+      "from": "wet_sand_shape",
+      "from_output": 0,
+      "to": "wet_sand_n",
+      "to_input": 0
+    },
+    {
+      "from": "dry_sand",
+      "from_output": 0,
+      "to": "dry_sand_shape",
+      "to_input": 0
+    },
+    {
+      "from": "dry_sand_shape",
+      "from_output": 0,
+      "to": "dry_sand_n",
+      "to_input": 0
+    },
+    {
+      "from": "smooth_normals",
+      "from_output": 0,
+      "to": "assign_sea",
+      "to_input": 0
+    },
+    {
+      "from": "wet_sand_n",
+      "from_output": 0,
+      "to": "assign_wet",
+      "to_input": 0
+    },
+    {
+      "from": "dry_sand_n",
+      "from_output": 0,
+      "to": "assign_dry",
+      "to_input": 0
+    },
+    {
+      "from": "assign_sea",
+      "from_output": 0,
+      "to": "sea_and_beach",
+      "to_input": 0
+    },
+    {
+      "from": "assign_wet",
+      "from_output": 0,
+      "to": "sea_and_beach",
+      "to_input": 1
+    },
+    {
+      "from": "assign_dry",
+      "from_output": 0,
+      "to": "sea_and_beach",
+      "to_input": 2
+    }
+  ]
+}

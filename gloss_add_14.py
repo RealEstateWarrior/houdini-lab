@@ -32,3 +32,9 @@ ADD["render"].append(
     {"term": "円い光 / Disk Light", "reading": "まるいひかり",
      "def": "hlight の Light Type を disk にした、円い面から出る光。遠くに見かけ 0.54° の大きさで置くと、太陽の代わりになり、水面のきらめきにも丸い太陽として映る。"
             "Normalize Light Intensity to Area を切ると、Intensity がそのまま面の明るさになる（実践「冬の朝の七里ヶ浜」では 150,000）。"})
+
+ADD["houdini"] = ADD.get("houdini", []) + [
+    {"term": "revertToDefaults()", "reading": "リバートトゥデフォルツ",
+     "def": "Python（hou）で、つまみを既定値に戻す関数。戻る先は「つまみの既定値」で、ノードを作った直後の値とは限らない。"
+            "pyrosolver の Use Control Field は、作った直後は「入り」なのに、revertToDefaults では「切り」に戻った（実験220）。"
+            "作った直後の値に戻したいときは、その値を直接 set する。"}]

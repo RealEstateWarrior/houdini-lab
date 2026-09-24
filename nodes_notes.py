@@ -90,7 +90,7 @@ MORE = {
     "kma_pyroshader": ("Enable Scatter を切った煙は、光の吸収の式 exp(−Density Scale × density × 厚み[m]) どおりに光を減らした。Density Scale を倍にすると、届く光は 2 乗に減る。Karma の Volume Step Rate が既定 0.25 だと濃い煙が少し明るく出て（Density Scale 4 で +12%）、1 で式とぴったり（実験216）。", ["216"]),
     "cam": ("Enable Depth of Field（Karma）を入れたときのぼけの直径は f²(d−s)/(N·d·s) に 0.9% 以内で一致した（焦点距離 100 mm・ピント 2 m・物まで 20 m）。F-Stop を半分にすると直径は倍。写真の薄いレンズの式より約 5% 小さい（実験214）。", ["214"]),
     "principledshader::2.0": ("金属（Metallic 1）の Roughness は 0.2 まで見た目がほぼ同じで、0.3 からハイライトが広がる。0.7 で明るさ 15%・広さ 2.4 倍（実験212）。Subsurface を入れた半径 0.5 の球は、Subsurface Distance 0.1〜0.3 で逆光に透け（0.3 で真ん中 5.3 倍）、1 ではかえって暗い。SSS Mode を Random Walk にすると同じ距離でもよく透けた（実験213）。", ["212", "213"]),
-    "pyrosolver": ("出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。", ["204"]),
+    "pyrosolver": ("出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。Turbulence は、Use Control Field が入っていると焚き火でまったく効かず（揺らぎなしと全フレーム同じ）、切ると炎が 1.21 → 1.31 m になった。作った直後の Use Control Field は「入り」だが、revertToDefaults で戻る値は「切り」なので、台本で戻すときは注意（実験220）。", ["204", "220"]),
 }
 for _k, (_t, _e) in MORE.items():
     if _k in NOTES:

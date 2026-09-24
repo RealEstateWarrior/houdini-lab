@@ -4966,10 +4966,11 @@
        "温度の広がり方"
       ]
      ],
-     "gotcha": "dissipation は「毎フレーム (1−d) 倍にする」という意味だと式を立てて確かめた。発生源が毎フレーム供給し続けるので、密度は減るのではなく増えて、やがて 1/d で釣り合う。立てた式と実測は4桁一致（差 0.0006 以内）した。 出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。",
+     "gotcha": "dissipation は「毎フレーム (1−d) 倍にする」という意味だと式を立てて確かめた。発生源が毎フレーム供給し続けるので、密度は減るのではなく増えて、やがて 1/d で釣り合う。立てた式と実測は4桁一致（差 0.0006 以内）した。 出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。 出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。Turbulence は、Use Control Field が入っていると焚き火でまったく効かず（揺らぎなしと全フレーム同じ）、切ると炎が 1.21 → 1.31 m になった。作った直後の Use Control Field は「入り」だが、revertToDefaults で戻る値は「切り」なので、台本で戻すときは注意（実験220）。",
      "exps": [
       "016",
-      "204"
+      "204",
+      "220"
      ],
      "img": "016_sheet.png",
      "cap": "散逸の強さを変えた比較"
