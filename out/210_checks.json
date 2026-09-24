@@ -1,0 +1,1878 @@
+[
+ {
+  "no": "181",
+  "commands": 1,
+  "records": [
+   "181_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 20,
+  "diffs": [
+   [
+    "181_stats.json",
+    ".rows[0].us_per_point",
+    0.173,
+    0.166
+   ],
+   [
+    "181_stats.json",
+    ".rows[1].us_per_point",
+    0.169,
+    0.173
+   ],
+   [
+    "181_stats.json",
+    ".rows[2].us_per_point",
+    0.281,
+    0.278
+   ],
+   [
+    "181_stats.json",
+    ".rows[3].us_per_point",
+    0.151,
+    0.26
+   ]
+  ],
+  "n_diffs": 4,
+  "sec": 8.5
+ },
+ {
+  "no": "182",
+  "commands": 1,
+  "records": [
+   "182_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 123,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "183",
+  "commands": 1,
+  "records": [
+   "183_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 728,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 4.3
+ },
+ {
+  "no": "184",
+  "commands": 1,
+  "records": [
+   "184_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 96,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 4.3
+ },
+ {
+  "no": "185",
+  "commands": 1,
+  "records": [
+   "185_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 216,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 0.9
+ },
+ {
+  "no": "186",
+  "commands": 1,
+  "records": [
+   "186_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 41,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "187",
+  "commands": 1,
+  "records": [
+   "187_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 48,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "188",
+  "commands": 1,
+  "records": [
+   "188_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 108,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.8
+ },
+ {
+  "no": "189",
+  "commands": 1,
+  "records": [
+   "189_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 45,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.1
+ },
+ {
+  "no": "190",
+  "commands": 1,
+  "records": [
+   "190_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 50,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 7.1
+ },
+ {
+  "no": "191",
+  "commands": 1,
+  "records": [
+   "191_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 30,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1.0
+ },
+ {
+  "no": "192",
+  "commands": 1,
+  "records": [
+   "192_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 108,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 0.9
+ },
+ {
+  "no": "193",
+  "commands": 1,
+  "records": [
+   "193_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 316,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 2.2
+ },
+ {
+  "no": "194",
+  "commands": 1,
+  "records": [
+   "194_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 634,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 5.0
+ },
+ {
+  "no": "195",
+  "commands": 1,
+  "records": [
+   "195_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 106,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 17.0
+ },
+ {
+  "no": "196",
+  "commands": 1,
+  "records": [
+   "196_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 49,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 11.2
+ },
+ {
+  "no": "197",
+  "commands": 1,
+  "records": [
+   "197_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 50,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 23.2
+ },
+ {
+  "no": "198",
+  "commands": 1,
+  "records": [
+   "198_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 40,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 2.3
+ },
+ {
+  "no": "199",
+  "commands": 1,
+  "records": [
+   "199_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 45,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 9.6
+ },
+ {
+  "no": "200",
+  "commands": 14,
+  "records": [
+   "200_noreseed_part_020.json",
+   "200_noreseed_part_060.json",
+   "200_noreseed_part_080.json",
+   "200_part_020.json",
+   "200_part_030.json",
+   "200_part_040.json",
+   "200_part_060.json",
+   "200_part_080.json",
+   "200_short_part_020.json",
+   "200_short_part_030.json",
+   "200_short_part_040.json",
+   "200_short_part_060.json",
+   "200_short_part_080.json",
+   "200_stats.json",
+   "200_threads.json",
+   "200_trap.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 14468,
+  "diffs": [
+   [
+    "200_part_020.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_part_020.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_part_030.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_part_030.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_part_040.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_part_040.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_part_060.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_part_060.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_part_080.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_part_080.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_short_part_020.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_short_part_020.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_short_part_030.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_short_part_030.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_short_part_040.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_short_part_040.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_short_part_060.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_short_part_060.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_short_part_080.json",
+    ".noreseed",
+    null,
+    false
+   ],
+   [
+    "200_short_part_080.json",
+    ".reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".rows[0].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".rows[0].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".rows[1].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".rows[1].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".rows[2].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".rows[2].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".rows[3].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".rows[3].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".rows[4].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".rows[4].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".short[0].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".short[0].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".short[1].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".short[1].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".short[2].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".short[2].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".short[3].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".short[3].reseed_default",
+    null,
+    1
+   ],
+   [
+    "200_stats.json",
+    ".short[4].noreseed",
+    null,
+    false
+   ],
+   [
+    "200_stats.json",
+    ".short[4].reseed_default",
+    null,
+    1
+   ]
+  ],
+  "n_diffs": 40,
+  "sec": 286.7
+ },
+ {
+  "no": "201",
+  "commands": 24,
+  "records": [
+   "201_part_buoy025.json",
+   "201_part_buoy05.json",
+   "201_part_cool075.json",
+   "201_part_cool1.json",
+   "201_part_cool15.json",
+   "201_part_cool2.json",
+   "201_part_fire_dist2.json",
+   "201_part_fire_dist5.json",
+   "201_part_fire_mix.json",
+   "201_part_fire_shred2.json",
+   "201_part_fire_turb1.json",
+   "201_part_fire_turb1_ctrl.json",
+   "201_part_fire_turb3.json",
+   "201_part_l025b01c1.json",
+   "201_part_l025b025.json",
+   "201_part_l025b025c1.json",
+   "201_part_l025b025c1_dist.json",
+   "201_part_l025b025c1_turb.json",
+   "201_part_l025c1.json",
+   "201_part_life025.json",
+   "201_part_life05.json",
+   "201_part_life1.json",
+   "201_part_life2.json",
+   "201_shape.json",
+   "201_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 10603,
+  "diffs": [
+   [
+    "201_part_buoy025.json",
+    ".defaults.disturbance",
+    null,
+    0.5
+   ],
+   [
+    "201_part_buoy025.json",
+    ".defaults.enable_disturbance",
+    null,
+    0
+   ],
+   [
+    "201_part_buoy025.json",
+    ".defaults.enable_turbulence",
+    null,
+    0
+   ],
+   [
+    "201_part_buoy025.json",
+    ".defaults.turbulence",
+    null,
+    0.1
+   ],
+   [
+    "201_part_buoy05.json",
+    ".defaults.disturbance",
+    null,
+    0.5
+   ],
+   [
+    "201_part_buoy05.json",
+    ".defaults.enable_disturbance",
+    null,
+    0
+   ],
+   [
+    "201_part_buoy05.json",
+    ".defaults.enable_turbulence",
+    null,
+    0
+   ],
+   [
+    "201_part_buoy05.json",
+    ".defaults.turbulence",
+    null,
+    0.1
+   ],
+   [
+    "201_part_cool1.json",
+    ".defaults.disturbance",
+    null,
+    0.5
+   ],
+   [
+    "201_part_cool1.json",
+    ".defaults.enable_disturbance",
+    null,
+    0
+   ],
+   [
+    "201_part_cool1.json",
+    ".defaults.enable_turbulence",
+    null,
+    0
+   ],
+   [
+    "201_part_cool1.json",
+    ".defaults.turbulence",
+    null,
+    0.1
+   ],
+   [
+    "201_part_cool2.json",
+    ".defaults.disturbance",
+    null,
+    0.5
+   ],
+   [
+    "201_part_cool2.json",
+    ".defaults.enable_disturbance",
+    null,
+    0
+   ],
+   [
+    "201_part_cool2.json",
+    ".defaults.enable_turbulence",
+    null,
+    0
+   ],
+   [
+    "201_part_cool2.json",
+    ".defaults.turbulence",
+    null,
+    0.1
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[10].flame.amount",
+    1.01511,
+    1.12966
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[10].flame.height",
+    0.66,
+    0.94
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[11].flame.amount",
+    1.04967,
+    1.16268
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[11].flame.height",
+    0.74,
+    1.06
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[12].flame.amount",
+    1.09229,
+    1.17785
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[12].flame.height",
+    0.78,
+    1.14
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[13].flame.amount",
+    1.11585,
+    1.17446
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[13].flame.height",
+    0.82,
+    1.22
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[14].flame.amount",
+    1.12442,
+    1.15878
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[14].flame.height",
+    0.9,
+    1.3
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[15].flame.amount",
+    1.13089,
+    1.14003
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[15].flame.height",
+    0.94,
+    1.38
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[16].flame.amount",
+    1.13012,
+    1.1168
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[16].flame.height",
+    1.02,
+    1.42
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[17].flame.amount",
+    1.13389,
+    1.09472
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[17].flame.height",
+    1.1,
+    1.46
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[18].flame.amount",
+    1.12691,
+    1.08256
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[18].flame.height",
+    1.14,
+    1.5
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[19].flame.amount",
+    1.09779,
+    1.07648
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[19].flame.height",
+    1.18,
+    1.46
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[20].flame.amount",
+    1.0912,
+    1.06841
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[20].flame.height",
+    1.22,
+    1.42
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[21].flame.amount",
+    1.07239,
+    1.0663
+   ],
+   [
+    "201_part_fire_turb1_ctrl.json",
+    ".per_frame[21].flame.height",
+    1.26,
+    1.38
+   ]
+  ],
+  "n_diffs": 568,
+  "sec": 219.7,
+  "kinds": {
+   "time": 0,
+   "file": 0,
+   "add": 64,
+   "value": 504
+  },
+  "worst": {
+   "file": 0.0,
+   "value": 2.5625
+  },
+  "per_file": {
+   "201_part_buoy025.json": 0,
+   "201_part_buoy05.json": 0,
+   "201_part_cool075.json": 0,
+   "201_part_cool1.json": 0,
+   "201_part_cool15.json": 0,
+   "201_part_cool2.json": 0,
+   "201_part_fire_dist2.json": 0,
+   "201_part_fire_dist5.json": 0,
+   "201_part_fire_mix.json": 0,
+   "201_part_fire_shred2.json": 0,
+   "201_part_fire_turb1.json": 0,
+   "201_part_fire_turb1_ctrl.json": 138,
+   "201_part_fire_turb3.json": 0,
+   "201_part_l025b01c1.json": 0,
+   "201_part_l025b025.json": 0,
+   "201_part_l025b025c1.json": 0,
+   "201_part_l025b025c1_dist.json": 0,
+   "201_part_l025b025c1_turb.json": 109,
+   "201_part_l025c1.json": 0,
+   "201_part_life025.json": 0,
+   "201_part_life05.json": 0,
+   "201_part_life1.json": 0,
+   "201_part_life2.json": 0,
+   "201_shape.json": 0,
+   "201_stats.json": 257
+  }
+ },
+ {
+  "no": "202",
+  "commands": 7,
+  "records": [
+   "202_part_sub2.json",
+   "202_part_veldiv2.json",
+   "202_part_vox020.json",
+   "202_part_vox030.json",
+   "202_part_vox040.json",
+   "202_part_vox060.json",
+   "202_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 4728,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 119.6
+ },
+ {
+  "no": "203",
+  "commands": 1,
+  "records": [
+   "203_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 16,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 1160.7
+ },
+ {
+  "no": "204",
+  "commands": 3,
+  "records": [
+   "204_part_v002.json",
+   "204_part_v004.json",
+   "204_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 2582,
+  "diffs": [
+   [
+    "204_part_v002.json",
+    ".per_frame[0].novel",
+    65865,
+    65867
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[0].raw",
+    66228,
+    66227
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[0].vdb",
+    48288,
+    48277
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[0].vdb_half",
+    51026,
+    51037
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[0].vdb_half_novel",
+    50328,
+    50305
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[0].vdb_half_prune",
+    51066,
+    51034
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[0].vdb_half_velmask",
+    51028,
+    51030
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[0].vdb_novel",
+    60259,
+    60197
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[10].novel",
+    929250,
+    929051
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[10].raw",
+    11267675,
+    11267466
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[10].vdb_half_novel",
+    478433,
+    478410
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[10].vdb_half_velmask",
+    1630569,
+    1630581
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[10].vdb_novel",
+    763910,
+    763917
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[11].novel",
+    929532,
+    929719
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[11].raw",
+    12626054,
+    12625677
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[11].vdb_half_novel",
+    476192,
+    476225
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[11].vdb_half_velmask",
+    1609491,
+    1609486
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[11].vdb_novel",
+    755312,
+    755311
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[12].novel",
+    925478,
+    925484
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[12].vdb_half",
+    7287118,
+    7287105
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[12].vdb_half_novel",
+    466749,
+    466752
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[12].vdb_half_velmask",
+    1572665,
+    1572659
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[12].vdb_novel",
+    738026,
+    737998
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[13].novel",
+    908143,
+    908138
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[13].raw",
+    13348478,
+    13348504
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[13].vdb_half",
+    7553296,
+    7553284
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[13].vdb_half_novel",
+    457242,
+    457249
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[13].vdb_half_velmask",
+    1539759,
+    1539779
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[13].vdb_novel",
+    723248,
+    723256
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[14].novel",
+    885752,
+    885759
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[14].raw",
+    13268309,
+    13268340
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[14].vdb_half",
+    7524447,
+    7524425
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[14].vdb_half_novel",
+    444979,
+    445008
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[14].vdb_half_velmask",
+    1503323,
+    1503329
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[14].vdb_novel",
+    703353,
+    703356
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[15].novel",
+    865533,
+    865541
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[15].raw",
+    13034027,
+    13033958
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[15].vdb_half",
+    7415159,
+    7415150
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[15].vdb_half_prune",
+    7410647,
+    7410637
+   ],
+   [
+    "204_part_v002.json",
+    ".per_frame[15].vdb_half_velmask",
+    1484358,
+    1484346
+   ]
+  ],
+  "n_diffs": 1174,
+  "sec": 117.0,
+  "kinds": {
+   "time": 0,
+   "file": 1174,
+   "add": 0,
+   "value": 0
+  },
+  "worst": {
+   "file": 0.006122343182996426,
+   "value": 0.0
+  }
+ },
+ {
+  "no": "205",
+  "commands": 4,
+  "records": [
+   "205_stats.json",
+   "205_times.json",
+   "205_times_strong.json",
+   "205_times_tune.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 338,
+  "diffs": [
+   [
+    "205_stats.json",
+    ".rows[0].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[10].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[11].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[12].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[13].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[14].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[15].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[16].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[17].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[18].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[19].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[1].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[20].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[21].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[22].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[2].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[3].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[4].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[5].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[6].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[7].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[8].denoise",
+    null,
+    false
+   ],
+   [
+    "205_stats.json",
+    ".rows[9].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[0].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[10].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[11].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[12].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[13].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[1].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[2].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[3].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[4].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[5].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[6].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[7].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[8].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times.json",
+    ".rows[9].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times_strong.json",
+    ".rows[0].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times_strong.json",
+    ".rows[1].denoise",
+    null,
+    false
+   ],
+   [
+    "205_times_strong.json",
+    ".rows[2].denoise",
+    null,
+    false
+   ]
+  ],
+  "n_diffs": 46,
+  "sec": 1751.5
+ },
+ {
+  "no": "206",
+  "commands": 1,
+  "records": [
+   "206_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 64,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 414.5
+ },
+ {
+  "no": "207",
+  "commands": 4,
+  "records": [
+   "207_part_extra.json",
+   "207_part_v03.json",
+   "207_part_v06.json",
+   "207_stats.json"
+  ],
+  "returncodes": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "errors": [],
+  "values": 129,
+  "diffs": [],
+  "n_diffs": 0,
+  "sec": 235.9
+ },
+ {
+  "no": "208",
+  "commands": 1,
+  "records": [
+   "208_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 123,
+  "diffs": [
+   [
+    "208_stats.json",
+    ".rows[0].f36.first",
+    0.324,
+    0.314
+   ],
+   [
+    "208_stats.json",
+    ".rows[0].f60.first",
+    0.21,
+    0.212
+   ],
+   [
+    "208_stats.json",
+    ".rows[1].f36.first",
+    0.779,
+    0.765
+   ],
+   [
+    "208_stats.json",
+    ".rows[1].f60.first",
+    0.513,
+    0.646
+   ],
+   [
+    "208_stats.json",
+    ".rows[2].f36.first",
+    0.098,
+    0.1
+   ],
+   [
+    "208_stats.json",
+    ".rows[2].f60.first",
+    0.088,
+    0.095
+   ],
+   [
+    "208_stats.json",
+    ".rows[3].f36.first",
+    0.273,
+    0.282
+   ],
+   [
+    "208_stats.json",
+    ".rows[3].f60.first",
+    0.198,
+    0.219
+   ],
+   [
+    "208_stats.json",
+    ".rows[4].f36.first",
+    0.521,
+    0.52
+   ],
+   [
+    "208_stats.json",
+    ".rows[4].f60.first",
+    0.379,
+    0.35
+   ],
+   [
+    "208_stats.json",
+    ".rows[5].f36.first",
+    0.097,
+    0.089
+   ],
+   [
+    "208_stats.json",
+    ".rows[5].f60.first",
+    0.094,
+    0.084
+   ],
+   [
+    "208_stats.json",
+    ".rows[6].f36.first",
+    0.409,
+    0.358
+   ],
+   [
+    "208_stats.json",
+    ".rows[6].f60.first",
+    0.316,
+    0.312
+   ],
+   [
+    "208_stats.json",
+    ".rows[7].f36.first",
+    0.514,
+    0.534
+   ],
+   [
+    "208_stats.json",
+    ".rows[7].f60.first",
+    0.472,
+    0.443
+   ]
+  ],
+  "n_diffs": 16,
+  "sec": 78.6
+ },
+ {
+  "no": "209",
+  "commands": 1,
+  "records": [
+   "209_stats.json"
+  ],
+  "returncodes": [
+   0
+  ],
+  "errors": [],
+  "values": 65,
+  "diffs": [
+   [
+    "209_stats.json",
+    ".inproc_sizes[0]",
+    234885,
+    234882
+   ],
+   [
+    "209_stats.json",
+    ".inproc_sizes[1]",
+    255315,
+    255319
+   ],
+   [
+    "209_stats.json",
+    ".inproc_sizes[2]",
+    277306,
+    277300
+   ],
+   [
+    "209_stats.json",
+    ".inproc_sizes[3]",
+    301997,
+    302001
+   ],
+   [
+    "209_stats.json",
+    ".inproc_sizes[4]",
+    319214,
+    319216
+   ],
+   [
+    "209_stats.json",
+    ".inproc_sizes[5]",
+    337342,
+    337345
+   ],
+   [
+    "209_stats.json",
+    ".inproc_sizes[6]",
+    361047,
+    361049
+   ],
+   [
+    "209_stats.json",
+    ".rows[1].sizes[0]",
+    234974,
+    234968
+   ],
+   [
+    "209_stats.json",
+    ".rows[1].sizes[1]",
+    255363,
+    255357
+   ],
+   [
+    "209_stats.json",
+    ".rows[1].sizes[2]",
+    277346,
+    277352
+   ],
+   [
+    "209_stats.json",
+    ".rows[1].sizes[4]",
+    319187,
+    319192
+   ],
+   [
+    "209_stats.json",
+    ".rows[1].sizes[5]",
+    337610,
+    337613
+   ],
+   [
+    "209_stats.json",
+    ".rows[1].sizes[6]",
+    361089,
+    361090
+   ],
+   [
+    "209_stats.json",
+    ".rows[1].sizes[7]",
+    361748,
+    361742
+   ],
+   [
+    "209_stats.json",
+    ".rows[2].sizes[1]",
+    255355,
+    255353
+   ],
+   [
+    "209_stats.json",
+    ".rows[2].sizes[3]",
+    302092,
+    302089
+   ],
+   [
+    "209_stats.json",
+    ".rows[2].sizes[4]",
+    319187,
+    319188
+   ],
+   [
+    "209_stats.json",
+    ".rows[2].sizes[5]",
+    337610,
+    337609
+   ],
+   [
+    "209_stats.json",
+    ".rows[2].sizes[6]",
+    361090,
+    361089
+   ],
+   [
+    "209_stats.json",
+    ".rows[2].sizes[7]",
+    361749,
+    361753
+   ],
+   [
+    "209_stats.json",
+    ".rows[3].sizes[0]",
+    234968,
+    234973
+   ],
+   [
+    "209_stats.json",
+    ".rows[3].sizes[2]",
+    277348,
+    277349
+   ],
+   [
+    "209_stats.json",
+    ".rows[3].sizes[3]",
+    302088,
+    302096
+   ],
+   [
+    "209_stats.json",
+    ".rows[3].sizes[4]",
+    319187,
+    319188
+   ],
+   [
+    "209_stats.json",
+    ".rows[3].sizes[5]",
+    337609,
+    337610
+   ],
+   [
+    "209_stats.json",
+    ".rows[3].sizes[6]",
+    361090,
+    361089
+   ],
+   [
+    "209_stats.json",
+    ".rows[3].sizes[7]",
+    361742,
+    361741
+   ],
+   [
+    "209_stats.json",
+    ".rows[4].sizes[0]",
+    234974,
+    234972
+   ],
+   [
+    "209_stats.json",
+    ".rows[4].sizes[1]",
+    255353,
+    255356
+   ],
+   [
+    "209_stats.json",
+    ".rows[4].sizes[2]",
+    277346,
+    277349
+   ],
+   [
+    "209_stats.json",
+    ".rows[4].sizes[3]",
+    302096,
+    302095
+   ],
+   [
+    "209_stats.json",
+    ".rows[4].sizes[4]",
+    319193,
+    319188
+   ],
+   [
+    "209_stats.json",
+    ".rows[4].sizes[5]",
+    337610,
+    337616
+   ],
+   [
+    "209_stats.json",
+    ".rows[4].sizes[7]",
+    361747,
+    361750
+   ]
+  ],
+  "n_diffs": 34,
+  "sec": 180.1
+ }
+]

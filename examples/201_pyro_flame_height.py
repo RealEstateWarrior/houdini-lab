@@ -75,6 +75,10 @@ def run_one(name):
     hou.setFrame(3)
     s0.geometry()
     geo, solver, made = e202.build(VOX)
+    # 実験202 で build に焚き火の設定（寿命・浮力・冷め方・揺れ）を足したので、この実験を取ったときの
+    # Houdini の既定値に戻す（点検 210 で、戻さないと記録と合わないことに気づいた）
+    for k in ("flames_lifespan", "buoyancylift", "tempcooling", "enable_turbulence", "turbulence", "turbulence_usecontrol"):
+        solver.parm(k).revertToDefaults()
     defaults = {k: solver.parm(k).eval() for k in ("flames_lifespan", "buoyancylift", "tempcooling", "enable_disturbance", "disturbance", "enable_turbulence", "turbulence")}
     for k, v in CASES[name].items():
         solver.parm(k).set(v)

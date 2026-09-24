@@ -1,0 +1,23 @@
+SSS Mode: ['pbrsss', 'pbrsingles', 'pbrrwalksss']
+front none
+front d001
+front d005
+front d010
+front d030
+front d100
+front rw010
+back none
+back d001
+back d005
+back d010
+back d030
+back d100
+back rw010
+{'case': 'none', 'sss': 0.0, 'dist': 0.1, 'mode': 'pbrsss', 'front_all': 0.27739, 'back_all': 0.01119, 'back_center': 0.00933, 'back_edge': 0.01145}
+{'case': 'd001', 'sss': 1.0, 'dist': 0.01, 'mode': 'pbrsss', 'front_all': 0.29882, 'back_all': 0.01139, 'back_center': 0.00995, 'back_edge': 0.01141}
+{'case': 'd005', 'sss': 1.0, 'dist': 0.05, 'mode': 'pbrsss', 'front_all': 0.29007, 'back_all': 0.01249, 'back_center': 0.01124, 'back_edge': 0.01241}
+{'case': 'd010', 'sss': 1.0, 'dist': 0.1, 'mode': 'pbrsss', 'front_all': 0.271, 'back_all': 0.02132, 'back_center': 0.02571, 'back_edge': 0.01809}
+{'case': 'd030', 'sss': 1.0, 'dist': 0.3, 'mode': 'pbrsss', 'front_all': 0.20133, 'back_all': 0.03478, 'back_center': 0.04907, 'back_edge': 0.02586}
+{'case': 'd100', 'sss': 1.0, 'dist': 1.0, 'mode': 'pbrsss', 'front_all': 0.11374, 'back_all': 0.02763, 'back_center': 0.03767, 'back_edge': 0.02121}
+{'case': 'rw010', 'sss': 1.0, 'dist': 0.1, 'mode': 'pbrrwalksss', 'front_all': 0.30629, 'back_all': 0.02734, 'back_center': 0.03574, 'back_edge': 0.02177}
+保存: D:\Claude\houdini\out\213_stats.json

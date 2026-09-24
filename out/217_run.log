@@ -1,0 +1,5 @@
+{'case': 'b-3', 'bend': 0.001, 'lowest': 0.2923, 'hem': {'+x': 0.4261, '+z': 0.451, '-x': 0.426, '-z': 0.4541}, 'side_points': 334, 'side_x_std_mm': 15.54, 'side_x_mean': 0.6447}
+{'case': 'b-1', 'bend': 0.1, 'lowest': 0.3156, 'hem': {'+x': 0.4261, '+z': 0.4493, '-x': 0.4253, '-z': 0.4523}, 'side_points': 336, 'side_x_std_mm': 14.91, 'side_x_mean': 0.6447}
+{'case': 'b1', 'bend': 10.0, 'lowest': 0.3888, 'hem': {'+x': 0.4676, '+z': 0.5042, '-x': 0.4483, '-z': 0.5089}, 'side_points': 293, 'side_x_std_mm': 41.88, 'side_x_mean': 0.7454}
+{'case': 'b3', 'bend': 1000.0, 'lowest': 0.3897, 'hem': {'+x': 0.486, '+z': 0.542, '-x': 0.4482, '-z': 0.5166}, 'side_points': 283, 'side_x_std_mm': 46.05, 'side_x_mean': 0.7645}
+保存: D:\Claude\houdini\out\217_stats.json

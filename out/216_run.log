@@ -1,0 +1,10 @@
+{'case': 's025', 'scale': 0.25, 'L': 0.5, 'step': 0.25, 'inside': 0.8838, 'outside': 1.0, 'T': 0.8838, 'k': 0.9882, 'T_if_k1': 0.8825}
+{'case': 's050', 'scale': 0.5, 'L': 0.5, 'step': 0.25, 'inside': 0.78063, 'outside': 1.0, 'T': 0.78063, 'k': 0.9906, 'T_if_k1': 0.7788}
+{'case': 's100', 'scale': 1.0, 'L': 0.5, 'step': 0.25, 'inside': 0.61155, 'outside': 1.0, 'T': 0.61155, 'k': 0.9835, 'T_if_k1': 0.60653}
+{'case': 's200', 'scale': 2.0, 'L': 0.5, 'step': 0.25, 'inside': 0.37939, 'outside': 1.0, 'T': 0.37939, 'k': 0.9692, 'T_if_k1': 0.36788}
+{'case': 's400', 'scale': 4.0, 'L': 0.5, 'step': 0.25, 'inside': 0.151, 'outside': 1.0, 'T': 0.151, 'k': 0.9452, 'T_if_k1': 0.13534}
+{'case': 's100_L1', 'scale': 1.0, 'L': 1.0, 'step': 0.25, 'inside': 0.37265, 'outside': 1.0, 'T': 0.37265, 'k': 0.9871, 'T_if_k1': 0.36788}
+{'case': 's400_step005', 'scale': 4.0, 'L': 0.5, 'step': 0.05, 'inside': 0.71262, 'outside': 1.0, 'T': 0.71262, 'k': 0.1694, 'T_if_k1': 0.13534}
+{'case': 's400_step1', 'scale': 4.0, 'L': 0.5, 'step': 1.0, 'inside': 0.1353, 'outside': 1.0, 'T': 0.1353, 'k': 1.0001, 'T_if_k1': 0.13534}
+{'case': 's200_step005', 'scale': 2.0, 'L': 0.5, 'step': 0.05, 'inside': 0.72798, 'outside': 1.0, 'T': 0.72798, 'k': 0.3175, 'T_if_k1': 0.36788}
+保存: D:\Claude\houdini\out\216_stats.json

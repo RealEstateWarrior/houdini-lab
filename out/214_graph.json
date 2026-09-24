@@ -1,0 +1,47 @@
+{
+  "title": "実験214",
+  "network": "/obj/glow",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "tiny_light_ball",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.05,
+        "rady": 0.05,
+        "radz": 0.05,
+        "rows": 24
+      }
+    },
+    {
+      "name": "assign_glow",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/glow_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "tiny_light_ball",
+      "from_output": 0,
+      "to": "assign_glow",
+      "to_input": 0
+    }
+  ]
+}

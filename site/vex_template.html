@@ -287,6 +287,8 @@
         <p>逆向きのなだらかな変化が欲しいときは、<code>1 - smooth(小さい数, 大きい数, x)</code> と書く（実践を作っていて気づいた）。</p></div>
       <div class="vx-trap"><strong>配列の { } の中に計算は書けない</strong>
         <p><code>{0, h, 0}</code> のように変数を入れると止まる。<code>set(0, h, 0)</code> を使うか、<code>append()</code> で 1 つずつ足す。</p></div>
+      <div class="vx-trap"><strong>rand() を lerp() の中に書くと「Ambiguous call」のエラー</strong>
+        <p><code>rand()</code> は小数もベクトルも返せるので、どちらを使うか決められずに止まる。<code>lerp(a, b, float(rand(@ptnum)))</code> のように <code>float()</code> で包む（草を並べて色を付けるときに出た）。</p></div>
       <div class="vx-trap"><strong>nearpoints() は自分も返す</strong>
         <p>「ほかの点」だけがほしいなら、最大数を 1 つ多くして先頭を捨てる（<a href="exp:136">実験136</a>）。</p></div>
       <div class="vx-trap"><strong>for-each の中の @primnum は 0</strong>

@@ -82,9 +82,14 @@ MORE = {
     "convertvdb": ("Pyro の出力を VDB にしただけでは、キャッシュは小さくならなかった（焚き火 48 フレームで 150 MB → 155 MB）。0 でない値を持つ速度 vel が升の 6 割以上に残るため。Prune Tolerance 0.01 でも変わらない。16 bit で書くと約半分（実験204）。", ["204"]),
     "volumewrangle": ("vel.x・vel.y・vel.z の 3 つのボリュームは、コードの中で v@vel として 1 つにまとめて読み書きできた。煙も炎も無い升の v@vel を 0 にしてから VDB・16 bit にすると、焚き火のキャッシュが 16 分の 1 になった（実験204）。", ["204"]),
     "blast": ("Group に @name=vel.* と書き、Group Type を Primitives にすると、Pyro の速度のボリューム 3 つだけを消せる。焚き火のキャッシュは 24 分の 1 になった（実験204）。", ["204"]),
-    "karma": ("被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。Volume Step Rate は既定 0.25 のままでよい。焚き火で 1 に粗くしても速くならず、1920×1080 ではかえって 23% 遅かった（実験207）。", ["205", "207"]),
+    "karma": ("被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。Volume Step Rate は大きいほど細かい。焚き火では既定 0.25 のままでよい（0.125 に下げても速くならず、1 に上げると 1920×1080 で 23% 遅い。実験207）。濃い煙を正しい濃さで撮るなら上げる（一様な煙の箱で、1 は光の吸収の式とぴったり、0.25 は Density Scale 4 で 12% 明るい。実験216）。", ["205", "207"]),
     "particlefluidsurface": ("形を決めるのは Influence Scale と Method。ダムブレイクの跳ね上がりで、Influence 2 は体積 104%（しぶきが細かく残る）、5 は 87%（丸まって痩せる）。Spherical は粒の球が残ってつぶつぶになる。Filtering（Dilate・Smooth・Erode）でさざ波が消え、時間は 1.3 倍。Voxel Scale 0.5 は面が 1.9 倍・時間 2.3 倍。Neural Point Surface は 1.6 倍（実験208）。", ["208"]),
     "ropgeometry": ("TOP の ropgeometry でシミュレーションを書き出すときは、Evaluate Using を Frame Range にし、Frame Range（最初から式が入っている）を入れ、All Frames in One Batch を入れる。既定の Single Frame では仕事 1 つにつき 1 フレーム目しか書かず、焚き火が燃え始めのまま（34 KB）だった。Valid Frame Range を変えても効かない（実験209）。", ["209"]),
+    "vellumsolver": ("布は、ぶつかる物から Default Thickness の分だけ離れて止まる。テーブルクロスは既定 0.01 で天板から 10 mm 浮き、0.0025 で 2.5 mm（めり込みは 0）。厚いほど裾が短く垂れる（実験211）。試しは 44×56 程度の粗い布で足りるが、角の垂れは短く出る（実験206）。", ["206", "211"]),
+    "vellumconstraints": ("Cloth の曲げの硬さ（Bend の Stiffness、既定 1 × 10⁻¹）は、テーブルクロス（1.9 × 1.45 m、66×84）では下げても形がほぼ同じ（0.001 で差 1.1 cm）。10 以上にすると布が張り、机の縁から 15 cm 張り出して裾が 4 cm 上がった（実験217）。", ["217"]),
+    "kma_pyroshader": ("Enable Scatter を切った煙は、光の吸収の式 exp(−Density Scale × density × 厚み[m]) どおりに光を減らした。Density Scale を倍にすると、届く光は 2 乗に減る。Karma の Volume Step Rate が既定 0.25 だと濃い煙が少し明るく出て（Density Scale 4 で +12%）、1 で式とぴったり（実験216）。", ["216"]),
+    "cam": ("Enable Depth of Field（Karma）を入れたときのぼけの直径は f²(d−s)/(N·d·s) に 0.9% 以内で一致した（焦点距離 100 mm・ピント 2 m・物まで 20 m）。F-Stop を半分にすると直径は倍。写真の薄いレンズの式より約 5% 小さい（実験214）。", ["214"]),
+    "principledshader::2.0": ("金属（Metallic 1）の Roughness は 0.2 まで見た目がほぼ同じで、0.3 からハイライトが広がる。0.7 で明るさ 15%・広さ 2.4 倍（実験212）。Subsurface を入れた半径 0.5 の球は、Subsurface Distance 0.1〜0.3 で逆光に透け（0.3 で真ん中 5.3 倍）、1 ではかえって暗い。SSS Mode を Random Walk にすると同じ距離でもよく透けた（実験213）。", ["212", "213"]),
     "pyrosolver": ("出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。", ["204"]),
 }
 for _k, (_t, _e) in MORE.items():

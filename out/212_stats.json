@@ -1,0 +1,71 @@
+{
+  "rows": [
+    {
+      "rough": 0.0,
+      "sec": 13.37,
+      "peak": 10.2774,
+      "half_area_px": 1868,
+      "half_area_frac": 0.01333,
+      "mean_on_sphere": 0.1936
+    },
+    {
+      "rough": 0.05,
+      "sec": 13.94,
+      "peak": 9.9882,
+      "half_area_px": 1870,
+      "half_area_frac": 0.01334,
+      "mean_on_sphere": 0.19372
+    },
+    {
+      "rough": 0.1,
+      "sec": 12.45,
+      "peak": 9.8662,
+      "half_area_px": 1860,
+      "half_area_frac": 0.01327,
+      "mean_on_sphere": 0.19457
+    },
+    {
+      "rough": 0.2,
+      "sec": 11.79,
+      "peak": 8.8187,
+      "half_area_px": 1849,
+      "half_area_frac": 0.01319,
+      "mean_on_sphere": 0.19795
+    },
+    {
+      "rough": 0.3,
+      "sec": 18.45,
+      "peak": 6.5857,
+      "half_area_px": 2163,
+      "half_area_frac": 0.01544,
+      "mean_on_sphere": 0.2045
+    },
+    {
+      "rough": 0.5,
+      "sec": 18.4,
+      "peak": 3.7014,
+      "half_area_px": 2626,
+      "half_area_frac": 0.01874,
+      "mean_on_sphere": 0.20601
+    },
+    {
+      "rough": 0.7,
+      "sec": 9.93,
+      "peak": 1.5112,
+      "half_area_px": 4487,
+      "half_area_frac": 0.03202,
+      "mean_on_sphere": 0.18046
+    }
+  ],
+  "res": [
+    640,
+    640
+  ],
+  "sphere_px": 140130,
+  "center": [
+    383.5,
+    300.0
+  ],
+  "radius_px": 215.5,
+  "background": 0.03469298034906387
+}

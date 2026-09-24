@@ -1,0 +1,65 @@
+{
+  "title": "実験216",
+  "network": "/obj/smoke_box",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "fog",
+      "type": "volume",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "name": "density",
+        "sizez": 0.5,
+        "divsize": 0.05
+      }
+    },
+    {
+      "name": "density_one",
+      "type": "volumewrangle",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 箱の中を濃さ 1 で満たす\n@density = 1;"
+      }
+    },
+    {
+      "name": "assign_smoke",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/smoke_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "fog",
+      "from_output": 0,
+      "to": "density_one",
+      "to_input": 0
+    },
+    {
+      "from": "density_one",
+      "from_output": 0,
+      "to": "assign_smoke",
+      "to_input": 0
+    }
+  ]
+}

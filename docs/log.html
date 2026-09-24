@@ -3736,7 +3736,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>141本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>146本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3884,8 +3884,15 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp199" data-anchor="exp199"><span class="doc-no">199</span><span class="doc-t">Open で丸めた辺の半径が約 3 升大きいのは、SDF の帯のせいではない — 帯 3〜25 升で足し分は変わらない</span></a></li>
         <li><a href="#exp203" data-anchor="exp203"><span class="doc-no">203</span><span class="doc-t">氷の入ったグラスを Karma で撮ると、サンプル1つあたり不透明の 6 倍の時間がかかる — 重ねた水と氷は +27% だけ。16 サンプル＋ノイズ除去なら約 3 分</span></a></li>
         <li><a href="#exp205" data-anchor="exp205"><span class="doc-no">205</span><span class="doc-t">Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない — ざらつきを消すのはサンプル数ではなくノイズ除去。16 サンプル＋OIDN で 27 秒</span></a></li>
-        <li><a href="#exp207" data-anchor="exp207"><span class="doc-no">207</span><span class="doc-t">焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</span></a></li>
+        <li><a href="#exp207" data-anchor="exp207"><span class="doc-no">207</span><span class="doc-t">焚き火を Karma で撮るとき、Volume Step Rate を 0.25 から下げても速くならず、1 に上げると遅い — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</span></a></li>
         <li><a href="#exp209" data-anchor="exp209"><span class="doc-no">209</span><span class="doc-t">焚き火を 8 通り回すなら、PDG で同時に 8 本が 1.6 倍速い — ただし同時に 1 本だと 2.2 倍遅く、2 本でほぼ並ぶ。Evaluate Using を Frame Range にしないと 1 フレームしか回らない</span></a></li>
+        <li class="doc-toc-sep" aria-hidden="true">211–240</li>
+        <li><a href="#exp212" data-anchor="exp212"><span class="doc-no">212</span><span class="doc-t">金属の Roughness は 0.2 まで見た目がほぼ同じ — ハイライトが広がり始めるのは 0.3 から。0.5 で明るさ 36%・広さ 1.4 倍、0.7 で 15%・2.4 倍</span></a></li>
+        <li><a href="#exp213" data-anchor="exp213"><span class="doc-no">213</span><span class="doc-t">SSS で透けて見せるなら、半径 0.5 の球では Subsurface Distance 0.1〜0.3 — 0.3 のとき逆光の真ん中が 5.3 倍明るい。1 にするとかえって暗く、正面から見ても 41% に沈む</span></a></li>
+        <li><a href="#exp214" data-anchor="exp214"><span class="doc-no">214</span><span class="doc-t">Karma のぼけの大きさは f²(d−s)/(N·d·s) に 0.9% 以内で一致 — F を半分にすると直径は倍。写真の薄いレンズの式より約 5% 小さい</span></a></li>
+        <li><a href="#exp216" data-anchor="exp216"><span class="doc-no">216</span><span class="doc-t">煙の透け具合は光の吸収の式 exp(−Density Scale × 濃さ × 厚み[m]) どおり — Density Scale を倍にすると、届く光は 2 乗に減る。ただし Volume Step Rate 0.25（既定）では濃い煙が少し明るく出て、1 で式とぴったり</span></a></li>
+        <li class="doc-toc-sep" aria-hidden="true">181–210</li>
+        <li><a href="#exp210" data-anchor="exp210"><span class="doc-no">210</span><span class="doc-t">181〜209 の点検 — 29 本を流し直して 35,969 個の値を突き合わせた。22 本は完全に一致。201 は台本が 202 の変更に引きずられていたので直したが、Turbulence の 2 条件はまだ合わない</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3897,7 +3904,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>209 / 209</dd></div>
+      <div><dt>実験</dt><dd>216 / 216</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -15887,32 +15894,32 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <div class="badge">207</div>
       <div class="body">
         <span class="chip chip--pm">モデリング</span>
-        <h2>焚き火を Karma で撮るとき、Volume Step Rate を粗くしても速くならない — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</h2>
+        <h2>焚き火を Karma で撮るとき、Volume Step Rate を 0.25 から下げても速くならず、1 に上げると遅い — 1920×1080 では 1 が 45 秒、0.125 が 36 秒。Pyro を粗くしても撮る時間は同じで、炎の形だけ変わる</h2>
         <div class="colhead">
           <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">速度</span><span class="coltag">Pyro</span></p>
           <div class="colbody">
           <div class="colgist"><p class="colgist-label">要点</p><ul>
-            <li><strong>Volume Step Rate は既定の 0.25 のままでよい。</strong>1 に粗くしても速くならず、1920×1080 ではかえって 23% 遅かった。</li>
+            <li><strong>焚き火なら Volume Step Rate は既定の 0.25 のままでよい。</strong>0.125 に下げても速くならず、1 に上げると 1920×1080 で 23% 遅い。見た目の差は見分けられない。</li>
+            <li><strong>訂正: Volume Step Rate は大きいほど細かい。</strong>はじめ「1 は粗い」と書いていた（<a href="#exp216">実験216</a> で確かめて直した）。</li>
             <li><strong>焚き火の炎は、1 枚の時間の約 6 割。</strong>炎を外すと 10.7 秒 → 4.6 秒。</li>
-            <li><strong>Pyro の Voxel Size は撮る時間に効かない。</strong>形で決める。0.06 にすると炎がぼけて柔らかくなった。</li>
           </ul></div>
           <img class="colthumb" src="thumb_207.png" alt="" loading="lazy" decoding="async">
           </div>
         </div>
         <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
-        <p class="path">examples/207_karma_fire_steprate.py &nbsp;·&nbsp; Volume Step Rate を粗くしても速くならない（1080p で 1 の方が 23% 遅い）。炎は1枚の約6割</p>
+        <p class="path">examples/207_karma_fire_steprate.py &nbsp;·&nbsp; Volume Step Rate は既定 0.25 のまま（1 に上げると 23% 遅い）。訂正: 大きいほど細かい</p>
         <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">karma</a></p>
         <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/207_scene.hipnc" target="_blank" rel="noopener noreferrer">207_scene.hipnc</a></p>
         <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="207_graph.png" alt="実験207 のノードのつなぎ方" loading="lazy" decoding="async"></details>
 
         <div class="prose">
-          <p><strong>課題: 焚き火を何百フレームも撮るなら、1 枚を短くしたい。<button class="term" data-term="Karma">Karma</button> の Volume Step Rate（<button class="term" data-term="ボリューム">ボリューム</button>の中を進む歩幅の細かさ。既定 0.25）を粗くすると、どれだけ速くなり、見た目はどれだけ変わるか。<button class="term" data-term="Pyro">Pyro</button> を粗い升で回した炎は、撮っても見劣りしないか。</strong></p>
+          <p><strong>課題: 焚き火を何百フレームも撮るなら、1 枚を短くしたい。<button class="term" data-term="Karma">Karma</button> の Volume Step Rate（<button class="term" data-term="ボリューム">ボリューム</button>の中を進む細かさ。既定 0.25）を変えると、どれだけ速くなり、見た目はどれだけ変わるか。<button class="term" data-term="Pyro">Pyro</button> を粗い升で回した炎は、撮っても見劣りしないか。</strong></p>
           <p>実践「焚き火を燃やす」のシーン（Voxel Size 0.03）を開き、フレーム 60 まで燃やして、960×540・16 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去（<a href="#exp205">実験205</a> で決めた撮り方）で撮った。Volume Step Rate を 1・0.5・0.25・0.125、Voxel Size を 0.03 と 0.06（升の数が約 8 分の 1）にした。見た目の差は、Voxel 0.03・Step Rate 0.125 の画との差（画素の値 0〜255 の差の平均）を、炎のまわりで測った。</p>
-          <p><strong>Step Rate を粗くしても、速くならない。</strong>960×540 で 1・0.5・0.25・0.125 は 13.1・11.4・10.7・11.0 秒。1920×1080 にすると、1 が 44.8 秒、0.125 が 36.4 秒で、粗い方が 23% 遅かった。粗く進むとざらつきが増え、ざらつきを見てサンプルを足す決め方（<a href="#exp205">実験205</a>）が長く回るためと考えられるが、画素ごとのサンプル数は確かめていない。</p>
+          <p><strong>Step Rate を変えても、ほとんど速くならない。</strong>960×540 で 1・0.5・0.25・0.125 は 13.1・11.4・10.7・11.0 秒。1920×1080 にすると、1 が 44.8 秒、0.125 が 36.4 秒で、1 の方が 23% 遅かった。<strong>訂正（2026-09-24、<a href="#exp216">実験216</a>）: はじめ、この記事では「1 は粗い」と書いていた。逆で、Volume Step Rate は大きいほど細かく進む。</strong>実験216 で一様な煙の箱を撮ると、1 では光の吸収の式とぴったり合い、0.25 では濃い煙が式より少し明るく、0.05 ではほぼ素通りになった。1 が遅かったのは、細かく進むためと考えられる。</p>
           <p><strong>見た目の差も小さい。</strong>炎のまわりの差は、Step Rate 1 で 0.90、0.5 で 0.78、0.25 で 0.53（0〜255 のうち）。並べても見分けられない。</p>
           <p><strong>炎は 1 枚の時間の約 6 割。</strong>炎を外して撮ると 4.6 秒（炎ありは 10.7 秒）。</p>
           <p><strong>Pyro の升を粗くしても、撮る時間は変わらない。</strong>Voxel Size 0.06（升 48×48×48）は 0.03（80×96×112）と同じく 10.8 秒。60 フレームの計算は 3.4 秒 → 1.4 秒と短くなるが、炎の形そのものが変わり、炎のまわりの差は 6.5 になった（ぼけた柔らかい炎になる）。</p>
-          <p><strong>決め方: Volume Step Rate は既定の 0.25 のまま。</strong>撮る時間を縮めたいなら、サンプル数とノイズ除去（<a href="#exp205">実験205</a>）や画の大きさで決める。Voxel Size は、撮る時間ではなく炎の形で決める。</p>
+          <p><strong>決め方: 焚き火なら Volume Step Rate は既定の 0.25 のまま。</strong>撮る時間を縮めたいなら、サンプル数とノイズ除去（<a href="#exp205">実験205</a>）や画の大きさで決める。Voxel Size は、撮る時間ではなく炎の形で決める。</p>
         </div>
 
         <p class="label">炎のまわり（960×540・16 サンプル＋ノイズ除去）</p>
@@ -15943,7 +15950,8 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li><strong>Volume Step Rate は既定の 0.25 のままでよい。</strong>1 に粗くしても速くならず、1920×1080 ではかえって 23% 遅かった。</li>
+          <li><strong>焚き火なら Volume Step Rate は既定の 0.25 のままでよい。</strong>0.125 に下げても速くならず、1 に上げると 1920×1080 で 23% 遅い。見た目の差は見分けられない。</li>
+          <li><strong>訂正: Volume Step Rate は大きいほど細かい。</strong>はじめ「1 は粗い」と書いていた（<a href="#exp216">実験216</a> で確かめて直した）。</li>
           <li><strong>焚き火の炎は、1 枚の時間の約 6 割。</strong>炎を外すと 10.7 秒 → 4.6 秒。</li>
           <li><strong>Pyro の Voxel Size は撮る時間に効かない。</strong>形で決める。0.06 にすると炎がぼけて柔らかくなった。</li>
         </ul>
@@ -16016,6 +16024,367 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 212 ===================== -->
+    <article class="entry entry--current" id="exp212">
+      <div class="badge">212</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>金属の Roughness は 0.2 まで見た目がほぼ同じ — ハイライトが広がり始めるのは 0.3 から。0.5 で明るさ 36%・広さ 1.4 倍、0.7 で 15%・2.4 倍</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">材質</span><span class="coltag">金属</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>Roughness 0〜0.2 は、見た目がほとんど同じ。</strong>ハイライトの広さは変わらず、明るさも 14% しか下がらない（板の明かりのとき）。</li>
+            <li><strong>映り込みをぼかすなら 0.5 以上。</strong>0.5 で明るさ 36%・広さ 1.4 倍。0.7 で四角い映り込みが消えた。</li>
+            <li><strong>球全体の明るさはほぼ同じ。</strong>平均 0.18〜0.21。変わるのは光の集まり方。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_212.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/212_karma_metal_roughness.py &nbsp;·&nbsp; 金属の Roughness は 0.2 まで見た目がほぼ同じ。広がるのは 0.3 から、0.7 で明るさ 15%</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">principledshader::2.0</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/212_scene.hipnc" target="_blank" rel="noopener noreferrer">212_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="212_graph.png" alt="実験212 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 金属を「つやつや」から「つや消し」まで見せ分けたい。principledshader の Roughness をいくつにすると、ハイライト（明かりの映り込み）がどれだけ広がって、どれだけ暗くなるのか。</strong></p>
+          <p>半径 0.5 の球に、Base Color 0.9・Metallic 1 の金属を当て、Roughness を 0〜0.7 の 7 段階にして、実践と同じ撮り方（暗い幕・板のキー・リム・弱いドーム）で 640×640・16 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で撮った。画は EXR（1 を超える明るさも切れない）で書き、OpenImageIO で読んで測った。キーの映り込みのいちばん明るい画素の明るさ（輝度）と、その半分より明るい画素の数（ハイライトの広さ。球の画素数に対する割合）を比べる。</p>
+          <p><strong>0.2 までは、ハイライトの広さがほとんど変わらない。</strong>球の 1.33%（0）→ 1.32%（0.2）。明るさも 86% までしか下がらない。並べると、0〜0.1 は鏡のまま、0.2 で映り込みの縁が少しぼけるだけ。キーの明かりは板（球の大きさの 1.2 倍）なので、映り込みの形はまず板の形で決まり、粗さのぼけが板より小さいうちは広がらないと考えられる。</p>
+          <p><strong>0.3 から広がり、暗くなる。</strong>0.3 で明るさ 64%・広さ 1.16 倍、0.5 で 36%・1.41 倍、0.7 で 15%・2.4 倍。0.7 では、板の四角い形はもう分からない。</p>
+          <p><strong>球全体の明るさは、ほとんど変わらない。</strong>球の画素の平均は 0.194〜0.206。光の量は同じまま、集まっているか広がっているかが変わる。</p>
+          <p><strong>目安: この撮り方（板のキー）で見分けがつくのは 0.2 → 0.3 → 0.5 → 0.7 の段。</strong>0 と 0.05・0.1 は、キーの映り込みの縁がわずかに柔らかくなるだけだった。</p>
+        </div>
+
+        <p class="label">Roughness を変えた金属の球</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="212_strip.png" alt="上の段 0・0.05・0.1・0.2、下の段 0.3・0.5・0.7。0.2 ま" loading="lazy" decoding="async"></div>
+            <figcaption>上の段 0・0.05・0.1・0.2、下の段 0.3・0.5・0.7。0.2 までは鏡に近く、0.3 から映り込みがぼける。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="212_chart.png" alt="Roughness 0 を 1 とした、いちばん明るい所とハイライトの広さ。" loading="lazy" decoding="async"></div>
+            <figcaption>Roughness 0 を 1 とした、いちばん明るい所とハイライトの広さ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Roughness</th><th>いちばん明るい所</th><th>0 との比</th><th>ハイライトの広さ（球に対して）</th><th>0 との比</th><th>球の平均の明るさ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">10.28</td><td class="num">1.00</td><td>1.33%</td><td class="num">1.00</td><td class="num">0.194</td></tr>
+              <tr><td class="num">0.05</td><td class="num">9.99</td><td class="num">0.97</td><td>1.33%</td><td class="num">1.00</td><td class="num">0.194</td></tr>
+              <tr><td class="num">0.1</td><td class="num">9.87</td><td class="num">0.96</td><td>1.33%</td><td class="num">1.00</td><td class="num">0.195</td></tr>
+              <tr><td class="num">0.2</td><td class="num">8.82</td><td class="num">0.86</td><td>1.32%</td><td class="num">0.99</td><td class="num">0.198</td></tr>
+              <tr><td class="num">0.3</td><td class="num">6.59</td><td class="num">0.64</td><td>1.54%</td><td class="num">1.16</td><td class="num">0.204</td></tr>
+              <tr><td class="num">0.5</td><td class="num">3.70</td><td class="num">0.36</td><td>1.87%</td><td class="num">1.41</td><td class="num">0.206</td></tr>
+              <tr><td class="num">0.7</td><td class="num">1.51</td><td class="num">0.15</td><td>3.20%</td><td class="num">2.40</td><td class="num">0.180</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Roughness 0〜0.2 は、見た目がほとんど同じ。</strong>ハイライトの広さは変わらず、明るさも 14% しか下がらない（板の明かりのとき）。</li>
+          <li><strong>映り込みをぼかすなら 0.5 以上。</strong>0.5 で明るさ 36%・広さ 1.4 倍。0.7 で四角い映り込みが消えた。</li>
+          <li><strong>球全体の明るさはほぼ同じ。</strong>平均 0.18〜0.21。変わるのは光の集まり方。</li>
+          <li><strong>明かりの形が映り込む。</strong>板の明かりの四角が、0.2 まではそのまま見えた。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
+
+    <!-- ===================== 213 ===================== -->
+    <article class="entry entry--current" id="exp213">
+      <div class="badge">213</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>SSS で透けて見せるなら、半径 0.5 の球では Subsurface Distance 0.1〜0.3 — 0.3 のとき逆光の真ん中が 5.3 倍明るい。1 にするとかえって暗く、正面から見ても 41% に沈む</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">材質</span><span class="coltag">SSS</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>半径 0.5 の球で透けを出すなら Subsurface Distance 0.1〜0.3。</strong>0.3 のとき、逆光の真ん中が 5.3 倍明るかった。</li>
+            <li><strong>0.05 以下では、ほとんど透けない。</strong>逆光の画は SSS なしとほぼ同じ。</li>
+            <li><strong>大きくしすぎると暗くなる。</strong>1 では正面から見ても明るさ 41%、ざらつきも増えた。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_213.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/213_karma_sss_distance.py &nbsp;·&nbsp; SSS の透けは、半径 0.5 の球で Distance 0.1〜0.3。1 はかえって暗い。Random Walk はよく透ける</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">principledshader::2.0</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/213_scene.hipnc" target="_blank" rel="noopener noreferrer">213_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="213_graph.png" alt="実験213 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: ろうそく・雪・肌・石けんのような「光が中に入って透ける」物を作りたい。principledshader の Subsurface を入れたとき、Subsurface Distance（光が中で散らばる距離、既定 0.1）をいくつにすると、どれだけ透けて見えるのか。</strong></p>
+          <p>半径 0.5 の球に Base Color (0.9, 0.85, 0.75) の材質を当て、Subsurface 1 で Distance を 0.01〜1 にした。実践と同じ正面寄りの明かりと、キーの明かりを球の真後ろに回した逆光の 2 通りで、640×640・16 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去・EXR で撮り、OpenImageIO で明るさを測った。逆光の画では、球の真ん中（厚い所）と縁（薄い所）を分けて測った。</p>
+          <p><strong>逆光で透けが見え始めるのは 0.1 から。</strong>真ん中の明るさは SSS なしを 1 として、0.01 で 1.07、0.05 で 1.20、0.1 で 2.8、0.3 で 5.3。0.05 までは、逆光の画は SSS なしとほとんど変わらない。</p>
+          <p><strong>大きすぎると、かえって暗い。</strong>1 では真ん中が 4.0 倍で、0.3 より暗かった。正面から撮った画も、球の平均の明るさが SSS なしの 41%（0.3 で 73%）に下がり、ざらつきも増えた。光が中で遠くまで散らばって、外へ出てくる量が減るためと考えられる（確かめていない）。</p>
+          <p><strong>Random Walk（<button class="term" data-term="Karma">Karma</button>）は、同じ距離でもよく透ける。</strong>0.1 で真ん中が 3.8 倍（既定の方式は 2.8 倍）。正面から見た明るさは 110% で、暗くならない。</p>
+          <p><strong>目安: 半径 0.5 の球で透けを出すなら、Distance 0.1〜0.3。</strong>Distance は長さ（m）なので、物の大きさが違えば合う値も変わると考えられるが、ここで確かめたのは半径 0.5 の球だけ。</p>
+        </div>
+
+        <p class="label">逆光で撮った球（表示だけ明るさを 3 倍にした）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="213_back.png" alt="左から SSS なし・0.1・0.3・1・Random Walk 0.1。SSS" loading="lazy" decoding="async"></div>
+            <figcaption>左から SSS なし・0.1・0.3・1・Random Walk 0.1。SSS なしは真っ暗、0.1〜0.3 で内側から明るい。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="213_front.png" alt="同じ材質を正面寄りの明かりで。1 は暗く、ざらつく。" loading="lazy" decoding="async"></div>
+            <figcaption>同じ材質を正面寄りの明かりで。1 は暗く、ざらつく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>設定</th><th>逆光・真ん中</th><th>SSS なしとの比</th><th>逆光・縁</th><th>正面・球の平均</th><th>SSS なしとの比</th></tr></thead>
+            <tbody>
+              <tr><td>SSS なし</td><td class="num">0.0093</td><td class="num">1.0</td><td class="num">0.0115</td><td class="num">0.277</td><td class="num">1.00</td></tr>
+              <tr><td>Distance 0.01</td><td class="num">0.0100</td><td class="num">1.1</td><td class="num">0.0114</td><td class="num">0.299</td><td class="num">1.08</td></tr>
+              <tr><td class="num">0.05</td><td class="num">0.0112</td><td class="num">1.2</td><td class="num">0.0124</td><td class="num">0.290</td><td class="num">1.05</td></tr>
+              <tr><td>0.1（既定）</td><td class="num">0.0257</td><td class="num">2.8</td><td class="num">0.0181</td><td class="num">0.271</td><td class="num">0.98</td></tr>
+              <tr><td class="num">0.3</td><td class="num">0.0491</td><td class="num">5.3</td><td class="num">0.0259</td><td class="num">0.201</td><td class="num">0.73</td></tr>
+              <tr><td class="num">1</td><td class="num">0.0377</td><td class="num">4.0</td><td class="num">0.0212</td><td class="num">0.114</td><td class="num">0.41</td></tr>
+              <tr><td>Random Walk 0.1</td><td class="num">0.0357</td><td class="num">3.8</td><td class="num">0.0218</td><td class="num">0.306</td><td class="num">1.10</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>半径 0.5 の球で透けを出すなら Subsurface Distance 0.1〜0.3。</strong>0.3 のとき、逆光の真ん中が 5.3 倍明るかった。</li>
+          <li><strong>0.05 以下では、ほとんど透けない。</strong>逆光の画は SSS なしとほぼ同じ。</li>
+          <li><strong>大きくしすぎると暗くなる。</strong>1 では正面から見ても明るさ 41%、ざらつきも増えた。</li>
+          <li><strong>Random Walk（Karma）は同じ距離でもよく透け、暗くならない。</strong>0.1 で逆光の真ん中が 3.8 倍。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
+
+    <!-- ===================== 214 ===================== -->
+    <article class="entry entry--current" id="exp214">
+      <div class="badge">214</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Karma のぼけの大きさは f²(d−s)/(N·d·s) に 0.9% 以内で一致 — F を半分にすると直径は倍。写真の薄いレンズの式より約 5% 小さい</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">カメラ</span><span class="coltag">被写界深度</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>ぼけの直径は F-Stop に反比例する。</strong>F を半分にすると直径は倍。</li>
+            <li><strong><button class="term" data-term="Karma">Karma</button> のぼけは f²(d−s)/(N·d·s) の式どおり（0.9% 以内）。</strong>写真の薄いレンズの式より約 5% 小さい（ピント 2 m・焦点距離 100 mm のとき）。</li>
+            <li><strong>式からは、焦点距離が 2 乗で効く。</strong>ぼけを大きくしたいなら焦点距離かピントの距離を変える（この実験で変えたのは F-Stop だけ）。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_214.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/214_karma_dof_blur_size.py &nbsp;·&nbsp; Karma のぼけは f²(d−s)/(N·d·s) に 0.9% 以内で一致。F を半分で直径は倍</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">cam</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/214_scene.hipnc" target="_blank" rel="noopener noreferrer">214_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="214_graph.png" alt="実験214 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp205">実験205</a> で、F-Stop 0.7 でも背景があまりぼけなかった。狙った大きさのぼけにするには、F-Stop・焦点距離・<button class="term" data-term="ピン">ピン</button>トの距離をどう決めればよいのか。Houdini のカメラの数字は、写真のレンズの式どおりに効くのか。</strong></p>
+          <p>真っ暗な中に光る球（半径 5 cm）を置き、焦点距離 100 mm・Aperture 41.4214 mm のカメラを 20 m 手前に置いた。ピントは 2 m で、球はピントより 18 m 奥にある。F-Stop を 1〜16 にして 640×360 で撮り（Enable Depth of Field）、EXR を OpenImageIO で読んで、ぼけた円盤の大きさを測った。測り方は、明るさで重みを付けた中心からの距離の二乗平均（一様な円盤なら直径 = 2√2 × この値）。ピントを球に合わせた画も撮り、球そのものの大きさの分を差し引いた（広がりは二乗で足し算になる）。</p>
+          <p><strong>ぼけの直径は F-Stop に反比例する。</strong>F 1・2・4・8・16 で 69.0 ・34.6 ・17.4 ・8.7 ・4.3 画素。F を倍にすると、ちょうど半分になった。</p>
+          <p><strong>写真の薄いレンズの式（(f/N)·f·(d−s)/(d·(s−f))）より、どれも約 5% 小さい</strong>（比 0.943〜0.954）。式の (s − f) を s に替えた f²(d−s)/(N·d·s) とは、0.9% 以内で一致した。ピントの距離 2 m に対して焦点距離 0.1 m の分（5%）の違いで、ピントが遠いほど、2 つの式の差は小さくなる。</p>
+          <p><strong>ぼけても、光の量は変わらない。</strong>窓の中の明るさの合計は 462〜468 で、ぼけた分だけ円盤は暗くなる（いちばん明るい画素は、ピントが合うと 10.2、F 1 で 0.40）。</p>
+          <p><strong>目安の式: 遠くの背景のぼけの直径（画素）≒ 焦点距離² ÷ (F-Stop × ピントの距離 × Aperture) × 画の横の画素数</strong>（長さは mm でそろえる。背景がピントよりずっと遠いとき）。たとえば焦点距離 50 mm・ピント 5 m・F 2.8・1920 画素なら、この式で約 8.3 画素（式から出した値。撮っては確かめていない）。式からは、ぼけを大きくするには焦点距離を上げる（2 乗で効く）かピントを近づけるのが効くと言える（この実験で変えたのは F-Stop だけ）。</p>
+        </div>
+
+        <p class="label">F-Stop を変えたぼけ（真ん中を 2 倍に拡大）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="214_blur.png" alt="左端はピントを球に合わせた画。F を上げるほど円盤が小さく、明るくなる。" loading="lazy" decoding="async"></div>
+            <figcaption>左端はピントを球に合わせた画。F を上げるほど円盤が小さく、明るくなる。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="214_chart.png" alt="測った直径（青）は、f²(d−s)/(N·d·s)（緑）とほぼ重なる。薄いレンズ" loading="lazy" decoding="async"></div>
+            <figcaption>測った直径（青）は、f²(d−s)/(N·d·s)（緑）とほぼ重なる。薄いレンズの式（橙）より少し小さい。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>F-Stop</th><th>測った直径（画素）</th><th>薄いレンズの式</th><th>比</th><th>f²(d−s)/(N·d·s)</th><th>比</th><th>明るさの合計</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td class="num">69.02</td><td class="num">73.19</td><td class="num">0.943</td><td class="num">69.53</td><td class="num">0.993</td><td class="num">462</td></tr>
+              <tr><td class="num">2</td><td class="num">34.64</td><td class="num">36.59</td><td class="num">0.947</td><td class="num">34.76</td><td class="num">0.997</td><td class="num">467</td></tr>
+              <tr><td class="num">4</td><td class="num">17.41</td><td class="num">18.30</td><td class="num">0.951</td><td class="num">17.38</td><td class="num">1.002</td><td class="num">465</td></tr>
+              <tr><td class="num">8</td><td class="num">8.73</td><td class="num">9.15</td><td class="num">0.954</td><td class="num">8.69</td><td class="num">1.005</td><td class="num">468</td></tr>
+              <tr><td class="num">16</td><td class="num">4.31</td><td class="num">4.57</td><td class="num">0.943</td><td class="num">4.35</td><td class="num">0.991</td><td class="num">466</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ぼけの直径は F-Stop に反比例する。</strong>F を半分にすると直径は倍。</li>
+          <li><strong><button class="term" data-term="Karma">Karma</button> のぼけは f²(d−s)/(N·d·s) の式どおり（0.9% 以内）。</strong>写真の薄いレンズの式より約 5% 小さい（ピント 2 m・焦点距離 100 mm のとき）。</li>
+          <li><strong>式からは、焦点距離が 2 乗で効く。</strong>ぼけを大きくしたいなら焦点距離かピントの距離を変える（この実験で変えたのは F-Stop だけ）。</li>
+          <li><strong>ぼけても光の量は変わらない。</strong>円盤が広がるぶん暗くなる。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
+
+    <!-- ===================== 216 ===================== -->
+    <article class="entry entry--current" id="exp216">
+      <div class="badge">216</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>煙の透け具合は光の吸収の式 exp(−Density Scale × 濃さ × 厚み[m]) どおり — Density Scale を倍にすると、届く光は 2 乗に減る。ただし Volume Step Rate 0.25（既定）では濃い煙が少し明るく出て、1 で式とぴったり</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">煙</span><span class="coltag">Pyro</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>煙の透け具合は exp(−Density Scale × 濃さ × 厚み[m])。</strong>Density Scale と厚みは掛け算で効く。</li>
+            <li><strong>Density Scale を倍にすると、届く光は 2 乗に減る。</strong>「倍にすると倍濃い」ではない。</li>
+            <li><strong>既定の Volume Step Rate 0.25 では、濃い煙が少し明るく出る</strong>（Density Scale 4 で +12%）。1 に上げると式どおり。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_216.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/216_karma_smoke_density.py &nbsp;·&nbsp; 煙の透けは exp(−Density Scale×濃さ×厚み)。倍にすると届く光は2乗。Volume Step Rate は大きいほど細かい</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">kma_pyroshader</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/216_scene.hipnc" target="_blank" rel="noopener noreferrer">216_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="216_graph.png" alt="実験216 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 煙が薄すぎる・濃すぎるとき、kma_pyroshader の Density Scale をいくつにすればよいか。倍にすると倍濃くなるのか。煙の厚みとどう関係するのか。</strong></p>
+          <p>真っ白に光る板（Emission 1）の手前に、濃さ 1 の一様な煙の箱（1 × 1 × 厚み L）を置き、明かりを入れずに正面から撮った（煙は光を減らすだけにする。Enable Scatter は既定の切）。板の光のうち、煙を通って届いた割合 T を、EXR の明るさ（煙の中 ÷ 煙の外）で測った。光の吸収の式（ベールの法則）では T = exp(−k × Density Scale × 濃さ × L)。</p>
+          <p><strong>式とほぼ合う。k は 1（1 m あたり）。</strong>厚み 0.5 m で Density Scale 0.25・0.5・1・2・4 のとき、T は 0.884・0.781・0.612・0.379・0.151（式では 0.882・0.779・0.607・0.368・0.135）。厚みを 1 m にすると 0.373（式 0.368）で、Density Scale 2・厚み 0.5 m とほぼ同じ。<strong>Density Scale と厚みは掛け算で効く。</strong></p>
+          <p><strong>だから「倍にすると倍濃い」ではない。</strong>Density Scale を倍にすると、届く光の割合は 2 乗になる（0.61 → 0.37 → 0.14）。</p>
+          <p><strong>濃い煙ほど、式より少し明るく出た。</strong>Density Scale 4 で T = 0.151（式 0.135、+12%）。<button class="term" data-term="Karma">Karma</button> の Volume Step Rate（既定 0.25）を 1 に上げると 0.1353 で、式と 4 桁一致した。0.05 に下げると 0.713 で、煙をほとんど素通りした。<strong>Volume Step Rate は、大きいほど細かく煙の中を進む。</strong>（<a href="#exp207">実験207</a> では逆に「1 は粗い」と書いていたので、そちらを訂正した）</p>
+          <p><strong>決め方: 煙の濃さは Density Scale と厚みの掛け算で決まる。濃い煙を正しい濃さで撮りたいときは Volume Step Rate を上げる</strong>（焚き火では、上げると時間が延びた。<a href="#exp207">実験207</a>）。</p>
+        </div>
+
+        <p class="label">光る板の手前の煙の箱（厚み 0.5 m）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="216_strip.png" alt="DS は Density Scale。上げるほど箱が暗い（光を通さない）。右の " loading="lazy" decoding="async"></div>
+            <figcaption>DS は Density Scale。上げるほど箱が暗い（光を通さない）。右の 2 枚は Density Scale 4 で Volume Step Rate を 1 と 0.05 にしたもの。0.05 は煙がほとんど消える。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="216_chart.png" alt="灰色の線が式。青（既定の Step Rate 0.25）は濃い所で少し上にずれ、" loading="lazy" decoding="async"></div>
+            <figcaption>灰色の線が式。青（既定の Step Rate 0.25）は濃い所で少し上にずれ、緑（1）は式に乗る。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>Density Scale</th><th>厚み m</th><th>Step Rate</th><th>届いた割合 T</th><th>式（k = 1）</th><th>式との差</th><th>k</th></tr></thead>
+            <tbody>
+              <tr><td>s025</td><td class="num">0.25</td><td class="num">0.5</td><td class="num">0.25</td><td class="num">0.8838</td><td class="num">0.8825</td><td>+0.1%</td><td class="num">0.988</td></tr>
+              <tr><td>s050</td><td class="num">0.5</td><td class="num">0.5</td><td class="num">0.25</td><td class="num">0.7806</td><td class="num">0.7788</td><td>+0.2%</td><td class="num">0.991</td></tr>
+              <tr><td>s100</td><td class="num">1</td><td class="num">0.5</td><td class="num">0.25</td><td class="num">0.6116</td><td class="num">0.6065</td><td>+0.8%</td><td class="num">0.984</td></tr>
+              <tr><td>s200</td><td class="num">2</td><td class="num">0.5</td><td class="num">0.25</td><td class="num">0.3794</td><td class="num">0.3679</td><td>+3.1%</td><td class="num">0.969</td></tr>
+              <tr><td>s400</td><td class="num">4</td><td class="num">0.5</td><td class="num">0.25</td><td class="num">0.1510</td><td class="num">0.1353</td><td>+11.6%</td><td class="num">0.945</td></tr>
+              <tr><td>s100 L1</td><td class="num">1</td><td class="num">1</td><td class="num">0.25</td><td class="num">0.3726</td><td class="num">0.3679</td><td>+1.3%</td><td class="num">0.987</td></tr>
+              <tr><td>s400 step005</td><td class="num">4</td><td class="num">0.5</td><td class="num">0.05</td><td class="num">0.7126</td><td class="num">0.1353</td><td>+426.5%</td><td class="num">0.169</td></tr>
+              <tr><td>s400 step1</td><td class="num">4</td><td class="num">0.5</td><td class="num">1</td><td class="num">0.1353</td><td class="num">0.1353</td><td>-0.0%</td><td class="num">1.000</td></tr>
+              <tr><td>s200 step005</td><td class="num">2</td><td class="num">0.5</td><td class="num">0.05</td><td class="num">0.7280</td><td class="num">0.3679</td><td>+97.9%</td><td class="num">0.318</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>煙の透け具合は exp(−Density Scale × 濃さ × 厚み[m])。</strong>Density Scale と厚みは掛け算で効く。</li>
+          <li><strong>Density Scale を倍にすると、届く光は 2 乗に減る。</strong>「倍にすると倍濃い」ではない。</li>
+          <li><strong>既定の Volume Step Rate 0.25 では、濃い煙が少し明るく出る</strong>（Density Scale 4 で +12%）。1 に上げると式どおり。</li>
+          <li><strong>Volume Step Rate は大きいほど細かい。</strong>0.05 に下げると煙をほぼ素通りした。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
+
+    <!-- ===================== 210 ===================== -->
+    <article class="entry entry--current" id="exp210">
+      <div class="badge">210</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>181〜209 の点検 — 29 本を流し直して 35,969 個の値を突き合わせた。22 本は完全に一致。201 は台本が 202 の変更に引きずられていたので直したが、Turbulence の 2 条件はまだ合わない</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">ツール</span><span class="coltag">点検</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>22 / 29 本は完全に一致。</strong></li>
+            <li><strong>201 の台本が、202 で足した焚き火の設定を借りていた。</strong>借りたあと既定値に戻すよう直した。</li>
+            <li><strong>201 の 2 条件（Turbulence を Use Control Field 入りで効かせたもの）は、直しても合わなかった。</strong>記事の結論は確かめ直しが要る。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_210.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/210_audit.py &nbsp;·&nbsp; 181〜209 を流し直し：22 本は完全一致。201 は台本を直したが Turbulence の 2 条件が合わない</p>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp181">実験181</a>〜209 の台本を今のまま流し直すと、記事に書いた値が同じように出るか。</strong></p>
+          <p>30 件ごとの点検（030・060・090・121・150・180 に続いて 7 回目）。記録（out/NNN_*.json）を控えに退避し、台本を流し直して、数字を 1 つずつ比べた（時間の項目は除く）。比べたあと記録は元に戻した。200 番台は条件ごとに 1 プロセスで回す台本なので、条件の一覧を記録の部分ファイルの名前から作った（examples/210_audit.py）。</p>
+          <p><strong>22 本は、時間以外のすべての値が一致した。</strong></p>
+          <p><strong>ずれの出たものは 4 種類に分けられた。</strong>時間の項目（名前に us_per などが付いていて、飛ばす一覧から漏れていたもの。点検と同時に別の実験を回していた）、書き出したファイルの大きさの揺れ（数十バイト。圧縮の結果がわずかに変わる）、あとから台本に足した項目（古い記録に無い）、そして本当に値が変わったもの。</p>
+          <p><strong>本当に値が変わったのは 201 だけ。はじめの原因は台本の外にあった。</strong>201 は、火の組み立てを 202 の台本から借りている。202 を作ったときに、その組み立てに焚き火の設定（Flame Lifespan 0.25・Buoyancy 0.25・Cooling Rate 1・Turbulence 3 など）を足したため、201 を今流すと、既定値のつもりの条件がすべて焚き火の設定になっていた（23 条件でずれ 5,870 か所）。201 の台本で、借りた組み立てのあとにこの 6 つを Houdini の既定値に戻すようにして、流し直した。</p>
+          <p><strong>直したあとも、23 条件のうち 2 条件が合わなかった。</strong>fire_turb1_ctrl・l025b025c1_turb。どちらも Turbulence を Use Control Field 入り（既定）で効かせた条件で、流し直すと炎が高く出た（フレーム 10 の高さ 0.66 → 0.94 など）。201 の記事の「Use Control Field を切らないと Turbulence は効かない」は、この 2 条件の記録から出した結論なので、確かめ直しが要る。原因はまだ確かめていない（やることメモに残した）。ほかの 21 条件は、時間以外のすべての値が一致した。</p>
+          <p><strong>学んだこと: ほかの実験の台本から組み立てを借りるときは、借りた先をあとで変えると、借りた側の結果が黙って変わる。</strong>点検で流し直すまで気づけない。</p>
+        </div>
+
+        <p class="label">1 本ずつの結果</p>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>実験</th><th>比べた値</th><th>ずれた値</th><th>判定</th></tr></thead>
+            <tbody>
+              <tr><td class="num">181</td><td class="num">20</td><td class="num">4</td><td>時間だけ違う</td></tr>
+              <tr><td class="num">182</td><td class="num">123</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">183</td><td class="num">728</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">184</td><td class="num">96</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">185</td><td class="num">216</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">186</td><td class="num">41</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">187</td><td class="num">48</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">188</td><td class="num">108</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">189</td><td class="num">45</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">190</td><td class="num">50</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">191</td><td class="num">30</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">192</td><td class="num">108</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">193</td><td class="num">316</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">194</td><td class="num">634</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">195</td><td class="num">106</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">196</td><td class="num">49</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">197</td><td class="num">50</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">198</td><td class="num">40</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">199</td><td class="num">45</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">200</td><td class="num">14468</td><td class="num">40</td><td>あとから足した項目だけ</td></tr>
+              <tr><td class="num">201</td><td class="num">10603</td><td class="num">568</td><td>23 条件のうち 2 条件が合わない（fire_turb1_ctrl・l025b025c1_turb）</td></tr>
+              <tr><td class="num">202</td><td class="num">4728</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">203</td><td class="num">16</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">204</td><td class="num">2582</td><td class="num">1174</td><td>ファイルの大きさが最大 0.61% 揺れた</td></tr>
+              <tr><td class="num">205</td><td class="num">338</td><td class="num">46</td><td>あとから足した項目だけ</td></tr>
+              <tr><td class="num">206</td><td class="num">64</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">207</td><td class="num">129</td><td class="num">0</td><td>一致</td></tr>
+              <tr><td class="num">208</td><td class="num">123</td><td class="num">16</td><td>時間だけ違う</td></tr>
+              <tr><td class="num">209</td><td class="num">65</td><td class="num">34</td><td>ファイルの大きさが最大 0.00% 揺れた</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>22 / 29 本は完全に一致。</strong></li>
+          <li><strong>201 の台本が、202 で足した焚き火の設定を借りていた。</strong>借りたあと既定値に戻すよう直した。</li>
+          <li><strong>201 の 2 条件（Turbulence を Use Control Field 入りで効かせたもの）は、直しても合わなかった。</strong>記事の結論は確かめ直しが要る。</li>
+          <li><strong>ファイルの大きさは、同じ中身でも数十バイト揺れる。</strong>容量の比べ方には影響しない大きさ（204・209）。</li>
+          <li><strong>時間の項目の名前がばらばらだと、点検で飛ばしきれない。</strong>us_per_point（181）のような名前も飛ばす一覧に入れる。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -16031,7 +16400,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-9d5ca2835b.js"></script>
+<script src="data/glossary-data-6dab5743cd.js"></script>
 <script src="data/node-data-42349d3e36.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -16210,10 +16579,10 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>209</dd></div>
+        <div><dt>実験</dt><dd>216</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>388</dd></div>
-        <div><dt>用語</dt><dd>446</dd></div>
+        <div><dt>用語</dt><dd>452</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -16285,9 +16654,9 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_209.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>209本の実験。最新は実験209</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_210.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>216本の実験。最新は実験210</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>388件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>446語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>452語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -16390,7 +16759,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-299ffe1474.js"></script>
+<script src="data/search-data-8779ae1ca6.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

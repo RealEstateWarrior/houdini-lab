@@ -1,0 +1,49 @@
+{
+  "title": "実験212",
+  "network": "/obj/exp212",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.5,
+        "rady": 0.5,
+        "radz": 0.5,
+        "ty": 0.5,
+        "rows": 64,
+        "cols": 64
+      }
+    },
+    {
+      "name": "assign_metal",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/metal_mat"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "assign_metal",
+      "to_input": 0
+    }
+  ]
+}
