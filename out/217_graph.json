@@ -7,7 +7,7 @@
       "name": "table_top",
       "type": "box",
       "pos": [
-        -22.027,
+        -28.522,
         3.765
       ],
       "flags": {
@@ -24,7 +24,7 @@
       "name": "table",
       "type": "merge",
       "pos": [
-        -17.509,
+        -24.004,
         0.979
       ],
       "flags": {
@@ -36,7 +36,7 @@
       "name": "leg0",
       "type": "box",
       "pos": [
-        -19.768,
+        -26.263,
         3.313
       ],
       "flags": {
@@ -55,7 +55,7 @@
       "name": "leg1",
       "type": "box",
       "pos": [
-        -17.509,
+        -24.004,
         2.861
       ],
       "flags": {
@@ -74,7 +74,7 @@
       "name": "leg2",
       "type": "box",
       "pos": [
-        -15.25,
+        -21.745,
         2.41
       ],
       "flags": {
@@ -93,7 +93,7 @@
       "name": "leg3",
       "type": "box",
       "pos": [
-        -12.99,
+        -19.486,
         1.958
       ],
       "flags": {
@@ -112,7 +112,7 @@
       "name": "cloth_66",
       "type": "grid",
       "pos": [
-        -24.851,
+        -31.346,
         2.56
       ],
       "flags": {
@@ -131,7 +131,7 @@
       "name": "cloth_setup_bm3",
       "type": "vellumconstraints",
       "pos": [
-        -24.851,
+        -31.346,
         1.431
       ],
       "flags": {
@@ -146,7 +146,7 @@
       "name": "drop_bm3",
       "type": "vellumsolver",
       "pos": [
-        -21.18,
+        -27.675,
         0.0
       ],
       "flags": {
@@ -164,7 +164,7 @@
       "name": "cloth_67",
       "type": "grid",
       "pos": [
-        -9.743,
+        -16.238,
         2.56
       ],
       "flags": {
@@ -183,7 +183,7 @@
       "name": "cloth_setup_bm1",
       "type": "vellumconstraints",
       "pos": [
-        -9.743,
+        -16.238,
         1.431
       ],
       "flags": {
@@ -195,6 +195,111 @@
     },
     {
       "name": "drop_bm1",
+      "type": "vellumsolver",
+      "pos": [
+        -16.238,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "useground": 1,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "cloth_68",
+      "type": "grid",
+      "pos": [
+        -12.99,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.9,
+        "sizey": 1.45,
+        "ty": 0.86,
+        "ry": 4.0,
+        "rows": 66,
+        "cols": 84
+      }
+    },
+    {
+      "name": "cloth_setup_b0",
+      "type": "vellumconstraints",
+      "pos": [
+        -12.99,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "bendstiffnessexp": 0
+      }
+    },
+    {
+      "name": "drop_b0",
+      "type": "vellumsolver",
+      "pos": [
+        -12.99,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "substeps": 5,
+        "useground": 1,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    },
+    {
+      "name": "cloth_69",
+      "type": "grid",
+      "pos": [
+        -9.743,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.9,
+        "sizey": 1.45,
+        "ty": 0.86,
+        "ry": 4.0,
+        "rows": 66,
+        "cols": 84
+      }
+    },
+    {
+      "name": "cloth_setup_b0s3",
+      "type": "vellumconstraints",
+      "pos": [
+        -9.743,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "bendstiffness": 3.0,
+        "bendstiffnessexp": 0
+      }
+    },
+    {
+      "name": "drop_b0s3",
       "type": "vellumsolver",
       "pos": [
         -9.743,
@@ -212,7 +317,7 @@
       }
     },
     {
-      "name": "cloth_68",
+      "name": "cloth_70",
       "type": "grid",
       "pos": [
         -6.495,
@@ -264,7 +369,7 @@
       }
     },
     {
-      "name": "cloth_69",
+      "name": "cloth_71",
       "type": "grid",
       "pos": [
         -3.248,
@@ -326,7 +431,7 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 00000001B21EAB00 read-only>"
+        "stash": "<hou.Geometry frozen at 00000001C89FF900 read-only>"
       }
     },
     {
@@ -340,11 +445,11 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 00000001DA847900 read-only>"
+        "stash": "<hou.Geometry frozen at 000000000FDCF900 read-only>"
       }
     },
     {
-      "name": "final_b1",
+      "name": "final_b0",
       "type": "stash",
       "pos": [
         3.954,
@@ -354,11 +459,25 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 00000001F55C3900 read-only>"
+        "stash": "<hou.Geometry frozen at 00000001BD0C3900 read-only>"
       }
     },
     {
-      "name": "final_b3",
+      "name": "final_b0s3",
+      "type": "stash",
+      "pos": [
+        3.954,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "stash": "<hou.Geometry frozen at 000000170AE1AB00 read-only>"
+      }
+    },
+    {
+      "name": "final_b1",
       "type": "stash",
       "pos": [
         6.213,
@@ -368,7 +487,21 @@
         "display": false
       },
       "params": {
-        "stash": "<hou.Geometry frozen at 00000001D3123900 read-only>"
+        "stash": "<hou.Geometry frozen at 000000172499E400 read-only>"
+      }
+    },
+    {
+      "name": "final_b3",
+      "type": "stash",
+      "pos": [
+        6.213,
+        1.581
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "stash": "<hou.Geometry frozen at 000000173BBFB900 read-only>"
       }
     },
     {
@@ -466,6 +599,54 @@
     {
       "from": "cloth_68",
       "from_output": 0,
+      "to": "cloth_setup_b0",
+      "to_input": 0
+    },
+    {
+      "from": "cloth_setup_b0",
+      "from_output": 0,
+      "to": "drop_b0",
+      "to_input": 0
+    },
+    {
+      "from": "cloth_setup_b0",
+      "from_output": 1,
+      "to": "drop_b0",
+      "to_input": 1
+    },
+    {
+      "from": "table",
+      "from_output": 0,
+      "to": "drop_b0",
+      "to_input": 2
+    },
+    {
+      "from": "cloth_69",
+      "from_output": 0,
+      "to": "cloth_setup_b0s3",
+      "to_input": 0
+    },
+    {
+      "from": "cloth_setup_b0s3",
+      "from_output": 0,
+      "to": "drop_b0s3",
+      "to_input": 0
+    },
+    {
+      "from": "cloth_setup_b0s3",
+      "from_output": 1,
+      "to": "drop_b0s3",
+      "to_input": 1
+    },
+    {
+      "from": "table",
+      "from_output": 0,
+      "to": "drop_b0s3",
+      "to_input": 2
+    },
+    {
+      "from": "cloth_70",
+      "from_output": 0,
       "to": "cloth_setup_b1",
       "to_input": 0
     },
@@ -488,7 +669,7 @@
       "to_input": 2
     },
     {
-      "from": "cloth_69",
+      "from": "cloth_71",
       "from_output": 0,
       "to": "cloth_setup_b3",
       "to_input": 0

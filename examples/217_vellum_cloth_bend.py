@@ -4,8 +4,8 @@
 制作の問い: 薄い布（シルク）と厚い布（帆布）を見せ分けたい。vellumconstraints の Cloth の曲げの硬さ（Bend の Stiffness、
 既定 1 × 10⁻¹ = 0.1）をいくつにすると、ひだの細かさ・垂れ方がどう変わるのか。
 
-  実験206・211 と同じ机と布（66×84）を 72 フレーム落とす。曲げの硬さだけを 10⁻³・10⁻¹（既定）・10¹・10³ にする
-  （Stiffness 1 のまま、× の指数 bendstiffnessexp を −3・−1・1・3）。
+  実験206・211 と同じ机と布（66×84）を 72 フレーム落とす。曲げの硬さだけを 0.001・0.1（既定）・1・3・10・1000 にする
+  （Stiffness と、× の指数 bendstiffnessexp で）。
   測るもの:
     - 布のいちばん低い点（角の垂れ）と、四辺の真ん中の裾の高さ
     - 机の +x 側（脚の間、|z| < 0.3）に垂れた面の「出入り」: 天板より下（y < 0.7）の点の x のばらつき（標準偏差）。
@@ -25,7 +25,8 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "examples"))
 OUT = os.path.join(HERE, "out")
 ROWS, COLS = 66, 84
-CASES = {"b-3": -3, "b-1": -1, "b1": 1, "b3": 3}
+# 値 = (Stiffness, 指数)。0.1 と 10 の間（1・3）はあとから足した
+CASES = {"b-3": (1, -3), "b-1": (1, -1), "b0": (1, 0), "b0s3": (3, 0), "b1": (1, 1), "b3": (1, 3)}
 
 
 def main():
@@ -43,7 +44,8 @@ def main():
         vs, vc = m.build_cloth(geo, table, ROWS, COLS)
         vs.setName(f"drop_{name.replace('-', 'm')}")
         vc.setName(f"cloth_setup_{name.replace('-', 'm')}")
-        vc.parm("bendstiffnessexp").set(e)
+        vc.parm("bendstiffness").set(e[0])
+        vc.parm("bendstiffnessexp").set(e[1])
         built[name] = vs
     rows, finals = [], {}
     for name, vs in built.items():
@@ -53,7 +55,7 @@ def main():
         g = vs.geometry()
         pts = [p.position() for p in g.points()]
         side = [p[0] for p in pts if p[0] > 0.55 and abs(p[2]) < 0.3 and p[1] < 0.7]
-        info = {"case": name, "bend": 10.0 ** CASES[name], "lowest": round(min(p[1] for p in pts), 4),
+        info = {"case": name, "bend": CASES[name][0] * 10.0 ** CASES[name][1], "lowest": round(min(p[1] for p in pts), 4),
                 "hem": m.hem(g)["hem"], "side_points": len(side),
                 "side_x_std_mm": round(statistics.pstdev(side) * 1000, 2) if len(side) > 1 else None,
                 "side_x_mean": round(statistics.fmean(side), 4) if side else None}
