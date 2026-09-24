@@ -1,0 +1,78 @@
+{
+  "rows": [
+    {
+      "wind": 5,
+      "hs_pm": 0.536,
+      "target_std": 0.1339,
+      "ampscale": 0.2933,
+      "std": 0.1339,
+      "whitecap_pct": 0.0929,
+      "cusp_threshold": 0.0793,
+      "pct_at_055": 0.0,
+      "cusp_p50": 0.012,
+      "cusp_p99": 0.0531,
+      "cusp_max": 0.1212
+    },
+    {
+      "wind": 7,
+      "hs_pm": 1.05,
+      "target_std": 0.2625,
+      "ampscale": 0.424,
+      "std": 0.2625,
+      "whitecap_pct": 0.2925,
+      "cusp_threshold": 0.1017,
+      "pct_at_055": 0.0,
+      "cusp_p50": 0.0194,
+      "cusp_p99": 0.0837,
+      "cusp_max": 0.187
+    },
+    {
+      "wind": 10,
+      "hs_pm": 2.143,
+      "target_std": 0.5357,
+      "ampscale": 0.6973,
+      "std": 0.5357,
+      "whitecap_pct": 0.987,
+      "cusp_threshold": 0.1504,
+      "pct_at_055": 0.0,
+      "cusp_p50": 0.0356,
+      "cusp_p99": 0.15,
+      "cusp_max": 0.3243
+    },
+    {
+      "wind": 12,
+      "hs_pm": 3.086,
+      "target_std": 0.7714,
+      "ampscale": 0.9574,
+      "std": 0.7714,
+      "whitecap_pct": 1.838,
+      "cusp_threshold": 0.1932,
+      "pct_at_055": 0.0,
+      "cusp_p50": 0.0512,
+      "cusp_p99": 0.2128,
+      "cusp_max": 0.4532
+    },
+    {
+      "wind": 15,
+      "hs_pm": 4.821,
+      "target_std": 1.2054,
+      "ampscale": 1.3974,
+      "std": 1.2054,
+      "whitecap_pct": 3.9337,
+      "cusp_threshold": 0.2601,
+      "pct_at_055": 0.025,
+      "cusp_p50": 0.0792,
+      "cusp_p99": 0.3257,
+      "cusp_max": 0.696
+    }
+  ],
+  "times": [
+    1.0,
+    3.0,
+    5.0
+  ],
+  "grid": [
+    200,
+    512
+  ]
+}

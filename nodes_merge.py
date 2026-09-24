@@ -22,6 +22,7 @@ import nodes_add_9
 import nodes_add_10
 import nodes_add_11
 import nodes_add_12
+import nodes_add_13
 import nodes_notes
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -71,7 +72,7 @@ def main():
     unknown = []
 
     for module in (nodes_add_1, nodes_add_2, nodes_add_3, nodes_add_4,
-                   nodes_add_5, nodes_add_6, nodes_add_7, nodes_add_8, nodes_add_9, nodes_add_10, nodes_add_11, nodes_add_12):
+                   nodes_add_5, nodes_add_6, nodes_add_7, nodes_add_8, nodes_add_9, nodes_add_10, nodes_add_11, nodes_add_12, nodes_add_13):
         for gid, label, note in getattr(module, "GROUPS_NEW", []):
             if gid not in groups:
                 groups[gid] = {"id": gid, "label": label, "note": note,

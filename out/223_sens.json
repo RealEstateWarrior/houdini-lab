@@ -1,0 +1,18 @@
+[
+ {
+  "case": "Resolution Exponent 8",
+  "cusp_threshold": 0.1379
+ },
+ {
+  "case": "Resolution Exponent 10",
+  "cusp_threshold": 0.1618
+ },
+ {
+  "case": "Chop 0.6",
+  "cusp_threshold": 0.1002
+ },
+ {
+  "case": "Chop 1.3",
+  "cusp_threshold": 0.2172
+ }
+]

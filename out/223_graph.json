@@ -1,0 +1,100 @@
+{
+  "title": "実験223",
+  "network": "/obj/whitecaps",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "sea",
+      "type": "grid",
+      "pos": [
+        -1.13,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 200.0,
+        "sizey": 200.0,
+        "rows": 512,
+        "cols": 512
+      }
+    },
+    {
+      "name": "wind_waves",
+      "type": "oceanspectrum",
+      "pos": [
+        1.13,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "res": 9,
+        "gridsize": 200.0,
+        "windspeed": 10.0,
+        "chopscale": 0.9,
+        "ampscale": 0.6973,
+        "amplituderamp1value": 1.0,
+        "amplituderamp2pos": 1.0,
+        "amplituderamp2value": 1.0
+      }
+    },
+    {
+      "name": "move_points",
+      "type": "oceanevaluate::2.0",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "cusp": 1,
+        "cuspramp1cg": 0.2199999988079071,
+        "cuspramp1cb": 0.44999998807907104,
+        "cuspramp2pos": 1.0,
+        "cuspramp2cr": 1.0,
+        "cuspramp2cg": 1.0,
+        "cuspramp2cb": 1.0
+      }
+    },
+    {
+      "name": "paint_whitecaps",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "snippet": "v@Cd = f@cusp > ch(\"threshold\") ? {0.95, 0.95, 0.95} : {0.02, 0.06, 0.09};",
+        "threshold": 0.1504
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "sea",
+      "from_output": 0,
+      "to": "move_points",
+      "to_input": 0
+    },
+    {
+      "from": "wind_waves",
+      "from_output": 0,
+      "to": "move_points",
+      "to_input": 1
+    },
+    {
+      "from": "move_points",
+      "from_output": 0,
+      "to": "paint_whitecaps",
+      "to_input": 0
+    }
+  ]
+}

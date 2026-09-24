@@ -1,0 +1,119 @@
+{
+ "title": "草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒",
+ "summary": "**課題: 実験215 で、パックした草は 1 万本 17 秒なのに 10 万本は 13 分かかった。時間はどこでかかっているのか。どう撮れば速いのか。**\n\n実験215 の場面（草 1 本 = 細い葉 3 枚・面 15 枚。10 m 四方にまいて copytopoints でパックして並べる）を使った。はじめに小さく 1 枚撮って捨て（Karma の立ち上がり）、1 通りずつ、ほかの重い処理は回さずに測った。\n\n**/obj の Karma では、時間の 9 割が「場面を Karma に渡す」段階だった。**3 万本を 640×360・8 サンプル＋ノイズ除去で撮ると 89.3 秒。画を 64×36・1 サンプル（光の計算がほぼ無い）にしても 79.0 秒で、88% が残った。本数を 1 万 → 3 万にすると、時間は 16.4 → 89.3 秒（5.4 倍）と、本数より速く延びた。usdinstancerpath を付けても（85.8 秒）、草ごとの色 Cd を消しても（90.8 秒）変わらなかった。\n\n**Solaris（LOP）で読むと、段違いに速い。**LOP の sopimport で同じ草を読み、Packed Primitives を「Create Point Instancer」にして、カメラとライトは sceneimport で /obj から読み、karmarendersettings で 8 サンプルにして usdrender で撮った（ノイズ除去は入れていないので、条件は少し違う）。1 万・3 万・10 万・100 万本で 4.7・6.7・12.2・37.2 秒。10 万本は /obj の 793 秒に比べて約 65 分の 1。\n\n**LOP でも、渡し方で 5 倍ちがう。**3 万本で、Create Point Instancer 6.7 秒、Create Native Instances（既定）17.1 秒、Create Xforms 31.0 秒。1 本ずつ別の物として渡すと、本数に応じて重くなる。\n\n**決め方: 同じ形を何万も並べる場面（草原・森・群衆）は、LOP の sopimport で Create Point Instancer にして撮る。**/obj の Karma で撮るのは、数千本までにする。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "撮り方と本数と時間",
+   "images": [
+    {
+     "path": "222_time.png",
+     "caption": "/obj の Karma は 10 万本で 13 分。LOP のポイントインスタンサーは 100 万本でも 37 秒。"
+    },
+    {
+     "path": "222_grid.png",
+     "caption": "同じ草原。LOP で撮っても見た目は同じ（ノイズ除去の有無の違いだけ）。"
+    },
+    {
+     "path": "222_lop_graph.png",
+     "caption": "LOP のつなぎ方: sceneimport（カメラとライト）→ sopimport（草。Create Point Instancer）→ karmarendersettings。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "撮り方",
+    "渡し方",
+    "本数",
+    "撮る時間（秒）",
+    "極小の画で（秒）"
+   ],
+   "rows": [
+    [
+     "/obj の Karma",
+     "パックしたまま",
+     "1 万",
+     "16.4",
+     "14.0"
+    ],
+    [
+     "/obj の Karma",
+     "パックしたまま",
+     "3 万",
+     "89.3",
+     "79.0"
+    ],
+    [
+     "/obj の Karma",
+     "usdinstancerpath",
+     "3 万",
+     "85.8",
+     "79.3"
+    ],
+    [
+     "/obj の Karma",
+     "パックしたまま（色 Cd を消す）",
+     "3 万",
+     "90.8",
+     "—"
+    ],
+    [
+     "/obj の Karma",
+     "usdinstancerpath（実験215）",
+     "10 万",
+     "793.4",
+     "—"
+    ],
+    [
+     "LOP の sopimport",
+     "Create Point Instancer",
+     "1 万",
+     "4.7",
+     "—"
+    ],
+    [
+     "LOP の sopimport",
+     "Create Point Instancer",
+     "3 万",
+     "6.7",
+     "—"
+    ],
+    [
+     "LOP の sopimport",
+     "Create Point Instancer",
+     "10 万",
+     "12.2",
+     "—"
+    ],
+    [
+     "LOP の sopimport",
+     "Create Point Instancer",
+     "100 万",
+     "37.2",
+     "—"
+    ],
+    [
+     "LOP の sopimport",
+     "Create Native Instances（既定）",
+     "3 万",
+     "17.1",
+     "—"
+    ],
+    [
+     "LOP の sopimport",
+     "Create Xforms",
+     "3 万",
+     "31.0",
+     "—"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>/obj の Karma で草を撮ると、時間の 88% が「場面を渡す」段階。</strong>本数より速く延びる。",
+  "<strong>LOP の sopimport で Create Point Instancer にすると、10 万本 12 秒、100 万本 37 秒。</strong>",
+  "<strong>LOP でも、既定の Create Native Instances は 3 万本 17 秒、Xforms は 31 秒。</strong>",
+  "<strong>草ごとの色（Cd）や usdinstancerpath は、/obj の Karma では時間に効かなかった。</strong>"
+ ],
+ "next": []
+}

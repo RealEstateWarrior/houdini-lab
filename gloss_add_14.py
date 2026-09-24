@@ -38,3 +38,14 @@ ADD["houdini"] = ADD.get("houdini", []) + [
      "def": "Python（hou）で、つまみを既定値に戻す関数。戻る先は「つまみの既定値」で、ノードを作った直後の値とは限らない。"
             "pyrosolver の Use Control Field は、作った直後は「入り」なのに、revertToDefaults では「切り」に戻った（実験220）。"
             "作った直後の値に戻したいときは、その値を直接 set する。"}]
+
+ADD["render"].append(
+    {"term": "usdinstancerpath", "reading": "ユーエスディーインスタンサーパス",
+     "def": "パックした形に付ける文字の属性。USD に渡すとき、この名前のポイントインスタンサーにまとめる目印になる。"
+            "ただし /obj の Karma で草 3 万本を撮ると、付けても付けなくても時間は同じだった（86 秒と 89 秒）。"
+            "Solaris の sopimport で Packed Primitives を Create Point Instancer にすると 6.7 秒で撮れた（実験222）。"})
+
+ADD["simulation"].append(
+    {"term": "白波 / Whitecap", "reading": "しろなみ",
+     "def": "沖で風に押された波の頭が崩れて、白く泡立つもの。本物の海で白波が覆う割合は、風速の 3.4 乗にほぼ比例する（Monahan らの式）。"
+            "風 5 m/秒で 0.09%、10 m/秒で 1%、15 m/秒で 4%。oceanevaluate の cusp で色を付けるときのしきい値は、実験223 の表で決められる。"})

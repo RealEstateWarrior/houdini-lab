@@ -1,0 +1,45 @@
+{
+ "rows": [
+  {
+   "case": "lop_pointinstancer_10k",
+   "count": 10000,
+   "packed": "pointinstancer",
+   "sec": 4.73
+  },
+  {
+   "case": "lop_pointinstancer_30k",
+   "count": 30000,
+   "packed": "pointinstancer",
+   "sec": 6.72
+  },
+  {
+   "case": "lop_pointinstancer_100k",
+   "count": 100000,
+   "packed": "pointinstancer",
+   "sec": 12.22
+  },
+  {
+   "case": "lop_pointinstancer_1000k",
+   "count": 1000000,
+   "packed": "pointinstancer",
+   "sec": 37.21
+  },
+  {
+   "case": "lop_nativeinstances_30k",
+   "count": 30000,
+   "packed": "nativeinstances",
+   "sec": 17.14
+  },
+  {
+   "case": "lop_xforms_30k",
+   "count": 30000,
+   "packed": "xforms",
+   "sec": 31.03
+  }
+ ],
+ "settings": {
+  "resolutionx": 1280,
+  "resolutiony": 720,
+  "samplesperpixel": 8
+ }
+}

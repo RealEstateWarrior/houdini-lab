@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>147本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>148本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3901,6 +3901,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp210" data-anchor="exp210"><span class="doc-no">210</span><span class="doc-t">181〜209 の点検 — 29 本を流し直して 35,969 個の値を突き合わせた。22 本は完全に一致。201 は台本が 202 の変更に引きずられていたので直したが、Turbulence の 2 条件はまだ合わない</span></a></li>
         <li class="doc-toc-sep" aria-hidden="true">211–240</li>
         <li><a href="#exp215" data-anchor="exp215"><span class="doc-no">215</span><span class="doc-t">草を Karma で撮るならパックしたまま（1 万本 17 秒、解くと 128 秒）。ただし 10 万本は、ポイントインスタンサーにしても、地面を広げて混み具合を 1 万本と同じにしても 13 分かかった</span></a></li>
+        <li><a href="#exp222" data-anchor="exp222"><span class="doc-no">222</span><span class="doc-t">草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3912,7 +3913,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>221 / 221</dd></div>
+      <div><dt>実験</dt><dd>223 / 223</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16457,6 +16458,83 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 222 ===================== -->
+    <article class="entry entry--current" id="exp222">
+      <div class="badge">222</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">Karma</span><span class="coltag">Solaris</span><span class="coltag">草</span><span class="coltag">速さ</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>/obj の Karma で草を撮ると、時間の 88% が「場面を渡す」段階。</strong>本数より速く延びる。</li>
+            <li><strong>LOP の sopimport で Create Point Instancer にすると、10 万本 12 秒、100 万本 37 秒。</strong></li>
+            <li><strong>LOP でも、既定の Create Native Instances は 3 万本 17 秒、Xforms は 31 秒。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_222.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/222_grass_cost_split.py &nbsp;·&nbsp; 草は LOP の sopimport で Create Point Instancer に。10万本13分→12秒</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/222_scene.hipnc" target="_blank" rel="noopener noreferrer">222_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="222_graph.png" alt="実験222 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp215">実験215</a> で、パックした草は 1 万本 17 秒なのに 10 万本は 13 分かかった。時間はどこでかかっているのか。どう撮れば速いのか。</strong></p>
+          <p><a href="#exp215">実験215</a> の場面（草 1 本 = 細い葉 3 枚・面 15 枚。10 m 四方にまいて copytopoints でパックして並べる）を使った。はじめに小さく 1 枚撮って捨て（<button class="term" data-term="Karma">Karma</button> の立ち上がり）、1 通りずつ、ほかの重い処理は回さずに測った。</p>
+          <p><strong>/obj の Karma では、時間の 9 割が「場面を Karma に渡す」段階だった。</strong>3 万本を 640×360・8 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で撮ると 89.3 秒。画を 64×36・1 サンプル（光の計算がほぼ無い）にしても 79.0 秒で、88% が残った。本数を 1 万 → 3 万にすると、時間は 16.4 → 89.3 秒（5.4 倍）と、本数より速く延びた。usdinstancerpath を付けても（85.8 秒）、草ごとの色 Cd を消しても（90.8 秒）変わらなかった。</p>
+          <p><strong>Solaris（LOP）で読むと、段違いに速い。</strong>LOP の sopimport で同じ草を読み、Packed Primitives を「Create Point Instancer」にして、カメラとライトは sceneimport で /obj から読み、karmarendersettings で 8 サンプルにして usdrender で撮った（ノイズ除去は入れていないので、条件は少し違う）。1 万・3 万・10 万・100 万本で 4.7・6.7・12.2・37.2 秒。10 万本は /obj の 793 秒に比べて約 65 分の 1。</p>
+          <p><strong>LOP でも、渡し方で 5 倍ちがう。</strong>3 万本で、Create Point Instancer 6.7 秒、Create Native Instances（既定）17.1 秒、Create Xforms 31.0 秒。1 本ずつ別の物として渡すと、本数に応じて重くなる。</p>
+          <p><strong>決め方: 同じ形を何万も並べる場面（草原・森・群衆）は、LOP の sopimport で Create Point Instancer にして撮る。</strong>/obj の Karma で撮るのは、数千本までにする。</p>
+        </div>
+
+        <p class="label">撮り方と本数と時間</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="222_time.png" alt="/obj の Karma は 10 万本で 13 分。LOP のポイントインスタ" loading="lazy" decoding="async"></div>
+            <figcaption>/obj の Karma は 10 万本で 13 分。LOP のポイントインスタンサーは 100 万本でも 37 秒。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="222_grid.png" alt="同じ草原。LOP で撮っても見た目は同じ（ノイズ除去の有無の違いだけ）。" loading="lazy" decoding="async"></div>
+            <figcaption>同じ草原。LOP で撮っても見た目は同じ（ノイズ除去の有無の違いだけ）。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="222_lop_graph.png" alt="LOP のつなぎ方: sceneimport（カメラとライト）→ sopimpo" loading="lazy" decoding="async"></div>
+            <figcaption>LOP のつなぎ方: sceneimport（カメラとライト）→ sopimport（草。Create Point Instancer）→ karmarendersettings。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>撮り方</th><th>渡し方</th><th>本数</th><th>撮る時間（秒）</th><th>極小の画で（秒）</th></tr></thead>
+            <tbody>
+              <tr><td>/obj の Karma</td><td>パックしたまま</td><td>1 万</td><td class="num">16.4</td><td class="num">14.0</td></tr>
+              <tr><td>/obj の Karma</td><td>パックしたまま</td><td>3 万</td><td class="num">89.3</td><td class="num">79.0</td></tr>
+              <tr><td>/obj の Karma</td><td>usdinstancerpath</td><td>3 万</td><td class="num">85.8</td><td class="num">79.3</td></tr>
+              <tr><td>/obj の Karma</td><td>パックしたまま（色 Cd を消す）</td><td>3 万</td><td class="num">90.8</td><td class="num muted">—</td></tr>
+              <tr><td>/obj の Karma</td><td>usdinstancerpath（実験215）</td><td>10 万</td><td class="num">793.4</td><td class="num muted">—</td></tr>
+              <tr><td>LOP の sopimport</td><td>Create Point Instancer</td><td>1 万</td><td class="num">4.7</td><td class="num muted">—</td></tr>
+              <tr><td>LOP の sopimport</td><td>Create Point Instancer</td><td>3 万</td><td class="num">6.7</td><td class="num muted">—</td></tr>
+              <tr><td>LOP の sopimport</td><td>Create Point Instancer</td><td>10 万</td><td class="num">12.2</td><td class="num muted">—</td></tr>
+              <tr><td>LOP の sopimport</td><td>Create Point Instancer</td><td>100 万</td><td class="num">37.2</td><td class="num muted">—</td></tr>
+              <tr><td>LOP の sopimport</td><td>Create Native Instances（既定）</td><td>3 万</td><td class="num">17.1</td><td class="num muted">—</td></tr>
+              <tr><td>LOP の sopimport</td><td>Create Xforms</td><td>3 万</td><td class="num">31.0</td><td class="num muted">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>/obj の Karma で草を撮ると、時間の 88% が「場面を渡す」段階。</strong>本数より速く延びる。</li>
+          <li><strong>LOP の sopimport で Create Point Instancer にすると、10 万本 12 秒、100 万本 37 秒。</strong></li>
+          <li><strong>LOP でも、既定の Create Native Instances は 3 万本 17 秒、Xforms は 31 秒。</strong></li>
+          <li><strong>草ごとの色（Cd）や usdinstancerpath は、/obj の Karma では時間に効かなかった。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -16472,8 +16550,8 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-183aebb567.js"></script>
-<script src="data/node-data-cd63b8deee.js"></script>
+<script src="data/glossary-data-904cb9b76f.js"></script>
+<script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
   /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
@@ -16651,10 +16729,10 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>221</dd></div>
+        <div><dt>実験</dt><dd>223</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
-        <div><dt>ノード</dt><dd>390</dd></div>
-        <div><dt>用語</dt><dd>460</dd></div>
+        <div><dt>ノード</dt><dd>393</dd></div>
+        <div><dt>用語</dt><dd>462</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -16730,8 +16808,8 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <a class="menu-card" href="guide_tree.html" target="_blank" rel="noopener"><img src="pr_tree_hero.png" alt="" loading="lazy" decoding="async"><span>L-system で木を育てる</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>460語</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>393件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>462語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -16834,7 +16912,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-9c202fc162.js"></script>
+<script src="data/search-data-5e48dae64a.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

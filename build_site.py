@@ -1493,6 +1493,18 @@ DONE = [
      "shots": ["221_grid.png", "221_graph.png"],
      "title": "海の映像の 1 枚は、サンプル数を 16→4 にしても 8.8→7.2 秒、解像度を 640×360 にしても 8.3 秒。時間の大半は画の大きさによらない分で、下げるなら 4 サンプル＋ノイズ除去",
      "note": "海の映像はサンプル数・解像度を下げても2割しか速くならない"},
+    {"no": "222", "anchor": "exp222",
+     "tags": ["Karma", "Solaris", "草", "速さ", "制作"],
+     "log": "log_pm", "thumb": "222_time.png",
+     "shots": ["222_time.png", "222_grid.png", "222_lop_graph.png"],
+     "title": "草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒",
+     "note": "草は LOP の sopimport で Create Point Instancer に。10万本13分→12秒"},
+    {"no": "223", "anchor": "exp223",
+     "tags": ["エフェクト", "海", "白波", "制作"],
+     "log": "log_fx", "thumb": "223_grid.png",
+     "shots": ["223_grid.png", "223_graph.png"],
+     "title": "海の白波の cusp のしきい値は、風 5 m/秒で 0.08・10 m/秒で 0.15・15 m/秒で 0.26（波の高さを本物に合わせたとき）。0.55 では風 15 m/秒でもほぼ白波が出ない",
+     "note": "白波の cusp しきい値は風10m/秒で0.15。0.55ではほぼ出ない"},
 ]
 
 PLANNED = []

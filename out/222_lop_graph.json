@@ -1,0 +1,140 @@
+{
+  "title": "実験222（LOP）",
+  "network": "/stage",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "camera_and_lights",
+      "type": "sceneimport::2.0",
+      "pos": [
+        0.0,
+        -0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "objects": "/obj/hero_cam /obj/hero_key /obj/hero_rim /obj/hero_dome",
+        "enable_prefixabsolutepaths": 1,
+        "prefixabsolutepaths": 1,
+        "enable_heightfieldconvert": 1,
+        "heightfieldconvert": 1
+      }
+    },
+    {
+      "name": "grass",
+      "type": "sopimport",
+      "pos": [
+        0.0,
+        -1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "soppath": "/obj/exp215/field",
+        "enable_packedhandling": 1,
+        "packedhandling": "pointinstancer"
+      }
+    },
+    {
+      "name": "settings",
+      "type": "karmarendersettings",
+      "pos": [
+        0.0,
+        -2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "resolutiony": 720,
+        "samplesperpixel": 8,
+        "__indirectsampling": 1,
+        "folder15": 1,
+        "__lpe": 1,
+        "folder0": 1,
+        "tonemapcurve": "<hou.Ramp is_color=False num_keys=21 data=((t=0, 0), (t=0.05, 0), (t=0.1, 0), (t=0.15, 0), (t=0.2, 0), (t=0.25, 0), (...",
+        "__variance": 1,
+        "oracle_ociodisplay": "sRGB - Display",
+        "folder14": 1,
+        "tonemapcurve1value": 0.0,
+        "tonemapcurve1interp": 1,
+        "tonemapcurve2pos": 0.05,
+        "tonemapcurve2value": 0.0,
+        "tonemapcurve2interp": 1,
+        "tonemapcurve3pos": 0.1,
+        "tonemapcurve3value": 0.0,
+        "tonemapcurve3interp": 1,
+        "tonemapcurve4pos": 0.15000000000000002,
+        "tonemapcurve4value": 0.0,
+        "tonemapcurve4interp": 1,
+        "tonemapcurve5pos": 0.2,
+        "tonemapcurve5value": 0.0,
+        "tonemapcurve5interp": 1,
+        "tonemapcurve6pos": 0.25,
+        "tonemapcurve6value": 0.0,
+        "tonemapcurve6interp": 1,
+        "tonemapcurve7pos": 0.30000000000000004,
+        "tonemapcurve7value": 0.0,
+        "tonemapcurve7interp": 1,
+        "tonemapcurve8pos": 0.35000000000000003,
+        "tonemapcurve8value": 0.0,
+        "tonemapcurve8interp": 1,
+        "tonemapcurve9pos": 0.4,
+        "tonemapcurve9value": 0.0,
+        "tonemapcurve9interp": 1,
+        "tonemapcurve10pos": 0.45,
+        "tonemapcurve10value": 0.0,
+        "tonemapcurve10interp": 1,
+        "tonemapcurve11pos": 0.5,
+        "tonemapcurve11value": 0.0,
+        "tonemapcurve11interp": 1,
+        "tonemapcurve12pos": 0.55,
+        "tonemapcurve12value": 0.0,
+        "tonemapcurve12interp": 1,
+        "tonemapcurve13pos": 0.6000000000000001,
+        "tonemapcurve13value": 0.0,
+        "tonemapcurve13interp": 1,
+        "tonemapcurve14pos": 0.65,
+        "tonemapcurve14value": 0.0,
+        "tonemapcurve14interp": 1,
+        "tonemapcurve15pos": 0.7000000000000001,
+        "tonemapcurve15value": 0.0,
+        "tonemapcurve15interp": 1,
+        "tonemapcurve16pos": 0.75,
+        "tonemapcurve16value": 0.0,
+        "tonemapcurve16interp": 1,
+        "tonemapcurve17pos": 0.8,
+        "tonemapcurve17value": 0.0,
+        "tonemapcurve17interp": 1,
+        "tonemapcurve18pos": 0.8500000000000001,
+        "tonemapcurve18value": 0.0,
+        "tonemapcurve18interp": 1,
+        "tonemapcurve19pos": 0.9,
+        "tonemapcurve19value": 0.0,
+        "tonemapcurve19interp": 1,
+        "tonemapcurve20pos": 0.9500000000000001,
+        "tonemapcurve20value": 0.0,
+        "tonemapcurve20interp": 1,
+        "tonemapcurve21pos": 1.0,
+        "tonemapcurve21value": 0.0,
+        "tonemapcurve21interp": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "camera_and_lights",
+      "from_output": 0,
+      "to": "grass",
+      "to_input": 0
+    },
+    {
+      "from": "grass",
+      "from_output": 0,
+      "to": "settings",
+      "to_input": 0
+    }
+  ]
+}

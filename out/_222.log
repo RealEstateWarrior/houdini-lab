@@ -1,0 +1,39 @@
+[23:31:06] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+[23:31:20] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_packed_10k', 'count': 10000, 'mode': 0, 'look': 'big', 'sec': 16.45}
+[23:31:36] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'tiny_packed_10k', 'count': 10000, 'mode': 0, 'look': 'tiny', 'sec': 14.02}
+[23:31:50] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_nocd_packed_10k', 'count': 10000, 'mode': 0, 'look': 'big_nocd', 'sec': 21.62}
+[23:32:12] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_inst_10k', 'count': 10000, 'mode': 2, 'look': 'big', 'sec': 18.83}
+[23:32:32] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'tiny_inst_10k', 'count': 10000, 'mode': 2, 'look': 'tiny', 'sec': 15.2}
+[23:32:46] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_nocd_inst_10k', 'count': 10000, 'mode': 2, 'look': 'big_nocd', 'sec': 21.92}
+[23:34:16] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_packed_30k', 'count': 30000, 'mode': 0, 'look': 'big', 'sec': 89.34}
+[23:35:42] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'tiny_packed_30k', 'count': 30000, 'mode': 0, 'look': 'tiny', 'sec': 78.98}
+[23:36:59] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_nocd_packed_30k', 'count': 30000, 'mode': 0, 'look': 'big_nocd', 'sec': 90.81}
+[23:38:32] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_inst_30k', 'count': 30000, 'mode': 2, 'look': 'big', 'sec': 85.75}
+[23:39:58] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'tiny_inst_30k', 'count': 30000, 'mode': 2, 'look': 'tiny', 'sec': 79.31}
+[23:41:16] Property 'vblur' cannot be specified on a per-instance at this time.
+	Please set the property on the prototype instead.
+{'case': 'big_nocd_inst_30k', 'count': 30000, 'mode': 2, 'look': 'big_nocd', 'sec': 91.25}
+保存: D:\Claude\houdini\out\222_stats.json
