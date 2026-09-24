@@ -1463,6 +1463,12 @@ DONE = [
      "shots": ["210_summary.png"],
      "title": "181〜209 の点検 — 29 本を流し直して 35,969 個の値を突き合わせた。22 本は完全に一致。201 は台本が 202 の変更に引きずられていたので直したが、Turbulence の 2 条件はまだ合わない",
      "note": "181〜209 を流し直し：22 本は完全一致。201 は台本を直したが Turbulence の 2 条件が合わない"},
+    {"no": "218", "anchor": "exp218",
+     "tags": ["エフェクト", "Karma", "海", "見た目"],
+     "log": "log_fx", "thumb": "218_grid.png",
+     "shots": ["218_grid.png", "218_graph.png"],
+     "title": "海の光の道は、Roughness を上げると太い白い帯になり（0.02→0.15 で幅 15→61 列）、さざ波を高くすると粒のまま広がる（0.4→3.2 で 12→36 列）",
+     "note": "海の光の道は Roughness で太い帯に、さざ波で粒のまま広がる"},
 ]
 
 PLANNED = []
@@ -2622,6 +2628,8 @@ def render_guide_sections(guides, works, urls):
             out.append(f'          <p class="guide-revised"><a href="#revisions">{html.escape(date_ja(last))} に作り直しました。'
                        '前の版との違いは「改訂の記録」へ</a></p>')
         out.append(f'          <p class="guide-lede">{guide["lede"]}</p>')
+        for var in guide.get("variants", []):
+            out.append(f'          <p class="guide-lede"><a href="#variant-{var["id"]}">もう一つの版: {html.escape(var["title"])} ↓</a></p>')
         if guide.get("facts"):
             out.append('          <dl class="guide-facts">')
             for label, value in guide["facts"]:
@@ -2746,6 +2754,67 @@ def render_guide_sections(guides, works, urls):
                                    f"{html.escape(trap['cap'])}</figcaption>")
                     out.append("          </figure>")
                 out.append("        </div>")
+
+        # もう一つの版（2026-09-24）。同じ題材を場面を変えて作ったものを、同じページの後ろに並べる
+        for var in guide.get("variants", []):
+            vid = var["id"]
+            out.append(f'        <section class="guide-variant" id="variant-{vid}">')
+            out.append('          <p class="label">もう一つの版</p>')
+            out.append(f'          <h3>{html.escape(var["title"])}</h3>')
+            out.append(f'          <p class="guide-lede">{var["lede"]}</p>')
+            out.append('          <div class="guide-hero">')
+            out.append(f'            <img src="{var["hero"]}" loading="lazy" decoding="async"'
+                       f' alt="{html.escape(var["title"])}の完成図">')
+            out.append("          </div>")
+            if var.get("hero_cap"):
+                out.append(f'          <p class="guide-cap">{html.escape(var["hero_cap"])}</p>')
+            if var.get("facts"):
+                out.append('          <dl class="guide-facts">')
+                for label, value in var["facts"]:
+                    out.append(f"            <div><dt>{html.escape(label)}</dt><dd>{html.escape(value)}</dd></div>")
+                out.append("          </dl>")
+            if var.get("hip"):
+                out.append(f'          <a class="guide-hip" href="{GITHUB_RAW}{var["hip"]}" download>'
+                           f'<span>hip を開く<small>{html.escape(var["hip"])}</small></span></a>')
+            anim = f"pr_{vid}_anim.mp4"
+            if os.path.exists(os.path.join(OUT, anim)):
+                out.append('          <figure class="guide-anim">')
+                out.append(f'            <video src="{anim}" autoplay muted loop playsinline preload="metadata"'
+                           f' poster="{var["hero"]}"></video>')
+                out.append(f'            <figcaption>{html.escape(var.get("anim_cap", ""))}</figcaption>')
+                out.append("          </figure>")
+            if os.path.exists(os.path.join(OUT, f"pr_{vid}_graph.png")):
+                out.append('          <figure class="guide-net">')
+                out.append(f'            <img src="pr_{vid}_graph.png" loading="lazy" decoding="async"'
+                           f' alt="{html.escape(var["title"])}のノードのつなぎ方">')
+                out.append("            <figcaption>ノードのつなぎ方（hip から描いた図）</figcaption>")
+                out.append("          </figure>")
+            out.append('          <ol class="steps">')
+            for index, step in enumerate(var["steps"], start=1):
+                out.append(f'            <li class="step" id="{vid}-step-{index}">')
+                out.append('              <div class="step-body">')
+                out.append(f'                <h4>{html.escape(step["title"])}<code>{html.escape(step["node"])}</code></h4>')
+                out.append(f'                <p>{step["body"]}</p>')
+                out.append("              </div>")
+                if step.get("img"):
+                    out.append('              <figure class="step-figure">')
+                    out.append(f'                <div class="frame-light"><img src="{step["img"]}" loading="lazy"'
+                               f' decoding="async" alt="{html.escape(step["title"])}の結果"></div>')
+                    if step.get("cap"):
+                        out.append(f"                <figcaption>{html.escape(step['cap'])}</figcaption>")
+                    out.append("              </figure>")
+                out.append("            </li>")
+            out.append("          </ol>")
+            if var.get("traps"):
+                out.append('          <p class="label">つまずくところ</p>')
+                for trap in var["traps"]:
+                    out.append('          <div class="trap">')
+                    out.append(f'            <h4>{html.escape(trap["title"])}</h4>')
+                    out.append(f'            <p>{trap["body"]}</p>')
+                    out.append("          </div>")
+            if var.get("compare"):
+                out.append(f'          <p class="revision-ref">{var["compare"]}</p>')
+            out.append("        </section>")
 
         # 改訂の記録（2026-09-24）。作り直した実践は、前の版から何をなぜ変えたかを、前の仕上がりと並べて残す
         if guide.get("revisions"):

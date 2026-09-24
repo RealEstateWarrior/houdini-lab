@@ -3629,6 +3629,12 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
 .revision-ref { margin: 12px 0 0; font-size: 0.8rem; color: var(--ink-mid); }
 @media (max-width: 560px) { .revision-compare { grid-template-columns: 1fr; } }
 
+/* もう一つの版（同じページに場面を変えた版を並べる。2026-09-24） */
+.guide-variant { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line, rgba(128,128,128,.3)); }
+.guide-variant > h3 { margin: 4px 0 10px; }
+.guide-variant .guide-hero { margin-top: 18px; }
+.guide-cap { color: var(--ink-dim); font-size: .9em; margin: 8px 0 0; }
+
 </style>
 </head>
 <body>
@@ -3736,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ エフェクト編<small>70本</small></p>
+      <p class="doc-toc-head">実験ログ エフェクト編<small>71本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp013" data-anchor="exp013"><span class="doc-no">013</span><span class="doc-t">時間軸への対応 — フレームを進めて記録する</span></a></li>
@@ -3814,6 +3820,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li class="doc-toc-sep" aria-hidden="true">211–240</li>
         <li><a href="#exp211" data-anchor="exp211"><span class="doc-no">211</span><span class="doc-t">テーブルクロスが机から浮くのは Thickness の分だけ — 既定 0.01 で 10 mm 浮く。0.0025 まで薄くしてもめり込まず、Calculate Uniform（辺の長さ × 0.25）なら 2.8 mm</span></a></li>
         <li><a href="#exp217" data-anchor="exp217"><span class="doc-no">217</span><span class="doc-t">テーブルクロスの曲げの硬さは、既定 0.1 から下げても形はほぼ同じ（差 1.1 cm）。10 に上げると布が張って机から 15 cm 張り出し、裾が 4 cm 上がる</span></a></li>
+        <li><a href="#exp218" data-anchor="exp218"><span class="doc-no">218</span><span class="doc-t">海の光の道は、Roughness を上げると太い白い帯になり（0.02→0.15 で幅 15→61 列）、さざ波を高くすると粒のまま広がる（0.4→3.2 で 12→36 列）</span></a></li>
       </ol>
       <a class="doc-other" href="log.html">実験ログ モデリング編へ →</a>
     </div>
@@ -3825,7 +3832,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — エフェクト編</h1>
     <p class="lede">時間を進めて物理を解く側の記録。剛体・布・煙・液体・パーティクル、そしてレンダリング。実験013から。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>216 / 216</dd></div>
+      <div><dt>実験</dt><dd>217 / 217</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -10804,6 +10811,79 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 218 ===================== -->
+    <article class="entry entry--current" id="exp218">
+      <div class="badge">218</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>海の光の道は、Roughness を上げると太い白い帯になり（0.02→0.15 で幅 15→61 列）、さざ波を高くすると粒のまま広がる（0.4→3.2 で 12→36 列）</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">エフェクト</span><span class="coltag">Karma</span><span class="coltag">海</span><span class="coltag">見た目</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>Roughness を上げると光の道は太くなるが、白い帯になる。</strong>0.02→0.15 で幅 15→61 列、むら 0.34→0.17。</li>
+            <li><strong>さざ波を高くすると、粒のまま広がる。</strong>0.4→3.2 で幅 12→36 列（Roughness 0.04）。</li>
+            <li><strong>さざ波を高くすると、光の道の外の水面は暗くなる。</strong>高すぎると、設計図のくり返しが横縞に見える。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_218.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/218_ocean_glitter_rough.py &nbsp;·&nbsp; 海の光の道は Roughness で太い帯に、さざ波で粒のまま広がる</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/218_scene.hipnc" target="_blank" rel="noopener noreferrer">218_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="218_graph.png" alt="実験218 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 海の画で太陽の下の光の道を「もっと広く」「もっと細かくきらめかせたい」とき、水の材質の Roughness と、さざ波の高さのどちらを動かせばよいか。</strong></p>
+          <p>実践「冬の朝の七里ヶ浜」の場面（太陽は高さ 15°・左へ 12°、砂浜の目の高さ 1.5 m から撮る）で、水の Roughness を 0.005・0.02・0.04・0.08・0.15、さざ波（Grid Size 1.3 m の oceanspectrum）の Amplitude の Scale を 0.4・1.6・3.2 にした 15 通りを、<button class="term" data-term="Karma">Karma</button> で 480×270 の EXR に撮った。カメラから約 12〜60 m 先の水面（縦 160〜190 行）で、列ごとの明るさが太陽から離れた所の 3 倍を超える列の数を「光の道の幅」とした（1 列は約 0.18°）。</p>
+          <p><strong>Roughness を上げると、光の道は太くなるが、白い帯になる。</strong>さざ波 1.6 で、Roughness 0.02・0.04・0.08・0.15 の幅は 15・20・34・61 列。明るさの合計は 0.014 → 0.459 と 30 倍以上になった。ただし光の道の中の明るさのむら（標準偏差 ÷ 平均）は 0.34 → 0.17 と下がり、画で見ても粒が消えてべったり白く光った。</p>
+          <p><strong>さざ波を高くすると、粒のまま広がる。</strong>Roughness 0.04 で、さざ波 0.4・1.6・3.2 の幅は 12・20・36 列、むらは 0.24・0.28・0.47。水面が傾く向きがばらけるので、太陽を映す面が広く散らばる。さざ波を高くすると、光の道の外の水面は暗くなった（太陽から離れた所の明るさ 0.156 → 0.084）。3.2 では、さざ波の設計図のくり返し（1.3 m ごと）が横縞になって見えた。</p>
+          <p><strong>Roughness 0.005 では、光の道がほとんど出ない。</strong>さざ波 0.4 で幅 0 列、1.6 で 1 列。太陽は見かけ 0.54° と小さいので、面の向きがちょうど合った所だけが光る。</p>
+          <p><strong>決め方: 写真のように広い範囲を細かくきらめかせるなら、Roughness は 0.02〜0.04 に抑えて、さざ波を高くする。</strong>Roughness は光の道を太くしたいときに少し上げる（0.08 から白い帯に見え始める）。</p>
+        </div>
+
+        <p class="label">Roughness（横）とさざ波の高さ（縦）を変えた光の道（フレーム 30）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="218_grid.png" alt="右へ行くほど白い帯に、下へ行くほど粒が広く散らばる。" loading="lazy" decoding="async"></div>
+            <figcaption>右へ行くほど白い帯に、下へ行くほど粒が広く散らばる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Roughness</th><th>さざ波の高さ</th><th>光の道の幅（列）</th><th>幅（度）</th><th>明るさの合計</th><th>むら</th><th>外の水面の明るさ</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0.005</td><td class="num">0.4</td><td class="num">0</td><td class="num">0.0</td><td class="num">0.000</td><td class="num muted">—</td><td class="num">0.155</td></tr>
+              <tr><td class="num">0.02</td><td class="num">0.4</td><td class="num">3</td><td class="num">0.5</td><td class="num">0.003</td><td class="num">0.33</td><td class="num">0.156</td></tr>
+              <tr><td class="num">0.04</td><td class="num">0.4</td><td class="num">12</td><td class="num">2.2</td><td class="num">0.022</td><td class="num">0.24</td><td class="num">0.156</td></tr>
+              <tr><td class="num">0.08</td><td class="num">0.4</td><td class="num">30</td><td class="num">5.4</td><td class="num">0.131</td><td class="num">0.19</td><td class="num">0.155</td></tr>
+              <tr><td class="num">0.15</td><td class="num">0.4</td><td class="num">56</td><td class="num">10.1</td><td class="num">0.461</td><td class="num">0.13</td><td class="num">0.140</td></tr>
+              <tr><td class="num">0.005</td><td class="num">1.6</td><td class="num">1</td><td class="num">0.2</td><td class="num">0.001</td><td class="num">0.36</td><td class="num">0.130</td></tr>
+              <tr><td class="num">0.02</td><td class="num">1.6</td><td class="num">15</td><td class="num">2.7</td><td class="num">0.014</td><td class="num">0.34</td><td class="num">0.131</td></tr>
+              <tr><td class="num">0.04</td><td class="num">1.6</td><td class="num">20</td><td class="num">3.6</td><td class="num">0.045</td><td class="num">0.28</td><td class="num">0.131</td></tr>
+              <tr><td class="num">0.08</td><td class="num">1.6</td><td class="num">34</td><td class="num">6.1</td><td class="num">0.162</td><td class="num">0.22</td><td class="num">0.130</td></tr>
+              <tr><td class="num">0.15</td><td class="num">1.6</td><td class="num">61</td><td class="num">11.0</td><td class="num">0.459</td><td class="num">0.17</td><td class="num">0.118</td></tr>
+              <tr><td class="num">0.005</td><td class="num">3.2</td><td class="num">4</td><td class="num">0.7</td><td class="num">0.002</td><td class="num">0.38</td><td class="num">0.084</td></tr>
+              <tr><td class="num">0.02</td><td class="num">3.2</td><td class="num">21</td><td class="num">3.8</td><td class="num">0.011</td><td class="num">0.46</td><td class="num">0.084</td></tr>
+              <tr><td class="num">0.04</td><td class="num">3.2</td><td class="num">36</td><td class="num">6.5</td><td class="num">0.038</td><td class="num">0.47</td><td class="num">0.084</td></tr>
+              <tr><td class="num">0.08</td><td class="num">3.2</td><td class="num">50</td><td class="num">9.0</td><td class="num">0.124</td><td class="num">0.39</td><td class="num">0.082</td></tr>
+              <tr><td class="num">0.15</td><td class="num">3.2</td><td class="num">75</td><td class="num">13.5</td><td class="num">0.339</td><td class="num">0.31</td><td class="num">0.077</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Roughness を上げると光の道は太くなるが、白い帯になる。</strong>0.02→0.15 で幅 15→61 列、むら 0.34→0.17。</li>
+          <li><strong>さざ波を高くすると、粒のまま広がる。</strong>0.4→3.2 で幅 12→36 列（Roughness 0.04）。</li>
+          <li><strong>さざ波を高くすると、光の道の外の水面は暗くなる。</strong>高すぎると、設計図のくり返しが横縞に見える。</li>
+          <li><strong>細かくきらめかせるなら、Roughness は 0.02〜0.04 に抑え、さざ波で広げる。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -10819,7 +10899,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 </div>
 </div>
 
-<script src="data/glossary-data-877993598e.js"></script>
+<script src="data/glossary-data-2168f465b3.js"></script>
 <script src="data/node-data-cd63b8deee.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -10998,10 +11078,10 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>216</dd></div>
+        <div><dt>実験</dt><dd>217</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>390</dd></div>
-        <div><dt>用語</dt><dd>456</dd></div>
+        <div><dt>用語</dt><dd>459</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -11073,9 +11153,9 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_210.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>216本の実験。最新は実験210</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_218.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>217本の実験。最新は実験218</small></span></a>
         <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>390件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>456語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>459語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -11178,7 +11258,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
   </div>
 </div>
 
-<script src="data/search-data-abe4b25e54.js"></script>
+<script src="data/search-data-9f32c2c0cd.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

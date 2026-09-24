@@ -44,6 +44,21 @@ def main():
         for g in data["guides"]:
             if g["id"] in revs:
                 g["revisions"] = revs[g["id"]]
+    # 同じページに載せる「もう一つの版」（variants.json、親の id → 版の id の並び。2026-09-24）。
+    # 版は別の台本（pr_<版の id>.py）で作り、out/pr_<版の id>.json の中身をそのまま親の variants に入れる
+    var_path = os.path.join(HERE, "variants.json")
+    if os.path.exists(var_path):
+        with open(var_path, encoding="utf-8") as fp:
+            variants = json.load(fp)
+        for g in data["guides"]:
+            if g["id"] in variants:
+                g["variants"] = []
+                for vid in variants[g["id"]]:
+                    with open(os.path.join(OUT, f"pr_{vid}.json"), encoding="utf-8") as fp:
+                        v = json.load(fp)
+                    if vid in caps if os.path.exists(caps_path) else False:
+                        v["anim_cap"] = caps[vid]
+                    g["variants"].append(v)
     with open(GUIDES, "w", encoding="utf-8", newline="") as fp:
         fp.write(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
     print("実践", len(data["guides"]), "本")
