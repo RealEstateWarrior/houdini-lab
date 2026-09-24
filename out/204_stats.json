@@ -1,0 +1,1860 @@
+{
+  "rows": [
+    {
+      "vox": 0.02,
+      "sizes": {
+        "raw": 564413074,
+        "novel": 36928732,
+        "vdb": 581511272,
+        "vdb_novel": 30485144,
+        "vdb_half": 321646705,
+        "vdb_half_novel": 19359544,
+        "vdb_half_prune": 321462537,
+        "vdb_half_velmask": 66998407
+      },
+      "vdbfile": {
+        "vdb": 624752812,
+        "vdb_novel": 37154739,
+        "vdb_half": 366939707,
+        "vdb_half_novel": 26144795,
+        "vdb_half_prune": 366825133,
+        "vdb_half_velmask": 81695941
+      },
+      "write_sec": {
+        "raw": 1.4412726999726146,
+        "novel": 0.48175399999308866,
+        "vdb": 7.002071800059639,
+        "vdb_novel": 1.1868807999853743,
+        "vdb_half": 6.926774699968519,
+        "vdb_half_novel": 1.0596410999860382,
+        "vdb_half_prune": 6.5076137999712955,
+        "vdb_half_velmask": 2.2107775000768015
+      },
+      "read_sec": {
+        "raw": 0.8960310999973444,
+        "novel": 0.27241000000503846,
+        "vdb": 1.0053207999444567,
+        "vdb_novel": 0.21515549995820038,
+        "vdb_half": 0.9775616999540944,
+        "vdb_half_novel": 0.22499370001605712,
+        "vdb_half_prune": 0.9865051999950083,
+        "vdb_half_velmask": 0.4372194999596104
+      },
+      "diff": {
+        "vdb_half_velmask@24": {
+          "density": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018960237503051758,
+            "mean": 1.1375457376061604e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_prune@24": {
+          "density": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018960237503051758,
+            "mean": 1.1375457376061604e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          }
+        },
+        "raw@24": {
+          "density": {
+            "max": 1.381896436214447e-05,
+            "mean": 1.5536988584585743e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 1.0848045349121094e-05,
+            "mean": 4.959658461700656e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.381896436214447e-05,
+            "mean": 1.5536988584585743e-08,
+            "field_max": 1.0
+          }
+        },
+        "novel@24": {
+          "density": {
+            "max": 1.381896436214447e-05,
+            "mean": 1.5536988584585743e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 1.0848045349121094e-05,
+            "mean": 4.959658461700656e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.381896436214447e-05,
+            "mean": 1.5536988584585743e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb@24": {
+          "density": {
+            "max": 1.0311603546142578e-05,
+            "mean": 1.706953334235095e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 9.059906005859375e-06,
+            "mean": 5.45794298645319e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.0311603546142578e-05,
+            "mean": 1.706953334235095e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_novel@24": {
+          "density": {
+            "max": 1.0311603546142578e-05,
+            "mean": 1.706953334235095e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 9.059906005859375e-06,
+            "mean": 5.45794298645319e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.0311603546142578e-05,
+            "mean": 1.706953334235095e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half@24": {
+          "density": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018960237503051758,
+            "mean": 1.1375457376061604e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_novel@24": {
+          "density": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018960237503051758,
+            "mean": 1.1375457376061604e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024700164794921875,
+            "mean": 2.4258686153189046e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_velmask@48": {
+          "density": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001894235610961914,
+            "mean": 9.148291013616472e-08,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_prune@48": {
+          "density": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001894235610961914,
+            "mean": 9.148291013616472e-08,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          }
+        },
+        "raw@48": {
+          "density": {
+            "max": 1.1444091796875e-05,
+            "mean": 1.096869794992017e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 1.2516975402832031e-05,
+            "mean": 3.902282941226076e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.1444091796875e-05,
+            "mean": 1.096869794992017e-08,
+            "field_max": 1.0
+          }
+        },
+        "novel@48": {
+          "density": {
+            "max": 1.1444091796875e-05,
+            "mean": 1.096869794992017e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 1.2516975402832031e-05,
+            "mean": 3.902282941226076e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.1444091796875e-05,
+            "mean": 1.096869794992017e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb@48": {
+          "density": {
+            "max": 9.288080036640167e-06,
+            "mean": 1.183050279962572e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 5.424022674560547e-06,
+            "mean": 3.1748059736713685e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 9.288080036640167e-06,
+            "mean": 1.183050279962572e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_novel@48": {
+          "density": {
+            "max": 9.288080036640167e-06,
+            "mean": 1.183050279962572e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 5.424022674560547e-06,
+            "mean": 3.1748059736713685e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 9.288080036640167e-06,
+            "mean": 1.183050279962572e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half@48": {
+          "density": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001894235610961914,
+            "mean": 9.148291013616472e-08,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_novel@48": {
+          "density": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001894235610961914,
+            "mean": 9.148291013616472e-08,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.0002455711364746094,
+            "mean": 1.9120775505143683e-06,
+            "field_max": 1.0
+          }
+        }
+      },
+      "per_frame": [
+        {
+          "f": 1,
+          "vdb_half_velmask": 51028,
+          "vdb_half_prune": 51066,
+          "raw": 66228,
+          "novel": 65865,
+          "vdb": 48288,
+          "vdb_novel": 60259,
+          "vdb_half": 51026,
+          "vdb_half_novel": 50328
+        },
+        {
+          "f": 2,
+          "vdb_half_velmask": 452371,
+          "vdb_half_prune": 2578168,
+          "raw": 4610387,
+          "novel": 64477,
+          "vdb": 4805484,
+          "vdb_novel": 70195,
+          "vdb_half": 2579608,
+          "vdb_half_novel": 52314
+        },
+        {
+          "f": 3,
+          "vdb_half_velmask": 562711,
+          "vdb_half_prune": 2939185,
+          "raw": 5239859,
+          "novel": 160417,
+          "vdb": 5392989,
+          "vdb_novel": 154887,
+          "vdb_half": 2939189,
+          "vdb_half_novel": 106218
+        },
+        {
+          "f": 4,
+          "vdb_half_velmask": 683620,
+          "vdb_half_prune": 3406497,
+          "raw": 6069048,
+          "novel": 229983,
+          "vdb": 6223929,
+          "vdb_novel": 214085,
+          "vdb_half": 3408295,
+          "vdb_half_novel": 142230
+        },
+        {
+          "f": 5,
+          "vdb_half_velmask": 831458,
+          "vdb_half_prune": 3686134,
+          "raw": 6552110,
+          "novel": 305682,
+          "vdb": 6793594,
+          "vdb_novel": 192900,
+          "vdb_half": 3686137,
+          "vdb_half_novel": 184545
+        },
+        {
+          "f": 6,
+          "vdb_half_velmask": 996699,
+          "vdb_half_prune": 4059521,
+          "raw": 7216647,
+          "novel": 399997,
+          "vdb": 7460988,
+          "vdb_novel": 362918,
+          "vdb_half": 4059495,
+          "vdb_half_novel": 145691
+        },
+        {
+          "f": 7,
+          "vdb_half_velmask": 1179481,
+          "vdb_half_prune": 4500191,
+          "raw": 8145578,
+          "novel": 523761,
+          "vdb": 8404219,
+          "vdb_novel": 465745,
+          "vdb_half": 4574720,
+          "vdb_half_novel": 295844
+        },
+        {
+          "f": 8,
+          "vdb_half_velmask": 1348412,
+          "vdb_half_prune": 4984517,
+          "raw": 8878451,
+          "novel": 652135,
+          "vdb": 9138966,
+          "vdb_novel": 565876,
+          "vdb_half": 4984521,
+          "vdb_half_novel": 356072
+        },
+        {
+          "f": 9,
+          "vdb_half_velmask": 1492191,
+          "vdb_half_prune": 5475110,
+          "raw": 9747110,
+          "novel": 769897,
+          "vdb": 10006470,
+          "vdb_novel": 663597,
+          "vdb_half": 5475133,
+          "vdb_half_novel": 413141
+        },
+        {
+          "f": 10,
+          "vdb_half_velmask": 1593768,
+          "vdb_half_prune": 6118383,
+          "raw": 10942034,
+          "novel": 875483,
+          "vdb": 11200382,
+          "vdb_novel": 733684,
+          "vdb_half": 6118372,
+          "vdb_half_novel": 455827
+        },
+        {
+          "f": 11,
+          "vdb_half_velmask": 1630569,
+          "vdb_half_prune": 6320316,
+          "raw": 11267675,
+          "novel": 929250,
+          "vdb": 11516011,
+          "vdb_novel": 763910,
+          "vdb_half": 6320719,
+          "vdb_half_novel": 478433
+        },
+        {
+          "f": 12,
+          "vdb_half_velmask": 1609491,
+          "vdb_half_prune": 7097431,
+          "raw": 12626054,
+          "novel": 929532,
+          "vdb": 12914251,
+          "vdb_novel": 755312,
+          "vdb_half": 7100239,
+          "vdb_half_novel": 476192
+        },
+        {
+          "f": 13,
+          "vdb_half_velmask": 1572665,
+          "vdb_half_prune": 7269301,
+          "raw": 12925163,
+          "novel": 925478,
+          "vdb": 13221000,
+          "vdb_novel": 738026,
+          "vdb_half": 7287118,
+          "vdb_half_novel": 466749
+        },
+        {
+          "f": 14,
+          "vdb_half_velmask": 1539759,
+          "vdb_half_prune": 7546615,
+          "raw": 13348478,
+          "novel": 908143,
+          "vdb": 13673924,
+          "vdb_novel": 723248,
+          "vdb_half": 7553296,
+          "vdb_half_novel": 457242
+        },
+        {
+          "f": 15,
+          "vdb_half_velmask": 1503323,
+          "vdb_half_prune": 7520415,
+          "raw": 13268309,
+          "novel": 885752,
+          "vdb": 13599366,
+          "vdb_novel": 703353,
+          "vdb_half": 7524447,
+          "vdb_half_novel": 444979
+        },
+        {
+          "f": 16,
+          "vdb_half_velmask": 1484358,
+          "vdb_half_prune": 7410647,
+          "raw": 13034027,
+          "novel": 865533,
+          "vdb": 13370944,
+          "vdb_novel": 689104,
+          "vdb_half": 7415159,
+          "vdb_half_novel": 439617
+        },
+        {
+          "f": 17,
+          "vdb_half_velmask": 1469070,
+          "vdb_half_prune": 7592278,
+          "raw": 13322566,
+          "novel": 851538,
+          "vdb": 13684050,
+          "vdb_novel": 678208,
+          "vdb_half": 7593190,
+          "vdb_half_novel": 434060
+        },
+        {
+          "f": 18,
+          "vdb_half_velmask": 1438332,
+          "vdb_half_prune": 7610798,
+          "raw": 13339279,
+          "novel": 823507,
+          "vdb": 13719781,
+          "vdb_novel": 657842,
+          "vdb_half": 7611798,
+          "vdb_half_novel": 419742
+        },
+        {
+          "f": 19,
+          "vdb_half_velmask": 1414347,
+          "vdb_half_prune": 7003491,
+          "raw": 12282587,
+          "novel": 792978,
+          "vdb": 12638060,
+          "vdb_novel": 644691,
+          "vdb_half": 7005326,
+          "vdb_half_novel": 409736
+        },
+        {
+          "f": 20,
+          "vdb_half_velmask": 1391398,
+          "vdb_half_prune": 6753966,
+          "raw": 11838707,
+          "novel": 759646,
+          "vdb": 12205755,
+          "vdb_novel": 632472,
+          "vdb_half": 6753942,
+          "vdb_half_novel": 401913
+        },
+        {
+          "f": 21,
+          "vdb_half_velmask": 1381162,
+          "vdb_half_prune": 6265110,
+          "raw": 10935770,
+          "novel": 742271,
+          "vdb": 11285448,
+          "vdb_novel": 632109,
+          "vdb_half": 6267080,
+          "vdb_half_novel": 400939
+        },
+        {
+          "f": 22,
+          "vdb_half_velmask": 1383845,
+          "vdb_half_prune": 6462161,
+          "raw": 11285407,
+          "novel": 759986,
+          "vdb": 11642576,
+          "vdb_novel": 637704,
+          "vdb_half": 6465080,
+          "vdb_half_novel": 405052
+        },
+        {
+          "f": 23,
+          "vdb_half_velmask": 1397506,
+          "vdb_half_prune": 6584253,
+          "raw": 11526257,
+          "novel": 782973,
+          "vdb": 11895921,
+          "vdb_novel": 648850,
+          "vdb_half": 6585300,
+          "vdb_half_novel": 410324
+        },
+        {
+          "f": 24,
+          "vdb_half_velmask": 1422378,
+          "vdb_half_prune": 6790163,
+          "raw": 11914057,
+          "novel": 800390,
+          "vdb": 12300984,
+          "vdb_novel": 664123,
+          "vdb_half": 6805135,
+          "vdb_half_novel": 420355
+        },
+        {
+          "f": 25,
+          "vdb_half_velmask": 1452017,
+          "vdb_half_prune": 6649152,
+          "raw": 11661384,
+          "novel": 822456,
+          "vdb": 12023769,
+          "vdb_novel": 679466,
+          "vdb_half": 6652837,
+          "vdb_half_novel": 429708
+        },
+        {
+          "f": 26,
+          "vdb_half_velmask": 1473696,
+          "vdb_half_prune": 6934389,
+          "raw": 12132245,
+          "novel": 826907,
+          "vdb": 12526910,
+          "vdb_novel": 685443,
+          "vdb_half": 6943882,
+          "vdb_half_novel": 434624
+        },
+        {
+          "f": 27,
+          "vdb_half_velmask": 1496120,
+          "vdb_half_prune": 6883979,
+          "raw": 12019627,
+          "novel": 826534,
+          "vdb": 12416674,
+          "vdb_novel": 696368,
+          "vdb_half": 6890102,
+          "vdb_half_novel": 440650
+        },
+        {
+          "f": 28,
+          "vdb_half_velmask": 1537154,
+          "vdb_half_prune": 7203336,
+          "raw": 12575735,
+          "novel": 856084,
+          "vdb": 12990847,
+          "vdb_novel": 719099,
+          "vdb_half": 7205832,
+          "vdb_half_novel": 454146
+        },
+        {
+          "f": 29,
+          "vdb_half_velmask": 1572248,
+          "vdb_half_prune": 7105079,
+          "raw": 12413972,
+          "novel": 886570,
+          "vdb": 12802687,
+          "vdb_novel": 736832,
+          "vdb_half": 7105096,
+          "vdb_half_novel": 465507
+        },
+        {
+          "f": 30,
+          "vdb_half_velmask": 1611651,
+          "vdb_half_prune": 7178816,
+          "raw": 12523119,
+          "novel": 915384,
+          "vdb": 12912242,
+          "vdb_novel": 760589,
+          "vdb_half": 7178798,
+          "vdb_half_novel": 481810
+        },
+        {
+          "f": 31,
+          "vdb_half_velmask": 1639485,
+          "vdb_half_prune": 7379763,
+          "raw": 12869329,
+          "novel": 933809,
+          "vdb": 13272807,
+          "vdb_novel": 776354,
+          "vdb_half": 7385020,
+          "vdb_half_novel": 493370
+        },
+        {
+          "f": 32,
+          "vdb_half_velmask": 1652659,
+          "vdb_half_prune": 7597538,
+          "raw": 13248124,
+          "novel": 942199,
+          "vdb": 13654853,
+          "vdb_novel": 784957,
+          "vdb_half": 7603970,
+          "vdb_half_novel": 499265
+        },
+        {
+          "f": 33,
+          "vdb_half_velmask": 1644030,
+          "vdb_half_prune": 8315933,
+          "raw": 14520005,
+          "novel": 951655,
+          "vdb": 14970867,
+          "vdb_novel": 779040,
+          "vdb_half": 8317659,
+          "vdb_half_novel": 497356
+        },
+        {
+          "f": 34,
+          "vdb_half_velmask": 1627302,
+          "vdb_half_prune": 8120825,
+          "raw": 14197926,
+          "novel": 953158,
+          "vdb": 14613424,
+          "vdb_novel": 765335,
+          "vdb_half": 8120818,
+          "vdb_half_novel": 489480
+        },
+        {
+          "f": 35,
+          "vdb_half_velmask": 1597538,
+          "vdb_half_prune": 8430110,
+          "raw": 14735876,
+          "novel": 926093,
+          "vdb": 15186822,
+          "vdb_novel": 744657,
+          "vdb_half": 8430111,
+          "vdb_half_novel": 478073
+        },
+        {
+          "f": 36,
+          "vdb_half_velmask": 1558863,
+          "vdb_half_prune": 8030210,
+          "raw": 14010899,
+          "novel": 888508,
+          "vdb": 14452571,
+          "vdb_novel": 725225,
+          "vdb_half": 8032076,
+          "vdb_half_novel": 463256
+        },
+        {
+          "f": 37,
+          "vdb_half_velmask": 1556513,
+          "vdb_half_prune": 8046182,
+          "raw": 14047859,
+          "novel": 882966,
+          "vdb": 14499076,
+          "vdb_novel": 730105,
+          "vdb_half": 8046193,
+          "vdb_half_novel": 463794
+        },
+        {
+          "f": 38,
+          "vdb_half_velmask": 1547547,
+          "vdb_half_prune": 7962954,
+          "raw": 13889724,
+          "novel": 878223,
+          "vdb": 14341363,
+          "vdb_novel": 727927,
+          "vdb_half": 7962967,
+          "vdb_half_novel": 462331
+        },
+        {
+          "f": 39,
+          "vdb_half_velmask": 1553839,
+          "vdb_half_prune": 7776282,
+          "raw": 13558362,
+          "novel": 874820,
+          "vdb": 13993920,
+          "vdb_novel": 731411,
+          "vdb_half": 7776963,
+          "vdb_half_novel": 465459
+        },
+        {
+          "f": 40,
+          "vdb_half_velmask": 1557864,
+          "vdb_half_prune": 7884922,
+          "raw": 13745476,
+          "novel": 866682,
+          "vdb": 14206750,
+          "vdb_novel": 732881,
+          "vdb_half": 7884926,
+          "vdb_half_novel": 465560
+        },
+        {
+          "f": 41,
+          "vdb_half_velmask": 1560576,
+          "vdb_half_prune": 7791690,
+          "raw": 13609901,
+          "novel": 871995,
+          "vdb": 14061444,
+          "vdb_novel": 735157,
+          "vdb_half": 7791686,
+          "vdb_half_novel": 468030
+        },
+        {
+          "f": 42,
+          "vdb_half_velmask": 1554035,
+          "vdb_half_prune": 8269188,
+          "raw": 14449464,
+          "novel": 869267,
+          "vdb": 14941764,
+          "vdb_novel": 730281,
+          "vdb_half": 8269183,
+          "vdb_half_novel": 464780
+        },
+        {
+          "f": 43,
+          "vdb_half_velmask": 1543696,
+          "vdb_half_prune": 8081742,
+          "raw": 14142943,
+          "novel": 863787,
+          "vdb": 14615671,
+          "vdb_novel": 724368,
+          "vdb_half": 8084645,
+          "vdb_half_novel": 460317
+        },
+        {
+          "f": 44,
+          "vdb_half_velmask": 1526153,
+          "vdb_half_prune": 8073677,
+          "raw": 14140223,
+          "novel": 864585,
+          "vdb": 14609641,
+          "vdb_novel": 715417,
+          "vdb_half": 8076681,
+          "vdb_half_novel": 456428
+        },
+        {
+          "f": 45,
+          "vdb_half_velmask": 1505663,
+          "vdb_half_prune": 8268356,
+          "raw": 14464439,
+          "novel": 854001,
+          "vdb": 14940306,
+          "vdb_novel": 704279,
+          "vdb_half": 8267901,
+          "vdb_half_novel": 449935
+        },
+        {
+          "f": 46,
+          "vdb_half_velmask": 1478281,
+          "vdb_half_prune": 7762301,
+          "raw": 13593947,
+          "novel": 850655,
+          "vdb": 14023818,
+          "vdb_novel": 691775,
+          "vdb_half": 7762294,
+          "vdb_half_novel": 440732
+        },
+        {
+          "f": 47,
+          "vdb_half_velmask": 1462254,
+          "vdb_half_prune": 7491872,
+          "raw": 13130900,
+          "novel": 853896,
+          "vdb": 13518020,
+          "vdb_novel": 677113,
+          "vdb_half": 7491867,
+          "vdb_half_novel": 434043
+        },
+        {
+          "f": 48,
+          "vdb_half_velmask": 1459281,
+          "vdb_half_prune": 8198524,
+          "raw": 14349807,
+          "novel": 863824,
+          "vdb": 14791646,
+          "vdb_novel": 677967,
+          "vdb_half": 8200873,
+          "vdb_half_novel": 433347
+        }
+      ],
+      "filled": {
+        "density>0.001": 0.040550370649857954,
+        "flame>0.001": 0.040550370649857954,
+        "temperature>0.001": 0.01791936700994318,
+        "|vel|>0.01": 0.3693253950639205,
+        "|vel|>0.1": 0.34848771528764205
+      },
+      "vel_mask_check": [
+        "density",
+        "temperature",
+        "flame",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "sim_sec": 8.65,
+      "res": [
+        128,
+        160,
+        176
+      ],
+      "prims": {
+        "vdb_half_velmask": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "vdb_half_prune": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "raw": [
+          "density:Volume",
+          "temperature:Volume",
+          "flame:Volume",
+          "vel.x:Volume",
+          "vel.y:Volume",
+          "vel.z:Volume"
+        ],
+        "novel": [
+          "density:Volume",
+          "temperature:Volume",
+          "flame:Volume"
+        ],
+        "vdb": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "vdb_novel": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB"
+        ],
+        "vdb_half": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "vdb_half_novel": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB"
+        ]
+      }
+    },
+    {
+      "vox": 0.04,
+      "sizes": {
+        "raw": 149695730,
+        "novel": 6353250,
+        "vdb": 154932920,
+        "vdb_novel": 4328474,
+        "vdb_half": 85495435,
+        "vdb_half_novel": 3188416,
+        "vdb_half_prune": 85403067,
+        "vdb_half_velmask": 9538517
+      },
+      "vdbfile": {
+        "vdb": 168335188,
+        "vdb_novel": 7503104,
+        "vdb_half": 99381864,
+        "vdb_half_novel": 5790373,
+        "vdb_half_prune": 99286504,
+        "vdb_half_velmask": 14897211
+      },
+      "write_sec": {
+        "raw": 0.3731071999791311,
+        "novel": 0.1271491000225069,
+        "vdb": 2.053265999944415,
+        "vdb_novel": 0.260371899974416,
+        "vdb_half": 1.9683018000068842,
+        "vdb_half_novel": 0.2695082999562146,
+        "vdb_half_prune": 1.7613972000108333,
+        "vdb_half_velmask": 0.5206195000064326
+      },
+      "read_sec": {
+        "raw": 0.20663930001319386,
+        "novel": 0.08464189994265325,
+        "vdb": 0.31909609999274835,
+        "vdb_novel": 0.08129470003768802,
+        "vdb_half": 0.30823830000008456,
+        "vdb_half_novel": 0.08059099997626618,
+        "vdb_half_prune": 0.31249379996734206,
+        "vdb_half_velmask": 0.13514619997295085
+      },
+      "diff": {
+        "vdb_half_velmask@24": {
+          "density": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018674135208129883,
+            "mean": 1.2252094450104778e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_prune@24": {
+          "density": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018674135208129883,
+            "mean": 1.2252094450104778e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          }
+        },
+        "raw@24": {
+          "density": {
+            "max": 1.0266900062561035e-05,
+            "mean": 2.0534487887857722e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 6.67572021484375e-06,
+            "mean": 7.714086258658881e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.0266900062561035e-05,
+            "mean": 2.0534487887857722e-08,
+            "field_max": 1.0
+          }
+        },
+        "novel@24": {
+          "density": {
+            "max": 1.0266900062561035e-05,
+            "mean": 2.0534487887857722e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 6.67572021484375e-06,
+            "mean": 7.714086258658881e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 1.0266900062561035e-05,
+            "mean": 2.0534487887857722e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb@24": {
+          "density": {
+            "max": 7.450580596923828e-06,
+            "mean": 2.0036356573882586e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 6.496906280517578e-06,
+            "mean": 8.513583615865628e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 7.450580596923828e-06,
+            "mean": 2.0036356573882586e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_novel@24": {
+          "density": {
+            "max": 7.450580596923828e-06,
+            "mean": 2.0036356573882586e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 6.496906280517578e-06,
+            "mean": 8.513583615865628e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 7.450580596923828e-06,
+            "mean": 2.0036356573882586e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half@24": {
+          "density": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018674135208129883,
+            "mean": 1.2252094450104778e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_novel@24": {
+          "density": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.00018674135208129883,
+            "mean": 1.2252094450104778e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024455785751342773,
+            "mean": 1.610881668057118e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_velmask@48": {
+          "density": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001868605613708496,
+            "mean": 1.2154815465237334e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_prune@48": {
+          "density": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001868605613708496,
+            "mean": 1.2154815465237334e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          }
+        },
+        "raw@48": {
+          "density": {
+            "max": 6.973743438720703e-06,
+            "mean": 1.219116185779967e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 4.172325134277344e-06,
+            "mean": 6.846008648864199e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 6.973743438720703e-06,
+            "mean": 1.219116185779967e-08,
+            "field_max": 1.0
+          }
+        },
+        "novel@48": {
+          "density": {
+            "max": 6.973743438720703e-06,
+            "mean": 1.219116185779967e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 4.172325134277344e-06,
+            "mean": 6.846008648864199e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 6.973743438720703e-06,
+            "mean": 1.219116185779967e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb@48": {
+          "density": {
+            "max": 4.887580871582031e-06,
+            "mean": 1.1465210114636193e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 3.2782554626464844e-06,
+            "mean": 4.119220964327042e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 4.887580871582031e-06,
+            "mean": 1.1465210114636193e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_novel@48": {
+          "density": {
+            "max": 4.887580871582031e-06,
+            "mean": 1.1465210114636193e-08,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 3.2782554626464844e-06,
+            "mean": 4.119220964327042e-09,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 4.887580871582031e-06,
+            "mean": 1.1465210114636193e-08,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half@48": {
+          "density": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001868605613708496,
+            "mean": 1.2154815465237334e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          }
+        },
+        "vdb_half_novel@48": {
+          "density": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          },
+          "temperature": {
+            "max": 0.0001868605613708496,
+            "mean": 1.2154815465237334e-07,
+            "field_max": 0.8754855394363403
+          },
+          "flame": {
+            "max": 0.00024563074111938477,
+            "mean": 1.7429788385925349e-06,
+            "field_max": 1.0
+          }
+        }
+      },
+      "per_frame": [
+        {
+          "f": 1,
+          "vdb_half_velmask": 19450,
+          "vdb_half_prune": 19456,
+          "raw": 19576,
+          "novel": 19263,
+          "vdb": 22809,
+          "vdb_novel": 20959,
+          "vdb_half": 19453,
+          "vdb_half_novel": 18792
+        },
+        {
+          "f": 2,
+          "vdb_half_velmask": 72222,
+          "vdb_half_prune": 642639,
+          "raw": 1122324,
+          "novel": 19699,
+          "vdb": 1168404,
+          "vdb_novel": 21783,
+          "vdb_half": 642642,
+          "vdb_half_novel": 17790
+        },
+        {
+          "f": 3,
+          "vdb_half_velmask": 91699,
+          "vdb_half_prune": 655880,
+          "raw": 1141151,
+          "novel": 37761,
+          "vdb": 1179762,
+          "vdb_novel": 37480,
+          "vdb_half": 655872,
+          "vdb_half_novel": 19745
+        },
+        {
+          "f": 4,
+          "vdb_half_velmask": 104376,
+          "vdb_half_prune": 661452,
+          "raw": 1151645,
+          "novel": 47845,
+          "vdb": 1201986,
+          "vdb_novel": 29334,
+          "vdb_half": 661453,
+          "vdb_half_novel": 33404
+        },
+        {
+          "f": 5,
+          "vdb_half_velmask": 121973,
+          "vdb_half_prune": 942657,
+          "raw": 1650166,
+          "novel": 60943,
+          "vdb": 1720868,
+          "vdb_novel": 34504,
+          "vdb_half": 942652,
+          "vdb_half_novel": 40195
+        },
+        {
+          "f": 6,
+          "vdb_half_velmask": 131972,
+          "vdb_half_prune": 1203498,
+          "raw": 2150232,
+          "novel": 74802,
+          "vdb": 2238056,
+          "vdb_novel": 69089,
+          "vdb_half": 1204639,
+          "vdb_half_novel": 48350
+        },
+        {
+          "f": 7,
+          "vdb_half_velmask": 153104,
+          "vdb_half_prune": 1302336,
+          "raw": 2333892,
+          "novel": 92594,
+          "vdb": 2395547,
+          "vdb_novel": 84936,
+          "vdb_half": 1308922,
+          "vdb_half_novel": 57857
+        },
+        {
+          "f": 8,
+          "vdb_half_velmask": 192867,
+          "vdb_half_prune": 1468524,
+          "raw": 2593586,
+          "novel": 110553,
+          "vdb": 2694912,
+          "vdb_novel": 56646,
+          "vdb_half": 1473380,
+          "vdb_half_novel": 65274
+        },
+        {
+          "f": 9,
+          "vdb_half_velmask": 184761,
+          "vdb_half_prune": 1513318,
+          "raw": 2729718,
+          "novel": 127443,
+          "vdb": 2829267,
+          "vdb_novel": 61933,
+          "vdb_half": 1515673,
+          "vdb_half_novel": 72344
+        },
+        {
+          "f": 10,
+          "vdb_half_velmask": 224535,
+          "vdb_half_prune": 1589222,
+          "raw": 2822330,
+          "novel": 142099,
+          "vdb": 2920950,
+          "vdb_novel": 67153,
+          "vdb_half": 1591212,
+          "vdb_half_novel": 77692
+        },
+        {
+          "f": 11,
+          "vdb_half_velmask": 233367,
+          "vdb_half_prune": 1570843,
+          "raw": 2795023,
+          "novel": 152111,
+          "vdb": 2884742,
+          "vdb_novel": 69030,
+          "vdb_half": 1574512,
+          "vdb_half_novel": 47255
+        },
+        {
+          "f": 12,
+          "vdb_half_velmask": 239618,
+          "vdb_half_prune": 1843359,
+          "raw": 3286833,
+          "novel": 159897,
+          "vdb": 3390265,
+          "vdb_novel": 71949,
+          "vdb_half": 1844247,
+          "vdb_half_novel": 83358
+        },
+        {
+          "f": 13,
+          "vdb_half_velmask": 238678,
+          "vdb_half_prune": 1900589,
+          "raw": 3375278,
+          "novel": 161646,
+          "vdb": 3476847,
+          "vdb_novel": 126081,
+          "vdb_half": 1900591,
+          "vdb_half_novel": 48785
+        },
+        {
+          "f": 14,
+          "vdb_half_velmask": 231591,
+          "vdb_half_prune": 1995420,
+          "raw": 3542841,
+          "novel": 160963,
+          "vdb": 3648710,
+          "vdb_novel": 69630,
+          "vdb_half": 1995406,
+          "vdb_half_novel": 82182
+        },
+        {
+          "f": 15,
+          "vdb_half_velmask": 230124,
+          "vdb_half_prune": 2006917,
+          "raw": 3554284,
+          "novel": 161239,
+          "vdb": 3658225,
+          "vdb_novel": 121185,
+          "vdb_half": 2008091,
+          "vdb_half_novel": 80439
+        },
+        {
+          "f": 16,
+          "vdb_half_velmask": 189412,
+          "vdb_half_prune": 1912234,
+          "raw": 3431818,
+          "novel": 155249,
+          "vdb": 3535468,
+          "vdb_novel": 116544,
+          "vdb_half": 1912244,
+          "vdb_half_novel": 78542
+        },
+        {
+          "f": 17,
+          "vdb_half_velmask": 218573,
+          "vdb_half_prune": 2248864,
+          "raw": 3959534,
+          "novel": 150453,
+          "vdb": 4083017,
+          "vdb_novel": 64839,
+          "vdb_half": 2252568,
+          "vdb_half_novel": 75821
+        },
+        {
+          "f": 18,
+          "vdb_half_velmask": 179084,
+          "vdb_half_prune": 2014624,
+          "raw": 3590900,
+          "novel": 141634,
+          "vdb": 3666358,
+          "vdb_novel": 109335,
+          "vdb_half": 2020617,
+          "vdb_half_novel": 72971
+        },
+        {
+          "f": 19,
+          "vdb_half_velmask": 204994,
+          "vdb_half_prune": 2023615,
+          "raw": 3545503,
+          "novel": 133860,
+          "vdb": 3674306,
+          "vdb_novel": 60695,
+          "vdb_half": 2030451,
+          "vdb_half_novel": 70173
+        },
+        {
+          "f": 20,
+          "vdb_half_velmask": 167444,
+          "vdb_half_prune": 1832398,
+          "raw": 3254780,
+          "novel": 127565,
+          "vdb": 3375465,
+          "vdb_novel": 101472,
+          "vdb_half": 1840065,
+          "vdb_half_novel": 67948
+        },
+        {
+          "f": 21,
+          "vdb_half_velmask": 196467,
+          "vdb_half_prune": 1771106,
+          "raw": 3090025,
+          "novel": 122446,
+          "vdb": 3162788,
+          "vdb_novel": 100711,
+          "vdb_half": 1777173,
+          "vdb_half_novel": 67604
+        },
+        {
+          "f": 22,
+          "vdb_half_velmask": 196080,
+          "vdb_half_prune": 1778400,
+          "raw": 3096522,
+          "novel": 124517,
+          "vdb": 3214325,
+          "vdb_novel": 101112,
+          "vdb_half": 1785143,
+          "vdb_half_novel": 67910
+        },
+        {
+          "f": 23,
+          "vdb_half_velmask": 170855,
+          "vdb_half_prune": 1712877,
+          "raw": 3018413,
+          "novel": 125936,
+          "vdb": 3136951,
+          "vdb_novel": 102784,
+          "vdb_half": 1713899,
+          "vdb_half_novel": 69002
+        },
+        {
+          "f": 24,
+          "vdb_half_velmask": 172130,
+          "vdb_half_prune": 1762319,
+          "raw": 3105035,
+          "novel": 130209,
+          "vdb": 3181270,
+          "vdb_novel": 104712,
+          "vdb_half": 1762289,
+          "vdb_half_novel": 70195
+        },
+        {
+          "f": 25,
+          "vdb_half_velmask": 205503,
+          "vdb_half_prune": 1839440,
+          "raw": 3190420,
+          "novel": 132958,
+          "vdb": 3318520,
+          "vdb_novel": 106707,
+          "vdb_half": 1842343,
+          "vdb_half_novel": 71885
+        },
+        {
+          "f": 26,
+          "vdb_half_velmask": 211055,
+          "vdb_half_prune": 1791985,
+          "raw": 3111173,
+          "novel": 133824,
+          "vdb": 3236102,
+          "vdb_novel": 109796,
+          "vdb_half": 1791987,
+          "vdb_half_novel": 73749
+        },
+        {
+          "f": 27,
+          "vdb_half_velmask": 214188,
+          "vdb_half_prune": 1796786,
+          "raw": 3115420,
+          "novel": 135831,
+          "vdb": 3243748,
+          "vdb_novel": 63816,
+          "vdb_half": 1798036,
+          "vdb_half_novel": 74679
+        },
+        {
+          "f": 28,
+          "vdb_half_velmask": 216338,
+          "vdb_half_prune": 1845291,
+          "raw": 3203426,
+          "novel": 137563,
+          "vdb": 3338928,
+          "vdb_novel": 65667,
+          "vdb_half": 1851376,
+          "vdb_half_novel": 76824
+        },
+        {
+          "f": 29,
+          "vdb_half_velmask": 232051,
+          "vdb_half_prune": 1892228,
+          "raw": 3288810,
+          "novel": 143776,
+          "vdb": 3423649,
+          "vdb_novel": 67616,
+          "vdb_half": 1896332,
+          "vdb_half_novel": 78862
+        },
+        {
+          "f": 30,
+          "vdb_half_velmask": 237282,
+          "vdb_half_prune": 1763191,
+          "raw": 3049610,
+          "novel": 148250,
+          "vdb": 3172485,
+          "vdb_novel": 122959,
+          "vdb_half": 1763192,
+          "vdb_half_novel": 81414
+        },
+        {
+          "f": 31,
+          "vdb_half_velmask": 243483,
+          "vdb_half_prune": 1859319,
+          "raw": 3220492,
+          "novel": 154350,
+          "vdb": 3351318,
+          "vdb_novel": 127047,
+          "vdb_half": 1859336,
+          "vdb_half_novel": 49044
+        },
+        {
+          "f": 32,
+          "vdb_half_velmask": 244694,
+          "vdb_half_prune": 1836812,
+          "raw": 3183408,
+          "novel": 156772,
+          "vdb": 3311068,
+          "vdb_novel": 72309,
+          "vdb_half": 1836801,
+          "vdb_half_novel": 84967
+        },
+        {
+          "f": 33,
+          "vdb_half_velmask": 242414,
+          "vdb_half_prune": 2052318,
+          "raw": 3556890,
+          "novel": 160876,
+          "vdb": 3698520,
+          "vdb_novel": 129899,
+          "vdb_half": 2052325,
+          "vdb_half_novel": 86262
+        },
+        {
+          "f": 34,
+          "vdb_half_velmask": 243607,
+          "vdb_half_prune": 2006728,
+          "raw": 3482480,
+          "novel": 161898,
+          "vdb": 3560736,
+          "vdb_novel": 127934,
+          "vdb_half": 2006728,
+          "vdb_half_novel": 50123
+        },
+        {
+          "f": 35,
+          "vdb_half_velmask": 245750,
+          "vdb_half_prune": 2379188,
+          "raw": 4142744,
+          "novel": 164304,
+          "vdb": 4302255,
+          "vdb_novel": 71877,
+          "vdb_half": 2385828,
+          "vdb_half_novel": 85277
+        },
+        {
+          "f": 36,
+          "vdb_half_velmask": 242818,
+          "vdb_half_prune": 2330003,
+          "raw": 4055271,
+          "novel": 163877,
+          "vdb": 4211661,
+          "vdb_novel": 126494,
+          "vdb_half": 2334158,
+          "vdb_half_novel": 49216
+        },
+        {
+          "f": 37,
+          "vdb_half_velmask": 238759,
+          "vdb_half_prune": 2280593,
+          "raw": 3970282,
+          "novel": 162306,
+          "vdb": 4120218,
+          "vdb_novel": 125204,
+          "vdb_half": 2284094,
+          "vdb_half_novel": 83787
+        },
+        {
+          "f": 38,
+          "vdb_half_velmask": 234408,
+          "vdb_half_prune": 2258943,
+          "raw": 3924470,
+          "novel": 157317,
+          "vdb": 4074697,
+          "vdb_novel": 68942,
+          "vdb_half": 2258951,
+          "vdb_half_novel": 81001
+        },
+        {
+          "f": 39,
+          "vdb_half_velmask": 229352,
+          "vdb_half_prune": 2232617,
+          "raw": 3879161,
+          "novel": 152246,
+          "vdb": 4029668,
+          "vdb_novel": 120487,
+          "vdb_half": 2232607,
+          "vdb_half_novel": 80193
+        },
+        {
+          "f": 40,
+          "vdb_half_velmask": 230325,
+          "vdb_half_prune": 2261390,
+          "raw": 3923708,
+          "novel": 152414,
+          "vdb": 4024209,
+          "vdb_novel": 121658,
+          "vdb_half": 2261407,
+          "vdb_half_novel": 47134
+        },
+        {
+          "f": 41,
+          "vdb_half_velmask": 232642,
+          "vdb_half_prune": 2211672,
+          "raw": 3840728,
+          "novel": 152529,
+          "vdb": 3991650,
+          "vdb_novel": 121861,
+          "vdb_half": 2213948,
+          "vdb_half_novel": 47811
+        },
+        {
+          "f": 42,
+          "vdb_half_velmask": 195745,
+          "vdb_half_prune": 2040035,
+          "raw": 3594637,
+          "novel": 150785,
+          "vdb": 3733471,
+          "vdb_novel": 67001,
+          "vdb_half": 2040015,
+          "vdb_half_novel": 79554
+        },
+        {
+          "f": 43,
+          "vdb_half_velmask": 189793,
+          "vdb_half_prune": 2063171,
+          "raw": 3635441,
+          "novel": 147558,
+          "vdb": 3725663,
+          "vdb_novel": 118759,
+          "vdb_half": 2063932,
+          "vdb_half_novel": 78519
+        },
+        {
+          "f": 44,
+          "vdb_half_velmask": 224767,
+          "vdb_half_prune": 2145136,
+          "raw": 3719725,
+          "novel": 149106,
+          "vdb": 3863715,
+          "vdb_novel": 119455,
+          "vdb_half": 2145147,
+          "vdb_half_novel": 79726
+        },
+        {
+          "f": 45,
+          "vdb_half_velmask": 225913,
+          "vdb_half_prune": 2145560,
+          "raw": 3721862,
+          "novel": 150954,
+          "vdb": 3866396,
+          "vdb_novel": 119779,
+          "vdb_half": 2145569,
+          "vdb_half_novel": 80330
+        },
+        {
+          "f": 46,
+          "vdb_half_velmask": 187943,
+          "vdb_half_prune": 2202182,
+          "raw": 3880155,
+          "novel": 150359,
+          "vdb": 3978007,
+          "vdb_novel": 119218,
+          "vdb_half": 2202183,
+          "vdb_half_novel": 79914
+        },
+        {
+          "f": 47,
+          "vdb_half_velmask": 184208,
+          "vdb_half_prune": 1845304,
+          "raw": 3257092,
+          "novel": 146635,
+          "vdb": 3381142,
+          "vdb_novel": 115867,
+          "vdb_half": 1845305,
+          "vdb_half_novel": 78037
+        },
+        {
+          "f": 48,
+          "vdb_half_velmask": 220103,
+          "vdb_half_prune": 1950628,
+          "raw": 3386916,
+          "novel": 146035,
+          "vdb": 3513796,
+          "vdb_novel": 114226,
+          "vdb_half": 1950641,
+          "vdb_half_novel": 76480
+        }
+      ],
+      "filled": {
+        "density>0.001": 0.03752848307291667,
+        "flame>0.001": 0.03752848307291667,
+        "temperature>0.001": 0.016965738932291665,
+        "|vel|>0.01": 0.6431498209635417,
+        "|vel|>0.1": 0.603167724609375
+      },
+      "vel_mask_check": [
+        "density",
+        "temperature",
+        "flame",
+        "vel.x",
+        "vel.y",
+        "vel.z"
+      ],
+      "sim_sec": 4.03,
+      "res": [
+        64,
+        80,
+        96
+      ],
+      "prims": {
+        "vdb_half_velmask": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "vdb_half_prune": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "raw": [
+          "density:Volume",
+          "temperature:Volume",
+          "flame:Volume",
+          "vel.x:Volume",
+          "vel.y:Volume",
+          "vel.z:Volume"
+        ],
+        "novel": [
+          "density:Volume",
+          "temperature:Volume",
+          "flame:Volume"
+        ],
+        "vdb": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "vdb_novel": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB"
+        ],
+        "vdb_half": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB",
+          "vel.x:VDB",
+          "vel.y:VDB",
+          "vel.z:VDB"
+        ],
+        "vdb_half_novel": [
+          "density:VDB",
+          "temperature:VDB",
+          "flame:VDB"
+        ]
+      }
+    }
+  ],
+  "frames": 48,
+  "check": [
+    24,
+    48
+  ],
+  "fields": [
+    "density",
+    "temperature",
+    "flame"
+  ]
+}

@@ -5657,6 +5657,117 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 204 ===================== -->
+    <article class="entry entry--current" id="exp204">
+      <div class="badge">204</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>焚き火の Pyro のキャッシュは、9 割以上が速度（vel）— vel を煙のある所だけに残して VDB・16 bit にすると 16 分の 1、描画に使う値のずれは 0.00025</h2>
+        <p class="path">examples/204_pyro_cache_size.py &nbsp;·&nbsp; 焚き火のキャッシュの9割は vel。煙のある所だけに残して VDB・16 bit で 16 分の 1</p>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火の <button class="term" data-term="Pyro">Pyro</button> を<button class="term" data-term="キャッシュ">キャッシュ</button>（ファイル）に書くと何 MB になるか。何を削れば小さくなり、そのとき炎や煙の値はどれだけ変わるか。</strong></p>
+          <p><a href="#exp202">実験202</a> と同じ焚き火（平たい球を Source Burn で燃やす）を Voxel Size 0.04 と 0.02 で 48 フレーム（2 秒）回し、毎フレーム 8 通りのやり方で .bgeo.sc に書いた。書いたファイルは File で読み戻し、Volume Wrangle で元の値との差を取った。</p>
+          <p><strong>そのまま書くと、Voxel Size 0.04 で 48 フレーム 150 MB、0.02 で 564 MB。</strong>中身は Volume が 6 つ（density・temperature・flame と、速度の vel.x・vel.y・vel.z）。</p>
+          <p><strong>容量のほとんどは vel。</strong>vel を捨てるだけで 6.4 MB（24 分の 1）になった。フレーム 48 で、煙が入っている升（density &gt; 0.001）は全体の 3.8% しかないのに、速さが 0.01 を超える升は 64% あった。煙の無い所でも空気は動いていて、そこの 0 でない値が圧縮で縮まない。</p>
+          <p><strong>VDB にするだけでは小さくならない。</strong>convertvdb で VDB にすると 155 MB で、むしろ少し増えた。VDB は 0 の所を持たないのが得意だが、vel は 0 ではないので効かない。Prune Tolerance を 0.01 にしても 85 MB で変わらなかった。</p>
+          <p><strong>16 bit（half）で書くと、約半分。</strong>VDB の intrinsic `vdb_is_saved_as_half_float` を 1 にすると 85.5 MB（VDB の 55%）。読み戻した値のずれは、最大 0.00025（density の最大 1.00 に対して）、平均 1.7e-06。32 bit の VDB は最大 4.9e-06、そのままのファイルは 7.0e-06 で、これは比べ方（位置から値を読む volumesample）の分のずれ。</p>
+          <p><strong>モーションブラーに vel を残したいときは、煙の無い所の vel を 0 にする。</strong>Volume Wrangle で「density も flame も 0.001 未満なら v@vel = 0」として VDB・16 bit で書くと、9.5 MB（そのままの 16 分の 1）。Voxel Size 0.02 では 564 MB → 67 MB（8 分の 1）。煙のある所の vel は変えていない。</p>
+          <p><strong>Voxel Size を半分にすると、そのままなら 3.8 倍。</strong>升の数は約 8 倍になるが、外側の升は 0 に近く圧縮で縮む。いちばん小さい書き方（vel を捨てて VDB・16 bit）は 3.2 MB → 19.4 MB。</p>
+          <p>書く時間はどれも短い（そのまま 48 フレームで 0.37 秒、VDB にすると変換を含めず 2.05 秒）。<strong>同じ VDB でも、.vdb 形式のファイルは .bgeo.sc より大きかった。</strong>VDB＋16 bit で 99 MB（.bgeo.sc の 1.16 倍）、vel を煙のある所だけにしたもので 14.9 MB（1.56 倍）。.bgeo.sc は中身をさらに圧縮して書くためと考えられる（確かめていない）。ほかのソフトに渡すのでなければ .bgeo.sc でよい。表は .bgeo.sc の値。</p>
+        </div>
+
+        <p class="label">48 フレーム分のキャッシュの大きさ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="204_size.png" alt="青が Voxel Size 0.04、橙が 0.02。vel を捨てるか、煙のあ" loading="lazy" decoding="async"></div>
+            <figcaption>青が Voxel Size 0.04、橙が 0.02。vel を捨てるか、煙のある所だけに残すと一気に小さくなる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>書き方</th><th>0.04 の MB</th><th>0.04 の縮み</th><th>0.02 の MB</th><th>0.02 の縮み</th><th>書く秒（0.04）</th><th>読む秒（0.04）</th></tr></thead>
+            <tbody>
+              <tr><td>そのまま（Volume 6つ）</td><td class="num">149.7</td><td>1.0 倍</td><td class="num">564.4</td><td>1.0 倍</td><td class="num">0.37</td><td class="num">0.21</td></tr>
+              <tr><td>VDB にする</td><td class="num">154.9</td><td>1.0 倍</td><td class="num">581.5</td><td>1.0 倍</td><td class="num">2.05</td><td class="num">0.32</td></tr>
+              <tr><td>VDB＋16 bit</td><td class="num">85.5</td><td>1.8 倍</td><td class="num">321.6</td><td>1.8 倍</td><td class="num">1.97</td><td class="num">0.31</td></tr>
+              <tr><td>VDB＋16 bit＋小さい値を捨てる</td><td class="num">85.4</td><td>1.8 倍</td><td class="num">321.5</td><td>1.8 倍</td><td class="num">1.76</td><td class="num">0.31</td></tr>
+              <tr><td>vel を煙のある所だけ＋VDB＋16 bit</td><td class="num">9.5</td><td>15.7 倍</td><td class="num">67.0</td><td>8.4 倍</td><td class="num">0.52</td><td class="num">0.14</td></tr>
+              <tr><td>vel を捨てる</td><td class="num">6.4</td><td>23.6 倍</td><td class="num">36.9</td><td>15.3 倍</td><td class="num">0.13</td><td class="num">0.08</td></tr>
+              <tr><td>vel を捨てる＋VDB</td><td class="num">4.3</td><td>34.6 倍</td><td class="num">30.5</td><td>18.5 倍</td><td class="num">0.26</td><td class="num">0.08</td></tr>
+              <tr><td>vel を捨てる＋VDB＋16 bit</td><td class="num">3.2</td><td>46.9 倍</td><td class="num">19.4</td><td>29.2 倍</td><td class="num">0.27</td><td class="num">0.08</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Pyro のキャッシュの大半は vel。</strong>煙のある升は 4% なのに、vel は 6 割以上の升で 0 でない。描画に要らなければ blast で捨てる（24 分の 1）。</li>
+          <li><strong>モーションブラーに vel が要るなら、煙の無い所の vel を 0 にしてから VDB・16 bit。</strong>16 分の 1 になり、煙のある所の値は残る。</li>
+          <li><strong>VDB にするだけ・Prune Tolerance 0.01 だけでは小さくならない。</strong>0 でない値を持つ vel が残るため。</li>
+          <li><strong>16 bit で書くと約半分。</strong>値のずれは最大 0.00025（値の最大 1 に対して）。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 206 ===================== -->
+    <article class="entry entry--current" id="exp206">
+      <div class="badge">206</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>テーブルクロスを粗い布で試すなら 44×56 まで — 落ち方の差は平均 1.9 cm で、計算は 39 秒（実践の細かさの 39%）。ただし粗いほど角の垂れが短く、22×28 では 17 cm 高い</h2>
+        <p class="path">examples/206_anim.py &nbsp;·&nbsp; 粗い布での試しは 44×56 まで。差は平均 1.9 cm、時間は 39%。角の垂れだけ短い</p>
+
+        <div class="prose">
+          <p><strong>課題: 実践「テーブルクロスを掛ける」では「粗いうちに落ち方を決めて、最後に細かくする」と書いた。粗い布で決めた落ち方は、細かい布でも同じになるのか。どこまで粗くしてよいか。</strong></p>
+          <p>実践と同じ机（天板 1.2 × 0.8 m、高さ 0.74 m）と布（1.9 × 1.45 m を天板の 12 cm 上に置き、4° 回す）を、布の分割だけ変えて vellumsolver（Substeps 5、地面あり）で 72 フレーム（3 秒）落とした。Rows × Columns は 22×28・44×56・66×84・110×140（実践の値）・165×210。いちばん細かい 165×210 を答えとして、その各点から粗い布の面までの距離を測った。</p>
+          <p><strong>計算の時間は、点の数ほどには増えない。</strong>点 616 個で 19 秒、2,464 個で 39 秒、5,544 個で 50 秒、15,400 個で 100 秒、34,650 個で 209 秒。点が 56 倍でも時間は 11 倍だった。</p>
+          <p><strong>形の差は、細かくするほど縮む。</strong>いちばん細かい布との距離の平均は、22×28 で 3.4 cm、44×56 で 1.9 cm、66×84 で 1.1 cm、110×140 で 0.8 cm。最大（ひだの先など）は 23・15・12・9 cm。</p>
+          <p><strong>粗い布は、角が短く垂れる。</strong>布のいちばん低い点（角の先）は、22×28 で 0.43 m、44×56 で 0.36 m、66×84 で 0.32 m、110×140 で 0.27 m、165×210 で 0.26 m。四辺の真ん中の裾の高さ（平均）も 0.459 → 0.429 m と、細かいほど下がった。粗い布は折れ曲がれる所が少ないためと考えられるが、確かめていない。</p>
+          <p><strong>天板の上の平らさは、44×56 から目に見えて変わる。</strong>天板の上にある点の高さのばらつきは、7.3・2.5・0.9・0.13・0.02 mm。22×28 では天板の上に波が残った。</p>
+          <p><strong>決め方: 落とす位置・向き・机との当たり方は 44×56 で決めてよい。</strong>差は平均 1.9 cm で、時間は実践の細かさの 39%。ただし角の垂れの長さは細かくすると 8 cm 伸びるので、裾の長さ（床からの高さ）は最後の細かさで確かめる。</p>
+        </div>
+
+        <p class="label">落ちる様子（左が 44×56、右が実践の 110×140）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="206_anim.gif" alt="72 フレーム（3 秒）を 2 フレームおきに。粗い布も同じように落ちるが、角の" loading="lazy" decoding="async"></div>
+            <figcaption>72 フレーム（3 秒）を 2 フレームおきに。粗い布も同じように落ちるが、角の垂れが短い。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">72 フレーム目の形</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="206_grid.png" alt="かっこは点の数、右は 72 フレームの計算時間。66×84 までは網目を重ねて見" loading="lazy" decoding="async"></div>
+            <figcaption>かっこは点の数、右は 72 フレームの計算時間。66×84 までは網目を重ねて見せた。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rows×Columns</th><th>点</th><th>秒</th><th>細かい布との差 平均 cm</th><th>最大 cm</th><th>裾の高さ m</th><th>いちばん低い点 m</th><th>天板の上のばらつき mm</th></tr></thead>
+            <tbody>
+              <tr><td>22×28</td><td class="num">616</td><td class="num">18.6</td><td class="num">3.4</td><td class="num">22.7</td><td class="num">0.459</td><td class="num">0.429</td><td class="num">7.3</td></tr>
+              <tr><td>44×56</td><td class="num">2,464</td><td class="num">39.4</td><td class="num">1.9</td><td class="num">15.4</td><td class="num">0.441</td><td class="num">0.357</td><td class="num">2.5</td></tr>
+              <tr><td>66×84</td><td class="num">5,544</td><td class="num">50.2</td><td class="num">1.1</td><td class="num">11.5</td><td class="num">0.438</td><td class="num">0.316</td><td class="num">0.9</td></tr>
+              <tr><td>110×140</td><td class="num">15,400</td><td class="num">100.4</td><td class="num">0.8</td><td class="num">9.0</td><td class="num">0.435</td><td class="num">0.275</td><td class="num">0.1</td></tr>
+              <tr><td>165×210</td><td class="num">34,650</td><td class="num">208.7</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">0.429</td><td class="num">0.258</td><td class="num">0.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>落ち方の試しは 44×56 で足りる。</strong>いちばん細かい布との差は平均 1.9 cm、時間は実践の細かさの 39%（39 秒）。</li>
+          <li><strong>粗い布ほど、角が短く垂れる。</strong>22×28 は 165×210 より 17 cm 高い所で止まった。裾の長さは最後の細かさで決める。</li>
+          <li><strong>点を増やしても、時間はそれほど増えない。</strong>点 56 倍で時間 11 倍。</li>
+          <li><strong>22×28 は粗すぎる。</strong>天板の上に波が残り、形の差も平均 3 cm を超えた。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

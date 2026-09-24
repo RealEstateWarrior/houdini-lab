@@ -1,0 +1,69 @@
+{
+ "fstop": 0.2,
+ "shutter": 1.0,
+ "rows": [
+  {
+   "case": "mblur",
+   "spp": 16,
+   "noise": 0.01,
+   "tag": "s_mblur_16",
+   "sec": 26.6
+  },
+  {
+   "case": "mblur",
+   "spp": 64,
+   "noise": 0.01,
+   "tag": "s_mblur_64",
+   "sec": 37.41
+  },
+  {
+   "case": "mblur",
+   "spp": 256,
+   "noise": 0.01,
+   "tag": "s_mblur_256",
+   "sec": 87.57
+  },
+  {
+   "case": "dof",
+   "spp": 16,
+   "noise": 0.01,
+   "tag": "s_dof_16",
+   "sec": 25.45
+  },
+  {
+   "case": "dof",
+   "spp": 64,
+   "noise": 0.01,
+   "tag": "s_dof_64",
+   "sec": 35.4
+  },
+  {
+   "case": "dof",
+   "spp": 256,
+   "noise": 0.01,
+   "tag": "s_dof_256",
+   "sec": 85.67
+  },
+  {
+   "case": "both",
+   "spp": 16,
+   "noise": 0.01,
+   "tag": "s_both_16",
+   "sec": 26.57
+  },
+  {
+   "case": "both",
+   "spp": 64,
+   "noise": 0.01,
+   "tag": "s_both_64",
+   "sec": 37.91
+  },
+  {
+   "case": "both",
+   "spp": 256,
+   "noise": 0.01,
+   "tag": "s_both_256",
+   "sec": 88.2
+  }
+ ]
+}

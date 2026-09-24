@@ -3639,7 +3639,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="nav-icon nav-burger" id="menu-open" aria-label="メニューを開く" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="nav-label">メニュー</span></button>
         <div class="subnav subnav--bar" data-g="1" hidden><a href="practice.html#guides" title="作り方を順に並べたもの" aria-current="page">実践</a><a href="practice.html#works" title="頼まれて作った一点物の記録">制作</a><a href="practice.html#requests" title="作ってほしいものと、その順番">要望</a></div>
         <div class="subnav subnav--bar" data-g="2" hidden><a href="index.html#experiments" title="1件ずつ。押すと中身が開く">実験集</a><a href="log.html" title="形を作る側">モデリング編</a><a href="log_fx.html" title="動かす側">エフェクト編</a><a href="index.html#speed" title="速さについて分かったこと">効率化</a><a href="reference.html#links" title="外の資料">参考リンク</a></div>
-        <div class="subnav subnav--bar" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a></div>
+        <div class="subnav subnav--bar" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a><a href="vex.html" title="書き方・使い方・測って分かったこと">VEX 解説</a></div>
       </div>
       <div class="brand">
         <a class="brand-logo" href="../" aria-label="Saito Production（親のページへ）" title="Saito Productionへ"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg></a>
@@ -3710,6 +3710,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
                   <ul>
                     <li><a href="reference.html#nodes">ノード解説</a><span class="mega-note">箱ひとつずつの説明</span></li>
                     <li><a href="reference.html#glossary">用語集</a><span class="mega-note">言葉の意味</span></li>
+                    <li><a href="vex.html">VEX 解説</a><span class="mega-note">書き方・使い方・測って分かったこと</span></li>
                   </ul>
                 </div>
               </div>
@@ -3726,7 +3727,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     </div>
     <div class="subnav subnav--row" data-g="1" hidden><a href="practice.html#guides" title="作り方を順に並べたもの" aria-current="page">実践</a><a href="practice.html#works" title="頼まれて作った一点物の記録">制作</a><a href="practice.html#requests" title="作ってほしいものと、その順番">要望</a></div>
     <div class="subnav subnav--row" data-g="2" hidden><a href="index.html#experiments" title="1件ずつ。押すと中身が開く">実験集</a><a href="log.html" title="形を作る側">実験ログ モデリング編</a><a href="log_fx.html" title="動かす側">実験ログ エフェクト編</a><a href="index.html#speed" title="速さについて分かったこと">効率化</a><a href="reference.html#links" title="外の資料">参考リンク</a></div>
-    <div class="subnav subnav--row" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a></div>
+    <div class="subnav subnav--row" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a><a href="vex.html" title="書き方・使い方・測って分かったこと">VEX 解説</a></div>
   </nav>
   <div class="shell guide-page">
 
@@ -3901,8 +3902,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/glossary-data-7523c388e2.js"></script>
-<script src="data/node-data-123d142505.js"></script>
+<script src="data/glossary-data-5fdcba2d4d.js"></script>
+<script src="data/node-data-1c484f0f3d.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
   /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
@@ -4080,10 +4081,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>203</dd></div>
+        <div><dt>実験</dt><dd>206</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
-        <div><dt>ノード</dt><dd>384</dd></div>
-        <div><dt>用語</dt><dd>433</dd></div>
+        <div><dt>ノード</dt><dd>387</dd></div>
+        <div><dt>用語</dt><dd>443</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -4103,6 +4104,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <li class="foot-group"><a class="foot-link" href="reference.html#nodes"><span>解説</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <ul class="foot-kids">
               <li><a href="reference.html#glossary"><span>用語集</span></a></li>
+              <li><a href="vex.html"><span>VEX 解説</span></a></li>
             </ul>
           </li>
       </ul>
@@ -4154,9 +4156,9 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_203.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>203本の実験。最新は実験203</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>384件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>433語</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_206.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>206本の実験。最新は実験206</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>387件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>443語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -4259,7 +4261,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-b136ce080a.js"></script>
+<script src="data/search-data-6820650c63.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

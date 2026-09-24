@@ -49,7 +49,9 @@ ALLOW = [
 
 # この中の文字はリンクしない。数値表や見出しに点線が入ると読みにくい。
 SKIP_TAGS = {"code", "button", "table", "thead", "tbody", "tr", "th", "td",
-             "h1", "h2", "h3", "h4", "figcaption", "script", "style", "a"}
+             "h1", "h2", "h3", "h4", "figcaption", "script", "style", "a",
+             # VEX 解説（2026-09-24）: ページの題・コードの塊・図の中の文字には付けない
+             "title", "pre", "svg"}
 SKIP_CLASSES = ("chip", "path", "label", "eyebrow", "thumb-no", "gloss-meta")
 VOID_TAGS = {"br", "img", "hr", "input", "meta", "link", "source"}
 

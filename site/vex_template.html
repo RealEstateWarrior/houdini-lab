@@ -1,0 +1,327 @@
+<title>VEX 解説 — Houdini 研究部</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+<!--CSS-->
+/* VEX 解説ページだけの形 */
+.vx-toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 8px; padding: 0; list-style: none; }
+.vx-toc a { display: inline-block; padding: 6px 12px; border: 1px solid var(--wire); border-radius: 999px;
+  font-size: 0.84rem; color: var(--ink); text-decoration: none; }
+.vx-toc a:hover { border-color: var(--flag); color: var(--flag); }
+.vx-sec { margin-top: 56px; scroll-margin-top: 96px; }
+.vx-sec > h2 { font-size: 1.5rem; margin: 0 0 6px; letter-spacing: -0.01em; }
+.vx-sec > h2 small { display: block; font-size: 0.78rem; color: var(--ink-dim); font-weight: 500; letter-spacing: 0.04em; margin-bottom: 4px; }
+.vx-sec h3 { font-size: 1.08rem; margin: 30px 0 8px; }
+.vx-sec p, .vx-sec li { line-height: 1.85; max-width: 46em; }
+.vx-lead { font-size: 1.02rem; color: var(--ink-mid); }
+.vx-box { background: var(--panel-hi); border: 1px solid var(--wire-dim); border-radius: 14px; padding: 18px 20px; margin: 18px 0; }
+.vx-box p:first-child { margin-top: 0; }
+.vx-box p:last-child { margin-bottom: 0; }
+.vx-fig { margin: 18px 0; }
+.vx-fig img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--wire-dim); display: block; }
+.vx-fig figcaption { font-size: 0.82rem; color: var(--ink-dim); margin-top: 6px; line-height: 1.6; }
+.vx-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.vx-svg { width: 100%; height: auto; display: block; }
+.vx-svg text { font-family: inherit; fill: var(--ink); }
+.vx-svg .dim { fill: var(--ink-dim); }
+.vx-svg .box { fill: var(--panel); stroke: var(--wire); }
+.vx-svg .code { fill: var(--ink); }
+.vx-svg .code-t { fill: var(--on-ink); font-family: "JetBrains Mono", monospace; }
+.vx-svg .pt { fill: var(--flag); }
+.vx-svg .arr { stroke: var(--flag); fill: none; stroke-width: 1.6; }
+.vx-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; }
+.vx-sec .vx-table, .vx-sec .vx-table th, .vx-sec .vx-table td { font-family: var(--font-body); white-space: normal; }
+.vx-sec .vx-table td code { white-space: nowrap; }
+/* >= や != が 1 文字（≥ ≠）に化けて見えると、写すときに間違えるので合字を切る */
+.vx-sec pre, .vx-sec code { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
+.vx-table th, .vx-table td { border-bottom: 1px solid var(--wire-dim); padding: 9px 10px; text-align: left; vertical-align: top; line-height: 1.65; }
+.vx-table th { font-size: 0.78rem; color: var(--ink-dim); font-weight: 600; }
+.vx-table td:first-child { white-space: nowrap; }
+.vx-scroll { overflow-x: auto; }
+.vx-recipe { border: 1px solid var(--wire-dim); border-radius: 16px; padding: 18px; margin: 22px 0; background: var(--panel); }
+.vx-recipe h3 { margin-top: 0; }
+.vx-recipe .meta { font-size: 0.8rem; color: var(--ink-dim); margin: 0 0 10px; }
+.vx-recipe pre { margin: 10px 0; }
+.vx-recipe .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.vx-recipe .pics figure { margin: 0; }
+.vx-recipe .pics img { width: 100%; height: auto; border-radius: 10px; display: block; border: 1px solid var(--wire-dim); }
+.vx-recipe .pics figcaption { font-size: 0.78rem; color: var(--ink-dim); margin-top: 4px; }
+.vx-trap { margin: 12px 0; padding: 14px 16px; border-left: 3px solid var(--alert); background: var(--panel-hi); border-radius: 0 12px 12px 0; }
+.vx-trap strong { display: block; margin-bottom: 4px; }
+.vx-trap p { margin: 4px 0; }
+.vx-guides { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; padding: 0; list-style: none; }
+.vx-guides a { display: inline-block; padding: 6px 12px; border-radius: 10px; background: var(--panel-hi); border: 1px solid var(--wire-dim);
+  color: var(--ink); text-decoration: none; font-size: 0.86rem; }
+.vx-guides a:hover { border-color: var(--flag); color: var(--flag); }
+.vx-guides small { color: var(--ink-dim); margin-left: 4px; }
+.vx-dl { display: inline-block; margin-top: 8px; padding: 9px 16px; border-radius: 999px; background: var(--ink); color: var(--on-ink); text-decoration: none; font-size: 0.88rem; }
+.vx-dl:hover { background: var(--ink-hover); }
+@media (max-width: 720px) {
+  .vx-two, .vx-recipe .pics { grid-template-columns: 1fr; }
+  .vx-table td:first-child { white-space: normal; }
+}
+</style>
+
+<div class="layout">
+<!--NAV-->
+  <div class="shell">
+
+    <header class="masthead">
+      <p class="eyebrow">VEX</p>
+      <h1>VEX 解説</h1>
+      <p class="lede">
+        VEX は、Houdini の中で「点や面ひとつずつに同じ計算をさせる」ための短いプログラムです。
+        このページでは、何をするものか、どこに書くか、どう書くか、書くと結果がどうなるかを、
+        これまでの実験で測ったことを根拠にまとめました。
+        プログラムを書いたことがない人に向けて書いています。
+      </p>
+      <ul class="vx-toc">
+        <li><a href="#what">VEX とは</a></li>
+        <li><a href="#where">どこに書くか</a></li>
+        <li><a href="#grammar">書き方の基本</a></li>
+        <li><a href="#recipes">お手本 6 つ</a></li>
+        <li><a href="#results">測って分かったこと</a></li>
+        <li><a href="#traps">落とし穴</a></li>
+        <li><a href="#choose">VEX・VOP・Python の使い分け</a></li>
+        <li><a href="#guides">VEX を使う実践</a></li>
+      </ul>
+    </header>
+
+    <!-- ============ 1 ============ -->
+    <section class="vx-sec" id="what">
+      <h2><small>01 — What</small>VEX とは</h2>
+      <p class="vx-lead">
+        Houdini の形は、たくさんの点（ポイント）と、点をつないだ面（プリミティブ）でできています。
+        VEX を使うと、<strong>「1 つの点に何をするか」だけを書けば、Houdini がそれを全部の点に配って、同時に計算してくれます。</strong>
+      </p>
+      <figure class="vx-fig">
+        <svg class="vx-svg" viewBox="0 0 720 230" role="img" aria-label="1つのコードが、たくさんの点に同時に配られる図">
+          <rect class="code" x="20" y="60" width="250" height="96" rx="12"/>
+          <text class="code-t" x="38" y="92" font-size="14">// 1 つの点にすること</text>
+          <text class="code-t" x="38" y="118" font-size="14">@P.y += 0.5;</text>
+          <text class="code-t" x="38" y="142" font-size="14">@Cd = {1, 0, 0};</text>
+          <text class="dim" x="20" y="186" font-size="13">書くのは 1 回だけ</text>
+          <path class="arr" d="M280 108 C 330 108, 330 40, 390 40"/>
+          <path class="arr" d="M280 108 C 330 108, 330 80, 390 80"/>
+          <path class="arr" d="M280 108 L 390 120"/>
+          <path class="arr" d="M280 108 C 330 108, 330 160, 390 160"/>
+          <path class="arr" d="M280 108 C 330 108, 330 200, 390 200"/>
+          <g>
+            <circle class="pt" cx="404" cy="40" r="7"/><text x="422" y="45" font-size="14">点 0 … 上へ 0.5、赤に</text>
+            <circle class="pt" cx="404" cy="80" r="7"/><text x="422" y="85" font-size="14">点 1 … 上へ 0.5、赤に</text>
+            <circle class="pt" cx="404" cy="120" r="7"/><text x="422" y="125" font-size="14">点 2 … 上へ 0.5、赤に</text>
+            <circle class="pt" cx="404" cy="160" r="7"/><text x="422" y="165" font-size="14">点 3 … 上へ 0.5、赤に</text>
+            <text class="dim" x="404" y="205" font-size="14">…… 100 万個でも同じ</text>
+          </g>
+        </svg>
+        <figcaption>コードは「1 つの点に対して」書く。Houdini が点の数だけ、同時に並べて走らせる。</figcaption>
+      </figure>
+      <h3>なぜ使うのか</h3>
+      <ul>
+        <li><strong>ノードに無い処理を作れる。</strong>「高さで色を変える」「近くの点を数える」「条件に合う面だけ消す」のような、ちょっとした決まりを自分で書ける。</li>
+        <li><strong>速い。</strong>100 万個の点に同じ計算をさせたところ、VEX（点ごと）は 1.3 ミリ秒で終わった。同じ計算を 1 つのループで順に回すと約 170 倍、Python で書くと約 260 倍かかった（<a href="exp:173">実験173</a>）。</li>
+        <li><strong>シーンのあちこちで同じ書き方が使える。</strong>点・面・ボリューム（升目の値）・シミュレーション中の粒に、同じ言葉で書ける。</li>
+      </ul>
+      <div class="vx-box">
+        <p><strong>ひとことで言うと：</strong>VEX は「点ひとつ分の指示書」です。点の位置 <code>@P</code>、色 <code>@Cd</code> のような、点が持っている値（アトリビュート）を読んだり書き換えたりします。</p>
+      </div>
+    </section>
+
+    <!-- ============ 2 ============ -->
+    <section class="vx-sec" id="where">
+      <h2><small>02 — Where</small>どこに書くか</h2>
+      <p class="vx-lead">いちばんよく使うのは <code>attribwrangle</code>（Attribute Wrangle）というノードです。</p>
+      <ol>
+        <li>ネットワークで Tab キーを押し、「Attribute Wrangle」と打って置く。</li>
+        <li>上に形（例：<code>grid</code>）のノードをつなぐ。Wrangle の入口は 4 つあり、いちばん左（番号 0）が「書き換える形」。</li>
+        <li>つまみの画面の <strong>VEXpression</strong> の欄にコードを書く。書いたらすぐ結果がビューポートに出る。</li>
+        <li><strong>Run Over</strong>（ランオーバー）で、何ごとに走らせるかを選ぶ。既定は Points（点ごと）。</li>
+      </ol>
+      <div class="vx-two">
+        <figure class="vx-fig">
+          <img src="guide_vex_net.png" alt="grid の下に Attribute Wrangle を 2 つつないだネットワーク" loading="lazy">
+          <figcaption>形（grid）の下に Wrangle をつなぐ。上の Wrangle で波を作り、下の Wrangle で色を塗っている（実践「VEX で点を動かす」）。</figcaption>
+        </figure>
+        <figure class="vx-fig">
+          <img src="guide_vex_p2_parm.png" alt="Attribute Wrangle のつまみ。Run Over と VEXpression の欄" loading="lazy">
+          <figcaption>Wrangle のつまみ。<strong>Run Over</strong> で走らせる単位を選び、<strong>VEXpression</strong> にコードを書く。</figcaption>
+        </figure>
+      </div>
+      <h3>Run Over で「何ごとに」走るかが変わる</h3>
+      <p>同じ <code>@marker = 1.0;</code> というコードでも、Run Over を変えると、できる値の置き場所が変わりました（<a href="exp:009">実験009</a>）。</p>
+      <div class="vx-scroll">
+      <table class="vx-table">
+        <tr><th>Run Over</th><th>何回走るか</th><th>書いた値の置き場所</th><th>向いていること</th></tr>
+        <tr><td>Points（既定）</td><td>点の数だけ</td><td>点</td><td>点を動かす・色を塗る・大きさを決める</td></tr>
+        <tr><td>Primitives</td><td>面の数だけ</td><td>面</td><td>面ごとに色を変える・面を消す</td></tr>
+        <tr><td>Vertices</td><td>頂点の数だけ</td><td>頂点（面の角）</td><td>UV など、面の角ごとに違う値</td></tr>
+        <tr><td>Detail (only once)</td><td>全体で 1 回</td><td>形全体に 1 つ</td><td>点や線を新しく作る・全体の数を数える</td></tr>
+        <tr><td>Numbers</td><td>指定した回数</td><td>置き場所は無かった</td><td>（実験009 では値が作られなかった）</td></tr>
+      </table>
+      </div>
+      <h3>ほかに VEX を書ける所</h3>
+      <div class="vx-scroll">
+      <table class="vx-table">
+        <tr><th>ノード</th><th>何ごとに走るか</th><th>使った例</th></tr>
+        <tr><td><code>volumewrangle</code></td><td>ボリュームの升目 1 つずつ</td><td>Pyro の速度 vel を、煙の無い升だけ 0 にした（<a href="exp:204">実験204</a>）</td></tr>
+        <tr><td><code>popwrangle</code></td><td>シミュレーション中の粒 1 つずつ（毎ステップ）</td><td>花びらを少しずつ回した（実践「桜の花びらが舞い散る」）</td></tr>
+        <tr><td><code>attribvop</code></td><td>Wrangle と同じ</td><td>コードの代わりに箱をつないで書く（VOP）。中身は VEX になる</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <!-- ============ 3 ============ -->
+    <section class="vx-sec" id="grammar">
+      <h2><small>03 — Grammar</small>書き方の基本</h2>
+      <h3>1. 1 行に 1 つの指示。最後に「;」</h3>
+<pre><code>@P.y = @P.y + 0.5;   // 点を 0.5 だけ上へ
+@P.y += 0.5;          // 同じ意味の短い書き方</code></pre>
+      <p><code>//</code> から行の終わりまではメモ（コメント）で、計算には使われません。</p>
+
+      <h3>2. 「@」で点の値を読み書きする</h3>
+      <p>頭に <code>@</code> を付けた名前は、いま計算している点（や面）が持っている値です。よく使うものは次のとおりです。</p>
+      <div class="vx-scroll">
+      <table class="vx-table">
+        <tr><th>書き方</th><th>中身</th><th>例</th></tr>
+        <tr><td><code>@P</code></td><td>位置（x, y, z の 3 つ組）</td><td><code>@P.y</code> で高さだけ</td></tr>
+        <tr><td><code>@Cd</code></td><td>色（赤, 緑, 青。0〜1）</td><td><code>@Cd = {1, 0, 0};</code> で赤</td></tr>
+        <tr><td><code>@N</code></td><td>法線（面が向いている方向）</td><td><code>@P += @N * 0.1;</code> で外へふくらませる</td></tr>
+        <tr><td><code>@pscale</code></td><td>大きさ</td><td>Copy to Points で並べた物の大きさになる</td></tr>
+        <tr><td><code>@ptnum</code></td><td>いまの点の番号（0 から）</td><td>乱数の種に使う</td></tr>
+        <tr><td><code>@numpt</code></td><td>点の数</td><td><code>@ptnum / (@numpt - 1.0)</code> で 0〜1</td></tr>
+        <tr><td><code>@primnum</code></td><td>いまの面の番号</td><td>Run Over が Primitives のとき</td></tr>
+        <tr><td><code>@Time</code> / <code>@Frame</code></td><td>いまの時刻（秒）/ フレーム</td><td>動かすとき</td></tr>
+      </table>
+      </div>
+      <p>無い名前に書くと、その名前の値が新しく作られます（<a href="exp:009">実験009</a>）。</p>
+
+      <h3>3. 値の種類（型）</h3>
+      <div class="vx-scroll">
+      <table class="vx-table">
+        <tr><th>種類</th><th>中身</th><th>変数を作る書き方</th><th>@ で書くときの頭文字</th></tr>
+        <tr><td>float</td><td>小数</td><td><code>float h = 0.5;</code></td><td><code>f@height</code></td></tr>
+        <tr><td>int</td><td>整数</td><td><code>int n = 3;</code></td><td><code>i@count</code></td></tr>
+        <tr><td>vector</td><td>3 つ組（位置・色・向き）</td><td><code>vector c = {1, 0.5, 0};</code></td><td><code>v@dir</code></td></tr>
+        <tr><td>string</td><td>文字</td><td><code>string s = "rock";</code></td><td><code>s@name</code></td></tr>
+        <tr><td>配列</td><td>同じ種類の値の並び</td><td><code>int ids[] = nearpoints(0, @P, 0.2);</code></td><td><code>i[]@ids</code></td></tr>
+      </table>
+      </div>
+      <p>自分で作る値（<code>@height</code> など）は、頭文字で種類を決めておくと安全です。<code>@P</code>・<code>@Cd</code>・<code>@N</code> などの決まった名前は、付けなくても正しい種類で読まれます。</p>
+
+      <h3>4. 関数を使う</h3>
+      <p>よく使う計算は、関数として用意されています。このサイトで測ったものを挙げます。</p>
+      <div class="vx-scroll">
+      <table class="vx-table">
+        <tr><th>関数</th><th>すること</th><th>測って分かったこと</th></tr>
+        <tr><td><code>noise(p)</code></td><td>場所ごとになめらかに変わる値</td><td>0.06〜0.92 ほどにしか届かない（<a href="exp:135">実験135</a>）</td></tr>
+        <tr><td><code>snoise(p)</code></td><td>0 を中心に上下する値</td><td>±1 を超えて ±2 近くまで出る（<a href="exp:135">実験135</a>）</td></tr>
+        <tr><td><code>curlnoise(p)</code></td><td>渦を巻く流れ（向き）</td><td>湧き出しがほぼ無く、流した粒が固まらない（<a href="exp:171">実験171</a>・<a href="exp:172">172</a>）</td></tr>
+        <tr><td><code>rand(n)</code></td><td>番号から 0〜1 の乱数</td><td>同じ番号なら毎回同じ値</td></tr>
+        <tr><td><code>fit(v, a, b, c, d)</code></td><td>a〜b の値を c〜d に直す</td><td>範囲の外は端で止まる。止めたくなければ <code>efit</code>（<a href="exp:137">実験137</a>）</td></tr>
+        <tr><td><code>lerp(a, b, t)</code></td><td>a と b を t の割合で混ぜる</td><td><code>efit</code> と同じ直線で、範囲の外も伸びる（<a href="exp:137">実験137</a>）</td></tr>
+        <tr><td><code>smooth(a, b, x)</code></td><td>a〜b の間をなめらかに 0→1</td><td>形は 3x² − 2x³（<a href="exp:137">実験137</a>）</td></tr>
+        <tr><td><code>nearpoints(0, P, r)</code></td><td>半径 r の中の点の番号を、近い順に</td><td>自分も先頭に入る（<a href="exp:136">実験136</a>）。<code>pcfind</code> と同じ結果・同じ速さ（<a href="exp:181">実験181</a>）</td></tr>
+        <tr><td><code>xyzdist(1, P)</code></td><td>別の形の面までの距離</td><td>2 万点で数ミリ秒（<a href="exp:191">実験191</a>）</td></tr>
+        <tr><td><code>addpoint</code> / <code>addprim</code></td><td>点・面（線）を作る</td><td>Run Over を Detail にして使うことが多い（下のお手本 5）</td></tr>
+        <tr><td><code>removeprim</code></td><td>面を消す</td><td>下のお手本 4</td></tr>
+        <tr><td><code>blackbody(温度, 白の温度)</code></td><td>温度から炎の色</td><td>引数は 2 つ要る。1000K と 1500K は同じ色で頭打ち（<a href="exp:026">実験026</a>）</td></tr>
+      </table>
+      </div>
+
+      <h3>5. つまみを作って、数字をあとから動かす</h3>
+      <p>コードの中に <code>ch("height")</code> と書き、VEXpression の欄の右上にあるボタン（＋の付いた四角）を押すと、「height」というつまみ（スライダー）が Wrangle に付きます。数字をコードに直接書く代わりにこれを使うと、コードを開かずに結果を調整できます。</p>
+<pre><code>@P.y += noise(@P * 2) * ch("height");</code></pre>
+
+      <h3>6. 2 つめの入力を読む</h3>
+      <p>Wrangle の入口は 4 つあり、左から番号 0・1・2・3 です。関数の最初の数字でどの入力を読むかを選びます。たとえば <code>xyzdist(1, @P)</code> は「入口 1 につないだ形まで、いまの点からの距離」です（下のお手本 6）。</p>
+    </section>
+
+    <!-- ============ 4 ============ -->
+    <section class="vx-sec" id="recipes">
+      <h2><small>04 — Recipes</small>お手本 6 つ</h2>
+      <p class="vx-lead">
+        どれも、形を 1 つ置き、その下に Attribute Wrangle を 1 つつないでコードを貼るだけです。
+        左が Wrangle に入る前、右が Wrangle を通した後です。6 つとも同じシーンファイルに入っています。
+      </p>
+      <p><a class="vx-dl" href="vex_recipes.hipnc" download>シーンファイル（vex_recipes.hipnc）</a></p>
+<!--VEX_RECIPES-->
+    </section>
+
+    <!-- ============ 5 ============ -->
+    <section class="vx-sec" id="results">
+      <h2><small>05 — Results</small>測って分かったこと</h2>
+      <p class="vx-lead">これまでの実験で、VEX について確かめたことの一覧です。番号を押すと、その実験の記事が開きます。</p>
+      <div class="vx-scroll">
+      <table class="vx-table">
+        <tr><th>実験</th><th>問い</th><th>分かったこと</th></tr>
+        <tr><td><a href="exp:009">009</a></td><td>Wrangle は何回動くのか</td><td>Run Over は 5 種類。同じコードでも、値が点・面・頂点・全体のどこに作られるかが変わる。</td></tr>
+        <tr><td><a href="exp:173">173</a></td><td>VEX はどれだけ速いか</td><td>100 万点で 1.3 ミリ秒。Detail で 1 つのループにすると約 170 倍、Python は約 260 倍遅い。</td></tr>
+        <tr><td><a href="exp:174">174</a></td><td>for-each と比べると</td><td>かけら 1000 個の処理は、Wrangle 1 つにまとめると for-each の 30 倍速い。</td></tr>
+        <tr><td><a href="exp:010">010</a></td><td>for-each の中の番号</td><td>for-each の中では <code>@primnum</code> がいつも 0。何番目かはメタデータから読む。</td></tr>
+        <tr><td><a href="exp:135">135</a></td><td>ノイズの値の範囲</td><td><code>noise</code> は 0.06〜0.92、<code>snoise</code> は ±2 近く、<code>anoise</code> は 0 側に寄る。</td></tr>
+        <tr><td><a href="exp:137">137</a></td><td>fit・efit・lerp・smooth の違い</td><td><code>fit</code> は範囲の外で止まり、<code>efit</code> と <code>lerp</code> は伸び続ける。<code>smooth</code> は 3x² − 2x³。</td></tr>
+        <tr><td><a href="exp:136">136</a></td><td>近くの点の探し方</td><td><code>nearpoints</code> は自分を先頭に、近い順に返す。半径ちょうどの点は丸めで入ったり入らなかったりする。</td></tr>
+        <tr><td><a href="exp:178">178</a></td><td>近くの点を探す重さ</td><td><code>pcfind</code> の重さは「見つかった点の数」で決まる。最大の数を絞れば 1 点 0.1 マイクロ秒。</td></tr>
+        <tr><td><a href="exp:181">181</a>・<a href="exp:182">182</a></td><td>pcfilter は何の平均か</td><td>距離で重みを付けた平均で、重みの形は点の並びで変わる。ただの平均なら自分で足す。</td></tr>
+        <tr><td><a href="exp:171">171</a>・<a href="exp:172">172</a></td><td>渦のノイズ</td><td><code>curlnoise</code> で流した粒は混み具合を保つ。ふつうのノイズだと平均 2 倍以上に固まる。</td></tr>
+        <tr><td><a href="exp:153">153</a></td><td>つながりを数える</td><td><code>neighbourcount</code> の合計の半分が辺の数。そこから穴や離れた塊を見分けられる。</td></tr>
+        <tr><td><a href="exp:026">026</a></td><td>炎の色</td><td><code>blackbody</code> は引数 2 つ。1000K より下は色が変わらない。</td></tr>
+        <tr><td><a href="exp:204">204</a></td><td>Pyro のキャッシュを小さく</td><td>Volume Wrangle で煙の無い升の速度を 0 にすると、キャッシュが 16 分の 1 になった。</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <!-- ============ 6 ============ -->
+    <section class="vx-sec" id="traps">
+      <h2><small>06 — Traps</small>落とし穴</h2>
+      <p class="vx-lead">実験や実践で実際につまずいたところです。</p>
+      <div class="vx-trap"><strong>Run Over が違うと、値の置き場所が変わる</strong>
+        <p>色を点に塗ったつもりが面に付いていた、ということが起きる。Wrangle を置いたら、まず Run Over を確かめる（<a href="exp:009">実験009</a>）。</p></div>
+      <div class="vx-trap"><strong>Detail で全部の点をループすると遅い</strong>
+        <p>Detail は 1 回だけ走るので、同時に並べて計算できない。点ごとの計算は Points で書く。約 170 倍の差が出た（<a href="exp:173">実験173</a>）。</p></div>
+      <div class="vx-trap"><strong>noise() は 0〜1 いっぱいには出ない</strong>
+        <p>0.06〜0.92 ほど。0〜1 に使いたいなら <code>fit(n, 0.1, 0.9, 0, 1)</code> などで伸ばす（<a href="exp:135">実験135</a>）。</p></div>
+      <div class="vx-trap"><strong>fit() は範囲の外で止まる</strong>
+        <p>はみ出した分を残したいなら <code>efit()</code> を使う（<a href="exp:137">実験137</a>）。</p></div>
+      <div class="vx-trap"><strong>smooth(大きい数, 小さい数, x) は効かない</strong>
+        <p>逆向きのなだらかな変化が欲しいときは、<code>1 - smooth(小さい数, 大きい数, x)</code> と書く（実践を作っていて気づいた）。</p></div>
+      <div class="vx-trap"><strong>配列の { } の中に計算は書けない</strong>
+        <p><code>{0, h, 0}</code> のように変数を入れると止まる。<code>set(0, h, 0)</code> を使うか、<code>append()</code> で 1 つずつ足す。</p></div>
+      <div class="vx-trap"><strong>nearpoints() は自分も返す</strong>
+        <p>「ほかの点」だけがほしいなら、最大数を 1 つ多くして先頭を捨てる（<a href="exp:136">実験136</a>）。</p></div>
+      <div class="vx-trap"><strong>for-each の中の @primnum は 0</strong>
+        <p>1 つずつ切り出して計算しているため。何番目かが要るならメタデータを読む。そもそも Wrangle 1 つで書けないか先に考える（<a href="exp:010">実験010</a>・<a href="exp:174">174</a>）。</p></div>
+      <div class="vx-trap"><strong>Python から Run Over を変えるときの番号</strong>
+        <p><code>class</code> のつまみは 0 = Detail、1 = Primitives、2 = Points。</p></div>
+    </section>
+
+    <!-- ============ 7 ============ -->
+    <section class="vx-sec" id="choose">
+      <h2><small>07 — Choose</small>VEX・VOP・Python の使い分け</h2>
+      <div class="vx-scroll">
+      <table class="vx-table">
+        <tr><th>書き方</th><th>向いているとき</th><th>速さ（100 万点に同じ計算。<a href="exp:173">実験173</a>）</th></tr>
+        <tr><td>VEX（Wrangle）</td><td>点・面・升ごとの計算ほぼ全部。まずこれ</td><td>1.3 ミリ秒</td></tr>
+        <tr><td>VOP（箱をつなぐ）</td><td>コードを書かずに組みたいとき。中身は VEX になる</td><td>（測っていない）</td></tr>
+        <tr><td>Python</td><td>ファイルを読む・ノードを作る・シーンを組むなど、形の外の仕事</td><td>1 点ずつだと約 260 倍。値をまとめて読み書きすると、1 点ずつより約 6 倍速い</td></tr>
+      </table>
+      </div>
+    </section>
+
+    <!-- ============ 8 ============ -->
+    <section class="vx-sec" id="guides">
+      <h2><small>08 — Practice</small>VEX を使う実践</h2>
+      <p class="vx-lead">作り方の手順（実践）のうち、Wrangle を使っているものです。かっこの数は、その実践に出てくる Wrangle の数です。</p>
+<!--VEX_GUIDES-->
+    </section>
+
+    <footer>
+      <p>このページの元は <code>site/vex_template.html</code>。お手本の画とシーンは <code>examples/vex_recipes.py</code> で作った。</p>
+    </footer>
+
+  </div>
+</div>
+
+<!--GLOSSARY_DATA-->
+<!--POPOVER-->
+<!--CHROME-->

@@ -3639,7 +3639,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="nav-icon nav-burger" id="menu-open" aria-label="メニューを開く" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="nav-label">メニュー</span></button>
         <div class="subnav subnav--bar" data-g="1" hidden><a href="practice.html#guides" title="作り方を順に並べたもの">実践</a><a href="practice.html#works" title="頼まれて作った一点物の記録">制作</a><a href="practice.html#requests" title="作ってほしいものと、その順番">要望</a></div>
         <div class="subnav subnav--bar" data-g="2" hidden><a href="index.html#experiments" title="1件ずつ。押すと中身が開く">実験集</a><a href="log.html" title="形を作る側" aria-current="page">モデリング編</a><a href="log_fx.html" title="動かす側">エフェクト編</a><a href="index.html#speed" title="速さについて分かったこと">効率化</a><a href="reference.html#links" title="外の資料">参考リンク</a></div>
-        <div class="subnav subnav--bar" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a></div>
+        <div class="subnav subnav--bar" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a><a href="vex.html" title="書き方・使い方・測って分かったこと">VEX 解説</a></div>
       </div>
       <div class="brand">
         <a class="brand-logo" href="../" aria-label="Saito Production（親のページへ）" title="Saito Productionへ"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg></a>
@@ -3710,6 +3710,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
                   <ul>
                     <li><a href="reference.html#nodes">ノード解説</a><span class="mega-note">箱ひとつずつの説明</span></li>
                     <li><a href="reference.html#glossary">用語集</a><span class="mega-note">言葉の意味</span></li>
+                    <li><a href="vex.html">VEX 解説</a><span class="mega-note">書き方・使い方・測って分かったこと</span></li>
                   </ul>
                 </div>
               </div>
@@ -3726,7 +3727,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     </div>
     <div class="subnav subnav--row" data-g="1" hidden><a href="practice.html#guides" title="作り方を順に並べたもの">実践</a><a href="practice.html#works" title="頼まれて作った一点物の記録">制作</a><a href="practice.html#requests" title="作ってほしいものと、その順番">要望</a></div>
     <div class="subnav subnav--row" data-g="2" hidden><a href="index.html#experiments" title="1件ずつ。押すと中身が開く">実験集</a><a href="log.html" title="形を作る側" aria-current="page">実験ログ モデリング編</a><a href="log_fx.html" title="動かす側">実験ログ エフェクト編</a><a href="index.html#speed" title="速さについて分かったこと">効率化</a><a href="reference.html#links" title="外の資料">参考リンク</a></div>
-    <div class="subnav subnav--row" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a></div>
+    <div class="subnav subnav--row" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a><a href="vex.html" title="書き方・使い方・測って分かったこと">VEX 解説</a></div>
   </nav>
   <div class="crumbrow crumbrow--doc">
       <nav class="crumbs" aria-label="現在地"><a href="../">Saito Production</a><span class="crumb-sep" aria-hidden="true">›</span><a href="index.html">Houdini 研究部</a><span class="crumb-sep" aria-hidden="true">›</span><a href="index.html#experiments">実験</a><span class="crumb-sep" aria-hidden="true">›</span><span aria-current="page">実験ログ モデリング編</span></nav>
@@ -3735,7 +3736,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>138本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>139本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3882,6 +3883,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp198" data-anchor="exp198"><span class="doc-no">198</span><span class="doc-t">vdbreshapesdf の Open で丸めた辺の断面は円弧 — 半径は Offset × 升より 2.5〜3.2 升大きい</span></a></li>
         <li><a href="#exp199" data-anchor="exp199"><span class="doc-no">199</span><span class="doc-t">Open で丸めた辺の半径が約 3 升大きいのは、SDF の帯のせいではない — 帯 3〜25 升で足し分は変わらない</span></a></li>
         <li><a href="#exp203" data-anchor="exp203"><span class="doc-no">203</span><span class="doc-t">氷の入ったグラスを Karma で撮ると、サンプル1つあたり不透明の 6 倍の時間がかかる — 重ねた水と氷は +27% だけ。16 サンプル＋ノイズ除去なら約 3 分</span></a></li>
+        <li><a href="#exp205" data-anchor="exp205"><span class="doc-no">205</span><span class="doc-t">Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない — ざらつきを消すのはサンプル数ではなくノイズ除去。16 サンプル＋OIDN で 27 秒</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3893,7 +3895,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>203 / 203</dd></div>
+      <div><dt>実験</dt><dd>206 / 206</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -7957,7 +7959,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <li><strong>ただし届く側の誤差はゼロではない。</strong>IK は繰り返して近づける解き方なので、わずかに残る。<strong>二骨IK（実験055）が全桁一致だったのとは違う。</strong>あちらは一発で解けるが、こちらは近づけていく。</li>
           <li><strong>残る誤差は鎖が長いほど大きい。</strong>骨2本で 0.000076、16本で 0.002775、32本で <span class="hi">0.006901</span>。<strong>本数を2倍にすると誤差もおよそ2倍。</strong></li>
           <li><strong>いちばん誤差が出るのは「伸びきる直前」。</strong>遠さ 0.5 で 0.000024、1.0 で 0.001444。<strong>60倍。</strong></li>
-          <li><strong><code>solver</code> は4つの値のうち、実質2種類だった。</strong>0 / 2 / 3 は小数点以下9桁までまったく同じ。<strong>違うのは 1 だけ。</strong></li>
+          <li><strong><code class="node-ref" data-node="solver" tabindex="0" role="button">solver</code> は4つの値のうち、実質2種類だった。</strong>0 / 2 / 3 は小数点以下9桁までまったく同じ。<strong>違うのは 1 だけ。</strong></li>
           <li><strong>どちらが正確かは、条件でひっくり返る。</strong>8割までは solver=1 が 5〜100倍、9割を越えると既定が 5〜58倍。<strong>境目は 0.8 と 0.9 の間。</strong></li>
           <li><strong>だから「どちらが良い」とは言えない。</strong>伸ばしきる動きが多いなら既定、曲げた姿勢で細かく合わせたいなら 1。<strong>使い方で選ぶ。</strong></li>
           <li>測り方について。<strong><button class="term" data-term="ジオメトリ">ジオメトリ</button>を作らずに APEX の部品だけで測っている。</strong>シーンを組まないので、33関節でも一瞬で終わる。</li>
@@ -15789,6 +15791,94 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 205 ===================== -->
+    <article class="entry entry--current" id="exp205">
+      <div class="badge">205</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない — ざらつきを消すのはサンプル数ではなくノイズ除去。16 サンプル＋OIDN で 27 秒</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約4分</span><span class="coltag">レンダリング</span><span class="coltag">Karma</span><span class="coltag">速度</span><span class="coltag">被写界深度</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>ぼけ・ぶれは遠慮なく入れてよい。</strong>時間は +5%〜9% しか増えなかった。</li>
+            <li><strong>ざらつきが気になっても、サンプル数を上げない。</strong>既定の Noise Level 0.01 のままでは、256 にしても滑らかにならず、時間だけ 3.3 倍になった。</li>
+            <li><strong>仕上げは 16 サンプル＋ノイズ除去（OIDN）。</strong>27 秒で、Noise Level 0.0025（230 秒）より滑らかだった。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_205.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約4分</small></summary>
+        <p class="path">examples/205_karma_dof_mblur_cost.py &nbsp;·&nbsp; ぼけ・ぶれは +5〜9% だけ。ざらつきはサンプル数では消えず、16＋ノイズ除去で 27 秒</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">karma</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/205_scene.hipnc" target="_blank" rel="noopener noreferrer">205_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="205_graph.png" alt="実験205 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 映像らしく見せるために、ぼけ（被写界深度）とぶれ（モーションブラー）を入れたい。入れると何倍重くなるのか。ぼけ・ぶれた所のざらつきを消すには、何を上げればよいのか。</strong></p>
+          <p>奥へ並んだ球 7 つと、画面を横切る箱（秒速 12 m）を、960×540 で撮った。<button class="term" data-term="Karma">Karma</button> の決め方は既定のまま（Convergence Mode = Variance、Noise Level 0.01）で、Primary Samples と Max Secondary Samples を同じ数（16・64・256）にした。ぼけは F-Stop 0.7（<button class="term" data-term="ピン">ピン</button>トは 4 番目の球）、ぶれはカメラの Shutter Time 0.5 フレーム（既定）。強くした組は F-Stop 0.2・Shutter Time 1。ざらつきの目安は、画を 3×3 の中央値でならした画との差（画素の値 0〜255 の二乗平均の平方根）で、画全体・動く箱のまわり・手前の球のまわりで測った。（はじめは Noise Level 0.001 の画を答えにしようとしたが、1 枚 8 分を超えても終わらなかったのでやめた）</p>
+          <p><strong>ぼけ・ぶれを入れても、時間はほとんど増えない。</strong>16 <button class="term" data-term="サンプル">サンプル</button>で、無し 24.9 秒・ぶれ 26.1 秒・ぼけ 25.1 秒・両方 26.3 秒。強くしても 26.6 秒。64 サンプルでも 無し 34.8 秒 → 強い両方 37.9 秒（+9%）。</p>
+          <p><strong>ぶれた所は少しざらつく。</strong>16 サンプルの箱のまわりのざらつきは、無し 1.41・両方 1.61・強い両方 1.88。画全体では差がほとんど出ない（ぼけ・ぶれの所が画の一部だけのため）。</p>
+          <p><strong>サンプル数を上げても、ざらつきは減らなかった。</strong>両方入れた画で、16・64・256 サンプルは 26・37・88 秒と延びたのに、ざらつきは 1.77・2.32・2.45 と、むしろ増えた（拡大図でも 256 の方が粗い）。Noise Level 0.01 に届いた所でサンプルを打ち切る決め方なので、上限を上げても仕上がりのざらつきは Noise Level で決まると考えられるが、増える理由は確かめていない。</p>
+          <p><strong>Noise Level を下げると減るが、時間が大きく延びる。</strong>64 サンプルで 0.01・0.005・0.0025 は 37・81・230 秒、ざらつきは 2.32・1.50・1.28。16 サンプルのままだと 0.0025 でも 1.38（96 秒）までしか下がらない。</p>
+          <p><strong>いちばん効いたのは<button class="term" data-term="ノイズ">ノイズ</button>除去（Denoiser = OIDN）。</strong>16 サンプル＋ノイズ除去は 26.5 秒（入れない 26.3 秒とほぼ同じ）で、ざらつきは画全体 1.19・箱のまわり 0.27。Noise Level 0.0025 の 230 秒（箱のまわり 0.60）より、短い時間で滑らかになった。コントラストを 4 倍にして拡大すると、ノイズ除去の画には大きなむらが少し見える。細かい模様のある物まで一緒にならしてしまうかは、この場面（模様が無い）では確かめていない。</p>
+        </div>
+
+        <p class="label">ぼけ・ぶれの見た目（16 サンプル）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="205_look.png" alt="左から 無し・両方（F-Stop 0.7、Shutter 0.5）・強い両方（F" loading="lazy" decoding="async"></div>
+            <figcaption>左から 無し・両方（F-Stop 0.7、Shutter 0.5）・強い両方（F-Stop 0.2、Shutter 1）。箱は右へ秒速 12 m で動いている。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">ざらつき（背景の一部を 2 倍に拡大し、コントラストを 4 倍にした）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="205_grain.png" alt="サンプルを 256 に上げると、かえって粗い。Noise Level を下げるか" loading="lazy" decoding="async"></div>
+            <figcaption>サンプルを 256 に上げると、かえって粗い。Noise Level を下げるか、ノイズ除去を入れると滑らかになる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件（サンプル数）</th><th>秒</th><th>ざらつき（全体）</th><th>箱のまわり</th><th>手前の球</th></tr></thead>
+            <tbody>
+              <tr><td>ぼけ・ぶれ無し・16</td><td class="num">24.9</td><td class="num">1.76</td><td class="num">1.41</td><td class="num">1.38</td></tr>
+              <tr><td>ぼけ・ぶれ無し・64</td><td class="num">34.8</td><td class="num">2.32</td><td class="num">1.89</td><td class="num">1.88</td></tr>
+              <tr><td>ぼけ・ぶれ無し・256</td><td class="num">85.0</td><td class="num">2.46</td><td class="num">2.08</td><td class="num">2.07</td></tr>
+              <tr><td>ぶれ・16</td><td class="num">26.1</td><td class="num">1.76</td><td class="num">1.59</td><td class="num">1.38</td></tr>
+              <tr><td>ぼけ・16</td><td class="num">25.1</td><td class="num">1.76</td><td class="num">1.45</td><td class="num">1.39</td></tr>
+              <tr><td>両方・16</td><td class="num">26.3</td><td class="num">1.77</td><td class="num">1.61</td><td class="num">1.39</td></tr>
+              <tr><td>両方・64</td><td class="num">36.5</td><td class="num">2.32</td><td class="num">1.79</td><td class="num">1.89</td></tr>
+              <tr><td>両方・256</td><td class="num">87.5</td><td class="num">2.45</td><td class="num">1.98</td><td class="num">2.04</td></tr>
+              <tr><td>両方を強く・16</td><td class="num">26.6</td><td class="num">1.79</td><td class="num">1.88</td><td class="num">1.48</td></tr>
+              <tr><td>両方を強く・64</td><td class="num">37.9</td><td class="num">2.31</td><td class="num">1.71</td><td class="num">1.84</td></tr>
+              <tr><td>両方を強く・256</td><td class="num">88.2</td><td class="num">2.46</td><td class="num">1.92</td><td class="num">2.02</td></tr>
+              <tr><td>両方・16・Noise Level 0.005</td><td class="num">60.0</td><td class="num">1.44</td><td class="num">1.36</td><td class="num">0.94</td></tr>
+              <tr><td>両方・16・Noise Level 0.0025</td><td class="num">96.1</td><td class="num">1.38</td><td class="num">1.32</td><td class="num">0.84</td></tr>
+              <tr><td>両方・64・Noise Level 0.005</td><td class="num">81.3</td><td class="num">1.50</td><td class="num">0.90</td><td class="num">0.87</td></tr>
+              <tr><td>両方・64・Noise Level 0.0025</td><td class="num">230.2</td><td class="num">1.28</td><td class="num">0.60</td><td class="num">0.48</td></tr>
+              <tr><td>両方・16・ノイズ除去</td><td class="num">26.5</td><td class="num">1.19</td><td class="num">0.27</td><td class="num">0.18</td></tr>
+              <tr><td>両方・64・ノイズ除去</td><td class="num">37.0</td><td class="num">1.19</td><td class="num">0.28</td><td class="num">0.19</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ぼけ・ぶれは遠慮なく入れてよい。</strong>時間は +5%〜9% しか増えなかった。</li>
+          <li><strong>ざらつきが気になっても、サンプル数を上げない。</strong>既定の Noise Level 0.01 のままでは、256 にしても滑らかにならず、時間だけ 3.3 倍になった。</li>
+          <li><strong>仕上げは 16 サンプル＋ノイズ除去（OIDN）。</strong>27 秒で、Noise Level 0.0025（230 秒）より滑らかだった。</li>
+          <li><strong>ノイズ除去が使えない場面では Noise Level を下げる。</strong>0.005 で約 2 倍、0.0025 で約 6 倍の時間。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
+
+    <!-- ===================== 204 ===================== -->
+
   </div>
 
   <footer>
@@ -15804,8 +15894,8 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-7523c388e2.js"></script>
-<script src="data/node-data-123d142505.js"></script>
+<script src="data/glossary-data-5fdcba2d4d.js"></script>
+<script src="data/node-data-1c484f0f3d.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
   /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
@@ -15983,10 +16073,10 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>203</dd></div>
+        <div><dt>実験</dt><dd>206</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
-        <div><dt>ノード</dt><dd>384</dd></div>
-        <div><dt>用語</dt><dd>433</dd></div>
+        <div><dt>ノード</dt><dd>387</dd></div>
+        <div><dt>用語</dt><dd>443</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -16006,6 +16096,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <li class="foot-group"><a class="foot-link" href="reference.html#nodes"><span>解説</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <ul class="foot-kids">
               <li><a href="reference.html#glossary"><span>用語集</span></a></li>
+              <li><a href="vex.html"><span>VEX 解説</span></a></li>
             </ul>
           </li>
       </ul>
@@ -16057,9 +16148,9 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_203.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>203本の実験。最新は実験203</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>384件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>433語</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_206.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>206本の実験。最新は実験206</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>387件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>443語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -16162,7 +16253,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-b136ce080a.js"></script>
+<script src="data/search-data-6820650c63.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

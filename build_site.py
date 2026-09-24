@@ -63,6 +63,8 @@ ARTIFACT_URLS = {
     # ハブを3つに分けたので、実践と解説は別のArtifactになる（2026-09-20 発行）
     "guides": "https://claude.ai/artifact/WthDFVCMFYPpKBXrgkwWzs",
     "ref": "https://claude.ai/artifact/GbMG66nTbwbAYRBRCg6Le7",
+    # VEX 解説は GitHub 版だけ（2026-09-24 新設。Artifact の写しは出していない）
+    "vex": "https://realestatewarrior.github.io/houdini-lab/vex.html",
 }
 
 # GitHub Pages 版。ルートがハブになるよう index.html をハブに割り当てる。
@@ -75,6 +77,7 @@ PAGES_URLS = {
     "links": "links.html",
     "guides": "practice.html",
     "ref": "reference.html",
+    "vex": "vex.html",
     # 親は別リポジトリの入口（realestatewarrior.github.io/）。
     # この部のページは /houdini-lab/ 以下なので、1つ上が親になる。
     "parent": "../",
@@ -90,6 +93,7 @@ ROOT_URLS = {
     "links": "houdini-lab/links.html",
     "guides": "houdini-lab/practice.html",
     "ref": "houdini-lab/reference.html",
+    "vex": "houdini-lab/vex.html",
     "parent": "index.html",
 }
 
@@ -193,12 +197,13 @@ MENU = [
         ("調べる", [
             ("nodes", "ノード解説", "箱ひとつずつの説明"),
             ("glossary", "用語集", "言葉の意味"),
+            ("@vex", "VEX 解説", "書き方・使い方・測って分かったこと"),
         ]),
     ]),
 ]
 
 # その行き先にいるときに印を付けるための対応表
-ACTIVE_OF = {"glossary": "解説", "links": "実験", "log": "実験", "log_fx": "実験"}
+ACTIVE_OF = {"glossary": "解説", "vex": "解説", "links": "実験", "log": "実験", "log_fx": "実験"}
 
 # Claude 版は1つの版に置けるファイルが512まで。パネルを全部1ページに入れると
 # 529 必要で入らない（実践のパラメータ画面163・実験の図145・サムネイル104…）。
@@ -1380,6 +1385,24 @@ DONE = [
      "shots": ["203_compare.png", "203_spp.png"],
      "title": "氷の入ったグラスを Karma で撮ると、サンプル1つあたり不透明の 6 倍の時間がかかる — 重ねた水と氷は +27% だけ。16 サンプル＋ノイズ除去なら約 3 分",
      "note": "透明な物はサンプル1つあたり6倍。16サンプル＋ノイズ除去で"},
+    {"no": "204", "anchor": "exp204",
+     "tags": ["エフェクト", "Pyro", "キャッシュ", "容量", "VDB"],
+     "log": "log_fx", "thumb": "204_size.png",
+     "shots": ["204_size.png", "204_graph.png"],
+     "title": "焚き火の Pyro のキャッシュは、9 割以上が速度（vel）— vel を煙のある所だけに残して VDB・16 bit にすると 16 分の 1、描画に使う値のずれは 0.00025",
+     "note": "焚き火のキャッシュの9割は vel。煙のある所だけに残して VDB・16 bit で 16 分の 1"},
+    {"no": "205", "anchor": "exp205",
+     "tags": ["レンダリング", "Karma", "速度", "被写界深度", "モーションブラー"],
+     "log": "log_pm", "thumb": "205_look.png",
+     "shots": ["205_look.png", "205_grain.png", "205_graph.png"],
+     "title": "Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない — ざらつきを消すのはサンプル数ではなくノイズ除去。16 サンプル＋OIDN で 27 秒",
+     "note": "ぼけ・ぶれは +5〜9% だけ。ざらつきはサンプル数では消えず、16＋ノイズ除去で 27 秒"},
+    {"no": "206", "anchor": "exp206",
+     "tags": ["エフェクト", "Vellum", "布", "速度", "解像度"],
+     "log": "log_fx", "thumb": "206_grid.png",
+     "shots": ["206_grid.png", "206_anim.gif", "206_graph.png"],
+     "title": "テーブルクロスを粗い布で試すなら 44×56 まで — 落ち方の差は平均 1.9 cm で、計算は 39 秒（実践の細かさの 39%）。ただし粗いほど角の垂れが短く、22×28 では 17 cm 高い",
+     "note": "粗い布での試しは 44×56 まで。差は平均 1.9 cm、時間は 39%。角の垂れだけ短い"},
 ]
 
 PLANNED = []
@@ -1400,6 +1423,7 @@ PAGES = [
     ("glossary_template.html", "glossary.html", "glossary.html", "glossary",
      False, None),
     ("links_template.html", "links.html", "links.html", "links", False, None),
+    ("vex_template.html", "vex.html", "vex.html", "vex", False, None),
 ]
 
 
@@ -3185,6 +3209,8 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
         ("<!--SP_RECENT-->", render_sp_recent(urls)),
         ("<!--SP_GUIDES-->", render_sp_guides(guides, urls)),
         ("<!--GUIDE_COUNT-->", str(len(guides["guides"]))),
+        ("<!--VEX_RECIPES-->", render_vex_recipes() if "<!--VEX_RECIPES-->" in page else ""),
+        ("<!--VEX_GUIDES-->", render_vex_guides(guides, urls) if "<!--VEX_GUIDES-->" in page else ""),
     ):
         page = page.replace(needle, value)
 
@@ -3195,6 +3221,9 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     unknown = sorted(set(re.findall(r'data-term="([^"]+)"', page)) - all_keys(data))
     if unknown:
         raise SystemExit(f"{template_name}: 用語集に存在しない用語: {unknown}")
+
+    if active == "vex":
+        page = link_vex_page(page, urls)
 
     if "entry" in page and 'id="exp' in page:
         page = inject_experiment_links(page, urls, nodes)
@@ -3220,6 +3249,61 @@ def render(template_name, out_dir, out_name, active, tabs, urls,
     with open(out_path, "w", encoding="utf-8") as fp:
         fp.write(page)
     return out_path
+
+
+VEX_RECIPES = os.path.join(OUT, "vex_recipes.json")
+
+
+def render_vex_recipes():
+    """VEX 解説のお手本。コードは examples/vex_recipes.py が書き出した json から取る（手で写さない）。"""
+    with open(VEX_RECIPES, encoding="utf-8") as fp:
+        recipes = json.load(fp)
+    out = []
+    for i, r in enumerate(recipes, 1):
+        pics = []
+        if r.get("before"):
+            pics.append(f'<figure><img src="vex_{r["id"]}_before.png" alt="Wrangle に入る前" loading="lazy">'
+                        '<figcaption>Wrangle に入る前</figcaption></figure>')
+        else:
+            pics.append('<figure><div class="vx-box" style="height:100%;margin:0;display:flex;align-items:center;">'
+                        '<p>入力は何もつながない。空っぽのところに、コードが点と線を作る。</p></div></figure>')
+        pics.append(f'<figure><img src="vex_{r["id"]}.png" alt="{html.escape(r["title"])}の結果" loading="lazy">'
+                    '<figcaption>Wrangle を通した後</figcaption></figure>')
+        out.append(
+            f'      <div class="vx-recipe" id="recipe-{r["id"]}">\n'
+            f'        <h3>{i}. {html.escape(r["title"])}</h3>\n'
+            f'        <p class="meta">Run Over: {html.escape(r["run"])} ／ 結果は 点 {r["points"]:,} 個・面（線）{r["prims"]:,} 枚</p>\n'
+            f'        <p>{r["why"]}</p>\n'
+            f'<pre><code>{html.escape(r["code"])}</code></pre>\n'
+            f'        <div class="pics">{"".join(pics)}</div>\n'
+            f'        <p>{r.get("result", "")}</p>\n'
+            '      </div>')
+    return "\n".join(out)
+
+
+def render_vex_guides(guides, urls):
+    """Wrangle を使っている実践の一覧（多い順）。"""
+    rows = []
+    for g in guides["guides"]:
+        n = json.dumps(g, ensure_ascii=False).count("wrangle")
+        if n:
+            rows.append((n, g))
+    rows.sort(key=lambda x: -x[0])
+    items = "".join(f'<li><a href="{guide_url(urls, g["id"])}">{html.escape(g["title"])}<small>{n}</small></a></li>'
+                    for n, g in rows)
+    return f'      <ul class="vx-guides">{items}</ul>'
+
+
+def link_vex_page(page, urls):
+    """VEX 解説の本文の href="exp:NNN" を実験ログの記事へ、hip を GitHub へ向け、用語にポップアップを付ける。"""
+    logs = {e["no"]: e["log"] for e in DONE}
+
+    def exp(m):
+        no = m.group(1)
+        return f'href="{urls[logs.get(no, "log_pm")]}#exp{no}" target="_blank" rel="noopener"'
+    page = re.sub(r'href="exp:(\d+)"', exp, page)
+    page = page.replace('href="vex_recipes.hipnc"', f'href="{GITHUB_RAW}vex_recipes.hipnc"')
+    return link_terms_in(page)
 
 
 # 1本ずつの実践ページの説明文とカード画像（page_meta と sitemap が読む）
@@ -3307,6 +3391,7 @@ PAGE_DESCRIPTION = {
     "log_fx.html": "Houdini 実験ログ エフェクト編。RBD・Vellum・POP・MPM・煙などのシミュレーションを測った数値で記録。",
     "glossary.html": "Houdini の用語辞典。実験で確かめた値を添えた日本語の説明。",
     "links.html": "Houdini を学ぶための参考リンク集。",
+    "vex.html": "Houdini の VEX の解説。何をするものか、どこに書くか、書き方、お手本6つ、実験で測って分かったこと、落とし穴。",
 }
 OG_IMAGE = "thumb_008.png"
 

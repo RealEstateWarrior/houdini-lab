@@ -1,0 +1,5 @@
+{'case': 'both', 'spp': 16, 'noise': 0.005, 'denoise': False, 'tag': 'tune_both_16_n0.005', 'sec': 59.96}
+{'case': 'both', 'spp': 16, 'noise': 0.0025, 'denoise': False, 'tag': 'tune_both_16_n0.0025', 'sec': 96.06}
+{'case': 'both', 'spp': 16, 'noise': 0.01, 'denoise': True, 'tag': 'tune_both_16_oidn', 'sec': 26.51}
+{'case': 'both', 'spp': 64, 'noise': 0.01, 'denoise': True, 'tag': 'tune_both_64_oidn', 'sec': 37.0}
+書いた: 205_times_tune.json

@@ -9757,6 +9757,78 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 205 ===================== -->
+    <article class="entry entry--current" id="exp205">
+      <div class="badge">205</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Karma のぼけ（被写界深度）とぶれ（モーションブラー）は、時間を +5%〜9% しか増やさない — ざらつきを消すのはサンプル数ではなくノイズ除去。16 サンプル＋OIDN で 27 秒</h2>
+        <p class="path">examples/205_karma_dof_mblur_cost.py &nbsp;·&nbsp; ぼけ・ぶれは +5〜9% だけ。ざらつきはサンプル数では消えず、16＋ノイズ除去で 27 秒</p>
+
+        <div class="prose">
+          <p><strong>課題: 映像らしく見せるために、ぼけ（被写界深度）とぶれ（モーションブラー）を入れたい。入れると何倍重くなるのか。ぼけ・ぶれた所のざらつきを消すには、何を上げればよいのか。</strong></p>
+          <p>奥へ並んだ球 7 つと、画面を横切る箱（秒速 12 m）を、960×540 で撮った。<button class="term" data-term="Karma">Karma</button> の決め方は既定のまま（Convergence Mode = Variance、Noise Level 0.01）で、Primary Samples と Max Secondary Samples を同じ数（16・64・256）にした。ぼけは F-Stop 0.7（<button class="term" data-term="ピン">ピン</button>トは 4 番目の球）、ぶれはカメラの Shutter Time 0.5 フレーム（既定）。強くした組は F-Stop 0.2・Shutter Time 1。ざらつきの目安は、画を 3×3 の中央値でならした画との差（画素の値 0〜255 の二乗平均の平方根）で、画全体・動く箱のまわり・手前の球のまわりで測った。（はじめは Noise Level 0.001 の画を答えにしようとしたが、1 枚 8 分を超えても終わらなかったのでやめた）</p>
+          <p><strong>ぼけ・ぶれを入れても、時間はほとんど増えない。</strong>16 <button class="term" data-term="サンプル">サンプル</button>で、無し 24.9 秒・ぶれ 26.1 秒・ぼけ 25.1 秒・両方 26.3 秒。強くしても 26.6 秒。64 サンプルでも 無し 34.8 秒 → 強い両方 37.9 秒（+9%）。</p>
+          <p><strong>ぶれた所は少しざらつく。</strong>16 サンプルの箱のまわりのざらつきは、無し 1.41・両方 1.61・強い両方 1.88。画全体では差がほとんど出ない（ぼけ・ぶれの所が画の一部だけのため）。</p>
+          <p><strong>サンプル数を上げても、ざらつきは減らなかった。</strong>両方入れた画で、16・64・256 サンプルは 26・37・88 秒と延びたのに、ざらつきは 1.77・2.32・2.45 と、むしろ増えた（拡大図でも 256 の方が粗い）。Noise Level 0.01 に届いた所でサンプルを打ち切る決め方なので、上限を上げても仕上がりのざらつきは Noise Level で決まると考えられるが、増える理由は確かめていない。</p>
+          <p><strong>Noise Level を下げると減るが、時間が大きく延びる。</strong>64 サンプルで 0.01・0.005・0.0025 は 37・81・230 秒、ざらつきは 2.32・1.50・1.28。16 サンプルのままだと 0.0025 でも 1.38（96 秒）までしか下がらない。</p>
+          <p><strong>いちばん効いたのは<button class="term" data-term="ノイズ">ノイズ</button>除去（Denoiser = OIDN）。</strong>16 サンプル＋ノイズ除去は 26.5 秒（入れない 26.3 秒とほぼ同じ）で、ざらつきは画全体 1.19・箱のまわり 0.27。Noise Level 0.0025 の 230 秒（箱のまわり 0.60）より、短い時間で滑らかになった。コントラストを 4 倍にして拡大すると、ノイズ除去の画には大きなむらが少し見える。細かい模様のある物まで一緒にならしてしまうかは、この場面（模様が無い）では確かめていない。</p>
+        </div>
+
+        <p class="label">ぼけ・ぶれの見た目（16 サンプル）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="205_look.png" alt="左から 無し・両方（F-Stop 0.7、Shutter 0.5）・強い両方（F" loading="lazy" decoding="async"></div>
+            <figcaption>左から 無し・両方（F-Stop 0.7、Shutter 0.5）・強い両方（F-Stop 0.2、Shutter 1）。箱は右へ秒速 12 m で動いている。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">ざらつき（背景の一部を 2 倍に拡大し、コントラストを 4 倍にした）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="205_grain.png" alt="サンプルを 256 に上げると、かえって粗い。Noise Level を下げるか" loading="lazy" decoding="async"></div>
+            <figcaption>サンプルを 256 に上げると、かえって粗い。Noise Level を下げるか、ノイズ除去を入れると滑らかになる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件（サンプル数）</th><th>秒</th><th>ざらつき（全体）</th><th>箱のまわり</th><th>手前の球</th></tr></thead>
+            <tbody>
+              <tr><td>ぼけ・ぶれ無し・16</td><td class="num">24.9</td><td class="num">1.76</td><td class="num">1.41</td><td class="num">1.38</td></tr>
+              <tr><td>ぼけ・ぶれ無し・64</td><td class="num">34.8</td><td class="num">2.32</td><td class="num">1.89</td><td class="num">1.88</td></tr>
+              <tr><td>ぼけ・ぶれ無し・256</td><td class="num">85.0</td><td class="num">2.46</td><td class="num">2.08</td><td class="num">2.07</td></tr>
+              <tr><td>ぶれ・16</td><td class="num">26.1</td><td class="num">1.76</td><td class="num">1.59</td><td class="num">1.38</td></tr>
+              <tr><td>ぼけ・16</td><td class="num">25.1</td><td class="num">1.76</td><td class="num">1.45</td><td class="num">1.39</td></tr>
+              <tr><td>両方・16</td><td class="num">26.3</td><td class="num">1.77</td><td class="num">1.61</td><td class="num">1.39</td></tr>
+              <tr><td>両方・64</td><td class="num">36.5</td><td class="num">2.32</td><td class="num">1.79</td><td class="num">1.89</td></tr>
+              <tr><td>両方・256</td><td class="num">87.5</td><td class="num">2.45</td><td class="num">1.98</td><td class="num">2.04</td></tr>
+              <tr><td>両方を強く・16</td><td class="num">26.6</td><td class="num">1.79</td><td class="num">1.88</td><td class="num">1.48</td></tr>
+              <tr><td>両方を強く・64</td><td class="num">37.9</td><td class="num">2.31</td><td class="num">1.71</td><td class="num">1.84</td></tr>
+              <tr><td>両方を強く・256</td><td class="num">88.2</td><td class="num">2.46</td><td class="num">1.92</td><td class="num">2.02</td></tr>
+              <tr><td>両方・16・Noise Level 0.005</td><td class="num">60.0</td><td class="num">1.44</td><td class="num">1.36</td><td class="num">0.94</td></tr>
+              <tr><td>両方・16・Noise Level 0.0025</td><td class="num">96.1</td><td class="num">1.38</td><td class="num">1.32</td><td class="num">0.84</td></tr>
+              <tr><td>両方・64・Noise Level 0.005</td><td class="num">81.3</td><td class="num">1.50</td><td class="num">0.90</td><td class="num">0.87</td></tr>
+              <tr><td>両方・64・Noise Level 0.0025</td><td class="num">230.2</td><td class="num">1.28</td><td class="num">0.60</td><td class="num">0.48</td></tr>
+              <tr><td>両方・16・ノイズ除去</td><td class="num">26.5</td><td class="num">1.19</td><td class="num">0.27</td><td class="num">0.18</td></tr>
+              <tr><td>両方・64・ノイズ除去</td><td class="num">37.0</td><td class="num">1.19</td><td class="num">0.28</td><td class="num">0.19</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ぼけ・ぶれは遠慮なく入れてよい。</strong>時間は +5%〜9% しか増えなかった。</li>
+          <li><strong>ざらつきが気になっても、サンプル数を上げない。</strong>既定の Noise Level 0.01 のままでは、256 にしても滑らかにならず、時間だけ 3.3 倍になった。</li>
+          <li><strong>仕上げは 16 サンプル＋ノイズ除去（OIDN）。</strong>27 秒で、Noise Level 0.0025（230 秒）より滑らかだった。</li>
+          <li><strong>ノイズ除去が使えない場面では Noise Level を下げる。</strong>0.005 で約 2 倍、0.0025 で約 6 倍の時間。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 204 ===================== -->
+
   </div>
 
   <footer>

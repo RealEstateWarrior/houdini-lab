@@ -3639,7 +3639,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="nav-icon nav-burger" id="menu-open" aria-label="メニューを開く" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h16M4 15h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="nav-label">メニュー</span></button>
         <div class="subnav subnav--bar" data-g="1" hidden><a href="practice.html#guides" title="作り方を順に並べたもの">実践</a><a href="practice.html#works" title="頼まれて作った一点物の記録">制作</a><a href="practice.html#requests" title="作ってほしいものと、その順番">要望</a></div>
         <div class="subnav subnav--bar" data-g="2" hidden><a href="index.html#experiments" title="1件ずつ。押すと中身が開く">実験集</a><a href="log.html" title="形を作る側">モデリング編</a><a href="log_fx.html" title="動かす側" aria-current="page">エフェクト編</a><a href="index.html#speed" title="速さについて分かったこと">効率化</a><a href="reference.html#links" title="外の資料">参考リンク</a></div>
-        <div class="subnav subnav--bar" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a></div>
+        <div class="subnav subnav--bar" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a><a href="vex.html" title="書き方・使い方・測って分かったこと">VEX 解説</a></div>
       </div>
       <div class="brand">
         <a class="brand-logo" href="../" aria-label="Saito Production（親のページへ）" title="Saito Productionへ"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg></a>
@@ -3710,6 +3710,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
                   <ul>
                     <li><a href="reference.html#nodes">ノード解説</a><span class="mega-note">箱ひとつずつの説明</span></li>
                     <li><a href="reference.html#glossary">用語集</a><span class="mega-note">言葉の意味</span></li>
+                    <li><a href="vex.html">VEX 解説</a><span class="mega-note">書き方・使い方・測って分かったこと</span></li>
                   </ul>
                 </div>
               </div>
@@ -3726,7 +3727,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     </div>
     <div class="subnav subnav--row" data-g="1" hidden><a href="practice.html#guides" title="作り方を順に並べたもの">実践</a><a href="practice.html#works" title="頼まれて作った一点物の記録">制作</a><a href="practice.html#requests" title="作ってほしいものと、その順番">要望</a></div>
     <div class="subnav subnav--row" data-g="2" hidden><a href="index.html#experiments" title="1件ずつ。押すと中身が開く">実験集</a><a href="log.html" title="形を作る側">実験ログ モデリング編</a><a href="log_fx.html" title="動かす側" aria-current="page">実験ログ エフェクト編</a><a href="index.html#speed" title="速さについて分かったこと">効率化</a><a href="reference.html#links" title="外の資料">参考リンク</a></div>
-    <div class="subnav subnav--row" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a></div>
+    <div class="subnav subnav--row" data-g="3" hidden><a href="reference.html#nodes" title="箱ひとつずつの説明">ノード解説</a><a href="reference.html#glossary" title="言葉の意味">用語集</a><a href="vex.html" title="書き方・使い方・測って分かったこと">VEX 解説</a></div>
   </nav>
   <div class="crumbrow crumbrow--doc">
       <nav class="crumbs" aria-label="現在地"><a href="../">Saito Production</a><span class="crumb-sep" aria-hidden="true">›</span><a href="index.html">Houdini 研究部</a><span class="crumb-sep" aria-hidden="true">›</span><a href="index.html#experiments">実験</a><span class="crumb-sep" aria-hidden="true">›</span><span aria-current="page">実験ログ エフェクト編</span></nav>
@@ -3735,7 +3736,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ エフェクト編<small>65本</small></p>
+      <p class="doc-toc-head">実験ログ エフェクト編<small>67本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp013" data-anchor="exp013"><span class="doc-no">013</span><span class="doc-t">時間軸への対応 — フレームを進めて記録する</span></a></li>
@@ -3807,6 +3808,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp200" data-anchor="exp200"><span class="doc-no">200</span><span class="doc-t">FLIP のダムブレイクは Particle Separation 0.04 で足りる — 0.06 より粗いと壁ぎわの数粒が大きな塊に見え、水も 1〜2 割増える</span></a></li>
         <li><a href="#exp201" data-anchor="exp201"><span class="doc-no">201</span><span class="doc-t">Pyro で焚き火の炎（高さ 1.2 m）を作るなら Flame Lifespan 0.25・Buoyancy 0.25・Cooling Rate 1 — 揺らすのは Turbulence で、Use Control Field を切る</span></a></li>
         <li><a href="#exp202" data-anchor="exp202"><span class="doc-no">202</span><span class="doc-t">焚き火の Pyro を速く回すなら Voxel Size を 0.02 → 0.04 に — 5.1 倍速く、炎の高さの差は 3%。速度の升だけ粗くするのと Substeps 2 は、かえって遅い</span></a></li>
+        <li><a href="#exp204" data-anchor="exp204"><span class="doc-no">204</span><span class="doc-t">焚き火の Pyro のキャッシュは、9 割以上が速度（vel）— vel を煙のある所だけに残して VDB・16 bit にすると 16 分の 1、描画に使う値のずれは 0.00025</span></a></li>
+        <li><a href="#exp206" data-anchor="exp206"><span class="doc-no">206</span><span class="doc-t">テーブルクロスを粗い布で試すなら 44×56 まで — 落ち方の差は平均 1.9 cm で、計算は 39 秒（実践の細かさの 39%）。ただし粗いほど角の垂れが短く、22×28 では 17 cm 高い</span></a></li>
       </ol>
       <a class="doc-other" href="log.html">実験ログ モデリング編へ →</a>
     </div>
@@ -3818,7 +3821,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — エフェクト編</h1>
     <p class="lede">時間を進めて物理を解く側の記録。剛体・布・煙・液体・パーティクル、そしてレンダリング。実験013から。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>203 / 203</dd></div>
+      <div><dt>実験</dt><dd>206 / 206</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -3913,7 +3916,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
           <li>出力は2形式にした。PDFには動きを載せられないので<strong><button class="term" data-term="コンタクトシート">コンタクトシート</button></strong>、HTMLには<strong>GIF</strong>。同じ連番から両方を作る。</li>
           <li><strong>パーティクルは <button class="term" data-term="SOP">SOP</button> に1つもない（0種）。</strong> すべて <button class="term" data-term="DOP">DOP</button> 側（67種）。SOPをつなぐだけでは始められず、DOP<button class="term" data-term="ネットワーク">ネットワーク</button>を組む必要がある。</li>
           <li>一方で剛体は SOP に 47種、布は 22種ある。<strong>SOPレベルのラッパーが充実している分野の方が入口として易しい。</strong> 当初はパーティクルから始める予定だったが、<strong><button class="term" data-term="RBD">RBD</button> か <button class="term" data-term="Vellum">Vellum</button> から入る方が理にかなっている</strong>と分かったので順番を変える。</li>
-          <li><code>solver</code> SOP はロックされたアセットで、中を触るには <code>allowEditingOfContents()</code> が要る。しかも中身は dopnet と4つの null で、想像していた単純な構造ではなかった。</li>
+          <li><code class="node-ref" data-node="solver" tabindex="0" role="button">solver</code> SOP はロックされたアセットで、中を触るには <code>allowEditingOfContents()</code> が要る。しかも中身は dopnet と4つの null で、想像していた単純な構造ではなかった。</li>
           <li>そのため今回の自由落下は数式で書いており、<strong>これは<button class="term" data-term="シミュレーション">シミュレーション</button>ではない</strong>（前のフレームの結果を使っていない）。本物のシミュレーションは次から。</li>
         </ul>
               </details>
@@ -10446,6 +10449,148 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 204 ===================== -->
+    <article class="entry entry--current" id="exp204">
+      <div class="badge">204</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>焚き火の Pyro のキャッシュは、9 割以上が速度（vel）— vel を煙のある所だけに残して VDB・16 bit にすると 16 分の 1、描画に使う値のずれは 0.00025</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">エフェクト</span><span class="coltag">Pyro</span><span class="coltag">キャッシュ</span><span class="coltag">容量</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>Pyro のキャッシュの大半は vel。</strong>煙のある升は 4% なのに、vel は 6 割以上の升で 0 でない。描画に要らなければ blast で捨てる（24 分の 1）。</li>
+            <li><strong>モーションブラーに vel が要るなら、煙の無い所の vel を 0 にしてから VDB・16 bit。</strong>16 分の 1 になり、煙のある所の値は残る。</li>
+            <li><strong>VDB にするだけ・Prune Tolerance 0.01 だけでは小さくならない。</strong>0 でない値を持つ vel が残るため。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_204.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/204_pyro_cache_size.py &nbsp;·&nbsp; 焚き火のキャッシュの9割は vel。煙のある所だけに残して VDB・16 bit で 16 分の 1</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">blast</a><a href="reference.html#nodes">convertvdb</a><a href="reference.html#nodes">volumewrangle</a><a href="reference.html#nodes">pyrosolver</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/204_scene.hipnc" target="_blank" rel="noopener noreferrer">204_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="204_graph.png" alt="実験204 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 焚き火の <button class="term" data-term="Pyro">Pyro</button> を<button class="term" data-term="キャッシュ">キャッシュ</button>（ファイル）に書くと何 MB になるか。何を削れば小さくなり、そのとき炎や煙の値はどれだけ変わるか。</strong></p>
+          <p><a href="#exp202">実験202</a> と同じ焚き火（平たい球を Source Burn で燃やす）を Voxel Size 0.04 と 0.02 で 48 フレーム（2 秒）回し、毎フレーム 8 通りのやり方で .bgeo.sc に書いた。書いたファイルは File で読み戻し、Volume Wrangle で元の値との差を取った。</p>
+          <p><strong>そのまま書くと、Voxel Size 0.04 で 48 フレーム 150 MB、0.02 で 564 MB。</strong>中身は Volume が 6 つ（density・temperature・flame と、速度の vel.x・vel.y・vel.z）。</p>
+          <p><strong>容量のほとんどは vel。</strong>vel を捨てるだけで 6.4 MB（24 分の 1）になった。フレーム 48 で、煙が入っている升（density &gt; 0.001）は全体の 3.8% しかないのに、速さが 0.01 を超える升は 64% あった。煙の無い所でも空気は動いていて、そこの 0 でない値が圧縮で縮まない。</p>
+          <p><strong>VDB にするだけでは小さくならない。</strong>convertvdb で VDB にすると 155 MB で、むしろ少し増えた。VDB は 0 の所を持たないのが得意だが、vel は 0 ではないので効かない。Prune Tolerance を 0.01 にしても 85 MB で変わらなかった。</p>
+          <p><strong>16 bit（half）で書くと、約半分。</strong>VDB の intrinsic `vdb_is_saved_as_half_float` を 1 にすると 85.5 MB（VDB の 55%）。読み戻した値のずれは、最大 0.00025（density の最大 1.00 に対して）、平均 1.7e-06。32 bit の VDB は最大 4.9e-06、そのままのファイルは 7.0e-06 で、これは比べ方（位置から値を読む volumesample）の分のずれ。</p>
+          <p><strong>モーションブラーに vel を残したいときは、煙の無い所の vel を 0 にする。</strong>Volume Wrangle で「density も flame も 0.001 未満なら v@vel = 0」として VDB・16 bit で書くと、9.5 MB（そのままの 16 分の 1）。Voxel Size 0.02 では 564 MB → 67 MB（8 分の 1）。煙のある所の vel は変えていない。</p>
+          <p><strong>Voxel Size を半分にすると、そのままなら 3.8 倍。</strong>升の数は約 8 倍になるが、外側の升は 0 に近く圧縮で縮む。いちばん小さい書き方（vel を捨てて VDB・16 bit）は 3.2 MB → 19.4 MB。</p>
+          <p>書く時間はどれも短い（そのまま 48 フレームで 0.37 秒、VDB にすると変換を含めず 2.05 秒）。<strong>同じ VDB でも、.vdb 形式のファイルは .bgeo.sc より大きかった。</strong>VDB＋16 bit で 99 MB（.bgeo.sc の 1.16 倍）、vel を煙のある所だけにしたもので 14.9 MB（1.56 倍）。.bgeo.sc は中身をさらに圧縮して書くためと考えられる（確かめていない）。ほかのソフトに渡すのでなければ .bgeo.sc でよい。表は .bgeo.sc の値。</p>
+        </div>
+
+        <p class="label">48 フレーム分のキャッシュの大きさ</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="204_size.png" alt="青が Voxel Size 0.04、橙が 0.02。vel を捨てるか、煙のあ" loading="lazy" decoding="async"></div>
+            <figcaption>青が Voxel Size 0.04、橙が 0.02。vel を捨てるか、煙のある所だけに残すと一気に小さくなる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>書き方</th><th>0.04 の MB</th><th>0.04 の縮み</th><th>0.02 の MB</th><th>0.02 の縮み</th><th>書く秒（0.04）</th><th>読む秒（0.04）</th></tr></thead>
+            <tbody>
+              <tr><td>そのまま（Volume 6つ）</td><td class="num">149.7</td><td>1.0 倍</td><td class="num">564.4</td><td>1.0 倍</td><td class="num">0.37</td><td class="num">0.21</td></tr>
+              <tr><td>VDB にする</td><td class="num">154.9</td><td>1.0 倍</td><td class="num">581.5</td><td>1.0 倍</td><td class="num">2.05</td><td class="num">0.32</td></tr>
+              <tr><td>VDB＋16 bit</td><td class="num">85.5</td><td>1.8 倍</td><td class="num">321.6</td><td>1.8 倍</td><td class="num">1.97</td><td class="num">0.31</td></tr>
+              <tr><td>VDB＋16 bit＋小さい値を捨てる</td><td class="num">85.4</td><td>1.8 倍</td><td class="num">321.5</td><td>1.8 倍</td><td class="num">1.76</td><td class="num">0.31</td></tr>
+              <tr><td>vel を煙のある所だけ＋VDB＋16 bit</td><td class="num">9.5</td><td>15.7 倍</td><td class="num">67.0</td><td>8.4 倍</td><td class="num">0.52</td><td class="num">0.14</td></tr>
+              <tr><td>vel を捨てる</td><td class="num">6.4</td><td>23.6 倍</td><td class="num">36.9</td><td>15.3 倍</td><td class="num">0.13</td><td class="num">0.08</td></tr>
+              <tr><td>vel を捨てる＋VDB</td><td class="num">4.3</td><td>34.6 倍</td><td class="num">30.5</td><td>18.5 倍</td><td class="num">0.26</td><td class="num">0.08</td></tr>
+              <tr><td>vel を捨てる＋VDB＋16 bit</td><td class="num">3.2</td><td>46.9 倍</td><td class="num">19.4</td><td>29.2 倍</td><td class="num">0.27</td><td class="num">0.08</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Pyro のキャッシュの大半は vel。</strong>煙のある升は 4% なのに、vel は 6 割以上の升で 0 でない。描画に要らなければ blast で捨てる（24 分の 1）。</li>
+          <li><strong>モーションブラーに vel が要るなら、煙の無い所の vel を 0 にしてから VDB・16 bit。</strong>16 分の 1 になり、煙のある所の値は残る。</li>
+          <li><strong>VDB にするだけ・Prune Tolerance 0.01 だけでは小さくならない。</strong>0 でない値を持つ vel が残るため。</li>
+          <li><strong>16 bit で書くと約半分。</strong>値のずれは最大 0.00025（値の最大 1 に対して）。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
+
+    <!-- ===================== 206 ===================== -->
+    <article class="entry entry--current" id="exp206">
+      <div class="badge">206</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>テーブルクロスを粗い布で試すなら 44×56 まで — 落ち方の差は平均 1.9 cm で、計算は 39 秒（実践の細かさの 39%）。ただし粗いほど角の垂れが短く、22×28 では 17 cm 高い</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">エフェクト</span><span class="coltag">Vellum</span><span class="coltag">布</span><span class="coltag">速度</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>落ち方の試しは 44×56 で足りる。</strong>いちばん細かい布との差は平均 1.9 cm、時間は実践の細かさの 39%（39 秒）。</li>
+            <li><strong>粗い布ほど、角が短く垂れる。</strong>22×28 は 165×210 より 17 cm 高い所で止まった。裾の長さは最後の細かさで決める。</li>
+            <li><strong>点を増やしても、時間はそれほど増えない。</strong>点 56 倍で時間 11 倍。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_206.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/206_anim.py &nbsp;·&nbsp; 粗い布での試しは 44×56 まで。差は平均 1.9 cm、時間は 39%。角の垂れだけ短い</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/206_scene.hipnc" target="_blank" rel="noopener noreferrer">206_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="206_graph.png" alt="実験206 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 実践「テーブルクロスを掛ける」では「粗いうちに落ち方を決めて、最後に細かくする」と書いた。粗い布で決めた落ち方は、細かい布でも同じになるのか。どこまで粗くしてよいか。</strong></p>
+          <p>実践と同じ机（天板 1.2 × 0.8 m、高さ 0.74 m）と布（1.9 × 1.45 m を天板の 12 cm 上に置き、4° 回す）を、布の分割だけ変えて vellumsolver（Substeps 5、地面あり）で 72 フレーム（3 秒）落とした。Rows × Columns は 22×28・44×56・66×84・110×140（実践の値）・165×210。いちばん細かい 165×210 を答えとして、その各点から粗い布の面までの距離を測った。</p>
+          <p><strong>計算の時間は、点の数ほどには増えない。</strong>点 616 個で 19 秒、2,464 個で 39 秒、5,544 個で 50 秒、15,400 個で 100 秒、34,650 個で 209 秒。点が 56 倍でも時間は 11 倍だった。</p>
+          <p><strong>形の差は、細かくするほど縮む。</strong>いちばん細かい布との距離の平均は、22×28 で 3.4 cm、44×56 で 1.9 cm、66×84 で 1.1 cm、110×140 で 0.8 cm。最大（ひだの先など）は 23・15・12・9 cm。</p>
+          <p><strong>粗い布は、角が短く垂れる。</strong>布のいちばん低い点（角の先）は、22×28 で 0.43 m、44×56 で 0.36 m、66×84 で 0.32 m、110×140 で 0.27 m、165×210 で 0.26 m。四辺の真ん中の裾の高さ（平均）も 0.459 → 0.429 m と、細かいほど下がった。粗い布は折れ曲がれる所が少ないためと考えられるが、確かめていない。</p>
+          <p><strong>天板の上の平らさは、44×56 から目に見えて変わる。</strong>天板の上にある点の高さのばらつきは、7.3・2.5・0.9・0.13・0.02 mm。22×28 では天板の上に波が残った。</p>
+          <p><strong>決め方: 落とす位置・向き・机との当たり方は 44×56 で決めてよい。</strong>差は平均 1.9 cm で、時間は実践の細かさの 39%。ただし角の垂れの長さは細かくすると 8 cm 伸びるので、裾の長さ（床からの高さ）は最後の細かさで確かめる。</p>
+        </div>
+
+        <p class="label">落ちる様子（左が 44×56、右が実践の 110×140）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="206_anim.gif" alt="72 フレーム（3 秒）を 2 フレームおきに。粗い布も同じように落ちるが、角の" loading="lazy" decoding="async"></div>
+            <figcaption>72 フレーム（3 秒）を 2 フレームおきに。粗い布も同じように落ちるが、角の垂れが短い。</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">72 フレーム目の形</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="206_grid.png" alt="かっこは点の数、右は 72 フレームの計算時間。66×84 までは網目を重ねて見" loading="lazy" decoding="async"></div>
+            <figcaption>かっこは点の数、右は 72 フレームの計算時間。66×84 までは網目を重ねて見せた。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rows×Columns</th><th>点</th><th>秒</th><th>細かい布との差 平均 cm</th><th>最大 cm</th><th>裾の高さ m</th><th>いちばん低い点 m</th><th>天板の上のばらつき mm</th></tr></thead>
+            <tbody>
+              <tr><td>22×28</td><td class="num">616</td><td class="num">18.6</td><td class="num">3.4</td><td class="num">22.7</td><td class="num">0.459</td><td class="num">0.429</td><td class="num">7.3</td></tr>
+              <tr><td>44×56</td><td class="num">2,464</td><td class="num">39.4</td><td class="num">1.9</td><td class="num">15.4</td><td class="num">0.441</td><td class="num">0.357</td><td class="num">2.5</td></tr>
+              <tr><td>66×84</td><td class="num">5,544</td><td class="num">50.2</td><td class="num">1.1</td><td class="num">11.5</td><td class="num">0.438</td><td class="num">0.316</td><td class="num">0.9</td></tr>
+              <tr><td>110×140</td><td class="num">15,400</td><td class="num">100.4</td><td class="num">0.8</td><td class="num">9.0</td><td class="num">0.435</td><td class="num">0.275</td><td class="num">0.1</td></tr>
+              <tr><td>165×210</td><td class="num">34,650</td><td class="num">208.7</td><td class="num muted">—</td><td class="num muted">—</td><td class="num">0.429</td><td class="num">0.258</td><td class="num">0.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>落ち方の試しは 44×56 で足りる。</strong>いちばん細かい布との差は平均 1.9 cm、時間は実践の細かさの 39%（39 秒）。</li>
+          <li><strong>粗い布ほど、角が短く垂れる。</strong>22×28 は 165×210 より 17 cm 高い所で止まった。裾の長さは最後の細かさで決める。</li>
+          <li><strong>点を増やしても、時間はそれほど増えない。</strong>点 56 倍で時間 11 倍。</li>
+          <li><strong>22×28 は粗すぎる。</strong>天板の上に波が残り、形の差も平均 3 cm を超えた。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -10461,8 +10606,8 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 </div>
 </div>
 
-<script src="data/glossary-data-7523c388e2.js"></script>
-<script src="data/node-data-123d142505.js"></script>
+<script src="data/glossary-data-5fdcba2d4d.js"></script>
+<script src="data/node-data-1c484f0f3d.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
   /* 用語をクリックすると意味をポップアップで出す。全ページ共通。
@@ -10640,10 +10785,10 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>203</dd></div>
+        <div><dt>実験</dt><dd>206</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
-        <div><dt>ノード</dt><dd>384</dd></div>
-        <div><dt>用語</dt><dd>433</dd></div>
+        <div><dt>ノード</dt><dd>387</dd></div>
+        <div><dt>用語</dt><dd>443</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -10663,6 +10808,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
           <li class="foot-group"><a class="foot-link" href="reference.html#nodes"><span>解説</span><svg class="foot-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <ul class="foot-kids">
               <li><a href="reference.html#glossary"><span>用語集</span></a></li>
+              <li><a href="vex.html"><span>VEX 解説</span></a></li>
             </ul>
           </li>
       </ul>
@@ -10714,9 +10860,9 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
         <a class="menu-card" href="guide_terrain.html" target="_blank" rel="noopener"><img src="guide_terrain_4_detail.png" alt="" loading="lazy" decoding="async"><span>地形を作る</span></a>
       </div>
       <div class="menu-doors">
-        <a class="menu-door" href="log.html"><img src="thumb_203.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>203本の実験。最新は実験203</small></span></a>
-        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>384件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>433語</small></span></a>
+        <a class="menu-door" href="log.html"><img src="thumb_206.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>実験ログ</strong><small>206本の実験。最新は実験206</small></span></a>
+        <a class="menu-door" href="reference.html#nodes"><img src="019_graph.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>387件</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><span class="menu-door-mark" aria-hidden="true">Aa</span><span class="menu-door-text"><strong>用語集</strong><small>443語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -10819,7 +10965,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
   </div>
 </div>
 
-<script src="data/search-data-b136ce080a.js"></script>
+<script src="data/search-data-6820650c63.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

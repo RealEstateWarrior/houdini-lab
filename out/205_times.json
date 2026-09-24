@@ -1,0 +1,116 @@
+{
+ "focus": 7.140939467973751,
+ "fstop": 0.7,
+ "shutter": 0.5,
+ "res": [
+  960,
+  540
+ ],
+ "frame": 12,
+ "box_speed": 12,
+ "rows": [
+  {
+   "case": "base",
+   "spp": 16,
+   "noise": 0.01,
+   "tag": "base_16",
+   "sec": 24.93
+  },
+  {
+   "case": "base",
+   "spp": 64,
+   "noise": 0.01,
+   "tag": "base_64",
+   "sec": 34.75
+  },
+  {
+   "case": "base",
+   "spp": 256,
+   "noise": 0.01,
+   "tag": "base_256",
+   "sec": 85.03
+  },
+  {
+   "case": "mblur",
+   "spp": 16,
+   "noise": 0.01,
+   "tag": "mblur_16",
+   "sec": 26.06
+  },
+  {
+   "case": "mblur",
+   "spp": 64,
+   "noise": 0.01,
+   "tag": "mblur_64",
+   "sec": 36.55
+  },
+  {
+   "case": "mblur",
+   "spp": 256,
+   "noise": 0.01,
+   "tag": "mblur_256",
+   "sec": 86.53
+  },
+  {
+   "case": "dof",
+   "spp": 16,
+   "noise": 0.01,
+   "tag": "dof_16",
+   "sec": 25.08
+  },
+  {
+   "case": "dof",
+   "spp": 64,
+   "noise": 0.01,
+   "tag": "dof_64",
+   "sec": 35.52
+  },
+  {
+   "case": "dof",
+   "spp": 256,
+   "noise": 0.01,
+   "tag": "dof_256",
+   "sec": 85.74
+  },
+  {
+   "case": "both",
+   "spp": 16,
+   "noise": 0.01,
+   "tag": "both_16",
+   "sec": 26.29
+  },
+  {
+   "case": "both",
+   "spp": 64,
+   "noise": 0.01,
+   "tag": "both_64",
+   "sec": 36.52
+  },
+  {
+   "case": "both",
+   "spp": 256,
+   "noise": 0.01,
+   "tag": "both_256",
+   "sec": 87.53
+  },
+  {
+   "case": "both",
+   "spp": 64,
+   "noise": 0.005,
+   "tag": "both_64_n0.005",
+   "sec": 81.31
+  },
+  {
+   "case": "both",
+   "spp": 64,
+   "noise": 0.0025,
+   "tag": "both_64_n0.0025",
+   "sec": 230.21
+  }
+ ],
+ "karma": {
+  "geosamples": 2,
+  "xformsamples": 2,
+  "varianceaa_minsamples": 1
+ }
+}

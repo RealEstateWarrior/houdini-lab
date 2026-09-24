@@ -1,0 +1,923 @@
+{
+ "vox": 0.04,
+ "sizes": {
+  "raw": 149695730,
+  "novel": 6353250,
+  "vdb": 154932920,
+  "vdb_novel": 4328474,
+  "vdb_half": 85495435,
+  "vdb_half_novel": 3188416,
+  "vdb_half_prune": 85403067,
+  "vdb_half_velmask": 9538517
+ },
+ "vdbfile": {
+  "vdb": 168335188,
+  "vdb_novel": 7503104,
+  "vdb_half": 99381864,
+  "vdb_half_novel": 5790373,
+  "vdb_half_prune": 99286504,
+  "vdb_half_velmask": 14897211
+ },
+ "write_sec": {
+  "raw": 0.3731071999791311,
+  "novel": 0.1271491000225069,
+  "vdb": 2.053265999944415,
+  "vdb_novel": 0.260371899974416,
+  "vdb_half": 1.9683018000068842,
+  "vdb_half_novel": 0.2695082999562146,
+  "vdb_half_prune": 1.7613972000108333,
+  "vdb_half_velmask": 0.5206195000064326
+ },
+ "read_sec": {
+  "raw": 0.20663930001319386,
+  "novel": 0.08464189994265325,
+  "vdb": 0.31909609999274835,
+  "vdb_novel": 0.08129470003768802,
+  "vdb_half": 0.30823830000008456,
+  "vdb_half_novel": 0.08059099997626618,
+  "vdb_half_prune": 0.31249379996734206,
+  "vdb_half_velmask": 0.13514619997295085
+ },
+ "diff": {
+  "vdb_half_velmask@24": {
+   "density": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.00018674135208129883,
+    "mean": 1.2252094450104778e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   }
+  },
+  "vdb_half_prune@24": {
+   "density": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.00018674135208129883,
+    "mean": 1.2252094450104778e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   }
+  },
+  "raw@24": {
+   "density": {
+    "max": 1.0266900062561035e-05,
+    "mean": 2.0534487887857722e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 6.67572021484375e-06,
+    "mean": 7.714086258658881e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 1.0266900062561035e-05,
+    "mean": 2.0534487887857722e-08,
+    "field_max": 1.0
+   }
+  },
+  "novel@24": {
+   "density": {
+    "max": 1.0266900062561035e-05,
+    "mean": 2.0534487887857722e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 6.67572021484375e-06,
+    "mean": 7.714086258658881e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 1.0266900062561035e-05,
+    "mean": 2.0534487887857722e-08,
+    "field_max": 1.0
+   }
+  },
+  "vdb@24": {
+   "density": {
+    "max": 7.450580596923828e-06,
+    "mean": 2.0036356573882586e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 6.496906280517578e-06,
+    "mean": 8.513583615865628e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 7.450580596923828e-06,
+    "mean": 2.0036356573882586e-08,
+    "field_max": 1.0
+   }
+  },
+  "vdb_novel@24": {
+   "density": {
+    "max": 7.450580596923828e-06,
+    "mean": 2.0036356573882586e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 6.496906280517578e-06,
+    "mean": 8.513583615865628e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 7.450580596923828e-06,
+    "mean": 2.0036356573882586e-08,
+    "field_max": 1.0
+   }
+  },
+  "vdb_half@24": {
+   "density": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.00018674135208129883,
+    "mean": 1.2252094450104778e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   }
+  },
+  "vdb_half_novel@24": {
+   "density": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.00018674135208129883,
+    "mean": 1.2252094450104778e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024455785751342773,
+    "mean": 1.610881668057118e-06,
+    "field_max": 1.0
+   }
+  },
+  "vdb_half_velmask@48": {
+   "density": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.0001868605613708496,
+    "mean": 1.2154815465237334e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   }
+  },
+  "vdb_half_prune@48": {
+   "density": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.0001868605613708496,
+    "mean": 1.2154815465237334e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   }
+  },
+  "raw@48": {
+   "density": {
+    "max": 6.973743438720703e-06,
+    "mean": 1.219116185779967e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 4.172325134277344e-06,
+    "mean": 6.846008648864199e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 6.973743438720703e-06,
+    "mean": 1.219116185779967e-08,
+    "field_max": 1.0
+   }
+  },
+  "novel@48": {
+   "density": {
+    "max": 6.973743438720703e-06,
+    "mean": 1.219116185779967e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 4.172325134277344e-06,
+    "mean": 6.846008648864199e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 6.973743438720703e-06,
+    "mean": 1.219116185779967e-08,
+    "field_max": 1.0
+   }
+  },
+  "vdb@48": {
+   "density": {
+    "max": 4.887580871582031e-06,
+    "mean": 1.1465210114636193e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 3.2782554626464844e-06,
+    "mean": 4.119220964327042e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 4.887580871582031e-06,
+    "mean": 1.1465210114636193e-08,
+    "field_max": 1.0
+   }
+  },
+  "vdb_novel@48": {
+   "density": {
+    "max": 4.887580871582031e-06,
+    "mean": 1.1465210114636193e-08,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 3.2782554626464844e-06,
+    "mean": 4.119220964327042e-09,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 4.887580871582031e-06,
+    "mean": 1.1465210114636193e-08,
+    "field_max": 1.0
+   }
+  },
+  "vdb_half@48": {
+   "density": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.0001868605613708496,
+    "mean": 1.2154815465237334e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   }
+  },
+  "vdb_half_novel@48": {
+   "density": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   },
+   "temperature": {
+    "max": 0.0001868605613708496,
+    "mean": 1.2154815465237334e-07,
+    "field_max": 0.8754855394363403
+   },
+   "flame": {
+    "max": 0.00024563074111938477,
+    "mean": 1.7429788385925349e-06,
+    "field_max": 1.0
+   }
+  }
+ },
+ "per_frame": [
+  {
+   "f": 1,
+   "vdb_half_velmask": 19450,
+   "vdb_half_prune": 19456,
+   "raw": 19576,
+   "novel": 19263,
+   "vdb": 22809,
+   "vdb_novel": 20959,
+   "vdb_half": 19453,
+   "vdb_half_novel": 18792
+  },
+  {
+   "f": 2,
+   "vdb_half_velmask": 72222,
+   "vdb_half_prune": 642639,
+   "raw": 1122324,
+   "novel": 19699,
+   "vdb": 1168404,
+   "vdb_novel": 21783,
+   "vdb_half": 642642,
+   "vdb_half_novel": 17790
+  },
+  {
+   "f": 3,
+   "vdb_half_velmask": 91699,
+   "vdb_half_prune": 655880,
+   "raw": 1141151,
+   "novel": 37761,
+   "vdb": 1179762,
+   "vdb_novel": 37480,
+   "vdb_half": 655872,
+   "vdb_half_novel": 19745
+  },
+  {
+   "f": 4,
+   "vdb_half_velmask": 104376,
+   "vdb_half_prune": 661452,
+   "raw": 1151645,
+   "novel": 47845,
+   "vdb": 1201986,
+   "vdb_novel": 29334,
+   "vdb_half": 661453,
+   "vdb_half_novel": 33404
+  },
+  {
+   "f": 5,
+   "vdb_half_velmask": 121973,
+   "vdb_half_prune": 942657,
+   "raw": 1650166,
+   "novel": 60943,
+   "vdb": 1720868,
+   "vdb_novel": 34504,
+   "vdb_half": 942652,
+   "vdb_half_novel": 40195
+  },
+  {
+   "f": 6,
+   "vdb_half_velmask": 131972,
+   "vdb_half_prune": 1203498,
+   "raw": 2150232,
+   "novel": 74802,
+   "vdb": 2238056,
+   "vdb_novel": 69089,
+   "vdb_half": 1204639,
+   "vdb_half_novel": 48350
+  },
+  {
+   "f": 7,
+   "vdb_half_velmask": 153104,
+   "vdb_half_prune": 1302336,
+   "raw": 2333892,
+   "novel": 92594,
+   "vdb": 2395547,
+   "vdb_novel": 84936,
+   "vdb_half": 1308922,
+   "vdb_half_novel": 57857
+  },
+  {
+   "f": 8,
+   "vdb_half_velmask": 192867,
+   "vdb_half_prune": 1468524,
+   "raw": 2593586,
+   "novel": 110553,
+   "vdb": 2694912,
+   "vdb_novel": 56646,
+   "vdb_half": 1473380,
+   "vdb_half_novel": 65274
+  },
+  {
+   "f": 9,
+   "vdb_half_velmask": 184761,
+   "vdb_half_prune": 1513318,
+   "raw": 2729718,
+   "novel": 127443,
+   "vdb": 2829267,
+   "vdb_novel": 61933,
+   "vdb_half": 1515673,
+   "vdb_half_novel": 72344
+  },
+  {
+   "f": 10,
+   "vdb_half_velmask": 224535,
+   "vdb_half_prune": 1589222,
+   "raw": 2822330,
+   "novel": 142099,
+   "vdb": 2920950,
+   "vdb_novel": 67153,
+   "vdb_half": 1591212,
+   "vdb_half_novel": 77692
+  },
+  {
+   "f": 11,
+   "vdb_half_velmask": 233367,
+   "vdb_half_prune": 1570843,
+   "raw": 2795023,
+   "novel": 152111,
+   "vdb": 2884742,
+   "vdb_novel": 69030,
+   "vdb_half": 1574512,
+   "vdb_half_novel": 47255
+  },
+  {
+   "f": 12,
+   "vdb_half_velmask": 239618,
+   "vdb_half_prune": 1843359,
+   "raw": 3286833,
+   "novel": 159897,
+   "vdb": 3390265,
+   "vdb_novel": 71949,
+   "vdb_half": 1844247,
+   "vdb_half_novel": 83358
+  },
+  {
+   "f": 13,
+   "vdb_half_velmask": 238678,
+   "vdb_half_prune": 1900589,
+   "raw": 3375278,
+   "novel": 161646,
+   "vdb": 3476847,
+   "vdb_novel": 126081,
+   "vdb_half": 1900591,
+   "vdb_half_novel": 48785
+  },
+  {
+   "f": 14,
+   "vdb_half_velmask": 231591,
+   "vdb_half_prune": 1995420,
+   "raw": 3542841,
+   "novel": 160963,
+   "vdb": 3648710,
+   "vdb_novel": 69630,
+   "vdb_half": 1995406,
+   "vdb_half_novel": 82182
+  },
+  {
+   "f": 15,
+   "vdb_half_velmask": 230124,
+   "vdb_half_prune": 2006917,
+   "raw": 3554284,
+   "novel": 161239,
+   "vdb": 3658225,
+   "vdb_novel": 121185,
+   "vdb_half": 2008091,
+   "vdb_half_novel": 80439
+  },
+  {
+   "f": 16,
+   "vdb_half_velmask": 189412,
+   "vdb_half_prune": 1912234,
+   "raw": 3431818,
+   "novel": 155249,
+   "vdb": 3535468,
+   "vdb_novel": 116544,
+   "vdb_half": 1912244,
+   "vdb_half_novel": 78542
+  },
+  {
+   "f": 17,
+   "vdb_half_velmask": 218573,
+   "vdb_half_prune": 2248864,
+   "raw": 3959534,
+   "novel": 150453,
+   "vdb": 4083017,
+   "vdb_novel": 64839,
+   "vdb_half": 2252568,
+   "vdb_half_novel": 75821
+  },
+  {
+   "f": 18,
+   "vdb_half_velmask": 179084,
+   "vdb_half_prune": 2014624,
+   "raw": 3590900,
+   "novel": 141634,
+   "vdb": 3666358,
+   "vdb_novel": 109335,
+   "vdb_half": 2020617,
+   "vdb_half_novel": 72971
+  },
+  {
+   "f": 19,
+   "vdb_half_velmask": 204994,
+   "vdb_half_prune": 2023615,
+   "raw": 3545503,
+   "novel": 133860,
+   "vdb": 3674306,
+   "vdb_novel": 60695,
+   "vdb_half": 2030451,
+   "vdb_half_novel": 70173
+  },
+  {
+   "f": 20,
+   "vdb_half_velmask": 167444,
+   "vdb_half_prune": 1832398,
+   "raw": 3254780,
+   "novel": 127565,
+   "vdb": 3375465,
+   "vdb_novel": 101472,
+   "vdb_half": 1840065,
+   "vdb_half_novel": 67948
+  },
+  {
+   "f": 21,
+   "vdb_half_velmask": 196467,
+   "vdb_half_prune": 1771106,
+   "raw": 3090025,
+   "novel": 122446,
+   "vdb": 3162788,
+   "vdb_novel": 100711,
+   "vdb_half": 1777173,
+   "vdb_half_novel": 67604
+  },
+  {
+   "f": 22,
+   "vdb_half_velmask": 196080,
+   "vdb_half_prune": 1778400,
+   "raw": 3096522,
+   "novel": 124517,
+   "vdb": 3214325,
+   "vdb_novel": 101112,
+   "vdb_half": 1785143,
+   "vdb_half_novel": 67910
+  },
+  {
+   "f": 23,
+   "vdb_half_velmask": 170855,
+   "vdb_half_prune": 1712877,
+   "raw": 3018413,
+   "novel": 125936,
+   "vdb": 3136951,
+   "vdb_novel": 102784,
+   "vdb_half": 1713899,
+   "vdb_half_novel": 69002
+  },
+  {
+   "f": 24,
+   "vdb_half_velmask": 172130,
+   "vdb_half_prune": 1762319,
+   "raw": 3105035,
+   "novel": 130209,
+   "vdb": 3181270,
+   "vdb_novel": 104712,
+   "vdb_half": 1762289,
+   "vdb_half_novel": 70195
+  },
+  {
+   "f": 25,
+   "vdb_half_velmask": 205503,
+   "vdb_half_prune": 1839440,
+   "raw": 3190420,
+   "novel": 132958,
+   "vdb": 3318520,
+   "vdb_novel": 106707,
+   "vdb_half": 1842343,
+   "vdb_half_novel": 71885
+  },
+  {
+   "f": 26,
+   "vdb_half_velmask": 211055,
+   "vdb_half_prune": 1791985,
+   "raw": 3111173,
+   "novel": 133824,
+   "vdb": 3236102,
+   "vdb_novel": 109796,
+   "vdb_half": 1791987,
+   "vdb_half_novel": 73749
+  },
+  {
+   "f": 27,
+   "vdb_half_velmask": 214188,
+   "vdb_half_prune": 1796786,
+   "raw": 3115420,
+   "novel": 135831,
+   "vdb": 3243748,
+   "vdb_novel": 63816,
+   "vdb_half": 1798036,
+   "vdb_half_novel": 74679
+  },
+  {
+   "f": 28,
+   "vdb_half_velmask": 216338,
+   "vdb_half_prune": 1845291,
+   "raw": 3203426,
+   "novel": 137563,
+   "vdb": 3338928,
+   "vdb_novel": 65667,
+   "vdb_half": 1851376,
+   "vdb_half_novel": 76824
+  },
+  {
+   "f": 29,
+   "vdb_half_velmask": 232051,
+   "vdb_half_prune": 1892228,
+   "raw": 3288810,
+   "novel": 143776,
+   "vdb": 3423649,
+   "vdb_novel": 67616,
+   "vdb_half": 1896332,
+   "vdb_half_novel": 78862
+  },
+  {
+   "f": 30,
+   "vdb_half_velmask": 237282,
+   "vdb_half_prune": 1763191,
+   "raw": 3049610,
+   "novel": 148250,
+   "vdb": 3172485,
+   "vdb_novel": 122959,
+   "vdb_half": 1763192,
+   "vdb_half_novel": 81414
+  },
+  {
+   "f": 31,
+   "vdb_half_velmask": 243483,
+   "vdb_half_prune": 1859319,
+   "raw": 3220492,
+   "novel": 154350,
+   "vdb": 3351318,
+   "vdb_novel": 127047,
+   "vdb_half": 1859336,
+   "vdb_half_novel": 49044
+  },
+  {
+   "f": 32,
+   "vdb_half_velmask": 244694,
+   "vdb_half_prune": 1836812,
+   "raw": 3183408,
+   "novel": 156772,
+   "vdb": 3311068,
+   "vdb_novel": 72309,
+   "vdb_half": 1836801,
+   "vdb_half_novel": 84967
+  },
+  {
+   "f": 33,
+   "vdb_half_velmask": 242414,
+   "vdb_half_prune": 2052318,
+   "raw": 3556890,
+   "novel": 160876,
+   "vdb": 3698520,
+   "vdb_novel": 129899,
+   "vdb_half": 2052325,
+   "vdb_half_novel": 86262
+  },
+  {
+   "f": 34,
+   "vdb_half_velmask": 243607,
+   "vdb_half_prune": 2006728,
+   "raw": 3482480,
+   "novel": 161898,
+   "vdb": 3560736,
+   "vdb_novel": 127934,
+   "vdb_half": 2006728,
+   "vdb_half_novel": 50123
+  },
+  {
+   "f": 35,
+   "vdb_half_velmask": 245750,
+   "vdb_half_prune": 2379188,
+   "raw": 4142744,
+   "novel": 164304,
+   "vdb": 4302255,
+   "vdb_novel": 71877,
+   "vdb_half": 2385828,
+   "vdb_half_novel": 85277
+  },
+  {
+   "f": 36,
+   "vdb_half_velmask": 242818,
+   "vdb_half_prune": 2330003,
+   "raw": 4055271,
+   "novel": 163877,
+   "vdb": 4211661,
+   "vdb_novel": 126494,
+   "vdb_half": 2334158,
+   "vdb_half_novel": 49216
+  },
+  {
+   "f": 37,
+   "vdb_half_velmask": 238759,
+   "vdb_half_prune": 2280593,
+   "raw": 3970282,
+   "novel": 162306,
+   "vdb": 4120218,
+   "vdb_novel": 125204,
+   "vdb_half": 2284094,
+   "vdb_half_novel": 83787
+  },
+  {
+   "f": 38,
+   "vdb_half_velmask": 234408,
+   "vdb_half_prune": 2258943,
+   "raw": 3924470,
+   "novel": 157317,
+   "vdb": 4074697,
+   "vdb_novel": 68942,
+   "vdb_half": 2258951,
+   "vdb_half_novel": 81001
+  },
+  {
+   "f": 39,
+   "vdb_half_velmask": 229352,
+   "vdb_half_prune": 2232617,
+   "raw": 3879161,
+   "novel": 152246,
+   "vdb": 4029668,
+   "vdb_novel": 120487,
+   "vdb_half": 2232607,
+   "vdb_half_novel": 80193
+  },
+  {
+   "f": 40,
+   "vdb_half_velmask": 230325,
+   "vdb_half_prune": 2261390,
+   "raw": 3923708,
+   "novel": 152414,
+   "vdb": 4024209,
+   "vdb_novel": 121658,
+   "vdb_half": 2261407,
+   "vdb_half_novel": 47134
+  },
+  {
+   "f": 41,
+   "vdb_half_velmask": 232642,
+   "vdb_half_prune": 2211672,
+   "raw": 3840728,
+   "novel": 152529,
+   "vdb": 3991650,
+   "vdb_novel": 121861,
+   "vdb_half": 2213948,
+   "vdb_half_novel": 47811
+  },
+  {
+   "f": 42,
+   "vdb_half_velmask": 195745,
+   "vdb_half_prune": 2040035,
+   "raw": 3594637,
+   "novel": 150785,
+   "vdb": 3733471,
+   "vdb_novel": 67001,
+   "vdb_half": 2040015,
+   "vdb_half_novel": 79554
+  },
+  {
+   "f": 43,
+   "vdb_half_velmask": 189793,
+   "vdb_half_prune": 2063171,
+   "raw": 3635441,
+   "novel": 147558,
+   "vdb": 3725663,
+   "vdb_novel": 118759,
+   "vdb_half": 2063932,
+   "vdb_half_novel": 78519
+  },
+  {
+   "f": 44,
+   "vdb_half_velmask": 224767,
+   "vdb_half_prune": 2145136,
+   "raw": 3719725,
+   "novel": 149106,
+   "vdb": 3863715,
+   "vdb_novel": 119455,
+   "vdb_half": 2145147,
+   "vdb_half_novel": 79726
+  },
+  {
+   "f": 45,
+   "vdb_half_velmask": 225913,
+   "vdb_half_prune": 2145560,
+   "raw": 3721862,
+   "novel": 150954,
+   "vdb": 3866396,
+   "vdb_novel": 119779,
+   "vdb_half": 2145569,
+   "vdb_half_novel": 80330
+  },
+  {
+   "f": 46,
+   "vdb_half_velmask": 187943,
+   "vdb_half_prune": 2202182,
+   "raw": 3880155,
+   "novel": 150359,
+   "vdb": 3978007,
+   "vdb_novel": 119218,
+   "vdb_half": 2202183,
+   "vdb_half_novel": 79914
+  },
+  {
+   "f": 47,
+   "vdb_half_velmask": 184208,
+   "vdb_half_prune": 1845304,
+   "raw": 3257092,
+   "novel": 146635,
+   "vdb": 3381142,
+   "vdb_novel": 115867,
+   "vdb_half": 1845305,
+   "vdb_half_novel": 78037
+  },
+  {
+   "f": 48,
+   "vdb_half_velmask": 220103,
+   "vdb_half_prune": 1950628,
+   "raw": 3386916,
+   "novel": 146035,
+   "vdb": 3513796,
+   "vdb_novel": 114226,
+   "vdb_half": 1950641,
+   "vdb_half_novel": 76480
+  }
+ ],
+ "filled": {
+  "density>0.001": 0.03752848307291667,
+  "flame>0.001": 0.03752848307291667,
+  "temperature>0.001": 0.016965738932291665,
+  "|vel|>0.01": 0.6431498209635417,
+  "|vel|>0.1": 0.603167724609375
+ },
+ "vel_mask_check": [
+  "density",
+  "temperature",
+  "flame",
+  "vel.x",
+  "vel.y",
+  "vel.z"
+ ],
+ "sim_sec": 4.03,
+ "res": [
+  64,
+  80,
+  96
+ ],
+ "prims": {
+  "vdb_half_velmask": [
+   "density:VDB",
+   "temperature:VDB",
+   "flame:VDB",
+   "vel.x:VDB",
+   "vel.y:VDB",
+   "vel.z:VDB"
+  ],
+  "vdb_half_prune": [
+   "density:VDB",
+   "temperature:VDB",
+   "flame:VDB",
+   "vel.x:VDB",
+   "vel.y:VDB",
+   "vel.z:VDB"
+  ],
+  "raw": [
+   "density:Volume",
+   "temperature:Volume",
+   "flame:Volume",
+   "vel.x:Volume",
+   "vel.y:Volume",
+   "vel.z:Volume"
+  ],
+  "novel": [
+   "density:Volume",
+   "temperature:Volume",
+   "flame:Volume"
+  ],
+  "vdb": [
+   "density:VDB",
+   "temperature:VDB",
+   "flame:VDB",
+   "vel.x:VDB",
+   "vel.y:VDB",
+   "vel.z:VDB"
+  ],
+  "vdb_novel": [
+   "density:VDB",
+   "temperature:VDB",
+   "flame:VDB"
+  ],
+  "vdb_half": [
+   "density:VDB",
+   "temperature:VDB",
+   "flame:VDB",
+   "vel.x:VDB",
+   "vel.y:VDB",
+   "vel.z:VDB"
+  ],
+  "vdb_half_novel": [
+   "density:VDB",
+   "temperature:VDB",
+   "flame:VDB"
+  ]
+ }
+}

@@ -79,6 +79,11 @@ MORE = {
     "popsource": ("Constant Birth Rate は1秒あたり。端数の粒はフレームごとに運で決まる（Rate 10 で 2 秒 27 粒）。数えられるフレームは Life × fps − 1/Substeps で、0.5 秒の粒は Substeps 1 で 11 フレーム（実験193・194）。", ["193", "194"]),
     "vdbreshapesdf": ("Dilate・Erode は面を Offset × 升の大きさだけ押し出す（引っ込める）。Iterations は効かない。Open・Close は球をほぼ変えない。箱の角では、Open は辺を円弧で丸め、半径は Offset × 升より約 3 升大きい（帯の幅によらない）。Close は凸な箱も少し削り、帯を 25 升に広げると削れは 0.2〜0.4% まで減る（実験195〜199）。", ["195", "196", "197", "198", "199"]),
     "vdbfrompolygons": ("箱を Open で丸めたときの体積は、帯 3 升と 6 升で違い、6 升以上では同じだった。広げるほど時間は増える（実験197・199）。", ["197", "199"]),
+    "convertvdb": ("Pyro の出力を VDB にしただけでは、キャッシュは小さくならなかった（焚き火 48 フレームで 150 MB → 155 MB）。0 でない値を持つ速度 vel が升の 6 割以上に残るため。Prune Tolerance 0.01 でも変わらない。16 bit で書くと約半分（実験204）。", ["204"]),
+    "volumewrangle": ("vel.x・vel.y・vel.z の 3 つのボリュームは、コードの中で v@vel として 1 つにまとめて読み書きできた。煙も炎も無い升の v@vel を 0 にしてから VDB・16 bit にすると、焚き火のキャッシュが 16 分の 1 になった（実験204）。", ["204"]),
+    "blast": ("Group に @name=vel.* と書き、Group Type を Primitives にすると、Pyro の速度のボリューム 3 つだけを消せる。焚き火のキャッシュは 24 分の 1 になった（実験204）。", ["204"]),
+    "karma": ("被写界深度（Enable Depth of Field）とモーションブラーを入れても、960×540・16 サンプルで 25 秒 → 27 秒ほどしか延びなかった。Primary Samples を 16 → 256 にすると 3.3 倍の時間でも、既定の Noise Level 0.01 のままではざらつきは減らなかった。Denoiser を oidn にすると、ほぼ同じ時間でいちばん滑らかだった（実験205）。", ["205"]),
+    "pyrosolver": ("出力のボリュームは density・temperature・flame と vel.x・vel.y・vel.z の 6 つ。そのまま .bgeo.sc に書くと、Voxel Size 0.04 の焚き火で 1 フレーム約 3 MB、その 9 割以上が vel だった（実験204）。", ["204"]),
 }
 for _k, (_t, _e) in MORE.items():
     if _k in NOTES:

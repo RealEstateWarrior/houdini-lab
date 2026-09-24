@@ -1,59 +1,14 @@
 [
  {
-  "spec": "sop/volume",
+  "spec": "sop/attribexpression",
   "ok": true,
   "category": "SOP",
-  "name": "volume",
-  "label": "Volume",
+  "name": "attribexpression",
+  "label": "Attribute Expression",
   "parms": [
    {
-    "name": "type",
-    "label": "Type",
-    "default": 0,
-    "kind": "Menu",
-    "menu": [
-     [
-      "float",
-      "Float"
-     ],
-     [
-      "int",
-      "Integer"
-     ]
-    ]
-   },
-   {
-    "name": "components",
-    "label": "Components",
-    "default": [
-     1
-    ],
-    "kind": "Int",
-    "menu": []
-   },
-   {
-    "name": "rank",
-    "label": "Collated Rank",
-    "default": 0,
-    "kind": "Menu",
-    "menu": [
-     [
-      "scalar",
-      "Scalar"
-     ],
-     [
-      "vector",
-      "Vector"
-     ],
-     [
-      "matrix",
-      "Matrix"
-     ]
-    ]
-   },
-   {
-    "name": "name",
-    "label": "Name",
+    "name": "bindgroup",
+    "label": "Group",
     "default": [
      ""
     ],
@@ -61,8 +16,250 @@
     "menu": []
    },
    {
-    "name": "initialval",
-    "label": "Initial Value",
+    "name": "bindgrouptype",
+    "label": "Group Type",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "guess",
+      "Guess from Group"
+     ],
+     [
+      "vertices",
+      "Vertices"
+     ],
+     [
+      "edges",
+      "Edges"
+     ],
+     [
+      "points",
+      "Points"
+     ],
+     [
+      "prims",
+      "Primitives"
+     ]
+    ]
+   },
+   {
+    "name": "folder0",
+    "label": "",
+    "default": null,
+    "kind": "FolderSet",
+    "menu": []
+   },
+   {
+    "name": "bindclass",
+    "label": "Attribute Class",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "detail",
+      "Detail"
+     ],
+     [
+      "primitive",
+      "Primitives"
+     ],
+     [
+      "point",
+      "Points"
+     ],
+     [
+      "vertex",
+      "Vertices"
+     ]
+    ]
+   },
+   {
+    "name": "expressions",
+    "label": "Attribute VEXpressions",
+    "default": 1,
+    "kind": "Folder",
+    "menu": []
+   },
+   {
+    "name": "vex_cwdpath",
+    "label": "Evaluation Node Path",
+    "default": [
+     "."
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_matchattrib",
+    "label": "Attribute to Match",
+    "default": [
+     "id"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "includes",
+    "label": "Include Files",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_updatenmls",
+    "label": "Update Normals If Displaced",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "updatecode",
+    "label": "Update Code",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "generatedcode",
+    "label": "Generated Code",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "enable1",
+    "label": "Enable",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "preset1",
+    "label": "Attribute",
+    "default": 1,
+    "kind": "Menu",
+    "menu": [
+     [
+      "",
+      "Custom"
+     ],
+     [
+      "P",
+      "Position (P)"
+     ],
+     [
+      "v",
+      "Velocity (v)"
+     ],
+     [
+      "force",
+      "Force (force)"
+     ],
+     [
+      "Cd",
+      "Color (Cd)"
+     ],
+     [
+      "Alpha",
+      "Alpha (Alpha)"
+     ],
+     [
+      "N",
+      "Normal (N)"
+     ],
+     [
+      "uv",
+      "Texture (uv)"
+     ],
+     [
+      "mass",
+      "Mass (mass)"
+     ],
+     [
+      "pscale",
+      "Scale (pscale)"
+     ],
+     [
+      "name",
+      "Name (name)"
+     ]
+    ]
+   },
+   {
+    "name": "name1",
+    "label": "Name",
+    "default": [
+     "P"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "type1",
+    "label": "Type",
+    "default": 2,
+    "kind": "Menu",
+    "menu": [
+     [
+      "int",
+      "Integer"
+     ],
+     [
+      "float",
+      "Float"
+     ],
+     [
+      "vector",
+      "Vector"
+     ],
+     [
+      "vector4",
+      "Vector 4"
+     ],
+     [
+      "matrix3",
+      "Matrix 3"
+     ],
+     [
+      "matrix",
+      "Matrix 4"
+     ],
+     [
+      "color",
+      "Color"
+     ],
+     [
+      "string",
+      "String"
+     ]
+    ]
+   },
+   {
+    "name": "vali_1",
+    "label": "Constant Value",
+    "default": [
+     0
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "valf_1",
+    "label": "Constant Value",
+    "default": [
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "valv3_1",
+    "label": "Constant Value",
     "default": [
      0.0,
      0.0,
@@ -72,14 +269,98 @@
     "menu": []
    },
    {
-    "name": "initialalpha",
-    "label": "Initial Alpha",
+    "name": "valv4_1",
+    "label": "Constant Value",
     "default": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "valm3_1",
+    "label": "Constant Value",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
      1.0
     ],
     "kind": "Float",
     "menu": []
    },
+   {
+    "name": "valm4_1",
+    "label": "Constant Value",
+    "default": [
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "valc_1",
+    "label": "Constant Value",
+    "default": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "kind": "Float",
+    "menu": []
+   },
+   {
+    "name": "vals_1",
+    "label": "Constant Value",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "snippet1",
+    "label": "VEXpression",
+    "default": [
+     "self"
+    ],
+    "kind": "String",
+    "menu": []
+   }
+  ],
+  "min_inputs": 0,
+  "max_inputs": 4
+ },
+ {
+  "spec": "sop/volumevop",
+  "ok": true,
+  "category": "SOP",
+  "name": "volumevop",
+  "label": "Volume VOP",
+  "parms": [
    {
     "name": "stdswitcher",
     "label": "",
@@ -88,47 +369,32 @@
     "menu": []
    },
    {
-    "name": "dimensionsource",
-    "label": "",
-    "default": null,
-    "kind": "FolderSet",
-    "menu": []
+    "name": "vexsrc",
+    "label": "Vex Source",
+    "default": 0,
+    "kind": "Menu",
+    "menu": [
+     [
+      "myself",
+      "Myself"
+     ],
+     [
+      "shop",
+      "Shop"
+     ],
+     [
+      "script",
+      "Script"
+     ],
+     [
+      "snippet",
+      "Snippet"
+     ]
+    ]
    },
    {
-    "name": "size",
-    "label": "Size",
-    "default": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "t",
-    "label": "Center",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "taper",
-    "label": "Taper",
-    "default": [
-     1.0,
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "camera",
-    "label": "Camera",
+    "name": "shoppath",
+    "label": "Shop Path",
     "default": [
      ""
     ],
@@ -136,349 +402,235 @@
     "menu": []
    },
    {
-    "name": "zmin",
-    "label": "Z Near",
+    "name": "script",
+    "label": "Script",
     "default": [
-     1.0
+     "null"
     ],
-    "kind": "Float",
+    "kind": "String",
     "menu": []
    },
    {
-    "name": "zmax",
-    "label": "Z Far",
-    "default": [
-     2.0
-    ],
-    "kind": "Float",
+    "name": "clear",
+    "label": "Re-load VEX Functions",
+    "default": null,
+    "kind": "Button",
     "menu": []
    },
    {
-    "name": "usecamwindow",
-    "label": "Use Camera's Window",
+    "name": "vop_compiler",
+    "label": "Compiler",
+    "default": [
+     "vcc -q $VOP_INCLUDEPATH -o $VOP_OBJECTFILE -e $VOP_ERRORFILE $VOP_SOURCEFILE"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vop_forcecompile",
+    "label": "Force Compile",
+    "default": null,
+    "kind": "Button",
+    "menu": []
+   },
+   {
+    "name": "vexsnippet",
+    "label": "Snippet",
+    "default": [
+     ""
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_exportlist",
+    "label": "Volumes to Write to",
+    "default": [
+     "*"
+    ],
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "vex_strict",
+    "label": "Enforce Prototypes",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "vex_strictvariables",
+    "label": "Standard Variable Names Only",
     "default": true,
     "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "winx",
-    "label": "Window X",
+    "name": "vex_cwdpath",
+    "label": "Evaluation Node Path",
     "default": [
-     0.0,
-     1.0
+     ""
     ],
-    "kind": "Float",
+    "kind": "String",
     "menu": []
    },
    {
-    "name": "winy",
-    "label": "Window Y",
+    "name": "vex_outputmask",
+    "label": "Export Parameters",
     "default": [
-     0.0,
-     1.0
+     "*"
     ],
-    "kind": "Float",
+    "kind": "String",
     "menu": []
    },
    {
-    "name": "uniformsamples",
-    "label": "Uniform Sampling",
-    "default": 4,
-    "kind": "Menu",
-    "menu": [
-     [
-      "nonsquare",
-      "Non Square"
-     ],
-     [
-      "x",
-      "X Axis"
-     ],
-     [
-      "y",
-      "Y Axis"
-     ],
-     [
-      "z",
-      "Z Axis"
-     ],
-     [
-      "max",
-      "Max Axis"
-     ],
-     [
-      "size",
-      "By Size"
-     ]
-    ]
-   },
-   {
-    "name": "samplediv",
-    "label": "Uniform Sampling Divs",
-    "default": [
-     10
-    ],
-    "kind": "Int",
+    "name": "vex_multithread",
+    "label": "Enable Multithreading",
+    "default": true,
+    "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "divs",
-    "label": "Sampling Divs",
-    "default": [
-     10,
-     10,
-     10
-    ],
-    "kind": "Int",
+    "name": "prunevdbblocks",
+    "label": "Prune VDB Blocks",
+    "default": true,
+    "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "divsize",
-    "label": "Div Size",
-    "default": [
-     0.1
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "zscale",
-    "label": "Z Resolution Scale",
-    "default": [
-     1.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "twod",
-    "label": "Two Dimensional",
+    "name": "vex_geometrygenerator",
+    "label": "Only Output Created Geometry",
     "default": false,
     "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "voxelplane",
-    "label": "Plane",
-    "default": 0,
-    "kind": "Menu",
-    "menu": [
-     [
-      "xy",
-      "XY Plane"
-     ],
-     [
-      "yz",
-      "YZ Plane"
-     ],
-     [
-      "zx",
-      "ZX Plane"
-     ]
-    ]
-   },
-   {
-    "name": "volborder",
-    "label": "Border Type",
-    "default": 0,
-    "kind": "Menu",
-    "menu": [
-     [
-      "constant",
-      "Constant"
-     ],
-     [
-      "repeat",
-      "Repeat"
-     ],
-     [
-      "streak",
-      "Streak"
-     ],
-     [
-      "sdf",
-      "SDF"
-     ],
-     [
-      "mirror",
-      "Mirror"
-     ]
-    ]
-   },
-   {
-    "name": "volborderval",
-    "label": "Border Value",
-    "default": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "kind": "Float",
+    "name": "vdb_signedflood",
+    "label": "Signed-Flood Fill Output SDF VDBs",
+    "default": true,
+    "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "volborderalpha",
-    "label": "Border Alpha",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
+    "name": "autobind",
+    "label": "Autobind by Name",
+    "default": true,
+    "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "voltol",
-    "label": "Constant Tol",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "quantizetol",
-    "label": "Quantization Tol",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
-    "menu": []
-   },
-   {
-    "name": "dither",
-    "label": "Dithering",
-    "default": 1,
-    "kind": "Menu",
-    "menu": [
-     [
-      "none",
-      "None"
-     ],
-     [
-      "ordered",
-      "Ordered"
-     ]
-    ]
-   },
-   {
-    "name": "usefp16",
-    "label": "Use 16bit Float",
+    "name": "bindeach",
+    "label": "Bind Each to Density",
     "default": false,
     "kind": "Toggle",
     "menu": []
    },
    {
-    "name": "volvis",
-    "label": "Display Mode",
+    "name": "bindings",
+    "label": "Number of Bindings",
     "default": 0,
-    "kind": "Menu",
-    "menu": [
-     [
-      "smoke",
-      "Smoke"
-     ],
-     [
-      "rainbow",
-      "Rainbow"
-     ],
-     [
-      "iso",
-      "Isosurface"
-     ],
-     [
-      "invisible",
-      "Invisible"
-     ],
-     [
-      "heightfield",
-      "Height Field"
-     ],
-     [
-      "image",
-      "Image"
-     ]
-    ]
-   },
-   {
-    "name": "volvisiso",
-    "label": "Display Isocontour",
-    "default": [
-     0.0
-    ],
-    "kind": "Float",
+    "kind": "Folder",
     "menu": []
    },
    {
-    "name": "volvisdensity",
-    "label": "Display Density",
+    "name": "vex_precision",
+    "label": "VEX Precision",
     "default": [
-     1.0
+     "auto"
     ],
-    "kind": "Float",
+    "kind": "String",
+    "menu": [
+     [
+      "auto",
+      "Auto"
+     ],
+     [
+      "32",
+      "32"
+     ],
+     [
+      "64",
+      "64"
+     ]
+    ]
+   }
+  ],
+  "min_inputs": 1,
+  "max_inputs": 4
+ },
+ {
+  "spec": "sop/solver",
+  "ok": true,
+  "category": "SOP",
+  "name": "solver",
+  "label": "Solver",
+  "parms": [
+   {
+    "name": "resimulate",
+    "label": "Reset Simulation",
+    "default": null,
+    "kind": "Button",
     "menu": []
    },
    {
-    "name": "voltypeinfo",
-    "label": "Volume Type Info",
-    "default": 0,
-    "kind": "Menu",
-    "menu": [
-     [
-      "none",
-      "None"
-     ],
-     [
-      "color",
-      "Color"
-     ],
-     [
-      "position",
-      "Position"
-     ],
-     [
-      "vector",
-      "Vector"
-     ],
-     [
-      "normal",
-      "Signed Normal"
-     ],
-     [
-      "offsetnormal",
-      "Offset Normal"
-     ],
-     [
-      "texturecoord",
-      "Texture Coordinate"
-     ],
-     [
-      "id",
-      "ID"
-     ],
-     [
-      "mask",
-      "Mask"
-     ],
-     [
-      "sdf",
-      "SDF"
-     ],
-     [
-      "height",
-      "Height"
-     ]
-    ]
+    "name": "useinitialsop",
+    "label": "Use Initial SOP",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
    },
    {
-    "name": "volvistiles",
-    "label": "Visualize Tiling",
+    "name": "initialsop",
+    "label": "Initial State",
     "default": [
-     1.0
+     ""
     ],
-    "kind": "Float",
+    "kind": "String",
+    "menu": []
+   },
+   {
+    "name": "startframe",
+    "label": "Start Frame",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "substep",
+    "label": "Sub Steps",
+    "default": [
+     1
+    ],
+    "kind": "Int",
+    "menu": []
+   },
+   {
+    "name": "cacheenabled",
+    "label": "Cache Simulation",
+    "default": true,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cachetodisk",
+    "label": "Allow Caching To Disk",
+    "default": false,
+    "kind": "Toggle",
+    "menu": []
+   },
+   {
+    "name": "cachemaxsize",
+    "label": "Cache Memory (MB)",
+    "default": [
+     5000
+    ],
+    "kind": "Int",
     "menu": []
    }
   ],
   "min_inputs": 0,
-  "max_inputs": 1
+  "max_inputs": 4
  }
 ]

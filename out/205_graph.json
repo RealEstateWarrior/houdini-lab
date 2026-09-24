@@ -1,0 +1,172 @@
+{
+  "title": "実験205",
+  "network": "/obj/exp205",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ball_spots",
+      "type": "attribwrangle",
+      "pos": [
+        -0.847,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 奥へ並べる 7 つの点。色を変えて、ぼけ具合を見分けやすくする\nfor (int i = 0; i < 7; i++) {\n    int p = addpoint(0, set(-0.9 + i * 0.3, 0.25, 1...."
+      }
+    },
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        -3.106,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.25,
+        "rady": 0.25,
+        "radz": 0.25,
+        "rows": 48,
+        "cols": 48
+      }
+    },
+    {
+      "name": "row_of_balls",
+      "type": "copytopoints::2.0",
+      "pos": [
+        -1.977,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetattribs": 1,
+        "applyattribs1": "Cd"
+      }
+    },
+    {
+      "name": "runner_box",
+      "type": "box",
+      "pos": [
+        1.977,
+        3.238
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.35,
+        "sizey": 0.35,
+        "sizez": 0.35
+      }
+    },
+    {
+      "name": "run_across",
+      "type": "xform",
+      "pos": [
+        1.977,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "tx": -0.5000000000000002,
+        "ty": 0.6,
+        "tz": 0.6
+      }
+    },
+    {
+      "name": "assign_balls",
+      "type": "material",
+      "pos": [
+        -1.977,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/ball_mat"
+      }
+    },
+    {
+      "name": "assign_box",
+      "type": "material",
+      "pos": [
+        1.977,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/box_mat"
+      }
+    },
+    {
+      "name": "scene",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "row_of_balls",
+      "to_input": 0
+    },
+    {
+      "from": "ball_spots",
+      "from_output": 0,
+      "to": "row_of_balls",
+      "to_input": 1
+    },
+    {
+      "from": "runner_box",
+      "from_output": 0,
+      "to": "run_across",
+      "to_input": 0
+    },
+    {
+      "from": "row_of_balls",
+      "from_output": 0,
+      "to": "assign_balls",
+      "to_input": 0
+    },
+    {
+      "from": "run_across",
+      "from_output": 0,
+      "to": "assign_box",
+      "to_input": 0
+    },
+    {
+      "from": "assign_balls",
+      "from_output": 0,
+      "to": "scene",
+      "to_input": 0
+    },
+    {
+      "from": "assign_box",
+      "from_output": 0,
+      "to": "scene",
+      "to_input": 1
+    }
+  ]
+}
