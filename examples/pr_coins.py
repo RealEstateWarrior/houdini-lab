@@ -34,12 +34,31 @@ def main():
                   "1枚ずつを packed（まとめた塊）にしておくと、計算がとても軽い。色は金・銀・銅の3つから選ぶ。",
                   tags=["シミュレーション", "RBD", "複製", "Karma"])
     g.shot_dir = (0.8, 0.8, 1.0)
-    disc = g.node("tube", "coin", type="poly", rad=(0.013, 0.013), height=0.0018, cols=40, cap=1)
-    rim = g.node("polybevel::3.0", "soft_rim", [disc], offset=0.0004, divisions=2)
+    profile = g.node("attribwrangle", "coin_profile", snippet=(
+        "// 硬貨の断面（半分）。面は少し低く、縁（リム）が一段高い。x が中心からの距離、y が高さ\n"
+        "vector pts[] = {{0.0, 0.0006, 0}, {0.0108, 0.0006, 0}, {0.0113, 0.0009, 0}, {0.0128, 0.0009, 0}, {0.013, 0.0007, 0},\n"
+        "                {0.013, -0.0007, 0}, {0.0128, -0.0009, 0}, {0.0113, -0.0009, 0}, {0.0108, -0.0006, 0}, {0.0, -0.0006, 0}};\n"
+        "int prim = addprim(0, 'poly');\n"
+        "foreach (vector p; pts) addvertex(0, prim, addpoint(0, p));"))
+    profile.parm("class").set(0)
+    turned = g.node("revolve::2.0", "coin_turn", [profile], divs=72)
+    body = g.node("reverse", "coin_body", [turned])
+    dense = g.node("remesh::2.0", "coin_mesh", [body], targetsize=0.0004)
+    rim = g.node("attribwrangle", "relief", [dense], snippet=(
+        "// 面の浮き彫り。縁より内側の平らな面だけを、模様の形にわずかに持ち上げる\n"
+        "float r = length(set(@P.x, @P.z));\n"
+        "if (r < 0.0102 && abs(@P.y) > 0.0005) {\n"
+        "    float a = atan2(@P.z, @P.x);\n"
+        "    float pattern = smooth(0.52, 0.56, noise(set(@P.x, @P.z, @P.y > 0) * 900));   // 中の絵柄\n"
+        "    float ring = smooth(0.0088, 0.0090, r) * (1 - smooth(0.0098, 0.0100, r)) * (frac(a * 30 / (2 * PI)) > 0.5);   // 縁に沿った点々\n"
+        "    @P.y += sign(@P.y) * 0.00015 * max(pattern * (r < 0.008), ring);\n"
+        "}"))
     g.step(rim, "コインを1枚作る",
-           "<code>tube</code> で半径 1.3 cm・厚さ 1.8 mm の円盤を作り（Columns 40 で縁をなめらかに）、"
-           "<code>polybevel</code> で縁の角を 0.4 mm 丸める。角が立っていると、光ったときに作り物に見える。",
-           cap="縁を丸めたコイン1枚。", shading="smoothwire", bbox=hou.BoundingBox(-0.016, -0.004, -0.016, 0.016, 0.004, 0.016))
+           "本物の硬貨は、面が少し低く、縁（リム）が一段高くなっていて、面には浮き彫りの絵柄がある。前の版は、ただの円盤で豆粒のように見えた。"
+           "何もつながない Detail の <code>attribwrangle</code> で、断面の半分（半径 1.3 cm・厚さ 1.8 mm、縁だけ 0.3 mm 高い）を多角形で描き、"
+           "<code>revolve</code>（72 分割）で回して <code>reverse</code> で面を外向きにする。<code>remesh</code> で 0.4 mm の細かい網にし、"
+           "もう1つの <code>attribwrangle</code> で、縁の内側の面をノイズの形に 0.15 mm 持ち上げて絵柄に、縁に沿って点々の飾りを付ける。",
+           cap="縁が高く、浮き彫りのあるコイン。", shading="smooth", bbox=hou.BoundingBox(-0.016, -0.004, -0.016, 0.016, 0.004, 0.016))
 
     cloud = g.node("box", "drop_zone", size=(0.25, 0.3, 0.25), t=(0, 0.3, 0))
     spots = g.node("scatter::2.0", "coin_spots", [cloud], npts=COUNT, seed=3)
@@ -81,16 +100,20 @@ def main():
            cap=f"フレーム {LAST}。床に散らばったコイン。", shading="smooth", ui_parm="useground",
            bbox=hou.BoundingBox(-0.3, 0, -0.3, 0.3, 0.1, 0.3))
 
-    metal = g.mat("coin_mat", basecolor=(1, 1, 1), metallic=1.0, rough=0.22)
-    wood = g.mat("table_mat", basecolor=(0.12, 0.07, 0.04), rough=0.45, reflect=0.5)
-    table = g.node("grid", "table", size=(1.5, 1.5), rows=2, cols=2)
+    metal = g.mat("coin_mat", basecolor=(1, 1, 1), metallic=1.0, rough=0.3)
+    wood = g.mat("table_mat", basecolor=(1, 1, 1), rough=0.45, reflect=0.5)
+    table_grid = g.node("grid", "table", size=(1.5, 1.5), rows=300, cols=300)
+    table = g.node("attribwrangle", "wood_grain", [table_grid], snippet=(
+        "// 木目：x 方向にゆらいだ縞。濃い茶と明るい茶を行き来する\n"
+        "float s = sin((@P.z + noise(@P * 4) * 0.03) * 260);\n"
+        "v@Cd = lerp({0.09, 0.05, 0.025}, {0.2, 0.12, 0.06}, s * 0.5 + 0.5) * fit(noise(@P * 30), 0.3, 0.7, 0.85, 1.1);"))
     final = g.node("merge", "coins_on_table", [g.assign(solver, metal, "assign_coin"), g.assign(table, wood, "assign_table")])
     g.step(final, "金属の材質を当てる",
-           "コインは <code>principledshader</code> で <strong>Metallic 1・Roughness 0.22</strong>、Base Color を白にして点の色 Cd を使う"
-           "（金属は Base Color がそのまま映り込みの色になる）。床は濃い木の色。",
+           "コインは <code>principledshader</code> で <strong>Metallic 1・Roughness 0.3</strong>、Base Color を白にして点の色 Cd を使う"
+           "（金属は Base Color がそのまま映り込みの色になる）。床は <code>grid</code> に <code>attribwrangle</code> でゆらいだ縞の木目を付ける。",
            cap="材質を当てた状態。", shot=False)
     g.hero(final, f"Karma で撮った仕上がり（フレーム {LAST}）。金・銀・銅のコインが散らばる。", frame=LAST,
-           direction=(0.7, 0.75, 1.0), key=3.0, rim=6.0, dome=0.6, spp=64, margin=0.95, floor=False,
+           direction=(0.7, 0.75, 1.0), key=0.3, rim=0.6, dome=0.35, spp=48, margin=0.6, floor=False, denoise=True,
            bbox=hou.BoundingBox(-0.25, 0, -0.25, 0.25, 0.03, 0.25))
     g.anim(final, (1, LAST), "コインが落ちて跳ね、散らばって止まるまで（72 フレーム＝3 秒）。",
            bbox=hou.BoundingBox(-0.3, 0, -0.3, 0.3, 0.45, 0.3), direction=(0.8, 0.6, 1.0))

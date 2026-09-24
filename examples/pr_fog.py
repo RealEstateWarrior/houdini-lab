@@ -58,32 +58,36 @@ def main():
         "float low = exp(-@P.y / chf('height'));\n"
         "float lumps = fit(noise(@P * 0.35), 0.3, 0.7, 0.5, 1.3);\n"
         "f@density = chf('amount') * low * lumps;"))
-    kit_spare(thick, amount=0.025, height=5.0)
+    kit_spare(thick, amount=0.05, height=5.0)
     g.step(thick, "霧で満たす",
            "<code>volume</code> で、名前 <strong>density</strong> の箱（30 × 11 × 30 m、森と同じ広さ）を作る。Uniform Sampling Divs 110 で、升は約 0.27 m。"
            "霧のむらはゆるやかなので、升は粗くてよい。"
-           "<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.025</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、"
-           "ノイズで 0.5〜1.3 倍のむらを付ける。霧はうすいほうが筋がはっきりする。",
+           "<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.05</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、"
+           "ノイズで 0.5〜1.3 倍のむらを付ける。",
            cap="下ほど濃い霧（ビューポートでは箱の影で見える）。", shading="smooth", ui_parm="amount",
            bbox=hou.BoundingBox(-15, 0, -15, 15, 11, 15))
 
-    bark = g.mat("bark_mat", basecolor=(0.09, 0.075, 0.06), rough=0.9)
-    moss_floor = g.mat("floor_mat", basecolor=(0.06, 0.07, 0.035), rough=0.95)
+    bark = g.mat("bark_mat", basecolor=(0.2, 0.17, 0.13), rough=0.9)
+    moss_floor = g.mat("floor_mat", basecolor=(0.13, 0.14, 0.08), rough=0.95)
+    # 森の奥の明るいもや。本物の霧の森は、奥の木ほど白いもやに溶けて見える（前の版は奥が真っ黒だった）
+    haze = g.node("grid", "far_haze", orient="xy", size=(80, 30), rows=2, cols=2, t=(0, 8, -16))
+    haze_m = g.mat("haze_mat", basecolor=(0, 0, 0), emitint=1.0, emitcolor=(0.62, 0.6, 0.52))
     canopy_mat = g.mat("canopy_mat", basecolor=(0.02, 0.04, 0.01), rough=0.9)
     final = g.node("merge", "forest", [g.assign(trees, bark, "assign_bark"), g.assign(ground, moss_floor, "assign_floor"),
-                                       g.assign(holes, canopy_mat, "assign_canopy"), thick])
+                                       g.assign(holes, canopy_mat, "assign_canopy"),
+                                       g.assign(haze, haze_m, "assign_haze"), thick])
     sun = hou.node("/obj").createNode("hlight::2.0", "sun")
     sun.parm("light_type").set("distant")
-    sun.parm("light_intensity").set(2.0)
+    sun.parm("light_intensity").set(3.0)
     sun.parmTuple("light_color").set((1.0, 0.9, 0.72))
     sun.parmTuple("r").set((-58, 150, 0))
     g.step(final, "日を斜め上から当てる",
-           "幹・地面・葉の層に暗い材質を当て、霧とまとめる。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、"
-           "Intensity 2・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。"
-           "光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。ほかの明かりはごく弱くする。",
+           "幹（灰色がかった茶）・地面（苔の暗い緑）・葉の層に材質を当て、霧とまとめる。森の奥（16 m 先）には大きな板を立て、明るいもやの色に光らせる。写真の霧の森は、奥の木ほど白いもやに溶けて見えるので、奥が真っ黒だと森の深さが出ない。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、"
+           "Intensity 3・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。"
+           "光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。空からのやわらかい光（ドーム、0.6）も当てて霧全体をほんのり光らせると、奥の木ほど霧に溶けて見える。",
            cap="材質と光を当てた状態。", shot=False)
     g.hero(final, "Karma で撮った仕上がり。葉のすき間を通った日が、霧の中で筋になる。",
-           direction=(0.25, 0.1, 1.0), key=0.0, rim=0.0, dome=0.06, dome_color=(0.5, 0.6, 0.7), floor=False,
+           direction=(0.25, 0.1, 1.0), key=0.0, rim=0.0, dome=0.6, dome_color=(0.62, 0.66, 0.68), floor=False,
            spp=64, margin=1.0, bbox=hou.BoundingBox(-3.5, 0, -10, 3.5, 5, 2), denoise=True)
 
     # ---- 落とし穴を測る ----
@@ -98,7 +102,7 @@ def main():
     karma.parm("picture").set(os.path.join(kit.OUT, "pr_fog_nofog.png").replace("\\", "/"))
     karma.parm("samplesperpixel").set(24)
     karma.render(verbose=False)
-    thick.parm("amount").set(0.025)
+    thick.parm("amount").set(0.05)
     karma.parm("picture").set(os.path.join(kit.OUT, "pr_fog_hero.png").replace("\\", "/"))
     traps = [
         {"title": "霧が無いと、光の筋は見えない",

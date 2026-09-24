@@ -2,7 +2,7 @@
 """実践「ひび割れから光る溶岩」— 冷えて固まった黒い岩の板のすき間から、中の溶岩が赤く光る地面を作る。
 
 本物の溶岩の表面は、冷えた黒い殻が亀の甲羅のような板に割れ、割れ目から中の熱い溶岩が見えて光る。
-割れ目の真ん中ほど熱く（黄色）、殻の縁ほど冷めている（暗い赤）。細胞のような形は VEX の wnoise（ウォーリーノイズ）で作れる。
+割れ目の真ん中ほど熱く（明るい赤橙）、殻の縁ほど冷めている（暗い赤）。細胞のような形は VEX の wnoise（ウォーリーノイズ）で作れる。
 
     hython examples/pr_lava.py
 """
@@ -32,30 +32,36 @@ def main():
         "int seed;\n"
         "wnoise(@P * chf('plate_size'), seed, f1, f2);\n"
         "float gap = f2 - f1;                              // 板と板の境目で 0 になる\n"
-        "f@heat = 1 - smooth(0.0, chf('crack_width'), gap);   // 割れ目の真ん中で 1、板の上で 0\n"
-        "// 板は少し盛り上がり、でこぼこも付く。割れ目は低い\n"
-        "float bumps = noise(@P * 6) * 0.03 + noise(@P * 25) * 0.008;\n"
-        "@P.y += smooth(0.0, 0.25, gap) * 0.06 + bumps;"))
+        "// 割れ目の幅は場所ごとにばらつかせる（写真の割れ目は、太い所と細い所がある）\n"
+        "float width = chf('crack_width') * fit(noise(@P * 1.3 + 2.1), 0.3, 0.7, 0.25, 1.8);\n"
+        "f@heat = 1 - smooth(0.0, width, gap);             // 割れ目の真ん中で 1、板の上で 0\n"
+        "f@gap = gap;                                      // 次の wrangle でも使えるよう、属性にしておく\n"
+        "// 板は盛り上がり、ごつごつしたでこぼこが付く（3つの大きさのノイズを重ねる）。板ごとに少し傾ける\n"
+        "float tilt = (rand(seed) - 0.5) * 0.06 * (@P.x + @P.z);\n"
+        "float bumps = noise(@P * 6) * 0.04 + noise(@P * 25) * 0.012 + noise(@P * 90) * 0.004;\n"
+        "@P.y += smooth(0.0, 0.25, gap) * 0.07 + bumps + tilt * smooth(0.0, 0.2, gap);"))
     kit_spare(crust, plate_size=2.2, crack_width=0.07)
     g.step(crust, "岩の板と割れ目を作る",
            "<code>attribwrangle</code> で <strong>wnoise</strong> を使う。空間に散らばった点のうち、一番近い点までの距離 f1 と、"
            "二番目に近い点までの距離 f2 が返る。<strong>f2 − f1</strong> は、2つの点のちょうど中間（＝板と板の境目）で 0 になる。"
-           "これが 0.07 より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。"
-           "板の上は 6 cm 持ち上げ、ノイズで細かいでこぼこも付ける。plate_size = 2.2 で、板1枚は数十 cm。",
+           "これが割れ目の幅より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。幅は crack_width = 0.07 を、別のノイズで 0.25〜1.8 倍にばらつかせる（写真の割れ目は太い所と細い所がある。前の版は同じ幅の線で、絵のように見えた）。"
+           "板の上は 7 cm 持ち上げ、大きさの違うノイズを3つ重ねてごつごつさせ、板ごとに少し傾ける。plate_size = 2.2 で、板1枚は数十 cm。",
            cap="亀の甲羅のように割れた地面。", shading="smooth", ui_parm="crack_width",
            bbox=hou.BoundingBox(-2, -0.2, -1.5, 2, 0.2, 1.5))
 
     tint = g.node("attribwrangle", "hot_colors", [crust], snippet=(
-        "// 割れ目の色。熱い所ほど黄色く、冷めた所ほど暗い赤。板は黒い岩\n"
-        "vector hot = lerp({0.35, 0.02, 0.0}, {1.0, 0.55, 0.08}, pow(f@heat, 2));\n"
-        "vector rock = {0.03, 0.028, 0.026} * fit(noise(@P * 12), 0.3, 0.7, 0.6, 1.4);\n"
+        "// 割れ目の色。熱い所ほど明るい赤橙、冷めた所ほど暗い赤。板は黒い岩\n"
+        "vector hot = lerp({0.3, 0.02, 0.0}, {1.0, 0.32, 0.03}, pow(f@heat, 2));   // 暗い赤 → 赤みの強い橙（写真の色）\n"
+        "vector rock = {0.045, 0.042, 0.04} * fit(noise(@P * 12), 0.3, 0.7, 0.6, 1.4);\n"
+        "// 割れ目のすぐそばの殻は、熱で赤くほてる\n"
+        "rock += {0.12, 0.015, 0.0} * pow(1 - smooth(0.0, 0.05, f@gap), 3) * (f@heat <= 0.02);\n"
         "v@Cd = f@heat > 0.02 ? hot * f@heat : rock;\n"
         "i@group_lava = f@heat > 0.02;"))
     g.step(tint, "熱さで色を分ける",
            "もう1つの <code>attribwrangle</code> で色 Cd を決める。heat が 0.02 より大きい点（割れ目）は、heat が大きいほど "
-           "暗い赤 → 黄色に、さらに heat を掛けて縁ほど暗くする。板の点はノイズで濃淡を付けた黒い岩の色。"
+           "暗い赤 → 赤みの強い橙に、さらに heat を掛けて縁ほど暗くする（前の版は黄色が強すぎた。写真の溶岩は赤橙）。板の点はノイズで濃淡を付けた黒い岩の色で、割れ目のすぐそばだけ熱で赤くほてらせる。"
            "割れ目の点は <strong>lava</strong> というグループにまとめておく（光る材質を当てる所）。",
-           cap="割れ目が赤く、真ん中ほど黄色い。", shading="smooth",
+           cap="割れ目が赤く、真ん中ほど明るい橙。", shading="smooth",
            bbox=hou.BoundingBox(-2, -0.2, -1.5, 2, 0.2, 1.5))
 
     faces = g.node("attribwrangle", "lava_faces", [tint], snippet=(
@@ -65,7 +71,7 @@ def main():
         "foreach (int p; primpoints(0, @primnum)) hot &= point(0, 'heat', p) > 0.15;\n"
         "i@group_lava = hot;"))
     faces.parm("class").set(1)
-    glow = g.mat("lava_mat", basecolor=(0, 0, 0), rough=0.6, emitint=3.0, emitcolor=(1, 1, 1))
+    glow = g.mat("lava_mat", basecolor=(0, 0, 0), rough=0.6, emitint=1.4, emitcolor=(1, 1, 1))
     glow.parm("emitcolor_usePointColor").set(1)
     rock = g.mat("crust_mat", basecolor=(1, 1, 1), rough=0.85, reflect=0.3)
     painted = g.assign(g.assign(faces, rock, "assign_rock"), glow, "assign_lava", group="lava")
@@ -73,11 +79,11 @@ def main():
            "材質は面に当てるので、Run Over を Primitives にした <code>attribwrangle</code> で、<strong>角の点が全部熱い</strong>"
            "（heat 0.15 より上）面を <strong>lava</strong> という面のグループにする。そのうえで材質を2つ当てる。まず全体に岩の材質"
            "（Base Color 白＝点の色 Cd を使う、Roughness 0.85）。次の <code>material</code> で Group を <strong>lava</strong> にして、"
-           "光る材質（Base Color 黒・<strong>Emission Intensity 3</strong>・Emission Color の <strong>Use Point Color</strong>）を上書きする。"
+           "光る材質（Base Color 黒・<strong>Emission Intensity 1.4</strong>（強すぎると色が黄色に飛ぶ）・Emission Color の <strong>Use Point Color</strong>）を上書きする。"
            "割れ目は Cd の色そのままで光る。",
            cap="材質を当てた状態（ビューポートでは光らない）。", shot=False)
     g.hero(painted, "Karma で撮った仕上がり。黒い殻の割れ目から、熱い溶岩が光る。", direction=(0.3, 0.75, 1.0),
-           key=0.4, rim=1.5, dome=0.05, dome_color=(0.4, 0.45, 0.6), spp=64, margin=0.62, floor=False,
+           key=0.6, rim=1.0, dome=0.25, dome_color=(0.55, 0.6, 0.7), spp=48, margin=0.62, floor=False, denoise=True,
            bbox=hou.BoundingBox(-1.6, -0.1, -1.2, 1.6, 0.1, 1.2))
 
     # ---- 落とし穴を測る ----

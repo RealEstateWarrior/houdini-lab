@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import practice_kit as kit  # noqa: E402
 
 LAST = 48      # 2 秒
-HERO_F = 9
+HERO_F = 14
 HIT = (0.12, 0.9, 0.0)
 
 
@@ -116,21 +116,28 @@ def main():
                                    ((0.06, 1.52, 0.06), (-0.53, 0.75, 0)), ((0.06, 1.52, 0.06), (0.53, 0.75, 0))]):
         frame.append(g.node("box", f"frame{i}", size=size, t=t))
     wood = g.node("merge", "window_frame", frame)
+    # 窓のまわりの壁。前の版は窓枠だけが床に立っていて、窓に見えなかった。窓の開口を残して4枚の板で囲む
+    panels = []
+    for i, (size, t) in enumerate([((1.9, 2.8, 0.14), (-1.51, 1.4, 0)), ((1.9, 2.8, 0.14), (1.51, 1.4, 0)),
+                                   ((1.12, 1.29, 0.14), (0, 2.155, 0))]):
+        panels.append(g.node("box", f"wall{i}", size=size, t=t))
+    wall = g.node("merge", "wall", panels)
+    plaster = g.mat("wall_mat", basecolor=(0.62, 0.6, 0.56), rough=0.9)
     glass_mat = g.mat("glass_mat", basecolor=(1, 1, 1), rough=0.0, reflect=1.0, ior=1.52, transparency=1.0,
                       transcolor=(0.85, 0.95, 0.92), transdist=0.3)
     wood_mat = g.mat("frame_mat", basecolor=(0.25, 0.14, 0.07), rough=0.5)
     unpack = g.node("unpack", "shards", [solver])
     steel = g.mat("steel_mat", basecolor=(0.6, 0.6, 0.62), metallic=1.0, rough=0.25)
     shards = g.assign(g.assign(unpack, glass_mat, "assign_glass"), steel, "assign_ball", group="@name=ball")
-    final = g.node("merge", "window", [shards, g.assign(wood, wood_mat, "assign_frame")])
-    g.step(final, "枠を付けて、ガラスの材質を当てる",
-           "細い <code>box</code> 4本で木の窓枠を作る。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、"
+    final = g.node("merge", "window", [shards, g.assign(wood, wood_mat, "assign_frame"), g.assign(wall, plaster, "assign_wall")])
+    g.step(final, "枠と壁を付けて、ガラスの材質を当てる",
+           "細い <code>box</code> 4本で木の窓枠を作り、窓の開口を残して <code>box</code> 3枚で壁を立てる（窓枠だけだと窓に見えない）。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、"
            "Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。"
            "<code>unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code>material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。",
            cap="材質を当てた状態（ビューポートでは透けない）。", shot=False)
     g.hero(final, f"Karma で撮った仕上がり（フレーム {HERO_F}）。当たった所から放射状に砕けた破片が飛ぶ。",
-           direction=(0.55, 0.2, 1.2), key=3.0, rim=9.0, dome=0.5, spp=96, margin=1.02, frame=HERO_F,
-           backdrop=(0.05, 0.055, 0.065), bbox=hou.BoundingBox(-0.62, 0, -0.5, 0.62, 1.52, 0.4))
+           direction=(0.45, 0.15, 1.2), key=2.0, rim=6.0, dome=0.5, spp=48, margin=1.1, frame=HERO_F, denoise=True,
+           backdrop=(0.2, 0.19, 0.18), bbox=hou.BoundingBox(-0.7, 0, -0.9, 0.7, 1.6, 0.4))
     g.anim(final, (1, LAST), "球が当たって、破片が飛び散り、床に落ちるまで（48 フレーム＝2 秒）。",
            bbox=hou.BoundingBox(-0.7, 0, -1.2, 0.7, 1.52, 0.8), direction=(0.9, 0.35, 1.0))
 

@@ -3,19 +3,23 @@
  "title": "L-system で木を育てる",
  "lede": "lsystem ノードは、文字の書き換えルールを何回も繰り返して枝を伸ばす。F は「前へ伸びる」、[ ] は「枝分かれ」、& や / は「向きを変える」。葉は、できた枝の表面に点をまいてコピーする。",
  "hero": "pr_tree_hero.png",
- "hero_cap": "Karma で撮った仕上がり。L-system で育てた木。",
+ "hero_cap": "Karma で撮った仕上がり。L-system で育てた広葉樹。",
  "facts": [
   [
    "足すノード",
-   "7個（材質2つ）"
+   "13個（材質3つ）"
   ],
   [
-   "面の数",
-   "162"
+   "枝の面の数",
+   "1,458"
+  ],
+  [
+   "葉",
+   "44,523枚"
   ],
   [
    "仕上がりを撮る時間",
-   "119.7秒（Karma 1280×720）"
+   "169.5秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -30,7 +34,7 @@
    "title": "葉を1枚作る",
    "node": "attribwrangle",
    "ui_node": "mark_leaf",
-   "body": "<code>grid</code>（縦長に 4 × 8 に割る）を <code>attribwrangle</code> で葉の形にする。付け根から先への位置 v で幅を <strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 30 cm・幅 16 cm。木の高さが 5 m ほどになるので、本物より少し大きめにしないと遠目に見えない。",
+   "body": "<code>grid</code>（縦長に 4 × 8 に割る）を <code>attribwrangle</code> で葉の形にする。付け根から先への位置 v で幅を <strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 11 cm・幅 6 cm（広葉樹の葉の大きさ）。",
    "img": "pr_tree_1.png",
    "cap": "葉1枚。"
   },
@@ -38,18 +42,18 @@
    "title": "ルールを書いて、枝を伸ばす",
    "node": "lsystem",
    "ui_node": "grow",
-   "body": "<code>lsystem</code> の Type を <strong>Tube</strong>（太さのある枝）にし、ルールを書く。Premise（はじまり）は <strong>FFFA</strong>＝3回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFFA</strong> は「少し倒して3回伸び、先でまた A」。Generations 8 で、この書き換えを8回繰り返す。Thickness 0.2 で幹を太くする。Random Scale 0.25 で角度と長さをばらつかせ、Gravity 0.3 で枝先を垂らす。",
+   "body": "<code>lsystem</code> の Type を <strong>Tube</strong>（太さのある枝）にし、ルールを書く。Premise（はじまり）は <strong>FFA</strong>＝2回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFA</strong> は「少し倒して2回伸び、先でまた A」。Generations 12 で、この書き換えを12回繰り返す。本物の広葉樹は、太い幹が低い所で分かれ、枝が横へ広がって丸い樹冠になる。そこで Thickness 0.34（太い幹）・Angle 38（枝を大きく開く）にし、幹を短くする。Random Scale 0.3 で角度と長さをばらつかせ、Gravity 0.15 で枝先を少し垂らす。",
    "img": "pr_tree_2.png",
-   "cap": "8回の書き換えで育った枝。",
+   "cap": "12回の書き換えで育った枝。",
    "ui_parm": "rule1"
   },
   {
    "title": "枝に葉をまいて付ける",
    "node": "merge",
    "ui_node": "tree",
-   "body": "<code>scatter</code> で枝の表面に 5000 個の点をまき、<code>attribwrangle</code> で高さ 2 m より下（幹）の点を消す。残った点に、ばらばらの向き orient と大きさ pscale（0.6〜1.2）を付け、<code>copytopoints</code> で葉を並べる。葉は 4,697 枚。枝先ほど枝が多いので、点も葉も自然に上のほうへ集まる。",
+   "body": "葉は枝先に付くので、<code>measure</code> で枝の面ごとの面積を測り、<code>attribwrangle</code>（Primitives）で「細さ」<strong>leafdensity</strong>（面積が小さいほど大きい）を作る。<code>scatter</code> の Density Attribute にこれを使って 45,000 個の点をまくと、細い枝に集まる。面積のまままくと、太い枝に葉が固まった（前の版）。<code>attribwrangle</code> で高さ 0.5 m より下の点を消し、枝から少し離してふんわりさせる。残った点に、ばらばらの向き orient と大きさ pscale（0.7〜1.2）を付け、<code>copytopoints</code> で葉を並べる。色も1枚ずつ変え、樹冠の外側（日の当たる所）ほど明るい黄緑、内側ほど濃い緑にする。葉は 44,523 枚。枝先ほど枝が多いので、葉も自然に外側へ集まり、丸い樹冠になる。",
    "img": "pr_tree_3.png",
-   "cap": "4,697 枚の葉が付いた木。",
+   "cap": "44,523 枚の葉が付いた木。",
    "ui_parm": "lowest"
   },
   {
@@ -70,7 +74,7 @@
   },
   {
    "title": "Generations は2つずつ効く",
-   "body": "面の数は Generations 6 で 54、7 で 54（同じ）、8 で 162（3.0 倍）。A は B に、B は A に書き換わるので、2回でやっと1段伸びる。1段伸びると、枝が3本に分かれるので面は約3倍になる。奇数に上げても何も変わらないことがある。",
+   "body": "面の数は Generations 10 で 486、11 で 486、12 で 1,458（10 の 3.0 倍）。A は B に、B は A に書き換わるので、2回でやっと1段伸びる。1段伸びると、枝が3本に分かれるので面は約3倍になる。奇数に上げても、ほとんど変わらないことがある。",
    "img": "",
    "cap": ""
   }

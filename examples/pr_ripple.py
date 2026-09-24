@@ -76,15 +76,25 @@ def main():
            cap="縁が不規則な水たまり。", shading="smooth", bbox=hou.BoundingBox(-1, -0.05, -0.7, 1, 0.05, 0.7))
     clear = g.mat("water_mat", basecolor=(1, 1, 1), rough=0.02, reflect=1.0, ior=1.33, transparency=1.0,
                   transcolor=(0.55, 0.52, 0.45), transdist=0.02)
-    final = g.assign(shape, clear, "assign_water")
-    g.step(final, "水の材質を当てる",
+    road_grid = g.node("grid", "asphalt", size=(12, 12), rows=400, cols=400, t=(0, -0.004, 0))
+    road = g.node("attribwrangle", "asphalt_grain", [road_grid], snippet=(
+        "// アスファルトの粒のざらつきと、濡れて濃くなった色のむら\n"
+        "@P.y += noise(@P * 60) * 0.002;\n"
+        "v@Cd = {0.06, 0.06, 0.065} * fit(noise(@P * 25), 0.3, 0.7, 0.6, 1.4);"))
+    tar = g.mat("asphalt_mat", basecolor=(1, 1, 1), rough=0.28, reflect=0.8)
+    sky_card = g.node("grid", "overcast_sky", orient="xy", size=(40, 14), rows=2, cols=2, t=(0, 4, -9))
+    sky_m = g.mat("sky_mat", basecolor=(0, 0, 0), emitint=1.0, emitcolor=(0.75, 0.8, 0.86))
+    final = g.node("merge", "rainy_street", [g.assign(shape, clear, "assign_water"), g.assign(road, tar, "assign_asphalt"),
+                                             g.assign(sky_card, sky_m, "assign_sky")])
+    g.step(final, "水・濡れた地面・空を置く",
            "水面は <code>principledshader</code> で <strong>Transparency 1・IOR 1.33</strong>（水）・Roughness 0.02。"
-           "下の地面は撮影用の幕を暗いアスファルト色にして使う。水たまりの見え方は、ほとんど「上にある空や明かりの映り込み」で決まる。"
-           "撮るときは、低い角度から、明るい光（キーとリム）を水面に映す。",
+           "水たまりの見え方は、ほとんど「空の映り込み」で決まる。写真の雨の水たまりは明るい曇り空を映していて、波紋は映り込みのゆがみとして白い輪に見える。"
+           "そこで、奥に大きな板を立てて明るい灰色に光らせ（曇り空）、低い角度から撮って水面に映す。"
+           "下には 12 m 四方の <code>grid</code> を置き、<code>attribwrangle</code> で粒のざらつきと濡れた色のむらを付けたアスファルトにする（雨で濡れているので Roughness 0.28 で照り返す）。",
            cap="材質を当てた状態。", shot=False)
-    g.hero(final, f"Karma で撮った仕上がり（フレーム {HERO_F}）。明かりが映った水面に、重なる波紋。",
-           direction=(0.15, 0.25, 1.0), key=1.0, rim=12.0, dome=1.1, dome_color=(0.6, 0.7, 0.85), spp=64, margin=0.95,
-           frame=HERO_F, backdrop=(0.035, 0.035, 0.035), backdrop_reflect=0.35,
+    g.hero(final, f"Karma で撮った仕上がり（フレーム {HERO_F}）。曇り空を映した水たまりに、重なる波紋。",
+           direction=(0.05, 0.2, 1.0), key=0.0, rim=0.0, dome=0.15, dome_color=(0.7, 0.75, 0.8), spp=32, margin=0.75,
+           frame=HERO_F, floor=False, denoise=True,
            bbox=hou.BoundingBox(-0.9, -0.01, -0.6, 0.9, 0.01, 0.6))
     g.anim(rings, (1, LAST), "雨粒が落ちて、輪が広がって消える（96 フレーム＝4 秒）。",
            bbox=hou.BoundingBox(-1, -0.05, -0.7, 1, 0.05, 0.7), direction=(0.3, 0.9, 0.6), shading="smooth")

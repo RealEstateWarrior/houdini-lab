@@ -7,8 +7,8 @@
       "name": "leaf_blank",
       "type": "grid",
       "pos": [
-        0.424,
-        6.928
+        -2.612,
+        8.358
       ],
       "flags": {
         "display": false
@@ -26,8 +26,8 @@
       "name": "leaf_shape",
       "type": "attribwrangle",
       "pos": [
-        0.424,
-        5.798
+        -2.612,
+        7.229
       ],
       "flags": {
         "display": false
@@ -40,8 +40,8 @@
       "name": "mark_leaf",
       "type": "attribwrangle",
       "pos": [
-        0.424,
-        4.669
+        -2.612,
+        6.099
       ],
       "flags": {
         "display": false
@@ -55,38 +55,77 @@
       "name": "grow",
       "type": "lsystem",
       "pos": [
-        -1.836,
-        3.69
+        -4.871,
+        5.12
       ],
       "flags": {
         "display": false
       },
       "params": {
         "type": 1,
-        "generations": 8.0,
-        "randscale": 0.25,
+        "generations": 12.0,
+        "randscale": 0.3,
         "randseed": 4,
-        "cols": 8,
-        "thickinit": 0.2,
-        "thickscale": 0.72,
-        "stepinit": 0.55,
-        "stepscale": 0.85,
-        "angleinit": 30.0,
-        "gravity": 0.3
+        "cols": 10,
+        "thickinit": 0.34,
+        "thickscale": 0.68,
+        "stepinit": 0.5,
+        "stepscale": 0.82,
+        "angleinit": 38.0,
+        "gravity": 0.15,
+        "premise": "FFA",
+        "rule2": "B=&FFA"
+      }
+    },
+    {
+      "name": "segment_area",
+      "type": "measure::2.0",
+      "pos": [
+        0.212,
+        9.036
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "colorramp1cb": 1.0,
+        "colorramp2pos": 0.5,
+        "colorramp2cr": 1.0,
+        "colorramp2cg": 1.0,
+        "colorramp2cb": 1.0,
+        "colorramp3pos": 1.0,
+        "colorramp3cr": 1.0
+      }
+    },
+    {
+      "name": "twig_weight",
+      "type": "attribwrangle",
+      "pos": [
+        0.212,
+        7.907
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "// 細い枝（面が小さい）ほど大きな値。幹や太い枝はほぼ 0\nf@leafdensity = pow(1e-4 / max(f@area, 1e-6), 1.5);"
       }
     },
     {
       "name": "leaf_spots",
       "type": "scatter::2.0",
       "pos": [
-        3.248,
-        5.346
+        0.212,
+        6.777
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "npts": 5000,
+        "npts": 45000,
+        "usedensityattrib": 1,
+        "densityattrib": "leafdensity",
         "seed": 2.0
       }
     },
@@ -94,34 +133,37 @@
       "name": "leaf_turn",
       "type": "attribwrangle",
       "pos": [
-        3.248,
-        4.217
+        0.212,
+        5.648
       ],
       "flags": {
         "display": false
       },
       "params": {
-        "snippet": "// 幹の低い所には葉を付けない。向きと大きさはばらばらにする\nif (@P.y < chf('lowest')) removepoint(0, @ptnum);\np@orient = quaternion(radians(set(r..."
+        "snippet": "// 葉は細い枝（先のほう）にだけ付ける。太い枝や幹には付かない。向き・大きさ・色は1枚ずつばらばらにする\nif (@P.y < chf('lowest')) removepoint(0, @ptnum);\np@orient = qu..."
       }
     },
     {
       "name": "leaves",
       "type": "copytopoints::2.0",
       "pos": [
-        1.836,
-        3.238
+        -1.2,
+        4.669
       ],
       "flags": {
         "display": false
       },
-      "params": {}
+      "params": {
+        "targetattribs": 1,
+        "applyattribs1": "Cd"
+      }
     },
     {
       "name": "tree",
       "type": "merge",
       "pos": [
-        0.0,
-        2.259
+        -3.036,
+        3.69
       ],
       "flags": {
         "display": false
@@ -132,8 +174,8 @@
       "name": "assign_bark",
       "type": "material",
       "pos": [
-        0.0,
-        1.129
+        -3.036,
+        2.56
       ],
       "flags": {
         "display": false
@@ -146,16 +188,60 @@
       "name": "assign_leaf",
       "type": "material",
       "pos": [
+        -3.036,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "group1": "@isleaf==1",
+        "shop_materialpath1": "/mat/leaf_mat"
+      }
+    },
+    {
+      "name": "meadow",
+      "type": "grid",
+      "pos": [
+        3.036,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 14.0,
+        "sizey": 14.0,
+        "ty": 0.002,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "assign_meadow",
+      "type": "material",
+      "pos": [
+        3.036,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/meadow_mat"
+      }
+    },
+    {
+      "name": "field",
+      "type": "merge",
+      "pos": [
         0.0,
         0.0
       ],
       "flags": {
         "display": true
       },
-      "params": {
-        "group1": "@isleaf==1",
-        "shop_materialpath1": "/mat/leaf_mat"
-      }
+      "params": {}
     }
   ],
   "edges": [
@@ -173,6 +259,18 @@
     },
     {
       "from": "grow",
+      "from_output": 0,
+      "to": "segment_area",
+      "to_input": 0
+    },
+    {
+      "from": "segment_area",
+      "from_output": 0,
+      "to": "twig_weight",
+      "to_input": 0
+    },
+    {
+      "from": "twig_weight",
       "from_output": 0,
       "to": "leaf_spots",
       "to_input": 0
@@ -218,6 +316,24 @@
       "from_output": 0,
       "to": "assign_leaf",
       "to_input": 0
+    },
+    {
+      "from": "meadow",
+      "from_output": 0,
+      "to": "assign_meadow",
+      "to_input": 0
+    },
+    {
+      "from": "assign_leaf",
+      "from_output": 0,
+      "to": "field",
+      "to_input": 0
+    },
+    {
+      "from": "assign_meadow",
+      "from_output": 0,
+      "to": "field",
+      "to_input": 1
     }
   ]
 }

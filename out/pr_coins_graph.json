@@ -4,8 +4,50 @@
   "houdini_version": "21.0.700",
   "nodes": [
     {
-      "name": "coin",
-      "type": "tube",
+      "name": "coin_profile",
+      "type": "attribwrangle",
+      "pos": [
+        -3.53,
+        9.638
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 硬貨の断面（半分）。面は少し低く、縁（リム）が一段高い。x が中心からの距離、y が高さ\nvector pts[] = {{0.0, 0.0006, 0}, {0.0108, 0.0006, 0}, {0.0113, 0.000..."
+      }
+    },
+    {
+      "name": "coin_turn",
+      "type": "revolve::2.0",
+      "pos": [
+        -3.53,
+        8.509
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 72,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "coin_body",
+      "type": "reverse",
+      "pos": [
+        -3.53,
+        7.379
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "coin_mesh",
+      "type": "remesh::2.0",
       "pos": [
         -3.53,
         6.25
@@ -14,17 +56,12 @@
         "display": false
       },
       "params": {
-        "type": 1,
-        "cap": 1,
-        "rad1": 0.013,
-        "rad2": 0.013,
-        "height": 0.0018,
-        "cols": 40
+        "targetsize": 0.0004
       }
     },
     {
-      "name": "soft_rim",
-      "type": "polybevel::3.0",
+      "name": "relief",
+      "type": "attribwrangle",
       "pos": [
         -3.53,
         5.12
@@ -33,13 +70,7 @@
         "display": false
       },
       "params": {
-        "offset": 0.0004,
-        "divisions": 2,
-        "profileramp1value": 0.5,
-        "profileramp1interp": 2,
-        "profileramp2pos": 1.0,
-        "profileramp2value": 0.5,
-        "profileramp2interp": 2
+        "snippet": "// 面の浮き彫り。縁より内側の平らな面だけを、模様の形にわずかに持ち上げる\nfloat r = length(set(@P.x, @P.z));\nif (r < 0.0102 && abs(@P.y) > 0.0005) {\n   ..."
       }
     },
     {
@@ -147,7 +178,7 @@
       "type": "grid",
       "pos": [
         2.118,
-        2.108
+        3.238
       ],
       "flags": {
         "display": false
@@ -155,8 +186,22 @@
       "params": {
         "sizex": 1.5,
         "sizey": 1.5,
-        "rows": 2,
-        "cols": 2
+        "rows": 300,
+        "cols": 300
+      }
+    },
+    {
+      "name": "wood_grain",
+      "type": "attribwrangle",
+      "pos": [
+        2.118,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 木目：x 方向にゆらいだ縞。濃い茶と明るい茶を行き来する\nfloat s = sin((@P.z + noise(@P * 4) * 0.03) * 260);\nv@Cd = lerp({0.09, 0.05, 0.025}, ..."
       }
     },
     {
@@ -202,9 +247,27 @@
   ],
   "edges": [
     {
-      "from": "coin",
+      "from": "coin_profile",
       "from_output": 0,
-      "to": "soft_rim",
+      "to": "coin_turn",
+      "to_input": 0
+    },
+    {
+      "from": "coin_turn",
+      "from_output": 0,
+      "to": "coin_body",
+      "to_input": 0
+    },
+    {
+      "from": "coin_body",
+      "from_output": 0,
+      "to": "coin_mesh",
+      "to_input": 0
+    },
+    {
+      "from": "coin_mesh",
+      "from_output": 0,
+      "to": "relief",
       "to_input": 0
     },
     {
@@ -220,7 +283,7 @@
       "to_input": 0
     },
     {
-      "from": "soft_rim",
+      "from": "relief",
       "from_output": 0,
       "to": "coins",
       "to_input": 0
@@ -238,13 +301,19 @@
       "to_input": 0
     },
     {
+      "from": "table",
+      "from_output": 0,
+      "to": "wood_grain",
+      "to_input": 0
+    },
+    {
       "from": "drop",
       "from_output": 0,
       "to": "assign_coin",
       "to_input": 0
     },
     {
-      "from": "table",
+      "from": "wood_grain",
       "from_output": 0,
       "to": "assign_table",
       "to_input": 0

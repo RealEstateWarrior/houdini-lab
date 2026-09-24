@@ -28,39 +28,57 @@ def main():
         "@P.y = v * chf('length');\n"
         "@P.z = -0.3 * chf('length') * v * v;                // 先が少し垂れる\n"
         "v@Cd = lerp({0.1, 0.24, 0.04}, {0.26, 0.42, 0.07}, v);   // 付け根は濃く、先は明るい緑"))
-    kit_spare(shape, width=0.16, length=0.3)
+    kit_spare(shape, width=0.06, length=0.11)
     mark = g.node("attribwrangle", "mark_leaf", [shape], snippet="i@isleaf = 1;   // 葉の面に印を付ける（あとで材質を分ける）")
     mark.parm("class").set(1)
     shape = mark
     g.step(shape, "葉を1枚作る",
            "<code>grid</code>（縦長に 4 × 8 に割る）を <code>attribwrangle</code> で葉の形にする。付け根から先への位置 v で幅を "
-           "<strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 30 cm・幅 16 cm。"
-           "木の高さが 5 m ほどになるので、本物より少し大きめにしないと遠目に見えない。",
-           cap="葉1枚。", shading="smoothwire", bbox=hou.BoundingBox(-0.16, 0, -0.16, 0.16, 0.32, 0.16))
+           "<strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 11 cm・幅 6 cm（広葉樹の葉の大きさ）。",
+           cap="葉1枚。", shading="smoothwire", bbox=hou.BoundingBox(-0.06, 0, -0.06, 0.06, 0.12, 0.06))
 
-    branches = g.node("lsystem", "grow", type="tube", generations=8, stepinit=0.55, stepscale=0.85,
-                      thickinit=0.2, thickscale=0.72, angleinit=30, randscale=0.25, randseed=4, gravity=0.3,
-                      premise="FFFA", rule1='A=!"[B]////[B]////B', rule2="B=&FFFA", cols=8)
+    branches = g.node("lsystem", "grow", type="tube", generations=12, stepinit=0.5, stepscale=0.82,
+                      thickinit=0.34, thickscale=0.68, angleinit=38, randscale=0.3, randseed=4, gravity=0.15,
+                      premise="FFA", rule1='A=!"[B]////[B]////B', rule2="B=&FFA", cols=10)
     g.step(branches, "ルールを書いて、枝を伸ばす",
            "<code>lsystem</code> の Type を <strong>Tube</strong>（太さのある枝）にし、ルールを書く。"
-           "Premise（はじまり）は <strong>FFFA</strong>＝3回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、"
-           "向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFFA</strong> は「少し倒して3回伸び、先でまた A」。"
-           "Generations 8 で、この書き換えを8回繰り返す。Thickness 0.2 で幹を太くする。Random Scale 0.25 で角度と長さをばらつかせ、"
-           "Gravity 0.3 で枝先を垂らす。",
-           cap="8回の書き換えで育った枝。", shading="smooth", ui_parm="rule1")
-    spots = g.node("scatter::2.0", "leaf_spots", [branches], npts=5000, seed=2)
+           "Premise（はじまり）は <strong>FFA</strong>＝2回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、"
+           "向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFA</strong> は「少し倒して2回伸び、先でまた A」。"
+           "Generations 12 で、この書き換えを12回繰り返す。本物の広葉樹は、太い幹が低い所で分かれ、枝が横へ広がって丸い樹冠になる。"
+           "そこで Thickness 0.34（太い幹）・Angle 38（枝を大きく開く）にし、幹を短くする。Random Scale 0.3 で角度と長さをばらつかせ、"
+           "Gravity 0.15 で枝先を少し垂らす。",
+           cap="12回の書き換えで育った枝。", shading="smooth", ui_parm="rule1")
+    # 面の大きさで割った「細さ」を密度にして、細い枝（枝先）ほど多く葉をまく。そのままだと太い枝に葉が固まる
+    thin = g.node("measure::2.0", "segment_area", [branches], measure="area", attribname="area")
+    weight = g.node("attribwrangle", "twig_weight", [thin], snippet=(
+        "// 細い枝（面が小さい）ほど大きな値。幹や太い枝はほぼ 0\n"
+        "f@leafdensity = pow(1e-4 / max(f@area, 1e-6), 1.5);"))
+    weight.parm("class").set(1)
+    spots = g.node("scatter::2.0", "leaf_spots", [weight], npts=45000, seed=2, usedensityattrib=1,
+                   densityattrib="leafdensity")
     turn = g.node("attribwrangle", "leaf_turn", [spots], snippet=(
-        "// 幹の低い所には葉を付けない。向きと大きさはばらばらにする\n"
+        "// 葉は細い枝（先のほう）にだけ付ける。太い枝や幹には付かない。向き・大きさ・色は1枚ずつばらばらにする\n"
         "if (@P.y < chf('lowest')) removepoint(0, @ptnum);\n"
         "p@orient = quaternion(radians(set(rand(@ptnum) * 360, rand(@ptnum + 1) * 360, rand(@ptnum + 2) * 360)), 0);\n"
-        "f@pscale = fit01(rand(@ptnum + 3), 0.6, 1.2);"))
-    kit_spare(turn, lowest=2.0)
-    tree = g.node("merge", "tree", [branches, g.node("copytopoints::2.0", "leaves", [shape, turn])])
+        "f@pscale = fit01(rand(@ptnum + 3), 0.7, 1.2);\n"
+        "@P += (vector(rand(@ptnum + 7)) - 0.5) * 0.12;   // 枝から少し離して、ふんわりした房にする\n"
+        "// 外側の日の当たる葉は明るい黄緑、内側は濃い緑\n"
+        "vector c = getbbox_center(0);\n"
+        "float out = clamp(length(@P - c) / 2.2, 0, 1);\n"
+        "v@Cd = lerp({0.07, 0.17, 0.03}, {0.24, 0.38, 0.07}, out) * fit01(rand(@ptnum + 5), 0.75, 1.2);"))
+    kit_spare(turn, lowest=0.5)
+    leaves = g.node("copytopoints::2.0", "leaves", [shape, turn], targetattribs=1)
+    leaves.parm("applyto1").set("points")
+    leaves.parm("applyattribs1").set("Cd")
+    tree = g.node("merge", "tree", [branches, leaves])
     n_leaves = len(turn.geometry().points())
     g.step(tree, "枝に葉をまいて付ける",
-           f"<code>scatter</code> で枝の表面に 5000 個の点をまき、<code>attribwrangle</code> で高さ 2 m より下（幹）の点を消す。"
-           "残った点に、ばらばらの向き orient と大きさ pscale（0.6〜1.2）を付け、<code>copytopoints</code> で葉を並べる。"
-           f"葉は {n_leaves:,} 枚。枝先ほど枝が多いので、点も葉も自然に上のほうへ集まる。",
+           "葉は枝先に付くので、<code>measure</code> で枝の面ごとの面積を測り、<code>attribwrangle</code>（Primitives）で「細さ」<strong>leafdensity</strong>（面積が小さいほど大きい）を作る。"
+           "<code>scatter</code> の Density Attribute にこれを使って 45,000 個の点をまくと、細い枝に集まる。面積のまままくと、太い枝に葉が固まった（前の版）。"
+           "<code>attribwrangle</code> で高さ 0.5 m より下の点を消し、枝から少し離してふんわりさせる。"
+           "残った点に、ばらばらの向き orient と大きさ pscale（0.7〜1.2）を付け、<code>copytopoints</code> で葉を並べる。"
+           "色も1枚ずつ変え、樹冠の外側（日の当たる所）ほど明るい黄緑、内側ほど濃い緑にする。"
+           f"葉は {n_leaves:,} 枚。枝先ほど枝が多いので、葉も自然に外側へ集まり、丸い樹冠になる。",
            cap=f"{n_leaves:,} 枚の葉が付いた木。", shading="smooth", ui_parm="lowest")
 
     bark = g.mat("bark_mat", basecolor=(0.16, 0.1, 0.06), rough=0.85)
@@ -71,27 +89,31 @@ def main():
            "葉を作ったときに、Primitives の <code>attribwrangle</code> で面に <strong>isleaf = 1</strong> の印を付けておいた。"
            "2つ目の <code>material</code> の Group に <strong>@isleaf==1</strong> と書くと、葉だけに当たる。",
            cap="材質を当てた状態。", shot=False)
-    g.hero(painted, "Karma で撮った仕上がり。L-system で育てた木。", direction=(1.0, 0.18, 1.1),
-           key=3.0, rim=5.0, dome=0.5, dome_color=(0.85, 0.92, 1.0), spp=64, margin=1.08, backdrop=(0.5, 0.62, 0.72))
+    ground = g.node("grid", "meadow", size=(14, 14), rows=2, cols=2, t=(0, 0.002, 0))
+    grass = g.mat("meadow_mat", basecolor=(0.16, 0.24, 0.07), rough=0.9)
+    scene = g.node("merge", "field", [painted, g.assign(ground, grass, "assign_meadow")])
+    g.hero(scene, "Karma で撮った仕上がり。L-system で育てた広葉樹。", direction=(1.0, 0.12, 1.1),
+           key=3.0, rim=3.0, dome=0.6, dome_color=(0.85, 0.92, 1.0), spp=32, margin=1.15, denoise=True, backdrop=(0.5, 0.62, 0.8), backdrop_reflect=0.0,
+           key_color=(1.0, 0.95, 0.85), bbox=painted.geometry().boundingBox())
 
     # ---- 落とし穴を測る ----
     counts = {}
-    for gen in (6, 7, 8):
+    for gen in (10, 11, 12):
         branches.parm("generations").set(gen)
         counts[gen] = len(branches.geometry().prims())
-    branches.parm("generations").set(8)
+    branches.parm("generations").set(12)
     traps = [
         {"title": "J で付けた葉は、枝先の細さに合わせて縮む",
          "body": "はじめは Rule 2 を B=&FFFAJ にして、J の所に葉（長さ 30 cm）をコピーさせた。撮ると葉は枝先の小さな白い点にしか見えなかった。"
                  "J のコピーは枝先の細さに合わせて小さくなるので、この木では scatter で点をまいて copytopoints で付けるほうが扱いやすい。",
          "img": "", "cap": ""},
         {"title": "Generations は2つずつ効く",
-         "body": f"面の数は Generations 6 で {counts[6]:,}、7 で {counts[7]:,}（同じ）、8 で {counts[8]:,}（{counts[8] / counts[6]:.1f} 倍）。"
+         "body": f"面の数は Generations 10 で {counts[10]:,}、11 で {counts[11]:,}、12 で {counts[12]:,}（10 の {counts[12] / counts[10]:.1f} 倍）。"
                  "A は B に、B は A に書き換わるので、2回でやっと1段伸びる。1段伸びると、枝が3本に分かれるので面は約3倍になる。"
-                 "奇数に上げても何も変わらないことがある。",
+                 "奇数に上げても、ほとんど変わらないことがある。",
          "img": "", "cap": ""},
     ]
-    g.save(facts=[["足すノード", "7個（材質2つ）"], ["面の数", f"{counts[8]:,}"]], traps=traps)
+    g.save(facts=[["足すノード", "13個（材質3つ）"], ["枝の面の数", f"{counts[12]:,}"], ["葉", f"{n_leaves:,}枚"]], traps=traps)
 
 
 def kit_spare(node, **values):

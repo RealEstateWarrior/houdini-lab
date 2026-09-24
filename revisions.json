@@ -53,5 +53,122 @@
       "before": "pr_snowman_hero_v1.png",
       "reference": "Wikimedia Commons の「snowman in snow」の写真（雪原の中、境目がつながった雪玉）"
     }
+  ],
+  "tree": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、本物の広葉樹の写真と並べて見比べた。前の版は、細い幹の先に大きな葉の房が上へ伸びるだけで、シダの束のように見えた。",
+      "changes": [
+        "<strong>太い幹を低い所で分け、枝を横へ広げた。</strong>Thickness 0.2 → 0.34、Angle 30 → 38、Generations 8 → 12、幹を短く。",
+        "<strong>葉を小さく、たくさんにした。</strong>長さ 30 cm → 11 cm、約 3,500 枚 → 約 38,000 枚。",
+        "<strong>葉を枝先に付けた。</strong>枝の面の大きさで割った「細さ」を scatter の密度にして、細い枝ほど葉が多く付くようにした（前は太い枝に葉が固まっていた）。",
+        "<strong>葉の色を1枚ずつ変え、外側ほど明るくした。草地の地面を置いた。</strong>"
+      ],
+      "before": "pr_tree_hero_v1.png",
+      "reference": "Wikimedia Commons の「solitary oak tree field」の写真（太い幹が低く分かれ、丸く広がる樹冠）"
+    }
+  ],
+  "ripple": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、雨の水たまりの写真と並べて見比べた。前の版は、水たまりが黒いかたまりに見え、波紋がほとんど見えなかった。",
+      "changes": [
+        "<strong>明るい曇り空を映した。</strong>写真の水たまりは空を映していて、波紋は映り込みのゆがみとして白い輪に見える。前の版は映す物が無く、黒く写っていた。奥に光る板を立てて空にした。",
+        "<strong>濡れたアスファルトの地面を置いた。</strong>粒のざらつきと色のむらを付け、Roughness 0.28 で照り返すようにした。",
+        "<strong>低い角度から撮った。</strong>"
+      ],
+      "before": "pr_ripple_hero_v1.png",
+      "reference": "Wikimedia Commons の「raindrops puddle ripples」の写真（暗い水面に、空を映した輪がたくさん重なる）"
+    }
+  ],
+  "sandpile": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、砂山の写真と並べて見比べた。前の版は、計算の粒（2 cm）をそのまま球で撮っていて、小石を並べた平らな円盤に見えた。",
+      "changes": [
+        "<strong>粒をつないで、砂の面にした。</strong>vdbfromparticles でつなぎ、vdbsmoothsdf でならして面に戻し、細かいざらつきと色のむらを付けた。本物の砂粒は 0.1〜1 mm で、1 m の山では1粒ずつは見えない。",
+        "<strong>山らしくした。</strong>柱を太く低く（半径 25 → 30 cm、高さ 90 → 55 cm）し、Friction Angle を 30 → 36度にした。止まった山の斜面は 17度から 21度になった。",
+        "<strong>斜面の傾きの測り方を直した。</strong>前は裾の広がりも含めて測っていた。中心からの距離ごとのいちばん高い粒で、斜面そのものの傾きを出すようにした。"
+      ],
+      "before": "pr_sandpile_hero_v1.png",
+      "reference": "Wikimedia Commons の「heap of sand construction」の写真（粒の見えない一続きの面で、傾きのある山）"
+    }
+  ],
+  "petals": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、舞い散る桜の写真と並べて見比べた。前の版は、広い範囲をまばらに撮っていて、花びらが点にしか見えなかった。",
+      "changes": [
+        "<strong>花びらの形を本物に近づけた。</strong>ソメイヨシノの花びらは丸く、先の真ん中に小さな切れ込みがある。長さ 3 cm の細い形から、長さ 2.2 cm・幅 1.6 cm の丸い形にし、先を V 字にへこませた。色もほとんど白にした。",
+        "<strong>狭い範囲に多く降らせ、近くから撮った。</strong>1 秒に 90 枚 → 420 枚、撮る範囲は幅 1.4 m → 0.6 m。",
+        "<strong>背景を暗めの青にした。</strong>明るい背景では白い花びらが溶けて見えなかった。"
+      ],
+      "before": "pr_petals_hero_v1.png",
+      "reference": "Wikimedia Commons の「sakura fubuki」の写真（濃い青空や暗い幹を背に、ほとんど白い花びらが舞う）"
+    }
+  ],
+  "fog": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、霧の森の写真と並べて見比べた。前の版は、奥が真っ黒で、どの幹も同じ濃さの黒い板に見えた。",
+      "changes": [
+        "<strong>奥に明るいもやを置いた。</strong>写真の霧の森は、奥の木ほど白いもやに溶けて見える。16 m 先に光る板を立てた。",
+        "<strong>霧を濃くし（amount 0.025 → 0.05）、空からのやわらかい光（ドーム 0.06 → 0.6）を当てた。</strong>霧全体がほんのり光り、奥の木ほど霧に溶けるようになった。",
+        "<strong>幹と地面の色を明るくした。</strong>"
+      ],
+      "before": "pr_fog_hero_v1.png",
+      "reference": "Wikimedia Commons の「crepuscular rays forest fog」の写真（奥ほど白くかすむ幹と、斜めの光の筋）"
+    }
+  ],
+  "moss": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、苔むした岩の写真と並べて見比べた。前の版は、石が明るすぎて白い泡のように見え、苔も芝生のように長かった。",
+      "changes": [
+        "<strong>石を濃い灰色にし、白っぽい地衣類の斑点を足した。</strong>写真の岩は、苔の無い所に地衣類がまだらに付いている。",
+        "<strong>苔を短く密にした。</strong>長さ 1.4 cm → 8 mm、9 万本 → 16 万本。写真の苔は短いビロードのよう。",
+        "<strong>明かりを抑え、地面を土の色にした。</strong>"
+      ],
+      "before": "pr_moss_hero_v1.png",
+      "reference": "Wikimedia Commons の「moss covered boulder」の写真（濃い灰色の岩に、短い苔と白っぽい地衣類）"
+    }
+  ],
+  "lava": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、溶岩の写真と並べて見比べた。前の版は、割れ目が同じ幅の黄色い線で、殻も平らで、絵のように見えた。",
+      "changes": [
+        "<strong>割れ目の幅をばらつかせた。</strong>ノイズで 0.25〜1.8 倍にした。",
+        "<strong>溶岩の色を赤橙にした。</strong>黄色が強すぎた。光る強さも 3 → 1.4 に下げた（強すぎると黄色に飛ぶ）。割れ目のそばの殻は熱で赤くほてらせた。",
+        "<strong>殻をごつごつにした。</strong>3つの大きさのノイズを重ね、板ごとに少し傾けた。空の光を少し足して、殻の質感が見えるようにした。"
+      ],
+      "before": "pr_lava_hero_v1.png",
+      "reference": "Wikimedia Commons の「pahoehoe」の写真（ごつごつした暗い殻と、赤橙に光る溶岩）"
+    }
+  ],
+  "coins": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、硬貨の写真と並べて見比べた。前の版は、縁の無いただの円盤で豆粒のように見え、明かりが強すぎて床が白く飛んでいた。",
+      "changes": [
+        "<strong>硬貨の形にした。</strong>本物の硬貨は面が少し低く、縁（リム）が一段高い。断面を描いて revolve で回した。",
+        "<strong>面に浮き彫りの絵柄と、縁に沿った点々の飾りを付けた。</strong>",
+        "<strong>明かりを弱め（キー 3 → 0.3）、床に木目を付けた。</strong>"
+      ],
+      "before": "pr_coins_hero_v1.png",
+      "reference": "Wikimedia Commons の「pile of euro coins」の写真（縁が一段高く、面に浮き彫り）と、古い硬貨の写真（縁に沿った点々の飾り）"
+    }
+  ],
+  "glass": [
+    {
+      "date": "2026-09-24",
+      "why": "公開したあと、割れた窓の写真と並べて見比べた。前の版は、窓枠だけが床に立っていて窓に見えず、穴が開く前の瞬間を撮っていた。",
+      "changes": [
+        "<strong>窓を壁にはめ込んだ。</strong>開口を残して壁の板を3枚立てた。",
+        "<strong>撮る瞬間をフレーム 9 → 14 にした。</strong>破片が飛び、穴が開いた瞬間。"
+      ],
+      "before": "pr_glass_hero_v1.png",
+      "reference": "Wikimedia Commons の「broken window pane」の写真（窓にはまったガラスに、放射状と同心円のひび）"
+    }
   ]
 }

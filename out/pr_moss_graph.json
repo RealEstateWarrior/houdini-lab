@@ -92,7 +92,7 @@
         "display": false
       },
       "params": {
-        "npts": 90000,
+        "npts": 160000,
         "usedensityattrib": 1,
         "densityattrib": "moss"
       }

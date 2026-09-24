@@ -3,7 +3,7 @@
  "title": "窓ガラスを割る",
  "lede": "板ガラスに球をぶつけて割る。rbdmaterialfracture を Glass にして当たる点を渡すと、そこから放射状と同心円のひびが入る。枠に触れている破片だけ動かないようにしておくと、真ん中が砕けて飛び、外側の破片が枠に残る。",
  "hero": "pr_glass_hero.png",
- "hero_cap": "Karma で撮った仕上がり（フレーム 9）。当たった所から放射状に砕けた破片が飛ぶ。",
+ "hero_cap": "Karma で撮った仕上がり（フレーム 14）。当たった所から放射状に砕けた破片が飛ぶ。",
  "facts": [
   [
    "足すノード",
@@ -19,7 +19,7 @@
   ],
   [
    "仕上がりを撮る時間",
-   "68.8秒（Karma 1280×720）"
+   "62.4秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -64,14 +64,14 @@
    "ui_node": "shatter",
    "body": "rbdmaterialfracture の右の出口（つながり）に <code>attribwrangle</code> をつなぎ、Run Over を Primitives にして <strong>strength を 0.8</strong> に下げる。既定のままだと強すぎて、球が跳ね返るだけで1枚も割れなかった。<code>rbdbulletsolver</code> の左に塊、<strong>真ん中に弱めたつながり</strong>をつなぎ、Ground Plane を入れる。球が当たると、そのまわりのつながりが切れて破片が飛び、遠くの破片はつながったまま枠に残る。48 フレームで、119 個のうち 41 個が動いた。",
    "img": "pr_glass_4.png",
-   "cap": "フレーム 9。当たった所から砕けて飛び散る。",
+   "cap": "フレーム 14。当たった所から砕けて飛び散る。",
    "ui_parm": "useground"
   },
   {
-   "title": "枠を付けて、ガラスの材質を当てる",
+   "title": "枠と壁を付けて、ガラスの材質を当てる",
    "node": "merge",
    "ui_node": "window",
-   "body": "細い <code>box</code> 4本で木の窓枠を作る。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。<code>unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code>material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。",
+   "body": "細い <code>box</code> 4本で木の窓枠を作り、窓の開口を残して <code>box</code> 3枚で壁を立てる（窓枠だけだと窓に見えない）。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。<code>unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code>material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。",
    "img": "",
    "cap": "材質を当てた状態（ビューポートでは透けない）。"
   }

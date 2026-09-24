@@ -30,7 +30,7 @@
         "display": false
       },
       "params": {
-        "snippet": "// 桜の花びら：丸い形で、先に小さな切れ込み。少し反らす\nfloat u = @P.x + 0.5;                 // 付け根 0 → 先 1\nfloat w = sin(PI * pow(u, 0.7)) * ..."
+        "snippet": "// 桜の花びら：丸い形で、先に小さな切れ込み。少し反らす\nfloat u = @P.x + 0.5;                 // 付け根 0 → 先 1\nfloat side = @P.z * 2;            ..."
       }
     },
     {
@@ -44,10 +44,10 @@
         "display": false
       },
       "params": {
-        "sizex": 3.0,
-        "sizey": 1.2,
-        "ty": 2.4,
-        "tz": -0.3,
+        "sizex": 1.4,
+        "sizey": 0.8,
+        "tx": -0.3,
+        "ty": 1.8,
         "rows": 2,
         "cols": 2
       }

@@ -12,7 +12,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import practice_kit as kit  # noqa: E402
 
-STRANDS = 90000
+STRANDS = 160000
 
 
 def main():
@@ -40,14 +40,17 @@ def main():
         "float patch = smooth(0.4, 0.6, noise(@P * chf('patch_size') + 3.7));\n"
         "f@moss = clamp(up * (0.35 + patch), 0, 1);\n"
         "// 苔のない所は灰色の石（ノイズで濃淡を付ける）、苔の所は下地の濃い緑\n"
-        "vector rock = {0.2, 0.19, 0.17} * fit(noise(@P * 9.0), 0.3, 0.7, 0.65, 1.25);  // 石にも濃淡のむら\n"
+        "vector rock = {0.11, 0.105, 0.1} * fit(noise(@P * 9.0), 0.3, 0.7, 0.65, 1.25);  // 石にも濃淡のむら\n"
+        "// 地衣類（石に付く白っぽい斑点）。写真の苔むした岩には、苔の無い所にこれがまだらに付いている\n"
+        "float lichen = smooth(0.6, 0.66, noise(@P * 14 + 7.7));\n"
+        "rock = lerp(rock, {0.42, 0.43, 0.38}, lichen * 0.8);\n"
         "v@Cd = lerp(rock, {0.06, 0.1, 0.03}, f@moss);"))
     kit_spare(mask, side=0.2, top=0.75, patch_size=4.0)
     g.step(mask, "苔の生える場所を決める",
            "<code>attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。"
            "まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。"
            "これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。"
-           "色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石の灰色には別のノイズで濃淡を付け、のっぺりした粘土に見えないようにする。",
+           "色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石は濃い灰色にし、別のノイズで濃淡を付け、苔の無い所には白っぽい地衣類の斑点を足す（前の版は石が明るすぎて、白い泡のように見えた）。",
            cap="上の面が緑、縁はまだら。", shading="smooth", ui_parm="patch_size")
 
     pts = g.node("scatter::2.0", "roots", [mask], npts=STRANDS, usedensityattrib=1, densityattrib="moss")
@@ -63,7 +66,7 @@ def main():
         "vector dir = normalize(normalize(v@N) + tilt);\n"
         "float len = chf('length') * fit01(rand(@ptnum + 7), 0.5, 1.3);\n"
         "float mix = rand(@ptnum + 11);\n"
-        "vector tip_col = lerp({0.2, 0.36, 0.05}, {0.36, 0.42, 0.08}, mix);  // 先は明るい黄緑\n"
+        "vector tip_col = lerp({0.22, 0.42, 0.04}, {0.42, 0.52, 0.08}, mix);  // 先は明るい黄緑\n"
         "int prim = addprim(0, 'polyline');\n"
         "for (int i = 0; i < 3; i++) {\n"
         "    float t = i / 2.0;\n"
@@ -73,11 +76,11 @@ def main():
         "    addvertex(0, prim, p);\n"
         "}\n"
         "removepoint(0, @ptnum);"))
-    kit_spare(hair, length=0.014, root_width=0.0016)
+    kit_spare(hair, length=0.008, root_width=0.0012)
     g.step(hair, "短い毛を立てる",
            "もう1つの <code>attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。"
-           "向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.014</strong>（1.4 cm）を 50〜130% にばらつかせ、"
-           "先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.6 mm から先へ細くする。"
+           "向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.008</strong>（8 mm）を 50〜130% にばらつかせ、"
+           "先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.2 mm から先へ細くする。写真の岩の苔は短く密なビロードのようなので、前の版（1.4 cm・9 万本）より短く多くした。"
            "最後に元の点を消す。",
            cap="石の上に、短い毛がびっしり立つ。", shading="smooth", ui_parm="length")
 
@@ -90,7 +93,7 @@ def main():
            "苔は <strong>Sheen 0.6</strong> で、毛の表面がふわっと明るく光る感じを足す。<code>merge</code> で石と苔を1つにする。",
            cap="材質を当てた状態。", shot=False)
     g.hero(final, "Karma で撮った仕上がり。上の面だけが苔に覆われ、縁はまだらに石がのぞく。", direction=(0.9, 0.5, 1.15),
-           key=2.0, rim=5.0, dome=0.35, spp=64, margin=1.12, backdrop=(0.09, 0.085, 0.075),
+           key=1.1, rim=2.5, dome=0.25, spp=48, margin=1.12, backdrop=(0.07, 0.055, 0.04), denoise=True,
            key_color=(1.0, 0.95, 0.85))
 
     # ---- 落とし穴を測る ----

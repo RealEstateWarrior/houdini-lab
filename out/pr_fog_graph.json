@@ -7,8 +7,8 @@
       "name": "ground",
       "type": "grid",
       "pos": [
-        -3.53,
-        6.702
+        -4.97,
+        7.154
       ],
       "flags": {
         "display": false
@@ -24,8 +24,8 @@
       "name": "tree_spots",
       "type": "scatter::2.0",
       "pos": [
-        -3.53,
-        5.572
+        -4.97,
+        6.024
       ],
       "flags": {
         "display": false
@@ -40,8 +40,8 @@
       "name": "tree_sizes",
       "type": "attribwrangle",
       "pos": [
-        -3.53,
-        4.443
+        -4.97,
+        4.895
       ],
       "flags": {
         "display": false
@@ -54,8 +54,8 @@
       "name": "trunk",
       "type": "tube",
       "pos": [
-        -5.789,
-        4.895
+        -7.229,
+        5.346
       ],
       "flags": {
         "display": false
@@ -73,8 +73,8 @@
       "name": "trees",
       "type": "copytopoints::2.0",
       "pos": [
-        -4.66,
-        3.464
+        -6.1,
+        3.916
       ],
       "flags": {
         "display": false
@@ -85,8 +85,8 @@
       "name": "canopy",
       "type": "grid",
       "pos": [
-        1.553,
-        3.69
+        0.113,
+        4.142
       ],
       "flags": {
         "display": false
@@ -103,8 +103,8 @@
       "name": "leaf_gaps",
       "type": "attribwrangle",
       "pos": [
-        1.553,
-        2.56
+        0.113,
+        3.012
       ],
       "flags": {
         "display": false
@@ -118,7 +118,7 @@
       "name": "fog",
       "type": "volume",
       "pos": [
-        4.377,
+        5.761,
         2.108
       ],
       "flags": {
@@ -137,7 +137,7 @@
       "name": "fog_density",
       "type": "volumewrangle",
       "pos": [
-        4.377,
+        5.761,
         0.979
       ],
       "flags": {
@@ -148,11 +148,31 @@
       }
     },
     {
+      "name": "far_haze",
+      "type": "grid",
+      "pos": [
+        2.937,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 80.0,
+        "sizey": 30.0,
+        "ty": 8.0,
+        "tz": -16.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
       "name": "assign_bark",
       "type": "material",
       "pos": [
-        -4.66,
-        2.334
+        -6.1,
+        2.786
       ],
       "flags": {
         "display": false
@@ -165,8 +185,8 @@
       "name": "assign_floor",
       "type": "material",
       "pos": [
-        -1.271,
-        1.883
+        -2.711,
+        2.334
       ],
       "flags": {
         "display": false
@@ -179,14 +199,28 @@
       "name": "assign_canopy",
       "type": "material",
       "pos": [
-        1.553,
-        1.431
+        0.113,
+        1.883
       ],
       "flags": {
         "display": false
       },
       "params": {
         "shop_materialpath1": "/mat/canopy_mat"
+      }
+    },
+    {
+      "name": "assign_haze",
+      "type": "material",
+      "pos": [
+        2.937,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/haze_mat"
       }
     },
     {
@@ -258,6 +292,12 @@
       "to_input": 0
     },
     {
+      "from": "far_haze",
+      "from_output": 0,
+      "to": "assign_haze",
+      "to_input": 0
+    },
+    {
       "from": "assign_bark",
       "from_output": 0,
       "to": "forest",
@@ -276,10 +316,16 @@
       "to_input": 2
     },
     {
-      "from": "fog_density",
+      "from": "assign_haze",
       "from_output": 0,
       "to": "forest",
       "to_input": 3
+    },
+    {
+      "from": "fog_density",
+      "from_output": 0,
+      "to": "forest",
+      "to_input": 4
     }
   ]
 }

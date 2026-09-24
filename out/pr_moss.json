@@ -11,11 +11,11 @@
   ],
   [
    "毛の数",
-   "90,000本"
+   "160,000本"
   ],
   [
    "仕上がりを撮る時間",
-   "39.3秒（Karma 1280×720）"
+   "29.8秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -40,7 +40,7 @@
    "title": "苔の生える場所を決める",
    "node": "attribwrangle",
    "ui_node": "where_moss",
-   "body": "<code>attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石の灰色には別のノイズで濃淡を付け、のっぺりした粘土に見えないようにする。",
+   "body": "<code>attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石は濃い灰色にし、別のノイズで濃淡を付け、苔の無い所には白っぽい地衣類の斑点を足す（前の版は石が明るすぎて、白い泡のように見えた）。",
    "img": "pr_moss_2.png",
    "cap": "上の面が緑、縁はまだら。",
    "ui_parm": "patch_size"
@@ -49,7 +49,7 @@
    "title": "苔の毛の根元をまく",
    "node": "scatter",
    "ui_node": "roots",
-   "body": "<code>scatter</code> で <strong>90,000 個</strong>の点をまく。<strong>Use Density Attribute</strong> を入れて <strong>Density Attribute を moss</strong> にすると、moss の大きい所ほど点が多く、0 の所には1つも出ない。点は、面の N などの属性を引き継ぐ。",
+   "body": "<code>scatter</code> で <strong>160,000 個</strong>の点をまく。<strong>Use Density Attribute</strong> を入れて <strong>Density Attribute を moss</strong> にすると、moss の大きい所ほど点が多く、0 の所には1つも出ない。点は、面の N などの属性を引き継ぐ。",
    "img": "pr_moss_3.png",
    "cap": "苔の場所にだけ点が集まる。",
    "ui_parm": "densityattrib"
@@ -58,7 +58,7 @@
    "title": "短い毛を立てる",
    "node": "attribwrangle",
    "ui_node": "grow_strands",
-   "body": "もう1つの <code>attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.014</strong>（1.4 cm）を 50〜130% にばらつかせ、先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.6 mm から先へ細くする。最後に元の点を消す。",
+   "body": "もう1つの <code>attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.008</strong>（8 mm）を 50〜130% にばらつかせ、先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.2 mm から先へ細くする。写真の岩の苔は短く密なビロードのようなので、前の版（1.4 cm・9 万本）より短く多くした。最後に元の点を消す。",
    "img": "pr_moss_4.png",
    "cap": "石の上に、短い毛がびっしり立つ。",
    "ui_parm": "length"
@@ -81,13 +81,13 @@
   },
   {
    "title": "Force Total Count は「苔のある所にだけ」まかれる",
-   "body": "Density Attribute を使っても、点の総数は Force Total Count のまま（90,000 本）。苔の場所が狭いと、同じ数が狭い所に詰まって濃くなる。広く生やすなら数も増やす。",
+   "body": "Density Attribute を使っても、点の総数は Force Total Count のまま（160,000 本）。苔の場所が狭いと、同じ数が狭い所に詰まって濃くなる。広く生やすなら数も増やす。",
    "img": "",
    "cap": ""
   },
   {
    "title": "毛の数が重さを決める",
-   "body": "90,000 本の毛は、点にすると 270,000 個。Karma で 1280×720 を撮るのにかかった時間は上の表のとおり。試すうちは STRANDS を減らして速く回し、最後に戻す。",
+   "body": "160,000 本の毛は、点にすると 480,000 個。Karma で 1280×720 を撮るのにかかった時間は上の表のとおり。試すうちは STRANDS を減らして速く回し、最後に戻す。",
    "img": "",
    "cap": ""
   }

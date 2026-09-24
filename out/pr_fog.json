@@ -15,7 +15,7 @@
   ],
   [
    "仕上がりを撮る時間",
-   "259.9秒（Karma 1280×720）"
+   "494.4秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -48,7 +48,7 @@
    "title": "霧で満たす",
    "node": "volumewrangle",
    "ui_node": "fog_density",
-   "body": "<code>volume</code> で、名前 <strong>density</strong> の箱（30 × 11 × 30 m、森と同じ広さ）を作る。Uniform Sampling Divs 110 で、升は約 0.27 m。霧のむらはゆるやかなので、升は粗くてよい。<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.025</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、ノイズで 0.5〜1.3 倍のむらを付ける。霧はうすいほうが筋がはっきりする。",
+   "body": "<code>volume</code> で、名前 <strong>density</strong> の箱（30 × 11 × 30 m、森と同じ広さ）を作る。Uniform Sampling Divs 110 で、升は約 0.27 m。霧のむらはゆるやかなので、升は粗くてよい。<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.05</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、ノイズで 0.5〜1.3 倍のむらを付ける。",
    "img": "pr_fog_3.png",
    "cap": "下ほど濃い霧（ビューポートでは箱の影で見える）。",
    "ui_parm": "amount"
@@ -57,7 +57,7 @@
    "title": "日を斜め上から当てる",
    "node": "merge",
    "ui_node": "forest",
-   "body": "幹・地面・葉の層に暗い材質を当て、霧とまとめる。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、Intensity 2・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。ほかの明かりはごく弱くする。",
+   "body": "幹（灰色がかった茶）・地面（苔の暗い緑）・葉の層に材質を当て、霧とまとめる。森の奥（16 m 先）には大きな板を立て、明るいもやの色に光らせる。写真の霧の森は、奥の木ほど白いもやに溶けて見えるので、奥が真っ黒だと森の深さが出ない。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、Intensity 3・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。空からのやわらかい光（ドーム、0.6）も当てて霧全体をほんのり光らせると、奥の木ほど霧に溶けて見える。",
    "img": "",
    "cap": "材質と光を当てた状態。"
   }

@@ -11,11 +11,11 @@
   ],
   [
    "光る点の割合",
-   "29%"
+   "31%"
   ],
   [
    "仕上がりを撮る時間",
-   "34.7秒（Karma 1280×720）"
+   "21.9秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -39,7 +39,7 @@
    "title": "岩の板と割れ目を作る",
    "node": "attribwrangle",
    "ui_node": "cracked_crust",
-   "body": "<code>attribwrangle</code> で <strong>wnoise</strong> を使う。空間に散らばった点のうち、一番近い点までの距離 f1 と、二番目に近い点までの距離 f2 が返る。<strong>f2 − f1</strong> は、2つの点のちょうど中間（＝板と板の境目）で 0 になる。これが 0.07 より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。板の上は 6 cm 持ち上げ、ノイズで細かいでこぼこも付ける。plate_size = 2.2 で、板1枚は数十 cm。",
+   "body": "<code>attribwrangle</code> で <strong>wnoise</strong> を使う。空間に散らばった点のうち、一番近い点までの距離 f1 と、二番目に近い点までの距離 f2 が返る。<strong>f2 − f1</strong> は、2つの点のちょうど中間（＝板と板の境目）で 0 になる。これが割れ目の幅より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。幅は crack_width = 0.07 を、別のノイズで 0.25〜1.8 倍にばらつかせる（写真の割れ目は太い所と細い所がある。前の版は同じ幅の線で、絵のように見えた）。板の上は 7 cm 持ち上げ、大きさの違うノイズを3つ重ねてごつごつさせ、板ごとに少し傾ける。plate_size = 2.2 で、板1枚は数十 cm。",
    "img": "pr_lava_2.png",
    "cap": "亀の甲羅のように割れた地面。",
    "ui_parm": "crack_width"
@@ -48,15 +48,15 @@
    "title": "熱さで色を分ける",
    "node": "attribwrangle",
    "ui_node": "hot_colors",
-   "body": "もう1つの <code>attribwrangle</code> で色 Cd を決める。heat が 0.02 より大きい点（割れ目）は、heat が大きいほど 暗い赤 → 黄色に、さらに heat を掛けて縁ほど暗くする。板の点はノイズで濃淡を付けた黒い岩の色。割れ目の点は <strong>lava</strong> というグループにまとめておく（光る材質を当てる所）。",
+   "body": "もう1つの <code>attribwrangle</code> で色 Cd を決める。heat が 0.02 より大きい点（割れ目）は、heat が大きいほど 暗い赤 → 赤みの強い橙に、さらに heat を掛けて縁ほど暗くする（前の版は黄色が強すぎた。写真の溶岩は赤橙）。板の点はノイズで濃淡を付けた黒い岩の色で、割れ目のすぐそばだけ熱で赤くほてらせる。割れ目の点は <strong>lava</strong> というグループにまとめておく（光る材質を当てる所）。",
    "img": "pr_lava_3.png",
-   "cap": "割れ目が赤く、真ん中ほど黄色い。"
+   "cap": "割れ目が赤く、真ん中ほど明るい橙。"
   },
   {
    "title": "割れ目だけを光らせる",
    "node": "material",
    "ui_node": "assign_lava",
-   "body": "材質は面に当てるので、Run Over を Primitives にした <code>attribwrangle</code> で、<strong>角の点が全部熱い</strong>（heat 0.15 より上）面を <strong>lava</strong> という面のグループにする。そのうえで材質を2つ当てる。まず全体に岩の材質（Base Color 白＝点の色 Cd を使う、Roughness 0.85）。次の <code>material</code> で Group を <strong>lava</strong> にして、光る材質（Base Color 黒・<strong>Emission Intensity 3</strong>・Emission Color の <strong>Use Point Color</strong>）を上書きする。割れ目は Cd の色そのままで光る。",
+   "body": "材質は面に当てるので、Run Over を Primitives にした <code>attribwrangle</code> で、<strong>角の点が全部熱い</strong>（heat 0.15 より上）面を <strong>lava</strong> という面のグループにする。そのうえで材質を2つ当てる。まず全体に岩の材質（Base Color 白＝点の色 Cd を使う、Roughness 0.85）。次の <code>material</code> で Group を <strong>lava</strong> にして、光る材質（Base Color 黒・<strong>Emission Intensity 1.4</strong>（強すぎると色が黄色に飛ぶ）・Emission Color の <strong>Use Point Color</strong>）を上書きする。割れ目は Cd の色そのままで光る。",
    "img": "",
    "cap": "材質を当てた状態（ビューポートでは光らない）。"
   }
@@ -64,13 +64,13 @@
  "traps": [
   {
    "title": "crack_width で割れ目の太さが決まる",
-   "body": "crack_width 0.07 で、光る点は全体の 29%。0.24 にすると 75%。割れ目が太いと、黒い殻より溶岩のほうが多くなり、固まりかけた溶岩に見えなくなる。",
+   "body": "crack_width 0.07 で、光る点は全体の 31%。0.24 にすると 74%。割れ目が太いと、黒い殻より溶岩のほうが多くなり、固まりかけた溶岩に見えなくなる。",
    "img": "",
    "cap": ""
   },
   {
    "title": "網の細かさでは、割れ目の量は変わらない",
-   "body": "升 4 cm（Rows 75・Columns 100）にしても、光る点の割合は 29%（升 1 cm では 29%）。割れ目の量を決めるのは crack_width と plate_size で、網の細かさは割れ目の縁のなめらかさにだけ効く。試すうちは粗い網で速く回し、撮る前に細かくする。",
+   "body": "升 4 cm（Rows 75・Columns 100）にしても、光る点の割合は 31%（升 1 cm では 31%）。割れ目の量を決めるのは crack_width と plate_size で、網の細かさは割れ目の縁のなめらかさにだけ効く。試すうちは粗い網で速く回し、撮る前に細かくする。",
    "img": "",
    "cap": ""
   }

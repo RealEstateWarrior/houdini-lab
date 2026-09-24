@@ -11,11 +11,11 @@
   ],
   [
    "120 フレームの計算",
-   "0.9秒"
+   "0.8秒"
   ],
   [
    "仕上がりを撮る時間",
-   "297.4秒（Karma 1280×720）"
+   "60.9秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -31,7 +31,7 @@
    "title": "花びらを1枚作る",
    "node": "attribwrangle",
    "ui_node": "petal_shape",
-   "body": "<code>grid</code> を <code>attribwrangle</code> で丸い花びらにする。付け根から先への位置 u で幅を sin の形にし、先に小さな切れ込みを入れ、少し反らせる。長さ 3 cm（本物より少し大きめにして、画面で見えるようにする）。色は付け根が濃いピンク、先が白に近いピンク。",
+   "body": "<code>grid</code> を <code>attribwrangle</code> で花びらにする。本物の桜（ソメイヨシノ）の花びらは長さ約 2 cm、丸く、先の真ん中に小さな切れ込みがある。付け根から先への位置 u で幅を <strong>√sin</strong> の形（付け根だけ細く、先まで丸い）にし、先の真ん中を V 字にへこませ、横に少し丸めて先を反らせる。長さ 2.2 cm・幅 1.6 cm。色はほとんど白で、付け根だけほんのり桃色（写真の桜の花びらは、思ったよりずっと白い）。",
    "img": "pr_petals_1.png",
    "cap": "桜の花びら1枚（拡大）。"
   },
@@ -39,7 +39,7 @@
    "title": "粒を生んで、ゆっくり落とす",
    "node": "dopimport",
    "ui_node": "in_air",
-   "body": "高さ 2.4 m に広い板（3 × 1.2 m）を置き、<code>dopnet</code> の中の <code>popsource</code> で、その面から <strong>1 秒に 90 個</strong>の粒を生む（Emission Type は Surface）。はじめの速さは横 0.3・下 0.2 m/秒に、ばらつきを付ける。<code>popforce</code> で重力、<code>popdrag</code> で <strong>Air Resistance 6</strong>（とても強い空気抵抗＝軽い花びら）と、風 (0.5, 0, 0.1) m/秒。<code>popwrangle</code> で粒ごとに回る軸と速さ spin を決め、毎ステップ orient を <code>qmultiply</code> で少しずつ回す。外の <code>dopimport</code> で取り出す。フレーム 110 で 414 枚が舞っている。120 フレームの計算は 0.9 秒。",
+   "body": "高さ 1.8 m に板（1.4 × 0.8 m）を置き、<code>dopnet</code> の中の <code>popsource</code> で、その面から <strong>1 秒に 420 個</strong>の粒を生む（Emission Type は Surface）。はじめの速さは横 0.3・下 0.2 m/秒に、ばらつきを付ける。<code>popforce</code> で重力、<code>popdrag</code> で <strong>Air Resistance 6</strong>（とても強い空気抵抗＝軽い花びら）と、風 (0.5, 0, 0.1) m/秒。<code>popwrangle</code> で粒ごとに回る軸と速さ spin を決め、毎ステップ orient を <code>qmultiply</code> で少しずつ回す。外の <code>dopimport</code> で取り出す。フレーム 110 で 1936 枚が舞っている。120 フレームの計算は 0.8 秒。",
    "img": "pr_petals_2.png",
    "cap": "フレーム 110。斜めに流れて落ちる粒。",
    "ui_parm": "airresist"

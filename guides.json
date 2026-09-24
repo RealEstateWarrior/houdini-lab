@@ -4619,11 +4619,11 @@
         ],
         [
           "毛の数",
-          "90,000本"
+          "160,000本"
         ],
         [
           "仕上がりを撮る時間",
-          "39.3秒（Karma 1280×720）"
+          "29.8秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -4648,7 +4648,7 @@
           "title": "苔の生える場所を決める",
           "node": "attribwrangle",
           "ui_node": "where_moss",
-          "body": "<code>attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石の灰色には別のノイズで濃淡を付け、のっぺりした粘土に見えないようにする。",
+          "body": "<code>attribwrangle</code> で、点ごとに <strong>moss</strong>（0〜1）を作る。まず <strong>N.y</strong>（面が上を向いている度合い）が 0.2 以下なら 0、0.75 以上なら 1 にする。これにノイズで作ったまだらを掛けると、上の面は厚く、縁はまだらに薄くなる。色 <strong>Cd</strong> も、moss に合わせて灰色から濃い緑へ変える（毛の根元が見える所の色）。石は濃い灰色にし、別のノイズで濃淡を付け、苔の無い所には白っぽい地衣類の斑点を足す（前の版は石が明るすぎて、白い泡のように見えた）。",
           "img": "pr_moss_2.png",
           "cap": "上の面が緑、縁はまだら。",
           "ui_parm": "patch_size"
@@ -4657,7 +4657,7 @@
           "title": "苔の毛の根元をまく",
           "node": "scatter",
           "ui_node": "roots",
-          "body": "<code>scatter</code> で <strong>90,000 個</strong>の点をまく。<strong>Use Density Attribute</strong> を入れて <strong>Density Attribute を moss</strong> にすると、moss の大きい所ほど点が多く、0 の所には1つも出ない。点は、面の N などの属性を引き継ぐ。",
+          "body": "<code>scatter</code> で <strong>160,000 個</strong>の点をまく。<strong>Use Density Attribute</strong> を入れて <strong>Density Attribute を moss</strong> にすると、moss の大きい所ほど点が多く、0 の所には1つも出ない。点は、面の N などの属性を引き継ぐ。",
           "img": "pr_moss_3.png",
           "cap": "苔の場所にだけ点が集まる。",
           "ui_parm": "densityattrib"
@@ -4666,7 +4666,7 @@
           "title": "短い毛を立てる",
           "node": "attribwrangle",
           "ui_node": "grow_strands",
-          "body": "もう1つの <code>attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.014</strong>（1.4 cm）を 50〜130% にばらつかせ、先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.6 mm から先へ細くする。最後に元の点を消す。",
+          "body": "もう1つの <code>attribwrangle</code> で、点ごとに3つの点をつないだ短い線（毛）を作る。向きは面の向き N に、ランダムな傾きを少し足したもの。長さは <strong>length = 0.008</strong>（8 mm）を 50〜130% にばらつかせ、先を少しだけ下へ垂らす。根元は暗い緑、先は明るい黄緑にし、太さ <strong>width</strong> は根元 1.2 mm から先へ細くする。写真の岩の苔は短く密なビロードのようなので、前の版（1.4 cm・9 万本）より短く多くした。最後に元の点を消す。",
           "img": "pr_moss_4.png",
           "cap": "石の上に、短い毛がびっしり立つ。",
           "ui_parm": "length"
@@ -4689,15 +4689,28 @@
         },
         {
           "title": "Force Total Count は「苔のある所にだけ」まかれる",
-          "body": "Density Attribute を使っても、点の総数は Force Total Count のまま（90,000 本）。苔の場所が狭いと、同じ数が狭い所に詰まって濃くなる。広く生やすなら数も増やす。",
+          "body": "Density Attribute を使っても、点の総数は Force Total Count のまま（160,000 本）。苔の場所が狭いと、同じ数が狭い所に詰まって濃くなる。広く生やすなら数も増やす。",
           "img": "",
           "cap": ""
         },
         {
           "title": "毛の数が重さを決める",
-          "body": "90,000 本の毛は、点にすると 270,000 個。Karma で 1280×720 を撮るのにかかった時間は上の表のとおり。試すうちは STRANDS を減らして速く回し、最後に戻す。",
+          "body": "160,000 本の毛は、点にすると 480,000 個。Karma で 1280×720 を撮るのにかかった時間は上の表のとおり。試すうちは STRANDS を減らして速く回し、最後に戻す。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、苔むした岩の写真と並べて見比べた。前の版は、石が明るすぎて白い泡のように見え、苔も芝生のように長かった。",
+          "changes": [
+            "<strong>石を濃い灰色にし、白っぽい地衣類の斑点を足した。</strong>写真の岩は、苔の無い所に地衣類がまだらに付いている。",
+            "<strong>苔を短く密にした。</strong>長さ 1.4 cm → 8 mm、9 万本 → 16 万本。写真の苔は短いビロードのよう。",
+            "<strong>明かりを抑え、地面を土の色にした。</strong>"
+          ],
+          "before": "pr_moss_hero_v1.png",
+          "reference": "Wikimedia Commons の「moss covered boulder」の写真（濃い灰色の岩に、短い苔と白っぽい地衣類）"
         }
       ]
     },
@@ -4706,7 +4719,7 @@
       "title": "窓ガラスを割る",
       "lede": "板ガラスに球をぶつけて割る。rbdmaterialfracture を Glass にして当たる点を渡すと、そこから放射状と同心円のひびが入る。枠に触れている破片だけ動かないようにしておくと、真ん中が砕けて飛び、外側の破片が枠に残る。",
       "hero": "pr_glass_hero.png",
-      "hero_cap": "Karma で撮った仕上がり（フレーム 9）。当たった所から放射状に砕けた破片が飛ぶ。",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 14）。当たった所から放射状に砕けた破片が飛ぶ。",
       "facts": [
         [
           "足すノード",
@@ -4722,7 +4735,7 @@
         ],
         [
           "仕上がりを撮る時間",
-          "68.8秒（Karma 1280×720）"
+          "62.4秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -4767,14 +4780,14 @@
           "ui_node": "shatter",
           "body": "rbdmaterialfracture の右の出口（つながり）に <code>attribwrangle</code> をつなぎ、Run Over を Primitives にして <strong>strength を 0.8</strong> に下げる。既定のままだと強すぎて、球が跳ね返るだけで1枚も割れなかった。<code>rbdbulletsolver</code> の左に塊、<strong>真ん中に弱めたつながり</strong>をつなぎ、Ground Plane を入れる。球が当たると、そのまわりのつながりが切れて破片が飛び、遠くの破片はつながったまま枠に残る。48 フレームで、119 個のうち 41 個が動いた。",
           "img": "pr_glass_4.png",
-          "cap": "フレーム 9。当たった所から砕けて飛び散る。",
+          "cap": "フレーム 14。当たった所から砕けて飛び散る。",
           "ui_parm": "useground"
         },
         {
-          "title": "枠を付けて、ガラスの材質を当てる",
+          "title": "枠と壁を付けて、ガラスの材質を当てる",
           "node": "merge",
           "ui_node": "window",
-          "body": "細い <code>box</code> 4本で木の窓枠を作る。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。<code>unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code>material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。",
+          "body": "細い <code>box</code> 4本で木の窓枠を作り、窓の開口を残して <code>box</code> 3枚で壁を立てる（窓枠だけだと窓に見えない）。ガラスは <code>principledshader</code> で <strong>Transparency 1・IOR 1.52</strong>（板ガラス）、Roughness 0。Transmission Color を少し青緑に、Transmission Distance 0.3 にすると、破片の厚い縁がうっすら緑に見える（本物の板ガラスの色）。<code>unpack</code> で塊を元の面に戻してから材質を当て、もう1つの <code>material</code> で Group を <strong>@name=ball</strong> にして、球だけ鉄にする。",
           "img": "",
           "cap": "材質を当てた状態（ビューポートでは透けない）。"
         }
@@ -4799,7 +4812,19 @@
           "cap": ""
         }
       ],
-      "anim_cap": "球が当たって、破片が飛び散り、床に落ちるまで（48 フレーム＝2 秒）。"
+      "anim_cap": "球が当たって、破片が飛び散り、床に落ちるまで（48 フレーム＝2 秒）。",
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、割れた窓の写真と並べて見比べた。前の版は、窓枠だけが床に立っていて窓に見えず、穴が開く前の瞬間を撮っていた。",
+          "changes": [
+            "<strong>窓を壁にはめ込んだ。</strong>開口を残して壁の板を3枚立てた。",
+            "<strong>撮る瞬間をフレーム 9 → 14 にした。</strong>破片が飛び、穴が開いた瞬間。"
+          ],
+          "before": "pr_glass_hero_v1.png",
+          "reference": "Wikimedia Commons の「broken window pane」の写真（窓にはまったガラスに、放射状と同心円のひび）"
+        }
+      ]
     },
     {
       "id": "tablecloth",
@@ -5097,7 +5122,7 @@
         ],
         [
           "仕上がりを撮る時間",
-          "259.9秒（Karma 1280×720）"
+          "494.4秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -5130,7 +5155,7 @@
           "title": "霧で満たす",
           "node": "volumewrangle",
           "ui_node": "fog_density",
-          "body": "<code>volume</code> で、名前 <strong>density</strong> の箱（30 × 11 × 30 m、森と同じ広さ）を作る。Uniform Sampling Divs 110 で、升は約 0.27 m。霧のむらはゆるやかなので、升は粗くてよい。<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.025</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、ノイズで 0.5〜1.3 倍のむらを付ける。霧はうすいほうが筋がはっきりする。",
+          "body": "<code>volume</code> で、名前 <strong>density</strong> の箱（30 × 11 × 30 m、森と同じ広さ）を作る。Uniform Sampling Divs 110 で、升は約 0.27 m。霧のむらはゆるやかなので、升は粗くてよい。<code>volumewrangle</code> で濃さを決める。<strong>amount = 0.05</strong> を基準に、高さで弱める（height 5 m で 1/e になる）、ノイズで 0.5〜1.3 倍のむらを付ける。",
           "img": "pr_fog_3.png",
           "cap": "下ほど濃い霧（ビューポートでは箱の影で見える）。",
           "ui_parm": "amount"
@@ -5139,7 +5164,7 @@
           "title": "日を斜め上から当てる",
           "node": "merge",
           "ui_node": "forest",
-          "body": "幹・地面・葉の層に暗い材質を当て、霧とまとめる。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、Intensity 2・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。ほかの明かりはごく弱くする。",
+          "body": "幹（灰色がかった茶）・地面（苔の暗い緑）・葉の層に材質を当て、霧とまとめる。森の奥（16 m 先）には大きな板を立て、明るいもやの色に光らせる。写真の霧の森は、奥の木ほど白いもやに溶けて見えるので、奥が真っ黒だと森の深さが出ない。<code>hlight</code> を <strong>Distant</strong>（太陽のように平行な光）にし、Intensity 3・少し黄色、Rotate (−58, 150, 0) で <strong>カメラの向こう側の斜め上</strong>から差す向きにする。光は向こうからこちらへ来るので、霧の中の筋が明るく見える（逆光）。空からのやわらかい光（ドーム、0.6）も当てて霧全体をほんのり光らせると、奥の木ほど霧に溶けて見える。",
           "img": "",
           "cap": "材質と光を当てた状態。"
         }
@@ -5156,6 +5181,19 @@
           "body": "葉の層は 39,601 面のうち、open 0.62 で 35,141 面が残った（11% が穴）。open を 0.5 にすると 19,844 面（50% が穴）。open で光の入る量を決める。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、霧の森の写真と並べて見比べた。前の版は、奥が真っ黒で、どの幹も同じ濃さの黒い板に見えた。",
+          "changes": [
+            "<strong>奥に明るいもやを置いた。</strong>写真の霧の森は、奥の木ほど白いもやに溶けて見える。16 m 先に光る板を立てた。",
+            "<strong>霧を濃くし（amount 0.025 → 0.05）、空からのやわらかい光（ドーム 0.06 → 0.6）を当てた。</strong>霧全体がほんのり光り、奥の木ほど霧に溶けるようになった。",
+            "<strong>幹と地面の色を明るくした。</strong>"
+          ],
+          "before": "pr_fog_hero_v1.png",
+          "reference": "Wikimedia Commons の「crepuscular rays forest fog」の写真（奥ほど白くかすむ幹と、斜めの光の筋）"
         }
       ]
     },
@@ -5260,7 +5298,7 @@
       "title": "水たまりに雨の波紋",
       "lede": "雨粒が落ちた所から輪が広がり、弱まって消える。これを「広がる輪の式」を雨粒の数だけ足して作る。時間 @Time を使うので、再生すると勝手に動く。シミュレーションは使わない。",
       "hero": "pr_ripple_hero.png",
-      "hero_cap": "Karma で撮った仕上がり（フレーム 60）。明かりが映った水面に、重なる波紋。",
+      "hero_cap": "Karma で撮った仕上がり（フレーム 60）。曇り空を映した水たまりに、重なる波紋。",
       "facts": [
         [
           "足すノード",
@@ -5276,7 +5314,7 @@
         ],
         [
           "仕上がりを撮る時間",
-          "35.1秒（Karma 1280×720）"
+          "42.9秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -5314,10 +5352,10 @@
           "cap": "縁が不規則な水たまり。"
         },
         {
-          "title": "水の材質を当てる",
-          "node": "material",
-          "ui_node": "assign_water",
-          "body": "水面は <code>principledshader</code> で <strong>Transparency 1・IOR 1.33</strong>（水）・Roughness 0.02。下の地面は撮影用の幕を暗いアスファルト色にして使う。水たまりの見え方は、ほとんど「上にある空や明かりの映り込み」で決まる。撮るときは、低い角度から、明るい光（キーとリム）を水面に映す。",
+          "title": "水・濡れた地面・空を置く",
+          "node": "merge",
+          "ui_node": "rainy_street",
+          "body": "水面は <code>principledshader</code> で <strong>Transparency 1・IOR 1.33</strong>（水）・Roughness 0.02。水たまりの見え方は、ほとんど「空の映り込み」で決まる。写真の雨の水たまりは明るい曇り空を映していて、波紋は映り込みのゆがみとして白い輪に見える。そこで、奥に大きな板を立てて明るい灰色に光らせ（曇り空）、低い角度から撮って水面に映す。下には 12 m 四方の <code>grid</code> を置き、<code>attribwrangle</code> で粒のざらつきと濡れた色のむらを付けたアスファルトにする（雨で濡れているので Roughness 0.28 で照り返す）。",
           "img": "",
           "cap": "材質を当てた状態。"
         }
@@ -5325,7 +5363,7 @@
       "traps": [
         {
           "title": "雨粒の数だけ計算が重くなる",
-          "body": "点 112,681 個 × 雨粒 160 個で、1フレームの計算は 0.02 秒。雨粒を 320 個にすると 0.01 秒。どの点も全部の雨粒を見るので、雨粒の数に比例して重くなる。",
+          "body": "点 112,681 個 × 雨粒 160 個で、1フレームの計算は 0.02 秒。雨粒を 320 個にすると 0.00 秒。どの点も全部の雨粒を見るので、雨粒の数に比例して重くなる。",
           "img": "",
           "cap": ""
         },
@@ -5336,7 +5374,20 @@
           "cap": ""
         }
       ],
-      "anim_cap": "雨粒が落ちて、輪が広がって消える（96 フレーム＝4 秒）。"
+      "anim_cap": "雨粒が落ちて、輪が広がって消える（96 フレーム＝4 秒）。",
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、雨の水たまりの写真と並べて見比べた。前の版は、水たまりが黒いかたまりに見え、波紋がほとんど見えなかった。",
+          "changes": [
+            "<strong>明るい曇り空を映した。</strong>写真の水たまりは空を映していて、波紋は映り込みのゆがみとして白い輪に見える。前の版は映す物が無く、黒く写っていた。奥に光る板を立てて空にした。",
+            "<strong>濡れたアスファルトの地面を置いた。</strong>粒のざらつきと色のむらを付け、Roughness 0.28 で照り返すようにした。",
+            "<strong>低い角度から撮った。</strong>"
+          ],
+          "before": "pr_ripple_hero_v1.png",
+          "reference": "Wikimedia Commons の「raindrops puddle ripples」の写真（暗い水面に、空を映した輪がたくさん重なる）"
+        }
+      ]
     },
     {
       "id": "sunflower",
@@ -5461,11 +5512,11 @@
         ],
         [
           "光る点の割合",
-          "29%"
+          "31%"
         ],
         [
           "仕上がりを撮る時間",
-          "34.7秒（Karma 1280×720）"
+          "21.9秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -5489,7 +5540,7 @@
           "title": "岩の板と割れ目を作る",
           "node": "attribwrangle",
           "ui_node": "cracked_crust",
-          "body": "<code>attribwrangle</code> で <strong>wnoise</strong> を使う。空間に散らばった点のうち、一番近い点までの距離 f1 と、二番目に近い点までの距離 f2 が返る。<strong>f2 − f1</strong> は、2つの点のちょうど中間（＝板と板の境目）で 0 になる。これが 0.07 より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。板の上は 6 cm 持ち上げ、ノイズで細かいでこぼこも付ける。plate_size = 2.2 で、板1枚は数十 cm。",
+          "body": "<code>attribwrangle</code> で <strong>wnoise</strong> を使う。空間に散らばった点のうち、一番近い点までの距離 f1 と、二番目に近い点までの距離 f2 が返る。<strong>f2 − f1</strong> は、2つの点のちょうど中間（＝板と板の境目）で 0 になる。これが割れ目の幅より小さい所を割れ目とし、<strong>heat</strong>（割れ目の真ん中で 1）を付ける。幅は crack_width = 0.07 を、別のノイズで 0.25〜1.8 倍にばらつかせる（写真の割れ目は太い所と細い所がある。前の版は同じ幅の線で、絵のように見えた）。板の上は 7 cm 持ち上げ、大きさの違うノイズを3つ重ねてごつごつさせ、板ごとに少し傾ける。plate_size = 2.2 で、板1枚は数十 cm。",
           "img": "pr_lava_2.png",
           "cap": "亀の甲羅のように割れた地面。",
           "ui_parm": "crack_width"
@@ -5498,15 +5549,15 @@
           "title": "熱さで色を分ける",
           "node": "attribwrangle",
           "ui_node": "hot_colors",
-          "body": "もう1つの <code>attribwrangle</code> で色 Cd を決める。heat が 0.02 より大きい点（割れ目）は、heat が大きいほど 暗い赤 → 黄色に、さらに heat を掛けて縁ほど暗くする。板の点はノイズで濃淡を付けた黒い岩の色。割れ目の点は <strong>lava</strong> というグループにまとめておく（光る材質を当てる所）。",
+          "body": "もう1つの <code>attribwrangle</code> で色 Cd を決める。heat が 0.02 より大きい点（割れ目）は、heat が大きいほど 暗い赤 → 赤みの強い橙に、さらに heat を掛けて縁ほど暗くする（前の版は黄色が強すぎた。写真の溶岩は赤橙）。板の点はノイズで濃淡を付けた黒い岩の色で、割れ目のすぐそばだけ熱で赤くほてらせる。割れ目の点は <strong>lava</strong> というグループにまとめておく（光る材質を当てる所）。",
           "img": "pr_lava_3.png",
-          "cap": "割れ目が赤く、真ん中ほど黄色い。"
+          "cap": "割れ目が赤く、真ん中ほど明るい橙。"
         },
         {
           "title": "割れ目だけを光らせる",
           "node": "material",
           "ui_node": "assign_lava",
-          "body": "材質は面に当てるので、Run Over を Primitives にした <code>attribwrangle</code> で、<strong>角の点が全部熱い</strong>（heat 0.15 より上）面を <strong>lava</strong> という面のグループにする。そのうえで材質を2つ当てる。まず全体に岩の材質（Base Color 白＝点の色 Cd を使う、Roughness 0.85）。次の <code>material</code> で Group を <strong>lava</strong> にして、光る材質（Base Color 黒・<strong>Emission Intensity 3</strong>・Emission Color の <strong>Use Point Color</strong>）を上書きする。割れ目は Cd の色そのままで光る。",
+          "body": "材質は面に当てるので、Run Over を Primitives にした <code>attribwrangle</code> で、<strong>角の点が全部熱い</strong>（heat 0.15 より上）面を <strong>lava</strong> という面のグループにする。そのうえで材質を2つ当てる。まず全体に岩の材質（Base Color 白＝点の色 Cd を使う、Roughness 0.85）。次の <code>material</code> で Group を <strong>lava</strong> にして、光る材質（Base Color 黒・<strong>Emission Intensity 1.4</strong>（強すぎると色が黄色に飛ぶ）・Emission Color の <strong>Use Point Color</strong>）を上書きする。割れ目は Cd の色そのままで光る。",
           "img": "",
           "cap": "材質を当てた状態（ビューポートでは光らない）。"
         }
@@ -5514,15 +5565,28 @@
       "traps": [
         {
           "title": "crack_width で割れ目の太さが決まる",
-          "body": "crack_width 0.07 で、光る点は全体の 29%。0.24 にすると 75%。割れ目が太いと、黒い殻より溶岩のほうが多くなり、固まりかけた溶岩に見えなくなる。",
+          "body": "crack_width 0.07 で、光る点は全体の 31%。0.24 にすると 74%。割れ目が太いと、黒い殻より溶岩のほうが多くなり、固まりかけた溶岩に見えなくなる。",
           "img": "",
           "cap": ""
         },
         {
           "title": "網の細かさでは、割れ目の量は変わらない",
-          "body": "升 4 cm（Rows 75・Columns 100）にしても、光る点の割合は 29%（升 1 cm では 29%）。割れ目の量を決めるのは crack_width と plate_size で、網の細かさは割れ目の縁のなめらかさにだけ効く。試すうちは粗い網で速く回し、撮る前に細かくする。",
+          "body": "升 4 cm（Rows 75・Columns 100）にしても、光る点の割合は 31%（升 1 cm では 31%）。割れ目の量を決めるのは crack_width と plate_size で、網の細かさは割れ目の縁のなめらかさにだけ効く。試すうちは粗い網で速く回し、撮る前に細かくする。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、溶岩の写真と並べて見比べた。前の版は、割れ目が同じ幅の黄色い線で、殻も平らで、絵のように見えた。",
+          "changes": [
+            "<strong>割れ目の幅をばらつかせた。</strong>ノイズで 0.25〜1.8 倍にした。",
+            "<strong>溶岩の色を赤橙にした。</strong>黄色が強すぎた。光る強さも 3 → 1.4 に下げた（強すぎると黄色に飛ぶ）。割れ目のそばの殻は熱で赤くほてらせた。",
+            "<strong>殻をごつごつにした。</strong>3つの大きさのノイズを重ね、板ごとに少し傾けた。空の光を少し足して、殻の質感が見えるようにした。"
+          ],
+          "before": "pr_lava_hero_v1.png",
+          "reference": "Wikimedia Commons の「pahoehoe」の写真（ごつごつした暗い殻と、赤橙に光る溶岩）"
         }
       ]
     },
@@ -5531,19 +5595,23 @@
       "title": "L-system で木を育てる",
       "lede": "lsystem ノードは、文字の書き換えルールを何回も繰り返して枝を伸ばす。F は「前へ伸びる」、[ ] は「枝分かれ」、& や / は「向きを変える」。葉は、できた枝の表面に点をまいてコピーする。",
       "hero": "pr_tree_hero.png",
-      "hero_cap": "Karma で撮った仕上がり。L-system で育てた木。",
+      "hero_cap": "Karma で撮った仕上がり。L-system で育てた広葉樹。",
       "facts": [
         [
           "足すノード",
-          "7個（材質2つ）"
+          "13個（材質3つ）"
         ],
         [
-          "面の数",
-          "162"
+          "枝の面の数",
+          "1,458"
+        ],
+        [
+          "葉",
+          "44,523枚"
         ],
         [
           "仕上がりを撮る時間",
-          "119.7秒（Karma 1280×720）"
+          "169.5秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -5558,7 +5626,7 @@
           "title": "葉を1枚作る",
           "node": "attribwrangle",
           "ui_node": "mark_leaf",
-          "body": "<code>grid</code>（縦長に 4 × 8 に割る）を <code>attribwrangle</code> で葉の形にする。付け根から先への位置 v で幅を <strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 30 cm・幅 16 cm。木の高さが 5 m ほどになるので、本物より少し大きめにしないと遠目に見えない。",
+          "body": "<code>grid</code>（縦長に 4 × 8 に割る）を <code>attribwrangle</code> で葉の形にする。付け根から先への位置 v で幅を <strong>sin</strong> の形（付け根と先が細い）にし、先を少し垂らす。長さ 11 cm・幅 6 cm（広葉樹の葉の大きさ）。",
           "img": "pr_tree_1.png",
           "cap": "葉1枚。"
         },
@@ -5566,18 +5634,18 @@
           "title": "ルールを書いて、枝を伸ばす",
           "node": "lsystem",
           "ui_node": "grow",
-          "body": "<code>lsystem</code> の Type を <strong>Tube</strong>（太さのある枝）にし、ルールを書く。Premise（はじまり）は <strong>FFFA</strong>＝3回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFFA</strong> は「少し倒して3回伸び、先でまた A」。Generations 8 で、この書き換えを8回繰り返す。Thickness 0.2 で幹を太くする。Random Scale 0.25 で角度と長さをばらつかせ、Gravity 0.3 で枝先を垂らす。",
+          "body": "<code>lsystem</code> の Type を <strong>Tube</strong>（太さのある枝）にし、ルールを書く。Premise（はじまり）は <strong>FFA</strong>＝2回伸びてから A。Rule 1 <strong>A=!\"[B]////[B]////B</strong> は「細く・短くしてから、向きを変えつつ枝 B を3本出す」。Rule 2 <strong>B=&FFA</strong> は「少し倒して2回伸び、先でまた A」。Generations 12 で、この書き換えを12回繰り返す。本物の広葉樹は、太い幹が低い所で分かれ、枝が横へ広がって丸い樹冠になる。そこで Thickness 0.34（太い幹）・Angle 38（枝を大きく開く）にし、幹を短くする。Random Scale 0.3 で角度と長さをばらつかせ、Gravity 0.15 で枝先を少し垂らす。",
           "img": "pr_tree_2.png",
-          "cap": "8回の書き換えで育った枝。",
+          "cap": "12回の書き換えで育った枝。",
           "ui_parm": "rule1"
         },
         {
           "title": "枝に葉をまいて付ける",
           "node": "merge",
           "ui_node": "tree",
-          "body": "<code>scatter</code> で枝の表面に 5000 個の点をまき、<code>attribwrangle</code> で高さ 2 m より下（幹）の点を消す。残った点に、ばらばらの向き orient と大きさ pscale（0.6〜1.2）を付け、<code>copytopoints</code> で葉を並べる。葉は 4,697 枚。枝先ほど枝が多いので、点も葉も自然に上のほうへ集まる。",
+          "body": "葉は枝先に付くので、<code>measure</code> で枝の面ごとの面積を測り、<code>attribwrangle</code>（Primitives）で「細さ」<strong>leafdensity</strong>（面積が小さいほど大きい）を作る。<code>scatter</code> の Density Attribute にこれを使って 45,000 個の点をまくと、細い枝に集まる。面積のまままくと、太い枝に葉が固まった（前の版）。<code>attribwrangle</code> で高さ 0.5 m より下の点を消し、枝から少し離してふんわりさせる。残った点に、ばらばらの向き orient と大きさ pscale（0.7〜1.2）を付け、<code>copytopoints</code> で葉を並べる。色も1枚ずつ変え、樹冠の外側（日の当たる所）ほど明るい黄緑、内側ほど濃い緑にする。葉は 44,523 枚。枝先ほど枝が多いので、葉も自然に外側へ集まり、丸い樹冠になる。",
           "img": "pr_tree_3.png",
-          "cap": "4,697 枚の葉が付いた木。",
+          "cap": "44,523 枚の葉が付いた木。",
           "ui_parm": "lowest"
         },
         {
@@ -5598,9 +5666,23 @@
         },
         {
           "title": "Generations は2つずつ効く",
-          "body": "面の数は Generations 6 で 54、7 で 54（同じ）、8 で 162（3.0 倍）。A は B に、B は A に書き換わるので、2回でやっと1段伸びる。1段伸びると、枝が3本に分かれるので面は約3倍になる。奇数に上げても何も変わらないことがある。",
+          "body": "面の数は Generations 10 で 486、11 で 486、12 で 1,458（10 の 3.0 倍）。A は B に、B は A に書き換わるので、2回でやっと1段伸びる。1段伸びると、枝が3本に分かれるので面は約3倍になる。奇数に上げても、ほとんど変わらないことがある。",
           "img": "",
           "cap": ""
+        }
+      ],
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、本物の広葉樹の写真と並べて見比べた。前の版は、細い幹の先に大きな葉の房が上へ伸びるだけで、シダの束のように見えた。",
+          "changes": [
+            "<strong>太い幹を低い所で分け、枝を横へ広げた。</strong>Thickness 0.2 → 0.34、Angle 30 → 38、Generations 8 → 12、幹を短く。",
+            "<strong>葉を小さく、たくさんにした。</strong>長さ 30 cm → 11 cm、約 3,500 枚 → 約 38,000 枚。",
+            "<strong>葉を枝先に付けた。</strong>枝の面の大きさで割った「細さ」を scatter の密度にして、細い枝ほど葉が多く付くようにした（前は太い枝に葉が固まっていた）。",
+            "<strong>葉の色を1枚ずつ変え、外側ほど明るくした。草地の地面を置いた。</strong>"
+          ],
+          "before": "pr_tree_hero_v1.png",
+          "reference": "Wikimedia Commons の「solitary oak tree field」の写真（太い幹が低く分かれ、丸く広がる樹冠）"
         }
       ]
     },
@@ -5617,15 +5699,15 @@
         ],
         [
           "砂粒",
-          "21,751個"
+          "19,000個"
         ],
         [
           "72 フレームの計算",
-          "4秒"
+          "5秒"
         ],
         [
           "仕上がりを撮る時間",
-          "45.7秒（Karma 1280×720）"
+          "46.4秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -5641,7 +5723,7 @@
           "title": "砂の柱を用意する",
           "node": "mpmsource",
           "ui_node": "sand",
-          "body": "<code>tube</code> で半径 25 cm・高さ 90 cm の円柱を作る。<code>mpmcontainer</code> は計算する範囲（3 × 1.4 × 3 m）と、粒の間隔 <strong>Particle Separation 0.02</strong>（2 cm）を決める。<code>mpmsource</code> の左に円柱、右に容器をつなぎ、<strong>Material Preset を Sand</strong>（砂）にし、<strong>Material Type を Sandy</strong> にする。円柱の中が、2 cm おきの砂粒で満たされる。",
+          "body": "<code>tube</code> で半径 30 cm・高さ 55 cm の円柱を作る。<code>mpmcontainer</code> は計算する範囲（3 × 1.4 × 3 m）と、粒の間隔 <strong>Particle Separation 0.02</strong>（2 cm）を決める。<code>mpmsource</code> の左に円柱、右に容器をつなぎ、<strong>Material Preset を Sand</strong>（砂）にし、<strong>Material Type を Sandy</strong> にする。<strong>Friction Angle は 36度</strong>（既定 30度）にする。乾いた砂の山の傾き（安息角）は 30〜35度ほどなので、それに近づける。円柱の中が、2 cm おきの砂粒で満たされる。",
           "img": "pr_sandpile_1.png",
           "cap": "砂粒で満たした円柱。",
           "ui_parm": "materialpreset"
@@ -5650,16 +5732,16 @@
           "title": "床の上で崩す",
           "node": "mpmsolver",
           "ui_node": "collapse",
-          "body": "床の <code>box</code> を <code>mpmcollider</code>（ぶつかる物）にする。左に床、右に容器。<code>mpmsolver</code> には、左から砂・床・容器の3本をつなぐ。再生すると、支えの無い砂の柱は自分の重さで崩れ、広がって止まる。21,751 粒・72 フレーム（3 秒）の計算は 4 秒。止まった山は高さ 0.24 m、根元の半径 0.75 m。",
+          "body": "床の <code>box</code> を <code>mpmcollider</code>（ぶつかる物）にする。左に床、右に容器。<code>mpmsolver</code> には、左から砂・床・容器の3本をつなぐ。再生すると、支えの無い砂の柱は自分の重さで崩れ、広がって止まる。19,000 粒・72 フレーム（3 秒）の計算は 5 秒。止まった山は高さ 0.27 m、根元の半径 0.59 m。",
           "img": "pr_sandpile_2.png",
           "cap": "フレーム 72。低く広がった山になって止まった。",
           "ui_parm": "materialpreset"
         },
         {
-          "title": "粒の見た目を決める",
+          "title": "粒をつないで、砂の面にする",
           "node": "merge",
           "ui_node": "sandbox",
-          "body": "<code>attribwrangle</code> で粒ごとに大きさ <strong>pscale</strong>（間隔の 0.6 倍を 0.8〜1.2 倍にばらつかせる）と、明るさの違う砂色 Cd を付ける。Karma は、面の無い点を pscale の大きさの小さな球として撮る。材質は Base Color を白にして Cd を使う。",
+          "body": "本物の砂粒は 0.1〜1 mm で、1 m の山では1粒ずつは見えない。計算の粒（2 cm）をそのまま球で撮ると、小石を並べたように見えた（前の版）。<code>vdbfromparticles</code>（Voxel Size 0.005、Radius Scale 1.6）で粒を1つのボリュームにつなぎ、<code>vdbsmoothsdf</code>（Iterations 8）でならして、<code>convertvdb</code> で面に戻す。<code>mountain</code>（Height 1.5 mm・Element Size 5 mm）で細かいざらつきを付け、<code>attribwrangle</code> で細かい色のむら（1粒ずつ色が違う砂の斑点）を付ける。材質は Roughness 0.95 で、つやを消す。",
           "img": "",
           "cap": "材質を当てた状態。"
         }
@@ -5667,18 +5749,31 @@
       "traps": [
         {
           "title": "Material Type を Sandy にしないと崩れない",
-          "body": "Material Preset を Sand にしただけだと Material Type は Chunky（塊）のままで、3 秒たっても高さ 0.88 m・半径 0.24 m と、柱が立ったままだった。Sandy にすると高さ 0.24 m・半径 0.75 m まで崩れた。",
+          "body": "Material Preset を Sand にしただけだと Material Type は Chunky（塊）のままで、3 秒たっても高さ 0.54 m・半径 0.29 m と、柱が立ったままだった。Sandy にすると高さ 0.27 m・半径 0.59 m まで崩れた。",
           "img": "",
           "cap": ""
         },
         {
-          "title": "崩れた山の傾き",
-          "body": "止まった山の「高さ ÷ 粒の 95% が入る半径」から出した傾きは 18度。裾に広がった粒も半径に入るので、斜面そのものの傾きよりゆるく出る測り方。",
+          "title": "崩れた山の斜面の傾き",
+          "body": "中心からの距離ごとのいちばん高い粒で斜面の傾きを出すと 21度（Friction Angle は 36度）。柱を一度に崩したので、砂は勢いよく広がり、止まった山は Friction Angle（36度）よりゆるい。前の版の細長い柱（高さ 90 cm・半径 25 cm、Friction Angle 30度）では 17度で、ほぼ平らな円盤になった。",
           "img": "",
           "cap": ""
         }
       ],
-      "anim_cap": "砂の柱が崩れて、山になって止まるまで（72 フレーム＝3 秒）。"
+      "anim_cap": "砂の柱が崩れて、山になって止まるまで（72 フレーム＝3 秒）。",
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、砂山の写真と並べて見比べた。前の版は、計算の粒（2 cm）をそのまま球で撮っていて、小石を並べた平らな円盤に見えた。",
+          "changes": [
+            "<strong>粒をつないで、砂の面にした。</strong>vdbfromparticles でつなぎ、vdbsmoothsdf でならして面に戻し、細かいざらつきと色のむらを付けた。本物の砂粒は 0.1〜1 mm で、1 m の山では1粒ずつは見えない。",
+            "<strong>山らしくした。</strong>柱を太く低く（半径 25 → 30 cm、高さ 90 → 55 cm）し、Friction Angle を 30 → 36度にした。止まった山の斜面は 17度から 21度になった。",
+            "<strong>斜面の傾きの測り方を直した。</strong>前は裾の広がりも含めて測っていた。中心からの距離ごとのいちばん高い粒で、斜面そのものの傾きを出すようにした。"
+          ],
+          "before": "pr_sandpile_hero_v1.png",
+          "reference": "Wikimedia Commons の「heap of sand construction」の写真（粒の見えない一続きの面で、傾きのある山）"
+        }
+      ]
     },
     {
       "id": "candle",
@@ -5855,11 +5950,11 @@
         ],
         [
           "72 フレームの計算",
-          "6.8秒"
+          "15.4秒"
         ],
         [
           "仕上がりを撮る時間",
-          "274.4秒（Karma 1280×720）"
+          "312.8秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -5873,11 +5968,11 @@
       "steps": [
         {
           "title": "コインを1枚作る",
-          "node": "polybevel",
-          "ui_node": "soft_rim",
-          "body": "<code>tube</code> で半径 1.3 cm・厚さ 1.8 mm の円盤を作り（Columns 40 で縁をなめらかに）、<code>polybevel</code> で縁の角を 0.4 mm 丸める。角が立っていると、光ったときに作り物に見える。",
+          "node": "attribwrangle",
+          "ui_node": "relief",
+          "body": "本物の硬貨は、面が少し低く、縁（リム）が一段高くなっていて、面には浮き彫りの絵柄がある。前の版は、ただの円盤で豆粒のように見えた。何もつながない Detail の <code>attribwrangle</code> で、断面の半分（半径 1.3 cm・厚さ 1.8 mm、縁だけ 0.3 mm 高い）を多角形で描き、<code>revolve</code>（72 分割）で回して <code>reverse</code> で面を外向きにする。<code>remesh</code> で 0.4 mm の細かい網にし、もう1つの <code>attribwrangle</code> で、縁の内側の面をノイズの形に 0.15 mm 持ち上げて絵柄に、縁に沿って点々の飾りを付ける。",
           "img": "pr_coins_1.png",
-          "cap": "縁を丸めたコイン1枚。"
+          "cap": "縁が高く、浮き彫りのあるコイン。"
         },
         {
           "title": "空中にばらまいて並べる",
@@ -5892,7 +5987,7 @@
           "title": "床へ落とす",
           "node": "rbdbulletsolver",
           "ui_node": "drop",
-          "body": "<code>rbdbulletsolver</code> に packed のコインをつなぎ、<strong>Ground Plane</strong> を入れる。コインは薄いので、<strong>Collision Margin を 0.0005</strong>（0.5 mm）に下げる（床の側の Collision Margin も同じ）。再生すると、コインは落ちて跳ね、転がって止まる。72 フレーム（3 秒）の計算は 6.8 秒。止まった 240 枚のうち 205 枚が平らに寝ていた（面の向きが真上・真下から約25度以内）。",
+          "body": "<code>rbdbulletsolver</code> に packed のコインをつなぎ、<strong>Ground Plane</strong> を入れる。コインは薄いので、<strong>Collision Margin を 0.0005</strong>（0.5 mm）に下げる（床の側の Collision Margin も同じ）。再生すると、コインは落ちて跳ね、転がって止まる。72 フレーム（3 秒）の計算は 15.4 秒。止まった 240 枚のうち 210 枚が平らに寝ていた（面の向きが真上・真下から約25度以内）。",
           "img": "pr_coins_3.png",
           "cap": "フレーム 72。床に散らばったコイン。",
           "ui_parm": "useground"
@@ -5901,7 +5996,7 @@
           "title": "金属の材質を当てる",
           "node": "merge",
           "ui_node": "coins_on_table",
-          "body": "コインは <code>principledshader</code> で <strong>Metallic 1・Roughness 0.22</strong>、Base Color を白にして点の色 Cd を使う（金属は Base Color がそのまま映り込みの色になる）。床は濃い木の色。",
+          "body": "コインは <code>principledshader</code> で <strong>Metallic 1・Roughness 0.3</strong>、Base Color を白にして点の色 Cd を使う（金属は Base Color がそのまま映り込みの色になる）。床は <code>grid</code> に <code>attribwrangle</code> でゆらいだ縞の木目を付ける。",
           "img": "",
           "cap": "材質を当てた状態。"
         }
@@ -5909,18 +6004,31 @@
       "traps": [
         {
           "title": "薄い物は、Collision Margin で浮く",
-          "body": "Collision Margin が既定の 0.02 のままだと、止まったコインの中心の高さ（真ん中の値）は 28.9 mm。厚さ 1.8 mm のコインが、床から 2 cm 近く浮いて止まった。0.0005 にすると 2.5 mm で、床に寝た。Bullet は形のまわりに余白を付けて当たりを取るので、余白が形より大きいと浮く（大きな箱では目立たない。実験167）。",
+          "body": "Collision Margin が既定の 0.02 のままだと、止まったコインの中心の高さ（真ん中の値）は 27.4 mm。厚さ 1.8 mm のコインが、床から 2 cm 近く浮いて止まった。0.0005 にすると 2.7 mm で、床に寝た。Bullet は形のまわりに余白を付けて当たりを取るので、余白が形より大きいと浮く（大きな箱では目立たない。実験167）。",
           "img": "",
           "cap": ""
         },
         {
           "title": "Pack and Instance を切ると",
-          "body": "切ると、出てくる面は 125,280 枚になり、72 フレームの計算は 10.4 秒だった（packed では 6.8 秒）。packed なら 1 枚のコインが 1 つの塊で、形の数は 240 のまま扱える。",
+          "body": "切ると、出てくる面は 11,965,440 枚になり、72 フレームの計算は 121.0 秒だった（packed では 15.4 秒）。packed なら 1 枚のコインが 1 つの塊で、形の数は 240 のまま扱える。",
           "img": "",
           "cap": ""
         }
       ],
-      "anim_cap": "コインが落ちて跳ね、散らばって止まるまで（72 フレーム＝3 秒）。"
+      "anim_cap": "コインが落ちて跳ね、散らばって止まるまで（72 フレーム＝3 秒）。",
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、硬貨の写真と並べて見比べた。前の版は、縁の無いただの円盤で豆粒のように見え、明かりが強すぎて床が白く飛んでいた。",
+          "changes": [
+            "<strong>硬貨の形にした。</strong>本物の硬貨は面が少し低く、縁（リム）が一段高い。断面を描いて revolve で回した。",
+            "<strong>面に浮き彫りの絵柄と、縁に沿った点々の飾りを付けた。</strong>",
+            "<strong>明かりを弱め（キー 3 → 0.3）、床に木目を付けた。</strong>"
+          ],
+          "before": "pr_coins_hero_v1.png",
+          "reference": "Wikimedia Commons の「pile of euro coins」の写真（縁が一段高く、面に浮き彫り）と、古い硬貨の写真（縁に沿った点々の飾り）"
+        }
+      ]
     },
     {
       "id": "letters",
@@ -6245,11 +6353,11 @@
         ],
         [
           "120 フレームの計算",
-          "0.9秒"
+          "0.8秒"
         ],
         [
           "仕上がりを撮る時間",
-          "297.4秒（Karma 1280×720）"
+          "60.9秒（Karma 1280×720）"
         ]
       ],
       "exp": "",
@@ -6265,7 +6373,7 @@
           "title": "花びらを1枚作る",
           "node": "attribwrangle",
           "ui_node": "petal_shape",
-          "body": "<code>grid</code> を <code>attribwrangle</code> で丸い花びらにする。付け根から先への位置 u で幅を sin の形にし、先に小さな切れ込みを入れ、少し反らせる。長さ 3 cm（本物より少し大きめにして、画面で見えるようにする）。色は付け根が濃いピンク、先が白に近いピンク。",
+          "body": "<code>grid</code> を <code>attribwrangle</code> で花びらにする。本物の桜（ソメイヨシノ）の花びらは長さ約 2 cm、丸く、先の真ん中に小さな切れ込みがある。付け根から先への位置 u で幅を <strong>√sin</strong> の形（付け根だけ細く、先まで丸い）にし、先の真ん中を V 字にへこませ、横に少し丸めて先を反らせる。長さ 2.2 cm・幅 1.6 cm。色はほとんど白で、付け根だけほんのり桃色（写真の桜の花びらは、思ったよりずっと白い）。",
           "img": "pr_petals_1.png",
           "cap": "桜の花びら1枚（拡大）。"
         },
@@ -6273,7 +6381,7 @@
           "title": "粒を生んで、ゆっくり落とす",
           "node": "dopimport",
           "ui_node": "in_air",
-          "body": "高さ 2.4 m に広い板（3 × 1.2 m）を置き、<code>dopnet</code> の中の <code>popsource</code> で、その面から <strong>1 秒に 90 個</strong>の粒を生む（Emission Type は Surface）。はじめの速さは横 0.3・下 0.2 m/秒に、ばらつきを付ける。<code>popforce</code> で重力、<code>popdrag</code> で <strong>Air Resistance 6</strong>（とても強い空気抵抗＝軽い花びら）と、風 (0.5, 0, 0.1) m/秒。<code>popwrangle</code> で粒ごとに回る軸と速さ spin を決め、毎ステップ orient を <code>qmultiply</code> で少しずつ回す。外の <code>dopimport</code> で取り出す。フレーム 110 で 414 枚が舞っている。120 フレームの計算は 0.9 秒。",
+          "body": "高さ 1.8 m に板（1.4 × 0.8 m）を置き、<code>dopnet</code> の中の <code>popsource</code> で、その面から <strong>1 秒に 420 個</strong>の粒を生む（Emission Type は Surface）。はじめの速さは横 0.3・下 0.2 m/秒に、ばらつきを付ける。<code>popforce</code> で重力、<code>popdrag</code> で <strong>Air Resistance 6</strong>（とても強い空気抵抗＝軽い花びら）と、風 (0.5, 0, 0.1) m/秒。<code>popwrangle</code> で粒ごとに回る軸と速さ spin を決め、毎ステップ orient を <code>qmultiply</code> で少しずつ回す。外の <code>dopimport</code> で取り出す。フレーム 110 で 1936 枚が舞っている。120 フレームの計算は 0.8 秒。",
           "img": "pr_petals_2.png",
           "cap": "フレーム 110。斜めに流れて落ちる粒。",
           "ui_parm": "airresist"
@@ -6295,7 +6403,20 @@
           "cap": ""
         }
       ],
-      "anim_cap": "花びらがひらひら回りながら、斜めに流れて落ちる（120 フレーム＝5 秒）。"
+      "anim_cap": "花びらがひらひら回りながら、斜めに流れて落ちる（120 フレーム＝5 秒）。",
+      "revisions": [
+        {
+          "date": "2026-09-24",
+          "why": "公開したあと、舞い散る桜の写真と並べて見比べた。前の版は、広い範囲をまばらに撮っていて、花びらが点にしか見えなかった。",
+          "changes": [
+            "<strong>花びらの形を本物に近づけた。</strong>ソメイヨシノの花びらは丸く、先の真ん中に小さな切れ込みがある。長さ 3 cm の細い形から、長さ 2.2 cm・幅 1.6 cm の丸い形にし、先を V 字にへこませた。色もほとんど白にした。",
+            "<strong>狭い範囲に多く降らせ、近くから撮った。</strong>1 秒に 90 枚 → 420 枚、撮る範囲は幅 1.4 m → 0.6 m。",
+            "<strong>背景を暗めの青にした。</strong>明るい背景では白い花びらが溶けて見えなかった。"
+          ],
+          "before": "pr_petals_hero_v1.png",
+          "reference": "Wikimedia Commons の「sakura fubuki」の写真（濃い青空や暗い幹を背に、ほとんど白い花びらが舞う）"
+        }
+      ]
     },
     {
       "id": "gears",

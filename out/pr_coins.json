@@ -15,11 +15,11 @@
   ],
   [
    "72 フレームの計算",
-   "6.8秒"
+   "15.4秒"
   ],
   [
    "仕上がりを撮る時間",
-   "274.4秒（Karma 1280×720）"
+   "312.8秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -33,11 +33,11 @@
  "steps": [
   {
    "title": "コインを1枚作る",
-   "node": "polybevel",
-   "ui_node": "soft_rim",
-   "body": "<code>tube</code> で半径 1.3 cm・厚さ 1.8 mm の円盤を作り（Columns 40 で縁をなめらかに）、<code>polybevel</code> で縁の角を 0.4 mm 丸める。角が立っていると、光ったときに作り物に見える。",
+   "node": "attribwrangle",
+   "ui_node": "relief",
+   "body": "本物の硬貨は、面が少し低く、縁（リム）が一段高くなっていて、面には浮き彫りの絵柄がある。前の版は、ただの円盤で豆粒のように見えた。何もつながない Detail の <code>attribwrangle</code> で、断面の半分（半径 1.3 cm・厚さ 1.8 mm、縁だけ 0.3 mm 高い）を多角形で描き、<code>revolve</code>（72 分割）で回して <code>reverse</code> で面を外向きにする。<code>remesh</code> で 0.4 mm の細かい網にし、もう1つの <code>attribwrangle</code> で、縁の内側の面をノイズの形に 0.15 mm 持ち上げて絵柄に、縁に沿って点々の飾りを付ける。",
    "img": "pr_coins_1.png",
-   "cap": "縁を丸めたコイン1枚。"
+   "cap": "縁が高く、浮き彫りのあるコイン。"
   },
   {
    "title": "空中にばらまいて並べる",
@@ -52,7 +52,7 @@
    "title": "床へ落とす",
    "node": "rbdbulletsolver",
    "ui_node": "drop",
-   "body": "<code>rbdbulletsolver</code> に packed のコインをつなぎ、<strong>Ground Plane</strong> を入れる。コインは薄いので、<strong>Collision Margin を 0.0005</strong>（0.5 mm）に下げる（床の側の Collision Margin も同じ）。再生すると、コインは落ちて跳ね、転がって止まる。72 フレーム（3 秒）の計算は 6.8 秒。止まった 240 枚のうち 205 枚が平らに寝ていた（面の向きが真上・真下から約25度以内）。",
+   "body": "<code>rbdbulletsolver</code> に packed のコインをつなぎ、<strong>Ground Plane</strong> を入れる。コインは薄いので、<strong>Collision Margin を 0.0005</strong>（0.5 mm）に下げる（床の側の Collision Margin も同じ）。再生すると、コインは落ちて跳ね、転がって止まる。72 フレーム（3 秒）の計算は 15.4 秒。止まった 240 枚のうち 210 枚が平らに寝ていた（面の向きが真上・真下から約25度以内）。",
    "img": "pr_coins_3.png",
    "cap": "フレーム 72。床に散らばったコイン。",
    "ui_parm": "useground"
@@ -61,7 +61,7 @@
    "title": "金属の材質を当てる",
    "node": "merge",
    "ui_node": "coins_on_table",
-   "body": "コインは <code>principledshader</code> で <strong>Metallic 1・Roughness 0.22</strong>、Base Color を白にして点の色 Cd を使う（金属は Base Color がそのまま映り込みの色になる）。床は濃い木の色。",
+   "body": "コインは <code>principledshader</code> で <strong>Metallic 1・Roughness 0.3</strong>、Base Color を白にして点の色 Cd を使う（金属は Base Color がそのまま映り込みの色になる）。床は <code>grid</code> に <code>attribwrangle</code> でゆらいだ縞の木目を付ける。",
    "img": "",
    "cap": "材質を当てた状態。"
   }
@@ -69,13 +69,13 @@
  "traps": [
   {
    "title": "薄い物は、Collision Margin で浮く",
-   "body": "Collision Margin が既定の 0.02 のままだと、止まったコインの中心の高さ（真ん中の値）は 28.9 mm。厚さ 1.8 mm のコインが、床から 2 cm 近く浮いて止まった。0.0005 にすると 2.5 mm で、床に寝た。Bullet は形のまわりに余白を付けて当たりを取るので、余白が形より大きいと浮く（大きな箱では目立たない。実験167）。",
+   "body": "Collision Margin が既定の 0.02 のままだと、止まったコインの中心の高さ（真ん中の値）は 27.4 mm。厚さ 1.8 mm のコインが、床から 2 cm 近く浮いて止まった。0.0005 にすると 2.7 mm で、床に寝た。Bullet は形のまわりに余白を付けて当たりを取るので、余白が形より大きいと浮く（大きな箱では目立たない。実験167）。",
    "img": "",
    "cap": ""
   },
   {
    "title": "Pack and Instance を切ると",
-   "body": "切ると、出てくる面は 125,280 枚になり、72 フレームの計算は 10.4 秒だった（packed では 6.8 秒）。packed なら 1 枚のコインが 1 つの塊で、形の数は 240 のまま扱える。",
+   "body": "切ると、出てくる面は 11,965,440 枚になり、72 フレームの計算は 121.0 秒だった（packed では 15.4 秒）。packed なら 1 枚のコインが 1 つの塊で、形の数は 240 のまま扱える。",
    "img": "",
    "cap": ""
   }

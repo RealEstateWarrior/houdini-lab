@@ -8,7 +8,7 @@
       "type": "grid",
       "pos": [
         0.0,
-        1.129
+        1.13
       ],
       "flags": {
         "display": false
@@ -25,7 +25,7 @@
       "type": "attribwrangle",
       "pos": [
         0.0,
-        -0.0
+        0.0
       ],
       "flags": {
         "display": true
@@ -50,6 +50,58 @@
       }
     },
     {
+      "name": "asphalt",
+      "type": "grid",
+      "pos": [
+        2.824,
+        -0.452
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 12.0,
+        "sizey": 12.0,
+        "ty": -0.004,
+        "rows": 400,
+        "cols": 400
+      }
+    },
+    {
+      "name": "asphalt_grain",
+      "type": "attribwrangle",
+      "pos": [
+        2.824,
+        -1.581
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// アスファルトの粒のざらつきと、濡れて濃くなった色のむら\n@P.y += noise(@P * 60) * 0.002;\nv@Cd = {0.06, 0.06, 0.065} * fit(noise(@P * 25), 0.3, ..."
+      }
+    },
+    {
+      "name": "overcast_sky",
+      "type": "grid",
+      "pos": [
+        5.648,
+        -2.033
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "orient": 0,
+        "sizex": 40.0,
+        "sizey": 14.0,
+        "ty": 4.0,
+        "tz": -9.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
       "name": "assign_water",
       "type": "material",
       "pos": [
@@ -62,6 +114,46 @@
       "params": {
         "shop_materialpath1": "/mat/water_mat"
       }
+    },
+    {
+      "name": "assign_asphalt",
+      "type": "material",
+      "pos": [
+        2.824,
+        -2.711
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/asphalt_mat"
+      }
+    },
+    {
+      "name": "assign_sky",
+      "type": "material",
+      "pos": [
+        5.648,
+        -3.163
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/sky_mat"
+      }
+    },
+    {
+      "name": "rainy_street",
+      "type": "merge",
+      "pos": [
+        2.824,
+        -4.142
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
     }
   ],
   "edges": [
@@ -78,10 +170,46 @@
       "to_input": 0
     },
     {
+      "from": "asphalt",
+      "from_output": 0,
+      "to": "asphalt_grain",
+      "to_input": 0
+    },
+    {
       "from": "puddle_shape",
       "from_output": 0,
       "to": "assign_water",
       "to_input": 0
+    },
+    {
+      "from": "asphalt_grain",
+      "from_output": 0,
+      "to": "assign_asphalt",
+      "to_input": 0
+    },
+    {
+      "from": "overcast_sky",
+      "from_output": 0,
+      "to": "assign_sky",
+      "to_input": 0
+    },
+    {
+      "from": "assign_water",
+      "from_output": 0,
+      "to": "rainy_street",
+      "to_input": 0
+    },
+    {
+      "from": "assign_asphalt",
+      "from_output": 0,
+      "to": "rainy_street",
+      "to_input": 1
+    },
+    {
+      "from": "assign_sky",
+      "from_output": 0,
+      "to": "rainy_street",
+      "to_input": 2
     }
   ]
 }

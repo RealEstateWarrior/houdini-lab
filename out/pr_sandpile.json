@@ -11,15 +11,15 @@
   ],
   [
    "砂粒",
-   "21,751個"
+   "19,000個"
   ],
   [
    "72 フレームの計算",
-   "4秒"
+   "5秒"
   ],
   [
    "仕上がりを撮る時間",
-   "45.7秒（Karma 1280×720）"
+   "46.4秒（Karma 1280×720）"
   ]
  ],
  "exp": "",
@@ -35,7 +35,7 @@
    "title": "砂の柱を用意する",
    "node": "mpmsource",
    "ui_node": "sand",
-   "body": "<code>tube</code> で半径 25 cm・高さ 90 cm の円柱を作る。<code>mpmcontainer</code> は計算する範囲（3 × 1.4 × 3 m）と、粒の間隔 <strong>Particle Separation 0.02</strong>（2 cm）を決める。<code>mpmsource</code> の左に円柱、右に容器をつなぎ、<strong>Material Preset を Sand</strong>（砂）にし、<strong>Material Type を Sandy</strong> にする。円柱の中が、2 cm おきの砂粒で満たされる。",
+   "body": "<code>tube</code> で半径 30 cm・高さ 55 cm の円柱を作る。<code>mpmcontainer</code> は計算する範囲（3 × 1.4 × 3 m）と、粒の間隔 <strong>Particle Separation 0.02</strong>（2 cm）を決める。<code>mpmsource</code> の左に円柱、右に容器をつなぎ、<strong>Material Preset を Sand</strong>（砂）にし、<strong>Material Type を Sandy</strong> にする。<strong>Friction Angle は 36度</strong>（既定 30度）にする。乾いた砂の山の傾き（安息角）は 30〜35度ほどなので、それに近づける。円柱の中が、2 cm おきの砂粒で満たされる。",
    "img": "pr_sandpile_1.png",
    "cap": "砂粒で満たした円柱。",
    "ui_parm": "materialpreset"
@@ -44,16 +44,16 @@
    "title": "床の上で崩す",
    "node": "mpmsolver",
    "ui_node": "collapse",
-   "body": "床の <code>box</code> を <code>mpmcollider</code>（ぶつかる物）にする。左に床、右に容器。<code>mpmsolver</code> には、左から砂・床・容器の3本をつなぐ。再生すると、支えの無い砂の柱は自分の重さで崩れ、広がって止まる。21,751 粒・72 フレーム（3 秒）の計算は 4 秒。止まった山は高さ 0.24 m、根元の半径 0.75 m。",
+   "body": "床の <code>box</code> を <code>mpmcollider</code>（ぶつかる物）にする。左に床、右に容器。<code>mpmsolver</code> には、左から砂・床・容器の3本をつなぐ。再生すると、支えの無い砂の柱は自分の重さで崩れ、広がって止まる。19,000 粒・72 フレーム（3 秒）の計算は 5 秒。止まった山は高さ 0.27 m、根元の半径 0.59 m。",
    "img": "pr_sandpile_2.png",
    "cap": "フレーム 72。低く広がった山になって止まった。",
    "ui_parm": "materialpreset"
   },
   {
-   "title": "粒の見た目を決める",
+   "title": "粒をつないで、砂の面にする",
    "node": "merge",
    "ui_node": "sandbox",
-   "body": "<code>attribwrangle</code> で粒ごとに大きさ <strong>pscale</strong>（間隔の 0.6 倍を 0.8〜1.2 倍にばらつかせる）と、明るさの違う砂色 Cd を付ける。Karma は、面の無い点を pscale の大きさの小さな球として撮る。材質は Base Color を白にして Cd を使う。",
+   "body": "本物の砂粒は 0.1〜1 mm で、1 m の山では1粒ずつは見えない。計算の粒（2 cm）をそのまま球で撮ると、小石を並べたように見えた（前の版）。<code>vdbfromparticles</code>（Voxel Size 0.005、Radius Scale 1.6）で粒を1つのボリュームにつなぎ、<code>vdbsmoothsdf</code>（Iterations 8）でならして、<code>convertvdb</code> で面に戻す。<code>mountain</code>（Height 1.5 mm・Element Size 5 mm）で細かいざらつきを付け、<code>attribwrangle</code> で細かい色のむら（1粒ずつ色が違う砂の斑点）を付ける。材質は Roughness 0.95 で、つやを消す。",
    "img": "",
    "cap": "材質を当てた状態。"
   }
@@ -61,13 +61,13 @@
  "traps": [
   {
    "title": "Material Type を Sandy にしないと崩れない",
-   "body": "Material Preset を Sand にしただけだと Material Type は Chunky（塊）のままで、3 秒たっても高さ 0.88 m・半径 0.24 m と、柱が立ったままだった。Sandy にすると高さ 0.24 m・半径 0.75 m まで崩れた。",
+   "body": "Material Preset を Sand にしただけだと Material Type は Chunky（塊）のままで、3 秒たっても高さ 0.54 m・半径 0.29 m と、柱が立ったままだった。Sandy にすると高さ 0.27 m・半径 0.59 m まで崩れた。",
    "img": "",
    "cap": ""
   },
   {
-   "title": "崩れた山の傾き",
-   "body": "止まった山の「高さ ÷ 粒の 95% が入る半径」から出した傾きは 18度。裾に広がった粒も半径に入るので、斜面そのものの傾きよりゆるく出る測り方。",
+   "title": "崩れた山の斜面の傾き",
+   "body": "中心からの距離ごとのいちばん高い粒で斜面の傾きを出すと 21度（Friction Angle は 36度）。柱を一度に崩したので、砂は勢いよく広がり、止まった山は Friction Angle（36度）よりゆるい。前の版の細長い柱（高さ 90 cm・半径 25 cm、Friction Angle 30度）では 17度で、ほぼ平らな円盤になった。",
    "img": "",
    "cap": ""
   }
