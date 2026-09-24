@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>158本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>159本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3912,6 +3912,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp235" data-anchor="exp235"><span class="doc-no">235</span><span class="doc-t">雲は、Karma の Volume Limit を上げるほど明るくなる（底の明るさ 0 → 16 で 0.45 → 0.93）。16 でもまだ明るくなり続け、時間は 13 → 378 秒。上げたら日差しを弱めないと白く飛ぶ</span></a></li>
         <li><a href="#exp236" data-anchor="exp236"><span class="doc-no">236</span><span class="doc-t">氷の入ったグラスの水は、Karma の Refraction Limit 既定 4 では氷がまだ黒く残る。8 で透明になり（暗い所 7% → 4%）、時間は 81 → 92 秒。16 は 8 と同じ</span></a></li>
         <li><a href="#exp238" data-anchor="exp238"><span class="doc-no">238</span><span class="doc-t">水面に映る太陽のきらめきは、Karma の Color Limit（既定 10）で明るさが切り詰められている。1000 にすると光の道は 6.8 倍明るく、16 サンプルのざらつきも 28% → 201% に増える。1 に下げるときらめきが鈍る</span></a></li>
+        <li><a href="#exp239" data-anchor="exp239"><span class="doc-no">239</span><span class="doc-t">画を 640×360 → 1920×1080（画素 9 倍）にすると、ドーナツは撮る時間が 7.9 倍、海は 2.1 倍。海は 1 枚あたり 9 秒が画の大きさによらない分</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3923,7 +3924,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>238 / 238</dd></div>
+      <div><dt>実験</dt><dd>239 / 239</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -17182,6 +17183,64 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 239 ===================== -->
+    <article class="entry entry--current" id="exp239">
+      <div class="badge">239</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>画を 640×360 → 1920×1080（画素 9 倍）にすると、ドーナツは撮る時間が 7.9 倍、海は 2.1 倍。海は 1 枚あたり 9 秒が画の大きさによらない分</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">速さ</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>ドーナツは、画素 9 倍で時間 7.9 倍。</strong>ほぼ画素に比例する。</li>
+            <li><strong>海は 2.1 倍。</strong>1 枚あたり 9 秒が画の大きさによらない。</li>
+            <li><strong>仕上げの時間は、2 つの大きさの試し撮りから a ＋ b × 画素数で見積もる。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_239.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/239_karma_resolution_time.py &nbsp;·&nbsp; 解像度9倍で時間はドーナツ7.9倍・海2.1倍</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/239_scene.hipnc" target="_blank" rel="noopener noreferrer">239_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="239_graph.png" alt="実験239 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 試し撮りは 640×360 で、仕上げは 1920×1080 で撮りたい。画素の数は 9 倍になるが、時間も 9 倍になるのか。場面によって違うのか。</strong></p>
+          <p>実践 2 本（ドーナツ＝ふつうの材質、冬の朝の七里ヶ浜＝224 万点の海と空）の hip を読み、同じ設定（16 <button class="term" data-term="サンプル">サンプル</button>・<button class="term" data-term="ノイズ">ノイズ</button>除去なし・CPU）で 640×360・1280×720・1920×1080 に撮った。はじめに小さく 1 枚撮って捨てた。3 つの時間を「時間 = 画の大きさによらない分 a ＋ 画素に比例する分 b × 画素数」に当てはめた。</p>
+          <p><strong>ドーナツは、ほぼ画素の数に比例する。</strong>20.1・75.3・159.2 秒で、640×360 → 1920×1080 は 7.9 倍。画の大きさによらない分は 4.0 秒、百万画素あたり 75 秒。</p>
+          <p><strong>海は、画の大きさによらない分が大きい。</strong>10.4・14.6・21.6 秒で 2.1 倍。画の大きさによらない分が 9.0 秒、百万画素あたり 6 秒。224 万点の海と大きな空の球を <button class="term" data-term="Karma">Karma</button> に渡す時間が、毎回かかると考えられる（<a href="log_fx.html#exp221">実験221</a> で、サンプル数や解像度を下げても 2 割しか速くならなかったのと合う）。</p>
+          <p><strong>決め方: 仕上げの時間は、試し撮りを 2 つの大きさで撮って見積もる。</strong>2 点から a と b が出るので、1920×1080 の時間は a ＋ b × 207 万で求まる。形が重い場面は a が大きく、解像度を下げても速くならない。</p>
+        </div>
+
+        <p class="label">画の大きさと撮る時間</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="239_time.png" alt="ドーナツはほぼ原点を通る直線、海は画の大きさによらない分（a）が大きい。" loading="lazy" decoding="async"></div>
+            <figcaption>ドーナツはほぼ原点を通る直線、海は画の大きさによらない分（a）が大きい。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>場面</th><th>640×360（秒）</th><th>1280×720（秒）</th><th>1920×1080（秒）</th><th>大きさによらない分 a（秒）</th><th>百万画素あたり b（秒）</th><th>9 倍の画素で何倍</th></tr></thead>
+            <tbody>
+              <tr><td>ドーナツ</td><td class="num">20.1</td><td class="num">75.3</td><td class="num">159.2</td><td class="num">4.0</td><td class="num">75.2</td><td class="num">7.9</td></tr>
+              <tr><td>冬の朝の七里ヶ浜（224 万点の海）</td><td class="num">10.4</td><td class="num">14.6</td><td class="num">21.6</td><td class="num">9.0</td><td class="num">6.1</td><td class="num">2.1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ドーナツは、画素 9 倍で時間 7.9 倍。</strong>ほぼ画素に比例する。</li>
+          <li><strong>海は 2.1 倍。</strong>1 枚あたり 9 秒が画の大きさによらない。</li>
+          <li><strong>仕上げの時間は、2 つの大きさの試し撮りから a ＋ b × 画素数で見積もる。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -17197,7 +17256,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-5a8164fe4b.js"></script>
+<script src="data/glossary-data-4a9b3148ca.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -17376,7 +17435,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>238</dd></div>
+        <div><dt>実験</dt><dd>239</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>468</dd></div>
@@ -17559,7 +17618,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-f8e6d04848.js"></script>
+<script src="data/search-data-ce38f17a62.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */
