@@ -59,7 +59,8 @@ def main():
             "**決め方: 試し撮りは XPU で速く回し、仕上げの前に必ず CPU の画と並べて確かめる。**色が変わる所（この実験ではアイシング・光る空）があれば、その場面は CPU で撮る。\n\n"
             "**追記（実験242・243）: 色が白くなった原因が分かった。**XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる"
             "（Use Point Color を切っていても）。ドーナツは揚げ色の Cd を持つ生地とアイシングを 1 つの形にまとめていたので、アイシングにも白の Cd が付いて白くなった。"
-            "MaterialX の材質（mtlxstandard_surface）なら、Cd があっても CPU と同じ色になった。",
+            "MaterialX の材質（mtlxstandard_surface）なら、Cd があっても CPU と同じ色になった。"
+            "ただしグラスの場面には Cd が無く（点の値は P だけ）、グラスが明るく飛んだのは別の原因で、まだ確かめていない。",
         "graph": "", "graph_image": "",
         "comparisons": [
             {"label": "CPU と XPU（640×360・32 サンプル、ノイズ除去なし）",

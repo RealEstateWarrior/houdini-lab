@@ -10583,7 +10583,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <p><strong>ガラスの場面は、全体が明るく飛んだ。</strong>グラスの水は背景の幕が白く飛び、ガラスの輪郭が見えにくくなった（差 28、明るさ 195 → 222）。原因は確かめていない。</p>
           <p><strong>雪（SSS）と炎（<button class="term" data-term="Pyro">Pyro</button>）は、ほぼ同じ絵。</strong>差は雪だるま 13、焚き火 6、ネオン管 7。どれも XPU の方が少し明るかった。</p>
           <p><strong>決め方: 試し撮りは XPU で速く回し、仕上げの前に必ず CPU の画と並べて確かめる。</strong>色が変わる所（この実験ではアイシング・光る空）があれば、その場面は CPU で撮る。</p>
-          <p><strong>追記（<a href="#exp242">実験242</a>・243）: 色が白くなった原因が分かった。</strong>XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。ドーナツは揚げ色の Cd を持つ生地とアイシングを 1 つの形にまとめていたので、アイシングにも白の Cd が付いて白くなった。MaterialX の材質（mtlxstandard_surface）なら、Cd があっても CPU と同じ色になった。</p>
+          <p><strong>追記（<a href="#exp242">実験242</a>・243）: 色が白くなった原因が分かった。</strong>XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。ドーナツは揚げ色の Cd を持つ生地とアイシングを 1 つの形にまとめていたので、アイシングにも白の Cd が付いて白くなった。MaterialX の材質（mtlxstandard_surface）なら、Cd があっても CPU と同じ色になった。ただしグラスの場面には Cd が無く（点の値は P だけ）、グラスが明るく飛んだのは別の原因で、まだ確かめていない。</p>
         </div>
 
         <p class="label">CPU と XPU（640×360・32 サンプル、ノイズ除去なし）</p>

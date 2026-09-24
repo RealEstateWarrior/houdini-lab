@@ -16877,7 +16877,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
         <span class="chip chip--pm">モデリング</span>
         <h2>Karma XPU は、ガラス・雪・ドーナツで CPU の 7〜14 倍速い（グラスの水 82 秒 → 6 秒）。ただしドーナツのアイシングと海の空は色が出ずに白くなり、ガラスの場面は明るく飛んだ。雪と炎はほぼ同じ絵</h2>
         <div class="colhead">
-          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">XPU</span><span class="coltag">速さ</span><span class="coltag">制作</span></p>
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">Karma</span><span class="coltag">XPU</span><span class="coltag">速さ</span><span class="coltag">制作</span></p>
           <div class="colbody">
           <div class="colgist"><p class="colgist-label">要点</p><ul>
             <li><strong>XPU は多くの場面で CPU の数倍〜十数倍速い。</strong>グラスの水 82 → 6 秒。</li>
@@ -16887,7 +16887,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <img class="colthumb" src="thumb_232.png" alt="" loading="lazy" decoding="async">
           </div>
         </div>
-        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
         <p class="path">examples/232_karma_xpu_scenes.py &nbsp;·&nbsp; XPU は数倍〜十数倍速いが、色が出ない所があった（原因は実験243）</p>
         <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">karma</a></p>
         <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/232_scene.hipnc" target="_blank" rel="noopener noreferrer">232_scene.hipnc</a></p>
@@ -16901,7 +16901,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
           <p><strong>ガラスの場面は、全体が明るく飛んだ。</strong>グラスの水は背景の幕が白く飛び、ガラスの輪郭が見えにくくなった（差 28、明るさ 195 → 222）。原因は確かめていない。</p>
           <p><strong>雪（SSS）と炎（<button class="term" data-term="Pyro">Pyro</button>）は、ほぼ同じ絵。</strong>差は雪だるま 13、焚き火 6、ネオン管 7。どれも XPU の方が少し明るかった。</p>
           <p><strong>決め方: 試し撮りは XPU で速く回し、仕上げの前に必ず CPU の画と並べて確かめる。</strong>色が変わる所（この実験ではアイシング・光る空）があれば、その場面は CPU で撮る。</p>
-          <p><strong>追記（<a href="#exp242">実験242</a>・243）: 色が白くなった原因が分かった。</strong>XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。ドーナツは揚げ色の Cd を持つ生地とアイシングを 1 つの形にまとめていたので、アイシングにも白の Cd が付いて白くなった。MaterialX の材質（mtlxstandard_surface）なら、Cd があっても CPU と同じ色になった。</p>
+          <p><strong>追記（<a href="#exp242">実験242</a>・243）: 色が白くなった原因が分かった。</strong>XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。ドーナツは揚げ色の Cd を持つ生地とアイシングを 1 つの形にまとめていたので、アイシングにも白の Cd が付いて白くなった。MaterialX の材質（mtlxstandard_surface）なら、Cd があっても CPU と同じ色になった。ただしグラスの場面には Cd が無く（点の値は P だけ）、グラスが明るく飛んだのは別の原因で、まだ確かめていない。</p>
         </div>
 
         <p class="label">CPU と XPU（640×360・32 サンプル、ノイズ除去なし）</p>
@@ -17690,7 +17690,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-9ab8eebf30.js"></script>
+<script src="data/glossary-data-d0dddc2d00.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
