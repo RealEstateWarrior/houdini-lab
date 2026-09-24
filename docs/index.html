@@ -3761,6 +3761,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </button>
           </form>
           <div class="deck" id="deck" aria-roledescription="カルーセル" aria-label="新着の実験">
+            <a class="deck-card" href="log_fx.html#exp246"><img src="thumb_246.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験246 · エフェクト編</span><span class="deck-t">ガラスの割れ方が回ごとに揺れたのは、計算を何本も並べて走らせていた（マルチスレッド）ため。1 スレッドにすると 5 回とも同じ割れ方になった。ただし Bullet の計算は約 3 倍遅くなる</span><span class="deck-d">Bullet の割れ方の揺れはマルチスレッドのため。1スレッドなら毎回同じ</span></a>
             <a class="deck-card" href="log.html#exp245"><img src="thumb_245.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験245 · モデリング編</span><span class="deck-t">地形を削る heightfield_erode は、升を細かくしても谷の細かさは変わらない（升 2 m と 1 m でほぼ同じ絵、時間もほぼ同じ）。谷の細かさを決めるのは Erosion Feature Size（既定 10 m）で、2.5 m にすると細かい谷が刻まれ、時間は 1.4 → 2.4 秒</span><span class="deck-d">地形の谷の細かさは升でなく Erosion Feature Size で決まる</span></a>
             <a class="deck-card" href="log_fx.html#exp244"><img src="thumb_244.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験244 · エフェクト編</span><span class="deck-t">焚き火の煙の量は Dissipation にほぼ反比例する（0.05・0.1・0.2・0.4 で 62・30・14・7）。ただし実践の焚き火は火元から煙を出しておらず、Dissipation はまったく効かなかった</span><span class="deck-d">焚き火の煙は火元に density が要る。量は Dissipation に反比例</span></a>
             <a class="deck-card" href="log.html#exp243"><img src="thumb_243.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験243 · モデリング編</span><span class="deck-t">Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色</span><span class="deck-d">XPU は Cd があると principledshader の色が Cd に。MaterialX なら同じ色</span></a>
@@ -3768,7 +3769,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <a class="deck-card" href="log.html#exp241"><img src="thumb_241.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験241 · モデリング編</span><span class="deck-t">Karma のノイズ除去は、4 サンプルでも 32 サンプル（なし）と同じくらい基準に近い（ドーナツ 差 1.88 と 1.75）。時間は 1/5。OptiX と OIDN はほぼ同じで、OptiX がわずかに近い</span><span class="deck-d">4サンプル＋ノイズ除去で32サンプル並み。OptiX と OIDN はほぼ同じ</span></a>
             <a class="deck-card" href="log.html#exp240"><img src="thumb_240.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験240 · モデリング編</span><span class="deck-t">211〜239 の点検</span><span class="deck-d">211〜239 を流し直し：26 本一致。218・219 は hip の版、226 は割れ方の揺れ</span></a>
             <a class="deck-card" href="log.html#exp239"><img src="thumb_239.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験239 · モデリング編</span><span class="deck-t">画を 640×360 → 1920×1080（画素 9 倍）にすると、ドーナツは撮る時間が 7.9 倍、海は 2.1 倍。海は 1 枚あたり 9 秒が画の大きさによらない分</span><span class="deck-d">解像度9倍で時間はドーナツ7.9倍・海2.1倍</span></a>
-            <a class="deck-card" href="log.html#exp238"><img src="thumb_238.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験238 · モデリング編</span><span class="deck-t">水面に映る太陽のきらめきは、Karma の Color Limit（既定 10）で明るさが切り詰められている。1000 にすると光の道は 6.8 倍明るく、16 サンプルのざらつきも 28% → 201% に増える。1 に下げるときらめきが鈍る</span><span class="deck-d">太陽のきらめきは Color Limit 10 で切り詰められている</span></a>
           </div>
           <div class="deck-ctrl"><button type="button" class="deck-play" id="deck-play" aria-label="自動の切り替えを止める"></button><button type="button" class="deck-arrow" id="deck-prev" aria-label="前の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="deck-dots" id="deck-dots"></div><button type="button" class="deck-arrow" id="deck-next" aria-label="次の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         </div>
@@ -4011,10 +4011,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
 
       <nav class="site-facts" aria-label="この場所の数字">
-        <a href="index.html#experiments"><b>245</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
+        <a href="index.html#experiments"><b>246</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
         <a href="practice.html#guides"><b>71</b><span>実践ガイド<em>PRACTICE</em></span></a>
         <a href="reference.html#nodes"><b>393</b><span>ノード解説<em>NODES</em></span></a>
-        <a href="reference.html#glossary"><b>471</b><span>用語集<em>GLOSSARY</em></span></a>
+        <a href="reference.html#glossary"><b>472</b><span>用語集<em>GLOSSARY</em></span></a>
       </nav>
       <p class="site-env">Houdini 21.0.700（Apprentice）· hython で実行 · Gemini Notebook のソース 41 / 300</p>
     </section>
@@ -4039,10 +4039,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </header>
       <div class="stage"><h3>完了した実験</h3><p>カードを押すと、実験ログの記事が新しいタブで開く。タグで絞り込める。</p></div>
       <div class="tagbar" id="tagbar">
-        <button type="button" class="tagchip is-on" data-tag="">すべて <span>245</span></button>
+        <button type="button" class="tagchip is-on" data-tag="">すべて <span>246</span></button>
         <button type="button" class="tagchip" data-tag="検算">検算 <span>112</span></button>
         <button type="button" class="tagchip" data-tag="モデリング">モデリング <span>82</span></button>
-        <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>36</span></button>
+        <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>37</span></button>
         <button type="button" class="tagchip" data-tag="エフェクト">エフェクト <span>33</span></button>
         <button type="button" class="tagchip" data-tag="Karma">Karma <span>32</span></button>
         <button type="button" class="tagchip" data-tag="落とし穴">落とし穴 <span>26</span></button>
@@ -4064,31 +4064,31 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="ツール">ツール <span>10</span></button>
         <button type="button" class="tagchip" data-tag="体積">体積 <span>10</span></button>
         <button type="button" class="tagchip" data-tag="毛">毛 <span>10</span></button>
+        <button type="button" class="tagchip" data-tag="点検">点検 <span>10</span></button>
         <button type="button" class="tagchip" data-tag="グルーム">グルーム <span>9</span></button>
         <button type="button" class="tagchip" data-tag="ノイズ">ノイズ <span>9</span></button>
-        <button type="button" class="tagchip" data-tag="点検">点検 <span>9</span></button>
         <button type="button" class="tagchip" data-tag="APEX">APEX <span>8</span></button>
         <button type="button" class="tagchip" data-tag="リグ">リグ <span>8</span></button>
         <button type="button" class="tagchip" data-tag="炎">炎 <span>8</span></button>
         <button type="button" class="tagchip" data-tag="摩擦">摩擦 <span>7</span></button>
         <button type="button" class="tagchip" data-tag="液体">液体 <span>7</span></button>
+        <button type="button" class="tagchip" data-tag="RBD">RBD <span>6</span></button>
         <button type="button" class="tagchip" data-tag="材質">材質 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="煙">煙 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="複製">複製 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="POP">POP <span>5</span></button>
-        <button type="button" class="tagchip" data-tag="RBD">RBD <span>5</span></button>
         <button type="button" class="tagchip" data-tag="比較">比較 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="海">海 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="HeightField">HeightField <span>4</span></button>
         <button type="button" class="tagchip" data-tag="KineFX">KineFX <span>4</span></button>
         <button type="button" class="tagchip" data-tag="SDF">SDF <span>4</span></button>
         <button type="button" class="tagchip" data-tag="smooth">smooth <span>4</span></button>
+        <button type="button" class="tagchip" data-tag="ガラス">ガラス <span>4</span></button>
         <button type="button" class="tagchip" data-tag="属性">属性 <span>4</span></button>
         <button type="button" class="tagchip" data-tag="破壊">破壊 <span>4</span></button>
         <button type="button" class="tagchip" data-tag="XPU">XPU <span>3</span></button>
         <button type="button" class="tagchip" data-tag="heightfield">heightfield <span>3</span></button>
         <button type="button" class="tagchip" data-tag="scatter">scatter <span>3</span></button>
-        <button type="button" class="tagchip" data-tag="ガラス">ガラス <span>3</span></button>
         <button type="button" class="tagchip" data-tag="テクスチャ">テクスチャ <span>3</span></button>
         <button type="button" class="tagchip" data-tag="ライト">ライト <span>3</span></button>
         <button type="button" class="tagchip" data-tag="分割">分割 <span>3</span></button>
@@ -6452,6 +6452,15 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <span class="thumb-tags"><span>地形</span><span>Heightfield</span><span>制作</span></span>
           </span>
         </button>
+        <button type="button" class="thumb" data-exp="246" data-tags="シミュレーション RBD ガラス 点検">
+          <span class="thumb-img"><img src="thumb_246.png" loading="lazy" decoding="async" alt="実験246の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 246</span>
+            <h4>ガラスの割れ方が回ごとに揺れたのは、計算を何本も並べて走らせていた（マルチスレッド）ため。1 スレッドにすると 5 回とも同じ割れ方になった。ただし Bullet の計算は約 3 倍遅くなる</h4>
+            <p>Bullet の割れ方の揺れはマルチスレッドのため。1スレッドなら毎回同じ</p>
+            <span class="thumb-tags"><span>シミュレーション</span><span>RBD</span><span>ガラス</span><span>点検</span></span>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -6907,8 +6916,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/experiment-data-7058af690c.js"></script>
-<script src="data/glossary-data-2358b53b82.js"></script>
+<script src="data/experiment-data-bb1a7e274b.js"></script>
+<script src="data/glossary-data-d70a8ea28d.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -7087,10 +7096,10 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>245</dd></div>
+        <div><dt>実験</dt><dd>246</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
-        <div><dt>用語</dt><dd>471</dd></div>
+        <div><dt>用語</dt><dd>472</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -7167,7 +7176,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
       <div class="menu-doors">
         <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>393件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>471語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>472語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -7270,7 +7279,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-a6fcae1e3b.js"></script>
+<script src="data/search-data-b4e3edcb47.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

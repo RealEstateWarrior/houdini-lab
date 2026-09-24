@@ -1637,6 +1637,12 @@ DONE = [
      "shots": ["245_grid.png", "245_graph.png"],
      "title": "地形を削る heightfield_erode は、升を細かくしても谷の細かさは変わらない（升 2 m と 1 m でほぼ同じ絵、時間もほぼ同じ）。谷の細かさを決めるのは Erosion Feature Size（既定 10 m）で、2.5 m にすると細かい谷が刻まれ、時間は 1.4 → 2.4 秒",
      "note": "地形の谷の細かさは升でなく Erosion Feature Size で決まる"},
+    {"no": "246", "anchor": "exp246",
+     "tags": ["シミュレーション", "RBD", "ガラス", "点検"],
+     "log": "log_fx", "thumb": "246_runs.png",
+     "shots": ["246_runs.png", "246_graph.png"],
+     "title": "ガラスの割れ方が回ごとに揺れたのは、計算を何本も並べて走らせていた（マルチスレッド）ため。1 スレッドにすると 5 回とも同じ割れ方になった。ただし Bullet の計算は約 3 倍遅くなる",
+     "note": "Bullet の割れ方の揺れはマルチスレッドのため。1スレッドなら毎回同じ"},
 ]
 
 PLANNED = []

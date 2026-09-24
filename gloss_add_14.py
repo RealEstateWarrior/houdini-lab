@@ -95,3 +95,8 @@ ADD["simulation"].append(
     {"term": "Dissipation（Pyro）", "reading": "ディシペーション",
      "def": "pyrosolver で、煙の濃さ（density）が時間とともに薄れて消える速さ。既定 0.1。出る量と釣り合うと、煙の量は Dissipation にほぼ反比例した（倍にすると半分）。"
             "火元が density を出していない（Source Burn だけの）焚き火では、変えても何も変わらなかった（実験244）。"})
+
+ADD["houdini"].append(
+    {"term": "HOUDINI_MAXTHREADS", "reading": "フーディーニマックススレッズ",
+     "def": "Houdini が計算に使うスレッド（並べて走らせる計算の本数）の上限を決める環境変数。1 にすると、Bullet で割るガラスが 5 回とも同じ割れ方になった"
+            "（ふつうは、割れるか割れないかの境目の強さで回ごとに揺れた）。ただし計算は約 3 倍遅くなる（実験246）。"})

@@ -77,7 +77,8 @@ def main():
     solver.parm("useground").set(1)
     solver.parm("startframe").set(1)
     rows = []
-    for name, cracks, noise, strength in CASES:
+    only = os.environ.get("ONLY")          # 実験246 から、条件を 1 つだけ回すのに使う
+    for name, cracks, noise, strength in [c for c in CASES if not only or c[0] == only]:
         glue.parm("snippet").set(f"f@strength = {strength};")
         frac.parm("glass_radialcracknum").set(cracks)
         frac.parm("glass_enableedgenoise").set(noise)
@@ -100,10 +101,12 @@ def main():
                 "fracture_sec": round(frac_sec, 2), "sim_sec": round(sim_sec, 2), "moved": moved}
         rows.append(info)
         print(info, flush=True)
-        if name in ("r8", "r20", "r80", "r80_smooth", "r80_g06", "r80_g05", "r80_g04", "r80_g01"):
+        if not only and name in ("r8", "r20", "r80", "r80_smooth", "r80_g06", "r80_g05", "r80_g04", "r80_g01"):
             hou_tools.render_preview(solver.path(), os.path.join(OUT, f"226_{name}.png"), res=(480, 480), direction=(0.35, 0.2, 1.0),
                                      shading="smoothwire", frame_bbox=hou.BoundingBox(-0.6, 0, -0.3, 0.6, 1.5, 0.3))
         solver.parm("resimulate").pressButton() if solver.parm("resimulate") else None
+    if only:
+        return
     frac.parm("glass_radialcracknum").set(20)
     frac.parm("glass_enableedgenoise").set(1)
     geo.layoutChildren()
