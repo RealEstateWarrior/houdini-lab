@@ -10924,6 +10924,76 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 241 ===================== -->
+    <article class="entry entry--current" id="exp241">
+      <div class="badge">241</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Karma のノイズ除去は、4 サンプルでも 32 サンプル（なし）と同じくらい基準に近い（ドーナツ 差 1.88 と 1.75）。時間は 1/5。OptiX と OIDN はほぼ同じで、OptiX がわずかに近い</h2>
+        <p class="path">examples/241_karma_denoiser.py &nbsp;·&nbsp; 4サンプル＋ノイズ除去で32サンプル並み。OptiX と OIDN はほぼ同じ</p>
+
+        <div class="prose">
+          <p><strong>課題: 試し撮りや映像は、<button class="term" data-term="サンプル">サンプル</button>を減らして<button class="term" data-term="ノイズ">ノイズ</button>除去で仕上げたい。<button class="term" data-term="Karma">Karma</button> の Denoiser には Intel OIDN と NVIDIA OptiX がある。どちらが速く、どちらが本物（たくさんサンプルを取った画）に近いか。何サンプルまで減らしてよいか。</strong></p>
+          <p>実践 2 本（ドーナツ＝細かいスプリンクル、雪だるま＝SSS のなめらかな雪）を 640×360 で、4・8・16・32 サンプル × ノイズ除去なし・OIDN・OptiX で撮った。基準は 512 サンプル・ノイズ除去なし。差は画素ごとの差の平均（0〜255、右下の透かしは除く）。はじめにそれぞれ 1 枚撮って捨てた。</p>
+          <p><strong>4 サンプル＋ノイズ除去で、32 サンプル（なし）と同じくらい。</strong>ドーナツは 4 サンプルで、なし 3.21・OIDN 1.95・OptiX 1.88、32 サンプルなしで 1.75。雪だるまは 4 サンプルで、なし 3.33・OIDN 1.19・OptiX 1.14、32 サンプルなしで 1.38（なめらかな面ほど、ノイズ除去がよく効く）。時間は 4 サンプル 6.5 秒、32 サンプル 32.9 秒（ドーナツ）。画でも、4 サンプル＋ノイズ除去のスプリンクルは形が崩れていなかった。</p>
+          <p><strong>OptiX と OIDN はほぼ同じ。</strong>どのサンプル数でも OptiX がわずかに基準に近く（ドーナツ 16 サンプルで 1.46 と 1.51）、ノイズ除去にかかる時間は、どちらも撮る時間に 1 秒も足さなかった。</p>
+          <p><strong>サンプルを増やしても、ノイズ除去した画はあまり良くならない。</strong>ドーナツ・OptiX で 4・8・16・32 サンプルの差は 1.88・1.63・1.46・1.38。</p>
+          <p><strong>決め方: 試し撮りと映像は 4〜8 サンプル＋OptiX（NVIDIA の GPU が無ければ OIDN）。</strong>仕上げの静止画は 16〜32 サンプル＋ノイズ除去。</p>
+        </div>
+
+        <p class="label">ノイズ除去とサンプル数（640×360）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="241_grid.png" alt="ドーナツの真ん中を切り出し。4 サンプル＋ノイズ除去でも、スプリンクルの形は崩れ" loading="lazy" decoding="async"></div>
+            <figcaption>ドーナツの真ん中を切り出し。4 サンプル＋ノイズ除去でも、スプリンクルの形は崩れない。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="241_curve.png" alt="ノイズ除去あり（OIDN・OptiX）は、少ないサンプルでも基準との差が小さい。" loading="lazy" decoding="async"></div>
+            <figcaption>ノイズ除去あり（OIDN・OptiX）は、少ないサンプルでも基準との差が小さい。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>場面</th><th>サンプル</th><th>ノイズ除去</th><th>撮る時間（秒）</th><th>基準との差（0〜255）</th></tr></thead>
+            <tbody>
+              <tr><td>ドーナツ</td><td class="num">4</td><td>ノイズ除去なし</td><td class="num">6.0</td><td class="num">3.21</td></tr>
+              <tr><td>ドーナツ</td><td class="num">4</td><td>OIDN</td><td class="num">6.2</td><td class="num">1.95</td></tr>
+              <tr><td>ドーナツ</td><td class="num">4</td><td>OptiX</td><td class="num">6.5</td><td class="num">1.88</td></tr>
+              <tr><td>ドーナツ</td><td class="num">8</td><td>ノイズ除去なし</td><td class="num">11.3</td><td class="num">2.24</td></tr>
+              <tr><td>ドーナツ</td><td class="num">8</td><td>OIDN</td><td class="num">11.8</td><td class="num">1.70</td></tr>
+              <tr><td>ドーナツ</td><td class="num">8</td><td>OptiX</td><td class="num">11.8</td><td class="num">1.63</td></tr>
+              <tr><td>ドーナツ</td><td class="num">16</td><td>ノイズ除去なし</td><td class="num">24.1</td><td class="num">1.85</td></tr>
+              <tr><td>ドーナツ</td><td class="num">16</td><td>OIDN</td><td class="num">23.9</td><td class="num">1.51</td></tr>
+              <tr><td>ドーナツ</td><td class="num">16</td><td>OptiX</td><td class="num">23.9</td><td class="num">1.46</td></tr>
+              <tr><td>ドーナツ</td><td class="num">32</td><td>ノイズ除去なし</td><td class="num">32.9</td><td class="num">1.75</td></tr>
+              <tr><td>ドーナツ</td><td class="num">32</td><td>OIDN</td><td class="num">33.4</td><td class="num">1.42</td></tr>
+              <tr><td>ドーナツ</td><td class="num">32</td><td>OptiX</td><td class="num">33.2</td><td class="num">1.38</td></tr>
+              <tr><td>雪だるま</td><td class="num">4</td><td>ノイズ除去なし</td><td class="num">5.1</td><td class="num">3.33</td></tr>
+              <tr><td>雪だるま</td><td class="num">4</td><td>OIDN</td><td class="num">5.4</td><td class="num">1.19</td></tr>
+              <tr><td>雪だるま</td><td class="num">4</td><td>OptiX</td><td class="num">5.5</td><td class="num">1.14</td></tr>
+              <tr><td>雪だるま</td><td class="num">8</td><td>ノイズ除去なし</td><td class="num">11.8</td><td class="num">1.86</td></tr>
+              <tr><td>雪だるま</td><td class="num">8</td><td>OIDN</td><td class="num">12.1</td><td class="num">1.15</td></tr>
+              <tr><td>雪だるま</td><td class="num">8</td><td>OptiX</td><td class="num">12.3</td><td class="num">1.11</td></tr>
+              <tr><td>雪だるま</td><td class="num">16</td><td>ノイズ除去なし</td><td class="num">26.4</td><td class="num">1.43</td></tr>
+              <tr><td>雪だるま</td><td class="num">16</td><td>OIDN</td><td class="num">26.8</td><td class="num">1.13</td></tr>
+              <tr><td>雪だるま</td><td class="num">16</td><td>OptiX</td><td class="num">26.7</td><td class="num">1.09</td></tr>
+              <tr><td>雪だるま</td><td class="num">32</td><td>ノイズ除去なし</td><td class="num">37.4</td><td class="num">1.38</td></tr>
+              <tr><td>雪だるま</td><td class="num">32</td><td>OIDN</td><td class="num">37.5</td><td class="num">1.12</td></tr>
+              <tr><td>雪だるま</td><td class="num">32</td><td>OptiX</td><td class="num">37.9</td><td class="num">1.08</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>4 サンプル＋ノイズ除去で、32 サンプル（なし）と同じくらい基準に近い。</strong>時間は約 1/5。</li>
+          <li><strong>OptiX と OIDN はほぼ同じ。OptiX がわずかに近い。</strong>ノイズ除去の時間は 1 秒未満。</li>
+          <li><strong>なめらかな面（雪）ほど、ノイズ除去がよく効く。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

@@ -12592,73 +12592,77 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
           <dt>ファイアフライ / Firefly<span class="gloss-meta">ファイアフライ</span></dt>
           <dd>レンダーした画に、ぽつぽつと出る白く明るい点。とても明るい光（太陽の映り込みなど）を、少ないサンプルでたまたま拾った画素が光る。Color Limit で明るさを切り詰めるか、サンプルを増やすか、ノイズ除去で抑える（実験238）。</dd>
         </div>
+        <div class="gloss-item" id="gloss-418">
+          <dt>ノイズ除去 / Denoiser（OIDN・OptiX）<span class="gloss-meta">ノイズじょきょ</span></dt>
+          <dd>少ないサンプルで撮ったざらざらの画を、なめらかに整える仕上げ。Karma の Denoiser で Intel OIDN か NVIDIA OptiX を選ぶ。ドーナツ・雪だるまでは、4 サンプル＋ノイズ除去で 32 サンプル（なし）と同じくらい 512 サンプルの画に近く、OptiX がわずかに近かった。かかる時間は 1 秒未満（実験241）。</dd>
+        </div>
       </dl>
     </section>
     <section class="gloss-cat" id="usd">
       <h3>USD と Solaris</h3>
       <p class="gloss-note">Solaris（LOP）で出てくる、USD の舞台の言葉。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-418">
+        <div class="gloss-item" id="gloss-419">
           <dt>USD ステージ / Stage<span class="gloss-meta">ユーエスディーステージ</span></dt>
           <dd>USD の舞台全体。いくつものレイヤーを重ねた結果として見えている、1つのシーン。Solaris の箱は、このステージを少しずつ書き換えていく。<span class="gloss-rel">関連: USD, レイヤー（USD）</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-419">
+        <div class="gloss-item" id="gloss-420">
           <dt>プリム / Prim<span class="gloss-meta">プリム</span></dt>
           <dd>USD のステージに置かれる1つ1つの要素。形・光・カメラ・材質・入れ物（Xform）など。/world/geo/box のようなパスで場所を表す。SOP のプリミティブとは別物。</dd>
         </div>
-        <div class="gloss-item" id="gloss-420">
+        <div class="gloss-item" id="gloss-421">
           <dt>レイヤー（USD） / Layer<span class="gloss-meta">レイヤー</span></dt>
           <dd>USD の編集を書き込んだ1枚の紙。何枚も重ねて1つのステージになる。上の紙の書き込みが、下の紙より強い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-421">
+        <div class="gloss-item" id="gloss-422">
           <dt>オピニオン / Opinion<span class="gloss-meta">オピニオン</span></dt>
           <dd>あるレイヤーが、ある属性に対して書いた値。同じ属性に複数のオピニオンがあると、強い方が勝つ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-422">
+        <div class="gloss-item" id="gloss-423">
           <dt>コンポジション / Composition<span class="gloss-meta">コンポジション</span></dt>
           <dd>レイヤー・参照・バリアントなどを組み合わせて、最終的なステージを作る仕組み。強さの順番（LIVRPS）が決まっている。</dd>
         </div>
-        <div class="gloss-item" id="gloss-423">
+        <div class="gloss-item" id="gloss-424">
           <dt>LIVRPS<span class="gloss-meta">リブアールピーエス</span></dt>
           <dd>USD で、どの書き込みが勝つかの強さの順番。Local・Inherits・VariantSets・References・Payloads・Specializes の頭文字。左ほど強い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-424">
+        <div class="gloss-item" id="gloss-425">
           <dt>参照（USD） / Reference<span class="gloss-meta">さんしょう</span></dt>
           <dd>別の USD ファイルの中身を、コピーせずに指し示して読み込むこと。元のファイルを直すと、参照している所すべてに反映される。</dd>
         </div>
-        <div class="gloss-item" id="gloss-425">
+        <div class="gloss-item" id="gloss-426">
           <dt>ペイロード / Payload<span class="gloss-meta">ペイロード</span></dt>
           <dd>あとから読み込むことにできる参照。重い部品を、必要になるまで読み込まずに置いておける。</dd>
         </div>
-        <div class="gloss-item" id="gloss-426">
+        <div class="gloss-item" id="gloss-427">
           <dt>バリアント / Variant<span class="gloss-meta">バリアント</span></dt>
           <dd>1つの物の中に持たせた、切り替えられる別案。色違い・形違い・細かさ違いなどを1つにまとめる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-427">
+        <div class="gloss-item" id="gloss-428">
           <dt>Kind<span class="gloss-meta">カインド</span></dt>
           <dd>プリムの役割の札。component（部品）・assembly（組み立て）・group などがあり、選択や整理の単位になる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-428">
+        <div class="gloss-item" id="gloss-429">
           <dt>Purpose<span class="gloss-meta">パーパス</span></dt>
           <dd>プリムの用途の札。render（本番の描画）・proxy（軽い代わり）・guide（目印）など。ビューポートとレンダーで出し分けられる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-429">
+        <div class="gloss-item" id="gloss-430">
           <dt>インスタンサブル / Instanceable<span class="gloss-meta">インスタンサブル</span></dt>
           <dd>同じ参照を持つプリムの中身を共有させる印。大量に置いても、メモリが増えにくい。</dd>
         </div>
-        <div class="gloss-item" id="gloss-430">
+        <div class="gloss-item" id="gloss-431">
           <dt>Hydra<span class="gloss-meta">ハイドラ</span></dt>
           <dd>USD のステージを描くための共通の仕組み。ビューポートや Karma は、Hydra を通してステージを描く。</dd>
         </div>
-        <div class="gloss-item" id="gloss-431">
+        <div class="gloss-item" id="gloss-432">
           <dt>Render Settings / Product / Var<span class="gloss-meta">レンダーセッティング</span></dt>
           <dd>USD でレンダリングの設定を表す3つのプリム。Settings が全体（カメラ・解像度）、Product が書き出す画像1枚、Var がその中の AOV 1つ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-432">
+        <div class="gloss-item" id="gloss-433">
           <dt>Cryptomatte<span class="gloss-meta">クリプトマット</span></dt>
           <dd>物や材質ごとに色分けされた ID の画像。合成のときに、あとから好きな物だけを切り抜ける。</dd>
         </div>
-        <div class="gloss-item" id="gloss-433">
+        <div class="gloss-item" id="gloss-434">
           <dt>ポイントインスタンサー / Point Instancer<span class="gloss-meta">ポイントインスタンサー</span></dt>
           <dd>同じ形を、位置・向きの表だけで大量に並べる USD のプリム。箱 1 万個で 0.32 MB と、1 個ずつプリムにするより何倍も小さかった（実験189・190）。</dd>
         </div>
@@ -12668,35 +12672,35 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <h3>ファイルの受け渡し</h3>
       <p class="gloss-note">外へ出す、外から入れるときの形式の言葉。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-434">
+        <div class="gloss-item" id="gloss-435">
           <dt>Alembic<span class="gloss-meta">アレンビック</span></dt>
           <dd>形と動きを他のソフトへ渡すための形式。焼き付いた結果を運ぶので軽いが、材質や仕掛けは持っていかない。実験058で書き出しを比べた。<span class="gloss-rel">関連: USD, FBX</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-435">
+        <div class="gloss-item" id="gloss-436">
           <dt>USD<span class="gloss-meta">ユーエスディー · Universal Scene Description</span></dt>
           <dd>シーン全体を層に分けて記述する形式。あとから上書きの層を重ねられるのが特徴。Houdini では /stage で扱う。<span class="gloss-rel">関連: Solaris</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-436">
+        <div class="gloss-item" id="gloss-437">
           <dt>FBX<span class="gloss-meta">エフビーエックス</span></dt>
           <dd>形・骨・動きをまとめて運べる形式。ゲームエンジンへ渡すときによく使う。<span class="gloss-rel">関連: Alembic</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-437">
+        <div class="gloss-item" id="gloss-438">
           <dt>OBJ<span class="gloss-meta">オービージェー</span></dt>
           <dd>点と面と UV だけを持つ、古くて単純な形式。アニメーションは持てない。素の形をやり取りするには確実。<span class="gloss-rel">関連: bgeo</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-438">
+        <div class="gloss-item" id="gloss-439">
           <dt>連番 / Sequence<span class="gloss-meta">れんばん</span></dt>
           <dd>1フレームごとに別のファイルとして書き出す並び。name.0001.bgeo のように番号が入る。$F4 で桁を揃える。<span class="gloss-rel">関連: $F</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-439">
+        <div class="gloss-item" id="gloss-440">
           <dt>パディング / Padding<span class="gloss-meta">パディング</span></dt>
           <dd>番号の桁を0で埋めて揃えること。1 を 0001 と書くと、並べ替えたときに順番が崩れない。<span class="gloss-rel">関連: 連番</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-440">
+        <div class="gloss-item" id="gloss-441">
           <dt>16 bit 浮動小数 / Half Float<span class="gloss-meta">じゅうろくビットふどうしょうすう</span></dt>
           <dd>ふつう（32 bit）の半分の大きさで小数を持つ形。桁が少ないぶん値が少しずれる。焚き火の Pyro を VDB・16 bit で書くと、ファイルは 32 bit の 55% になり、値のずれは最大 0.00025（値の最大 1 に対して）だった（実験204）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-441">
+        <div class="gloss-item" id="gloss-442">
           <dt>速度のボリューム / vel<span class="gloss-meta">ベル</span></dt>
           <dd>Pyro や FLIP が、升ごとの空気や水の速さを持つボリューム。vel.x・vel.y・vel.z の 3 つに分かれて出てくる。描画では主にモーションブラーに使う。煙の無い所でも 0 でないので、焚き火のキャッシュでは容量の 9 割以上を占めた（実験204）。</dd>
         </div>
@@ -12706,107 +12710,107 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <h3>Houdini そのものに関する語</h3>
       <p class="gloss-note">ファイル形式やツール名など、操作の周辺で出てくる語。</p>
       <dl class="gloss-list">
-        <div class="gloss-item" id="gloss-442">
+        <div class="gloss-item" id="gloss-443">
           <dt>パラメータ / Parameter<span class="gloss-meta">パラメータ</span></dt>
           <dd>ノードの設定値。高さ、回数、サイズなど。parm と略される。Houdiniではこの値に数式を入れて他のノードと連動させられる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-443">
+        <div class="gloss-item" id="gloss-444">
           <dt>クック / Cook<span class="gloss-meta">クック</span></dt>
           <dd>ノードが実際に計算を行うこと。パラメータや入力が変わると、そのノードと下流が再クックされる。重いノードを触ると待たされるのはこれが走っているため。</dd>
         </div>
-        <div class="gloss-item" id="gloss-444">
+        <div class="gloss-item" id="gloss-445">
           <dt>表示フラグ / Display flag<span class="gloss-meta">ディスプレイ・フラグ</span></dt>
           <dd>どのノードの結果を画面に表示するかの指定。ノードの端に付く点で示される。「途中のノードを見る」ができるのはこの仕組みのおかげ。</dd>
         </div>
-        <div class="gloss-item" id="gloss-445">
+        <div class="gloss-item" id="gloss-446">
           <dt>バイパス / Bypass<span class="gloss-meta">バイパス</span></dt>
           <dd>ノードを一時的に無効にして、入力をそのまま下流に流すこと。そのノードの効果を消して比較したいときに使う。</dd>
         </div>
-        <div class="gloss-item" id="gloss-446">
+        <div class="gloss-item" id="gloss-447">
           <dt>HDA<span class="gloss-meta">エイチディーエー · Houdini Digital Asset</span></dt>
           <dd>作ったネットワークを1つのノードとしてまとめ、部品として再利用できるようにしたもの。中身を隠して必要なパラメータだけ外に出せる。</dd>
         </div>
-        <div class="gloss-item" id="gloss-447">
+        <div class="gloss-item" id="gloss-448">
           <dt>.hip / .hipnc<span class="gloss-meta">ヒップ / ヒップエヌシー</span></dt>
           <dd>Houdiniのシーンファイル。.hip が通常版で、.hipnc は非商用（Apprentice）版が保存する形式。.hipnc は商用版で開けない。</dd>
         </div>
-        <div class="gloss-item" id="gloss-448">
+        <div class="gloss-item" id="gloss-449">
           <dt>hython<span class="gloss-meta">ハイソン</span></dt>
           <dd>Houdiniの機能を使えるPython。GUIを開かずにノードを組んだりレンダリングしたりできるため、自動化の中心になる。<span class="gloss-rel">関連: HOM</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-449">
+        <div class="gloss-item" id="gloss-450">
           <dt>HOM<span class="gloss-meta">ホム · Houdini Object Model</span></dt>
           <dd>PythonからHoudiniを操作するためのAPI。`hou` という名前のモジュールとして提供される。<span class="gloss-rel">関連: hython</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-450">
+        <div class="gloss-item" id="gloss-451">
           <dt>Apprentice<span class="gloss-meta">アプレンティス</span></dt>
           <dd>無料で使える非商用ライセンス。出力にウォーターマークが入り、解像度は1920x1080まで、保存は .hipnc のみという制限がある。学習用途としては十分。</dd>
         </div>
-        <div class="gloss-item" id="gloss-451">
+        <div class="gloss-item" id="gloss-452">
           <dt>ハッシュ / Hash<span class="gloss-meta">ハッシュ</span></dt>
           <dd>どんな長さのデータからでも、決まった長さの短い文字列を作る計算。元が1文字でも違えば結果は別物になる。実験027では、上流のネットワークからSHA-1 のハッシュを取り、キャッシュが古くなっていないかの判定に使った。</dd>
         </div>
-        <div class="gloss-item" id="gloss-452">
+        <div class="gloss-item" id="gloss-453">
           <dt>.hipnc<span class="gloss-meta">ヒップエヌシー</span></dt>
           <dd>Apprentice 版で保存したシーンのファイル。商用版の .hip とは別の拡張子で、商用版では開けない決まりになっている。<span class="gloss-rel">関連: Apprentice</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-453">
+        <div class="gloss-item" id="gloss-454">
           <dt>bgeo<span class="gloss-meta">ビージオ</span></dt>
           <dd>Houdini が形を保存する独自の形式。アトリビュートもグループもそのまま残る。.bgeo.sc は圧縮されたもの。<span class="gloss-rel">関連: ディスクキャッシュ</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-454">
+        <div class="gloss-item" id="gloss-455">
           <dt>$HIP<span class="gloss-meta">ドルヒップ</span></dt>
           <dd>いま開いているシーンのファイルがある場所を指す。ファイルの場所をこれで書くと、フォルダごと移しても壊れない。<span class="gloss-rel">関連: 式</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-455">
+        <div class="gloss-item" id="gloss-456">
           <dt>$F<span class="gloss-meta">ドルエフ</span></dt>
           <dd>いまのフレーム番号。$F4 と書くと 0001 のように4桁に揃う。連番のファイル名に使う。<span class="gloss-rel">関連: 式, 連番</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-456">
+        <div class="gloss-item" id="gloss-457">
           <dt>Solaris<span class="gloss-meta">ソラリス</span></dt>
           <dd>USD でシーンを組み立てるための仕組み。/stage の中で動く。ライトや材質の割り当てをここでまとめる。<span class="gloss-rel">関連: /stage, USD</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-457">
+        <div class="gloss-item" id="gloss-458">
           <dt>Karma XPU<span class="gloss-meta">カルマエックスピーユー</span></dt>
           <dd>Karma のうち、GPU も使って速く描く方式。使える機能に制限があるため、CPU 版と結果が違うことがある。<span class="gloss-rel">関連: Karma</span></dd>
         </div>
-        <div class="gloss-item" id="gloss-458">
+        <div class="gloss-item" id="gloss-459">
           <dt>MPM<span class="gloss-meta">エムピーエム · Material Point Method</span></dt>
           <dd>粒と升目を行き来させて、砂・雪・泥のような材質を解くやり方。固体と液体の中間のものを扱える。実験061〜076で測った。</dd>
         </div>
-        <div class="gloss-item" id="gloss-459">
+        <div class="gloss-item" id="gloss-460">
           <dt>つまみの式 / Parameter Expression<span class="gloss-meta">つまみのしき</span></dt>
           <dd>つまみに値ではなく式（$F や ch() や @N など）が入っている状態。SOP では488個のつまみに最初から式が入っていた（実験134）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-460">
+        <div class="gloss-item" id="gloss-461">
           <dt>deleteAllKeyframes()<span class="gloss-meta">デリートオールキーフレームズ</span></dt>
           <dd>Python でつまみの式やキーを全部消す命令。式が入ったつまみは、これで消してから set しないと値が変わらない（実験133・134）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-461">
+        <div class="gloss-item" id="gloss-462">
           <dt>$FSTART / $FEND<span class="gloss-meta">エフスタート</span></dt>
           <dd>シーンの最初と最後のフレーム番号。キャッシュや読み込みの範囲に、最初から式として入っていることが多い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-462">
+        <div class="gloss-item" id="gloss-463">
           <dt>intrinsic（内在属性）<span class="gloss-meta">イントリンシック</span></dt>
           <dd>形が最初から持っている読み取り用の値（pointcount・primitivecount など）。点を1つずつ数えるより速い。</dd>
         </div>
-        <div class="gloss-item" id="gloss-463">
+        <div class="gloss-item" id="gloss-464">
           <dt>振り返り点検（Audit）<span class="gloss-meta">ふりかえりてんけん</span></dt>
           <dd>このサイトで30件ごとに行う見直し。台本を全部流し直し、記録の数字と1つずつ比べる。150 では 122〜149 の28本がすべて一致した。</dd>
         </div>
-        <div class="gloss-item" id="gloss-464">
+        <div class="gloss-item" id="gloss-465">
           <dt>埋め込み HDA / Embedded<span class="gloss-meta">うめこみエイチディーエー</span></dt>
           <dd>HDA（自作ノード）の定義を、別の .hda ファイルではなく hip の中にしまうこと。hip 1つを渡すだけで相手も使える。台本では createDigitalAsset(save_as_embedded=True)（実践「レンガ塀を HDA にする」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-465">
+        <div class="gloss-item" id="gloss-466">
           <dt>PDG / TOPs<span class="gloss-meta">ピーディージー / トップス</span></dt>
           <dd>「番号や値を変えながら、同じ処理を何回も回し、結果をファイルに書き出す」仕組み。topnet の中に TOP ノード（wedge・ropgeometry など）を並べて組む。5つの石を1回の実行で書き出した（実践「PDG で形違いを一度に書き出す」）。</dd>
         </div>
-        <div class="gloss-item" id="gloss-466">
+        <div class="gloss-item" id="gloss-467">
           <dt>@wedgeindex<span class="gloss-meta">アットウェッジインデックス</span></dt>
           <dd>wedge が作った作業ごとに付く番号（0, 1, 2, …）。SOP のつまみの式やファイル名に `@wedgeindex` と書くと、作業ごとに違う値になる。PDG の外で見ると 0。</dd>
         </div>
-        <div class="gloss-item" id="gloss-467">
+        <div class="gloss-item" id="gloss-468">
           <dt>revertToDefaults()<span class="gloss-meta">リバートトゥデフォルツ</span></dt>
           <dd>Python（hou）で、つまみを既定値に戻す関数。戻る先は「つまみの既定値」で、ノードを作った直後の値とは限らない。pyrosolver の Use Control Field は、作った直後は「入り」なのに、revertToDefaults では「切り」に戻った（実験220）。作った直後の値に戻したいときは、その値を直接 set する。</dd>
         </div>
@@ -13013,7 +13017,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
 </div>
 
 <script src="data/experiment-data-bf21a9e8fb.js"></script>
-<script src="data/glossary-data-d837146123.js"></script>
+<script src="data/glossary-data-e3903249ad.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -13192,10 +13196,10 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>240</dd></div>
+        <div><dt>実験</dt><dd>241</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
-        <div><dt>用語</dt><dd>468</dd></div>
+        <div><dt>用語</dt><dd>469</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -13272,7 +13276,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       </div>
       <div class="menu-doors">
         <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>393件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>468語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>469語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -13375,7 +13379,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
 </div>
 
-<script src="data/search-data-a10dfb0c0b.js"></script>
+<script src="data/search-data-9bd6b10aeb.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */
