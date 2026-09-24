@@ -5992,16 +5992,17 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <div class="badge">219</div>
       <div class="body">
         <span class="chip chip--fx">エフェクト</span>
-        <h2>海の板の点を半分にすると、撮る時間は 17% 減り、きらめきの粒も 15% 減る。1/4 で時間 41% 減・粒 27% 減。1/16 でも時間は 52% までしか減らない</h2>
-        <p class="path">examples/219_ocean_grid_density.py &nbsp;·&nbsp; 海の板の点を半分にすると時間17%減、粒15%減</p>
+        <h2>海の板の点を半分にすると、撮る時間は 12% 減り、きらめきの粒も 15% 減る。1/4 で時間 23% 減・粒 27% 減。1/16 でも時間は 64% までしか減らない</h2>
+        <p class="path">examples/219_ocean_grid_density.py &nbsp;·&nbsp; 海の板の点を半分にすると時間12%減、粒15%減</p>
 
         <div class="prose">
           <p><strong>課題: 実践「冬の朝の七里ヶ浜」の映像は 1 枚 11.8 秒かかった。海の板（grid 1400 × 1600、224 万点）の点を減らすと、撮る時間と見た目はどう変わるか。どこまで減らしてよいか。</strong></p>
           <p>板の Rows・Columns を 1400×1600・990×1131（1/2 の点）・700×800（1/4）・350×400（1/16）にし、フレーム 30 を映像と同じ 960×540・16 <button class="term" data-term="サンプル">サンプル</button>で撮った。1 通りずつ、ほかの処理は回さずに測った。画の差は、1400×1600 の画との画素ごとの差の平均（0〜255）。あわせて、水面のきらめきの粒（R・G・B すべて 240 超の画素）の数と、手前の泡の網目のくっきり具合（となりの画素との明るさの差の平均）を数えた。</p>
-          <p><strong>撮る時間は、点に比例しては減らない。</strong>224 万・112 万・56 万・14 万点で 14.5・12.0・8.5・7.6 秒。点を 1/16 にしても、時間は 52% までしか減らなかった。残りは、空・砂浜・光の計算にかかる分。板から泡までを作る時間は 0.95・0.21・0.12・0.07 秒で、撮る時間に比べて小さい。</p>
+          <p><strong>撮る時間は、点に比例しては減らない。</strong>224 万・112 万・56 万・14 万点で 9.2・8.1・7.1・5.9 秒。点を 1/16 にしても、時間は 64% までしか減らなかった。残りは、空・砂浜・光の計算にかかる分。板から泡までを作る時間は 0.15・0.11・0.07・0.04 秒で、撮る時間に比べて小さい。</p>
           <p><strong>半分では、きらめきの粒が 15% 減る。</strong>1/2 の粒は 1713 個（元は 2006 個）、泡の網目のくっきり具合は 14.79（元は 15.80）。画を並べると、違いは光の道の粒の数くらいで、小さい。</p>
           <p><strong>1/4 からは、きらめきと泡の細かさが落ちる。</strong>粒は 1/4 で 1472 個、1/16 で 1097 個。網目のくっきり具合は 13.65・10.50。画では、光の道の粒がまばらになり、泡の網目がぼやけた。元の画との差は、沖（水平線から約 30 m まで）で 6.1・9.7・16.3、手前で 1.3・2.1・4.3。点が粗くなると、さざ波（1.3 m）の細かい傾きが面に乗らなくなる。空は差 0。</p>
-          <p><strong>決め方: 仕上げは 1400×1600 のまま。動きの確かめは 990×1131 か 700×800 で撮る。</strong>990×1131 なら 1 枚 2.5 秒、120 枚で約 5 分の節約。点を減らしても時間は半分より下がらないので、もっと速くしたいときは、解像度やサンプル数を下げる方が効く。</p>
+          <p><strong>決め方: 仕上げは 1400×1600 のまま。動きの確かめは 990×1131 か 700×800 で撮る。</strong>990×1131 なら 1 枚 1.1 秒、120 枚で約 2 分の節約。サンプル数や解像度を下げても、1 枚の時間は大きくは減らなかった（<a href="#exp221">実験221</a>）。</p>
+          <p><strong>訂正（2026-09-24）: はじめは、1 枚目に <button class="term" data-term="Karma">Karma</button> の立ち上がりの時間が入ったまま測っていた。</strong>そのときは 1400×1600 が 14.5 秒と長く出て、点を半分にすると 17%・1/4 で 41% 速いと書いた。はじめに小さく 1 枚撮って捨ててから測り直したのが、上の値。画は測り直す前とまったく同じだった。</p>
         </div>
 
         <p class="label">板の点の数を変えた画（フレーム 30、光の道と泡のあたりを切り出し）</p>
@@ -6015,18 +6016,18 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
           <table>
             <thead><tr><th>板（Rows × Columns）</th><th>作る時間（秒）</th><th>撮る時間（秒）</th><th>きらめきの粒</th><th>網目のくっきり具合</th><th>差: 沖</th><th>差: 手前</th></tr></thead>
             <tbody>
-              <tr><td>1400×1600（224 万点）</td><td class="num">0.95</td><td class="num">14.5</td><td class="num">2006</td><td class="num">15.80</td><td class="num">0.0</td><td class="num">0.0</td></tr>
-              <tr><td>990×1131（112 万点）</td><td class="num">0.21</td><td class="num">12.0</td><td class="num">1713</td><td class="num">14.79</td><td class="num">6.1</td><td class="num">1.3</td></tr>
-              <tr><td>700×800（56 万点）</td><td class="num">0.12</td><td class="num">8.5</td><td class="num">1472</td><td class="num">13.65</td><td class="num">9.7</td><td class="num">2.1</td></tr>
-              <tr><td>350×400（14 万点）</td><td class="num">0.07</td><td class="num">7.6</td><td class="num">1097</td><td class="num">10.50</td><td class="num">16.3</td><td class="num">4.3</td></tr>
+              <tr><td>1400×1600（224 万点）</td><td class="num">0.15</td><td class="num">9.2</td><td class="num">2006</td><td class="num">15.80</td><td class="num">0.0</td><td class="num">0.0</td></tr>
+              <tr><td>990×1131（112 万点）</td><td class="num">0.11</td><td class="num">8.1</td><td class="num">1713</td><td class="num">14.79</td><td class="num">6.1</td><td class="num">1.3</td></tr>
+              <tr><td>700×800（56 万点）</td><td class="num">0.07</td><td class="num">7.1</td><td class="num">1472</td><td class="num">13.65</td><td class="num">9.7</td><td class="num">2.1</td></tr>
+              <tr><td>350×400（14 万点）</td><td class="num">0.04</td><td class="num">5.9</td><td class="num">1097</td><td class="num">10.50</td><td class="num">16.3</td><td class="num">4.3</td></tr>
             </tbody>
           </table>
         </div>
 
         <p class="label">わかったこと</p>
         <ul class="findings">
-          <li><strong>点を減らしても、撮る時間は点に比例して減らない。</strong>1/16 の点で 52% の時間。</li>
-          <li><strong>半分（112 万点）では、1 枚 2.5 秒速く、きらめきの粒が 15% 減る。</strong>違いは小さい。</li>
+          <li><strong>点を減らしても、撮る時間は点に比例して減らない。</strong>1/16 の点で 64% の時間。</li>
+          <li><strong>半分（112 万点）では、1 枚 1.1 秒速く、きらめきの粒が 15% 減る。</strong>違いは小さい。</li>
           <li><strong>1/4 からは、きらめきの粒と泡の網目の細かさが落ちる。</strong>粒 2006 → 1472 個。</li>
         </ul>
       </div>
@@ -6076,6 +6077,52 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
           <li><strong>切ると効く。</strong>炎の高さ 1.21 → 1.31 m。</li>
           <li><strong>pyrosolver を作った直後の Use Control Field は「入り」、revertToDefaults で戻る値は「切り」。</strong>点検で合わなかったのはこのため。</li>
           <li><strong>毎回同じに回る。</strong>2 回回して全フレーム一致。</li>
+        </ul>
+      </div>
+    </article>
+
+
+    <!-- ===================== 221 ===================== -->
+    <article class="entry entry--current" id="exp221">
+      <div class="badge">221</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>海の映像の 1 枚は、サンプル数を 16→4 にしても 8.8→7.2 秒、解像度を 640×360 にしても 8.3 秒。時間の大半は画の大きさによらない分で、下げるなら 4 サンプル＋ノイズ除去</h2>
+        <p class="path">examples/221_ocean_render_settings.py &nbsp;·&nbsp; 海の映像はサンプル数・解像度を下げても2割しか速くならない</p>
+
+        <div class="prose">
+          <p><strong>課題: 実践「冬の朝の七里ヶ浜」の映像の 1 枚を速く撮るなら、<button class="term" data-term="サンプル">サンプル</button>数・解像度・<button class="term" data-term="ノイズ">ノイズ</button>除去のどれを下げるのが効くか。</strong></p>
+          <p>フレーム 30 を、960×540 の 16・8・4 サンプル、4 サンプル＋ノイズ除去（OIDN）、640×360 の 16 サンプルで撮った（板は 1400×1600 のまま）。はじめに 1 枚撮って捨て（<button class="term" data-term="Karma">Karma</button> の立ち上がりの分）、1 通りずつ、ほかの処理は回さずに測った。画の差は、16 サンプルの画との画素ごとの差の平均（0〜255）で、640×360 の画は 960×540 に拡大して比べた。</p>
+          <p><strong>どれを下げても、時間は 2 割ほどしか減らない。</strong>16・8・4 サンプルで 8.8・7.9・7.2 秒。画素の数が半分以下の 640×360 でも 8.3 秒。1 枚の時間の大半は、画の大きさやサンプル数によらない分（224 万点の海や空を Karma に渡すなど）だった。</p>
+          <p><strong>下げるなら、4 サンプル＋ノイズ除去。</strong>7.5 秒で、水面の差は 2.80。8 サンプル（7.9 秒、差 2.92）より基準に近く、4 サンプルだけ（差 4.17）よりざらつきが少ない。640×360 は差 4.55 で、細かいきらめきが拡大でぼやけた。空はどれもほぼ同じ（差 0.12 以下）。</p>
+          <p><strong>決め方: 海の映像を早く確かめたいときは、4 サンプル＋ノイズ除去にする（1 枚で約 1.3 秒の節約）。</strong>それ以上速くするには、形の方を軽くする（<a href="#exp219">実験219</a>: 板の点を 1/16 にして 36% 減）か、1 枚ごとに Karma へ渡し直す分を減らす撮り方が要る（まだ測っていない）。</p>
+        </div>
+
+        <p class="label">設定を変えて撮った海（フレーム 30、光の道と泡のあたり）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="221_grid.png" alt="左上が基準（16 サンプル）。4 サンプルはざらつき、ノイズ除去を入れるとなめら" loading="lazy" decoding="async"></div>
+            <figcaption>左上が基準（16 サンプル）。4 サンプルはざらつき、ノイズ除去を入れるとなめらかになる。640×360 は拡大でぼやける。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>設定</th><th>撮る時間（秒）</th><th>短くなった割合</th><th>差: 水面</th><th>差: 空</th></tr></thead>
+            <tbody>
+              <tr><td>960×540・16 サンプル（基準）</td><td class="num">8.8</td><td>0%</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+              <tr><td>960×540・8 サンプル</td><td class="num">7.9</td><td>10%</td><td class="num">2.92</td><td class="num">0.06</td></tr>
+              <tr><td>960×540・4 サンプル</td><td class="num">7.2</td><td>18%</td><td class="num">4.17</td><td class="num">0.06</td></tr>
+              <tr><td>960×540・4 サンプル＋ノイズ除去</td><td class="num">7.5</td><td>15%</td><td class="num">2.80</td><td class="num">0.08</td></tr>
+              <tr><td>640×360・16 サンプル</td><td class="num">8.3</td><td>6%</td><td class="num">4.55</td><td class="num">0.12</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>サンプル数を 16→4 にしても、時間は 18% しか減らない。</strong></li>
+          <li><strong>解像度を 640×360 にしても 6% 減。</strong>時間の大半は画の大きさによらない分。</li>
+          <li><strong>下げるなら 4 サンプル＋ノイズ除去。</strong>8 サンプルより速く、基準に近い。</li>
         </ul>
       </div>
     </article>

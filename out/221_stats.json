@@ -1,0 +1,85 @@
+{
+  "rows": [
+    {
+      "case": "s16",
+      "res": [
+        960,
+        540
+      ],
+      "spp": 16,
+      "denoise": "off",
+      "render_sec": 8.8,
+      "diff": {
+        "sky": 0.0,
+        "sea": 0.0
+      }
+    },
+    {
+      "case": "s8",
+      "res": [
+        960,
+        540
+      ],
+      "spp": 8,
+      "denoise": "off",
+      "render_sec": 7.9,
+      "diff": {
+        "sky": 0.06,
+        "sea": 2.92
+      }
+    },
+    {
+      "case": "s4",
+      "res": [
+        960,
+        540
+      ],
+      "spp": 4,
+      "denoise": "off",
+      "render_sec": 7.2,
+      "diff": {
+        "sky": 0.06,
+        "sea": 4.17
+      }
+    },
+    {
+      "case": "s4_oidn",
+      "res": [
+        960,
+        540
+      ],
+      "spp": 4,
+      "denoise": "oidn",
+      "render_sec": 7.5,
+      "diff": {
+        "sky": 0.08,
+        "sea": 2.8
+      }
+    },
+    {
+      "case": "r640",
+      "res": [
+        640,
+        360
+      ],
+      "spp": 16,
+      "denoise": "off",
+      "render_sec": 8.3,
+      "diff": {
+        "sky": 0.12,
+        "sea": 4.55
+      }
+    }
+  ],
+  "frame": 30,
+  "zones": {
+    "sky": [
+      0,
+      216
+    ],
+    "sea": [
+      308,
+      432
+    ]
+  }
+}

@@ -43,6 +43,10 @@ def main():
     cam.parm("resy").set(RES[1])
     grid = hou.node("/obj/ocean_winter/sea")
     surf = hou.node("/obj/ocean_winter/breaking_waves")
+    # 1 枚目は Karma の立ち上がりの分だけ遅い（はじめはこれを入れずに測り、1400×1600 だけ 5 秒ほど長く出た。実験221 で気づいた）。
+    # 小さく 1 枚撮って捨ててから測る
+    karma.parm("picture").set(os.path.join(OUT, "_219_warm.png").replace("\\", "/"))
+    karma.render(frame_range=(FRAME, FRAME, 1), verbose=False)
     rows, imgs = [], {}
     for name, r, c in CASES:
         grid.parm("rows").set(r)
