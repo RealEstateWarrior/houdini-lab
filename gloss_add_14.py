@@ -55,3 +55,8 @@ ADD["render"].append(
      "def": "Karma がシャッターの開いている間に、物の位置や形を何回調べるか。オブジェクトの動きは Transform Time Samples、形の変化は Geometry Time Samples（どちらも既定 2）。"
             "2 回だと、その間をまっすぐ結ぶので、速く回る物のブレが弧ではなく直線になる。オブジェクトの回転は既定の Rotation Blur で弧になるが、"
             "SOP で回すと Geometry Time Samples を 8 にしてやっと弧になった（90° 回る場合。実験230）。"})
+
+ADD["render"].append(
+    {"term": "Diffuse Limit", "reading": "ディフューズリミット",
+     "def": "Karma が、光がざらざらした面（壁・床など）で跳ね返るのを何回まで追うか。既定 1。"
+            "窓の光だけで照らす明るい部屋では、1 だと本来の明るさの 72%、4 で 91%、8 で 98% になった。時間は 1 → 4 で 2 倍（実験234）。"})

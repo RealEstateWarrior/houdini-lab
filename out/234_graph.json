@@ -1,0 +1,274 @@
+{
+  "title": "実験234",
+  "network": "/obj/room",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "floor",
+      "type": "grid",
+      "pos": [
+        -9.037,
+        5.723
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 6.0,
+        "sizey": 5.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "ceiling",
+      "type": "grid",
+      "pos": [
+        -6.778,
+        5.271
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 6.0,
+        "sizey": 5.0,
+        "ty": 3.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "wall_back",
+      "type": "grid",
+      "pos": [
+        -4.518,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 6.0,
+        "sizey": 3.0,
+        "ty": 1.5,
+        "tz": -2.5,
+        "rx": 90.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "wall_left",
+      "type": "grid",
+      "pos": [
+        -2.259,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 5.0,
+        "sizey": 3.0,
+        "tx": -3.0,
+        "ty": 1.5,
+        "rx": 90.0,
+        "ry": 90.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "wall_right",
+      "type": "grid",
+      "pos": [
+        0.0,
+        3.916
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 5.0,
+        "sizey": 3.0,
+        "tx": 3.0,
+        "ty": 1.5,
+        "rx": 90.0,
+        "ry": 90.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "win_left",
+      "type": "grid",
+      "pos": [
+        2.259,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.2,
+        "sizey": 3.0,
+        "tx": -1.9,
+        "ty": 1.5,
+        "tz": 2.5,
+        "rx": 90.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "win_right",
+      "type": "grid",
+      "pos": [
+        4.518,
+        3.012
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 2.2,
+        "sizey": 3.0,
+        "tx": 1.9,
+        "ty": 1.5,
+        "tz": 2.5,
+        "rx": 90.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "win_below",
+      "type": "grid",
+      "pos": [
+        6.778,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.6,
+        "sizey": 0.9,
+        "ty": 0.45,
+        "tz": 2.5,
+        "rx": 90.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "win_above",
+      "type": "grid",
+      "pos": [
+        9.037,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 1.6,
+        "sizey": 0.8999999999999999,
+        "ty": 2.55,
+        "tz": 2.5,
+        "rx": 90.0,
+        "rows": 2,
+        "cols": 2
+      }
+    },
+    {
+      "name": "walls",
+      "type": "merge",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/wall"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "floor",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 0
+    },
+    {
+      "from": "ceiling",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 1
+    },
+    {
+      "from": "wall_back",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 2
+    },
+    {
+      "from": "wall_left",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 3
+    },
+    {
+      "from": "wall_right",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 4
+    },
+    {
+      "from": "win_left",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 5
+    },
+    {
+      "from": "win_right",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 6
+    },
+    {
+      "from": "win_below",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 7
+    },
+    {
+      "from": "win_above",
+      "from_output": 0,
+      "to": "walls",
+      "to_input": 8
+    },
+    {
+      "from": "walls",
+      "from_output": 0,
+      "to": "assign",
+      "to_input": 0
+    }
+  ]
+}

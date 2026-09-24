@@ -10615,6 +10615,57 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 234 ===================== -->
+    <article class="entry entry--current" id="exp234">
+      <div class="badge">234</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>窓の光で照らす部屋は、Karma の Diffuse Limit 既定 1 では明るさが 72% しか出ない。4 で 91%、8 で 98%。時間は 1 → 4 で 2.0 倍</h2>
+        <p class="path">examples/234_karma_diffuse_limit_room.py &nbsp;·&nbsp; 窓の光の部屋は Diffuse Limit 4 以上に</p>
+
+        <div class="prose">
+          <p><strong>課題: 室内を窓の光だけで照らすと、部屋が暗く写ることがある。<button class="term" data-term="Karma">Karma</button> の Diffuse Limit（光が面で跳ね返るのを何回まで追うか）は既定 1。いくつにすれば部屋の明るさが落ち着くのか。時間はどう変わるか。</strong></p>
+          <p>6 × 5 m・高さ 3 m の部屋（壁・床・天井は色 0.7 の principledshader）の一方の壁に 1.6 × 1.2 m の窓を開け、外から太陽（distant）と空（envlight）で照らした。カメラは部屋の中から奥を見る。Diffuse Limit を 0・1・2・4・8・16 にして、640×360・32 <button class="term" data-term="サンプル">サンプル</button>（<button class="term" data-term="ノイズ">ノイズ</button>除去なし）で撮った。基準は Diffuse Limit 16・256 サンプルの画（右下の透かしは除いて明るさの平均を比べた）。</p>
+          <p><strong>既定の 1 では、部屋が暗い。</strong>明るさは基準に対して、Diffuse Limit 0・1・2・4・8・16 で 62・72・81・91・98・100%。壁が明るい（色 0.7）部屋では、光が何度も跳ね返って奥まで届くので、跳ね返りを数回で打ち切ると、その分だけ暗くなる。画でも、0・1 は奥の壁や天井が暗く、4 以上で部屋全体が明るくなった。</p>
+          <p><strong>時間は、跳ね返りを追うほど延びる。</strong>25・75・121・152・174・184 秒。基準（256 サンプル）は 671 秒。</p>
+          <p><strong>ざらつきは、32 サンプルでは残る。</strong>基準との差（明るさに対する割合）は 4 で 10%、8 で 6%。</p>
+          <p><strong>決め方: 窓の光で照らす室内は、Diffuse Limit を 4 以上にする（明るい壁の部屋なら 8）。</strong>既定の 1 は、外の場面や、明かりが直接当たる場面向け。</p>
+        </div>
+
+        <p class="label">Diffuse Limit と部屋の明るさ（640×360・32 サンプル）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="234_grid.png" alt="左から 0・1（既定）・4・16。1 では奥が暗い。" loading="lazy" decoding="async"></div>
+            <figcaption>左から 0・1（既定）・4・16。1 では奥が暗い。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="234_curve.png" alt="4 で 9 割、8 でほぼ落ち着く。" loading="lazy" decoding="async"></div>
+            <figcaption>4 で 9 割、8 でほぼ落ち着く。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Diffuse Limit</th><th>撮る時間（秒）</th><th>明るさ（基準に対して %）</th><th>基準との差（%）</th></tr></thead>
+            <tbody>
+              <tr><td class="num">0</td><td class="num">24.5</td><td class="num">61.6</td><td class="num">39.7</td></tr>
+              <tr><td>1（既定）</td><td class="num">75.1</td><td class="num">71.8</td><td class="num">28.6</td></tr>
+              <tr><td class="num">2</td><td class="num">120.9</td><td class="num">81.1</td><td class="num">19.4</td></tr>
+              <tr><td class="num">4</td><td class="num">152.3</td><td class="num">91.2</td><td class="num">10.2</td></tr>
+              <tr><td class="num">8</td><td class="num">174.3</td><td class="num">98.2</td><td class="num">6.0</td></tr>
+              <tr><td class="num">16</td><td class="num">183.6</td><td class="num">100.0</td><td class="num">5.8</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>窓の光の部屋は、既定の Diffuse Limit 1 では明るさが 72%。</strong></li>
+          <li><strong>4 で 91%、8 で 98%。</strong>時間は 1 → 4 で 2.0 倍。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

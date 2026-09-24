@@ -1565,6 +1565,12 @@ DONE = [
      "shots": ["233_grid.png", "233_graph.png"],
      "title": "焚き火の Pyro は、Voxel Size を 0.08 → 0.02 に細かくして升目が 28 倍になっても、撮る時間は 4.7 → 5.8 秒（25% 増）。増えるのは計算（1.3 → 5.5 秒）で、画は細かいほど炎の縁が裂ける",
      "note": "Pyro の升目を細かくしても撮る時間はあまり増えない"},
+    {"no": "234", "anchor": "exp234",
+     "tags": ["Karma", "室内", "ライト", "制作"],
+     "log": "log_pm", "thumb": "234_grid.png",
+     "shots": ["234_grid.png", "234_curve.png", "234_graph.png"],
+     "title": "窓の光で照らす部屋は、Karma の Diffuse Limit 既定 1 では明るさが 72% しか出ない。4 で 91%、8 で 98%。時間は 1 → 4 で 2.0 倍",
+     "note": "窓の光の部屋は Diffuse Limit 4 以上に"},
 ]
 
 PLANNED = []
