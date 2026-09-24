@@ -10425,6 +10425,53 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 228 ===================== -->
+    <article class="entry entry--current" id="exp228">
+      <div class="badge">228</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>粒は点のまま Karma に渡す。1000 万個でも 8 秒（640×360・8 サンプル）。小さな球をパックして並べると 3 万個で 78 秒かかり、その 8 割は場面を渡す時間</h2>
+        <p class="path">examples/228_karma_points_count.py &nbsp;·&nbsp; 粒は点のまま渡す。1000万個で8秒</p>
+
+        <div class="prose">
+          <p><strong>課題: 火花・雪・雨・砂ぼこりのような粒は、何十万〜何百万個になる。/obj の <button class="term" data-term="Karma">Karma</button> に点のまま渡すと、Karma は点を小さな球として描く（半径は pscale）。<a href="#exp222">実験222</a> では、パックした形を何万個も渡すと、場面を渡すだけで何分もかかった。粒ならどうか。</strong></p>
+          <p>4 m 四方・高さ 4 m の箱の中に、半径 5 mm の粒を乱数で散らし、640×360・8 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で撮った。はじめに小さく 1 枚撮って捨て、同じ画を 2 回続けて撮った（1 回目は場面を Karma に渡す分を含み、2 回目は変わっていない場面をそのまま使う）。はじめは <button class="term" data-term="scatter">scatter</button> で点をまいたが、scatter は 100 万個が上限で、1000 万を指定しても 100 万個だった。pointgenerate で点を作り、<button class="term" data-term="VEX">VEX</button> で散らすようにした。</p>
+          <p><strong>点のままなら、1000 万個でも数秒。</strong>1 万・10 万・100 万・1000 万個で、1 回目 2.1・2.5・5.7・8.1 秒。2 回目も 2.0・2.5・7.0・8.0 秒で、場面を渡す時間はほとんど無い。</p>
+          <p><strong>小さな球をパックして並べると、場面を渡すだけで時間がかかる。</strong>1 万・3 万個で、1 回目 13.1・77.5 秒、2 回目 6.2・15.4 秒。3 万個では 1 回目の 80% が場面を渡す分だった。映像は毎フレーム粒が動くので、毎フレームこの 1 回目の時間がかかる。</p>
+          <p><strong>決め方: 丸い粒は、点のまま（pscale で大きさ）Karma に渡す。</strong>形のある粒（葉・破片）を何万も並べるなら、Solaris の sopimport で Create Point Instancer にする（<a href="#exp222">実験222</a>）。</p>
+        </div>
+
+        <p class="label">粒の数と撮る時間（640×360・8 サンプル＋ノイズ除去）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="228_grid.png" alt="点のまま 10 万個・1000 万個と、球をパックして並べた 3 万個。" loading="lazy" decoding="async"></div>
+            <figcaption>点のまま 10 万個・1000 万個と、球をパックして並べた 3 万個。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>渡し方</th><th>粒の数</th><th>1 回目（秒）</th><th>2 回目（秒）</th></tr></thead>
+            <tbody>
+              <tr><td>点のまま</td><td class="num">10,000</td><td class="num">2.1</td><td class="num">2.0</td></tr>
+              <tr><td>点のまま</td><td class="num">100,000</td><td class="num">2.5</td><td class="num">2.5</td></tr>
+              <tr><td>点のまま</td><td class="num">1,000,000</td><td class="num">5.7</td><td class="num">7.0</td></tr>
+              <tr><td>点のまま</td><td class="num">10,000,000</td><td class="num">8.1</td><td class="num">8.0</td></tr>
+              <tr><td>球をパックして並べる</td><td class="num">10,000</td><td class="num">13.1</td><td class="num">6.2</td></tr>
+              <tr><td>球をパックして並べる</td><td class="num">30,000</td><td class="num">77.5</td><td class="num">15.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>粒は点のまま渡すと、1000 万個でも 8 秒。</strong></li>
+          <li><strong>小さな球をパックして並べると、3 万個で 78 秒。</strong>大半は場面を渡す時間で、動く映像では毎フレームかかる。</li>
+          <li><strong>scatter は 100 万個が上限。</strong>それ以上は pointgenerate で点を作る。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

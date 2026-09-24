@@ -2679,12 +2679,13 @@
        "乱数の種。変えると配置が変わる"
       ]
      ],
-     "gotcha": "既定の Relax Iterations のままだと、点の一部が板の縁の上にぴったり乗る（1,000点中52点）（実験123）。 density 属性は点を面積あたりの比で配り、Force Total Count を切ると数は Density Scale × 面積のあたりで揺れる（実験155）。",
+     "gotcha": "既定の Relax Iterations のままだと、点の一部が板の縁の上にぴったり乗る（1,000点中52点）（実験123）。 density 属性は点を面積あたりの比で配り、Force Total Count を切ると数は Density Scale × 面積のあたりで揺れる（実験155）。 既定の Relax Iterations のままだと、点の一部が板の縁の上にぴったり乗る（1,000点中52点）（実験123）。 density 属性は点を面積あたりの比で配り、Force Total Count を切ると数は Density Scale × 面積のあたりで揺れる（実験155）。Force Total Count に 1000 万を入れても、点は 100 万個しか出なかった（21.0.700）。それより多い点は pointgenerate で作る（実験228）。",
      "exps": [
       "008",
       "096",
       "123",
-      "155"
+      "155",
+      "228"
      ],
      "img": "008_plain.png",
      "cap": "ばらまいた点の上に複製した状態",

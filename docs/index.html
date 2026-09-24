@@ -3761,6 +3761,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </button>
           </form>
           <div class="deck" id="deck" aria-roledescription="カルーセル" aria-label="新着の実験">
+            <a class="deck-card" href="log.html#exp228"><img src="thumb_228.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験228 · モデリング編</span><span class="deck-t">粒は点のまま Karma に渡す。1000 万個でも 8 秒（640×360・8 サンプル）。小さな球をパックして並べると 3 万個で 78 秒かかり、その 8 割は場面を渡す時間</span><span class="deck-d">粒は点のまま渡す。1000万個で8秒</span></a>
             <a class="deck-card" href="log.html#exp227"><img src="thumb_227.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験227 · モデリング編</span><span class="deck-t">地形を削る heightfield_erode は、既定の 5 フレームでもう谷筋が刻まれる。20 フレームで谷の出口に土砂が広がり、100 フレームでは谷が埋まって山が低くなる（高さのばらつき 29 → 18 m）。時間はどれも 3 秒以内</span><span class="deck-d">地形の浸食は既定5フレームで谷筋、100で谷が埋まる</span></a>
             <a class="deck-card" href="log_fx.html#exp226"><img src="thumb_226.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験226 · エフェクト編</span><span class="deck-t">ガラスのひびを増やすと、同じつながりの強さでは割れにくくなる（20 本で破片の 17% が動いたのが、80 本では 5%）。80 本なら強さを 0.8 → 0.6 に下げると同じくらい割れる。計算はどれも 3 秒以内</span><span class="deck-d">ガラスのひびを増やすと割れにくくなる。80本なら強さ0.6</span></a>
             <a class="deck-card" href="log.html#exp225"><img src="thumb_225.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験225 · モデリング編</span><span class="deck-t">明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない</span><span class="deck-d">明かり1000個はライトで。光る球で照らすとざらつく</span></a>
@@ -3768,7 +3769,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <a class="deck-card" href="log_fx.html#exp223"><img src="thumb_223.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験223 · エフェクト編</span><span class="deck-t">海の白波の cusp のしきい値は、風 5 m/秒で 0.08・10 m/秒で 0.15・15 m/秒で 0.26（波の高さを本物に合わせたとき）。0.55 では風 15 m/秒でもほぼ白波が出ない</span><span class="deck-d">白波の cusp しきい値は風10m/秒で0.15。0.55ではほぼ出ない</span></a>
             <a class="deck-card" href="log.html#exp222"><img src="thumb_222.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験222 · モデリング編</span><span class="deck-t">草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒</span><span class="deck-d">草は LOP の sopimport で Create Point Instancer に。10万本13分→12秒</span></a>
             <a class="deck-card" href="log_fx.html#exp221"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験221 · エフェクト編</span><span class="deck-t">海の映像の 1 枚は、サンプル数を 16→4 にしても 8.8→7.2 秒、解像度を 640×360 にしても 8.3 秒。時間の大半は画の大きさによらない分で、下げるなら 4 サンプル＋ノイズ除去</span><span class="deck-d">海の映像はサンプル数・解像度を下げても2割しか速くならない</span></a>
-            <a class="deck-card" href="log.html#exp215"><img src="thumb_215.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験215 · モデリング編</span><span class="deck-t">草を Karma で撮るならパックしたまま（1 万本 17 秒、解くと 128 秒）。ただし 10 万本は、ポイントインスタンサーにしても、地面を広げて混み具合を 1 万本と同じにしても 13 分かかった</span><span class="deck-d">草はパックしたまま（1万本17秒、解くと128秒）。10万本は13分</span></a>
           </div>
           <div class="deck-ctrl"><button type="button" class="deck-play" id="deck-play" aria-label="自動の切り替えを止める"></button><button type="button" class="deck-arrow" id="deck-prev" aria-label="前の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="deck-dots" id="deck-dots"></div><button type="button" class="deck-arrow" id="deck-next" aria-label="次の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         </div>
@@ -4011,7 +4011,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
 
       <nav class="site-facts" aria-label="この場所の数字">
-        <a href="index.html#experiments"><b>227</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
+        <a href="index.html#experiments"><b>228</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
         <a href="practice.html#guides"><b>71</b><span>実践ガイド<em>PRACTICE</em></span></a>
         <a href="reference.html#nodes"><b>393</b><span>ノード解説<em>NODES</em></span></a>
         <a href="reference.html#glossary"><b>462</b><span>用語集<em>GLOSSARY</em></span></a>
@@ -4039,15 +4039,15 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </header>
       <div class="stage"><h3>完了した実験</h3><p>カードを押すと、実験ログの記事が新しいタブで開く。タグで絞り込める。</p></div>
       <div class="tagbar" id="tagbar">
-        <button type="button" class="tagchip is-on" data-tag="">すべて <span>227</span></button>
+        <button type="button" class="tagchip is-on" data-tag="">すべて <span>228</span></button>
         <button type="button" class="tagchip" data-tag="検算">検算 <span>112</span></button>
         <button type="button" class="tagchip" data-tag="モデリング">モデリング <span>82</span></button>
         <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>35</span></button>
         <button type="button" class="tagchip" data-tag="エフェクト">エフェクト <span>30</span></button>
         <button type="button" class="tagchip" data-tag="落とし穴">落とし穴 <span>26</span></button>
+        <button type="button" class="tagchip" data-tag="Karma">Karma <span>19</span></button>
         <button type="button" class="tagchip" data-tag="レンダリング">レンダリング <span>19</span></button>
         <button type="button" class="tagchip" data-tag="効率化">効率化 <span>19</span></button>
-        <button type="button" class="tagchip" data-tag="Karma">Karma <span>18</span></button>
         <button type="button" class="tagchip" data-tag="MPM">MPM <span>18</span></button>
         <button type="button" class="tagchip" data-tag="VEX">VEX <span>15</span></button>
         <button type="button" class="tagchip" data-tag="Vellum">Vellum <span>14</span></button>
@@ -4058,13 +4058,13 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="実践">実践 <span>11</span></button>
         <button type="button" class="tagchip" data-tag="布">布 <span>11</span></button>
         <button type="button" class="tagchip" data-tag="体積">体積 <span>10</span></button>
+        <button type="button" class="tagchip" data-tag="制作">制作 <span>10</span></button>
         <button type="button" class="tagchip" data-tag="訂正">訂正 <span>10</span></button>
+        <button type="button" class="tagchip" data-tag="速さ">速さ <span>10</span></button>
         <button type="button" class="tagchip" data-tag="グルーム">グルーム <span>9</span></button>
         <button type="button" class="tagchip" data-tag="ツール">ツール <span>9</span></button>
         <button type="button" class="tagchip" data-tag="ノイズ">ノイズ <span>9</span></button>
-        <button type="button" class="tagchip" data-tag="制作">制作 <span>9</span></button>
         <button type="button" class="tagchip" data-tag="毛">毛 <span>9</span></button>
-        <button type="button" class="tagchip" data-tag="速さ">速さ <span>9</span></button>
         <button type="button" class="tagchip" data-tag="APEX">APEX <span>8</span></button>
         <button type="button" class="tagchip" data-tag="リグ">リグ <span>8</span></button>
         <button type="button" class="tagchip" data-tag="点検">点検 <span>8</span></button>
@@ -4224,6 +4224,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="点をまとめる">点をまとめる <span>1</span></button>
         <button type="button" class="tagchip" data-tag="白波">白波 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="空気抵抗">空気抵抗 <span>1</span></button>
+        <button type="button" class="tagchip" data-tag="粒">粒 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="粘着">粘着 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="総当たり">総当たり <span>1</span></button>
         <button type="button" class="tagchip" data-tag="色">色 <span>1</span></button>
@@ -6282,6 +6283,15 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <span class="thumb-tags"><span>地形</span><span>Heightfield</span><span>制作</span></span>
           </span>
         </button>
+        <button type="button" class="thumb" data-exp="228" data-tags="Karma 粒 速さ 制作">
+          <span class="thumb-img"><img src="thumb_228.png" loading="lazy" decoding="async" alt="実験228の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 228</span>
+            <h4>粒は点のまま Karma に渡す。1000 万個でも 8 秒（640×360・8 サンプル）。小さな球をパックして並べると 3 万個で 78 秒かかり、その 8 割は場面を渡す時間</h4>
+            <p>粒は点のまま渡す。1000万個で8秒</p>
+            <span class="thumb-tags"><span>Karma</span><span>粒</span><span>速さ</span><span>制作</span></span>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -6737,8 +6747,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/experiment-data-345d29b93a.js"></script>
-<script src="data/glossary-data-d4d4922ed5.js"></script>
+<script src="data/experiment-data-f942445237.js"></script>
+<script src="data/glossary-data-88da30c67c.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -6917,7 +6927,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>227</dd></div>
+        <div><dt>実験</dt><dd>228</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>462</dd></div>
@@ -7100,7 +7110,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-dad509c0cc.js"></script>
+<script src="data/search-data-20d5bc22de.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

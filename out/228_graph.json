@@ -1,0 +1,129 @@
+{
+  "title": "実験228",
+  "network": "/obj/particles",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "spots",
+      "type": "pointgenerate",
+      "pos": [
+        -1.412,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 100000
+      }
+    },
+    {
+      "name": "size_and_color",
+      "type": "attribwrangle",
+      "pos": [
+        -1.412,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "@P = set(rand(@ptnum * 3 + 0.1) * 4 - 2, rand(@ptnum * 3 + 1.1) * 4, rand(@ptnum * 3 + 2.1) * 4 - 2);\nf@pscale = 0.00..."
+      }
+    },
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        1.412,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 6,
+        "cols": 8
+      }
+    },
+    {
+      "name": "balls",
+      "type": "copytopoints::2.0",
+      "pos": [
+        1.412,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "pack": 1
+      }
+    },
+    {
+      "name": "points_or_spheres",
+      "type": "switch",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/white"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "spots",
+      "from_output": 0,
+      "to": "size_and_color",
+      "to_input": 0
+    },
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "balls",
+      "to_input": 0
+    },
+    {
+      "from": "size_and_color",
+      "from_output": 0,
+      "to": "balls",
+      "to_input": 1
+    },
+    {
+      "from": "size_and_color",
+      "from_output": 0,
+      "to": "points_or_spheres",
+      "to_input": 0
+    },
+    {
+      "from": "balls",
+      "from_output": 0,
+      "to": "points_or_spheres",
+      "to_input": 1
+    },
+    {
+      "from": "points_or_spheres",
+      "from_output": 0,
+      "to": "assign",
+      "to_input": 0
+    }
+  ]
+}

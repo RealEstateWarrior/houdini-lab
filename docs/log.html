@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>150本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>151本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3904,6 +3904,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp222" data-anchor="exp222"><span class="doc-no">222</span><span class="doc-t">草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒</span></a></li>
         <li><a href="#exp225" data-anchor="exp225"><span class="doc-no">225</span><span class="doc-t">明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない</span></a></li>
         <li><a href="#exp227" data-anchor="exp227"><span class="doc-no">227</span><span class="doc-t">地形を削る heightfield_erode は、既定の 5 フレームでもう谷筋が刻まれる。20 フレームで谷の出口に土砂が広がり、100 フレームでは谷が埋まって山が低くなる（高さのばらつき 29 → 18 m）。時間はどれも 3 秒以内</span></a></li>
+        <li><a href="#exp228" data-anchor="exp228"><span class="doc-no">228</span><span class="doc-t">粒は点のまま Karma に渡す。1000 万個でも 8 秒（640×360・8 サンプル）。小さな球をパックして並べると 3 万個で 78 秒かかり、その 8 割は場面を渡す時間</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3915,7 +3916,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>227 / 227</dd></div>
+      <div><dt>実験</dt><dd>228 / 228</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16665,6 +16666,69 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 228 ===================== -->
+    <article class="entry entry--current" id="exp228">
+      <div class="badge">228</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>粒は点のまま Karma に渡す。1000 万個でも 8 秒（640×360・8 サンプル）。小さな球をパックして並べると 3 万個で 78 秒かかり、その 8 割は場面を渡す時間</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">粒</span><span class="coltag">速さ</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>粒は点のまま渡すと、1000 万個でも 8 秒。</strong></li>
+            <li><strong>小さな球をパックして並べると、3 万個で 78 秒。</strong>大半は場面を渡す時間で、動く映像では毎フレームかかる。</li>
+            <li><strong>scatter は 100 万個が上限。</strong>それ以上は pointgenerate で点を作る。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_228.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/228_karma_points_count.py &nbsp;·&nbsp; 粒は点のまま渡す。1000万個で8秒</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">scatter</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/228_scene.hipnc" target="_blank" rel="noopener noreferrer">228_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="228_graph.png" alt="実験228 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 火花・雪・雨・砂ぼこりのような粒は、何十万〜何百万個になる。/obj の <button class="term" data-term="Karma">Karma</button> に点のまま渡すと、Karma は点を小さな球として描く（半径は pscale）。<a href="#exp222">実験222</a> では、パックした形を何万個も渡すと、場面を渡すだけで何分もかかった。粒ならどうか。</strong></p>
+          <p>4 m 四方・高さ 4 m の箱の中に、半径 5 mm の粒を乱数で散らし、640×360・8 <button class="term" data-term="サンプル">サンプル</button>＋<button class="term" data-term="ノイズ">ノイズ</button>除去で撮った。はじめに小さく 1 枚撮って捨て、同じ画を 2 回続けて撮った（1 回目は場面を Karma に渡す分を含み、2 回目は変わっていない場面をそのまま使う）。はじめは <button class="term" data-term="scatter">scatter</button> で点をまいたが、scatter は 100 万個が上限で、1000 万を指定しても 100 万個だった。pointgenerate で点を作り、<button class="term" data-term="VEX">VEX</button> で散らすようにした。</p>
+          <p><strong>点のままなら、1000 万個でも数秒。</strong>1 万・10 万・100 万・1000 万個で、1 回目 2.1・2.5・5.7・8.1 秒。2 回目も 2.0・2.5・7.0・8.0 秒で、場面を渡す時間はほとんど無い。</p>
+          <p><strong>小さな球をパックして並べると、場面を渡すだけで時間がかかる。</strong>1 万・3 万個で、1 回目 13.1・77.5 秒、2 回目 6.2・15.4 秒。3 万個では 1 回目の 80% が場面を渡す分だった。映像は毎フレーム粒が動くので、毎フレームこの 1 回目の時間がかかる。</p>
+          <p><strong>決め方: 丸い粒は、点のまま（pscale で大きさ）Karma に渡す。</strong>形のある粒（葉・破片）を何万も並べるなら、Solaris の sopimport で Create Point Instancer にする（<a href="#exp222">実験222</a>）。</p>
+        </div>
+
+        <p class="label">粒の数と撮る時間（640×360・8 サンプル＋ノイズ除去）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="228_grid.png" alt="点のまま 10 万個・1000 万個と、球をパックして並べた 3 万個。" loading="lazy" decoding="async"></div>
+            <figcaption>点のまま 10 万個・1000 万個と、球をパックして並べた 3 万個。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>渡し方</th><th>粒の数</th><th>1 回目（秒）</th><th>2 回目（秒）</th></tr></thead>
+            <tbody>
+              <tr><td>点のまま</td><td class="num">10,000</td><td class="num">2.1</td><td class="num">2.0</td></tr>
+              <tr><td>点のまま</td><td class="num">100,000</td><td class="num">2.5</td><td class="num">2.5</td></tr>
+              <tr><td>点のまま</td><td class="num">1,000,000</td><td class="num">5.7</td><td class="num">7.0</td></tr>
+              <tr><td>点のまま</td><td class="num">10,000,000</td><td class="num">8.1</td><td class="num">8.0</td></tr>
+              <tr><td>球をパックして並べる</td><td class="num">10,000</td><td class="num">13.1</td><td class="num">6.2</td></tr>
+              <tr><td>球をパックして並べる</td><td class="num">30,000</td><td class="num">77.5</td><td class="num">15.4</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>粒は点のまま渡すと、1000 万個でも 8 秒。</strong></li>
+          <li><strong>小さな球をパックして並べると、3 万個で 78 秒。</strong>大半は場面を渡す時間で、動く映像では毎フレームかかる。</li>
+          <li><strong>scatter は 100 万個が上限。</strong>それ以上は pointgenerate で点を作る。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -16680,7 +16744,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-d4d4922ed5.js"></script>
+<script src="data/glossary-data-88da30c67c.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -16859,7 +16923,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>227</dd></div>
+        <div><dt>実験</dt><dd>228</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>462</dd></div>
@@ -17042,7 +17106,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-dad509c0cc.js"></script>
+<script src="data/search-data-20d5bc22de.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

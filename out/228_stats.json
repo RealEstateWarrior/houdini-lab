@@ -1,0 +1,59 @@
+{
+  "rows": [
+    {
+      "case": "points_10k",
+      "kind": "points",
+      "count": 10000,
+      "points_real": 10000,
+      "cook_sec": 0.0,
+      "sec_first": 2.1,
+      "sec_again": 2.05
+    },
+    {
+      "case": "points_100k",
+      "kind": "points",
+      "count": 100000,
+      "points_real": 100000,
+      "cook_sec": 0.0,
+      "sec_first": 2.54,
+      "sec_again": 2.5
+    },
+    {
+      "case": "points_1000k",
+      "kind": "points",
+      "count": 1000000,
+      "points_real": 1000000,
+      "cook_sec": 0.0,
+      "sec_first": 5.71,
+      "sec_again": 7.01
+    },
+    {
+      "case": "points_10000k",
+      "kind": "points",
+      "count": 10000000,
+      "points_real": 10000000,
+      "cook_sec": 0.02,
+      "sec_first": 8.08,
+      "sec_again": 7.99
+    },
+    {
+      "case": "spheres_10k",
+      "kind": "spheres",
+      "count": 10000,
+      "points_real": 10000,
+      "cook_sec": 0.0,
+      "sec_first": 13.1,
+      "sec_again": 6.16
+    },
+    {
+      "case": "spheres_30k",
+      "kind": "spheres",
+      "count": 30000,
+      "points_real": 30000,
+      "cook_sec": 0.0,
+      "sec_first": 77.53,
+      "sec_again": 15.41
+    }
+  ],
+  "pscale": 0.005
+}
