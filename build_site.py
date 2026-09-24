@@ -1649,6 +1649,12 @@ DONE = [
      "shots": ["247_grid.png", "247_graph.png"],
      "title": "映像にノイズ除去（OptiX）を使っても、動かない空のちらつきは増えなかった（4 サンプルで 0.47% → 0.20%）。4 サンプル＋OptiX は 16 サンプル（なし）と同じくらいで、時間は 12 枚 100 秒と 118 秒",
      "note": "映像にノイズ除去を使っても、空のちらつきは増えなかった"},
+    {"no": "248", "anchor": "exp248",
+     "tags": ["Karma", "XPU", "材質", "MaterialX", "ガラス", "制作"],
+     "log": "log_pm", "thumb": "248_grid.png",
+     "shots": ["248_grid.png", "248_graph.png"],
+     "title": "グラスの場面も、材質を MaterialX にすると Karma の CPU と XPU がほぼ同じ絵になった（差 2.5、principledshader では 28.2）。XPU は 6 秒、CPU は 154 秒",
+     "note": "グラスも MaterialX なら CPU と XPU がほぼ同じ絵"},
 ]
 
 PLANNED = []

@@ -11188,6 +11188,52 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 248 ===================== -->
+    <article class="entry entry--current" id="exp248">
+      <div class="badge">248</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>グラスの場面も、材質を MaterialX にすると Karma の CPU と XPU がほぼ同じ絵になった（差 2.5、principledshader では 28.2）。XPU は 6 秒、CPU は 154 秒</h2>
+        <p class="path">examples/248_karma_xpu_mtlx_glass.py &nbsp;·&nbsp; グラスも MaterialX なら CPU と XPU がほぼ同じ絵</p>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp232">実験232</a> で、氷の入ったグラスの水を XPU で撮ると、全体が明るく飛んだ。この場面には点の色 Cd が無いので、<a href="#exp243">実験243</a>（Cd があると principledshader の色が置き換わる）とは別の原因。材質を MaterialX（mtlxstandard_surface）に替えると揃うのか。</strong></p>
+          <p>実践「氷の入ったグラスの水」の /mat の材質 5 つ（幕・ガラス・水・氷・氷の芯）を、同じ色・Roughness・IOR の mtlxstandard_surface に差し替え（透明なものは transmission に Transparency の値）、CPU と XPU で撮った（640×360・32 <button class="term" data-term="サンプル">サンプル</button>・<button class="term" data-term="ノイズ">ノイズ</button>除去なし、条件ごとに別の <button class="term" data-term="hython">hython</button>）。差し替えでは、水の Transmission Color・Distance（水のわずかな色）は移していない。</p>
+          <p><strong>MaterialX なら、CPU と XPU がほぼ同じ。</strong>画の差（0〜255）は MaterialX で 2.5、principledshader で 28.2。画の明るさの平均は、principledshader の CPU 195・XPU 222、MaterialX の CPU 221・XPU 223。</p>
+          <p><strong>明るさがほかと違ったのは、principledshader の CPU の方だった。</strong>principledshader の XPU と、MaterialX の 2 つは、同じくらい明るかった。画でも、principledshader の CPU だけ水と氷が暗く沈み、ほかの 3 つは水が明るく透けた。どちらが本物に近いかは、この実験では決めていない（MaterialX には水の色を移していないので、そのぶんも明るい）。</p>
+          <p><strong>時間: XPU はどちらも約 6 秒。CPU は MaterialX で 154 秒と、principledshader（82 秒）より長かった。</strong></p>
+          <p><strong>決め方: XPU で試し撮りして CPU で仕上げるなら、材質は MaterialX で作る（両方が同じ絵になる）。</strong>principledshader のまま XPU で試すと、仕上げの CPU と違う絵になる。</p>
+        </div>
+
+        <p class="label">材質と Engine（640×360・32 サンプル、グラスのまわりを切り出し）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="248_grid.png" alt="principledshader の CPU だけ水と氷が暗い。Material" loading="lazy" decoding="async"></div>
+            <figcaption>principledshader の CPU だけ水と氷が暗い。MaterialX は CPU と XPU がほぼ同じ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>材質・Engine</th><th>撮る時間（秒）</th><th>画の明るさの平均</th><th>同じ材質の CPU との差</th></tr></thead>
+            <tbody>
+              <tr><td>principledshader・CPU</td><td class="num">81.8</td><td class="num">195.1</td><td class="num">0.0</td></tr>
+              <tr><td>principledshader・XPU</td><td class="num">6.0</td><td class="num">222.5</td><td class="num">28.2</td></tr>
+              <tr><td>MaterialX・CPU</td><td class="num">153.6</td><td class="num">221.1</td><td class="num">0.0</td></tr>
+              <tr><td>MaterialX・XPU</td><td class="num">6.0</td><td class="num">222.8</td><td class="num">2.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>MaterialX なら、グラスの場面も CPU と XPU がほぼ同じ絵（差 2.5）。</strong></li>
+          <li><strong>明るさが違ったのは principledshader の CPU の方。</strong>どちらが本物に近いかは決めていない。</li>
+          <li><strong>XPU で試して CPU で仕上げるなら、材質は MaterialX で作る。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

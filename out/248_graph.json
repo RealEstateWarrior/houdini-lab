@@ -1,0 +1,448 @@
+{
+  "title": "氷の入ったグラスの水",
+  "network": "/obj/glasscup",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "glass_profile",
+      "type": "attribwrangle",
+      "pos": [
+        -4.66,
+        5.723
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// グラスの断面（x が軸からの距離、y が高さ）。外側を下から上へ、縁で折り返して内側を上から下へ\nvector pts[] = {\n    {0.0, 0.0, 0}, {0.030, 0.0, 0}, {0.032, 0.00..."
+      }
+    },
+    {
+      "name": "glass_turn",
+      "type": "revolve::2.0",
+      "pos": [
+        -4.66,
+        4.593
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 96,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "glass",
+      "type": "reverse",
+      "pos": [
+        -4.66,
+        3.464
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "water_profile",
+      "type": "attribwrangle",
+      "pos": [
+        -7.907,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 水の断面。内側の壁に沿って、水面（高さ 0.07）まで。壁と重ならないよう 0.2 mm 内側にする\nfloat top = 0.07;\nfloat r_top = 0.030 + (top - 0.010) / 0.090 *..."
+      }
+    },
+    {
+      "name": "water_turn",
+      "type": "revolve::2.0",
+      "pos": [
+        -7.907,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "divs": 96,
+        "uv_folder": 1
+      }
+    },
+    {
+      "name": "water",
+      "type": "reverse",
+      "pos": [
+        -7.907,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "water_volume",
+      "type": "measure::2.0",
+      "pos": [
+        -7.907,
+        0.0
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "measure": 2,
+        "attribname": "volume",
+        "colorramp1cb": 1.0,
+        "colorramp2pos": 0.5,
+        "colorramp2cr": 1.0,
+        "colorramp2cg": 1.0,
+        "colorramp2cb": 1.0,
+        "colorramp3pos": 1.0,
+        "colorramp3cr": 1.0
+      }
+    },
+    {
+      "name": "ice_block",
+      "type": "box",
+      "pos": [
+        0.424,
+        7.379
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizex": 0.021,
+        "sizey": 0.018,
+        "sizez": 0.019
+      }
+    },
+    {
+      "name": "melted_edges",
+      "type": "polybevel::3.0",
+      "pos": [
+        0.424,
+        6.25
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "offset": 0.004,
+        "divisions": 3,
+        "profileramp1value": 0.5,
+        "profileramp1interp": 2,
+        "profileramp2pos": 1.0,
+        "profileramp2value": 0.5,
+        "profileramp2interp": 2
+      }
+    },
+    {
+      "name": "ice_mesh",
+      "type": "remesh::2.0",
+      "pos": [
+        0.424,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "targetsize": 0.0012
+      }
+    },
+    {
+      "name": "ice_lumps",
+      "type": "mountain::2.0",
+      "pos": [
+        0.424,
+        3.991
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.0018,
+        "elementsize": 0.012,
+        "oct": 4
+      }
+    },
+    {
+      "name": "cloudy_core",
+      "type": "sphere",
+      "pos": [
+        5.507,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.006,
+        "rady": 0.005,
+        "radz": 0.0055,
+        "rows": 12,
+        "cols": 18
+      }
+    },
+    {
+      "name": "core_lumps",
+      "type": "mountain::2.0",
+      "pos": [
+        5.507,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "height": 0.002,
+        "elementsize": 0.006
+      }
+    },
+    {
+      "name": "ice_spots",
+      "type": "attribwrangle",
+      "pos": [
+        2.683,
+        3.539
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0,
+        "snippet": "// 氷5つの置き場所と向き。水面に寄り集まり、頭を少し出して浮く\nvector places[] = {{-0.012, 0.067, 0.008}, {0.011, 0.066, 0.007}, {0.0, 0.068, -0.0..."
+      }
+    },
+    {
+      "name": "ice",
+      "type": "copytopoints::2.0",
+      "pos": [
+        1.553,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "ice_cores",
+      "type": "copytopoints::2.0",
+      "pos": [
+        5.507,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_glass",
+      "type": "material",
+      "pos": [
+        -4.66,
+        2.334
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/glass_mat"
+      }
+    },
+    {
+      "name": "assign_water",
+      "type": "material",
+      "pos": [
+        -2.4,
+        1.883
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/water_mat"
+      }
+    },
+    {
+      "name": "assign_ice",
+      "type": "material",
+      "pos": [
+        1.553,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/ice_mat"
+      }
+    },
+    {
+      "name": "assign_core",
+      "type": "material",
+      "pos": [
+        5.507,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "shop_materialpath1": "/mat/ice_core_mat"
+      }
+    },
+    {
+      "name": "drink",
+      "type": "merge",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "from": "glass_profile",
+      "from_output": 0,
+      "to": "glass_turn",
+      "to_input": 0
+    },
+    {
+      "from": "glass_turn",
+      "from_output": 0,
+      "to": "glass",
+      "to_input": 0
+    },
+    {
+      "from": "water_profile",
+      "from_output": 0,
+      "to": "water_turn",
+      "to_input": 0
+    },
+    {
+      "from": "water_turn",
+      "from_output": 0,
+      "to": "water",
+      "to_input": 0
+    },
+    {
+      "from": "water",
+      "from_output": 0,
+      "to": "water_volume",
+      "to_input": 0
+    },
+    {
+      "from": "ice_block",
+      "from_output": 0,
+      "to": "melted_edges",
+      "to_input": 0
+    },
+    {
+      "from": "melted_edges",
+      "from_output": 0,
+      "to": "ice_mesh",
+      "to_input": 0
+    },
+    {
+      "from": "ice_mesh",
+      "from_output": 0,
+      "to": "ice_lumps",
+      "to_input": 0
+    },
+    {
+      "from": "cloudy_core",
+      "from_output": 0,
+      "to": "core_lumps",
+      "to_input": 0
+    },
+    {
+      "from": "ice_lumps",
+      "from_output": 0,
+      "to": "ice",
+      "to_input": 0
+    },
+    {
+      "from": "ice_spots",
+      "from_output": 0,
+      "to": "ice",
+      "to_input": 1
+    },
+    {
+      "from": "core_lumps",
+      "from_output": 0,
+      "to": "ice_cores",
+      "to_input": 0
+    },
+    {
+      "from": "ice_spots",
+      "from_output": 0,
+      "to": "ice_cores",
+      "to_input": 1
+    },
+    {
+      "from": "glass",
+      "from_output": 0,
+      "to": "assign_glass",
+      "to_input": 0
+    },
+    {
+      "from": "water",
+      "from_output": 0,
+      "to": "assign_water",
+      "to_input": 0
+    },
+    {
+      "from": "ice",
+      "from_output": 0,
+      "to": "assign_ice",
+      "to_input": 0
+    },
+    {
+      "from": "ice_cores",
+      "from_output": 0,
+      "to": "assign_core",
+      "to_input": 0
+    },
+    {
+      "from": "assign_glass",
+      "from_output": 0,
+      "to": "drink",
+      "to_input": 0
+    },
+    {
+      "from": "assign_water",
+      "from_output": 0,
+      "to": "drink",
+      "to_input": 1
+    },
+    {
+      "from": "assign_ice",
+      "from_output": 0,
+      "to": "drink",
+      "to_input": 2
+    },
+    {
+      "from": "assign_core",
+      "from_output": 0,
+      "to": "drink",
+      "to_input": 3
+    }
+  ]
+}

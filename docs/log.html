@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>165本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>166本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3920,6 +3920,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp243" data-anchor="exp243"><span class="doc-no">243</span><span class="doc-t">Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色</span></a></li>
         <li><a href="#exp245" data-anchor="exp245"><span class="doc-no">245</span><span class="doc-t">地形を削る heightfield_erode は、升を細かくしても谷の細かさは変わらない（升 2 m と 1 m でほぼ同じ絵、時間もほぼ同じ）。谷の細かさを決めるのは Erosion Feature Size（既定 10 m）で、2.5 m にすると細かい谷が刻まれ、時間は 1.4 → 2.4 秒</span></a></li>
         <li><a href="#exp247" data-anchor="exp247"><span class="doc-no">247</span><span class="doc-t">映像にノイズ除去（OptiX）を使っても、動かない空のちらつきは増えなかった（4 サンプルで 0.47% → 0.20%）。4 サンプル＋OptiX は 16 サンプル（なし）と同じくらいで、時間は 12 枚 100 秒と 118 秒</span></a></li>
+        <li><a href="#exp248" data-anchor="exp248"><span class="doc-no">248</span><span class="doc-t">グラスの場面も、材質を MaterialX にすると Karma の CPU と XPU がほぼ同じ絵になった（差 2.5、principledshader では 28.2）。XPU は 6 秒、CPU は 154 秒</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3931,7 +3932,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>247 / 247</dd></div>
+      <div><dt>実験</dt><dd>248 / 248</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -17675,6 +17676,67 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 248 ===================== -->
+    <article class="entry entry--current" id="exp248">
+      <div class="badge">248</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>グラスの場面も、材質を MaterialX にすると Karma の CPU と XPU がほぼ同じ絵になった（差 2.5、principledshader では 28.2）。XPU は 6 秒、CPU は 154 秒</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">XPU</span><span class="coltag">材質</span><span class="coltag">MaterialX</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>MaterialX なら、グラスの場面も CPU と XPU がほぼ同じ絵（差 2.5）。</strong></li>
+            <li><strong>明るさが違ったのは principledshader の CPU の方。</strong>どちらが本物に近いかは決めていない。</li>
+            <li><strong>XPU で試して CPU で仕上げるなら、材質は MaterialX で作る。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_248.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/248_karma_xpu_mtlx_glass.py &nbsp;·&nbsp; グラスも MaterialX なら CPU と XPU がほぼ同じ絵</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/248_scene.hipnc" target="_blank" rel="noopener noreferrer">248_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="248_graph.png" alt="実験248 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: <a href="#exp232">実験232</a> で、氷の入ったグラスの水を XPU で撮ると、全体が明るく飛んだ。この場面には点の色 Cd が無いので、<a href="#exp243">実験243</a>（Cd があると principledshader の色が置き換わる）とは別の原因。材質を MaterialX（mtlxstandard_surface）に替えると揃うのか。</strong></p>
+          <p>実践「氷の入ったグラスの水」の /mat の材質 5 つ（幕・ガラス・水・氷・氷の芯）を、同じ色・Roughness・IOR の mtlxstandard_surface に差し替え（透明なものは transmission に Transparency の値）、CPU と XPU で撮った（640×360・32 <button class="term" data-term="サンプル">サンプル</button>・<button class="term" data-term="ノイズ">ノイズ</button>除去なし、条件ごとに別の <button class="term" data-term="hython">hython</button>）。差し替えでは、水の Transmission Color・Distance（水のわずかな色）は移していない。</p>
+          <p><strong>MaterialX なら、CPU と XPU がほぼ同じ。</strong>画の差（0〜255）は MaterialX で 2.5、principledshader で 28.2。画の明るさの平均は、principledshader の CPU 195・XPU 222、MaterialX の CPU 221・XPU 223。</p>
+          <p><strong>明るさがほかと違ったのは、principledshader の CPU の方だった。</strong>principledshader の XPU と、MaterialX の 2 つは、同じくらい明るかった。画でも、principledshader の CPU だけ水と氷が暗く沈み、ほかの 3 つは水が明るく透けた。どちらが本物に近いかは、この実験では決めていない（MaterialX には水の色を移していないので、そのぶんも明るい）。</p>
+          <p><strong>時間: XPU はどちらも約 6 秒。CPU は MaterialX で 154 秒と、principledshader（82 秒）より長かった。</strong></p>
+          <p><strong>決め方: XPU で試し撮りして CPU で仕上げるなら、材質は MaterialX で作る（両方が同じ絵になる）。</strong>principledshader のまま XPU で試すと、仕上げの CPU と違う絵になる。</p>
+        </div>
+
+        <p class="label">材質と Engine（640×360・32 サンプル、グラスのまわりを切り出し）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="248_grid.png" alt="principledshader の CPU だけ水と氷が暗い。Material" loading="lazy" decoding="async"></div>
+            <figcaption>principledshader の CPU だけ水と氷が暗い。MaterialX は CPU と XPU がほぼ同じ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>材質・Engine</th><th>撮る時間（秒）</th><th>画の明るさの平均</th><th>同じ材質の CPU との差</th></tr></thead>
+            <tbody>
+              <tr><td>principledshader・CPU</td><td class="num">81.8</td><td class="num">195.1</td><td class="num">0.0</td></tr>
+              <tr><td>principledshader・XPU</td><td class="num">6.0</td><td class="num">222.5</td><td class="num">28.2</td></tr>
+              <tr><td>MaterialX・CPU</td><td class="num">153.6</td><td class="num">221.1</td><td class="num">0.0</td></tr>
+              <tr><td>MaterialX・XPU</td><td class="num">6.0</td><td class="num">222.8</td><td class="num">2.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>MaterialX なら、グラスの場面も CPU と XPU がほぼ同じ絵（差 2.5）。</strong></li>
+          <li><strong>明るさが違ったのは principledshader の CPU の方。</strong>どちらが本物に近いかは決めていない。</li>
+          <li><strong>XPU で試して CPU で仕上げるなら、材質は MaterialX で作る。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -17690,7 +17752,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-d0dddc2d00.js"></script>
+<script src="data/glossary-data-7e56425f0f.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -17869,7 +17931,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>247</dd></div>
+        <div><dt>実験</dt><dd>248</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>472</dd></div>
@@ -18052,7 +18114,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-f2d57e32ef.js"></script>
+<script src="data/search-data-c57af898d4.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

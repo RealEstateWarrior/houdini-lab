@@ -1,0 +1,45 @@
+{
+  "rows": [
+    {
+      "case": "principled_cpu",
+      "kind": "principled",
+      "engine": "cpu",
+      "sec": 81.84,
+      "mean": 195.05,
+      "swapped": 0,
+      "diff_to_cpu": 0.0
+    },
+    {
+      "case": "principled_xpu",
+      "kind": "principled",
+      "engine": "xpu",
+      "sec": 5.98,
+      "mean": 222.47,
+      "swapped": 0,
+      "diff_to_cpu": 28.2
+    },
+    {
+      "case": "mtlx_cpu",
+      "kind": "mtlx",
+      "engine": "cpu",
+      "sec": 153.64,
+      "mean": 221.05,
+      "swapped": 5,
+      "diff_to_cpu": 0.0
+    },
+    {
+      "case": "mtlx_xpu",
+      "kind": "mtlx",
+      "engine": "xpu",
+      "sec": 6.02,
+      "mean": 222.76,
+      "swapped": 5,
+      "diff_to_cpu": 2.52
+    }
+  ],
+  "res": [
+    640,
+    360
+  ],
+  "spp": 32
+}

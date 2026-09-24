@@ -3761,6 +3761,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </button>
           </form>
           <div class="deck" id="deck" aria-roledescription="カルーセル" aria-label="新着の実験">
+            <a class="deck-card" href="log.html#exp248"><img src="thumb_248.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験248 · モデリング編</span><span class="deck-t">グラスの場面も、材質を MaterialX にすると Karma の CPU と XPU がほぼ同じ絵になった（差 2.5、principledshader では 28.2）。XPU は 6 秒、CPU は 154 秒</span><span class="deck-d">グラスも MaterialX なら CPU と XPU がほぼ同じ絵</span></a>
             <a class="deck-card" href="log.html#exp247"><img src="thumb_247.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験247 · モデリング編</span><span class="deck-t">映像にノイズ除去（OptiX）を使っても、動かない空のちらつきは増えなかった（4 サンプルで 0.47% → 0.20%）。4 サンプル＋OptiX は 16 サンプル（なし）と同じくらいで、時間は 12 枚 100 秒と 118 秒</span><span class="deck-d">映像にノイズ除去を使っても、空のちらつきは増えなかった</span></a>
             <a class="deck-card" href="log_fx.html#exp246"><img src="thumb_246.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験246 · エフェクト編</span><span class="deck-t">ガラスの割れ方が回ごとに揺れたのは、計算を何本も並べて走らせていた（マルチスレッド）ため。1 スレッドにすると 5 回とも同じ割れ方になった。ただし Bullet の計算は約 3 倍遅くなる</span><span class="deck-d">Bullet の割れ方の揺れはマルチスレッドのため。1スレッドなら毎回同じ</span></a>
             <a class="deck-card" href="log.html#exp245"><img src="thumb_245.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験245 · モデリング編</span><span class="deck-t">地形を削る heightfield_erode は、升を細かくしても谷の細かさは変わらない（升 2 m と 1 m でほぼ同じ絵、時間もほぼ同じ）。谷の細かさを決めるのは Erosion Feature Size（既定 10 m）で、2.5 m にすると細かい谷が刻まれ、時間は 1.4 → 2.4 秒</span><span class="deck-d">地形の谷の細かさは升でなく Erosion Feature Size で決まる</span></a>
@@ -3768,7 +3769,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <a class="deck-card" href="log.html#exp243"><img src="thumb_243.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験243 · モデリング編</span><span class="deck-t">Karma XPU では、形に点の色 Cd があると、principledshader の色が Cd に置き換わる（Use Point Color を切っていても）。Cd の無い形なら材質の色が出る。MaterialX の材質は、Cd があっても CPU と同じ色</span><span class="deck-d">XPU は Cd があると principledshader の色が Cd に。MaterialX なら同じ色</span></a>
             <a class="deck-card" href="log.html#exp242"><img src="thumb_242.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験242 · モデリング編</span><span class="deck-t">Karma XPU で、6 つの球のうち点の色 Cd をピンクにした 1 つ以外が白くなった。（訂正: 原因は「材質の色が効かない」ではなく「形に Cd があると材質の色が Cd に置き換わる」だった。実験243）</span><span class="deck-d">XPU で Cd のある形は白くなった（訂正: 原因は実験243）</span></a>
             <a class="deck-card" href="log.html#exp241"><img src="thumb_241.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験241 · モデリング編</span><span class="deck-t">Karma のノイズ除去は、4 サンプルでも 32 サンプル（なし）と同じくらい基準に近い（ドーナツ 差 1.88 と 1.75）。時間は 1/5。OptiX と OIDN はほぼ同じで、OptiX がわずかに近い</span><span class="deck-d">4サンプル＋ノイズ除去で32サンプル並み。OptiX と OIDN はほぼ同じ</span></a>
-            <a class="deck-card" href="log.html#exp240"><img src="thumb_240.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験240 · モデリング編</span><span class="deck-t">211〜239 の点検</span><span class="deck-d">211〜239 を流し直し：26 本一致。218・219 は hip の版、226 は割れ方の揺れ</span></a>
           </div>
           <div class="deck-ctrl"><button type="button" class="deck-play" id="deck-play" aria-label="自動の切り替えを止める"></button><button type="button" class="deck-arrow" id="deck-prev" aria-label="前の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="deck-dots" id="deck-dots"></div><button type="button" class="deck-arrow" id="deck-next" aria-label="次の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         </div>
@@ -4011,7 +4011,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
 
       <nav class="site-facts" aria-label="この場所の数字">
-        <a href="index.html#experiments"><b>247</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
+        <a href="index.html#experiments"><b>248</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
         <a href="practice.html#guides"><b>71</b><span>実践ガイド<em>PRACTICE</em></span></a>
         <a href="reference.html#nodes"><b>393</b><span>ノード解説<em>NODES</em></span></a>
         <a href="reference.html#glossary"><b>472</b><span>用語集<em>GLOSSARY</em></span></a>
@@ -4039,13 +4039,13 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </header>
       <div class="stage"><h3>完了した実験</h3><p>カードを押すと、実験ログの記事が新しいタブで開く。タグで絞り込める。</p></div>
       <div class="tagbar" id="tagbar">
-        <button type="button" class="tagchip is-on" data-tag="">すべて <span>247</span></button>
+        <button type="button" class="tagchip is-on" data-tag="">すべて <span>248</span></button>
         <button type="button" class="tagchip" data-tag="検算">検算 <span>112</span></button>
         <button type="button" class="tagchip" data-tag="モデリング">モデリング <span>82</span></button>
         <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>37</span></button>
-        <button type="button" class="tagchip" data-tag="Karma">Karma <span>33</span></button>
+        <button type="button" class="tagchip" data-tag="Karma">Karma <span>34</span></button>
         <button type="button" class="tagchip" data-tag="エフェクト">エフェクト <span>33</span></button>
-        <button type="button" class="tagchip" data-tag="制作">制作 <span>26</span></button>
+        <button type="button" class="tagchip" data-tag="制作">制作 <span>27</span></button>
         <button type="button" class="tagchip" data-tag="落とし穴">落とし穴 <span>26</span></button>
         <button type="button" class="tagchip" data-tag="レンダリング">レンダリング <span>19</span></button>
         <button type="button" class="tagchip" data-tag="効率化">効率化 <span>19</span></button>
@@ -4071,22 +4071,22 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="リグ">リグ <span>8</span></button>
         <button type="button" class="tagchip" data-tag="炎">炎 <span>8</span></button>
         <button type="button" class="tagchip" data-tag="摩擦">摩擦 <span>7</span></button>
+        <button type="button" class="tagchip" data-tag="材質">材質 <span>7</span></button>
         <button type="button" class="tagchip" data-tag="液体">液体 <span>7</span></button>
         <button type="button" class="tagchip" data-tag="RBD">RBD <span>6</span></button>
-        <button type="button" class="tagchip" data-tag="材質">材質 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="煙">煙 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="複製">複製 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="POP">POP <span>5</span></button>
+        <button type="button" class="tagchip" data-tag="ガラス">ガラス <span>5</span></button>
         <button type="button" class="tagchip" data-tag="比較">比較 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="海">海 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="HeightField">HeightField <span>4</span></button>
         <button type="button" class="tagchip" data-tag="KineFX">KineFX <span>4</span></button>
         <button type="button" class="tagchip" data-tag="SDF">SDF <span>4</span></button>
+        <button type="button" class="tagchip" data-tag="XPU">XPU <span>4</span></button>
         <button type="button" class="tagchip" data-tag="smooth">smooth <span>4</span></button>
-        <button type="button" class="tagchip" data-tag="ガラス">ガラス <span>4</span></button>
         <button type="button" class="tagchip" data-tag="属性">属性 <span>4</span></button>
         <button type="button" class="tagchip" data-tag="破壊">破壊 <span>4</span></button>
-        <button type="button" class="tagchip" data-tag="XPU">XPU <span>3</span></button>
         <button type="button" class="tagchip" data-tag="heightfield">heightfield <span>3</span></button>
         <button type="button" class="tagchip" data-tag="scatter">scatter <span>3</span></button>
         <button type="button" class="tagchip" data-tag="テクスチャ">テクスチャ <span>3</span></button>
@@ -4104,6 +4104,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="FLIP">FLIP <span>2</span></button>
         <button type="button" class="tagchip" data-tag="Heightfield">Heightfield <span>2</span></button>
         <button type="button" class="tagchip" data-tag="IK">IK <span>2</span></button>
+        <button type="button" class="tagchip" data-tag="MaterialX">MaterialX <span>2</span></button>
         <button type="button" class="tagchip" data-tag="Python">Python <span>2</span></button>
         <button type="button" class="tagchip" data-tag="Solaris">Solaris <span>2</span></button>
         <button type="button" class="tagchip" data-tag="USD">USD <span>2</span></button>
@@ -4133,7 +4134,6 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="被写界深度">被写界深度 <span>2</span></button>
         <button type="button" class="tagchip" data-tag="軽くする">軽くする <span>2</span></button>
         <button type="button" class="tagchip" data-tag="Apprentice">Apprentice <span>1</span></button>
-        <button type="button" class="tagchip" data-tag="MaterialX">MaterialX <span>1</span></button>
         <button type="button" class="tagchip" data-tag="PDG">PDG <span>1</span></button>
         <button type="button" class="tagchip" data-tag="SSS">SSS <span>1</span></button>
         <button type="button" class="tagchip" data-tag="attribblur">attribblur <span>1</span></button>
@@ -6471,6 +6471,15 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <span class="thumb-tags"><span>Karma</span><span>ノイズ除去</span><span>映像</span><span>制作</span></span>
           </span>
         </button>
+        <button type="button" class="thumb" data-exp="248" data-tags="Karma XPU 材質 MaterialX ガラス 制作">
+          <span class="thumb-img"><img src="thumb_248.png" loading="lazy" decoding="async" alt="実験248の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 248</span>
+            <h4>グラスの場面も、材質を MaterialX にすると Karma の CPU と XPU がほぼ同じ絵になった（差 2.5、principledshader では 28.2）。XPU は 6 秒、CPU は 154 秒</h4>
+            <p>グラスも MaterialX なら CPU と XPU がほぼ同じ絵</p>
+            <span class="thumb-tags"><span>Karma</span><span>XPU</span><span>材質</span><span>MaterialX</span><span>ガラス</span><span>制作</span></span>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -6926,8 +6935,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/experiment-data-cfb109c5a3.js"></script>
-<script src="data/glossary-data-d0dddc2d00.js"></script>
+<script src="data/experiment-data-d4ece9645f.js"></script>
+<script src="data/glossary-data-7e56425f0f.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -7106,7 +7115,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>247</dd></div>
+        <div><dt>実験</dt><dd>248</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>472</dd></div>
@@ -7289,7 +7298,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-f2d57e32ef.js"></script>
+<script src="data/search-data-c57af898d4.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */
