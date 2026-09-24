@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>149本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>150本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3903,6 +3903,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp215" data-anchor="exp215"><span class="doc-no">215</span><span class="doc-t">草を Karma で撮るならパックしたまま（1 万本 17 秒、解くと 128 秒）。ただし 10 万本は、ポイントインスタンサーにしても、地面を広げて混み具合を 1 万本と同じにしても 13 分かかった</span></a></li>
         <li><a href="#exp222" data-anchor="exp222"><span class="doc-no">222</span><span class="doc-t">草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒</span></a></li>
         <li><a href="#exp225" data-anchor="exp225"><span class="doc-no">225</span><span class="doc-t">明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない</span></a></li>
+        <li><a href="#exp227" data-anchor="exp227"><span class="doc-no">227</span><span class="doc-t">地形を削る heightfield_erode は、既定の 5 フレームでもう谷筋が刻まれる。20 フレームで谷の出口に土砂が広がり、100 フレームでは谷が埋まって山が低くなる（高さのばらつき 29 → 18 m）。時間はどれも 3 秒以内</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3914,7 +3915,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>226 / 226</dd></div>
+      <div><dt>実験</dt><dd>227 / 227</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16601,6 +16602,69 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 227 ===================== -->
+    <article class="entry entry--current" id="exp227">
+      <div class="badge">227</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>地形を削る heightfield_erode は、既定の 5 フレームでもう谷筋が刻まれる。20 フレームで谷の出口に土砂が広がり、100 フレームでは谷が埋まって山が低くなる（高さのばらつき 29 → 18 m）。時間はどれも 3 秒以内</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">地形</span><span class="coltag">Heightfield</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>既定の 5 フレームで、もう谷筋が刻まれる。</strong></li>
+            <li><strong>20 フレームで扇状地が広がり、100 フレームで谷が埋まって山が低くなる。</strong>高さのばらつき 29 → 18 m。</li>
+            <li><strong>時間はどれも数秒（100 フレームで 3.1 秒）。</strong>見た目で選んでよい。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_227.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/227_heightfield_erode_frames.py &nbsp;·&nbsp; 地形の浸食は既定5フレームで谷筋、100で谷が埋まる</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">heightfield_erode</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/227_scene.hipnc" target="_blank" rel="noopener noreferrer">227_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="227_graph.png" alt="実験227 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 山の地形に川筋や崖を刻みたい。heightfield_erode（::3.0）は、フレームを進めながら少しずつ削り、Freeze at Frame（既定 5）で止まる。何フレームまで削ればよいのか。時間はどれだけかかるのか。</strong></p>
+          <p>heightfield（1000 m 四方、Grid Spacing 2 → 500 × 500）に heightfield_noise（Amplitude 500 は既定、Element Size 300）で山を作り、Freeze at Frame を 5・20・50・100 にして削った（Iterations per Frame は 1 のまま）。削る時間は 1 通りずつ、ほかの処理は回さずに測った。見た目は、高さから描いた陰影図（北西から光を当てた地図。真ん中の 500 m 四方）で比べた。</p>
+          <p><strong>時間は小さい。</strong>5・20・50・100 フレームで 0.76・1.00・1.91・3.07 秒。</p>
+          <p><strong>既定の 5 フレームで、もう「削った地形」になる。</strong>削る前はただのでこぼこだったが、5 フレームで尾根と谷筋が刻まれた。削る前との高さの差は平均 2.8 m、いちばん大きい所で 29 m。</p>
+          <p><strong>20 フレームで、谷の出口に土砂が扇のように広がる。</strong>50・100 フレームでは谷が土砂で埋まって平らな野が広がり、山は低く、斜面はゆるくなった。高さのばらつき（標準偏差）は削る前・5・20・50・100 で 29.2・27.8・24.7・21.2・17.8 m、斜面の傾きの平均は 29.0・26.3・23.1・20.1・17.7°。100 フレームでは、いちばん深い所で 75 m 削られた。</p>
+          <p><strong>決め方: 険しい山に谷を刻むなら 5〜20 フレーム。平野や扇状地を広げたいなら 50 フレーム以上。</strong>時間はどれも数秒なので、見た目で選んでよい。</p>
+        </div>
+
+        <p class="label">削るフレーム数と地形（陰影図、真ん中の 500 m 四方）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="227_grid.png" alt="左から削る前・5・20・50・100 フレーム。5 で谷筋が刻まれ、20 で扇状" loading="lazy" decoding="async"></div>
+            <figcaption>左から削る前・5・20・50・100 フレーム。5 で谷筋が刻まれ、20 で扇状地が広がり、100 で谷が埋まる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>時間（秒）</th><th>高さのばらつき（m）</th><th>斜面の傾き（°）</th><th>細かい凸凹（m）</th><th>削る前との差 平均（m）</th><th>最大（m）</th></tr></thead>
+            <tbody>
+              <tr><td>削る前</td><td class="num">0.00</td><td class="num">29.2</td><td class="num">29.0</td><td class="num">0.269</td><td class="num">0.0</td><td class="num">0.0</td></tr>
+              <tr><td>5 フレーム（既定）</td><td class="num">0.76</td><td class="num">27.8</td><td class="num">26.3</td><td class="num">0.239</td><td class="num">2.8</td><td class="num">29.3</td></tr>
+              <tr><td>20 フレーム</td><td class="num">1.00</td><td class="num">24.7</td><td class="num">23.1</td><td class="num">0.231</td><td class="num">7.1</td><td class="num">40.4</td></tr>
+              <tr><td>50 フレーム</td><td class="num">1.91</td><td class="num">21.2</td><td class="num">20.1</td><td class="num">0.251</td><td class="num">11.8</td><td class="num">60.3</td></tr>
+              <tr><td>100 フレーム</td><td class="num">3.07</td><td class="num">17.8</td><td class="num">17.7</td><td class="num">0.259</td><td class="num">16.3</td><td class="num">74.7</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>既定の 5 フレームで、もう谷筋が刻まれる。</strong></li>
+          <li><strong>20 フレームで扇状地が広がり、100 フレームで谷が埋まって山が低くなる。</strong>高さのばらつき 29 → 18 m。</li>
+          <li><strong>時間はどれも数秒（100 フレームで 3.1 秒）。</strong>見た目で選んでよい。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -16616,7 +16680,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-cab8b6e9d1.js"></script>
+<script src="data/glossary-data-d4d4922ed5.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -16795,7 +16859,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>226</dd></div>
+        <div><dt>実験</dt><dd>227</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>462</dd></div>
@@ -16978,7 +17042,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-337e3058a5.js"></script>
+<script src="data/search-data-dad509c0cc.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

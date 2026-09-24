@@ -1,0 +1,64 @@
+{
+  "title": "実験227",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ground",
+      "type": "heightfield",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "mountains",
+      "type": "heightfield_noise",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "elementsize": 300.0
+      }
+    },
+    {
+      "name": "erode",
+      "type": "heightfield_erode::3.0",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "freezeframe": 20,
+        "seed": 0.2140711545944214,
+        "folder0": 1,
+        "folder1": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ground",
+      "from_output": 0,
+      "to": "mountains",
+      "to_input": 0
+    },
+    {
+      "from": "mountains",
+      "from_output": 0,
+      "to": "erode",
+      "to_input": 0
+    }
+  ]
+}
