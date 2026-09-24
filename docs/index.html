@@ -3761,14 +3761,14 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             </button>
           </form>
           <div class="deck" id="deck" aria-roledescription="カルーセル" aria-label="新着の実験">
+            <a class="deck-card" href="log.html#exp225"><img src="thumb_225.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験225 · モデリング編</span><span class="deck-t">明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない</span><span class="deck-d">明かり1000個はライトで。光る球で照らすとざらつく</span></a>
+            <a class="deck-card" href="log_fx.html#exp224"><img src="thumb_224.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験224 · エフェクト編</span><span class="deck-t">Vellum の布の伸びは Substeps で決まる（1→5 で平均 2.8%→0.10%）。Constraint Iterations を 4 倍にするより Substeps を倍にする方が、短い時間でよく効く。布の目を細かくすると 4 倍伸びる</span><span class="deck-d">布の伸びは Substeps で決まる。Iterations より効く</span></a>
             <a class="deck-card" href="log_fx.html#exp223"><img src="thumb_223.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験223 · エフェクト編</span><span class="deck-t">海の白波の cusp のしきい値は、風 5 m/秒で 0.08・10 m/秒で 0.15・15 m/秒で 0.26（波の高さを本物に合わせたとき）。0.55 では風 15 m/秒でもほぼ白波が出ない</span><span class="deck-d">白波の cusp しきい値は風10m/秒で0.15。0.55ではほぼ出ない</span></a>
             <a class="deck-card" href="log.html#exp222"><img src="thumb_222.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験222 · モデリング編</span><span class="deck-t">草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒</span><span class="deck-d">草は LOP の sopimport で Create Point Instancer に。10万本13分→12秒</span></a>
             <a class="deck-card" href="log_fx.html#exp221"><img src="thumb_221.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験221 · エフェクト編</span><span class="deck-t">海の映像の 1 枚は、サンプル数を 16→4 にしても 8.8→7.2 秒、解像度を 640×360 にしても 8.3 秒。時間の大半は画の大きさによらない分で、下げるなら 4 サンプル＋ノイズ除去</span><span class="deck-d">海の映像はサンプル数・解像度を下げても2割しか速くならない</span></a>
             <a class="deck-card" href="log.html#exp215"><img src="thumb_215.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験215 · モデリング編</span><span class="deck-t">草を Karma で撮るならパックしたまま（1 万本 17 秒、解くと 128 秒）。ただし 10 万本は、ポイントインスタンサーにしても、地面を広げて混み具合を 1 万本と同じにしても 13 分かかった</span><span class="deck-d">草はパックしたまま（1万本17秒、解くと128秒）。10万本は13分</span></a>
             <a class="deck-card" href="log_fx.html#exp220"><img src="thumb_220.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験220 · エフェクト編</span><span class="deck-t">焚き火の Turbulence は、Use Control Field を入れると効かない（揺らぎなしと全フレーム同じ）。切ると炎の高さ 1.31 m（なし 1.21 m）。実験201 の結論は正しく、点検で合わなかったのは revertToDefaults が Use Control Field を「切り」に戻したため</span><span class="deck-d">焚き火の Turbulence は Use Control Field 入りだと効かない。201 の点検のずれの原因</span></a>
             <a class="deck-card" href="log_fx.html#exp219"><img src="thumb_219.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験219 · エフェクト編</span><span class="deck-t">海の板の点を半分にすると、撮る時間は 12% 減り、きらめきの粒も 15% 減る。1/4 で時間 23% 減・粒 27% 減。1/16 でも時間は 64% までしか減らない</span><span class="deck-d">海の板の点を半分にすると時間12%減、粒15%減</span></a>
-            <a class="deck-card" href="log_fx.html#exp218"><img src="thumb_218.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験218 · エフェクト編</span><span class="deck-t">海の光の道は、Roughness を上げると太い白い帯になり（0.02→0.15 で幅 15→61 列）、さざ波を高くすると粒のまま広がる（0.4→3.2 で 12→36 列）</span><span class="deck-d">海の光の道は Roughness で太い帯に、さざ波で粒のまま広がる</span></a>
-            <a class="deck-card" href="log.html#exp210"><img src="thumb_210.png" alt="" loading="lazy" decoding="async"><span class="deck-meta">実験210 · モデリング編</span><span class="deck-t">181〜209 の点検</span><span class="deck-d">181〜209 を流し直し：22 本は完全一致。201 は台本を直したが Turbulence の 2 条件が合わない</span></a>
           </div>
           <div class="deck-ctrl"><button type="button" class="deck-play" id="deck-play" aria-label="自動の切り替えを止める"></button><button type="button" class="deck-arrow" id="deck-prev" aria-label="前の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="deck-dots" id="deck-dots"></div><button type="button" class="deck-arrow" id="deck-next" aria-label="次の実験"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         </div>
@@ -4011,7 +4011,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </div>
 
       <nav class="site-facts" aria-label="この場所の数字">
-        <a href="index.html#experiments"><b>223</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
+        <a href="index.html#experiments"><b>225</b><span>実験ログ<em>EXPERIMENTS</em></span></a>
         <a href="practice.html#guides"><b>71</b><span>実践ガイド<em>PRACTICE</em></span></a>
         <a href="reference.html#nodes"><b>393</b><span>ノード解説<em>NODES</em></span></a>
         <a href="reference.html#glossary"><b>462</b><span>用語集<em>GLOSSARY</em></span></a>
@@ -4039,41 +4039,41 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       </header>
       <div class="stage"><h3>完了した実験</h3><p>カードを押すと、実験ログの記事が新しいタブで開く。タグで絞り込める。</p></div>
       <div class="tagbar" id="tagbar">
-        <button type="button" class="tagchip is-on" data-tag="">すべて <span>223</span></button>
+        <button type="button" class="tagchip is-on" data-tag="">すべて <span>225</span></button>
         <button type="button" class="tagchip" data-tag="検算">検算 <span>112</span></button>
         <button type="button" class="tagchip" data-tag="モデリング">モデリング <span>82</span></button>
-        <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>33</span></button>
+        <button type="button" class="tagchip" data-tag="シミュレーション">シミュレーション <span>34</span></button>
         <button type="button" class="tagchip" data-tag="エフェクト">エフェクト <span>30</span></button>
         <button type="button" class="tagchip" data-tag="落とし穴">落とし穴 <span>26</span></button>
         <button type="button" class="tagchip" data-tag="レンダリング">レンダリング <span>19</span></button>
         <button type="button" class="tagchip" data-tag="効率化">効率化 <span>19</span></button>
+        <button type="button" class="tagchip" data-tag="Karma">Karma <span>18</span></button>
         <button type="button" class="tagchip" data-tag="MPM">MPM <span>18</span></button>
-        <button type="button" class="tagchip" data-tag="Karma">Karma <span>17</span></button>
         <button type="button" class="tagchip" data-tag="VEX">VEX <span>15</span></button>
-        <button type="button" class="tagchip" data-tag="Vellum">Vellum <span>13</span></button>
+        <button type="button" class="tagchip" data-tag="Vellum">Vellum <span>14</span></button>
         <button type="button" class="tagchip" data-tag="パーティクル">パーティクル <span>13</span></button>
         <button type="button" class="tagchip" data-tag="速度">速度 <span>12</span></button>
         <button type="button" class="tagchip" data-tag="VDB">VDB <span>11</span></button>
         <button type="button" class="tagchip" data-tag="地形">地形 <span>11</span></button>
         <button type="button" class="tagchip" data-tag="実践">実践 <span>11</span></button>
+        <button type="button" class="tagchip" data-tag="布">布 <span>11</span></button>
         <button type="button" class="tagchip" data-tag="体積">体積 <span>10</span></button>
-        <button type="button" class="tagchip" data-tag="布">布 <span>10</span></button>
         <button type="button" class="tagchip" data-tag="訂正">訂正 <span>10</span></button>
         <button type="button" class="tagchip" data-tag="グルーム">グルーム <span>9</span></button>
         <button type="button" class="tagchip" data-tag="ツール">ツール <span>9</span></button>
         <button type="button" class="tagchip" data-tag="ノイズ">ノイズ <span>9</span></button>
         <button type="button" class="tagchip" data-tag="毛">毛 <span>9</span></button>
+        <button type="button" class="tagchip" data-tag="速さ">速さ <span>9</span></button>
         <button type="button" class="tagchip" data-tag="APEX">APEX <span>8</span></button>
         <button type="button" class="tagchip" data-tag="リグ">リグ <span>8</span></button>
         <button type="button" class="tagchip" data-tag="点検">点検 <span>8</span></button>
         <button type="button" class="tagchip" data-tag="Pyro">Pyro <span>7</span></button>
+        <button type="button" class="tagchip" data-tag="制作">制作 <span>7</span></button>
         <button type="button" class="tagchip" data-tag="摩擦">摩擦 <span>7</span></button>
         <button type="button" class="tagchip" data-tag="液体">液体 <span>7</span></button>
-        <button type="button" class="tagchip" data-tag="速さ">速さ <span>7</span></button>
         <button type="button" class="tagchip" data-tag="炎">炎 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="複製">複製 <span>6</span></button>
         <button type="button" class="tagchip" data-tag="POP">POP <span>5</span></button>
-        <button type="button" class="tagchip" data-tag="制作">制作 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="比較">比較 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="煙">煙 <span>5</span></button>
         <button type="button" class="tagchip" data-tag="HeightField">HeightField <span>4</span></button>
@@ -4202,11 +4202,13 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <button type="button" class="tagchip" data-tag="ボクセル">ボクセル <span>1</span></button>
         <button type="button" class="tagchip" data-tag="ボリューム">ボリューム <span>1</span></button>
         <button type="button" class="tagchip" data-tag="モーションブラー">モーションブラー <span>1</span></button>
+        <button type="button" class="tagchip" data-tag="ライト">ライト <span>1</span></button>
         <button type="button" class="tagchip" data-tag="三角形分割">三角形分割 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="保留">保留 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="凸包">凸包 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="向き">向き <span>1</span></button>
         <button type="button" class="tagchip" data-tag="基礎">基礎 <span>1</span></button>
+        <button type="button" class="tagchip" data-tag="夜">夜 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="容量">容量 <span>1</span></button>
         <button type="button" class="tagchip" data-tag="張り直す">張り直す <span>1</span></button>
         <button type="button" class="tagchip" data-tag="文字">文字 <span>1</span></button>
@@ -6243,6 +6245,24 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
             <span class="thumb-tags"><span>エフェクト</span><span>海</span><span>白波</span><span>制作</span></span>
           </span>
         </button>
+        <button type="button" class="thumb" data-exp="224" data-tags="シミュレーション Vellum 布 速さ 制作">
+          <span class="thumb-img"><img src="thumb_224.png" loading="lazy" decoding="async" alt="実験224の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 224</span>
+            <h4>Vellum の布の伸びは Substeps で決まる（1→5 で平均 2.8%→0.10%）。Constraint Iterations を 4 倍にするより Substeps を倍にする方が、短い時間でよく効く。布の目を細かくすると 4 倍伸びる</h4>
+            <p>布の伸びは Substeps で決まる。Iterations より効く</p>
+            <span class="thumb-tags"><span>シミュレーション</span><span>Vellum</span><span>布</span><span>速さ</span><span>制作</span></span>
+          </span>
+        </button>
+        <button type="button" class="thumb" data-exp="225" data-tags="Karma ライト 夜 速さ 制作">
+          <span class="thumb-img"><img src="thumb_225.png" loading="lazy" decoding="async" alt="実験225の結果のレンダリング"></span>
+          <span class="thumb-body">
+            <span class="thumb-no">実験 225</span>
+            <h4>明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない</h4>
+            <p>明かり1000個はライトで。光る球で照らすとざらつく</p>
+            <span class="thumb-tags"><span>Karma</span><span>ライト</span><span>夜</span><span>速さ</span><span>制作</span></span>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -6698,8 +6718,8 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/experiment-data-c5f2730611.js"></script>
-<script src="data/glossary-data-904cb9b76f.js"></script>
+<script src="data/experiment-data-72334b65db.js"></script>
+<script src="data/glossary-data-542c0ce076.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -6878,7 +6898,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>223</dd></div>
+        <div><dt>実験</dt><dd>225</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>462</dd></div>
@@ -7061,7 +7081,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   </div>
 </div>
 
-<script src="data/search-data-5e48dae64a.js"></script>
+<script src="data/search-data-546ae05553.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

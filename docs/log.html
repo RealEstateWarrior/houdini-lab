@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>148本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>149本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3902,6 +3902,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li class="doc-toc-sep" aria-hidden="true">211–240</li>
         <li><a href="#exp215" data-anchor="exp215"><span class="doc-no">215</span><span class="doc-t">草を Karma で撮るならパックしたまま（1 万本 17 秒、解くと 128 秒）。ただし 10 万本は、ポイントインスタンサーにしても、地面を広げて混み具合を 1 万本と同じにしても 13 分かかった</span></a></li>
         <li><a href="#exp222" data-anchor="exp222"><span class="doc-no">222</span><span class="doc-t">草を何万本も Karma で撮るなら、Solaris（LOP）の sopimport で「Create Point Instancer」にして撮る。10 万本が 793 秒 → 12 秒、100 万本も 37 秒</span></a></li>
+        <li><a href="#exp225" data-anchor="exp225"><span class="doc-no">225</span><span class="doc-t">明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3913,7 +3914,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>223 / 223</dd></div>
+      <div><dt>実験</dt><dd>225 / 225</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16535,6 +16536,71 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 225 ===================== -->
+    <article class="entry entry--current" id="exp225">
+      <div class="badge">225</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">ライト</span><span class="coltag">夜</span><span class="coltag">速さ</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>ライト（point）は 1000 個でも 16 サンプル 28 秒・ざらつき 5%。</strong></li>
+            <li><strong>小さな光る球で照らすと、ざらつき 52〜54%。</strong>64 サンプルでも光が拾いきれない。</li>
+            <li><strong>照らすのはライト、写る電球は光る物。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_225.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/225_karma_many_lights.py &nbsp;·&nbsp; 明かり1000個はライトで。光る球で照らすとざらつく</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/225_scene.hipnc" target="_blank" rel="noopener noreferrer">225_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="225_graph.png" alt="実験225 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 夜の街の窓明かりや街灯を何百も置きたい。1 つずつライト（hlight の point）で置くのと、小さな光る球（Emission の材質）で置くのとで、<button class="term" data-term="Karma">Karma</button> の時間とざらつきはどう違うか。何個まで置けるか。</strong></p>
+          <p>40 m 四方の地面に箱 20 個（建物のつもり）を並べ、その上 3〜4.4 m に明かりを 1・10・100・1000 個、格子状に置いた。明かりの合計の強さは個数によらず同じにした（ライトは Intensity 400 ÷ 個数。光る球は半径 0.1 m で、同じ強さのライトと同じだけ光を出すよう Emission を式で決めた）。480×270 を 16 <button class="term" data-term="サンプル">サンプル</button>で撮った時間と、64 サンプルで撮った画との差（地面と箱の部分の、明るさに対する割合）をざらつきとした。ライトが 1 つも無いと Karma が自動で明かりを足すので、明るさ 0 の環境ライトを置いて止めた（はじめはこれを忘れ、光る球の場面が自動の明かりで照らされていた）。</p>
+          <p><strong>ライトは、1000 個でもなめらか。</strong>1・10・100・1000 個で、撮る時間は 5.1・8.3・13.7・27.9 秒、ざらつきは 1.9・5.5・5.1・4.7%。時間はライトの数とともに延びるが、1000 個でも 30 秒ほど。</p>
+          <p><strong>小さな光る球で照らすと、ひどくざらつく。</strong>1・10・100・1000 個で、ざらつきは 21・52・54・22%。16 サンプルの時間は 2.7〜8.8 秒と短いが、画は砂嵐のようになった。64 サンプルでも、地面の明るさは 1・10・100・1000 個で 0.013・0.015・0.085・0.509 と、光の合計は同じなのに大きく変わった。小さな光る物は、ライトのように光の出どころとして直接は調べられず、たまたま当たったときしか光が届かないためと考えられる（確かめてはいない）。数が多いほど当たりやすくなるので、明るさが増えて見える（まだ正しい明るさに落ち着いていない）。64 サンプルで撮る時間は、光る球 100 個で 84 秒と、ライト 100 個（17 秒）より長かった。</p>
+          <p><strong>決め方: 照らすのはライト、画に写る電球は光る物で作る。</strong>ライト（point）は画に写らないので、窓や電球の見た目には光る物を置き、その光で周りを照らそうとはしない。何百個でもライトでよい（1000 個で 16 サンプル約 30 秒）。</p>
+        </div>
+
+        <p class="label">ライトと光る球（480×270・16 サンプル）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="225_grid.png" alt="左がライト、右が光る球。光る球は球そのものは写るが、地面はざらつく。" loading="lazy" decoding="async"></div>
+            <figcaption>左がライト、右が光る球。光る球は球そのものは写るが、地面はざらつく。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>明かり</th><th>個数</th><th>16 サンプルの時間（秒）</th><th>64 サンプルの時間（秒）</th><th>ざらつき（%）</th><th>地面の明るさ（64 サンプル）</th></tr></thead>
+            <tbody>
+              <tr><td>ライト（point）</td><td class="num">1</td><td class="num">5.1</td><td class="num">8.9</td><td class="num">1.9</td><td class="num">0.606</td></tr>
+              <tr><td>ライト（point）</td><td class="num">10</td><td class="num">8.3</td><td class="num">11.2</td><td class="num">5.5</td><td class="num">0.165</td></tr>
+              <tr><td>ライト（point）</td><td class="num">100</td><td class="num">13.7</td><td class="num">17.3</td><td class="num">5.1</td><td class="num">0.248</td></tr>
+              <tr><td>ライト（point）</td><td class="num">1000</td><td class="num">27.9</td><td class="num">31.7</td><td class="num">4.7</td><td class="num">0.254</td></tr>
+              <tr><td>光る球</td><td class="num">1</td><td class="num">2.7</td><td class="num">6.9</td><td class="num">21.1</td><td class="num">0.013</td></tr>
+              <tr><td>光る球</td><td class="num">10</td><td class="num">3.1</td><td class="num">13.8</td><td class="num">52.4</td><td class="num">0.015</td></tr>
+              <tr><td>光る球</td><td class="num">100</td><td class="num">7.5</td><td class="num">83.9</td><td class="num">54.3</td><td class="num">0.085</td></tr>
+              <tr><td>光る球</td><td class="num">1000</td><td class="num">8.8</td><td class="num">75.0</td><td class="num">22.1</td><td class="num">0.509</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ライト（point）は 1000 個でも 16 サンプル 28 秒・ざらつき 5%。</strong></li>
+          <li><strong>小さな光る球で照らすと、ざらつき 52〜54%。</strong>64 サンプルでも光が拾いきれない。</li>
+          <li><strong>照らすのはライト、写る電球は光る物。</strong></li>
+          <li><strong>ライトが無い場面では、Karma が自動で明かりを足す。</strong>比べるときは明るさ 0 の環境ライトで止める。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -16550,7 +16616,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-904cb9b76f.js"></script>
+<script src="data/glossary-data-542c0ce076.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -16729,7 +16795,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>223</dd></div>
+        <div><dt>実験</dt><dd>225</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>462</dd></div>
@@ -16912,7 +16978,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-5e48dae64a.js"></script>
+<script src="data/search-data-546ae05553.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

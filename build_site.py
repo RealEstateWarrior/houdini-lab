@@ -1505,6 +1505,18 @@ DONE = [
      "shots": ["223_grid.png", "223_graph.png"],
      "title": "海の白波の cusp のしきい値は、風 5 m/秒で 0.08・10 m/秒で 0.15・15 m/秒で 0.26（波の高さを本物に合わせたとき）。0.55 では風 15 m/秒でもほぼ白波が出ない",
      "note": "白波の cusp しきい値は風10m/秒で0.15。0.55ではほぼ出ない"},
+    {"no": "224", "anchor": "exp224",
+     "tags": ["シミュレーション", "Vellum", "布", "速さ", "制作"],
+     "log": "log_fx", "thumb": "224_cost.png",
+     "shots": ["224_cost.png", "224_grid.png", "224_graph.png"],
+     "title": "Vellum の布の伸びは Substeps で決まる（1→5 で平均 2.8%→0.10%）。Constraint Iterations を 4 倍にするより Substeps を倍にする方が、短い時間でよく効く。布の目を細かくすると 4 倍伸びる",
+     "note": "布の伸びは Substeps で決まる。Iterations より効く"},
+    {"no": "225", "anchor": "exp225",
+     "tags": ["Karma", "ライト", "夜", "速さ", "制作"],
+     "log": "log_pm", "thumb": "225_grid.png",
+     "shots": ["225_grid.png", "225_graph.png"],
+     "title": "明かりを何百も置く場面は、照らすのをライトで。1000 個でも 16 サンプル 28 秒・ざらつき 5%。小さな光る球で照らすと、ざらつき 54% で、64 サンプルでも光が拾いきれない",
+     "note": "明かり1000個はライトで。光る球で照らすとざらつく"},
 ]
 
 PLANNED = []

@@ -1,0 +1,11 @@
+{'case': 'sub1', 'grid': [66, 84], 'substeps': 1, 'niter': 100, 'sec': 6.18, 'stretch_mean': 2.798, 'stretch_p99': 23.29, 'stretch_max': 116.321, 'lowest': 0.1726}
+{'case': 'sub2', 'grid': [66, 84], 'substeps': 2, 'niter': 100, 'sec': 9.3, 'stretch_mean': 0.643, 'stretch_p99': 5.479, 'stretch_max': 41.571, 'lowest': 0.2719}
+{'case': 'sub5', 'grid': [66, 84], 'substeps': 5, 'niter': 100, 'sec': 22.02, 'stretch_mean': 0.096, 'stretch_p99': 0.996, 'stretch_max': 17.419, 'lowest': 0.3156}
+{'case': 'sub10', 'grid': [66, 84], 'substeps': 10, 'niter': 100, 'sec': 44.59, 'stretch_mean': 0.03, 'stretch_p99': 0.382, 'stretch_max': 6.314, 'lowest': 0.3206}
+{'case': 'it25', 'grid': [66, 84], 'substeps': 5, 'niter': 25, 'sec': 19.59, 'stretch_mean': 0.403, 'stretch_p99': 2.851, 'stretch_max': 16.75, 'lowest': 0.2915}
+{'case': 'it50', 'grid': [66, 84], 'substeps': 5, 'niter': 50, 'sec': 20.06, 'stretch_mean': 0.189, 'stretch_p99': 1.896, 'stretch_max': 15.552, 'lowest': 0.306}
+{'case': 'it200', 'grid': [66, 84], 'substeps': 5, 'niter': 200, 'sec': 33.68, 'stretch_mean': 0.071, 'stretch_p99': 0.949, 'stretch_max': 19.651, 'lowest': 0.306}
+{'case': 'it400', 'grid': [66, 84], 'substeps': 5, 'niter': 400, 'sec': 52.2, 'stretch_mean': 0.044, 'stretch_p99': 0.65, 'stretch_max': 13.944, 'lowest': 0.3162}
+{'case': 'fine_it100', 'grid': [132, 168], 'substeps': 5, 'niter': 100, 'sec': 65.95, 'stretch_mean': 0.419, 'stretch_p99': 2.683, 'stretch_max': 53.018, 'lowest': 0.2647}
+{'case': 'fine_it400', 'grid': [132, 168], 'substeps': 5, 'niter': 400, 'sec': 94.51, 'stretch_mean': 0.145, 'stretch_p99': 1.767, 'stretch_max': 41.151, 'lowest': 0.2933}
+保存: D:\Claude\houdini\out\224_stats.json

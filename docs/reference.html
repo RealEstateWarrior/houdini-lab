@@ -7733,13 +7733,14 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
             <ul class="node-parms">
               <li><code>substeps</code>1フレームを何回に分けて計算するか</li>
             </ul>
-            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>既定（Constraint Iterations 100・Substeps 1）では、ぶら下げた布が 2.3% 伸びる。伸びは Iterations を上げる方が安く減る（400 回で 0.2%・時間 1.5 倍）。Stretch Stiffness は Substeps 1 では 10^4 と 10^10 で差が出ない（実験170・177）。 既定（Constraint Iterations 100・Substeps 1）では、ぶら下げた布が 2.3% 伸びる。伸びは Iterations を上げる方が安く減る（400 回で 0.2%・時間 1.5 倍）。Stretch Stiffness は Substeps 1 では 10^4 と 10^10 で差が出ない（実験170・177）。 布は、ぶつかる物から Default Thickness の分だけ離れて止まる。テーブルクロスは既定 0.01 で天板から 10 mm 浮き、0.0025 で 2.5 mm（めり込みは 0）。厚いほど裾が短く垂れる（実験211）。試しは 44×56 程度の粗い布で足りるが、角の垂れは短く出る（実験206）。</div>
+            <div class="gotcha"><span class="gotcha-tag">つまずいた点</span>既定（Constraint Iterations 100・Substeps 1）では、ぶら下げた布が 2.3% 伸びる。伸びは Iterations を上げる方が安く減る（400 回で 0.2%・時間 1.5 倍）。Stretch Stiffness は Substeps 1 では 10^4 と 10^10 で差が出ない（実験170・177）。 既定（Constraint Iterations 100・Substeps 1）では、ぶら下げた布が 2.3% 伸びる。伸びは Iterations を上げる方が安く減る（400 回で 0.2%・時間 1.5 倍）。Stretch Stiffness は Substeps 1 では 10^4 と 10^10 で差が出ない（実験170・177）。 布は、ぶつかる物から Default Thickness の分だけ離れて止まる。テーブルクロスは既定 0.01 で天板から 10 mm 浮き、0.0025 で 2.5 mm（めり込みは 0）。厚いほど裾が短く垂れる（実験211）。試しは 44×56 程度の粗い布で足りるが、角の垂れは短く出る（実験206）。 既定（Constraint Iterations 100・Substeps 1）では、ぶら下げた布が 2.3% 伸びる。伸びは Iterations を上げる方が安く減る（400 回で 0.2%・時間 1.5 倍）。Stretch Stiffness は Substeps 1 では 10^4 と 10^10 で差が出ない（実験170・177）。机に落とすテーブルクロスでは、Substeps の方が時間の割によく効いた。Substeps 1→5 で伸び 2.8%→0.10%、Iterations 400 より Substeps 10 の方が短い時間で伸びが小さい。布の目を 4 倍にすると約 4 倍伸びる（実験224）。 布は、ぶつかる物から Default Thickness の分だけ離れて止まる。テーブルクロスは既定 0.01 で天板から 10 mm 浮き、0.0025 で 2.5 mm（めり込みは 0）。厚いほど裾が短く垂れる（実験211）。試しは 44×56 程度の粗い布で足りるが、角の垂れは短く出る（実験206）。</div>
             <div class="node-exps">
               <a href="log.html#exp015">実験 015</a>
               <a href="log.html#exp170">実験 170</a>
               <a href="log.html#exp177">実験 177</a>
               <a href="log.html#exp206">実験 206</a>
               <a href="log.html#exp211">実験 211</a>
+              <a href="log.html#exp224">実験 224</a>
             </div>
           </div>
           <div class="node-shot">
@@ -12976,7 +12977,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
 </div>
 
 <script src="data/experiment-data-bf21a9e8fb.js"></script>
-<script src="data/glossary-data-904cb9b76f.js"></script>
+<script src="data/glossary-data-542c0ce076.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -13155,7 +13156,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>223</dd></div>
+        <div><dt>実験</dt><dd>225</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>462</dd></div>
@@ -13338,7 +13339,7 @@ breaking（dobreaking）は効く種類が決まっている。glue が作る st
   </div>
 </div>
 
-<script src="data/search-data-5e48dae64a.js"></script>
+<script src="data/search-data-546ae05553.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

@@ -6175,6 +6175,62 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 224 ===================== -->
+    <article class="entry entry--current" id="exp224">
+      <div class="badge">224</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Vellum の布の伸びは Substeps で決まる（1→5 で平均 2.8%→0.10%）。Constraint Iterations を 4 倍にするより Substeps を倍にする方が、短い時間でよく効く。布の目を細かくすると 4 倍伸びる</h2>
+        <p class="path">examples/224_vellum_cloth_stretch.py &nbsp;·&nbsp; 布の伸びは Substeps で決まる。Iterations より効く</p>
+
+        <div class="prose">
+          <p><strong>課題: テーブルクロスやカーテンが、ゴムのように伸びて垂れて見えることがある。vellumsolver の Substeps と Constraint Iterations（既定 100）の、どちらをいくつにすれば伸びなくなるのか。時間はどれだけ延びるのか。</strong></p>
+          <p><a href="#exp206">実験206</a> と同じ机とテーブルクロス（1.9 × 1.45 m、66×84、Cloth の既定の硬さ）を 72 フレーム落とし、72 フレーム目の布の四角形の辺の長さを、落とす前の grid の同じ辺と比べた（伸び）。1 通りずつ、ほかの処理は回さずに時間も測った。</p>
+          <p><strong>Substeps がいちばん効く。</strong>Substeps 1・2・5・10 で、伸びの平均は 2.80・0.64・0.096・0.030%、いちばん伸びた 1% の辺は 23.3・5.5・1.00・0.38%。角のいちばん低い点は 0.17・0.27・0.32・0.32 m で、Substeps 1 では角が 14 cm 長く垂れた。時間は 6.2・9.3・22.0・44.6 秒で、Substeps にほぼ比例する。</p>
+          <p><strong>Constraint Iterations も効くが、時間の割に弱い。</strong>Substeps 5 のまま 25・50・100・200・400 にすると、伸びの平均は 0.403・0.189・0.096・0.071・0.044%、時間は 19.6・20.1・22.0・33.7・52.2 秒。Substeps 10（45 秒、0.030%）は、Iterations 400（52 秒、0.044%）より短い時間でよく効いた。</p>
+          <p><strong>布の目を細かくすると伸びやすい。</strong>132×168（目の数 4 倍）は同じ Substeps 5・Iterations 100 で伸びの平均 0.42%（66×84 の約 4 倍）、角が 0.05 m 長く垂れた。Iterations 400 にしても 0.14%。時間は 66・95 秒。</p>
+          <p><strong>決め方: 伸びて見えたら、まず Substeps を上げる（布の目を細かくしたら、なおさら）。</strong>Substeps 5 で平均 0.1% になり、見た目の垂れはほぼ止まる。Iterations は、Substeps を上げても伸びが残るときに足す。</p>
+        </div>
+
+        <p class="label">布の伸びと時間</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="224_cost.png" alt="同じ時間なら、Substeps を上げた方が伸びは小さい。" loading="lazy" decoding="async"></div>
+            <figcaption>同じ時間なら、Substeps を上げた方が伸びは小さい。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="224_grid.png" alt="72 フレーム目。Substeps 1 は角が長く垂れる。" loading="lazy" decoding="async"></div>
+            <figcaption>72 フレーム目。Substeps 1 は角が長く垂れる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>布の目</th><th>Substeps</th><th>Iterations</th><th>時間（秒）</th><th>伸び 平均（%）</th><th>伸び 上位 1%（%）</th><th>伸び 最大（%）</th><th>角の高さ（m）</th></tr></thead>
+            <tbody>
+              <tr><td>sub1</td><td>66×84</td><td class="num">1</td><td class="num">100</td><td class="num">6.2</td><td class="num">2.798</td><td class="num">23.29</td><td class="num">116.3</td><td class="num">0.173</td></tr>
+              <tr><td>sub2</td><td>66×84</td><td class="num">2</td><td class="num">100</td><td class="num">9.3</td><td class="num">0.643</td><td class="num">5.48</td><td class="num">41.6</td><td class="num">0.272</td></tr>
+              <tr><td>sub5</td><td>66×84</td><td class="num">5</td><td class="num">100</td><td class="num">22.0</td><td class="num">0.096</td><td class="num">1.00</td><td class="num">17.4</td><td class="num">0.316</td></tr>
+              <tr><td>sub10</td><td>66×84</td><td class="num">10</td><td class="num">100</td><td class="num">44.6</td><td class="num">0.030</td><td class="num">0.38</td><td class="num">6.3</td><td class="num">0.321</td></tr>
+              <tr><td>it25</td><td>66×84</td><td class="num">5</td><td class="num">25</td><td class="num">19.6</td><td class="num">0.403</td><td class="num">2.85</td><td class="num">16.8</td><td class="num">0.291</td></tr>
+              <tr><td>it50</td><td>66×84</td><td class="num">5</td><td class="num">50</td><td class="num">20.1</td><td class="num">0.189</td><td class="num">1.90</td><td class="num">15.6</td><td class="num">0.306</td></tr>
+              <tr><td>it200</td><td>66×84</td><td class="num">5</td><td class="num">200</td><td class="num">33.7</td><td class="num">0.071</td><td class="num">0.95</td><td class="num">19.7</td><td class="num">0.306</td></tr>
+              <tr><td>it400</td><td>66×84</td><td class="num">5</td><td class="num">400</td><td class="num">52.2</td><td class="num">0.044</td><td class="num">0.65</td><td class="num">13.9</td><td class="num">0.316</td></tr>
+              <tr><td>fine_it100</td><td>132×168</td><td class="num">5</td><td class="num">100</td><td class="num">66.0</td><td class="num">0.419</td><td class="num">2.68</td><td class="num">53.0</td><td class="num">0.265</td></tr>
+              <tr><td>fine_it400</td><td>132×168</td><td class="num">5</td><td class="num">400</td><td class="num">94.5</td><td class="num">0.145</td><td class="num">1.77</td><td class="num">41.2</td><td class="num">0.293</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>布の伸びは Substeps で決まる。</strong>1→5 で平均 2.8%→0.10%、角の垂れは 14 cm 短くなった。</li>
+          <li><strong>Iterations を 4 倍（400）にするより、Substeps を倍（10）にする方が、短い時間でよく効く。</strong></li>
+          <li><strong>布の目を 4 倍にすると、同じ設定で約 4 倍伸びる。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

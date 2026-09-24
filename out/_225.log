@@ -1,0 +1,9 @@
+{'count': 1, 'kind': 'lights', 'sec': 5.1, 'sec_ref64': 8.93, 'noise': 0.0195, 'mean': 0.606}
+{'count': 1, 'kind': 'glow', 'sec': 2.7, 'sec_ref64': 6.87, 'noise': 0.2108, 'mean': 0.0132}
+{'count': 10, 'kind': 'lights', 'sec': 8.32, 'sec_ref64': 11.23, 'noise': 0.0552, 'mean': 0.1651}
+{'count': 10, 'kind': 'glow', 'sec': 3.08, 'sec_ref64': 13.81, 'noise': 0.5239, 'mean': 0.0151}
+{'count': 100, 'kind': 'lights', 'sec': 13.66, 'sec_ref64': 17.33, 'noise': 0.0515, 'mean': 0.248}
+{'count': 100, 'kind': 'glow', 'sec': 7.48, 'sec_ref64': 83.9, 'noise': 0.5433, 'mean': 0.0845}
+{'count': 1000, 'kind': 'lights', 'sec': 27.87, 'sec_ref64': 31.71, 'noise': 0.0474, 'mean': 0.2539}
+{'count': 1000, 'kind': 'glow', 'sec': 8.77, 'sec_ref64': 75.04, 'noise': 0.2206, 'mean': 0.5087}
+保存: D:\Claude\houdini\out\225_stats.json

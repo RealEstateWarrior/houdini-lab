@@ -1,0 +1,84 @@
+{
+  "title": "実験225",
+  "network": "/obj/glow_balls",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "spots",
+      "type": "attribwrangle",
+      "pos": [
+        1.13,
+        2.108
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 0
+      }
+    },
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        -1.13,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.1,
+        "rady": 0.1,
+        "radz": 0.1
+      }
+    },
+    {
+      "name": "balls",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "assign_glow",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/glow"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "balls",
+      "to_input": 0
+    },
+    {
+      "from": "spots",
+      "from_output": 0,
+      "to": "balls",
+      "to_input": 1
+    },
+    {
+      "from": "balls",
+      "from_output": 0,
+      "to": "assign_glow",
+      "to_input": 0
+    }
+  ]
+}
