@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>153本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>154本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3907,6 +3907,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp228" data-anchor="exp228"><span class="doc-no">228</span><span class="doc-t">粒は点のまま Karma に渡す。1000 万個でも 8 秒（640×360・8 サンプル）。小さな球をパックして並べると 3 万個で 78 秒かかり、その 8 割は場面を渡す時間</span></a></li>
         <li><a href="#exp229" data-anchor="exp229"><span class="doc-no">229</span><span class="doc-t">毛は曲線のまま Karma に渡す。100 万本でも 12 秒（640×360・8 サンプル）。polywire で筒の面にすると 1 本あたりが重く、3 万本で 9 秒</span></a></li>
         <li><a href="#exp230" data-anchor="exp230"><span class="doc-no">230</span><span class="doc-t">速く回る物のブレは、オブジェクトごと回すなら既定（Rotation Blur・2 サンプル）で弧になる。SOP で形を回すと既定の Geometry Time Samples 2 ではまっすぐな線になり、8 で弧になる。時間はほぼ同じ</span></a></li>
+        <li><a href="#exp232" data-anchor="exp232"><span class="doc-no">232</span><span class="doc-t">Karma XPU は、ガラス・雪・ドーナツで CPU の 8〜14 倍速い（グラスの水 82 秒 → 6 秒）。ただしドーナツのアイシングと海の空は色が出ずに白くなり、ガラスの場面は明るく飛んだ。雪と炎はほぼ同じ絵</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3918,7 +3919,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>231 / 231</dd></div>
+      <div><dt>実験</dt><dd>232 / 232</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16855,6 +16856,70 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 232 ===================== -->
+    <article class="entry entry--current" id="exp232">
+      <div class="badge">232</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>Karma XPU は、ガラス・雪・ドーナツで CPU の 7〜14 倍速い（グラスの水 82 秒 → 6 秒）。ただしドーナツのアイシングと海の空は色が出ずに白くなり、ガラスの場面は明るく飛んだ。雪と炎はほぼ同じ絵</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">XPU</span><span class="coltag">速さ</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>XPU は多くの場面で CPU の数倍〜十数倍速い。</strong>グラスの水 82 → 6 秒。</li>
+            <li><strong>ドーナツのアイシングと海の空は、XPU では色が出ずに白くなった。</strong>原因は確かめていない。</li>
+            <li><strong>ガラスの場面は明るく飛んだ。雪（SSS）と炎（Pyro）はほぼ同じ絵。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_232.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/232_karma_xpu_scenes.py &nbsp;·&nbsp; XPU は数倍〜十数倍速いが、色が出ない所があった</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/232_scene.hipnc" target="_blank" rel="noopener noreferrer">232_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="232_graph.png" alt="実験232 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 実践「夕暮れの海」では、XPU（GPU で撮る <button class="term" data-term="Karma">Karma</button>）は速かったが、点の色で光らせた空が白く飛んだ。どの場面なら XPU に任せてよいのか。どれだけ速いのか。</strong></p>
+          <p>実践 6 本の hip を読み、仕上がりを撮る Karma の Rendering Engine だけを CPU・XPU に切り替えて、640×360・32 <button class="term" data-term="サンプル">サンプル</button>・<button class="term" data-term="ノイズ">ノイズ</button>除去なしで撮った。場面ごとに別の <button class="term" data-term="hython">hython</button> で、CPU・XPU それぞれはじめに 1 枚撮って捨て（XPU は GPU の準備の分）、2 枚目の時間を測った。画の違いは、CPU の画との画素ごとの差の平均（0〜255。右下の透かしは除く）。GPU は GeForce RTX 4070。</p>
+          <p><strong>速さ: 多くの場面で数倍〜十数倍。</strong>グラスの水 81.9 → 6.0 秒、雪だるま 37.2 → 4.0 秒、ドーナツ 32.9 → 4.5 秒、ネオン管 18.8 → 4.0 秒、焚き火 6.7 → 4.4 秒。冬の海だけは 7.8 → 8.2 秒で速くならなかった。</p>
+          <p><strong>材質の色が出ずに白くなる所があった。</strong>ドーナツのアイシング（principledshader の色が<button class="term" data-term="ピン">ピン</button>ク、Coat 0.5）は、CPU ではピンク、XPU では白だった（差 23）。Coat を 0 にしても XPU では白いままだった。点の色で揚げ色を付けた生地は、XPU でも揚げ色だった。冬の海の空（点の色で光らせた空の球）も、XPU では真っ白に飛んだ（差 123、画の明るさの平均 115 → 238）。どちらも原因は確かめていない。</p>
+          <p><strong>ガラスの場面は、全体が明るく飛んだ。</strong>グラスの水は背景の幕が白く飛び、ガラスの輪郭が見えにくくなった（差 28、明るさ 195 → 222）。原因は確かめていない。</p>
+          <p><strong>雪（SSS）と炎（<button class="term" data-term="Pyro">Pyro</button>）は、ほぼ同じ絵。</strong>差は雪だるま 13、焚き火 6、ネオン管 7。どれも XPU の方が少し明るかった。</p>
+          <p><strong>決め方: 試し撮りは XPU で速く回し、仕上げの前に必ず CPU の画と並べて確かめる。</strong>色が変わる所（この実験ではアイシング・光る空）があれば、その場面は CPU で撮る。</p>
+        </div>
+
+        <p class="label">CPU と XPU（640×360・32 サンプル、ノイズ除去なし）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="232_grid.png" alt="左が CPU、右が XPU。ドーナツのアイシングと海の空は色が出ずに白くなり、グ" loading="lazy" decoding="async"></div>
+            <figcaption>左が CPU、右が XPU。ドーナツのアイシングと海の空は色が出ずに白くなり、グラスは明るく飛んだ。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>場面</th><th>CPU（秒）</th><th>XPU（秒）</th><th>速さの比</th><th>画の差（0〜255）</th><th>明るさの平均 CPU → XPU</th></tr></thead>
+            <tbody>
+              <tr><td>ドーナツ</td><td class="num">32.9</td><td class="num">4.5</td><td class="num">7.3</td><td class="num">23.2</td><td>169 → 192</td></tr>
+              <tr><td>氷の入ったグラスの水</td><td class="num">81.9</td><td class="num">6.0</td><td class="num">13.7</td><td class="num">28.2</td><td>195 → 222</td></tr>
+              <tr><td>冬の朝の七里ヶ浜</td><td class="num">7.8</td><td class="num">8.2</td><td class="num">1.0</td><td class="num">123.0</td><td>115 → 238</td></tr>
+              <tr><td>雪だるま</td><td class="num">37.2</td><td class="num">4.0</td><td class="num">9.2</td><td class="num">13.4</td><td>195 → 208</td></tr>
+              <tr><td>焚き火</td><td class="num">6.7</td><td class="num">4.4</td><td class="num">1.5</td><td class="num">6.4</td><td>22 → 28</td></tr>
+              <tr><td>ネオン管</td><td class="num">18.8</td><td class="num">4.0</td><td class="num">4.7</td><td class="num">7.5</td><td>45 → 51</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>XPU は多くの場面で CPU の数倍〜十数倍速い。</strong>グラスの水 82 → 6 秒。</li>
+          <li><strong>ドーナツのアイシングと海の空は、XPU では色が出ずに白くなった。</strong>原因は確かめていない。</li>
+          <li><strong>ガラスの場面は明るく飛んだ。雪（SSS）と炎（Pyro）はほぼ同じ絵。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -16870,7 +16935,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-e9ab41160a.js"></script>
+<script src="data/glossary-data-839c8c1a93.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -17049,7 +17114,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>231</dd></div>
+        <div><dt>実験</dt><dd>232</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>463</dd></div>
@@ -17232,7 +17297,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-add023b7ef.js"></script>
+<script src="data/search-data-ede13a9a27.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

@@ -1,0 +1,63 @@
+{
+  "rows": [
+    {
+      "case": "ocean_winter",
+      "frame": 30,
+      "cpu_sec": 7.81,
+      "xpu_sec": 8.21,
+      "diff": 123.04,
+      "cpu_mean": 115.4,
+      "xpu_mean": 238.4
+    },
+    {
+      "case": "campfire",
+      "frame": 60,
+      "cpu_sec": 6.7,
+      "xpu_sec": 4.43,
+      "diff": 6.37,
+      "cpu_mean": 21.8,
+      "xpu_mean": 27.9
+    },
+    {
+      "case": "glasscup",
+      "frame": 1,
+      "cpu_sec": 81.86,
+      "xpu_sec": 5.97,
+      "diff": 28.2,
+      "cpu_mean": 195.0,
+      "xpu_mean": 222.5
+    },
+    {
+      "case": "snowman",
+      "frame": 1,
+      "cpu_sec": 37.21,
+      "xpu_sec": 4.03,
+      "diff": 13.39,
+      "cpu_mean": 194.7,
+      "xpu_mean": 207.8
+    },
+    {
+      "case": "donut",
+      "frame": 1,
+      "cpu_sec": 32.85,
+      "xpu_sec": 4.49,
+      "diff": 23.24,
+      "cpu_mean": 168.6,
+      "xpu_mean": 191.8
+    },
+    {
+      "case": "neon",
+      "frame": 1,
+      "cpu_sec": 18.81,
+      "xpu_sec": 4.02,
+      "diff": 7.48,
+      "cpu_mean": 45.1,
+      "xpu_mean": 51.0
+    }
+  ],
+  "res": [
+    640,
+    360
+  ],
+  "spp": 32
+}

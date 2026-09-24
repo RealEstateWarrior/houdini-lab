@@ -1,0 +1,1 @@
+{"case": "neon", "frame": 1, "cpu_sec": 18.81, "xpu_sec": 4.02, "diff": 7.48, "cpu_mean": 45.1, "xpu_mean": 51.0}
