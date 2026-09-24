@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ エフェクト編<small>76本</small></p>
+      <p class="doc-toc-head">実験ログ エフェクト編<small>77本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp013" data-anchor="exp013"><span class="doc-no">013</span><span class="doc-t">時間軸への対応 — フレームを進めて記録する</span></a></li>
@@ -3826,6 +3826,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp221" data-anchor="exp221"><span class="doc-no">221</span><span class="doc-t">海の映像の 1 枚は、サンプル数を 16→4 にしても 8.8→7.2 秒、解像度を 640×360 にしても 8.3 秒。時間の大半は画の大きさによらない分で、下げるなら 4 サンプル＋ノイズ除去</span></a></li>
         <li><a href="#exp223" data-anchor="exp223"><span class="doc-no">223</span><span class="doc-t">海の白波の cusp のしきい値は、風 5 m/秒で 0.08・10 m/秒で 0.15・15 m/秒で 0.26（波の高さを本物に合わせたとき）。0.55 では風 15 m/秒でもほぼ白波が出ない</span></a></li>
         <li><a href="#exp224" data-anchor="exp224"><span class="doc-no">224</span><span class="doc-t">Vellum の布の伸びは Substeps で決まる（1→5 で平均 2.8%→0.10%）。Constraint Iterations を 4 倍にするより Substeps を倍にする方が、短い時間でよく効く。布の目を細かくすると 4 倍伸びる</span></a></li>
+        <li><a href="#exp226" data-anchor="exp226"><span class="doc-no">226</span><span class="doc-t">ガラスのひびを増やすと、同じつながりの強さでは割れにくくなる（20 本で破片の 17% が動いたのが、80 本では 5%）。80 本なら強さを 0.8 → 0.6 に下げると同じくらい割れる。計算はどれも 3 秒以内</span></a></li>
       </ol>
       <a class="doc-other" href="log.html">実験ログ モデリング編へ →</a>
     </div>
@@ -3837,7 +3838,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — エフェクト編</h1>
     <p class="lede">時間を進めて物理を解く側の記録。剛体・布・煙・液体・パーティクル、そしてレンダリング。実験013から。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>225 / 225</dd></div>
+      <div><dt>実験</dt><dd>226 / 226</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -11211,6 +11212,75 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 226 ===================== -->
+    <article class="entry entry--current" id="exp226">
+      <div class="badge">226</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>ガラスのひびを増やすと、同じつながりの強さでは割れにくくなる（20 本で破片の 17% が動いたのが、80 本では 5%）。80 本なら強さを 0.8 → 0.6 に下げると同じくらい割れる。計算はどれも 3 秒以内</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約3分</span><span class="coltag">シミュレーション</span><span class="coltag">RBD</span><span class="coltag">ガラス</span><span class="coltag">破壊</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>ひびを増やすと、同じつながりの強さでは割れにくくなる。</strong>20 本 17% → 80 本 5% の破片が動いた。</li>
+            <li><strong>80 本なら強さ 0.6 で、20 本・0.8 と同じくらい割れる。</strong></li>
+            <li><strong>計算の時間はどれも 3 秒以内。</strong>縁のでこぼこを切ると面の数と割る時間が減る。</li>
+          </ul></div>
+          <img class="colthumb" src="thumb_226.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約3分</small></summary>
+        <p class="path">examples/226_rbd_glass_pieces.py &nbsp;·&nbsp; ガラスのひびを増やすと割れにくくなる。80本なら強さ0.6</p>
+        <p class="usedby"><span class="usedby-tag">使ったノード</span><a href="reference.html#nodes">rbdmaterialfracture</a></p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/226_scene.hipnc" target="_blank" rel="noopener noreferrer">226_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="226_graph.png" alt="実験226 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 窓ガラスを割る場面で、破片をもっと細かくしたい。rbdmaterialfracture（Glass）の Radial Crack Number（放射状のひびの数、既定 20）を上げると、計算の時間はどれだけ増えるか。見た目はどう変わるか。</strong></p>
+          <p>実践「窓ガラスを割る」と同じ場面（1 × 1.4 m・厚さ 8 mm の板に、半径 6 cm の球を秒速 14 m で当てる。枠に触れる破片は止め、破片どうしのつながりの強さ 0.8）を48 フレーム回した。ひびを 8・20・40・80 本にし、Enable Edge Noise（破片の縁のでこぼこ）を切ったものも比べた。48 フレーム目までに 5 cm 以上動いた破片を数えた。</p>
+          <p><strong>計算の時間は、どれも小さい。</strong>ひび 8・20・40・80 本で、破片は 37・119・254・474 個、割る計算は 1.74・0.64・0.69・1.31 秒（8 本は 1 回目の作成の分を含む）、Bullet の 48 フレームは 0.60・0.38・0.58・1.01 秒。縁のでこぼこを切ると、面の数が 4,900 → 816（20 本）に減り、割る計算は 0.64 → 0.05 秒になった。</p>
+          <p><strong>ひびを増やすと、割れにくくなる。</strong>同じ強さ 0.8 で、動いた破片は 20 本で 20 / 119 個（17%）、80 本で 23 / 474 個（5%）。画でも、80 本は球が小さな穴を開けただけだった。縁をなめらかにした 80 本は 2 個しか動かず、ほとんど割れなかった。破片が増えると、破片どうしのつながりの数も増えて、全体として割れにくくなると考えられる。</p>
+          <p><strong>80 本なら、つながりの強さを下げる。</strong>強さ 0.6・0.5・0.4・0.2・0.1 で、動いた破片は 19・21・52・58・81%。0.6 で 20 本・0.8 と同じくらい（19% と 17%）割れ、穴の縁の破片がずっと細かくなった。0.1 では、ガラスの大半が崩れ落ちた。なお 0.4 の条件は、同じ設定で 2 回回すと動いた数が 238 と 245 で、少し揺らいだ（ほかの条件は 2 回とも同じ）。</p>
+          <p><strong>決め方: ひびを増やしたら、つながりの強さを下げる（20 → 80 本で 0.8 → 0.6）。</strong>計算の時間は気にしなくてよい。</p>
+        </div>
+
+        <p class="label">ひびの数とつながりの強さ（48 フレーム目）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="226_grid.png" alt="上: 20 本・80 本・80 本縁なめらか（強さ 0.8）。下: 80 本で強" loading="lazy" decoding="async"></div>
+            <figcaption>上: 20 本・80 本・80 本縁なめらか（強さ 0.8）。下: 80 本で強さ 0.6・0.4・0.1。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>ひび</th><th>縁のでこぼこ</th><th>つながりの強さ</th><th>破片</th><th>面の数</th><th>割る計算（秒）</th><th>Bullet（秒）</th><th>動いた破片</th></tr></thead>
+            <tbody>
+              <tr><td>ひび 8 本</td><td class="num">8</td><td>入り</td><td class="num">0.8</td><td class="num">37</td><td class="num">2,419</td><td class="num">1.74</td><td class="num">0.60</td><td>20（54%）</td></tr>
+              <tr><td>ひび 20 本（既定）</td><td class="num">20</td><td>入り</td><td class="num">0.8</td><td class="num">119</td><td class="num">4,900</td><td class="num">0.64</td><td class="num">0.38</td><td>20（17%）</td></tr>
+              <tr><td>ひび 40 本</td><td class="num">40</td><td>入り</td><td class="num">0.8</td><td class="num">254</td><td class="num">8,823</td><td class="num">0.69</td><td class="num">0.58</td><td>19（7%）</td></tr>
+              <tr><td>ひび 80 本</td><td class="num">80</td><td>入り</td><td class="num">0.8</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.31</td><td class="num">1.01</td><td>23（5%）</td></tr>
+              <tr><td>20 本・縁なめらか</td><td class="num">20</td><td>切り</td><td class="num">0.8</td><td class="num">119</td><td class="num">816</td><td class="num">0.05</td><td class="num">0.37</td><td>38（32%）</td></tr>
+              <tr><td>80 本・縁なめらか</td><td class="num">80</td><td>切り</td><td class="num">0.8</td><td class="num">530</td><td class="num">3,858</td><td class="num">0.11</td><td class="num">0.74</td><td>2（0%）</td></tr>
+              <tr><td>80 本・強さ 0.6</td><td class="num">80</td><td>入り</td><td class="num">0.6</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.38</td><td class="num">1.31</td><td>88（19%）</td></tr>
+              <tr><td>80 本・強さ 0.5</td><td class="num">80</td><td>入り</td><td class="num">0.5</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.40</td><td class="num">1.46</td><td>100（21%）</td></tr>
+              <tr><td>80 本・強さ 0.4</td><td class="num">80</td><td>入り</td><td class="num">0.4</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.55</td><td class="num">2.17</td><td>245（52%）</td></tr>
+              <tr><td>80 本・強さ 0.2</td><td class="num">80</td><td>入り</td><td class="num">0.2</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.52</td><td class="num">2.43</td><td>275（58%）</td></tr>
+              <tr><td>80 本・強さ 0.1</td><td class="num">80</td><td>入り</td><td class="num">0.1</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.48</td><td class="num">2.98</td><td>382（81%）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ひびを増やすと、同じつながりの強さでは割れにくくなる。</strong>20 本 17% → 80 本 5% の破片が動いた。</li>
+          <li><strong>80 本なら強さ 0.6 で、20 本・0.8 と同じくらい割れる。</strong></li>
+          <li><strong>計算の時間はどれも 3 秒以内。</strong>縁のでこぼこを切ると面の数と割る時間が減る。</li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -11226,7 +11296,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
 </div>
 </div>
 
-<script src="data/glossary-data-542c0ce076.js"></script>
+<script src="data/glossary-data-cab8b6e9d1.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -11405,7 +11475,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>225</dd></div>
+        <div><dt>実験</dt><dd>226</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
         <div><dt>用語</dt><dd>462</dd></div>
@@ -11588,7 +11658,7 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
   </div>
 </div>
 
-<script src="data/search-data-546ae05553.js"></script>
+<script src="data/search-data-337e3058a5.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

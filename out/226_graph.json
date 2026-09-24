@@ -1,0 +1,242 @@
+{
+  "title": "実験226",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "pane",
+      "type": "box",
+      "pos": [
+        -5.224,
+        6.551
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "sizey": 1.4,
+        "sizez": 0.008,
+        "ty": 0.75
+      }
+    },
+    {
+      "name": "hit_point",
+      "type": "add",
+      "pos": [
+        -2.965,
+        6.099
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "points": 1,
+        "pt0x": 0.12,
+        "pt0y": 0.9
+      }
+    },
+    {
+      "name": "crack",
+      "type": "rbdmaterialfracture::3.0",
+      "pos": [
+        -4.095,
+        5.12
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "materialtype": 1,
+        "glass_useinput": 1
+      }
+    },
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        -0.141,
+        5.798
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.06,
+        "rady": 0.06,
+        "radz": 0.06,
+        "tx": 0.12,
+        "ty": 0.9,
+        "tz": 0.7
+      }
+    },
+    {
+      "name": "throw",
+      "type": "attribwrangle",
+      "pos": [
+        -0.141,
+        4.669
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "s@name = 'ball';\nv@v = {0, 0, -14};"
+      }
+    },
+    {
+      "name": "glass_and_ball",
+      "type": "merge",
+      "pos": [
+        -2.118,
+        3.69
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "one_per_piece",
+      "type": "pack",
+      "pos": [
+        -2.118,
+        2.56
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "packbyname": 1,
+        "transfer_attributes": "name v"
+      }
+    },
+    {
+      "name": "hold_edges",
+      "type": "attribwrangle",
+      "pos": [
+        -2.118,
+        1.431
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "float b[] = primintrinsic(0, 'bounds', @ptnum);\nint on_frame = b[0] < -0.47 || b[1] > 0.47 || b[2] < 0.08 || b[3] > 1..."
+      }
+    },
+    {
+      "name": "weak_glue",
+      "type": "attribwrangle",
+      "pos": [
+        2.118,
+        0.979
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "class": 1,
+        "snippet": "f@strength = 0.1;"
+      }
+    },
+    {
+      "name": "shatter",
+      "type": "rbdbulletsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "folder3": 1,
+        "folder35": 1,
+        "folder6": 1,
+        "folder4": 1,
+        "folder34": 1,
+        "folder21": 1,
+        "folder38": 1,
+        "setupfolder_2": 1,
+        "useground": 1,
+        "folder5": 1,
+        "folder26_1": 1,
+        "folder13": 1,
+        "folder7": 1,
+        "folder44": 1,
+        "folder47": 1,
+        "folder24": 1,
+        "folder10": 1,
+        "folder26": 1,
+        "folder9": 1,
+        "folder42": 1,
+        "folder45": 1,
+        "folder26_2": 1,
+        "folder27": 1
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "pane",
+      "from_output": 0,
+      "to": "crack",
+      "to_input": 0
+    },
+    {
+      "from": "hit_point",
+      "from_output": 0,
+      "to": "crack",
+      "to_input": 3
+    },
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "throw",
+      "to_input": 0
+    },
+    {
+      "from": "crack",
+      "from_output": 0,
+      "to": "glass_and_ball",
+      "to_input": 0
+    },
+    {
+      "from": "throw",
+      "from_output": 0,
+      "to": "glass_and_ball",
+      "to_input": 1
+    },
+    {
+      "from": "glass_and_ball",
+      "from_output": 0,
+      "to": "one_per_piece",
+      "to_input": 0
+    },
+    {
+      "from": "one_per_piece",
+      "from_output": 0,
+      "to": "hold_edges",
+      "to_input": 0
+    },
+    {
+      "from": "crack",
+      "from_output": 1,
+      "to": "weak_glue",
+      "to_input": 0
+    },
+    {
+      "from": "hold_edges",
+      "from_output": 0,
+      "to": "shatter",
+      "to_input": 0
+    },
+    {
+      "from": "weak_glue",
+      "from_output": 0,
+      "to": "shatter",
+      "to_input": 1
+    }
+  ]
+}

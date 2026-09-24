@@ -6231,6 +6231,59 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 226 ===================== -->
+    <article class="entry entry--current" id="exp226">
+      <div class="badge">226</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>ガラスのひびを増やすと、同じつながりの強さでは割れにくくなる（20 本で破片の 17% が動いたのが、80 本では 5%）。80 本なら強さを 0.8 → 0.6 に下げると同じくらい割れる。計算はどれも 3 秒以内</h2>
+        <p class="path">examples/226_rbd_glass_pieces.py &nbsp;·&nbsp; ガラスのひびを増やすと割れにくくなる。80本なら強さ0.6</p>
+
+        <div class="prose">
+          <p><strong>課題: 窓ガラスを割る場面で、破片をもっと細かくしたい。rbdmaterialfracture（Glass）の Radial Crack Number（放射状のひびの数、既定 20）を上げると、計算の時間はどれだけ増えるか。見た目はどう変わるか。</strong></p>
+          <p>実践「窓ガラスを割る」と同じ場面（1 × 1.4 m・厚さ 8 mm の板に、半径 6 cm の球を秒速 14 m で当てる。枠に触れる破片は止め、破片どうしのつながりの強さ 0.8）を48 フレーム回した。ひびを 8・20・40・80 本にし、Enable Edge Noise（破片の縁のでこぼこ）を切ったものも比べた。48 フレーム目までに 5 cm 以上動いた破片を数えた。</p>
+          <p><strong>計算の時間は、どれも小さい。</strong>ひび 8・20・40・80 本で、破片は 37・119・254・474 個、割る計算は 1.74・0.64・0.69・1.31 秒（8 本は 1 回目の作成の分を含む）、Bullet の 48 フレームは 0.60・0.38・0.58・1.01 秒。縁のでこぼこを切ると、面の数が 4,900 → 816（20 本）に減り、割る計算は 0.64 → 0.05 秒になった。</p>
+          <p><strong>ひびを増やすと、割れにくくなる。</strong>同じ強さ 0.8 で、動いた破片は 20 本で 20 / 119 個（17%）、80 本で 23 / 474 個（5%）。画でも、80 本は球が小さな穴を開けただけだった。縁をなめらかにした 80 本は 2 個しか動かず、ほとんど割れなかった。破片が増えると、破片どうしのつながりの数も増えて、全体として割れにくくなると考えられる。</p>
+          <p><strong>80 本なら、つながりの強さを下げる。</strong>強さ 0.6・0.5・0.4・0.2・0.1 で、動いた破片は 19・21・52・58・81%。0.6 で 20 本・0.8 と同じくらい（19% と 17%）割れ、穴の縁の破片がずっと細かくなった。0.1 では、ガラスの大半が崩れ落ちた。なお 0.4 の条件は、同じ設定で 2 回回すと動いた数が 238 と 245 で、少し揺らいだ（ほかの条件は 2 回とも同じ）。</p>
+          <p><strong>決め方: ひびを増やしたら、つながりの強さを下げる（20 → 80 本で 0.8 → 0.6）。</strong>計算の時間は気にしなくてよい。</p>
+        </div>
+
+        <p class="label">ひびの数とつながりの強さ（48 フレーム目）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="226_grid.png" alt="上: 20 本・80 本・80 本縁なめらか（強さ 0.8）。下: 80 本で強" loading="lazy" decoding="async"></div>
+            <figcaption>上: 20 本・80 本・80 本縁なめらか（強さ 0.8）。下: 80 本で強さ 0.6・0.4・0.1。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>条件</th><th>ひび</th><th>縁のでこぼこ</th><th>つながりの強さ</th><th>破片</th><th>面の数</th><th>割る計算（秒）</th><th>Bullet（秒）</th><th>動いた破片</th></tr></thead>
+            <tbody>
+              <tr><td>ひび 8 本</td><td class="num">8</td><td>入り</td><td class="num">0.8</td><td class="num">37</td><td class="num">2,419</td><td class="num">1.74</td><td class="num">0.60</td><td>20（54%）</td></tr>
+              <tr><td>ひび 20 本（既定）</td><td class="num">20</td><td>入り</td><td class="num">0.8</td><td class="num">119</td><td class="num">4,900</td><td class="num">0.64</td><td class="num">0.38</td><td>20（17%）</td></tr>
+              <tr><td>ひび 40 本</td><td class="num">40</td><td>入り</td><td class="num">0.8</td><td class="num">254</td><td class="num">8,823</td><td class="num">0.69</td><td class="num">0.58</td><td>19（7%）</td></tr>
+              <tr><td>ひび 80 本</td><td class="num">80</td><td>入り</td><td class="num">0.8</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.31</td><td class="num">1.01</td><td>23（5%）</td></tr>
+              <tr><td>20 本・縁なめらか</td><td class="num">20</td><td>切り</td><td class="num">0.8</td><td class="num">119</td><td class="num">816</td><td class="num">0.05</td><td class="num">0.37</td><td>38（32%）</td></tr>
+              <tr><td>80 本・縁なめらか</td><td class="num">80</td><td>切り</td><td class="num">0.8</td><td class="num">530</td><td class="num">3,858</td><td class="num">0.11</td><td class="num">0.74</td><td>2（0%）</td></tr>
+              <tr><td>80 本・強さ 0.6</td><td class="num">80</td><td>入り</td><td class="num">0.6</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.38</td><td class="num">1.31</td><td>88（19%）</td></tr>
+              <tr><td>80 本・強さ 0.5</td><td class="num">80</td><td>入り</td><td class="num">0.5</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.40</td><td class="num">1.46</td><td>100（21%）</td></tr>
+              <tr><td>80 本・強さ 0.4</td><td class="num">80</td><td>入り</td><td class="num">0.4</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.55</td><td class="num">2.17</td><td>245（52%）</td></tr>
+              <tr><td>80 本・強さ 0.2</td><td class="num">80</td><td>入り</td><td class="num">0.2</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.52</td><td class="num">2.43</td><td>275（58%）</td></tr>
+              <tr><td>80 本・強さ 0.1</td><td class="num">80</td><td>入り</td><td class="num">0.1</td><td class="num">474</td><td class="num">16,367</td><td class="num">1.48</td><td class="num">2.98</td><td>382（81%）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>ひびを増やすと、同じつながりの強さでは割れにくくなる。</strong>20 本 17% → 80 本 5% の破片が動いた。</li>
+          <li><strong>80 本なら強さ 0.6 で、20 本・0.8 と同じくらい割れる。</strong></li>
+          <li><strong>計算の時間はどれも 3 秒以内。</strong>縁のでこぼこを切ると面の数と割る時間が減る。</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>

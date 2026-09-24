@@ -1,0 +1,126 @@
+{
+  "rows": [
+    {
+      "case": "r8",
+      "radial_cracks": 8,
+      "edge_noise": 1,
+      "glue": 0.8,
+      "pieces": 37,
+      "polys": 2419,
+      "fracture_sec": 1.74,
+      "sim_sec": 0.6,
+      "moved": 20
+    },
+    {
+      "case": "r20",
+      "radial_cracks": 20,
+      "edge_noise": 1,
+      "glue": 0.8,
+      "pieces": 119,
+      "polys": 4900,
+      "fracture_sec": 0.64,
+      "sim_sec": 0.38,
+      "moved": 20
+    },
+    {
+      "case": "r40",
+      "radial_cracks": 40,
+      "edge_noise": 1,
+      "glue": 0.8,
+      "pieces": 254,
+      "polys": 8823,
+      "fracture_sec": 0.69,
+      "sim_sec": 0.58,
+      "moved": 19
+    },
+    {
+      "case": "r80",
+      "radial_cracks": 80,
+      "edge_noise": 1,
+      "glue": 0.8,
+      "pieces": 474,
+      "polys": 16367,
+      "fracture_sec": 1.31,
+      "sim_sec": 1.01,
+      "moved": 23
+    },
+    {
+      "case": "r20_smooth",
+      "radial_cracks": 20,
+      "edge_noise": 0,
+      "glue": 0.8,
+      "pieces": 119,
+      "polys": 816,
+      "fracture_sec": 0.05,
+      "sim_sec": 0.37,
+      "moved": 38
+    },
+    {
+      "case": "r80_smooth",
+      "radial_cracks": 80,
+      "edge_noise": 0,
+      "glue": 0.8,
+      "pieces": 530,
+      "polys": 3858,
+      "fracture_sec": 0.11,
+      "sim_sec": 0.74,
+      "moved": 2
+    },
+    {
+      "case": "r80_g06",
+      "radial_cracks": 80,
+      "edge_noise": 1,
+      "glue": 0.6,
+      "pieces": 474,
+      "polys": 16367,
+      "fracture_sec": 1.38,
+      "sim_sec": 1.31,
+      "moved": 88
+    },
+    {
+      "case": "r80_g05",
+      "radial_cracks": 80,
+      "edge_noise": 1,
+      "glue": 0.5,
+      "pieces": 474,
+      "polys": 16367,
+      "fracture_sec": 1.4,
+      "sim_sec": 1.46,
+      "moved": 100
+    },
+    {
+      "case": "r80_g04",
+      "radial_cracks": 80,
+      "edge_noise": 1,
+      "glue": 0.4,
+      "pieces": 474,
+      "polys": 16367,
+      "fracture_sec": 1.55,
+      "sim_sec": 2.17,
+      "moved": 245
+    },
+    {
+      "case": "r80_g02",
+      "radial_cracks": 80,
+      "edge_noise": 1,
+      "glue": 0.2,
+      "pieces": 474,
+      "polys": 16367,
+      "fracture_sec": 1.52,
+      "sim_sec": 2.43,
+      "moved": 275
+    },
+    {
+      "case": "r80_g01",
+      "radial_cracks": 80,
+      "edge_noise": 1,
+      "glue": 0.1,
+      "pieces": 474,
+      "polys": 16367,
+      "fracture_sec": 1.48,
+      "sim_sec": 2.98,
+      "moved": 382
+    }
+  ],
+  "last": 48
+}
