@@ -1583,6 +1583,12 @@ DONE = [
      "shots": ["236_grid.png", "236_graph.png"],
      "title": "氷の入ったグラスの水は、Karma の Refraction Limit 既定 4 では氷がまだ黒く残る。8 で透明になり（暗い所 7% → 4%）、時間は 81 → 92 秒。16 は 8 と同じ",
      "note": "グラスの水と氷は Refraction Limit 8 で透明に"},
+    {"no": "237", "anchor": "exp237",
+     "tags": ["シミュレーション", "Vellum", "風船", "制作"],
+     "log": "log_fx", "thumb": "237_grid.png",
+     "shots": ["237_grid.png", "237_graph.png"],
+     "title": "Vellum の風船の体積は、Pressure の Rest Length Scale の倍率ちょうどになる（3 なら 3.00 倍）。2 フレームで落ち着く。ただし 2 倍を超えるとしずく形が消えて球になり、膜が柔らかい（10²）と横につぶれる",
+     "note": "風船の体積は Rest Length Scale の倍率ちょうどに。2倍を超えると球に"},
 ]
 
 PLANNED = []

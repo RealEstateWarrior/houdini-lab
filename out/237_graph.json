@@ -1,0 +1,127 @@
+{
+  "title": "実験237",
+  "network": "/obj/bench",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "rubber",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        4.518
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.11,
+        "rady": 0.13,
+        "radz": 0.11,
+        "rows": 24,
+        "cols": 32
+      }
+    },
+    {
+      "name": "teardrop",
+      "type": "attribwrangle",
+      "pos": [
+        0.0,
+        3.388
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "if (@P.y < 0) {\n    float k = fit(@P.y, -0.13, 0, 0.3, 1);\n    @P.x *= k;  @P.z *= k;\n}\ni@group_knot = @P.y < -0.125;"
+      }
+    },
+    {
+      "name": "rubber_skin",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 3,
+        "pingroup": "knot",
+        "stretchstiffnessexp": 3
+      }
+    },
+    {
+      "name": "air_pressure",
+      "type": "vellumconstraints",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "constrainttype": 9,
+        "stretchrestscale": 3.0
+      }
+    },
+    {
+      "name": "inflate",
+      "type": "vellumsolver",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "substeps": 5,
+        "gravityy": 0.0,
+        "windshadow_maskfalloff1pos": 0.8500000238418579,
+        "windshadow_maskfalloff1value": 1.0,
+        "windshadow_maskfalloff2pos": 0.9973856210708618
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "rubber",
+      "from_output": 0,
+      "to": "teardrop",
+      "to_input": 0
+    },
+    {
+      "from": "teardrop",
+      "from_output": 0,
+      "to": "rubber_skin",
+      "to_input": 0
+    },
+    {
+      "from": "rubber_skin",
+      "from_output": 0,
+      "to": "air_pressure",
+      "to_input": 0
+    },
+    {
+      "from": "rubber_skin",
+      "from_output": 1,
+      "to": "air_pressure",
+      "to_input": 1
+    },
+    {
+      "from": "air_pressure",
+      "from_output": 0,
+      "to": "inflate",
+      "to_input": 0
+    },
+    {
+      "from": "air_pressure",
+      "from_output": 1,
+      "to": "inflate",
+      "to_input": 1
+    }
+  ]
+}

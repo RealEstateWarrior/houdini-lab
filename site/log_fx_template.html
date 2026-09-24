@@ -6378,6 +6378,55 @@ v(t)  = 風速 × (風速·a·t) / (風速·a·t + 1)  最大のずれ 0.0000003
       </div>
     </article>
 
+
+    <!-- ===================== 237 ===================== -->
+    <article class="entry entry--current" id="exp237">
+      <div class="badge">237</div>
+      <div class="body">
+        <span class="chip chip--fx">エフェクト</span>
+        <h2>Vellum の風船の体積は、Pressure の Rest Length Scale の倍率ちょうどになる（3 なら 3.00 倍）。2 フレームで落ち着く。ただし 2 倍を超えるとしずく形が消えて球になり、膜が柔らかい（10²）と横につぶれる</h2>
+        <p class="path">examples/237_vellum_balloon_pressure.py &nbsp;·&nbsp; 風船の体積は Rest Length Scale の倍率ちょうどに。2倍を超えると球に</p>
+
+        <div class="prose">
+          <p><strong>課題: 実践「風船をふくらませる」では、Pressure の Rest Length Scale を 3 にした（「今の 3 倍の体積が本来の大きさ」）。体積は本当に 3 倍になるのか。ゴムの膜の硬さで、ふくらみ方は変わるのか。何フレームで落ち着くのか。</strong></p>
+          <p>実践と同じ、しぼんだしずく形の風船（体積 5.11 L、縦 ÷ 横 1.18）に、Cloth（Stretch Stiffness 1 × 10³）と Pressure をかけ、重力 0・Substeps 5 で 48 フレーム回した。Rest Length Scale を 1.5・2・3・4・6 にし、3 では膜の硬さを 10²・10⁴ にしたものも回した。体積は閉じた面の体積（三角形ごとの符号付き体積の和）で、はじめとの比を取った。</p>
+          <p><strong>体積は、Rest Length Scale の倍率ちょうどになる。</strong>48 フレーム目の体積は 1.5・2・3・4・6 で 1.500・2.000・3.000・4.001・6.003 倍。膜の硬さを 10²・10⁴ にしても 3.002・2.998 倍。どれも 2 フレーム目で最後の 95% に届き、あとはほとんど動かなかった。</p>
+          <p><strong>2 倍を超えると、しずく形が消えて球になる。</strong>縦 ÷ 横は、はじめ 1.18、1.5・2・3・4・6 で 1.12・1.06・1.00・1.02・0.93。6 では結び目を留めた下側が引っぱられ、横長になった。</p>
+          <p><strong>膜が柔らかいと、横につぶれる。</strong>Rest Length Scale 3 で、膜の硬さ 10²・10³・10⁴ の縦 ÷ 横は 0.79・1.00・1.00。体積は同じでも、柔らかい膜は伸びやすい向きへふくらんで、形が崩れた。</p>
+          <p><strong>決め方: ふくらませたい体積の倍率を、そのまま Rest Length Scale に入れる。</strong>しずく形を残したいなら 2 倍までにして、しぼんだ形をはじめから大きめに作る。膜の硬さは 10³ 以上にする。</p>
+        </div>
+
+        <p class="label">Rest Length Scale と風船の形（48 フレーム目）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="237_grid.png" alt="左から 1.5・3・6（膜 10³）・3（膜 10⁴）。1.5 はしずく形が残り" loading="lazy" decoding="async"></div>
+            <figcaption>左から 1.5・3・6（膜 10³）・3（膜 10⁴）。1.5 はしずく形が残り、3 以上は球になる。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Rest Length Scale</th><th>膜の硬さ（10 の何乗）</th><th>体積の倍率</th><th>落ち着いたフレーム</th><th>縦（cm）</th><th>横（cm）</th><th>縦 ÷ 横</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1.5</td><td class="num">3</td><td class="num">1.500</td><td class="num">2</td><td class="num">27.5</td><td class="num">24.5</td><td class="num">1.12</td></tr>
+              <tr><td class="num">2</td><td class="num">3</td><td class="num">2.000</td><td class="num">2</td><td class="num">28.2</td><td class="num">26.7</td><td class="num">1.06</td></tr>
+              <tr><td>3（実践）</td><td class="num">3</td><td class="num">3.000</td><td class="num">2</td><td class="num">30.9</td><td class="num">30.8</td><td class="num">1.00</td></tr>
+              <tr><td class="num">4</td><td class="num">3</td><td class="num">4.001</td><td class="num">2</td><td class="num">34.3</td><td class="num">33.7</td><td class="num">1.02</td></tr>
+              <tr><td class="num">6</td><td class="num">3</td><td class="num">6.003</td><td class="num">2</td><td class="num">38.5</td><td class="num">41.4</td><td class="num">0.93</td></tr>
+              <tr><td>3・膜 10²</td><td class="num">2</td><td class="num">3.002</td><td class="num">2</td><td class="num">29.6</td><td class="num">37.4</td><td class="num">0.79</td></tr>
+              <tr><td>3・膜 10⁴</td><td class="num">4</td><td class="num">2.998</td><td class="num">2</td><td class="num">31.5</td><td class="num">31.4</td><td class="num">1.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>体積は Rest Length Scale の倍率ちょうどになり、2 フレームで落ち着く。</strong>膜の硬さによらない。</li>
+          <li><strong>2 倍を超えると、しずく形が消えて球になる。</strong>縦 ÷ 横 1.18 → 1.00。</li>
+          <li><strong>膜が柔らかい（10²）と、横につぶれる（縦 ÷ 横 0.79）。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
