@@ -46,7 +46,7 @@ NOTES = {
     "sphere": ("Primitive Type = Polygon は二十面体を分けた測地球で、点 10f²+2・面 20f²（f = Frequency）。同じ点の数なら Polygon Mesh より体積の不足が約3割小さい（実験151）。", ["151"]),
     "polybevel": ("Offset は丸みの半径。Round は Divisions を増やすと角を丸めた箱の体積に近づき、Divisions 1 は Solid（平らな面取り、箱なら 1−6d²+(16/3)d³）と同じ形（実験152）。", ["152"]),
     "polyfill": ("四角形の塞ぎ方（Quadrilateral Fan / Quadrilaterals / Quadrilateral Grid）は辺が奇数の穴を塞がず、警告だけ出して穴のまま流す。Grid は蓋が外へふくらむ。Triangles は1つの穴に n−2 枚（実験154）。", ["154"]),
-    "polywire": ("管は Wire Radius の円に内接する正 n 角柱で、両端に蓋が付く（体積を測れる）。Prevent Joint Buckling を入れると、折れ目の輪が曲がりの面の中で r/cos(θ/2) に広がって太さを保つ（実験156）。", ["156"]),
+    "polywire": ("管は Wire Radius の円に内接する正 n 角柱で、両端に蓋が付く（体積を測れる）。Prevent Joint Buckling を入れると、折れ目の輪が曲がりの面の中で r/cos(θ/2) に広がって太さを保つ（実験156）。毛を Karma で撮るなら、polywire で筒にせず、曲線のまま（width で太さ）渡す方が速い。毛 3 万本を筒（1 本 30 枚）にすると 9.2 秒で、曲線 10 万本（9.8 秒）と同じくらい。曲線なら 100 万本で 12.4 秒（実験229）。", ["156", "229"]),
     "voronoifracture::2.0": ("種 N 個で N 個のかけらになり、体積の合計は元のまま。Create Interior Surfaces を切ると表面に触れないかけらは消える。scatter の relax で種を広げると、種が壁へ寄ってかえって大きさがばらつく（実験157・158）。", ["157", "158"]),
     "trail": ("Compute Velocity の v は1秒あたりで、差分の式どおり。Compute Acceleration は Central Difference のときだけ値が入り、Velocity Scale の2乗で縮む（実験159）。", ["159"]),
     "uvlayout::3.0": ("島どうしの大きさの比は保って並べる。長方形12枚で升の48〜84%を埋めた。Island Padding は Search Resolution が粗いほど大きく効く（実験160）。", ["160"]),

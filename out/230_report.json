@@ -1,0 +1,106 @@
+{
+ "title": "速く回る物のブレは、オブジェクトごと回すなら既定（Rotation Blur・2 サンプル）で弧になる。SOP で形を回すと既定の Geometry Time Samples 2 ではまっすぐな線になり、8 で弧になる。時間はほぼ同じ",
+ "summary": "**課題: 扇風機の羽や車輪のように速く回る物をモーションブラーで撮ると、ブレが弧ではなく、まっすぐな線になることがある。Karma の Transform Time Samples（既定 2）・Motion Blur Style（既定 Rotation Blur）・Geometry Time Samples（既定 2）の、どれをいくつにすればよいか。**\n\n中心から 1 m の所に半径 5 cm の光る球を置き、1 フレームで 180° 回した。カメラのシャッターは既定の 0.5 フレームなので、本物なら 90° の弧のブレになる。真正面から平行投影（幅 3 m）で 400×400・64 サンプルで撮り、ブレの筋の画素が中心からどれだけ離れているかを測った（右下の透かしは除いた）。弧ならどこも 1 m。まっすぐな線（弦）なら、真ん中が 0.71 m まで内側に寄る。\n\n**オブジェクトごと回すなら、既定のままで弧になる。**Transform Time Samples 2・Rotation Blur で、筋の中心からの距離は平均 1.00 m、いちばん内側（5 パーセンタイル）0.96 m。Linear Blur にすると平均 0.83 m・内側 0.70 m で弦になり、Transform Time Samples を 8 にすると 1.00 m・0.95 m で弧に戻った。\n\n**SOP で形を回すと、既定では弦になる。**オブジェクトは止めて、中の transform（SOP）で回すと、Rotation Blur は効かない。Geometry Time Samples 2・4・8・16 で、いちばん内側は 0.70・0.93・0.95・0.96 m。4 でほぼ弧、8 で弧（オブジェクトで回したときと同じ）になった。シャッターの間の回転 90° を 7 区間に分けると、1 区間 13° になる。\n\n**時間はほとんど変わらない。**どの条件も 2.3〜2.5 秒。\n\n**決め方: 回る物は、できればオブジェクトの回転で動かす（既定で弧になる）。**SOP やシミュレーションで回すなら、Geometry Time Samples を、シャッターの間の回転を 15° 以下の区間に分けられる数にする（この例の 90° なら 8）。",
+ "graph": "",
+ "graph_image": "",
+ "comparisons": [
+  {
+   "label": "回し方とサンプル数と、ブレの形（90° の弧になるはず）",
+   "images": [
+    {
+     "path": "230_grid.png",
+     "caption": "左から: オブジェクト・Rotation Blur 2（弧）、Linear Blur 2（弦）、SOP・Geometry 2（弦）、SOP・Geometry 8（弧）。"
+    }
+   ],
+   "per_row": 1,
+   "columns": [
+    "回し方",
+    "Transform Samples",
+    "Blur Style",
+    "Geometry Samples",
+    "距離 平均（m）",
+    "いちばん内側（m）",
+    "広がり（°）",
+    "時間（秒）"
+   ],
+   "rows": [
+    [
+     "オブジェクトで回す・Rotation Blur・2",
+     "2",
+     "Rotation Blur",
+     "2",
+     "1.001",
+     "0.956",
+     "94.8",
+     "2.50"
+    ],
+    [
+     "オブジェクト・Linear Blur・2",
+     "2",
+     "Linear Blur",
+     "2",
+     "0.829",
+     "0.696",
+     "94.8",
+     "2.26"
+    ],
+    [
+     "オブジェクト・Linear Blur・8",
+     "8",
+     "Linear Blur",
+     "2",
+     "0.997",
+     "0.952",
+     "94.8",
+     "2.44"
+    ],
+    [
+     "SOP で回す・Geometry 2",
+     "2",
+     "Rotation Blur",
+     "2",
+     "0.829",
+     "0.696",
+     "94.8",
+     "2.44"
+    ],
+    [
+     "SOP・Geometry 4",
+     "2",
+     "Rotation Blur",
+     "4",
+     "0.979",
+     "0.930",
+     "94.8",
+     "2.29"
+    ],
+    [
+     "SOP・Geometry 8",
+     "2",
+     "Rotation Blur",
+     "8",
+     "0.997",
+     "0.952",
+     "94.8",
+     "2.35"
+    ],
+    [
+     "SOP・Geometry 16",
+     "2",
+     "Rotation Blur",
+     "16",
+     "1.000",
+     "0.955",
+     "94.8",
+     "2.55"
+    ]
+   ]
+  }
+ ],
+ "notes": [
+  "<strong>オブジェクトごと回すなら、既定（Rotation Blur・2 サンプル）で弧になる。</strong>",
+  "<strong>SOP で回すと、Geometry Time Samples 2 ではまっすぐな線（内側 0.70 m）。8 で弧。</strong>",
+  "<strong>サンプル数を上げても、時間はほとんど変わらない。</strong>"
+ ],
+ "next": []
+}

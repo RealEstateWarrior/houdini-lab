@@ -1541,6 +1541,12 @@ DONE = [
      "shots": ["229_grid.png", "229_graph.png"],
      "title": "毛は曲線のまま Karma に渡す。100 万本でも 12 秒（640×360・8 サンプル）。polywire で筒の面にすると 1 本あたりが重く、3 万本で 9 秒",
      "note": "毛は曲線のまま渡す。100万本で12秒"},
+    {"no": "230", "anchor": "exp230",
+     "tags": ["Karma", "モーションブラー", "制作"],
+     "log": "log_pm", "thumb": "230_grid.png",
+     "shots": ["230_grid.png", "230_graph.png"],
+     "title": "速く回る物のブレは、オブジェクトごと回すなら既定（Rotation Blur・2 サンプル）で弧になる。SOP で形を回すと既定の Geometry Time Samples 2 ではまっすぐな線になり、8 で弧になる。時間はほぼ同じ",
+     "note": "回る物のブレ: SOPで回すと Geometry Time Samples 8 で弧に"},
 ]
 
 PLANNED = []

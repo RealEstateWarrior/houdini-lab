@@ -1,0 +1,67 @@
+{
+  "title": "実験230",
+  "network": "/obj/spinner",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "ball",
+      "type": "sphere",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 0.05,
+        "rady": 0.05,
+        "radz": 0.05,
+        "tx": 1.0
+      }
+    },
+    {
+      "name": "spin_in_sop",
+      "type": "xform",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "rz": 1800.0
+      }
+    },
+    {
+      "name": "assign",
+      "type": "material",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "shop_materialpath1": "/mat/glow"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ball",
+      "from_output": 0,
+      "to": "spin_in_sop",
+      "to_input": 0
+    },
+    {
+      "from": "spin_in_sop",
+      "from_output": 0,
+      "to": "assign",
+      "to_input": 0
+    }
+  ]
+}

@@ -49,3 +49,9 @@ ADD["simulation"].append(
     {"term": "白波 / Whitecap", "reading": "しろなみ",
      "def": "沖で風に押された波の頭が崩れて、白く泡立つもの。本物の海で白波が覆う割合は、風速の 3.4 乗にほぼ比例する（Monahan らの式）。"
             "風 5 m/秒で 0.09%、10 m/秒で 1%、15 m/秒で 4%。oceanevaluate の cusp で色を付けるときのしきい値は、実験223 の表で決められる。"})
+
+ADD["render"].append(
+    {"term": "Time Samples（モーションブラー）", "reading": "タイムサンプルズ",
+     "def": "Karma がシャッターの開いている間に、物の位置や形を何回調べるか。オブジェクトの動きは Transform Time Samples、形の変化は Geometry Time Samples（どちらも既定 2）。"
+            "2 回だと、その間をまっすぐ結ぶので、速く回る物のブレが弧ではなく直線になる。オブジェクトの回転は既定の Rotation Blur で弧になるが、"
+            "SOP で回すと Geometry Time Samples を 8 にしてやっと弧になった（90° 回る場合。実験230）。"})

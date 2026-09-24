@@ -1,0 +1,91 @@
+{
+  "rows": [
+    {
+      "case": "obj_rot_2",
+      "where": "obj",
+      "xformsamples": 2,
+      "blurstyle": "Rotation Blur",
+      "geosamples": 2,
+      "sec": 2.5,
+      "pixels": 2780,
+      "r_mean": 1.001,
+      "r_p5": 0.9564,
+      "span_deg": 94.8
+    },
+    {
+      "case": "obj_lin_2",
+      "where": "obj",
+      "xformsamples": 2,
+      "blurstyle": "Linear Blur",
+      "geosamples": 2,
+      "sec": 2.26,
+      "pixels": 2034,
+      "r_mean": 0.8289,
+      "r_p5": 0.6964,
+      "span_deg": 94.8
+    },
+    {
+      "case": "obj_lin_8",
+      "where": "obj",
+      "xformsamples": 8,
+      "blurstyle": "Linear Blur",
+      "geosamples": 2,
+      "sec": 2.44,
+      "pixels": 2752,
+      "r_mean": 0.9967,
+      "r_p5": 0.9522,
+      "span_deg": 94.8
+    },
+    {
+      "case": "sop_2",
+      "where": "sop",
+      "xformsamples": 2,
+      "blurstyle": "Rotation Blur",
+      "geosamples": 2,
+      "sec": 2.44,
+      "pixels": 2034,
+      "r_mean": 0.8289,
+      "r_p5": 0.6964,
+      "span_deg": 94.8
+    },
+    {
+      "case": "sop_4",
+      "where": "sop",
+      "xformsamples": 2,
+      "blurstyle": "Rotation Blur",
+      "geosamples": 4,
+      "sec": 2.29,
+      "pixels": 2699,
+      "r_mean": 0.9785,
+      "r_p5": 0.93,
+      "span_deg": 94.8
+    },
+    {
+      "case": "sop_8",
+      "where": "sop",
+      "xformsamples": 2,
+      "blurstyle": "Rotation Blur",
+      "geosamples": 8,
+      "sec": 2.35,
+      "pixels": 2752,
+      "r_mean": 0.9967,
+      "r_p5": 0.9522,
+      "span_deg": 94.8
+    },
+    {
+      "case": "sop_16",
+      "where": "sop",
+      "xformsamples": 2,
+      "blurstyle": "Rotation Blur",
+      "geosamples": 16,
+      "sec": 2.55,
+      "pixels": 2803,
+      "r_mean": 1.0,
+      "r_p5": 0.9553,
+      "span_deg": 94.8
+    }
+  ],
+  "res": 400,
+  "width": 3.0,
+  "frame": 10
+}

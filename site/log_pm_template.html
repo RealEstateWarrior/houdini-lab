@@ -10517,6 +10517,55 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 230 ===================== -->
+    <article class="entry entry--current" id="exp230">
+      <div class="badge">230</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>速く回る物のブレは、オブジェクトごと回すなら既定（Rotation Blur・2 サンプル）で弧になる。SOP で形を回すと既定の Geometry Time Samples 2 ではまっすぐな線になり、8 で弧になる。時間はほぼ同じ</h2>
+        <p class="path">examples/230_karma_rotation_blur.py &nbsp;·&nbsp; 回る物のブレ: SOPで回すと Geometry Time Samples 8 で弧に</p>
+
+        <div class="prose">
+          <p><strong>課題: 扇風機の羽や車輪のように速く回る物をモーションブラーで撮ると、ブレが弧ではなく、まっすぐな線になることがある。<button class="term" data-term="Karma">Karma</button> の Transform Time Samples（既定 2）・Motion Blur Style（既定 Rotation Blur）・Geometry Time Samples（既定 2）の、どれをいくつにすればよいか。</strong></p>
+          <p>中心から 1 m の所に半径 5 cm の光る球を置き、1 フレームで 180° 回した。カメラのシャッターは既定の 0.5 フレームなので、本物なら 90° の弧のブレになる。真正面から平行投影（幅 3 m）で 400×400・64 <button class="term" data-term="サンプル">サンプル</button>で撮り、ブレの筋の画素が中心からどれだけ離れているかを測った（右下の透かしは除いた）。弧ならどこも 1 m。まっすぐな線（弦）なら、真ん中が 0.71 m まで内側に寄る。</p>
+          <p><strong>オブジェクトごと回すなら、既定のままで弧になる。</strong>Transform Time Samples 2・Rotation Blur で、筋の中心からの距離は平均 1.00 m、いちばん内側（5 パーセンタイル）0.96 m。Linear Blur にすると平均 0.83 m・内側 0.70 m で弦になり、Transform Time Samples を 8 にすると 1.00 m・0.95 m で弧に戻った。</p>
+          <p><strong><button class="term" data-term="SOP">SOP</button> で形を回すと、既定では弦になる。</strong>オブジェクトは止めて、中の transform（SOP）で回すと、Rotation Blur は効かない。Geometry Time Samples 2・4・8・16 で、いちばん内側は 0.70・0.93・0.95・0.96 m。4 でほぼ弧、8 で弧（オブジェクトで回したときと同じ）になった。シャッターの間の回転 90° を 7 区間に分けると、1 区間 13° になる。</p>
+          <p><strong>時間はほとんど変わらない。</strong>どの条件も 2.3〜2.5 秒。</p>
+          <p><strong>決め方: 回る物は、できればオブジェクトの回転で動かす（既定で弧になる）。</strong>SOP や<button class="term" data-term="シミュレーション">シミュレーション</button>で回すなら、Geometry Time Samples を、シャッターの間の回転を 15° 以下の区間に分けられる数にする（この例の 90° なら 8）。</p>
+        </div>
+
+        <p class="label">回し方とサンプル数と、ブレの形（90° の弧になるはず）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="230_grid.png" alt="左から: オブジェクト・Rotation Blur 2（弧）、Linear Bl" loading="lazy" decoding="async"></div>
+            <figcaption>左から: オブジェクト・Rotation Blur 2（弧）、Linear Blur 2（弦）、SOP・Geometry 2（弦）、SOP・Geometry 8（弧）。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>回し方</th><th>Transform Samples</th><th>Blur Style</th><th>Geometry Samples</th><th>距離 平均（m）</th><th>いちばん内側（m）</th><th>広がり（°）</th><th>時間（秒）</th></tr></thead>
+            <tbody>
+              <tr><td>オブジェクトで回す・Rotation Blur・2</td><td class="num">2</td><td>Rotation Blur</td><td class="num">2</td><td class="num">1.001</td><td class="num">0.956</td><td class="num">94.8</td><td class="num">2.50</td></tr>
+              <tr><td>オブジェクト・Linear Blur・2</td><td class="num">2</td><td>Linear Blur</td><td class="num">2</td><td class="num">0.829</td><td class="num">0.696</td><td class="num">94.8</td><td class="num">2.26</td></tr>
+              <tr><td>オブジェクト・Linear Blur・8</td><td class="num">8</td><td>Linear Blur</td><td class="num">2</td><td class="num">0.997</td><td class="num">0.952</td><td class="num">94.8</td><td class="num">2.44</td></tr>
+              <tr><td>SOP で回す・Geometry 2</td><td class="num">2</td><td>Rotation Blur</td><td class="num">2</td><td class="num">0.829</td><td class="num">0.696</td><td class="num">94.8</td><td class="num">2.44</td></tr>
+              <tr><td>SOP・Geometry 4</td><td class="num">2</td><td>Rotation Blur</td><td class="num">4</td><td class="num">0.979</td><td class="num">0.930</td><td class="num">94.8</td><td class="num">2.29</td></tr>
+              <tr><td>SOP・Geometry 8</td><td class="num">2</td><td>Rotation Blur</td><td class="num">8</td><td class="num">0.997</td><td class="num">0.952</td><td class="num">94.8</td><td class="num">2.35</td></tr>
+              <tr><td>SOP・Geometry 16</td><td class="num">2</td><td>Rotation Blur</td><td class="num">16</td><td class="num">1.000</td><td class="num">0.955</td><td class="num">94.8</td><td class="num">2.55</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>オブジェクトごと回すなら、既定（Rotation Blur・2 サンプル）で弧になる。</strong></li>
+          <li><strong>SOP で回すと、Geometry Time Samples 2 ではまっすぐな線（内側 0.70 m）。8 で弧。</strong></li>
+          <li><strong>サンプル数を上げても、時間はほとんど変わらない。</strong></li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 
   <footer>
