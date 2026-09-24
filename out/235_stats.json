@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "case": "vl0",
+      "volume_limit": 0,
+      "sec": 13.09,
+      "top": 0.4458,
+      "bottom": 0.4547,
+      "top_ratio": 0.5452,
+      "bottom_ratio": 0.4882
+    },
+    {
+      "case": "vl1",
+      "volume_limit": 1,
+      "sec": 63.93,
+      "top": 0.5348,
+      "bottom": 0.5697,
+      "top_ratio": 0.6541,
+      "bottom_ratio": 0.6116
+    },
+    {
+      "case": "vl2",
+      "volume_limit": 2,
+      "sec": 128.81,
+      "top": 0.5941,
+      "bottom": 0.6457,
+      "top_ratio": 0.7266,
+      "bottom_ratio": 0.6931
+    },
+    {
+      "case": "vl4",
+      "volume_limit": 4,
+      "sec": 212.65,
+      "top": 0.6698,
+      "bottom": 0.7423,
+      "top_ratio": 0.8191,
+      "bottom_ratio": 0.7969
+    },
+    {
+      "case": "vl8",
+      "volume_limit": 8,
+      "sec": 289.89,
+      "top": 0.7493,
+      "bottom": 0.8439,
+      "top_ratio": 0.9164,
+      "bottom_ratio": 0.906
+    },
+    {
+      "case": "vl16",
+      "volume_limit": 16,
+      "sec": 377.61,
+      "top": 0.8177,
+      "bottom": 0.9315,
+      "top_ratio": 1.0,
+      "bottom_ratio": 1.0
+    }
+  ],
+  "res": [
+    640,
+    360
+  ],
+  "spp": 32,
+  "default_volumelimit": 0.0,
+  "cloud_pixels": 216813,
+  "mid_row": 169
+}

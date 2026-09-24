@@ -3742,7 +3742,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
   <aside class="doc-toc" aria-label="この編の実験">
     <div class="doc-toc-inner">
       <label class="doc-filter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="M15.4 15.4L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input type="search" id="doc-filter" placeholder="この編を絞り込む" autocomplete="off" aria-label="この編の実験を題で絞り込む"></label>
-      <p class="doc-toc-head">実験ログ モデリング編<small>155本</small></p>
+      <p class="doc-toc-head">実験ログ モデリング編<small>156本</small></p>
       <ol class="doc-toc-list" id="doc-toc-list">
         <li class="doc-toc-sep" aria-hidden="true">001–030</li>
         <li><a href="#exp001" data-anchor="exp001"><span class="doc-no">001</span><span class="doc-t">Box を山にして細分割し、位置で色を付ける</span></a></li>
@@ -3909,6 +3909,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
         <li><a href="#exp230" data-anchor="exp230"><span class="doc-no">230</span><span class="doc-t">速く回る物のブレは、オブジェクトごと回すなら既定（Rotation Blur・2 サンプル）で弧になる。SOP で形を回すと既定の Geometry Time Samples 2 ではまっすぐな線になり、8 で弧になる。時間はほぼ同じ</span></a></li>
         <li><a href="#exp232" data-anchor="exp232"><span class="doc-no">232</span><span class="doc-t">Karma XPU は、ガラス・雪・ドーナツで CPU の 8〜14 倍速い（グラスの水 82 秒 → 6 秒）。ただしドーナツのアイシングと海の空は色が出ずに白くなり、ガラスの場面は明るく飛んだ。雪と炎はほぼ同じ絵</span></a></li>
         <li><a href="#exp234" data-anchor="exp234"><span class="doc-no">234</span><span class="doc-t">窓の光で照らす部屋は、Karma の Diffuse Limit 既定 1 では明るさが 72% しか出ない。4 で 91%、8 で 98%。時間は 1 → 4 で 2.0 倍</span></a></li>
+        <li><a href="#exp235" data-anchor="exp235"><span class="doc-no">235</span><span class="doc-t">雲は、Karma の Volume Limit を上げるほど明るくなる（底の明るさ 0 → 16 で 0.45 → 0.93）。16 でもまだ明るくなり続け、時間は 13 → 378 秒。上げたら日差しを弱めないと白く飛ぶ</span></a></li>
       </ol>
       <a class="doc-other" href="log_fx.html">実験ログ エフェクト編へ →</a>
     </div>
@@ -3920,7 +3921,7 @@ strong.parm-ref:focus-visible { outline: 2px solid var(--flag); outline-offset: 
     <h1>実験ログ — モデリング編</h1>
     <p class="lede">形を作る側の記録。箱を割る、ノイズで歪める、ばらまいて複製する、VEX で書く、ブーリアンで抜く。実験001から012、030（振り返り点検）、034〜039（地形・レンダ・テクスチャ）。数字はすべて実行して得た値で、推測は含まない。</p>
     <dl class="facts">
-      <div><dt>実験</dt><dd>234 / 234</dd></div>
+      <div><dt>実験</dt><dd>235 / 235</dd></div>
       <div><dt>Houdini</dt><dd>21.0.700</dd></div>
       <div><dt>ライセンス</dt><dd>Apprentice</dd></div>
       <div><dt>Notebook ソース</dt><dd>41 / 300</dd></div>
@@ -16986,6 +16987,73 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
     </article>
 
+
+    <!-- ===================== 235 ===================== -->
+    <article class="entry entry--current" id="exp235">
+      <div class="badge">235</div>
+      <div class="body">
+        <span class="chip chip--pm">モデリング</span>
+        <h2>雲は、Karma の Volume Limit を上げるほど明るくなる（底の明るさ 0 → 16 で 0.45 → 0.93）。16 でもまだ明るくなり続け、時間は 13 → 378 秒。上げたら日差しを弱めないと白く飛ぶ</h2>
+        <div class="colhead">
+          <p class="colmeta"><span>読む時間 約2分</span><span class="coltag">Karma</span><span class="coltag">雲</span><span class="coltag">ボリューム</span><span class="coltag">制作</span></p>
+          <div class="colbody">
+          <div class="colgist"><p class="colgist-label">要点</p><ul>
+            <li><strong>Volume Limit を上げるほど、雲は明るくなる。</strong>16 でもまだ落ち着かない（8 → 16 で 1 割増）。</li>
+            <li><strong>時間は 0 → 16 で 13 → 378 秒。</strong></li>
+            <li><strong>上げたら日差しを弱めないと、白く飛んで陰影が消える。</strong></li>
+          </ul></div>
+          <img class="colthumb" src="thumb_235.png" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <details class="colfull"><summary><span>全文を読む</span><small>約2分</small></summary>
+        <p class="path">examples/235_karma_cloud_volume_limit.py &nbsp;·&nbsp; 雲は Volume Limit を上げるほど明るく、16でも落ち着かない</p>
+        <p class="usedby"><span class="usedby-tag">シーンファイル</span><a href="https://github.com/RealEstateWarrior/houdini-lab/raw/main/out/235_scene.hipnc" target="_blank" rel="noopener noreferrer">235_scene.hipnc</a></p>
+        <details class="netgraph"><summary>ノードのつなぎ方を見る</summary><img src="235_graph.png" alt="実験235 のノードのつなぎ方" loading="lazy" decoding="async"></details>
+
+        <div class="prose">
+          <p><strong>課題: 本物の積雲は、日陰の側や底でも明るい灰白色で、中から光っているように見える。CG の雲は底が暗く重たくなりやすい。<button class="term" data-term="Karma">Karma</button> の Volume Limit（雲の中で光が散らばるのを何回まで追うか。既定 0）を上げると、雲はどう変わるのか。時間はどれだけ延びるのか。</strong></p>
+          <p>実践「もくもくの雲を浮かべる」の場面（太陽 distant 強さ 4・空のドーム 0.5）で、Volume Limit を 0・1・2・4・8・16 にし、640×360・32 <button class="term" data-term="サンプル">サンプル</button>（<button class="term" data-term="ノイズ">ノイズ</button>除去なし）で撮った。雲の写っている所（Volume Limit 16 の画で明るさ 0.15 超）を上半分と下半分に分け、明るさの平均を比べた。</p>
+          <p><strong>上げるほど、雲は明るくなる。</strong>明るさの平均は、上半分が 0・1・2・4・8・16 で 0.45・0.53・0.59・0.67・0.75・0.82、下半分が 0.45・0.57・0.65・0.74・0.84・0.93。8 → 16 でもまだ 1 割明るくなり、落ち着かなかった。雲は光をほとんど吸わず、中で何度も散らばってから外へ出るので、追う回数を打ち切るほど暗くなると考えられる。</p>
+          <p><strong>時間は大きく延びる。</strong>13・64・129・213・290・378 秒。1 で既定の 5 倍になる。</p>
+          <p><strong>明るくなるほど、白く飛んで陰影が消える。</strong>白く飛んだ画素（R・G・B すべて 250 以上）は 18,338・31,389・33,374・34,459・35,376・35,822 個。既定の 0 は、もこもこの塊ごとの陰影が見えたが、4 以上では雲がほぼ真っ白な塊になった。</p>
+          <p><strong>決め方: 雲を本物らしく明るくするなら、Volume Limit を上げ、そのぶん日差しを弱める。</strong>時間が許すなら 4 以上。試し撮りは既定の 0 で形を見て、仕上げで上げる。</p>
+        </div>
+
+        <p class="label">Volume Limit と雲（640×360・32 サンプル）</p>
+        <div class="figs figs--wide">
+          <figure>
+            <div class="frame-light"><img src="235_grid.png" alt="左から 0（既定）・1・4・16。上げるほど明るく、白く飛んで陰影が消える。" loading="lazy" decoding="async"></div>
+            <figcaption>左から 0（既定）・1・4・16。上げるほど明るく、白く飛んで陰影が消える。</figcaption>
+          </figure>
+          <figure>
+            <div class="frame-light"><img src="235_curve.png" alt="16 でもまだ明るくなり続ける。" loading="lazy" decoding="async"></div>
+            <figcaption>16 でもまだ明るくなり続ける。</figcaption>
+          </figure>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Volume Limit</th><th>撮る時間（秒）</th><th>上半分の明るさ</th><th>下半分の明るさ</th><th>白く飛んだ画素</th></tr></thead>
+            <tbody>
+              <tr><td>0（既定）</td><td class="num">13</td><td class="num">0.446</td><td class="num">0.455</td><td class="num">18,338</td></tr>
+              <tr><td class="num">1</td><td class="num">64</td><td class="num">0.535</td><td class="num">0.570</td><td class="num">31,389</td></tr>
+              <tr><td class="num">2</td><td class="num">129</td><td class="num">0.594</td><td class="num">0.646</td><td class="num">33,374</td></tr>
+              <tr><td class="num">4</td><td class="num">213</td><td class="num">0.670</td><td class="num">0.742</td><td class="num">34,459</td></tr>
+              <tr><td class="num">8</td><td class="num">290</td><td class="num">0.749</td><td class="num">0.844</td><td class="num">35,376</td></tr>
+              <tr><td class="num">16</td><td class="num">378</td><td class="num">0.818</td><td class="num">0.931</td><td class="num">35,822</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="label">わかったこと</p>
+        <ul class="findings">
+          <li><strong>Volume Limit を上げるほど、雲は明るくなる。</strong>16 でもまだ落ち着かない（8 → 16 で 1 割増）。</li>
+          <li><strong>時間は 0 → 16 で 13 → 378 秒。</strong></li>
+          <li><strong>上げたら日差しを弱めないと、白く飛んで陰影が消える。</strong></li>
+        </ul>
+              </details>
+      </div>
+    </article>
+
   </div>
 
   <footer>
@@ -17001,7 +17069,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
 </div>
 </div>
 
-<script src="data/glossary-data-bfd62f37aa.js"></script>
+<script src="data/glossary-data-dba1f10621.js"></script>
 <script src="data/node-data-9dd73d6054.js"></script>
 <div id="popover" role="dialog" aria-label="用語の説明" hidden></div>
 <script>
@@ -17180,10 +17248,10 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       <a class="foot-logo" href="index.html"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><g transform="translate(24 24) scale(1.46) translate(-22.7 -26.4)" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M28.6 16.4c-1.2-1.6-3.2-2.5-5.5-2.5-3.3 0-5.6 1.7-5.6 4.1 0 2.2 1.6 3.4 4.7 4.1l1.6.4c3.1.7 4.7 2 4.7 4.4 0 2.6-2.4 4.4-6 4.4-2.3 0-4.3-.7-5.7-2"/><path d="M22.6 22.3v16.6"/></g></svg><span><strong>Houdini 研究部</strong><small>Saito Production</small></span></a>
       <p class="foot-lede">Houdini の機能を1つずつ動かし、測った数値で記録する研究サイト。作り方の手順と、ノード・用語の解説もある。</p>
       <dl class="foot-stats">
-        <div><dt>実験</dt><dd>234</dd></div>
+        <div><dt>実験</dt><dd>235</dd></div>
         <div><dt>実践</dt><dd>71</dd></div>
         <div><dt>ノード</dt><dd>393</dd></div>
-        <div><dt>用語</dt><dd>464</dd></div>
+        <div><dt>用語</dt><dd>465</dd></div>
       </dl>
       <div class="foot-ext">
         <a href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Gemini Notebook<small>資料に質問できるノート</small></span></a>
@@ -17260,7 +17328,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
       </div>
       <div class="menu-doors">
         <a class="menu-door" href="reference.html#nodes"><img src="pr_campfire_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>ノード解説</strong><small>393件</small></span></a>
-        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>464語</small></span></a>
+        <a class="menu-door" href="reference.html#glossary"><img src="pr_gems_hero.png" alt="" loading="lazy" decoding="async"><span class="menu-door-text"><strong>用語集</strong><small>465語</small></span></a>
         <a class="menu-door" href="https://notebooklm.google.com/notebook/9e4a30fe-e11f-455d-8179-df0765435022" target="_blank" rel="noopener"><span class="menu-door-mark menu-door-mark--nb" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V19.5H8a3 3 0 01-3-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 16.5a3 3 0 013-3h10.5M9 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span class="menu-door-text"><strong>Gemini Notebook</strong><small>資料に質問できるノート</small></span></a>
       </div>
       <p class="menu-cards-head menu-cards-head--list"><span>すべてのページ</span></p>
@@ -17363,7 +17431,7 @@ d &gt; 2 なら   誤差 = d − 2</code></pre>
   </div>
 </div>
 
-<script src="data/search-data-fe4a8d84f9.js"></script>
+<script src="data/search-data-b75f112303.js"></script>
 
 <script>
   /* 先頭に戻るボタン。少しスクロールしてから出す。 */

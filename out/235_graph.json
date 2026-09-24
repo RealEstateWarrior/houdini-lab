@@ -1,0 +1,180 @@
+{
+  "title": "実験235",
+  "network": "/obj/cloud",
+  "houdini_version": "21.0.700",
+  "nodes": [
+    {
+      "name": "cloud_base",
+      "type": "sphere",
+      "pos": [
+        1.13,
+        6.626
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "radx": 4.0,
+        "rady": 1.6,
+        "radz": 2.6,
+        "rows": 24,
+        "cols": 48
+      }
+    },
+    {
+      "name": "puff_spots",
+      "type": "scatter::2.0",
+      "pos": [
+        1.13,
+        5.497
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "npts": 26,
+        "seed": 5.0
+      }
+    },
+    {
+      "name": "puff_sizes",
+      "type": "attribwrangle",
+      "pos": [
+        1.13,
+        4.367
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "snippet": "// 上の点ほど大きな球にする（上がもくもく盛り上がる）\nf@pscale = fit(@P.y, -1.6, 1.6, 0.9, 2.1) * fit01(rand(@ptnum + 2), 0.75, 1.2);"
+      }
+    },
+    {
+      "name": "puff",
+      "type": "sphere",
+      "pos": [
+        -1.13,
+        4.819
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "type": 2,
+        "rows": 16
+      }
+    },
+    {
+      "name": "puffs",
+      "type": "copytopoints::2.0",
+      "pos": [
+        0.0,
+        3.389
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {}
+    },
+    {
+      "name": "flat_bottom",
+      "type": "clip::2.0",
+      "pos": [
+        0.0,
+        2.259
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "dirx": 0.0,
+        "diry": 1.0,
+        "dist": -0.6
+      }
+    },
+    {
+      "name": "to_cloud",
+      "type": "cloud::2.0",
+      "pos": [
+        0.0,
+        1.129
+      ],
+      "flags": {
+        "display": false
+      },
+      "params": {
+        "samplediv": 160,
+        "densitymultiplier": 3.0,
+        "densityrempa2pos": 1.0,
+        "densityrempa2value": 1.0,
+        "xaxisprofile1value": 1.0,
+        "xaxisprofile1interp": 3,
+        "yaxisprofile1value": 1.0,
+        "yaxisprofile1interp": 3,
+        "zaxisprofile1value": 1.0
+      }
+    },
+    {
+      "name": "fluffy_edges",
+      "type": "cloudnoise",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "flags": {
+        "display": true
+      },
+      "params": {
+        "noiseamount": 0.45,
+        "noiseoctaves": 5,
+        "noiseelementsize": 1.2
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "cloud_base",
+      "from_output": 0,
+      "to": "puff_spots",
+      "to_input": 0
+    },
+    {
+      "from": "puff_spots",
+      "from_output": 0,
+      "to": "puff_sizes",
+      "to_input": 0
+    },
+    {
+      "from": "puff",
+      "from_output": 0,
+      "to": "puffs",
+      "to_input": 0
+    },
+    {
+      "from": "puff_sizes",
+      "from_output": 0,
+      "to": "puffs",
+      "to_input": 1
+    },
+    {
+      "from": "puffs",
+      "from_output": 0,
+      "to": "flat_bottom",
+      "to_input": 0
+    },
+    {
+      "from": "flat_bottom",
+      "from_output": 0,
+      "to": "to_cloud",
+      "to_input": 0
+    },
+    {
+      "from": "to_cloud",
+      "from_output": 0,
+      "to": "fluffy_edges",
+      "to_input": 0
+    }
+  ]
+}

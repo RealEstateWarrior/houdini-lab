@@ -1571,6 +1571,12 @@ DONE = [
      "shots": ["234_grid.png", "234_curve.png", "234_graph.png"],
      "title": "窓の光で照らす部屋は、Karma の Diffuse Limit 既定 1 では明るさが 72% しか出ない。4 で 91%、8 で 98%。時間は 1 → 4 で 2.0 倍",
      "note": "窓の光の部屋は Diffuse Limit 4 以上に"},
+    {"no": "235", "anchor": "exp235",
+     "tags": ["Karma", "雲", "ボリューム", "制作"],
+     "log": "log_pm", "thumb": "235_grid.png",
+     "shots": ["235_grid.png", "235_curve.png", "235_graph.png"],
+     "title": "雲は、Karma の Volume Limit を上げるほど明るくなる（底の明るさ 0 → 16 で 0.45 → 0.93）。16 でもまだ明るくなり続け、時間は 13 → 378 秒。上げたら日差しを弱めないと白く飛ぶ",
+     "note": "雲は Volume Limit を上げるほど明るく、16でも落ち着かない"},
 ]
 
 PLANNED = []
